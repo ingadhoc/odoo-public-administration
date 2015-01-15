@@ -156,10 +156,22 @@ class preventive_line(models.Model):
                 _("Definitive Amount can't be greater than Preventive Amount"))
 
     @api.one
-    def unlink(self):
-        if self.preventive_status == 'confirmed':
-            raise Warning(_(
-                "You can not delete a confirmed preventive line"))
-        return super(preventive_line, self).unlink()
+    @api.constrains(
+        'budget_id',
+        'budget_position_id',
+        'preventive_amount')
+    def _check_position_balance_amount(self):
+        self = self.with_context(budget_id=self.budget_id.id)
+        if self.budget_position_id.budget_assignment_allowed and self.budget_position_id.balance_amount < 0.0:
+            raise Warning(
+                _("There is not Enought Balance Amount on this Budget Position '%s'") %
+                (self.budget_position_id.name))
+
+    @api.one
+    @api.constrains('definitive_line_ids', 'preventive_amount')
+    def _check_number(self):
+        if self.preventive_amount < self.definitive_amount:
+            raise Warning(
+                _("Definitive Amount can't be greater than Preventive Amount"))
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

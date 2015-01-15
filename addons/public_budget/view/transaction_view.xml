@@ -63,7 +63,6 @@
                     <sheet string="Budget Transaction">
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
-<<<<<<< HEAD
                      <group>
                         <field name="issue_date"
                             /> 
@@ -102,7 +101,6 @@
                         <field name="advance_return_ids"
                         /> 
                      </group>
-=======
                         <field name="type_with_advance_payment" invisible="1"/>
                         <field name="type_with_salary_advance" invisible="1"/>
                         <group>
@@ -155,7 +153,6 @@
                                 <field name="note"/>
                             </page>
                         </notebook>
->>>>>>> IMP merge con modificaciones
                     </sheet>
                 </form>
             </field>
