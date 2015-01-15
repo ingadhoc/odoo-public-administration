@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- SEARCH VIEW -->
+        <record id="view_public_budget_budget_position_filter" model="ir.ui.view">
+            <field name="name">public_budget.budget_position.select</field>
+            <field name="model">public_budget.budget_position</field>
+            <field name="arch" type="xml">
+                <search string="Budget Position">
+                    <field name="code" string="Code"
+                            />
+                    <field name="name" string="Name"
+                            />
+                    <field name="type" string="Type"
+                            />
+                    <field name="budget_assignment_allowed" string="Budget Assignment Allowed?"
+                            />
+                    <field name="category_id" string="Category"
+                            />
+                    <field name="inventariable" string="Inventariable?"
+                            />
+                    <field name="parent_id" string="Parent"
+                            />
+                    <group expand="0" string="Group By">
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- FORMVIEW -->
+        <record id="view_public_budget_budget_position_form" model="ir.ui.view">
+            <field name="name">public_budget.budget_position.form</field>
+            <field name="model">public_budget.budget_position</field>
+            <field name="arch" type="xml">
+                <form string="Budget Position">
+                    <header>
+                    </header>
+                    <sheet string="Budget Position">
+                       <div class="oe_right oe_button_box" name="buttons">
+                       </div>
+                     <group>
+                        <field name="code"
+                            /> 
+                        <field name="name"
+                            /> 
+                        <field name="type"
+                            /> 
+                        <field name="budget_assignment_allowed"
+                            /> 
+                        <field name="category_id"
+                            attrs="{'invisible': [('type', '=', 'view')], 'required':[('type', '=', 'normal')]}"
+                            /> 
+                        <field name="inventariable"
+                            attrs="{'invisible': [('type', '=', 'view')]}"
+                            /> 
+                        <field name="available_account_ids"
+                            attrs="{'invisible':[('type','=','view')]}"
+                        /> 
+                        <field name="parent_id"
+                        /> 
+                     </group>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+        <!-- TREEVIEW -->
+        <record id="view_public_budget_budget_position_tree" model="ir.ui.view">
+            <field name="name">public_budget.budget_position.tree</field>
+            <field name="model">public_budget.budget_position</field>
+            <field name="arch" type="xml">
+                <tree string="Budget Position"
+                    colors="blue:type=='view'"
+                    >
+                    <field name="code"
+                        />
+                    <field name="name"
+                        />
+                    <field name="type"
+                            invisible="True"
+                        />
+                    <field name="budget_assignment_allowed"
+                        />
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</openerp>
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
+     -->

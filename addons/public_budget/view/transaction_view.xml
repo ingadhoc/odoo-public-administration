@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- SEARCH VIEW -->
+        <record id="view_public_budget_transaction_filter" model="ir.ui.view">
+            <field name="name">public_budget.transaction.select</field>
+            <field name="model">public_budget.transaction</field>
+            <field name="arch" type="xml">
+                <search string="Budget Transaction">
+                    <field name="issue_date" string="Issue Date"
+                            />
+                    <field name="name" string="Name"
+                            />
+                    <field name="user_id" string="User"
+                            />
+                    <field name="expedient_id" string="Expedient"
+                            />
+                    <field name="type_id" string="Type"
+                            />
+                    <field name="total" string="Total"
+                            />
+                    <field name="supplier_ids" string="Suppliers"
+                            />
+                    <field name="budget_position_ids" string="Related Budget Positions"
+                            />
+                    <group expand="0" string="Group By">
+                        <field name="supplier_ids" string="Suppliers" context="{'group_by':'supplier_ids'}"
+                            />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- FORMVIEW -->
+        <record id="view_public_budget_transaction_form" model="ir.ui.view">
+            <field name="name">public_budget.transaction.form</field>
+            <field name="model">public_budget.transaction</field>
+            <field name="arch" type="xml">
+                <form string="Budget Transaction">
+                    <header>
+                        <button name="action_cancel_draft"
+                            type="object"
+                            states="cancel"
+                            string="To Draft"
+                            />
+                        <button name="sgn_open"
+                            states="draft"
+                            string="Open"
+                            class="oe_highlight"
+                            />
+                        <button name="sgn_close"
+                            states="open"
+                            string="Close"
+                            class="oe_highlight"
+                            />
+                        <button name="sgn_cancel"
+                            states="closed,draft,open"
+                            string="Cancel"
+                            />
+                        <field name="state" widget="statusbar"
+                            statusbar_colors='{}'
+                            />
+                    </header>
+                    <sheet string="Budget Transaction">
+                       <div class="oe_right oe_button_box" name="buttons">
+                       </div>
+                     <group>
+                        <field name="issue_date"
+                            /> 
+                        <field name="name"
+                            /> 
+                        <field name="user_id"
+                            /> 
+                        <field name="expedient_id"
+                            /> 
+                        <field name="type_id"
+                            /> 
+                        <field name="partner_id"
+                            attrs="{'invisible':[('type_with_advance_payment','=',False)],'required':[('type_with_advance_payment','=',True)]}"
+                            /> 
+                        <field name="total"
+                            /> 
+                        <field name="invoice_ids"
+                            /> 
+                        <field name="payment_order_ids"
+                            /> 
+                        <field name="note"
+                            /> 
+                        <field name="type_with_advance_payment"
+                            invisible="True"
+                            /> 
+                        <field name="type_with_salary_advance"
+                            invisible="True"
+                            /> 
+                        <field name="company_id"
+                            groups="base.group_multi_company"
+                            /> 
+                        <field name="preventive_line_ids"
+                        /> 
+                        <field name="refund_voucher_ids"
+                        /> 
+                        <field name="advance_return_ids"
+                        /> 
+                     </group>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+        <!-- TREEVIEW -->
+        <record id="view_public_budget_transaction_tree" model="ir.ui.view">
+            <field name="name">public_budget.transaction.tree</field>
+            <field name="model">public_budget.transaction</field>
+            <field name="arch" type="xml">
+                <tree string="Budget Transaction"
+                    colors="grey:state=='cancelled';blue:state in (u'draft',);black:state in (u'open', u'closed');red:state in ()"
+                    >
+                    <field name="issue_date"
+                        />
+                    <field name="name"
+                        />
+                    <field name="user_id"
+                        />
+                    <field name="expedient_id"
+                        />
+                    <field name="type_id"
+                        />
+                    <field name="total"
+                        />
+                    <field name="state"
+                        />
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</openerp>
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
+     -->

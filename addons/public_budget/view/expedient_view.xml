@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- SEARCH VIEW -->
+        <record id="view_public_budget_expedient_filter" model="ir.ui.view">
+            <field name="name">public_budget.expedient.select</field>
+            <field name="model">public_budget.expedient</field>
+            <field name="arch" type="xml">
+                <search string="Expedient">
+                    <field name="issue_date" string="Issue Date"
+                            />
+                    <field name="number" string="Number"
+                            />
+                    <field name="description" string="Description"
+                            />
+                    <field name="last_move_date" string="Last Move"
+                            />
+                    <field name="founder_id" string="Founder"
+                            />
+                    <field name="category_id" string="Category"
+                            />
+                    <field name="type" string="Type"
+                            />
+                    <field name="current_location_id" string="Current Location"
+                            />
+                    <field name="supplier_ids" string="Suppliers"
+                            />
+                    <group expand="0" string="Group By">
+                        <field name="last_move_date" string="Last Move" context="{'group_by':'last_move_date'}"
+                            />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- FORMVIEW -->
+        <record id="view_public_budget_expedient_form" model="ir.ui.view">
+            <field name="name">public_budget.expedient.form</field>
+            <field name="model">public_budget.expedient</field>
+            <field name="arch" type="xml">
+                <form string="Expedient">
+                    <header>
+                        <button name="sgn_to_revision"
+                            states="open"
+                            string="To Revision"
+                            class="oe_highlight"
+                            />
+                        <button name="action_cancel_open"
+                            type="object"
+                            states="cancel"
+                            string="To Draft"
+                            />
+                        <button name="sgn_to_annulled"
+                            states="open"
+                            string="To Annulled"
+                            />
+                        <button name="sgn_close"
+                            states="in_revision"
+                            string="Close"
+                            class="oe_highlight"
+                            />
+                        <button name="sgn_cancel"
+                            states="annulled,closed,in_revision,open"
+                            string="Cancel"
+                            />
+                        <field name="state" widget="statusbar"
+                            statusbar_colors='{}'
+                            />
+                    </header>
+                    <sheet string="Expedient">
+                       <div class="oe_right oe_button_box" name="buttons">
+                       </div>
+                     <group>
+                        <field name="issue_date"
+                            /> 
+                        <field name="number"
+                            /> 
+                        <field name="description"
+                            /> 
+                        <field name="founder_id"
+                            /> 
+                        <field name="category_id"
+                            /> 
+                        <field name="first_location_id"
+                            /> 
+                        <field name="type"
+                            /> 
+                        <field name="current_location_id"
+                            /> 
+                        <field name="note"
+                            /> 
+                        <field name="final_location"
+                            /> 
+                        <field name="expedient_move_ids"
+                            context="{'expedient':active_id}"
+                        /> 
+                        <field name="child_ids"
+                        /> 
+                        <field name="parent_id"
+                        /> 
+                        <field name="supplier_ids"
+                            widget="many2many_tags"
+                        /> 
+                     </group>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+        <!-- TREEVIEW -->
+        <record id="view_public_budget_expedient_tree" model="ir.ui.view">
+            <field name="name">public_budget.expedient.tree</field>
+            <field name="model">public_budget.expedient</field>
+            <field name="arch" type="xml">
+                <tree string="Expedient"
+                    colors="grey:state=='cancelled';blue:state in (u'open',);black:state in (u'annulled', u'in_revision', u'closed');red:state in ()"
+                    >
+                    <field name="issue_date"
+                        />
+                    <field name="number"
+                        />
+                    <field name="cover"
+                        />
+                    <field name="last_move_date"
+                        />
+                    <field name="founder_id"
+                        />
+                    <field name="category_id"
+                        />
+                    <field name="type"
+                        />
+                    <field name="current_location_id"
+                        />
+                    <field name="state"
+                        />
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</openerp>
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
+     -->

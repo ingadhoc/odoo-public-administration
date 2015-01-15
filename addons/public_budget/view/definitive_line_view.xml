@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- SEARCH VIEW -->
+        <record id="view_public_budget_definitive_line_filter" model="ir.ui.view">
+            <field name="name">public_budget.definitive_line.select</field>
+            <field name="model">public_budget.definitive_line</field>
+            <field name="arch" type="xml">
+                <search string="Definitive Line">
+                    <field name="issue_date" string="Issue Date"
+                            />
+                    <field name="supplier_id" string="Supplier"
+                            />
+                    <field name="amount" string="Amount"
+                            />
+                    <field name="budget_position_id" string="Budget Position"
+                            />
+                    <group expand="0" string="Group By">
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- FORMVIEW -->
+        <record id="view_public_budget_definitive_line_form" model="ir.ui.view">
+            <field name="name">public_budget.definitive_line.form</field>
+            <field name="model">public_budget.definitive_line</field>
+            <field name="arch" type="xml">
+                <form string="Definitive Line">
+                    <header>
+                    </header>
+                    <sheet string="Definitive Line">
+                       <div class="oe_right oe_button_box" name="buttons">
+                       </div>
+                     <group>
+                        <field name="issue_date"
+                            /> 
+                        <field name="supplier_id"
+                            /> 
+                        <field name="amount"
+                            /> 
+                     </group>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+        <!-- TREEVIEW -->
+        <record id="view_public_budget_definitive_line_tree" model="ir.ui.view">
+            <field name="name">public_budget.definitive_line.tree</field>
+            <field name="model">public_budget.definitive_line</field>
+            <field name="arch" type="xml">
+                <tree string="Definitive Line"
+                    editable="top"
+                    >
+                    <field name="issue_date"
+                        />
+                    <field name="supplier_id"
+                        />
+                    <field name="amount"
+                        />
+                    <field name="budget_position_id"
+                            invisible="'from_preventive' in context"
+                        />
+                    <field name="state"
+                            invisible="True"
+                        />
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</openerp>
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
+     -->

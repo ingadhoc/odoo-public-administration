@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <menuitem
+            name="Budget"
+            id="menu_budget_main"
+            sequence="45"
+            />
+
+        <menuitem
+            name="Budget"
+            id="menu_budget"
+            sequence="20"
+            parent="menu_budget_main"
+            />
+
+        <menuitem
+            name="Configuration"
+            id="menu_configuration"
+            sequence="100"
+            parent="menu_budget_main"
+            groups="group_manager"
+            />
+
+        <menuitem
+            name="HR"
+            id="menu_hr"
+            sequence="30"
+            parent="menu_budget_main"
+            />
+
+        <menuitem
+            name="Main"
+            id="menu_main"
+            sequence="10"
+            parent="menu_budget_main"
+            />
+        <record id="action_public_budget_advance_request_advance_requests" model="ir.actions.act_window">
+            <field name="name">Advance Requests</field>
+            <field name="res_model">public_budget.advance_request</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_public_budget_advance_request_tree"/>
+            <field name="search_view_id" ref="view_public_budget_advance_request_filter"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create"> Click to create a Advance Requests.</p>
+            </field>
+        </record>
+
+        <menuitem
+            name="Advance Requests"
+            id="menu_advance_requests"
+            sequence="10"
+            action="action_public_budget_advance_request_advance_requests"
+            parent="menu_hr"
+            />
+
+        <menuitem
+            name="Budget"
+            id="menu_budget_conf"
+            sequence="100"
+            parent="menu_configuration"
+            groups="group_manager"
+            />
+        <record id="action_public_budget_budget_budgets" model="ir.actions.act_window">
+            <field name="name">Budgets</field>
+            <field name="res_model">public_budget.budget</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_public_budget_budget_tree"/>
+            <field name="search_view_id" ref="view_public_budget_budget_filter"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create"> Click to create a Budgets.</p>
+            </field>
+        </record>
+
+        <menuitem
+            name="Budgets"
+            id="menu_budgets"
+            sequence="10"
+            action="action_public_budget_budget_budgets"
+            parent="menu_budget"
+            />
+        <record id="action_res_partner_employees" model="ir.actions.act_window">
+            <field name="name">Employees</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create"> Click to create a Employees.</p>
+            </field>
+            <field name="context">{'search_default_employee':1}</field>
+        </record>
+
+        <menuitem
+            name="Employees"
+            id="menu_employees"
+            sequence="10"
+            action="action_res_partner_employees"
+            parent="menu_hr"
+            />
+        <record id="action_public_budget_expedient_expedients" model="ir.actions.act_window">
+            <field name="name">Expedients</field>
+            <field name="res_model">public_budget.expedient</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_public_budget_expedient_tree"/>
+            <field name="search_view_id" ref="view_public_budget_expedient_filter"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create"> Click to create a Expedients.</p>
+            </field>
+        </record>
+
+        <menuitem
+            name="Expedients"
+            id="menu_expedients"
+            sequence="20"
+            action="action_public_budget_expedient_expedients"
+            parent="menu_main"
+            />
+        <record id="action_public_budget_location_locations" model="ir.actions.act_window">
+            <field name="name">Locations</field>
+            <field name="res_model">public_budget.location</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_public_budget_location_tree"/>
+            <field name="search_view_id" ref="view_public_budget_location_filter"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create"> Click to create a Locations.</p>
+            </field>
+        </record>
+
+        <menuitem
+            name="Locations"
+            id="menu_locations"
+            sequence="20"
+            action="action_public_budget_location_locations"
+            parent="menu_configuration"
+            groups="group_manager"
+            />
+        <record id="action_public_budget_transaction_type_transaction_types" model="ir.actions.act_window">
+            <field name="name">Transaction Types</field>
+            <field name="res_model">public_budget.transaction_type</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_public_budget_transaction_type_tree"/>
+            <field name="search_view_id" ref="view_public_budget_transaction_type_filter"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create"> Click to create a Transaction Types.</p>
+            </field>
+        </record>
+
+        <menuitem
+            name="Transaction Types"
+            id="menu_transaction_types"
+            sequence="10"
+            action="action_public_budget_transaction_type_transaction_types"
+            parent="menu_configuration"
+            groups="group_manager"
+            />
+        <record id="action_public_budget_transaction_transactions" model="ir.actions.act_window">
+            <field name="name">Transactions</field>
+            <field name="res_model">public_budget.transaction</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_public_budget_transaction_tree"/>
+            <field name="search_view_id" ref="view_public_budget_transaction_filter"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create"> Click to create a Transactions.</p>
+            </field>
+        </record>
+
+        <menuitem
+            name="Transactions"
+            id="menu_transactions"
+            sequence="10"
+            action="action_public_budget_transaction_transactions"
+            parent="menu_main"
+            />
+
+        <menuitem
+            name="Expedients"
+            id="menu_expedients_conf"
+            sequence="40"
+            parent="menu_budget_conf"
+            groups="group_manager"
+            />
+        <record id="action_public_budget_budget_pos_exc_rest_position_exc__rest_" model="ir.actions.act_window">
+            <field name="name">Position Exc. Rest.</field>
+            <field name="res_model">public_budget.budget_pos_exc_rest</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_public_budget_budget_pos_exc_rest_tree"/>
+            <field name="search_view_id" ref="view_public_budget_budget_pos_exc_rest_filter"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create"> Click to create a Position Exc. Rest..</p>
+            </field>
+        </record>
+
+        <menuitem
+            name="Position Exc. Rest."
+            id="menu_position_exc__rest_"
+            sequence="20"
+            action="action_public_budget_budget_pos_exc_rest_position_exc__rest_"
+            parent="menu_budget_conf"
+            groups="group_manager"
+            />
+        <record id="action_public_budget_budget_position_category_position_types" model="ir.actions.act_window">
+            <field name="name">Position Types</field>
+            <field name="res_model">public_budget.budget_position_category</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_public_budget_budget_position_category_tree"/>
+            <field name="search_view_id" ref="view_public_budget_budget_position_category_filter"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create"> Click to create a Position Types.</p>
+            </field>
+        </record>
+
+        <menuitem
+            name="Position Types"
+            id="menu_position_types"
+            sequence="10"
+            action="action_public_budget_budget_position_category_position_types"
+            parent="menu_budget_conf"
+            groups="group_manager"
+            />
+        <record id="action_public_budget_budget_position_positions" model="ir.actions.act_window">
+            <field name="name">Positions</field>
+            <field name="res_model">public_budget.budget_position</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_public_budget_budget_position_tree"/>
+            <field name="search_view_id" ref="view_public_budget_budget_position_filter"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create"> Click to create a Positions.</p>
+            </field>
+        </record>
+
+        <menuitem
+            name="Positions"
+            id="menu_positions"
+            sequence="30"
+            action="action_public_budget_budget_position_positions"
+            parent="menu_budget_conf"
+            groups="group_manager"
+            />
+        <record id="action_public_budget_expedient_category_categories" model="ir.actions.act_window">
+            <field name="name">Categories</field>
+            <field name="res_model">public_budget.expedient_category</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_public_budget_expedient_category_tree"/>
+            <field name="search_view_id" ref="view_public_budget_expedient_category_filter"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create"> Click to create a Categories.</p>
+            </field>
+        </record>
+
+        <menuitem
+            name="Categories"
+            id="menu_categories"
+            sequence="10"
+            action="action_public_budget_expedient_category_categories"
+            parent="menu_expedients_conf"
+            groups="group_manager"
+            />
+        <record id="action_public_budget_expedient_founder_founders" model="ir.actions.act_window">
+            <field name="name">Founders</field>
+            <field name="res_model">public_budget.expedient_founder</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_public_budget_expedient_founder_tree"/>
+            <field name="search_view_id" ref="view_public_budget_expedient_founder_filter"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create"> Click to create a Founders.</p>
+            </field>
+        </record>
+
+        <menuitem
+            name="Founders"
+            id="menu_founders"
+            sequence="40"
+            action="action_public_budget_expedient_founder_founders"
+            parent="menu_expedients_conf"
+            groups="group_manager"
+            />
+    </data>
+</openerp>
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
+     -->

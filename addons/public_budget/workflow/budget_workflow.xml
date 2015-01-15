@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+    <data>
+        <!-- Workflow -->
+
+        <record id="budget_untitle_wkf" model="workflow">
+            <field name="name">public_budget.budget.untitle</field>
+            <field name="osv">public_budget.budget</field>
+            <field name="on_create">True</field>
+        </record>
+
+        <!-- Activities -->
+
+        <record id="a_12DB_1392" model="workflow.activity">
+            <field name="wkf_id" ref="budget_untitle_wkf"/>
+            <field name="flow_start">True</field>
+            <field name="name">Draft</field>
+            <field name="action">
+                write({'state':'draft'})
+            </field>
+            <field name="kind">function</field>
+        </record>
+        <record id="a_12DB_1393" model="workflow.activity">
+            <field name="wkf_id" ref="budget_untitle_wkf"/>
+            <field name="name">Open</field>
+            <field name="action">
+                write({'state':'open'})
+            </field>
+            <field name="kind">function</field>
+        </record>
+        <record id="a_12DB_1394" model="workflow.activity">
+            <field name="wkf_id" ref="budget_untitle_wkf"/>
+            <field name="name">Pre Closed</field>
+            <field name="action">
+                write({'state':'pre_closed'})
+            </field>
+            <field name="kind">function</field>
+        </record>
+        <record id="a_12DB_1398" model="workflow.activity">
+            <field name="wkf_id" ref="budget_untitle_wkf"/>
+            <field name="name">Closed</field>
+            <field name="action">
+                write({'state':'closed'})
+            </field>
+            <field name="kind">function</field>
+        </record>
+        <record id="a_12DB_1397" model="workflow.activity">
+            <field name="wkf_id" ref="budget_untitle_wkf"/>
+            <field name="flow_stop">True</field>
+            <field name="name">Cancel</field>
+            <field name="action">
+                write({'state':'cancel'})
+            </field>
+            <field name="kind">function</field>
+        </record>
+
+        <!-- Transitions -->
+
+        <record id="t_12DB_1395" model="workflow.transition">
+            <field name="act_from" ref="a_12DB_1392"/>
+            <field name="act_to" ref="a_12DB_1393"/>
+            <field name="signal">sgn_open</field>
+            <field name="condition">True</field>
+        </record>
+        <record id="t_12DB_1396" model="workflow.transition">
+            <field name="act_from" ref="a_12DB_1393"/>
+            <field name="act_to" ref="a_12DB_1394"/>
+            <field name="signal">sgn_pre_close</field>
+            <field name="condition">True</field>
+        </record>
+        <record id="t_12DB_1399" model="workflow.transition">
+            <field name="act_from" ref="a_12DB_1394"/>
+            <field name="act_to" ref="a_12DB_1398"/>
+            <field name="signal">sgn_close</field>
+            <field name="condition">True</field>
+        </record>
+        <record id="t_12DB_139D" model="workflow.transition">
+            <field name="act_from" ref="a_12DB_1392"/>
+            <field name="act_to" ref="a_12DB_1397"/>
+            <field name="signal">sgn_cancel</field>
+            <field name="condition">True</field>
+        </record>
+        <record id="t_12DB_139E" model="workflow.transition">
+            <field name="act_from" ref="a_12DB_1393"/>
+            <field name="act_to" ref="a_12DB_1397"/>
+            <field name="signal">sgn_cancel</field>
+            <field name="condition">True</field>
+        </record>
+        <record id="t_12DB_139F" model="workflow.transition">
+            <field name="act_from" ref="a_12DB_1394"/>
+            <field name="act_to" ref="a_12DB_1397"/>
+            <field name="signal">sgn_cancel</field>
+            <field name="condition">True</field>
+        </record>
+        <record id="t_12DB_13A0" model="workflow.transition">
+            <field name="act_from" ref="a_12DB_1398"/>
+            <field name="act_to" ref="a_12DB_1397"/>
+            <field name="signal">sgn_cancel</field>
+            <field name="condition">True</field>
+        </record>
+        <record id="t_12DB_13A1" model="workflow.transition">
+            <field name="act_from" ref="a_12DB_1397"/>
+            <field name="act_to" ref="a_12DB_1392"/>
+            <field name="signal">sgn_to_draft</field>
+            <field name="condition">True</field>
+        </record>
+    </data>
+</openerp>
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
+     -->
