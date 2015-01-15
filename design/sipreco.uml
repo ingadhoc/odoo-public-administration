@@ -100,7 +100,7 @@
 			</model>
 		</userDefined>
 </profile>
-<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Thu Jan 15 19:49:39 ART 2015'>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Thu Jan 15 19:52:34 ART 2015'>
   <XMI.header>    <XMI.documentation>
       <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
       <XMI.exporterVersion>0.34(6) revised on $Date: 2010-01-11 22:20:14 +0100 (Mon, 11 Jan 2010) $ </XMI.exporterVersion>
@@ -8769,21 +8769,6 @@
                       name = 'return' isSpecification = 'false' kind = 'return'/>
                   </UML:BehavioralFeature.parameter>
                 </UML:Operation>
-                <UML:Attribute xmi.id = '127-0-1-1--6a392a2b:14aef7d6c45:-8000:000000000000288F'
-                  name = 'other_Field' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
-                  changeability = 'changeable' targetScope = 'instance'>
-                  <UML:StructuralFeature.multiplicity>
-                    <UML:Multiplicity xmi.id = '127-0-1-1--6a392a2b:14aef7d6c45:-8000:0000000000002890'>
-                      <UML:Multiplicity.range>
-                        <UML:MultiplicityRange xmi.id = '127-0-1-1--6a392a2b:14aef7d6c45:-8000:0000000000002891'
-                          lower = '1' upper = '1'/>
-                      </UML:Multiplicity.range>
-                    </UML:Multiplicity>
-                  </UML:StructuralFeature.multiplicity>
-                  <UML:StructuralFeature.type>
-                    <UML:DataType href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000B97'/>
-                  </UML:StructuralFeature.type>
-                </UML:Attribute>
               </UML:Classifier.feature>
             </UML:Class>
             <UML:Association xmi.id = '127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015DE'
@@ -23557,7 +23542,7 @@
       strokecolor="black"
     />
     <group name="Fig90.4"
-         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[945, 40, 344, 88]"
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[945, 40, 344, 79]"
          href="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A4"
          fill="0"
          fillcolor="white"
@@ -23571,7 +23556,7 @@
         x="945"
         y="40"
         width="344"
-        height="88"
+        height="79"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -23629,22 +23614,6 @@
         x="945"
         y="88"
         width="344"
-        height="16"
-        fill="0"
-        fillcolor="white"
-        stroke="0"
-        strokecolor="black"
-        textcolor="black"
-        font="Dialog"
-        italic="false"
-        bold="false"
-        textsize="12"
-        justification="Left"
-      >paid : Boolean</text>
-      <text name="Fig90.4.5"
-        x="945"
-        y="104"
-        width="344"
         height="22"
         fill="0"
         fillcolor="white"
@@ -23656,11 +23625,11 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >other_Field : Integer</text>
+      >paid : Boolean</text>
     </group>
     <rectangle name="Fig90.5"
       x="944"
-      y="127"
+      y="119"
       width="346"
       height="1"
       fill="1"
@@ -23669,7 +23638,7 @@
       strokecolor="black"
     />
     <group name="Fig90.6"
-         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[945, 128, 344, 24]"
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[945, 120, 344, 31]"
          href="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A4"
          fill="0"
          fillcolor="white"
@@ -23681,9 +23650,9 @@
       
       <rectangle name="Fig90.6.0"
         x="945"
-        y="128"
+        y="120"
         width="344"
-        height="24"
+        height="31"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -23691,7 +23660,7 @@
       />
       <text name="Fig90.6.1"
         x="945"
-        y="128"
+        y="120"
         width="344"
         height="22"
         fill="0"
@@ -36215,7 +36184,7 @@
       strokecolor="black"
     />
     <group name="Fig3.4"
-         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[1121, 240, 344, 88]"
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[1121, 240, 344, 79]"
          href="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A4"
          fill="0"
          fillcolor="white"
@@ -36229,7 +36198,7 @@
         x="1121"
         y="240"
         width="344"
-        height="88"
+        height="79"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -36287,22 +36256,6 @@
         x="1121"
         y="288"
         width="344"
-        height="16"
-        fill="0"
-        fillcolor="white"
-        stroke="0"
-        strokecolor="black"
-        textcolor="black"
-        font="Dialog"
-        italic="false"
-        bold="false"
-        textsize="12"
-        justification="Left"
-      >paid : Boolean</text>
-      <text name="Fig3.4.5"
-        x="1121"
-        y="304"
-        width="344"
         height="22"
         fill="0"
         fillcolor="white"
@@ -36314,11 +36267,11 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >other_Field : Integer</text>
+      >paid : Boolean</text>
     </group>
     <rectangle name="Fig3.5"
       x="1120"
-      y="327"
+      y="319"
       width="346"
       height="1"
       fill="1"
@@ -36327,7 +36280,7 @@
       strokecolor="black"
     />
     <group name="Fig3.6"
-         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[1121, 328, 344, 24]"
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[1121, 320, 344, 31]"
          href="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A4"
          fill="0"
          fillcolor="white"
@@ -36339,9 +36292,9 @@
       
       <rectangle name="Fig3.6.0"
         x="1121"
-        y="328"
+        y="320"
         width="344"
-        height="24"
+        height="31"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -36349,7 +36302,7 @@
       />
       <text name="Fig3.6.1"
         x="1121"
-        y="328"
+        y="320"
         width="344"
         height="22"
         fill="0"

@@ -27,9 +27,6 @@ class payment_order(models.Model):
         string='Paid',
         compute='_get_paid'
         )
-    other_Field = fields.Integer(
-        string='other_Field'
-        )
     transaction_id = fields.Many2one(
         'public_budget.transaction',
         string='Transaction'
