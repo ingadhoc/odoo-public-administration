@@ -63,44 +63,7 @@
                     <sheet string="Budget Transaction">
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
-                     <group>
-                        <field name="issue_date"
-                            /> 
-                        <field name="name"
-                            /> 
-                        <field name="user_id"
-                            /> 
-                        <field name="expedient_id"
-                            domain="[('current_location_id','in',user_location_ids[0][2]),('in_transit','=',False),('state','=','open')]"
-                            /> 
-                        <field name="type_id"
-                            /> 
-                        <field name="partner_id"
-                            attrs="{'invisible':[('type_with_advance_payment','=',False)],'required':[('type_with_advance_payment','=',True)]}"
-                            /> 
-                        <field name="invoice_ids"
-                            /> 
-                        <field name="note"
-                            /> 
-                        <field name="type_with_advance_payment"
-                            invisible="True"
-                            /> 
-                        <field name="type_with_salary_advance"
-                            invisible="True"
-                            /> 
-                        <field name="company_id"
-                            groups="base.group_multi_company"
-                            /> 
-                        <field name="user_location_ids"
-                            invisible="True"
-                            /> 
-                        <field name="preventive_line_ids"
-                        /> 
-                        <field name="refund_voucher_ids"
-                        /> 
-                        <field name="advance_return_ids"
-                        /> 
-                     </group>
+                        <field name="user_location_ids" invisible="True"/> 
                         <field name="type_with_advance_payment" invisible="1"/>
                         <field name="type_with_salary_advance" invisible="1"/>
                         <group>
@@ -108,7 +71,9 @@
                                 <field name="issue_date"/>
                                 <field name="name"/>
                                 <field name="user_id"/>
-                                <field name="expedient_id" options="{'no_quick_create': True}"/>
+                                <field name="expedient_id"
+                                    domain="[('current_location_id','in',user_location_ids[0][2]),('in_transit','=',False)]" options="{'no_quick_create': True}"
+                                    /> 
                                 <field name="type_id"/>
                                 <field name="partner_id" attrs="{'invisible':[('type_with_advance_payment','=',False)],'required':[('type_with_advance_payment','=',True)],'readonly':[('payment_order_ids','!=',[])]}"/>
                                 <field name="company_id" groups="base.group_multi_company"/>

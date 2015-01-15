@@ -168,6 +168,18 @@ class preventive_line(models.Model):
                 (self.budget_position_id.name))
 
     @api.one
+    @api.constrains(
+        'budget_id',
+        'budget_position_id',
+        'preventive_amount')
+    def _check_position_balance_amount(self):
+        self = self.with_context(budget_id=self.budget_id.id)
+        if self.budget_position_id.budget_assignment_allowed and self.budget_position_id.balance_amount < 0.0:
+            raise Warning(
+                _("There is not Enought Balance Amount on this Budget Position '%s'") %
+                (self.budget_position_id.name))
+
+    @api.one
     @api.constrains('definitive_line_ids', 'preventive_amount')
     def _check_number(self):
         if self.preventive_amount < self.definitive_amount:
