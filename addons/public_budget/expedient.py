@@ -111,19 +111,44 @@ class expedient(models.Model):
     ]
 
     @api.one
+    @api.depends(
+        'first_location_id',
+        'expedient_move_ids',
+        'expedient_move_ids.location_dest_id',
+        'expedient_move_ids.date')
     def _get_current_location(self):
         """"""
-        raise NotImplementedError
+        moves = self.env['public_budget.expedient_move'].search([
+            ('expedient_id', '=', self.id)], order='date desc')
+        last_move_date = False
+        if moves:
+            self.current_location_id = moves[0].location_dest_id.id
+            last_move_date = moves[0].date
+        elif self.first_location_id:
+            self.current_location_id = self.first_location_id.id
+        else:
+            self.current_location_id = False
+        self.last_move_date = last_move_date
 
     @api.one
+    @api.depends('issue_date')
     def _get_year(self):
         """"""
-        raise NotImplementedError
+        year = False
+        if self.issue_date:
+            issue_date = fields.Datetime.from_string(self.issue_date)
+            year = issue_date.year
+        self.year = year
 
     @api.one
+    @api.depends('supplier_ids', 'description')
     def _get_cover(self):
         """"""
-        raise NotImplementedError
+        supplier_names = [x.name for x in self.supplier_ids]
+        cover = self.description
+        if supplier_names:
+            cover += ' - ' + ', '.join(supplier_names)
+        self.cover = cover
 
     @api.multi
     def action_cancel_open(self):
@@ -132,5 +157,24 @@ class expedient(models.Model):
         self.delete_workflow()
         self.create_workflow()
         return True
+
+    @api.multi
+    def name_get(self):
+        result = []
+        for rec in self:
+            result.append(
+                (rec.id, "%s - %s" % (rec.number, rec.cover)))
+        return result
+
+    @api.model
+    def name_search(self, name, args=None, operator='ilike', limit=100):
+        args = args or []
+        recs = self.browse()
+        if name:
+            recs = self.search(
+                [('number', operator, name)] + args, limit=limit)
+        if not recs:
+            recs = self.search([('cover', operator, name)] + args, limit=limit)
+        return recs.name_get()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

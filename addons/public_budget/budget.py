@@ -129,14 +129,57 @@ class budget(models.Model):
     ]
 
     @api.one
+    @api.depends(
+        'budget_detail_ids',
+        'budget_detail_ids.budget_position_id',
+        'budget_modification_ids',
+        'budget_modification_ids.budget_modification_detail_ids',
+        'budget_modification_ids.budget_modification_detail_ids.budget_position_id',
+    )
     def _get_budget_positions(self):
-        """"""
-        raise NotImplementedError
+        budget_positions = self.env['public_budget.budget_position']
+        self.budget_position_ids = budget_positions
+
+        modifications = self.env[
+            'public_budget.budget_modification_detail'].search(
+            [('budget_modification_id.budget_id', '=', self.id)])
+
+        # modifications
+        position_ids = [x.budget_position_id.id for x in modifications]
+        # initial positions
+        position_ids = position_ids + [
+            x.budget_position_id.id for x in self.budget_detail_ids]
+        # parents positions
+        for position in budget_positions.browse(position_ids):
+            parents = budget_positions.search(
+                [('parent_left', '<', position.parent_left),
+                 ('parent_right', '>', position.parent_right)])
+            position_ids += parents.ids
+        self.budget_position_ids = budget_positions.browse(
+            list(set(position_ids)))
 
     @api.one
     def _get_totals(self):
-        """"""
-        raise NotImplementedError
+        total_authorized = sum([x.amount for x in self.with_context(
+            budget_id=self.id).budget_position_ids if x.type != 'view'])
+        total_preventive = sum(
+            [x.preventive_amount for x in self.with_context(
+                budget_id=self.id).budget_position_ids if x.type != 'view'])
+        total_requested = sum(
+            [x.amount for x in self.with_context(
+                budget_id=self.id).funding_move_ids if x.type == 'request']) - sum(
+            [x.amount for x in self.with_context(
+                budget_id=self.id).funding_move_ids if x.type == 'refund'])
+
+        self.total_authorized = total_authorized
+        self.total_preventive = total_preventive
+        self.total_requested = total_requested
+
+        # Get passive residue
+        definitive_lines = self.env['public_budget.definitive_line'].search(
+            [('preventive_line_id.budget_id', '=', self.id)])
+        passive_residue = sum([x.residual_amount for x in definitive_lines])
+        self.passive_residue = passive_residue
 
     @api.multi
     def action_cancel_draft(self):
@@ -145,5 +188,30 @@ class budget(models.Model):
         self.delete_workflow()
         self.create_workflow()
         return True
+
+    @api.one
+    def action_pre_close(self):
+        # Unlink any previous pre close detail
+        self.budget_prec_detail_ids.unlink()
+        self = self.with_context(budget_id=self.id)
+
+        self.prec_passive_residue = self.passive_residue
+        self.prec_total_requested = self.total_requested
+
+        for line in self.budget_position_ids:
+            vals = {
+                'budget_position_id': line.id,
+                'amount': line.amount,
+                'draft_amount': line.draft_amount,
+                'preventive_amount': line.preventive_amount,
+                'definitive_amount': line.definitive_amount,
+                'to_pay_amount': line.to_pay_amount,
+                'paid_amount': line.paid_amount,
+                'balance_amount': line.balance_amount,
+                'parent_left': line.parent_left,
+                'order_int': line.parent_left,
+                'budget_id': self.id,
+            }
+            self.budget_prec_detail_ids.create(vals)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -206,34 +206,85 @@ class transaction(models.Model):
     ]
 
     @api.one
+    @api.depends(
+        'preventive_line_ids',
+        'preventive_line_ids.definitive_line_ids',
+        'preventive_line_ids.definitive_line_ids.supplier_id',
+    )
     def _get_suppliers(self):
-        """"""
-        raise NotImplementedError
+        definitive_lines = self.env['public_budget.definitive_line'].search(
+            [('preventive_line_id.transaction_id', '=', self.id)])
+        supplier_ids = [
+            x.supplier_id.id for x in definitive_lines]
+        self.supplier_ids = self.env['res.partner']
+        self.supplier_ids = supplier_ids
 
     @api.one
+    @api.depends(
+        'preventive_line_ids',
+        'preventive_line_ids.budget_position_id',
+    )
     def _get_budget_positions(self):
-        """"""
-        raise NotImplementedError
+        self.budget_position_ids = self.env['public_budget.budget_position']
+        budget_position_ids = [
+            x.budget_position_id.id for x in self.preventive_line_ids]
+        self.budget_position_ids = budget_position_ids
 
     @api.one
+    @api.depends('refund_voucher_ids')
     def _refund_voucher_count(self):
-        """"""
-        raise NotImplementedError
+        self.refund_voucher_count = len(self.refund_voucher_ids)
 
     @api.one
+    @api.depends('payment_order_ids')
     def _payment_order_count(self):
-        """"""
-        raise NotImplementedError
+        self.payment_order_count = len(self.payment_order_ids)
 
     @api.one
+    @api.depends(
+        'advance_preventive_line_ids',
+        'refund_voucher_ids',
+        'refund_voucher_ids.state',
+        'invoice_ids',
+    )
     def _get_advance_amounts(self):
-        """"""
-        raise NotImplementedError
+        refund_voucher_amount = sum(
+            x.amount for x in self.refund_voucher_ids if x.state == 'posted')
+        self.refund_voucher_amount = refund_voucher_amount
+        self.advance_remaining_amount = self.payment_order_amount - \
+            refund_voucher_amount - self.paid_amount
 
     @api.one
+    @api.depends(
+        'preventive_line_ids',
+        'payment_order_ids',
+        'payment_order_ids.state',
+        'total',
+    )
     def _get_amounts(self):
-        """"""
-        raise NotImplementedError
+        preventive_amount = sum([
+            preventive.preventive_amount
+            for preventive in self.preventive_line_ids])
+        payment_order_amount = sum(
+            x.total for x in self.payment_order_ids if x.state == 'done')
+        # definitive_amount = sum([
+        #     preventive.definitive_amount
+        #     for preventive in self.preventive_line_ids])
+        # invoiced_amount = sum([
+        #     preventive.invoiced_amount
+        #     for preventive in self.preventive_line_ids])
+        # to_pay_amount = sum([
+        #     preventive.to_pay_amount
+        #     for preventive in self.preventive_line_ids])
+        paid_amount = sum([
+            preventive.paid_amount for preventive in self.definitive_line_ids])
+        self.remaining_amount = self.total - preventive_amount
+        self.payment_order_amount = payment_order_amount
+        self.preventive_amount = preventive_amount
+        # self.definitive_amount = definitive_amount
+        # self.invoiced_amount = invoiced_amount
+        # self.to_pay_amount = to_pay_amount
+        self.paid_amount = paid_amount
 
     @api.multi
     def action_cancel_draft(self):
@@ -242,5 +293,73 @@ class transaction(models.Model):
         self.delete_workflow()
         self.create_workflow()
         return True
+
+    @api.one
+    def check_closure(self):
+        # Check preventive lines
+        for line in self.preventive_line_ids:
+            if line.preventive_amount != line.definitive_amount or line.preventive_amount != line.invoiced_amount or line.preventive_amount != line.to_pay_amount or line.preventive_amount != line.paid_amount:
+                raise Warning(
+                    _('To close a transaction, Preventive, Definitive, Invoiced, To Pay and Paid amount must be the same for each line'))
+
+        # Check advance transactions
+        if self.type_id.with_advance_payment:
+            if self.advance_remaining_amount != 0.0:
+                raise Warning(
+                    _('To close a transaction with advance payment, Payment Order Amounts - Refund Amounts should be equal to Definitive Amounts'))
+
+# Constraints
+    @api.one
+    @api.constrains(
+        'type_id', 'advance_preventive_line_ids', 'preventive_line_ids')
+    def _check_advance_preventive_lines(self):
+        if self.type_id.with_advance_payment:
+            payment_order_amount = sum(
+                x.total for x in self.payment_order_ids if x.state == 'done')
+            preventive_amount = sum(
+                [x.preventive_amount for x in
+                    self.preventive_line_ids])
+            if payment_order_amount < preventive_amount:
+                raise Warning(
+                    _("In transactions with 'Advance Payment', \
+                        Settlement Amount can't be greater than Payment Orders Amount"))
+
+    @api.one
+    @api.constrains('total', 'preventive_line_ids')
+    def _check_preventive_amount(self):
+        conf_preventive_amount = sum(
+            [x.preventive_amount for x in
+                self.preventive_line_ids])
+        if self.total < conf_preventive_amount:
+            raise Warning(
+                _("Preventive Amounts can't be \
+                    greater than Transaction Total"))
+
+    @api.one
+    @api.constrains('total', 'advance_preventive_line_ids')
+    def _check_advance_preventive_amount(self):
+        conf_preventive_amount = sum(
+            [x.preventive_amount for x in
+                self.advance_preventive_line_ids])
+        if self.total < conf_preventive_amount:
+            raise Warning(
+                _("Avance Preventive Amounts can't be \
+                    greater than Transaction Total"))
+
+    @api.one
+    @api.constrains('total', 'expedient_id')
+    def _check_transaction_type(self):
+        if self.type_id.with_amount_restriction:
+            restriction = self.env[
+                'public_budget.transaction_type_amo_rest'].search(
+                [('transaction_type_id', '=', self.type_id.id),
+                 ('date', '<=', self.expedient_id.issue_date)],
+                order='date desc', limit=1)
+            if restriction:
+                if restriction.to_amount < self.total or \
+                        restriction.from_amount > self.total:
+                    raise Warning(
+                        _("Total and Date are not compatible with \
+                            Transaction Amount Restrictions"))
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

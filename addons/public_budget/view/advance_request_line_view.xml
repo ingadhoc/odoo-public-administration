@@ -58,6 +58,8 @@
                         />
                     <field name="description"
                         />
+                    <field name="returned_amount"/>
+                    <field name="balance_amount"/>
                 </tree>
             </field>
         </record>

@@ -18,4 +18,18 @@ class invoice(models.Model):
     _constraints = [
     ]
 
+    @api.multi
+    def invoice_validate(self):
+        res = super(invoice, self).invoice_validate()
+        for inv in self:
+            if inv.transaction_id.type_id.with_advance_payment:
+                domain = [
+                    ('move_id', '=', inv.move_id.id),
+                    ('account_id', '=', inv.account_id.id),
+                ]
+                move_lines = self.env['account.move.line'].search(domain)
+                move_lines.write(
+                    {'partner_id': self.transaction_id.partner_id.id})
+        return res
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

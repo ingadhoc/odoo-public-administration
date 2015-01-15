@@ -20,6 +20,11 @@
             <field name="arch" type="xml">
                 <group position="inside">
                 </group>
+                <notebook>
+                    <page string="Parameters">
+                        <field name="inventory_rule_ids"/>
+                    </page>
+                </notebook>
             </field>
         </record>
 

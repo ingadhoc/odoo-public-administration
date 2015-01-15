@@ -34,6 +34,17 @@
             </field>
         </record>
 
+        <!-- FORMVIEW -->
+        <record id="invoice_supplier_form" model="ir.ui.view">
+            <field name="name">account.invoice.supplier.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_line']/tree/field[@name='account_id']" position="after">
+                    <field name="definitive_line_id"/>
+                </xpath>
+            </field>
+        </record>
 
     </data>
 </openerp>

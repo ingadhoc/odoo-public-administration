@@ -71,4 +71,58 @@ class funding_move(models.Model):
         self.create_workflow()
         return True
 
+    @api.one
+    def unlink(self):
+        if self.state not in ('draft'):
+            raise Warning(
+                _('The funding move must be in draft state for unlink !'))
+        return super(funding_move, self).unlink()
+
+    @api.one
+    @api.constrains('state')
+    def _check_cancel(self):
+        if self.state == 'cancel' and self.move_id:
+            raise Warning(
+                _("You can not cancel a Funding Move that has a related \
+                Account Move. Delete it first"))
+
+    @api.one
+    def action_confirm(self):
+        if self.type == 'refund':
+            account_id = self.journal_id.default_debit_account_id.id
+            debit = 0.0
+            credit = self.amount
+        else:
+            account_id = self.journal_id.default_credit_account_id.id
+            credit = 0.0
+            debit = self.amount
+
+        move_line1 = {
+            'name': self.name[:64],
+            'date': self.date,
+            'debit': debit,
+            'credit': credit,
+            'account_id': account_id,
+        }
+        move_line2 = {
+            'name': self.name[:64],
+            'date': self.date,
+            'debit': credit,
+            'credit': debit,
+            'account_id': self.budget_id.income_account_id.id,
+        }
+
+        period = self.env['account.period'].find(self.date)[:1]
+
+        move_vals = {
+            'ref': self.name,
+            'line_id': [(0, 0, move_line2), (0, 0, move_line1)],
+            'journal_id': self.journal_id.id,
+            'date': self.date,
+            'period_id': period.id,
+        }
+        move = self.env['account.move'].create(move_vals)
+        self.write({'move_id': move.id, 'state': 'confirmed'})
+        move.post()
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

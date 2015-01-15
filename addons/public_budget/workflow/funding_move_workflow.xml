@@ -25,7 +25,7 @@
             <field name="wkf_id" ref="funding_move_untitle_wkf"/>
             <field name="name">Confirmed</field>
             <field name="action">
-                write({'state':'confirmed'})
+                action_confirm()
             </field>
             <field name="kind">function</field>
         </record>
