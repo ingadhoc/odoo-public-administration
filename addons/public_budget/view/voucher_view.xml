@@ -34,6 +34,68 @@
             </field>
         </record>
 
+        <record id="view_voucher_filter_vendor_pay" model="ir.ui.view">
+            <field name="name">account.voucher.payment.filter</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher.view_voucher_filter_vendor_pay"/>
+            <field name="arch" type="xml">
+                <field name="journal_id" position="after">
+                    <field name="transaction_id"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_voucher_filter_customer_pay" model="ir.ui.view">
+            <field name="name">account.voucher.customer.pay.select</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher.view_voucher_filter_customer_pay"/>
+            <field name="arch" type="xml">
+                <field name="journal_id" position="after">
+                    <field name="transaction_id"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_vendor_receipt_form" model="ir.ui.view">
+            <field name="name">account.voucher.payment.form</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher.view_vendor_receipt_form"/>
+            <field name="arch" type="xml">
+                <field name="journal_id" position="after">
+                    <field name="transaction_id" readolny="1"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_vendor_payment_form" model="ir.ui.view">
+            <field name="name">account.voucher.customer.pay.form</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher.view_vendor_payment_form"/>
+            <field name="arch" type="xml">
+                <field name="journal_id" position="after">
+                    <field name="transaction_id" readolny="1"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_voucher_no_create_tree">
+            <field name="name">account.voucher.no_create.tree</field>
+            <field name="model">account.voucher</field>
+            <field name="arch" type="xml">
+                <tree colors="blue:state == 'draft';gray:state == 'cancel';red:audit" string="Voucher Entries" create="false">
+                    <field name="date"/>
+                    <field name="number"/>
+                    <field name="reference"/>
+                    <field name="partner_id"/>
+                    <field name="journal_id" groups="account.group_account_user"/>
+                    <field name="period_id" invisible="context.get('visible', True)"/>
+                    <field name="type" invisible="context.get('visible', True)"/>
+                    <field name="amount" sum="Total Amount"/>
+                    <field name="audit" invisible="1"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
 
     </data>
 </openerp>

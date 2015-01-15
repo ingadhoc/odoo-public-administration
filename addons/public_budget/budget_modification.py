@@ -56,8 +56,34 @@ class budget_modification(models.Model):
     ]
 
     @api.one
+    @api.depends(
+        'budget_modification_detail_ids',
+        'budget_modification_detail_ids.budget_position_id',
+        'budget_modification_detail_ids.amount',
+    )
     def _get_restriction_data(self):
-        """"""
-        raise NotImplementedError
+        """
+        """
+        rest_message = False
+        rest_type = False
+        if self.type == 'exchange':
+            decrease_category_ids = [
+                x.budget_position_id.category_id.id for x in self.budget_modification_detail_ids if x.amount < 0.0]
+            increase_category_ids = [
+                x.budget_position_id.category_id.id for x in self.budget_modification_detail_ids if x.amount > 0.0]
+            domain = [('origin_category_id', 'in', decrease_category_ids),
+                      ('destiny_category_id', 'in', increase_category_ids)]
+            restrictions = self.env[
+                'public_budget.budget_pos_exc_rest'].search(
+                domain + [('type', '=', 'block')])
+            if not restrictions:
+                restrictions = self.env[
+                    'public_budget.budget_pos_exc_rest'].search(
+                    domain + [('type', '=', 'alert')])
+
+            rest_message = restrictions.message
+            rest_type = restrictions.type
+        self.rest_message = rest_message
+        self.rest_type = rest_type
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

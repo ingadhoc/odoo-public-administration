@@ -9,6 +9,10 @@
             <field name="arch" type="xml">
                 <search position="inside">
                 </search>
+                <field name="mode" position="before">
+                    <field name="transaction_id"/>
+                    <field name="partner_id"/>
+                </field>
             </field>
         </record>
  
@@ -20,6 +24,30 @@
             <field name="arch" type="xml">
                 <group position="inside">
                 </group>
+                <!-- we replace default wizard for wizard without search on date and predefined -->
+                <button string="Invoices" position="attributes">
+                    <attribute name="attrs">{'invisible':['|',('state','=','done'),('transaction_id','!=',False)]}</attribute>
+                </button>
+                <button string="Invoices" position="after">
+                    <button class="oe_inline oe_stat_button oe_right" name="action_search_entries" string="Select Transaction Invoices" Help="Select Transaction Invoices to Pay" type="object" attrs="{'invisible':['|','|',('state','=','done'),('type_with_advance_payment','=',True),('transaction_id','=',False)]}" icon="fa-pencil-square-o" widget="statinfo"/>
+                </button>
+                <div class=" oe_right oe_button_box">
+                    <button class="oe_inline oe_stat_button oe_right" name="%(action_add_avance_lines)d" string="Advance Lines" Help="Select Advance Lines to Pay"
+                           type="action" attrs="{'invisible':['|',('state','=','done'),('type_with_advance_payment','=',False)]}" icon="fa-pencil-square-o" context="{'transaction_id':transaction_id}" widget="statinfo"/>
+                </div>
+                <field name="line_ids" position="attributes">
+                    <attribute name="attrs">{'readonly':[('transaction_id', '!=', False)]}</attribute>
+                </field>
+                <field name="user_id" position="after">
+                    <field name="partner_id" attrs="{'invisible':['|',('transaction_id', '!=', False),('type_with_advance_payment', '=', True)]}"/>
+                </field>
+                <field name="mode" position="after">
+                    <field name="transaction_id" readonly="1"/>
+                    <field name="type_with_advance_payment" invisible="1"/>
+                </field>
+                <xpath expr="//tree//field[@name='amount']" position='attributes'>
+                    <attribute name="invisible">0</attribute>
+                </xpath>
             </field>
         </record>
 
@@ -34,6 +62,31 @@
             </field>
         </record>
 
+        <record id="action_payment_order_form" model="ir.actions.act_window">
+            <field name="name">Payment Mode</field>
+            <field name="res_model">payment.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+        </record>
+
+        <record id="view_payment_order_no_create_tree" model="ir.ui.view">
+            <field name="name">payment.order.no_create.tree</field>
+            <field name="model">payment.order</field>
+            <field eval="99" name="priority"/>
+            <field name="arch" type="xml">
+                <tree create="false" colors="blue:state == 'draft';gray:state in ('cancel','done');black:state == 'open'" string="Payment order">
+                    <field name="reference"/>
+                    <field name="mode"/>
+                    <field name="user_id"/>
+                    <field name="partner_id"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="date_created"/>
+                    <field name="date_done"/>
+                    <field name="total"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
 
     </data>
 </openerp>

@@ -59,29 +59,61 @@
                     <sheet string="Budget">
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
-                     <group>
-                        <field name="name"
-                            /> 
-                        <field name="year"
-                            /> 
-                        <field name="income_account_id"
-                            /> 
-                        <field name="expedient_id"
-                            /> 
-                        <field name="prec_passive_residue"
-                            /> 
-                        <field name="prec_total_requested"
-                            /> 
-                        <field name="company_id"
-                            groups="base.group_multi_company"
-                            /> 
-                        <field name="budget_modification_ids"
-                        /> 
-                        <field name="funding_move_ids"
-                        /> 
-                     </group>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="year"/>
+                                <field name="expedient_id"/>
+                                <field name="income_account_id"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                            </group>
+                            <group>
+                                <field name="total_authorized"/>
+                                <field name="total_preventive"/>
+                                <field name="total_requested"/>
+                                <field name="passive_residue" attrs="{'invisible':[('state', 'not in', ['pre_closed','closed'])]}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Analysis">
+                                <field name="budget_position_ids" context="{'budget_id':active_id}">
+                                    <tree colors="blue:type=='view'; green:budget_assignment_allowed; red: budget_assignment_allowed and projected_amount > amount;">
+                                        <field name="parent_left" invisible="1"/>
+                                        <field name="code"/>
+                                        <field name="name"/>
+                                        <field name="type" invisible="1"/>
+                                        <field name="amount" attrs="{'invisible':[('budget_assignment_allowed','=',False)]}"/>
+                                        <field name="draft_amount"/>
+                                        <field name="preventive_amount"/>
+                                        <field name="definitive_amount"/>
+                                        <field name="to_pay_amount"/>
+                                        <field name="paid_amount"/>
+                                        <field name="projected_amount"/>
+                                        <field name="preventive_avg" widget="progressbar" attrs="{'invisible':[('budget_assignment_allowed','=',False)]}"/>
+                                        <field name="preventive_avg" widget="integer" string="%" attrs="{'invisible':[('budget_assignment_allowed','=',False)]}"/>
+                                        <field name="balance_amount" attrs="{'invisible':[('budget_assignment_allowed','=',False)]}"/>
+                                        <field name="budget_assignment_allowed" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Detail">
+                                <field name="budget_detail_ids"/>
+                            </page>
+                            <page string="Moves">
+                                <field name="budget_modification_ids"/>
+                            </page>
+                            <page string="Funding Moves">
+                                <field name="funding_move_ids"/>
+                            </page>
+                            <page string="Pre Close Detail" attrs="{'invisible':[('state', 'not in', ['pre_closed','closed'])]}">
+                                <group col="4">
+                                    <field name="prec_passive_residue"/>
+                                    <field name="prec_total_requested"/>
+                                </group>
+                                <field name="budget_prec_detail_ids"/>
+                            </page>
+                        </notebook>
                     </sheet>
-
                 </form>
             </field>
         </record>

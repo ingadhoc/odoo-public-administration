@@ -36,10 +36,44 @@ class payment_order(models.Model):
     ]
 
     @api.one
-    def _get_paid(self):
-        """"""
-        parent = super(payment_order,self)
-        result = parent._get_paid() if hasattr(parent, '_get_paid') else False
-        return result
+    def create_voucher(self):
+        res = super(payment_order, self).create_voucher()
+        for voucher_ids in res:
+            vouchers = self.env['account.voucher'].browse(voucher_ids)
+            vouchers.signal_workflow(
+                'proforma_confirmed')
+        return res
+
+    @api.multi
+    def action_search_entries(self):
+        if not self.transaction_id:
+            raise Warning(
+                _('This action is only available for Payment Orders with Transaction'))
+        move_lines = self.env['account.move.line']
+        models = self.env['ir.model.data']
+        domain = [
+            ('reconcile_id', '=', False),
+            ('account_id.type', '=', 'payable'),
+            ('credit', '>', 0),
+            ('invoice.transaction_id', '=', self.transaction_id.id),
+            ('account_id.reconcile', '=', True)]
+        move_lines = move_lines.search(domain)
+        context = dict(
+            self._context, line_ids=move_lines.ids,
+            default_entries=move_lines.ids)
+        models = models.search(
+            [('model', '=', 'ir.ui.view'),
+             ('name', '=', 'view_create_payment_order_lines')])
+        resource_id = models.read(fields=[
+            'res_id'])[0]['res_id']
+        return {'name': _('Entry Lines'),
+                'context': context,
+                'view_type': 'form',
+                'view_mode': 'form',
+                'res_model': 'payment.order.create',
+                'views': [(resource_id, 'form')],
+                'type': 'ir.actions.act_window',
+                'target': 'new',
+                }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

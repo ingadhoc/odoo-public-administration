@@ -28,10 +28,26 @@ class invoice_line(models.Model):
     ]
 
     @api.one
+    @api.depends(
+        'price_subtotal',
+        'invoice_id.amount_total',
+        'invoice_id.residual')
     def _get_amounts(self):
-        """"""
-        parent = super(invoice_line,self)
-        result = parent._get_amounts() if hasattr(parent, '_get_amounts') else False
-        return result
+        """Update the following fields:
+        -to_pay_amount: is the amount of this invoice that is in draft vouchers
+        so we consider that is has been sent to be paid. Dividimos
+        proporcionalmente por linea, porque sabemos el total a nivel factura
+        -paid_amount: vemos el porcentaje que se pago de la factura y,
+        al total de cada linea lo multiplicamos por ese porcentaje"""
+        invoice_total = self.invoice_id.amount_total
+        invoice_paid_perc = 0.0
+        if invoice_total:
+            invoice_paid_perc = (
+                invoice_total - self.invoice_id.residual) / invoice_total
+        # TODO implementar to_pay_amount, ver si usamos como hicimos en las
+        # preventive lines que lo sacamos de las ordenes de pago o hacemos algo
+        # distinto, ver tmb el paid_amount como lo calculamos
+        self.to_pay_amount = self.price_subtotal * invoice_paid_perc
+        self.paid_amount = self.price_subtotal * invoice_paid_perc
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
