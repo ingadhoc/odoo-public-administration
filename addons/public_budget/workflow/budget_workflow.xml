@@ -33,6 +33,7 @@
             <field name="wkf_id" ref="budget_untitle_wkf"/>
             <field name="name">Pre Closed</field>
             <field name="action">
+                action_pre_close()
                 write({'state':'pre_closed'})
             </field>
             <field name="kind">function</field>

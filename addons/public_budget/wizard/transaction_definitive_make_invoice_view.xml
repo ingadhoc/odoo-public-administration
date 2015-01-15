@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_definitive_make_invoice" model="ir.ui.view">
+            <field name="name">Make Invoice</field>
+            <field name="model">public_budget.definitive.make.invoice</field>
+            <field name="arch" type="xml">
+                <form string="Create Invoice">
+                    <field name="transaction_id" invisible="1"/>
+                    <field name="supplier_ids" invisible="1"/>
+                    <field name="company_id" invisible="1"/>
+                    <group>
+                        <field name="supplier_id" options="{'no_create': True}" domain="[('id','in',supplier_ids[0][2])]"/>
+                        <field name="journal_id"/>
+                        <field name="definitive_line_ids">
+                            <tree create="false" editable="top">
+                                <field name="budget_id" readonly="1"/>
+                                <field name="budget_position_id" readonly="1"/>
+                                <field name="residual_amount"/>
+                                <field name="to_invoice_amount" readonly="0" required="1"/>
+                                <field name="full_imputation"/>
+                            </tree>
+                        </field>
+                        <field name="invoice_date"/>
+                        <field name="supplier_invoice_number"/>
+                    </group>
+                    <footer>
+                        <button name="make_invoices" string="Create Invoice" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+               </form>
+            </field>
+        </record>
+
+        <record id="action_definitive_make_invoice" model="ir.actions.act_window">
+            <field name="name">Make Invoice</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">public_budget.definitive.make.invoice</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_definitive_make_invoice"/>
+            <field name="target">new</field>
+            <field name="multi">True</field>
+        </record>
+    </data>
+</openerp>

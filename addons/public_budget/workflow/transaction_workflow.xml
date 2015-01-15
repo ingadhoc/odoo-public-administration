@@ -65,7 +65,7 @@
             <field name="act_from" ref="a_12D8_0FEF"/>
             <field name="act_to" ref="a_12D8_0D95"/>
             <field name="signal">sgn_close</field>
-            <field name="condition">True</field>
+            <field name="condition">check_closure()</field>
         </record>
         <record id="t_12D8_0DA0" model="workflow.transition">
             <field name="act_from" ref="a_12D8_0D94"/>

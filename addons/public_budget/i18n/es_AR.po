@@ -1,0 +1,1705 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* public_budget
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-01-13 21:00+0000\n"
+"PO-Revision-Date: 2015-01-13 21:00+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: public_budget
+#: model:ir.actions.act_window,help:public_budget.action_public_budget_advance_request_advance_requests
+msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Advance Requests.</p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Advance Requests.</p>\n"
+"            "
+
+#. module: public_budget
+#: model:ir.actions.act_window,help:public_budget.action_public_budget_budget_budgets
+msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Budgets.</p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Budgets.</p>\n"
+"            "
+
+#. module: public_budget
+#: model:ir.actions.act_window,help:public_budget.action_public_budget_expedient_category_categories
+msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Categories.</p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Categories.</p>\n"
+"            "
+
+#. module: public_budget
+#: model:ir.actions.act_window,help:public_budget.action_res_partner_employees
+msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Employees.</p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Employees.</p>\n"
+"            "
+
+#. module: public_budget
+#: model:ir.actions.act_window,help:public_budget.action_public_budget_expedient_expedients
+msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Expedients.</p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Expedients.</p>\n"
+"            "
+
+#. module: public_budget
+#: model:ir.actions.act_window,help:public_budget.action_public_budget_expedient_founder_founders
+msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Founders.</p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Founders.</p>\n"
+"            "
+
+#. module: public_budget
+#: model:ir.actions.act_window,help:public_budget.action_public_budget_location_locations
+msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Locations.</p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Locations.</p>\n"
+"            "
+
+#. module: public_budget
+#: model:ir.actions.act_window,help:public_budget.action_public_budget_budget_pos_exc_rest_position_exc__rest_
+msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Position Exc. Rest..</p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Position Exc. Rest..</p>\n"
+"            "
+
+#. module: public_budget
+#: model:ir.actions.act_window,help:public_budget.action_public_budget_budget_position_category_position_types
+msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Position Types.</p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Position Types.</p>\n"
+"            "
+
+#. module: public_budget
+#: model:ir.actions.act_window,help:public_budget.action_public_budget_budget_position_positions
+msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Positions.</p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Positions.</p>\n"
+"            "
+
+#. module: public_budget
+#: model:ir.actions.act_window,help:public_budget.action_public_budget_transaction_type_transaction_types
+msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Transaction Types.</p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Transaction Types.</p>\n"
+"            "
+
+#. module: public_budget
+#: model:ir.actions.act_window,help:public_budget.action_public_budget_transaction_transactions
+msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Transactions.</p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Transactions.</p>\n"
+"            "
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_account_account
+#: view:public_budget.preventive_line:public_budget.view_public_budget_preventive_line_filter
+#: field:public_budget.preventive_line,account_id:0
+msgid "Account"
+msgstr "Cuenta"
+
+#. module: public_budget
+#: field:public_budget.preventive_line,accounting_state:0
+msgid "Accounting State"
+msgstr "Estado Contable"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_account_voucher
+msgid "Accounting Voucher"
+msgstr "Comprobante de contabilidad"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_add_avance_lines
+msgid "Add Advance Lines"
+msgstr "Agregar Línea de Adelanto"
+
+#. module: public_budget
+#: view:payment.add.advance_lines:public_budget.view_create_payment_order_lines
+msgid "Add to payment order"
+msgstr "Agregar a Orden de Pago"
+
+#. module: public_budget
+#: field:public_budget.transaction_type,advance_account_id:0
+msgid "Advance Account"
+msgstr "Cuenta Adelanto"
+
+#. module: public_budget
+#: view:payment.order:public_budget.view_public_budget_payment_order_form
+msgid "Advance Lines"
+msgstr "Lineas Adelanto"
+
+#. module: public_budget
+#: field:payment.add.advance_lines,advance_preventive_line_ids:0
+#: field:public_budget.transaction,advance_preventive_line_ids:0
+msgid "Advance Preventive Lines"
+msgstr "Lineas Preventivas Adelanto"
+
+#. module: public_budget
+#: view:public_budget.advance_request_line:public_budget.view_public_budget_advance_request_line_filter
+#: view:public_budget.advance_request_line:public_budget.view_public_budget_advance_request_line_form
+#: view:public_budget.advance_request_line:public_budget.view_public_budget_advance_request_line_tree
+msgid "Advance Request Line"
+msgstr "Advance Request Line"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_public_budget_advance_request_advance_requests
+#: model:ir.ui.menu,name:public_budget.menu_advance_requests
+msgid "Advance Requests"
+msgstr "Requerimientos de Adelanto"
+
+#. module: public_budget
+#: field:public_budget.transaction,advance_return_ids:0
+msgid "Advance Returns"
+msgstr "Devoluciones de Adelanto"
+
+#. module: public_budget
+#: selection:public_budget.budget_pos_exc_rest,type:0
+msgid "Alert"
+msgstr "Alerta"
+
+#. module: public_budget
+#: view:public_budget.advance_request_line:public_budget.view_public_budget_advance_request_line_filter
+#: field:public_budget.advance_request_line,amount:0
+#: view:public_budget.advance_return_line:public_budget.view_public_budget_advance_return_line_filter
+#: field:public_budget.advance_return_line,amount:0
+#: field:public_budget.budget_modification_detail,amount:0
+#: field:public_budget.budget_prec_detail,amount:0
+#: view:public_budget.definitive_line:public_budget.view_public_budget_definitive_line_filter
+#: field:public_budget.definitive_line,amount:0
+#: field:public_budget.funding_move,amount:0
+#: field:public_budget.transaction_create_refund_voucher,amount:0
+msgid "Amount"
+msgstr "Monto"
+
+#. module: public_budget
+#: code:addons/public_budget/wizard/transaction_create_refund_voucher.py:52
+#, python-format
+msgid "Amount Can't be greater than Advance Remaining Amount"
+msgstr "El Monto de debe ser superior al Monto Remanente de Adelanto"
+
+#. module: public_budget
+#: field:public_budget.transaction_type,amount_restriction_ids:0
+msgid "Amount Restrictions"
+msgstr "Restricciones de Monto"
+
+#. module: public_budget
+#: view:public_budget.budget:public_budget.view_public_budget_budget_form
+msgid "Analysis"
+msgstr "Análisis"
+
+#. module: public_budget
+#: selection:public_budget.expedient,state:0
+msgid "Annulled"
+msgstr "Anulado"
+
+#. module: public_budget
+#: view:public_budget.advance_request:public_budget.view_public_budget_advance_request_form
+msgid "Approve"
+msgstr "Aprobar"
+
+#. module: public_budget
+#: selection:public_budget.advance_request,state:0
+msgid "Approved"
+msgstr "Aprobado"
+
+#. module: public_budget
+#: selection:public_budget.expedient,type:0
+msgid "Authorizing"
+msgstr "Autorizante"
+
+#. module: public_budget
+#: field:public_budget.budget_position,available_account_ids:0
+msgid "Available Accounts"
+msgstr "Cuentas Disponibles"
+
+#. module: public_budget
+#: field:public_budget.budget_prec_detail,balance_amount:0
+msgid "Balance Amount"
+msgstr "Monto Remanente"
+
+#. module: public_budget
+#: selection:public_budget.budget_pos_exc_rest,type:0
+msgid "Block"
+msgstr "Bloque"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_budget
+#: model:ir.ui.menu,name:public_budget.menu_budget
+#: model:ir.ui.menu,name:public_budget.menu_budget_conf
+#: model:ir.ui.menu,name:public_budget.menu_budget_main
+#: view:public_budget.budget:public_budget.view_public_budget_budget_filter
+#: view:public_budget.budget:public_budget.view_public_budget_budget_form
+#: view:public_budget.budget:public_budget.view_public_budget_budget_tree
+#: field:public_budget.budget_modification,budget_id:0
+#: field:public_budget.definitive_line,budget_id:0
+#: field:public_budget.funding_move,budget_id:0
+#: view:public_budget.preventive_line:public_budget.view_public_budget_preventive_line_filter
+#: field:public_budget.preventive_line,budget_id:0
+msgid "Budget"
+msgstr "Presupuesto"
+
+#. module: public_budget
+#: view:public_budget.budget_position:public_budget.view_public_budget_budget_position_filter
+#: field:public_budget.budget_position,budget_assignment_allowed:0
+msgid "Budget Assignment Allowed?"
+msgstr "Budget Assignment Allowed?"
+
+#. module: public_budget
+#: view:public_budget.budget_modification:public_budget.view_public_budget_budget_modification_filter
+#: view:public_budget.budget_modification:public_budget.view_public_budget_budget_modification_form
+#: view:public_budget.budget_modification:public_budget.view_public_budget_budget_modification_tree
+msgid "Budget Modification"
+msgstr "Modificación de Presupuesto"
+
+#. module: public_budget
+#: view:public_budget.budget_modification_detail:public_budget.view_public_budget_budget_modification_detail_filter
+#: view:public_budget.budget_modification_detail:public_budget.view_public_budget_budget_modification_detail_form
+#: view:public_budget.budget_modification_detail:public_budget.view_public_budget_budget_modification_detail_tree
+msgid "Budget Modification Detail"
+msgstr "Detalle de Modificación de Presupuesto"
+
+#. module: public_budget
+#: view:public_budget.budget_modification:public_budget.view_public_budget_budget_modification_filter
+#: field:public_budget.budget_modification,type:0
+msgid "Budget Modification Type"
+msgstr "Tipo de Modificación de Presupuesto"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_budget_position
+#: view:public_budget.budget_detail:public_budget.view_public_budget_budget_detail_filter
+#: field:public_budget.budget_detail,budget_position_id:0
+#: view:public_budget.budget_modification_detail:public_budget.view_public_budget_budget_modification_detail_filter
+#: field:public_budget.budget_modification_detail,budget_position_id:0
+#: view:public_budget.budget_position:public_budget.view_public_budget_budget_position_filter
+#: view:public_budget.budget_position:public_budget.view_public_budget_budget_position_form
+#: view:public_budget.budget_position:public_budget.view_public_budget_budget_position_tree
+#: view:public_budget.budget_prec_detail:public_budget.view_public_budget_budget_prec_detail_filter
+#: field:public_budget.budget_prec_detail,budget_position_id:0
+#: view:public_budget.definitive_line:public_budget.view_public_budget_definitive_line_filter
+#: field:public_budget.definitive_line,budget_position_id:0
+#: view:public_budget.preventive_line:public_budget.view_public_budget_preventive_line_filter
+#: field:public_budget.preventive_line,budget_position_id:0
+msgid "Budget Position"
+msgstr "Partida Presupuestaria"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_budget_position_category
+#: view:public_budget.budget_position_category:public_budget.view_public_budget_budget_position_category_filter
+#: view:public_budget.budget_position_category:public_budget.view_public_budget_budget_position_category_form
+#: view:public_budget.budget_position_category:public_budget.view_public_budget_budget_position_category_tree
+msgid "Budget Position Category"
+msgstr "Categoría de Partida Presupuestaria"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_budget_pos_exc_rest
+#: view:public_budget.budget_pos_exc_rest:public_budget.view_public_budget_budget_pos_exc_rest_filter
+#: view:public_budget.budget_pos_exc_rest:public_budget.view_public_budget_budget_pos_exc_rest_form
+#: view:public_budget.budget_pos_exc_rest:public_budget.view_public_budget_budget_pos_exc_rest_tree
+msgid "Budget Position Exchange Restriction"
+msgstr "Restricción de Intercambio de Partidas Presupuestarias"
+
+#. module: public_budget
+#: field:public_budget.budget,budget_position_ids:0
+msgid "Budget Positions"
+msgstr "Partidas Presupuestarias"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_transaction
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_filter
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_form
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_tree
+msgid "Budget Transaction"
+msgstr "Transacción Presupuestaria"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_public_budget_budget_budgets
+#: model:ir.ui.menu,name:public_budget.menu_budgets
+msgid "Budgets"
+msgstr "Presupuestos"
+
+#. module: public_budget
+#: view:payment.add.advance_lines:public_budget.view_create_payment_order_lines
+#: view:public_budget.advance_request:public_budget.view_public_budget_advance_request_form
+#: selection:public_budget.advance_request,state:0
+#: view:public_budget.advance_return:public_budget.view_public_budget_advance_return_form
+#: selection:public_budget.advance_return,state:0
+#: view:public_budget.budget:public_budget.view_public_budget_budget_form
+#: selection:public_budget.budget,state:0
+#: view:public_budget.definitive.make.invoice:public_budget.view_definitive_make_invoice
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_form
+#: selection:public_budget.expedient,state:0
+#: view:public_budget.expedients_move_wizard:public_budget.view_expedients_move_wizard_form
+#: view:public_budget.funding_move:public_budget.view_public_budget_funding_move_form
+#: selection:public_budget.funding_move,state:0
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_form
+#: selection:public_budget.transaction,state:0
+#: view:public_budget.transaction_create_refund_voucher:public_budget.view_transaction_create_refund_voucher
+msgid "Cancel"
+msgstr "Cancelado"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_public_budget_expedient_category_categories
+#: model:ir.ui.menu,name:public_budget.menu_categories
+msgid "Categories"
+msgstr "Categorías"
+
+#. module: public_budget
+#: view:public_budget.budget_position:public_budget.view_public_budget_budget_position_filter
+#: field:public_budget.budget_position,category_id:0
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_filter
+#: field:public_budget.expedient,category_id:0
+msgid "Category"
+msgstr "Categoría"
+
+#. module: public_budget
+#: field:public_budget.budget_position,child_ids:0
+#: field:public_budget.expedient,child_ids:0
+msgid "Childs"
+msgstr "Hijos"
+
+#. module: public_budget
+#: view:public_budget.budget:public_budget.view_public_budget_budget_form
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_form
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_form
+msgid "Close"
+msgstr "Cerrar"
+
+#. module: public_budget
+#: selection:public_budget.budget,state:0
+#: selection:public_budget.expedient,state:0
+#: selection:public_budget.transaction,state:0
+msgid "Closed"
+msgstr "Cerrado"
+
+#. module: public_budget
+#: view:public_budget.budget_position:public_budget.view_public_budget_budget_position_filter
+#: field:public_budget.budget_position,code:0
+msgid "Code"
+msgstr "Código"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: public_budget
+#: field:public_budget.advance_request,company_id:0
+#: field:public_budget.inventory_rule,company_id:0
+msgid "Company"
+msgstr "Compañía"
+
+#. module: public_budget
+#: model:ir.ui.menu,name:public_budget.menu_configuration
+msgid "Configuration"
+msgstr "Configuración"
+
+#. module: public_budget
+#: view:public_budget.advance_return:public_budget.view_public_budget_advance_return_form
+#: view:public_budget.expedients_move_wizard:public_budget.view_expedients_move_wizard_form
+#: view:public_budget.funding_move:public_budget.view_public_budget_funding_move_form
+msgid "Confirm"
+msgstr "Confirmar"
+
+#. module: public_budget
+#: selection:public_budget.advance_return,state:0
+#: selection:public_budget.funding_move,state:0
+#: selection:public_budget.preventive_line,accounting_state:0
+#: selection:public_budget.preventive_line,preventive_status:0
+msgid "Confirmed"
+msgstr "Confirmado"
+
+#. module: public_budget
+#: field:public_budget.expedient,cover:0
+msgid "Cover"
+msgstr "Carátula"
+
+#. module: public_budget
+#: view:public_budget.definitive.make.invoice:public_budget.view_definitive_make_invoice
+msgid "Create Invoice"
+msgstr "Crear Comprobante"
+
+#. module: public_budget
+#: view:payment.add.advance_lines:public_budget.view_create_payment_order_lines
+msgid "Create Payment lines"
+msgstr "Crear Líneas de Pago"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_transaction_create_refund_voucher
+#: view:public_budget.transaction_create_refund_voucher:public_budget.view_transaction_create_refund_voucher
+msgid "Create Refund Voucher"
+msgstr "Crear Devolución"
+
+#. module: public_budget
+#: field:payment.add.advance_lines,create_uid:0
+#: field:public_budget.advance_request,create_uid:0
+#: field:public_budget.advance_request_line,create_uid:0
+#: field:public_budget.advance_return,create_uid:0
+#: field:public_budget.advance_return_line,create_uid:0
+#: field:public_budget.budget,create_uid:0
+#: field:public_budget.budget_detail,create_uid:0
+#: field:public_budget.budget_modification,create_uid:0
+#: field:public_budget.budget_modification_detail,create_uid:0
+#: field:public_budget.budget_pos_exc_rest,create_uid:0
+#: field:public_budget.budget_position,create_uid:0
+#: field:public_budget.budget_position_category,create_uid:0
+#: field:public_budget.budget_prec_detail,create_uid:0
+#: field:public_budget.definitive.make.invoice,create_uid:0
+#: field:public_budget.definitive_line,create_uid:0
+#: field:public_budget.expedient,create_uid:0
+#: field:public_budget.expedient_category,create_uid:0
+#: field:public_budget.expedient_founder,create_uid:0
+#: field:public_budget.expedient_move,create_uid:0
+#: field:public_budget.expedients_move_wizard,create_uid:0
+#: field:public_budget.funding_move,create_uid:0
+#: field:public_budget.inventory_rule,create_uid:0
+#: field:public_budget.location,create_uid:0
+#: field:public_budget.preventive_line,create_uid:0
+#: field:public_budget.rest_type,create_uid:0
+#: field:public_budget.transaction,create_uid:0
+#: field:public_budget.transaction_create_refund_voucher,create_uid:0
+#: field:public_budget.transaction_type,create_uid:0
+#: field:public_budget.transaction_type_amo_rest,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: public_budget
+#: field:payment.add.advance_lines,create_date:0
+#: field:public_budget.advance_request,create_date:0
+#: field:public_budget.advance_request_line,create_date:0
+#: field:public_budget.advance_return,create_date:0
+#: field:public_budget.advance_return_line,create_date:0
+#: field:public_budget.budget,create_date:0
+#: field:public_budget.budget_detail,create_date:0
+#: field:public_budget.budget_modification,create_date:0
+#: field:public_budget.budget_modification_detail,create_date:0
+#: field:public_budget.budget_pos_exc_rest,create_date:0
+#: field:public_budget.budget_position,create_date:0
+#: field:public_budget.budget_position_category,create_date:0
+#: field:public_budget.budget_prec_detail,create_date:0
+#: field:public_budget.definitive.make.invoice,create_date:0
+#: field:public_budget.definitive_line,create_date:0
+#: field:public_budget.expedient,create_date:0
+#: field:public_budget.expedient_category,create_date:0
+#: field:public_budget.expedient_founder,create_date:0
+#: field:public_budget.expedient_move,create_date:0
+#: field:public_budget.expedients_move_wizard,create_date:0
+#: field:public_budget.funding_move,create_date:0
+#: field:public_budget.inventory_rule,create_date:0
+#: field:public_budget.location,create_date:0
+#: field:public_budget.preventive_line,create_date:0
+#: field:public_budget.rest_type,create_date:0
+#: field:public_budget.transaction,create_date:0
+#: field:public_budget.transaction_create_refund_voucher,create_date:0
+#: field:public_budget.transaction_type,create_date:0
+#: field:public_budget.transaction_type_amo_rest,create_date:0
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: public_budget
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_filter
+#: field:public_budget.expedient,current_location_id:0
+msgid "Current Location"
+msgstr "Ubicación Actual"
+
+#. module: public_budget
+#: view:public_budget.advance_request:public_budget.view_public_budget_advance_request_filter
+#: field:public_budget.advance_request,date:0
+#: view:public_budget.advance_return:public_budget.view_public_budget_advance_return_filter
+#: field:public_budget.advance_return,date:0
+#: view:public_budget.budget_modification:public_budget.view_public_budget_budget_modification_filter
+#: field:public_budget.budget_modification,date:0
+#: view:public_budget.expedient_move:public_budget.view_public_budget_expedient_move_filter
+#: field:public_budget.expedient_move,date:0
+#: field:public_budget.expedients_move_wizard,date:0
+#: view:public_budget.funding_move:public_budget.view_public_budget_funding_move_filter
+#: field:public_budget.funding_move,date:0
+#: field:public_budget.inventory_rule,date:0
+#: view:public_budget.transaction_type_amo_rest:public_budget.view_public_budget_transaction_type_amo_rest_filter
+#: field:public_budget.transaction_type_amo_rest,date:0
+msgid "Date"
+msgstr "Fecha"
+
+#. module: public_budget
+#: field:public_budget.budget_prec_detail,definitive_amount:0
+msgid "Definitive Amount"
+msgstr "Monto Definitivo"
+
+#. module: public_budget
+#: code:addons/public_budget/preventive_line.py:278
+#, python-format
+msgid "Definitive Amount can't be greater than Preventive Amount"
+msgstr "El Monto Definitivo no puede superar el Monto Preventivo"
+
+#. module: public_budget
+#: field:account.invoice.line,definitive_line_id:0
+#: model:ir.model,name:public_budget.model_public_budget_definitive_line
+#: view:public_budget.definitive_line:public_budget.view_public_budget_definitive_line_filter
+#: view:public_budget.definitive_line:public_budget.view_public_budget_definitive_line_form
+#: view:public_budget.definitive_line:public_budget.view_public_budget_definitive_line_tree
+msgid "Definitive Line"
+msgstr "Afectación Definitiva"
+
+#. module: public_budget
+#: field:public_budget.preventive_line,definitive_line_ids:0
+#: field:public_budget.transaction,definitive_line_ids:0
+msgid "Definitive Lines"
+msgstr "Afectaciones Definitivas"
+
+#. module: public_budget
+#: view:public_budget.advance_request_line:public_budget.view_public_budget_advance_request_line_filter
+#: field:public_budget.advance_request_line,description:0
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_filter
+#: field:public_budget.expedient,description:0
+msgid "Description"
+msgstr "Descripción"
+
+#. module: public_budget
+#: view:public_budget.expedient_move:public_budget.view_public_budget_expedient_move_filter
+#: field:public_budget.expedient_move,location_dest_id:0
+msgid "Destination Location"
+msgstr "Ubicación Destino"
+
+#. module: public_budget
+#: view:public_budget.budget_pos_exc_rest:public_budget.view_public_budget_budget_pos_exc_rest_filter
+#: field:public_budget.budget_pos_exc_rest,destiny_category_id:0
+msgid "Destiny Category"
+msgstr "Categoría Destino"
+
+#. module: public_budget
+#: field:public_budget.expedients_move_wizard,location_dest_id:0
+msgid "Destiny Location"
+msgstr "Ubicación Destino"
+
+#. module: public_budget
+#: view:public_budget.budget:public_budget.view_public_budget_budget_form
+msgid "Detail"
+msgstr "Inicial"
+
+#. module: public_budget
+#: field:public_budget.budget,budget_detail_ids:0
+#: field:public_budget.budget_modification,budget_modification_detail_ids:0
+msgid "Details"
+msgstr "Detalles"
+
+#. module: public_budget
+#: selection:public_budget.advance_request,state:0
+#: selection:public_budget.advance_return,state:0
+#: selection:public_budget.budget,state:0
+#: selection:public_budget.funding_move,state:0
+#: selection:public_budget.preventive_line,accounting_state:0
+#: selection:public_budget.preventive_line,preventive_status:0
+#: selection:public_budget.transaction,state:0
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: public_budget
+#: field:public_budget.budget_prec_detail,draft_amount:0
+msgid "Draft Amount"
+msgstr "Monto Borrador"
+
+#. module: public_budget
+#: view:public_budget.advance_request_line:public_budget.view_public_budget_advance_request_line_filter
+#: field:public_budget.advance_request_line,employee_id:0
+msgid "Employee"
+msgstr "Empleado"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_res_partner_employees
+#: model:ir.ui.menu,name:public_budget.menu_employees
+msgid "Employees"
+msgstr "Empleados"
+
+#. module: public_budget
+#: code:addons/public_budget/payment_order.py:62
+#: code:addons/public_budget/wizard/account_payment_order.py:47
+#, python-format
+msgid "Entry Lines"
+msgstr "Entry Lines"
+
+#. module: public_budget
+#: selection:public_budget.budget_modification,type:0
+msgid "Exchange"
+msgstr "Reasignación"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_expedient
+#: view:public_budget.budget:public_budget.view_public_budget_budget_filter
+#: field:public_budget.budget,expedient_id:0
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_filter
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_form
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_tree
+#: field:public_budget.expedient_move,expedient_id:0
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_filter
+#: field:public_budget.transaction,expedient_id:0
+msgid "Expedient"
+msgstr "Expediente"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_expedient_category
+#: view:public_budget.expedient_category:public_budget.view_public_budget_expedient_category_filter
+#: view:public_budget.expedient_category:public_budget.view_public_budget_expedient_category_form
+#: view:public_budget.expedient_category:public_budget.view_public_budget_expedient_category_tree
+msgid "Expedient Category"
+msgstr "Categoría de Expediente"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_expedient_founder
+#: view:public_budget.expedient_founder:public_budget.view_public_budget_expedient_founder_filter
+#: view:public_budget.expedient_founder:public_budget.view_public_budget_expedient_founder_form
+#: view:public_budget.expedient_founder:public_budget.view_public_budget_expedient_founder_tree
+msgid "Expedient Founder"
+msgstr "Causante de Expediente"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_expedient_move
+#: view:public_budget.expedient_move:public_budget.view_public_budget_expedient_move_filter
+#: view:public_budget.expedient_move:public_budget.view_public_budget_expedient_move_form
+#: view:public_budget.expedient_move:public_budget.view_public_budget_expedient_move_tree
+msgid "Expedient Move"
+msgstr "Movimiento de Expediente"
+
+#. module: public_budget
+#: code:addons/public_budget/wizard/public_budget_expedients_move_wizard.py:71
+#, python-format
+msgid "Expedient Moves"
+msgstr "Movimientos de Expediente"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_public_budget_expedient_expedients
+#: model:ir.ui.menu,name:public_budget.menu_expedients
+#: model:ir.ui.menu,name:public_budget.menu_expedients_conf
+#: field:public_budget.expedients_move_wizard,expedient_ids:0
+msgid "Expedients"
+msgstr "Expedientes"
+
+#. module: public_budget
+#: view:public_budget.expedients_move_wizard:public_budget.view_expedients_move_wizard_form
+msgid "Expedients Move"
+msgstr "Movimiento de Expedientes"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_expedients_move_wizard
+#: model:ir.model,name:public_budget.model_public_budget_expedients_move_wizard
+#: model:ir.ui.menu,name:public_budget.menu_expedients_move_wizard
+msgid "Expedients Move Wizard"
+msgstr "Movimiento Expedientes"
+
+#. module: public_budget
+#: field:public_budget.expedient,final_location:0
+msgid "Final Location"
+msgstr "Ubicación Destino"
+
+#. module: public_budget
+#: field:public_budget.expedient,first_location_id:0
+msgid "First Location"
+msgstr "Ubicación actual"
+
+#. module: public_budget
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_filter
+#: field:public_budget.expedient,founder_id:0
+msgid "Founder"
+msgstr "Causante"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_public_budget_expedient_founder_founders
+#: model:ir.ui.menu,name:public_budget.menu_founders
+msgid "Founders"
+msgstr "Causantes"
+
+#. module: public_budget
+#: view:public_budget.transaction_type_amo_rest:public_budget.view_public_budget_transaction_type_amo_rest_filter
+#: field:public_budget.transaction_type_amo_rest,from_amount:0
+msgid "From Amount"
+msgstr "Desde Monto"
+
+#. module: public_budget
+#: view:public_budget.funding_move:public_budget.view_public_budget_funding_move_filter
+#: view:public_budget.funding_move:public_budget.view_public_budget_funding_move_form
+#: view:public_budget.funding_move:public_budget.view_public_budget_funding_move_tree
+msgid "Funding Move"
+msgstr "Movimiento de Fondo"
+
+#. module: public_budget
+#: view:public_budget.budget:public_budget.view_public_budget_budget_form
+#: field:public_budget.budget,funding_move_ids:0
+msgid "Funding Moves"
+msgstr "Movimientos de Fondos"
+
+#. module: public_budget
+#: view:account.invoice.line:public_budget.view_public_budget_invoice_line_filter
+#: view:public_budget.advance_request:public_budget.view_public_budget_advance_request_filter
+#: view:public_budget.advance_request_line:public_budget.view_public_budget_advance_request_line_filter
+#: view:public_budget.advance_return:public_budget.view_public_budget_advance_return_filter
+#: view:public_budget.advance_return_line:public_budget.view_public_budget_advance_return_line_filter
+#: view:public_budget.budget:public_budget.view_public_budget_budget_filter
+#: view:public_budget.budget_detail:public_budget.view_public_budget_budget_detail_filter
+#: view:public_budget.budget_modification:public_budget.view_public_budget_budget_modification_filter
+#: view:public_budget.budget_modification_detail:public_budget.view_public_budget_budget_modification_detail_filter
+#: view:public_budget.budget_pos_exc_rest:public_budget.view_public_budget_budget_pos_exc_rest_filter
+#: view:public_budget.budget_position:public_budget.view_public_budget_budget_position_filter
+#: view:public_budget.budget_position_category:public_budget.view_public_budget_budget_position_category_filter
+#: view:public_budget.budget_prec_detail:public_budget.view_public_budget_budget_prec_detail_filter
+#: view:public_budget.definitive_line:public_budget.view_public_budget_definitive_line_filter
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_filter
+#: view:public_budget.expedient_category:public_budget.view_public_budget_expedient_category_filter
+#: view:public_budget.expedient_founder:public_budget.view_public_budget_expedient_founder_filter
+#: view:public_budget.expedient_move:public_budget.view_public_budget_expedient_move_filter
+#: view:public_budget.funding_move:public_budget.view_public_budget_funding_move_filter
+#: view:public_budget.inventory_rule:public_budget.view_public_budget_inventory_rule_filter
+#: view:public_budget.location:public_budget.view_public_budget_location_filter
+#: view:public_budget.preventive_line:public_budget.view_public_budget_preventive_line_filter
+#: view:public_budget.rest_type:public_budget.view_public_budget_rest_type_filter
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_filter
+#: view:public_budget.transaction_type:public_budget.view_public_budget_transaction_type_filter
+#: view:public_budget.transaction_type_amo_rest:public_budget.view_public_budget_transaction_type_amo_rest_filter
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: public_budget
+#: model:ir.ui.menu,name:public_budget.menu_hr
+msgid "HR"
+msgstr "Recursos Humanos"
+
+#. module: public_budget
+#: field:payment.add.advance_lines,id:0
+#: field:public_budget.advance_request,id:0
+#: field:public_budget.advance_request_line,id:0
+#: field:public_budget.advance_return,id:0
+#: field:public_budget.advance_return_line,id:0
+#: field:public_budget.budget,id:0
+#: field:public_budget.budget_detail,id:0
+#: field:public_budget.budget_modification,id:0
+#: field:public_budget.budget_modification_detail,id:0
+#: field:public_budget.budget_pos_exc_rest,id:0
+#: field:public_budget.budget_position,id:0
+#: field:public_budget.budget_position_category,id:0
+#: field:public_budget.budget_prec_detail,id:0
+#: field:public_budget.definitive.make.invoice,id:0
+#: field:public_budget.definitive_line,id:0
+#: field:public_budget.expedient,id:0
+#: field:public_budget.expedient_category,id:0
+#: field:public_budget.expedient_founder,id:0
+#: field:public_budget.expedient_move,id:0
+#: field:public_budget.expedients_move_wizard,id:0
+#: field:public_budget.funding_move,id:0
+#: field:public_budget.inventory_rule,id:0
+#: field:public_budget.location,id:0
+#: field:public_budget.preventive_line,id:0
+#: field:public_budget.rest_type,id:0
+#: field:public_budget.transaction,id:0
+#: field:public_budget.transaction_create_refund_voucher,id:0
+#: field:public_budget.transaction_type,id:0
+#: field:public_budget.transaction_type_amo_rest,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: public_budget
+#: selection:public_budget.expedient,state:0
+msgid "In Revision"
+msgstr "En Revisión"
+
+#. module: public_budget
+#: view:public_budget.budget:public_budget.view_public_budget_budget_filter
+#: field:public_budget.budget,income_account_id:0
+msgid "Income Account"
+msgstr "Cuenta de Ingresos"
+
+#. module: public_budget
+#: selection:public_budget.budget_modification,type:0
+msgid "Increase / Decrease"
+msgstr "Incremento / Disminución"
+
+#. module: public_budget
+#: view:public_budget.budget_position:public_budget.view_public_budget_budget_position_filter
+#: field:public_budget.budget_position,inventariable:0
+msgid "Inventariable?"
+msgstr "Inventariable?"
+
+#. module: public_budget
+#: view:public_budget.inventory_rule:public_budget.view_public_budget_inventory_rule_filter
+#: view:public_budget.inventory_rule:public_budget.view_public_budget_inventory_rule_form
+#: view:public_budget.inventory_rule:public_budget.view_public_budget_inventory_rule_tree
+msgid "Inventory Rule"
+msgstr "Regla de Inventariado"
+
+#. module: public_budget
+#: field:res.company,inventory_rule_ids:0
+msgid "Inventory Rules"
+msgstr "Reglas de Inventariado"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_account_invoice
+msgid "Invoice"
+msgstr "Factura"
+
+#. module: public_budget
+#: field:public_budget.definitive.make.invoice,invoice_date:0
+msgid "Invoice Date"
+msgstr "Fecha Comprobante"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "Línea de factura"
+
+#. module: public_budget
+#: field:public_budget.definitive_line,invoice_line_ids:0
+msgid "Invoice Lines"
+msgstr "Líneas de Comprobantes"
+
+#. module: public_budget
+#: view:payment.order:public_budget.view_public_budget_payment_order_form
+#: field:public_budget.transaction,invoice_ids:0
+msgid "Invoices"
+msgstr "Comprobantes"
+
+#. module: public_budget
+#: field:public_budget.budget_modification,initial_approval:0
+msgid "Is Initial Approval?"
+msgstr "Es Aprobación Inicial?"
+
+#. module: public_budget
+#: view:public_budget.definitive_line:public_budget.view_public_budget_definitive_line_filter
+#: field:public_budget.definitive_line,issue_date:0
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_filter
+#: field:public_budget.expedient,issue_date:0
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_filter
+#: field:public_budget.transaction,issue_date:0
+msgid "Issue Date"
+msgstr "Fecha Emisión"
+
+#. module: public_budget
+#: view:public_budget.funding_move:public_budget.view_public_budget_funding_move_filter
+#: field:public_budget.funding_move,journal_id:0
+#: field:public_budget.transaction_create_refund_voucher,journal_id:0
+msgid "Journal"
+msgstr "Diario"
+
+#. module: public_budget
+#: field:public_budget.funding_move,move_id:0
+msgid "Journal Entry"
+msgstr "Registro de Diario"
+
+#. module: public_budget
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_filter
+#: field:public_budget.expedient,last_move_date:0
+msgid "Last Move"
+msgstr "Ultimo Movimiento"
+
+#. module: public_budget
+#: field:payment.add.advance_lines,write_uid:0
+#: field:public_budget.advance_request,write_uid:0
+#: field:public_budget.advance_request_line,write_uid:0
+#: field:public_budget.advance_return,write_uid:0
+#: field:public_budget.advance_return_line,write_uid:0
+#: field:public_budget.budget,write_uid:0
+#: field:public_budget.budget_detail,write_uid:0
+#: field:public_budget.budget_modification,write_uid:0
+#: field:public_budget.budget_modification_detail,write_uid:0
+#: field:public_budget.budget_pos_exc_rest,write_uid:0
+#: field:public_budget.budget_position,write_uid:0
+#: field:public_budget.budget_position_category,write_uid:0
+#: field:public_budget.budget_prec_detail,write_uid:0
+#: field:public_budget.definitive.make.invoice,write_uid:0
+#: field:public_budget.definitive_line,write_uid:0
+#: field:public_budget.expedient,write_uid:0
+#: field:public_budget.expedient_category,write_uid:0
+#: field:public_budget.expedient_founder,write_uid:0
+#: field:public_budget.expedient_move,write_uid:0
+#: field:public_budget.expedients_move_wizard,write_uid:0
+#: field:public_budget.funding_move,write_uid:0
+#: field:public_budget.inventory_rule,write_uid:0
+#: field:public_budget.location,write_uid:0
+#: field:public_budget.preventive_line,write_uid:0
+#: field:public_budget.rest_type,write_uid:0
+#: field:public_budget.transaction,write_uid:0
+#: field:public_budget.transaction_create_refund_voucher,write_uid:0
+#: field:public_budget.transaction_type,write_uid:0
+#: field:public_budget.transaction_type_amo_rest,write_uid:0
+msgid "Last Updated by"
+msgstr "Ultima Actualización por"
+
+#. module: public_budget
+#: field:payment.add.advance_lines,write_date:0
+#: field:public_budget.advance_request,write_date:0
+#: field:public_budget.advance_request_line,write_date:0
+#: field:public_budget.advance_return,write_date:0
+#: field:public_budget.advance_return_line,write_date:0
+#: field:public_budget.budget,write_date:0
+#: field:public_budget.budget_detail,write_date:0
+#: field:public_budget.budget_modification,write_date:0
+#: field:public_budget.budget_modification_detail,write_date:0
+#: field:public_budget.budget_pos_exc_rest,write_date:0
+#: field:public_budget.budget_position,write_date:0
+#: field:public_budget.budget_position_category,write_date:0
+#: field:public_budget.budget_prec_detail,write_date:0
+#: field:public_budget.definitive.make.invoice,write_date:0
+#: field:public_budget.definitive_line,write_date:0
+#: field:public_budget.expedient,write_date:0
+#: field:public_budget.expedient_category,write_date:0
+#: field:public_budget.expedient_founder,write_date:0
+#: field:public_budget.expedient_move,write_date:0
+#: field:public_budget.expedients_move_wizard,write_date:0
+#: field:public_budget.funding_move,write_date:0
+#: field:public_budget.inventory_rule,write_date:0
+#: field:public_budget.location,write_date:0
+#: field:public_budget.preventive_line,write_date:0
+#: field:public_budget.rest_type,write_date:0
+#: field:public_budget.transaction,write_date:0
+#: field:public_budget.transaction_create_refund_voucher,write_date:0
+#: field:public_budget.transaction_type,write_date:0
+#: field:public_budget.transaction_type_amo_rest,write_date:0
+msgid "Last Updated on"
+msgstr "Ultima Actualización en"
+
+#. module: public_budget
+#: field:public_budget.budget,preventive_line_ids:0
+msgid "Lines"
+msgstr "Lines"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_location
+#: view:public_budget.location:public_budget.view_public_budget_location_filter
+#: view:public_budget.location:public_budget.view_public_budget_location_form
+#: view:public_budget.location:public_budget.view_public_budget_location_tree
+msgid "Location"
+msgstr "Ubicación"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_public_budget_location_locations
+#: model:ir.ui.menu,name:public_budget.menu_locations
+msgid "Locations"
+msgstr "Ubicaciones"
+
+#. module: public_budget
+#: model:ir.ui.menu,name:public_budget.menu_main
+msgid "Main"
+msgstr "Principal"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_definitive_make_invoice
+msgid "Make Invoice"
+msgstr "Crear Comprobante"
+
+#. module: public_budget
+#: model:res.groups,name:public_budget.group_manager
+msgid "Manager"
+msgstr "Responsable"
+
+#. module: public_budget
+#: view:public_budget.budget_pos_exc_rest:public_budget.view_public_budget_budget_pos_exc_rest_filter
+#: field:public_budget.budget_pos_exc_rest,message:0
+msgid "Message"
+msgstr "Mensaje"
+
+#. module: public_budget
+#: field:public_budget.inventory_rule,min_amount:0
+msgid "Minimum Amount"
+msgstr "Monto Mínimo"
+
+#. module: public_budget
+#: field:public_budget.budget_modification_detail,budget_modification_id:0
+msgid "Modification"
+msgstr "Modificación"
+
+#. module: public_budget
+#: field:public_budget.budget,budget_modification_ids:0
+msgid "Modifications"
+msgstr "Modificaciones"
+
+#. module: public_budget
+#: field:public_budget.advance_return,move_id:0
+msgid "Move"
+msgstr "Movimiento"
+
+#. module: public_budget
+#: view:public_budget.budget:public_budget.view_public_budget_budget_form
+#: field:public_budget.expedient,expedient_move_ids:0
+msgid "Moves"
+msgstr "Modificaciones"
+
+#. module: public_budget
+#: view:public_budget.budget:public_budget.view_public_budget_budget_filter
+#: field:public_budget.budget,name:0
+#: view:public_budget.budget_modification:public_budget.view_public_budget_budget_modification_filter
+#: field:public_budget.budget_modification,name:0
+#: view:public_budget.budget_position:public_budget.view_public_budget_budget_position_filter
+#: field:public_budget.budget_position,name:0
+#: view:public_budget.budget_position_category:public_budget.view_public_budget_budget_position_category_filter
+#: field:public_budget.budget_position_category,name:0
+#: view:public_budget.expedient_category:public_budget.view_public_budget_expedient_category_filter
+#: field:public_budget.expedient_category,name:0
+#: view:public_budget.expedient_founder:public_budget.view_public_budget_expedient_founder_filter
+#: field:public_budget.expedient_founder,name:0
+#: view:public_budget.funding_move:public_budget.view_public_budget_funding_move_filter
+#: field:public_budget.funding_move,name:0
+#: view:public_budget.location:public_budget.view_public_budget_location_filter
+#: field:public_budget.location,name:0
+#: view:public_budget.preventive_line:public_budget.view_public_budget_preventive_line_filter
+#: field:public_budget.preventive_line,name:0
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_filter
+#: field:public_budget.transaction,name:0
+#: view:public_budget.transaction_type:public_budget.view_public_budget_transaction_type_filter
+#: field:public_budget.transaction_type,name:0
+msgid "Name"
+msgstr "Nombre"
+
+#. module: public_budget
+#: selection:public_budget.budget_position,type:0
+msgid "Normal"
+msgstr "Normal"
+
+#. module: public_budget
+#: code:addons/public_budget/wizard/transaction_create_refund_voucher.py:49
+#, python-format
+msgid "Not Journal Found"
+msgstr "No se encuentra Diario"
+
+#. module: public_budget
+#: field:public_budget.expedient,note:0
+#: field:public_budget.transaction,note:0
+msgid "Note"
+msgstr "Nota"
+
+#. module: public_budget
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_filter
+#: field:public_budget.expedient,number:0
+msgid "Number"
+msgstr "Número"
+
+#. module: public_budget
+#: code:addons/public_budget/wizard/transaction_definitive_make_invoice.py:100
+#, python-format
+msgid "On Advance Transactions, sum of to Invoice Amount can not be greater than Advance Remaining Amount!"
+msgstr "En transacciones con Adelanto, la suma de los valores devengados no puede ser superior al Monto Remanente de Adelanto!"
+
+#. module: public_budget
+#: code:addons/public_budget/wizard/transaction_definitive_make_invoice.py:93
+#, python-format
+msgid "On Advance Transactions, transaction advance type must have and advance account configured!"
+msgstr "En Transacciones con Adelanto, el Tipo de Transacción con Adelanto, debe tener una cuenta de adelanto configurada!"
+
+#. module: public_budget
+#: view:public_budget.budget:public_budget.view_public_budget_budget_form
+#: selection:public_budget.budget,state:0
+#: selection:public_budget.expedient,state:0
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_form
+#: selection:public_budget.transaction,state:0
+msgid "Open"
+msgstr "Abierto"
+
+#. module: public_budget
+#: view:public_budget.budget_pos_exc_rest:public_budget.view_public_budget_budget_pos_exc_rest_filter
+#: field:public_budget.budget_pos_exc_rest,origin_category_id:0
+msgid "Origin Category"
+msgstr "Categoría Origen"
+
+#. module: public_budget
+#: field:public_budget.budget_prec_detail,paid_amount:0
+msgid "Paid Amount"
+msgstr "Monto Pagado"
+
+#. module: public_budget
+#: view:public_budget.budget_position:public_budget.view_public_budget_budget_position_filter
+#: field:public_budget.budget_position,parent_id:0
+#: field:public_budget.expedient,parent_id:0
+msgid "Parent"
+msgstr "Padre"
+
+#. module: public_budget
+#: field:public_budget.budget_position,parent_left:0
+#: field:public_budget.budget_prec_detail,order_int:0
+msgid "Parent Left"
+msgstr "Padre"
+
+#. module: public_budget
+#: field:public_budget.budget_position,parent_right:0
+msgid "Parent Right"
+msgstr "Padre"
+
+#. module: public_budget
+#: field:payment.order,partner_id:0
+#: field:public_budget.transaction,partner_id:0
+msgid "Partner"
+msgstr "Cliente/Proveedor"
+
+#. module: public_budget
+#: selection:public_budget.expedient,type:0
+msgid "Payment"
+msgstr "Pago"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_payment_order_form
+msgid "Payment Mode"
+msgstr "Modo de pago"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_payment_order
+#: field:public_budget.advance_request,payment_order_id:0
+msgid "Payment Order"
+msgstr "Orden de pago"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_payment_add_advance_lines
+msgid "Payment Order Add Advance Lines"
+msgstr "Agregar lineas de adelanto Orden de Pago"
+
+#. module: public_budget
+#: field:public_budget.transaction,advance_payment_order_ids:0
+#: field:public_budget.transaction,payment_order_ids:0
+msgid "Payment Orders"
+msgstr "Ordenes de Pago"
+
+#. module: public_budget
+#: field:public_budget.preventive_line,payment_line_id:0
+msgid "Payment line"
+msgstr "Línea de Pago"
+
+#. module: public_budget
+#: view:payment.order:public_budget.view_payment_order_no_create_tree
+msgid "Payment order"
+msgstr "Ordenes de pago"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_public_budget_budget_pos_exc_rest_position_exc__rest_
+#: model:ir.ui.menu,name:public_budget.menu_position_exc__rest_
+msgid "Position Exc. Rest."
+msgstr "Restricción de Intercambio de Partidas"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_public_budget_budget_position_category_position_types
+#: model:ir.ui.menu,name:public_budget.menu_position_types
+msgid "Position Types"
+msgstr "Tipos de Partidas"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_public_budget_budget_position_positions
+#: model:ir.ui.menu,name:public_budget.menu_positions
+msgid "Positions"
+msgstr "Partidas"
+
+#. module: public_budget
+#: view:public_budget.budget:public_budget.view_public_budget_budget_form
+msgid "Pre Close"
+msgstr "Pre Cerrar"
+
+#. module: public_budget
+#: view:public_budget.budget:public_budget.view_public_budget_budget_form
+#: field:public_budget.budget,budget_prec_detail_ids:0
+msgid "Pre Close Detail"
+msgstr "Detalle de Pre Cierre"
+
+#. module: public_budget
+#: field:public_budget.budget,prec_passive_residue:0
+msgid "Pre Close Passive Residue"
+msgstr "Residuo Pasivo al Pre-Cierre"
+
+#. module: public_budget
+#: field:public_budget.budget,prec_total_requested:0
+msgid "Pre Close Total Requested"
+msgstr "Total Requerido al Pre-Cierre"
+
+#. module: public_budget
+#: selection:public_budget.budget,state:0
+msgid "Pre Closed"
+msgstr "Pre Cerrado"
+
+#. module: public_budget
+#: view:public_budget.preventive_line:public_budget.view_public_budget_preventive_line_filter
+#: field:public_budget.preventive_line,preventive_amount:0
+msgid "Preventive"
+msgstr "Preventivo"
+
+#. module: public_budget
+#: field:public_budget.budget_prec_detail,preventive_amount:0
+msgid "Preventive Amount"
+msgstr "Monto Preventivo"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_preventive_line
+#: field:public_budget.definitive_line,preventive_line_id:0
+#: view:public_budget.preventive_line:public_budget.view_public_budget_preventive_line_filter
+#: view:public_budget.preventive_line:public_budget.view_public_budget_preventive_line_form
+#: view:public_budget.preventive_line:public_budget.view_public_budget_preventive_line_tree
+msgid "Preventive Line"
+msgstr "Afectación Preventiva"
+
+#. module: public_budget
+#: field:public_budget.transaction,preventive_line_ids:0
+msgid "Preventive Lines"
+msgstr "Líneas Preventivas"
+
+#. module: public_budget
+#: model:ir.module.category,description:public_budget.module_category_public_budget
+#: model:ir.module.category,name:public_budget.module_category_public_budget
+msgid "Public Budget"
+msgstr "Public Budget"
+
+#. module: public_budget
+#: view:public_budget.budget_modification:public_budget.view_public_budget_budget_modification_filter
+#: field:public_budget.budget_modification,reference:0
+msgid "Reference"
+msgstr "Referencia"
+
+#. module: public_budget
+#: selection:public_budget.funding_move,type:0
+msgid "Refund"
+msgstr "Devolución"
+
+#. module: public_budget
+#: field:public_budget.transaction,budget_position_ids:0
+msgid "Related Budget Positions"
+msgstr "Partidas Presupuestarias Relacionadas"
+
+#. module: public_budget
+#: selection:public_budget.funding_move,type:0
+msgid "Request"
+msgstr "Requerimiento"
+
+#. module: public_budget
+#: model:res.groups,name:public_budget.group_secretary
+msgid "Secretary"
+msgstr "Secretario/a"
+
+#. module: public_budget
+#: view:payment.order:public_budget.view_public_budget_payment_order_form
+msgid "Select Transaction Invoices"
+msgstr "Seleccionar Comprobantes"
+
+#. module: public_budget
+#: view:public_budget.expedient_move:public_budget.view_public_budget_expedient_move_filter
+#: field:public_budget.expedient_move,location_id:0
+#: field:public_budget.expedients_move_wizard,location_id:0
+msgid "Source Location"
+msgstr "Ubicación Origen"
+
+#. module: public_budget
+#: code:addons/public_budget/wizard/public_budget_expedients_move_wizard.py:49
+#, python-format
+msgid "Source Location and Destiny Location can not be the same"
+msgstr "La Ubicación Origen y Destino no pueden ser iguales."
+
+#. module: public_budget
+#: field:public_budget.advance_request,state:0
+#: field:public_budget.advance_return,state:0
+#: field:public_budget.budget,state:0
+#: field:public_budget.expedient,state:0
+#: field:public_budget.funding_move,state:0
+#: field:public_budget.transaction,state:0
+msgid "State"
+msgstr "Estado"
+
+#. module: public_budget
+#: field:public_budget.preventive_line,preventive_status:0
+msgid "Status"
+msgstr "Estado"
+
+#. module: public_budget
+#: field:public_budget.definitive.make.invoice,supplier_id:0
+#: view:public_budget.definitive_line:public_budget.view_public_budget_definitive_line_filter
+#: field:public_budget.definitive_line,supplier_id:0
+msgid "Supplier"
+msgstr "Proveedor"
+
+#. module: public_budget
+#: field:public_budget.definitive.make.invoice,supplier_invoice_number:0
+msgid "Supplier Invoice Number"
+msgstr "Número de Comprobante Proveedor"
+
+#. module: public_budget
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_filter
+#: field:public_budget.expedient,supplier_ids:0
+#: field:public_budget.transaction,supplier_ids:0
+msgid "Suppliers"
+msgstr "Proveedores"
+
+#. module: public_budget
+#: code:addons/public_budget/funding_move.py:75
+#, python-format
+msgid "The funding move must be in draft state for unlink !"
+msgstr "El movimiento de fondo debe estar en borrador para desvincular!"
+
+#. module: public_budget
+#: help:public_budget.definitive.make.invoice,supplier_invoice_number:0
+msgid "The reference of this invoice as provided by the supplier."
+msgstr "La referencia de este comprobante como es suministrada por el proveedor."
+
+#. module: public_budget
+#: code:addons/public_budget/preventive_line.py:271
+#, python-format
+msgid "There is not Enought Balance Amount on this Budget Position"
+msgstr "No hay suficiente monto remanente en esta partida presupuestaria."
+
+#. module: public_budget
+#: code:addons/public_budget/payment_order.py:44
+#, python-format
+msgid "This action is only available for Payment Orders with Transaction"
+msgstr "This action is only available for Payment Orders with Transaction"
+
+#. module: public_budget
+#: view:public_budget.transaction_type_amo_rest:public_budget.view_public_budget_transaction_type_amo_rest_filter
+#: field:public_budget.transaction_type_amo_rest,to_amount:0
+msgid "To Amount"
+msgstr "Hasta Monto"
+
+#. module: public_budget
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_form
+msgid "To Annulled"
+msgstr "Anular"
+
+#. module: public_budget
+#: view:public_budget.advance_request:public_budget.view_public_budget_advance_request_form
+#: view:public_budget.advance_return:public_budget.view_public_budget_advance_return_form
+#: view:public_budget.budget:public_budget.view_public_budget_budget_form
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_form
+#: view:public_budget.funding_move:public_budget.view_public_budget_funding_move_form
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_form
+msgid "To Draft"
+msgstr "A Borrador"
+
+#. module: public_budget
+#: field:public_budget.definitive_line,to_invoice_amount:0
+msgid "To Invoice"
+msgstr "A Devengar"
+
+#. module: public_budget
+#: code:addons/public_budget/definitive_line.py:143
+#, python-format
+msgid "To Invoice Amount can't be greater than Residual Amount"
+msgstr "El monto a Devengar no puede superar el Monto Residual de al afectación definitiva"
+
+#. module: public_budget
+#: field:public_budget.budget_prec_detail,to_pay_amount:0
+msgid "To Pay Amount"
+msgstr "Monto A Pagar"
+
+#. module: public_budget
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_form
+msgid "To Revision"
+msgstr "A Revision"
+
+#. module: public_budget
+#: view:public_budget.budget_detail:public_budget.view_public_budget_budget_detail_tree
+#: view:public_budget.budget_prec_detail:public_budget.view_public_budget_budget_prec_detail_tree
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_filter
+#: field:public_budget.transaction,total:0
+msgid "Total"
+msgstr "Total"
+
+#. module: public_budget
+#: view:account.voucher:public_budget.view_voucher_no_create_tree
+msgid "Total Amount"
+msgstr "Importe Total"
+
+#. module: public_budget
+#: field:account.voucher,transaction_id:0
+#: field:payment.add.advance_lines,transaction_id:0
+#: field:payment.order,transaction_id:0
+#: field:public_budget.definitive.make.invoice,transaction_id:0
+#: field:public_budget.definitive_line,transaction_id:0
+#: field:public_budget.preventive_line,transaction_id:0
+#: field:public_budget.transaction_create_refund_voucher,transaction_id:0
+msgid "Transaction"
+msgstr "Transacción"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_transaction_create_refund_voucher
+msgid "Transaction Create Refund Voucher"
+msgstr "Transacción Crear Comprobante de Devolución"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_definitive_make_invoice
+msgid "Transaction Definitive Make Invoice"
+msgstr "Transacción Definitiva Crear Comprobante"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_transaction_type
+#: view:public_budget.transaction_type:public_budget.view_public_budget_transaction_type_filter
+#: view:public_budget.transaction_type:public_budget.view_public_budget_transaction_type_form
+#: view:public_budget.transaction_type:public_budget.view_public_budget_transaction_type_tree
+msgid "Transaction Type"
+msgstr "Tipo de Transacción"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_transaction_type_amo_rest
+#: view:public_budget.transaction_type_amo_rest:public_budget.view_public_budget_transaction_type_amo_rest_filter
+#: view:public_budget.transaction_type_amo_rest:public_budget.view_public_budget_transaction_type_amo_rest_form
+#: view:public_budget.transaction_type_amo_rest:public_budget.view_public_budget_transaction_type_amo_rest_tree
+msgid "Transaction Type Amount Restriction"
+msgstr "Restricción de Monto de Tipo de Transacción "
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_public_budget_transaction_type_transaction_types
+#: model:ir.ui.menu,name:public_budget.menu_transaction_types
+msgid "Transaction Types"
+msgstr "Tipos de Transacciones"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_public_budget_transaction_transactions
+#: model:ir.ui.menu,name:public_budget.menu_transactions
+msgid "Transactions"
+msgstr "Transacciones"
+
+#. module: public_budget
+#: view:public_budget.budget_pos_exc_rest:public_budget.view_public_budget_budget_pos_exc_rest_filter
+#: field:public_budget.budget_pos_exc_rest,type:0
+#: view:public_budget.budget_position:public_budget.view_public_budget_budget_position_filter
+#: field:public_budget.budget_position,type:0
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_filter
+#: field:public_budget.expedient,type:0
+#: view:public_budget.funding_move:public_budget.view_public_budget_funding_move_filter
+#: field:public_budget.funding_move,type:0
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_filter
+#: field:public_budget.transaction,type_id:0
+msgid "Type"
+msgstr "Tipo"
+
+#. module: public_budget
+#: view:public_budget.advance_request:public_budget.view_public_budget_advance_request_filter
+#: field:public_budget.advance_request,user_id:0
+#: view:public_budget.advance_return:public_budget.view_public_budget_advance_return_filter
+#: field:public_budget.advance_return,user_id:0
+#: view:public_budget.expedient_move:public_budget.view_public_budget_expedient_move_filter
+#: field:public_budget.expedient_move,user_id:0
+#: field:public_budget.expedients_move_wizard,user_id:0
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_filter
+#: field:public_budget.transaction,user_id:0
+#: model:res.groups,name:public_budget.group_user
+msgid "User"
+msgstr "Usuario"
+
+#. module: public_budget
+#: selection:public_budget.budget_position,type:0
+msgid "View"
+msgstr "Vista"
+
+#. module: public_budget
+#: view:account.voucher:public_budget.view_voucher_no_create_tree
+msgid "Voucher Entries"
+msgstr "Asientos de vouchers"
+
+#. module: public_budget
+#: field:public_budget.transaction,refund_voucher_ids:0
+msgid "Vouchers"
+msgstr "Vouchers"
+
+#. module: public_budget
+#: view:public_budget.transaction_type:public_budget.view_public_budget_transaction_type_filter
+#: field:public_budget.transaction_type,with_salary_advance:0
+msgid "With Advance Salary"
+msgstr "Con Adelanto de Salario"
+
+#. module: public_budget
+#: view:public_budget.transaction_type:public_budget.view_public_budget_transaction_type_filter
+#: field:public_budget.transaction_type,with_amount_restriction:0
+msgid "With Amount Restriction?"
+msgstr "Con Restricción de Monto?"
+
+#. module: public_budget
+#: view:public_budget.transaction_type:public_budget.view_public_budget_transaction_type_filter
+#: field:public_budget.transaction_type,with_advance_payment:0
+msgid "With advance payment?"
+msgstr "Con Pago Anticipado?"
+
+#. module: public_budget
+#: view:public_budget.budget:public_budget.view_public_budget_budget_filter
+#: field:public_budget.budget,year:0
+msgid "Year"
+msgstr "Año"
+
+#. module: public_budget
+#: code:addons/public_budget/funding_move.py:83
+#, python-format
+msgid "You can not cancel a Funding Move that has a related                 Account Move. Delete it first"
+msgstr "No es posible cancelar un Movimiento de Fondos que tiene un Movimiento Contable relacionado. Borrar este movimiento previamente."
+
+#. module: public_budget
+#: code:addons/public_budget/preventive_line.py:283
+#, python-format
+msgid "You can not delete a confirmed preventive line"
+msgstr "No es posible borrar una linea preventiva confirmada."
+
+#. module: public_budget
+#: code:addons/public_budget/definitive_line.py:148
+#, python-format
+msgid "You can not delete a definitive line that has been invoiced"
+msgstr "No es posible borrar una línea definitiva que ya fue devengada."
+
+#. module: public_budget
+#: code:addons/public_budget/budget_modification_detail.py:39
+#, python-format
+msgid "You can not make this modification as '%s' will have a                     negative balance"
+msgstr "No puede realizar esta modificación, ya que '%s' terminaría con balance negativo."
+
+#. module: public_budget
+#: code:addons/public_budget/budget_position.py:207
+#, python-format
+msgid "You cannot define children to an account with                 internal type different of \"View\"."
+msgstr "No puedes definir hijos a una cuenta con tipo interno diferente a  \"View\"."
+
+#. module: public_budget
+#: code:addons/public_budget/wizard/transaction_definitive_make_invoice.py:128
+#, python-format
+msgid "You should set at least one line with amount greater than 0"
+msgstr "Debes completar al menos una línea con un monto mayor a cero "
+
+#. module: public_budget
+#: field:public_budget.preventive_line,advance_line:0
+msgid "advance_line"
+msgstr "Línea Adelanto"
+
+#. module: public_budget
+#: field:public_budget.advance_request_line,advance_line_ids:0
+msgid "advance_line_ids"
+msgstr "Lineas de Adelanto"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_advance_request
+#: view:public_budget.advance_request:public_budget.view_public_budget_advance_request_filter
+#: view:public_budget.advance_request:public_budget.view_public_budget_advance_request_form
+#: view:public_budget.advance_request:public_budget.view_public_budget_advance_request_tree
+msgid "advance_request"
+msgstr "Requerimiento de Adelanto"
+
+#. module: public_budget
+#: field:public_budget.advance_request_line,advance_request_id:0
+msgid "advance_request_id"
+msgstr "Requerimiento de Adelanto"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_advance_request_line
+msgid "advance_request_line"
+msgstr "Línea de Requerimiento de Adelanto"
+
+#. module: public_budget
+#: field:public_budget.advance_return_line,advance_request_line_id:0
+msgid "advance_request_line_id"
+msgstr "Línea de Requerimiento de Adelanto"
+
+#. module: public_budget
+#: field:public_budget.advance_request,advance_request_line_ids:0
+msgid "advance_request_line_ids"
+msgstr "Línea de Requerimiento de Adelanto"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_advance_return
+#: view:public_budget.advance_return:public_budget.view_public_budget_advance_return_filter
+#: view:public_budget.advance_return:public_budget.view_public_budget_advance_return_form
+#: view:public_budget.advance_return:public_budget.view_public_budget_advance_return_tree
+msgid "advance_return"
+msgstr "Retorno de Adelanto"
+
+#. module: public_budget
+#: field:public_budget.advance_return_line,advance_return_id:0
+msgid "advance_return_id"
+msgstr "Retorno de Adelanto"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_advance_return_line
+#: view:public_budget.advance_return_line:public_budget.view_public_budget_advance_return_line_filter
+#: view:public_budget.advance_return_line:public_budget.view_public_budget_advance_return_line_form
+#: view:public_budget.advance_return_line:public_budget.view_public_budget_advance_return_line_tree
+msgid "advance_return_line"
+msgstr "Línea de Retorno de Adelanto"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_budget_detail
+#: view:public_budget.budget_detail:public_budget.view_public_budget_budget_detail_filter
+#: view:public_budget.budget_detail:public_budget.view_public_budget_budget_detail_form
+#: view:public_budget.budget_detail:public_budget.view_public_budget_budget_detail_tree
+msgid "budget_detail"
+msgstr "detalle_presupuesto"
+
+#. module: public_budget
+#: field:public_budget.budget_detail,budget_id:0
+#: field:public_budget.budget_prec_detail,budget_id:0
+msgid "budget_id"
+msgstr "budget_id"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_budget_modification
+msgid "budget_modification"
+msgstr "budget_modification"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_budget_modification_detail
+msgid "budget_modification_detail"
+msgstr "budget_modification_detail"
+
+#. module: public_budget
+#: field:account.account,budget_position_ids:0
+msgid "budget_position_ids"
+msgstr "budget_position_ids"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_budget_prec_detail
+#: view:public_budget.budget_prec_detail:public_budget.view_public_budget_budget_prec_detail_filter
+#: view:public_budget.budget_prec_detail:public_budget.view_public_budget_budget_prec_detail_form
+#: view:public_budget.budget_prec_detail:public_budget.view_public_budget_budget_prec_detail_tree
+msgid "budget_prec_detail"
+msgstr "budget_prec_detail"
+
+#. module: public_budget
+#: field:public_budget.preventive_line,definitive_amount:0
+msgid "definitive_amount"
+msgstr "definitive_amount"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_funding_move
+msgid "funding_move"
+msgstr "funding_move"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_inventory_rule
+msgid "inventory_rule"
+msgstr "inventory_rule"
+
+#. module: public_budget
+#: view:account.invoice.line:public_budget.view_public_budget_invoice_line_filter
+#: view:account.invoice.line:public_budget.view_public_budget_invoice_line_form
+#: view:account.invoice.line:public_budget.view_public_budget_invoice_line_tree
+msgid "invoice_line"
+msgstr "invoice_line"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_rest_type
+#: view:public_budget.rest_type:public_budget.view_public_budget_rest_type_filter
+#: view:public_budget.rest_type:public_budget.view_public_budget_rest_type_form
+#: view:public_budget.rest_type:public_budget.view_public_budget_rest_type_tree
+msgid "rest_type"
+msgstr "rest_type"
+
+#. module: public_budget
+#: field:public_budget.advance_return,return_line_ids:0
+msgid "return_line_ids"
+msgstr "return_line_ids"
+
+#. module: public_budget
+#: field:account.invoice,transaction_id:0
+#: field:public_budget.advance_return,transaction_id:0
+msgid "transaction_id"
+msgstr "transaction_id"
+
+#. module: public_budget
+#: field:public_budget.transaction_type_amo_rest,transaction_type_id:0
+msgid "transaction_type_id"
+msgstr "transaction_type_id"
+
+#. module: public_budget
+#: view:payment.order:public_budget.view_public_budget_payment_order_form
+msgid "{'invisible':['|',('state','=','done'),('transaction_id','!=',False)]}"
+msgstr "{'invisible':['|',('state','=','done'),('transaction_id','!=',False)]}"
+
+#. module: public_budget
+#: view:payment.order:public_budget.view_public_budget_payment_order_form
+msgid "{'readonly':[('transaction_id', '!=', False)]}"
+msgstr "{'readonly':[('transaction_id', '!=', False)]}"
+

@@ -48,8 +48,13 @@ class advance_request_line(models.Model):
     ]
 
     @api.one
+    @api.depends(
+        'amount',
+        # TODO completar con el campo o2m que vamos a agregar
+        )
     def _get_amounts(self):
-        """"""
-        raise NotImplementedError
+        # TODO implementar!
+        self.returned_amount = False
+        self.balance_amount = False
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
