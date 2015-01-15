@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <menuitem
+            id="menu_expedients_move_wizard"
+            sequence="100"
+            action="action_expedients_move_wizard"
+            parent="public_budget.menu_main"
+            />
+
+    </data>
+</openerp>

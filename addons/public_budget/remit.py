@@ -18,6 +18,17 @@ class remit(models.Model):
         ('cancel', 'Cancel'),
     ]
 
+    @api.model
+    def _get_current_location(self):
+        expedient_id = self._context.get('expedient', False)
+        location_id = False
+        if isinstance(expedient_id, int):
+            expedient = self.env['public_budget.expedient'].search([
+                ('id', '=', expedient_id)])
+            if expedient.current_location_id:
+                location_id = expedient.current_location_id.id
+        return location_id
+
     date = fields.Datetime(
         string='Date',
         readonly=True,

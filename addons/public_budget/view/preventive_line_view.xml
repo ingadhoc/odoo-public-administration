@@ -32,7 +32,11 @@
                     <sheet string="Preventive Line">
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
-                     <group>
+                     <group string="Preventive Line">
+                        <field name="budget_id"
+                        /> 
+                        <field name="budget_position_id"
+                        /> 
                         <field name="account_id"
                             attrs="{'required':[('advance_line','=',False)],'invisible':[('advance_line','=',True)]}"
                             /> 
@@ -47,10 +51,11 @@
                         <field name="state"
                             invisible="True"
                             /> 
-                        <field name="budget_id"
-                        /> 
-                        <field name="budget_position_id"
-                        /> 
+                     </group>
+                     <group string="Definitive Lines" attrs="{'invisible':[('advance_line','=',True)]}">
+                        <field name="definitive_line_ids"
+                                nolabel="1"
+                                context="{'from_preventive':True,'default_amount':remaining_amount}"/>
                      </group>
                     </sheet>
 
@@ -66,6 +71,10 @@
                 <tree string="Preventive Line"
                     colors="grey:accounting_state==False; blue:accounting_state=='draft'; green:preventive_amount==definitive_amount==to_pay_amount==paid_amount;"
                     >
+                    <field name="budget_id"
+                        />
+                    <field name="budget_position_id"
+                        />
                     <field name="preventive_amount"
                             sum="Total"
                         />
@@ -84,10 +93,6 @@
                         />
                     <field name="state"
                             invisible="True"
-                        />
-                    <field name="budget_id"
-                        />
-                    <field name="budget_position_id"
                         />
                 </tree>
             </field>

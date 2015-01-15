@@ -323,6 +323,24 @@
             parent="menu_expedients_conf"
             groups="group_manager"
             />
+
+<!-- Menus agregados por nosotros -->
+        <record id="action_public_budget_funding_move" model="ir.actions.act_window">
+            <field name="name">Funding Moves</field>
+            <field name="res_model">public_budget.funding_move</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="public_budget.view_public_budget_funding_move_tree"/>
+            <field name="search_view_id" ref="public_budget.view_public_budget_funding_move_filter"/>
+            <field name="domain">[]</field>
+        </record>
+
+        <menuitem
+            id="menu_funding_moves"
+            sequence="10"
+            action="action_public_budget_funding_move"
+            parent="account.menu_finance_bank_and_cash"
+            />     
     </data>
 </openerp>
 <!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4

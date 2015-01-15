@@ -74,45 +74,38 @@
                     <sheet string="Expedient">
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
-                     <group>
-                        <field name="number"
-                            /> 
-                        <field name="issue_date"
-                            /> 
-                        <field name="description"
-                            /> 
-                        <field name="founder_id"
-                            /> 
-                        <field name="category_id"
-                            /> 
-                        <field name="type"
-                            /> 
-                        <field name="first_location_id"
-                            domain="[('id','in',user_location_ids[0][2])]"
-                            /> 
-                        <field name="current_location_id"
-                            /> 
-                        <field name="note"
-                            /> 
-                        <field name="final_location"
-                            /> 
-                        <field name="in_transit"
-                            /> 
-                        <field name="user_location_ids"
-                            invisible="True"
-                            /> 
-                        <field name="user_id"
-                            /> 
-                        <field name="child_ids"
-                        /> 
-                        <field name="parent_id"
-                        /> 
-                        <field name="supplier_ids"
-                            widget="many2many_tags"
-                        /> 
-                        <field name="remit_ids"
-                        /> 
-                     </group>
+                        <group>
+                            <group>
+                                <field name="issue_date"/>
+                                <field name="year"/>
+                                <field name="number"/>
+                                <field name="description"/>
+                                <field name="supplier_ids" widget="many2many_tags"/>
+                                <field name="cover"/>
+                            </group>
+                            <group>
+                                <field name="founder_id"/>
+                                <field name="category_id"/>
+                                <field name="type"/>
+                                <field name="parent_id"/>
+                                <field name="first_location_id"/>
+                                <field name="final_location" states="closed,annulled"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Moves">
+                                <group>
+                                    <field name="current_location_id"/>
+                                    <field name="expedient_move_ids" context="{'expedient':active_id}"/>
+                                </group>
+                            </page>
+                            <page string="Childs">
+                                <field name="child_ids"/>
+                            </page>
+                            <page string="Notes">
+                                <field name="note"/>
+                            </page>
+                        </notebook>
                     </sheet>
 
                 </form>

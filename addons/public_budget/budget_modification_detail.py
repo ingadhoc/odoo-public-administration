@@ -30,4 +30,14 @@ class budget_modification_detail(models.Model):
     _constraints = [
     ]
 
+    @api.one
+    @api.constrains('budget_position_id', 'amount')
+    def _check_modification(self):
+        budget_id = self.budget_modification_id.budget_id.id
+        if self.budget_position_id.budget_assignment_allowed and self.with_context(
+                budget_id=budget_id).budget_position_id.balance_amount < 0.0:
+            raise Warning(
+                _("You can not make this modification as '%s' will have a \
+                    negative balance") % (self.budget_position_id.name))
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

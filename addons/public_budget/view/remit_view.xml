@@ -95,6 +95,29 @@
             </field>
         </record>
 
+        <!-- TREEVIEW no create no edit-->
+
+        <record id="view_public_budget_expedient_move2_tree" model="ir.ui.view">
+            <field name="name">public_budget.expedient_move2.tree</field>
+            <field name="model">public_budget.expedient_move</field>
+            <field name="priority">90</field>
+            <field name="arch" type="xml">
+                <tree create='false' edit='false' string="Expedient Move"
+                    >
+                    <field name="date"
+                        />
+                    <field name="expedient_id"
+                        />
+                    <field name="user_id"
+                        />
+                    <field name="location_id"
+                        />
+                    <field name="location_dest_id"
+                        />
+                </tree>
+            </field>
+        </record>
+
     </data>
 </openerp>
 <!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
