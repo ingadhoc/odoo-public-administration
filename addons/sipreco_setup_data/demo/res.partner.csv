@@ -1,0 +1,11 @@
+id,name,supplier
+res_partner_adhoc,ADHOC SA,True
+res_partner_sueldos,Sueldos Varios,True
+res_partner_airoldi,Airoldi,True
+res_partner_gabe,Gabe,True
+res_partner_propietario,Propietario Casa,
+res_partner_shell,Shell,
+res_partner_comercios_varios,Comercios Varios,
+res_partner_pepito,Pepito Rodriguez,
+res_partner_roberto,Roberto Perez,
+res_partner_epe,EPE,

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_voucher_filter_vendor_pay" model="ir.ui.view">
+            <field name="name">account.voucher.payment.filter</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher.view_voucher_filter_vendor_pay"/>
+            <field name="arch" type="xml">
+                <field name="journal_id" position="after">
+                    <field name="payment_order_id"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>

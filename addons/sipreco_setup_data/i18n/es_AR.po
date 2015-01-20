@@ -1,0 +1,182 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_voucher_confirm
+# 	* sipreco_setup_data
+# 	* sipreco_custom_views
+# 	* account_payment_voucher
+# 	* account_invoice_auto_pay
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-12-05 13:37+0000\n"
+"PO-Revision-Date: 2014-12-05 10:42-0300\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 1.5.4\n"
+
+#. modules: account_voucher_confirm, account_payment_voucher
+#: model:ir.model,name:account_payment_voucher.model_account_voucher
+#: model:ir.model,name:account_voucher_confirm.model_account_voucher
+msgid "Accounting Voucher"
+msgstr "Comprobante de contabilidad"
+
+#. module: sipreco_setup_data
+#: model:public_budget.transaction_type,name:sipreco_setup_data.purchase_type_anticipo_gasto
+msgid "Anticipo de Gastos"
+msgstr "Anticipo de Gastos"
+
+#. module: account_invoice_auto_pay
+#: view:account.invoice:account_invoice_auto_pay.invoice_supplier_cancel_form_inherit
+msgid "Cancel Invoice"
+msgstr "Cancelar factura"
+
+#. module: account_payment_voucher
+#: view:payment.order:account_payment_voucher.view_payment_order_form
+msgid "Cancel Payments and set to Draft"
+msgstr "Cancelar Pagos y pasar a Borrador"
+
+#. module: account_voucher_confirm
+#: view:account.voucher:account_voucher_confirm.view_vendor_payment_form
+#: view:account.voucher:account_voucher_confirm.view_vendor_receipt_form
+msgid "Cancel Receipt"
+msgstr "Cancelar recibo"
+
+#. module: sipreco_setup_data
+#: model:public_budget.transaction_type,name:sipreco_setup_data.purchase_type_compra_directa
+msgid "Compra Directa"
+msgstr "Compra Directa"
+
+#. module: sipreco_setup_data
+#: model:public_budget.transaction_type,name:sipreco_setup_data.purchase_type_concurso_precios
+msgid "Concurso de Precios"
+msgstr "Concurso de Precios"
+
+#. module: account_voucher_confirm
+#: view:account.voucher:account_voucher_confirm.view_vendor_payment_form
+#: view:account.voucher:account_voucher_confirm.view_vendor_receipt_form
+msgid "Confirm"
+msgstr "Confirmar"
+
+#. module: sipreco_setup_data
+#: model:public_budget.transaction_type,name:sipreco_setup_data.purchase_type_fondo_fijo
+msgid "Fondo Fijo / Caja Chica"
+msgstr "Fondo Fijo / Caja Chica"
+
+#. module: account_payment_voucher
+#: code:addons/account_payment_voucher/account_payment.py:82
+#: code:addons/sources/sipreco/addons/account_payment_voucher/account_payment.py:82
+#, python-format
+msgid ""
+"In advance transactions you should configure an advance account on the "
+"Transaction Type"
+msgstr ""
+"En transacciones con Adelanto, deberá ser configurada la Cuenta Contable de "
+"Adelanto en el Tipo de Transacción"
+
+#. module: account_invoice_auto_pay
+#: model:ir.model,name:account_invoice_auto_pay.model_account_invoice
+msgid "Invoice"
+msgstr "Comprobante"
+
+#. module: sipreco_setup_data
+#: model:public_budget.transaction_type,name:sipreco_setup_data.purchase_type_lprivada
+msgid "Licitación Privada"
+msgstr "Licitación Privada"
+
+#. module: sipreco_setup_data
+#: model:public_budget.transaction_type,name:sipreco_setup_data.purchase_type_lpublica
+msgid "Licitación Pública"
+msgstr "Licitación Pública"
+
+#. module: account_payment_voucher
+#: model:ir.model,name:account_payment_voucher.model_payment_line
+msgid "Payment Line"
+msgstr "Línea de pago"
+
+#. module: account_payment_voucher
+#: field:account.voucher,payment_line_ids:0
+msgid "Payment Lines"
+msgstr "Líneas de Pago"
+
+#. module: account_payment_voucher
+#: field:account.voucher,payment_order_id:0
+#: model:ir.model,name:account_payment_voucher.model_payment_order
+msgid "Payment Order"
+msgstr "Orden de pago"
+
+#. module: sipreco_setup_data
+#: model:public_budget.transaction_type,name:sipreco_setup_data.purchase_type_subsidio_con_cargo
+msgid "Subsidio con Cargo de Rendición"
+msgstr "Subsidio con Cargo de Rendición"
+
+#. module: sipreco_setup_data
+#: model:public_budget.transaction_type,name:sipreco_setup_data.purchase_type_subsidio_sin_cargo
+msgid "Subsidio sin Cargo de Rendición"
+msgstr "Subsidio sin Cargo de Rendición"
+
+#. module: sipreco_setup_data
+#: model:public_budget.transaction_type,name:sipreco_setup_data.purchase_type_sueldos
+msgid "Sueldos"
+msgstr "Sueldos"
+
+#. module: account_payment_voucher
+#: field:payment.line,voucher_id:0
+msgid "Voucher"
+msgstr "Pago"
+
+#. module: account_payment_voucher
+#: field:payment.order,voucher_ids:0
+msgid "Vouchers"
+msgstr "Pagos"
+
+#. module: account_payment_voucher
+#: code:addons/account_payment_voucher/account_payment.py:39
+#: code:addons/sources/sipreco/addons/account_payment_voucher/account_payment.py:39
+#, python-format
+msgid ""
+"You can cancel a Payment Order with Vouchers in states different from "
+"'draft' or 'cancel'."
+msgstr ""
+"No es posible cancelar una Orden de Pago si existen Pagos en estados "
+"diferentes a 'Borrador' o 'Cancelado'"
+
+#. module: account_payment_voucher
+#: code:addons/account_payment_voucher/account_payment.py:32
+#: code:addons/sources/sipreco/addons/account_payment_voucher/account_payment.py:32
+#, python-format
+msgid "You can delete a Payment Order with Vouchers."
+msgstr "No es posible borrar una Orden de Pago con Pagos relacionados"
+
+#. module: account_payment_voucher
+#: code:addons/account_payment_voucher/account_voucher.py:18
+#: code:addons/sources/sipreco/addons/account_payment_voucher/account_voucher.py:18
+#, python-format
+msgid ""
+"You can not delete a voucher that has been generated froma Payment Order, "
+"you should cancel the payment order."
+msgstr ""
+"You can not delete a voucher that has been generated froma Payment Order, "
+"you should cancel the payment order."
+
+#. module: sipreco_custom_views
+#: view:account.asset.asset:sipreco_custom_views.view_account_asset_asset_form
+msgid "base.group_no_one"
+msgstr "base.group_no_one"
+
+#. module: account_voucher_confirm
+#: view:account.voucher:account_voucher_confirm.view_vendor_payment_form
+#: view:account.voucher:account_voucher_confirm.view_vendor_receipt_form
+msgid "draft,confirmed"
+msgstr "Borrador,Confirmado"
+
+#. module: base
+#: field:res.partner,vat:0
+msgid "TIN"
+msgstr "CUIT"
+

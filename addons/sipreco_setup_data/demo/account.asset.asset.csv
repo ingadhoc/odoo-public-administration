@@ -1,0 +1,5 @@
+id,name,category_id/id,purchase_value
+account_asset_1,Computadora de Escritorio,account_asset.account_asset_category_fixedassets0,2000
+account_asset_2,Mueble modular,account_asset.account_asset_category_fixedassets0,5000
+account_asset_3,Lámpara de Pie,account_asset.account_asset_category_fixedassets0,2000
+account_asset_4,Impresora Laser,account_asset.account_asset_category_fixedassets0,4500

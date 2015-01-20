@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<openerp>
+    <data>
+        <workflow action="sgn_open" model="public_budeget.budget" ref="sipreco_setup_data.budget_2014"/>
+    </data>
+</openerp>
