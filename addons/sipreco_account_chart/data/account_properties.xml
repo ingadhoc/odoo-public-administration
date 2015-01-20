@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <!-- Properties -->
+<!--         <record forcecreate="True" id="property_account_receivable" model="ir.property">
+            <field name="name">property_account_receivable</field>
+            <field name="fields_id" search="[('model','=','res.partner'),('name','=','property_account_receivable')]"/>
+            <field eval="'account.account,'+str(a_recv)" name="value"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record> -->
+        <record id="account_account_661" model="account.account">
+<!--             <field name="code">X11002</field>
+            <field name="name">Debtors - (test)</field>
+            <field ref="cas" name="parent_id"/>
+            <field name="type">receivable</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="data_account_type_receivable"/> -->
+        </record>
+        <record forcecreate="True" id="property_account_payable" model="ir.property">
+            <field name="name">property_account_payable</field>
+            <field name="fields_id" search="[('model','=','res.partner'),('name','=','property_account_payable')]"/>
+            <field eval="'account.account,'+str(account_account_661)" name="value"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+<!--         <record forcecreate="True" id="property_account_position" model="ir.property">
+            <field name="name">property_account_position</field>
+            <field name="fields_id" search="[('model','=','res.partner'),('name','=','property_account_position')]"/>
+            <field eval="False" name="value"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="property_account_expense_categ" model="ir.property">
+            <field name="name">property_account_expense_categ</field>
+            <field name="fields_id" search="[('model','=','product.category'),('name','=','property_account_expense_categ')]"/>
+            <field eval="'account.account,'+str(ref('account.a_expense'))" name="value"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        <record id="property_account_income_categ" model="ir.property">
+            <field name="name">property_account_income_categ</field>
+            <field name="fields_id" search="[('model','=','product.category'),('name','=','property_account_income_categ')]"/>
+            <field eval="'account.account,'+str(ref('account.a_sale'))" model="account.account" name="value"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record> -->
+
+    </data>
+</openerp>

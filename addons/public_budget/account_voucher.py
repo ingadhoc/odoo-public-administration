@@ -26,6 +26,25 @@ class account_voucher(models.Model):
     _constraints = [
     ]
 
+    partner_ids = fields.Many2many(
+        'res.partner',
+        string='Partners',
+        compute="_get_partner_ids")
+
+    @api.one
+    @api.depends('transaction_id')
+    def _get_partner_ids(self):
+        self.partner_ids = self.env['res.partner']
+        if not self.transaction_id:
+            return False
+        invoices = self.env['account.invoice'].search(
+            [('transaction_id', '=', self.transaction_id.id),
+                ('residual', '>', 0.0)])
+        partner_ids = [x.partner_id.id for x in invoices]
+        if len(set(partner_ids)) == 1:
+            self.partner_id = partner_ids[0]
+        self.partner_ids = partner_ids
+
     @api.one
     def _get_paid(self):
         """"""
@@ -45,6 +64,7 @@ class account_voucher(models.Model):
             ('account_id.type', '=', 'payable'),
             ('credit', '>', 0),
             ('invoice.transaction_id', '=', self.transaction_id.id),
+            ('invoice.partner_id', '=', self.partner_id.id),
             ('account_id.reconcile', '=', True)]
         move_lines = move_lines.search(domain)
         context = dict(

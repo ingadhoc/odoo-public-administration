@@ -170,7 +170,7 @@ class public_budget_definitive_make_invoice(models.TransientModel):
             # 'name': invoice.name,
             'type': inv_type,
             'account_id': account_id,
-            'journal_id': self.journal_id.id,
+            'journal_id': wizard.journal_id.id,
             # 'currency_id': invoice.currency_id and invoice.currency_id.id,
             'fiscal_position': partner_data['value'].get('fiscal_position', False),
             'payment_term': partner_data['value'].get('payment_term', False),

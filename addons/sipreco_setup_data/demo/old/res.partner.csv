@@ -1,0 +1,2 @@
+id,name,customer,supplier,responsability_id/id
+res_partner_adhoc,Ingenieria ADHOC,False,True,l10n_ar_invoice.res_IVARI

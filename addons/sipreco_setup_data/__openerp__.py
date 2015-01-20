@@ -34,16 +34,18 @@ Sipreco Set Up Data
         'account_clean_cancelled_invoice_number',
         'account_check',
         'l10n_ar_bank',
+        'l10n_ar_invoice',
     ],
     'data': [
-        'data/account/ir.sequence.csv'
-    ],
-    'demo': [
+        'data/account/ir.sequence.csv',
+        'data/res.company.csv',
+        # datos demo
+        'demo/account/account_period.xml',
+        'demo/account.journal.csv',
         'demo/journal_data.xml',
         'demo/res.partner.csv',
         'demo/users/res.partner.csv',
         'demo/users/res.users.csv',
-        'demo/account.journal.csv',
         'demo/res.partner.bank.csv',
         'demo/payment.mode.csv',
         'demo/public_budget.expedient_founder.csv',
@@ -65,7 +67,9 @@ Sipreco Set Up Data
         'demo/demo_data.xml',
         'demo/public_budget.budget_modification.csv',
         'demo/public_budget.budget_modification_detail.csv',
-        'demo/account.asset.asset.csv',
+        # 'demo/account.asset.asset.csv', hay que crear antes la categoria de asset
+    ],
+    'demo': [
     ],
     'test': [
     ],
