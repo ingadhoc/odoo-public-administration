@@ -18,6 +18,7 @@ Sipreco Account Chart
     ],
     'data': [
         'data/account.account.csv',
+        'data/account_properties.xml',
     ],
     'demo': [
     ],

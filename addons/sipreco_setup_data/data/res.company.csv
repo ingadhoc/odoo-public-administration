@@ -1,4 +1,2 @@
-id,name,parent_id/id,partner_id/id
-res_company_padre,Padre,,res_partner_padre
-res_company_otra,Otra,res_company_padre,res_partner_otra
-base.main_company,Juancho,res_company_padre,
+id,name,responsability_id/id
+base.main_company,Tribunal Municipal de Cuentas,l10n_ar_invoice.res_IVAE
