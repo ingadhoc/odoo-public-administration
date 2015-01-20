@@ -33,15 +33,6 @@ class account_voucher(models.Model):
         result = parent._get_paid() if hasattr(parent, '_get_paid') else False
         return result
 
-    @api.one
-    def create_voucher(self):
-        res = super(payment_order, self).create_voucher()
-        for voucher_ids in res:
-            vouchers = self.env['account.voucher'].browse(voucher_ids)
-            vouchers.signal_workflow(
-                'proforma_confirmed')
-        return res
-
     @api.multi
     def action_search_entries(self):
         if not self.transaction_id:
