@@ -82,10 +82,13 @@
               name="sipreco_Transaction.pgml"
               diagramclass="org.argouml.uml.diagram.static_structure.ui.UMLClassDiagram"
               diagramname="Transaction" />
+<<<<<<< HEAD
       <member type="pgml"
               name="sipreco_Expedient.pgml"
               diagramclass="org.argouml.uml.diagram.static_structure.ui.UMLClassDiagram"
               diagramname="Expedient" />
+=======
+>>>>>>> ADD other sipreco modules
       <member type="todo"
               name="sipreco.todo" />
     </members>
@@ -104,7 +107,15 @@
 			</model>
 		</userDefined>
 </profile>
+<<<<<<< HEAD
 <XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Thu Mar 05 12:45:51 ART 2015'>
+=======
+<<<<<<< HEAD
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Thu Mar 05 12:45:06 ART 2015'>
+=======
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Thu Jan 15 19:49:39 ART 2015'>
+>>>>>>> ADD other sipreco modules
+>>>>>>> ADD other sipreco modules
   <XMI.header>    <XMI.documentation>
       <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
       <XMI.exporterVersion>0.34(6) revised on $Date: 2010-01-11 22:20:14 +0100 (Mon, 11 Jan 2010) $ </XMI.exporterVersion>
@@ -532,6 +543,47 @@
                     <UML:Class xmi.idref = '127-0-1-1-17311379:1481ce88eca:-8000:0000000000000D77'/>
                   </UML:StructuralFeature.type>
                 </UML:Attribute>
+<<<<<<< HEAD
+=======
+                <UML:Attribute xmi.id = '127-0-1-1-ca2ca85:1480e7e8288:-8000:000000000000131C'
+                  name = 'total' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+                  changeability = 'changeable' targetScope = 'instance'>
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id = '127-0-1-1-ca2ca85:1480e7e8288:-8000:000000000000131D'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = '127-0-1-1-ca2ca85:1480e7e8288:-8000:000000000000131E'
+                          lower = '1' upper = '1'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:00000000000011E5'/>
+                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:00000000000011E6'/>
+                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--7f493fcf:13b6d9e307b:-8000:0000000000000F56'/>
+                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000BA2'/>
+                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000BA1'/>
+                  </UML:ModelElement.stereotype>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1-55241b8a:1483b8574f8:-8000:0000000000001364'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Total</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-2b464aa4:13b09d81b72:-8000:0000000000001573'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1-25e2be35:14a00d450ac:-8000:00000000000012E7'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>{&apos;draft&apos;: [(&apos;readonly&apos;, False)], &apos;open&apos;: [(&apos;readonly&apos;, False)]}</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--3588a9e:13cead26784:-8000:0000000000000F31'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                  <UML:StructuralFeature.type>
+                    <UML:DataType href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000B9E'/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+>>>>>>> ADD other sipreco modules
                 <UML:Attribute xmi.id = '127-0-1-1-55241b8a:1483b8574f8:-8000:0000000000001899'
                   name = 'invoice_ids' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
                   changeability = 'changeable' targetScope = 'instance'>
@@ -560,6 +612,37 @@
                     <UML:Class xmi.idref = '127-0-1-1-17311379:1481ce88eca:-8000:0000000000000DA4'/>
                   </UML:StructuralFeature.type>
                 </UML:Attribute>
+<<<<<<< HEAD
+=======
+                <UML:Attribute xmi.id = '127-0-1-1-55241b8a:1483b8574f8:-8000:000000000000189C'
+                  name = 'payment_order_ids' visibility = 'public' isSpecification = 'false'
+                  ownerScope = 'instance' changeability = 'changeable' targetScope = 'instance'>
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id = '127-0-1-1-55241b8a:1483b8574f8:-8000:000000000000189D'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = '127-0-1-1-55241b8a:1483b8574f8:-8000:000000000000189E'
+                          lower = '1' upper = '1'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:00000000000011E5'/>
+                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000BA1'/>
+                  </UML:ModelElement.stereotype>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1-55241b8a:1483b8574f8:-8000:00000000000018A0'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Payment Orders</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-2b464aa4:13b09d81b72:-8000:0000000000001573'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                  <UML:StructuralFeature.type>
+                    <UML:Class xmi.idref = '127-0-1-1-17311379:1481ce88eca:-8000:0000000000000DA4'/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+>>>>>>> ADD other sipreco modules
                 <UML:Attribute xmi.id = '127-0-1-1--159810e7:148fa7b46d0:-8000:00000000000014A4'
                   name = 'note' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
                   changeability = 'changeable' targetScope = 'instance'>
@@ -861,6 +944,47 @@
                     <UML:DataType href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--29a7adf0:14ac0e08da2:-8000:000000000000128A'/>
                   </UML:StructuralFeature.type>
                 </UML:Attribute>
+<<<<<<< HEAD
+=======
+                <UML:Attribute xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:0000000000001750'
+                  name = 'advance_payment_order_ids' visibility = 'public' isSpecification = 'false'
+                  ownerScope = 'instance' changeability = 'changeable' targetScope = 'instance'>
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:0000000000001751'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:0000000000001752'
+                          lower = '1' upper = '1'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:0000000000001753'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Payment Orders</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-2b464aa4:13b09d81b72:-8000:0000000000001573'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:0000000000001754'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>payment.order</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--29a7adf0:14ac0e08da2:-8000:000000000000128C'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:0000000000001755'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>transaction_id</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--29a7adf0:14ac0e08da2:-8000:0000000000001298'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                  <UML:StructuralFeature.type>
+                    <UML:DataType href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--29a7adf0:14ac0e08da2:-8000:000000000000128A'/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+>>>>>>> ADD other sipreco modules
                 <UML:Attribute xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:0000000000001756'
                   name = 'refund_voucher_count' visibility = 'public' isSpecification = 'false'
                   ownerScope = 'instance' changeability = 'changeable' targetScope = 'instance'>
@@ -892,6 +1016,40 @@
                     <UML:DataType href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000B97'/>
                   </UML:StructuralFeature.type>
                 </UML:Attribute>
+<<<<<<< HEAD
+=======
+                <UML:Attribute xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:000000000000175B'
+                  name = 'payment_order_count' visibility = 'public' isSpecification = 'false'
+                  ownerScope = 'instance' changeability = 'changeable' targetScope = 'instance'>
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:000000000000175C'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:000000000000175D'
+                          lower = '1' upper = '1'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:0000000000001761'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>_payment_order_count</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:00000000000011EC'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:0000000000001762'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Payment Orders</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-2b464aa4:13b09d81b72:-8000:0000000000001573'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                  <UML:StructuralFeature.type>
+                    <UML:DataType href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000B9E'/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+>>>>>>> ADD other sipreco modules
                 <UML:Attribute xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:000000000000175E'
                   name = 'preventive_amount' visibility = 'public' isSpecification = 'false'
                   ownerScope = 'instance' changeability = 'changeable' targetScope = 'instance'>
@@ -985,6 +1143,40 @@
                     <UML:DataType href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000B9E'/>
                   </UML:StructuralFeature.type>
                 </UML:Attribute>
+<<<<<<< HEAD
+=======
+                <UML:Attribute xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:000000000000176B'
+                  name = 'payment_order_amount' visibility = 'public' isSpecification = 'false'
+                  ownerScope = 'instance' changeability = 'changeable' targetScope = 'instance'>
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:000000000000176C'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:000000000000176D'
+                          lower = '1' upper = '1'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:0000000000001776'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>_get_amounts</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:00000000000011EC'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:0000000000001779'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Payment Orderes Amount</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-2b464aa4:13b09d81b72:-8000:0000000000001573'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                  <UML:StructuralFeature.type>
+                    <UML:DataType href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000B9E'/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+>>>>>>> ADD other sipreco modules
                 <UML:Attribute xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:000000000000176E'
                   name = 'advance_remaining_amount' visibility = 'public' isSpecification = 'false'
                   ownerScope = 'instance' changeability = 'changeable' targetScope = 'instance'>
@@ -1720,6 +1912,7 @@
                 </UML:TaggedValue>
               </UML:ModelElement.taggedValue>
               <UML:Classifier.feature>
+<<<<<<< HEAD
                 <UML:Attribute xmi.id = '127-0-1-1-17311379:1481ce88eca:-8000:0000000000000DDC'
                   name = 'number' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
                   changeability = 'changeable' targetScope = 'instance'>
@@ -1727,29 +1920,7 @@
                     <UML:Multiplicity xmi.id = '127-0-1-1-17311379:1481ce88eca:-8000:0000000000000DDD'>
                       <UML:Multiplicity.range>
                         <UML:MultiplicityRange xmi.id = '127-0-1-1-17311379:1481ce88eca:-8000:0000000000000DDE'
-                          lower = '1' upper = '1'/>
-                      </UML:Multiplicity.range>
-                    </UML:Multiplicity>
-                  </UML:StructuralFeature.multiplicity>
-                  <UML:ModelElement.stereotype>
-                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:00000000000011E5'/>
-                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:00000000000011E6'/>
-                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--7f493fcf:13b6d9e307b:-8000:0000000000000F56'/>
-                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000BA1'/>
-                  </UML:ModelElement.stereotype>
-                  <UML:ModelElement.taggedValue>
-                    <UML:TaggedValue xmi.id = '127-0-1-1-55241b8a:1483b8574f8:-8000:000000000000138E'
-                      isSpecification = 'false'>
-                      <UML:TaggedValue.dataValue>Number</UML:TaggedValue.dataValue>
-                      <UML:TaggedValue.type>
-                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-2b464aa4:13b09d81b72:-8000:0000000000001573'/>
-                      </UML:TaggedValue.type>
-                    </UML:TaggedValue>
-                  </UML:ModelElement.taggedValue>
-                  <UML:StructuralFeature.type>
-                    <UML:DataType href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000B9C'/>
-                  </UML:StructuralFeature.type>
-                </UML:Attribute>
+=======
                 <UML:Attribute xmi.id = '127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000013D6'
                   name = 'issue_date' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
                   changeability = 'changeable' targetScope = 'instance'>
@@ -1757,6 +1928,7 @@
                     <UML:Multiplicity xmi.id = '127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000013D7'>
                       <UML:Multiplicity.range>
                         <UML:MultiplicityRange xmi.id = '127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000013D8'
+>>>>>>> ADD other sipreco modules
                           lower = '1' upper = '1'/>
                       </UML:Multiplicity.range>
                     </UML:Multiplicity>
@@ -1765,6 +1937,14 @@
                     <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:00000000000011E5'/>
                     <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:00000000000011E6'/>
                     <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--7f493fcf:13b6d9e307b:-8000:0000000000000F56'/>
+<<<<<<< HEAD
+                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000BA1'/>
+                  </UML:ModelElement.stereotype>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1-55241b8a:1483b8574f8:-8000:000000000000138E'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Number</UML:TaggedValue.dataValue>
+=======
                     <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000BA2'/>
                   </UML:ModelElement.stereotype>
                   <UML:ModelElement.taggedValue>
@@ -1778,13 +1958,83 @@
                     <UML:TaggedValue xmi.id = '127-0-1-1-55241b8a:1483b8574f8:-8000:000000000000138D'
                       isSpecification = 'false'>
                       <UML:TaggedValue.dataValue>Issue Date</UML:TaggedValue.dataValue>
+>>>>>>> ADD other sipreco modules
                       <UML:TaggedValue.type>
                         <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-2b464aa4:13b09d81b72:-8000:0000000000001573'/>
                       </UML:TaggedValue.type>
                     </UML:TaggedValue>
                   </UML:ModelElement.taggedValue>
                   <UML:StructuralFeature.type>
+<<<<<<< HEAD
+                    <UML:DataType href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000B9C'/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+                <UML:Attribute xmi.id = '127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000013D6'
+                  name = 'issue_date' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+                  changeability = 'changeable' targetScope = 'instance'>
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id = '127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000013D7'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = '127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000013D8'
+=======
                     <UML:DataType href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000B9A'/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+                <UML:Attribute xmi.id = '127-0-1-1-17311379:1481ce88eca:-8000:0000000000000DDC'
+                  name = 'number' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+                  changeability = 'changeable' targetScope = 'instance'>
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id = '127-0-1-1-17311379:1481ce88eca:-8000:0000000000000DDD'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = '127-0-1-1-17311379:1481ce88eca:-8000:0000000000000DDE'
+>>>>>>> ADD other sipreco modules
+                          lower = '1' upper = '1'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:00000000000011E5'/>
+                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:00000000000011E6'/>
+                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--7f493fcf:13b6d9e307b:-8000:0000000000000F56'/>
+                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000BA2'/>
+                  </UML:ModelElement.stereotype>
+                  <UML:ModelElement.taggedValue>
+<<<<<<< HEAD
+                    <UML:TaggedValue xmi.id = '127-0-1-1-17311379:1481ce88eca:-8000:0000000000000DC6'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>fields.Datetime.now</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-2b464aa4:13b09d81b72:-8000:0000000000001567'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1-55241b8a:1483b8574f8:-8000:000000000000138D'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Issue Date</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-2b464aa4:13b09d81b72:-8000:0000000000001573'/>
+=======
+                    <UML:TaggedValue xmi.id = '127-0-1-1-55241b8a:1483b8574f8:-8000:000000000000138E'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Number</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-2b464aa4:13b09d81b72:-8000:0000000000001573'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--2c8f0b2f:14ac1f4cc3f:-8000:00000000000016D9'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>lambda self: self.env[&apos;ir.sequence&apos;].get(&apos;public_budget.expedient&apos;)</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-2b464aa4:13b09d81b72:-8000:0000000000001567'/>
+>>>>>>> ADD other sipreco modules
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                  <UML:StructuralFeature.type>
+<<<<<<< HEAD
+                    <UML:DataType href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000B9A'/>
+=======
+                    <UML:DataType href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000B9C'/>
+>>>>>>> ADD other sipreco modules
                   </UML:StructuralFeature.type>
                 </UML:Attribute>
                 <UML:Attribute xmi.id = '127-0-1-1--2c8f0b2f:14ac1f4cc3f:-8000:00000000000016DF'
@@ -6250,6 +6500,79 @@
                     <UML:Class xmi.idref = '127-0-1-1-ca2ca85:1480e7e8288:-8000:0000000000001316'/>
                   </UML:StructuralFeature.type>
                 </UML:Attribute>
+<<<<<<< HEAD
+=======
+                <UML:Attribute xmi.id = '127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015C2'
+                  name = 'payment_order_id' visibility = 'public' isSpecification = 'false'
+                  ownerScope = 'instance' changeability = 'changeable' targetScope = 'instance'>
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id = '127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015C3'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = '127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015C4'
+                          lower = '1' upper = '1'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000BA1'/>
+                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:00000000000011E5'/>
+                  </UML:ModelElement.stereotype>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015C5'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Payment Order</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-2b464aa4:13b09d81b72:-8000:0000000000001573'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                  <UML:StructuralFeature.type>
+                    <UML:Class xmi.idref = '127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A4'/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+                <UML:Attribute xmi.id = '127-0-1-1--3431ae39:149a977fc0d:-8000:000000000000124B'
+                  name = 'company_id' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+                  changeability = 'changeable' targetScope = 'instance'>
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id = '127-0-1-1--3431ae39:149a977fc0d:-8000:000000000000124C'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = '127-0-1-1--3431ae39:149a977fc0d:-8000:000000000000124D'
+                          lower = '1' upper = '1'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000BA2'/>
+                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:00000000000011E5'/>
+                  </UML:ModelElement.stereotype>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--3431ae39:149a977fc0d:-8000:000000000000124E'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Company</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-2b464aa4:13b09d81b72:-8000:0000000000001573'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--3431ae39:149a977fc0d:-8000:000000000000124F'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>lambda self: self.env[&apos;res.company&apos;]._company_default_get(&apos;public_budget.advance_request&apos;)</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-2b464aa4:13b09d81b72:-8000:0000000000001567'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:0000000000001793'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>base.group_multi_company</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-19e0703c:13b6dbe7adf:-8000:00000000000011CA'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                  <UML:StructuralFeature.type>
+                    <UML:Class xmi.idref = '127-0-1-1--37b37c4d:13b4c72c4b4:-8000:0000000000000FEC'/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+>>>>>>> ADD other sipreco modules
               </UML:Classifier.feature>
             </UML:Class>
             <UML:Class xmi.id = '127-0-1-1-639eb821:1499f8400f7:-8000:0000000000001255'
@@ -8345,8 +8668,14 @@
                   </UML:AssociationEnd.participant>
                 </UML:AssociationEnd>
                 <UML:AssociationEnd xmi.id = '127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015AA'
+<<<<<<< HEAD
                   name = 'voucher_ids' visibility = 'public' isSpecification = 'false' isNavigable = 'true'
                   ordering = 'unordered' aggregation = 'none' targetScope = 'instance' changeability = 'changeable'>
+=======
+                  name = 'payment_order_ids' visibility = 'public' isSpecification = 'false'
+                  isNavigable = 'true' ordering = 'unordered' aggregation = 'none' targetScope = 'instance'
+                  changeability = 'changeable'>
+>>>>>>> ADD other sipreco modules
                   <UML:AssociationEnd.multiplicity>
                     <UML:Multiplicity xmi.id = '127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015AE'>
                       <UML:Multiplicity.range>
@@ -8371,10 +8700,17 @@
               </UML:Association.connection>
             </UML:Association>
             <UML:Class xmi.id = '127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A4'
+<<<<<<< HEAD
               name = 'account_voucher' visibility = 'public' isSpecification = 'false'
               isRoot = 'false' isLeaf = 'false' isAbstract = 'false' isActive = 'false'>
               <UML:GeneralizableElement.generalization>
                 <UML:Generalization xmi.idref = '127-0-0-1-6908b982:14be9ff1df1:-8000:00000000000017C6'/>
+=======
+              name = 'payment_order' visibility = 'public' isSpecification = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false' isActive = 'false'>
+              <UML:GeneralizableElement.generalization>
+                <UML:Generalization xmi.idref = '127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015BD'/>
+>>>>>>> ADD other sipreco modules
               </UML:GeneralizableElement.generalization>
               <UML:Classifier.feature>
                 <UML:Attribute xmi.id = '127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015B0'
@@ -8411,6 +8747,47 @@
                     <UML:DataType href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000B98'/>
                   </UML:StructuralFeature.type>
                 </UML:Attribute>
+<<<<<<< HEAD
+=======
+                <UML:Attribute xmi.id = '127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015B5'
+                  name = 'partner_id' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+                  changeability = 'changeable' targetScope = 'instance'>
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id = '127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015B6'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = '127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015B7'
+                          lower = '1' upper = '1'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015B8'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Partner</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-2b464aa4:13b09d81b72:-8000:0000000000001573'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015B9'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>{&apos;done&apos;: [(&apos;readonly&apos;, True)]}</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--3588a9e:13cead26784:-8000:0000000000000F31'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--6a392a2b:14aef7d6c45:-8000:000000000000202A'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Partner related to this payment order</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-2b464aa4:13b09d81b72:-8000:0000000000001576'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                  <UML:StructuralFeature.type>
+                    <UML:Class xmi.idref = '127-0-1-1-17311379:1481ce88eca:-8000:0000000000000D77'/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+>>>>>>> ADD other sipreco modules
                 <UML:Attribute xmi.id = '127-0-1-1-6f86a1b1:14ae9c18dfc:-8000:00000000000017BA'
                   name = 'note' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
                   changeability = 'changeable' targetScope = 'instance'>
@@ -8435,6 +8812,71 @@
                     <UML:DataType href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-608aa393:13b6da4b8d4:-8000:0000000000000D16'/>
                   </UML:StructuralFeature.type>
                 </UML:Attribute>
+<<<<<<< HEAD
+=======
+                <UML:Attribute xmi.id = '127-0-1-1--6a392a2b:14aef7d6c45:-8000:00000000000017BE'
+                  name = 'paid' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+                  changeability = 'changeable' targetScope = 'instance'>
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id = '127-0-1-1--6a392a2b:14aef7d6c45:-8000:00000000000017BF'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = '127-0-1-1--6a392a2b:14aef7d6c45:-8000:00000000000017C0'
+                          lower = '1' upper = '1'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--6a392a2b:14aef7d6c45:-8000:00000000000017C1'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Paid</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-2b464aa4:13b09d81b72:-8000:0000000000001573'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--6a392a2b:14aef7d6c45:-8000:00000000000017C2'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>It indicate if all related vouchers has been paid</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-2b464aa4:13b09d81b72:-8000:0000000000001576'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--6a392a2b:14aef7d6c45:-8000:00000000000017C3'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>_get_paid</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:00000000000011EC'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                  <UML:StructuralFeature.type>
+                    <UML:DataType href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000B98'/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+                <UML:Operation xmi.id = '127-0-1-1--6a392a2b:14aef7d6c45:-8000:00000000000017C4'
+                  name = '_get_paid' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+                  isQuery = 'false' concurrency = 'sequential' isRoot = 'false' isLeaf = 'false'
+                  isAbstract = 'false'>
+                  <UML:BehavioralFeature.parameter>
+                    <UML:Parameter xmi.id = '127-0-1-1--6a392a2b:14aef7d6c45:-8000:00000000000017C5'
+                      name = 'return' isSpecification = 'false' kind = 'return'/>
+                  </UML:BehavioralFeature.parameter>
+                </UML:Operation>
+                <UML:Attribute xmi.id = '127-0-1-1--6a392a2b:14aef7d6c45:-8000:000000000000288F'
+                  name = 'other_Field' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+                  changeability = 'changeable' targetScope = 'instance'>
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id = '127-0-1-1--6a392a2b:14aef7d6c45:-8000:0000000000002890'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = '127-0-1-1--6a392a2b:14aef7d6c45:-8000:0000000000002891'
+                          lower = '1' upper = '1'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:StructuralFeature.type>
+                    <UML:DataType href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000B97'/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+>>>>>>> ADD other sipreco modules
               </UML:Classifier.feature>
             </UML:Class>
             <UML:Association xmi.id = '127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015DE'
@@ -8455,7 +8897,10 @@
                     <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:00000000000011E5'/>
                     <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:00000000000011E6'/>
                     <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--7f493fcf:13b6d9e307b:-8000:0000000000000F56'/>
+<<<<<<< HEAD
                     <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000BA1'/>
+=======
+>>>>>>> ADD other sipreco modules
                   </UML:ModelElement.stereotype>
                   <UML:ModelElement.taggedValue>
                     <UML:TaggedValue xmi.id = '127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015E5'
@@ -8467,7 +8912,11 @@
                     </UML:TaggedValue>
                     <UML:TaggedValue xmi.id = '127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015E6'
                       isSpecification = 'false'>
+<<<<<<< HEAD
                       <UML:TaggedValue.dataValue>{&apos;draft&apos;: [(&apos;readonly&apos;, False)], &apos;open&apos;: [(&apos;readonly&apos;, False)]}</UML:TaggedValue.dataValue>
+=======
+                      <UML:TaggedValue.dataValue>{&apos;invoiced&apos;: [(&apos;readonly&apos;, True)], &apos;closed&apos;: [(&apos;readonly&apos;, True)], &apos;cancel&apos;: [(&apos;readonly&apos;, True)]}</UML:TaggedValue.dataValue>
+>>>>>>> ADD other sipreco modules
                       <UML:TaggedValue.type>
                         <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--3588a9e:13cead26784:-8000:0000000000000F31'/>
                       </UML:TaggedValue.type>
@@ -9740,7 +10189,10 @@
                     <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:00000000000011E5'/>
                     <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:00000000000011E6'/>
                     <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--7f493fcf:13b6d9e307b:-8000:0000000000000F56'/>
+<<<<<<< HEAD
                     <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000BA1'/>
+=======
+>>>>>>> ADD other sipreco modules
                   </UML:ModelElement.stereotype>
                   <UML:ModelElement.taggedValue>
                     <UML:TaggedValue xmi.id = '127-0-1-1--44365c94:14ae8a06ccc:-8000:0000000000002851'
@@ -9766,7 +10218,11 @@
                     </UML:TaggedValue>
                     <UML:TaggedValue xmi.id = '127-0-1-1--44365c94:14ae8a06ccc:-8000:0000000000002854'
                       isSpecification = 'false'>
+<<<<<<< HEAD
                       <UML:TaggedValue.dataValue>{&apos;draft&apos;: [(&apos;readonly&apos;, False)], &apos;open&apos;: [(&apos;readonly&apos;, False)]}</UML:TaggedValue.dataValue>
+=======
+                      <UML:TaggedValue.dataValue>{&apos;invoiced&apos;: [(&apos;readonly&apos;, True)], &apos;closed&apos;: [(&apos;readonly&apos;, True)], &apos;cancel&apos;: [(&apos;readonly&apos;, True)]}</UML:TaggedValue.dataValue>
+>>>>>>> ADD other sipreco modules
                       <UML:TaggedValue.type>
                         <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--3588a9e:13cead26784:-8000:0000000000000F31'/>
                       </UML:TaggedValue.type>
@@ -9828,7 +10284,10 @@
                     <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:00000000000011E6'/>
                     <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--7f493fcf:13b6d9e307b:-8000:0000000000000F56'/>
                     <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000BA2'/>
+<<<<<<< HEAD
                     <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000BA1'/>
+=======
+>>>>>>> ADD other sipreco modules
                   </UML:ModelElement.stereotype>
                   <UML:ModelElement.taggedValue>
                     <UML:TaggedValue xmi.id = '127-0-1-1-55241b8a:1483b8574f8:-8000:0000000000001366'
@@ -9840,7 +10299,11 @@
                     </UML:TaggedValue>
                     <UML:TaggedValue xmi.id = '127-0-1-1--97d0ae6:149f180fbb3:-8000:00000000000012D8'
                       isSpecification = 'false'>
+<<<<<<< HEAD
                       <UML:TaggedValue.dataValue>{&apos;draft&apos;: [(&apos;readonly&apos;, False)], &apos;open&apos;: [(&apos;readonly&apos;, False)]}</UML:TaggedValue.dataValue>
+=======
+                      <UML:TaggedValue.dataValue>{&apos;invoiced&apos;: [(&apos;readonly&apos;, True)], &apos;closed&apos;: [(&apos;readonly&apos;, True)], &apos;cancel&apos;: [(&apos;readonly&apos;, True)]}</UML:TaggedValue.dataValue>
+>>>>>>> ADD other sipreco modules
                       <UML:TaggedValue.type>
                         <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--3588a9e:13cead26784:-8000:0000000000000F31'/>
                       </UML:TaggedValue.type>
@@ -9864,7 +10327,10 @@
                   <UML:ModelElement.stereotype>
                     <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:00000000000011E5'/>
                     <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--7f493fcf:13b6d9e307b:-8000:0000000000000F56'/>
+<<<<<<< HEAD
                     <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000BA1'/>
+=======
+>>>>>>> ADD other sipreco modules
                   </UML:ModelElement.stereotype>
                   <UML:ModelElement.taggedValue>
                     <UML:TaggedValue xmi.id = '127-0-1-1-2d70f4ff:1482303b186:-8000:000000000000129F'
@@ -9883,7 +10349,11 @@
                     </UML:TaggedValue>
                     <UML:TaggedValue xmi.id = '127-0-1-1--97d0ae6:149f180fbb3:-8000:00000000000012DA'
                       isSpecification = 'false'>
+<<<<<<< HEAD
                       <UML:TaggedValue.dataValue>{&apos;draft&apos;: [(&apos;readonly&apos;, False)], &apos;open&apos;: [(&apos;readonly&apos;, False)]}</UML:TaggedValue.dataValue>
+=======
+                      <UML:TaggedValue.dataValue>{&apos;invoiced&apos;: [(&apos;readonly&apos;, True)], &apos;closed&apos;: [(&apos;readonly&apos;, True)]}</UML:TaggedValue.dataValue>
+>>>>>>> ADD other sipreco modules
                       <UML:TaggedValue.type>
                         <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--3588a9e:13cead26784:-8000:0000000000000F31'/>
                       </UML:TaggedValue.type>
@@ -9944,6 +10414,67 @@
                     <UML:DataType href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000B9E'/>
                   </UML:StructuralFeature.type>
                 </UML:Attribute>
+<<<<<<< HEAD
+=======
+                <UML:Attribute xmi.id = '127-0-1-1-17311379:1481ce88eca:-8000:0000000000000DD6'
+                  name = 'preventive_status' visibility = 'public' isSpecification = 'false'
+                  ownerScope = 'instance' changeability = 'changeable' targetScope = 'instance'>
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id = '127-0-1-1-17311379:1481ce88eca:-8000:0000000000000DD7'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = '127-0-1-1-17311379:1481ce88eca:-8000:0000000000000DD8'
+                          lower = '1' upper = '1'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:00000000000011E6'/>
+                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:00000000000011E5'/>
+                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000BA2'/>
+                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000BA1'/>
+                  </UML:ModelElement.stereotype>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1-17311379:1481ce88eca:-8000:0000000000000DE2'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>&apos;draft&apos;</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-2b464aa4:13b09d81b72:-8000:0000000000001567'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1-55241b8a:1483b8574f8:-8000:000000000000136E'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Status</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-2b464aa4:13b09d81b72:-8000:0000000000001573'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1-55241b8a:1483b8574f8:-8000:0000000000001898'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>1</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--6c1fde7f:13ceca5ec28:-8000:0000000000000CA4'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--97d0ae6:149f180fbb3:-8000:00000000000012DC'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>{&apos;open&apos;: [(&apos;readonly&apos;, False)], &apos;confirmed&apos;: [(&apos;readonly&apos;, False)]}</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--3588a9e:13cead26784:-8000:0000000000000F31'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--2297a316:14ac4945ad3:-8000:00000000000017A2'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>{&apos;invisible&apos;:[(&apos;advance_line&apos;,&apos;=&apos;,True)]}</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--6c1fde7f:13ceca5ec28:-8000:0000000000000C95'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                  <UML:StructuralFeature.type>
+                    <UML:Enumeration xmi.idref = '127-0-1-1-17311379:1481ce88eca:-8000:0000000000000DD9'/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+>>>>>>> ADD other sipreco modules
                 <UML:Attribute xmi.id = '127-0-1-1-55241b8a:1483b8574f8:-8000:00000000000018CD'
                   name = 'available_account_ids' visibility = 'public' isSpecification = 'false'
                   ownerScope = 'instance' changeability = 'changeable' targetScope = 'instance'>
@@ -10320,6 +10851,7 @@
                       name = 'return' isSpecification = 'false' kind = 'return'/>
                   </UML:BehavioralFeature.parameter>
                 </UML:Operation>
+<<<<<<< HEAD
               </UML:Classifier.feature>
             </UML:Class>
             <UML:Generalization xmi.id = '127-0-0-1-6908b982:14be9ff1df1:-8000:00000000000017C6'
@@ -10334,6 +10866,61 @@
                 <UML:Class xmi.idref = '127-0-1-1-17311379:1481ce88eca:-8000:0000000000000DC0'/>
               </UML:Generalization.parent>
             </UML:Generalization>
+=======
+                <UML:Attribute xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:0000000000001719'
+                  name = 'accounting_state' visibility = 'public' isSpecification = 'false'
+                  ownerScope = 'instance' changeability = 'changeable' targetScope = 'instance'>
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:000000000000171A'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:000000000000171B'
+                          lower = '1' upper = '1'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:00000000000011E8'/>
+                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:00000000000011E6'/>
+                  </UML:ModelElement.stereotype>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:000000000000171C'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>Accounting State</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-2b464aa4:13b09d81b72:-8000:0000000000001573'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:000000000000171D'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>[(&apos;draft&apos;, &apos;Draft&apos;), (&apos;confirmed&apos;, &apos;Confirmed&apos;)]</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--29a7adf0:14ac0e08da2:-8000:000000000000129B'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:000000000000171E'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>_get_accounting_state</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:00000000000011EC'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                  <UML:StructuralFeature.type>
+                    <UML:DataType href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--29a7adf0:14ac0e08da2:-8000:000000000000129E'/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+                <UML:Operation xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:000000000000171F'
+                  name = '_get_accounting_state' visibility = 'public' isSpecification = 'false'
+                  ownerScope = 'instance' isQuery = 'false' concurrency = 'sequential' isRoot = 'false'
+                  isLeaf = 'false' isAbstract = 'false'>
+                  <UML:BehavioralFeature.parameter>
+                    <UML:Parameter xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:0000000000001720'
+                      name = 'return' isSpecification = 'false' kind = 'return'/>
+                  </UML:BehavioralFeature.parameter>
+                </UML:Operation>
+              </UML:Classifier.feature>
+            </UML:Class>
+>>>>>>> ADD other sipreco modules
           </UML:Namespace.ownedElement>
         </UML:Package>
         <UML:Package xmi.id = '127-0-1-1-17311379:1481ce88eca:-8000:0000000000000DA3'
@@ -10933,6 +11520,64 @@
             <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-663b23fd:13b396ee199:-8000:0000000000000D10'/>
           </UML:ModelElement.stereotype>
         </UML:Package>
+<<<<<<< HEAD
+=======
+        <UML:Package xmi.id = '127-0-1-1--51c23241:14abfca01d3:-8000:0000000000003AA8'
+          name = 'account_payment_voucher' isSpecification = 'false' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false'>
+          <UML:ModelElement.stereotype>
+            <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-663b23fd:13b396ee199:-8000:0000000000000D10'/>
+          </UML:ModelElement.stereotype>
+          <UML:Namespace.ownedElement>
+            <UML:Generalization xmi.id = '127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015BD'
+              isSpecification = 'false'>
+              <UML:ModelElement.stereotype>
+                <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-7944a5f0:13b6db16c37:-8000:00000000000011C6'/>
+              </UML:ModelElement.stereotype>
+              <UML:Generalization.child>
+                <UML:Class xmi.idref = '127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A4'/>
+              </UML:Generalization.child>
+              <UML:Generalization.parent>
+                <UML:Class xmi.idref = '127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A5'/>
+              </UML:Generalization.parent>
+            </UML:Generalization>
+            <UML:Class xmi.id = '127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A5'
+              name = 'payment_order' visibility = 'public' isSpecification = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false' isActive = 'false'>
+              <UML:ModelElement.taggedValue>
+                <UML:TaggedValue xmi.id = '127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015BE'
+                  isSpecification = 'false'>
+                  <UML:TaggedValue.dataValue>payment.order</UML:TaggedValue.dataValue>
+                  <UML:TaggedValue.type>
+                    <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--2a7de05c:14ac03b07f8:-8000:000000000000260E'/>
+                  </UML:TaggedValue.type>
+                </UML:TaggedValue>
+                <UML:TaggedValue xmi.id = '127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015BF'
+                  isSpecification = 'false'>
+                  <UML:TaggedValue.dataValue>account_payment.view_payment_order_form</UML:TaggedValue.dataValue>
+                  <UML:TaggedValue.type>
+                    <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-29a13c2b:13cb7762c9e:-8000:0000000000000EDB'/>
+                  </UML:TaggedValue.type>
+                </UML:TaggedValue>
+                <UML:TaggedValue xmi.id = '127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015C0'
+                  isSpecification = 'false'>
+                  <UML:TaggedValue.dataValue>account_payment.view_payment_order_tree</UML:TaggedValue.dataValue>
+                  <UML:TaggedValue.type>
+                    <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-29a13c2b:13cb7762c9e:-8000:0000000000000ED8'/>
+                  </UML:TaggedValue.type>
+                </UML:TaggedValue>
+                <UML:TaggedValue xmi.id = '127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015C1'
+                  isSpecification = 'false'>
+                  <UML:TaggedValue.dataValue>account_payment.view_payment_order_search</UML:TaggedValue.dataValue>
+                  <UML:TaggedValue.type>
+                    <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-29a13c2b:13cb7762c9e:-8000:0000000000000EDE'/>
+                  </UML:TaggedValue.type>
+                </UML:TaggedValue>
+              </UML:ModelElement.taggedValue>
+            </UML:Class>
+          </UML:Namespace.ownedElement>
+        </UML:Package>
+>>>>>>> ADD other sipreco modules
         <UML:Package xmi.id = '127-0-1-1--51c23241:14abfca01d3:-8000:0000000000003AA9'
           name = 'account_invoice_auto_pay' isSpecification = 'false' isRoot = 'false'
           isLeaf = 'false' isAbstract = 'false'>
@@ -11025,7 +11670,15 @@
       strokecolor="black"
     />
     <group name="Fig0.4"
+<<<<<<< HEAD
          description="org.argouml.uml.diagram.ui.FigAttributesCompartment[329, 232, 447, 391]"
+=======
+<<<<<<< HEAD
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[329, 232, 447, 383]"
+=======
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[329, 232, 447, 424]"
+>>>>>>> ADD other sipreco modules
+>>>>>>> ADD other sipreco modules
          href="127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000012D8"
          fill="0"
          fillcolor="white"
@@ -11039,7 +11692,15 @@
         x="329"
         y="232"
         width="447"
+<<<<<<< HEAD
         height="391"
+=======
+<<<<<<< HEAD
+        height="383"
+=======
+        height="424"
+>>>>>>> ADD other sipreco modules
+>>>>>>> ADD other sipreco modules
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -11156,7 +11817,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;form, readonly&gt;&gt; invoice_ids : invoice</text>
+=======
+      >&lt;&lt;form, tree, search, required, readonly&gt;&gt; total : Float</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig0.4.8"
         x="329"
         y="344"
@@ -11172,7 +11837,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;form&gt;&gt; note : HTML</text>
+=======
+      >&lt;&lt;form, readonly&gt;&gt; invoice_ids : invoice</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig0.4.9"
         x="329"
         y="360"
@@ -11188,7 +11857,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;form, hidden, readonly&gt;&gt; type_with_advance_payment : Boolean</text>
+=======
+      >&lt;&lt;form, readonly&gt;&gt; payment_order_ids : invoice</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig0.4.10"
         x="329"
         y="376"
@@ -11204,7 +11877,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;form, hidden, readonly&gt;&gt; type_with_salary_advance : Boolean</text>
+=======
+      >&lt;&lt;form&gt;&gt; note : HTML</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig0.4.11"
         x="329"
         y="392"
@@ -11220,7 +11897,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;readonly&gt;&gt; definitive_line_ids : One2many</text>
+=======
+      >&lt;&lt;form, hidden, readonly&gt;&gt; type_with_advance_payment : Boolean</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig0.4.12"
         x="329"
         y="408"
@@ -11236,7 +11917,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;store, search, group_by&gt;&gt; supplier_ids : Many2many</text>
+=======
+      >&lt;&lt;form, hidden, readonly&gt;&gt; type_with_salary_advance : Boolean</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig0.4.13"
         x="329"
         y="424"
@@ -11252,7 +11937,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;store, search&gt;&gt; budget_position_ids : Many2many</text>
+=======
+      >&lt;&lt;readonly&gt;&gt; definitive_line_ids : One2many</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig0.4.14"
         x="329"
         y="440"
@@ -11268,7 +11957,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;readonly&gt;&gt; advance_preventive_line_ids : One2many</text>
+=======
+      >&lt;&lt;store, search, group_by&gt;&gt; supplier_ids : Many2many</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig0.4.15"
         x="329"
         y="456"
@@ -11284,7 +11977,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >refund_voucher_count : Integer</text>
+=======
+      >&lt;&lt;store, search&gt;&gt; budget_position_ids : Many2many</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig0.4.16"
         x="329"
         y="472"
@@ -11300,7 +11997,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >preventive_amount : Float</text>
+=======
+      >&lt;&lt;readonly&gt;&gt; advance_preventive_line_ids : One2many</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig0.4.17"
         x="329"
         y="488"
@@ -11316,7 +12017,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >paid_amount : Float</text>
+=======
+      >advance_payment_order_ids : One2many</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig0.4.18"
         x="329"
         y="504"
@@ -11332,7 +12037,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >remaining_amount : Float</text>
+=======
+      >refund_voucher_count : Integer</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig0.4.19"
         x="329"
         y="520"
@@ -11348,7 +12057,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >advance_remaining_amount : Float</text>
+=======
+      >payment_order_count : Float</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig0.4.20"
         x="329"
         y="536"
@@ -11364,11 +12077,98 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >refund_voucher_amount : Float</text>
+=======
+      >preventive_amount : Float</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig0.4.21"
         x="329"
         y="552"
         width="447"
+<<<<<<< HEAD
+=======
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >paid_amount : Float</text>
+      <text name="Fig0.4.22"
+        x="329"
+        y="568"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >remaining_amount : Float</text>
+      <text name="Fig0.4.23"
+        x="329"
+        y="584"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >payment_order_amount : Float</text>
+      <text name="Fig0.4.24"
+        x="329"
+        y="600"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >advance_remaining_amount : Float</text>
+      <text name="Fig0.4.25"
+        x="329"
+        y="616"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >refund_voucher_amount : Float</text>
+      <text name="Fig0.4.26"
+        x="329"
+        y="632"
+        width="447"
+>>>>>>> ADD other sipreco modules
         height="22"
         fill="0"
         fillcolor="white"
@@ -11384,7 +12184,15 @@
     </group>
     <rectangle name="Fig0.5"
       x="328"
+<<<<<<< HEAD
       y="623"
+=======
+<<<<<<< HEAD
+      y="615"
+=======
+      y="655"
+>>>>>>> ADD other sipreco modules
+>>>>>>> ADD other sipreco modules
       width="449"
       height="1"
       fill="1"
@@ -11393,7 +12201,15 @@
       strokecolor="black"
     />
     <group name="Fig0.6"
+<<<<<<< HEAD
          description="org.argouml.uml.diagram.ui.FigOperationsCompartment[329, 624, 447, 135]"
+=======
+<<<<<<< HEAD
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[329, 616, 447, 143]"
+=======
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[329, 656, 447, 104]"
+>>>>>>> ADD other sipreco modules
+>>>>>>> ADD other sipreco modules
          href="127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000012D8"
          fill="0"
          fillcolor="white"
@@ -11405,9 +12221,21 @@
       
       <rectangle name="Fig0.6.0"
         x="329"
+<<<<<<< HEAD
         y="624"
         width="447"
         height="135"
+=======
+<<<<<<< HEAD
+        y="616"
+        width="447"
+        height="143"
+=======
+        y="656"
+        width="447"
+        height="104"
+>>>>>>> ADD other sipreco modules
+>>>>>>> ADD other sipreco modules
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -11415,7 +12243,15 @@
       />
       <text name="Fig0.6.1"
         x="329"
+<<<<<<< HEAD
         y="624"
+=======
+<<<<<<< HEAD
+        y="616"
+=======
+        y="656"
+>>>>>>> ADD other sipreco modules
+>>>>>>> ADD other sipreco modules
         width="447"
         height="16"
         fill="0"
@@ -11431,7 +12267,15 @@
       >_get_suppliers()</text>
       <text name="Fig0.6.2"
         x="329"
+<<<<<<< HEAD
         y="640"
+=======
+<<<<<<< HEAD
+        y="632"
+=======
+        y="672"
+>>>>>>> ADD other sipreco modules
+>>>>>>> ADD other sipreco modules
         width="447"
         height="16"
         fill="0"
@@ -11447,7 +12291,15 @@
       >_get_budget_positions()</text>
       <text name="Fig0.6.3"
         x="329"
+<<<<<<< HEAD
         y="656"
+=======
+<<<<<<< HEAD
+        y="648"
+=======
+        y="688"
+>>>>>>> ADD other sipreco modules
+>>>>>>> ADD other sipreco modules
         width="447"
         height="16"
         fill="0"
@@ -11463,7 +12315,35 @@
       >_refund_voucher_count()</text>
       <text name="Fig0.6.4"
         x="329"
+<<<<<<< HEAD
         y="672"
+=======
+<<<<<<< HEAD
+        y="664"
+=======
+        y="704"
+>>>>>>> ADD other sipreco modules
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >_payment_order_count()</text>
+      <text name="Fig0.6.5"
+        x="329"
+<<<<<<< HEAD
+        y="680"
+=======
+        y="720"
+>>>>>>> ADD other sipreco modules
+>>>>>>> ADD other sipreco modules
         width="447"
         height="16"
         fill="0"
@@ -11479,7 +12359,15 @@
       >_get_advance_amounts()</text>
       <text name="Fig0.6.5"
         x="329"
+<<<<<<< HEAD
         y="688"
+=======
+<<<<<<< HEAD
+        y="696"
+=======
+        y="736"
+>>>>>>> ADD other sipreco modules
+>>>>>>> ADD other sipreco modules
         width="447"
         height="22"
         fill="0"
@@ -11496,7 +12384,11 @@
     </group>
   </group>
   <group name="Fig1"
+<<<<<<< HEAD
        description="org.argouml.uml.diagram.static_structure.ui.FigClass[1056, 136, 519, 360]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
+=======
+       description="org.argouml.uml.diagram.static_structure.ui.FigClass[968, 120, 519, 360]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
+>>>>>>> ADD other sipreco modules
        href="127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000012D9"
        fill="1"
        fillcolor="white"
@@ -11507,8 +12399,13 @@
     </private>
     
     <rectangle name="Fig1.0"
+<<<<<<< HEAD
       x="1056"
       y="136"
+=======
+      x="968"
+      y="120"
+>>>>>>> ADD other sipreco modules
       width="519"
       height="360"
       fill="1"
@@ -11517,8 +12414,13 @@
       strokecolor="black"
     />
     <text name="Fig1.1"
+<<<<<<< HEAD
       x="1057"
       y="137"
+=======
+      x="969"
+      y="121"
+>>>>>>> ADD other sipreco modules
       width="517"
       height="22"
       fill="0"
@@ -11533,7 +12435,11 @@
       justification="Center"
     >preventive_line</text>
     <group name="Fig1.2"
+<<<<<<< HEAD
          description="org.argouml.uml.diagram.ui.FigStereotypesGroup[1057, 137, 490, 0]"
+=======
+         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[969, 121, 490, 0]"
+>>>>>>> ADD other sipreco modules
          href="127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000012D9"
          fill="0"
          fillcolor="white"
@@ -11545,8 +12451,13 @@
       </private>
       
       <rectangle name="Fig1.2.0"
+<<<<<<< HEAD
         x="1057"
         y="137"
+=======
+        x="969"
+        y="121"
+>>>>>>> ADD other sipreco modules
         width="490"
         height="0"
         fill="0"
@@ -11556,8 +12467,13 @@
       />
     </group>
     <rectangle name="Fig1.3"
+<<<<<<< HEAD
       x="1056"
       y="159"
+=======
+      x="968"
+      y="143"
+>>>>>>> ADD other sipreco modules
       width="519"
       height="1"
       fill="1"
@@ -11566,7 +12482,11 @@
       strokecolor="black"
     />
     <group name="Fig1.4"
+<<<<<<< HEAD
          description="org.argouml.uml.diagram.ui.FigAttributesCompartment[1057, 160, 517, 255]"
+=======
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[969, 144, 517, 263]"
+>>>>>>> ADD other sipreco modules
          href="127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000012D9"
          fill="0"
          fillcolor="white"
@@ -11577,18 +12497,30 @@
       </private>
       
       <rectangle name="Fig1.4.0"
+<<<<<<< HEAD
         x="1057"
         y="160"
         width="517"
         height="255"
+=======
+        x="969"
+        y="144"
+        width="517"
+        height="263"
+>>>>>>> ADD other sipreco modules
         fill="0"
         fillcolor="white"
         stroke="0"
         strokecolor="black"
       />
       <text name="Fig1.4.1"
+<<<<<<< HEAD
         x="1057"
         y="160"
+=======
+        x="969"
+        y="144"
+>>>>>>> ADD other sipreco modules
         width="517"
         height="16"
         fill="0"
@@ -11601,10 +12533,17 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;form, tree, search, required, readonly&gt;&gt; name : Char</text>
       <text name="Fig1.4.2"
         x="1057"
         y="176"
+=======
+      >&lt;&lt;form, tree, search, required&gt;&gt; name : Char</text>
+      <text name="Fig1.4.2"
+        x="969"
+        y="160"
+>>>>>>> ADD other sipreco modules
         width="517"
         height="16"
         fill="0"
@@ -11617,10 +12556,17 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;form, search, readonly&gt;&gt; account_id : account</text>
       <text name="Fig1.4.3"
         x="1057"
         y="192"
+=======
+      >&lt;&lt;form, search&gt;&gt; account_id : account</text>
+      <text name="Fig1.4.3"
+        x="969"
+        y="176"
+>>>>>>> ADD other sipreco modules
         width="517"
         height="16"
         fill="0"
@@ -11635,7 +12581,27 @@
         justification="Left"
       >&lt;&lt;form, tree, search, required&gt;&gt; preventive_amount : Float</text>
       <text name="Fig1.4.4"
+<<<<<<< HEAD
         x="1057"
+=======
+        x="969"
+        y="192"
+        width="517"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >&lt;&lt;tree, form, required, readonly&gt;&gt; preventive_status : preventive_line_state</text>
+      <text name="Fig1.4.5"
+        x="969"
+>>>>>>> ADD other sipreco modules
         y="208"
         width="517"
         height="16"
@@ -11650,8 +12616,13 @@
         textsize="12"
         justification="Left"
       >available_account_ids : account</text>
+<<<<<<< HEAD
       <text name="Fig1.4.5"
         x="1057"
+=======
+      <text name="Fig1.4.6"
+        x="969"
+>>>>>>> ADD other sipreco modules
         y="224"
         width="517"
         height="16"
@@ -11666,8 +12637,13 @@
         textsize="12"
         justification="Left"
       >&lt;&lt;form, hidden&gt;&gt; advance_line : Boolean</text>
+<<<<<<< HEAD
       <text name="Fig1.4.6"
         x="1057"
+=======
+      <text name="Fig1.4.7"
+        x="969"
+>>>>>>> ADD other sipreco modules
         y="240"
         width="517"
         height="16"
@@ -11682,8 +12658,13 @@
         textsize="12"
         justification="Left"
       >&lt;&lt;readonly&gt;&gt; payment_line_id : Many2one</text>
+<<<<<<< HEAD
       <text name="Fig1.4.7"
         x="1057"
+=======
+      <text name="Fig1.4.8"
+        x="969"
+>>>>>>> ADD other sipreco modules
         y="256"
         width="517"
         height="16"
@@ -11698,8 +12679,13 @@
         textsize="12"
         justification="Left"
       >&lt;&lt;form, hidden&gt;&gt; remaining_amount : Float</text>
+<<<<<<< HEAD
       <text name="Fig1.4.8"
         x="1057"
+=======
+      <text name="Fig1.4.9"
+        x="969"
+>>>>>>> ADD other sipreco modules
         y="272"
         width="517"
         height="16"
@@ -11714,8 +12700,13 @@
         textsize="12"
         justification="Left"
       >&lt;&lt;tree&gt;&gt; definitive_amount : Float</text>
+<<<<<<< HEAD
       <text name="Fig1.4.9"
         x="1057"
+=======
+      <text name="Fig1.4.10"
+        x="969"
+>>>>>>> ADD other sipreco modules
         y="288"
         width="517"
         height="16"
@@ -11730,8 +12721,13 @@
         textsize="12"
         justification="Left"
       >&lt;&lt;tree&gt;&gt; invoiced_amount : Float</text>
+<<<<<<< HEAD
       <text name="Fig1.4.10"
         x="1057"
+=======
+      <text name="Fig1.4.11"
+        x="969"
+>>>>>>> ADD other sipreco modules
         y="304"
         width="517"
         height="16"
@@ -11746,8 +12742,13 @@
         textsize="12"
         justification="Left"
       >&lt;&lt;tree&gt;&gt; to_pay_amount : Float</text>
+<<<<<<< HEAD
       <text name="Fig1.4.11"
         x="1057"
+=======
+      <text name="Fig1.4.12"
+        x="969"
+>>>>>>> ADD other sipreco modules
         y="320"
         width="517"
         height="16"
@@ -11762,8 +12763,13 @@
         textsize="12"
         justification="Left"
       >&lt;&lt;tree&gt;&gt; paid_amount : Float</text>
+<<<<<<< HEAD
       <text name="Fig1.4.12"
         x="1057"
+=======
+      <text name="Fig1.4.13"
+        x="969"
+>>>>>>> ADD other sipreco modules
         y="336"
         width="517"
         height="16"
@@ -11778,9 +12784,39 @@
         textsize="12"
         justification="Left"
       >&lt;&lt;readonly&gt;&gt; available_account_ids : Many2many</text>
+<<<<<<< HEAD
       <text name="Fig1.4.13"
         x="1057"
         y="352"
+        width="517"
+        height="22"
+=======
+      <text name="Fig1.4.14"
+        x="969"
+        y="352"
+        width="517"
+        height="16"
+>>>>>>> ADD other sipreco modules
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >&lt;&lt;form, hidden, tree&gt;&gt; state : Selection</text>
+<<<<<<< HEAD
+    </group>
+    <rectangle name="Fig1.5"
+      x="1056"
+      y="415"
+=======
+      <text name="Fig1.4.15"
+        x="969"
+        y="368"
         width="517"
         height="22"
         fill="0"
@@ -11793,11 +12829,12 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >&lt;&lt;form, hidden, tree&gt;&gt; state : Selection</text>
+      >&lt;&lt;store, tree&gt;&gt; accounting_state : Selection</text>
     </group>
     <rectangle name="Fig1.5"
-      x="1056"
-      y="415"
+      x="968"
+      y="407"
+>>>>>>> ADD other sipreco modules
       width="519"
       height="1"
       fill="1"
@@ -11806,7 +12843,11 @@
       strokecolor="black"
     />
     <group name="Fig1.6"
+<<<<<<< HEAD
          description="org.argouml.uml.diagram.ui.FigOperationsCompartment[1057, 416, 517, 79]"
+=======
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[969, 408, 517, 71]"
+>>>>>>> ADD other sipreco modules
          href="127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000012D9"
          fill="0"
          fillcolor="white"
@@ -11817,18 +12858,30 @@
       </private>
       
       <rectangle name="Fig1.6.0"
+<<<<<<< HEAD
         x="1057"
         y="416"
         width="517"
         height="79"
+=======
+        x="969"
+        y="408"
+        width="517"
+        height="71"
+>>>>>>> ADD other sipreco modules
         fill="0"
         fillcolor="white"
         stroke="0"
         strokecolor="black"
       />
       <text name="Fig1.6.1"
+<<<<<<< HEAD
         x="1057"
         y="416"
+=======
+        x="969"
+        y="408"
+>>>>>>> ADD other sipreco modules
         width="517"
         height="16"
         fill="0"
@@ -11843,8 +12896,33 @@
         justification="Left"
       >_get_amounts()</text>
       <text name="Fig1.6.2"
+<<<<<<< HEAD
         x="1057"
         y="432"
+        width="517"
+        height="22"
+=======
+        x="969"
+        y="424"
+        width="517"
+        height="16"
+>>>>>>> ADD other sipreco modules
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >_get_state()</text>
+<<<<<<< HEAD
+=======
+      <text name="Fig1.6.3"
+        x="969"
+        y="440"
         width="517"
         height="22"
         fill="0"
@@ -11857,7 +12935,8 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >_get_state()</text>
+      >_get_accounting_state()</text>
+>>>>>>> ADD other sipreco modules
     </group>
   </group>
   <group name="Fig2"
@@ -12879,7 +13958,11 @@
     >
       <moveto x="776"
               y="296" />
+<<<<<<< HEAD
       <lineto x="1056"
+=======
+      <lineto x="968"
+>>>>>>> ADD other sipreco modules
               y="296" />
     </path>
   </group>
@@ -12989,7 +14072,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;form, tree, search, readonly&gt;&gt; number : Char</text>
+=======
+      >&lt;&lt;form, tree, search, required&gt;&gt; issue_date : Datetime</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig6.4.2"
         x="361"
         y="800"
@@ -13005,7 +14092,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;form, tree, search, required&gt;&gt; issue_date : Datetime</text>
+=======
+      >&lt;&lt;form, tree, search, required&gt;&gt; number : Char</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig6.4.3"
         x="361"
         y="816"
@@ -14755,8 +15846,13 @@
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigMultiplicity"
                         ownerhref="127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000013D5"
+<<<<<<< HEAD
                         angle="221.0"
                         offset="13" />
+=======
+                        angle="225.0"
+                        offset="5" />
+>>>>>>> ADD other sipreco modules
       <argouml:pathitem figname="Fig21.5"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigAssociationEndAnnotation"
@@ -15423,7 +16519,11 @@
       stroke="1"
       strokecolor="51 51 153"
     >
+<<<<<<< HEAD
       <moveto x="1574"
+=======
+      <moveto x="1486"
+>>>>>>> ADD other sipreco modules
               y="360" />
       <lineto x="1664"
               y="360" />
@@ -19432,7 +20532,11 @@
       strokecolor="black"
     />
     <group name="Fig58.4"
+<<<<<<< HEAD
          description="org.argouml.uml.diagram.ui.FigAttributesCompartment[377, 2168, 458, 55]"
+=======
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[377, 2168, 458, 72]"
+>>>>>>> ADD other sipreco modules
          href="127-0-1-1-639eb821:1499f8400f7:-8000:000000000000124E"
          fill="0"
          fillcolor="white"
@@ -19446,7 +20550,11 @@
         x="377"
         y="2168"
         width="458"
+<<<<<<< HEAD
         height="55"
+=======
+        height="72"
+>>>>>>> ADD other sipreco modules
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -19472,7 +20580,11 @@
         x="377"
         y="2184"
         width="458"
+<<<<<<< HEAD
         height="22"
+=======
+        height="16"
+>>>>>>> ADD other sipreco modules
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -19484,10 +20596,49 @@
         textsize="12"
         justification="Left"
       >&lt;&lt;form, tree, search, required&gt;&gt; user_id : users</text>
+<<<<<<< HEAD
     </group>
     <rectangle name="Fig58.5"
       x="376"
       y="2223"
+=======
+      <text name="Fig58.4.3"
+        x="377"
+        y="2200"
+        width="458"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >&lt;&lt;readonly, form&gt;&gt; payment_order_id : payment_order</text>
+      <text name="Fig58.4.4"
+        x="377"
+        y="2216"
+        width="458"
+        height="22"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >&lt;&lt;required, form&gt;&gt; company_id : company</text>
+    </group>
+    <rectangle name="Fig58.5"
+      x="376"
+      y="2239"
+>>>>>>> ADD other sipreco modules
       width="460"
       height="1"
       fill="1"
@@ -19496,7 +20647,11 @@
       strokecolor="black"
     />
     <group name="Fig58.6"
+<<<<<<< HEAD
          description="org.argouml.uml.diagram.ui.FigOperationsCompartment[377, 2224, 458, 36]"
+=======
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[377, 2240, 458, 21]"
+>>>>>>> ADD other sipreco modules
          href="127-0-1-1-639eb821:1499f8400f7:-8000:000000000000124E"
          fill="0"
          fillcolor="white"
@@ -19508,9 +20663,15 @@
       
       <rectangle name="Fig58.6.0"
         x="377"
+<<<<<<< HEAD
         y="2224"
         width="458"
         height="36"
+=======
+        y="2240"
+        width="458"
+        height="21"
+>>>>>>> ADD other sipreco modules
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -21687,8 +22848,13 @@
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigAssociationEndAnnotation"
                         ownerhref="127-0-1-1--3431ae39:149a977fc0d:-8000:00000000000012A0"
+<<<<<<< HEAD
                         angle="82.0"
                         offset="80" />
+=======
+                        angle="45.0"
+                        offset="5" />
+>>>>>>> ADD other sipreco modules
       <argouml:pathitem figname="Fig79.4"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigMultiplicity"
@@ -22849,7 +24015,11 @@
       bold="false"
       textsize="12"
       justification="Center"
+<<<<<<< HEAD
     >public_budget::account_voucher</text>
+=======
+    >public_budget::payment_order</text>
+>>>>>>> ADD other sipreco modules
     <group name="Fig90.2"
          description="org.argouml.uml.diagram.ui.FigStereotypesGroup[945, 17, 344, 0]"
          href="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A4"
@@ -22884,7 +24054,11 @@
       strokecolor="black"
     />
     <group name="Fig90.4"
+<<<<<<< HEAD
          description="org.argouml.uml.diagram.ui.FigAttributesCompartment[945, 40, 344, 64]"
+=======
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[945, 40, 344, 88]"
+>>>>>>> ADD other sipreco modules
          href="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A4"
          fill="0"
          fillcolor="white"
@@ -22898,7 +24072,11 @@
         x="945"
         y="40"
         width="344"
+<<<<<<< HEAD
         height="64"
+=======
+        height="88"
+>>>>>>> ADD other sipreco modules
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -22924,7 +24102,27 @@
         x="945"
         y="56"
         width="344"
+<<<<<<< HEAD
         height="22"
+=======
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >partner_id : partner</text>
+      <text name="Fig90.4.3"
+        x="945"
+        y="72"
+        width="344"
+        height="16"
+>>>>>>> ADD other sipreco modules
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -22936,10 +24134,49 @@
         textsize="12"
         justification="Left"
       >note : HTML</text>
+<<<<<<< HEAD
     </group>
     <rectangle name="Fig90.5"
       x="944"
       y="104"
+=======
+      <text name="Fig90.4.4"
+        x="945"
+        y="88"
+        width="344"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >paid : Boolean</text>
+      <text name="Fig90.4.5"
+        x="945"
+        y="104"
+        width="344"
+        height="22"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >other_Field : Integer</text>
+    </group>
+    <rectangle name="Fig90.5"
+      x="944"
+      y="127"
+>>>>>>> ADD other sipreco modules
       width="346"
       height="1"
       fill="1"
@@ -22948,7 +24185,11 @@
       strokecolor="black"
     />
     <group name="Fig90.6"
+<<<<<<< HEAD
          description="org.argouml.uml.diagram.ui.FigOperationsCompartment[945, 105, 344, 45]"
+=======
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[945, 128, 344, 24]"
+>>>>>>> ADD other sipreco modules
          href="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A4"
          fill="0"
          fillcolor="white"
@@ -22960,9 +24201,161 @@
       
       <rectangle name="Fig90.6.0"
         x="945"
+<<<<<<< HEAD
         y="105"
         width="344"
         height="45"
+=======
+        y="128"
+        width="344"
+        height="24"
+>>>>>>> ADD other sipreco modules
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+      />
+<<<<<<< HEAD
+    </group>
+  </group>
+  <group name="Fig91"
+=======
+      <text name="Fig90.6.1"
+        x="945"
+        y="128"
+        width="344"
+        height="22"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >_get_paid()</text>
+    </group>
+  </group>
+  <group name="Fig91"
+       description="org.argouml.uml.diagram.static_structure.ui.FigClass[1496, 24, 104, 69]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
+       href="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A5"
+       fill="1"
+       fillcolor="white"
+       stroke="1"
+       strokecolor="black"
+  >
+    <private>
+    </private>
+    
+    <rectangle name="Fig91.0"
+      x="1496"
+      y="24"
+      width="104"
+      height="69"
+      fill="1"
+      fillcolor="white"
+      stroke="1"
+      strokecolor="black"
+    />
+    <text name="Fig91.1"
+      x="1497"
+      y="25"
+      width="102"
+      height="22"
+      fill="0"
+      fillcolor="white"
+      stroke="0"
+      strokecolor="black"
+      textcolor="black"
+      font="Dialog"
+      italic="false"
+      bold="false"
+      textsize="12"
+      justification="Center"
+    >payment_order</text>
+    <group name="Fig91.2"
+         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[1497, 25, 277, 0]"
+         href="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A5"
+         fill="0"
+         fillcolor="white"
+         stroke="0"
+         strokecolor="black"
+         visibility="0"
+    >
+      <private>
+      </private>
+      
+      <rectangle name="Fig91.2.0"
+        x="1497"
+        y="25"
+        width="277"
+        height="0"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+      />
+    </group>
+    <rectangle name="Fig91.3"
+      x="1496"
+      y="47"
+      width="104"
+      height="1"
+      fill="1"
+      fillcolor="black"
+      stroke="1"
+      strokecolor="black"
+    />
+    <group name="Fig91.4"
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[1497, 48, 102, 21]"
+         href="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A5"
+         fill="0"
+         fillcolor="white"
+         stroke="0"
+         strokecolor="black"
+    >
+      <private>
+      </private>
+      
+      <rectangle name="Fig91.4.0"
+        x="1497"
+        y="48"
+        width="102"
+        height="21"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+      />
+    </group>
+    <rectangle name="Fig91.5"
+      x="1496"
+      y="69"
+      width="104"
+      height="1"
+      fill="1"
+      fillcolor="black"
+      stroke="1"
+      strokecolor="black"
+    />
+    <group name="Fig91.6"
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[1497, 70, 102, 21]"
+         href="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A5"
+         fill="0"
+         fillcolor="white"
+         stroke="0"
+         strokecolor="black"
+    >
+      <private>
+      </private>
+      
+      <rectangle name="Fig91.6.0"
+        x="1497"
+        y="70"
+        width="102"
+        height="21"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -22970,7 +24363,8 @@
       />
     </group>
   </group>
-  <group name="Fig91"
+  <group name="Fig92"
+>>>>>>> ADD other sipreco modules
        description="org.argouml.uml.diagram.ui.FigAssociation"
        href="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A8"
        sourceConnector="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A9"
@@ -22983,18 +24377,27 @@
       destPortFig="Fig90.0"
       sourceFigNode="Fig0"
       destFigNode="Fig90"
+<<<<<<< HEAD
       <argouml:pathitem figname="Fig91.1"
+=======
+      <argouml:pathitem figname="Fig92.1"
+>>>>>>> ADD other sipreco modules
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigTextGroup"
                         ownerhref="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A8"
                         angle="270.0"
                         offset="25" />
+<<<<<<< HEAD
       <argouml:pathitem figname="Fig91.2"
+=======
+      <argouml:pathitem figname="Fig92.2"
+>>>>>>> ADD other sipreco modules
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigMultiplicity"
                         ownerhref="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A9"
                         angle="315.0"
                         offset="5" />
+<<<<<<< HEAD
       <argouml:pathitem figname="Fig91.3"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigAssociationEndAnnotation"
@@ -23002,11 +24405,21 @@
                         angle="-272.0"
                         offset="88" />
       <argouml:pathitem figname="Fig91.4"
+=======
+      <argouml:pathitem figname="Fig92.3"
+                        classname="org.argouml.uml.diagram.ui.PathItemPlacement"
+                        figclassname="org.argouml.uml.diagram.ui.FigAssociationEndAnnotation"
+                        ownerhref="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A9"
+                        angle="-273.0"
+                        offset="92" />
+      <argouml:pathitem figname="Fig92.4"
+>>>>>>> ADD other sipreco modules
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigMultiplicity"
                         ownerhref="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015AA"
                         angle="225.0"
                         offset="5" />
+<<<<<<< HEAD
       <argouml:pathitem figname="Fig91.5"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigAssociationEndAnnotation"
@@ -23015,6 +24428,16 @@
                         offset="84" />
     </private>
     <path name="Fig91.0"
+=======
+      <argouml:pathitem figname="Fig92.5"
+                        classname="org.argouml.uml.diagram.ui.PathItemPlacement"
+                        figclassname="org.argouml.uml.diagram.ui.FigAssociationEndAnnotation"
+                        ownerhref="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015AA"
+                        angle="-232.0"
+                        offset="100" />
+    </private>
+    <path name="Fig92.0"
+>>>>>>> ADD other sipreco modules
       description="org.argouml.gefext.ArgoFigPoly"
       fill="0"
       fillcolor="white"
@@ -23027,7 +24450,42 @@
               y="151" />
     </path>
   </group>
+<<<<<<< HEAD
   <group name="Fig92"
+=======
+  <group name="Fig93"
+       description="org.argouml.uml.diagram.ui.FigGeneralization"
+       href="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015BD"
+       stroke="1"
+       strokecolor="51 51 153"
+  >
+    <private>
+      sourcePortFig="Fig90.0"
+      destPortFig="Fig91.0"
+      sourceFigNode="Fig90"
+      destFigNode="Fig91"
+      <argouml:pathitem figname="Fig93.1"
+                        classname="org.argouml.uml.diagram.ui.PathItemPlacement"
+                        figclassname="org.argouml.uml.diagram.ui.FigTextGroup"
+                        ownerhref="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015BD"
+                        angle="270.0"
+                        offset="-10" />
+    </private>
+    <path name="Fig93.0"
+      description="org.argouml.gefext.ArgoFigPoly"
+      fill="0"
+      fillcolor="white"
+      stroke="1"
+      strokecolor="51 51 153"
+    >
+      <moveto x="1289"
+              y="24" />
+      <lineto x="1496"
+              y="24" />
+    </path>
+  </group>
+  <group name="Fig94"
+>>>>>>> ADD other sipreco modules
        description="org.argouml.uml.diagram.static_structure.ui.FigClass[373, 1912, 162, 67]pathVisible=true;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
        href="127-0-1-1-d1bb66a:14ac0ed2282:-8000:00000000000016A0"
        fill="1"
@@ -23038,7 +24496,11 @@
     <private>
     </private>
     
+<<<<<<< HEAD
     <rectangle name="Fig92.0"
+=======
+    <rectangle name="Fig94.0"
+>>>>>>> ADD other sipreco modules
       x="373"
       y="1912"
       width="162"
@@ -23048,7 +24510,11 @@
       stroke="1"
       strokecolor="black"
     />
+<<<<<<< HEAD
     <text name="Fig92.1"
+=======
+    <text name="Fig94.1"
+>>>>>>> ADD other sipreco modules
       x="374"
       y="1913"
       width="160"
@@ -23064,7 +24530,11 @@
       textsize="12"
       justification="Center"
     >public_budget::company</text>
+<<<<<<< HEAD
     <group name="Fig92.2"
+=======
+    <group name="Fig94.2"
+>>>>>>> ADD other sipreco modules
          description="org.argouml.uml.diagram.ui.FigStereotypesGroup[374, 1913, 160, 0]"
          href="127-0-1-1-d1bb66a:14ac0ed2282:-8000:00000000000016A0"
          fill="0"
@@ -23076,7 +24546,11 @@
       <private>
       </private>
       
+<<<<<<< HEAD
       <rectangle name="Fig92.2.0"
+=======
+      <rectangle name="Fig94.2.0"
+>>>>>>> ADD other sipreco modules
         x="374"
         y="1913"
         width="160"
@@ -23087,7 +24561,11 @@
         strokecolor="black"
       />
     </group>
+<<<<<<< HEAD
     <rectangle name="Fig92.3"
+=======
+    <rectangle name="Fig94.3"
+>>>>>>> ADD other sipreco modules
       x="373"
       y="1935"
       width="162"
@@ -23097,7 +24575,11 @@
       stroke="1"
       strokecolor="black"
     />
+<<<<<<< HEAD
     <group name="Fig92.4"
+=======
+    <group name="Fig94.4"
+>>>>>>> ADD other sipreco modules
          description="org.argouml.uml.diagram.ui.FigAttributesCompartment[374, 1936, 160, 21]"
          href="127-0-1-1-d1bb66a:14ac0ed2282:-8000:00000000000016A0"
          fill="0"
@@ -23108,7 +24590,11 @@
       <private>
       </private>
       
+<<<<<<< HEAD
       <rectangle name="Fig92.4.0"
+=======
+      <rectangle name="Fig94.4.0"
+>>>>>>> ADD other sipreco modules
         x="374"
         y="1936"
         width="160"
@@ -23119,7 +24605,11 @@
         strokecolor="black"
       />
     </group>
+<<<<<<< HEAD
     <rectangle name="Fig92.5"
+=======
+    <rectangle name="Fig94.5"
+>>>>>>> ADD other sipreco modules
       x="373"
       y="1956"
       width="162"
@@ -23129,7 +24619,11 @@
       stroke="1"
       strokecolor="black"
     />
+<<<<<<< HEAD
     <group name="Fig92.6"
+=======
+    <group name="Fig94.6"
+>>>>>>> ADD other sipreco modules
          description="org.argouml.uml.diagram.ui.FigOperationsCompartment[374, 1957, 160, 21]"
          href="127-0-1-1-d1bb66a:14ac0ed2282:-8000:00000000000016A0"
          fill="0"
@@ -23140,7 +24634,11 @@
       <private>
       </private>
       
+<<<<<<< HEAD
       <rectangle name="Fig92.6.0"
+=======
+      <rectangle name="Fig94.6.0"
+>>>>>>> ADD other sipreco modules
         x="374"
         y="1957"
         width="160"
@@ -23152,7 +24650,11 @@
       />
     </group>
   </group>
+<<<<<<< HEAD
   <group name="Fig93"
+=======
+  <group name="Fig95"
+>>>>>>> ADD other sipreco modules
        description="org.argouml.uml.diagram.ui.FigAssociation"
        href="127-0-1-1-d1bb66a:14ac0ed2282:-8000:00000000000016A5"
        sourceConnector="127-0-1-1-d1bb66a:14ac0ed2282:-8000:00000000000016A6"
@@ -23162,41 +24664,68 @@
   >
     <private>
       sourcePortFig="Fig47.0"
+<<<<<<< HEAD
       destPortFig="Fig92.0"
       sourceFigNode="Fig47"
       destFigNode="Fig92"
       <argouml:pathitem figname="Fig93.1"
+=======
+      destPortFig="Fig94.0"
+      sourceFigNode="Fig47"
+      destFigNode="Fig94"
+      <argouml:pathitem figname="Fig95.1"
+>>>>>>> ADD other sipreco modules
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigTextGroup"
                         ownerhref="127-0-1-1-d1bb66a:14ac0ed2282:-8000:00000000000016A5"
                         angle="270.0"
                         offset="25" />
+<<<<<<< HEAD
       <argouml:pathitem figname="Fig93.2"
+=======
+      <argouml:pathitem figname="Fig95.2"
+>>>>>>> ADD other sipreco modules
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigMultiplicity"
                         ownerhref="127-0-1-1-d1bb66a:14ac0ed2282:-8000:00000000000016A6"
                         angle="315.0"
                         offset="5" />
+<<<<<<< HEAD
       <argouml:pathitem figname="Fig93.3"
+=======
+      <argouml:pathitem figname="Fig95.3"
+>>>>>>> ADD other sipreco modules
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigAssociationEndAnnotation"
                         ownerhref="127-0-1-1-d1bb66a:14ac0ed2282:-8000:00000000000016A6"
                         angle="45.0"
                         offset="5" />
+<<<<<<< HEAD
       <argouml:pathitem figname="Fig93.4"
+=======
+      <argouml:pathitem figname="Fig95.4"
+>>>>>>> ADD other sipreco modules
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigMultiplicity"
                         ownerhref="127-0-1-1-d1bb66a:14ac0ed2282:-8000:00000000000016A7"
                         angle="225.0"
                         offset="5" />
+<<<<<<< HEAD
       <argouml:pathitem figname="Fig93.5"
+=======
+      <argouml:pathitem figname="Fig95.5"
+>>>>>>> ADD other sipreco modules
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigAssociationEndAnnotation"
                         ownerhref="127-0-1-1-d1bb66a:14ac0ed2282:-8000:00000000000016A7"
                         angle="45.0"
                         offset="75" />
     </private>
+<<<<<<< HEAD
     <path name="Fig93.0"
+=======
+    <path name="Fig95.0"
+>>>>>>> ADD other sipreco modules
       description="org.argouml.gefext.ArgoFigPoly"
       fill="0"
       fillcolor="white"
@@ -23209,6 +24738,7 @@
               y="1970" />
     </path>
   </group>
+<<<<<<< HEAD
   <group name="Fig94"
        description="org.argouml.uml.diagram.static_structure.ui.FigClass[1433, 56, 119, 67]pathVisible=true;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
        href="127-0-1-1-17311379:1481ce88eca:-8000:0000000000000DC0"
@@ -23365,6 +24895,8 @@
               y="56" />
     </path>
   </group>
+=======
+>>>>>>> ADD other sipreco modules
 </pgml>
 <pgml description="org.argouml.uml.diagram.use_case.ui.UMLUseCaseDiagram|127-0-1-1--17588d67:13b392fe554:-8000:0000000000000ACF"
       name="Diagrama de caso de uso"
@@ -32367,7 +33899,11 @@
       strokecolor="black"
     />
     <group name="Fig1.4"
+<<<<<<< HEAD
          description="org.argouml.uml.diagram.ui.FigAttributesCompartment[33, 456, 490, 255]"
+=======
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[33, 456, 490, 263]"
+>>>>>>> ADD other sipreco modules
          href="127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000012D9"
          fill="0"
          fillcolor="white"
@@ -32381,7 +33917,11 @@
         x="33"
         y="456"
         width="490"
+<<<<<<< HEAD
         height="255"
+=======
+        height="263"
+>>>>>>> ADD other sipreco modules
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -32402,7 +33942,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;form, tree, search, required, readonly&gt;&gt; name : Char</text>
+=======
+      >&lt;&lt;form, tree, search, required&gt;&gt; name : Char</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig1.4.2"
         x="33"
         y="472"
@@ -32418,7 +33962,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;form, search, readonly&gt;&gt; account_id : account</text>
+=======
+      >&lt;&lt;form, search&gt;&gt; account_id : account</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig1.4.3"
         x="33"
         y="488"
@@ -32450,7 +33998,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >available_account_ids : account</text>
+=======
+      >&lt;&lt;tree, form, required, readonly&gt;&gt; preventive_status : preventive_line_state</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig1.4.5"
         x="33"
         y="520"
@@ -32466,7 +34018,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;form, hidden&gt;&gt; advance_line : Boolean</text>
+=======
+      >available_account_ids : account</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig1.4.6"
         x="33"
         y="536"
@@ -32482,7 +34038,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;readonly&gt;&gt; payment_line_id : Many2one</text>
+=======
+      >&lt;&lt;form, hidden&gt;&gt; advance_line : Boolean</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig1.4.7"
         x="33"
         y="552"
@@ -32498,7 +34058,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;form, hidden&gt;&gt; remaining_amount : Float</text>
+=======
+      >&lt;&lt;readonly&gt;&gt; payment_line_id : Many2one</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig1.4.8"
         x="33"
         y="568"
@@ -32514,7 +34078,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;tree&gt;&gt; definitive_amount : Float</text>
+=======
+      >&lt;&lt;form, hidden&gt;&gt; remaining_amount : Float</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig1.4.9"
         x="33"
         y="584"
@@ -32530,7 +34098,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;tree&gt;&gt; invoiced_amount : Float</text>
+=======
+      >&lt;&lt;tree&gt;&gt; definitive_amount : Float</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig1.4.10"
         x="33"
         y="600"
@@ -32546,7 +34118,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;tree&gt;&gt; to_pay_amount : Float</text>
+=======
+      >&lt;&lt;tree&gt;&gt; invoiced_amount : Float</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig1.4.11"
         x="33"
         y="616"
@@ -32562,7 +34138,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;tree&gt;&gt; paid_amount : Float</text>
+=======
+      >&lt;&lt;tree&gt;&gt; to_pay_amount : Float</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig1.4.12"
         x="33"
         y="632"
@@ -32578,10 +34158,56 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;readonly&gt;&gt; available_account_ids : Many2many</text>
+=======
+      >&lt;&lt;tree&gt;&gt; paid_amount : Float</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig1.4.13"
         x="33"
         y="648"
+        width="490"
+<<<<<<< HEAD
+        height="22"
+=======
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >&lt;&lt;readonly&gt;&gt; available_account_ids : Many2many</text>
+      <text name="Fig1.4.14"
+        x="33"
+        y="664"
+        width="490"
+        height="16"
+>>>>>>> ADD other sipreco modules
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >&lt;&lt;form, hidden, tree&gt;&gt; state : Selection</text>
+<<<<<<< HEAD
+    </group>
+    <rectangle name="Fig1.5"
+      x="32"
+      y="711"
+=======
+      <text name="Fig1.4.15"
+        x="33"
+        y="680"
         width="490"
         height="22"
         fill="0"
@@ -32594,11 +34220,12 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >&lt;&lt;form, hidden, tree&gt;&gt; state : Selection</text>
+      >&lt;&lt;store, tree&gt;&gt; accounting_state : Selection</text>
     </group>
     <rectangle name="Fig1.5"
       x="32"
-      y="711"
+      y="719"
+>>>>>>> ADD other sipreco modules
       width="492"
       height="1"
       fill="1"
@@ -32607,7 +34234,11 @@
       strokecolor="black"
     />
     <group name="Fig1.6"
+<<<<<<< HEAD
          description="org.argouml.uml.diagram.ui.FigOperationsCompartment[33, 712, 490, 79]"
+=======
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[33, 720, 490, 71]"
+>>>>>>> ADD other sipreco modules
          href="127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000012D9"
          fill="0"
          fillcolor="white"
@@ -32619,9 +34250,15 @@
       
       <rectangle name="Fig1.6.0"
         x="33"
+<<<<<<< HEAD
         y="712"
         width="490"
         height="79"
+=======
+        y="720"
+        width="490"
+        height="71"
+>>>>>>> ADD other sipreco modules
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -32629,7 +34266,11 @@
       />
       <text name="Fig1.6.1"
         x="33"
+<<<<<<< HEAD
         y="712"
+=======
+        y="720"
+>>>>>>> ADD other sipreco modules
         width="490"
         height="16"
         fill="0"
@@ -32645,7 +34286,31 @@
       >_get_amounts()</text>
       <text name="Fig1.6.2"
         x="33"
+<<<<<<< HEAD
         y="728"
+        width="490"
+        height="22"
+=======
+        y="736"
+        width="490"
+        height="16"
+>>>>>>> ADD other sipreco modules
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >_get_state()</text>
+<<<<<<< HEAD
+=======
+      <text name="Fig1.6.3"
+        x="33"
+        y="752"
         width="490"
         height="22"
         fill="0"
@@ -32658,7 +34323,8 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >_get_state()</text>
+      >_get_accounting_state()</text>
+>>>>>>> ADD other sipreco modules
     </group>
   </group>
   <group name="Fig2"
@@ -32690,8 +34356,13 @@
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigAssociationEndAnnotation"
                         ownerhref="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015DF"
+<<<<<<< HEAD
                         angle="80.0"
                         offset="98" />
+=======
+                        angle="43.99999999999999"
+                        offset="43" />
+>>>>>>> ADD other sipreco modules
       <argouml:pathitem figname="Fig2.4"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigMultiplicity"
@@ -34251,6 +35922,7 @@
               y="636" />
     </path>
   </group>
+<<<<<<< HEAD
   <group name="Fig14"
        description="org.argouml.uml.diagram.static_structure.ui.FigClass[448, 928, 157, 67]pathVisible=true;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
        href="127-0-1-1-55241b8a:1483b8574f8:-8000:00000000000018BA"
@@ -34433,6 +36105,8 @@
               y="928" />
     </path>
   </group>
+=======
+>>>>>>> ADD other sipreco modules
 </pgml>
 <pgml description="org.argouml.uml.diagram.static_structure.ui.UMLClassDiagram|127-0-1-1--17588d67:13b392fe554:-8000:0000000000000ACF"
       name="Res - base"
@@ -34793,7 +36467,15 @@
       strokecolor="black"
     />
     <group name="Fig0.4"
+<<<<<<< HEAD
          description="org.argouml.uml.diagram.ui.FigAttributesCompartment[273, 125, 462, 391]"
+=======
+<<<<<<< HEAD
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[273, 125, 462, 383]"
+=======
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[273, 125, 462, 424]"
+>>>>>>> ADD other sipreco modules
+>>>>>>> ADD other sipreco modules
          href="127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000012D8"
          fill="0"
          fillcolor="white"
@@ -34807,7 +36489,15 @@
         x="273"
         y="125"
         width="462"
+<<<<<<< HEAD
         height="391"
+=======
+<<<<<<< HEAD
+        height="383"
+=======
+        height="424"
+>>>>>>> ADD other sipreco modules
+>>>>>>> ADD other sipreco modules
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -34924,7 +36614,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;form, readonly&gt;&gt; invoice_ids : invoice</text>
+=======
+      >&lt;&lt;form, tree, search, required, readonly&gt;&gt; total : Float</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig0.4.8"
         x="273"
         y="237"
@@ -34940,7 +36634,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;form&gt;&gt; note : HTML</text>
+=======
+      >&lt;&lt;form, readonly&gt;&gt; invoice_ids : invoice</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig0.4.9"
         x="273"
         y="253"
@@ -34956,7 +36654,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;form, hidden, readonly&gt;&gt; type_with_advance_payment : Boolean</text>
+=======
+      >&lt;&lt;form, readonly&gt;&gt; payment_order_ids : invoice</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig0.4.10"
         x="273"
         y="269"
@@ -34972,7 +36674,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;form, hidden, readonly&gt;&gt; type_with_salary_advance : Boolean</text>
+=======
+      >&lt;&lt;form&gt;&gt; note : HTML</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig0.4.11"
         x="273"
         y="285"
@@ -34988,7 +36694,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;readonly&gt;&gt; definitive_line_ids : One2many</text>
+=======
+      >&lt;&lt;form, hidden, readonly&gt;&gt; type_with_advance_payment : Boolean</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig0.4.12"
         x="273"
         y="301"
@@ -35004,7 +36714,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;store, search, group_by&gt;&gt; supplier_ids : Many2many</text>
+=======
+      >&lt;&lt;form, hidden, readonly&gt;&gt; type_with_salary_advance : Boolean</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig0.4.13"
         x="273"
         y="317"
@@ -35020,7 +36734,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;store, search&gt;&gt; budget_position_ids : Many2many</text>
+=======
+      >&lt;&lt;readonly&gt;&gt; definitive_line_ids : One2many</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig0.4.14"
         x="273"
         y="333"
@@ -35036,7 +36754,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;readonly&gt;&gt; advance_preventive_line_ids : One2many</text>
+=======
+      >&lt;&lt;store, search, group_by&gt;&gt; supplier_ids : Many2many</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig0.4.15"
         x="273"
         y="349"
@@ -35052,7 +36774,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >refund_voucher_count : Integer</text>
+=======
+      >&lt;&lt;store, search&gt;&gt; budget_position_ids : Many2many</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig0.4.16"
         x="273"
         y="365"
@@ -35068,7 +36794,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >preventive_amount : Float</text>
+=======
+      >&lt;&lt;readonly&gt;&gt; advance_preventive_line_ids : One2many</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig0.4.17"
         x="273"
         y="381"
@@ -35084,7 +36814,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >paid_amount : Float</text>
+=======
+      >advance_payment_order_ids : One2many</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig0.4.18"
         x="273"
         y="397"
@@ -35100,7 +36834,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >remaining_amount : Float</text>
+=======
+      >refund_voucher_count : Integer</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig0.4.19"
         x="273"
         y="413"
@@ -35116,7 +36854,11 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >advance_remaining_amount : Float</text>
+=======
+      >payment_order_count : Float</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig0.4.20"
         x="273"
         y="429"
@@ -35132,11 +36874,98 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >refund_voucher_amount : Float</text>
+=======
+      >preventive_amount : Float</text>
+>>>>>>> ADD other sipreco modules
       <text name="Fig0.4.21"
         x="273"
         y="445"
         width="462"
+<<<<<<< HEAD
+=======
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >paid_amount : Float</text>
+      <text name="Fig0.4.22"
+        x="273"
+        y="461"
+        width="462"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >remaining_amount : Float</text>
+      <text name="Fig0.4.23"
+        x="273"
+        y="477"
+        width="462"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >payment_order_amount : Float</text>
+      <text name="Fig0.4.24"
+        x="273"
+        y="493"
+        width="462"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >advance_remaining_amount : Float</text>
+      <text name="Fig0.4.25"
+        x="273"
+        y="509"
+        width="462"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >refund_voucher_amount : Float</text>
+      <text name="Fig0.4.26"
+        x="273"
+        y="525"
+        width="462"
+>>>>>>> ADD other sipreco modules
         height="22"
         fill="0"
         fillcolor="white"
@@ -35152,7 +36981,15 @@
     </group>
     <rectangle name="Fig0.5"
       x="272"
+<<<<<<< HEAD
       y="516"
+=======
+<<<<<<< HEAD
+      y="508"
+=======
+      y="548"
+>>>>>>> ADD other sipreco modules
+>>>>>>> ADD other sipreco modules
       width="464"
       height="1"
       fill="1"
@@ -35161,7 +36998,15 @@
       strokecolor="black"
     />
     <group name="Fig0.6"
+<<<<<<< HEAD
          description="org.argouml.uml.diagram.ui.FigOperationsCompartment[273, 517, 462, 135]"
+=======
+<<<<<<< HEAD
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[273, 509, 462, 143]"
+=======
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[273, 549, 462, 104]"
+>>>>>>> ADD other sipreco modules
+>>>>>>> ADD other sipreco modules
          href="127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000012D8"
          fill="0"
          fillcolor="white"
@@ -35173,9 +37018,21 @@
       
       <rectangle name="Fig0.6.0"
         x="273"
+<<<<<<< HEAD
         y="517"
         width="462"
         height="135"
+=======
+<<<<<<< HEAD
+        y="509"
+        width="462"
+        height="143"
+=======
+        y="549"
+        width="462"
+        height="104"
+>>>>>>> ADD other sipreco modules
+>>>>>>> ADD other sipreco modules
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -35183,7 +37040,15 @@
       />
       <text name="Fig0.6.1"
         x="273"
+<<<<<<< HEAD
         y="517"
+=======
+<<<<<<< HEAD
+        y="509"
+=======
+        y="549"
+>>>>>>> ADD other sipreco modules
+>>>>>>> ADD other sipreco modules
         width="462"
         height="16"
         fill="0"
@@ -35199,7 +37064,15 @@
       >_get_suppliers()</text>
       <text name="Fig0.6.2"
         x="273"
+<<<<<<< HEAD
         y="533"
+=======
+<<<<<<< HEAD
+        y="525"
+=======
+        y="565"
+>>>>>>> ADD other sipreco modules
+>>>>>>> ADD other sipreco modules
         width="462"
         height="16"
         fill="0"
@@ -35215,7 +37088,15 @@
       >_get_budget_positions()</text>
       <text name="Fig0.6.3"
         x="273"
+<<<<<<< HEAD
         y="549"
+=======
+<<<<<<< HEAD
+        y="541"
+=======
+        y="581"
+>>>>>>> ADD other sipreco modules
+>>>>>>> ADD other sipreco modules
         width="462"
         height="16"
         fill="0"
@@ -35231,7 +37112,35 @@
       >_refund_voucher_count()</text>
       <text name="Fig0.6.4"
         x="273"
+<<<<<<< HEAD
         y="565"
+=======
+<<<<<<< HEAD
+        y="557"
+=======
+        y="597"
+>>>>>>> ADD other sipreco modules
+        width="462"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >_payment_order_count()</text>
+      <text name="Fig0.6.5"
+        x="273"
+<<<<<<< HEAD
+        y="573"
+=======
+        y="613"
+>>>>>>> ADD other sipreco modules
+>>>>>>> ADD other sipreco modules
         width="462"
         height="16"
         fill="0"
@@ -35247,7 +37156,15 @@
       >_get_advance_amounts()</text>
       <text name="Fig0.6.5"
         x="273"
+<<<<<<< HEAD
         y="581"
+=======
+<<<<<<< HEAD
+        y="589"
+=======
+        y="629"
+>>>>>>> ADD other sipreco modules
+>>>>>>> ADD other sipreco modules
         width="462"
         height="22"
         fill="0"
@@ -35481,7 +37398,11 @@
       bold="false"
       textsize="12"
       justification="Center"
+<<<<<<< HEAD
     >public_budget::account_voucher</text>
+=======
+    >public_budget::payment_order</text>
+>>>>>>> ADD other sipreco modules
     <group name="Fig3.2"
          description="org.argouml.uml.diagram.ui.FigStereotypesGroup[1121, 217, 344, 0]"
          href="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A4"
@@ -35516,7 +37437,11 @@
       strokecolor="black"
     />
     <group name="Fig3.4"
+<<<<<<< HEAD
          description="org.argouml.uml.diagram.ui.FigAttributesCompartment[1121, 240, 344, 64]"
+=======
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[1121, 240, 344, 88]"
+>>>>>>> ADD other sipreco modules
          href="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A4"
          fill="0"
          fillcolor="white"
@@ -35530,7 +37455,11 @@
         x="1121"
         y="240"
         width="344"
+<<<<<<< HEAD
         height="64"
+=======
+        height="88"
+>>>>>>> ADD other sipreco modules
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -35556,7 +37485,11 @@
         x="1121"
         y="256"
         width="344"
+<<<<<<< HEAD
         height="22"
+=======
+        height="16"
+>>>>>>> ADD other sipreco modules
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -35567,6 +37500,7 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >note : HTML</text>
     </group>
     <rectangle name="Fig3.5"
@@ -35914,6 +37848,13 @@
         x="1017"
         y="552"
         width="490"
+=======
+      >partner_id : partner</text>
+      <text name="Fig3.4.3"
+        x="1121"
+        y="272"
+        width="344"
+>>>>>>> ADD other sipreco modules
         height="16"
         fill="0"
         fillcolor="white"
@@ -35925,11 +37866,19 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;tree&gt;&gt; paid_amount : Float</text>
       <text name="Fig5.4.12"
         x="1017"
         y="568"
         width="490"
+=======
+      >note : HTML</text>
+      <text name="Fig3.4.4"
+        x="1121"
+        y="288"
+        width="344"
+>>>>>>> ADD other sipreco modules
         height="16"
         fill="0"
         fillcolor="white"
@@ -35941,11 +37890,19 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;readonly&gt;&gt; available_account_ids : Many2many</text>
       <text name="Fig5.4.13"
         x="1017"
         y="584"
         width="490"
+=======
+      >paid : Boolean</text>
+      <text name="Fig3.4.5"
+        x="1121"
+        y="304"
+        width="344"
+>>>>>>> ADD other sipreco modules
         height="22"
         fill="0"
         fillcolor="white"
@@ -35957,21 +37914,36 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >&lt;&lt;form, hidden, tree&gt;&gt; state : Selection</text>
     </group>
     <rectangle name="Fig5.5"
       x="1016"
       y="631"
       width="492"
+=======
+      >other_Field : Integer</text>
+    </group>
+    <rectangle name="Fig3.5"
+      x="1120"
+      y="327"
+      width="346"
+>>>>>>> ADD other sipreco modules
       height="1"
       fill="1"
       fillcolor="black"
       stroke="1"
       strokecolor="black"
     />
+<<<<<<< HEAD
     <group name="Fig5.6"
          description="org.argouml.uml.diagram.ui.FigOperationsCompartment[1017, 632, 490, 63]"
          href="127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000012D9"
+=======
+    <group name="Fig3.6"
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[1121, 328, 344, 24]"
+         href="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A4"
+>>>>>>> ADD other sipreco modules
          fill="0"
          fillcolor="white"
          stroke="0"
@@ -35980,16 +37952,25 @@
       <private>
       </private>
       
+<<<<<<< HEAD
       <rectangle name="Fig5.6.0"
         x="1017"
         y="632"
         width="490"
         height="63"
+=======
+      <rectangle name="Fig3.6.0"
+        x="1121"
+        y="328"
+        width="344"
+        height="24"
+>>>>>>> ADD other sipreco modules
         fill="0"
         fillcolor="white"
         stroke="0"
         strokecolor="black"
       />
+<<<<<<< HEAD
       <text name="Fig5.6.1"
         x="1017"
         y="632"
@@ -36010,6 +37991,12 @@
         x="1017"
         y="648"
         width="490"
+=======
+      <text name="Fig3.6.1"
+        x="1121"
+        y="328"
+        width="344"
+>>>>>>> ADD other sipreco modules
         height="22"
         fill="0"
         fillcolor="white"
@@ -36021,6 +38008,7 @@
         bold="false"
         textsize="12"
         justification="Left"
+<<<<<<< HEAD
       >_get_state()</text>
     </group>
   </group>
@@ -36029,11 +38017,22 @@
        href="127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000012EF"
        sourceConnector="127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000012F0"
        destConnector="127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000012F1"
+=======
+      >_get_paid()</text>
+    </group>
+  </group>
+  <group name="Fig4"
+       description="org.argouml.uml.diagram.ui.FigAssociation"
+       href="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A8"
+       sourceConnector="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A9"
+       destConnector="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015AA"
+>>>>>>> ADD other sipreco modules
        stroke="1"
        strokecolor="black"
   >
     <private>
       sourcePortFig="Fig0"
+<<<<<<< HEAD
       destPortFig="Fig5"
       sourceFigNode="Fig0"
       destFigNode="Fig5"
@@ -36070,12 +38069,51 @@
     </private>
     <path name="Fig6.0"
       description="org.tigris.gef.presentation.FigPoly"
+=======
+      destPortFig="Fig3"
+      sourceFigNode="Fig0"
+      destFigNode="Fig3"
+      <argouml:pathitem figname="Fig4.1"
+                        classname="org.argouml.uml.diagram.ui.PathItemPlacement"
+                        figclassname="org.argouml.uml.diagram.ui.FigTextGroup"
+                        ownerhref="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A8"
+                        angle="267.0"
+                        offset="25" />
+      <argouml:pathitem figname="Fig4.2"
+                        classname="org.argouml.uml.diagram.ui.PathItemPlacement"
+                        figclassname="org.argouml.uml.diagram.ui.FigMultiplicity"
+                        ownerhref="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A9"
+                        angle="315.0"
+                        offset="5" />
+      <argouml:pathitem figname="Fig4.3"
+                        classname="org.argouml.uml.diagram.ui.PathItemPlacement"
+                        figclassname="org.argouml.uml.diagram.ui.FigAssociationEndAnnotation"
+                        ownerhref="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A9"
+                        angle="45.0"
+                        offset="5" />
+      <argouml:pathitem figname="Fig4.4"
+                        classname="org.argouml.uml.diagram.ui.PathItemPlacement"
+                        figclassname="org.argouml.uml.diagram.ui.FigMultiplicity"
+                        ownerhref="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015AA"
+                        angle="225.0"
+                        offset="5" />
+      <argouml:pathitem figname="Fig4.5"
+                        classname="org.argouml.uml.diagram.ui.PathItemPlacement"
+                        figclassname="org.argouml.uml.diagram.ui.FigAssociationEndAnnotation"
+                        ownerhref="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015AA"
+                        angle="135.0"
+                        offset="5" />
+    </private>
+    <path name="Fig4.0"
+      description="org.argouml.gefext.ArgoFigPoly"
+>>>>>>> ADD other sipreco modules
       fill="0"
       fillcolor="white"
       stroke="1"
       strokecolor="black"
     >
       <moveto x="735"
+<<<<<<< HEAD
               y="513" />
       <lineto x="1016"
               y="513" />
@@ -37792,6 +39830,13 @@
       />
     </group>
   </group>
+=======
+              y="281" />
+      <lineto x="1120"
+              y="281" />
+    </path>
+  </group>
+>>>>>>> ADD other sipreco modules
 </pgml>
 <todo>
 <todolist>

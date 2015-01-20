@@ -42,10 +42,13 @@ Sipreco Set Up Data
         # datos demo
         'demo/account/account_period.xml',
         'demo/account.journal.csv',
+    ],
+    'demo': [
         'demo/journal_data.xml',
         'demo/res.partner.csv',
         'demo/users/res.partner.csv',
         'demo/users/res.users.csv',
+        'demo/account.journal.csv',
         'demo/res.partner.bank.csv',
         'demo/payment.mode.csv',
         'demo/public_budget.expedient_founder.csv',
@@ -68,8 +71,6 @@ Sipreco Set Up Data
         'demo/public_budget.budget_modification.csv',
         'demo/public_budget.budget_modification_detail.csv',
         # 'demo/account.asset.asset.csv', hay que crear antes la categoria de asset
-    ],
-    'demo': [
     ],
     'test': [
     ],

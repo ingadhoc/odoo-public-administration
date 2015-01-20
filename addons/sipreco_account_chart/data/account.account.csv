@@ -70,6 +70,7 @@ account_account_115,4100020,Ingreso 2015,account_account_112,False,account.data_
 account_account_116,42,REINTEGROS,account_account_111,False,account.data_account_type_view,view
 account_account_1161,4200010,Reintegros,account_account_116,False,account.data_account_type_income,other
 account_account_1162,43,FONDOS AUTORIZADOS NO UTILIZADOS,account_account_111,False,account.data_account_type_income,view
+account_account_1162,43,FONDOS AUTORIZADOS NO UTILIZADOS,account_account_111,False,account.data_account_type_income,other
 account_account_1163,4300010,Fondos autorizados no utilizados,account_account_1162,False,account.data_account_type_income,other
 account_account_125,5,EGRESOS,account_account_1,False,account.data_account_type_view,view
 account_account_126,51,PERSONAL,account_account_125,False,account.data_account_type_view,view
