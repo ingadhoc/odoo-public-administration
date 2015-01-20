@@ -1,0 +1,5 @@
+module,type,name,res_id,src,value
+account_payment,view,payment.order,account_payment.view_payment_order_form,Confirm Payments,Confirmar pagos Por Juan CSV
+account_payment,view,account.payment.make.payment,account_payment.account_payment_make_payment_view,Make Payment,Realizar pago Por Juan CSV
+account_payment,model,"ir.actions.act_window,name",account_payment.action_account_payment_make_payment,Make Payment,Realizar pago Por Juan CSV
+account_payment,view,payment.order,account_payment.view_payment_order_form,Make Payments,Realizar pagos Por Juan CSV

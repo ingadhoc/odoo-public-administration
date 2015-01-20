@@ -1,0 +1,15 @@
+id,preventive_line_id/id,supplier_id/id,amount
+definitive_line_1,prev_line_1,res_partner_airoldi,20000
+definitive_line_2,prev_line_1,res_partner_gabe,10000
+definitive_line_3,prev_line_2,res_partner_airoldi,10000
+definitive_line_4,prev_line_2,res_partner_gabe,10000
+definitive_line_5,prev_line_3,res_partner_adhoc,30000
+definitive_line_6,prev_line_4,res_partner_adhoc,30000
+definitive_line_7,prev_line_5,res_partner_gabe,800
+definitive_line_8,prev_line_6,res_partner_epe,1300
+definitive_line_9,prev_line_9,res_partner_propietario,15000
+definitive_line_10,prev_line_10,res_partner_sueldos,30000
+definitive_line_11,prev_line_11,res_partner_sueldos,10000
+definitive_line_12,prev_line_12,res_partner_sueldos,10000
+definitive_line_13,prev_line_13,res_partner_pepito,1500
+definitive_line_14,prev_line_14,res_partner_roberto,1000

@@ -1,0 +1,3 @@
+id,origin_category_id/id,destiny_category_id/id,type,message
+pos_exc_res_cap_expense,pos_categ_capital,pos_categ_expense,block,¡Advertencia! Recuerde que no es posible reasignar saldo de una partida del tipo Capital a una del tipo Gastos.
+pos_exc_res_exp_expense,pos_categ_expense,pos_categ_expense,alert, Aviso: Esta reasignando saldos entre partidas de tipo Gastos.
