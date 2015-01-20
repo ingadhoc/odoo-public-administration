@@ -36,6 +36,11 @@ class payment_order(models.Model):
     ]
 
     @api.one
+    def _get_paid(self):
+        """"""
+        self.paid = False
+
+    @api.one
     def create_voucher(self):
         res = super(payment_order, self).create_voucher()
         for voucher_ids in res:
