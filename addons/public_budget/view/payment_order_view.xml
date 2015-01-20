@@ -39,7 +39,7 @@
                     <attribute name="attrs">{'readonly':[('transaction_id', '!=', False)]}</attribute>
                 </field>
                 <field name="user_id" position="after">
-                    <field name="partner_id" options="{'no_create': True}" attrs="{'required':[('transaction_id', '!=',False)],'invisible':['|',('transaction_id', '=', False),('type_with_advance_payment', '=', True)]}"/>
+                    <field name="partner_id" options="{'no_create': True}" attrs="{'required':[('transaction_id', '!=',False),('type_with_advance_payment', '=', False)],'invisible':['|',('transaction_id', '=', False),('type_with_advance_payment', '=', True)]}"/>
                 </field>
                 <field name="mode" position="after">
                     <field name="transaction_id" readonly="1"/>

@@ -51,58 +51,71 @@ class payment_order(models.Model):
         voucher_ids = []
         journal = self.mode.journal
         currency = journal.currency or journal.company_id.currency_id
-        for line in self.line_ids:
-            if line.voucher_id:
-                continue
-            result = self.env['account.voucher'].onchange_partner_id(
-                partner_id=line.partner_id.id,
-                journal_id=journal.id,
-                amount=abs(line.amount),
-                currency_id=currency.id,
-                ttype='payment',
-                date=line.ml_maturity_date)
+        partners = [x.partner_id for x in self.line_ids]
+        if len(set(partners)) != 1:
+            raise Warning(_('You can not create confirm a payment order for more than one partner'))
 
-            account_id = result['value'].get(
-                'account_id', journal.default_credit_account_id.id)
-            voucher_res = {
-                'type': 'payment',
-                'name': line.name,
-                'partner_id': line.partner_id.id,
-                'journal_id': journal.id,
-                'account_id': account_id,
-                'company_id': self.company_id.id,
-                'currency_id': currency.id,
-                'date': line.date or time.strftime('%Y-%m-%d'),
-                'amount': abs(line.amount),
-                'payment_order_id': self.id
-            }
-            voucher = self.env['account.voucher'].create(voucher_res)
-            if self.transaction_id.type_id.with_advance_payment:
-                if not self.transaction_id.type_id.advance_account_id:
-                    raise Warning(_('In advance transactions you should configure an advance account on the Transaction Type'))
-                voucher_vals = {
-                    'payment_option': 'with_writeoff',
-                    'writeoff_acc_id': self.transaction_id.type_id.advance_account_id.id,
-                    'comment': self.transaction_id.type_id.advance_account_id.name,
-                    }
-                voucher.write(voucher_vals)
-            else:
-                voucher_line_dict = {}
-                for line_dict in result[
-                        'value']['line_cr_ids'] + result[
-                        'value']['line_dr_ids']:
-                    move_line = move_line_obj.browse(
-                        self._cr, self._uid, line_dict['move_line_id'],
-                        self._context)
+        # for line in self.line_ids:
+        #     if line.voucher_id:
+        #         continue
+        amount = abs(sum([x.amount for x in self.line_ids]))
+        partner = self.line_ids[0].partner_id
+        # TODO mejorar esto maturity date y date
+        maturity_date = self.line_ids[0].ml_maturity_date
+        date = self.line_ids[0].date or time.strftime('%Y-%m-%d')
+        result = self.env['account.voucher'].onchange_partner_id(
+            partner_id=partner.id,
+            journal_id=journal.id,
+            amount=amount,
+            currency_id=currency.id,
+            ttype='payment',
+            date=maturity_date,
+            )
+
+        account_id = result['value'].get(
+            'account_id', journal.default_credit_account_id.id)
+        voucher_res = {
+            'type': 'payment',
+            'name': ', '.join([x.name for x in self.line_ids]),
+            'partner_id': partner.id,
+            'journal_id': journal.id,
+            'account_id': account_id,
+            'company_id': self.company_id.id,
+            'currency_id': currency.id,
+            'date': date,
+            'amount': amount,
+            'payment_order_id': self.id
+        }
+        voucher = self.env['account.voucher'].create(voucher_res)
+        if self.transaction_id.type_id.with_advance_payment:
+            if not self.transaction_id.type_id.advance_account_id:
+                raise Warning(_('In advance transactions you should configure an advance account on the Transaction Type'))
+            voucher_vals = {
+                'payment_option': 'with_writeoff',
+                'writeoff_acc_id': self.transaction_id.type_id.advance_account_id.id,
+                'comment': self.transaction_id.type_id.advance_account_id.name,
+                }
+            voucher.write(voucher_vals)
+        else:
+            voucher_line_dict = {}
+            print 'result', result
+            for line_dict in result[
+                    'value']['line_cr_ids'] + result[
+                    'value']['line_dr_ids']:
+                move_line = move_line_obj.browse(
+                    self._cr, self._uid, line_dict['move_line_id'],
+                    self._context)
+                for line in self.line_ids:
+                    print 'line.move_line_id.move_id.id', line.move_line_id.move_id.id
+                    print 'move_line.move_id.id', move_line.move_id.id
                     if line.move_line_id.move_id.id == move_line.move_id.id:
                         voucher_line_dict = line_dict
-
-                if voucher_line_dict:
-                    voucher_line_dict.update({'voucher_id': voucher.id})
-                    self.env['account.voucher.line'].create(
-                        voucher_line_dict)
+                        voucher_line_dict.update({'voucher_id': voucher.id})
+                        self.env['account.voucher.line'].create(
+                            voucher_line_dict)
+        for line in self.line_ids:
             line.voucher_id = voucher.id
-            voucher_ids.append(voucher.id)
+        voucher_ids.append(voucher.id)
         return voucher_ids
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
