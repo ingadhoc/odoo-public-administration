@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data> 
+
+        <!-- Tree Recibos (Customer and vendor)-->
+        <record id="voucher_payline_tree_view" model="ir.ui.view">
+            <field name="name">account.voucher.payline.tree</field>
+            <field name="model">account.voucher.payline</field>
+            <field name="arch" type="xml"> 
+                <tree string="Paylines">
+                    <field name="journal_id"/>
+                    <field name="reference"/>
+                    <field name="ammount" sum="Total"/>
+                </tree>
+            </field>
+        </record>   
+
+        <!-- Form Recibos (Customer and vendor)-->
+        <record id="voucher_payline_form_view" model="ir.ui.view">
+            <field name="name">account.voucher.payline.form</field>
+            <field name="model">account.voucher.payline</field>
+            <field name="arch" type="xml"> 
+                <form string="Paylines">
+                    <sheet string="Paylines">
+                        <field name="journal_id"/>
+                        <field name="ammount"/>
+                        <!-- TODO agregar funcionaldiad para distintos tipos de pagos -->
+                    </sheet>
+                </form>
+            </field>
+        </record>   
+        
+    </data>
+</openerp>

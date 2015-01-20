@@ -1,0 +1,2 @@
+id,requisition_id/id,partner_id/id,invoice_method
+purchase_order_1_1,purcase_req_1,res_partner_adhoc,manual

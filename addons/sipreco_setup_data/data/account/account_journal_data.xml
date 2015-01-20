@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Puede no ir total dejamos la secuencia por defecto -->
+        
+        <!-- Aca damos de alta el journal -->
+        <record id="sales_journal" model="account.journal">
+            <field name="name">Ventas</field>
+            <field name="code">VEN01</field>
+            <field name="type">sale</field>
+            <field name="point_of_sale" eval="1"/>
+            <field name="use_documents" eval="True"/>
+        </record>
+
+        <!-- Aca le creamos los documents al journal, lo unico que hay que cambiar es lo que va en "eval" -->
+        <!-- Parametros de eval: 
+            debit_notes: dont_use, own_sequence o same_sequence
+            credit_notes: own_sequence o same_sequence
+            journal_ids: se suele user [ref('id_del_registro_con_el_que_se_levanto_el_journal')]-->
+        <function
+            eval="('own_sequence','own_sequence',[ref('sales_journal')])"
+            id="sales_journal_document_set"
+            model="account.journal.document_config"
+            name="create_journals"/>
+
+    </data>
+</openerp>

@@ -1,0 +1,2 @@
+id,prefix,suffix,padding
+account_payment.seq_payment_order,,-%(year)s,4
