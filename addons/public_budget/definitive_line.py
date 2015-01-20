@@ -8,6 +8,7 @@ class definitive_line(models.Model):
 
     _name = 'public_budget.definitive_line'
     _description = 'Definitive Line'
+    _rec_name = 'preventive_line_id'
 
     issue_date = fields.Date(
         string='Issue Date',
