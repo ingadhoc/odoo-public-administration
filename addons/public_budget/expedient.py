@@ -22,7 +22,7 @@ class expedient(models.Model):
 
     number = fields.Char(
         string='Number',
-        required=True
+        readonly=True
         )
     issue_date = fields.Datetime(
         string='Issue Date',
