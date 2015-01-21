@@ -20,15 +20,14 @@ class expedient(models.Model):
         ('cancel', 'Cancel'),
     ]
 
+    number = fields.Char(
+        string='Number',
+        required=True
+        )
     issue_date = fields.Datetime(
         string='Issue Date',
         required=True,
         default=fields.Datetime.now
-        )
-    number = fields.Char(
-        string='Number',
-        required=True,
-        default=lambda self: self.env['ir.sequence'].get('public_budget.expedient')
         )
     cover = fields.Char(
         string='Cover',
