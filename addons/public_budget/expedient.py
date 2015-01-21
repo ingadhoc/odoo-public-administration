@@ -178,7 +178,7 @@ class expedient(models.Model):
 
     @api.model
     def create(self, vals):
-        vals['name'] = self.env[
+        vals['number'] = self.env[
             'ir.sequence'].get('public_budget.expedient') or '/'
         return super(expedient, self).create(vals)
 
