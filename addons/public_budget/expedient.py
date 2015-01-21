@@ -199,4 +199,10 @@ class expedient(models.Model):
             recs = self.search([('cover', operator, name)] + args, limit=limit)
         return recs.name_get()
 
+    @api.model
+    def create(self, vals):
+        vals['name'] = self.env[
+            'ir.sequence'].get('public_budget.expedient') or '/'
+        return super(expedient, self).create(vals)
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
