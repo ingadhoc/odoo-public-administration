@@ -86,6 +86,48 @@
             </field>
         </record>
 
+        <!-- TREEVIEW for ANALISIS -->
+        <record id="view_budget_position_analisis_tree" model="ir.ui.view">
+            <field name="name">public_budget.budget_position.tree</field>
+            <field name="model">public_budget.budget_position</field>
+            <field name="field_parent">child_ids</field>
+            <field name="arch" type="xml">
+                <tree colors="blue:type=='view'; green:budget_assignment_allowed; red: budget_assignment_allowed and projected_amount > amount;">
+                    <field name="parent_left" invisible="1"/>
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="type" invisible="1"/>
+                    <field name="amount" attrs="{'invisible':[('budget_assignment_allowed','=',False)]}"/>
+                    <field name="draft_amount"/>
+                    <field name="preventive_amount"/>
+                    <field name="definitive_amount"/>
+                    <field name="to_pay_amount"/>
+                    <field name="paid_amount"/>
+                    <field name="projected_amount"/>
+                    <field name="preventive_avg" widget="progressbar" attrs="{'invisible':[('budget_assignment_allowed','=',False)]}"/>
+                    <field name="preventive_avg" widget="integer" string="%" attrs="{'invisible':[('budget_assignment_allowed','=',False)]}"/>
+                    <field name="balance_amount" attrs="{'invisible':[('budget_assignment_allowed','=',False)]}"/>
+                    <field name="budget_assignment_allowed" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_position_analisis_tree" model="ir.actions.act_window">
+            <field name="name">Budget Position Analisis</field>
+            <field name="res_model">public_budget.budget_position</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="view_budget_position_analisis_tree"/>
+            <field name="domain">[('parent_id','=',False)]</field>
+        </record>
+
+        <!-- Enable drill-down from Chart Of Accounts tree view -->
+        <act_window
+            id="action_budget_position_items"
+            name="Items"
+            context="{'search_budget_position_id': [active_id], 'budget_id': context.get('budget_id')}"
+            res_model="public_budget.preventive_line"
+            src_model="public_budget.budget_position"
+            key2="tree_but_open"/>
     </data>
 </openerp>
 <!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4

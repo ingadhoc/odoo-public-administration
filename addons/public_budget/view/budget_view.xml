@@ -58,6 +58,7 @@
                     </header>
                     <sheet string="Budget">
                        <div class="oe_right oe_button_box" name="buttons">
+                            <button class="oe_inline oe_stat_button oe_right" name="%(action_position_analisis_tree)d" string="Position Analisis" type="action" widget="statinfo" context="{'budget_id':active_id}"/>
                        </div>
                         <group>
                             <group>
