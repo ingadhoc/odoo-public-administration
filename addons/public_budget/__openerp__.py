@@ -5,7 +5,6 @@
                 u'view/account_voucher_view.xml',
                 u'wizard/transaction_definitive_make_invoice_view.xml',
                 u'wizard/transaction_create_refund_voucher_view.xml',
-                u'wizard/account_payment_add_avance_lines_view.xml',
                 u'wizard/public_budget_expedients_move_wizard_view.xml',
                 u'view/inventory_rule_view.xml',
                 u'view/voucher_view.xml',
@@ -118,7 +117,9 @@
                 u'view/public_budget_menuitem.xml',
                 u'wizard/wizards_menus.xml',
                 u'view/public_budget_actions.xml'],
-    'depends': [u'account'],
+    'depends': [
+        'account_voucher',
+        ],
     'description': u'Public Budget',
     'installable': True,
     'license': 'AGPL-3',
