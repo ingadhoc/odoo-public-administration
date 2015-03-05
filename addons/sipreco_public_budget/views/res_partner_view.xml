@@ -27,6 +27,23 @@
             </field>
         </record>
 
+        <record id="action_res_partner_suppliers" model="ir.actions.act_window">
+            <field name="name">Subsidy recipents</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create"> Click to create a Subsidy Recipent.</p>
+            </field>
+            <field name="context">{'search_default_subsidy_recipient':1}</field>
+        </record>
+
+        <menuitem
+            id="menu_subsidy_recipient"
+            sequence="15"
+            action="action_res_partner_suppliers"
+            parent="public_budget.menu_contacts"
+            />
     </data>
 </openerp>
 <!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
