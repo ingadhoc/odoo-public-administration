@@ -5,6 +5,7 @@
     'category': 'Accounting & Finance',
     'data': [
         'wizard/transaction_definitive_make_invoice_view.xml',
+        'views/res_partner_view.xml',
     ],
     'demo': [],
     'depends': ['l10n_ar_invoice', 'public_budget'],
