@@ -75,7 +75,7 @@
                                     domain="[('current_location_id','in',user_location_ids[0][2]),('in_transit','=',False)]" options="{'no_quick_create': True}"
                                     /> 
                                 <field name="type_id"/>
-                                <field name="partner_id" attrs="{'invisible':[('type_with_advance_payment','=',False)],'required':[('type_with_advance_payment','=',True)],'readonly':[('payment_order_ids','!=',[])]}"/>
+                                <field name="partner_id" attrs="{'invisible':[('type_with_advance_payment','=',False)],'required':[('type_with_advance_payment','=',True)]}"/>
                                 <field name="company_id" groups="base.group_multi_company"/>
                             </group>
                             <group>
