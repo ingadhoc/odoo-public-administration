@@ -24,7 +24,7 @@ class transaction(models.Model):
         track_visibility='always',
         readonly=True,
         required=True,
-        states={'draft': [('readonly', False)], 'open': [('readonly', False)]},
+        states={'draft': [('readonly', False)]},
         default=fields.Date.context_today
         )
     name = fields.Char(
@@ -38,7 +38,6 @@ class transaction(models.Model):
         string='User',
         readonly=True,
         required=True,
-        states={'draft': [('readonly', False)], 'open': [('readonly', False)]},
         default=lambda self: self.env.user
         )
     expedient_id = fields.Many2one(
@@ -135,7 +134,9 @@ class transaction(models.Model):
     company_id = fields.Many2one(
         'res.company',
         string='Company',
+        readonly=True,
         required=True,
+        states={'draft': [('readonly', False)]},
         default=lambda self: self.env['res.company']._company_default_get('public_budget.transaction')
         )
     total = fields.Float(
@@ -152,7 +153,7 @@ class transaction(models.Model):
         'transaction_id',
         string='Preventive Lines',
         readonly=True,
-        states={'draft': [('readonly', False)], 'open': [('readonly', False)]},
+        states={'open': [('readonly', False)]},
         domain=[('advance_line', '=', False)]
         )
     refund_voucher_ids = fields.One2many(
@@ -179,7 +180,9 @@ class transaction(models.Model):
     voucher_ids = fields.One2many(
         'account.voucher',
         'transaction_id',
-        string='Payment Orders'
+        string='Payment Orders',
+        readonly=True,
+        states={'open': [('readonly', False)]}
         )
 
     _constraints = [
