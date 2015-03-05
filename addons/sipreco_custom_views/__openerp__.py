@@ -15,7 +15,6 @@ Sipreco Custom Views
     ],
     'depends': [
         'public_budget',
-        'account_voucher',
         'account_asset',
     ],
     'data': [
