@@ -86,6 +86,7 @@
                         <field name="type"
                             /> 
                         <field name="current_location_id"
+                            attrs="{'readonly':[('remit_ids', '=', [(6, False, [])])]}"
                             /> 
                         <field name="note"
                             /> 

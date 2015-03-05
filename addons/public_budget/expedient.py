@@ -106,7 +106,8 @@ class expedient(models.Model):
         'public_budget_remit_ids_expedient_ids_rel',
         'expedient_id',
         'remit_id',
-        string='Remits'
+        string='Remits',
+        readonly=True
         )
 
     _constraints = [
