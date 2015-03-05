@@ -138,6 +138,10 @@ class transaction(models.Model):
         required=True,
         default=lambda self: self.env['res.company']._company_default_get('public_budget.transaction')
         )
+    total = fields.Float(
+        string='Total',
+        compute='_get_total'
+        )
     state = fields.Selection(
         _states_,
         'State',
@@ -203,6 +207,11 @@ class transaction(models.Model):
 
     @api.one
     def _get_amounts(self):
+        """"""
+        raise NotImplementedError
+
+    @api.one
+    def _get_total(self):
         """"""
         raise NotImplementedError
 
