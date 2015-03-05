@@ -20,7 +20,9 @@ class remit(models.Model):
 
     date = fields.Datetime(
         string='Date',
+        readonly=True,
         required=True,
+        states={'draft': [('in_transit', False)]},
         default=lambda self: fields.datetime.now()
         )
     user_id = fields.Many2one(
@@ -33,12 +35,16 @@ class remit(models.Model):
     location_id = fields.Many2one(
         'public_budget.location',
         string='Source Location',
-        required=True
+        readonly=True,
+        required=True,
+        states={'draft': [('in_transit', False)]}
         )
     location_dest_id = fields.Many2one(
         'public_budget.location',
         string='Destination Location',
-        required=True
+        readonly=True,
+        required=True,
+        states={'draft': [('in_transit', False)]}
         )
     state = fields.Selection(
         _states_,

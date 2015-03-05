@@ -124,7 +124,8 @@ class expedient(models.Model):
         'expedient_id',
         'remit_id',
         string='Remits',
-        readonly=True
+        readonly=True,
+        states={'draft': [('in_transit', False)]}
         )
 
     _constraints = [
