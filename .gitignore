@@ -52,5 +52,5 @@ coverage.xml
 docs/_build/
 
 # UML temp files
-.uml~
+*.uml~
 
