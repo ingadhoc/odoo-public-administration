@@ -110,7 +110,6 @@
                 u'workflow/remit_workflow.xml',
                 u'security/ir.model.access.csv',
                 u'view/public_budget_menuitem.xml',
-                u'wizard/wizards_menus.xml',
                 u'view/public_budget_actions.xml'],
     'depends': [u'account'],
     'description': u'Public Budget',
