@@ -42,9 +42,6 @@
                             /> 
                         <field name="preventive_amount"
                             /> 
-                        <field name="preventive_status"
-                            attrs="{'invisible':[('advance_line','=',True)]}"
-                            /> 
                         <field name="advance_line"
                             invisible="True"
                             /> 
@@ -78,9 +75,6 @@
                     <field name="preventive_amount"
                             sum="Total"
                         />
-                    <field name="preventive_status"
-                            invisible="1"
-                        />
                     <field name="definitive_amount"
                             sum="Total"
                         />
@@ -96,8 +90,6 @@
                         />
                     <field name="state"
                             invisible="True"
-                        />
-                    <field name="accounting_state"
                         />
                     <field name="budget_id"
                         />

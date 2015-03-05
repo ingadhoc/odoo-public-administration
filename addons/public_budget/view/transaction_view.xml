@@ -17,8 +17,6 @@
                             />
                     <field name="type_id" string="Type"
                             />
-                    <field name="total" string="Total"
-                            />
                     <field name="supplier_ids" string="Suppliers"
                             />
                     <field name="budget_position_ids" string="Related Budget Positions"
@@ -78,8 +76,6 @@
                         <field name="partner_id"
                             attrs="{'invisible':[('type_with_advance_payment','=',False)],'required':[('type_with_advance_payment','=',True)]}"
                             /> 
-                        <field name="total"
-                            /> 
                         <field name="invoice_ids"
                             /> 
                         <field name="payment_order_ids"
@@ -125,8 +121,6 @@
                     <field name="expedient_id"
                         />
                     <field name="type_id"
-                        />
-                    <field name="total"
                         />
                     <field name="state"
                         />

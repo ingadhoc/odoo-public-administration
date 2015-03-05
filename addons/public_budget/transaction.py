@@ -61,12 +61,6 @@ class transaction(models.Model):
         readonly=True,
         states={'draft': [('readonly', False)]}
         )
-    total = fields.Float(
-        string='Total',
-        readonly=True,
-        required=True,
-        states={'draft': [('readonly', False)], 'open': [('readonly', False)]}
-        )
     invoice_ids = fields.Many2one(
         'account.invoice',
         string='Vouchers',

@@ -27,14 +27,6 @@ class preventive_line(models.Model):
         required=True,
         states={'closed': [('readonly', True)]}
         )
-    preventive_status = fields.Selection(
-        [(u'draft', u'Draft'), (u'confirmed', u'Confirmed')],
-        string='Status',
-        readonly=True,
-        required=True,
-        states={'open': [('readonly', False)], 'confirmed': [('readonly', False)]},
-        default='draft'
-        )
     available_account_ids = fields.Many2one(
         'account.account',
         string='available_account_ids'
@@ -78,12 +70,6 @@ class preventive_line(models.Model):
         string='States',
         compute='_get_state'
         )
-    accounting_state = fields.Selection(
-        selection=[('draft', 'Draft'), ('confirmed', 'Confirmed')],
-        string='Accounting State',
-        store=True,
-        compute='_get_accounting_state'
-        )
     transaction_id = fields.Many2one(
         'public_budget.transaction',
         ondelete='cascade',
@@ -125,11 +111,6 @@ class preventive_line(models.Model):
 
     @api.one
     def _get_state(self):
-        """"""
-        raise NotImplementedError
-
-    @api.one
-    def _get_accounting_state(self):
         """"""
         raise NotImplementedError
 
