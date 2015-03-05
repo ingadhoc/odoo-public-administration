@@ -56,7 +56,7 @@ class preventive_line(models.Model):
     state = fields.Selection(
         selection=[('draft', 'Draft'), ('open', 'Open'), ('definitive', 'definitive'), ('invoiced', 'invoiced'), ('closed', 'closed'), ('cancel', 'Cancel')],
         string='States',
-        # compute='_get_state'
+        compute='_get_state'
         )
     transaction_id = fields.Many2one(
         'public_budget.transaction',
@@ -87,6 +87,19 @@ class preventive_line(models.Model):
 
     _constraints = [
     ]
+
+    @api.one
+    @api.depends(
+        'preventive_amount',
+        'definitive_line_ids',
+    )
+    def _get_state(self):
+        """Por ahora solo implementamos los estados invoiced y draft
+        """
+        state = 'draft'
+        if self.invoiced_amount:
+            state = 'invoiced'
+        self.state = state
 
     @api.one
     @api.depends(
