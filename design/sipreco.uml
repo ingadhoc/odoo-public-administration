@@ -104,7 +104,7 @@
 			</model>
 		</userDefined>
 </profile>
-<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Thu Mar 05 12:29:50 ART 2015'>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Thu Mar 05 12:35:27 ART 2015'>
   <XMI.header>    <XMI.documentation>
       <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
       <XMI.exporterVersion>0.34(6) revised on $Date: 2010-01-11 22:20:14 +0100 (Mon, 11 Jan 2010) $ </XMI.exporterVersion>
@@ -8642,53 +8642,6 @@
                     <UML:DataType href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-608aa393:13b6da4b8d4:-8000:0000000000000D16'/>
                   </UML:StructuralFeature.type>
                 </UML:Attribute>
-                <UML:Attribute xmi.id = '127-0-1-1--6a392a2b:14aef7d6c45:-8000:00000000000017BE'
-                  name = 'paid' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
-                  changeability = 'changeable' targetScope = 'instance'>
-                  <UML:StructuralFeature.multiplicity>
-                    <UML:Multiplicity xmi.id = '127-0-1-1--6a392a2b:14aef7d6c45:-8000:00000000000017BF'>
-                      <UML:Multiplicity.range>
-                        <UML:MultiplicityRange xmi.id = '127-0-1-1--6a392a2b:14aef7d6c45:-8000:00000000000017C0'
-                          lower = '1' upper = '1'/>
-                      </UML:Multiplicity.range>
-                    </UML:Multiplicity>
-                  </UML:StructuralFeature.multiplicity>
-                  <UML:ModelElement.taggedValue>
-                    <UML:TaggedValue xmi.id = '127-0-1-1--6a392a2b:14aef7d6c45:-8000:00000000000017C1'
-                      isSpecification = 'false'>
-                      <UML:TaggedValue.dataValue>Paid</UML:TaggedValue.dataValue>
-                      <UML:TaggedValue.type>
-                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-2b464aa4:13b09d81b72:-8000:0000000000001573'/>
-                      </UML:TaggedValue.type>
-                    </UML:TaggedValue>
-                    <UML:TaggedValue xmi.id = '127-0-1-1--6a392a2b:14aef7d6c45:-8000:00000000000017C2'
-                      isSpecification = 'false'>
-                      <UML:TaggedValue.dataValue>It indicate if all related vouchers has been paid</UML:TaggedValue.dataValue>
-                      <UML:TaggedValue.type>
-                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-2b464aa4:13b09d81b72:-8000:0000000000001576'/>
-                      </UML:TaggedValue.type>
-                    </UML:TaggedValue>
-                    <UML:TaggedValue xmi.id = '127-0-1-1--6a392a2b:14aef7d6c45:-8000:00000000000017C3'
-                      isSpecification = 'false'>
-                      <UML:TaggedValue.dataValue>_get_paid</UML:TaggedValue.dataValue>
-                      <UML:TaggedValue.type>
-                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:00000000000011EC'/>
-                      </UML:TaggedValue.type>
-                    </UML:TaggedValue>
-                  </UML:ModelElement.taggedValue>
-                  <UML:StructuralFeature.type>
-                    <UML:DataType href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000B98'/>
-                  </UML:StructuralFeature.type>
-                </UML:Attribute>
-                <UML:Operation xmi.id = '127-0-1-1--6a392a2b:14aef7d6c45:-8000:00000000000017C4'
-                  name = '_get_paid' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
-                  isQuery = 'false' concurrency = 'sequential' isRoot = 'false' isLeaf = 'false'
-                  isAbstract = 'false'>
-                  <UML:BehavioralFeature.parameter>
-                    <UML:Parameter xmi.id = '127-0-1-1--6a392a2b:14aef7d6c45:-8000:00000000000017C5'
-                      name = 'return' isSpecification = 'false' kind = 'return'/>
-                  </UML:BehavioralFeature.parameter>
-                </UML:Operation>
               </UML:Classifier.feature>
             </UML:Class>
             <UML:Association xmi.id = '127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015DE'
@@ -23250,7 +23203,7 @@
       strokecolor="black"
     />
     <group name="Fig90.4"
-         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[945, 40, 344, 71]"
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[945, 40, 344, 64]"
          href="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A4"
          fill="0"
          fillcolor="white"
@@ -23264,7 +23217,7 @@
         x="945"
         y="40"
         width="344"
-        height="71"
+        height="64"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -23290,7 +23243,7 @@
         x="945"
         y="56"
         width="344"
-        height="16"
+        height="22"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -23302,26 +23255,10 @@
         textsize="12"
         justification="Left"
       >note : HTML</text>
-      <text name="Fig90.4.3"
-        x="945"
-        y="72"
-        width="344"
-        height="22"
-        fill="0"
-        fillcolor="white"
-        stroke="0"
-        strokecolor="black"
-        textcolor="black"
-        font="Dialog"
-        italic="false"
-        bold="false"
-        textsize="12"
-        justification="Left"
-      >paid : Boolean</text>
     </group>
     <rectangle name="Fig90.5"
       x="944"
-      y="111"
+      y="104"
       width="346"
       height="1"
       fill="1"
@@ -23330,7 +23267,7 @@
       strokecolor="black"
     />
     <group name="Fig90.6"
-         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[945, 112, 344, 39]"
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[945, 105, 344, 45]"
          href="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A4"
          fill="0"
          fillcolor="white"
@@ -23342,30 +23279,14 @@
       
       <rectangle name="Fig90.6.0"
         x="945"
-        y="112"
+        y="105"
         width="344"
-        height="39"
+        height="45"
         fill="0"
         fillcolor="white"
         stroke="0"
         strokecolor="black"
       />
-      <text name="Fig90.6.1"
-        x="945"
-        y="112"
-        width="344"
-        height="22"
-        fill="0"
-        fillcolor="white"
-        stroke="0"
-        strokecolor="black"
-        textcolor="black"
-        font="Dialog"
-        italic="false"
-        bold="false"
-        textsize="12"
-        justification="Left"
-      >_get_paid()</text>
     </group>
   </group>
   <group name="Fig91"
@@ -35994,7 +35915,7 @@
       strokecolor="black"
     />
     <group name="Fig3.4"
-         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[1121, 240, 344, 71]"
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[1121, 240, 344, 64]"
          href="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A4"
          fill="0"
          fillcolor="white"
@@ -36008,7 +35929,7 @@
         x="1121"
         y="240"
         width="344"
-        height="71"
+        height="64"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -36034,7 +35955,7 @@
         x="1121"
         y="256"
         width="344"
-        height="16"
+        height="22"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -36046,26 +35967,10 @@
         textsize="12"
         justification="Left"
       >note : HTML</text>
-      <text name="Fig3.4.3"
-        x="1121"
-        y="272"
-        width="344"
-        height="22"
-        fill="0"
-        fillcolor="white"
-        stroke="0"
-        strokecolor="black"
-        textcolor="black"
-        font="Dialog"
-        italic="false"
-        bold="false"
-        textsize="12"
-        justification="Left"
-      >paid : Boolean</text>
     </group>
     <rectangle name="Fig3.5"
       x="1120"
-      y="311"
+      y="304"
       width="346"
       height="1"
       fill="1"
@@ -36074,7 +35979,7 @@
       strokecolor="black"
     />
     <group name="Fig3.6"
-         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[1121, 312, 344, 39]"
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[1121, 305, 344, 45]"
          href="127-0-1-1--40de86d6:14ac0af2b43:-8000:00000000000015A4"
          fill="0"
          fillcolor="white"
@@ -36086,30 +35991,14 @@
       
       <rectangle name="Fig3.6.0"
         x="1121"
-        y="312"
+        y="305"
         width="344"
-        height="39"
+        height="45"
         fill="0"
         fillcolor="white"
         stroke="0"
         strokecolor="black"
       />
-      <text name="Fig3.6.1"
-        x="1121"
-        y="312"
-        width="344"
-        height="22"
-        fill="0"
-        fillcolor="white"
-        stroke="0"
-        strokecolor="black"
-        textcolor="black"
-        font="Dialog"
-        italic="false"
-        bold="false"
-        textsize="12"
-        justification="Left"
-      >_get_paid()</text>
     </group>
   </group>
   <group name="Fig4"

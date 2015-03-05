@@ -18,10 +18,6 @@ class account_voucher(models.Model):
     note = fields.Html(
         string='Note'
         )
-    paid = fields.Boolean(
-        string='Paid',
-        compute='_get_paid'
-        )
     transaction_id = fields.Many2one(
         'public_budget.transaction',
         string='Transaction'
@@ -29,12 +25,5 @@ class account_voucher(models.Model):
 
     _constraints = [
     ]
-
-    @api.one
-    def _get_paid(self):
-        """"""
-        parent = super(account_voucher,self)
-        result = parent._get_paid() if hasattr(parent, '_get_paid') else False
-        return result
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
