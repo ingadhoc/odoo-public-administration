@@ -125,11 +125,13 @@ class preventive_line(models.Model):
         to_pay_amount = False
         paid_amount = False
         if self.advance_line:
-            if self.payment_line_id.order_id.state == 'done':
-                definitive_amount = self.preventive_amount
-                to_pay_amount = self.preventive_amount
-                if self.payment_line_id.voucher_id.state == 'posted':
-                    paid_amount = self.preventive_amount
+            print 'TODO advance line'
+            # TODO
+            # if self.payment_line_id.order_id.state == 'done':
+            #     definitive_amount = self.preventive_amount
+            #     to_pay_amount = self.preventive_amount
+            #     if self.payment_line_id.voucher_id.state == 'posted':
+            #         paid_amount = self.preventive_amount
         else:
             definitive_amount = sum([
                 definitive.amount
