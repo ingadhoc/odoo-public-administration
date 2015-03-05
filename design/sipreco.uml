@@ -104,7 +104,7 @@
 			</model>
 		</userDefined>
 </profile>
-<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Thu Mar 05 14:34:24 ART 2015'>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Thu Mar 05 16:47:15 ART 2015'>
   <XMI.header>    <XMI.documentation>
       <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
       <XMI.exporterVersion>0.34(6) revised on $Date: 2010-01-11 22:20:14 +0100 (Mon, 11 Jan 2010) $ </XMI.exporterVersion>
@@ -10028,40 +10028,6 @@
                       name = 'return' isSpecification = 'false' kind = 'return'/>
                   </UML:BehavioralFeature.parameter>
                 </UML:Operation>
-                <UML:Attribute xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:00000000000016EA'
-                  name = 'payment_line_id' visibility = 'public' isSpecification = 'false'
-                  ownerScope = 'instance' changeability = 'changeable' targetScope = 'instance'>
-                  <UML:StructuralFeature.multiplicity>
-                    <UML:Multiplicity xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:00000000000016EB'>
-                      <UML:Multiplicity.range>
-                        <UML:MultiplicityRange xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:00000000000016EC'
-                          lower = '1' upper = '1'/>
-                      </UML:Multiplicity.range>
-                    </UML:Multiplicity>
-                  </UML:StructuralFeature.multiplicity>
-                  <UML:ModelElement.stereotype>
-                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000BA1'/>
-                  </UML:ModelElement.stereotype>
-                  <UML:ModelElement.taggedValue>
-                    <UML:TaggedValue xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:00000000000016ED'
-                      isSpecification = 'false'>
-                      <UML:TaggedValue.dataValue>payment.line</UML:TaggedValue.dataValue>
-                      <UML:TaggedValue.type>
-                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--29a7adf0:14ac0e08da2:-8000:000000000000128C'/>
-                      </UML:TaggedValue.type>
-                    </UML:TaggedValue>
-                    <UML:TaggedValue xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:00000000000016EE'
-                      isSpecification = 'false'>
-                      <UML:TaggedValue.dataValue>Payment line</UML:TaggedValue.dataValue>
-                      <UML:TaggedValue.type>
-                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-2b464aa4:13b09d81b72:-8000:0000000000001573'/>
-                      </UML:TaggedValue.type>
-                    </UML:TaggedValue>
-                  </UML:ModelElement.taggedValue>
-                  <UML:StructuralFeature.type>
-                    <UML:DataType href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--29a7adf0:14ac0e08da2:-8000:000000000000128B'/>
-                  </UML:StructuralFeature.type>
-                </UML:Attribute>
                 <UML:Attribute xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:00000000000016EF'
                   name = 'remaining_amount' visibility = 'public' isSpecification = 'false'
                   ownerScope = 'instance' changeability = 'changeable' targetScope = 'instance'>
@@ -11639,7 +11605,7 @@
       strokecolor="black"
     />
     <group name="Fig1.4"
-         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[1057, 160, 517, 255]"
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[1057, 160, 517, 247]"
          href="127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000012D9"
          fill="0"
          fillcolor="white"
@@ -11653,7 +11619,7 @@
         x="1057"
         y="160"
         width="517"
-        height="255"
+        height="247"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -11754,7 +11720,7 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >&lt;&lt;readonly&gt;&gt; payment_line_id : Many2one</text>
+      >&lt;&lt;form, hidden&gt;&gt; remaining_amount : Float</text>
       <text name="Fig1.4.7"
         x="1057"
         y="256"
@@ -11770,7 +11736,7 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >&lt;&lt;form, hidden&gt;&gt; remaining_amount : Float</text>
+      >&lt;&lt;tree&gt;&gt; definitive_amount : Float</text>
       <text name="Fig1.4.8"
         x="1057"
         y="272"
@@ -11786,7 +11752,7 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >&lt;&lt;tree&gt;&gt; definitive_amount : Float</text>
+      >&lt;&lt;tree&gt;&gt; invoiced_amount : Float</text>
       <text name="Fig1.4.9"
         x="1057"
         y="288"
@@ -11802,7 +11768,7 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >&lt;&lt;tree&gt;&gt; invoiced_amount : Float</text>
+      >&lt;&lt;tree&gt;&gt; to_pay_amount : Float</text>
       <text name="Fig1.4.10"
         x="1057"
         y="304"
@@ -11818,7 +11784,7 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >&lt;&lt;tree&gt;&gt; to_pay_amount : Float</text>
+      >&lt;&lt;tree&gt;&gt; paid_amount : Float</text>
       <text name="Fig1.4.11"
         x="1057"
         y="320"
@@ -11834,26 +11800,10 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >&lt;&lt;tree&gt;&gt; paid_amount : Float</text>
+      >&lt;&lt;readonly&gt;&gt; available_account_ids : Many2many</text>
       <text name="Fig1.4.12"
         x="1057"
         y="336"
-        width="517"
-        height="16"
-        fill="0"
-        fillcolor="white"
-        stroke="0"
-        strokecolor="black"
-        textcolor="black"
-        font="Dialog"
-        italic="false"
-        bold="false"
-        textsize="12"
-        justification="Left"
-      >&lt;&lt;readonly&gt;&gt; available_account_ids : Many2many</text>
-      <text name="Fig1.4.13"
-        x="1057"
-        y="352"
         width="517"
         height="22"
         fill="0"
@@ -11870,7 +11820,7 @@
     </group>
     <rectangle name="Fig1.5"
       x="1056"
-      y="415"
+      y="407"
       width="519"
       height="1"
       fill="1"
@@ -11879,7 +11829,7 @@
       strokecolor="black"
     />
     <group name="Fig1.6"
-         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[1057, 416, 517, 79]"
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[1057, 408, 517, 87]"
          href="127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000012D9"
          fill="0"
          fillcolor="white"
@@ -11891,9 +11841,9 @@
       
       <rectangle name="Fig1.6.0"
         x="1057"
-        y="416"
+        y="408"
         width="517"
-        height="79"
+        height="87"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -11901,7 +11851,7 @@
       />
       <text name="Fig1.6.1"
         x="1057"
-        y="416"
+        y="408"
         width="517"
         height="16"
         fill="0"
@@ -11917,7 +11867,7 @@
       >_get_amounts()</text>
       <text name="Fig1.6.2"
         x="1057"
-        y="432"
+        y="424"
         width="517"
         height="22"
         fill="0"
@@ -12940,8 +12890,8 @@
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigAssociationEndAnnotation"
                         ownerhref="127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000012F1"
-                        angle="154.00000000000003"
-                        offset="117" />
+                        angle="152.0"
+                        offset="118" />
     </private>
     <path name="Fig5.0"
       description="org.argouml.gefext.ArgoFigPoly"
@@ -32440,7 +32390,7 @@
       strokecolor="black"
     />
     <group name="Fig1.4"
-         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[33, 456, 490, 255]"
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[33, 456, 490, 247]"
          href="127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000012D9"
          fill="0"
          fillcolor="white"
@@ -32454,7 +32404,7 @@
         x="33"
         y="456"
         width="490"
-        height="255"
+        height="247"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -32555,7 +32505,7 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >&lt;&lt;readonly&gt;&gt; payment_line_id : Many2one</text>
+      >&lt;&lt;form, hidden&gt;&gt; remaining_amount : Float</text>
       <text name="Fig1.4.7"
         x="33"
         y="552"
@@ -32571,7 +32521,7 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >&lt;&lt;form, hidden&gt;&gt; remaining_amount : Float</text>
+      >&lt;&lt;tree&gt;&gt; definitive_amount : Float</text>
       <text name="Fig1.4.8"
         x="33"
         y="568"
@@ -32587,7 +32537,7 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >&lt;&lt;tree&gt;&gt; definitive_amount : Float</text>
+      >&lt;&lt;tree&gt;&gt; invoiced_amount : Float</text>
       <text name="Fig1.4.9"
         x="33"
         y="584"
@@ -32603,7 +32553,7 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >&lt;&lt;tree&gt;&gt; invoiced_amount : Float</text>
+      >&lt;&lt;tree&gt;&gt; to_pay_amount : Float</text>
       <text name="Fig1.4.10"
         x="33"
         y="600"
@@ -32619,7 +32569,7 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >&lt;&lt;tree&gt;&gt; to_pay_amount : Float</text>
+      >&lt;&lt;tree&gt;&gt; paid_amount : Float</text>
       <text name="Fig1.4.11"
         x="33"
         y="616"
@@ -32635,26 +32585,10 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >&lt;&lt;tree&gt;&gt; paid_amount : Float</text>
+      >&lt;&lt;readonly&gt;&gt; available_account_ids : Many2many</text>
       <text name="Fig1.4.12"
         x="33"
         y="632"
-        width="490"
-        height="16"
-        fill="0"
-        fillcolor="white"
-        stroke="0"
-        strokecolor="black"
-        textcolor="black"
-        font="Dialog"
-        italic="false"
-        bold="false"
-        textsize="12"
-        justification="Left"
-      >&lt;&lt;readonly&gt;&gt; available_account_ids : Many2many</text>
-      <text name="Fig1.4.13"
-        x="33"
-        y="648"
         width="490"
         height="22"
         fill="0"
@@ -32671,7 +32605,7 @@
     </group>
     <rectangle name="Fig1.5"
       x="32"
-      y="711"
+      y="703"
       width="492"
       height="1"
       fill="1"
@@ -32680,7 +32614,7 @@
       strokecolor="black"
     />
     <group name="Fig1.6"
-         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[33, 712, 490, 79]"
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[33, 704, 490, 87]"
          href="127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000012D9"
          fill="0"
          fillcolor="white"
@@ -32692,9 +32626,9 @@
       
       <rectangle name="Fig1.6.0"
         x="33"
-        y="712"
+        y="704"
         width="490"
-        height="79"
+        height="87"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -32702,7 +32636,7 @@
       />
       <text name="Fig1.6.1"
         x="33"
-        y="712"
+        y="704"
         width="490"
         height="16"
         fill="0"
@@ -32718,7 +32652,7 @@
       >_get_amounts()</text>
       <text name="Fig1.6.2"
         x="33"
-        y="728"
+        y="720"
         width="490"
         height="22"
         fill="0"
@@ -35835,7 +35769,7 @@
       strokecolor="black"
     />
     <group name="Fig5.4"
-         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[1017, 392, 490, 239]"
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[1017, 392, 490, 231]"
          href="127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000012D9"
          fill="0"
          fillcolor="white"
@@ -35849,7 +35783,7 @@
         x="1017"
         y="392"
         width="490"
-        height="239"
+        height="231"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -35950,7 +35884,7 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >&lt;&lt;readonly&gt;&gt; payment_line_id : Many2one</text>
+      >&lt;&lt;form, hidden&gt;&gt; remaining_amount : Float</text>
       <text name="Fig5.4.7"
         x="1017"
         y="488"
@@ -35966,7 +35900,7 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >&lt;&lt;form, hidden&gt;&gt; remaining_amount : Float</text>
+      >&lt;&lt;tree&gt;&gt; definitive_amount : Float</text>
       <text name="Fig5.4.8"
         x="1017"
         y="504"
@@ -35982,7 +35916,7 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >&lt;&lt;tree&gt;&gt; definitive_amount : Float</text>
+      >&lt;&lt;tree&gt;&gt; invoiced_amount : Float</text>
       <text name="Fig5.4.9"
         x="1017"
         y="520"
@@ -35998,7 +35932,7 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >&lt;&lt;tree&gt;&gt; invoiced_amount : Float</text>
+      >&lt;&lt;tree&gt;&gt; to_pay_amount : Float</text>
       <text name="Fig5.4.10"
         x="1017"
         y="536"
@@ -36014,7 +35948,7 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >&lt;&lt;tree&gt;&gt; to_pay_amount : Float</text>
+      >&lt;&lt;tree&gt;&gt; paid_amount : Float</text>
       <text name="Fig5.4.11"
         x="1017"
         y="552"
@@ -36030,26 +35964,10 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >&lt;&lt;tree&gt;&gt; paid_amount : Float</text>
+      >&lt;&lt;readonly&gt;&gt; available_account_ids : Many2many</text>
       <text name="Fig5.4.12"
         x="1017"
         y="568"
-        width="490"
-        height="16"
-        fill="0"
-        fillcolor="white"
-        stroke="0"
-        strokecolor="black"
-        textcolor="black"
-        font="Dialog"
-        italic="false"
-        bold="false"
-        textsize="12"
-        justification="Left"
-      >&lt;&lt;readonly&gt;&gt; available_account_ids : Many2many</text>
-      <text name="Fig5.4.13"
-        x="1017"
-        y="584"
         width="490"
         height="22"
         fill="0"
@@ -36066,7 +35984,7 @@
     </group>
     <rectangle name="Fig5.5"
       x="1016"
-      y="631"
+      y="623"
       width="492"
       height="1"
       fill="1"
@@ -36075,7 +35993,7 @@
       strokecolor="black"
     />
     <group name="Fig5.6"
-         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[1017, 632, 490, 63]"
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[1017, 624, 490, 71]"
          href="127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000012D9"
          fill="0"
          fillcolor="white"
@@ -36087,9 +36005,9 @@
       
       <rectangle name="Fig5.6.0"
         x="1017"
-        y="632"
+        y="624"
         width="490"
-        height="63"
+        height="71"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -36097,7 +36015,7 @@
       />
       <text name="Fig5.6.1"
         x="1017"
-        y="632"
+        y="624"
         width="490"
         height="16"
         fill="0"
@@ -36113,7 +36031,7 @@
       >_get_amounts()</text>
       <text name="Fig5.6.2"
         x="1017"
-        y="648"
+        y="640"
         width="490"
         height="22"
         fill="0"

@@ -34,11 +34,6 @@ class preventive_line(models.Model):
     advance_line = fields.Boolean(
         string='advance_line'
         )
-    payment_line_id = fields.Many2one(
-        comodel_name='payment.line',
-        string='Payment line',
-        readonly=True
-        )
     remaining_amount = fields.Float(
         string='Remaining Amount',
         compute='_get_amounts'
