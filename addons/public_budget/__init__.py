@@ -14,7 +14,6 @@ import invoice_line
 import rest_type
 import budget_position
 import company
-import expedient_move
 import budget_detail
 import budget_prec_detail
 import preventive_line
@@ -23,6 +22,7 @@ import account
 import transaction
 import budget_position_category
 import budget
+import remit
 import advance_return_line
 import budget_pos_exc_rest
 import budget_modification

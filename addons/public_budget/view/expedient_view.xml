@@ -23,6 +23,8 @@
                             />
                     <field name="current_location_id" string="Current Location"
                             />
+                    <field name="in_transit" string="In Transit?"
+                            />
                     <field name="supplier_ids" string="Suppliers"
                             />
                     <group expand="0" string="Group By">
@@ -81,8 +83,6 @@
                             /> 
                         <field name="category_id"
                             /> 
-                        <field name="first_location_id"
-                            /> 
                         <field name="type"
                             /> 
                         <field name="current_location_id"
@@ -91,15 +91,16 @@
                             /> 
                         <field name="final_location"
                             /> 
-                        <field name="expedient_move_ids"
-                            context="{'expedient':active_id}"
-                        /> 
+                        <field name="in_transit"
+                            /> 
                         <field name="child_ids"
                         /> 
                         <field name="parent_id"
                         /> 
                         <field name="supplier_ids"
                             widget="many2many_tags"
+                        /> 
+                        <field name="remit_ids"
                         /> 
                      </group>
                     </sheet>
@@ -131,6 +132,8 @@
                     <field name="type"
                         />
                     <field name="current_location_id"
+                        />
+                    <field name="in_transit"
                         />
                     <field name="state"
                         />

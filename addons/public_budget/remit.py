@@ -3,13 +3,20 @@ from openerp import models, fields, api, _
 from openerp.exceptions import Warning
 
 
-class expedient_move(models.Model):
-    """Expedient Move"""
+class remit(models.Model):
+    """Remit"""
 
-    _name = 'public_budget.expedient_move'
-    _description = 'Expedient Move'
+    _name = 'public_budget.remit'
+    _description = 'Remit'
 
     _order = "date desc"
+
+    _states_ = [
+        # State machine: untitle
+        ('in_transit', 'In Transit'),
+        ('confirmed', 'confirmed'),
+        ('cancel', 'Cancel'),
+    ]
 
     date = fields.Datetime(
         string='Date',
@@ -32,14 +39,29 @@ class expedient_move(models.Model):
         string='Destination Location',
         required=True
         )
-    expedient_id = fields.Many2one(
+    state = fields.Selection(
+        _states_,
+        'State',
+        default='in_transit',
+        )
+    expedient_ids = fields.Many2many(
         'public_budget.expedient',
-        ondelete='cascade',
-        string='Expedient',
+        'public_budget_remit_ids_expedient_ids_rel',
+        'remit_id',
+        'expedient_id',
+        string='Expedients',
         required=True
         )
 
     _constraints = [
     ]
+
+    @api.multi
+    def action_cancel_in_transit(self):
+        # go from canceled state to draft state
+        self.write({'state': 'in_transit'})
+        self.delete_workflow()
+        self.create_workflow()
+        return True
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

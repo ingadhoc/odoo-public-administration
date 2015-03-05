@@ -2,11 +2,11 @@
 <openerp>
     <data>
         <!-- SEARCH VIEW -->
-        <record id="view_public_budget_expedient_move_filter" model="ir.ui.view">
-            <field name="name">public_budget.expedient_move.select</field>
-            <field name="model">public_budget.expedient_move</field>
+        <record id="view_public_budget_remit_filter" model="ir.ui.view">
+            <field name="name">public_budget.remit.select</field>
+            <field name="model">public_budget.remit</field>
             <field name="arch" type="xml">
-                <search string="Expedient Move">
+                <search string="Remit">
                     <field name="date" string="Date"
                             />
                     <field name="user_id" string="User"
@@ -22,14 +22,31 @@
         </record>
 
         <!-- FORMVIEW -->
-        <record id="view_public_budget_expedient_move_form" model="ir.ui.view">
-            <field name="name">public_budget.expedient_move.form</field>
-            <field name="model">public_budget.expedient_move</field>
+        <record id="view_public_budget_remit_form" model="ir.ui.view">
+            <field name="name">public_budget.remit.form</field>
+            <field name="model">public_budget.remit</field>
             <field name="arch" type="xml">
-                <form string="Expedient Move">
+                <form string="Remit">
                     <header>
+                        <button name="sgn_confirm"
+                            states="in_transit"
+                            string="Confirm"
+                            class="oe_highlight"
+                            />
+                        <button name="action_cancel_in_transit"
+                            type="object"
+                            states="cancel"
+                            string="To In Transit"
+                            />
+                        <button name="sgn_cancel"
+                            states="confirmed,in_transit"
+                            string="Cancel"
+                            />
+                        <field name="state" widget="statusbar"
+                            statusbar_colors='{}'
+                            />
                     </header>
-                    <sheet string="Expedient Move">
+                    <sheet string="Remit">
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
                      <group>
@@ -41,6 +58,9 @@
                             /> 
                         <field name="location_dest_id"
                             /> 
+                        <field name="expedient_ids"
+                            domain="[('current_location_id','=',location_id),('in_transit','=',False)]"
+                        /> 
                      </group>
                     </sheet>
 
@@ -49,12 +69,12 @@
         </record>
 
         <!-- TREEVIEW -->
-        <record id="view_public_budget_expedient_move_tree" model="ir.ui.view">
-            <field name="name">public_budget.expedient_move.tree</field>
-            <field name="model">public_budget.expedient_move</field>
+        <record id="view_public_budget_remit_tree" model="ir.ui.view">
+            <field name="name">public_budget.remit.tree</field>
+            <field name="model">public_budget.remit</field>
             <field name="arch" type="xml">
-                <tree string="Expedient Move"
-                    editable="top"
+                <tree string="Remit"
+                    colors="grey:state=='cancelled';blue:state in (u'in_transit',);black:state in (u'confirmed',);red:state in ()"
                     >
                     <field name="date"
                         />
@@ -63,6 +83,8 @@
                     <field name="location_id"
                         />
                     <field name="location_dest_id"
+                        />
+                    <field name="state"
                         />
                 </tree>
             </field>

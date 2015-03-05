@@ -53,10 +53,6 @@ class expedient(models.Model):
         string='Category',
         required=True
         )
-    first_location_id = fields.Many2one(
-        'public_budget.location',
-        string='First Location'
-        )
     type = fields.Selection(
         [(u'payment', u'Payment'), (u'authorizing', u'Authorizing')],
         string='Type'
@@ -77,15 +73,15 @@ class expedient(models.Model):
         string='Year',
         compute='_get_year'
         )
+    in_transit = fields.Boolean(
+        string='In Transit?',
+        store=True,
+        compute='_get_current_location'
+        )
     state = fields.Selection(
         _states_,
         'State',
         default='open',
-        )
-    expedient_move_ids = fields.One2many(
-        'public_budget.expedient_move',
-        'expedient_id',
-        string='Moves'
         )
     child_ids = fields.One2many(
         'public_budget.expedient',
@@ -104,6 +100,13 @@ class expedient(models.Model):
         string='Suppliers',
         context={'default_supplier': 1},
         domain=[('supplier', '=', True)]
+        )
+    remit_ids = fields.Many2many(
+        'public_budget.remit',
+        'public_budget_remit_ids_expedient_ids_rel',
+        'expedient_id',
+        'remit_id',
+        string='Remits'
         )
 
     _constraints = [

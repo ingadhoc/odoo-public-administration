@@ -29,9 +29,6 @@
 "access_public_budget_funding_move_manager","public_budget_funding_move.manager","model_public_budget_funding_move","group_manager",1,1,1,1
 "access_public_budget_funding_move_user","public_budget_funding_move.user","model_public_budget_funding_move","group_user",1,1,1,1
 "access_public_budget_funding_move_secretary","public_budget_funding_move.secretary","model_public_budget_funding_move","group_secretary",1,1,1,1
-"access_public_budget_expedient_move_manager","public_budget_expedient_move.manager","model_public_budget_expedient_move","group_manager",1,1,1,1
-"access_public_budget_expedient_move_user","public_budget_expedient_move.user","model_public_budget_expedient_move","group_user",1,1,1,1
-"access_public_budget_expedient_move_secretary","public_budget_expedient_move.secretary","model_public_budget_expedient_move","group_secretary",1,1,1,1
 "access_public_budget_location_manager","public_budget_location.manager","model_public_budget_location","group_manager",1,1,1,1
 "access_public_budget_location_user","public_budget_location.user","model_public_budget_location","group_user",1,1,1,1
 "access_public_budget_location_secretary","public_budget_location.secretary","model_public_budget_location","group_secretary",1,1,1,1
@@ -92,3 +89,6 @@
 "access_public_budget_preventive_line_manager","public_budget_preventive_line.manager","model_public_budget_preventive_line","group_manager",1,1,1,1
 "access_public_budget_preventive_line_user","public_budget_preventive_line.user","model_public_budget_preventive_line","group_user",1,1,1,1
 "access_public_budget_preventive_line_secretary","public_budget_preventive_line.secretary","model_public_budget_preventive_line","group_secretary",1,1,1,1
+"access_public_budget_remit_manager","public_budget_remit.manager","model_public_budget_remit","group_manager",1,1,1,1
+"access_public_budget_remit_user","public_budget_remit.user","model_public_budget_remit","group_user",1,1,1,1
+"access_public_budget_remit_secretary","public_budget_remit.secretary","model_public_budget_remit","group_secretary",1,1,1,1
