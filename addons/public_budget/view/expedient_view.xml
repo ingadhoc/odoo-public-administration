@@ -91,16 +91,13 @@
                                 <field name="category_id"/>
                                 <field name="type"/>
                                 <field name="parent_id"/>
-                                <field name="first_location_id"/>
+                                <field name="current_location_id"/>
                                 <field name="final_location" states="closed,annulled"/>
                             </group>
                         </group>
                         <notebook>
                             <page string="Moves">
-                                <group>
-                                    <field name="current_location_id"/>
-                                    <field name="expedient_move_ids" context="{'expedient':active_id}"/>
-                                </group>
+                                <field name="remit_ids"/>
                             </page>
                             <page string="Childs">
                                 <field name="child_ids"/>

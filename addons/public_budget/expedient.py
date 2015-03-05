@@ -66,8 +66,8 @@ class expedient(models.Model):
     current_location_id = fields.Many2one(
         'public_budget.location',
         string='Current Location',
-        store=True,
-        compute='_get_current_location'
+        # store=True,
+        # compute='_get_current_location' #sacamos el compute para que se pueda setear por primera vez
         )
     note = fields.Html(
         string='Note'
@@ -134,23 +134,29 @@ class expedient(models.Model):
 
     @api.one
     @api.depends(
-        'first_location_id',
-        'expedient_move_ids',
-        'expedient_move_ids.location_dest_id',
-        'expedient_move_ids.date')
+        'remit_ids',
+        'remit_ids.location_id',
+        'remit_ids.location_dest_id',
+        'remit_ids.state',
+        )
     def _get_current_location(self):
-        """"""
-        moves = self.env['public_budget.expedient_move'].search([
-            ('expedient_id', '=', self.id)], order='date desc')
+        """
+        current_location_id no es computed
+        los otros dos si
+        """
+        moves = self.env['public_budget.remit'].search([
+            ('expedient_ids', '=', self.id)], order='date desc')
         last_move_date = False
+        current_location_id = False
+        in_transit = False
         if moves:
             self.current_location_id = moves[0].location_dest_id.id
             last_move_date = moves[0].date
-        elif self.first_location_id:
-            self.current_location_id = self.first_location_id.id
-        else:
-            self.current_location_id = False
+            in_transit = moves[0].in_transit
+
+        self.current_location_id = current_location_id
         self.last_move_date = last_move_date
+        self.in_transit = in_transit
 
     @api.one
     @api.depends('issue_date')

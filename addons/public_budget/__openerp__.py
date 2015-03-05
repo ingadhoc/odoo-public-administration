@@ -5,7 +5,6 @@
                 u'view/account_voucher_view.xml',
                 u'wizard/transaction_definitive_make_invoice_view.xml',
                 u'wizard/transaction_create_refund_voucher_view.xml',
-                u'wizard/public_budget_expedients_move_wizard_view.xml',
                 u'view/inventory_rule_view.xml',
                 u'view/voucher_view.xml',
                 u'view/invoice_view.xml',
@@ -108,18 +107,12 @@
                 u'workflow/funding_move_workflow.xml',
                 u'workflow/advance_request_workflow.xml',
                 u'workflow/advance_return_workflow.xml',
-<<<<<<< HEAD
                 u'workflow/remit_workflow.xml',
-                'security/ir.model.access.csv',
-=======
                 u'security/ir.model.access.csv',
->>>>>>> IMP merge con modificaciones
                 u'view/public_budget_menuitem.xml',
                 u'wizard/wizards_menus.xml',
                 u'view/public_budget_actions.xml'],
-    'depends': [
-        'account_voucher',
-        ],
+    'depends': [u'account'],
     'description': u'Public Budget',
     'installable': True,
     'license': 'AGPL-3',
