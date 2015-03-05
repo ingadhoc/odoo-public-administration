@@ -3,22 +3,17 @@ from openerp import models, fields, api, _
 from openerp.exceptions import Warning
 
 
-class payment_order(models.Model):
+class account_voucher(models.Model):
     """"""
 
-    _name = 'payment.order'
+    _name = 'account.voucher'
     _inherits = {}
-    _inherit = ['payment.order']
+    _inherit = ['account.voucher']
 
     type_with_advance_payment = fields.Boolean(
         string='With advance payment?',
         readonly=True,
         related='transaction_id.type_id.with_advance_payment'
-        )
-    partner_id = fields.Many2one(
-        'res.partner',
-        string='Partner',
-        states={'done': [('readonly', True)]}
         )
     note = fields.Html(
         string='Note'
@@ -38,7 +33,7 @@ class payment_order(models.Model):
     @api.one
     def _get_paid(self):
         """"""
-        parent = super(payment_order,self)
+        parent = super(account_voucher,self)
         result = parent._get_paid() if hasattr(parent, '_get_paid') else False
         return result
 

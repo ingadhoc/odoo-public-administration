@@ -71,9 +71,9 @@
 "access_account_invoice_line_manager","account_invoice_line.manager","model_account_invoice_line","group_manager",1,1,1,1
 "access_account_invoice_line_user","account_invoice_line.user","model_account_invoice_line","group_user",1,1,1,1
 "access_account_invoice_line_secretary","account_invoice_line.secretary","model_account_invoice_line","group_secretary",1,1,1,1
-"access_payment_order_manager","payment_order.manager","model_payment_order","group_manager",1,1,1,1
-"access_payment_order_user","payment_order.user","model_payment_order","group_user",1,1,1,1
-"access_payment_order_secretary","payment_order.secretary","model_payment_order","group_secretary",1,1,1,1
+"access_account_voucher_manager","account_voucher.manager","model_account_voucher","group_manager",1,1,1,1
+"access_account_voucher_user","account_voucher.user","model_account_voucher","group_user",1,1,1,1
+"access_account_voucher_secretary","account_voucher.secretary","model_account_voucher","group_secretary",1,1,1,1
 "access_public_budget_budget_position_manager","public_budget_budget_position.manager","model_public_budget_budget_position","group_manager",1,1,1,1
 "access_public_budget_budget_position_user","public_budget_budget_position.user","model_public_budget_budget_position","group_user",1,1,1,1
 "access_public_budget_budget_position_secretary","public_budget_budget_position.secretary","model_public_budget_budget_position","group_secretary",1,1,1,1

@@ -27,7 +27,7 @@ class advance_request(models.Model):
         required=True
         )
     payment_order_id = fields.Many2one(
-        'payment.order',
+        'account.voucher',
         string='Payment Order',
         readonly=True
         )

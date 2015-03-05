@@ -1,4 +1,4 @@
-import payment_order
+import account_voucher
 import inventory_rule
 import voucher
 import invoice

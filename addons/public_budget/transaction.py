@@ -190,8 +190,8 @@ class transaction(models.Model):
         track_visibility='always',
         readonly=True
         )
-    payment_order_ids = fields.One2many(
-        'payment.order',
+    voucher_ids = fields.One2many(
+        'account.voucher',
         'transaction_id',
         string='Payment Orders'
         )
