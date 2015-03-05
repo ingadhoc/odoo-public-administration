@@ -91,6 +91,7 @@
                                 <field name="category_id"/>
                                 <field name="type"/>
                                 <field name="parent_id"/>
+                                <field name="first_location_id"/>
                                 <field name="current_location_id"/>
                                 <field name="final_location" states="closed,annulled"/>
                             </group>
