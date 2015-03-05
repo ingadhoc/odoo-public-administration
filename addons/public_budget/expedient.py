@@ -88,7 +88,7 @@ class expedient(models.Model):
         related='user_id.location_ids'
         )
     user_id = fields.Many2one(
-        'public_budget.users',
+        'res.users',
         string='User',
         readonly=True,
         required=True,

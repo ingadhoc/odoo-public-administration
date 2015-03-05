@@ -24,7 +24,7 @@ class remit(models.Model):
         default=lambda self: fields.datetime.now()
         )
     user_id = fields.Many2one(
-        'public_budget.users',
+        'res.users',
         string='User',
         readonly=True,
         required=True,

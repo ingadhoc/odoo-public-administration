@@ -6,9 +6,17 @@ from openerp.exceptions import Warning
 class users(models.Model):
     """"""
 
-    _name = 'public_budget.users'
-    _description = 'users'
+    _name = 'res.users'
+    _inherits = {}
+    _inherit = ['res.users']
 
+    location_ids = fields.Many2many(
+        'public_budget.location',
+        'public_budget_user_ids_location_ids_rel',
+        'users_id',
+        'location_id',
+        string='Locations'
+        )
 
     _constraints = [
     ]

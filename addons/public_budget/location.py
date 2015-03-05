@@ -16,7 +16,7 @@ class location(models.Model):
         required=True
         )
     user_ids = fields.Many2many(
-        'public_budget.users',
+        'res.users',
         'public_budget_user_ids_location_ids_rel',
         'location_id',
         'users_id',

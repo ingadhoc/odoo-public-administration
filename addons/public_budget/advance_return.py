@@ -22,7 +22,7 @@ class advance_return(models.Model):
         default=fields.Date.context_today
         )
     user_id = fields.Many2one(
-        'public_budget.users',
+        'res.users',
         string='User',
         required=True
         )

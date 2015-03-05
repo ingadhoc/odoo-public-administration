@@ -92,6 +92,6 @@
 "access_public_budget_location_manager","public_budget_location.manager","model_public_budget_location","group_manager",1,1,1,1
 "access_public_budget_location_user","public_budget_location.user","model_public_budget_location","group_user",1,1,1,1
 "access_public_budget_location_secretary","public_budget_location.secretary","model_public_budget_location","group_secretary",1,1,1,1
-"access_public_budget_users_manager","public_budget_users.manager","model_public_budget_users","group_manager",1,1,1,1
-"access_public_budget_users_user","public_budget_users.user","model_public_budget_users","group_user",1,1,1,1
-"access_public_budget_users_secretary","public_budget_users.secretary","model_public_budget_users","group_secretary",1,1,1,1
+"access_res_users_manager","res_users.manager","model_res_users","group_manager",1,1,1,1
+"access_res_users_user","res_users.user","model_res_users","group_user",1,1,1,1
+"access_res_users_secretary","res_users.secretary","model_res_users","group_secretary",1,1,1,1
