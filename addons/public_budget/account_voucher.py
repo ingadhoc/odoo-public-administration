@@ -45,13 +45,6 @@ class account_voucher(models.Model):
             self.partner_id = partner_ids[0]
         self.partner_ids = partner_ids
 
-    @api.one
-    def _get_paid(self):
-        """"""
-        parent = super(account_voucher,self)
-        result = parent._get_paid() if hasattr(parent, '_get_paid') else False
-        return result
-
     @api.multi
     def action_search_entries(self):
         if not self.transaction_id:
@@ -85,5 +78,4 @@ class account_voucher(models.Model):
                 'target': 'new',
                 }
 
->>>>>>> IMP merge con modificaciones
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
