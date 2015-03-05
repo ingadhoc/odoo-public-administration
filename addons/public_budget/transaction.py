@@ -34,7 +34,7 @@ class transaction(models.Model):
         states={'draft': [('readonly', False)], 'open': [('readonly', False)]}
         )
     user_id = fields.Many2one(
-        'res.users',
+        'public_budget.users',
         string='User',
         readonly=True,
         required=True,

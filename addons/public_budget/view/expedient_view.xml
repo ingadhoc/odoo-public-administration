@@ -85,14 +85,19 @@
                             /> 
                         <field name="type"
                             /> 
+                        <field name="first_location_id"
+                            domain="[('id','in',user_location_ids)]"
+                            /> 
                         <field name="current_location_id"
-                            attrs="{'readonly':[('remit_ids', '=', [(6, False, [])])]}"
                             /> 
                         <field name="note"
                             /> 
                         <field name="final_location"
                             /> 
                         <field name="in_transit"
+                            /> 
+                        <field name="user_location_ids"
+                            invisible="True"
                             /> 
                         <field name="child_ids"
                         /> 

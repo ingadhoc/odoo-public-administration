@@ -57,6 +57,10 @@ class expedient(models.Model):
         [(u'payment', u'Payment'), (u'authorizing', u'Authorizing')],
         string='Type'
         )
+    first_location_id = fields.Many2one(
+        'public_budget.location',
+        string='First Location'
+        )
     current_location_id = fields.Many2one(
         'public_budget.location',
         string='Current Location',
@@ -77,6 +81,11 @@ class expedient(models.Model):
         string='In Transit?',
         store=True,
         compute='_get_current_location'
+        )
+    user_location_ids = fields.Many2many(
+        comodel_name='public_budget.location',
+        string='User Locations',
+        related='user_id.location_ids'
         )
     state = fields.Selection(
         _states_,

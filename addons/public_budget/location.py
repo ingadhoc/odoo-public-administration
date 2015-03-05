@@ -15,6 +15,13 @@ class location(models.Model):
         string='Name',
         required=True
         )
+    user_ids = fields.Many2many(
+        'public_budget.users',
+        'public_budget_user_ids_location_ids_rel',
+        'location_id',
+        'users_id',
+        string='Users'
+        )
 
     _constraints = [
     ]

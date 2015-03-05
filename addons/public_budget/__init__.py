@@ -12,6 +12,7 @@ import budget_modification_detail
 import funding_move
 import invoice_line
 import rest_type
+import users
 import budget_position
 import company
 import budget_detail

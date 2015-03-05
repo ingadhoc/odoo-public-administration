@@ -29,9 +29,6 @@
 "access_public_budget_funding_move_manager","public_budget_funding_move.manager","model_public_budget_funding_move","group_manager",1,1,1,1
 "access_public_budget_funding_move_user","public_budget_funding_move.user","model_public_budget_funding_move","group_user",1,1,1,1
 "access_public_budget_funding_move_secretary","public_budget_funding_move.secretary","model_public_budget_funding_move","group_secretary",1,1,1,1
-"access_public_budget_location_manager","public_budget_location.manager","model_public_budget_location","group_manager",1,1,1,1
-"access_public_budget_location_user","public_budget_location.user","model_public_budget_location","group_user",1,1,1,1
-"access_public_budget_location_secretary","public_budget_location.secretary","model_public_budget_location","group_secretary",1,1,1,1
 "access_account_account_manager","account_account.manager","model_account_account","group_manager",1,1,1,1
 "access_account_account_user","account_account.user","model_account_account","group_user",1,1,1,1
 "access_account_account_secretary","account_account.secretary","model_account_account","group_secretary",1,1,1,1
@@ -92,3 +89,9 @@
 "access_public_budget_remit_manager","public_budget_remit.manager","model_public_budget_remit","group_manager",1,1,1,1
 "access_public_budget_remit_user","public_budget_remit.user","model_public_budget_remit","group_user",1,1,1,1
 "access_public_budget_remit_secretary","public_budget_remit.secretary","model_public_budget_remit","group_secretary",1,1,1,1
+"access_public_budget_location_manager","public_budget_location.manager","model_public_budget_location","group_manager",1,1,1,1
+"access_public_budget_location_user","public_budget_location.user","model_public_budget_location","group_user",1,1,1,1
+"access_public_budget_location_secretary","public_budget_location.secretary","model_public_budget_location","group_secretary",1,1,1,1
+"access_public_budget_users_manager","public_budget_users.manager","model_public_budget_users","group_manager",1,1,1,1
+"access_public_budget_users_user","public_budget_users.user","model_public_budget_users","group_user",1,1,1,1
+"access_public_budget_users_secretary","public_budget_users.secretary","model_public_budget_users","group_secretary",1,1,1,1

@@ -22,7 +22,7 @@ class advance_request(models.Model):
         default=fields.Date.context_today
         )
     user_id = fields.Many2one(
-        'res.users',
+        'public_budget.users',
         string='User',
         required=True
         )
