@@ -87,6 +87,13 @@ class expedient(models.Model):
         string='User Locations',
         related='user_id.location_ids'
         )
+    user_id = fields.Many2one(
+        'public_budget.users',
+        string='User',
+        readonly=True,
+        required=True,
+        default=lambda self: self.env.user
+        )
     state = fields.Selection(
         _states_,
         'State',

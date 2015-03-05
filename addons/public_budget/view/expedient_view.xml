@@ -25,6 +25,8 @@
                             />
                     <field name="in_transit" string="In Transit?"
                             />
+                    <field name="user_id" string="User"
+                            />
                     <field name="supplier_ids" string="Suppliers"
                             />
                     <group expand="0" string="Group By">
@@ -99,6 +101,8 @@
                         <field name="user_location_ids"
                             invisible="True"
                             /> 
+                        <field name="user_id"
+                            /> 
                         <field name="child_ids"
                         /> 
                         <field name="parent_id"
@@ -140,6 +144,8 @@
                     <field name="current_location_id"
                         />
                     <field name="in_transit"
+                        />
+                    <field name="user_id"
                         />
                     <field name="state"
                         />
