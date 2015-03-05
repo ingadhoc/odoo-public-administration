@@ -134,6 +134,7 @@ class expedient(models.Model):
 
     @api.one
     @api.depends(
+        'first_location_id',
         'remit_ids',
         'remit_ids.location_id',
         'remit_ids.location_dest_id',
@@ -159,6 +160,8 @@ class expedient(models.Model):
                     in_transit = True
                 else:
                     in_transit = False
+        else:
+            current_location_id = self.first_location_id.id
 
         print 'current_location_id', current_location_id
         self.current_location_id = current_location_id
