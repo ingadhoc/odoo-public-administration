@@ -50,11 +50,6 @@
                             /> 
                         <field name="user_id"
                             /> 
-                        <field name="payment_order_id"
-                            /> 
-                        <field name="company_id"
-                            groups="base.group_multi_company"
-                            /> 
                         <field name="advance_request_line_ids"
                         /> 
                      </group>

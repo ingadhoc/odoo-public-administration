@@ -66,11 +66,6 @@ class transaction(models.Model):
         string='Vouchers',
         readonly=True
         )
-    payment_order_ids = fields.Many2one(
-        'account.invoice',
-        string='Payment Orders',
-        readonly=True
-        )
     note = fields.Html(
         string='Note'
         )
@@ -113,18 +108,9 @@ class transaction(models.Model):
         context={'default_advance_line': 1, 'default_preventive_status': 'confirmed', 'advance_line': 1},
         domain=[('advance_line', '=', True)]
         )
-    advance_payment_order_ids = fields.One2many(
-        comodel_name='payment.order',
-        inverse_name='transaction_id',
-        string='Payment Orders'
-        )
     refund_voucher_count = fields.Integer(
         string='Refund Vouchers',
         compute='_refund_voucher_count'
-        )
-    payment_order_count = fields.Float(
-        string='Payment Orders',
-        compute='_payment_order_count'
         )
     preventive_amount = fields.Float(
         string='Preventive Amount',
@@ -136,10 +122,6 @@ class transaction(models.Model):
         )
     remaining_amount = fields.Float(
         string='Remaining Amount',
-        compute='_get_amounts'
-        )
-    payment_order_amount = fields.Float(
-        string='Payment Orderes Amount',
         compute='_get_amounts'
         )
     advance_remaining_amount = fields.Float(
@@ -211,11 +193,6 @@ class transaction(models.Model):
 
     @api.one
     def _refund_voucher_count(self):
-        """"""
-        raise NotImplementedError
-
-    @api.one
-    def _payment_order_count(self):
         """"""
         raise NotImplementedError
 

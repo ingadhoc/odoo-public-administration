@@ -26,17 +26,6 @@ class advance_request(models.Model):
         string='User',
         required=True
         )
-    payment_order_id = fields.Many2one(
-        'account.voucher',
-        string='Payment Order',
-        readonly=True
-        )
-    company_id = fields.Many2one(
-        'res.company',
-        string='Company',
-        required=True,
-        default=lambda self: self.env['res.company']._company_default_get('public_budget.advance_request')
-        )
     state = fields.Selection(
         _states_,
         'State',

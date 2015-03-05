@@ -78,8 +78,6 @@
                             /> 
                         <field name="invoice_ids"
                             /> 
-                        <field name="payment_order_ids"
-                            /> 
                         <field name="note"
                             /> 
                         <field name="type_with_advance_payment"
