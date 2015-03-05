@@ -224,11 +224,6 @@ class transaction(models.Model):
         self.refund_voucher_count = len(self.refund_voucher_ids)
 
     @api.one
-    @api.depends('payment_order_ids')
-    def _payment_order_count(self):
-        self.payment_order_count = len(self.payment_order_ids)
-
-    @api.one
     @api.depends(
         'advance_preventive_line_ids',
         'refund_voucher_ids',
@@ -239,22 +234,25 @@ class transaction(models.Model):
         refund_voucher_amount = sum(
             x.amount for x in self.refund_voucher_ids if x.state == 'posted')
         self.refund_voucher_amount = refund_voucher_amount
-        self.advance_remaining_amount = self.payment_order_amount - \
-            refund_voucher_amount - self.paid_amount
+        self.advance_remaining_amount = False
+        # TODO
+        # self.advance_remaining_amount = self.payment_order_amount - \
+            # refund_voucher_amount - self.paid_amount
 
     @api.one
     @api.depends(
         'preventive_line_ids',
-        'payment_order_ids',
-        'payment_order_ids.state',
-        'total',
+        # 'payment_order_ids',
+        # 'payment_order_ids.state',
+        # 'total',
     )
     def _get_amounts(self):
         preventive_amount = sum([
             preventive.preventive_amount
             for preventive in self.preventive_line_ids])
-        payment_order_amount = sum(
-            x.total for x in self.payment_order_ids if x.state == 'done')
+        # TODO
+        # payment_order_amount = sum(
+        #     x.total for x in self.payment_order_ids if x.state == 'done')
         # definitive_amount = sum([
         #     preventive.definitive_amount
         #     for preventive in self.preventive_line_ids])
@@ -266,8 +264,8 @@ class transaction(models.Model):
         #     for preventive in self.preventive_line_ids])
         paid_amount = sum([
             preventive.paid_amount for preventive in self.definitive_line_ids])
-        self.remaining_amount = self.total - preventive_amount
-        self.payment_order_amount = payment_order_amount
+        # self.remaining_amount = self.total - preventive_amount
+        # self.payment_order_amount = payment_order_amount
         self.preventive_amount = preventive_amount
         # self.definitive_amount = definitive_amount
         # self.invoiced_amount = invoiced_amount
@@ -307,37 +305,15 @@ class transaction(models.Model):
         'type_id', 'advance_preventive_line_ids', 'preventive_line_ids')
     def _check_advance_preventive_lines(self):
         if self.type_id.with_advance_payment:
-            payment_order_amount = sum(
-                x.total for x in self.payment_order_ids if x.state == 'done')
+            # payment_order_amount = sum(
+                # x.total for x in self.payment_order_ids if x.state == 'done')
             preventive_amount = sum(
                 [x.preventive_amount for x in
                     self.preventive_line_ids])
-            if payment_order_amount < preventive_amount:
-                raise Warning(
-                    _("In transactions with 'Advance Payment', \
-                        Settlement Amount can't be greater than Payment Orders Amount"))
-
-    @api.one
-    @api.constrains('total', 'preventive_line_ids')
-    def _check_preventive_amount(self):
-        conf_preventive_amount = sum(
-            [x.preventive_amount for x in
-                self.preventive_line_ids])
-        if self.total < conf_preventive_amount:
-            raise Warning(
-                _("Preventive Amounts can't be \
-                    greater than Transaction Total"))
-
-    @api.one
-    @api.constrains('total', 'advance_preventive_line_ids')
-    def _check_advance_preventive_amount(self):
-        conf_preventive_amount = sum(
-            [x.preventive_amount for x in
-                self.advance_preventive_line_ids])
-        if self.total < conf_preventive_amount:
-            raise Warning(
-                _("Avance Preventive Amounts can't be \
-                    greater than Transaction Total"))
+            # if payment_order_amount < preventive_amount:
+            #     raise Warning(
+            #         _("In transactions with 'Advance Payment', \
+            #             Settlement Amount can't be greater than Payment Orders Amount"))
 
     @api.one
     @api.constrains('total', 'expedient_id')

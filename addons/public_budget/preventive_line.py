@@ -56,7 +56,7 @@ class preventive_line(models.Model):
     state = fields.Selection(
         selection=[('draft', 'Draft'), ('open', 'Open'), ('definitive', 'definitive'), ('invoiced', 'invoiced'), ('closed', 'closed'), ('cancel', 'Cancel')],
         string='States',
-        compute='_get_state'
+        # compute='_get_state'
         )
     transaction_id = fields.Many2one(
         'public_budget.transaction',
