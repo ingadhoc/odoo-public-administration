@@ -104,7 +104,7 @@
 			</model>
 		</userDefined>
 </profile>
-<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Thu Mar 05 13:25:09 ART 2015'>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Thu Mar 05 14:21:50 ART 2015'>
   <XMI.header>    <XMI.documentation>
       <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
       <XMI.exporterVersion>0.34(6) revised on $Date: 2010-01-11 22:20:14 +0100 (Mon, 11 Jan 2010) $ </XMI.exporterVersion>
@@ -3454,9 +3454,6 @@
                       </UML:Multiplicity.range>
                     </UML:Multiplicity>
                   </UML:AssociationEnd.multiplicity>
-                  <UML:ModelElement.stereotype>
-                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000BA1'/>
-                  </UML:ModelElement.stereotype>
                   <UML:ModelElement.taggedValue>
                     <UML:TaggedValue xmi.id = '127-0-1-1-17311379:1481ce88eca:-8000:0000000000000DCF'
                       isSpecification = 'false'>
@@ -3470,13 +3467,6 @@
                       <UML:TaggedValue.dataValue>Definitive Lines</UML:TaggedValue.dataValue>
                       <UML:TaggedValue.type>
                         <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-2b464aa4:13b09d81b72:-8000:0000000000001573'/>
-                      </UML:TaggedValue.type>
-                    </UML:TaggedValue>
-                    <UML:TaggedValue xmi.id = '127-0-1-1--97d0ae6:149f180fbb3:-8000:00000000000012DD'
-                      isSpecification = 'false'>
-                      <UML:TaggedValue.dataValue>{&apos;confirmed&apos;: [(&apos;readonly&apos;, False)], &apos;definitive&apos;: [(&apos;readonly&apos;, False)], &apos;invoiced&apos;: [(&apos;readonly&apos;, False)]}</UML:TaggedValue.dataValue>
-                      <UML:TaggedValue.type>
-                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--3588a9e:13cead26784:-8000:0000000000000F31'/>
                       </UML:TaggedValue.type>
                     </UML:TaggedValue>
                   </UML:ModelElement.taggedValue>
@@ -10327,7 +10317,7 @@
                   <UML:ModelElement.taggedValue>
                     <UML:TaggedValue xmi.id = '127-0-1-1--5fff59bb:14ac23a564a:-8000:0000000000001714'
                       isSpecification = 'false'>
-                      <UML:TaggedValue.dataValue>[(&apos;draft&apos;, &apos;Draft&apos;), (&apos;open&apos;, &apos;Open&apos;), (&apos;confirmed&apos;, &apos;confirmed&apos;), (&apos;definitive&apos;, &apos;definitive&apos;), (&apos;invoiced&apos;, &apos;invoiced&apos;), (&apos;closed&apos;, &apos;closed&apos;), (&apos;cancel&apos;, &apos;Cancel&apos;), (&apos;inactive&apos;, &apos;Inactive&apos;)]</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.dataValue>[(&apos;draft&apos;, &apos;Draft&apos;), (&apos;open&apos;, &apos;Open&apos;), (&apos;definitive&apos;, &apos;definitive&apos;), (&apos;invoiced&apos;, &apos;invoiced&apos;), (&apos;closed&apos;, &apos;closed&apos;), (&apos;cancel&apos;, &apos;Cancel&apos;)]</UML:TaggedValue.dataValue>
                       <UML:TaggedValue.type>
                         <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--29a7adf0:14ac0e08da2:-8000:000000000000129B'/>
                       </UML:TaggedValue.type>

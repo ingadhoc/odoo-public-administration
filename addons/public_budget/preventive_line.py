@@ -66,7 +66,7 @@ class preventive_line(models.Model):
         related='budget_position_id.available_account_ids'
         )
     state = fields.Selection(
-        selection=[('draft', 'Draft'), ('open', 'Open'), ('confirmed', 'confirmed'), ('definitive', 'definitive'), ('invoiced', 'invoiced'), ('closed', 'closed'), ('cancel', 'Cancel'), ('inactive', 'Inactive')],
+        selection=[('draft', 'Draft'), ('open', 'Open'), ('definitive', 'definitive'), ('invoiced', 'invoiced'), ('closed', 'closed'), ('cancel', 'Cancel')],
         string='States',
         compute='_get_state'
         )
@@ -79,9 +79,7 @@ class preventive_line(models.Model):
     definitive_line_ids = fields.One2many(
         'public_budget.definitive_line',
         'preventive_line_id',
-        string='Definitive Lines',
-        readonly=True,
-        states={'confirmed': [('readonly', False)], 'definitive': [('readonly', False)], 'invoiced': [('readonly', False)]}
+        string='Definitive Lines'
         )
     budget_id = fields.Many2one(
         'public_budget.budget',
