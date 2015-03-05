@@ -273,9 +273,13 @@ class transaction(models.Model):
         self.paid_amount = paid_amount
 
     @api.one
+    @api.depends(
+        'preventive_line_ids',
+        'preventive_line_ids.preventive_amount',
+        )
     def _get_total(self):
-        """"""
-        raise NotImplementedError
+        self.total = sum(
+            [x.preventive_amount for x in self.preventive_line_ids])
 
     @api.multi
     def action_cancel_draft(self):
@@ -316,7 +320,7 @@ class transaction(models.Model):
             #             Settlement Amount can't be greater than Payment Orders Amount"))
 
     @api.one
-    @api.constrains('total', 'expedient_id')
+    @api.constrains('preventive_line_ids', 'expedient_id')
     def _check_transaction_type(self):
         if self.type_id.with_amount_restriction:
             restriction = self.env[
