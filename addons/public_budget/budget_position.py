@@ -164,10 +164,16 @@ class budget_position(models.Model):
 
         draft_preventive_lines = self.env[
             'public_budget.preventive_line'].search(
-            domain + [('accounting_state', '=', 'draft')])
+            # TODO
+            domain
+            # + [('accounting_state', '=', 'draft')]
+            )
         active_preventive_lines = self.env[
             'public_budget.preventive_line'].search(
-            domain + [('accounting_state', '=', 'confirmed')])
+            domain
+            # TODO
+            # + [('accounting_state', '=', 'confirmed')]
+            )
 
         draft_amounts = [
             line.preventive_amount

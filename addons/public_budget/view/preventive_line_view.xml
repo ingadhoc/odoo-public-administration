@@ -69,7 +69,7 @@
             <field name="model">public_budget.preventive_line</field>
             <field name="arch" type="xml">
                 <tree string="Preventive Line"
-                    colors="grey:accounting_state==False; blue:accounting_state=='draft'; green:preventive_amount==definitive_amount==to_pay_amount==paid_amount;"
+                    colors="green:preventive_amount==definitive_amount==to_pay_amount==paid_amount;"
                     >
                     <field name="budget_id"
                         />

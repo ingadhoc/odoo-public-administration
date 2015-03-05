@@ -1,0 +1,22 @@
+id,code,name,category_id/id,type,parent_id/id
+budg_pos_personal,"1,13E+019",Personal,,view,
+budg_pos_1,11301101011401000000,Personal Permanente,pos_categ_expense,normal,budg_pos_personal
+budg_pos_2,11301101011401000000,Personal No Permanente y Transitorio,pos_categ_expense,normal,budg_pos_personal
+budg_pos_3,11301101011401100000,Personal No Permanente y A. Superior,pos_categ_expense,normal,budg_pos_personal
+budg_pos_bs_y_ser,"1,13E+019",Bienes y Servicios,,view,
+budg_pos_4,11301101011402000000,Bienes de Consumo,pos_categ_expense,normal,budg_pos_bs_y_ser
+budg_pos_5,11301101011403000000,Servicios Básicos,pos_categ_expense,normal,budg_pos_bs_y_ser
+budg_pos_6,11301101011403000000,Alquileres y Derechos,pos_categ_expense,normal,budg_pos_bs_y_ser
+budg_pos_7,11301101011403000000,"Mantenimiento, reparación y limpieza de bienes de dom. Privado",pos_categ_expense,normal,budg_pos_bs_y_ser
+budg_pos_8,11301101011403000000,Servicios Técnicos y Profesionales,pos_categ_expense,normal,budg_pos_bs_y_ser
+budg_pos_9,11301101011403100000,Servicios Comerciales y Financieros,pos_categ_expense,normal,budg_pos_bs_y_ser
+budg_pos_10,11301101011403100000,Publicidad y Propaganda,pos_categ_expense,normal,budg_pos_bs_y_ser
+budg_pos_11,11301101011403100000,Otros Servicios,pos_categ_expense,normal,budg_pos_bs_y_ser
+budg_pos_activos,"1,13E+019",Activos,,view,
+budg_pos_12,11301101011404000000,Maquinaria y Equipo,pos_categ_capital,normal,budg_pos_activos
+budg_pos_13,11301101011404100000,"Libros, Revistas y Otros Elementos Coleccionables",pos_categ_expense,normal,budg_pos_activos
+budg_pos_14,11301101011404100000,Activos Intangibles,pos_categ_capital,normal,budg_pos_activos
+budg_pos_otros,11301101011405000000,Otros,,view,
+budg_pos_15,11301101011405000000,Aportes Asociación Nacional Tribunales de Cuenta,pos_categ_expense,normal,budg_pos_otros
+budg_pos_16,11301101011405000000,Pasantías,pos_categ_expense,normal,budg_pos_otros
+budg_pos_17,11301101011405000000,Subsidio Universidad Nacional de Rosario,pos_categ_expense,normal,budg_pos_otros

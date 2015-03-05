@@ -1,0 +1,3 @@
+id,budget_position_id/id,amount,budget_modification_id/id
+budg_mod_det_2_1,budg_pos_14,10000,budg_mod_2
+budg_mod_det_2_2,budg_pos_12,-10000,budg_mod_2
