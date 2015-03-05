@@ -26,7 +26,7 @@
       <fontname>Dialog</fontname>
       <fontsize>12</fontsize>
       <defaultstereotypeview>0</defaultstereotypeview>
-      <activediagram>Expedient</activediagram>
+      <activediagram>public_budget 0 13</activediagram>
     </settings>
     <searchpath href="PROJECT_DIR" />
     <members>
@@ -108,7 +108,7 @@
 			</model>
 		</userDefined>
 </profile>
-<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Thu Mar 05 18:26:44 ART 2015'>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Thu Mar 05 18:32:23 ART 2015'>
   <XMI.header>    <XMI.documentation>
       <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
       <XMI.exporterVersion>0.34(6) revised on $Date: 2010-01-11 22:20:14 +0100 (Mon, 11 Jan 2010) $ </XMI.exporterVersion>
@@ -2122,6 +2122,7 @@
                   </UML:StructuralFeature.multiplicity>
                   <UML:ModelElement.stereotype>
                     <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:00000000000011E5'/>
+                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:0000000000000BA2'/>
                   </UML:ModelElement.stereotype>
                   <UML:ModelElement.taggedValue>
                     <UML:TaggedValue xmi.id = '127-0-0-1-753bf4a:14beaba908f:-8000:0000000000002819'
@@ -10407,6 +10408,13 @@
                         <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-2b464aa4:13b09d81b72:-8000:0000000000001573'/>
                       </UML:TaggedValue.type>
                     </UML:TaggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-0-1-753bf4a:14beaba908f:-8000:000000000000283C'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>[(&apos;id&apos;,&apos;!=&apos;,location_id)]</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--6c1fde7f:13ceca5ec28:-8000:0000000000000CC2'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
                   </UML:ModelElement.taggedValue>
                   <UML:StructuralFeature.type>
                     <UML:Class xmi.idref = '127-0-1-1-55241b8a:1483b8574f8:-8000:0000000000001340'/>
@@ -10447,7 +10455,7 @@
                       </UML:StateVertex.incoming>
                     </UML:SimpleState>
                     <UML:SimpleState xmi.id = '127-0-0-1-753bf4a:14beaba908f:-8000:00000000000027E6'
-                      name = 'confirmed' isSpecification = 'false'>
+                      name = 'Confirmed' isSpecification = 'false'>
                       <UML:StateVertex.outgoing>
                         <UML:Transition xmi.idref = '127-0-0-1-753bf4a:14beaba908f:-8000:00000000000027EB'/>
                       </UML:StateVertex.outgoing>
@@ -13616,7 +13624,7 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >&lt;&lt;form&gt;&gt; first_location_id : location</text>
+      >&lt;&lt;form, required&gt;&gt; first_location_id : location</text>
       <text name="Fig6.4.10"
         x="361"
         y="928"
@@ -37844,7 +37852,7 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >&lt;&lt;form&gt;&gt; first_location_id : location</text>
+      >&lt;&lt;form, required&gt;&gt; first_location_id : location</text>
       <text name="Fig1.4.10"
         x="193"
         y="240"
@@ -39293,7 +39301,7 @@
     ></text>
   </group>
   <group name="Fig3"
-       description="org.argouml.uml.diagram.state.ui.FigSimpleState[440, 104, 74, 44]pathVisible=false;stereotypeView=0;"
+       description="org.argouml.uml.diagram.state.ui.FigSimpleState[520, 80, 75, 44]pathVisible=false;stereotypeView=0;"
        href="127-0-0-1-753bf4a:14beaba908f:-8000:00000000000027E6"
        fill="1"
        fillcolor="white"
@@ -39304,9 +39312,9 @@
     </private>
     
     <rectangle name="Fig3.0"
-      x="440"
-      y="104"
-      width="74"
+      x="520"
+      y="80"
+      width="75"
       height="44"
       fill="1"
       fillcolor="255 0 255"
@@ -39315,9 +39323,9 @@
       rounding="16"
     />
     <rectangle name="Fig3.1"
-      x="440"
-      y="104"
-      width="74"
+      x="520"
+      y="80"
+      width="75"
       height="44"
       fill="1"
       fillcolor="white"
@@ -39326,9 +39334,9 @@
       rounding="16"
     />
     <text name="Fig3.2"
-      x="442"
-      y="104"
-      width="70"
+      x="522"
+      y="80"
+      width="71"
       height="23"
       fill="0"
       fillcolor="white"
@@ -39340,7 +39348,7 @@
       bold="false"
       textsize="12"
       justification="Center"
-    >confirmed</text>
+    >Confirmed</text>
     <path name="Fig3.3"
       description="org.tigris.gef.presentation.FigLine"
       fill="1"
@@ -39348,15 +39356,15 @@
       stroke="1"
       strokecolor="black"
     >
-      <moveto x="440"
-              y="127" />
-      <lineto x="513"
-              y="127" />
+      <moveto x="520"
+              y="103" />
+      <lineto x="594"
+              y="103" />
     </path>
     <text name="Fig3.4"
-      x="442"
-      y="127"
-      width="70"
+      x="522"
+      y="103"
+      width="71"
       height="15"
       fill="0"
       fillcolor="white"
@@ -39537,7 +39545,7 @@
     >
       <moveto x="336"
               y="118" />
-      <lineto x="440"
+      <lineto x="520"
               y="118" />
     </path>
   </group>
@@ -39566,8 +39574,8 @@
       stroke="1"
       strokecolor="51 51 153"
     >
-      <moveto x="440"
-              y="147" />
+      <moveto x="520"
+              y="123" />
       <lineto x="413"
               y="216" />
     </path>

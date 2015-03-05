@@ -59,7 +59,8 @@ class expedient(models.Model):
         )
     first_location_id = fields.Many2one(
         'public_budget.location',
-        string='First Location'
+        string='First Location',
+        required=True
         )
     current_location_id = fields.Many2one(
         'public_budget.location',

@@ -23,7 +23,7 @@
         </record>
         <record id="a_27CB_27E6" model="workflow.activity">
             <field name="wkf_id" ref="remit_untitle_wkf"/>
-            <field name="name">confirmed</field>
+            <field name="name">Confirmed</field>
             <field name="action">
                 write({'state':'confirmed'})
             </field>

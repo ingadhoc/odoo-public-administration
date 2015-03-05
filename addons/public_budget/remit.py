@@ -14,7 +14,7 @@ class remit(models.Model):
     _states_ = [
         # State machine: untitle
         ('in_transit', 'In Transit'),
-        ('confirmed', 'confirmed'),
+        ('confirmed', 'Confirmed'),
         ('cancel', 'Cancel'),
     ]
 
