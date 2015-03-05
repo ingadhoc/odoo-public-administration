@@ -85,6 +85,7 @@
                                 <field name="description"/>
                                 <field name="supplier_ids" widget="many2many_tags"/>
                                 <field name="cover"/>
+                                <field name="user_id"/>
                             </group>
                             <group>
                                 <field name="founder_id"/>
