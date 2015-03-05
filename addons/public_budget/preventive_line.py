@@ -74,7 +74,7 @@ class preventive_line(models.Model):
         string='Budget',
         required=True,
         states={'invoiced': [('readonly', True)]},
-        domain=[('state', 'not in', ['closed', 'pre_closed'])]
+        domain=[('state', '=', 'open')]
         )
     budget_position_id = fields.Many2one(
         'public_budget.budget_position',
