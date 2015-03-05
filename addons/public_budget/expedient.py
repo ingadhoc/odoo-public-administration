@@ -66,8 +66,8 @@ class expedient(models.Model):
     current_location_id = fields.Many2one(
         'public_budget.location',
         string='Current Location',
-        # store=True,
-        # compute='_get_current_location' #sacamos el compute para que se pueda setear por primera vez
+        store=True,
+        compute='_get_current_location'
         )
     note = fields.Html(
         string='Note'
@@ -144,16 +144,23 @@ class expedient(models.Model):
         current_location_id no es computed
         los otros dos si
         """
-        moves = self.env['public_budget.remit'].search([
-            ('expedient_ids', '=', self.id)], order='date desc')
         last_move_date = False
         current_location_id = False
         in_transit = False
-        if moves:
-            self.current_location_id = moves[0].location_dest_id.id
-            last_move_date = moves[0].date
-            in_transit = moves[0].in_transit
 
+        if self.remit_ids:
+            remits = self.env['public_budget.remit'].search([
+                ('expedient_ids', '=', self.id), ('state', '!=', 'cancel')],
+                order='date desc')
+            if remits:
+                current_location_id = remits[0].location_dest_id.id
+                last_move_date = remits[0].date
+                if remits[0].state == 'in_transit':
+                    in_transit = True
+                else:
+                    in_transit = False
+
+        print 'current_location_id', current_location_id
         self.current_location_id = current_location_id
         self.last_move_date = last_move_date
         self.in_transit = in_transit

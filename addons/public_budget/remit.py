@@ -77,6 +77,17 @@ class remit(models.Model):
     _constraints = [
     ]
 
+    @api.one
+    @api.constrains('state')
+    def check_state(self):
+        if self.state == 'cancel':
+            for expedient in self.expedient_ids:
+                remits = self.search([
+                    ('expedient_ids', '=', expedient.id)],
+                    order='date desc')
+                if remits[0] != self:
+                    raise Warning(_('You can Not cancel a remit that is not the last one for all the expedients'))
+
     @api.multi
     def action_cancel_in_transit(self):
         # go from canceled state to draft state
@@ -84,5 +95,12 @@ class remit(models.Model):
         self.delete_workflow()
         self.create_workflow()
         return True
+
+    @api.one
+    def unlink(self):
+        if self.state != 'cancel':
+            raise Warning(_(
+                "You can not delete a Remit that is not in Cancel State"))
+        return super(remit, self).unlink()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

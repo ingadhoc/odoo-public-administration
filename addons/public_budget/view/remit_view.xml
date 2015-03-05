@@ -47,6 +47,7 @@
                             />
                     </header>
                     <sheet string="Remit">
+                        <field name="user_location_ids" invisible="True"/>
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
                      <group>
@@ -60,13 +61,10 @@
                         <field name="location_dest_id"
                             domain="[('id','!=',location_id)]"
                             /> 
-                        <field name="user_location_ids"
-                            invisible="True"
-                            /> 
-                        <field name="expedient_ids"
-                            domain="[('current_location_id','=',location_id),('in_transit','=',False)]"
-                        /> 
                      </group>
+                    <field name="expedient_ids"
+                        domain="[('current_location_id','=',location_id),('in_transit','=',False)]"
+                    /> 
                     </sheet>
 
                 </form>
