@@ -26,6 +26,7 @@ class expedient(models.Model):
         )
     issue_date = fields.Datetime(
         string='Issue Date',
+        readonly=True,
         required=True,
         default=fields.Datetime.now
         )

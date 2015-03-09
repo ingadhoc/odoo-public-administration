@@ -15,7 +15,7 @@ class users(models.Model):
         'public_budget_user_ids_location_ids_rel',
         'users_id',
         'location_id',
-        string='Locations'
+        string='Allowed Locations'
         )
 
     _constraints = [

@@ -22,7 +22,6 @@ class remit(models.Model):
         string='Date',
         readonly=True,
         required=True,
-        states={'in_transit': [('readonly', False)]},
         default=lambda self: fields.datetime.now()
         )
     user_id = fields.Many2one(
