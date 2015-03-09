@@ -18,7 +18,10 @@
             <field name="model">res.users</field>
             <field name="inherit_id" ref="base.view_users_form"/>
             <field name="arch" type="xml">
-                <group position="inside">
+                <group string="Allowed Companies" position="after">
+                    <group string="Allowed Locations">
+                        <field name="location_ids" nolabel="1" widget="many2many_tags"/>
+                    </group>
                 </group>
             </field>
         </record>

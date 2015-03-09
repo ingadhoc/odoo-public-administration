@@ -72,6 +72,7 @@
                             />
                     </header>
                     <sheet string="Expedient">
+                        <field name="user_location_ids" invisible="1"/>
                         <h1>
                             <label for="number"/>
                             <field name="number" class="oe_inline" readonly="1"/>
@@ -92,7 +93,7 @@
                                 <field name="category_id"/>
                                 <field name="type"/>
                                 <field name="parent_id"/>
-                                <field name="first_location_id" options="{'no_create': True}"/>
+                                <field name="first_location_id" options="{'no_create': True}" domain="[('id','in',user_location_ids[0][2])]"/>
                                 <field name="current_location_id"/>
                                 <field name="final_location" states="closed,annulled"/>
                             </group>
