@@ -72,7 +72,7 @@
                                 <field name="name"/>
                                 <field name="user_id"/>
                                 <field name="expedient_id"
-                                    domain="[('current_location_id','in',user_location_ids[0][2]),('in_transit','=',False)]" options="{'no_create': True}"
+                                    domain="[('current_location_id','in',user_location_ids[0][2]),('in_transit','=',False),('state','=','open')]" options="{'no_create': True}"
                                     /> 
                                 <field name="type_id"/>
                                 <field name="partner_id" attrs="{'invisible':[('type_with_advance_payment','=',False)],'required':[('type_with_advance_payment','=',True)]}"/>
