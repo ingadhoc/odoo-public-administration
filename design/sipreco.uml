@@ -26,7 +26,7 @@
       <fontname>Dialog</fontname>
       <fontsize>12</fontsize>
       <defaultstereotypeview>0</defaultstereotypeview>
-      <activediagram>Transaction</activediagram>
+      <activediagram>Diagrama de clase</activediagram>
     </settings>
     <searchpath href="PROJECT_DIR" />
     <members>
@@ -108,7 +108,7 @@
 			</model>
 		</userDefined>
 </profile>
-<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Mon Mar 09 17:42:48 ART 2015'>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Mon Mar 09 19:10:16 ART 2015'>
   <XMI.header>    <XMI.documentation>
       <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
       <XMI.exporterVersion>0.34(6) revised on $Date: 2010-01-11 22:20:14 +0100 (Mon, 11 Jan 2010) $ </XMI.exporterVersion>
@@ -26189,7 +26189,7 @@
     </path>
   </group>
   <group name="Fig28"
-       description="org.argouml.uml.diagram.use_case.ui.FigActor[224, 248, 119, 98]pathVisible=false;stereotypeView=0;"
+       description="org.argouml.uml.diagram.use_case.ui.FigActor[192, 200, 119, 98]pathVisible=false;stereotypeView=0;"
        href="127-0-1-1--159810e7:148fa7b46d0:-8000:00000000000019EB"
        fill="1"
        fillcolor="white"
@@ -26200,8 +26200,8 @@
     </private>
     
     <rectangle name="Fig28.0"
-      x="224"
-      y="248"
+      x="192"
+      y="200"
       width="119"
       height="98"
       fill="0"
@@ -26210,8 +26210,8 @@
       strokecolor="black"
     />
     <text name="Fig28.1"
-      x="249"
-      y="303"
+      x="217"
+      y="255"
       width="68"
       height="23"
       fill="0"
@@ -26226,8 +26226,8 @@
       justification="Center"
     >Secretary</text>
     <ellipse name="Fig28.2"
-      x="283"
-      y="265"
+      x="251"
+      y="217"
       rx="8"
       ry="7"
       fill="1"
@@ -26242,10 +26242,10 @@
       stroke="1"
       strokecolor="black"
     >
-      <moveto x="283"
-              y="273" />
-      <lineto x="283"
-              y="288" />
+      <moveto x="251"
+              y="225" />
+      <lineto x="251"
+              y="240" />
     </path>
     <path name="Fig28.4"
       description="org.tigris.gef.presentation.FigLine"
@@ -26254,10 +26254,10 @@
       stroke="1"
       strokecolor="black"
     >
-      <moveto x="273"
-              y="278" />
-      <lineto x="293"
-              y="278" />
+      <moveto x="241"
+              y="230" />
+      <lineto x="261"
+              y="230" />
     </path>
     <path name="Fig28.5"
       description="org.tigris.gef.presentation.FigLine"
@@ -26266,10 +26266,10 @@
       stroke="1"
       strokecolor="black"
     >
-      <moveto x="283"
-              y="288" />
-      <lineto x="278"
-              y="303" />
+      <moveto x="251"
+              y="240" />
+      <lineto x="246"
+              y="255" />
     </path>
     <path name="Fig28.6"
       description="org.tigris.gef.presentation.FigLine"
@@ -26278,13 +26278,13 @@
       stroke="1"
       strokecolor="black"
     >
-      <moveto x="283"
-              y="288" />
-      <lineto x="288"
-              y="303" />
+      <moveto x="251"
+              y="240" />
+      <lineto x="256"
+              y="255" />
     </path>
     <group name="Fig28.7"
-         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[242, 326, 83, 19]"
+         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[210, 278, 83, 19]"
          href="127-0-1-1--159810e7:148fa7b46d0:-8000:00000000000019EB"
          fill="0"
          fillcolor="white"
@@ -26295,8 +26295,8 @@
       </private>
       
       <rectangle name="Fig28.7.0"
-        x="242"
-        y="326"
+        x="210"
+        y="278"
         width="83"
         height="19"
         fill="0"
@@ -26305,8 +26305,8 @@
         strokecolor="black"
       />
       <text name="Fig28.7.1"
-        x="242"
-        y="326"
+        x="210"
+        y="278"
         width="83"
         height="17"
         fill="0"
@@ -26373,10 +26373,10 @@
       stroke="1"
       strokecolor="51 51 153"
     >
-      <moveto x="288"
-              y="326" />
-      <lineto x="500"
-              y="396" />
+      <moveto x="256"
+              y="278" />
+      <lineto x="507"
+              y="392" />
     </path>
   </group>
   <group name="Fig30"
