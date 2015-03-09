@@ -70,7 +70,7 @@
                         <field name="user_id"
                             /> 
                         <field name="expedient_id"
-                            domain="[('current_location_id','in',user_location_ids[0][2]),('in_transit','=',False)]"
+                            domain="[('current_location_id','in',user_location_ids[0][2]),('in_transit','=',False),('state','=','open')]"
                             /> 
                         <field name="type_id"
                             /> 

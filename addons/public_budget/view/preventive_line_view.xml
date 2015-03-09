@@ -7,8 +7,6 @@
             <field name="model">public_budget.preventive_line</field>
             <field name="arch" type="xml">
                 <search string="Preventive Line">
-                    <field name="name" string="Name"
-                            />
                     <field name="account_id" string="Account"
                             />
                     <field name="preventive_amount" string="Preventive"
@@ -35,8 +33,6 @@
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
                      <group>
-                        <field name="name"
-                            /> 
                         <field name="account_id"
                             attrs="{'required':[('advance_line','=',False)],'invisible':[('advance_line','=',True)]}"
                             /> 
@@ -70,8 +66,6 @@
                 <tree string="Preventive Line"
                     colors="grey:accounting_state==False; blue:accounting_state=='draft'; green:preventive_amount==definitive_amount==to_pay_amount==paid_amount;"
                     >
-                    <field name="name"
-                        />
                     <field name="preventive_amount"
                             sum="Total"
                         />

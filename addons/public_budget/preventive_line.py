@@ -9,17 +9,10 @@ class preventive_line(models.Model):
     _name = 'public_budget.preventive_line'
     _description = 'Preventive Line'
 
-    name = fields.Char(
-        string='Name',
-        readonly=True,
-        required=True,
-        states={'draft': [('readonly', False)], 'open': [('readonly', False)]}
-        )
     account_id = fields.Many2one(
         'account.account',
         string='Account',
-        readonly=True,
-        states={'draft': [('readonly', False)], 'open': [('readonly', False)]},
+        states={'invoiced': [('readonly', True)]},
         domain=[('type', 'in', ['other']), ('user_type.report_type', 'in', ['expense','asset'])]
         )
     preventive_amount = fields.Float(
@@ -79,17 +72,15 @@ class preventive_line(models.Model):
     budget_id = fields.Many2one(
         'public_budget.budget',
         string='Budget',
-        readonly=True,
         required=True,
-        states={'draft': [('readonly', False)], 'open': [('readonly', False)]},
+        states={'invoiced': [('readonly', True)]},
         domain=[('state', 'not in', ['closed', 'pre_closed'])]
         )
     budget_position_id = fields.Many2one(
         'public_budget.budget_position',
         string='Budget Position',
-        readonly=True,
         required=True,
-        states={'draft': [('readonly', False)], 'open': [('readonly', False)]},
+        states={'invoiced': [('readonly', True)]},
         context={'default_type': 'normal'},
         domain=[('type', '=', 'normal')]
         )
