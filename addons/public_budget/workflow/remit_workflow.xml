@@ -45,7 +45,7 @@
             <field name="act_from" ref="a_27CB_27E5"/>
             <field name="act_to" ref="a_27CB_27E6"/>
             <field name="signal">sgn_confirm</field>
-            <field name="condition">True</field>
+            <field name="condition">check_user_location()</field>
         </record>
         <record id="t_27CB_27EB" model="workflow.transition">
             <field name="act_from" ref="a_27CB_27E6"/>
