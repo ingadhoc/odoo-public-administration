@@ -57,13 +57,13 @@
                             /> 
                         <field name="location_id"
                             domain="[('id','in',user_location_ids[0][2])]"
-                            /> 
+                            options="{'no_create': True}"/>
                         <field name="location_dest_id"
-                            domain="[('id','!=',location_id)]"
+                            domain="[('id','!=',location_id)]" options="{'no_create': True}"
                             /> 
                      </group>
                     <field name="expedient_ids"
-                        domain="[('current_location_id','=',location_id),('in_transit','=',False)]"
+                        domain="[('current_location_id','=',location_id),('in_transit','=',False)]" options="{'no_create': True}"
                     /> 
                     </sheet>
 
