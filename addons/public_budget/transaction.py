@@ -143,6 +143,11 @@ class transaction(models.Model):
         string='Total',
         compute='_get_total'
         )
+    user_location_ids = fields.Many2many(
+        comodel_name='public_budget.location',
+        string='User Locations',
+        related='user_id.location_ids'
+        )
     state = fields.Selection(
         _states_,
         'State',

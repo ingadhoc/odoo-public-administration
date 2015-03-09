@@ -70,6 +70,7 @@
                         <field name="user_id"
                             /> 
                         <field name="expedient_id"
+                            domain="[('current_location_id','in',user_location_ids[0][2]),('in_transit','=',False)]"
                             /> 
                         <field name="type_id"
                             /> 
@@ -88,6 +89,9 @@
                             /> 
                         <field name="company_id"
                             groups="base.group_multi_company"
+                            /> 
+                        <field name="user_location_ids"
+                            invisible="True"
                             /> 
                         <field name="preventive_line_ids"
                         /> 

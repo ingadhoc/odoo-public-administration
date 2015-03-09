@@ -46,6 +46,11 @@ class remit(models.Model):
         required=True,
         states={'in_transit': [('readonly', False)]}
         )
+    user_location_ids = fields.Many2many(
+        comodel_name='public_budget.location',
+        string='User Locations',
+        related='user_id.location_ids'
+        )
     state = fields.Selection(
         _states_,
         'State',

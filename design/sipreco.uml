@@ -108,7 +108,7 @@
 			</model>
 		</userDefined>
 </profile>
-<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Mon Mar 09 16:06:10 ART 2015'>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Mon Mar 09 16:25:39 ART 2015'>
   <XMI.header>    <XMI.documentation>
       <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
       <XMI.exporterVersion>0.34(6) revised on $Date: 2010-01-11 22:20:14 +0100 (Mon, 11 Jan 2010) $ </XMI.exporterVersion>
@@ -522,6 +522,13 @@
                       <UML:TaggedValue.dataValue>{&apos;draft&apos;: [(&apos;readonly&apos;, False)]}</UML:TaggedValue.dataValue>
                       <UML:TaggedValue.type>
                         <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--3588a9e:13cead26784:-8000:0000000000000F31'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-0-1-39fca2db:14bffecc83b:-8000:00000000000017CF'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>[(&apos;current_location_id&apos;,&apos;in&apos;,user_location_ids[0][2]),(&apos;in_transit&apos;,&apos;=&apos;,False)]</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--6c1fde7f:13ceca5ec28:-8000:0000000000000CC2'/>
                       </UML:TaggedValue.type>
                     </UML:TaggedValue>
                   </UML:ModelElement.taggedValue>
@@ -1259,6 +1266,48 @@
                       name = 'return' isSpecification = 'false' kind = 'return'/>
                   </UML:BehavioralFeature.parameter>
                 </UML:Operation>
+                <UML:Attribute xmi.id = '127-0-0-1-39fca2db:14bffecc83b:-8000:00000000000017C9'
+                  name = 'user_location_ids' visibility = 'public' isSpecification = 'false'
+                  ownerScope = 'instance' changeability = 'changeable' targetScope = 'instance'>
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id = '127-0-0-1-39fca2db:14bffecc83b:-8000:00000000000017CA'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = '127-0-0-1-39fca2db:14bffecc83b:-8000:00000000000017CB'
+                          lower = '1' upper = '1'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:00000000000011E5'/>
+                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-7b01ca01:13b51db18aa:-8000:0000000000000D12'/>
+                  </UML:ModelElement.stereotype>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-0-1-39fca2db:14bffecc83b:-8000:00000000000017CC'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>public_budget.location</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--29a7adf0:14ac0e08da2:-8000:000000000000128C'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-0-1-39fca2db:14bffecc83b:-8000:00000000000017CD'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>user_id.location_ids</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-5ee79c33:13bb911d610:-8000:0000000000000FAD'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-0-1-39fca2db:14bffecc83b:-8000:00000000000017CE'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>User Locations</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-2b464aa4:13b09d81b72:-8000:0000000000001573'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                  <UML:StructuralFeature.type>
+                    <UML:DataType href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--29a7adf0:14ac0e08da2:-8000:0000000000001289'/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
               </UML:Classifier.feature>
             </UML:Class>
             <UML:Association xmi.id = '127-0-1-1-ca2ca85:1480e7e8288:-8000:0000000000001336'
@@ -2134,7 +2183,7 @@
                     </UML:TaggedValue>
                     <UML:TaggedValue xmi.id = '127-0-0-1-753bf4a:14beaba908f:-8000:000000000000282A'
                       isSpecification = 'false'>
-                      <UML:TaggedValue.dataValue>[(&apos;id&apos;,&apos;in&apos;,user_location_ids)]</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.dataValue>[(&apos;id&apos;,&apos;in&apos;,user_location_ids[0][2])]</UML:TaggedValue.dataValue>
                       <UML:TaggedValue.type>
                         <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--6c1fde7f:13ceca5ec28:-8000:0000000000000CC2'/>
                       </UML:TaggedValue.type>
@@ -10394,6 +10443,13 @@
                         <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--3588a9e:13cead26784:-8000:0000000000000F31'/>
                       </UML:TaggedValue.type>
                     </UML:TaggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-0-1-39fca2db:14bffecc83b:-8000:00000000000017C2'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>[(&apos;id&apos;,&apos;in&apos;,user_location_ids[0][2])]</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--6c1fde7f:13ceca5ec28:-8000:0000000000000CC2'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
                   </UML:ModelElement.taggedValue>
                   <UML:StructuralFeature.type>
                     <UML:Class xmi.idref = '127-0-1-1-55241b8a:1483b8574f8:-8000:0000000000001340'/>
@@ -10442,6 +10498,48 @@
                   </UML:ModelElement.taggedValue>
                   <UML:StructuralFeature.type>
                     <UML:Class xmi.idref = '127-0-1-1-55241b8a:1483b8574f8:-8000:0000000000001340'/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+                <UML:Attribute xmi.id = '127-0-0-1-39fca2db:14bffecc83b:-8000:00000000000017C3'
+                  name = 'user_location_ids' visibility = 'public' isSpecification = 'false'
+                  ownerScope = 'instance' changeability = 'changeable' targetScope = 'instance'>
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id = '127-0-0-1-39fca2db:14bffecc83b:-8000:00000000000017C4'>
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id = '127-0-0-1-39fca2db:14bffecc83b:-8000:00000000000017C5'
+                          lower = '1' upper = '1'/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:ModelElement.stereotype>
+                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--66344949:13b09938a14:-8000:00000000000011E5'/>
+                    <UML:Stereotype href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-7b01ca01:13b51db18aa:-8000:0000000000000D12'/>
+                  </UML:ModelElement.stereotype>
+                  <UML:ModelElement.taggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-0-1-39fca2db:14bffecc83b:-8000:00000000000017C6'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>public_budget.location</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--29a7adf0:14ac0e08da2:-8000:000000000000128C'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-0-1-39fca2db:14bffecc83b:-8000:00000000000017C7'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>user_id.location_ids</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-5ee79c33:13bb911d610:-8000:0000000000000FAD'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                    <UML:TaggedValue xmi.id = '127-0-0-1-39fca2db:14bffecc83b:-8000:00000000000017C8'
+                      isSpecification = 'false'>
+                      <UML:TaggedValue.dataValue>User Locations</UML:TaggedValue.dataValue>
+                      <UML:TaggedValue.type>
+                        <UML:TagDefinition href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1-2b464aa4:13b09d81b72:-8000:0000000000001573'/>
+                      </UML:TaggedValue.type>
+                    </UML:TaggedValue>
+                  </UML:ModelElement.taggedValue>
+                  <UML:StructuralFeature.type>
+                    <UML:DataType href = 'http://argouml.org/user-profiles/OpenObjectStadardElements.xmi#127-0-1-1--29a7adf0:14ac0e08da2:-8000:0000000000001289'/>
                   </UML:StructuralFeature.type>
                 </UML:Attribute>
               </UML:Classifier.feature>
@@ -11547,7 +11645,7 @@
       strokecolor="black"
     />
     <group name="Fig0.4"
-         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[329, 232, 447, 391]"
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[329, 232, 447, 399]"
          href="127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000012D8"
          fill="0"
          fillcolor="white"
@@ -11561,7 +11659,7 @@
         x="329"
         y="232"
         width="447"
-        height="391"
+        height="399"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -11907,7 +12005,7 @@
         x="329"
         y="568"
         width="447"
-        height="22"
+        height="16"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -11919,10 +12017,26 @@
         textsize="12"
         justification="Left"
       >total : Float</text>
+      <text name="Fig0.4.23"
+        x="329"
+        y="584"
+        width="447"
+        height="22"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >&lt;&lt;form, hidden&gt;&gt; user_location_ids : Many2many</text>
     </group>
     <rectangle name="Fig0.5"
       x="328"
-      y="623"
+      y="631"
       width="449"
       height="1"
       fill="1"
@@ -11931,7 +12045,7 @@
       strokecolor="black"
     />
     <group name="Fig0.6"
-         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[329, 624, 447, 135]"
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[329, 632, 447, 127]"
          href="127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000012D8"
          fill="0"
          fillcolor="white"
@@ -11943,9 +12057,9 @@
       
       <rectangle name="Fig0.6.0"
         x="329"
-        y="624"
+        y="632"
         width="447"
-        height="135"
+        height="127"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -11953,7 +12067,7 @@
       />
       <text name="Fig0.6.1"
         x="329"
-        y="624"
+        y="632"
         width="447"
         height="16"
         fill="0"
@@ -11969,7 +12083,7 @@
       >_get_suppliers()</text>
       <text name="Fig0.6.2"
         x="329"
-        y="640"
+        y="648"
         width="447"
         height="16"
         fill="0"
@@ -11985,7 +12099,7 @@
       >_get_budget_positions()</text>
       <text name="Fig0.6.3"
         x="329"
-        y="656"
+        y="664"
         width="447"
         height="16"
         fill="0"
@@ -12001,7 +12115,7 @@
       >_refund_voucher_count()</text>
       <text name="Fig0.6.4"
         x="329"
-        y="672"
+        y="680"
         width="447"
         height="16"
         fill="0"
@@ -12017,7 +12131,7 @@
       >_get_advance_amounts()</text>
       <text name="Fig0.6.5"
         x="329"
-        y="688"
+        y="696"
         width="447"
         height="16"
         fill="0"
@@ -12033,7 +12147,7 @@
       >_get_amounts()</text>
       <text name="Fig0.6.6"
         x="329"
-        y="704"
+        y="712"
         width="447"
         height="22"
         fill="0"
@@ -35746,7 +35860,7 @@
       strokecolor="black"
     />
     <group name="Fig0.4"
-         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[273, 125, 462, 391]"
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[273, 125, 462, 399]"
          href="127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000012D8"
          fill="0"
          fillcolor="white"
@@ -35760,7 +35874,7 @@
         x="273"
         y="125"
         width="462"
-        height="391"
+        height="399"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -36106,7 +36220,7 @@
         x="273"
         y="461"
         width="462"
-        height="22"
+        height="16"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -36118,10 +36232,26 @@
         textsize="12"
         justification="Left"
       >total : Float</text>
+      <text name="Fig0.4.23"
+        x="273"
+        y="477"
+        width="462"
+        height="22"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >&lt;&lt;form, hidden&gt;&gt; user_location_ids : Many2many</text>
     </group>
     <rectangle name="Fig0.5"
       x="272"
-      y="516"
+      y="524"
       width="464"
       height="1"
       fill="1"
@@ -36130,7 +36260,7 @@
       strokecolor="black"
     />
     <group name="Fig0.6"
-         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[273, 517, 462, 135]"
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[273, 525, 462, 127]"
          href="127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000012D8"
          fill="0"
          fillcolor="white"
@@ -36142,9 +36272,9 @@
       
       <rectangle name="Fig0.6.0"
         x="273"
-        y="517"
+        y="525"
         width="462"
-        height="135"
+        height="127"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -36152,7 +36282,7 @@
       />
       <text name="Fig0.6.1"
         x="273"
-        y="517"
+        y="525"
         width="462"
         height="16"
         fill="0"
@@ -36168,7 +36298,7 @@
       >_get_suppliers()</text>
       <text name="Fig0.6.2"
         x="273"
-        y="533"
+        y="541"
         width="462"
         height="16"
         fill="0"
@@ -36184,7 +36314,7 @@
       >_get_budget_positions()</text>
       <text name="Fig0.6.3"
         x="273"
-        y="549"
+        y="557"
         width="462"
         height="16"
         fill="0"
@@ -36200,7 +36330,7 @@
       >_refund_voucher_count()</text>
       <text name="Fig0.6.4"
         x="273"
-        y="565"
+        y="573"
         width="462"
         height="16"
         fill="0"
@@ -36216,7 +36346,7 @@
       >_get_advance_amounts()</text>
       <text name="Fig0.6.5"
         x="273"
-        y="581"
+        y="589"
         width="462"
         height="16"
         fill="0"
@@ -36232,7 +36362,7 @@
       >_get_amounts()</text>
       <text name="Fig0.6.6"
         x="273"
-        y="597"
+        y="605"
         width="462"
         height="22"
         fill="0"
@@ -38424,7 +38554,7 @@
     </group>
   </group>
   <group name="Fig5"
-       description="org.argouml.uml.diagram.static_structure.ui.FigClass[184, 536, 451, 117]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
+       description="org.argouml.uml.diagram.static_structure.ui.FigClass[184, 616, 451, 133]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
        href="127-0-0-1-753bf4a:14beaba908f:-8000:00000000000027CB"
        fill="1"
        fillcolor="white"
@@ -38436,9 +38566,9 @@
     
     <rectangle name="Fig5.0"
       x="184"
-      y="536"
+      y="616"
       width="451"
-      height="117"
+      height="133"
       fill="1"
       fillcolor="white"
       stroke="1"
@@ -38446,7 +38576,7 @@
     />
     <text name="Fig5.1"
       x="185"
-      y="537"
+      y="617"
       width="449"
       height="22"
       fill="0"
@@ -38461,7 +38591,7 @@
       justification="Center"
     >remit</text>
     <group name="Fig5.2"
-         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[185, 537, 449, 0]"
+         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[185, 617, 449, 0]"
          href="127-0-0-1-753bf4a:14beaba908f:-8000:00000000000027CB"
          fill="0"
          fillcolor="white"
@@ -38474,7 +38604,7 @@
       
       <rectangle name="Fig5.2.0"
         x="185"
-        y="537"
+        y="617"
         width="449"
         height="0"
         fill="0"
@@ -38485,7 +38615,7 @@
     </group>
     <rectangle name="Fig5.3"
       x="184"
-      y="559"
+      y="639"
       width="451"
       height="1"
       fill="1"
@@ -38494,7 +38624,7 @@
       strokecolor="black"
     />
     <group name="Fig5.4"
-         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[185, 560, 449, 72]"
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[185, 640, 449, 88]"
          href="127-0-0-1-753bf4a:14beaba908f:-8000:00000000000027CB"
          fill="0"
          fillcolor="white"
@@ -38506,9 +38636,9 @@
       
       <rectangle name="Fig5.4.0"
         x="185"
-        y="560"
+        y="640"
         width="449"
-        height="72"
+        height="88"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -38516,7 +38646,7 @@
       />
       <text name="Fig5.4.1"
         x="185"
-        y="560"
+        y="640"
         width="449"
         height="16"
         fill="0"
@@ -38532,7 +38662,7 @@
       >&lt;&lt;form, tree, search, required, readonly&gt;&gt; date : Datetime</text>
       <text name="Fig5.4.2"
         x="185"
-        y="576"
+        y="656"
         width="449"
         height="16"
         fill="0"
@@ -38548,7 +38678,7 @@
       >&lt;&lt;form, tree, search, required, readonly&gt;&gt; user_id : users</text>
       <text name="Fig5.4.3"
         x="185"
-        y="592"
+        y="672"
         width="449"
         height="16"
         fill="0"
@@ -38564,7 +38694,23 @@
       >&lt;&lt;form, tree, search, required, readonly&gt;&gt; location_id : location</text>
       <text name="Fig5.4.4"
         x="185"
-        y="608"
+        y="688"
+        width="449"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >&lt;&lt;form, tree, search, required, readonly&gt;&gt; location_dest_id : location</text>
+      <text name="Fig5.4.5"
+        x="185"
+        y="704"
         width="449"
         height="22"
         fill="0"
@@ -38577,11 +38723,11 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >&lt;&lt;form, tree, search, required, readonly&gt;&gt; location_dest_id : location</text>
+      >&lt;&lt;form, hidden&gt;&gt; user_location_ids : Many2many</text>
     </group>
     <rectangle name="Fig5.5"
       x="184"
-      y="631"
+      y="727"
       width="451"
       height="1"
       fill="1"
@@ -38590,7 +38736,7 @@
       strokecolor="black"
     />
     <group name="Fig5.6"
-         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[185, 632, 449, 21]"
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[185, 728, 449, 21]"
          href="127-0-0-1-753bf4a:14beaba908f:-8000:00000000000027CB"
          fill="0"
          fillcolor="white"
@@ -38602,7 +38748,7 @@
       
       <rectangle name="Fig5.6.0"
         x="185"
-        y="632"
+        y="728"
         width="449"
         height="21"
         fill="0"
@@ -38664,7 +38810,7 @@
       strokecolor="51 51 153"
     >
       <moveto x="432"
-              y="536" />
+              y="616" />
       <lineto x="432"
               y="469" />
     </path>
@@ -38834,7 +38980,7 @@
       <moveto x="726"
               y="614" />
       <lineto x="634"
-              y="614" />
+              y="616" />
     </path>
   </group>
   <group name="Fig9"
@@ -39174,6 +39320,595 @@
       <lineto x="888"
               y="450" />
     </path>
+  </group>
+  <group name="Fig13"
+       description="org.argouml.uml.diagram.static_structure.ui.FigClass[760, 560, 449, 504]pathVisible=true;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
+       href="127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000012D8"
+       fill="1"
+       fillcolor="white"
+       stroke="1"
+       strokecolor="black"
+  >
+    <private>
+    </private>
+    
+    <rectangle name="Fig13.0"
+      x="760"
+      y="560"
+      width="449"
+      height="504"
+      fill="1"
+      fillcolor="white"
+      stroke="1"
+      strokecolor="black"
+    />
+    <text name="Fig13.1"
+      x="761"
+      y="561"
+      width="447"
+      height="22"
+      fill="0"
+      fillcolor="white"
+      stroke="0"
+      strokecolor="black"
+      textcolor="black"
+      font="Dialog"
+      italic="false"
+      bold="false"
+      textsize="12"
+      justification="Center"
+    >public_budget::transaction</text>
+    <group name="Fig13.2"
+         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[761, 561, 447, 0]"
+         href="127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000012D8"
+         fill="0"
+         fillcolor="white"
+         stroke="0"
+         strokecolor="black"
+         visibility="0"
+    >
+      <private>
+      </private>
+      
+      <rectangle name="Fig13.2.0"
+        x="761"
+        y="561"
+        width="447"
+        height="0"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+      />
+    </group>
+    <rectangle name="Fig13.3"
+      x="760"
+      y="583"
+      width="449"
+      height="1"
+      fill="1"
+      fillcolor="black"
+      stroke="1"
+      strokecolor="black"
+    />
+    <group name="Fig13.4"
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[761, 584, 447, 376]"
+         href="127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000012D8"
+         fill="0"
+         fillcolor="white"
+         stroke="0"
+         strokecolor="black"
+    >
+      <private>
+      </private>
+      
+      <rectangle name="Fig13.4.0"
+        x="761"
+        y="584"
+        width="447"
+        height="376"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+      />
+      <text name="Fig13.4.1"
+        x="761"
+        y="584"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >&lt;&lt;form, tree, search, required, readonly&gt;&gt; issue_date : Date</text>
+      <text name="Fig13.4.2"
+        x="761"
+        y="600"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >&lt;&lt;form, tree, search, required, readonly&gt;&gt; name : Char</text>
+      <text name="Fig13.4.3"
+        x="761"
+        y="616"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >&lt;&lt;form, tree, search, required, readonly&gt;&gt; user_id : users</text>
+      <text name="Fig13.4.4"
+        x="761"
+        y="632"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >&lt;&lt;form, tree, search, required, readonly&gt;&gt; expedient_id : expedient</text>
+      <text name="Fig13.4.5"
+        x="761"
+        y="648"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >&lt;&lt;form, tree, search, required, readonly&gt;&gt; type_id : transaction_type</text>
+      <text name="Fig13.4.6"
+        x="761"
+        y="664"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >&lt;&lt;form, readonly&gt;&gt; partner_id : partner</text>
+      <text name="Fig13.4.7"
+        x="761"
+        y="680"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >&lt;&lt;form, readonly&gt;&gt; invoice_ids : invoice</text>
+      <text name="Fig13.4.8"
+        x="761"
+        y="696"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >&lt;&lt;form&gt;&gt; note : HTML</text>
+      <text name="Fig13.4.9"
+        x="761"
+        y="712"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >&lt;&lt;form, hidden, readonly&gt;&gt; type_with_advance_payment : Boolean</text>
+      <text name="Fig13.4.10"
+        x="761"
+        y="728"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >&lt;&lt;form, hidden, readonly&gt;&gt; type_with_salary_advance : Boolean</text>
+      <text name="Fig13.4.11"
+        x="761"
+        y="744"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >&lt;&lt;readonly&gt;&gt; definitive_line_ids : One2many</text>
+      <text name="Fig13.4.12"
+        x="761"
+        y="760"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >&lt;&lt;store, search, group_by&gt;&gt; supplier_ids : Many2many</text>
+      <text name="Fig13.4.13"
+        x="761"
+        y="776"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >&lt;&lt;store, search&gt;&gt; budget_position_ids : Many2many</text>
+      <text name="Fig13.4.14"
+        x="761"
+        y="792"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >&lt;&lt;readonly&gt;&gt; advance_preventive_line_ids : One2many</text>
+      <text name="Fig13.4.15"
+        x="761"
+        y="808"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >refund_voucher_count : Integer</text>
+      <text name="Fig13.4.16"
+        x="761"
+        y="824"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >preventive_amount : Float</text>
+      <text name="Fig13.4.17"
+        x="761"
+        y="840"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >paid_amount : Float</text>
+      <text name="Fig13.4.18"
+        x="761"
+        y="856"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >remaining_amount : Float</text>
+      <text name="Fig13.4.19"
+        x="761"
+        y="872"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >advance_remaining_amount : Float</text>
+      <text name="Fig13.4.20"
+        x="761"
+        y="888"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >refund_voucher_amount : Float</text>
+      <text name="Fig13.4.21"
+        x="761"
+        y="904"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >&lt;&lt;required, form, readonly&gt;&gt; company_id : company</text>
+      <text name="Fig13.4.22"
+        x="761"
+        y="920"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >total : Float</text>
+      <text name="Fig13.4.23"
+        x="761"
+        y="936"
+        width="447"
+        height="22"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >&lt;&lt;form, hidden&gt;&gt; user_location_ids : Many2many</text>
+    </group>
+    <rectangle name="Fig13.5"
+      x="760"
+      y="959"
+      width="449"
+      height="1"
+      fill="1"
+      fillcolor="black"
+      stroke="1"
+      strokecolor="black"
+    />
+    <group name="Fig13.6"
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[761, 960, 447, 104]"
+         href="127-0-1-1-ca2ca85:1480e7e8288:-8000:00000000000012D8"
+         fill="0"
+         fillcolor="white"
+         stroke="0"
+         strokecolor="black"
+    >
+      <private>
+      </private>
+      
+      <rectangle name="Fig13.6.0"
+        x="761"
+        y="960"
+        width="447"
+        height="104"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+      />
+      <text name="Fig13.6.1"
+        x="761"
+        y="960"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >_get_suppliers()</text>
+      <text name="Fig13.6.2"
+        x="761"
+        y="976"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >_get_budget_positions()</text>
+      <text name="Fig13.6.3"
+        x="761"
+        y="992"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >_refund_voucher_count()</text>
+      <text name="Fig13.6.4"
+        x="761"
+        y="1008"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >_get_advance_amounts()</text>
+      <text name="Fig13.6.5"
+        x="761"
+        y="1024"
+        width="447"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >_get_amounts()</text>
+      <text name="Fig13.6.6"
+        x="761"
+        y="1040"
+        width="447"
+        height="22"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >_get_total()</text>
+    </group>
   </group>
 </pgml>
 <pgml description="org.argouml.uml.diagram.state.ui.UMLStateDiagram|127-0-0-1-753bf4a:14beaba908f:-8000:00000000000027E1"
