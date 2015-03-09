@@ -16,10 +16,12 @@ Sipreco Custom Views
     'depends': [
         'public_budget',
         'account_asset',
+        'share',
     ],
     'data': [
         'custom_views.xml',
         'account_asset_view.xml',
+        'security/security.xml',
     ],
     'demo': [
     ],
