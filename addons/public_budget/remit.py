@@ -61,8 +61,7 @@ class remit(models.Model):
         'public_budget_remit_ids_expedient_ids_rel',
         'remit_id',
         'expedient_id',
-        string='Expedients',
-        required=True
+        string='Expedients'
         )
 
     _constraints = [
