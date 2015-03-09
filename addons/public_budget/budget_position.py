@@ -244,12 +244,15 @@ class budget_position(models.Model):
             raise Warning(_("You can not set 'Budget Assignment Allowed' to false if budget position is\
                 being used in a budget detail or modification."))
 
-        # Check only one with budget_assignment_allowed
-        parents = self.search(
-            [('parent_left', '<', self.parent_left),
-             ('parent_right', '>', self.parent_right)])
+        # Check only one with _check_budget_assignment_allowed
+        parents = self.search([
+            ('parent_left', '<', self.parent_left),
+            ('parent_right', '>', self.parent_right)
+            ])
+        childs = self.search([('id', 'child_of', self.id)])
+        branch = parents + childs
         budget_assignment_allowed = [
-            x.budget_assignment_allowed for x in parents if x.budget_assignment_allowed]
+            x.budget_assignment_allowed for x in branch if x.budget_assignment_allowed]
         if len(budget_assignment_allowed) > 1:
             raise Warning(_('In one branch only one budget position can have \
                 Budget Assignment Allowed.'))

@@ -64,6 +64,10 @@ class budget_detail(models.Model):
     _constraints = [
     ]
 
+    _sql_constraints = [
+        ('position_unique', 'unique(budget_position_id, budget_id)',
+            _('Budget Position must be unique per Budget.'))]
+
     @api.one
     @api.depends(
         'amount',
