@@ -1,38 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <!-- INHERITED SEARCH -->
-        <record id="view_public_budget_voucher_filter" model="ir.ui.view">
-            <field name="name">public_budget.voucher.select</field>
-            <field name="model">account.voucher</field>
-            <field name="inherit_id" ref="account_voucher.view_voucher_filter"/>
-            <field name="arch" type="xml">
-                <search position="inside">
-                </search>
-            </field>
-        </record>
- 
-        <!-- INHERITED FORM -->
-        <record id="view_public_budget_voucher_form" model="ir.ui.view">
-            <field name="name">public_budget.voucher.form</field>
-            <field name="model">account.voucher</field>
-            <field name="inherit_id" ref="account_voucher.view_voucher_form"/>
-            <field name="arch" type="xml">
-                <group position="inside">
-                </group>
-            </field>
-        </record>
-
-        <!-- INHERITED TREE -->
-        <record id="view_public_budget_voucher_tree" model="ir.ui.view">
-            <field name="name">public_budget.voucher.tree</field>
-            <field name="model">account.voucher</field>
-            <field name="inherit_id" ref="account_voucher.view_voucher_tree"/>
-            <field name="arch" type="xml">
-                <tree position="inside">
-                </tree>
-            </field>
-        </record>
 
         <record id="view_voucher_filter_vendor_pay" model="ir.ui.view">
             <field name="name">account.voucher.payment.filter</field>
@@ -78,7 +46,7 @@
             </field>
         </record>
 
-        <record model="ir.ui.view" id="view_voucher_no_create_tree">
+<!--         <record model="ir.ui.view" id="view_voucher_no_create_tree">
             <field name="name">account.voucher.no_create.tree</field>
             <field name="model">account.voucher</field>
             <field name="arch" type="xml">
@@ -95,7 +63,7 @@
                     <field name="state"/>
                 </tree>
             </field>
-        </record>
+        </record> -->
 
     </data>
 </openerp>

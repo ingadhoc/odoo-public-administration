@@ -98,7 +98,7 @@
                             <page string="Payment Orders and Refunds" attrs="{'invisible':[('type_with_advance_payment','=',False)]}">
                                 <label for="refund_voucher_ids"/>
                                 <button class="oe_link oe_inline" string="(Create Refund Voucher)" type="action" states="open" name="%(public_budget.action_transaction_create_refund_voucher)d"/>
-                                <field name="refund_voucher_ids" context="{'form_view_ref': 'account_voucher.view_vendor_receipt_form','tree_view_ref': 'public_budget.view_voucher_no_create_tree'}"/>
+                                <field name="refund_voucher_ids" context="{'form_view_ref': 'account_voucher.view_vendor_receipt_form','tree_view_ref': 'account_voucher.view_voucher_tree'}"/>
                             </page>
                             <page string="Vouchers">
                                 <button class="oe_link" string="Create Voucher" states="open" type="action" name="%(public_budget.action_definitive_make_invoice)d"/>
