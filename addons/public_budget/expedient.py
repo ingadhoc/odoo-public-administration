@@ -163,7 +163,6 @@ class expedient(models.Model):
         else:
             current_location_id = self.first_location_id.id
 
-        print 'current_location_id', current_location_id
         self.current_location_id = current_location_id
         self.last_move_date = last_move_date
         self.in_transit = in_transit

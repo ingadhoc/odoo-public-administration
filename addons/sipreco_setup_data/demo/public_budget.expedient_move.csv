@@ -1,7 +1,0 @@
-id,expedient_id/id,date,user_id/id,location_id/id,location_dest_id/id
-expedient_move_1,budget_exp_caso_1,2014-04-04 05:05:05,res_user_mesadeentrada,public_location_secretaria,public_location_mesa_de_entrada
-expedient_move_2,budget_exp_caso_1,2014-04-05 05:05:05,res_user_marcelo,public_location_mesa_de_entrada,public_location_contaduria
-expedient_move_3,budget_exp_caso_1,2014-04-06 05:05:05,res_user_silvina,public_location_contaduria,public_location_secretaria
-expedient_move_4,budget_exp_caso_1,2014-04-07 05:05:05,res_user_mesadeentrada,public_location_secretaria,public_location_compras
-expedient_move_5,budget_exp_caso_1,2014-04-08 05:05:05,res_user_marcelo,public_location_compras,public_location_contaduria
-expedient_move_6,budget_exp_caso_1,2014-04-09 05:05:05,res_user_gonzalo,public_location_contaduria,public_location_habilitaciones
