@@ -120,6 +120,12 @@ class budget_position(models.Model):
         'budget_position_id',
         string='preventive_line_ids'
         )
+    assignment_position_id = fields.Many2one(
+        'public_budget.budget_position',
+        string='Assignment Position',
+        compute='_get_assignment_position',
+        # store=True, # TODO ver si la hacemos store
+        )
 
     _constraints = [
     ]
@@ -164,15 +170,11 @@ class budget_position(models.Model):
 
         draft_preventive_lines = self.env[
             'public_budget.preventive_line'].search(
-            # TODO
             domain
-            # + [('accounting_state', '=', 'draft')]
             )
         active_preventive_lines = self.env[
             'public_budget.preventive_line'].search(
             domain
-            # TODO
-            # + [('accounting_state', '=', 'confirmed')]
             )
 
         draft_amounts = [
@@ -243,18 +245,45 @@ class budget_position(models.Model):
         if not self.budget_assignment_allowed and (self.budget_modification_detail_ids or self.budget_detail_ids):
             raise Warning(_("You can not set 'Budget Assignment Allowed' to false if budget position is\
                 being used in a budget detail or modification."))
+        if self.budget_assignment_allowed:
+            # Checl no parent has budget allowed
+            if len(self.get_parent_assignment_position()) > 1:
+                raise Warning(_('In one branch only one budget position can have \
+                    Budget Assignment Allowed.'))
+            # Checl no children has budget allowed
+            else:
+                children_allowed = self.search([
+                    ('id', 'child_of', self.id),
+                    ('id', '!=', self.id),
+                    ('budget_assignment_allowed', '=', True)])
+                if children_allowed:
+                    raise Warning(_(
+                        'You can not set position %s to Budget Posistion \
+                        Allowed as the child position %s has Allowed.') % (
+                        self.name, children_allowed[0].name))
 
-        # Check only one with _check_budget_assignment_allowed
+    @api.multi
+    def get_parent_assignment_position(self):
+        self.ensure_one()
         parents = self.search([
             ('parent_left', '<', self.parent_left),
             ('parent_right', '>', self.parent_right)
             ])
-        childs = self.search([('id', 'child_of', self.id)])
-        branch = parents + childs
-        budget_assignment_allowed = [
-            x.budget_assignment_allowed for x in branch if x.budget_assignment_allowed]
-        if len(budget_assignment_allowed) > 1:
-            raise Warning(_('In one branch only one budget position can have \
-                Budget Assignment Allowed.'))
+        positions_assignment_allowed = [
+            x for x in parents if x.budget_assignment_allowed]
+        return positions_assignment_allowed and positions_assignment_allowed[0] or []
+
+    @api.one
+    @api.depends(
+        'parent_id',
+        'child_ids',
+        'budget_assignment_allowed',
+    )
+    def _get_assignment_position(self):
+        if self.budget_assignment_allowed:
+            assignment_position_id = self
+        else:
+            assignment_position_id = self.get_parent_assignment_position()
+        self.assignment_position_id = assignment_position_id
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

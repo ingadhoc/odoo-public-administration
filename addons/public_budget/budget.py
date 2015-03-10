@@ -76,7 +76,7 @@ class budget(models.Model):
         relation='public_budget_budget_position_rel',
         comodel_name='public_budget.budget_position',
         string='Budget Positions',
-        store=True,
+        # store=True, #TODO ver si agregamos el store y si es necesario este campo
         compute='_get_budget_positions'
         )
     company_id = fields.Many2one(
@@ -132,6 +132,8 @@ class budget(models.Model):
     @api.depends(
         'budget_detail_ids',
         'budget_detail_ids.budget_position_id',
+        'preventive_line_ids',
+        'preventive_line_ids.budget_position_id',
         'budget_modification_ids',
         'budget_modification_ids.budget_modification_detail_ids',
         'budget_modification_ids.budget_modification_detail_ids.budget_position_id',
@@ -149,6 +151,11 @@ class budget(models.Model):
         # initial positions
         position_ids = position_ids + [
             x.budget_position_id.id for x in self.budget_detail_ids]
+        # transactions positions
+        position_ids = position_ids + [
+            x.budget_position_id.id for x in self.preventive_line_ids]
+        # eliminate duplicated
+        position_ids = list(set(position_ids))
         # parents positions
         for position in budget_positions.browse(position_ids):
             parents = budget_positions.search(

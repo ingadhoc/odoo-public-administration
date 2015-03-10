@@ -320,7 +320,7 @@ class transaction(models.Model):
             #             Settlement Amount can't be greater than Payment Orders Amount"))
 
     @api.one
-    @api.constrains('preventive_line_ids', 'expedient_id')
+    @api.constrains('preventive_line_ids', 'type_id', 'expedient_id')
     def _check_transaction_type(self):
         if self.type_id.with_amount_restriction:
             restriction = self.env[
@@ -332,7 +332,7 @@ class transaction(models.Model):
                 if restriction.to_amount < self.total or \
                         restriction.from_amount > self.total:
                     raise Warning(
-                        _("Total and Date are not compatible with \
+                        _("Total, Type and Date are not compatible with \
                             Transaction Amount Restrictions"))
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

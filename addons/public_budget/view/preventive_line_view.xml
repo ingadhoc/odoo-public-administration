@@ -33,12 +33,12 @@
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
                      <group string="Preventive Line">
-                        <field name="budget_id"
+                        <field name="budget_id" options="{'no_create': True}"
                         /> 
-                        <field name="budget_position_id"
+                        <field name="budget_position_id" options="{'no_create': True}"
                         /> 
                         <field name="account_id"
-                            attrs="{'required':[('advance_line','=',False)],'invisible':[('advance_line','=',True)]}"
+                            attrs="{'required':[('advance_line','=',False)],'invisible':[('advance_line','=',True)]}" options="{'no_create': True}"
                             /> 
                         <field name="preventive_amount"
                             /> 
