@@ -101,7 +101,7 @@
                     <field name="name"/>
                     <field name="type" invisible="1"/>
                     <field name="amount" attrs="{'invisible':[('budget_assignment_allowed','=',False)]}"/>
-                    <field name="draft_amount"/>
+                    <!-- <field name="draft_amount"/> -->
                     <field name="preventive_amount"/>
                     <field name="definitive_amount"/>
                     <field name="to_pay_amount"/>

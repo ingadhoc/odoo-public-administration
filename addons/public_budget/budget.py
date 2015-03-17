@@ -139,6 +139,11 @@ class budget(models.Model):
         'budget_modification_ids.budget_modification_detail_ids.budget_position_id',
     )
     def _get_budget_positions(self):
+        """ Definimos por ahora llevar solamente las posiciones que tienen
+        admitida la asignacion de presupuesto. 
+        La unica diferencia entre los dos metodos es que el segundo lleva ademas
+        posiciones que fueron utilizadas en transacciones pero que no tenian
+        marcada la opcion de asignacion de presupuesto"""
         budget_positions = self.env['public_budget.budget_position']
         self.budget_position_ids = budget_positions
 
@@ -151,9 +156,6 @@ class budget(models.Model):
         # initial positions
         position_ids = position_ids + [
             x.budget_position_id.id for x in self.budget_detail_ids]
-        # transactions positions
-        position_ids = position_ids + [
-            x.budget_position_id.id for x in self.preventive_line_ids]
         # eliminate duplicated
         position_ids = list(set(position_ids))
         # parents positions
@@ -164,6 +166,34 @@ class budget(models.Model):
             position_ids += parents.ids
         self.budget_position_ids = budget_positions.browse(
             list(set(position_ids)))
+
+        # Torma vieja donde llevabamos padres e hijos de todas las posiciones
+        # involucradas en un presupuesto
+        # budget_positions = self.env['public_budget.budget_position']
+        # self.budget_position_ids = budget_positions
+
+        # modifications = self.env[
+        #     'public_budget.budget_modification_detail'].search(
+        #     [('budget_modification_id.budget_id', '=', self.id)])
+
+        # # modifications
+        # position_ids = [x.budget_position_id.id for x in modifications]
+        # # initial positions
+        # position_ids = position_ids + [
+        #     x.budget_position_id.id for x in self.budget_detail_ids]
+        # # transactions positions
+        # position_ids = position_ids + [
+        #     x.budget_position_id.id for x in self.preventive_line_ids]
+        # # eliminate duplicated
+        # position_ids = list(set(position_ids))
+        # # parents positions
+        # for position in budget_positions.browse(position_ids):
+        #     parents = budget_positions.search(
+        #         [('parent_left', '<', position.parent_left),
+        #          ('parent_right', '>', position.parent_right)])
+        #     position_ids += parents.ids
+        # self.budget_position_ids = budget_positions.browse(
+        #     list(set(position_ids)))
 
     @api.one
     def _get_totals(self):

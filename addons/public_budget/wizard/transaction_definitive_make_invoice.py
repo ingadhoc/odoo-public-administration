@@ -130,7 +130,7 @@ class public_budget_definitive_make_invoice(models.TransientModel):
         for line in wizard.definitive_line_ids:
             if line.to_invoice_amount:
                 line_vals = {
-                    'name': line.preventive_line_id.name,
+                    'name': line.budget_position_id.name,
                     'price_unit': line.to_invoice_amount,
                     'quantity': 1,
                     'definitive_line_id': line.id,

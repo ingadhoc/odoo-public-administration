@@ -71,7 +71,7 @@ class budget_position(models.Model):
         compute='_get_amounts'
         )
     preventive_avg = fields.Float(
-        string='Preventive Avg',
+        string='Preventive Perc.',
         compute='_get_amounts'
         )
     amount = fields.Float(
