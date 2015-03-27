@@ -26,7 +26,6 @@ Installs All Sipreco Project Dependencies
     ],
     'depends': [
         'sipreco_account_chart',
-        'sipreco_custom_views',
         'sipreco_public_budget',
         'account_cancel',
         'account_bank_voucher',

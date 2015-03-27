@@ -6,9 +6,17 @@
     'data': [
         'wizard/transaction_definitive_make_invoice_view.xml',
         'views/res_partner_view.xml',
+        'views/custom_views.xml',
+        'views/account_asset_view.xml',
+        'security/security.xml',
     ],
     'demo': [],
-    'depends': ['l10n_ar_invoice', 'public_budget'],
+    'depends': [
+        'l10n_ar_invoice',
+        'public_budget',
+        'account_asset',
+        'share',
+    ],
     'description': '''
 Public Budget Sipreco Customizations
 ====================================
