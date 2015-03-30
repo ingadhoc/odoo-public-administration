@@ -41,6 +41,7 @@
                         <button name="sgn_cancel"
                             states="confirmed,in_transit"
                             string="Cancel"
+                            groups="base.group_no_one"
                             />
                         <field name="state" widget="statusbar"
                             statusbar_colors='{}'
