@@ -9,6 +9,7 @@
         'views/custom_views.xml',
         'views/account_asset_view.xml',
         'security/security.xml',
+        'data/data.xml',
     ],
     'demo': [],
     'depends': [
@@ -16,6 +17,7 @@
         'public_budget',
         'account_asset',
         'share',
+        'web_m2x_options',
     ],
     'description': '''
 Public Budget Sipreco Customizations

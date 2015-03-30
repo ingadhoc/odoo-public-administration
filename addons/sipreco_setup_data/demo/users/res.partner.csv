@@ -1,11 +1,11 @@
-id,name,email
-res_partner_alejandro,Alejandro Pendino,alejandro@mail.com
-res_partner_jonatan,Jonatan Santos,jonatan@mail.com
-res_partner_gustavo,Gustavo Pelegrino,gustavo@mail.com
-res_partner_marina,Marina Marcilli,marina@mail.com
-res_partner_marcelo,Marcelo Pazos,marcelo@mail.com
-res_partner_gonzalo,Gonzalo Aciar,gonzalo@mail.com
-res_partner_silvina,Silvina Nicoli,silvina@mail.com
-res_partner_mariano,Mariano Roca,mariano@mail.com
-res_partner_mesadeentrada,Mesa de Entrada,mesa@mail.com
-res_partner_efren,José Efren,jose@mail.com
+id,name,email,document_type_id/id,document_number,responsability_id/id
+res_partner_alejandro,Alejandro Pendino,alejandro@mail.com,l10n_ar_invoice.dt_DNI,31393297,l10n_ar_invoice.res_CF
+res_partner_jonatan,Jonatan Santos,jonatan@mail.com,l10n_ar_invoice.dt_DNI,31393297,l10n_ar_invoice.res_CF
+res_partner_gustavo,Gustavo Pelegrino,gustavo@mail.com,l10n_ar_invoice.dt_DNI,31393297,l10n_ar_invoice.res_CF
+res_partner_marina,Marina Marcilli,marina@mail.com,l10n_ar_invoice.dt_DNI,31393297,l10n_ar_invoice.res_CF
+res_partner_marcelo,Marcelo Pazos,marcelo@mail.com,l10n_ar_invoice.dt_DNI,31393297,l10n_ar_invoice.res_CF
+res_partner_gonzalo,Gonzalo Aciar,gonzalo@mail.com,l10n_ar_invoice.dt_DNI,31393297,l10n_ar_invoice.res_CF
+res_partner_silvina,Silvina Nicoli,silvina@mail.com,l10n_ar_invoice.dt_DNI,31393297,l10n_ar_invoice.res_CF
+res_partner_mariano,Mariano Roca,mariano@mail.com,l10n_ar_invoice.dt_DNI,31393297,l10n_ar_invoice.res_CF
+res_partner_mesadeentrada,Mesa de Entrada,mesa@mail.com,l10n_ar_invoice.dt_DNI,31393297,l10n_ar_invoice.res_CF
+res_partner_efren,José Efren,jose@mail.com,l10n_ar_invoice.dt_DNI,31393297,l10n_ar_invoice.res_CF

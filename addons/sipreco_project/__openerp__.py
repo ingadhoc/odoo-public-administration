@@ -32,6 +32,7 @@ Installs All Sipreco Project Dependencies
         'account_accountant',
         'account_clean_cancelled_invoice_number',
         'l10n_ar_bank',
+        'disable_openerp_online',
     ],
     'data': [
     ],
