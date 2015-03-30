@@ -292,6 +292,10 @@ class transaction(models.Model):
     @api.one
     def check_closure(self):
         # Check preventive lines
+        if not self.preventive_line_ids:
+                raise Warning(
+                    _('To close a transaction there must be at least one preventive line'))
+
         for line in self.preventive_line_ids:
             if line.preventive_amount != line.definitive_amount or line.preventive_amount != line.invoiced_amount or line.preventive_amount != line.to_pay_amount or line.preventive_amount != line.paid_amount:
                 raise Warning(
