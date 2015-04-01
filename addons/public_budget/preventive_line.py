@@ -8,21 +8,25 @@ class preventive_line(models.Model):
 
     _name = 'public_budget.preventive_line'
     _description = 'Preventive Line'
+    _rec_name = 'budget_position_id'
+
+    @api.model
+    def _get_default_budget(self):
+        budgets = self.env['public_budget.budget'].search([('state', '=', 'open')])
+        return budgets and budgets[0] or False
 
     account_id = fields.Many2one(
         'account.account',
         string='Account',
         states={'invoiced': [('readonly', True)]},
-        domain=[('type', 'in', ['other']), ('user_type.report_type', 'in', ['expense','asset'])]
+        domain=[('type', 'in', ['other']), ('user_type.report_type', 'in', ['expense', 'asset'])]
+        # TODO borrar esto si no interesa restringir por los avialable accounts y borrar tmb los avialable accounts
+        # domain="[('type', 'in', ['other']), ('user_type.report_type', 'in', ['expense', 'asset']), ('id', 'in', available_account_ids[0][2])]"
         )
     preventive_amount = fields.Float(
         string='Preventive',
         required=True,
         states={'closed': [('readonly', True)]}
-        )
-    available_account_ids = fields.Many2one(
-        'account.account',
-        string='available_account_ids'
         )
     advance_line = fields.Boolean(
         string='advance_line'
@@ -73,6 +77,7 @@ class preventive_line(models.Model):
         'public_budget.budget',
         string='Budget',
         required=True,
+        default=_get_default_budget,
         states={'invoiced': [('readonly', True)]},
         domain=[('state', '=', 'open')]
         )

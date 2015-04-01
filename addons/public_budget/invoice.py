@@ -12,7 +12,8 @@ class invoice(models.Model):
 
     transaction_id = fields.Many2one(
         'public_budget.transaction',
-        string='transaction_id'
+        string='transaction_id',
+        copy=False,
         )
 
     _constraints = [

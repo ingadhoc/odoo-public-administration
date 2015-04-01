@@ -64,6 +64,7 @@
                     <sheet string="Budget Transaction">
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
+                        <field name="id" invisible="True"/> 
                         <field name="user_location_ids" invisible="True"/> 
                         <field name="type_with_advance_payment" invisible="1"/>
                         <field name="type_with_salary_advance" invisible="1"/>
@@ -109,6 +110,7 @@
                                 <field name="advance_return_ids"/>
                             </page>
                             <page string="Payment Orders" attrs="{'invisible':[('type_with_advance_payment','=',True)]}">
+                                <field name="voucher_ids" context="{'default_transaction_id':id, 'form_view_ref': 'account_voucher.view_vendor_receipt_form','tree_view_ref': 'account_voucher.view_voucher_tree'}"/>
                             </page>
                             <page string="Notes">
                                 <field name="note"/>
