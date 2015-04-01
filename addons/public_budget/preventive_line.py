@@ -21,6 +21,7 @@ class preventive_line(models.Model):
         states={'invoiced': [('readonly', True)]},
         domain=[('type', 'in', ['other']), ('user_type.report_type', 'in', ['expense', 'asset'])]
         # TODO borrar esto si no interesa restringir por los avialable accounts y borrar tmb los avialable accounts
+        # Hablamos con gonza de que a priori no lo usamos salvo que lo pidan
         # domain="[('type', 'in', ['other']), ('user_type.report_type', 'in', ['expense', 'asset']), ('id', 'in', available_account_ids[0][2])]"
         )
     preventive_amount = fields.Float(
