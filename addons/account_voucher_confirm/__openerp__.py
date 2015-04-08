@@ -6,16 +6,20 @@
     'data': [
         'workflow/account_voucher_workflow.xml',
         'views/account_voucher_view.xml',
+        'security/ir.model.access.csv',
     ],
     'demo': [],
     'depends': [
-        'account_voucher',
+        'account_voucher_withholding',
+        'account_check',
         ],
     'description': '''
-Account Voucher Confirm State Management
-========================================
+Account Voucher Double Validation
+=================================
+Add a new state called confirm on vouchers. 
+It also adds a payment date. Payments can not be validated before this payment date.
 ''',
     'installable': True,
-    'name': "Account Voucher Confirm State Management",
+    'name': "Account Voucher Double Validation",
     'test': [],
     'version': '1.243'}
