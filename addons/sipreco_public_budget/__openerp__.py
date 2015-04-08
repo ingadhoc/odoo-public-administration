@@ -8,6 +8,7 @@
         'views/res_partner_view.xml',
         'views/custom_views.xml',
         'views/account_asset_view.xml',
+        'views/account_voucher_view.xml',
         'security/security.xml',
         'data/data.xml',
     ],
