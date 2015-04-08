@@ -18,7 +18,7 @@
         'account_asset',
         'share',
         'web_m2x_options',
-        'account_voucher_confirm',
+        'account_voucher_double_validation',
     ],
     'description': '''
 Public Budget Sipreco Customizations
