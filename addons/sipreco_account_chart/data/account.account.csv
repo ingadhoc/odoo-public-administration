@@ -90,3 +90,4 @@ account_account_164,515,OTROS GASTOS,account_account_126,False,account.data_acco
 account_account_165,5150010,Otros Servicios,account_account_164,False,account.data_account_type_expense,other
 account_account_1651,5150020,Gastos Bienes de Uso,account_account_164,False,account.data_account_type_expense,other
 account_account_1652,5150030,Servicios Comerciales y Financieros,account_account_164,False,account.data_account_type_expense,other
+account_account_1653,5150040,Subsidios Otorgados,account_account_164,False,account.data_account_type_expense,other
