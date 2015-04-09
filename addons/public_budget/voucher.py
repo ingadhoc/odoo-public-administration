@@ -10,11 +10,44 @@ class voucher(models.Model):
     _inherits = {}
     _inherit = ['account.voucher']
 
+    @api.model
+    def _get_default_budget(self):
+        budgets = self.env['public_budget.budget'].search(
+            [('state', '=', 'open')])
+        return budgets and budgets[0] or False
+
+    budget_id = fields.Many2one(
+        'public_budget.budget',
+        string='Budget',
+        required=True,
+        default=_get_default_budget,
+        readonly=True,
+        domain=[('state', '=', 'open')],
+        states={'draft': [('readonly', False)]},
+        )
+    expedient_id = fields.Many2one(
+        'public_budget.expedient',
+        string='Expedient',
+        readonly=True,
+        required=True,
+        domain=[('type', '=', 'payment'), ('state', '=', 'open')],
+        context={'default_type': 'payment'},
+        states={'draft': [('readonly', False)]}
+        )
     transaction_id = fields.Many2one(
         'public_budget.transaction',
         string='Transaction',
-        # readonly=True,
         required=True,
+        readonly=True,
+        # TODO add domain
+        # domain=[('state', '=', 'open')],
+        states={'draft': [('readonly', False)]},
+        )
+    budget_position_ids = fields.Many2many(
+        relation='voucher_position_rel',
+        comodel_name='public_budget.budget_position',
+        string='Related Budget Positions',
+        compute='_get_budget_positions'
         )
     # supplier_ids = fields.Many2one(
     #     'public_budget.transaction',
@@ -33,6 +66,14 @@ class voucher(models.Model):
 
     _constraints = [
     ]
+
+    @api.one
+    def _get_budget_positions(self):
+        self.budget_position_ids = self.env['public_budget.budget_position']
+        # TODO implementar
+        # budget_position_ids = [
+        #     x.budget_position_id.id for x in self.preventive_line_ids]
+        # self.budget_position_ids = budget_position_ids
 
     @api.one
     @api.onchange(
