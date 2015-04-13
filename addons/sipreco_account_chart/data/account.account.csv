@@ -73,20 +73,20 @@ account_account_1162,43,FONDOS AUTORIZADOS NO UTILIZADOS,account_account_111,Fal
 account_account_1163,4300010,Fondos autorizados no utilizados,account_account_1162,False,account.data_account_type_income,other
 account_account_125,5,EGRESOS,account_account_1,False,account.data_account_type_view,view
 account_account_126,51,PERSONAL,account_account_125,False,account.data_account_type_view,view
-account_account_127,511,PERSONAL PERMANENTE,account_account_126,False,account.data_account_type_view,view
-account_account_128,5110010,Personal Permanente,account_account_127,False,account.data_account_type_expense,other
-account_account_129,5110020,Personal No Permanente – Transitorio,account_account_127,False,account.data_account_type_expense,other
-account_account_130,5110030,Personal No Permanente – Autoridad Superior,account_account_127,False,account.data_account_type_expense,other
-account_account_135,512,BIENES DE CONSUMO,account_account_126,False,account.data_account_type_view,view
-account_account_136,5120010,Bienes de Consumo,account_account_135,False,account.data_account_type_expense,other
-account_account_145,513,SERVICIOS NO PERSONALES,account_account_126,False,account.data_account_type_view,view
-account_account_146,5130010,Alquileres y derechos,account_account_145,False,account.data_account_type_expense,other
-account_account_147,5130020,"Mantenimiento, reparación y limpieza Dom. Priv.",account_account_145,False,account.data_account_type_expense,other
-account_account_148,5130030,Servicios Técnicos Profesionales,account_account_145,False,account.data_account_type_expense,other
-account_account_149,5130040,Publicidad y Propaganda,account_account_145,False,account.data_account_type_expense,other
-account_account_156,514,"IMPUESTOS, DERECHOS, TASAS Y MULTAS",account_account_126,False,account.data_account_type_view,view
-account_account_157,5140010,Tasas y Derechos,account_account_156,False,account.data_account_type_expense,other
-account_account_164,515,OTROS GASTOS,account_account_126,False,account.data_account_type_view,view
-account_account_165,5150010,Otros Servicios,account_account_164,False,account.data_account_type_expense,other
-account_account_1651,5150020,Gastos Bienes de Uso,account_account_164,False,account.data_account_type_expense,other
-account_account_1652,5150030,Servicios Comerciales y Financieros,account_account_164,False,account.data_account_type_expense,other
+account_account_128,5100010,Personal Permanente,account_account_126,False,account.data_account_type_expense,other
+account_account_129,5100020,Personal No Permanente – Transitorio,account_account_126,False,account.data_account_type_expense,other
+account_account_130,5100030,Personal No Permanente – Autoridad Superior,account_account_126,False,account.data_account_type_expense,other
+account_account_135,52,BIENES DE CONSUMO,account_account_125,False,account.data_account_type_view,view
+account_account_136,5200010,Bienes de Consumo,account_account_135,False,account.data_account_type_expense,other
+account_account_137,5200020,Servicios Básicos,account_account_135,False,account.data_account_type_expense,other
+account_account_145,53,SERVICIOS NO PERSONALES,account_account_125,False,account.data_account_type_view,view
+account_account_146,5300010,Alquileres y derechos,account_account_145,False,account.data_account_type_expense,other
+account_account_147,5300020,"Mantenimiento, reparación y limpieza Dom. Priv.",account_account_145,False,account.data_account_type_expense,other
+account_account_148,5300030,Servicios Técnicos Profesionales,account_account_145,False,account.data_account_type_expense,other
+account_account_149,5300040,Publicidad y Propaganda,account_account_145,False,account.data_account_type_expense,other
+account_account_156,54,"IMPUESTOS, DERECHOS, TASAS Y MULTAS",account_account_125,False,account.data_account_type_view,view
+account_account_157,5400010,Tasas y Derechos,account_account_156,False,account.data_account_type_expense,other
+account_account_164,55,OTROS GASTOS,account_account_125,False,account.data_account_type_view,view
+account_account_165,5500010,Otros Servicios,account_account_164,False,account.data_account_type_expense,other
+account_account_1651,5500020,Gastos Bienes de Uso,account_account_164,False,account.data_account_type_expense,other
+account_account_1652,5500030,Servicios Comerciales y Financieros,account_account_164,False,account.data_account_type_expense,other
