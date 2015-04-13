@@ -1,102 +1,135 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* public_budget
+# 	* public_budget
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-01-13 21:00+0000\n"
-"PO-Revision-Date: 2015-01-13 21:00+0000\n"
+"PO-Revision-Date: 2015-04-13 16:38-0300\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
+"X-Generator: Poedit 1.5.4\n"
 
 #. module: public_budget
 #: model:ir.actions.act_window,help:public_budget.action_public_budget_advance_request_advance_requests
-msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Advance Requests.</p>\n"
+msgid ""
+"<p class=\"oe_view_nocontent_create\"> Click to create a Advance Requests.</"
+"p>\n"
 "            "
-msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Advance Requests.</p>\n"
+msgstr ""
+"<p class=\"oe_view_nocontent_create\"> Click to create a Advance Requests.</"
+"p>\n"
 "            "
 
 #. module: public_budget
 #: model:ir.actions.act_window,help:public_budget.action_public_budget_budget_budgets
-msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Budgets.</p>\n"
+msgid ""
+"<p class=\"oe_view_nocontent_create\"> Click to create a Budgets.</p>\n"
 "            "
-msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Budgets.</p>\n"
+msgstr ""
+"<p class=\"oe_view_nocontent_create\"> Click to create a Budgets.</p>\n"
 "            "
 
 #. module: public_budget
 #: model:ir.actions.act_window,help:public_budget.action_public_budget_expedient_category_categories
-msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Categories.</p>\n"
+msgid ""
+"<p class=\"oe_view_nocontent_create\"> Click to create a Categories.</p>\n"
 "            "
-msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Categories.</p>\n"
+msgstr ""
+"<p class=\"oe_view_nocontent_create\"> Click to create a Categories.</p>\n"
 "            "
 
 #. module: public_budget
 #: model:ir.actions.act_window,help:public_budget.action_res_partner_employees
-msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Employees.</p>\n"
+msgid ""
+"<p class=\"oe_view_nocontent_create\"> Click to create a Employees.</p>\n"
 "            "
-msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Employees.</p>\n"
+msgstr ""
+"<p class=\"oe_view_nocontent_create\"> Click to create a Employees.</p>\n"
 "            "
 
 #. module: public_budget
 #: model:ir.actions.act_window,help:public_budget.action_public_budget_expedient_expedients
-msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Expedients.</p>\n"
+msgid ""
+"<p class=\"oe_view_nocontent_create\"> Click to create a Expedients.</p>\n"
 "            "
-msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Expedients.</p>\n"
+msgstr ""
+"<p class=\"oe_view_nocontent_create\"> Click to create a Expedients.</p>\n"
 "            "
 
 #. module: public_budget
 #: model:ir.actions.act_window,help:public_budget.action_public_budget_expedient_founder_founders
-msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Founders.</p>\n"
+msgid ""
+"<p class=\"oe_view_nocontent_create\"> Click to create a Founders.</p>\n"
 "            "
-msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Founders.</p>\n"
+msgstr ""
+"<p class=\"oe_view_nocontent_create\"> Click to create a Founders.</p>\n"
 "            "
 
 #. module: public_budget
 #: model:ir.actions.act_window,help:public_budget.action_public_budget_location_locations
-msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Locations.</p>\n"
+msgid ""
+"<p class=\"oe_view_nocontent_create\"> Click to create a Locations.</p>\n"
 "            "
-msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Locations.</p>\n"
+msgstr ""
+"<p class=\"oe_view_nocontent_create\"> Click to create a Locations.</p>\n"
 "            "
 
 #. module: public_budget
 #: model:ir.actions.act_window,help:public_budget.action_public_budget_budget_pos_exc_rest_position_exc__rest_
-msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Position Exc. Rest..</p>\n"
+msgid ""
+"<p class=\"oe_view_nocontent_create\"> Click to create a Position Exc. Rest.."
+"</p>\n"
 "            "
-msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Position Exc. Rest..</p>\n"
+msgstr ""
+"<p class=\"oe_view_nocontent_create\"> Click to create a Position Exc. Rest.."
+"</p>\n"
 "            "
 
 #. module: public_budget
 #: model:ir.actions.act_window,help:public_budget.action_public_budget_budget_position_category_position_types
-msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Position Types.</p>\n"
+msgid ""
+"<p class=\"oe_view_nocontent_create\"> Click to create a Position Types.</"
+"p>\n"
 "            "
-msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Position Types.</p>\n"
+msgstr ""
+"<p class=\"oe_view_nocontent_create\"> Click to create a Position Types.</"
+"p>\n"
 "            "
 
 #. module: public_budget
 #: model:ir.actions.act_window,help:public_budget.action_public_budget_budget_position_positions
-msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Positions.</p>\n"
+msgid ""
+"<p class=\"oe_view_nocontent_create\"> Click to create a Positions.</p>\n"
 "            "
-msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Positions.</p>\n"
+msgstr ""
+"<p class=\"oe_view_nocontent_create\"> Click to create a Positions.</p>\n"
 "            "
 
 #. module: public_budget
 #: model:ir.actions.act_window,help:public_budget.action_public_budget_transaction_type_transaction_types
-msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Transaction Types.</p>\n"
+msgid ""
+"<p class=\"oe_view_nocontent_create\"> Click to create a Transaction Types.</"
+"p>\n"
 "            "
-msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Transaction Types.</p>\n"
+msgstr ""
+"<p class=\"oe_view_nocontent_create\"> Click to create a Transaction Types.</"
+"p>\n"
 "            "
 
 #. module: public_budget
 #: model:ir.actions.act_window,help:public_budget.action_public_budget_transaction_transactions
-msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Transactions.</p>\n"
+msgid ""
+"<p class=\"oe_view_nocontent_create\"> Click to create a Transactions.</p>\n"
 "            "
-msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Transactions.</p>\n"
+msgstr ""
+"<p class=\"oe_view_nocontent_create\"> Click to create a Transactions.</p>\n"
 "            "
 
 #. module: public_budget
@@ -774,8 +807,7 @@ msgstr "Recursos Humanos"
 #: field:public_budget.advance_request_line,id:0
 #: field:public_budget.advance_return,id:0
 #: field:public_budget.advance_return_line,id:0
-#: field:public_budget.budget,id:0
-#: field:public_budget.budget_detail,id:0
+#: field:public_budget.budget,id:0 field:public_budget.budget_detail,id:0
 #: field:public_budget.budget_modification,id:0
 #: field:public_budget.budget_modification_detail,id:0
 #: field:public_budget.budget_pos_exc_rest,id:0
@@ -783,17 +815,14 @@ msgstr "Recursos Humanos"
 #: field:public_budget.budget_position_category,id:0
 #: field:public_budget.budget_prec_detail,id:0
 #: field:public_budget.definitive.make.invoice,id:0
-#: field:public_budget.definitive_line,id:0
-#: field:public_budget.expedient,id:0
+#: field:public_budget.definitive_line,id:0 field:public_budget.expedient,id:0
 #: field:public_budget.expedient_category,id:0
 #: field:public_budget.expedient_founder,id:0
 #: field:public_budget.expedient_move,id:0
 #: field:public_budget.expedients_move_wizard,id:0
 #: field:public_budget.funding_move,id:0
-#: field:public_budget.inventory_rule,id:0
-#: field:public_budget.location,id:0
-#: field:public_budget.preventive_line,id:0
-#: field:public_budget.rest_type,id:0
+#: field:public_budget.inventory_rule,id:0 field:public_budget.location,id:0
+#: field:public_budget.preventive_line,id:0 field:public_budget.rest_type,id:0
 #: field:public_budget.transaction,id:0
 #: field:public_budget.transaction_create_refund_voucher,id:0
 #: field:public_budget.transaction_type,id:0
@@ -1064,8 +1093,7 @@ msgid "Not Journal Found"
 msgstr "No se encuentra Diario"
 
 #. module: public_budget
-#: field:public_budget.expedient,note:0
-#: field:public_budget.transaction,note:0
+#: field:public_budget.expedient,note:0 field:public_budget.transaction,note:0
 msgid "Note"
 msgstr "Nota"
 
@@ -1078,14 +1106,22 @@ msgstr "Número"
 #. module: public_budget
 #: code:addons/public_budget/wizard/transaction_definitive_make_invoice.py:100
 #, python-format
-msgid "On Advance Transactions, sum of to Invoice Amount can not be greater than Advance Remaining Amount!"
-msgstr "En transacciones con Adelanto, la suma de los valores devengados no puede ser superior al Monto Remanente de Adelanto!"
+msgid ""
+"On Advance Transactions, sum of to Invoice Amount can not be greater than "
+"Advance Remaining Amount!"
+msgstr ""
+"En transacciones con Adelanto, la suma de los valores devengados no puede "
+"ser superior al Monto Remanente de Adelanto!"
 
 #. module: public_budget
 #: code:addons/public_budget/wizard/transaction_definitive_make_invoice.py:93
 #, python-format
-msgid "On Advance Transactions, transaction advance type must have and advance account configured!"
-msgstr "En Transacciones con Adelanto, el Tipo de Transacción con Adelanto, debe tener una cuenta de adelanto configurada!"
+msgid ""
+"On Advance Transactions, transaction advance type must have and advance "
+"account configured!"
+msgstr ""
+"En Transacciones con Adelanto, el Tipo de Transacción con Adelanto, debe "
+"tener una cuenta de adelanto configurada!"
 
 #. module: public_budget
 #: view:public_budget.budget:public_budget.view_public_budget_budget_form
@@ -1094,7 +1130,7 @@ msgstr "En Transacciones con Adelanto, el Tipo de Transacción con Adelanto, deb
 #: view:public_budget.transaction:public_budget.view_public_budget_transaction_form
 #: selection:public_budget.transaction,state:0
 msgid "Open"
-msgstr "Abierto"
+msgstr "Abrir"
 
 #. module: public_budget
 #: view:public_budget.budget_pos_exc_rest:public_budget.view_public_budget_budget_pos_exc_rest_filter
@@ -1290,8 +1326,7 @@ msgstr "La Ubicación Origen y Destino no pueden ser iguales."
 #. module: public_budget
 #: field:public_budget.advance_request,state:0
 #: field:public_budget.advance_return,state:0
-#: field:public_budget.budget,state:0
-#: field:public_budget.expedient,state:0
+#: field:public_budget.budget,state:0 field:public_budget.expedient,state:0
 #: field:public_budget.funding_move,state:0
 #: field:public_budget.transaction,state:0
 msgid "State"
@@ -1330,7 +1365,8 @@ msgstr "El movimiento de fondo debe estar en borrador para desvincular!"
 #. module: public_budget
 #: help:public_budget.definitive.make.invoice,supplier_invoice_number:0
 msgid "The reference of this invoice as provided by the supplier."
-msgstr "La referencia de este comprobante como es suministrada por el proveedor."
+msgstr ""
+"La referencia de este comprobante como es suministrada por el proveedor."
 
 #. module: public_budget
 #: code:addons/public_budget/preventive_line.py:271
@@ -1374,7 +1410,9 @@ msgstr "A Devengar"
 #: code:addons/public_budget/definitive_line.py:143
 #, python-format
 msgid "To Invoice Amount can't be greater than Residual Amount"
-msgstr "El monto a Devengar no puede superar el Monto Residual de al afectación definitiva"
+msgstr ""
+"El monto a Devengar no puede superar el Monto Residual de al afectación "
+"definitiva"
 
 #. module: public_budget
 #: field:public_budget.budget_prec_detail,to_pay_amount:0
@@ -1518,8 +1556,12 @@ msgstr "Año"
 #. module: public_budget
 #: code:addons/public_budget/funding_move.py:83
 #, python-format
-msgid "You can not cancel a Funding Move that has a related                 Account Move. Delete it first"
-msgstr "No es posible cancelar un Movimiento de Fondos que tiene un Movimiento Contable relacionado. Borrar este movimiento previamente."
+msgid ""
+"You can not cancel a Funding Move that has a related                 Account "
+"Move. Delete it first"
+msgstr ""
+"No es posible cancelar un Movimiento de Fondos que tiene un Movimiento "
+"Contable relacionado. Borrar este movimiento previamente."
 
 #. module: public_budget
 #: code:addons/public_budget/preventive_line.py:283
@@ -1536,14 +1578,21 @@ msgstr "No es posible borrar una línea definitiva que ya fue devengada."
 #. module: public_budget
 #: code:addons/public_budget/budget_modification_detail.py:39
 #, python-format
-msgid "You can not make this modification as '%s' will have a                     negative balance"
-msgstr "No puede realizar esta modificación, ya que '%s' terminaría con balance negativo."
+msgid ""
+"You can not make this modification as '%s' will have a                     "
+"negative balance"
+msgstr ""
+"No puede realizar esta modificación, ya que '%s' terminaría con balance "
+"negativo."
 
 #. module: public_budget
 #: code:addons/public_budget/budget_position.py:207
 #, python-format
-msgid "You cannot define children to an account with                 internal type different of \"View\"."
-msgstr "No puedes definir hijos a una cuenta con tipo interno diferente a  \"View\"."
+msgid ""
+"You cannot define children to an account with                 internal type "
+"different of \"View\"."
+msgstr ""
+"No puedes definir hijos a una cuenta con tipo interno diferente a  \"View\"."
 
 #. module: public_budget
 #: code:addons/public_budget/wizard/transaction_definitive_make_invoice.py:128
@@ -1702,4 +1751,3 @@ msgstr "{'invisible':['|',('state','=','done'),('transaction_id','!=',False)]}"
 #: view:payment.order:public_budget.view_public_budget_payment_order_form
 msgid "{'readonly':[('transaction_id', '!=', False)]}"
 msgstr "{'readonly':[('transaction_id', '!=', False)]}"
-
