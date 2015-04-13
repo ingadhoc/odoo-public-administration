@@ -62,7 +62,7 @@ class transaction(models.Model):
         )
     invoice_ids = fields.Many2one(
         'account.invoice',
-        string='Vouchers',
+        string='Invoices',
         readonly=True
         )
     note = fields.Html(
@@ -161,6 +161,31 @@ class transaction(models.Model):
         states={'open': [('readonly', False)]},
         domain=[('advance_line', '=', False)]
         )
+    invoice_ids = fields.One2many(
+        'account.invoice',
+        'transaction_id',
+        string='Invoices',
+        track_visibility='always',
+        readonly=True
+        )
+    voucher_ids = fields.One2many(
+        'account.voucher',
+        'transaction_id',
+        string='Payment Orders',
+        readonly=True,
+        domain=[('type', '=', 'payment')],
+        context={'default_type': 'payment'},
+        states={'open': [('readonly', False)]},
+        )
+    advance_voucher_ids = fields.One2many(
+        'account.voucher',
+        'transaction_id',
+        string='Advance Payment Orders',
+        readonly=True,
+        domain=[('type', '=', 'payment')],
+        context={'default_type': 'payment'},
+        states={'open': [('readonly', False)]},
+        )
     refund_voucher_ids = fields.One2many(
         'account.voucher',
         'transaction_id',
@@ -175,26 +200,13 @@ class transaction(models.Model):
         readonly=True,
         states={'draft': [('readonly', False)], 'open': [('readonly', False)]}
         )
-    invoice_ids = fields.One2many(
-        'account.invoice',
-        'transaction_id',
-        string='Invoices',
-        track_visibility='always',
-        readonly=True
-        )
-    voucher_ids = fields.One2many(
-        'account.voucher',
-        'transaction_id',
-        string='Payment Orders',
-        readonly=True,
-        states={'open': [('readonly', False)]}
-        )
 
     _constraints = [
     ]
 
     @api.one
     @api.depends(
+        'partner_id',
         'preventive_line_ids',
         'preventive_line_ids.definitive_line_ids',
         'preventive_line_ids.definitive_line_ids.supplier_id',
@@ -204,6 +216,8 @@ class transaction(models.Model):
             [('preventive_line_id.transaction_id', '=', self.id)])
         supplier_ids = [
             x.supplier_id.id for x in definitive_lines]
+        if self.partner_id:
+            supplier_ids.append(self.partner_id.id)
         self.supplier_ids = self.env['res.partner']
         self.supplier_ids = supplier_ids
 
