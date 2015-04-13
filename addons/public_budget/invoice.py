@@ -1,6 +1,16 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
 from openerp.exceptions import Warning
+import openerp.addons.decimal_precision as dp
+
+
+class account_move_line(models.Model):
+    _inherit = ['account.move.line']
+    voucher_line_ids = fields.One2many(
+        'account.voucher.line',
+        'move_line_id',
+        'Voucher Lines'
+        )
 
 
 class invoice(models.Model):
@@ -15,9 +25,41 @@ class invoice(models.Model):
         string='transaction_id',
         copy=False,
         )
+    to_pay_amount = fields.Float(
+        string='To Pay Amount',
+        digits=dp.get_precision('Account'),
+        compute='_compute_to_pay_amount',
+        store=True,
+        )
 
     _constraints = [
     ]
+
+    @api.one
+    @api.depends(
+        'state', 'currency_id',
+        'move_id.line_id.voucher_line_ids.amount',
+        'move_id.line_id.voucher_line_ids.voucher_id.state',
+    )
+    # An invoice's to pay amount is the sum of its unreconciled move lines and,
+    # for partially reconciled move lines, their residual amount divided by the
+    # number of times this reconciliation is used in an invoice (so we split
+    # the residual amount between all invoice)
+    def _compute_to_pay_amount(self):
+        voucher_lines = self.env['account.voucher.line'].search([
+            ('move_line_id.move_id', '=', self.move_id.id),
+            ('amount', '!=', 0),
+            ('voucher_id.state', 'in', ('confirmed', 'done')),
+            ])
+        to_pay_amount = sum([x.amount for x in voucher_lines])
+        self.to_pay_amount = to_pay_amount
+
+    @api.multi
+    def action_cancel(self):
+        for inv in self:
+            if inv.to_pay_amount:
+                raise Warning(_('You cannot cancel an invoice which has been sent to pay. You need to cancel related payments first.'))
+        return super(invoice, self).action_cancel()
 
     @api.multi
     def invoice_validate(self):

@@ -46,6 +46,9 @@
                 <button name="invoice_pay_customer" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </button>
+                <field name="residual" position="after">
+                    <field name="to_pay_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                </field>
             </field>
         </record>
 

@@ -101,7 +101,9 @@
                     <field name="code"/>
                     <field name="name"/>
                     <field name="type" invisible="1"/>
-                    <field name="amount" attrs="{'invisible':[('budget_assignment_allowed','=',False)]}"/>
+                    <field name="amount"/>
+                    <!-- No usamos el attrs porque no lo renderiza bien la vista arbol -->
+                    <!-- <field name="amount" attrs="{'invisible':[('budget_assignment_allowed','=',False)]}"/> -->
                     <!-- <field name="draft_amount"/> -->
                     <field name="preventive_amount"/>
                     <field name="definitive_amount"/>
