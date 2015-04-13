@@ -163,7 +163,7 @@ class budget_position(models.Model):
             initial_lines = self.env['public_budget.budget_detail'].search([
                 ('budget_id', '=', budget_id),
                 ('budget_position_id', operator, self.id)])
-            initial_amounts = [line.amount for line in initial_lines]
+            initial_amounts = [line.initial_amount for line in initial_lines]
             amount = sum(initial_amounts) + sum(modification_amounts)
         else:
             amount = False

@@ -29,9 +29,6 @@ class account_voucher(models.Model):
         default=0.0,
         states={'confirmed': [('readonly', False)]}
         )
-    journal_id = fields.Many2one(
-        states={'confirmed': [('readonly', False)]}
-        )
     issued_check_ids = fields.One2many(
         states={'confirmed': [('readonly', False)]}
         )
