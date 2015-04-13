@@ -68,6 +68,8 @@
                         <field name="user_location_ids" invisible="True"/> 
                         <field name="type_with_advance_payment" invisible="1"/>
                         <field name="type_with_salary_advance" invisible="1"/>
+                        <!-- si no lo agregamos aca no refresca en voucher, raro... -->
+                        <field name="supplier_ids" invisible="1"/>
                         <group>
                             <group>
                                 <field name="issue_date"/>
@@ -100,7 +102,7 @@
                             <page string="Payment Orders and Refunds" attrs="{'invisible':[('type_with_advance_payment','=',False)]}">
                                 <label for="refund_voucher_ids"/>
                                 <button class="oe_link oe_inline" string="(Create Refund Voucher)" type="action" states="open" name="%(public_budget.action_transaction_create_refund_voucher)d"/>
-                                <field name="refund_voucher_ids" context="{'form_view_ref': 'account_voucher.view_vendor_receipt_form','tree_view_ref': 'account_voucher.view_voucher_tree'}"/>
+                                <field name="refund_voucher_ids" context="{'form_view_ref': 'account_voucher.view_vendor_payment_form','tree_view_ref': 'account_voucher.view_voucher_tree'}"/>
                             </page>
                             <page string="Vouchers">
                                 <button class="oe_link" string="Create Voucher" states="open" type="action" name="%(public_budget.action_definitive_make_invoice)d"/>
@@ -110,7 +112,7 @@
                                 <field name="advance_return_ids"/>
                             </page>
                             <page string="Payment Orders" attrs="{'invisible':[('type_with_advance_payment','=',True)]}">
-                                <field name="voucher_ids" context="{'default_transaction_id':id, 'form_view_ref': 'account_voucher.view_vendor_receipt_form','tree_view_ref': 'account_voucher.view_voucher_tree'}"/>
+                                <field name="voucher_ids" context="{'default_transaction_id':id, 'form_view_ref': 'account_voucher.view_vendor_payment_form','tree_view_ref': 'account_voucher.view_voucher_tree'}"/>
                             </page>
                             <page string="Notes">
                                 <field name="note"/>

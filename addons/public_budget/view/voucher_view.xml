@@ -8,8 +8,8 @@
             <field name="inherit_id" ref="account_voucher.view_voucher_filter_vendor_pay"/>
             <field name="arch" type="xml">
                 <field name="journal_id" position="after">
-                    <field name="budget_id"/>
                     <field name="transaction_id"/>
+                    <field name="budget_id"/>
                     <field name="expedient_id"/>
                 </field>
             </field>
@@ -49,8 +49,8 @@
             <field name="arch" type="xml">
                 <field name="partner_id" position="before">
                     <field name="supplier_ids" invisible="1"/>
-                    <field name="budget_id"/>
                     <field name="transaction_id"/>
+                    <field name="budget_id"/>
                     <field name="expedient_id"/>
                 </field>
                 <field name="company_id" position="after">
