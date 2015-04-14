@@ -46,6 +46,11 @@
                 <button name="invoice_pay_customer" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </button>
+                <!-- TODO tal vez mover -->
+                <field name="journal_id" position="after">
+                    <field name="transaction_id"/>
+                    <field name="budget_id"/>
+                </field>
                 <field name="residual" position="after">
                     <field name="to_pay_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                 </field>

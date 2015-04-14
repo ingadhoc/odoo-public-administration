@@ -22,51 +22,63 @@ class public_budget_definitive_make_invoice(models.TransientModel):
             self._context.get('active_id', False))
 
     @api.model
+    def _get_default_budget(self):
+        budgets = self.env['public_budget.budget'].search(
+            [('state', '=', 'open')])
+        return budgets and budgets[0] or False
+
+    @api.model
     def _get_default_company(self):
         return self._get_transaction_id().company_id
 
     invoice_date = fields.Date(
         'Invoice Date',
-        required=True)
-
+        required=True
+        )
     supplier_invoice_number = fields.Char(
         string='Supplier Invoice Number',
         help="The reference of this invoice as provided by the supplier.",
-        required=True,)
-
+        required=True,
+        )
     company_id = fields.Many2one(
         'res.company',
         string='Company',
-        default=_get_default_company)
-
+        default=_get_default_company
+        )
     supplier_ids = fields.Many2many(
         'res.partner',
         string='Suppliers',
-        compute="_get_supplier_ids")
-
+        compute="_get_supplier_ids"
+        )
     supplier_id = fields.Many2one(
         'res.partner',
         string='Supplier',
         required=True,
         domain=[('supplier', '=', True)],
-        context={'default_supplier': True})
-
+        context={'default_supplier': True}
+        )
     definitive_line_ids = fields.Many2many(
         'public_budget.definitive_line',
         string='Lines',
-        compute='_compute_lines')
-
+        compute='_compute_lines'
+        )
     journal_id = fields.Many2one(
         'account.journal',
         string='Journal',
         required=True,
         domain="[('type', '=', 'purchase'),('company_id','=',company_id)]",
-        default=_get_default_journal)
-
+        default=_get_default_journal
+        )
     transaction_id = fields.Many2one(
         'public_budget.transaction',
         'Transaction',
         default=_get_transaction_id,
+        required=True
+        )
+    budget_id = fields.Many2one(
+        'public_budget.budget',
+        'Budget',
+        default=_get_default_budget,
         required=True
     )
 
@@ -85,7 +97,7 @@ class public_budget_definitive_make_invoice(models.TransientModel):
         self.supplier_ids = supplier_ids
 
     @api.one
-    @api.depends('supplier_id')
+    @api.depends('supplier_id', 'budget_id')
     def _compute_lines(self):
         self.definitive_line_ids = definitive_lines = self.env[
             'public_budget.definitive_line']
@@ -96,6 +108,7 @@ class public_budget_definitive_make_invoice(models.TransientModel):
             definitive_lines = definitive_lines.search([
                 ('transaction_id', '=', transaction_id),
                 ('supplier_id', '=', self.supplier_id.id),
+                ('preventive_line_id.budget_id', '=', self.budget_id.id),
                 # ('residual_amount', '>', 0.0)
             ])
             # self.definitive_line_ids = definitive_lines.ids
@@ -176,6 +189,7 @@ class public_budget_definitive_make_invoice(models.TransientModel):
             'payment_term': partner_data['value'].get('payment_term', False),
             'company_id': company_id,
             'transaction_id': wizard.transaction_id.id,
+            'budget_id': wizard.budget_id.id,
             'period_id': period_ids and period_ids[0] or False,
             'partner_bank_id': partner_data['value'].get('partner_bank_id', False),
         }

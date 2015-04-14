@@ -9,7 +9,7 @@
                 <search string="Budget">
                     <field name="name" string="Name"
                             />
-                    <field name="year" string="Year"
+                    <field name="fiscalyear_id" string="Year"
                             />
                     <field name="income_account_id" string="Income Account"
                             />
@@ -64,7 +64,7 @@
                         <group>
                             <group>
                                 <field name="name"/>
-                                <field name="year"/>
+                                <field name="fiscalyear_id"/>
                                 <field name="expedient_id"/>
                                 <field name="income_account_id"/>
                                 <field name="company_id" groups="base.group_multi_company"/>
@@ -130,7 +130,7 @@
                     >
                     <field name="name"
                         />
-                    <field name="year"
+                    <field name="fiscalyear_id"
                         />
                     <field name="income_account_id"
                         />

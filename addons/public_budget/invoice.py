@@ -6,6 +6,7 @@ import openerp.addons.decimal_precision as dp
 
 class account_move_line(models.Model):
     _inherit = ['account.move.line']
+
     voucher_line_ids = fields.One2many(
         'account.voucher.line',
         'move_line_id',
@@ -15,15 +16,24 @@ class account_move_line(models.Model):
 
 class invoice(models.Model):
     """"""
-
+# TODO validar que la factura no se pueda validar en un fiscalyear distinto al del budget id
     _name = 'account.invoice'
     _inherits = {}
     _inherit = ['account.invoice']
 
     transaction_id = fields.Many2one(
         'public_budget.transaction',
-        string='transaction_id',
+        string='Transaction',
         copy=False,
+        readonly=True,
+        required=True,
+        )
+    budget_id = fields.Many2one(
+        'public_budget.budget',
+        string='Budget',
+        copy=False,
+        readonly=True,
+        required=True,
         )
     to_pay_amount = fields.Float(
         string='To Pay Amount',

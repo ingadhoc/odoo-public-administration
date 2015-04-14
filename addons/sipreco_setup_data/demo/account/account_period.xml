@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data noupdate="1">
-        
         <!--
-        Fiscal year
+        Fiscal year actual 2016 (TODO hacer variable y que sea next year)
+        -->    
+        <record id="data_fiscalyear_next" model="account.fiscalyear">
+            <field eval="'Fiscal Year X 2016'" name="name"/>
+            <field eval="'FY2016'" name="code"/>
+            <field eval="'2016-01-01'" name="date_start"/>
+            <field eval="'2016-12-31'" name="date_stop"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>        
+        <!--
+        Fiscal year actual
         -->    
         
         <record id="data_fiscalyear" model="account.fiscalyear">
@@ -13,6 +22,7 @@
             <field eval="time.strftime('%Y')+'-12-31'" name="date_stop"/>
             <field name="company_id" ref="base.main_company"/>
         </record>
+
         
         <!--
         Fiscal Periods

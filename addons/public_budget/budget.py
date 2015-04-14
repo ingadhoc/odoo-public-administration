@@ -9,7 +9,7 @@ class budget(models.Model):
     _name = 'public_budget.budget'
     _description = 'Budget'
 
-    _order = "year desc"
+    _order = "fiscalyear_id desc"
 
     _states_ = [
         # State machine: untitle
@@ -26,12 +26,12 @@ class budget(models.Model):
         required=True,
         states={'draft': [('readonly', False)]}
         )
-    year = fields.Integer(
-        string='Year',
-        readonly=True,
+    fiscalyear_id = fields.Many2one(
+        'account.fiscalyear',
+        'Fiscal Year',
         required=True,
-        states={'draft': [('readonly', False)]}
-        )
+        states={'done': [('readonly', True)]},
+        select=True)
     income_account_id = fields.Many2one(
         'account.account',
         string='Income Account',

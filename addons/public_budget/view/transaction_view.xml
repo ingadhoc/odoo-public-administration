@@ -108,7 +108,7 @@
                                 <field name="refund_voucher_ids" context="{'default_type': 'receipt', 'form_view_ref': 'account_voucher.view_vendor_payment_form','tree_view_ref': 'account_voucher.view_voucher_tree'}"/>
                             </page>
                             <page string="Invoices">
-                                <button class="oe_link" string="Create Voucher" states="open" type="action" name="%(public_budget.action_definitive_make_invoice)d"/>
+                                <button class="oe_link" string="Create Invoice" states="open" type="action" name="%(public_budget.action_definitive_make_invoice)d"/>
                                 <field name="invoice_ids" nolabel="1"/>
                             </page>
                             <page string="Salary Advance Returns" attrs="{'invisible':[('type_with_salary_advance','=',False)]}">
