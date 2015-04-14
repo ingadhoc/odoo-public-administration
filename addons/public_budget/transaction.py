@@ -107,10 +107,6 @@ class transaction(models.Model):
         context={'default_advance_line': 1, 'default_preventive_status': 'confirmed', 'advance_line': 1},
         domain=[('advance_line', '=', True)]
         )
-    refund_voucher_count = fields.Integer(
-        string='Refund Vouchers',
-        compute='_refund_voucher_count'
-        )
     preventive_amount = fields.Float(
         string='Preventive Amount',
         compute='_get_amounts'
@@ -119,18 +115,14 @@ class transaction(models.Model):
         string='Paid Amount',
         compute='_get_amounts'
         )
-    remaining_amount = fields.Float(
-        string='Remaining Amount',
-        compute='_get_amounts'
-        )
     advance_remaining_amount = fields.Float(
         string='Advance Remaining Amount',
-        compute='_get_advance_amounts'
+        compute='_get_amounts'
         )
-    refund_voucher_amount = fields.Float(
-        string='Refound Vouchers Amount',
-        compute='_get_advance_amounts'
-        )
+    # refund_voucher_amount = fields.Float(
+    #     string='Refound Vouchers Amount',
+    #     compute='_get_amounts'
+    #     )
     company_id = fields.Many2one(
         'res.company',
         string='Company',
@@ -177,6 +169,8 @@ class transaction(models.Model):
         context={'default_type': 'payment'},
         states={'open': [('readonly', False)]},
         )
+    # basicamente es el mismo campo de arriba pero lo separamos para poner en
+    # otro lugar de la vista
     advance_voucher_ids = fields.One2many(
         'account.voucher',
         'transaction_id',
@@ -186,13 +180,16 @@ class transaction(models.Model):
         context={'default_type': 'payment'},
         states={'open': [('readonly', False)]},
         )
-    refund_voucher_ids = fields.One2many(
-        'account.voucher',
-        'transaction_id',
-        string='Vouchers',
-        context={'default_type': 'receipt'},
-        domain=[('type', '=', 'receipt')]
-        )
+    # TODO ver si los borramos, vamos a usar los de payment porque si no no
+    # concilia una cosa con otra. Si borramos tmb borrar el wizard
+    # tambien borrar en otros lugares que aparece refund_voucher_ids y refund_voucher_amount
+    # refund_voucher_ids = fields.One2many(
+    #     'account.voucher',
+    #     'transaction_id',
+    #     string='Vouchers',
+    #     context={'default_type': 'receipt'},
+    #     domain=[('type', '=', 'receipt')]
+    #     )
     advance_return_ids = fields.One2many(
         'public_budget.advance_return',
         'transaction_id',
@@ -232,58 +229,54 @@ class transaction(models.Model):
             x.budget_position_id.id for x in self.preventive_line_ids]
         self.budget_position_ids = budget_position_ids
 
-    @api.one
-    @api.depends('refund_voucher_ids')
-    def _refund_voucher_count(self):
-        self.refund_voucher_count = len(self.refund_voucher_ids)
-
-    @api.one
-    @api.depends(
-        'advance_preventive_line_ids',
-        'refund_voucher_ids',
-        'refund_voucher_ids.state',
-        'invoice_ids',
-    )
-    def _get_advance_amounts(self):
-        refund_voucher_amount = sum(
-            x.amount for x in self.refund_voucher_ids if x.state == 'posted')
-        self.refund_voucher_amount = refund_voucher_amount
-        self.advance_remaining_amount = False
-        # TODO
-        # self.advance_remaining_amount = self.payment_order_amount - \
-            # refund_voucher_amount - self.paid_amount
+    # @api.one
+    # @api.depends(
+    #     'advance_preventive_line_ids',
+    #     'voucher_ids',
+    #     'voucher_ids.state',
+    #     # 'refund_voucher_ids',
+    #     # 'refund_voucher_ids.state',
+    #     'invoice_ids',
+    # )
+    # def _get_advance_amounts(self):
+    #     # refund_voucher_amount = sum(
+    #     #     x.amount for x in self.refund_voucher_ids if x.state == 'posted')
+    #     # self.refund_voucher_amount = refund_voucher_amount
+    #     # self.advance_remaining_amount = False
+    #     # TODO
+    #     self.advance_remaining_amount = self.payment_order_amount - \
+    #         self.paid_amount
 
     @api.one
     @api.depends(
         'preventive_line_ids',
-        # 'payment_order_ids',
-        # 'payment_order_ids.state',
-        # 'total',
+        'voucher_ids',
+        'voucher_ids.state',
     )
     def _get_amounts(self):
         preventive_amount = sum([
             preventive.preventive_amount
             for preventive in self.preventive_line_ids])
         # TODO
-        # payment_order_amount = sum(
-        #     x.total for x in self.payment_order_ids if x.state == 'done')
-        # definitive_amount = sum([
-        #     preventive.definitive_amount
-        #     for preventive in self.preventive_line_ids])
-        # invoiced_amount = sum([
-        #     preventive.invoiced_amount
-        #     for preventive in self.preventive_line_ids])
-        # to_pay_amount = sum([
-        #     preventive.to_pay_amount
-        #     for preventive in self.preventive_line_ids])
+        payment_order_amount = sum(
+            x.amount for x in self.voucher_ids if x.state == 'posted')
+        definitive_amount = sum([
+            preventive.definitive_amount
+            for preventive in self.preventive_line_ids])
+        invoiced_amount = sum([
+            preventive.invoiced_amount
+            for preventive in self.preventive_line_ids])
+        to_pay_amount = sum([
+            preventive.to_pay_amount
+            for preventive in self.preventive_line_ids])
         paid_amount = sum([
             preventive.paid_amount for preventive in self.definitive_line_ids])
-        # self.remaining_amount = self.total - preventive_amount
-        # self.payment_order_amount = payment_order_amount
+        self.advance_remaining_amount = payment_order_amount - paid_amount
+        self.payment_order_amount = payment_order_amount
         self.preventive_amount = preventive_amount
-        # self.definitive_amount = definitive_amount
-        # self.invoiced_amount = invoiced_amount
-        # self.to_pay_amount = to_pay_amount
+        self.definitive_amount = definitive_amount
+        self.invoiced_amount = invoiced_amount
+        self.to_pay_amount = to_pay_amount
         self.paid_amount = paid_amount
 
     @api.one

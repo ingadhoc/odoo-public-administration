@@ -85,10 +85,9 @@
                             </group>
                             <group>
                                 <field name="total"/>
-                                <field name="remaining_amount"/>
                                 <field name="paid_amount"/>
                                 <field name="preventive_amount"/>
-                                <field name="refund_voucher_amount"/>
+                                <!-- <field name="refund_voucher_amount"/> -->
                                 <field name="advance_remaining_amount"/>
                             </group>
                         </group>
@@ -97,15 +96,15 @@
                                 <label for="advance_preventive_line_ids" string="Advance Lines" attrs="{'invisible':[('type_with_advance_payment','=',False)]}"/>
                                 <field name="advance_preventive_line_ids" attrs="{'invisible':[('type_with_advance_payment','=',False)]}"/>
                                 <label for="preventive_line_ids" string="Settlement Lines" attrs="{'invisible':[('type_with_advance_payment','=',False)]}"/>
-                                <field name="preventive_line_ids" context="{'default_preventive_amount':remaining_amount}"/>
+                                <field name="preventive_line_ids"/>
                             </page>
                             <page string="Payment Orders and Refunds" attrs="{'invisible':[('type_with_advance_payment','=',False)]}">
                                 <label for="advance_voucher_ids"/>
                                 <field name="advance_voucher_ids" context="{'default_transaction_id':id, 'default_partner_id': partner_id, 'default_type': 'payment', 'form_view_ref': 'account_voucher.view_vendor_payment_form','tree_view_ref': 'account_voucher.view_voucher_tree'}"/>
 
-                                <label for="refund_voucher_ids"/>
+<!--                                 <label for="refund_voucher_ids"/>
                                 <button class="oe_link oe_inline" string="(Create Refund Voucher)" type="action" states="open" name="%(public_budget.action_transaction_create_refund_voucher)d"/>
-                                <field name="refund_voucher_ids" context="{'default_type': 'receipt', 'form_view_ref': 'account_voucher.view_vendor_payment_form','tree_view_ref': 'account_voucher.view_voucher_tree'}"/>
+                                <field name="refund_voucher_ids" context="{'default_type': 'receipt', 'form_view_ref': 'account_voucher.view_vendor_payment_form','tree_view_ref': 'account_voucher.view_voucher_tree'}"/> -->
                             </page>
                             <page string="Invoices">
                                 <button class="oe_link" string="Create Invoice" states="open" type="action" name="%(public_budget.action_definitive_make_invoice)d"/>
