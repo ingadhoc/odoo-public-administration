@@ -42,15 +42,11 @@ class invoice_line(models.Model):
         invoice_total = self.invoice_id.amount_total
         invoice_paid_perc = 0.0
         invoice_to_pay_perc = 0.0
-        print 'invoice_total', invoice_total
         if invoice_total:
-            print 'asdads', invoice_total
             invoice_paid_perc = (
                 invoice_total - self.invoice_id.residual) / invoice_total
             invoice_to_pay_perc = (
                 self.invoice_id.to_pay_amount) / invoice_total
-            print 'invoice_to_pay_perc', invoice_to_pay_perc
-            print 'invoice_paid_perc', invoice_paid_perc
         # TODO implementar to_pay_amount, ver si usamos como hicimos en las
         # preventive lines que lo sacamos de las ordenes de pago o hacemos algo
         # distinto, ver tmb el paid_amount como lo calculamos

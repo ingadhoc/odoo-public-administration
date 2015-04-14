@@ -70,10 +70,13 @@ class voucher(models.Model):
     @api.one
     def _get_budget_positions(self):
         self.budget_position_ids = self.env['public_budget.budget_position']
-        # TODO implementar
-        # budget_position_ids = [
-        #     x.budget_position_id.id for x in self.preventive_line_ids]
-        # self.budget_position_ids = budget_position_ids
+        budget_position_ids = []
+        for line in self.line_ids:
+            if line.amount and line.move_line_id and line.move_line_id.invoice:
+                budget_position_ids.extend([
+                    x.definitive_line_id.budget_position_id.id for x in line.move_line_id.invoice.invoice_line])
+        budget_position_ids = list(set(budget_position_ids))
+        self.budget_position_ids = budget_position_ids
 
     @api.one
     @api.onchange(
@@ -148,7 +151,5 @@ class voucher(models.Model):
             self, partner_id, journal_id, price, currency_id, ttype, date):
         default = super(voucher, self).recompute_voucher_lines(
             partner_id, journal_id, price, currency_id, ttype, date)
-        print 'default', default
-        print 'self', self.transaction_id
         return default
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

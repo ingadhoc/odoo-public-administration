@@ -12,10 +12,12 @@
         'security/security.xml',
         'workflow/voucher_workflow.xml',
         'data/data.xml',
+        'reports/receipt_report.xml',
     ],
     'demo': [],
     'depends': [
         'l10n_ar_invoice',
+        'l10n_ar_aeroo_voucher',
         'public_budget',
         'account_asset',
         'share',
