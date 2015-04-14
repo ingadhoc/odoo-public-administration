@@ -10,7 +10,6 @@
         'views/account_asset_view.xml',
         'views/account_voucher_view.xml',
         'security/security.xml',
-        'workflow/voucher_workflow.xml',
         'data/data.xml',
         'reports/receipt_report.xml',
     ],

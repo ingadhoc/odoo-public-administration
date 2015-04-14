@@ -26,7 +26,6 @@ class account_voucher(models.Model):
         store=True,
         )
     net_amount = fields.Float(
-        default=0.0,
         states={'confirmed': [('readonly', False)]}
         )
     issued_check_ids = fields.One2many(
@@ -45,14 +44,6 @@ class account_voucher(models.Model):
             payment_date = payment_base_date + relativedelta(
                 days=self.payment_days)
         self.payment_date = payment_date
-
-    @api.multi
-    def check_to_pay_amount(self):
-        for voucher in self:
-            if not voucher.to_pay_amount:
-                raise Warning(_('You can not confirm a voucher with to pay\
-                    amount equal to 0'))
-        return True
 
     @api.multi
     def proforma_voucher(self):
