@@ -216,8 +216,8 @@ class transaction(models.Model):
             [('preventive_line_id.transaction_id', '=', self.id)])
         supplier_ids = [
             x.supplier_id.id for x in definitive_lines]
-        if self.partner_id:
-            supplier_ids.append(self.partner_id.id)
+        # if self.partner_id:
+        #     supplier_ids.append(self.partner_id.id)
         self.supplier_ids = self.env['res.partner']
         self.supplier_ids = supplier_ids
 

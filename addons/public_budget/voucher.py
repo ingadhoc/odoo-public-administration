@@ -49,19 +49,13 @@ class voucher(models.Model):
         string='Related Budget Positions',
         compute='_get_budget_positions'
         )
-    # supplier_ids = fields.Many2one(
-    #     'public_budget.transaction',
-    #     string='Transaction',
-    #     # readonly=True,
-    #     required=True,
-    #     )
-    supplier_ids = fields.Many2many(
+    partner_ids = fields.Many2many(
         comodel_name='res.partner',
-        string='Suppliers',
-        related='transaction_id.supplier_ids'
+        string='Partners',
+        compute='_get_partners'
         )
     partner_id = fields.Many2one(
-        domain="[('id', 'in', supplier_ids[0][2])]",
+        domain="[('id', 'in', partner_ids[0][2])]",
         )
 
     _constraints = [
@@ -79,11 +73,25 @@ class voucher(models.Model):
         self.budget_position_ids = budget_position_ids
 
     @api.one
+    @api.depends(
+        'transaction_id',
+        )
+    def _get_partners(self):
+        self.partner_ids = self.env['res.partner']
+        partner_ids = []
+        if self.transaction_id:
+            if self.transaction_id.type_id.with_advance_payment and self.transaction_id.partner_id:
+                partner_ids = [self.transaction_id.partner_id.id]
+            else:
+                partner_ids = self.transaction_id.supplier_ids
+        self.partner_ids = partner_ids
+
+    @api.one
     @api.onchange(
         'transaction_id',
         )
     def on_change_transaction(self):
-        self.partner_id = self.supplier_ids and self.supplier_ids[0] or False
+        self.partner_id = self.partner_ids and self.partner_ids[0] or False
 
     @api.multi
     def get_transaction_move_lines(self, ttype, partner_id, transaction_id):
