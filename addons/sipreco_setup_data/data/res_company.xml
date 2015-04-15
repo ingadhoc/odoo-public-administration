@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<openerp>
+    <data noupdate="1">
+
+        <record id="base.main_company" model="res.company">
+            <field name="logo" type="base64" file="sipreco_setup_data/data/SIPRECO_Logo.png"/>
+        </record>
+
+    </data>
+</openerp>

@@ -167,15 +167,14 @@ class definitive_line(models.Model):
         state
         """
 
-        invoiced_amount = sum([
-            invoice_line.price_subtotal
-            for invoice_line in self.invoice_line_ids])
-        to_pay_amount = sum([
-            invoice_line.to_pay_amount
-            for invoice_line in self.invoice_line_ids])
-        paid_amount = sum([
-            invoice_line.paid_amount
-            for invoice_line in self.invoice_line_ids])
+        invoice_lines = [
+            x for x in self.invoice_line_ids if x.invoice_id.state not in (
+                'draft', 'cancel')]
+
+        invoiced_amount = sum([x.price_subtotal for x in invoice_lines])
+        to_pay_amount = sum([x.to_pay_amount for x in invoice_lines])
+        paid_amount = sum([x.paid_amount for x in invoice_lines])
+
         self.invoiced_amount = invoiced_amount
         self.residual_amount = self.amount - invoiced_amount
         self.to_pay_amount = to_pay_amount

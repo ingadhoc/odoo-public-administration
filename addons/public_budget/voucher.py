@@ -23,7 +23,7 @@ class voucher(models.Model):
         default=_get_default_budget,
         readonly=True,
         domain=[('state', '=', 'open')],
-        states={'draft': [('readonly', False)]},
+        # states={'draft': [('readonly', False)]},
         )
     expedient_id = fields.Many2one(
         'public_budget.expedient',
@@ -41,7 +41,7 @@ class voucher(models.Model):
         readonly=True,
         # TODO add domain
         # domain=[('state', '=', 'open')],
-        states={'draft': [('readonly', False)]},
+        # states={'draft': [('readonly', False)]},
         )
     budget_position_ids = fields.Many2many(
         relation='voucher_position_rel',
@@ -121,7 +121,8 @@ class voucher(models.Model):
     def onchange_partner_id(
             self, partner_id, journal_id, amount, currency_id, ttype, date,
             transaction_id=False):
-        # Si viene transacion entonces buscamos los move_lines correspondientes y lo pasamos por contexto
+        # Si viene transacion entonces buscamos los move_lines correspondientes
+        # y lo pasamos por contexto
         # if transaction_id:
         #     self = self.with_context(
         #         move_line_ids=self.get_transaction_move_lines(
