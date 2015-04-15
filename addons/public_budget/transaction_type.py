@@ -23,11 +23,13 @@ class transaction_type(models.Model):
     with_advance_payment = fields.Boolean(
         string='With advance payment?'
         )
-    advance_account_id = fields.Many2one(
-        'account.account',
-        string='Advance Account',
-        context={'default_type': 'other'},
-        domain=[('type', '=', 'other'), ('user_type.report_type', 'in', ['asset'])]
+    advance_journal_id = fields.Many2one(
+        'account.journal',
+        string='Advance Journal',
+        context={'default_type': 'cash', 'default_allow_direct_payment': True},
+        domain=[
+            ('type', 'in', ('cash', 'bank')),
+            ('allow_direct_payment', '=', True)]
         )
     amount_restriction_ids = fields.One2many(
         'public_budget.transaction_type_amo_rest',

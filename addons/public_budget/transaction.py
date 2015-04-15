@@ -111,12 +111,28 @@ class transaction(models.Model):
         string='Preventive Amount',
         compute='_get_amounts'
         )
+    definitive_amount = fields.Float(
+        string='Definitive Amount',
+        compute='_get_amounts'
+        )
+    invoiced_amount = fields.Float(
+        string='Invoiced Amount',
+        compute='_get_amounts'
+        )
+    to_pay_amount = fields.Float(
+        string='To Pay Amount',
+        compute='_get_amounts'
+        )
     paid_amount = fields.Float(
         string='Paid Amount',
         compute='_get_amounts'
         )
-    advance_remaining_amount = fields.Float(
-        string='Advance Remaining Amount',
+    to_return_amount = fields.Float(
+        string='To Return Amount',
+        compute='_get_amounts'
+        )
+    advance_amount = fields.Float(
+        string='Advance Amount',
         compute='_get_amounts'
         )
     # refund_voucher_amount = fields.Float(
@@ -242,9 +258,9 @@ class transaction(models.Model):
     #     # refund_voucher_amount = sum(
     #     #     x.amount for x in self.refund_voucher_ids if x.state == 'posted')
     #     # self.refund_voucher_amount = refund_voucher_amount
-    #     # self.advance_remaining_amount = False
+    #     # self.to_return_amount = False
     #     # TODO
-    #     self.advance_remaining_amount = self.payment_order_amount - \
+    #     self.to_return_amount = self.payment_order_amount - \
     #         self.paid_amount
 
     @api.one
@@ -257,22 +273,41 @@ class transaction(models.Model):
         preventive_amount = sum([
             preventive.preventive_amount
             for preventive in self.preventive_line_ids])
-        # TODO
-        payment_order_amount = sum(
-            x.amount for x in self.voucher_ids if x.state == 'posted')
         definitive_amount = sum([
             preventive.definitive_amount
             for preventive in self.preventive_line_ids])
         invoiced_amount = sum([
             preventive.invoiced_amount
             for preventive in self.preventive_line_ids])
-        to_pay_amount = sum([
-            preventive.to_pay_amount
-            for preventive in self.preventive_line_ids])
-        paid_amount = sum([
-            preventive.paid_amount for preventive in self.definitive_line_ids])
-        self.advance_remaining_amount = payment_order_amount - paid_amount
-        self.payment_order_amount = payment_order_amount
+        # TODO ver si esta nueva forma de calcularlos esta ok, si lo hacemos
+        # como antes habria que ver que no sea recursivo porque preventiev
+        # consulta a estos valores
+        to_pay_amount = sum(
+            x.to_pay_amount for x in self.voucher_ids if x.state in ['confirmed', 'posted'])
+        paid_amount = sum(
+            x.amount for x in self.voucher_ids if x.state == 'posted')
+        # to_pay_amount = sum([
+        #     preventive.to_pay_amount
+        #     for preventive in self.preventive_line_ids])
+        # paid_amount = sum([
+        #     preventive.paid_amount for preventive in self.definitive_line_ids])
+
+        if self.type_id.with_advance_payment and self.state in ('draft', 'open'):
+            advance_amount = sum([
+                x.preventive_amount for x in self.advance_preventive_line_ids])
+            self.advance_amount = advance_amount
+            self.to_return_amount = advance_amount - invoiced_amount
+            preventive_amount = sum([
+                preventive.preventive_amount
+                for preventive in self.advance_preventive_line_ids])
+            definitive_amount = sum([
+                preventive.definitive_amount
+                for preventive in self.advance_preventive_line_ids])
+            invoiced_amount = sum([
+                preventive.invoiced_amount
+                for preventive in self.advance_preventive_line_ids])
+
+
         self.preventive_amount = preventive_amount
         self.definitive_amount = definitive_amount
         self.invoiced_amount = invoiced_amount
@@ -310,25 +345,25 @@ class transaction(models.Model):
 
         # Check advance transactions
         if self.type_id.with_advance_payment:
-            if self.advance_remaining_amount != 0.0:
+            if self.to_return_amount != 0.0:
                 raise Warning(
                     _('To close a transaction with advance payment, Payment Order Amounts - Refund Amounts should be equal to Definitive Amounts'))
 
 # Constraints
     @api.one
     @api.constrains(
-        'type_id', 'advance_preventive_line_ids', 'preventive_line_ids')
+        'type_id', 'advance_preventive_line_ids', 'advance_voucher_ids')
     def _check_advance_preventive_lines(self):
+        print 'self.type_id.with_advance_payment', self.type_id.with_advance_payment
         if self.type_id.with_advance_payment:
-            # payment_order_amount = sum(
-                # x.total for x in self.payment_order_ids if x.state == 'done')
-            preventive_amount = sum(
-                [x.preventive_amount for x in
-                    self.preventive_line_ids])
-            # if payment_order_amount < preventive_amount:
-            #     raise Warning(
-            #         _("In transactions with 'Advance Payment', \
-            #             Settlement Amount can't be greater than Payment Orders Amount"))
+            not_cancel_amount = sum(
+                x.to_pay_amount for x in self.advance_voucher_ids if x.state != 'cancel')
+            print 'not_cancel_amount', not_cancel_amount
+            print 'self.advance_amount', self.advance_amount
+            if not_cancel_amount > self.advance_amount:
+                raise Warning(
+                    _("In transactions with 'Advance Payment', \
+                        Settlement Amount can't be greater than Payment Orders Amount"))
 
     @api.one
     @api.constrains('preventive_line_ids', 'type_id', 'expedient_id')

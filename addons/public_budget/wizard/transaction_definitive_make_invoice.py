@@ -124,16 +124,16 @@ class public_budget_definitive_make_invoice(models.TransientModel):
         wizard = self.browse(cr, uid, ids[0], context=context)
 
         tran_type = wizard.transaction_id.type_id
-        advance_account_id = False
+        advance_journal_id = False
         if tran_type.with_advance_payment:
-            if not tran_type.advance_account_id:
+            if not tran_type.advance_journal_id:
                 raise Warning(
-                    _("On Advance Transactions, transaction advance type must have and advance account configured!"))
-            advance_account_id = tran_type.advance_account_id.id
+                    _("On Advance Transactions, transaction advance type must have and advance journal configured!"))
+            advance_journal_id = tran_type.advance_journal_id.id
             # Check advance remaining amount
             total_to_invoice_amount = sum([
                 x.to_invoice_amount for x in wizard.definitive_line_ids])
-            if total_to_invoice_amount > wizard.transaction_id.advance_remaining_amount:
+            if total_to_invoice_amount > wizard.transaction_id.to_return_amount:
                 raise Warning(
                     _("On Advance Transactions, sum of to Invoice Amount can not be greater than Advance Remaining Amount!"))
 
@@ -171,10 +171,6 @@ class public_budget_definitive_make_invoice(models.TransientModel):
             cr, uid, False, inv_type, wizard.supplier_id.id, company_id=company_id)
         period_ids = period_obj.find(
             cr, uid, wizard.invoice_date, context=context)
-        if advance_account_id:
-            account_id = advance_account_id
-        else:
-            account_id = partner_data['value'].get('account_id', False)
         invoice_vals = {
             'partner_id': wizard.supplier_id.id,
             'date_invoice': wizard.invoice_date,
@@ -182,7 +178,8 @@ class public_budget_definitive_make_invoice(models.TransientModel):
             'invoice_line': [(6, 0, inv_lines)],
             # 'name': invoice.name,
             'type': inv_type,
-            'account_id': account_id,
+            'account_id': partner_data['value'].get('account_id', False),
+            'direct_payment_journal_id': advance_journal_id,
             'journal_id': wizard.journal_id.id,
             # 'currency_id': invoice.currency_id and invoice.currency_id.id,
             'fiscal_position': partner_data['value'].get('fiscal_position', False),

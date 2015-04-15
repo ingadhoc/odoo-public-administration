@@ -41,7 +41,7 @@
                             /> 
                         <field name="with_advance_payment"
                             /> 
-                        <field name="advance_account_id"
+                        <field name="advance_journal_id"
                             attrs="{'required':[('with_advance_payment','=',True)],'invisible':[('with_advance_payment','!=',True)]}"
                             /> 
                         <field name="amount_restriction_ids"

@@ -85,4 +85,17 @@ class invoice(models.Model):
                     {'partner_id': self.transaction_id.partner_id.id})
         return res
 
+    @api.multi
+    def prepare_direct_payment_voucher_vals(self):
+        """Add some values to direct payment voucher creation"""
+        if not self.transaction_id:
+            raise Warning(_('Not Transaction in actual invoice, can not create\
+             direct Payment'))
+        res = super(
+            invoice, self).prepare_direct_payment_voucher_vals()
+        res['transaction_id'] = self.transaction_id.id
+        res['expedient_id'] = self.transaction_id.expedient_id.id
+        res['budget_id'] = self.budget_id.id
+        return res
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

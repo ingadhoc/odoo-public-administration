@@ -15,7 +15,6 @@
     ],
     'demo': [],
     'depends': [
-        'account_invoice_direct_payment',
         'l10n_ar_invoice',
         'l10n_ar_aeroo_voucher',
         'public_budget',
