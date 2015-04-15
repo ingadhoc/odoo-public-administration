@@ -46,11 +46,9 @@ class account_voucher(models.Model):
         self.payment_date = payment_date
 
     @api.multi
-    def proforma_voucher(self):
-        """Check Amount = to Amount To Pay
-        """
+    def check_to_pay_amount(self):
         for voucher in self:
-            if voucher.amount != voucher.to_pay_amount:
-                raise Warning(_('You can not validate a Voucher that has\
-                    Total Amount different from To Pay Amount'))
-        return super(account_voucher, self).proforma_voucher()
+            if not voucher.to_pay_amount:
+                raise Warning(_('You can not confirm a voucher with to pay\
+                    amount equal to 0'))
+        return True
