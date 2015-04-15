@@ -23,6 +23,7 @@ Sipreco Set Up Data
     'data': [
         'data/account/ir.sequence.csv',
         'data/res.company.csv',
+        'data/res_company.xml',
         # datos demo
         'demo/account/account_period.xml',
         'demo/account.journal.csv',
