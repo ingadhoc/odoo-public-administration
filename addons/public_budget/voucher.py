@@ -100,7 +100,7 @@ class voucher(models.Model):
         else:
             account_type = 'receivable'
         move_lines = self.env['account.move.line'].search([
-            ('state','=','valid'),
+            ('state', '=', 'valid'),
             ('account_id.type', '=', account_type),
             ('reconcile_id', '=', False),
             ('partner_id', '=', partner_id),

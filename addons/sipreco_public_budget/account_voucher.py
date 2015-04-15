@@ -45,13 +45,12 @@ class account_voucher(models.Model):
                 days=self.payment_days)
         self.payment_date = payment_date
 
-    # TODO activar
-    # @api.multi
-    # def proforma_voucher(self):
-    #     """Check Amount = to Amount To Pay
-    #     """
-    #     for voucher in self:
-    #         if voucher.amount != voucher.to_pay_amount:
-    #             raise Warning(_('You can not validate a Voucher that has\
-    #                 Total Amount different from To Pay Amount'))
-    #     return super(account_voucher, self).proforma_voucher()
+    @api.multi
+    def proforma_voucher(self):
+        """Check Amount = to Amount To Pay
+        """
+        for voucher in self:
+            if voucher.amount != voucher.to_pay_amount:
+                raise Warning(_('You can not validate a Voucher that has\
+                    Total Amount different from To Pay Amount'))
+        return super(account_voucher, self).proforma_voucher()

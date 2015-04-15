@@ -59,7 +59,7 @@ class invoice(models.Model):
         voucher_lines = self.env['account.voucher.line'].search([
             ('move_line_id.move_id', '=', self.move_id.id),
             ('amount', '!=', 0),
-            ('voucher_id.state', 'in', ('confirmed', 'done')),
+            ('voucher_id.state', 'in', ('confirmed', 'posted')),
             ])
         to_pay_amount = sum([x.amount for x in voucher_lines])
         self.to_pay_amount = to_pay_amount
@@ -95,6 +95,7 @@ class invoice(models.Model):
             invoice, self).prepare_direct_payment_voucher_vals()
         res['transaction_id'] = self.transaction_id.id
         res['expedient_id'] = self.transaction_id.expedient_id.id
+        res['budget_id'] = self.budget_id.id
         res['budget_id'] = self.budget_id.id
         return res
 
