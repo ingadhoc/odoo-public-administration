@@ -45,10 +45,11 @@ Sipreco Set Up Data
         'demo/public_budget.transaction.csv',
         'demo/public_budget.preventive_line.csv',
         'demo/public_budget.definitive_line.csv',
-        'demo/res_users.xml',
         'demo/public_budget.remit.csv',
         'demo/public_budget.budget_modification.csv',
         'demo/public_budget.budget_modification_detail.csv',
+        'demo/account.tax.withholding.csv',
+        'demo/account.checkbook.csv',
         # 'demo/account.asset.asset.csv', hay que crear antes la categoria de asset
     ],
     'demo': [

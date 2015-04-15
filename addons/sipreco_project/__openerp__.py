@@ -28,6 +28,7 @@ Installs All Sipreco Project Dependencies
         'sipreco_account_chart',
         'sipreco_public_budget',
         'account_cancel',
+        'admin_technical_features',
         'account_bank_voucher',
         'account_accountant',
         'account_clean_cancelled_invoice_number',

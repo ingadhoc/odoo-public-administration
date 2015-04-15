@@ -45,9 +45,10 @@
         <record id="view_vendor_payment_form" model="ir.ui.view">
             <field name="name">account.voucher.customer.pay.form</field>
             <field name="model">account.voucher</field>
-            <field name="inherit_id" ref="account_voucher.view_vendor_payment_form"/>
+            <field name="inherit_id" ref="account_voucher_double_validation.view_vendor_payment_form"/>
             <field name="arch" type="xml">
                 <field name="partner_id" position="before">
+                    <field name="transaction_with_advance_payment" invisible="1"/>
                     <field name="partner_ids" invisible="1"/>
                     <field name="transaction_id"/>
                     <field name="budget_id"/>
@@ -55,6 +56,10 @@
                 </field>
                 <field name="company_id" position="after">
                     <field name="budget_position_ids" widget="many2many_tags"/>
+                </field>
+                <!-- hide advance amount on not advance transactions  -->
+                <field name="advance_amount" position="attributes">
+                    <attribute name="attrs">{'invisible':[('transaction_with_advance_payment', '=', False)]}</attribute>
                 </field>
                 <!-- Clean onchange method -->
 <!--                 <field name="partner_id" position="attributes">

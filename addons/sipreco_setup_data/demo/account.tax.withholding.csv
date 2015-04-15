@@ -1,0 +1,5 @@
+id,name,code,account_receipt_id/id,account_payment_id/id,receipt_tax_code_id/id,payment_tax_code_id/id
+retencion_ganancias,AFIP Retención Impuesto a las Ganancias,RET-GA,sipreco_account_chart.account_account_742,sipreco_account_chart.account_account_742,,
+retencion_iibb,Retención Ingresos Brutos,RET-IIBB,sipreco_account_chart.account_account_743,sipreco_account_chart.account_account_743,,
+retencion_drei,Retención DreI,RET-DREI,sipreco_account_chart.account_account_744,sipreco_account_chart.account_account_744,,
+retencion_otras_rete,Otras Retenciones,RET-OTRAS,sipreco_account_chart.account_account_745,sipreco_account_chart.account_account_745,,

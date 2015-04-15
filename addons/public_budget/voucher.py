@@ -57,6 +57,11 @@ class voucher(models.Model):
     partner_id = fields.Many2one(
         domain="[('id', 'in', partner_ids[0][2])]",
         )
+    transaction_with_advance_payment = fields.Boolean(
+        string='With advance payment?',
+        readonly=True,
+        related='transaction_id.type_id.with_advance_payment',
+        )
 
     _constraints = [
     ]
@@ -108,14 +113,15 @@ class voucher(models.Model):
             ])
         return move_lines
 
-    @api.onchange('dummy_journal_id')
-    def change_dummy_journal_id(self):
-        """Unlink checks on journal change"""
-        print 'asdasda', self
-        print 'asdasda', self.line_cr_ids
-        print 'asdasda', self.line_dr_ids
-        print 'asdasda', self.amount
-        print 'asdasda', self.journal_id
+    # @api.onchange('dummy_journal_id')
+    # def change_dummy_journal_id(self):
+    # TODO si usamos este onchange temoes que llamar al super
+    #     """Unlink checks on journal change"""
+    #     print 'asdasda', self
+    #     print 'asdasda', self.line_cr_ids
+    #     print 'asdasda', self.line_dr_ids
+    #     print 'asdasda', self.amount
+    #     print 'asdasda', self.journal_id
 
     @api.multi
     def onchange_partner_id(
