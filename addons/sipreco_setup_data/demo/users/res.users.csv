@@ -1,11 +1,12 @@
-id,name,login,password,partner_id/id,groups_id/id
-res_user_alejandro,Alejandro Pendino,alejandro,alejandro,res_partner_alejandro,base.group_user
-res_user_jonatan,Jonatan Santos,jonatan,jonatan,res_partner_jonatan,base.group_user
-res_user_gustavo,Gustavo Pelegrino,gustavo,gustavo,res_partner_gustavo,base.group_user
-res_user_marina,Marina Marsilli,marina,marina,res_partner_marina,base.group_user
-res_user_marcelo,Marcelo Pazos,marcelo,marcelo,res_partner_marcelo,base.group_user
-res_user_gonzalo,Gonzalo Aciar,gonzalo,gonzalo,res_partner_gonzalo,base.group_user
-res_user_silvina,Silvina Nicoli,silvina,silvina,res_partner_silvina,base.group_user
-res_user_mariano,Mariano Roca,mariano,mariano,res_partner_mariano,base.group_user
-res_user_mesadeentrada,Mesa de Entrada,mesadeentrada,mesadeentrada,res_partner_mesadeentrada,base.group_user
-res_user_efren,Jose Efren,efren,efren,res_partner_efren,base.group_user
+id,name,login,password,partner_id/id,groups_id/id,location_ids/id
+res_user_alejandro,Alejandro Pendino,apendino,apendino,res_partner_alejandro,base.group_user,sipreco_setup_data.public_location_tmc
+res_user_jonatan,Jonatan Santos,jsantos,jsantos,res_partner_jonatan,base.group_user,sipreco_setup_data.public_location_tmc
+res_user_gustavo,Gustavo Pelegrino,gpellegrino,gpellegrino,res_partner_gustavo,base.group_user,sipreco_setup_data.public_location_contaduria
+res_user_marina,Marina Marsilli,mmarsilli,mmarsilli,res_partner_marina,base.group_user,sipreco_setup_data.public_location_tmc
+res_user_marcelo,Marcelo Pazos,mpazos,mpazos,res_partner_marcelo,base.group_user,sipreco_setup_data.public_location_contaduria
+res_user_gonzalo,Gonzalo Aciar,gaciar,gaciar,res_partner_gonzalo,base.group_user,sipreco_setup_data.public_location_secretaria
+res_user_silvina,Silvina Nicoli,snicoli,snicoli,res_partner_silvina,base.group_user,sipreco_setup_data.public_location_secretaria
+res_user_mariano,Mariano Roca,mroca,mroca,res_partner_mariano,base.group_user,sipreco_setup_data.public_location_habilitaciones
+res_user_mesadeentrada,Mesa de Entrada,mentrada,mentrada,res_partner_mesadeentrada,base.group_user,"sipreco_setup_data.public_location_mesa_de_entrada,"
+res_user_efren,Jose Efren,jefren,jefren,res_partner_efren,base.group_user,sipreco_setup_data.public_location_tmc
+res_user_jesus,Jesus Farias,jfarias,jfarias,res_partner_jesus,base.group_user,sipreco_setup_data.public_location_habilitaciones
