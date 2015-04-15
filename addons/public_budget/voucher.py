@@ -108,38 +108,54 @@ class voucher(models.Model):
             ])
         return move_lines
 
-    # @api.multi
-    # def onchange_partner_id(
-    #         self, partner_id, journal_id, amount, currency_id, ttype, date,
-    #         transaction_id=False):
-    #     # Si viene transacion entonces buscamos los move_lines correspondientes y lo pasamos por contexto
+    @api.onchange('dummy_journal_id')
+    def change_dummy_journal_id(self):
+        """Unlink checks on journal change"""
+        print 'asdasda', self
+        print 'asdasda', self.line_cr_ids
+        print 'asdasda', self.line_dr_ids
+        print 'asdasda', self.amount
+        print 'asdasda', self.journal_id
+
+    @api.multi
+    def onchange_partner_id(
+            self, partner_id, journal_id, amount, currency_id, ttype, date,
+            transaction_id=False):
+        # Si viene transacion entonces buscamos los move_lines correspondientes y lo pasamos por contexto
+        # if transaction_id:
+        #     self = self.with_context(
+        #         move_line_ids=self.get_transaction_move_lines(
+        #         ttype, partner_id, transaction_id).ids)
+        res = super(voucher, self).onchange_partner_id(
+            partner_id, journal_id, amount, currency_id, ttype, date,)
+        print 'res333, change partner'
+        print res
+        return res
+
+    @api.multi
+    def onchange_amount(
+            self, amount, rate, partner_id, journal_id, currency_id, ttype,
+            date, payment_rate_currency_id, company_id, transaction_id=False):
     #     if transaction_id:
     #         self = self.with_context(
     #             move_line_ids=self.get_transaction_move_lines(
     #             ttype, partner_id, transaction_id).ids)
-    #     res = super(voucher, self).onchange_partner_id(
-    #         partner_id, journal_id, amount, currency_id, ttype, date,)
-    #     return res
+        res = super(voucher, self).onchange_amount(
+            amount, rate, partner_id, journal_id, currency_id, ttype, date,
+            payment_rate_currency_id, company_id)
+        print 'res222, change amount'
+        print res
+        return res
 
-    # @api.multi
-    # def onchange_amount(
-    #         self, amount, rate, partner_id, journal_id, currency_id, ttype,
-    #         date, payment_rate_currency_id, company_id, transaction_id=False):
-    #     if transaction_id:
-    #         self = self.with_context(
-    #             move_line_ids=self.get_transaction_move_lines(
-    #             ttype, partner_id, transaction_id).ids)
-    #     res = super(voucher, self).onchange_amount(
-    #         amount, rate, partner_id, journal_id, currency_id, ttype, date,
-    #         payment_rate_currency_id, company_id)
-    #     return res
-
-    # def onchange_journal(
-    #         self, cr, uid, ids, journal_id, line_ids, tax_id, partner_id, date,
-    #         amount, ttype, company_id, context=None):
-    #     return super(voucher, self).onchange_journal(
-    #         cr, uid, ids, journal_id, line_ids, tax_id, partner_id, date, amount,
-    #         ttype, company_id, context=context)
+    def onchange_journal(
+            self, cr, uid, ids, journal_id, line_ids, tax_id, partner_id, date,
+            amount, ttype, company_id, context=None):
+        res = super(voucher, self).onchange_journal(
+            cr, uid, ids, journal_id, line_ids, tax_id, partner_id, date, amount,
+            ttype, company_id, context=context)
+        print '111, change journal'
+        print res
+        return res
     # @api.multi
     # def onchange_journal(
     #         self, journal_id, line_ids, tax_id, partner_id, date, amount,
