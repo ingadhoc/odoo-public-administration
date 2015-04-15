@@ -211,6 +211,26 @@
 							<field name="parent_id" ref="ri_tax_code_iibb_sf"/>
 						</record>
 
+                <record model="account.tax.code" id="ri_tax_code_ret_drei_rosario">
+                    <!-- <field name="code"></field> -->
+                    <field name="name">Retencion  DREI Rosario</field>
+                    <field name="sign">1</field>
+                    <field name="parent_id" ref="ri_tax_code_chart_root"/>
+                </record>
+
+                <record model="account.tax.code" id="ri_tax_code_ret_ganancias">
+                    <!-- <field name="code"></field> -->
+                    <field name="name">Retencion Ganancias</field>
+                    <field name="sign">1</field>
+                    <field name="parent_id" ref="ri_impuestos_nacionales"/>
+                </record>
+
+                <record model="account.tax.code" id="ri_tax_code_otras_retenciones">
+                    <!-- <field name="code"></field> -->
+                    <field name="name">Otras Retencion</field>
+                    <field name="sign">1</field>
+                    <field name="parent_id" ref="ri_impuestos_nacionales"/>
+                </record>
 #
 # Tax
 #
