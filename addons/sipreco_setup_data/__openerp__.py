@@ -27,7 +27,6 @@ Sipreco Set Up Data
         # datos demo
         'demo/account/account_period.xml',
         'demo/account.journal.csv',
-        'demo/journal_data.xml',
         'demo/res.partner.csv',
         'demo/users/res.partner.csv',
         'demo/public_budget.location.csv',
