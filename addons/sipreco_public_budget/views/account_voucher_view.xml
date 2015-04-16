@@ -15,6 +15,10 @@
                 <xpath expr="//page[@string='Payment Information']/group/group[2]/group[2]" position="attributes">
                     <attribute name="groups">base.group_no_one</attribute>
                 </xpath>
+                <!-- hide advance amount on not advance transactions  -->
+                <field name="advance_amount" position="attributes">
+                    <attribute name="attrs">{'invisible':[('transaction_with_advance_payment', '=', False)]}</attribute>
+                </field>
             </field>
         </record>
           
