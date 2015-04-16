@@ -5,12 +5,12 @@ account_account_3,11,ACTIVO CORRIENTE,account_account_2,False,account.data_accou
 account_account_4,111,DISPONIBILIDADES,account_account_3,False,account.data_account_type_view,view
 account_account_5,1111,CAJAS,account_account_4,False,account.data_account_type_view,view
 account_account_6,1111010,Caja pesos,account_account_5,False,account.data_account_type_cash,liquidity
-account_account_10,1111030,Fondo fijo,account_account_5,False,account.data_account_type_payable,payable
+account_account_10,1111030,Caja chica,account_account_5,False,account.data_account_type_receivable,receivable
 account_account_11,1111040,Valores en cartera,account_account_5,False,account.data_account_type_cash,liquidity
 account_account_12,1112,BANCOS,account_account_4,False,account.data_account_type_view,view
 account_account_13,1112010-aux,Banco Municipal Cuenta Corriente,account_account_12,False,account.data_account_type_bank,liquidity
 account_account_14,1113,OTRAS DISPONIBILIDADES,account_account_4,False,account.data_account_type_view,view
-account_account_401,11300010,Anticipo para Gastos a Rendir,account_account_14,True,account.data_account_type_receivable,receivable
+account_account_401,11300010,Anticipo para Gastos a Rendir,account_account_14,False,account.data_account_type_receivable,receivable
 account_account_402,11300020,Anticipo Sueldos,account_account_14,True,account.data_account_type_receivable,receivable
 account_account_403,11300030,Transf. A depositar Tesorería General,account_account_14,True,account.data_account_type_receivable,receivable
 account_account_404,11300040,Recursos Devengados,account_account_14,True,account.data_account_type_receivable,receivable
@@ -18,7 +18,7 @@ account_account_405,11300050,Comisiones y Gastos Bancarios Adelantados,account_a
 account_account_406,11300060,AFIP Saldo a Favor,account_account_14,True,account.data_account_type_receivable,receivable
 account_account_407,11300070,Caja Seguro Saldo a Favor,account_account_14,True,account.data_account_type_receivable,receivable
 account_account_408,11300080,Reintegros Banco Municipal,account_account_14,True,account.data_account_type_receivable,receivable
-account_account_409,11300090,Rendiciones,account_account_14,True,account.data_account_type_receivable,other
+account_account_409,11300090,Subsidios con cargo a rendir,account_account_14,False,account.data_account_type_receivable,receivable
 account_account_41,12,ACTIVO NO CORRIENTE,account_account_2,False,account.data_account_type_view,view
 account_account_42,121,BIENES DE USO,account_account_41,False,account.data_account_type_view,view
 account_account_43,1211,BIENES PREEXISTENTES,account_account_42,False,account.data_account_type_view,view

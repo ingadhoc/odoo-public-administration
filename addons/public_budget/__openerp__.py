@@ -117,7 +117,7 @@
     'depends': [
         'account',
         'report_aeroo',
-        'account_invoice_direct_payment',
+        'account_invoice_auto_pay',
     ],
     'description': 'Public Budget',
     'installable': True,

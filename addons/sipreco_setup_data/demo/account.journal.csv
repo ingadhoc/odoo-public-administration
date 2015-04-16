@@ -1,13 +1,12 @@
-id,name,code,type,use_documents,default_credit_account_id/id,default_debit_account_id/id,check_type,entry_posted,update_posted,allow_direct_payment
-account.cash_journal,Efectivo,01EFE,cash,,sipreco_account_chart.account_account_6,sipreco_account_chart.account_account_6,,True,True,
-account.bank_journal,Transferencias - Banco Municipal - Cta A,02BCM,bank,,sipreco_account_chart.account_account_13,sipreco_account_chart.account_account_13,,True,True,
-account.check_journal,Cheques - Banco Municipal - Cta A,03CHB,bank,,sipreco_account_chart.account_account_748,sipreco_account_chart.account_account_748,issue,True,True,
-account.expenses_journal,Facturas de Compra,04CPR,purchase,True,,,,True,True,
-account.refund_expenses_journal,Notas de Crédito Compras,05NCC,purchase_refund,True,,,,True,True,
-other_documents,Otros Comprobantes,05OCC,purchase,,,,,True,True,
-account.sales_journal,Ventas,06VEN,sale,,,,,True,True,
-account.refund_sales_journal,Notas de Crédito Ventas,07NCV,sale_refund,,,,,True,True,
-account.opening_journal,Apertura y Cierre,08AC,situation,,,,,True,True,
-account.bank_journal_usd,General,99GEN,general,,,,,True,True,
-account.miscellaneous_journal,Varios,99VAR,general,,,,,True,True,
-journal_anticipos,Rendiciones,09ANT,cash,,sipreco_account_chart.account_account_409,sipreco_account_chart.account_account_409,,True,True,True
+id,name,code,type,use_documents,default_credit_account_id/id,default_debit_account_id/id,check_type,entry_posted,update_posted
+account.cash_journal,Efectivo,01EFE,cash,,sipreco_account_chart.account_account_6,sipreco_account_chart.account_account_6,,True,True
+account.bank_journal,Transferencias - Banco Municipal - Cta A,02BCM,bank,,sipreco_account_chart.account_account_13,sipreco_account_chart.account_account_13,,True,True
+account.check_journal,Cheques - Banco Municipal - Cta A,03CHB,bank,,sipreco_account_chart.account_account_748,sipreco_account_chart.account_account_748,issue,True,True
+account.expenses_journal,Facturas de Compra,04CPR,purchase,True,,,,True,True
+account.refund_expenses_journal,Notas de Crédito Compras,05NCC,purchase_refund,True,,,,True,True
+other_documents,Otros Comprobantes,05OCC,purchase,,,,,True,True
+account.sales_journal,Ventas,06VEN,sale,,,,,True,True
+account.refund_sales_journal,Notas de Crédito Ventas,07NCV,sale_refund,,,,,True,True
+account.opening_journal,Apertura y Cierre,08AC,situation,,,,,True,True
+account.bank_journal_usd,General,99GEN,general,,,,,True,True
+account.miscellaneous_journal,Varios,99VAR,general,,,,,True,True
