@@ -58,10 +58,10 @@ account_account_66,212,DEUDAS A PROVEEDORES,account_account_57,False,account.dat
 account_account_661,2120010,Proveedores,account_account_66,True,account.data_account_type_payable,payable
 account_account_662,2120020,Residuo Pasivo,account_account_66,True,account.data_account_type_payable,payable
 account_account_741,213,DEUDAS POR RETENCIONES IMPOSITIVAS,account_account_57,False,account.data_account_type_view,view
-account_account_742,2130010,AFIP Retención Impuesto a las Ganancias,account_account_741,True,account.data_account_type_payable,payable
-account_account_743,2130020,Retención Ingresos Brutos,account_account_741,True,account.data_account_type_payable,payable
-account_account_744,2130030,Retención DReI,account_account_741,True,account.data_account_type_payable,payable
-account_account_745,2130040,Otras Retenciones,account_account_741,True,account.data_account_type_payable,payable
+account_account_742,2130010,AFIP Retención Impuesto a las Ganancias,account_account_741,True,account.data_account_type_payable,other
+account_account_743,2130020,Retención Ingresos Brutos,account_account_741,True,account.data_account_type_payable,other
+account_account_744,2130030,Retención DReI,account_account_741,True,account.data_account_type_payable,other
+account_account_745,2130040,Otras Retenciones,account_account_741,True,account.data_account_type_payable,other
 account_account_746,214,OTRAS DEUDAS,account_account_57,False,account.data_account_type_view,view
 account_account_747,2140010,Tranf. A Reintegrar Tesorería General,account_account_746,True,account.data_account_type_payable,payable
 account_account_748,2140020,Cheques a Pagar,account_account_746,False,account.data_account_type_payable,other

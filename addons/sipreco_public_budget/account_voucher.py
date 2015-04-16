@@ -45,10 +45,10 @@ class account_voucher(models.Model):
                 days=self.payment_days)
         self.payment_date = payment_date
 
-    @api.multi
+    @api.constrains('state', 'to_pay_amount')
     def check_to_pay_amount(self):
         for voucher in self:
-            if not voucher.to_pay_amount:
+            if self.state == 'confirmed' and not voucher.to_pay_amount:
                 raise Warning(_('You can not confirm a voucher with to pay\
                     amount equal to 0'))
         return True
