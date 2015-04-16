@@ -37,6 +37,7 @@
                         <button name="sgn_cancel"
                             states="approved,draft"
                             string="Cancel"
+                            groups="base.group_no_one"
                             />
                         <field name="state" widget="statusbar"
                             statusbar_colors='{}'
@@ -49,11 +50,6 @@
                         <field name="date"
                             /> 
                         <field name="user_id"
-                            /> 
-                        <field name="payment_order_id"
-                            /> 
-                        <field name="company_id"
-                            groups="base.group_multi_company"
                             /> 
                         <field name="advance_request_line_ids"
                         /> 

@@ -26,6 +26,7 @@ class expedient(models.Model):
         )
     issue_date = fields.Datetime(
         string='Issue Date',
+        readonly=True,
         required=True,
         default=fields.Datetime.now
         )
@@ -53,13 +54,14 @@ class expedient(models.Model):
         string='Category',
         required=True
         )
-    first_location_id = fields.Many2one(
-        'public_budget.location',
-        string='First Location'
-        )
     type = fields.Selection(
         [(u'payment', u'Payment'), (u'authorizing', u'Authorizing')],
         string='Type'
+        )
+    first_location_id = fields.Many2one(
+        'public_budget.location',
+        string='First Location',
+        required=True
         )
     current_location_id = fields.Many2one(
         'public_budget.location',
@@ -77,15 +79,27 @@ class expedient(models.Model):
         string='Year',
         compute='_get_year'
         )
+    in_transit = fields.Boolean(
+        string='In Transit?',
+        store=True,
+        compute='_get_current_location'
+        )
+    user_location_ids = fields.Many2many(
+        comodel_name='public_budget.location',
+        string='User Locations',
+        related='user_id.location_ids'
+        )
+    user_id = fields.Many2one(
+        'res.users',
+        string='User',
+        readonly=True,
+        required=True,
+        default=lambda self: self.env.user
+        )
     state = fields.Selection(
         _states_,
         'State',
         default='open',
-        )
-    expedient_move_ids = fields.One2many(
-        'public_budget.expedient_move',
-        'expedient_id',
-        string='Moves'
         )
     child_ids = fields.One2many(
         'public_budget.expedient',
@@ -105,6 +119,15 @@ class expedient(models.Model):
         context={'default_supplier': 1},
         domain=[('supplier', '=', True)]
         )
+    remit_ids = fields.Many2many(
+        'public_budget.remit',
+        'public_budget_remit_ids_expedient_ids_rel',
+        'expedient_id',
+        'remit_id',
+        string='Remits',
+        readonly=True,
+        states={'in_transit': [('readonly', False)]}
+        )
 
     _constraints = [
     ]
@@ -112,22 +135,37 @@ class expedient(models.Model):
     @api.one
     @api.depends(
         'first_location_id',
-        'expedient_move_ids',
-        'expedient_move_ids.location_dest_id',
-        'expedient_move_ids.date')
+        'remit_ids',
+        'remit_ids.location_id',
+        'remit_ids.location_dest_id',
+        'remit_ids.state',
+        )
     def _get_current_location(self):
-        """"""
-        moves = self.env['public_budget.expedient_move'].search([
-            ('expedient_id', '=', self.id)], order='date desc')
+        """
+        current_location_id no es computed
+        los otros dos si
+        """
         last_move_date = False
-        if moves:
-            self.current_location_id = moves[0].location_dest_id.id
-            last_move_date = moves[0].date
-        elif self.first_location_id:
-            self.current_location_id = self.first_location_id.id
+        current_location_id = False
+        in_transit = False
+
+        if self.remit_ids:
+            remits = self.env['public_budget.remit'].search([
+                ('expedient_ids', '=', self.id), ('state', '!=', 'cancel')],
+                order='date desc')
+            if remits:
+                current_location_id = remits[0].location_dest_id.id
+                last_move_date = remits[0].date
+                if remits[0].state == 'in_transit':
+                    in_transit = True
+                else:
+                    in_transit = False
         else:
-            self.current_location_id = False
+            current_location_id = self.first_location_id.id
+
+        self.current_location_id = current_location_id
         self.last_move_date = last_move_date
+        self.in_transit = in_transit
 
     @api.one
     @api.depends('issue_date')

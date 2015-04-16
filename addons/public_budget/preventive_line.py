@@ -8,44 +8,29 @@ class preventive_line(models.Model):
 
     _name = 'public_budget.preventive_line'
     _description = 'Preventive Line'
+    _rec_name = 'budget_position_id'
 
-    name = fields.Char(
-        string='Name',
-        readonly=True,
-        required=True,
-        states={'draft': [('readonly', False)], 'open': [('readonly', False)]}
-        )
+    @api.model
+    def _get_default_budget(self):
+        budgets = self.env['public_budget.budget'].search([('state', '=', 'open')])
+        return budgets and budgets[0] or False
+
     account_id = fields.Many2one(
         'account.account',
         string='Account',
-        readonly=True,
-        states={'draft': [('readonly', False)], 'open': [('readonly', False)]},
-        domain=[('type', 'in', ['other']), ('user_type.report_type', 'in', ['expense','asset'])]
+        states={'invoiced': [('readonly', True)]},
+        domain=[('type', 'in', ['other']), ('user_type.report_type', 'in', ['expense', 'asset'])]
+        # TODO borrar esto si no interesa restringir por los avialable accounts y borrar tmb los avialable accounts
+        # Hablamos con gonza de que a priori no lo usamos salvo que lo pidan
+        # domain="[('type', 'in', ['other']), ('user_type.report_type', 'in', ['expense', 'asset']), ('id', 'in', available_account_ids[0][2])]"
         )
     preventive_amount = fields.Float(
         string='Preventive',
         required=True,
         states={'closed': [('readonly', True)]}
         )
-    preventive_status = fields.Selection(
-        [(u'draft', u'Draft'), (u'confirmed', u'Confirmed')],
-        string='Status',
-        readonly=True,
-        required=True,
-        states={'open': [('readonly', False)], 'confirmed': [('readonly', False)]},
-        default='draft'
-        )
-    available_account_ids = fields.Many2one(
-        'account.account',
-        string='available_account_ids'
-        )
     advance_line = fields.Boolean(
         string='advance_line'
-        )
-    payment_line_id = fields.Many2one(
-        comodel_name='payment.line',
-        string='Payment line',
-        readonly=True
         )
     remaining_amount = fields.Float(
         string='Remaining Amount',
@@ -74,15 +59,9 @@ class preventive_line(models.Model):
         related='budget_position_id.available_account_ids'
         )
     state = fields.Selection(
-        selection=[('draft', 'Draft'), ('open', 'Open'), ('confirmed', 'confirmed'), ('definitive', 'definitive'), ('invoiced', 'invoiced'), ('closed', 'closed'), ('cancel', 'Cancel'), ('inactive', 'Inactive')],
+        selection=[('draft', 'Draft'), ('open', 'Open'), ('definitive', 'definitive'), ('invoiced', 'invoiced'), ('closed', 'closed'), ('cancel', 'Cancel')],
         string='States',
         compute='_get_state'
-        )
-    accounting_state = fields.Selection(
-        selection=[('draft', 'Draft'), ('confirmed', 'Confirmed')],
-        string='Accounting State',
-        store=True,
-        compute='_get_accounting_state'
         )
     transaction_id = fields.Many2one(
         'public_budget.transaction',
@@ -93,30 +72,40 @@ class preventive_line(models.Model):
     definitive_line_ids = fields.One2many(
         'public_budget.definitive_line',
         'preventive_line_id',
-        string='Definitive Lines',
-        readonly=True,
-        states={'confirmed': [('readonly', False)], 'definitive': [('readonly', False)], 'invoiced': [('readonly', False)]}
+        string='Definitive Lines'
         )
     budget_id = fields.Many2one(
         'public_budget.budget',
         string='Budget',
-        readonly=True,
         required=True,
-        states={'draft': [('readonly', False)], 'open': [('readonly', False)]},
-        domain=[('state', 'not in', ['closed', 'pre_closed'])]
+        default=_get_default_budget,
+        states={'invoiced': [('readonly', True)]},
+        domain=[('state', '=', 'open')]
         )
     budget_position_id = fields.Many2one(
         'public_budget.budget_position',
         string='Budget Position',
-        readonly=True,
         required=True,
-        states={'draft': [('readonly', False)], 'open': [('readonly', False)]},
+        states={'invoiced': [('readonly', True)]},
         context={'default_type': 'normal'},
         domain=[('type', '=', 'normal')]
         )
 
     _constraints = [
     ]
+
+    @api.one
+    @api.depends(
+        'preventive_amount',
+        'definitive_line_ids',
+    )
+    def _get_state(self):
+        """Por ahora solo implementamos los estados invoiced y draft
+        """
+        state = 'draft'
+        if self.invoiced_amount:
+            state = 'invoiced'
+        self.state = state
 
     @api.one
     @api.depends(
@@ -142,11 +131,12 @@ class preventive_line(models.Model):
         to_pay_amount = False
         paid_amount = False
         if self.advance_line:
-            if self.payment_line_id.order_id.state == 'done':
-                definitive_amount = self.preventive_amount
-                to_pay_amount = self.preventive_amount
-                if self.payment_line_id.voucher_id.state == 'posted':
-                    paid_amount = self.preventive_amount
+            paid = self.transaction_id.paid_amount
+            to_pay = self.transaction_id.to_pay_amount
+            advance_amount = self.transaction_id.advance_amount
+            if advance_amount:
+                definitive_amount = to_pay_amount = self.preventive_amount * (to_pay / advance_amount)
+                paid_amount = self.preventive_amount * (paid / advance_amount)
         else:
             definitive_amount = sum([
                 definitive.amount
@@ -167,90 +157,11 @@ class preventive_line(models.Model):
         self.paid_amount = paid_amount
 
     @api.one
-    @api.depends(
-        'transaction_id',
-        'preventive_status',
-        'definitive_line_ids',
-        'budget_id',
-        'budget_id.state',
-    )
-    def _get_state(self):
-        """ Usamos "state" para definir cuando son modificables algunos
-        campos:
-        * draft: cuando esta marcada como "borrador" o el proyecto en borrador
-            Se puede modificar
-        * confirmed: cuando esta marcada como confirm
-            Se pueden agregar definitivas
-        * definitive: cuando existe una definitiva
-            No se puede modificar el preventive_status de la preventiva
-        * invoiced: si existe una factura para al menos una definitiva
-            Ya no se puede moficiar nada, solo se puede modificar el importe
-            (que sera restricto a la suma de los importes definitivos) y
-            las lineas definitivas. A su vez, cada linea definitiva tiene la
-            restriccion de poder ser modificada solo si no fue facturada.
-        * closed: si el budget es "pre-closed o closed" o transaccion closed
-            No se puede modificar nada
-        * cancel: si el budget esta en "cancel" o transaccion cancel
-            No se puede modificar nada
-        """
-        # transacion states closed, cancel, draft, open
-        state = self.transaction_id.state
-        if self.budget_id:
-            # states draft, cancel, closed or open
-            state = self.budget_id.state
-            if self.budget_id.state == 'open':
-                if self.preventive_status == 'confirmed':
-                    state = 'confirmed'
-                if self.definitive_line_ids:
-                    state = 'definitive'
-                    def_state = [x.state for x in self.definitive_line_ids]
-                    if 'invoiced' in def_state:
-                        state = 'invoiced'
-        self.state = state
-
-    @api.one
-    @api.depends(
-        'transaction_id',
-        'transaction_id.state',
-        'transaction_id.type_id.with_advance_payment',
-        'budget_id',
-        'budget_id.state',
-        'advance_line',
-        'preventive_status',
-    )
-    def _get_accounting_state(self):
-        """
-        Usamos "accounting_state" para saber si se deben tener en cuenta en el
-        calculo de las budgets positions:
-        * draft: cuando esta marcada como "borrador" o el proyecto en borrador
-            Se tiene en cuenta como draft
-        * preventive: cuando es
-
-        If accounting state == false, then it doesn't mean anything.
-        """
-        accounting_state = False
-        if self.transaction_id.state != 'cancel':
-            # Presupuestos no cancelados
-            if self.budget_id.state != 'cancel':
-                # Para transacciones con adelanto
-                if self.transaction_id.type_id.with_advance_payment:
-                    # Si es linea de adelanto, se tiene en cuenta en draft y
-                    # open
-                    if self.advance_line and self.transaction_id.state in (
-                            'draft', 'open'):
-                        accounting_state = 'confirmed'
-                        # accounting_state = self.preventive_status
-                    # Si no es linea de adelanto, se tiene en cuenta en closed
-                    if not self.advance_line and self.transaction_id.state in (
-                            'closed'):
-                        accounting_state = 'confirmed'
-                        # accounting_state = self.preventive_status
-                else:
-                    if self.budget_id.state == 'draft':
-                        accounting_state = 'draft'
-                    else:
-                        accounting_state = self.preventive_status
-        self.accounting_state = accounting_state
+    @api.constrains('definitive_line_ids', 'preventive_amount')
+    def _check_number(self):
+        if self.preventive_amount < self.definitive_amount:
+            raise Warning(
+                _("Definitive Amount can't be greater than Preventive Amount"))
 
     @api.one
     @api.constrains(
@@ -259,23 +170,9 @@ class preventive_line(models.Model):
         'preventive_amount')
     def _check_position_balance_amount(self):
         self = self.with_context(budget_id=self.budget_id.id)
-        if self.budget_position_id.budget_assignment_allowed and self.budget_position_id.balance_amount < 0.0:
+        if self.budget_position_id.assignment_position_id.balance_amount < 0.0:
             raise Warning(
                 _("There is not Enought Balance Amount on this Budget Position '%s'") %
-                (self.budget_position_id.name))
-
-    @api.one
-    @api.constrains('definitive_line_ids', 'preventive_amount')
-    def _check_number(self):
-        if self.preventive_amount < self.definitive_amount:
-            raise Warning(
-                _("Definitive Amount can't be greater than Preventive Amount"))
-
-    @api.one
-    def unlink(self):
-        if self.preventive_status == 'confirmed':
-            raise Warning(_(
-                "You can not delete a confirmed preventive line"))
-        return super(preventive_line, self).unlink()
+                (self.budget_position_id.assignment_position_id.name))
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

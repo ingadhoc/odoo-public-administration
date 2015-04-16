@@ -23,6 +23,10 @@
                             />
                     <field name="current_location_id" string="Current Location"
                             />
+                    <field name="in_transit" string="In Transit?"
+                            />
+                    <field name="user_id" string="User"
+                            />
                     <field name="supplier_ids" string="Suppliers"
                             />
                     <group expand="0" string="Group By">
@@ -62,12 +66,14 @@
                         <button name="sgn_cancel"
                             states="annulled,closed,in_revision,open"
                             string="Cancel"
+                            groups="base.group_no_one"
                             />
                         <field name="state" widget="statusbar"
                             statusbar_colors='{}'
                             />
                     </header>
                     <sheet string="Expedient">
+                        <field name="user_location_ids" invisible="1"/>
                         <h1>
                             <label for="number"/>
                             <field name="number" class="oe_inline" readonly="1"/>
@@ -81,22 +87,21 @@
                                 <field name="description"/>
                                 <field name="supplier_ids" widget="many2many_tags"/>
                                 <field name="cover"/>
+                                <field name="user_id"/>
                             </group>
                             <group>
                                 <field name="founder_id"/>
                                 <field name="category_id"/>
                                 <field name="type"/>
                                 <field name="parent_id"/>
-                                <field name="first_location_id"/>
+                                <field name="first_location_id" options="{'no_create': True}" domain="[('id','in',user_location_ids[0][2])]"/>
+                                <field name="current_location_id"/>
                                 <field name="final_location" states="closed,annulled"/>
                             </group>
                         </group>
                         <notebook>
                             <page string="Moves">
-                                <group>
-                                    <field name="current_location_id"/>
-                                    <field name="expedient_move_ids" context="{'expedient':active_id}"/>
-                                </group>
+                                <field name="remit_ids"/>
                             </page>
                             <page string="Childs">
                                 <field name="child_ids"/>
@@ -134,6 +139,10 @@
                     <field name="type"
                         />
                     <field name="current_location_id"
+                        />
+                    <field name="in_transit"
+                        />
+                    <field name="user_id"
                         />
                     <field name="state"
                         />

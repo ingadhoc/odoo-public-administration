@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- INHERITED SEARCH -->
+        <record id="view_public_budget_users_filter" model="ir.ui.view">
+            <field name="name">public_budget.users.select</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_search"/>
+            <field name="arch" type="xml">
+                <search position="inside">
+                </search>
+            </field>
+        </record>
+ 
+        <!-- INHERITED FORM -->
+        <record id="view_public_budget_users_form" model="ir.ui.view">
+            <field name="name">public_budget.users.form</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <group string="Allowed Companies" position="after">
+                    <group string="Allowed Locations">
+                        <field name="location_ids" nolabel="1" widget="many2many_tags"/>
+                    </group>
+                </group>
+            </field>
+        </record>
+
+        <!-- INHERITED TREE -->
+        <record id="view_public_budget_users_tree" model="ir.ui.view">
+            <field name="name">public_budget.users.tree</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_tree"/>
+            <field name="arch" type="xml">
+                <tree position="inside">
+                </tree>
+            </field>
+        </record>
+
+
+    </data>
+</openerp>
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
+     -->

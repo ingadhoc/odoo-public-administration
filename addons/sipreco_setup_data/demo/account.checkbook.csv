@@ -1,0 +1,2 @@
+id,name,issue_check_subtype,debit_journal_id/id,journal_id/id,range_from,range_to,state
+checkbook_chequera_1,Chequera 1 – 100,currents,account.bank_journal,account.check_journal,0,100,active

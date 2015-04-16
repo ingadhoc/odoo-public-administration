@@ -31,8 +31,8 @@
                             /> 
                         <field name="amount"
                             /> 
-                        <field name="draft_amount"
-                            /> 
+<!--                         <field name="draft_amount"
+                            />  -->
                         <field name="preventive_amount"
                             /> 
                         <field name="definitive_amount"
@@ -63,9 +63,9 @@
                     <field name="amount"
                             sum="Total"
                         />
-                    <field name="draft_amount"
+<!--                     <field name="draft_amount"
                             sum="Total"
-                        />
+                        /> -->
                     <field name="preventive_amount"
                             sum="Total"
                         />

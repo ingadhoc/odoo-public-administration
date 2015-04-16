@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- SEARCH VIEW -->
+        <record id="view_public_budget_remit_filter" model="ir.ui.view">
+            <field name="name">public_budget.remit.select</field>
+            <field name="model">public_budget.remit</field>
+            <field name="arch" type="xml">
+                <search string="Remit">
+                    <field name="date" string="Date"
+                            />
+                    <field name="user_id" string="User"
+                            />
+                    <field name="location_id" string="Source Location"
+                            />
+                    <field name="location_dest_id" string="Destination Location"
+                            />
+                    <group expand="0" string="Group By">
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- FORMVIEW -->
+        <record id="view_public_budget_remit_form" model="ir.ui.view">
+            <field name="name">public_budget.remit.form</field>
+            <field name="model">public_budget.remit</field>
+            <field name="arch" type="xml">
+                <form string="Remit">
+                    <header>
+                        <button name="sgn_confirm"
+                            states="in_transit"
+                            string="Confirm"
+                            class="oe_highlight"
+                            />
+                        <button name="action_cancel_in_transit"
+                            type="object"
+                            states="cancel"
+                            string="To In Transit"
+                            />
+                        <button name="sgn_cancel"
+                            states="confirmed,in_transit"
+                            string="Cancel"
+                            groups="base.group_no_one"
+                            />
+                        <field name="state" widget="statusbar"
+                            statusbar_colors='{}'
+                            />
+                    </header>
+                    <sheet string="Remit">
+                        <field name="user_location_ids" invisible="True"/>
+                       <div class="oe_right oe_button_box" name="buttons">
+                       </div>
+                     <group>
+                        <field name="date"
+                            /> 
+                        <field name="user_id"
+                            /> 
+                        <field name="location_id"
+                            domain="[('id','in',user_location_ids[0][2])]"
+                            options="{'no_create': True}"/>
+                        <field name="location_dest_id"
+                            domain="[('id','!=',location_id)]" options="{'no_create': True}"
+                            /> 
+                     </group>
+                    <field name="expedient_ids"
+                        domain="[('current_location_id','=',location_id),('in_transit','=',False)]" options="{'no_create': True}"
+                    /> 
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+        <!-- TREEVIEW -->
+        <record id="view_public_budget_remit_tree" model="ir.ui.view">
+            <field name="name">public_budget.remit.tree</field>
+            <field name="model">public_budget.remit</field>
+            <field name="arch" type="xml">
+                <tree string="Remit"
+                    colors="grey:state=='cancelled';blue:state in (u'in_transit',);black:state in (u'confirmed',);red:state in ()"
+                    >
+                    <field name="date"
+                        />
+                    <field name="user_id"
+                        />
+                    <field name="location_id"
+                        />
+                    <field name="location_dest_id"
+                        />
+                    <field name="state"
+                        />
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</openerp>
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
+     -->

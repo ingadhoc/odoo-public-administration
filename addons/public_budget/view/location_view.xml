@@ -29,6 +29,8 @@
                      <group>
                         <field name="name"
                             /> 
+                        <field name="user_ids"
+                        /> 
                      </group>
                     </sheet>
 

@@ -3,19 +3,14 @@
     <data noupdate="1">
 
         <!-- Properties -->
-<!--         <record forcecreate="True" id="property_account_receivable" model="ir.property">
+        <!-- Para que no de un error... -->
+        <record id="account_account_661" model="account.account">
+        </record>
+        <record forcecreate="True" id="property_account_receivable" model="ir.property">
             <field name="name">property_account_receivable</field>
             <field name="fields_id" search="[('model','=','res.partner'),('name','=','property_account_receivable')]"/>
-            <field eval="'account.account,'+str(a_recv)" name="value"/>
+            <field eval="'account.account,'+str(account_account_661)" name="value"/>
             <field name="company_id" ref="base.main_company"/>
-        </record> -->
-        <record id="account_account_661" model="account.account">
-<!--             <field name="code">X11002</field>
-            <field name="name">Debtors - (test)</field>
-            <field ref="cas" name="parent_id"/>
-            <field name="type">receivable</field>
-            <field eval="True" name="reconcile"/>
-            <field name="user_type" ref="data_account_type_receivable"/> -->
         </record>
         <record forcecreate="True" id="property_account_payable" model="ir.property">
             <field name="name">property_account_payable</field>

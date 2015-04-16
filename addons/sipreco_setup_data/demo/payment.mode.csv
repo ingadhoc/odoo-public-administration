@@ -1,3 +1,0 @@
-id,name,journal/id,bank_id/id
-account_payment.payment_mode_1,Transferencias - Banco Municipal - Cta A,account.bank_journal,account_payment.res_partner_bank_2
-account_payment.payment_mode_2,Cheques - Banco Municipal - Cta A,account.check_journal,account_payment.res_partner_bank_2

@@ -1,38 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <!-- INHERITED SEARCH -->
-        <record id="view_public_budget_voucher_filter" model="ir.ui.view">
-            <field name="name">public_budget.voucher.select</field>
-            <field name="model">account.voucher</field>
-            <field name="inherit_id" ref="account_voucher.view_voucher_filter"/>
-            <field name="arch" type="xml">
-                <search position="inside">
-                </search>
-            </field>
-        </record>
- 
-        <!-- INHERITED FORM -->
-        <record id="view_public_budget_voucher_form" model="ir.ui.view">
-            <field name="name">public_budget.voucher.form</field>
-            <field name="model">account.voucher</field>
-            <field name="inherit_id" ref="account_voucher.view_voucher_form"/>
-            <field name="arch" type="xml">
-                <group position="inside">
-                </group>
-            </field>
-        </record>
-
-        <!-- INHERITED TREE -->
-        <record id="view_public_budget_voucher_tree" model="ir.ui.view">
-            <field name="name">public_budget.voucher.tree</field>
-            <field name="model">account.voucher</field>
-            <field name="inherit_id" ref="account_voucher.view_voucher_tree"/>
-            <field name="arch" type="xml">
-                <tree position="inside">
-                </tree>
-            </field>
-        </record>
 
         <record id="view_voucher_filter_vendor_pay" model="ir.ui.view">
             <field name="name">account.voucher.payment.filter</field>
@@ -41,44 +9,68 @@
             <field name="arch" type="xml">
                 <field name="journal_id" position="after">
                     <field name="transaction_id"/>
+                    <field name="budget_id"/>
+                    <field name="expedient_id"/>
                 </field>
             </field>
         </record>
 
-        <record id="view_voucher_filter_customer_pay" model="ir.ui.view">
+<!-- No necesitamos estas -->
+<!--         <record id="view_voucher_filter_customer_pay" model="ir.ui.view">
             <field name="name">account.voucher.customer.pay.select</field>
             <field name="model">account.voucher</field>
             <field name="inherit_id" ref="account_voucher.view_voucher_filter_customer_pay"/>
             <field name="arch" type="xml">
                 <field name="journal_id" position="after">
+                    <field name="budget_id"/>
                     <field name="transaction_id"/>
+                    <field name="expedient_id"/>
                 </field>
             </field>
-        </record>
+        </record> -->
 
-        <record id="view_vendor_receipt_form" model="ir.ui.view">
+<!--         <record id="view_vendor_receipt_form" model="ir.ui.view">
             <field name="name">account.voucher.payment.form</field>
             <field name="model">account.voucher</field>
             <field name="inherit_id" ref="account_voucher.view_vendor_receipt_form"/>
             <field name="arch" type="xml">
                 <field name="journal_id" position="after">
-                    <field name="transaction_id" readolny="1"/>
+                    <field name="budget_id"/>
+                    <field name="transaction_id"/>
+                    <field name="expedient_id"/>
                 </field>
             </field>
-        </record>
+        </record> -->
 
         <record id="view_vendor_payment_form" model="ir.ui.view">
             <field name="name">account.voucher.customer.pay.form</field>
             <field name="model">account.voucher</field>
             <field name="inherit_id" ref="account_voucher.view_vendor_payment_form"/>
             <field name="arch" type="xml">
-                <field name="journal_id" position="after">
-                    <field name="transaction_id" readolny="1"/>
+                <field name="partner_id" position="before">
+                    <field name="transaction_with_advance_payment" invisible="1"/>
+                    <field name="partner_ids" invisible="1"/>
+                    <field name="transaction_id"/>
+                    <field name="budget_id"/>
+                    <field name="expedient_id"/>
                 </field>
+                <field name="company_id" position="after">
+                    <field name="budget_position_ids" widget="many2many_tags"/>
+                </field>
+                <!-- Clean onchange method -->
+<!--                 <field name="partner_id" position="attributes">
+                    <attribute name="on_change">onchange_partner_id(partner_id, journal_id, amount, currency_id, type, date, transaction_id, context)</attribute>
+                </field>
+                <field name="amount" position="attributes">
+                    <attribute name="on_change">onchange_amount(amount, payment_rate, partner_id, journal_id, currency_id, type, date, payment_rate_currency_id, company_id, transaction_id, context)</attribute>
+                </field>
+                <field name="journal_id" position="attributes">
+                    <attribute name="on_change">onchange_journal(journal_id, line_dr_ids, False, partner_id, date, amount, type, company_id, transaction_id, context)</attribute>
+                </field> -->
             </field>
         </record>
 
-        <record model="ir.ui.view" id="view_voucher_no_create_tree">
+<!--         <record model="ir.ui.view" id="view_voucher_no_create_tree">
             <field name="name">account.voucher.no_create.tree</field>
             <field name="model">account.voucher</field>
             <field name="arch" type="xml">
@@ -95,7 +87,7 @@
                     <field name="state"/>
                 </tree>
             </field>
-        </record>
+        </record> -->
 
     </data>
 </openerp>

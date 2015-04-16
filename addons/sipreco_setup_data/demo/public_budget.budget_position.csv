@@ -17,7 +17,7 @@ budg_pos_activos,04.,Bienes de Uso,,view,,
 budg_pos_12,04.03,Maquinaria y Equipo,pos_categ_capital,normal,budg_pos_activos,True
 budg_pos_13,04.05,"Libros, Revistas y Otros Elementos Coleccionables",pos_categ_expense,normal,budg_pos_activos,True
 budg_pos_14,04.08,Activos Intangibles,pos_categ_capital,normal,budg_pos_activos,True
-budg_pos_otros,05.,Transferencias,,view,,
-budg_pos_15,05.01.04,Aportes Asociación Nacional Tribunales de Cuenta,pos_categ_expense,normal,budg_pos_otros,True
-budg_pos_16,05.01.09,Pasantías,pos_categ_expense,normal,budg_pos_otros,True
-budg_pos_17,05.03.06.01,Subsidio Universidad Nacional de Rosario,pos_categ_expense,normal,budg_pos_otros,True
+budg_pos_otros,05.,Transferencias,,view,,True
+budg_pos_15,05.01.04,Aportes Asociación Nacional Tribunales de Cuenta,pos_categ_expense,normal,budg_pos_otros,
+budg_pos_16,05.01.09,Pasantías,pos_categ_expense,normal,budg_pos_otros,
+budg_pos_17,05.03.06.01,Subsidio Universidad Nacional de Rosario,pos_categ_expense,normal,budg_pos_otros,

@@ -45,19 +45,23 @@
                             /> 
                         <field name="type"
                             /> 
+                        <field name="parent_id"
+                        /> 
                         <field name="budget_assignment_allowed"
-                            /> 
-                        <field name="category_id"
-                            attrs="{'invisible': [('type', '=', 'view')], 'required':[('type', '=', 'normal')]}"
                             /> 
                         <field name="inventariable"
                             attrs="{'invisible': [('type', '=', 'view')]}"
                             /> 
-                        <field name="available_account_ids"
+                        <field name="category_id"
+                            attrs="{'invisible': [('type', '=', 'view')], 'required':[('type', '=', 'normal')]}"
+                            /> 
+                        <!-- TODO si no lo usamos borrarlo, ver notas en preventive line campo account_id -->
+                        <!-- <field name="available_account_ids"
                             attrs="{'invisible':[('type','=','view')]}"
-                        /> 
-                        <field name="parent_id"
-                        /> 
+                            /> -->
+                        <field name="child_ids"
+                            attrs="{'invisible':[('type','!=','view')]}"
+                            />
                      </group>
                     </sheet>
 
@@ -97,8 +101,10 @@
                     <field name="code"/>
                     <field name="name"/>
                     <field name="type" invisible="1"/>
-                    <field name="amount" attrs="{'invisible':[('budget_assignment_allowed','=',False)]}"/>
-                    <field name="draft_amount"/>
+                    <field name="amount"/>
+                    <!-- No usamos el attrs porque no lo renderiza bien la vista arbol -->
+                    <!-- <field name="amount" attrs="{'invisible':[('budget_assignment_allowed','=',False)]}"/> -->
+                    <!-- <field name="draft_amount"/> -->
                     <field name="preventive_amount"/>
                     <field name="definitive_amount"/>
                     <field name="to_pay_amount"/>

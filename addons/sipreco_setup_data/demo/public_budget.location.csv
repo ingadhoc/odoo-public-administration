@@ -1,11 +1,7 @@
 id,name
 public_location_secretaria,Secretaria
-public_location_transito_secretaria,En transito a Secretaria
-public_location_contaduria,Contaduría
-public_location_transito_contaduria,En transito a Contaduría
+public_location_contaduria,ContadurÃ­a
 public_location_habilitaciones,Habilitaciones
-public_location_transito_habilitaciones,En transito a Habilitaciones
 public_location_mesa_de_entrada,Mesa de Entrada
-public_location_transito_mesa_de_entrada,En transito a Mesa de Entrada
 public_location_compras,Compras
-public_location_transito_compras,En transito a Compras
+public_location_tmc,Tribunal de Cuentas

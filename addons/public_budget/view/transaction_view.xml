@@ -17,8 +17,6 @@
                             />
                     <field name="type_id" string="Type"
                             />
-                    <field name="total" string="Total"
-                            />
                     <field name="supplier_ids" string="Suppliers"
                             />
                     <field name="budget_position_ids" string="Related Budget Positions"
@@ -57,6 +55,7 @@
                         <button name="sgn_cancel"
                             states="closed,draft,open"
                             string="Cancel"
+                            groups="base.group_no_one"
                             />
                         <field name="state" widget="statusbar"
                             statusbar_colors='{}'
@@ -65,26 +64,34 @@
                     <sheet string="Budget Transaction">
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
+                        <field name="id" invisible="True"/> 
+                        <field name="user_location_ids" invisible="True"/> 
                         <field name="type_with_advance_payment" invisible="1"/>
                         <field name="type_with_salary_advance" invisible="1"/>
+                        <!-- si no lo agregamos aca no refresca en voucher, raro... -->
+                        <field name="supplier_ids" invisible="1"/>
                         <group>
                             <group>
                                 <field name="issue_date"/>
                                 <field name="name"/>
-                                <field name="user_id"/>
-                                <field name="expedient_id" options="{'no_quick_create': True}"/>
+                                <field name="expedient_id"
+                                    domain="[('current_location_id','in',user_location_ids[0][2]),('in_transit','=',False),('state','=','open')]" options="{'no_create': True}"
+                                    /> 
                                 <field name="type_id"/>
-                                <field name="partner_id" attrs="{'invisible':[('type_with_advance_payment','=',False)],'required':[('type_with_advance_payment','=',True)],'readonly':[('payment_order_ids','!=',[])]}"/>
+                                <field name="partner_id" attrs="{'invisible':[('type_with_advance_payment','=',False)],'required':[('type_with_advance_payment','=',True)]}"/>
                                 <field name="company_id" groups="base.group_multi_company"/>
+                                <field name="user_id"/>
                             </group>
                             <group>
                                 <field name="total"/>
-                                <field name="remaining_amount"/>
+                                <!-- TODO ver si los djamos o no, ver si hay que borrarlos y si hay que borrar el cmapo funcion correspondiente o no -->
+<!--                                 <field name="preventive_amount"/>
+                                <field name="definitive_amount"/>
+                                <field name="invoiced_amount"/>
+                                <field name="to_pay_amount"/>
                                 <field name="paid_amount"/>
-                                <field name="preventive_amount"/>
-                                <field name="payment_order_amount"/>
-                                <field name="refund_voucher_amount"/>
-                                <field name="advance_remaining_amount"/>
+                                <field name="advance_amount" attrs="{'invisible':[('type_with_advance_payment','=',False)]}"/>
+                                <field name="to_return_amount" attrs="{'invisible':[('type_with_advance_payment','=',False)]}"/> -->
                             </group>
                         </group>
                         <notebook>
@@ -92,26 +99,20 @@
                                 <label for="advance_preventive_line_ids" string="Advance Lines" attrs="{'invisible':[('type_with_advance_payment','=',False)]}"/>
                                 <field name="advance_preventive_line_ids" attrs="{'invisible':[('type_with_advance_payment','=',False)]}"/>
                                 <label for="preventive_line_ids" string="Settlement Lines" attrs="{'invisible':[('type_with_advance_payment','=',False)]}"/>
-                                <field name="preventive_line_ids" context="{'default_preventive_amount':remaining_amount}"/>
+                                <field name="preventive_line_ids"/>
                             </page>
                             <page string="Payment Orders and Refunds" attrs="{'invisible':[('type_with_advance_payment','=',False)]}">
-                                <label for="advance_payment_order_ids"/>
-                                <button class="oe_link oe_inline" string="(Create Payment Order)" type="action" name="%(public_budget.action_payment_order_form)d" context="{'default_transaction_id':active_id}"/>
-                                <field name="advance_payment_order_ids" context="{'tree_view_ref': 'public_budget.view_payment_order_no_create_tree'}"/>
-                                <label for="refund_voucher_ids"/>
-                                <button class="oe_link oe_inline" string="(Create Refund Voucher)" type="action" name="%(public_budget.action_transaction_create_refund_voucher)d"/>
-                                <field name="refund_voucher_ids" context="{'form_view_ref': 'account_voucher.view_vendor_receipt_form','tree_view_ref': 'public_budget.view_voucher_no_create_tree'}"/>
+                                <field name="advance_voucher_ids" context="{'default_transaction_id':id, 'default_partner_id': partner_id, 'default_type': 'payment', 'form_view_ref': 'account_voucher.view_vendor_payment_form','tree_view_ref': 'account_voucher.view_voucher_tree'}"/>
                             </page>
-                            <page string="Vouchers">
-                                <button class="oe_link" string="Create Voucher" type="action" name="%(public_budget.action_definitive_make_invoice)d"/>
+                            <page string="Invoices">
+                                <button class="oe_link" string="Create Invoice" states="open" type="action" name="%(public_budget.action_definitive_make_invoice)d"/>
                                 <field name="invoice_ids" nolabel="1"/>
                             </page>
                             <page string="Salary Advance Returns" attrs="{'invisible':[('type_with_salary_advance','=',False)]}">
                                 <field name="advance_return_ids"/>
                             </page>
                             <page string="Payment Orders" attrs="{'invisible':[('type_with_advance_payment','=',True)]}">
-                                <button class="oe_link oe_inline" string="Create Payment Order" type="action" name="%(public_budget.action_payment_order_form)d" context="{'default_transaction_id':active_id}"/>
-                                <field name="payment_order_ids" context="{'tree_view_ref': 'public_budget.view_payment_order_no_create_tree'}"/>
+                                <field name="voucher_ids" context="{'default_type': 'payment', 'default_transaction_id':id, 'form_view_ref': 'account_voucher.view_vendor_payment_form','tree_view_ref': 'account_voucher.view_voucher_tree'}"/>
                             </page>
                             <page string="Notes">
                                 <field name="note"/>
@@ -139,8 +140,6 @@
                     <field name="expedient_id"
                         />
                     <field name="type_id"
-                        />
-                    <field name="total"
                         />
                     <field name="state"
                         />

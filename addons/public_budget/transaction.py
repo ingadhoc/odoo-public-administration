@@ -24,7 +24,7 @@ class transaction(models.Model):
         track_visibility='always',
         readonly=True,
         required=True,
-        states={'draft': [('readonly', False)], 'open': [('readonly', False)]},
+        states={'draft': [('readonly', False)]},
         default=fields.Date.context_today
         )
     name = fields.Char(
@@ -38,7 +38,6 @@ class transaction(models.Model):
         string='User',
         readonly=True,
         required=True,
-        states={'draft': [('readonly', False)], 'open': [('readonly', False)]},
         default=lambda self: self.env.user
         )
     expedient_id = fields.Many2one(
@@ -61,20 +60,9 @@ class transaction(models.Model):
         readonly=True,
         states={'draft': [('readonly', False)]}
         )
-    total = fields.Float(
-        string='Total',
-        readonly=True,
-        required=True,
-        states={'draft': [('readonly', False)], 'open': [('readonly', False)]}
-        )
     invoice_ids = fields.Many2one(
         'account.invoice',
-        string='Vouchers',
-        readonly=True
-        )
-    payment_order_ids = fields.Many2one(
-        'account.invoice',
-        string='Payment Orders',
+        string='Invoices',
         readonly=True
         )
     note = fields.Html(
@@ -115,52 +103,58 @@ class transaction(models.Model):
         inverse_name='transaction_id',
         string='Advance Preventive Lines',
         readonly=True,
-        states={'draft': [('readonly', False)], 'open': [('readonly', False)]},
+        states={'open': [('readonly', False)]},
         context={'default_advance_line': 1, 'default_preventive_status': 'confirmed', 'advance_line': 1},
         domain=[('advance_line', '=', True)]
         )
-    advance_payment_order_ids = fields.One2many(
-        comodel_name='payment.order',
-        inverse_name='transaction_id',
-        string='Payment Orders'
-        )
-    refund_voucher_count = fields.Integer(
-        string='Refund Vouchers',
-        compute='_refund_voucher_count'
-        )
-    payment_order_count = fields.Float(
-        string='Payment Orders',
-        compute='_payment_order_count'
-        )
     preventive_amount = fields.Float(
         string='Preventive Amount',
+        compute='_get_amounts'
+        )
+    definitive_amount = fields.Float(
+        string='Definitive Amount',
+        compute='_get_amounts'
+        )
+    invoiced_amount = fields.Float(
+        string='Invoiced Amount',
+        compute='_get_amounts'
+        )
+    to_pay_amount = fields.Float(
+        string='To Pay Amount',
         compute='_get_amounts'
         )
     paid_amount = fields.Float(
         string='Paid Amount',
         compute='_get_amounts'
         )
-    remaining_amount = fields.Float(
-        string='Remaining Amount',
+    to_return_amount = fields.Float(
+        string='To Return Amount',
         compute='_get_amounts'
         )
-    payment_order_amount = fields.Float(
-        string='Payment Orderes Amount',
+    advance_amount = fields.Float(
+        string='Advance Amount',
         compute='_get_amounts'
         )
-    advance_remaining_amount = fields.Float(
-        string='Advance Remaining Amount',
-        compute='_get_advance_amounts'
-        )
-    refund_voucher_amount = fields.Float(
-        string='Refound Vouchers Amount',
-        compute='_get_advance_amounts'
-        )
+    # refund_voucher_amount = fields.Float(
+    #     string='Refound Vouchers Amount',
+    #     compute='_get_amounts'
+    #     )
     company_id = fields.Many2one(
         'res.company',
         string='Company',
+        readonly=True,
         required=True,
+        states={'draft': [('readonly', False)]},
         default=lambda self: self.env['res.company']._company_default_get('public_budget.transaction')
+        )
+    total = fields.Float(
+        string='Total',
+        compute='_get_total'
+        )
+    user_location_ids = fields.Many2many(
+        comodel_name='public_budget.location',
+        string='User Locations',
+        related='user_id.location_ids'
         )
     state = fields.Selection(
         _states_,
@@ -172,22 +166,8 @@ class transaction(models.Model):
         'transaction_id',
         string='Preventive Lines',
         readonly=True,
-        states={'draft': [('readonly', False)], 'open': [('readonly', False)]},
+        states={'open': [('readonly', False)]},
         domain=[('advance_line', '=', False)]
-        )
-    refund_voucher_ids = fields.One2many(
-        'account.voucher',
-        'transaction_id',
-        string='Vouchers',
-        context={'default_type': 'receipt'},
-        domain=[('type', '=', 'receipt')]
-        )
-    advance_return_ids = fields.One2many(
-        'public_budget.advance_return',
-        'transaction_id',
-        string='Advance Returns',
-        readonly=True,
-        states={'draft': [('readonly', False)], 'open': [('readonly', False)]}
         )
     invoice_ids = fields.One2many(
         'account.invoice',
@@ -196,10 +176,42 @@ class transaction(models.Model):
         track_visibility='always',
         readonly=True
         )
-    payment_order_ids = fields.One2many(
-        'payment.order',
+    voucher_ids = fields.One2many(
+        'account.voucher',
         'transaction_id',
-        string='Payment Orders'
+        string='Payment Orders',
+        readonly=True,
+        domain=[('type', '=', 'payment')],
+        context={'default_type': 'payment'},
+        states={'open': [('readonly', False)]},
+        )
+    # basicamente es el mismo campo de arriba pero lo separamos para poner en
+    # otro lugar de la vista
+    advance_voucher_ids = fields.One2many(
+        'account.voucher',
+        'transaction_id',
+        string='Advance Payment Orders',
+        readonly=True,
+        domain=[('type', '=', 'payment')],
+        context={'default_type': 'payment'},
+        states={'open': [('readonly', False)]},
+        )
+    # TODO ver si los borramos, vamos a usar los de payment porque si no no
+    # concilia una cosa con otra. Si borramos tmb borrar el wizard
+    # tambien borrar en otros lugares que aparece refund_voucher_ids y refund_voucher_amount
+    # refund_voucher_ids = fields.One2many(
+    #     'account.voucher',
+    #     'transaction_id',
+    #     string='Vouchers',
+    #     context={'default_type': 'receipt'},
+    #     domain=[('type', '=', 'receipt')]
+    #     )
+    advance_return_ids = fields.One2many(
+        'public_budget.advance_return',
+        'transaction_id',
+        string='Advance Returns',
+        readonly=True,
+        states={'draft': [('readonly', False)], 'open': [('readonly', False)]}
         )
 
     _constraints = [
@@ -207,6 +219,7 @@ class transaction(models.Model):
 
     @api.one
     @api.depends(
+        'partner_id',
         'preventive_line_ids',
         'preventive_line_ids.definitive_line_ids',
         'preventive_line_ids.definitive_line_ids.supplier_id',
@@ -216,6 +229,8 @@ class transaction(models.Model):
             [('preventive_line_id.transaction_id', '=', self.id)])
         supplier_ids = [
             x.supplier_id.id for x in definitive_lines]
+        # if self.partner_id:
+        #     supplier_ids.append(self.partner_id.id)
         self.supplier_ids = self.env['res.partner']
         self.supplier_ids = supplier_ids
 
@@ -230,61 +245,83 @@ class transaction(models.Model):
             x.budget_position_id.id for x in self.preventive_line_ids]
         self.budget_position_ids = budget_position_ids
 
-    @api.one
-    @api.depends('refund_voucher_ids')
-    def _refund_voucher_count(self):
-        self.refund_voucher_count = len(self.refund_voucher_ids)
-
-    @api.one
-    @api.depends('payment_order_ids')
-    def _payment_order_count(self):
-        self.payment_order_count = len(self.payment_order_ids)
-
-    @api.one
-    @api.depends(
-        'advance_preventive_line_ids',
-        'refund_voucher_ids',
-        'refund_voucher_ids.state',
-        'invoice_ids',
-    )
-    def _get_advance_amounts(self):
-        refund_voucher_amount = sum(
-            x.amount for x in self.refund_voucher_ids if x.state == 'posted')
-        self.refund_voucher_amount = refund_voucher_amount
-        self.advance_remaining_amount = self.payment_order_amount - \
-            refund_voucher_amount - self.paid_amount
+    # @api.one
+    # @api.depends(
+    #     'advance_preventive_line_ids',
+    #     'voucher_ids',
+    #     'voucher_ids.state',
+    #     # 'refund_voucher_ids',
+    #     # 'refund_voucher_ids.state',
+    #     'invoice_ids',
+    # )
+    # def _get_advance_amounts(self):
+    #     # refund_voucher_amount = sum(
+    #     #     x.amount for x in self.refund_voucher_ids if x.state == 'posted')
+    #     # self.refund_voucher_amount = refund_voucher_amount
+    #     # self.to_return_amount = False
+    #     # TODO
+    #     self.to_return_amount = self.payment_order_amount - \
+    #         self.paid_amount
 
     @api.one
     @api.depends(
         'preventive_line_ids',
-        'payment_order_ids',
-        'payment_order_ids.state',
-        'total',
+        'voucher_ids',
+        'voucher_ids.state',
     )
     def _get_amounts(self):
         preventive_amount = sum([
             preventive.preventive_amount
             for preventive in self.preventive_line_ids])
-        payment_order_amount = sum(
-            x.total for x in self.payment_order_ids if x.state == 'done')
-        # definitive_amount = sum([
-        #     preventive.definitive_amount
-        #     for preventive in self.preventive_line_ids])
-        # invoiced_amount = sum([
-        #     preventive.invoiced_amount
-        #     for preventive in self.preventive_line_ids])
+        definitive_amount = sum([
+            preventive.definitive_amount
+            for preventive in self.preventive_line_ids])
+        invoiced_amount = sum([
+            preventive.invoiced_amount
+            for preventive in self.preventive_line_ids])
+        # TODO ver si esta nueva forma de calcularlos esta ok, si lo hacemos
+        # como antes habria que ver que no sea recursivo porque preventiev
+        # consulta a estos valores
+        to_pay_amount = sum(
+            x.to_pay_amount for x in self.voucher_ids if x.state in ['confirmed', 'posted'])
+        paid_amount = sum(
+            x.amount for x in self.voucher_ids if x.state == 'posted')
         # to_pay_amount = sum([
         #     preventive.to_pay_amount
         #     for preventive in self.preventive_line_ids])
-        paid_amount = sum([
-            preventive.paid_amount for preventive in self.definitive_line_ids])
-        self.remaining_amount = self.total - preventive_amount
-        self.payment_order_amount = payment_order_amount
+        # paid_amount = sum([
+        #     preventive.paid_amount for preventive in self.definitive_line_ids])
+
+        if self.type_id.with_advance_payment and self.state in ('draft', 'open'):
+            advance_amount = sum([
+                x.preventive_amount for x in self.advance_preventive_line_ids])
+            self.advance_amount = advance_amount
+            self.to_return_amount = advance_amount - invoiced_amount
+            preventive_amount = sum([
+                preventive.preventive_amount
+                for preventive in self.advance_preventive_line_ids])
+            definitive_amount = sum([
+                preventive.definitive_amount
+                for preventive in self.advance_preventive_line_ids])
+            invoiced_amount = sum([
+                preventive.invoiced_amount
+                for preventive in self.advance_preventive_line_ids])
+
+
         self.preventive_amount = preventive_amount
-        # self.definitive_amount = definitive_amount
-        # self.invoiced_amount = invoiced_amount
-        # self.to_pay_amount = to_pay_amount
+        self.definitive_amount = definitive_amount
+        self.invoiced_amount = invoiced_amount
+        self.to_pay_amount = to_pay_amount
         self.paid_amount = paid_amount
+
+    @api.one
+    @api.depends(
+        'preventive_line_ids',
+        'preventive_line_ids.preventive_amount',
+        )
+    def _get_total(self):
+        self.total = sum(
+            [x.preventive_amount for x in self.preventive_line_ids])
 
     @api.multi
     def action_cancel_draft(self):
@@ -297,6 +334,10 @@ class transaction(models.Model):
     @api.one
     def check_closure(self):
         # Check preventive lines
+        if not self.preventive_line_ids:
+                raise Warning(
+                    _('To close a transaction there must be at least one preventive line'))
+
         for line in self.preventive_line_ids:
             if line.preventive_amount != line.definitive_amount or line.preventive_amount != line.invoiced_amount or line.preventive_amount != line.to_pay_amount or line.preventive_amount != line.paid_amount:
                 raise Warning(
@@ -304,50 +345,28 @@ class transaction(models.Model):
 
         # Check advance transactions
         if self.type_id.with_advance_payment:
-            if self.advance_remaining_amount != 0.0:
+            if self.to_return_amount != 0.0:
                 raise Warning(
                     _('To close a transaction with advance payment, Payment Order Amounts - Refund Amounts should be equal to Definitive Amounts'))
 
 # Constraints
     @api.one
     @api.constrains(
-        'type_id', 'advance_preventive_line_ids', 'preventive_line_ids')
+        'type_id', 'advance_preventive_line_ids', 'advance_voucher_ids')
     def _check_advance_preventive_lines(self):
+        print 'self.type_id.with_advance_payment', self.type_id.with_advance_payment
         if self.type_id.with_advance_payment:
-            payment_order_amount = sum(
-                x.total for x in self.payment_order_ids if x.state == 'done')
-            preventive_amount = sum(
-                [x.preventive_amount for x in
-                    self.preventive_line_ids])
-            if payment_order_amount < preventive_amount:
+            not_cancel_amount = sum(
+                x.to_pay_amount for x in self.advance_voucher_ids if x.state != 'cancel')
+            print 'not_cancel_amount', not_cancel_amount
+            print 'self.advance_amount', self.advance_amount
+            if not_cancel_amount > self.advance_amount:
                 raise Warning(
                     _("In transactions with 'Advance Payment', \
                         Settlement Amount can't be greater than Payment Orders Amount"))
 
     @api.one
-    @api.constrains('total', 'preventive_line_ids')
-    def _check_preventive_amount(self):
-        conf_preventive_amount = sum(
-            [x.preventive_amount for x in
-                self.preventive_line_ids])
-        if self.total < conf_preventive_amount:
-            raise Warning(
-                _("Preventive Amounts can't be \
-                    greater than Transaction Total"))
-
-    @api.one
-    @api.constrains('total', 'advance_preventive_line_ids')
-    def _check_advance_preventive_amount(self):
-        conf_preventive_amount = sum(
-            [x.preventive_amount for x in
-                self.advance_preventive_line_ids])
-        if self.total < conf_preventive_amount:
-            raise Warning(
-                _("Avance Preventive Amounts can't be \
-                    greater than Transaction Total"))
-
-    @api.one
-    @api.constrains('total', 'expedient_id')
+    @api.constrains('preventive_line_ids', 'type_id', 'expedient_id')
     def _check_transaction_type(self):
         if self.type_id.with_amount_restriction:
             restriction = self.env[
@@ -359,7 +378,7 @@ class transaction(models.Model):
                 if restriction.to_amount < self.total or \
                         restriction.from_amount > self.total:
                     raise Warning(
-                        _("Total and Date are not compatible with \
+                        _("Total, Type and Date are not compatible with \
                             Transaction Amount Restrictions"))
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

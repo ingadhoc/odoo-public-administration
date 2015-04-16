@@ -9,7 +9,7 @@
                 <search string="Budget">
                     <field name="name" string="Name"
                             />
-                    <field name="year" string="Year"
+                    <field name="fiscalyear_id" string="Year"
                             />
                     <field name="income_account_id" string="Income Account"
                             />
@@ -51,6 +51,7 @@
                         <button name="sgn_cancel"
                             states="closed,draft,open,pre_closed"
                             string="Cancel"
+                            groups="base.group_no_one"
                             />
                         <field name="state" widget="statusbar"
                             statusbar_colors='{}'
@@ -63,7 +64,7 @@
                         <group>
                             <group>
                                 <field name="name"/>
-                                <field name="year"/>
+                                <field name="fiscalyear_id"/>
                                 <field name="expedient_id"/>
                                 <field name="income_account_id"/>
                                 <field name="company_id" groups="base.group_multi_company"/>
@@ -84,7 +85,7 @@
                                         <field name="name"/>
                                         <field name="type" invisible="1"/>
                                         <field name="amount" attrs="{'invisible':[('budget_assignment_allowed','=',False)]}"/>
-                                        <field name="draft_amount"/>
+                                        <!-- <field name="draft_amount"/> -->
                                         <field name="preventive_amount"/>
                                         <field name="definitive_amount"/>
                                         <field name="to_pay_amount"/>
@@ -129,7 +130,7 @@
                     >
                     <field name="name"
                         />
-                    <field name="year"
+                    <field name="fiscalyear_id"
                         />
                     <field name="income_account_id"
                         />

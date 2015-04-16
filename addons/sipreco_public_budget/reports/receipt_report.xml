@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+        <record id="l10n_ar_aeroo_voucher.action_aeroo_report_ar_voucher" model="ir.actions.report.xml">
+            <field name="model">account.voucher</field>
+            <field name="report_rml">sipreco_public_budget/reports/payment_order.odt</field>
+            <field name="print_logo">no_logo</field> <!-- Or 'company_logo' or ''  -->
+            <field name="use_background_image" eval="False"/>
+        </record>
+    </data>
+</openerp>
