@@ -5,7 +5,7 @@ account_account_3,11,ACTIVO CORRIENTE,account_account_2,False,account.data_accou
 account_account_4,111,DISPONIBILIDADES,account_account_3,False,account.data_account_type_view,view
 account_account_5,1111,CAJAS,account_account_4,False,account.data_account_type_view,view
 account_account_6,1111010,Caja pesos,account_account_5,False,account.data_account_type_cash,liquidity
-account_account_10,1111030,Fondo fijo,account_account_5,False,account.data_account_type_cash,liquidity
+account_account_10,1111030,Fondo fijo,account_account_5,False,account.data_account_type_payable,payable
 account_account_11,1111040,Valores en cartera,account_account_5,False,account.data_account_type_cash,liquidity
 account_account_12,1112,BANCOS,account_account_4,False,account.data_account_type_view,view
 account_account_13,1112010-aux,Banco Municipal Cuenta Corriente,account_account_12,False,account.data_account_type_bank,liquidity

@@ -3,7 +3,7 @@ from openerp import models, fields, api, _
 from openerp.exceptions import Warning
 
 
-class voucher(models.Model):
+class account_voucher(models.Model):
     """"""
 
     _name = 'account.voucher'
@@ -91,27 +91,46 @@ class voucher(models.Model):
                 partner_ids = self.transaction_id.supplier_ids
         self.partner_ids = partner_ids
 
-    @api.one
-    @api.onchange(
-        'transaction_id',
-        )
-    def on_change_transaction(self):
-        self.partner_id = self.partner_ids and self.partner_ids[0] or False
+    # @api.one
+    # @api.onchange(
+    #     'transaction_id',
+    #     )
+    # def on_change_transaction(self):
+    #     self.partner_id = self.partner_ids and self.partner_ids[0] or False
 
-    @api.multi
-    def get_transaction_move_lines(self, ttype, partner_id, transaction_id):
-        if ttype == 'payment':
-            account_type = 'payable'
-        else:
-            account_type = 'receivable'
-        move_lines = self.env['account.move.line'].search([
-            ('state', '=', 'valid'),
-            ('account_id.type', '=', account_type),
-            ('reconcile_id', '=', False),
-            ('partner_id', '=', partner_id),
-            ('invoice.transaction_id', '=', transaction_id),
-            ])
-        return move_lines
+    # @api.multi
+    # def get_transaction_move_lines(self, ttype, partner_id, transaction_id):
+    #     if ttype == 'payment':
+    #         account_type = 'payable'
+    #     else:
+    #         account_type = 'receivable'
+    #     move_lines = self.env['account.move.line'].search([
+    #         ('state', '=', 'valid'),
+    #         ('account_id.type', '=', account_type),
+    #         ('reconcile_id', '=', False),
+    #         ('partner_id', '=', partner_id),
+    #         ('invoice.transaction_id', '=', transaction_id),
+    #         ])
+    #     return move_lines
+
+    def writeoff_move_line_get(
+            self, cr, uid, voucher_id, line_total, move_id, name,
+            company_currency, current_currency, context=None):
+        """Cambiamos la cuenta que usa el adelanto para utilizar aquella que
+        viene de la transaccion de adelanto"""
+        res = super(account_voucher, self).writeoff_move_line_get(
+            cr, uid, voucher_id, line_total, move_id, name,
+            company_currency, current_currency, context=context)
+        voucher = self.browse(cr, uid, voucher_id, context=context)
+
+        if res and voucher.transaction_with_advance_payment:
+            account = voucher.transaction_id.type_id.advance_account_id
+            if not account:
+                raise Warning(_(
+                    'In payment of advance transaction type, you need to\
+                    an advance account in transaction type!'))
+            res['account_id'] = account.id
+        return res
 
     # @api.onchange('dummy_journal_id')
     # def change_dummy_journal_id(self):

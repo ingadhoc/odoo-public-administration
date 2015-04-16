@@ -103,7 +103,7 @@ class transaction(models.Model):
         inverse_name='transaction_id',
         string='Advance Preventive Lines',
         readonly=True,
-        states={'draft': [('readonly', False)], 'open': [('readonly', False)]},
+        states={'open': [('readonly', False)]},
         context={'default_advance_line': 1, 'default_preventive_status': 'confirmed', 'advance_line': 1},
         domain=[('advance_line', '=', True)]
         )

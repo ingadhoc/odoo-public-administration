@@ -27,8 +27,10 @@ class transaction_type(models.Model):
         'account.account',
         string='Advance Account',
         context={'default_type': 'other'},
-        domain=[('type', '=', 'other'), ('user_type.report_type', 'in', ['asset'])],
-        help='This account will be used on advance payments',
+        # we use payable accounts because we need them in vouchers of type payment
+        domain=[('type', 'in', ('payable'))],
+        help='This account will be used on advance payments. Must be a payable account.',
+        # domain=[('type', '=', 'other'), ('user_type.report_type', 'in', ['asset'])],
         )
     advance_journal_id = fields.Many2one(
         'account.journal',
