@@ -149,7 +149,11 @@ class budget_position(models.Model):
         if self.type == 'normal':
             operator = '='
 
-        domain = [('budget_position_id', operator, self.id)]
+        domain = [
+            ('budget_position_id', operator, self.id),
+            ('transaction_id.state', 'in', ('open', 'closed')),
+            ('affects_budget', '=', True),
+            ]
 
         budget_id = self._context.get('budget_id', False)
         # we add budget_assignment_allowed condition to optimize
@@ -177,14 +181,12 @@ class budget_position(models.Model):
             domain
             )
 
-        draft_amounts = [
-            line.preventive_amount
-            for line
-            in draft_preventive_lines]
-
         preventive_amount = sum(
             [line.preventive_amount for line in active_preventive_lines])
-        self.draft_amount = sum(draft_amounts)
+        self.draft_amount = sum([
+            line.preventive_amount
+            for line
+            in draft_preventive_lines])
         self.preventive_amount = preventive_amount
         self.definitive_amount = sum(
             [line.definitive_amount for line in active_preventive_lines])

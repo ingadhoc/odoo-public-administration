@@ -127,7 +127,7 @@ class public_budget_definitive_make_invoice(models.TransientModel):
             [('preventive_line_id.transaction_id', '=', self.transaction_id.id)])
         supplier_ids = []
         for line in definitive_lines:
-            # TODO ver si hacemos que residual_amount sea stored y podemos
+            # No lo buscamos arriba porque no es un campo stored
             if line.residual_amount > 0:
                 supplier_ids.append(line.supplier_id.id)
         self.supplier_ids = supplier_ids
@@ -139,17 +139,15 @@ class public_budget_definitive_make_invoice(models.TransientModel):
             'public_budget.definitive.make.invoice.detail']
         transaction_id = self.env.context.get('active_id', False)
         if transaction_id:
-            # TODO ver si hacemos que residual_amount sea stored y podemos
-            # buscar por este
             definitive_lines = self.env[
                 'public_budget.definitive_line'].search([
                     ('transaction_id', '=', transaction_id),
                     ('supplier_id', '=', self.supplier_id.id),
                     ('preventive_line_id.budget_id', '=', self.budget_id.id),
-                    # ('residual_amount', '>', 0.0)
                 ])
             lines = []
             for line in definitive_lines:
+                # No lo buscamos arriba porque no es un campo stored
                 if line.residual_amount:
                     values = {
                         'definitive_line_id': line.id,
@@ -174,10 +172,6 @@ class public_budget_definitive_make_invoice(models.TransientModel):
                 raise Warning(
                     _("On Advance Transactions, transaction advance type must have and advance account configured!"))
             advance_account_id = tran_type.advance_account_id.id
-            # if not tran_type.advance_journal_id:
-            #     raise Warning(
-            #         _("On Advance Transactions, transaction advance type must have and advance journal configured!"))
-            # advance_journal_id = tran_type.advance_journal_id.id
             # Check advance remaining amount
             total_to_invoice_amount = sum([
                 x.to_invoice_amount for x in wizard.line_ids])

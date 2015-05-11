@@ -63,6 +63,11 @@ class preventive_line(models.Model):
         string='States',
         compute='_get_state'
         )
+    affects_budget = fields.Boolean(
+        'Affects Budget?',
+        store=True,
+        compute='_get_affects_budget',
+        )
     transaction_id = fields.Many2one(
         'public_budget.transaction',
         ondelete='cascade',
@@ -106,6 +111,31 @@ class preventive_line(models.Model):
         if self.invoiced_amount:
             state = 'invoiced'
         self.state = state
+
+    @api.one
+    @api.depends(
+        'transaction_id.state',
+        'transaction_id.type_id.with_advance_payment',
+        'advance_line',
+    )
+    def _get_affects_budget(self):
+        """Marcamos las lineas preventivas que deben ser tenidas en cuenta en
+        el budget de acuerdo a el estado de la transaccion y a sí son lineas
+        de adelanto o no.
+        """
+        affects_budget = False
+        with_advance_payment = self.transaction_id.type_id.with_advance_payment
+        transaction_state = self.transaction_id.state
+        if with_advance_payment:
+            if self.advance_line and transaction_state == 'open':
+                affects_budget = True
+            elif not self.advance_line and transaction_state == 'closed':
+                affects_budget = True
+        else:
+            if not self.advance_line and transaction_state in (
+                    'open', 'closed'):
+                affects_budget = True
+        self.affects_budget = affects_budget
 
     @api.one
     @api.depends(

@@ -196,16 +196,6 @@ class transaction(models.Model):
         context={'default_type': 'payment'},
         states={'open': [('readonly', False)]},
         )
-    # TODO ver si los borramos, vamos a usar los de payment porque si no no
-    # concilia una cosa con otra. Si borramos tmb borrar el wizard
-    # tambien borrar en otros lugares que aparece refund_voucher_ids y refund_voucher_amount
-    # refund_voucher_ids = fields.One2many(
-    #     'account.voucher',
-    #     'transaction_id',
-    #     string='Vouchers',
-    #     context={'default_type': 'receipt'},
-    #     domain=[('type', '=', 'receipt')]
-    #     )
     advance_return_ids = fields.One2many(
         'public_budget.advance_return',
         'transaction_id',
@@ -245,24 +235,6 @@ class transaction(models.Model):
             x.budget_position_id.id for x in self.preventive_line_ids]
         self.budget_position_ids = budget_position_ids
 
-    # @api.one
-    # @api.depends(
-    #     'advance_preventive_line_ids',
-    #     'voucher_ids',
-    #     'voucher_ids.state',
-    #     # 'refund_voucher_ids',
-    #     # 'refund_voucher_ids.state',
-    #     'invoice_ids',
-    # )
-    # def _get_advance_amounts(self):
-    #     # refund_voucher_amount = sum(
-    #     #     x.amount for x in self.refund_voucher_ids if x.state == 'posted')
-    #     # self.refund_voucher_amount = refund_voucher_amount
-    #     # self.to_return_amount = False
-    #     # TODO
-    #     self.to_return_amount = self.payment_order_amount - \
-    #         self.paid_amount
-
     @api.one
     @api.depends(
         'preventive_line_ids',
@@ -292,21 +264,21 @@ class transaction(models.Model):
         # paid_amount = sum([
         #     preventive.paid_amount for preventive in self.definitive_line_ids])
 
-        if self.type_id.with_advance_payment and self.state in ('draft', 'open'):
+        if self.type_id.with_advance_payment:
             advance_amount = sum([
                 x.preventive_amount for x in self.advance_preventive_line_ids])
             self.advance_amount = advance_amount
-            self.to_return_amount = advance_amount - invoiced_amount
-            preventive_amount = sum([
-                preventive.preventive_amount
-                for preventive in self.advance_preventive_line_ids])
-            definitive_amount = sum([
-                preventive.definitive_amount
-                for preventive in self.advance_preventive_line_ids])
-            invoiced_amount = sum([
-                preventive.invoiced_amount
-                for preventive in self.advance_preventive_line_ids])
-
+            self.to_return_amount = paid_amount - invoiced_amount
+            if self.state in ('draft', 'open'):
+                preventive_amount = sum([
+                    preventive.preventive_amount
+                    for preventive in self.advance_preventive_line_ids])
+                definitive_amount = sum([
+                    preventive.definitive_amount
+                    for preventive in self.advance_preventive_line_ids])
+                invoiced_amount = sum([
+                    preventive.invoiced_amount
+                    for preventive in self.advance_preventive_line_ids])
 
         self.preventive_amount = preventive_amount
         self.definitive_amount = definitive_amount
