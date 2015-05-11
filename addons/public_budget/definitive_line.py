@@ -37,10 +37,6 @@ class definitive_line(models.Model):
         string='Budget Position',
         readonly=True
         )
-    full_imputation = fields.Boolean(
-        string='Full Imputation',
-        compute='_get_full_imputation'
-        )
     residual_amount = fields.Float(
         string='Residual Amount',
         compute='_get_amounts'
@@ -56,9 +52,6 @@ class definitive_line(models.Model):
     invoiced_amount = fields.Float(
         string='Invoiced Amount',
         compute='_get_amounts'
-        )
-    to_invoice_amount = fields.Float(
-        string='To Invoice'
         )
     transaction_id = fields.Many2one(
         comodel_name='public_budget.transaction',
@@ -105,11 +98,6 @@ class definitive_line(models.Model):
     ]
 
     @api.one
-    def _get_full_imputation(self):
-        """Dummy function for dummy computed field that is used in a wizard"""
-        self.full_imputation = False
-
-    @api.one
     def _get_state(self):
         if self.invoice_line_ids:
             self.state = 'invoiced'
@@ -124,25 +112,6 @@ class definitive_line(models.Model):
         if 'invoice_line_ids' in vals:
             vals.pop('invoice_line_ids')
         return super(definitive_line, self).write(vals)
-
-    @api.one
-    @api.onchange('full_imputation')
-    def _onchange_full_imputation(self):
-        """This is used in the wizard to generate the invoice"""
-        if self.full_imputation:
-            self.to_invoice_amount = self.residual_amount
-        else:
-            self.to_invoice_amount = False
-
-    @api.one
-    @api.constrains(
-        'residual_amount',
-        'to_invoice_amount'
-    )
-    def _check_number(self):
-        if self.residual_amount < self.to_invoice_amount:
-            raise Warning(
-                _("To Invoice Amount can't be greater than Residual Amount"))
 
     @api.one
     def unlink(self):

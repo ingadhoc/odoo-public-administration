@@ -3,6 +3,42 @@ from openerp import models, fields, api, _
 from openerp.exceptions import Warning
 
 
+class public_budget_definitive_make_invoice_detail(models.TransientModel):
+    _name = "public_budget.definitive.make.invoice.detail"
+
+    definitive_make_invoice_id = fields.Many2one(
+        'public_budget.definitive.make.invoice',
+        'Def Make Invoice',
+    )
+    definitive_line_id = fields.Many2one(
+        'public_budget.definitive_line',
+        'Def Make Invoice',
+    )
+    residual_amount = fields.Float(
+        related='definitive_line_id.residual_amount',
+    )
+    to_invoice_amount = fields.Float(
+        'Amount',
+    )
+    full_imputation = fields.Boolean(
+        'Full Imputation?',
+    )
+
+    @api.onchange('full_imputation')
+    def change_full_imputation(self):
+        self.to_invoice_amount = self.definitive_line_id.residual_amount
+
+    @api.one
+    @api.constrains(
+        'residual_amount',
+        'to_invoice_amount'
+    )
+    def _check_number(self):
+        if self.residual_amount < self.to_invoice_amount:
+            raise Warning(
+                _("To Invoice Amount can't be greater than Residual Amount"))
+
+
 class public_budget_definitive_make_invoice(models.TransientModel):
     _name = "public_budget.definitive.make.invoice"
     _description = "Transaction Definitive Make Invoice"
@@ -34,47 +70,47 @@ class public_budget_definitive_make_invoice(models.TransientModel):
     invoice_date = fields.Date(
         'Invoice Date',
         required=True
-        )
+    )
     supplier_invoice_number = fields.Char(
         string='Supplier Invoice Number',
         help="The reference of this invoice as provided by the supplier.",
         required=True,
-        )
+    )
     company_id = fields.Many2one(
         'res.company',
         string='Company',
         default=_get_default_company
-        )
+    )
     supplier_ids = fields.Many2many(
         'res.partner',
         string='Suppliers',
         compute="_get_supplier_ids"
-        )
+    )
     supplier_id = fields.Many2one(
         'res.partner',
         string='Supplier',
         required=True,
         domain=[('supplier', '=', True)],
         context={'default_supplier': True}
-        )
-    definitive_line_ids = fields.Many2many(
-        'public_budget.definitive_line',
+    )
+    line_ids = fields.One2many(
+        'public_budget.definitive.make.invoice.detail',
+        'definitive_make_invoice_id',
         string='Lines',
-        compute='_compute_lines'
-        )
+    )
     journal_id = fields.Many2one(
         'account.journal',
         string='Journal',
         required=True,
         domain="[('type', '=', 'purchase'),('company_id','=',company_id)]",
         default=_get_default_journal
-        )
+    )
     transaction_id = fields.Many2one(
         'public_budget.transaction',
         'Transaction',
         default=_get_transaction_id,
         required=True
-        )
+    )
     budget_id = fields.Many2one(
         'public_budget.budget',
         'Budget',
@@ -97,23 +133,30 @@ class public_budget_definitive_make_invoice(models.TransientModel):
         self.supplier_ids = supplier_ids
 
     @api.one
-    @api.depends('supplier_id', 'budget_id')
+    @api.onchange('supplier_id', 'budget_id')
     def _compute_lines(self):
-        self.definitive_line_ids = definitive_lines = self.env[
-            'public_budget.definitive_line']
+        self.line_ids = self.env[
+            'public_budget.definitive.make.invoice.detail']
         transaction_id = self.env.context.get('active_id', False)
         if transaction_id:
             # TODO ver si hacemos que residual_amount sea stored y podemos
             # buscar por este
-            definitive_lines = definitive_lines.search([
-                ('transaction_id', '=', transaction_id),
-                ('supplier_id', '=', self.supplier_id.id),
-                ('preventive_line_id.budget_id', '=', self.budget_id.id),
-                # ('residual_amount', '>', 0.0)
-            ])
-            # self.definitive_line_ids = definitive_lines.ids
-            self.definitive_line_ids = [
-                x.id for x in definitive_lines if x.residual_amount > 0.0]
+            definitive_lines = self.env[
+                'public_budget.definitive_line'].search([
+                    ('transaction_id', '=', transaction_id),
+                    ('supplier_id', '=', self.supplier_id.id),
+                    ('preventive_line_id.budget_id', '=', self.budget_id.id),
+                    # ('residual_amount', '>', 0.0)
+                ])
+            # self.line_ids = definitive_lines.ids
+            lines = []
+            for line in definitive_lines:
+                values = {
+                    'definitive_line_id': line.id,
+                    'definitive_make_invoice_id': self.id,
+                }
+                lines.append((0, _, values))
+            self.line_ids = lines
 
     def make_invoices(self, cr, uid, ids, context=None):
         mod_obj = self.pool.get('ir.model.data')
@@ -137,7 +180,7 @@ class public_budget_definitive_make_invoice(models.TransientModel):
             # advance_journal_id = tran_type.advance_journal_id.id
             # Check advance remaining amount
             total_to_invoice_amount = sum([
-                x.to_invoice_amount for x in wizard.definitive_line_ids])
+                x.to_invoice_amount for x in wizard.line_ids])
             # TODO  verificar que se debe comparar con este campo
             if total_to_invoice_amount > wizard.transaction_id.to_return_amount:
                 raise Warning(
@@ -146,14 +189,15 @@ class public_budget_definitive_make_invoice(models.TransientModel):
         if context is None:
             context = {}
         inv_lines = []
-        for line in wizard.definitive_line_ids:
+        for line in wizard.line_ids:
+            definitive_line = line.definitive_line_id
             if line.to_invoice_amount:
                 line_vals = {
-                    'name': line.budget_position_id.name,
+                    'name': definitive_line.budget_position_id.name,
                     'price_unit': line.to_invoice_amount,
                     'quantity': 1,
-                    'definitive_line_id': line.id,
-                    'account_id': line.preventive_line_id.account_id.id,
+                    'definitive_line_id': definitive_line.id,
+                    'account_id': definitive_line.preventive_line_id.account_id.id,
                     # 'discount': ,
                     # 'product_id': line.product_id.id or False,
                     # 'uos_id': line.uos_id.id or False,
@@ -207,7 +251,8 @@ class public_budget_definitive_make_invoice(models.TransientModel):
             cr, uid, 'account', 'action_invoice_tree2')
         id = result and result[1] or False
         result = act_obj.read(cr, uid, [id], context=context)[0]
-        res = mod_obj.get_object_reference(cr, uid, 'account', 'invoice_supplier_form')
+        res = mod_obj.get_object_reference(
+            cr, uid, 'account', 'invoice_supplier_form')
         result['views'] = [(res and res[1] or False, 'form')]
         result['res_id'] = invoice_id
         # result[
