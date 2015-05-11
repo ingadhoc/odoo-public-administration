@@ -95,7 +95,7 @@ class budget(models.Model):
         'budget_id',
         string='Modifications',
         readonly=True,
-        states={'open': [('readonly', False)]},
+        states={'draft': [('readonly', False)], 'open': [('readonly', False)]},
         domain=[('initial_approval', '=', False)]
         )
     budget_detail_ids = fields.One2many(
