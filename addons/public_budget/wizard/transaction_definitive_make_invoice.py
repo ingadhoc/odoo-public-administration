@@ -148,14 +148,14 @@ class public_budget_definitive_make_invoice(models.TransientModel):
                     ('preventive_line_id.budget_id', '=', self.budget_id.id),
                     # ('residual_amount', '>', 0.0)
                 ])
-            # self.line_ids = definitive_lines.ids
             lines = []
             for line in definitive_lines:
-                values = {
-                    'definitive_line_id': line.id,
-                    'definitive_make_invoice_id': self.id,
-                }
-                lines.append((0, _, values))
+                if line.residual_amount:
+                    values = {
+                        'definitive_line_id': line.id,
+                        'definitive_make_invoice_id': self.id,
+                    }
+                    lines.append((0, _, values))
             self.line_ids = lines
 
     def make_invoices(self, cr, uid, ids, context=None):
