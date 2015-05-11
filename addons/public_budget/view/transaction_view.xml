@@ -103,6 +103,7 @@
                                 <field name="preventive_line_ids"/>
                             </page>
                             <page string="Payment Orders and Refunds" attrs="{'invisible':[('type_with_advance_payment','=',False)]}">
+                                <button class="oe_link" string="Create Payment Order" states="open" type="object" name="action_new_voucher"/>
                                 <field name="advance_voucher_ids" context="{'default_transaction_id':id, 'default_partner_id': partner_id, 'default_type': 'payment', 'form_view_ref': 'account_voucher.view_vendor_payment_form','tree_view_ref': 'account_voucher.view_voucher_tree'}"/>
                             </page>
                             <page string="Invoices">
@@ -113,6 +114,7 @@
                                 <field name="advance_return_ids"/>
                             </page>
                             <page string="Payment Orders" attrs="{'invisible':[('type_with_advance_payment','=',True)]}">
+                                <button class="oe_link" string="Create Payment Order" states="open" type="object" name="action_new_voucher"/>
                                 <field name="voucher_ids" context="{'default_type': 'payment', 'default_transaction_id':id, 'form_view_ref': 'account_voucher.view_vendor_payment_form','tree_view_ref': 'account_voucher.view_voucher_tree'}"/>
                             </page>
                             <page string="Notes">

@@ -353,4 +353,28 @@ class transaction(models.Model):
                         _("Total, Type and Date are not compatible with \
                             Transaction Amount Restrictions"))
 
+    @api.multi
+    def action_new_voucher(self):
+        '''
+        This function returns an action that display a new voucher
+        '''
+        self.ensure_one()
+        action = self.env['ir.model.data'].xmlid_to_object(
+            'account_voucher.action_vendor_payment')
+
+        if not action:
+            return False
+
+        res = action.read()[0]
+
+        form_view_id = self.env['ir.model.data'].xmlid_to_res_id(
+            'account_voucher.view_vendor_payment_form')
+        res['views'] = [(form_view_id, 'form')]
+
+        res['context'] = {
+            'default_transaction_id': self.id,
+            'default_partner_id': self.partner_id and self.partner_id.id or False,
+            'default_type': 'payment',
+            }
+        return res
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
