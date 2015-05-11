@@ -23,7 +23,7 @@ class account_voucher(models.Model):
         default=_get_default_budget,
         readonly=True,
         domain=[('state', '=', 'open')],
-        # states={'draft': [('readonly', False)]},
+        states={'draft': [('readonly', False)]},
         )
     expedient_id = fields.Many2one(
         'public_budget.expedient',
