@@ -11,7 +11,7 @@ Sipreco Project
 Installs All Sipreco Project Dependencies
 # 01 - Pasos alta BD Sipreco
 # =============================
-# Cambiar formato de fecha en lenguaje Español
+# Cambiar formato del separador por "[3,3,1]"
 # Importar archivo es_AR.po, en carpeta sipreco_set_up_data > l18i
 # Nombre de idioma: Cualquier texto
 # Código: es_AR
