@@ -19,7 +19,6 @@ import budget_detail
 import budget_prec_detail
 import preventive_line
 import definitive_line
-import account
 import transaction
 import budget_position_category
 import budget

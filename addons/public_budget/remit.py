@@ -74,9 +74,6 @@ class remit(models.Model):
         string='Expedients'
         )
 
-    _constraints = [
-    ]
-
     @api.one
     @api.constrains('state')
     def check_state(self):
@@ -95,7 +92,7 @@ class remit(models.Model):
 
     @api.multi
     def action_cancel_in_transit(self):
-        # go from canceled state to draft state
+        """ go from canceled state to draft state"""
         self.write({'state': 'in_transit'})
         self.delete_workflow()
         self.create_workflow()

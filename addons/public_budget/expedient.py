@@ -85,8 +85,6 @@ class expedient(models.Model):
         compute='_get_current_location'
         )
     user_location_ids = fields.Many2many(
-        comodel_name='public_budget.location',
-        string='User Locations',
         related='user_id.location_ids'
         )
     user_id = fields.Many2one(
@@ -128,9 +126,6 @@ class expedient(models.Model):
         readonly=True,
         states={'in_transit': [('readonly', False)]}
         )
-
-    _constraints = [
-    ]
 
     @api.one
     @api.depends(
@@ -189,7 +184,7 @@ class expedient(models.Model):
 
     @api.multi
     def action_cancel_open(self):
-        # go from canceled state to draft state
+        """ go from canceled state to draft state"""
         self.write({'state': 'open'})
         self.delete_workflow()
         self.create_workflow()

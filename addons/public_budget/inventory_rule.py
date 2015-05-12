@@ -22,15 +22,13 @@ class inventory_rule(models.Model):
         'res.company',
         string='Company',
         required=True,
-        default=lambda self: self.env['res.company']._company_default_get('public_budget.inventory_rule')
+        default=lambda self: self.env['res.company']._company_default_get(
+            'public_budget.inventory_rule')
         )
     company_id = fields.Many2one(
         'res.company',
         string='Company',
         required=True
         )
-
-    _constraints = [
-    ]
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

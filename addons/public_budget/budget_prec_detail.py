@@ -8,7 +8,6 @@ class budget_prec_detail(models.Model):
 
     _name = 'public_budget.budget_prec_detail'
     _description = 'Budget Preclose Detail'
-
     _order = "order_int"
 
     budget_position_id = fields.Many2one(
@@ -64,8 +63,5 @@ class budget_prec_detail(models.Model):
         string='budget_id',
         required=True
         )
-
-    _constraints = [
-    ]
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

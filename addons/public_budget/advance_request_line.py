@@ -44,9 +44,6 @@ class advance_request_line(models.Model):
         string='advance_line_ids'
         )
 
-    _constraints = [
-    ]
-
     @api.one
     @api.depends(
         'amount',

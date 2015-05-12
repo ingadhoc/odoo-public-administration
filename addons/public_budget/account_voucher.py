@@ -11,7 +11,6 @@ class account_voucher(models.Model):
     _inherit = ['account.voucher']
 
     type_with_advance_payment = fields.Boolean(
-        string='With advance payment?',
         readonly=True,
         related='transaction_id.type_id.with_advance_payment'
         )
@@ -22,9 +21,6 @@ class account_voucher(models.Model):
         'public_budget.transaction',
         string='Transaction'
         )
-
-    _constraints = [
-    ]
 
     partner_ids = fields.Many2many(
         'res.partner',

@@ -16,7 +16,8 @@ class account_move_line(models.Model):
 
 class invoice(models.Model):
     """"""
-# TODO validar que la factura no se pueda validar en un fiscalyear distinto al del budget id
+    # TODO validar que la factura
+    # no se pueda validar en un fiscalyear distinto al del budget id
     _name = 'account.invoice'
     _inherits = {}
     _inherit = ['account.invoice']
@@ -37,11 +38,8 @@ class invoice(models.Model):
         string='To Pay Amount',
         digits=dp.get_precision('Account'),
         compute='_compute_to_pay_amount',
-        # store=True,
+        # store=True, #TODO ver si lo hacemos stored
         )
-
-    _constraints = [
-    ]
 
     @api.one
     @api.depends(

@@ -86,13 +86,6 @@ class budget_position(models.Model):
         string='Parent Right',
         select=True
         )
-    available_account_ids = fields.Many2many(
-        'account.account',
-        'public_budget_budget_position_ids_available_account_ids_rel',
-        'budget_position_id',
-        'account_id',
-        string='Available Accounts'
-        )
     child_ids = fields.One2many(
         'public_budget.budget_position',
         'parent_id',
@@ -103,7 +96,7 @@ class budget_position(models.Model):
         string='Parent',
         ondelete='cascade',
         context={'default_type':'view'},
-        domain=[('type','=','view')]
+        domain=[('type', '=', 'view')]
         )
     budget_detail_ids = fields.One2many(
         'public_budget.budget_detail',
@@ -124,11 +117,7 @@ class budget_position(models.Model):
         'public_budget.budget_position',
         string='Assignment Position',
         compute='_get_assignment_position',
-        # store=True, # TODO ver si la hacemos store
         )
-
-    _constraints = [
-    ]
 
     @api.one
     def _get_amounts(self):
@@ -161,8 +150,8 @@ class budget_position(models.Model):
             domain.append(('budget_id', '=', budget_id))
             modification_lines = self.env[
                 'public_budget.budget_modification_detail'].search([
-                ('budget_modification_id.budget_id', '=', budget_id),
-                ('budget_position_id', operator, self.id)])
+                    ('budget_modification_id.budget_id', '=', budget_id),
+                    ('budget_position_id', operator, self.id)])
             modification_amounts = [line.amount for line in modification_lines]
             initial_lines = self.env['public_budget.budget_detail'].search([
                 ('budget_id', '=', budget_id),
@@ -198,7 +187,6 @@ class budget_position(models.Model):
         day_of_year = datetime.now().timetuple().tm_yday
         projected_amount = preventive_amount / day_of_year * 365
         self.projected_amount = projected_amount
-
 
         if self.budget_assignment_allowed:
             projected_avg = amount and \
@@ -245,7 +233,8 @@ class budget_position(models.Model):
     )
     def _check_budget_assignment_allowed(self):
         # Check before seting budget_assignment_allowed false if position used
-        if not self.budget_assignment_allowed and (self.budget_modification_detail_ids or self.budget_detail_ids):
+        if not self.budget_assignment_allowed and (
+                self.budget_modification_detail_ids or self.budget_detail_ids):
             raise Warning(_("You can not set 'Budget Assignment Allowed' to false if budget position is\
                 being used in a budget detail or modification."))
         if self.budget_assignment_allowed:

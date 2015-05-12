@@ -37,12 +37,9 @@ class advance_request(models.Model):
         string='advance_request_line_ids'
         )
 
-    _constraints = [
-    ]
-
     @api.multi
     def action_cancel_draft(self):
-        # go from canceled state to draft state
+        """ go from canceled state to draft state"""
         self.write({'state': 'draft'})
         self.delete_workflow()
         self.create_workflow()

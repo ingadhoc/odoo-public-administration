@@ -60,23 +60,16 @@ class definitive_line(models.Model):
         required=True
         )
     transaction_id = fields.Many2one(
-        # TODO remove and clean code
-        # comodel_name='public_budget.transaction',
-        # string='Transaction',
         readonly=True,
         store=True,
         related='preventive_line_id.transaction_id'
         )
     budget_id = fields.Many2one(
-        # comodel_name='public_budget.budget',
-        # string='Budget',
         readonly=True,
         store=True,
         related='preventive_line_id.budget_id'
         )
     budget_position_id = fields.Many2one(
-        # comodel_name='public_budget.budget_position',
-        # string='Budget Position',
         readonly=True,
         store=True,
         related='preventive_line_id.budget_position_id'
@@ -95,9 +88,6 @@ class definitive_line(models.Model):
         readonly=True
         )
 
-    _constraints = [
-    ]
-
     @api.one
     def _get_state(self):
         if self.invoice_line_ids:
@@ -107,6 +97,7 @@ class definitive_line(models.Model):
 
     @api.one
     def write(self, vals):
+        # TODO ver si se puede sacar esto.
         # No le pude encontrar la vuelta de porque algunas veces al guardar las
         # definitives se va a setear esto en cero y termina borrando los
         # vinculos desde las invoice lines a las definitives

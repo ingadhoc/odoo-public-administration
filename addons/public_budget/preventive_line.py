@@ -17,9 +17,6 @@ class preventive_line(models.Model):
         domain=[
             ('type', 'in', ['other']),
             ('user_type.report_type', 'in', ['expense', 'asset'])]
-        # TODO borrar esto si no interesa restringir por los avialable accounts y borrar tmb los avialable accounts
-        # Hablamos con gonza de que a priori no lo usamos salvo que lo pidan
-        # domain="[('type', 'in', ['other']), ('user_type.report_type', 'in', ['expense', 'asset']), ('id', 'in', available_account_ids[0][2])]"
         )
     expedient_id = fields.Many2one(
         related='transaction_id.expedient_id',
@@ -51,12 +48,6 @@ class preventive_line(models.Model):
     paid_amount = fields.Float(
         string='Paid Amount',
         compute='_get_amounts'
-        )
-    available_account_ids = fields.Many2many(
-        comodel_name='account.account',
-        string='Available Accounts',
-        readonly=True,
-        related='budget_position_id.available_account_ids'
         )
     state = fields.Selection(
         selection=[('draft', 'Draft'), ('open', 'Open'), ('definitive', 'definitive'), ('invoiced', 'invoiced'), ('closed', 'closed'), ('cancel', 'Cancel')],
@@ -92,9 +83,6 @@ class preventive_line(models.Model):
         context={'default_type': 'normal'},
         domain=[('type', '=', 'normal')]
         )
-
-    _constraints = [
-    ]
 
     @api.one
     @api.depends(

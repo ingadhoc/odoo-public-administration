@@ -83,12 +83,10 @@ class transaction(models.Model):
         string='Note'
         )
     type_with_advance_payment = fields.Boolean(
-        string='With advance payment?',
         readonly=True,
         related='type_id.with_advance_payment'
         )
     type_with_salary_advance = fields.Boolean(
-        string='With salary advance?',
         readonly=True,
         related='type_id.with_salary_advance'
         )
@@ -149,24 +147,20 @@ class transaction(models.Model):
         string='Advance Amount',
         compute='_get_amounts'
         )
-    # refund_voucher_amount = fields.Float(
-    #     string='Refound Vouchers Amount',
-    #     compute='_get_amounts'
-    #     )
     company_id = fields.Many2one(
         'res.company',
         string='Company',
         readonly=True,
         required=True,
         states={'draft': [('readonly', False)]},
-        default=lambda self: self.env['res.company']._company_default_get('public_budget.transaction')
+        default=lambda self: self.env['res.company']._company_default_get(
+            'public_budget.transaction')
         )
     total = fields.Float(
         string='Total',
         compute='_get_total'
         )
     user_location_ids = fields.Many2many(
-        comodel_name='public_budget.location',
         string='User Locations',
         related='user_id.location_ids'
         )
@@ -218,14 +212,9 @@ class transaction(models.Model):
         states={'draft': [('readonly', False)], 'open': [('readonly', False)]}
         )
 
-    _constraints = [
-    ]
-
     @api.one
     @api.depends(
         'partner_id',
-        # 'preventive_line_ids',
-        # 'preventive_line_ids.definitive_line_ids',
         'preventive_line_ids.definitive_line_ids.supplier_id',
     )
     def _get_suppliers(self):
@@ -240,7 +229,6 @@ class transaction(models.Model):
 
     @api.one
     @api.depends(
-        # 'preventive_line_ids',
         'preventive_line_ids.budget_position_id',
     )
     def _get_budget_positions(self):
@@ -252,7 +240,6 @@ class transaction(models.Model):
     @api.one
     @api.depends(
         'preventive_line_ids',
-        # 'voucher_ids',
         'voucher_ids.state',
     )
     def _get_amounts(self):
@@ -265,18 +252,10 @@ class transaction(models.Model):
         invoiced_amount = sum([
             preventive.invoiced_amount
             for preventive in self.preventive_line_ids])
-        # TODO ver si esta nueva forma de calcularlos esta ok, si lo hacemos
-        # como antes habria que ver que no sea recursivo porque preventiev
-        # consulta a estos valores
         to_pay_amount = sum(
             x.to_pay_amount for x in self.voucher_ids if x.state in ['confirmed', 'posted'])
         paid_amount = sum(
             x.amount for x in self.voucher_ids if x.state == 'posted')
-        # to_pay_amount = sum([
-        #     preventive.to_pay_amount
-        #     for preventive in self.preventive_line_ids])
-        # paid_amount = sum([
-        #     preventive.paid_amount for preventive in self.definitive_line_ids])
 
         if self.type_id.with_advance_payment:
             advance_amount = sum([
@@ -302,7 +281,6 @@ class transaction(models.Model):
 
     @api.one
     @api.depends(
-        # 'preventive_line_ids',
         'preventive_line_ids.preventive_amount',
         )
     def _get_total(self):
@@ -311,7 +289,7 @@ class transaction(models.Model):
 
     @api.multi
     def action_cancel_draft(self):
-        # go from canceled state to draft state
+        """ go from canceled state to draft state"""
         self.write({'state': 'draft'})
         self.delete_workflow()
         self.create_workflow()
@@ -319,7 +297,8 @@ class transaction(models.Model):
 
     @api.one
     def check_closure(self):
-        # Check preventive lines
+        """ Check preventive lines
+        """
         if not self.preventive_line_ids:
                 raise Warning(
                     _('To close a transaction there must be at least one preventive line'))
@@ -340,7 +319,6 @@ class transaction(models.Model):
     @api.constrains(
         'type_id', 'advance_preventive_line_ids', 'advance_voucher_ids')
     def _check_advance_preventive_lines(self):
-        print 'self.type_id.with_advance_payment', self.type_id.with_advance_payment
         if self.type_id.with_advance_payment:
             not_cancel_amount = sum(
                 x.to_pay_amount for x in self.advance_voucher_ids if x.state != 'cancel')

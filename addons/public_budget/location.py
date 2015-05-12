@@ -23,7 +23,4 @@ class location(models.Model):
         string='Users'
         )
 
-    _constraints = [
-    ]
-
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

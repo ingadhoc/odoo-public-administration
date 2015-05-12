@@ -26,7 +26,6 @@
                     <header>
                     </header>
                     <sheet string="Preventive Line">
-                        <field name="available_account_ids" invisible="1"/>
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
                      <group string="Preventive Line">

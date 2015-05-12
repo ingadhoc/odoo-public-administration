@@ -52,12 +52,8 @@ class budget_modification(models.Model):
         string='Details'
         )
 
-    _constraints = [
-    ]
-
     @api.one
     @api.depends(
-        'budget_modification_detail_ids',
         'budget_modification_detail_ids.budget_position_id',
         'budget_modification_detail_ids.amount',
     )

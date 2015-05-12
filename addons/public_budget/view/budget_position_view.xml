@@ -39,8 +39,6 @@
                         <field name="budget_assignment_allowed"/> 
                         <field name="inventariable" attrs="{'invisible': [('type', '=', 'view')]}"/> 
                         <field name="category_id" attrs="{'invisible': [('type', '=', 'view')], 'required':[('type', '=', 'normal')]}"/> 
-                        <!-- TODO si no lo usamos borrarlo, ver notas en preventive line campo account_id -->
-                        <!-- <field name="available_account_ids" attrs="{'invisible':[('type','=','view')]}"/> -->
                         <field name="child_ids" attrs="{'invisible':[('type','!=','view')]}"/>
                      </group>
                     </sheet>

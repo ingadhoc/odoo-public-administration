@@ -15,7 +15,6 @@ class public_budget_definitive_make_invoice(models.TransientModel):
         )
     use_documents = fields.Boolean(
         related='journal_id.use_documents',
-        string='Use Documents?',
         readonly=True
     )
 

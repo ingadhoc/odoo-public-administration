@@ -27,9 +27,6 @@ class budget_modification_detail(models.Model):
         domain=[('budget_assignment_allowed', '=', True)]
         )
 
-    _constraints = [
-    ]
-
     @api.one
     @api.constrains('budget_position_id', 'amount')
     def _check_modification(self):

@@ -29,9 +29,6 @@ class account_voucher(models.Model):
         string='Transaction',
         required=True,
         readonly=True,
-        # TODO add domain
-        # domain=[('state', '=', 'open')],
-        # states={'draft': [('readonly', False)]},
         )
     budget_position_ids = fields.Many2many(
         relation='voucher_position_rel',
@@ -48,13 +45,9 @@ class account_voucher(models.Model):
         domain="[('id', 'in', partner_ids[0][2])]",
         )
     transaction_with_advance_payment = fields.Boolean(
-        string='With advance payment?',
         readonly=True,
         related='transaction_id.type_id.with_advance_payment',
         )
-
-    _constraints = [
-    ]
 
     @api.one
     def _get_budget_positions(self):

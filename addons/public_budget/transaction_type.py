@@ -29,10 +29,7 @@ class transaction_type(models.Model):
         context={'default_type': 'other'},
         # we use receivable to get debt but we dont reconcile
         domain=[('type', 'in', ('receivable')), ('reconcile', '=', False)],
-        # we use payable accounts because we need them in vouchers of type payment
-        # domain=[('type', 'in', ('payable'))],
         help='This account will be used on advance payments. Must be a payable account.',
-        # domain=[('type', '=', 'other'), ('user_type.report_type', 'in', ['asset'])],
         )
     advance_journal_id = fields.Many2one(
         'account.journal',
@@ -48,8 +45,5 @@ class transaction_type(models.Model):
         'transaction_type_id',
         string='Amount Restrictions'
         )
-
-    _constraints = [
-    ]
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

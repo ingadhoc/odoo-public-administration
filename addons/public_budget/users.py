@@ -18,7 +18,4 @@ class users(models.Model):
         string='Allowed Locations'
         )
 
-    _constraints = [
-    ]
-
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
