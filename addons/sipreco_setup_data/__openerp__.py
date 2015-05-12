@@ -29,6 +29,7 @@ Sipreco Set Up Data
         'demo/account.journal.csv',
         'demo/res.partner.csv',
         'demo/users/res.partner.csv',
+        'demo/users/admin_user/res.users.csv',
         'demo/public_budget.location.csv',
         'demo/users/res.users.csv',
         'demo/res.partner.bank.csv',
