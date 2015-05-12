@@ -7,14 +7,10 @@
             <field name="model">public_budget.budget_pos_exc_rest</field>
             <field name="arch" type="xml">
                 <search string="Budget Position Exchange Restriction">
-                    <field name="origin_category_id" string="Origin Category"
-                            />
-                    <field name="destiny_category_id" string="Destiny Category"
-                            />
-                    <field name="type" string="Type"
-                            />
-                    <field name="message" string="Message"
-                            />
+                    <field name="origin_category_id"/>
+                    <field name="destiny_category_id" />
+                    <field name="type"/>
+                    <field name="message"/>
                     <group expand="0" string="Group By">
                     </group>
                 </search>
@@ -33,17 +29,12 @@
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
                      <group>
-                        <field name="origin_category_id"
-                            /> 
-                        <field name="destiny_category_id"
-                            /> 
-                        <field name="type"
-                            /> 
-                        <field name="message"
-                            /> 
+                        <field name="origin_category_id"/> 
+                        <field name="destiny_category_id"/> 
+                        <field name="type"/> 
+                        <field name="message"/> 
                      </group>
                     </sheet>
-
                 </form>
             </field>
         </record>
@@ -55,14 +46,10 @@
             <field name="arch" type="xml">
                 <tree string="Budget Position Exchange Restriction"
                     >
-                    <field name="origin_category_id"
-                        />
-                    <field name="destiny_category_id"
-                        />
-                    <field name="type"
-                        />
-                    <field name="message"
-                        />
+                    <field name="origin_category_id"/>
+                    <field name="destiny_category_id"/>
+                    <field name="type"/>
+                    <field name="message"/>
                 </tree>
             </field>
         </record>

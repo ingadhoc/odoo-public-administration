@@ -7,31 +7,19 @@
             <field name="model">public_budget.expedient</field>
             <field name="arch" type="xml">
                 <search string="Expedient">
-                    <field name="number" string="Number"
-                            />
-                    <field name="issue_date" string="Issue Date"
-                            />
-                    <field name="description" string="Description"
-                            />
-                    <field name="last_move_date" string="Last Move"
-                            />
-                    <field name="founder_id" string="Founder"
-                            />
-                    <field name="category_id" string="Category"
-                            />
-                    <field name="type" string="Type"
-                            />
-                    <field name="current_location_id" string="Current Location"
-                            />
-                    <field name="in_transit" string="In Transit?"
-                            />
-                    <field name="user_id" string="User"
-                            />
-                    <field name="supplier_ids" string="Suppliers"
-                            />
+                    <field name="number"/>
+                    <field name="issue_date"/>
+                    <field name="description"/>
+                    <field name="last_move_date"/>
+                    <field name="founder_id"/>
+                    <field name="category_id"/>
+                    <field name="type"/>
+                    <field name="current_location_id"/>
+                    <field name="in_transit"/>
+                    <field name="user_id"/>
+                    <field name="supplier_ids"/>
                     <group expand="0" string="Group By">
-                        <field name="last_move_date" string="Last Move" context="{'group_by':'last_move_date'}"
-                            />
+                        <field name="last_move_date" string="Last Move" context="{'group_by':'last_move_date'}"/>
                     </group>
                 </search>
             </field>
@@ -47,30 +35,24 @@
                         <button name="sgn_to_revision"
                             states="open"
                             string="To Revision"
-                            class="oe_highlight"
-                            />
+                            class="oe_highlight"/>
                         <button name="action_cancel_open"
                             type="object"
                             states="cancel"
-                            string="To Draft"
-                            />
+                            string="To Draft"/>
                         <button name="sgn_to_annulled"
                             states="open"
-                            string="To Annulled"
-                            />
+                            string="To Annulled"/>
                         <button name="sgn_close"
                             states="in_revision"
                             string="Close"
-                            class="oe_highlight"
-                            />
+                            class="oe_highlight"/>
                         <button name="sgn_cancel"
                             states="annulled,closed,in_revision,open"
                             string="Cancel"
-                            groups="base.group_no_one"
-                            />
+                            groups="base.group_no_one"/>
                         <field name="state" widget="statusbar"
-                            statusbar_colors='{}'
-                            />
+                            statusbar_colors='{}'/>
                     </header>
                     <sheet string="Expedient">
                         <field name="user_location_ids" invisible="1"/>
@@ -124,28 +106,17 @@
                 <tree string="Expedient"
                     colors="grey:state=='cancelled';blue:state in (u'open',);black:state in (u'annulled', u'in_revision', u'closed');red:state in ()"
                     >
-                    <field name="number"
-                        />
-                    <field name="issue_date"
-                        />
-                    <field name="cover"
-                        />
-                    <field name="last_move_date"
-                        />
-                    <field name="founder_id"
-                        />
-                    <field name="category_id"
-                        />
-                    <field name="type"
-                        />
-                    <field name="current_location_id"
-                        />
-                    <field name="in_transit"
-                        />
-                    <field name="user_id"
-                        />
-                    <field name="state"
-                        />
+                    <field name="number"/>
+                    <field name="issue_date"/>
+                    <field name="cover"/>
+                    <field name="last_move_date"/>
+                    <field name="founder_id"/>
+                    <field name="category_id"/>
+                    <field name="type"/>
+                    <field name="current_location_id"/>
+                    <field name="in_transit"/>
+                    <field name="user_id"/>
+                    <field name="state"/>
                 </tree>
             </field>
         </record>

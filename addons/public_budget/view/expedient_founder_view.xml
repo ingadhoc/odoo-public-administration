@@ -7,8 +7,7 @@
             <field name="model">public_budget.expedient_founder</field>
             <field name="arch" type="xml">
                 <search string="Expedient Founder">
-                    <field name="name" string="Name"
-                            />
+                    <field name="name"/>
                     <group expand="0" string="Group By">
                     </group>
                 </search>
@@ -27,11 +26,9 @@
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
                      <group>
-                        <field name="name"
-                            /> 
+                        <field name="name"/> 
                      </group>
                     </sheet>
-
                 </form>
             </field>
         </record>
@@ -43,8 +40,7 @@
             <field name="arch" type="xml">
                 <tree string="Expedient Founder"
                     >
-                    <field name="name"
-                        />
+                    <field name="name"/>
                 </tree>
             </field>
         </record>

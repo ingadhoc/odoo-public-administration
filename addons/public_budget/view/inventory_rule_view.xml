@@ -40,10 +40,8 @@
                 <tree string="Inventory Rule"
                     editable="top"
                     >
-                    <field name="date"
-                        />
-                    <field name="min_amount"
-                        />
+                    <field name="date"/>
+                    <field name="min_amount"/>
                 </tree>
             </field>
         </record>

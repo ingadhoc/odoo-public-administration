@@ -7,14 +7,10 @@
             <field name="model">public_budget.budget</field>
             <field name="arch" type="xml">
                 <search string="Budget">
-                    <field name="name" string="Name"
-                            />
-                    <field name="fiscalyear_id" string="Year"
-                            />
-                    <field name="income_account_id" string="Income Account"
-                            />
-                    <field name="expedient_id" string="Expedient"
-                            />
+                    <field name="name"/>
+                    <field name="fiscalyear_id"/>
+                    <field name="income_account_id"/>
+                    <field name="expedient_id"/>
                     <group expand="0" string="Group By">
                     </group>
                 </search>
@@ -31,31 +27,25 @@
                         <button name="sgn_open"
                             states="draft"
                             string="Open"
-                            class="oe_highlight"
-                            />
+                            class="oe_highlight"/>
                         <button name="action_cancel_draft"
                             type="object"
                             states="cancel"
-                            string="To Draft"
-                            />
+                            string="To Draft"/>
                         <button name="sgn_pre_close"
                             states="open"
                             string="Pre Close"
-                            class="oe_highlight"
-                            />
+                            class="oe_highlight"/>
                         <button name="sgn_close"
                             states="pre_closed"
                             string="Close"
-                            class="oe_highlight"
-                            />
+                            class="oe_highlight"/>
                         <button name="sgn_cancel"
                             states="closed,draft,open,pre_closed"
                             string="Cancel"
-                            groups="base.group_no_one"
-                            />
+                            groups="base.group_no_one"/>
                         <field name="state" widget="statusbar"
-                            statusbar_colors='{}'
-                            />
+                            statusbar_colors='{}'/>
                     </header>
                     <sheet string="Budget">
                        <div class="oe_right oe_button_box" name="buttons">
@@ -110,16 +100,11 @@
                 <tree string="Budget"
                     colors="grey:state=='cancelled';blue:state in (u'draft',);black:state in (u'pre_closed', u'open', u'closed');red:state in ()"
                     >
-                    <field name="name"
-                        />
-                    <field name="fiscalyear_id"
-                        />
-                    <field name="income_account_id"
-                        />
-                    <field name="expedient_id"
-                        />
-                    <field name="state"
-                        />
+                    <field name="name"/>
+                    <field name="fiscalyear_id"/>
+                    <field name="income_account_id"/>
+                    <field name="expedient_id"/>
+                    <field name="state"/>
                 </tree>
             </field>
         </record>

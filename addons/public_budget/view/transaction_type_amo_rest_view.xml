@@ -7,12 +7,9 @@
             <field name="model">public_budget.transaction_type_amo_rest</field>
             <field name="arch" type="xml">
                 <search string="Transaction Type Amount Restriction">
-                    <field name="date" string="Date"
-                            />
-                    <field name="from_amount" string="From Amount"
-                            />
-                    <field name="to_amount" string="To Amount"
-                            />
+                    <field name="date"/>
+                    <field name="from_amount"/>
+                    <field name="to_amount"/>
                     <group expand="0" string="Group By">
                     </group>
                 </search>
@@ -31,12 +28,9 @@
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
                      <group>
-                        <field name="date"
-                            /> 
-                        <field name="from_amount"
-                            /> 
-                        <field name="to_amount"
-                            /> 
+                        <field name="date"/> 
+                        <field name="from_amount"/> 
+                        <field name="to_amount"/> 
                      </group>
                     </sheet>
 
@@ -51,12 +45,9 @@
             <field name="arch" type="xml">
                 <tree string="Transaction Type Amount Restriction"
                     >
-                    <field name="date"
-                        />
-                    <field name="from_amount"
-                        />
-                    <field name="to_amount"
-                        />
+                    <field name="date"/>
+                    <field name="from_amount"/>
+                    <field name="to_amount"/>
                 </tree>
             </field>
         </record>

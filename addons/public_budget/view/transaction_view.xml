@@ -7,24 +7,16 @@
             <field name="model">public_budget.transaction</field>
             <field name="arch" type="xml">
                 <search string="Budget Transaction">
-                    <field name="issue_date" string="Issue Date"
-                            />
-                    <field name="name" string="Name"
-                            />
-                    <field name="user_id" string="User"
-                            />
-                    <field name="expedient_id" string="Expedient"
-                            />
-                    <field name="type_id" string="Type"
-                            />
-                    <field name="supplier_ids" string="Suppliers"
-                            />
-                    <field name="budget_position_ids" string="Related Budget Positions"
-                            />
+                    <field name="issue_date"/>
+                    <field name="name"/>
+                    <field name="user_id"/>
+                    <field name="expedient_id"/>
+                    <field name="type_id"/>
+                    <field name="supplier_ids"/>
+                    <field name="budget_position_ids"/>
                     <filter name="with_advance_payment" string="With Advance Payment" domain="[('type_id.with_advance_payment','ilike',True)]"/>
                     <group expand="0" string="Group By">
-                        <field name="supplier_ids" string="Suppliers" context="{'group_by':'supplier_ids'}"
-                            />
+                        <field name="supplier_ids" string="Suppliers" context="{'group_by':'supplier_ids'}"/>
                     </group>
                 </search>
             </field>
@@ -40,26 +32,21 @@
                         <button name="action_cancel_draft"
                             type="object"
                             states="cancel"
-                            string="To Draft"
-                            />
+                            string="To Draft"/>
                         <button name="sgn_open"
                             states="draft"
                             string="Open"
-                            class="oe_highlight"
-                            />
+                            class="oe_highlight"/>
                         <button name="sgn_close"
                             states="open"
                             string="Close"
-                            class="oe_highlight"
-                            />
+                            class="oe_highlight"/>
                         <button name="sgn_cancel"
                             states="closed,draft,open"
                             string="Cancel"
-                            groups="base.group_no_one"
-                            />
+                            groups="base.group_no_one"/>
                         <field name="state" widget="statusbar"
-                            statusbar_colors='{}'
-                            />
+                            statusbar_colors='{}'/>
                     </header>
                     <sheet string="Budget Transaction">
                        <div class="oe_right oe_button_box" name="buttons">
@@ -134,18 +121,12 @@
                 <tree string="Budget Transaction"
                     colors="grey:state=='cancelled';blue:state in (u'draft',);black:state in (u'open', u'closed');red:state in ()"
                     >
-                    <field name="issue_date"
-                        />
-                    <field name="name"
-                        />
-                    <field name="user_id"
-                        />
-                    <field name="expedient_id"
-                        />
-                    <field name="type_id"
-                        />
-                    <field name="state"
-                        />
+                    <field name="issue_date"/>
+                    <field name="name"/>
+                    <field name="user_id"/>
+                    <field name="expedient_id"/>
+                    <field name="type_id"/>
+                    <field name="state"/>
                 </tree>
             </field>
         </record>

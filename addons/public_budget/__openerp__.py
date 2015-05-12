@@ -25,7 +25,6 @@
                 'view/budget_detail_view.xml',
                 'view/budget_prec_detail_view.xml',
                 'view/definitive_line_view.xml',
-                'view/account_view.xml',
                 'view/transaction_view.xml',
                 'view/budget_position_category_view.xml',
                 'view/budget_view.xml',

@@ -7,8 +7,7 @@
             <field name="model">public_budget.advance_return_line</field>
             <field name="arch" type="xml">
                 <search string="advance_return_line">
-                    <field name="amount" string="Amount"
-                            />
+                    <field name="amount"/>
                     <group expand="0" string="Group By">
                     </group>
                 </search>
@@ -27,10 +26,8 @@
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
                      <group>
-                        <field name="amount"
-                            /> 
-                        <field name="advance_request_line_id"
-                        /> 
+                        <field name="amount"/> 
+                        <field name="advance_request_line_id"/> 
                      </group>
                     </sheet>
 
@@ -45,8 +42,7 @@
             <field name="arch" type="xml">
                 <tree string="advance_return_line"
                     >
-                    <field name="amount"
-                        />
+                    <field name="amount"/>
                 </tree>
             </field>
         </record>

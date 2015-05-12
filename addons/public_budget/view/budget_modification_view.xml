@@ -7,14 +7,10 @@
             <field name="model">public_budget.budget_modification</field>
             <field name="arch" type="xml">
                 <search string="Budget Modification">
-                    <field name="date" string="Date"
-                            />
-                    <field name="type" string="Budget Modification Type"
-                            />
-                    <field name="name" string="Name"
-                            />
-                    <field name="reference" string="Reference"
-                            />
+                    <field name="date"/>
+                    <field name="type"/>
+                    <field name="name"/>
+                    <field name="reference" />
                     <group expand="0" string="Group By">
                     </group>
                 </search>
@@ -33,29 +29,16 @@
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
                      <group>
-                        <field name="date"
-                            /> 
-                        <field name="initial_approval"
-                            invisible="True"
-                            /> 
-                        <field name="type"
-                            attrs="{'invisible':[('initial_approval','=',True)]}"
-                            /> 
-                        <field name="name"
-                            /> 
-                        <field name="reference"
-                            /> 
-                        <field name="rest_message"
-                            attrs="{'invisible':[('rest_message','=',False)]}"
-                            /> 
-                        <field name="rest_type"
-                            invisible="True"
-                            /> 
-                        <field name="budget_modification_detail_ids"
-                        /> 
+                        <field name="date"/> 
+                        <field name="initial_approval" invisible="True"/> 
+                        <field name="type" attrs="{'invisible':[('initial_approval','=',True)]}"/> 
+                        <field name="name"/> 
+                        <field name="reference"/> 
+                        <field name="rest_message" attrs="{'invisible':[('rest_message','=',False)]}"/> 
+                        <field name="rest_type" invisible="True"/> 
+                        <field name="budget_modification_detail_ids"/> 
                      </group>
                     </sheet>
-
                 </form>
             </field>
         </record>
@@ -67,14 +50,10 @@
             <field name="arch" type="xml">
                 <tree string="Budget Modification"
                     >
-                    <field name="date"
-                        />
-                    <field name="type"
-                        />
-                    <field name="name"
-                        />
-                    <field name="reference"
-                        />
+                    <field name="date"/>
+                    <field name="type"/>
+                    <field name="name"/>
+                    <field name="reference"/>
                 </tree>
             </field>
         </record>

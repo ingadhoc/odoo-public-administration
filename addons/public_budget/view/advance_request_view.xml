@@ -7,10 +7,8 @@
             <field name="model">public_budget.advance_request</field>
             <field name="arch" type="xml">
                 <search string="advance_request">
-                    <field name="date" string="Date"
-                            />
-                    <field name="user_id" string="User"
-                            />
+                    <field name="date"/>
+                    <field name="user_id"/>
                     <group expand="0" string="Group By">
                     </group>
                 </search>
@@ -24,35 +22,18 @@
             <field name="arch" type="xml">
                 <form string="advance_request">
                     <header>
-                        <button name="sgn_approve"
-                            states="draft"
-                            string="Approve"
-                            class="oe_highlight"
-                            />
-                        <button name="action_cancel_draft"
-                            type="object"
-                            states="cancel"
-                            string="To Draft"
-                            />
-                        <button name="sgn_cancel"
-                            states="approved,draft"
-                            string="Cancel"
-                            groups="base.group_no_one"
-                            />
-                        <field name="state" widget="statusbar"
-                            statusbar_colors='{}'
-                            />
+                        <button name="sgn_approve" states="draft" string="Approve" class="oe_highlight"/>
+                        <button name="action_cancel_draft" type="object" states="cancel" string="To Draft"/>
+                        <button name="sgn_cancel" states="approved,draft" string="Cancel" groups="base.group_no_one"/>
+                        <field name="state" widget="statusbar" statusbar_colors='{}'/>
                     </header>
                     <sheet string="advance_request">
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
                      <group>
-                        <field name="date"
-                            /> 
-                        <field name="user_id"
-                            /> 
-                        <field name="advance_request_line_ids"
-                        /> 
+                        <field name="date"/> 
+                        <field name="user_id"/> 
+                        <field name="advance_request_line_ids"/> 
                      </group>
                     </sheet>
 
@@ -69,12 +50,9 @@
                     editable="top"
                     colors="grey:state=='cancelled';blue:state in (u'draft',);black:state in (u'approved',);red:state in ()"
                     >
-                    <field name="date"
-                        />
-                    <field name="user_id"
-                        />
-                    <field name="state"
-                        />
+                    <field name="date"/>
+                    <field name="user_id"/>
+                    <field name="state"/>
                 </tree>
             </field>
         </record>

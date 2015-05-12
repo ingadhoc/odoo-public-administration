@@ -7,8 +7,7 @@
             <field name="model">public_budget.location</field>
             <field name="arch" type="xml">
                 <search string="Location">
-                    <field name="name" string="Name"
-                            />
+                    <field name="name" string="Name"/>
                     <group expand="0" string="Group By">
                     </group>
                 </search>
@@ -27,10 +26,8 @@
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
                      <group>
-                        <field name="name"
-                            /> 
-                        <field name="user_ids"
-                        /> 
+                        <field name="name"/> 
+                        <field name="user_ids"/> 
                      </group>
                     </sheet>
 
@@ -45,8 +42,7 @@
             <field name="arch" type="xml">
                 <tree string="Location"
                     >
-                    <field name="name"
-                        />
+                    <field name="name"/>
                 </tree>
             </field>
         </record>

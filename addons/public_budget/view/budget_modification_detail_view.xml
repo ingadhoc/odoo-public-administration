@@ -7,8 +7,7 @@
             <field name="model">public_budget.budget_modification_detail</field>
             <field name="arch" type="xml">
                 <search string="Budget Modification Detail">
-                    <field name="budget_position_id" string="Budget Position"
-                            />
+                    <field name="budget_position_id"/>
                     <group expand="0" string="Group By">
                     </group>
                 </search>
@@ -27,10 +26,8 @@
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
                      <group>
-                        <field name="budget_position_id"
-                        /> 
-                        <field name="amount"
-                            /> 
+                        <field name="budget_position_id"/> 
+                        <field name="amount"/> 
                      </group>
                     </sheet>
 
@@ -45,10 +42,8 @@
             <field name="arch" type="xml">
                 <tree string="Budget Modification Detail"
                     >
-                    <field name="budget_position_id"
-                        />
-                    <field name="amount"
-                        />
+                    <field name="budget_position_id"/>
+                    <field name="amount"/>
                 </tree>
             </field>
         </record>

@@ -7,20 +7,13 @@
             <field name="model">public_budget.budget_position</field>
             <field name="arch" type="xml">
                 <search string="Budget Position">
-                    <field name="code" string="Code"
-                            />
-                    <field name="name" string="Name"
-                            />
-                    <field name="type" string="Type"
-                            />
-                    <field name="budget_assignment_allowed" string="Budget Assignment Allowed?"
-                            />
-                    <field name="category_id" string="Category"
-                            />
-                    <field name="inventariable" string="Inventariable?"
-                            />
-                    <field name="parent_id" string="Parent"
-                            />
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="type"/>
+                    <field name="budget_assignment_allowed"/>
+                    <field name="category_id"/>
+                    <field name="inventariable"/>
+                    <field name="parent_id"/>
                     <group expand="0" string="Group By">
                     </group>
                 </search>
@@ -39,29 +32,16 @@
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
                      <group>
-                        <field name="code"
-                            /> 
-                        <field name="name"
-                            /> 
-                        <field name="type"
-                            /> 
-                        <field name="parent_id"
-                        /> 
-                        <field name="budget_assignment_allowed"
-                            /> 
-                        <field name="inventariable"
-                            attrs="{'invisible': [('type', '=', 'view')]}"
-                            /> 
-                        <field name="category_id"
-                            attrs="{'invisible': [('type', '=', 'view')], 'required':[('type', '=', 'normal')]}"
-                            /> 
+                        <field name="code"/> 
+                        <field name="name"/> 
+                        <field name="type"/> 
+                        <field name="parent_id"/> 
+                        <field name="budget_assignment_allowed"/> 
+                        <field name="inventariable" attrs="{'invisible': [('type', '=', 'view')]}"/> 
+                        <field name="category_id" attrs="{'invisible': [('type', '=', 'view')], 'required':[('type', '=', 'normal')]}"/> 
                         <!-- TODO si no lo usamos borrarlo, ver notas en preventive line campo account_id -->
-                        <!-- <field name="available_account_ids"
-                            attrs="{'invisible':[('type','=','view')]}"
-                            /> -->
-                        <field name="child_ids"
-                            attrs="{'invisible':[('type','!=','view')]}"
-                            />
+                        <!-- <field name="available_account_ids" attrs="{'invisible':[('type','=','view')]}"/> -->
+                        <field name="child_ids" attrs="{'invisible':[('type','!=','view')]}"/>
                      </group>
                     </sheet>
 
@@ -77,15 +57,10 @@
                 <tree string="Budget Position"
                     colors="blue:type=='view'"
                     >
-                    <field name="code"
-                        />
-                    <field name="name"
-                        />
-                    <field name="type"
-                            invisible="True"
-                        />
-                    <field name="budget_assignment_allowed"
-                        />
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="type" invisible="True"/>
+                    <field name="budget_assignment_allowed"/>
                 </tree>
             </field>
         </record>

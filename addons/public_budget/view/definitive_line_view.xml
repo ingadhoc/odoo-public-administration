@@ -7,14 +7,10 @@
             <field name="model">public_budget.definitive_line</field>
             <field name="arch" type="xml">
                 <search string="Definitive Line">
-                    <field name="issue_date" string="Issue Date"
-                            />
-                    <field name="supplier_id" string="Supplier"
-                            />
-                    <field name="amount" string="Amount"
-                            />
-                    <field name="budget_position_id" string="Budget Position"
-                            />
+                    <field name="issue_date"/>
+                    <field name="supplier_id"/>
+                    <field name="amount"/>
+                    <field name="budget_position_id"/>
                     <group expand="0" string="Group By">
                     </group>
                 </search>
@@ -33,12 +29,9 @@
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
                      <group>
-                        <field name="issue_date"
-                            /> 
-                        <field name="supplier_id"
-                            /> 
-                        <field name="amount"
-                            /> 
+                        <field name="issue_date"/> 
+                        <field name="supplier_id"/> 
+                        <field name="amount"/> 
                      </group>
                     </sheet>
 
@@ -54,18 +47,11 @@
                 <tree string="Definitive Line"
                     editable="top"
                     >
-                    <field name="issue_date"
-                        />
-                    <field name="supplier_id"
-                        />
-                    <field name="amount"
-                        />
-                    <field name="budget_position_id"
-                            invisible="'from_preventive' in context"
-                        />
-                    <field name="state"
-                            invisible="True"
-                        />
+                    <field name="issue_date"/>
+                    <field name="supplier_id"/>
+                    <field name="amount"/>
+                    <field name="budget_position_id" invisible="'from_preventive' in context"/>
+                    <field name="state" invisible="True"/>
                 </tree>
             </field>
         </record>

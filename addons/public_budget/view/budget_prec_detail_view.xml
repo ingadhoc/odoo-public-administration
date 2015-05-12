@@ -7,8 +7,7 @@
             <field name="model">public_budget.budget_prec_detail</field>
             <field name="arch" type="xml">
                 <search string="budget_prec_detail">
-                    <field name="budget_position_id" string="Budget Position"
-                            />
+                    <field name="budget_position_id"/>
                     <group expand="0" string="Group By">
                     </group>
                 </search>
@@ -27,22 +26,14 @@
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
                      <group>
-                        <field name="budget_position_id"
-                            /> 
-                        <field name="amount"
-                            /> 
-<!--                         <field name="draft_amount"
-                            />  -->
-                        <field name="preventive_amount"
-                            /> 
-                        <field name="definitive_amount"
-                            /> 
-                        <field name="to_pay_amount"
-                            /> 
-                        <field name="paid_amount"
-                            /> 
-                        <field name="balance_amount"
-                            /> 
+                        <field name="budget_position_id"/> 
+                        <field name="amount"/> 
+<!--                         <field name="draft_amount"/>  -->
+                        <field name="preventive_amount"/> 
+                        <field name="definitive_amount"/> 
+                        <field name="to_pay_amount"/> 
+                        <field name="paid_amount"/> 
+                        <field name="balance_amount"/> 
                      </group>
                     </sheet>
 

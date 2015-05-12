@@ -7,8 +7,7 @@
             <field name="model">public_budget.budget_position_category</field>
             <field name="arch" type="xml">
                 <search string="Budget Position Category">
-                    <field name="name" string="Name"
-                            />
+                    <field name="name"/>
                     <group expand="0" string="Group By">
                     </group>
                 </search>
@@ -27,8 +26,7 @@
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
                      <group>
-                        <field name="name"
-                            /> 
+                        <field name="name"/> 
                      </group>
                     </sheet>
 
@@ -43,8 +41,7 @@
             <field name="arch" type="xml">
                 <tree string="Budget Position Category"
                     >
-                    <field name="name"
-                        />
+                    <field name="name"/>
                 </tree>
             </field>
         </record>
