@@ -119,10 +119,10 @@ class budget(models.Model):
         states={'open': [('readonly', False)], 'pre_closed': [('readonly', False)]},
         context={'from_budget': True}
         )
-    preventive_line_ids = fields.One2many(
-        'public_budget.preventive_line',
+    transaction_ids = fields.One2many(
+        'public_budget.transaction',
         'budget_id',
-        string='Lines'
+        string='Transactions'
         )
 
     _constraints = [
@@ -130,12 +130,13 @@ class budget(models.Model):
 
     @api.one
     @api.depends(
-        'budget_detail_ids',
+        # TODO borrar comentados si no se necesitan
+        # 'budget_detail_ids',
         'budget_detail_ids.budget_position_id',
-        'preventive_line_ids',
-        'preventive_line_ids.budget_position_id',
-        'budget_modification_ids',
-        'budget_modification_ids.budget_modification_detail_ids',
+        # 'transaction_ids',
+        'transaction_ids.preventive_line_ids.budget_position_id',
+        # 'budget_modification_ids',
+        # 'budget_modification_ids.budget_modification_detail_ids',
         'budget_modification_ids.budget_modification_detail_ids.budget_position_id',
     )
     def _get_budget_positions(self):
@@ -214,7 +215,7 @@ class budget(models.Model):
 
         # Get passive residue
         definitive_lines = self.env['public_budget.definitive_line'].search(
-            [('preventive_line_id.budget_id', '=', self.id)])
+            [('budget_id', '=', self.id)])
         passive_residue = sum([x.residual_amount for x in definitive_lines])
         self.passive_residue = passive_residue
 

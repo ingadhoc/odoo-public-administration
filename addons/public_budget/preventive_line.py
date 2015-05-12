@@ -10,16 +10,13 @@ class preventive_line(models.Model):
     _description = 'Preventive Line'
     _rec_name = 'budget_position_id'
 
-    @api.model
-    def _get_default_budget(self):
-        budgets = self.env['public_budget.budget'].search([('state', '=', 'open')])
-        return budgets and budgets[0] or False
-
     account_id = fields.Many2one(
         'account.account',
         string='Account',
         states={'invoiced': [('readonly', True)]},
-        domain=[('type', 'in', ['other']), ('user_type.report_type', 'in', ['expense', 'asset'])]
+        domain=[
+            ('type', 'in', ['other']),
+            ('user_type.report_type', 'in', ['expense', 'asset'])]
         # TODO borrar esto si no interesa restringir por los avialable accounts y borrar tmb los avialable accounts
         # Hablamos con gonza de que a priori no lo usamos salvo que lo pidan
         # domain="[('type', 'in', ['other']), ('user_type.report_type', 'in', ['expense', 'asset']), ('id', 'in', available_account_ids[0][2])]"
@@ -83,12 +80,9 @@ class preventive_line(models.Model):
         string='Definitive Lines'
         )
     budget_id = fields.Many2one(
-        'public_budget.budget',
-        string='Budget',
-        required=True,
-        default=_get_default_budget,
-        states={'invoiced': [('readonly', True)]},
-        domain=[('state', '=', 'open')]
+        readonly=True,
+        store=True,
+        related='transaction_id.budget_id'
         )
     budget_position_id = fields.Many2one(
         'public_budget.budget_position',
@@ -198,11 +192,11 @@ class preventive_line(models.Model):
 
     @api.one
     @api.constrains(
-        'budget_id',
+        'transaction_id',
         'budget_position_id',
         'preventive_amount')
     def _check_position_balance_amount(self):
-        self = self.with_context(budget_id=self.budget_id.id)
+        self = self.with_context(budget_id=self.transaction_id.budget_id.id)
         if self.budget_position_id.assignment_position_id.balance_amount < 0.0:
             raise Warning(
                 _("There is not Enought Balance Amount on this Budget Position '%s'") %

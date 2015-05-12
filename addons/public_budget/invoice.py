@@ -29,11 +29,9 @@ class invoice(models.Model):
         required=True,
         )
     budget_id = fields.Many2one(
-        'public_budget.budget',
-        string='Budget',
-        copy=False,
+        related='transaction_id.budget_id',
         readonly=True,
-        required=True,
+        store=True,
         )
     to_pay_amount = fields.Float(
         string='To Pay Amount',
@@ -98,7 +96,6 @@ class invoice(models.Model):
             invoice, self).prepare_direct_payment_voucher_vals()
         res['transaction_id'] = self.transaction_id.id
         res['expedient_id'] = self.transaction_id.expedient_id.id
-        res['budget_id'] = self.budget_id.id
         return res
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

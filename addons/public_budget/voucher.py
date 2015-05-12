@@ -10,20 +10,10 @@ class account_voucher(models.Model):
     _inherits = {}
     _inherit = ['account.voucher']
 
-    @api.model
-    def _get_default_budget(self):
-        budgets = self.env['public_budget.budget'].search(
-            [('state', '=', 'open')])
-        return budgets and budgets[0] or False
-
     budget_id = fields.Many2one(
-        'public_budget.budget',
-        string='Budget',
-        required=True,
-        default=_get_default_budget,
+        related='transaction_id.budget_id',
         readonly=True,
-        domain=[('state', '=', 'open')],
-        states={'draft': [('readonly', False)]},
+        store=True,
         )
     expedient_id = fields.Many2one(
         'public_budget.expedient',

@@ -19,6 +19,12 @@ class transaction(models.Model):
         ('cancel', 'Cancel'),
     ]
 
+    @api.model
+    def _get_default_budget(self):
+        budgets = self.env['public_budget.budget'].search(
+            [('state', '=', 'open')])
+        return budgets and budgets[0] or False
+
     issue_date = fields.Date(
         string='Issue Date',
         track_visibility='always',
@@ -46,6 +52,14 @@ class transaction(models.Model):
         readonly=True,
         required=True,
         states={'draft': [('readonly', False)]}
+        )
+    budget_id = fields.Many2one(
+        'public_budget.budget',
+        string='Budget',
+        required=True,
+        default=_get_default_budget,
+        states={'invoiced': [('readonly', True)]},
+        domain=[('state', '=', 'open')]
         )
     type_id = fields.Many2one(
         'public_budget.transaction_type',
@@ -210,8 +224,8 @@ class transaction(models.Model):
     @api.one
     @api.depends(
         'partner_id',
-        'preventive_line_ids',
-        'preventive_line_ids.definitive_line_ids',
+        # 'preventive_line_ids',
+        # 'preventive_line_ids.definitive_line_ids',
         'preventive_line_ids.definitive_line_ids.supplier_id',
     )
     def _get_suppliers(self):
@@ -226,7 +240,7 @@ class transaction(models.Model):
 
     @api.one
     @api.depends(
-        'preventive_line_ids',
+        # 'preventive_line_ids',
         'preventive_line_ids.budget_position_id',
     )
     def _get_budget_positions(self):
@@ -238,7 +252,7 @@ class transaction(models.Model):
     @api.one
     @api.depends(
         'preventive_line_ids',
-        'voucher_ids',
+        # 'voucher_ids',
         'voucher_ids.state',
     )
     def _get_amounts(self):
@@ -288,7 +302,7 @@ class transaction(models.Model):
 
     @api.one
     @api.depends(
-        'preventive_line_ids',
+        # 'preventive_line_ids',
         'preventive_line_ids.preventive_amount',
         )
     def _get_total(self):

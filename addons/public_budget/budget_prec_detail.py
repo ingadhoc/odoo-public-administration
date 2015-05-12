@@ -7,7 +7,7 @@ class budget_prec_detail(models.Model):
     """"""
 
     _name = 'public_budget.budget_prec_detail'
-    _description = 'budget_prec_detail'
+    _description = 'Budget Preclose Detail'
 
     _order = "order_int"
 

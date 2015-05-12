@@ -143,7 +143,7 @@ class public_budget_definitive_make_invoice(models.TransientModel):
                 'public_budget.definitive_line'].search([
                     ('transaction_id', '=', transaction_id),
                     ('supplier_id', '=', self.supplier_id.id),
-                    ('preventive_line_id.budget_id', '=', self.budget_id.id),
+                    ('budget_id', '=', self.budget_id.id),
                 ])
             lines = []
             for line in definitive_lines:

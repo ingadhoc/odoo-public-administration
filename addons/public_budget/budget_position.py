@@ -118,7 +118,7 @@ class budget_position(models.Model):
     preventive_line_ids = fields.One2many(
         'public_budget.preventive_line',
         'budget_position_id',
-        string='preventive_line_ids'
+        string='Preventive Lines'
         )
     assignment_position_id = fields.Many2one(
         'public_budget.budget_position',

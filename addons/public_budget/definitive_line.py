@@ -53,23 +53,30 @@ class definitive_line(models.Model):
         string='Invoiced Amount',
         compute='_get_amounts'
         )
+    preventive_line_id = fields.Many2one(
+        'public_budget.preventive_line',
+        ondelete='cascade',
+        string='Preventive Line',
+        required=True
+        )
     transaction_id = fields.Many2one(
-        comodel_name='public_budget.transaction',
-        string='Transaction',
+        # TODO remove and clean code
+        # comodel_name='public_budget.transaction',
+        # string='Transaction',
         readonly=True,
         store=True,
         related='preventive_line_id.transaction_id'
         )
     budget_id = fields.Many2one(
-        comodel_name='public_budget.budget',
-        string='Budget',
+        # comodel_name='public_budget.budget',
+        # string='Budget',
         readonly=True,
         store=True,
         related='preventive_line_id.budget_id'
         )
     budget_position_id = fields.Many2one(
-        comodel_name='public_budget.budget_position',
-        string='Budget Position',
+        # comodel_name='public_budget.budget_position',
+        # string='Budget Position',
         readonly=True,
         store=True,
         related='preventive_line_id.budget_position_id'
@@ -80,12 +87,6 @@ class definitive_line(models.Model):
         states={'draft': [('readonly', False)]},
         default='draft',
         compute='_get_state'
-        )
-    preventive_line_id = fields.Many2one(
-        'public_budget.preventive_line',
-        ondelete='cascade',
-        string='Preventive Line',
-        required=True
         )
     invoice_line_ids = fields.One2many(
         'account.invoice.line',

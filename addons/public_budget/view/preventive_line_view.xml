@@ -7,12 +7,9 @@
             <field name="model">public_budget.preventive_line</field>
             <field name="arch" type="xml">
                 <search string="Preventive Line">
-                    <field name="account_id" string="Account"
-                            />
-                    <field name="preventive_amount" string="Preventive"
-                            />
-                    <field name="budget_id" string="Budget"
-                            />
+                    <field name="account_id"/>
+                    <field name="preventive_amount"/>
+                    <field name="budget_id"/>
                     <field name="budget_position_id" string="Child Of Budget Position" operator="child_of"/>
                     <group expand="0" string="Group By">
                     </group>
@@ -33,8 +30,6 @@
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
                      <group string="Preventive Line">
-                        <field name="budget_id" options="{'no_create': True}"
-                        /> 
                         <field name="budget_position_id" options="{'no_create': True}"
                         /> 
                         <field name="account_id"
@@ -70,8 +65,6 @@
                 <tree string="Preventive Line"
                     colors="green:preventive_amount==definitive_amount==to_pay_amount==paid_amount;"
                     >
-                    <field name="budget_id"
-                        />
                     <field name="budget_position_id"
                         />
                     <field name="preventive_amount"
