@@ -67,6 +67,7 @@
         <record id="view_public_budget_preventive_line_analysis_tree" model="ir.ui.view">
             <field name="name">public_budget.preventive_line.analysis.tree</field>
             <field name="model">public_budget.preventive_line</field>
+            <field name="priority" eval="99"/>
             <field name="arch" type="xml">
                 <tree string="Preventive Line"
                     colors="green:preventive_amount==definitive_amount==to_pay_amount==paid_amount;" create="false" edit="false" delete="false"

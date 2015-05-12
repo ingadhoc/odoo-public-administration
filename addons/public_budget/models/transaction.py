@@ -57,7 +57,8 @@ class transaction(models.Model):
         string='Budget',
         required=True,
         default=_get_default_budget,
-        states={'invoiced': [('readonly', True)]},
+        readonly=True,
+        states={'draft': [('readonly', False)]},
         domain=[('state', '=', 'open')]
         )
     type_id = fields.Many2one(
