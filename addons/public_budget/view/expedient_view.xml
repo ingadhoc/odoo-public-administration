@@ -15,7 +15,7 @@
                     <field name="category_id"/>
                     <field name="type"/>
                     <field name="current_location_id"/>
-                    <field name="in_transit"/>
+                    <filter name="in_transit" string="In Transit" domain="[('in_transit','=','True')]"/>
                     <field name="user_id"/>
                     <field name="supplier_ids"/>
                     <group expand="0" string="Group By">

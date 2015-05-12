@@ -12,6 +12,7 @@ Installs All Sipreco Project Dependencies
 # 01 - Pasos alta BD Sipreco
 # =============================
 # Cambiar formato del separador por "[3,3,1]"
+# Establecer por defecto en Proveedores: Tipo de documento = CUIT, Ciudad: Rosario
 # Importar archivo es_AR.po, en carpeta sipreco_set_up_data > l18i
 # Nombre de idioma: Cualquier texto
 # Código: es_AR

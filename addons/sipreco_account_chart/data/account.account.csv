@@ -8,7 +8,7 @@ account_account_6,1111010,Caja pesos,account_account_5,False,account.data_accoun
 account_account_10,1111030,Caja chica,account_account_5,False,account.data_account_type_receivable,receivable
 account_account_11,1111040,Valores en cartera,account_account_5,False,account.data_account_type_cash,liquidity
 account_account_12,1112,BANCOS,account_account_4,False,account.data_account_type_view,view
-account_account_13,1112010-aux,Banco Municipal Cuenta Corriente,account_account_12,False,account.data_account_type_bank,liquidity
+account_account_13,1112010,Banco Municipal Cuenta Corriente,account_account_12,False,account.data_account_type_bank,liquidity
 account_account_14,1113,OTRAS DISPONIBILIDADES,account_account_4,False,account.data_account_type_view,view
 account_account_401,11300010,Anticipo para Gastos a Rendir,account_account_14,False,account.data_account_type_receivable,receivable
 account_account_402,11300020,Anticipo Sueldos,account_account_14,True,account.data_account_type_receivable,receivable
@@ -87,6 +87,7 @@ account_account_146,5130010,Alquileres y derechos,account_account_145,False,acco
 account_account_147,5130020,"Mantenimiento, reparación y limpieza Dom. Priv.",account_account_145,False,account.data_account_type_expense,other
 account_account_148,5130030,Servicios Técnicos Profesionales,account_account_145,False,account.data_account_type_expense,other
 account_account_149,5130040,Publicidad y Propaganda,account_account_145,False,account.data_account_type_expense,other
+account_account_150,5130050,Servicios Básicos,account_account_145,False,account.data_account_type_expense,other
 account_account_156,514,"IMPUESTOS, DERECHOS, TASAS Y MULTAS",account_account_126,False,account.data_account_type_view,view
 account_account_157,5140010,Tasas y Derechos,account_account_156,False,account.data_account_type_expense,other
 account_account_164,515,OTROS GASTOS,account_account_126,False,account.data_account_type_view,view
