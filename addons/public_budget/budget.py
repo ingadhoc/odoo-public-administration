@@ -165,7 +165,7 @@ class budget(models.Model):
                  ('parent_right', '>', position.parent_right)])
             position_ids += parents.ids
         self.budget_position_ids = budget_positions.browse(
-            list(set(position_ids)))
+            list(set(position_ids))).sorted(key=lambda r: r.parent_left)
 
         # Torma vieja donde llevabamos padres e hijos de todas las posiciones
         # involucradas en un presupuesto

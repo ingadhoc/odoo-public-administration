@@ -199,15 +199,16 @@ class budget_position(models.Model):
         projected_amount = preventive_amount / day_of_year * 365
         self.projected_amount = projected_amount
 
-        projected_avg = amount and \
-            projected_amount / amount * 100.0 or 0.0
-        self.projected_avg = projected_avg
 
-        preventive_avg = amount and \
-            preventive_amount / amount * 100.0 or 0.0
-        self.preventive_avg = preventive_avg
-        self.amount = amount
-        self.balance_amount = self.amount - preventive_amount
+        if self.budget_assignment_allowed:
+            projected_avg = amount and \
+                projected_amount / amount * 100.0 or 0.0
+            self.projected_avg = projected_avg
+            self.amount = amount
+            preventive_avg = amount and \
+                preventive_amount / amount * 100.0 or 0.0
+            self.preventive_avg = preventive_avg
+            self.balance_amount = self.amount - preventive_amount
 
     @api.multi
     def name_get(self):

@@ -24,6 +24,9 @@ class preventive_line(models.Model):
         # Hablamos con gonza de que a priori no lo usamos salvo que lo pidan
         # domain="[('type', 'in', ['other']), ('user_type.report_type', 'in', ['expense', 'asset']), ('id', 'in', available_account_ids[0][2])]"
         )
+    expedient_id = fields.Many2one(
+        related='transaction_id.expedient_id',
+        )
     preventive_amount = fields.Float(
         string='Preventive',
         required=True,

@@ -135,14 +135,24 @@ class definitive_line(models.Model):
         -paid_amount: amount sum of lines that has a related voucher in open
         state
         """
-
-        invoice_lines = [
+        debit_invoice_lines = [
             x for x in self.invoice_line_ids if x.invoice_id.state not in (
-                'draft', 'cancel')]
+                'draft', 'cancel') and x.invoice_id.type in (
+                    'out_invoice', 'in_invoice')]
+        credit_invoice_lines = [
+            x for x in self.invoice_line_ids if x.invoice_id.state not in (
+                'draft', 'cancel') and x.invoice_id.type in (
+                    'out_refund', 'in_refund')]
 
-        invoiced_amount = sum([x.price_subtotal for x in invoice_lines])
-        to_pay_amount = sum([x.to_pay_amount for x in invoice_lines])
-        paid_amount = sum([x.paid_amount for x in invoice_lines])
+        invoiced_amount = sum(
+            [x.price_subtotal for x in debit_invoice_lines]) - sum(
+                [x.price_subtotal for x in credit_invoice_lines])
+        to_pay_amount = sum(
+            [x.to_pay_amount for x in debit_invoice_lines]) - sum(
+                [x.to_pay_amount for x in credit_invoice_lines])
+        paid_amount = sum(
+            [x.paid_amount for x in debit_invoice_lines]) - sum(
+                [x.paid_amount for x in credit_invoice_lines])
 
         self.invoiced_amount = invoiced_amount
         self.residual_amount = self.amount - invoiced_amount

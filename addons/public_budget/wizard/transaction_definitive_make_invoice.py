@@ -33,7 +33,7 @@ class public_budget_definitive_make_invoice_detail(models.TransientModel):
         'residual_amount',
         'to_invoice_amount'
     )
-    def _check_number(self):
+    def _check_amounts(self):
         if self.residual_amount < self.to_invoice_amount:
             raise Warning(
                 _("To Invoice Amount can't be greater than Residual Amount"))
@@ -102,7 +102,7 @@ class public_budget_definitive_make_invoice(models.TransientModel):
         'account.journal',
         string='Journal',
         required=True,
-        domain="[('type', '=', 'purchase'),('company_id','=',company_id)]",
+        domain="[('type', 'in', ('purchase','purchase_refund')),('company_id','=',company_id)]",
         default=_get_default_journal
     )
     transaction_id = fields.Many2one(
@@ -202,7 +202,15 @@ class public_budget_definitive_make_invoice(models.TransientModel):
                 inv_lines.append(
                     inv_line_obj.create(cr, uid, line_vals, context=context))
                 line.to_invoice_amount = False
-        inv_type = 'in_invoice'
+        journal_type = wizard.journal_id.type
+        if journal_type == 'sale':
+            inv_type = 'out_invoice'
+        elif journal_type == 'purchase':
+            inv_type = 'in_invoice'
+        elif journal_type == 'sale_refund':
+            inv_type = 'out_refund'
+        else:
+            inv_type = 'in_refund'
 
         # Si no hay se creo alguna linea es porque todas tienen amount 0
         if not inv_lines:

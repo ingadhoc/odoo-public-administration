@@ -59,7 +59,7 @@
                     </header>
                     <sheet string="Budget">
                        <div class="oe_right oe_button_box" name="buttons">
-                            <button class="oe_inline oe_stat_button oe_right" name="%(action_position_analisis_tree)d" string="Position Analisis" type="action" widget="statinfo" context="{'budget_id':active_id}"/>
+                            <button class="oe_inline oe_stat_button oe_right" name="%(action_position_analysis_tree)d" string="Position analysis" type="action" widget="statinfo" context="{'budget_id':active_id}"/>
                        </div>
                         <group>
                             <group>
@@ -78,25 +78,7 @@
                         </group>
                         <notebook>
                             <page string="Analysis">
-                                <field name="budget_position_ids" context="{'budget_id':active_id}">
-                                    <tree colors="blue:type=='view'; green:budget_assignment_allowed; red: budget_assignment_allowed and projected_amount > amount;">
-                                        <field name="parent_left" invisible="1"/>
-                                        <field name="code"/>
-                                        <field name="name"/>
-                                        <field name="type" invisible="1"/>
-                                        <field name="amount" attrs="{'invisible':[('budget_assignment_allowed','=',False)]}"/>
-                                        <!-- <field name="draft_amount"/> -->
-                                        <field name="preventive_amount"/>
-                                        <field name="definitive_amount"/>
-                                        <field name="to_pay_amount"/>
-                                        <field name="paid_amount"/>
-                                        <field name="projected_amount"/>
-                                        <field name="preventive_avg" widget="progressbar" attrs="{'invisible':[('budget_assignment_allowed','=',False)]}"/>
-                                        <field name="preventive_avg" widget="integer" string="%" attrs="{'invisible':[('budget_assignment_allowed','=',False)]}"/>
-                                        <field name="balance_amount" attrs="{'invisible':[('budget_assignment_allowed','=',False)]}"/>
-                                        <field name="budget_assignment_allowed" invisible="1"/>
-                                    </tree>
-                                </field>
+                                <field name="budget_position_ids" context="{'budget_id':active_id,'tree_view_ref': 'public_budget.view_budget_position_budget_tree'}"/>
                             </page>
                             <page string="Detail">
                                 <field name="budget_detail_ids"/>

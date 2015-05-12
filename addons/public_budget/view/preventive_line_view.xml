@@ -13,8 +13,7 @@
                             />
                     <field name="budget_id" string="Budget"
                             />
-                    <field name="budget_position_id" string="Budget Position"
-                            />
+                    <field name="budget_position_id" string="Child Of Budget Position" operator="child_of"/>
                     <group expand="0" string="Group By">
                     </group>
                 </search>
@@ -59,7 +58,6 @@
                                 context="{'from_preventive':True,'default_amount':remaining_amount}"/>
                      </group>
                     </sheet>
-
                 </form>
             </field>
         </record>
@@ -85,6 +83,42 @@
                     <field name="invoiced_amount"
                             sum="Total"
                             invisible="'advance_line' in context"
+                        />
+                    <field name="to_pay_amount"
+                            sum="Total"
+                        />
+                    <field name="paid_amount"
+                            sum="Total"
+                        />
+                    <field name="state"
+                            invisible="True"
+                        />
+                </tree>
+            </field>
+        </record>
+
+        <!-- TREEVIEW -->
+        <record id="view_public_budget_preventive_line_analysis_tree" model="ir.ui.view">
+            <field name="name">public_budget.preventive_line.analysis.tree</field>
+            <field name="model">public_budget.preventive_line</field>
+            <field name="arch" type="xml">
+                <tree string="Preventive Line"
+                    colors="green:preventive_amount==definitive_amount==to_pay_amount==paid_amount;" create="false" edit="false" delete="false"
+                    >
+                    <field name="transaction_id"
+                        />
+                    <field name="expedient_id"
+                        />
+                    <field name="budget_position_id"
+                        />
+                    <field name="preventive_amount"
+                            sum="Total"
+                        />
+                    <field name="definitive_amount"
+                            sum="Total"
+                        />
+                    <field name="invoiced_amount"
+                            sum="Total"
                         />
                     <field name="to_pay_amount"
                             sum="Total"
