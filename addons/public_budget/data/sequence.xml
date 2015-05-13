@@ -11,8 +11,8 @@
         <record id="seq_expedient" model="ir.sequence">
             <field name="name">Expedient</field>
             <field name="code">public_budget.expedient</field>
-            <field name="prefix">EX</field>
-            <field name="padding">4</field>
+            <field name="prefix">EX-%(year)s-</field>
+            <field name="padding">6</field>
             <field name="company_id" eval="False"/>
         </record>
 
