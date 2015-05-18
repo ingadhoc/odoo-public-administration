@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
 from openerp.exceptions import Warning
+import openerp.addons.decimal_precision as dp
 
 
 class invoice_line(models.Model):
@@ -12,11 +13,13 @@ class invoice_line(models.Model):
 
     to_pay_amount = fields.Float(
         string='To Pay Amount',
-        compute='_get_amounts'
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
         )
     paid_amount = fields.Float(
         string='Paid Amount',
-        compute='_get_amounts'
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
         )
     definitive_line_id = fields.Many2one(
         'public_budget.definitive_line',

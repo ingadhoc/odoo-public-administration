@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
 from openerp.exceptions import Warning
+import openerp.addons.decimal_precision as dp
 
 
 class budget(models.Model):
@@ -50,27 +51,33 @@ class budget(models.Model):
         )
     prec_passive_residue = fields.Float(
         string='Pre Close Passive Residue',
-        readonly=True
+        readonly=True,
+        digits=dp.get_precision('Account'),
         )
     prec_total_requested = fields.Float(
         string='Pre Close Total Requested',
-        readonly=True
+        readonly=True,
+        digits=dp.get_precision('Account'),
         )
     total_preventive = fields.Float(
         string='Total Preventive',
-        compute='_get_totals'
+        compute='_get_totals',
+        digits=dp.get_precision('Account'),
         )
     total_authorized = fields.Float(
         string='Total Authorized',
-        compute='_get_totals'
+        compute='_get_totals',
+        digits=dp.get_precision('Account'),
         )
     total_requested = fields.Float(
         string='Total Requested',
-        compute='_get_totals'
+        compute='_get_totals',
+        digits=dp.get_precision('Account'),
         )
     passive_residue = fields.Float(
         string='Total Residue',
-        compute='_get_totals'
+        compute='_get_totals',
+        digits=dp.get_precision('Account'),
         )
     budget_position_ids = fields.Many2many(
         relation='public_budget_budget_position_rel',

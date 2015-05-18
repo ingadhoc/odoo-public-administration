@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
 from openerp.exceptions import Warning
+import openerp.addons.decimal_precision as dp
 
 
 class advance_request_line(models.Model):
@@ -18,19 +19,22 @@ class advance_request_line(models.Model):
         )
     amount = fields.Float(
         string='Amount',
-        required=True
+        required=True,
+        digits=dp.get_precision('Account'),
         )
     description = fields.Char(
         string='Description',
-        required=True
+        required=True,
         )
     balance_amount = fields.Float(
         string='Balance Amount',
-        compute='_get_amounts'
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
         )
     returned_amount = fields.Float(
         string='Returned Amount',
-        compute='_get_amounts'
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
         )
     advance_request_id = fields.Many2one(
         'public_budget.advance_request',

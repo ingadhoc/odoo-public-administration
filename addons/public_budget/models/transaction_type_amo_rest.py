@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
 from openerp.exceptions import Warning
+import openerp.addons.decimal_precision as dp
 
 
 class transaction_type_amo_rest(models.Model):
@@ -18,11 +19,13 @@ class transaction_type_amo_rest(models.Model):
         )
     from_amount = fields.Float(
         string='From Amount',
-        required=True
+        required=True,
+        digits=dp.get_precision('Account'),
         )
     to_amount = fields.Float(
         string='To Amount',
-        required=True
+        required=True,
+        digits=dp.get_precision('Account'),
         )
     transaction_type_id = fields.Many2one(
         'public_budget.transaction_type',

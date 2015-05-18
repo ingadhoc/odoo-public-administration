@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
 from openerp.exceptions import Warning
+import openerp.addons.decimal_precision as dp
 
 
 class public_budget_definitive_make_invoice_detail(models.TransientModel):
@@ -19,6 +20,7 @@ class public_budget_definitive_make_invoice_detail(models.TransientModel):
     )
     to_invoice_amount = fields.Float(
         'Amount',
+        digits=dp.get_precision('Account'),
     )
     full_imputation = fields.Boolean(
         'Full Imputation?',
@@ -56,12 +58,6 @@ class public_budget_definitive_make_invoice(models.TransientModel):
     def _get_transaction_id(self):
         return self.env['public_budget.transaction'].browse(
             self._context.get('active_id', False))
-
-    @api.model
-    def _get_default_budget(self):
-        budgets = self.env['public_budget.budget'].search(
-            [('state', '=', 'open')])
-        return budgets and budgets[0] or False
 
     @api.model
     def _get_default_company(self):
@@ -111,12 +107,6 @@ class public_budget_definitive_make_invoice(models.TransientModel):
         default=_get_transaction_id,
         required=True
     )
-    budget_id = fields.Many2one(
-        'public_budget.budget',
-        'Budget',
-        default=_get_default_budget,
-        required=True
-    )
 
     @api.one
     @api.depends('transaction_id')
@@ -133,7 +123,7 @@ class public_budget_definitive_make_invoice(models.TransientModel):
         self.supplier_ids = supplier_ids
 
     @api.one
-    @api.onchange('supplier_id', 'budget_id')
+    @api.onchange('supplier_id')
     def _compute_lines(self):
         self.line_ids = self.env[
             'public_budget.definitive.make.invoice.detail']
@@ -143,7 +133,6 @@ class public_budget_definitive_make_invoice(models.TransientModel):
                 'public_budget.definitive_line'].search([
                     ('transaction_id', '=', transaction_id),
                     ('supplier_id', '=', self.supplier_id.id),
-                    ('budget_id', '=', self.budget_id.id),
                 ])
             lines = []
             for line in definitive_lines:
@@ -242,7 +231,6 @@ class public_budget_definitive_make_invoice(models.TransientModel):
             'payment_term': partner_data['value'].get('payment_term', False),
             'company_id': company_id,
             'transaction_id': wizard.transaction_id.id,
-            'budget_id': wizard.budget_id.id,
             'period_id': period_ids and period_ids[0] or False,
             'partner_bank_id': partner_data['value'].get('partner_bank_id', False),
         }

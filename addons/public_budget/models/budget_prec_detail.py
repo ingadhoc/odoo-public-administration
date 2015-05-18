@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
 from openerp.exceptions import Warning
+import openerp.addons.decimal_precision as dp
 
 
 class budget_prec_detail(models.Model):
@@ -18,37 +19,44 @@ class budget_prec_detail(models.Model):
     amount = fields.Float(
         string='Amount',
         readonly=True,
-        required=True
+        required=True,
+        digits=dp.get_precision('Account'),
         )
     draft_amount = fields.Float(
         string='Draft Amount',
         readonly=True,
-        required=True
+        required=True,
+        digits=dp.get_precision('Account'),
         )
     preventive_amount = fields.Float(
         string='Preventive Amount',
         readonly=True,
-        required=True
+        required=True,
+        digits=dp.get_precision('Account'),
         )
     definitive_amount = fields.Float(
         string='Definitive Amount',
         readonly=True,
-        required=True
+        required=True,
+        digits=dp.get_precision('Account'),
         )
     to_pay_amount = fields.Float(
         string='To Pay Amount',
         readonly=True,
-        required=True
+        required=True,
+        digits=dp.get_precision('Account'),
         )
     paid_amount = fields.Float(
         string='Paid Amount',
         readonly=True,
-        required=True
+        required=True,
+        digits=dp.get_precision('Account'),
         )
     balance_amount = fields.Float(
         string='Balance Amount',
         readonly=True,
-        required=True
+        required=True,
+        digits=dp.get_precision('Account'),
         )
     account_type = fields.Selection(
         string='Type',

@@ -9,5 +9,9 @@
             <field name="key">web_m2x_options.create_edit</field>
             <field name="value">False</field>
         </record>
+        <!-- cambiamos nombre reporte orden de pago -->
+        <record id="l10n_ar_aeroo_voucher.action_aeroo_report_ar_voucher" model="ir.actions.report.xml">
+            <field name="name">Orden de Pago</field>
+        </record>
     </data>
 </openerp>

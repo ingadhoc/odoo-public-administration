@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
 from openerp.exceptions import Warning
+import openerp.addons.decimal_precision as dp
 
 
 class transaction(models.Model):
@@ -121,31 +122,38 @@ class transaction(models.Model):
         )
     preventive_amount = fields.Float(
         string='Preventive Amount',
-        compute='_get_amounts'
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
         )
     definitive_amount = fields.Float(
         string='Definitive Amount',
-        compute='_get_amounts'
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
         )
     invoiced_amount = fields.Float(
         string='Invoiced Amount',
-        compute='_get_amounts'
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
         )
     to_pay_amount = fields.Float(
         string='To Pay Amount',
-        compute='_get_amounts'
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
         )
     paid_amount = fields.Float(
         string='Paid Amount',
-        compute='_get_amounts'
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
         )
     to_return_amount = fields.Float(
         string='To Return Amount',
-        compute='_get_amounts'
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
         )
     advance_amount = fields.Float(
         string='Advance Amount',
-        compute='_get_amounts'
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
         )
     company_id = fields.Many2one(
         'res.company',
@@ -158,7 +166,8 @@ class transaction(models.Model):
         )
     total = fields.Float(
         string='Total',
-        compute='_get_total'
+        compute='_get_total',
+        digits=dp.get_precision('Account'),
         )
     user_location_ids = fields.Many2many(
         string='User Locations',

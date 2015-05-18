@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
 from openerp.exceptions import Warning
+import openerp.addons.decimal_precision as dp
 
 
 class preventive_line(models.Model):
@@ -24,30 +25,36 @@ class preventive_line(models.Model):
     preventive_amount = fields.Float(
         string='Preventive',
         required=True,
+        digits=dp.get_precision('Account'),
         states={'closed': [('readonly', True)]}
         )
     advance_line = fields.Boolean(
-        string='advance_line'
+        string='advance_line',
         )
     remaining_amount = fields.Float(
         string='Remaining Amount',
-        compute='_get_amounts'
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
         )
     definitive_amount = fields.Float(
         string='Definitive Amount',
-        compute='_get_amounts'
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
         )
     invoiced_amount = fields.Float(
         string='Invoiced Amount',
-        compute='_get_amounts'
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
         )
     to_pay_amount = fields.Float(
         string='To Pay Amount',
-        compute='_get_amounts'
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
         )
     paid_amount = fields.Float(
         string='Paid Amount',
-        compute='_get_amounts'
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
         )
     state = fields.Selection(
         selection=[('draft', 'Draft'), ('open', 'Open'), ('definitive', 'definitive'), ('invoiced', 'invoiced'), ('closed', 'closed'), ('cancel', 'Cancel')],

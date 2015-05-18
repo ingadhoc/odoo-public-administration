@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
 from openerp.exceptions import Warning
+import openerp.addons.decimal_precision as dp
 
 
 class budget_detail(models.Model):
@@ -13,7 +14,8 @@ class budget_detail(models.Model):
 
     initial_amount = fields.Float(
         string='Initial Amount',
-        required=True
+        required=True,
+        digits=dp.get_precision('Account'),
         )
     state = fields.Selection(
         related='budget_id.state'

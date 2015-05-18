@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
 from openerp.exceptions import Warning
+import openerp.addons.decimal_precision as dp
 
 
 class definitive_line(models.Model):
@@ -30,28 +31,33 @@ class definitive_line(models.Model):
         string='Amount',
         readonly=True,
         required=True,
-        states={'draft': [('readonly', False)]}
+        states={'draft': [('readonly', False)]},
+        digits=dp.get_precision('Account'),
         )
     budget_position_id = fields.Many2one(
         'public_budget.budget_position',
         string='Budget Position',
-        readonly=True
+        readonly=True,
         )
     residual_amount = fields.Float(
         string='Residual Amount',
-        compute='_get_amounts'
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
         )
     to_pay_amount = fields.Float(
         string='To Pay Amount',
-        compute='_get_amounts'
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
         )
     paid_amount = fields.Float(
         string='Paid Amount',
-        compute='_get_amounts'
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
         )
     invoiced_amount = fields.Float(
         string='Invoiced Amount',
-        compute='_get_amounts'
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
         )
     preventive_line_id = fields.Many2one(
         'public_budget.preventive_line',

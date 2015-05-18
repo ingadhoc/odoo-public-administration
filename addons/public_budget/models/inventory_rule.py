@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
 from openerp.exceptions import Warning
+import openerp.addons.decimal_precision as dp
 
 
 class inventory_rule(models.Model):
@@ -16,7 +17,8 @@ class inventory_rule(models.Model):
         )
     min_amount = fields.Float(
         string='Minimum Amount',
-        required=True
+        required=True,
+        digits=dp.get_precision('Account'),
         )
     company_id = fields.Many2one(
         'res.company',

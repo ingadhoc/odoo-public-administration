@@ -2,6 +2,7 @@
 from openerp import models, fields, api, _
 from openerp.exceptions import Warning
 from datetime import datetime
+import openerp.addons.decimal_precision as dp
 
 
 class budget_position(models.Model):
@@ -40,19 +41,23 @@ class budget_position(models.Model):
         )
     draft_amount = fields.Float(
         string='Draft Amount',
-        compute='_get_amounts'
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
         )
     preventive_amount = fields.Float(
         string='Preventive Amount',
-        compute='_get_amounts'
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
         )
     definitive_amount = fields.Float(
         string='Definitive Amount',
-        compute='_get_amounts'
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
         )
     to_pay_amount = fields.Float(
         string='To Pay Amount',
-        compute='_get_amounts'
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
         )
     paid_amount = fields.Float(
         string='Paid Amount',
@@ -60,23 +65,28 @@ class budget_position(models.Model):
         )
     balance_amount = fields.Float(
         string='Balance Amount',
-        compute='_get_amounts'
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
         )
     projected_amount = fields.Float(
         string='Projected Amount',
-        compute='_get_amounts'
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
         )
     projected_avg = fields.Float(
         string='Projected Avg',
-        compute='_get_amounts'
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
         )
     preventive_avg = fields.Float(
         string='Preventive Perc.',
-        compute='_get_amounts'
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
         )
     amount = fields.Float(
         string='Amount',
-        compute='_get_amounts'
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
         )
     parent_left = fields.Integer(
         string='Parent Left',
