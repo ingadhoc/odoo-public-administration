@@ -34,6 +34,9 @@ Installs All Sipreco Project Dependencies
         'account_accountant',
         'account_clean_cancelled_invoice_number',
         'l10n_ar_bank',
+        'portal',   # necesitamos portal por un error raro al crear un voucher
+        # es un error de javascript pero con portal de alguna manera se
+        # resuelve. Luego de instalar portal refrescar pantalla
         'disable_openerp_online',
     ],
     'data': [
