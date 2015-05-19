@@ -41,7 +41,7 @@
             <field name="inherit_id" ref="account_voucher.view_invoice_supplier"/>
             <field name="arch" type="xml">
                 <!-- we hide refund button -->
-                <button name="%(action_account_invoice_refund)d" position="attributes">
+                <button name="%(account.action_account_invoice_refund)d" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </button>
 

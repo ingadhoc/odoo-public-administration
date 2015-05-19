@@ -34,9 +34,6 @@
                 <form position="attributes">
                     <attribute name="create">false</attribute>
                 </form>
-                <button name="receipt_print" position="attributes">
-                    <attribute name="states"></attribute>
-                </button>
                 <field name="partner_id" position="before">
                     <field name="transaction_with_advance_payment" invisible="1"/>
                     <field name="partner_ids" invisible="1"/>
