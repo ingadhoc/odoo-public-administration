@@ -4,8 +4,8 @@
        <record model="ir.ui.view" id="view_account_check_form">
             <field name="name">account.check.form</field>
             <field name="model">account.check</field>
-            <field name="arch" type="xml">
             <field name="inherit_id" ref="account_check.view_account_check_form"/>
+            <field name="arch" type="xml">
                 <field name="state" position="before">
                     <button name="action_delivered" type="object" string="Delivered" states="handed"/>
                 </field>

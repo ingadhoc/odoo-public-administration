@@ -22,7 +22,7 @@
             <field name="act_from" ref="account_voucher_double_validation.act_confirmed"/>
             <field name="act_to" ref="act_signature_process"/>
             <field name="signal">confirmed_signature_process</field>
-            <field name="condition">check_to_sign_process</field>
+            <field name="condition">check_to_sign_process()</field>
         </record>
 
         <record id="signature_process_signed" model="workflow.transition">
