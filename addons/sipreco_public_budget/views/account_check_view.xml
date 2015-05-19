@@ -9,31 +9,10 @@
                 <field name="state" position="before">
                     <button name="action_delivered" type="object" string="Delivered" states="handed"/>
                 </field>
-                <field name="issue_date" position="before">
-                    <field name="delivered"/>
-                </field>
-            </field>
-        </record>
-
-        <record model="ir.ui.view" id="view_account_check_tree">
-            <field name="name">account.check.tree</field>
-            <field name="model">account.check</field>
-            <field name="inherit_id" ref="account_check.view_account_check_tree"/>
-            <field name="arch" type="xml">
-                <tree>
-                    <field name="delivered"/>
-                </tree>
-            </field>
-        </record>
-
-        <record model="ir.ui.view" id="view_account_check_create_tree">
-            <field name="name">account.check.tree</field>
-            <field name="model">account.check</field>
-            <field name="inherit_id" ref="account_check.view_account_check_create_tree"/>
-            <field name="arch" type="xml">
-                <tree>
-                    <field name="delivered"/>
-                </tree>
+                <!-- buttons to add to_be_handed behaviour -->
+                <button position="after'">
+                    <button name="to_be_handed" string="Handed" attrs="{'invisible':['|',('type','!=','issue'),('state','!=','to_be_handed')]}" />
+                </button>
             </field>
         </record>
     </data>

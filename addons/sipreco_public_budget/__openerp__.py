@@ -11,6 +11,7 @@
         'views/account_voucher_view.xml',
         'views/account_check_view.xml',
         'workflow/account_voucher_workflow.xml',
+        'workflow/account_check_workflow.xml',
         'security/security.xml',
         'data/data.xml',
         'reports/receipt_report.xml',

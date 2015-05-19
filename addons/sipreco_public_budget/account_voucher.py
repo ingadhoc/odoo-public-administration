@@ -63,7 +63,8 @@ class account_voucher(models.Model):
             ('signed', 'Signed'),
             ('cancel', 'Cancelled'),
             ('proforma', 'Pro-forma'),
-            ('posted', 'Posted')
+            # we also change posted for paid
+            ('posted', 'Paid')
         ])
 
     @api.multi
