@@ -21,6 +21,17 @@
                 </field>
             </field>
         </record>
-          
+
+        <!-- make print button available in all states -->
+        <record id="view_vendor_payment_form" model="ir.ui.view">
+            <field name="name">account.voucher.customer.pay.form</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="report_extended_voucher.view_vendor_receipt_dialog_form"/>
+            <field name="arch" type="xml">
+                <button name="receipt_print" position="attributes">
+                    <attribute name="states"></attribute>
+                </button>
+            </field>
+        </record>
     </data>
 </openerp>
