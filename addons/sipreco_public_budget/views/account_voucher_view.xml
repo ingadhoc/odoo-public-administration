@@ -19,11 +19,41 @@
                 <field name="advance_amount" position="attributes">
                     <attribute name="attrs">{'invisible':[('transaction_with_advance_payment', '=', False)]}</attribute>
                 </field>
+
+            </field>
+        </record>
+
+        <!-- vies modifications because of signature required -->
+        <record id="view_vendor_payment_signature_form" model="ir.ui.view">
+            <field name="name">account.voucher.customer.pay.form</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher_double_validation.view_vendor_payment_form"/>
+            <field name="arch" type="xml">
+                <field name="state" position="attributes">
+                    <attribute name="statusbar_visible">draft,confirmed,signature_process,signed,posted</attribute>
+                </field>
+
+                <!-- Make validate only visible from signed -->
+                <button name="proforma_voucher" position="attributes">
+                    <attribute name="states">signed</attribute>
+                </button>
+
+                <!-- Add signe buttons -->
+                <button name="proforma_voucher" position="before">
+                    <button name="confirmed_signature_process" class="oe_highlight" string="To Signature Process" states="confirmed"/>
+                    <button name="signature_process_signed" class="oe_highlight" string="Signed" states="signature_process"/>
+                </button>
+
+                <!-- Add cancel on sign states -->
+                <button name="proforma_voucher" position="after">
+                     <button name="cancel_voucher" string="Cancel Receipt" states="signature_process,signed"/>
+                </button>
+
             </field>
         </record>
 
         <!-- make print button available in all states -->
-        <record id="view_vendor_payment_form" model="ir.ui.view">
+        <record id="view_print_button_vendor_payment_form" model="ir.ui.view">
             <field name="name">account.voucher.customer.pay.form</field>
             <field name="model">account.voucher</field>
             <field name="inherit_id" ref="report_extended_voucher.view_vendor_receipt_dialog_form"/>
@@ -33,5 +63,6 @@
                 </button>
             </field>
         </record>
+
     </data>
 </openerp>

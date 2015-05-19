@@ -52,3 +52,26 @@ class account_voucher(models.Model):
                 raise Warning(_('You can not confirm a voucher with to pay\
                     amount equal to 0'))
         return True
+
+# We add signature states
+
+    state = fields.Selection(
+        selection=[
+            ('draft', 'Draft'),
+            ('confirmed', 'Confirmed'),
+            ('signature_process', 'Signature Process'),
+            ('signed', 'Signed'),
+            ('cancel', 'Cancelled'),
+            ('proforma', 'Pro-forma'),
+            ('posted', 'Posted')
+        ])
+
+    @api.multi
+    def check_to_sign_process(self):
+        """
+        """
+        for voucher in self:
+            if voucher.amount != voucher.to_pay_amount:
+                raise Warning(_('You can not send to sign process a Voucher \
+                    that has Total Amount different from To Pay Amount'))
+        return True
