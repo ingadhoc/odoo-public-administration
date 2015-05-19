@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+       <record model="ir.ui.view" id="view_account_check_form">
+            <field name="name">account.check.form</field>
+            <field name="model">account.check</field>
+            <field name="arch" type="xml">
+            <field name="inherit_id" ref="account_check.view_account_check_form"/>
+                <field name="state" position="before">
+                    <button name="action_delivered" type="object" string="Delivered" states="handed"/>
+                </field>
+                <field name="issue_date" position="before">
+                    <field name="delivered"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_account_check_tree">
+            <field name="name">account.check.tree</field>
+            <field name="model">account.check</field>
+            <field name="inherit_id" ref="account_check.view_account_check_tree"/>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="delivered"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_account_check_create_tree">
+            <field name="name">account.check.tree</field>
+            <field name="model">account.check</field>
+            <field name="inherit_id" ref="account_check.view_account_check_create_tree"/>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="delivered"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</openerp>
