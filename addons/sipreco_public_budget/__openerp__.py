@@ -9,11 +9,8 @@
         'views/custom_views.xml',
         'views/account_asset_view.xml',
         'views/account_voucher_view.xml',
-<<<<<<< HEAD
         'views/account_check_view.xml',
-=======
         'workflow/account_voucher_workflow.xml',
->>>>>>> juan_dev
         'security/security.xml',
         'data/data.xml',
         'reports/receipt_report.xml',
