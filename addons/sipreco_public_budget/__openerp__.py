@@ -9,6 +9,7 @@
         'views/custom_views.xml',
         'views/account_asset_view.xml',
         'views/account_voucher_view.xml',
+        'views/account_check_view.xml',
         'security/security.xml',
         'data/data.xml',
         'reports/receipt_report.xml',
