@@ -40,6 +40,11 @@
             <field name="model">account.invoice</field>
             <field name="inherit_id" ref="account_voucher.view_invoice_supplier"/>
             <field name="arch" type="xml">
+                <!-- we hide refund button -->
+                <button name="%(account.action_account_invoice_refund)d" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </button>
+
                 <xpath expr="//field[@name='invoice_line']/tree/field[@name='account_id']" position="after">
                     <field name="definitive_line_id"/>
                 </xpath>

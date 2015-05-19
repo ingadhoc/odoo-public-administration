@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <!-- activities -->
+        <record id="act_signature_process" model="workflow.activity">
+            <field name="wkf_id" ref="account_voucher.wkf"/>
+            <field name="name">signature_process</field>
+            <field name="action">write({'state':'signature_process'})</field>
+            <field name="kind">function</field>
+        </record>
+
+        <record id="act_signed" model="workflow.activity">
+            <field name="wkf_id" ref="account_voucher.wkf"/>
+            <field name="name">signed</field>
+            <field name="action">write({'state':'signed'})</field>
+            <field name="kind">function</field>
+        </record>
+        
+        <!-- transitions -->
+        <record id="confirmed_signature_process" model="workflow.transition">
+            <field name="act_from" ref="account_voucher_double_validation.act_confirmed"/>
+            <field name="act_to" ref="act_signature_process"/>
+            <field name="signal">confirmed_signature_process</field>
+            <field name="condition">check_to_sign_process</field>
+        </record>
+
+        <record id="signature_process_signed" model="workflow.transition">
+            <field name="act_from" ref="act_signature_process"/>
+            <field name="act_to" ref="act_signed"/>
+            <field name="signal">signature_process_signed</field>
+        </record>
+
+        <record id="signed_done" model="workflow.transition">
+            <field name="act_from" ref="act_signed"/>
+            <field name="act_to" ref="account_voucher.act_done"/>
+            <field name="signal">proforma_voucher</field>
+        </record>
+
+        <record id="signature_process_cancel" model="workflow.transition">
+            <field name="act_from" ref="act_signature_process"/>
+            <field name="act_to" ref="account_voucher.act_cancel"/>
+            <field name="signal">cancel_voucher</field>
+        </record>
+
+        <record id="signed_cancel" model="workflow.transition">
+            <field name="act_from" ref="act_signed"/>
+            <field name="act_to" ref="account_voucher.act_cancel"/>
+            <field name="signal">cancel_voucher</field>
+        </record>
+        
+    </data>
+</openerp>
