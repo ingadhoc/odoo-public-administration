@@ -331,8 +331,6 @@ class transaction(models.Model):
         if self.type_id.with_advance_payment:
             not_cancel_amount = sum(
                 x.to_pay_amount for x in self.advance_voucher_ids if x.state != 'cancel')
-            print 'not_cancel_amount', not_cancel_amount
-            print 'self.advance_amount', self.advance_amount
             if not_cancel_amount > self.advance_amount:
                 raise Warning(
                     _("In transactions with 'Advance Payment', \
