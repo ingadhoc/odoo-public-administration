@@ -19,7 +19,7 @@ Sipreco Set Up Data
         'account_check',
         'l10n_ar_bank',
         'l10n_ar_invoice',
-        'account_balance_constraint',
+        # 'account_balance_constraint',
     ],
     'data': [
         'data/account/ir.sequence.csv',
