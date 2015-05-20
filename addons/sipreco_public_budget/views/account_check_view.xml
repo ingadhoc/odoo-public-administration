@@ -10,7 +10,7 @@
                     <button name="action_delivered" type="object" string="Delivered" states="handed"/>
                 </field>
                 <!-- buttons to add to_be_handed behaviour -->
-                <button position="after'">
+                <button position="after">
                     <button name="to_be_handed" string="Handed" attrs="{'invisible':['|',('type','!=','issue'),('state','!=','to_be_handed')]}" />
                 </button>
             </field>
