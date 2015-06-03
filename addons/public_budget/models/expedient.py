@@ -69,7 +69,7 @@ class expedient(models.Model):
         store=True,
         compute='_get_current_location'
         )
-    note = fields.Html(
+    note = fields.Text(
         string='Note'
         )
     final_location = fields.Char(
