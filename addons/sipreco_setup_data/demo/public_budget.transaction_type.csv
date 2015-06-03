@@ -8,3 +8,4 @@ purchase_type_sueldos,Sueldos,,
 purchase_type_anticipo_gasto,Anticipo de Gastos,True,sipreco_account_chart.account_account_401
 purchase_type_subsidio_con_cargo,Subsidio con Cargo de Rendición,True,sipreco_account_chart.account_account_409
 purchase_type_subsidio_sin_cargo,Subsidio sin Cargo de Rendición,,
+purchase_type_compra_directa_con_autorizacion,Compra Directa con autorización de cuerpo,,
