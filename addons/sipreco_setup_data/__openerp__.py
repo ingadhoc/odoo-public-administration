@@ -18,7 +18,8 @@ Sipreco Set Up Data
         'sipreco_public_budget',
         'account_check',
         'l10n_ar_bank',
-        'l10n_ar_invoice',
+        # 'l10n_ar_invoice',
+        'account_tax_settlement_voucher',
         # 'account_balance_constraint',
     ],
     'data': [
