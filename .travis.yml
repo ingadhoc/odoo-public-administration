@@ -50,6 +50,9 @@ install:
   # install pyafipws after others dependencies because dependency erro
   - pip install pyafipws
 
+  # oca OCA/web
+  - git clone https://github.com/OCA/web.git ${HOME}/web
+
   # oca server tools
   - git clone https://github.com/OCA/server-tools.git ${HOME}/server-tools
 
