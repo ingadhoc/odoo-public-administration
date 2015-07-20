@@ -41,7 +41,7 @@ install:
   - git clone https://github.com/ingadhoc/odoo-addons.git ${HOME}/odoo-addons
 
   # odoo addons argentina
-  - pip install geopy==0.95.1 BeautifulSoup pyOpenSSL suds httplib2>=0.7 pysimplesoap==1.08.8 m2crypto>=0.18 fpdf>=1.7.2 dbf>=0.88.019 Pillow>=2.0.0 pyafipws
+  - pip install geopy==0.95.1 BeautifulSoup pyOpenSSL suds httplib2 pysimplesoap==1.08.8 m2crypto fpdf dbf Pillow pyafipws
   - git clone https://github.com/ingadhoc/odoo-argentina.git ${HOME}/odoo-argentina
 
   # repository requirements
