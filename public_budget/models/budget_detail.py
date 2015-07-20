@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import models, fields, api, _
-from openerp.exceptions import Warning
+from openerp import models, fields, _
 import openerp.addons.decimal_precision as dp
 
 
@@ -30,7 +29,8 @@ class budget_detail(models.Model):
         'public_budget.budget_position',
         string='Budget Position',
         required=True,
-        context={'default_type': 'normal', 'default_budget_assignment_allowed': 1},
+        context={
+            'default_type': 'normal', 'default_budget_assignment_allowed': 1},
         domain=[('budget_assignment_allowed', '=', True)]
         )
 

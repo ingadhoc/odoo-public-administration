@@ -56,7 +56,8 @@ class account_voucher(models.Model):
         for line in self.line_ids:
             if line.amount and line.move_line_id and line.move_line_id.invoice:
                 budget_position_ids.extend([
-                    x.definitive_line_id.budget_position_id.id for x in line.move_line_id.invoice.invoice_line])
+                    x.definitive_line_id.budget_position_id.id for x in (
+                        line.move_line_id.invoice.invoice_line)])
         budget_position_ids = list(set(budget_position_ids))
         self.budget_position_ids = budget_position_ids
 
@@ -68,7 +69,8 @@ class account_voucher(models.Model):
         self.partner_ids = self.env['res.partner']
         partner_ids = []
         if self.transaction_id:
-            if self.transaction_id.type_id.with_advance_payment and self.transaction_id.partner_id:
+            if self.transaction_id.type_id.with_advance_payment and (
+                    self.transaction_id.partner_id):
                 partner_ids = [self.transaction_id.partner_id.id]
             else:
                 partner_ids = self.transaction_id.supplier_ids
@@ -115,74 +117,4 @@ class account_voucher(models.Model):
             res['account_id'] = account.id
         return res
 
-    # @api.onchange('dummy_journal_id')
-    # def change_dummy_journal_id(self):
-    # TODO si usamos este onchange temoes que llamar al super
-    #     """Unlink checks on journal change"""
-    #     print 'asdasda', self
-    #     print 'asdasda', self.line_cr_ids
-    #     print 'asdasda', self.line_dr_ids
-    #     print 'asdasda', self.amount
-    #     print 'asdasda', self.journal_id
-
-    # @api.multi
-    # def onchange_partner_id(
-    #         self, partner_id, journal_id, amount, currency_id, ttype, date,
-    #         transaction_id=False):
-    #     # Si viene transacion entonces buscamos los move_lines correspondientes
-    #     # y lo pasamos por contexto
-    #     # if transaction_id:
-    #     #     self = self.with_context(
-    #     #         move_line_ids=self.get_transaction_move_lines(
-    #     #         ttype, partner_id, transaction_id).ids)
-    #     res = super(voucher, self).onchange_partner_id(
-    #         partner_id, journal_id, amount, currency_id, ttype, date,)
-    #     print 'res333, change partner'
-    #     print res
-    #     return res
-
-    # @api.multi
-    # def onchange_amount(
-    #         self, amount, rate, partner_id, journal_id, currency_id, ttype,
-    #         date, payment_rate_currency_id, company_id, transaction_id=False):
-    # #     if transaction_id:
-    # #         self = self.with_context(
-    # #             move_line_ids=self.get_transaction_move_lines(
-    # #             ttype, partner_id, transaction_id).ids)
-    #     res = super(voucher, self).onchange_amount(
-    #         amount, rate, partner_id, journal_id, currency_id, ttype, date,
-    #         payment_rate_currency_id, company_id)
-    #     print 'res222, change amount'
-    #     print res
-    #     return res
-
-    # def onchange_journal(
-    #         self, cr, uid, ids, journal_id, line_ids, tax_id, partner_id, date,
-    #         amount, ttype, company_id, context=None):
-    #     res = super(voucher, self).onchange_journal(
-    #         cr, uid, ids, journal_id, line_ids, tax_id, partner_id, date, amount,
-    #         ttype, company_id, context=context)
-    #     print '111, change journal'
-    #     print res
-    #     return res
-    # # @api.multi
-    # # def onchange_journal(
-    # #         self, journal_id, line_ids, tax_id, partner_id, date, amount,
-    # #         ttype, company_id):
-    # #         # ttype, company_id, transaction_id):
-    # #     # if transaction_id:
-    # #     #     self = self.with_context(
-    # #     #         move_line_ids=self.get_transaction_move_lines(
-    # #     #         ttype, partner_id, transaction_id).ids)
-    # #     res = super(voucher, self).onchange_journal(
-    # #         journal_id, line_ids, tax_id, partner_id, date, amount, ttype,
-    # #         company_id)
-    # #     return res
-
-    # @api.multi
-    # def recompute_voucher_lines(
-    #         self, partner_id, journal_id, price, currency_id, ttype, date):
-    #     default = super(voucher, self).recompute_voucher_lines(
-    #         partner_id, journal_id, price, currency_id, ttype, date)
-    #     return default
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

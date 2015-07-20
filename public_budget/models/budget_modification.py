@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import models, fields, api, _
-from openerp.exceptions import Warning
+from openerp import models, fields, api
 
 
 class budget_modification(models.Model):
@@ -17,8 +16,9 @@ class budget_modification(models.Model):
     initial_approval = fields.Boolean(
         string='Is Initial Approval?'
         )
-    type = fields.Selection(
-        [(u'increase_decrease', u'Increase / Decrease'), (u'exchange', u'Exchange')],
+    type = fields.Selection([
+        (u'increase_decrease', u'Increase / Decrease'),
+        (u'exchange', u'Exchange')],
         string='Budget Modification Type',
         required=True,
         default='increase_decrease'
@@ -64,9 +64,11 @@ class budget_modification(models.Model):
         rest_type = False
         if self.type == 'exchange':
             decrease_category_ids = [
-                x.budget_position_id.category_id.id for x in self.budget_modification_detail_ids if x.amount < 0.0]
+                x.budget_position_id.category_id.id for x in (
+                    self.budget_modification_detail_ids) if x.amount < 0.0]
             increase_category_ids = [
-                x.budget_position_id.category_id.id for x in self.budget_modification_detail_ids if x.amount > 0.0]
+                x.budget_position_id.category_id.id for x in (
+                    self.budget_modification_detail_ids) if x.amount > 0.0]
             domain = [('origin_category_id', 'in', decrease_category_ids),
                       ('destiny_category_id', 'in', increase_category_ids)]
             restrictions = self.env[

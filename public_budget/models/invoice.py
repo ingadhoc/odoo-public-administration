@@ -67,7 +67,9 @@ class invoice(models.Model):
     def action_cancel(self):
         for inv in self:
             if inv.to_pay_amount:
-                raise Warning(_('You cannot cancel an invoice which has been sent to pay. You need to cancel related payments first.'))
+                raise Warning(_(
+                    'You cannot cancel an invoice which has been sent to pay.\
+                    You need to cancel related payments first.'))
         return super(invoice, self).action_cancel()
 
     @api.multi

@@ -105,7 +105,7 @@ class budget_position(models.Model):
         'public_budget.budget_position',
         string='Parent',
         ondelete='cascade',
-        context={'default_type':'view'},
+        context={'default_type': 'view'},
         domain=[('type', '=', 'view')]
         )
     budget_detail_ids = fields.One2many(
@@ -245,13 +245,15 @@ class budget_position(models.Model):
         # Check before seting budget_assignment_allowed false if position used
         if not self.budget_assignment_allowed and (
                 self.budget_modification_detail_ids or self.budget_detail_ids):
-            raise Warning(_("You can not set 'Budget Assignment Allowed' to false if budget position is\
-                being used in a budget detail or modification."))
+            raise Warning(_(
+                "You can not set 'Budget Assignment Allowed' to false if\
+                budget position is being used in a budget detail or\
+                modification."))
         if self.budget_assignment_allowed:
             # Checl no parent has budget allowed
             if len(self.get_parent_assignment_position()) > 1:
-                raise Warning(_('In one branch only one budget position can have \
-                    Budget Assignment Allowed.'))
+                raise Warning(_('In one branch only one budget position can\
+                    have Budget Assignment Allowed.'))
             # Checl no children has budget allowed
             else:
                 children_allowed = self.search([
@@ -271,9 +273,9 @@ class budget_position(models.Model):
             ('parent_left', '<', self.parent_left),
             ('parent_right', '>', self.parent_right)
             ])
-        positions_assignment_allowed = [
+        assignment_allowed = [
             x for x in parents if x.budget_assignment_allowed]
-        return positions_assignment_allowed and positions_assignment_allowed[0] or []
+        return assignment_allowed and assignment_allowed[0] or []
 
     @api.one
     @api.depends(

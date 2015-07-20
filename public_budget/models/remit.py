@@ -83,12 +83,16 @@ class remit(models.Model):
                     ('expedient_ids', '=', expedient.id)],
                     order='date desc')
                 if remits[0] != self:
-                    raise Warning(_('You can Not cancel a remit that is not the last one for all the expedients'))
+                    raise Warning(_(
+                        'You can Not cancel a remit that is not the last one\
+                        for all the expedients'))
 
     @api.one
     def check_user_location(self):
         if self.location_dest_id not in self.env.user.location_ids:
-            raise Warning(_('You can Not Confirme a Remit of a Location where your are not authorized!'))
+            raise Warning(_(
+                'You can Not Confirme a Remit of a Location where your are not\
+                authorized!'))
 
     @api.multi
     def action_cancel_in_transit(self):
