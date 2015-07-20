@@ -25,7 +25,8 @@ class budget_modification_detail(models.Model):
         'public_budget.budget_position',
         string='Budget Position',
         required=True,
-        context={'default_type': 'normal', 'default_budget_assignment_allowed': 1},
+        context={
+            'default_type': 'normal', 'default_budget_assignment_allowed': 1},
         domain=[('budget_assignment_allowed', '=', True)]
         )
 
@@ -33,8 +34,9 @@ class budget_modification_detail(models.Model):
     @api.constrains('budget_position_id', 'amount')
     def _check_modification(self):
         budget_id = self.budget_modification_id.budget_id.id
-        if self.budget_position_id.budget_assignment_allowed and self.with_context(
-                budget_id=budget_id).budget_position_id.balance_amount < 0.0:
+        if self.budget_position_id.budget_assignment_allowed and (
+                self.with_context(
+                budget_id=budget_id).budget_position_id.balance_amount < 0.0):
             raise Warning(
                 _("You can not make this modification as '%s' will have a \
                     negative balance") % (self.budget_position_id.name))

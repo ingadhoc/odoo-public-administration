@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import models, fields, api, _
-from openerp.exceptions import Warning
+from openerp import models, fields
 
 
 class budget_pos_exc_rest(models.Model):

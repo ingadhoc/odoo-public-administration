@@ -117,7 +117,10 @@ class transaction(models.Model):
         string='Advance Preventive Lines',
         readonly=True,
         states={'open': [('readonly', False)]},
-        context={'default_advance_line': 1, 'default_preventive_status': 'confirmed', 'advance_line': 1},
+        context={
+            'default_advance_line': 1,
+            'default_preventive_status': 'confirmed',
+            'advance_line': 1},
         domain=[('advance_line', '=', True)]
         )
     preventive_amount = fields.Float(
@@ -262,7 +265,8 @@ class transaction(models.Model):
             preventive.invoiced_amount
             for preventive in self.preventive_line_ids])
         to_pay_amount = sum(
-            x.to_pay_amount for x in self.voucher_ids if x.state in ['confirmed', 'posted'])
+            x.to_pay_amount for x in self.voucher_ids if x.state in [
+                'confirmed', 'posted'])
         paid_amount = sum(
             x.amount for x in self.voucher_ids if x.state == 'posted')
 
@@ -309,19 +313,27 @@ class transaction(models.Model):
         """ Check preventive lines
         """
         if not self.preventive_line_ids:
-                raise Warning(
-                    _('To close a transaction there must be at least one preventive line'))
+                raise Warning(_(
+                    'To close a transaction there must be at least one\
+                    preventive line'))
 
         for line in self.preventive_line_ids:
-            if line.preventive_amount != line.definitive_amount or line.preventive_amount != line.invoiced_amount or line.preventive_amount != line.to_pay_amount or line.preventive_amount != line.paid_amount:
-                raise Warning(
-                    _('To close a transaction, Preventive, Definitive, Invoiced, To Pay and Paid amount must be the same for each line'))
+            if (
+                    line.preventive_amount != line.definitive_amount) or (
+                    line.preventive_amount != line.invoiced_amount) or (
+                    line.preventive_amount != line.to_pay_amount) or (
+                    line.preventive_amount != line.paid_amount):
+                raise Warning(_(
+                    'To close a transaction, Preventive, Definitive, Invoiced,\
+                    To Pay and Paid amount must be the same for each line'))
 
         # Check advance transactions
         if self.type_id.with_advance_payment:
             if self.to_return_amount != 0.0:
-                raise Warning(
-                    _('To close a transaction with advance payment, Payment Order Amounts - Refund Amounts should be equal to Definitive Amounts'))
+                raise Warning(_(
+                    'To close a transaction with advance payment,\
+                    Payment Order Amounts - Refund Amounts should be equal to\
+                    Definitive Amounts'))
 
 # Constraints
     @api.one
@@ -330,11 +342,13 @@ class transaction(models.Model):
     def _check_advance_preventive_lines(self):
         if self.type_id.with_advance_payment:
             not_cancel_amount = sum(
-                x.to_pay_amount for x in self.advance_voucher_ids if x.state != 'cancel')
+                x.to_pay_amount for x in self.advance_voucher_ids if (
+                    x.state != 'cancel'))
             if not_cancel_amount > self.advance_amount:
                 raise Warning(
                     _("In transactions with 'Advance Payment', \
-                        Settlement Amount can't be greater than Payment Orders Amount"))
+                        Settlement Amount can't be greater than\
+                        Payment Orders Amount"))
 
     @api.one
     @api.constrains('preventive_line_ids', 'type_id', 'expedient_id')
@@ -370,9 +384,11 @@ class transaction(models.Model):
             'account_voucher.view_vendor_payment_form')
         res['views'] = [(form_view_id, 'form')]
 
+        partner_id = self.partner_id
+
         res['context'] = {
             'default_transaction_id': self.id,
-            'default_partner_id': self.partner_id and self.partner_id.id or False,
+            'default_partner_id': partner_id and partner_id.id or False,
             'default_type': 'payment',
             }
         return res

@@ -98,7 +98,8 @@ class public_budget_definitive_make_invoice(models.TransientModel):
         'account.journal',
         string='Journal',
         required=True,
-        domain="[('type', 'in', ('purchase','purchase_refund')),('company_id','=',company_id)]",
+        domain="[('type', 'in', ('purchase','purchase_refund')),\
+        ('company_id','=',company_id)]",
         default=_get_default_journal
     )
     transaction_id = fields.Many2one(
@@ -113,8 +114,9 @@ class public_budget_definitive_make_invoice(models.TransientModel):
     def _get_supplier_ids(self):
         self.supplier_ids = self.env['res.partner']
         definitive_lines = self.env[
-            'public_budget.definitive_line'].search(
-            [('preventive_line_id.transaction_id', '=', self.transaction_id.id)])
+            'public_budget.definitive_line'].search([
+                ('preventive_line_id.transaction_id',
+                    '=', self.transaction_id.id)])
         supplier_ids = []
         for line in definitive_lines:
             # No lo buscamos arriba porque no es un campo stored
@@ -158,35 +160,37 @@ class public_budget_definitive_make_invoice(models.TransientModel):
         advance_account_id = False
         if tran_type.with_advance_payment:
             if not tran_type.advance_account_id:
-                raise Warning(
-                    _("On Advance Transactions, transaction advance type must have and advance account configured!"))
+                raise Warning(_(
+                    "On Advance Transactions, transaction advance type\
+                    must have and advance account configured!"))
             advance_account_id = tran_type.advance_account_id.id
             # Check advance remaining amount
             total_to_invoice_amount = sum([
                 x.to_invoice_amount for x in wizard.line_ids])
             # TODO  verificar que se debe comparar con este campo
-            if total_to_invoice_amount > wizard.transaction_id.to_return_amount:
-                raise Warning(
-                    _("On Advance Transactions, sum of to Invoice Amount can not be greater than Advance Remaining Amount!"))
+            if total_to_invoice_amount > (
+                    wizard.transaction_id.to_return_amount):
+                raise Warning(_(
+                    "On Advance Transactions, sum of to Invoice Amount can not\
+                    be greater than Advance Remaining Amount!"))
 
         if context is None:
             context = {}
         inv_lines = []
         for line in wizard.line_ids:
             definitive_line = line.definitive_line_id
+            preventive_line = definitive_line.preventive_line_id
             if line.to_invoice_amount:
                 line_vals = {
                     'name': definitive_line.budget_position_id.name,
                     'price_unit': line.to_invoice_amount,
                     'quantity': 1,
                     'definitive_line_id': definitive_line.id,
-                    'account_id': definitive_line.preventive_line_id.account_id.id,
+                    'account_id': preventive_line.account_id.id,
                     # 'discount': ,
                     # 'product_id': line.product_id.id or False,
                     # 'uos_id': line.uos_id.id or False,
                     # 'sequence': line.sequence,
-                    # 'invoice_line_tax_id': [(6, 0, line_data['value'].get('invoice_line_tax_id', []))],
-                    # 'account_analytic_id': line.account_analytic_id.id or False,
                 }
                 inv_lines.append(
                     inv_line_obj.create(cr, uid, line_vals, context=context))
@@ -203,13 +207,14 @@ class public_budget_definitive_make_invoice(models.TransientModel):
 
         # Si no hay se creo alguna linea es porque todas tienen amount 0
         if not inv_lines:
-            raise Warning(
-                _("You should set at least one line with amount greater than 0"))
+            raise Warning(_(
+                "You should set at least one line with amount greater than 0"))
 
         company_id = self.pool['res.users'].browse(
             cr, uid, uid, context=context).company_id.id
         partner_data = self.pool['account.invoice'].onchange_partner_id(
-            cr, uid, False, inv_type, wizard.supplier_id.id, company_id=company_id)
+            cr, uid, False, inv_type,
+            wizard.supplier_id.id, company_id=company_id)
         period_ids = period_obj.find(
             cr, uid, wizard.invoice_date, context=context)
         if advance_account_id:
@@ -227,12 +232,14 @@ class public_budget_definitive_make_invoice(models.TransientModel):
             # 'direct_payment_journal_id': advance_journal_id,
             'journal_id': wizard.journal_id.id,
             # 'currency_id': invoice.currency_id and invoice.currency_id.id,
-            'fiscal_position': partner_data['value'].get('fiscal_position', False),
+            'fiscal_position': partner_data['value'].get(
+                'fiscal_position', False),
             'payment_term': partner_data['value'].get('payment_term', False),
             'company_id': company_id,
             'transaction_id': wizard.transaction_id.id,
             'period_id': period_ids and period_ids[0] or False,
-            'partner_bank_id': partner_data['value'].get('partner_bank_id', False),
+            'partner_bank_id': partner_data['value'].get(
+                'partner_bank_id', False),
         }
         invoice_id = invoice_obj.create(cr, uid, invoice_vals, context=context)
 
@@ -245,8 +252,6 @@ class public_budget_definitive_make_invoice(models.TransientModel):
             cr, uid, 'account', 'invoice_supplier_form')
         result['views'] = [(res and res[1] or False, 'form')]
         result['res_id'] = invoice_id
-        # result[
-            # 'domain'] = "[('id','in', [" + ','.join(map(str, [invoice_id])) + "])]"
         if tran_type.with_advance_payment:
             self.pool['account.invoice'].signal_workflow(
                 cr, uid, [invoice_id], 'invoice_open')

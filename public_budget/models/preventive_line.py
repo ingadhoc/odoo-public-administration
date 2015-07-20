@@ -57,7 +57,13 @@ class preventive_line(models.Model):
         digits=dp.get_precision('Account'),
         )
     state = fields.Selection(
-        selection=[('draft', 'Draft'), ('open', 'Open'), ('definitive', 'definitive'), ('invoiced', 'invoiced'), ('closed', 'closed'), ('cancel', 'Cancel')],
+        selection=[
+            ('draft', 'Draft'),
+            ('open', 'Open'),
+            ('definitive', 'definitive'),
+            ('invoiced', 'invoiced'),
+            ('closed', 'closed'),
+            ('cancel', 'Cancel')],
         string='States',
         compute='_get_state'
         )
@@ -157,7 +163,8 @@ class preventive_line(models.Model):
             to_pay = self.transaction_id.to_pay_amount
             advance_amount = self.transaction_id.advance_amount
             if advance_amount:
-                definitive_amount = to_pay_amount = self.preventive_amount * (to_pay / advance_amount)
+                definitive_amount = to_pay_amount = self.preventive_amount * (
+                    to_pay / advance_amount)
                 paid_amount = self.preventive_amount * (paid / advance_amount)
         else:
             definitive_amount = sum([
@@ -170,7 +177,8 @@ class preventive_line(models.Model):
                 definitive.to_pay_amount
                 for definitive in self.definitive_line_ids])
             paid_amount = sum([
-                definitive.paid_amount for definitive in self.definitive_line_ids])
+                definitive.paid_amount for definitive in (
+                    self.definitive_line_ids)])
 
         self.remaining_amount = self.preventive_amount - definitive_amount
         self.definitive_amount = definitive_amount
@@ -194,7 +202,8 @@ class preventive_line(models.Model):
         self = self.with_context(budget_id=self.transaction_id.budget_id.id)
         if self.budget_position_id.assignment_position_id.balance_amount < 0.0:
             raise Warning(
-                _("There is not Enought Balance Amount on this Budget Position '%s'") %
+                _("There is not Enought Balance Amount on this\
+                    Budget Position '%s'") %
                 (self.budget_position_id.assignment_position_id.name))
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
