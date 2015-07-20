@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import models, fields, api, _
-from openerp.exceptions import Warning
+from openerp import models, fields, api
 import openerp.addons.decimal_precision as dp
 
 
@@ -40,7 +39,9 @@ class budget(models.Model):
         required=True,
         states={'draft': [('readonly', False)]},
         context={'default_type': 'other'},
-        domain=[('type', '=', 'other'), ('user_type.report_type', 'in', ['income'])]
+        domain=[
+            ('type', '=', 'other'),
+            ('user_type.report_type', 'in', ['income'])]
         )
     expedient_id = fields.Many2one(
         'public_budget.expedient',
@@ -90,7 +91,8 @@ class budget(models.Model):
         'res.company',
         string='Company',
         required=True,
-        default=lambda self: self.env['res.company']._company_default_get('public_budget.budget')
+        default=lambda self: self.env['res.company']._company_default_get(
+            'public_budget.budget')
         )
     state = fields.Selection(
         _states_,
@@ -123,7 +125,9 @@ class budget(models.Model):
         'budget_id',
         string='Funding Moves',
         readonly=True,
-        states={'open': [('readonly', False)], 'pre_closed': [('readonly', False)]},
+        states={
+            'open': [('readonly', False)],
+            'pre_closed': [('readonly', False)]},
         context={'from_budget': True}
         )
     transaction_ids = fields.One2many(
@@ -140,7 +144,7 @@ class budget(models.Model):
     )
     def _get_budget_positions(self):
         """ Definimos por ahora llevar solamente las posiciones que tienen
-        admitida la asignacion de presupuesto. 
+        admitida la asignacion de presupuesto.
         """
         budget_positions = self.env['public_budget.budget_position']
         self.budget_position_ids = budget_positions
