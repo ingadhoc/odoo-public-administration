@@ -4,12 +4,12 @@ addons:
       - expect-dev  # provides unbuffer utility
       - python-lxml # because pip installation is slow
       # aeroo
-      - debhelper
-      - autotools-dev
-      - cups-ppdc
-      - libcups2-dev
-      - cups
-      - imagemagick
+      # - debhelper
+      # - autotools-dev
+      # - cups-ppdc
+      # - libcups2-dev
+      # - cups
+      # - imagemagick
       # FE
       - mercurial
       - python-dev
@@ -32,8 +32,8 @@ python:
 # we make this way becasue we could not get it work in other way, we need cups
 before_install:
   # aeroo
-  - apt-get update -qq
-  - apt-get install -qq cups-ppdc libcups2-dev cups
+  # - apt-get update -qq
+  - sudo apt-get install -qq libcups2-dev
   # - sudo apt-get install -qq debhelper autotools-dev cups-ppdc libcups2-dev cups imagemagick
     # ghostscript
   - pip install httplib2 pycups==1.9.68
