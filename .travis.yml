@@ -4,7 +4,7 @@ addons:
       - expect-dev  # provides unbuffer utility
       - python-lxml # because pip installation is slow
       # odoo-argentina fe
-      - python-dev
+      # - python-dev
       # - swig
       # - libffi-dev
       # - libssl-dev
@@ -23,9 +23,9 @@ python:
 
 env:
   # TODO enable lint check
-  - VERSION="8.0" LINT_CHECK="0"
-  - VERSION="8.0" ODOO_REPO="odoo/odoo" LINT_CHECK="0"
-  # - VERSION="8.0" UNIT_TEST="1" LINT_CHECK="0"
+  - VERSION="8.0" LINT_CHECK="0" EXCLUDE="l10n_ar_afipws"
+  - VERSION="8.0" ODOO_REPO="odoo/odoo" LINT_CHECK="0" EXCLUDE="l10n_ar_afipws"
+  - VERSION="8.0" UNIT_TEST="1" LINT_CHECK="0"
 
 virtualenv:
   system_site_packages: true
