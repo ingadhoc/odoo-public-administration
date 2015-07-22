@@ -23,8 +23,8 @@ python:
 
 env:
   # TODO enable lint check
-  - VERSION="8.0" LINT_CHECK="0" EXCLUDE="l10n_ar_afipws,l10n_ar_afipws_fe"
-  - VERSION="8.0" ODOO_REPO="odoo/odoo" LINT_CHECK="0" EXCLUDE="l10n_ar_afipws,l10n_ar_afipws_fe"
+  - VERSION="8.0" LINT_CHECK="0" EXCLUDE="l10n_ar_afipws"
+  - VERSION="8.0" ODOO_REPO="odoo/odoo" LINT_CHECK="0" EXCLUDE="l10n_ar_afipws"
 
 virtualenv:
   system_site_packages: true
