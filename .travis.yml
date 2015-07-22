@@ -23,9 +23,9 @@ python:
 
 env:
   # TODO enable lint check
-  - VERSION="8.0" LINT_CHECK="0" EXCLUDE="l10n_ar_afipws"
-  - VERSION="8.0" ODOO_REPO="odoo/odoo" LINT_CHECK="0" EXCLUDE="l10n_ar_afipws"
-  - VERSION="8.0" UNIT_TEST="1" LINT_CHECK="0"
+  # - VERSION="8.0" LINT_CHECK="1"
+  - VERSION="8.0" ODOO_REPO="odoo/odoo" LINT_CHECK="0"
+  - VERSION="8.0" UNIT_TEST="1"
 
 virtualenv:
   system_site_packages: true
@@ -44,7 +44,8 @@ install:
   - git clone https://github.com/ingadhoc/odoo-addons.git -b 8.0.x ${HOME}/odoo-addons
 
   # odoo argentina
-  - git clone https://github.com/ingadhoc/odoo-argentina.git ${HOME}/odoo-argentina
+  # TODO change to 8.0 when ready
+  - git clone https://github.com/ingadhoc/odoo-argentina.git ${HOME}/odoo-argentina -b 8.0.x
   - pip install geopy==0.95.1 BeautifulSoup 
 
   # odoo argentina fe
