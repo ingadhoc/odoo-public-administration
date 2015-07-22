@@ -2,7 +2,7 @@
 
 [report]
 include =
-    */sipreco-project/sipreco_new/*
+    */ingadhoc/odoo-public-administration/*
 
 omit =
     */scenario/*
