@@ -30,6 +30,7 @@
         'demo/account.journal.csv',
         'demo/account.checkbook.csv',
         'demo/account_properties.xml',
+        'demo/account_period.xml',
         'demo/taxes.xml',
         'demo/account.tax.withholding.csv',
         'demo/public_budget.transaction_type.csv',
