@@ -33,7 +33,7 @@ Modulos principales del proyecto:
     'images': [
     ],
     'depends': [
-        'sipreco_account_chart',
+        # 'sipreco_account_chart',
         'sipreco_public_budget',
         'account_cancel',
         'admin_technical_features',

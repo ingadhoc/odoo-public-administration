@@ -26,7 +26,7 @@ Plan de cuentas del proyecto SIPRECO
     ],
     'test': [
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
     'application': False,
 }

@@ -36,7 +36,7 @@ Sipreco Set Up Data TMC
     ],
     'test': [
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
     'application': False,
 }
