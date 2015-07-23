@@ -19,7 +19,7 @@ class account_voucher(models.Model):
         'public_budget.expedient',
         string='Expedient',
         readonly=True,
-        required=True,
+        # required=True,
         domain=[('type', '=', 'payment'), ('state', '=', 'open')],
         context={'default_type': 'payment'},
         states={'draft': [('readonly', False)]}
@@ -27,7 +27,7 @@ class account_voucher(models.Model):
     transaction_id = fields.Many2one(
         'public_budget.transaction',
         string='Transaction',
-        required=True,
+        # required=True,
         readonly=True,
         )
     budget_position_ids = fields.Many2many(
