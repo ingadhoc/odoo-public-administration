@@ -1,0 +1,15 @@
+id,budget_position_id/id,initial_amount,budget_id/id
+budg_det_1,budg_pos_1,40000,budget_actual
+budg_det_2,budg_pos_2,50000,budget_actual
+budg_det_3,budg_pos_3,30000,budget_actual
+budg_det_5,budg_pos_5,3000,budget_actual
+budg_det_6,budg_pos_6,25000,budget_actual
+budg_det_7,budg_pos_7,0,budget_actual
+budg_det_8,budg_pos_8,10000,budget_actual
+budg_det_9,budg_pos_9,50000,budget_actual
+budg_det_10,budg_pos_10,30000,budget_actual
+budg_det_11,budg_pos_11,9000000,budget_actual
+budg_det_12,budg_pos_12,150000,budget_actual
+budg_det_13,budg_pos_13,0,budget_actual
+budg_det_14,budg_pos_14,1000000,budget_actual
+budg_det_15,budg_pos_otros,84000,budget_actual

@@ -1,0 +1,12 @@
+id,advance_account_id/id
+purchase_type_fondo_fijo,account_account_10
+purchase_type_compra_directa,
+purchase_type_lprivada,
+purchase_type_lpublica,
+purchase_type_concurso_precios,
+purchase_type_sueldos,
+purchase_type_anticipo_gasto,account_account_401
+purchase_type_subsidio_con_cargo,account_account_409
+purchase_type_subsidio_sin_cargo,
+purchase_type_compra_directa_con_autorizacion,
+purchase_type_orden_de_trabajo,

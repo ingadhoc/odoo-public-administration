@@ -118,7 +118,11 @@
         'report_aeroo',
         'account_invoice_auto_pay',
     ],
-    'description': 'Public Budget',
+    'description': """
+Public Budget
+=============
+Modulo generico para gestion publica presupuestaria/contable
+""",
     'installable': True,
     'license': 'AGPL-3',
     'name': 'Public Budget',

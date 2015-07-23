@@ -8,9 +8,16 @@
     'description': """
 Sipreco Project
 ===============
-Installs All Sipreco Project Dependencies
+Modulos principales del proyecto:
+---------------------------------
+* Sipreco Project: Instala todos los modulos del proyecto
+* Sipreco Chart Accunt: Plan contable del proyecto Sipreco
+* Sipreco Public Budget: Customizaciones a public budget para el proyecto Sipreco
+* Sipreco Setup Data TMC: Carga de datos iniciales para el proyecto Sipreco/TMC
+* Sipreco Setup Data CMD: Carga de datos iniciales para el proyecto Sipreco/CMD
+
 # 01 - Pasos alta BD Sipreco
-# =============================
+=============================
 # Cambiar formato del separador por "[3,3,1]", cambiar separador decimales por "," y de miles por "."
 # Establecer por defecto en Proveedores: Tipo de documento = CUIT, Ciudad: Rosario
 # Importar archivo es_AR.po, en carpeta sipreco_set_up_data > l18i

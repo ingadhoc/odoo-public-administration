@@ -8,6 +8,7 @@
     'description': """
 Sipreco Account Chart
 =====================
+Plan de cuentas del proyecto SIPRECO
     """,
     'author':  'Ingenieria ADHOC',
     'website': 'www.ingadhoc.com',
