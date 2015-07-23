@@ -25,6 +25,7 @@
         'share',
         'web_m2x_options',
         'account_voucher_double_validation',
+        'account_tax_settlement_withholding',
     ],
     'description': '''
 Public Budget Sipreco Customizations

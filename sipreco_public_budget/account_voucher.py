@@ -34,6 +34,22 @@ class account_voucher(models.Model):
     withholding_ids = fields.One2many(
         states={'confirmed': [('readonly', False)]}
         )
+    paid_withholding_ids = fields.Many2many(
+        comodel_name='account.voucher.withholding',
+        string='Paid Withholdings',
+        compute='_get_paid_withholding'
+        )
+
+    @api.one
+    def _get_paid_withholding(self):
+        paid_move_ids = [
+            x.move_line_id.move_id.id for x in self.line_ids if x.amount]
+        paid_withholdings = self.env['account.voucher.withholding'].search([(
+            'move_line_id.tax_settlement_move_id', 'in', paid_move_ids)])
+        print 'paid_withholdings'
+        print 'paid_withholdings'
+        print 'paid_withholdings', paid_withholdings
+        self.paid_withholding_ids = paid_withholdings
 
     @api.one
     @api.depends('payment_base_date', 'payment_days')
