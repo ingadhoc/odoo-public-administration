@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    <!-- Activities -->
+
+        <record id="actt_to_be_handed" model="workflow.activity">
+            <field name="wkf_id" ref="account_check.account_checks"/>
+            <field name="name">to_be_handed</field>
+            <field name="action">write({'state':'to_be_handed'})</field>
+            <field name="kind">function</field>
+        </record>
+
+    <!-- Transitions -->
+        <record id="account_check.transs_router_handed" model="workflow.transition">
+            <field name="act_to" ref="actt_to_be_handed"/>
+        </record>
+
+        <record id="transs_to_be_handed_handed" model="workflow.transition">
+            <field name="act_from" ref="actt_to_be_handed"/>
+            <field name="act_to" ref="account_check.actt_handed"/>
+            <field name="signal">to_be_handed</field>
+        </record>
+
+        <record id="transs_handed_to_be_handed" model="workflow.transition">
+            <field name="act_from" ref="account_check.actt_handed"/>
+            <field name="act_to" ref="actt_to_be_handed"/>
+            <field name="signal">back_to_be_handed</field>
+        </record>
+
+        <record id="transs_to_be_handed_cancel" model="workflow.transition">
+            <field name="act_from" ref="actt_to_be_handed"/>
+            <field name="act_to" ref="account_check.actt_cancel"/>
+            <field name="signal">cancel</field>
+            <field name="condition">type == 'issue'</field>
+        </record>
+
+    </data>
+</openerp>

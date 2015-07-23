@@ -1,0 +1,4 @@
+id,date,user_id/id,location_id/id,location_dest_id/id,expedient_ids/id
+expedient_remit_1,2014-04-04 05:05:05,contaduria_user_user,public_location_secretaria,public_location_mesa_de_entrada,"budget_exp_caso_1,budget_exp_caso_2"
+expedient_remit_2,2014-04-05 05:05:05,contaduria_user_user,public_location_secretaria,public_location_contaduria,"budget_exp_caso_3,budget_exp_caso_4"
+expedient_remit_3,2014-04-06 05:05:05,contaduria_user_user,public_location_secretaria,public_location_compras,budget_exp_caso_5

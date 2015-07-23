@@ -1,0 +1,13 @@
+id,name,supplier,responsability_id/id,document_type_id/id,document_number
+res_partner_adhoc,ADHOC SA,True,l10n_ar_invoice.res_IVARI,l10n_ar_invoice.dt_CUIT,20313932975
+res_partner_sueldos,Sueldos Varios,True,l10n_ar_invoice.res_CF,l10n_ar_invoice.dt_DNI,31393297
+res_partner_airoldi,Airoldi,True,l10n_ar_invoice.res_IVARI,l10n_ar_invoice.dt_CUIT,20313932975
+res_partner_gabe,Gabe,True,l10n_ar_invoice.res_IVARI,l10n_ar_invoice.dt_CUIT,20313932975
+res_partner_propietario,Propietario Casa,,l10n_ar_invoice.res_IVARI,l10n_ar_invoice.dt_DNI,31393297
+res_partner_shell,Shell,,l10n_ar_invoice.res_IVARI,l10n_ar_invoice.dt_CUIT,20313932975
+res_partner_comercios_varios,Comercios Varios,,l10n_ar_invoice.res_RM,l10n_ar_invoice.dt_CUIT,20313932975
+res_partner_pepito,Pepito Rodriguez,,l10n_ar_invoice.res_RM,l10n_ar_invoice.dt_DNI,31393297
+res_partner_roberto,Roberto Perez,,l10n_ar_invoice.res_RM,l10n_ar_invoice.dt_DNI,31393297
+res_partner_epe,EPE,,l10n_ar_invoice.res_IVARI,l10n_ar_invoice.dt_CUIT,20313932975
+res_partner_api,API,True,,,
+res_partner_muni_rosario,Municipalidad de Rosario,True,,,

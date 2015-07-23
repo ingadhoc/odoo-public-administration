@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_voucher_filter_vendor_pay" model="ir.ui.view">
+            <field name="name">account.voucher.payment.filter</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher.view_voucher_filter_vendor_pay"/>
+            <field name="arch" type="xml">
+                <field name="journal_id" position="after">
+                    <field name="transaction_id"/>
+                    <field name="budget_id"/>
+                    <field name="expedient_id"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_voucher_tree" model="ir.ui.view">
+            <field name="name">account.voucher.tree</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher.view_voucher_tree"/>
+            <field name="arch" type="xml">
+                <tree position="attributes">
+                    <attribute name="create">false</attribute>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_vendor_payment_form" model="ir.ui.view">
+            <field name="name">account.voucher.customer.pay.form</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher.view_vendor_payment_form"/>
+            <field name="arch" type="xml">
+                <form position="attributes">
+                    <attribute name="create">false</attribute>
+                </form>
+                <field name="partner_id" position="before">
+                    <field name="transaction_with_advance_payment" invisible="1"/>
+                    <field name="partner_ids" invisible="1"/>
+                    <field name="transaction_id"/>
+                    <field name="budget_id"/>
+                    <field name="expedient_id"/>
+                </field>
+                <field name="company_id" position="after">
+                    <field name="budget_position_ids" widget="many2many_tags"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
+     -->

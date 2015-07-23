@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- INHERITED SEARCH -->
+        <record id="view_public_budget_invoice_filter" model="ir.ui.view">
+            <field name="name">public_budget.invoice.select</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+            <field name="arch" type="xml">
+                <search position="inside">
+                </search>
+            </field>
+        </record>
+ 
+        <!-- INHERITED FORM -->
+        <record id="view_public_budget_invoice_form" model="ir.ui.view">
+            <field name="name">public_budget.invoice.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <group position="inside">
+                </group>
+            </field>
+        </record>
+
+        <!-- INHERITED TREE -->
+        <record id="view_public_budget_invoice_tree" model="ir.ui.view">
+            <field name="name">public_budget.invoice.tree</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_tree"/>
+            <field name="arch" type="xml">
+                <tree position="inside">
+                </tree>
+            </field>
+        </record>
+
+        <!-- FORMVIEW -->
+        <record id="invoice_supplier_form" model="ir.ui.view">
+            <field name="name">account.invoice.supplier.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account_voucher.view_invoice_supplier"/>
+            <field name="arch" type="xml">
+                <!-- we hide refund button -->
+                <button name="%(account.action_account_invoice_refund)d" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </button>
+
+                <xpath expr="//field[@name='invoice_line']/tree/field[@name='account_id']" position="after">
+                    <field name="definitive_line_id"/>
+                </xpath>
+                <button name="invoice_pay_customer" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </button>
+                <!-- TODO tal vez mover -->
+                <field name="journal_id" position="after">
+                    <field name="transaction_id"/>
+                    <field name="budget_id"/>
+                </field>
+                <field name="residual" position="after">
+                    <field name="to_pay_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
+     -->
