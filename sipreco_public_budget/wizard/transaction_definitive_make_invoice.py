@@ -17,6 +17,9 @@ class public_budget_definitive_make_invoice(models.TransientModel):
         related='journal_id.use_documents',
         readonly=True
     )
+    supplier_invoice_number = fields.Char(
+        required=False,
+    )
 
     @api.onchange('point_of_sale', 'invoice_number', 'use_documents')
     def _check_invoice_number(self):

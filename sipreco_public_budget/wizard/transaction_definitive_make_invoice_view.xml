@@ -9,6 +9,9 @@
                 <form>
                     <field name="use_documents" invisible="1"/>
                 </form>
+                <field name="supplier_invoice_number" position="attributes">
+                    <attribute name="attrs">{'required':[('use_documents', '=', True)]}</attribute>
+                </field>
                 <field name="supplier_invoice_number" position="before">
                     <label for="invoice_number" attrs="{'invisible':[('use_documents', '=', False)]}"/>
                     <div class="oe_inline" attrs="{'invisible':[('use_documents', '=', False)]}">
