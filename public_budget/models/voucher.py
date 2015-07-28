@@ -34,7 +34,12 @@ class account_voucher(models.Model):
         relation='voucher_position_rel',
         comodel_name='public_budget.budget_position',
         string='Related Budget Positions',
-        compute='_get_budget_positions'
+        compute='_get_budget_positions_and_invoices'
+        )
+    invoice_ids = fields.Many2many(
+        comodel_name='account.invoice',
+        string='Related Invoices',
+        compute='_get_budget_positions_and_invoices'
         )
     partner_ids = fields.Many2many(
         comodel_name='res.partner',
@@ -50,16 +55,11 @@ class account_voucher(models.Model):
         )
 
     @api.one
-    def _get_budget_positions(self):
-        self.budget_position_ids = self.env['public_budget.budget_position']
-        budget_position_ids = []
-        for line in self.line_ids:
-            if line.amount and line.move_line_id and line.move_line_id.invoice:
-                budget_position_ids.extend([
-                    x.definitive_line_id.budget_position_id.id for x in (
-                        line.move_line_id.invoice.invoice_line)])
-        budget_position_ids = list(set(budget_position_ids))
-        self.budget_position_ids = budget_position_ids
+    def _get_budget_positions_and_invoices(self):
+        self.invoice_ids = self.line_ids.filtered('amount').mapped(
+            'move_line_id.invoice')
+        self.budget_position_ids = self.invoice_ids.mapped(
+            'invoice_line.definitive_line_id.budget_position_id')
 
     @api.one
     @api.depends(
