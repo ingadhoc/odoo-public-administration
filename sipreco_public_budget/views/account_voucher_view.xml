@@ -49,6 +49,10 @@
                      <button name="cancel_voucher" string="Cancel Receipt" states="signature_process,signed"/>
                 </button>
 
+                <!-- make date invisible -->
+                <field name="date" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </field>
             </field>
         </record>
 
