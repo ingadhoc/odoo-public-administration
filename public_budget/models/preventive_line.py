@@ -39,21 +39,25 @@ class preventive_line(models.Model):
     definitive_amount = fields.Float(
         string='Definitive Amount',
         compute='_get_amounts',
+        # store=True,
         digits=dp.get_precision('Account'),
         )
     invoiced_amount = fields.Float(
         string='Invoiced Amount',
         compute='_get_amounts',
+        # store=True,
         digits=dp.get_precision('Account'),
         )
     to_pay_amount = fields.Float(
         string='To Pay Amount',
         compute='_get_amounts',
+        # store=True,
         digits=dp.get_precision('Account'),
         )
     paid_amount = fields.Float(
         string='Paid Amount',
         compute='_get_amounts',
+        # store=True,
         digits=dp.get_precision('Account'),
         )
     state = fields.Selection(
@@ -137,8 +141,15 @@ class preventive_line(models.Model):
 
     @api.one
     @api.depends(
+        'advance_line',
         'preventive_amount',
-        'definitive_line_ids',
+        'transaction_id.advance_voucher_ids.state',
+        'transaction_id.advance_voucher_ids.to_pay_amount',
+        'transaction_id.advance_voucher_ids.amount',
+        'definitive_line_ids.amount',
+        'definitive_line_ids.invoiced_amount',
+        'definitive_line_ids.to_pay_amount',
+        'definitive_line_ids.paid_amount',
     )
     def _get_amounts(self):
         """Update the following fields with the related values to the budget
@@ -153,33 +164,25 @@ class preventive_line(models.Model):
         -balance_amount: diffference between budget position and preventive
         amount
         """
-
-        definitive_amount = False
-        invoiced_amount = False
-        to_pay_amount = False
-        paid_amount = False
         if self.advance_line:
-            paid = self.transaction_id.paid_amount
-            to_pay = self.transaction_id.to_pay_amount
-            advance_amount = self.transaction_id.advance_amount
-            if advance_amount:
-                definitive_amount = to_pay_amount = self.preventive_amount * (
-                    to_pay / advance_amount)
-                paid_amount = self.preventive_amount * (paid / advance_amount)
+            definitive_amount = to_pay_amount = sum(
+                self.transaction_id.advance_voucher_ids.filtered(
+                    lambda r: r.state not in ('cancel', 'draft')).mapped(
+                    'to_pay_amount'))
+            paid_amount = sum(
+                self.transaction_id.advance_voucher_ids.filtered(
+                    lambda r: r.state == 'posted').mapped(
+                    'amount'))
+            invoiced_amount = 0.0
         else:
-            definitive_amount = sum([
-                definitive.amount
-                for definitive in self.definitive_line_ids])
-            invoiced_amount = sum([
-                definitive.invoiced_amount
-                for definitive in self.definitive_line_ids])
-            to_pay_amount = sum([
-                definitive.to_pay_amount
-                for definitive in self.definitive_line_ids])
-            paid_amount = sum([
-                definitive.paid_amount for definitive in (
-                    self.definitive_line_ids)])
-
+            definitive_amount = sum(self.mapped(
+                'definitive_line_ids.amount'))
+            invoiced_amount = sum(self.mapped(
+                'definitive_line_ids.invoiced_amount'))
+            to_pay_amount = sum(self.mapped(
+                'definitive_line_ids.to_pay_amount'))
+            paid_amount = sum(self.mapped(
+                'definitive_line_ids.paid_amount'))
         self.remaining_amount = self.preventive_amount - definitive_amount
         self.definitive_amount = definitive_amount
         self.invoiced_amount = invoiced_amount

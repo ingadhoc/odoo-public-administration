@@ -34,11 +34,6 @@ class definitive_line(models.Model):
         states={'draft': [('readonly', False)]},
         digits=dp.get_precision('Account'),
         )
-    budget_position_id = fields.Many2one(
-        'public_budget.budget_position',
-        string='Budget Position',
-        readonly=True,
-        )
     residual_amount = fields.Float(
         string='Residual Amount',
         compute='_get_amounts',
@@ -77,8 +72,8 @@ class definitive_line(models.Model):
         )
     budget_position_id = fields.Many2one(
         readonly=True,
-        store=True,
-        related='preventive_line_id.budget_position_id'
+        string='Budget Position',
+        related='preventive_line_id.budget_position_id',
         )
     state = fields.Selection(
         selection=[('draft', 'Draft'), ('invoiced', 'Invoiced')],
@@ -133,24 +128,27 @@ class definitive_line(models.Model):
         -paid_amount: amount sum of lines that has a related voucher in open
         state
         """
-        debit_invoice_lines = [
-            x for x in self.invoice_line_ids if x.invoice_id.state not in (
-                'draft', 'cancel') and x.invoice_id.type in (
-                    'out_invoice', 'in_invoice')]
-        credit_invoice_lines = [
-            x for x in self.invoice_line_ids if x.invoice_id.state not in (
-                'draft', 'cancel') and x.invoice_id.type in (
-                    'out_refund', 'in_refund')]
+        debit_invoice_lines = self.invoice_line_ids.filtered(
+            lambda r: (
+                r.invoice_id.state not in ('cancel', 'draft') and
+                r.invoice_id.type in ('out_invoice', 'in_invoice')))
+        credit_invoice_lines = self.invoice_line_ids.filtered(
+            lambda r: (
+                r.invoice_id.state not in ('cancel', 'draft') and
+                r.invoice_id.type in ('out_refund', 'in_refund')))
 
-        invoiced_amount = sum(
-            [x.price_subtotal for x in debit_invoice_lines]) - sum(
-                [x.price_subtotal for x in credit_invoice_lines])
-        to_pay_amount = sum(
-            [x.to_pay_amount for x in debit_invoice_lines]) - sum(
-                [x.to_pay_amount for x in credit_invoice_lines])
-        paid_amount = sum(
-            [x.paid_amount for x in debit_invoice_lines]) - sum(
-                [x.paid_amount for x in credit_invoice_lines])
+        invoiced_amount = (
+            sum(debit_invoice_lines.mapped('price_subtotal')) -
+            sum(credit_invoice_lines.mapped('price_subtotal'))
+            )
+        to_pay_amount = (
+            sum(debit_invoice_lines.mapped('to_pay_amount')) -
+            sum(credit_invoice_lines.mapped('to_pay_amount'))
+            )
+        paid_amount = (
+            sum(debit_invoice_lines.mapped('paid_amount')) -
+            sum(credit_invoice_lines.mapped('paid_amount'))
+            )
 
         self.invoiced_amount = invoiced_amount
         self.residual_amount = self.amount - invoiced_amount

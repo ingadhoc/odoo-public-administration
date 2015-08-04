@@ -27,7 +27,7 @@ class invoice(models.Model):
         string='Transaction',
         copy=False,
         readonly=True,
-        required=True,
+        # required=True,
         )
     budget_id = fields.Many2one(
         related='transaction_id.budget_id',
@@ -56,7 +56,7 @@ class invoice(models.Model):
         voucher_lines = self.env['account.voucher.line'].search([
             ('move_line_id.move_id', '=', self.move_id.id),
             ('amount', '!=', 0),
-            ('voucher_id.state', 'in', ('confirmed', 'posted')),
+            ('voucher_id.state', 'not in', ('cancel', 'draft')),
             ])
         to_pay_amount = sum([x.amount for x in voucher_lines])
         if paid_amount > to_pay_amount:

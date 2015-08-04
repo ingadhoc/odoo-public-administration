@@ -59,7 +59,7 @@ class account_voucher(models.Model):
         self.invoice_ids = self.line_ids.filtered('amount').mapped(
             'move_line_id.invoice')
         self.budget_position_ids = self.invoice_ids.mapped(
-            'invoice_line.definitive_line_id.budget_position_id')
+            'invoice_line.definitive_line_id.preventive_line_id.budget_position_id')
 
     @api.one
     @api.depends(
@@ -116,5 +116,33 @@ class account_voucher(models.Model):
                     an advance account in transaction type!'))
             res['account_id'] = account.id
         return res
+
+    @api.one
+    @api.constrains('advance_amount', 'transaction_id', 'state')
+    def check_voucher_transaction_amount(self):
+        """
+        """
+        if self.transaction_with_advance_payment:
+            advance_remaining_amount = (
+                self.transaction_id.advance_remaining_amount)
+            if self.advance_amount > advance_remaining_amount:
+                raise Warning(_(
+                    'In advance transactions, payment orders amount can '
+                    'not be greater than transaction amount'))
+
+
+class account_voucher_line(models.Model):
+    """"""
+
+    _inherit = 'account.voucher.line'
+
+    @api.one
+    @api.constrains('amount_unreconciled', 'amount')
+    def check_voucher_transaction_amount(self):
+        """
+        """
+        if self.amount > self.amount_unreconciled:
+            raise Warning(_(
+                'In each line, Amount can not be greater than Open Balance'))
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

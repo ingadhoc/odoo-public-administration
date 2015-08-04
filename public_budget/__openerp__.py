@@ -117,6 +117,7 @@
         'account',
         'report_aeroo',
         'account_invoice_auto_pay',
+        'account_voucher_double_validation',
     ],
     'description': """
 Public Budget
