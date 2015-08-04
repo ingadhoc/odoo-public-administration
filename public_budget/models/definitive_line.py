@@ -101,7 +101,7 @@ class definitive_line(models.Model):
         else:
             self.state = 'draft'
 
-    @api.one
+    @api.multi
     def write(self, vals):
         # TODO ver si se puede sacar esto.
         # No le pude encontrar la vuelta de porque algunas veces al guardar las

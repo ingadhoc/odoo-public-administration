@@ -130,6 +130,12 @@ class budget_position(models.Model):
         )
 
     @api.one
+    # @api.depends(
+    #     'preventive_line_ids.affects_budget',
+    #     'preventive_line_ids.transaction_id.state',
+    #     'preventive_line_ids.preventive_amount',
+    #     'preventive_line_ids.definitive_line_ids.amount',
+    #     )
     def _get_amounts(self):
         """Update the following fields with the related values to the budget
         and the budget position:

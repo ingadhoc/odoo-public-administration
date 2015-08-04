@@ -6,20 +6,15 @@
         <record id="view_vendor_payment_form" model="ir.ui.view">
             <field name="name">account.voucher.form.receipts.pay.inherit</field>
             <field name="model">account.voucher</field>
-            <field name="inherit_id" ref="account_voucher_double_validation.view_vendor_payment_form"/>
+            <field name="inherit_id" ref="public_budget.view_vendor_payment_form"/>
             <field name="arch" type="xml">
-                <field name="payment_date" position="before">
-                    <field name="payment_base_date"/>
-                    <field name="payment_days"/>
+                <field name="budget_position_ids" position="after">
+                    <field name="paid_withholding_ids" widget="many2many_tags"/>
                 </field>
+
                 <xpath expr="//page[@string='Payment Information']/group/group[2]/group[2]" position="attributes">
                     <attribute name="groups">base.group_no_one</attribute>
                 </xpath>
-                <!-- hide advance amount on not advance transactions  -->
-                <field name="advance_amount" position="attributes">
-                    <attribute name="attrs">{'invisible':[('transaction_with_advance_payment', '=', False)]}</attribute>
-                </field>
-
             </field>
         </record>
 
@@ -29,6 +24,11 @@
             <field name="model">account.voucher</field>
             <field name="inherit_id" ref="account_voucher_double_validation.view_vendor_payment_form"/>
             <field name="arch" type="xml">
+                <field name="payment_date" position="before">
+                    <field name="payment_base_date"/>
+                    <field name="payment_days"/>
+                </field>
+
                 <field name="state" position="attributes">
                     <attribute name="statusbar_visible">draft,confirmed,signature_process,signed,posted</attribute>
                 </field>
@@ -49,6 +49,15 @@
                      <button name="cancel_voucher" string="Cancel Receipt" states="signature_process,signed"/>
                 </button>
 
+                <!-- hide advance amount on not advance transactions  -->
+                <field name="advance_amount" position="attributes">
+                    <attribute name="attrs">{'invisible':[('transaction_with_advance_payment', '=', False)]}</attribute>
+                </field>
+
+                <!-- make date invisible -->
+                <field name="date" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </field>
             </field>
         </record>
 
