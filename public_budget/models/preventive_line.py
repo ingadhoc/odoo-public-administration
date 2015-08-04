@@ -138,7 +138,10 @@ class preventive_line(models.Model):
     @api.one
     @api.depends(
         'preventive_amount',
-        'definitive_line_ids',
+        'definitive_line_ids.amount',
+        'definitive_line_ids.invoiced_amount',
+        'definitive_line_ids.to_pay_amount',
+        'definitive_line_ids.paid_amount',
     )
     def _get_amounts(self):
         """Update the following fields with the related values to the budget
@@ -153,7 +156,6 @@ class preventive_line(models.Model):
         -balance_amount: diffference between budget position and preventive
         amount
         """
-
         definitive_amount = False
         invoiced_amount = False
         to_pay_amount = False
