@@ -11,3 +11,21 @@ res_partner_roberto,Roberto Perez,,l10n_ar_invoice.res_RM,l10n_ar_invoice.dt_DNI
 res_partner_epe,EPE,,l10n_ar_invoice.res_IVARI,l10n_ar_invoice.dt_CUIT,20313932975
 res_partner_api,API,True,,,
 res_partner_muni_rosario,Municipalidad de Rosario,True,,,
+res_partner_1,Acreedores Judiciales,True,l10n_ar_invoice.res_IVAE,l10n_ar_invoice.dt_DNI,30000000
+res_partner_2,Aportes Voluntarios,True,l10n_ar_invoice.res_IVAE,l10n_ar_invoice.dt_DNI,30000000
+res_partner_3,Personal Permanente,True,l10n_ar_invoice.res_IVAE,l10n_ar_invoice.dt_DNI,30000000
+res_partner_4,AAESAM,True,l10n_ar_invoice.res_IVAE,l10n_ar_invoice.dt_DNI,30000000
+res_partner_5,AMEMA,True,l10n_ar_invoice.res_IVAE,l10n_ar_invoice.dt_DNI,30000000
+res_partner_6,AMTRAM,True,l10n_ar_invoice.res_IVAE,l10n_ar_invoice.dt_DNI,30000000
+res_partner_7,Asociación mutual entre empleados y ex empleados municipales,True,l10n_ar_invoice.res_IVAE,l10n_ar_invoice.dt_DNI,30000000
+res_partner_8,Asociación Personal HCM,True,l10n_ar_invoice.res_IVAE,l10n_ar_invoice.dt_DNI,30000000
+res_partner_9,Asociación Personal Jerarquizado,True,l10n_ar_invoice.res_IVAE,l10n_ar_invoice.dt_DNI,30000000
+res_partner_10,Banco Municipal,True,l10n_ar_invoice.res_IVAE,l10n_ar_invoice.dt_DNI,30000000
+res_partner_11,Caja de Seguros de Vida SA,True,l10n_ar_invoice.res_IVAE,l10n_ar_invoice.dt_DNI,30000000
+res_partner_12,Dirección Provincial de Viviendas y Urbanismo,True,l10n_ar_invoice.res_IVAE,l10n_ar_invoice.dt_DNI,30000000
+res_partner_13,FESTRAM,True,l10n_ar_invoice.res_IVAE,l10n_ar_invoice.dt_DNI,30000000
+res_partner_14,IAPOS,True,l10n_ar_invoice.res_IVAE,l10n_ar_invoice.dt_DNI,30000000
+res_partner_15,IMPS,True,l10n_ar_invoice.res_IVAE,l10n_ar_invoice.dt_DNI,30000000
+res_partner_16,Mutual Segunda Circunscripcion,True,l10n_ar_invoice.res_IVAE,l10n_ar_invoice.dt_DNI,30000000
+res_partner_17,Sindicato de Trabajadores Municipales de Rosario,True,l10n_ar_invoice.res_IVAE,l10n_ar_invoice.dt_DNI,30000000
+res_partner_19,Sistemas de Urgencias del Rosafe SA,True,l10n_ar_invoice.res_IVAE,l10n_ar_invoice.dt_DNI,30000000
