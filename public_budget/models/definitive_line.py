@@ -130,11 +130,11 @@ class definitive_line(models.Model):
         """
         debit_invoice_lines = self.invoice_line_ids.filtered(
             lambda r: (
-                r.state not in ('cancel', 'draft') and
+                r.invoice_id.state not in ('cancel', 'draft') and
                 r.invoice_id.type in ('out_invoice', 'in_invoice')))
         credit_invoice_lines = self.invoice_line_ids.filtered(
             lambda r: (
-                r.state not in ('cancel', 'draft') and
+                r.invoice_id.state not in ('cancel', 'draft') and
                 r.invoice_id.type in ('out_refund', 'in_refund')))
 
         invoiced_amount = (
