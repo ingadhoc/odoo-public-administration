@@ -59,7 +59,7 @@ class account_voucher(models.Model):
         self.invoice_ids = self.line_ids.filtered('amount').mapped(
             'move_line_id.invoice')
         self.budget_position_ids = self.invoice_ids.mapped(
-            'invoice_line.definitive_line_id.budget_position_id')
+            'invoice_line.definitive_line_id.preventive_line_id.budget_position_id')
 
     @api.one
     @api.depends(

@@ -34,11 +34,6 @@ class definitive_line(models.Model):
         states={'draft': [('readonly', False)]},
         digits=dp.get_precision('Account'),
         )
-    budget_position_id = fields.Many2one(
-        'public_budget.budget_position',
-        string='Budget Position',
-        readonly=True,
-        )
     residual_amount = fields.Float(
         string='Residual Amount',
         compute='_get_amounts',
@@ -77,8 +72,8 @@ class definitive_line(models.Model):
         )
     budget_position_id = fields.Many2one(
         readonly=True,
-        store=True,
-        related='preventive_line_id.budget_position_id'
+        string='Budget Position',
+        related='preventive_line_id.budget_position_id',
         )
     state = fields.Selection(
         selection=[('draft', 'Draft'), ('invoiced', 'Invoiced')],

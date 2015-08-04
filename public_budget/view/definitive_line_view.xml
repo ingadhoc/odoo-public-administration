@@ -10,7 +10,6 @@
                     <field name="issue_date"/>
                     <field name="supplier_id"/>
                     <field name="amount"/>
-                    <field name="budget_position_id"/>
                     <group expand="0" string="Group By">
                     </group>
                 </search>
