@@ -72,13 +72,13 @@
                                 <field name="user_id"/>
                             </group>
                             <group>
-                                <field name="total"/>
+                                <field name="preventive_amount"/>
                                 <field name="invoiced_amount"/>
                                 <field name="paid_amount"/>
                                 <field name="advance_amount" attrs="{'invisible':[('type_with_advance_payment','=',False)]}"/>
                                 <field name="to_return_amount" attrs="{'invisible':[('type_with_advance_payment','=',False)]}"/>
                                 <!-- TODO ver si los djamos o no, ver si hay que borrarlos y si hay que borrar el cmapo funcion correspondiente o no -->
-<!--                                 <field name="preventive_amount"/>
+<!--                            
                                 <field name="definitive_amount"/>
                                 <field name="to_pay_amount"/>
                             -->

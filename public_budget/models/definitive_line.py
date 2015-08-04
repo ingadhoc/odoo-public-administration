@@ -137,15 +137,18 @@ class definitive_line(models.Model):
                 'draft', 'cancel') and x.invoice_id.type in (
                     'out_refund', 'in_refund')]
 
-        invoiced_amount = sum(
-            [x.price_subtotal for x in debit_invoice_lines]) - sum(
-                [x.price_subtotal for x in credit_invoice_lines])
-        to_pay_amount = sum(
-            [x.to_pay_amount for x in debit_invoice_lines]) - sum(
-                [x.to_pay_amount for x in credit_invoice_lines])
-        paid_amount = sum(
-            [x.paid_amount for x in debit_invoice_lines]) - sum(
-                [x.paid_amount for x in credit_invoice_lines])
+        invoiced_amount = (
+            sum(debit_invoice_lines.mapped('price_subtotal')) -
+            sum(credit_invoice_lines.mapped('price_subtotal'))
+            )
+        to_pay_amount = (
+            sum(debit_invoice_lines.mapped('to_pay_amount')) -
+            sum(credit_invoice_lines.mapped('to_pay_amount'))
+            )
+        paid_amount = (
+            sum(debit_invoice_lines.mapped('paid_amount')) -
+            sum(credit_invoice_lines.mapped('paid_amount'))
+            )
 
         self.invoiced_amount = invoiced_amount
         self.residual_amount = self.amount - invoiced_amount

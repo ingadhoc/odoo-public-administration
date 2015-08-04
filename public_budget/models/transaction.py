@@ -158,6 +158,11 @@ class transaction(models.Model):
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
+    advance_remaining_amount = fields.Float(
+        string='Advance Remaining Amount',
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
+        )
     company_id = fields.Many2one(
         'res.company',
         string='Company',
@@ -166,11 +171,6 @@ class transaction(models.Model):
         states={'draft': [('readonly', False)]},
         default=lambda self: self.env['res.company']._company_default_get(
             'public_budget.transaction')
-        )
-    total = fields.Float(
-        string='Total',
-        compute='_get_total',
-        digits=dp.get_precision('Account'),
         )
     user_location_ids = fields.Many2many(
         string='User Locations',
@@ -232,22 +232,15 @@ class transaction(models.Model):
     def _get_suppliers(self):
         definitive_lines = self.env['public_budget.definitive_line'].search(
             [('preventive_line_id.transaction_id', '=', self.id)])
-        supplier_ids = [
-            x.supplier_id.id for x in definitive_lines]
-        # if self.partner_id:
-        #     supplier_ids.append(self.partner_id.id)
-        self.supplier_ids = self.env['res.partner']
-        self.supplier_ids = supplier_ids
+        self.supplier_ids = definitive_lines.mapped('supplier_id')
 
     @api.one
     @api.depends(
         'preventive_line_ids.budget_position_id',
     )
     def _get_budget_positions(self):
-        self.budget_position_ids = self.env['public_budget.budget_position']
-        budget_position_ids = [
-            x.budget_position_id.id for x in self.preventive_line_ids]
-        self.budget_position_ids = budget_position_ids
+        self.budget_position_ids = self.preventive_line_ids.mapped(
+            'budget_position_id')
 
     @api.one
     @api.depends(
@@ -255,50 +248,39 @@ class transaction(models.Model):
         'voucher_ids.state',
     )
     def _get_amounts(self):
-        preventive_amount = sum([
-            preventive.preventive_amount
-            for preventive in self.preventive_line_ids])
-        definitive_amount = sum([
-            preventive.definitive_amount
-            for preventive in self.preventive_line_ids])
-        invoiced_amount = sum([
-            preventive.invoiced_amount
-            for preventive in self.preventive_line_ids])
-        to_pay_amount = sum(
-            x.to_pay_amount for x in self.voucher_ids if x.state in [
-                'confirmed', 'posted'])
-        paid_amount = sum(
-            x.amount for x in self.voucher_ids if x.state == 'posted')
 
-        if self.type_id.with_advance_payment:
-            advance_amount = sum([
-                x.preventive_amount for x in self.advance_preventive_line_ids])
-            self.advance_amount = advance_amount
+        if self.type_id.with_advance_payment and self.state in (
+                'draft', 'open'):
+            preventive_amount = sum(self.mapped(
+                'advance_preventive_line_ids.preventive_amount'))
+            definitive_amount = sum(self.mapped(
+                'advance_preventive_line_ids.definitive_amount'))
+            invoiced_amount = sum(self.mapped(
+                'advance_preventive_line_ids.invoiced_amount'))
+            to_pay_amount = sum(self.mapped(
+                'advance_preventive_line_ids.to_pay_amount'))
+            paid_amount = sum(self.mapped(
+                'advance_preventive_line_ids.paid_amount'))
+            self.advance_amount = preventive_amount
+            self.advance_remaining_amount = preventive_amount - to_pay_amount
             self.to_return_amount = paid_amount - invoiced_amount
-            if self.state in ('draft', 'open'):
-                preventive_amount = sum([
-                    preventive.preventive_amount
-                    for preventive in self.advance_preventive_line_ids])
-                definitive_amount = sum([
-                    preventive.definitive_amount
-                    for preventive in self.advance_preventive_line_ids])
-                invoiced_amount = sum([
-                    preventive.invoiced_amount
-                    for preventive in self.advance_preventive_line_ids])
+        else:
+            preventive_amount = sum(self.mapped(
+                'preventive_line_ids.preventive_amount'))
+            definitive_amount = sum(self.mapped(
+                'preventive_line_ids.definitive_amount'))
+            invoiced_amount = sum(self.mapped(
+                'preventive_line_ids.invoiced_amount'))
+            to_pay_amount = sum(self.mapped(
+                'preventive_line_ids.to_pay_amount'))
+            paid_amount = sum(self.mapped(
+                'preventive_line_ids.paid_amount'))
 
         self.preventive_amount = preventive_amount
         self.definitive_amount = definitive_amount
         self.invoiced_amount = invoiced_amount
         self.to_pay_amount = to_pay_amount
         self.paid_amount = paid_amount
-
-    @api.one
-    @api.depends(
-        'preventive_line_ids.preventive_amount',
-        )
-    def _get_total(self):
-        self.total = sum(
-            [x.preventive_amount for x in self.preventive_line_ids])
 
     @api.multi
     def action_cancel_draft(self):
@@ -360,12 +342,13 @@ class transaction(models.Model):
                  ('date', '<=', self.expedient_id.issue_date)],
                 order='date desc', limit=1)
             if restriction:
-                if restriction.to_amount < self.total or \
-                        restriction.from_amount > self.total:
-                    raise Warning(
-                        _("Total, Type and Date are not compatible with \
-                            Transaction Amount Restrictions"))
+                if restriction.to_amount < self.preventive_amount or \
+                        restriction.from_amount > self.preventive_amount:
+                    raise Warning(_(
+                        "Preventive Total, Type and Date are not compatible "
+                        "with Transaction Amount Restrictions"))
 
+# Actions
     @api.multi
     def action_new_voucher(self):
         '''
