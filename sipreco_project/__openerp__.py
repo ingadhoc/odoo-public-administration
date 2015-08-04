@@ -27,6 +27,8 @@ Modulos principales del proyecto:
 # Sobreescribir terminos: True
 # En el diario de compras y abono de compras marcar "use documents" y en la pestaña documentos correr el wizard de configuración
 # En proveedores, establecer por defecto que tomen cuenta Proveedores como Cuenta a Pagar
+# Restringir balance en cuentas contables correspondientes a medios de pago (Transferencias bancarias). Fijar monto 0.0 (evita giros en descubierto)
+
     """,
     'author':  'ADHOC SA',
     'website': 'www.adhoc.com.ar',
