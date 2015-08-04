@@ -27,7 +27,7 @@ class invoice(models.Model):
         string='Transaction',
         copy=False,
         readonly=True,
-        required=True,
+        # required=True,
         )
     budget_id = fields.Many2one(
         related='transaction_id.budget_id',
