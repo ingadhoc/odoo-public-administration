@@ -34,6 +34,9 @@
                 <form position="attributes">
                     <attribute name="create">false</attribute>
                 </form>
+                <field name="partner_id" position="attributes">
+                    <attribute name="on_change">onchange_partner_id(partner_id, journal_id, amount, currency_id, type, date, transaction_id, context)</attribute>
+                </field>
                 <field name="partner_id" position="before">
                     <field name="transaction_with_advance_payment" invisible="1"/>
                     <field name="partner_ids" invisible="1"/>
