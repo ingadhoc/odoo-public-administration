@@ -3,7 +3,6 @@
     'category': 'base.module_category_knowledge_management',
     'data': [
                 'security/public_budget_group.xml',
-                'view/account_voucher_view.xml',
                 'wizard/transaction_definitive_make_invoice_view.xml',
                 'view/inventory_rule_view.xml',
                 'view/voucher_view.xml',

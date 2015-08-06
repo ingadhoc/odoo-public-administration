@@ -76,27 +76,35 @@ class account_voucher(models.Model):
                 partner_ids = self.transaction_id.supplier_ids
         self.partner_ids = partner_ids
 
-    # @api.one
-    # @api.onchange(
-    #     'transaction_id',
-    #     )
-    # def on_change_transaction(self):
-    #     self.partner_id = self.partner_ids and self.partner_ids[0] or False
+    @api.multi
+    def onchange_partner_id(
+            self, partner_id, journal_id, amount, currency_id, ttype,
+            date, transaction_id=False):
+        """
+        We add transaction on partner change
+        """
+        move_lines = self.get_transaction_move_lines(
+            ttype, partner_id, transaction_id)
 
-    # @api.multi
-    # def get_transaction_move_lines(self, ttype, partner_id, transaction_id):
-    #     if ttype == 'payment':
-    #         account_type = 'payable'
-    #     else:
-    #         account_type = 'receivable'
-    #     move_lines = self.env['account.move.line'].search([
-    #         ('state', '=', 'valid'),
-    #         ('account_id.type', '=', account_type),
-    #         ('reconcile_id', '=', False),
-    #         ('partner_id', '=', partner_id),
-    #         ('invoice.transaction_id', '=', transaction_id),
-    #         ])
-    #     return move_lines
+        return super(account_voucher, self.with_context(
+            move_line_ids=move_lines.ids)).onchange_partner_id(
+            partner_id, journal_id, amount, currency_id, ttype, date)
+
+    @api.model
+    def get_transaction_move_lines(self, ttype, partner_id, transaction_id):
+        if ttype == 'payment':
+            account_type = 'payable'
+        else:
+            account_type = 'receivable'
+        move_lines = self.env['account.move.line'].search([
+            ('state', '=', 'valid'),
+            ('account_id.type', '=', account_type),
+            ('reconcile_id', '=', False),
+            ('partner_id', '=', partner_id),
+            '|', ('invoice', '=', False),
+            ('invoice.transaction_id', '=', transaction_id),
+            ])
+        return move_lines
 
     def writeoff_move_line_get(
             self, cr, uid, voucher_id, line_total, move_id, name,
