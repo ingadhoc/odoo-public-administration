@@ -37,6 +37,7 @@ class account_voucher(models.Model):
     paid_withholding_ids = fields.Many2many(
         comodel_name='account.voucher.withholding',
         string='Paid Withholdings',
+        help='Withholding being paid with this voucher',
         compute='_get_paid_withholding'
         )
 
