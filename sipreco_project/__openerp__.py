@@ -39,10 +39,11 @@ Modulos principales del proyecto:
         'sipreco_public_budget',
         'account_cancel',
         'admin_technical_features',
-        'account_bank_voucher',
         'account_accountant',
         'account_clean_cancelled_invoice_number',
         'l10n_ar_bank',
+        'account_transfer',
+        'account_statement_move_import',
         'account_voucher_popup_print',
         'portal',   # necesitamos portal por un error raro al crear un voucher
         # es un error de javascript pero con portal de alguna manera se
