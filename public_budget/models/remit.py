@@ -33,7 +33,7 @@ class remit(models.Model):
         string='Date',
         readonly=True,
         required=True,
-        default=lambda self: fields.datetime.now()
+        default=lambda self: fields.Datetime.now()
         )
     user_id = fields.Many2one(
         'res.users',
@@ -41,6 +41,15 @@ class remit(models.Model):
         readonly=True,
         required=True,
         default=lambda self: self.env.user
+        )
+    confirmation_user_id = fields.Many2one(
+        'res.users',
+        string='Confirmation User',
+        readonly=True,
+        )
+    confirmation_date = fields.Datetime(
+        string='Confirmation Date',
+        readonly=True,
         )
     location_id = fields.Many2one(
         'public_budget.location',
@@ -89,6 +98,8 @@ class remit(models.Model):
 
     @api.one
     def check_user_location(self):
+        self.confirmation_user_id = self.env.user
+        self.confirmation_date = fields.Datetime.now()
         if self.location_dest_id not in self.env.user.location_ids:
             raise Warning(_(
                 'You can Not Confirme a Remit of a Location where your are not\

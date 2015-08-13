@@ -44,13 +44,19 @@
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
                      <group>
-                        <field name="date"/> 
-                        <field name="user_id"/> 
-                        <field name="location_id"
-                            domain="[('id','in',user_location_ids[0][2])]"
-                            options="{'no_create': True}"/>
-                        <field name="location_dest_id"
-                            domain="[('id','!=',location_id)]" options="{'no_create': True}"/> 
+                        <group>
+                            <field name="date"/> 
+                            <field name="location_id"
+                                domain="[('id','in',user_location_ids[0][2])]"
+                                options="{'no_create': True}"/>
+                            <field name="location_dest_id"
+                                domain="[('id','!=',location_id)]" options="{'no_create': True}"/> 
+                        </group>
+                        <group>
+                            <field name="user_id"/> 
+                            <field name="confirmation_user_id"/> 
+                            <field name="confirmation_date"/> 
+                        </group>
                      </group>
                     <field name="expedient_ids"
                         domain="[('current_location_id','=',location_id),('in_transit','=',False)]" options="{'no_create': True}"
