@@ -47,11 +47,9 @@
                 'security/ir.model.access.csv',
                 'view/public_budget_menuitem.xml',
                 'view/public_budget_actions.xml',
-                'report/remit_report.xml',
              ],
     'depends': [
         'account',
-        'report_aeroo',
         'account_invoice_auto_pay',
         'account_voucher_double_validation',
     ],

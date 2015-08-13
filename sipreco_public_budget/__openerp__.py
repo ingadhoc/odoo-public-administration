@@ -10,6 +10,7 @@
         'views/account_asset_view.xml',
         'views/account_voucher_view.xml',
         'views/account_check_view.xml',
+        'views/remit_view.xml',
         'workflow/account_voucher_workflow.xml',
         'workflow/account_check_workflow.xml',
         'data/data.xml',
@@ -19,7 +20,9 @@
         'data/public_budget.budget_position_category.csv',
         'data/public_budget.budget_pos_exc_rest.csv',
         'security/security.xml',
+        'reports/stylesheet.xml',
         'reports/receipt_report.xml',
+        'reports/remit_report.xml',
     ],
     'demo': [
         'demo/company_demo.xml',
