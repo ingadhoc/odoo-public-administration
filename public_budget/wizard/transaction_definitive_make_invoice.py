@@ -167,12 +167,14 @@ class public_budget_definitive_make_invoice(models.TransientModel):
             # Check advance remaining amount
             total_to_invoice_amount = sum([
                 x.to_invoice_amount for x in wizard.line_ids])
-            # TODO  verificar que se debe comparar con este campo
-            if total_to_invoice_amount > (
-                    wizard.transaction_id.to_return_amount):
+            advance_to_return_amount = (
+                wizard.transaction_id.advance_to_return_amount)
+            if total_to_invoice_amount > advance_to_return_amount:
                 raise Warning(_(
-                    "On Advance Transactions, sum of to Invoice Amount can not\
-                    be greater than Advance Remaining Amount!"))
+                    "You can not invoice more than Advance Remaining Amount!\n"
+                    "* Amount to invoice: %s\n"
+                    "* Advance Remaining Amount: %s"
+                    ) % (total_to_invoice_amount, advance_to_return_amount))
 
         if context is None:
             context = {}
@@ -182,7 +184,7 @@ class public_budget_definitive_make_invoice(models.TransientModel):
             preventive_line = definitive_line.preventive_line_id
             if line.to_invoice_amount:
                 line_vals = {
-                    'name': definitive_line.budget_position_id.name,
+                    'name': preventive_line.budget_position_id.name,
                     'price_unit': line.to_invoice_amount,
                     'quantity': 1,
                     'definitive_line_id': definitive_line.id,

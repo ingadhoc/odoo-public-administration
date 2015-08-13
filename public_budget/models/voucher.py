@@ -133,10 +133,13 @@ class account_voucher(models.Model):
         if self.transaction_with_advance_payment:
             advance_remaining_amount = (
                 self.transaction_id.advance_remaining_amount)
-            if self.advance_amount > advance_remaining_amount:
+            if advance_remaining_amount < 0.0:
                 raise Warning(_(
-                    'In advance transactions, payment orders amount can '
-                    'not be greater than transaction amount'))
+                    'In advance transactions, payment orders amount (%s) can '
+                    'not be greater than transaction advance remaining amount '
+                    '(%s)') % (
+                    self.advance_amount,
+                    advance_remaining_amount + self.advance_amount))
 
 
 class account_voucher_line(models.Model):

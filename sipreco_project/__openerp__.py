@@ -44,6 +44,7 @@ Modulos principales del proyecto:
         'l10n_ar_bank',
         'account_transfer',
         'account_statement_move_import',
+        'account_statement_disable_invoice_import',
         'account_voucher_popup_print',
         'account_balance_constraint',
         'portal',   # necesitamos portal por un error raro al crear un voucher

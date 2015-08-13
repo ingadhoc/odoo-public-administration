@@ -49,7 +49,6 @@
                     <field name="issue_date"/>
                     <field name="supplier_id"/>
                     <field name="amount"/>
-                    <field name="budget_position_id" invisible="'from_preventive' in context"/>
                     <field name="state" invisible="True"/>
                 </tree>
             </field>
