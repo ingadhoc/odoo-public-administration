@@ -79,13 +79,15 @@ class account_voucher(models.Model):
     @api.multi
     def onchange_partner_id(
             self, partner_id, journal_id, amount, currency_id, ttype,
-            date, transaction_id=False):
+            date):
         """
         We add transaction on partner change
         """
+        transaction_id = self._context.get(
+            'transaction_id',
+            self._context.get('transaction_id', False))
         move_lines = self.get_transaction_move_lines(
             ttype, partner_id, transaction_id)
-
         return super(account_voucher, self.with_context(
             move_line_ids=move_lines.ids)).onchange_partner_id(
             partner_id, journal_id, amount, currency_id, ttype, date)
