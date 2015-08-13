@@ -10,7 +10,6 @@
             <field name="arch" type="xml">
                 <button name="sgn_confirm" position="before">
                     <button name="%(action_aeroo_report_remit)d" class="oe_highlight" string="Print" type="action"/>
-                    <!-- <button name="print_remit" class="oe_highlight" string="Print" type="object"/> -->
                 </button>
             </field>
         </record>
