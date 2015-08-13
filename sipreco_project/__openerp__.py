@@ -45,6 +45,7 @@ Modulos principales del proyecto:
         'account_transfer',
         'account_statement_move_import',
         'account_voucher_popup_print',
+        'account_balance_constraint',
         'portal',   # necesitamos portal por un error raro al crear un voucher
         # es un error de javascript pero con portal de alguna manera se
         # resuelve. Luego de instalar portal refrescar pantalla
