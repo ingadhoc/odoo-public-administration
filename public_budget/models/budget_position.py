@@ -177,6 +177,12 @@ class budget_position(models.Model):
         else:
             amount = False
 
+        # TODO explicar
+        excluded_line_id = self._context.get('excluded_line_id', False)
+        print 'excluded_line_id', excluded_line_id
+        if excluded_line_id:
+            domain.append(('id', '!=', excluded_line_id))
+
         draft_preventive_lines = self.env[
             'public_budget.preventive_line'].search(
             domain

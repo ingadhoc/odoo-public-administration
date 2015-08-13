@@ -202,11 +202,19 @@ class preventive_line(models.Model):
         'budget_position_id',
         'preventive_amount')
     def _check_position_balance_amount(self):
-        self = self.with_context(budget_id=self.transaction_id.budget_id.id)
-        if self.budget_position_id.assignment_position_id.balance_amount < 0.0:
-            raise Warning(
-                _("There is not Enought Balance Amount on this\
-                    Budget Position '%s'") %
-                (self.budget_position_id.assignment_position_id.name))
+        self = self.with_context(
+            budget_id=self.transaction_id.budget_id.id,
+            excluded_line_id=self.id,
+            )
+        assignment_position = self.budget_position_id.assignment_position_id
+        position_balance = (assignment_position.balance_amount)
+        preventive_amount = self.preventive_amount
+        if position_balance < preventive_amount:
+            raise Warning(_(
+                "There is not enough Balance Amount to assign (%s) to Budget "
+                "Position '%s'.\n"
+                "* Balance available for '%s': %s") % (
+                preventive_amount, self.budget_position_id.name,
+                assignment_position.name, position_balance))
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
