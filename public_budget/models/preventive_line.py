@@ -165,14 +165,16 @@ class preventive_line(models.Model):
         amount
         """
         if self.advance_line:
-            definitive_amount = to_pay_amount = sum(
-                self.transaction_id.advance_voucher_ids.filtered(
-                    lambda r: r.state not in ('cancel', 'draft')).mapped(
-                    'to_pay_amount'))
-            paid_amount = sum(
-                self.transaction_id.advance_voucher_ids.filtered(
-                    lambda r: r.state == 'posted').mapped(
-                    'amount'))
+            transaction = self.transaction_id
+            if transaction.advance_preventive_amount:
+                preventive_perc = (
+                    self.preventive_amount /
+                    transaction.advance_preventive_amount)
+            else:
+                preventive_perc = 0.0
+            definitive_amount = to_pay_amount = (
+                transaction.advance_to_pay_amount * preventive_perc)
+            paid_amount = (transaction.advance_paid_amount * preventive_perc)
             invoiced_amount = 0.0
         else:
             definitive_amount = sum(self.mapped(

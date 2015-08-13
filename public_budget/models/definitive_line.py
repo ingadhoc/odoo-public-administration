@@ -70,11 +70,6 @@ class definitive_line(models.Model):
         store=True,
         related='preventive_line_id.budget_id'
         )
-    budget_position_id = fields.Many2one(
-        readonly=True,
-        string='Budget Position',
-        related='preventive_line_id.budget_position_id',
-        )
     state = fields.Selection(
         selection=[('draft', 'Draft'), ('invoiced', 'Invoiced')],
         string='State',

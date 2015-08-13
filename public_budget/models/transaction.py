@@ -148,19 +148,31 @@ class transaction(models.Model):
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
-    to_return_amount = fields.Float(
-        string='To Return Amount',
-        compute='_get_amounts',
+    advance_preventive_amount = fields.Float(
+        string='Advance Preventive Amount',
+        compute='_get_advance_amounts',
         digits=dp.get_precision('Account'),
         )
-    advance_amount = fields.Float(
-        string='Advance Amount',
-        compute='_get_amounts',
+    advance_to_pay_amount = fields.Float(
+        string='Advance To Pay Amount',
+        compute='_get_advance_amounts',
         digits=dp.get_precision('Account'),
         )
+    advance_paid_amount = fields.Float(
+        string='Advance Paid Amount',
+        compute='_get_advance_amounts',
+        digits=dp.get_precision('Account'),
+        )
+    # TODO IMPLEMENTAR
     advance_remaining_amount = fields.Float(
         string='Advance Remaining Amount',
-        compute='_get_amounts',
+        compute='_get_advance_amounts',
+        digits=dp.get_precision('Account'),
+        )
+    # TODO IMPLEMENTAR
+    advance_to_return_amount = fields.Float(
+        string='To Return Amount',
+        compute='_get_advance_to_return_amount',
         digits=dp.get_precision('Account'),
         )
     company_id = fields.Many2one(
@@ -244,37 +256,51 @@ class transaction(models.Model):
 
     @api.one
     @api.depends(
+        'invoiced_amount',
+        'advance_paid_amount',
+    )
+    def _get_advance_to_return_amount(self):
+        self.advance_to_return_amount = (
+            self.advance_paid_amount - self.invoiced_amount)
+
+    @api.one
+    @api.depends(
+        'advance_preventive_line_ids.preventive_amount',
+        'voucher_ids.state',
+    )
+    def _get_advance_amounts(self):
+        advance_preventive_amount = sum(self.mapped(
+            'advance_preventive_line_ids.preventive_amount'))
+        advance_to_pay_amount = sum(
+            self.advance_voucher_ids.filtered(
+                lambda r: r.state not in ('cancel', 'draft')).mapped(
+                'to_pay_amount'))
+        advance_paid_amount = sum(
+            self.advance_voucher_ids.filtered(
+                lambda r: r.state == 'posted').mapped(
+                'amount'))
+        self.advance_preventive_amount = advance_preventive_amount
+        self.advance_to_pay_amount = advance_to_pay_amount
+        self.advance_paid_amount = advance_paid_amount
+        self.advance_remaining_amount = (
+            advance_preventive_amount - advance_to_pay_amount)
+
+    @api.one
+    @api.depends(
         'preventive_line_ids',
         'voucher_ids.state',
     )
     def _get_amounts(self):
-
-        if self.type_id.with_advance_payment and self.state in (
-                'draft', 'open'):
-            preventive_amount = sum(self.mapped(
-                'advance_preventive_line_ids.preventive_amount'))
-            definitive_amount = sum(self.mapped(
-                'advance_preventive_line_ids.definitive_amount'))
-            invoiced_amount = sum(self.mapped(
-                'advance_preventive_line_ids.invoiced_amount'))
-            to_pay_amount = sum(self.mapped(
-                'advance_preventive_line_ids.to_pay_amount'))
-            paid_amount = sum(self.mapped(
-                'advance_preventive_line_ids.paid_amount'))
-            self.advance_amount = preventive_amount
-            self.advance_remaining_amount = preventive_amount - to_pay_amount
-            self.to_return_amount = paid_amount - invoiced_amount
-        else:
-            preventive_amount = sum(self.mapped(
-                'preventive_line_ids.preventive_amount'))
-            definitive_amount = sum(self.mapped(
-                'preventive_line_ids.definitive_amount'))
-            invoiced_amount = sum(self.mapped(
-                'preventive_line_ids.invoiced_amount'))
-            to_pay_amount = sum(self.mapped(
-                'preventive_line_ids.to_pay_amount'))
-            paid_amount = sum(self.mapped(
-                'preventive_line_ids.paid_amount'))
+        preventive_amount = sum(self.mapped(
+            'preventive_line_ids.preventive_amount'))
+        definitive_amount = sum(self.mapped(
+            'preventive_line_ids.definitive_amount'))
+        invoiced_amount = sum(self.mapped(
+            'preventive_line_ids.invoiced_amount'))
+        to_pay_amount = sum(self.mapped(
+            'preventive_line_ids.to_pay_amount'))
+        paid_amount = sum(self.mapped(
+            'preventive_line_ids.paid_amount'))
 
         self.preventive_amount = preventive_amount
         self.definitive_amount = definitive_amount
@@ -311,27 +337,17 @@ class transaction(models.Model):
 
         # Check advance transactions
         if self.type_id.with_advance_payment:
-            if self.to_return_amount != 0.0:
+            if self.advance_to_return_amount != 0.0:
                 raise Warning(_(
-                    'To close a transaction with advance payment,\
-                    Payment Order Amounts - Refund Amounts should be equal to\
-                    Definitive Amounts'))
+                    'To close a transaction to return amount must be 0!\n'
+                    '* To return amount = advance paid amount - '
+                    'invoiced amount\n'
+                    '(%s = %s - %s)' % (
+                        self.advance_to_return_amount,
+                        self.advance_paid_amount,
+                        self.invoiced_amount)))
 
 # Constraints
-    @api.one
-    @api.constrains(
-        'type_id', 'advance_preventive_line_ids', 'advance_voucher_ids')
-    def _check_advance_preventive_lines(self):
-        if self.type_id.with_advance_payment:
-            not_cancel_amount = sum(
-                x.to_pay_amount for x in self.advance_voucher_ids if (
-                    x.state != 'cancel'))
-            if not_cancel_amount > self.advance_amount:
-                raise Warning(
-                    _("In transactions with 'Advance Payment', \
-                        Settlement Amount can't be greater than\
-                        Payment Orders Amount"))
-
     @api.one
     @api.constrains('preventive_line_ids', 'type_id', 'expedient_id')
     def _check_transaction_type(self):
