@@ -8,6 +8,7 @@ class remit(models.Model):
 
     _name = 'public_budget.remit'
     _description = 'Remit'
+    _rec_name = 'number'
 
     _order = "date desc"
 
@@ -29,6 +30,10 @@ class remit(models.Model):
                 location_id = expedient.current_location_id.id
         return location_id
 
+    number = fields.Char(
+        string='Number',
+        readonly=True
+        )
     date = fields.Datetime(
         string='Date',
         readonly=True,
@@ -119,5 +124,11 @@ class remit(models.Model):
             raise Warning(_(
                 "You can not delete a Remit that is not in Cancel State"))
         return super(remit, self).unlink()
+
+    @api.model
+    def create(self, vals):
+        vals['number'] = self.env[
+            'ir.sequence'].get('public_budget.remit') or '/'
+        return super(remit, self).create(vals)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
