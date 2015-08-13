@@ -127,6 +127,7 @@ class budget_position(models.Model):
         'public_budget.budget_position',
         string='Assignment Position',
         compute='_get_assignment_position',
+        store=True,
         )
 
     @api.one
@@ -177,9 +178,10 @@ class budget_position(models.Model):
         else:
             amount = False
 
-        # TODO explicar
+        # we exclude lines from preventive lines because constraints sometimes
+        # consider the line you are checking and sometimes not, so better we
+        # exclude that line and compare to that line amount
         excluded_line_id = self._context.get('excluded_line_id', False)
-        print 'excluded_line_id', excluded_line_id
         if excluded_line_id:
             domain.append(('id', '!=', excluded_line_id))
 
@@ -262,11 +264,11 @@ class budget_position(models.Model):
                 budget position is being used in a budget detail or\
                 modification."))
         if self.budget_assignment_allowed:
-            # Checl no parent has budget allowed
-            if len(self.get_parent_assignment_position()) > 1:
+            # Check no parent has budget allowed
+            if len(self.get_parent_assignment_position()) >= 1:
                 raise Warning(_('In one branch only one budget position can\
                     have Budget Assignment Allowed.'))
-            # Checl no children has budget allowed
+            # Check no children has budget allowed
             else:
                 children_allowed = self.search([
                     ('id', 'child_of', self.id),
@@ -281,13 +283,13 @@ class budget_position(models.Model):
     @api.multi
     def get_parent_assignment_position(self):
         self.ensure_one()
-        parents = self.search([
-            ('parent_left', '<', self.parent_left),
-            ('parent_right', '>', self.parent_right)
-            ])
-        assignment_allowed = [
-            x for x in parents if x.budget_assignment_allowed]
-        return assignment_allowed and assignment_allowed[0] or []
+        assignment_allowed = self.env['public_budget.budget_position']
+        parent = self.parent_id
+        while parent:
+            if parent.budget_assignment_allowed:
+                assignment_allowed += parent
+            parent = parent.parent_id
+        return assignment_allowed
 
     @api.one
     @api.depends(

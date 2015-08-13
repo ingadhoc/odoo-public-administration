@@ -209,6 +209,10 @@ class preventive_line(models.Model):
             excluded_line_id=self.id,
             )
         assignment_position = self.budget_position_id.assignment_position_id
+        if not assignment_position:
+            raise Warning(_(
+                "The selected budget position (%s) has not a related assigment"
+                " position!" % self.budget_position_id.name))
         position_balance = (assignment_position.balance_amount)
         preventive_amount = self.preventive_amount
         if position_balance < preventive_amount:
