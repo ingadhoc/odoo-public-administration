@@ -2,6 +2,26 @@
 <openerp>
     <data> 
 
+
+        <!-- make print button available in all states -->
+        <record id="view_print_button_vendor_payment_form" model="ir.ui.view">
+            <field name="name">account.voucher.customer.pay.form</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="report_extended_voucher.view_vendor_receipt_dialog_form"/>
+            <field name="arch" type="xml">
+                <form>
+                    <field name="show_print_receipt_button" invisible="0"/>
+                </form>
+                <button name="receipt_print" position="attributes">
+                    <attribute name="states"></attribute>
+                    <attribute name="string">Print Payment Order</attribute>
+                </button>
+                <button name="receipt_print" position="after">
+                    <button name="%(action_aeroo_report_payment_receipt)d" class="oe_highlight" string="Print Receipt" attrs="{'invisible': [('show_print_receipt_button', '=', False)]}" type="action"/>
+                </button>
+            </field>
+        </record>
+        
         <!-- Supplier Receipt Form  -->
         <record id="view_vendor_payment_form" model="ir.ui.view">
             <field name="name">account.voucher.form.receipts.pay.inherit</field>
@@ -58,18 +78,6 @@
                 <field name="date" position="attributes">
                     <attribute name="invisible">True</attribute>
                 </field>
-            </field>
-        </record>
-
-        <!-- make print button available in all states -->
-        <record id="view_print_button_vendor_payment_form" model="ir.ui.view">
-            <field name="name">account.voucher.customer.pay.form</field>
-            <field name="model">account.voucher</field>
-            <field name="inherit_id" ref="report_extended_voucher.view_vendor_receipt_dialog_form"/>
-            <field name="arch" type="xml">
-                <button name="receipt_print" position="attributes">
-                    <attribute name="states"></attribute>
-                </button>
             </field>
         </record>
 

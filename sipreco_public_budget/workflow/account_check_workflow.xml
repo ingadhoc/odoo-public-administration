@@ -31,7 +31,7 @@
             <field name="act_from" ref="actt_to_be_handed"/>
             <field name="act_to" ref="account_check.actt_cancel"/>
             <field name="signal">cancel</field>
-            <field name="condition">type == 'issue'</field>
+            <field name="condition">type == 'issue_check'</field>
         </record>
 
     </data>

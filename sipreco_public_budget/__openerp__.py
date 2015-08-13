@@ -6,10 +6,11 @@
     'data': [
         'wizard/transaction_definitive_make_invoice_view.xml',
         'reports/stylesheet.xml',
-        'reports/receipt_report.xml',
+        'reports/payment_order_report.xml',
         'reports/remit_report.xml',
         'reports/expedient_report.xml',
         'reports/transaction_report.xml',
+        'reports/payment_receipt_report.xml',
         'views/res_partner_view.xml',
         'views/custom_views.xml',
         'views/account_asset_view.xml',
