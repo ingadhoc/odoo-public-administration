@@ -37,6 +37,7 @@
                         <field name="type"/> 
                         <field name="parent_id"/> 
                         <field name="budget_assignment_allowed"/> 
+                        <field name="assignment_position_id"/> 
                         <field name="inventariable" attrs="{'invisible': [('type', '=', 'view')]}"/> 
                         <field name="category_id" attrs="{'invisible': [('type', '=', 'view')], 'required':[('type', '=', 'normal')]}"/> 
                         <field name="child_ids" attrs="{'invisible':[('type','!=','view')]}"/>

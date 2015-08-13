@@ -299,9 +299,9 @@ class budget_position(models.Model):
     )
     def _get_assignment_position(self):
         if self.budget_assignment_allowed:
-            assignment_position_id = self
+            assignment_position = self
         else:
-            assignment_position_id = self.get_parent_assignment_position()
-        self.assignment_position_id = assignment_position_id
+            assignment_position = self.get_parent_assignment_position()
+        self.assignment_position_id = assignment_position.id
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
