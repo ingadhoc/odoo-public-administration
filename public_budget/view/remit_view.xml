@@ -7,6 +7,7 @@
             <field name="model">public_budget.remit</field>
             <field name="arch" type="xml">
                 <search string="Remit">
+                    <field name="number"/>
                     <field name="date"/>
                     <field name="user_id"/>
                     <field name="location_id"/>
@@ -41,16 +42,26 @@
                     </header>
                     <sheet string="Remit">
                         <field name="user_location_ids" invisible="True"/>
+                        <h1>
+                            <label for="number"/>
+                            <field name="number" class="oe_inline" readonly="1"/>
+                        </h1>
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
                      <group>
-                        <field name="date"/> 
-                        <field name="user_id"/> 
-                        <field name="location_id"
-                            domain="[('id','in',user_location_ids[0][2])]"
-                            options="{'no_create': True}"/>
-                        <field name="location_dest_id"
-                            domain="[('id','!=',location_id)]" options="{'no_create': True}"/> 
+                        <group>
+                            <field name="date"/> 
+                            <field name="location_id"
+                                domain="[('id','in',user_location_ids[0][2])]"
+                                options="{'no_create': True}"/>
+                            <field name="location_dest_id"
+                                domain="[('id','!=',location_id)]" options="{'no_create': True}"/> 
+                        </group>
+                        <group>
+                            <field name="user_id"/> 
+                            <field name="confirmation_user_id"/> 
+                            <field name="confirmation_date"/> 
+                        </group>
                      </group>
                     <field name="expedient_ids"
                         domain="[('current_location_id','=',location_id),('in_transit','=',False)]" options="{'no_create': True}"
@@ -69,6 +80,7 @@
                 <tree string="Remit"
                     colors="grey:state=='cancelled';blue:state in (u'in_transit',);black:state in (u'confirmed',);red:state in ()"
                     >
+                    <field name="number"/>
                     <field name="date"/>
                     <field name="user_id"/>
                     <field name="location_id"/>

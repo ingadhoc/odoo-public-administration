@@ -6,12 +6,10 @@
             <field name="model">account.check</field>
             <field name="inherit_id" ref="account_check.view_account_check_form"/>
             <field name="arch" type="xml">
-                <field name="state" position="before">
-                    <button name="action_delivered" type="object" string="Delivered" states="handed"/>
-                </field>
                 <!-- buttons to add to_be_handed behaviour -->
                 <button position="after">
-                    <button name="to_be_handed" string="Handed" attrs="{'invisible':['|',('type','!=','issue'),('state','!=','to_be_handed')]}" />
+                    <button name="to_be_handed" string="Handed" attrs="{'invisible':['|',('type','!=','issue_check'),('state','!=','to_be_handed')]}" />
+                    <button name="back_to_be_handed" string="Back To Be Handed" attrs="{'invisible':['|',('type','!=','issue_check'),('state','!=','handed')]}" />
                 </button>
             </field>
         </record>

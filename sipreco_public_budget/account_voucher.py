@@ -34,6 +34,10 @@ class account_voucher(models.Model):
     withholding_ids = fields.One2many(
         states={'confirmed': [('readonly', False)]}
         )
+    show_print_receipt_button = fields.Boolean(
+        'Show Print Receipt Button',
+        compute='get_show_print_receipt_button',
+        )
     paid_withholding_ids = fields.Many2many(
         comodel_name='account.voucher.withholding',
         string='Paid Withholdings',
@@ -48,6 +52,16 @@ class account_voucher(models.Model):
         paid_withholdings = self.env['account.voucher.withholding'].search([(
             'move_line_id.tax_settlement_move_id', 'in', paid_move_ids)])
         self.paid_withholding_ids = paid_withholdings
+
+    @api.one
+    @api.depends('issued_check_ids.state', 'state')
+    def get_show_print_receipt_button(self):
+        show_print_receipt_button = False
+        not_handed_checks = self.issued_check_ids.filtered(
+            lambda r: r.state not in ('handed', 'returned', 'debited'))
+        if self.state == 'posted' and not not_handed_checks:
+            show_print_receipt_button = True
+        self.show_print_receipt_button = show_print_receipt_button
 
     @api.one
     @api.depends('payment_base_date', 'payment_days')
