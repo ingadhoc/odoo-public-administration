@@ -252,6 +252,7 @@ class public_budget_definitive_make_invoice(models.TransientModel):
             cr, uid, 'account', 'invoice_supplier_form')
         result['views'] = [(res and res[1] or False, 'form')]
         result['res_id'] = invoice_id
+        result['target'] = 'new'
         if tran_type.with_advance_payment:
             self.pool['account.invoice'].signal_workflow(
                 cr, uid, [invoice_id], 'invoice_open')
