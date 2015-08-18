@@ -66,12 +66,19 @@ class account_voucher(models.Model):
     @api.one
     @api.depends('payment_base_date', 'payment_days')
     def get_payment_date(self):
-        payment_date = False
+        current_date = False
+        business_days_to_add = self.payment_days
         if self.payment_base_date:
-            payment_base_date = fields.Date.from_string(self.payment_base_date)
-            payment_date = payment_base_date + relativedelta(
-                days=self.payment_days)
-        self.payment_date = payment_date
+            current_date = fields.Date.from_string(self.payment_base_date)
+            while business_days_to_add > 0:
+                current_date = current_date + relativedelta(days=1)
+                weekday = current_date.weekday()
+                if weekday >= 5:    # sunday = 6
+                    continue
+                # if current_date in holidays:
+                #     continue
+                business_days_to_add -= 1
+        self.payment_date = current_date
 
     @api.constrains('state', 'to_pay_amount')
     def check_to_pay_amount(self):
