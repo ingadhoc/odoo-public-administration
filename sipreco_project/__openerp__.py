@@ -36,6 +36,7 @@ Modulos principales del proyecto:
     ],
     'depends': [
         # 'sipreco_account_chart',
+        'account_move_line_no_filter',
         'sipreco_public_budget',
         'account_cancel',
         'account_voucher_multic_fix',
@@ -45,7 +46,6 @@ Modulos principales del proyecto:
         'account_clean_cancelled_invoice_number',
         'l10n_ar_bank',
         'account_transfer',
-        'account_statement_move_import',
         'account_statement_disable_invoice_import',
         'account_voucher_popup_print',
         'account_balance_constraint',

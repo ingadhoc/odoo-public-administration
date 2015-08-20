@@ -63,6 +63,7 @@
         'public_budget',
         'account_asset',
         'share',
+        'account_statement_move_import',
         'web_m2x_options',
         'account_tax_settlement_withholding',
     ],
