@@ -60,6 +60,13 @@ class account_voucher(models.Model):
             vals['force_number'] = force_number
         return super(account_voucher, self).create(vals)
 
+    @api.onchange('company_id')
+    def _get_receiptbook(self):
+        if self.budget_id:
+            return self.budget_id.receiptbook_id
+        else:
+            return super(account_voucher, self)._get_receiptbook()
+
     @api.one
     def _get_paid_withholding(self):
         paid_move_ids = [

@@ -16,6 +16,7 @@
         'views/account_asset_view.xml',
         'views/account_voucher_view.xml',
         'views/account_check_view.xml',
+        'views/budget_view.xml',
         'views/remit_view.xml',
         'views/expedient_view.xml',
         'views/transaction_view.xml',

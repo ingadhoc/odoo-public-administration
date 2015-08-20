@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- FORMVIEW -->
+        <record id="view_public_budget_budget_form" model="ir.ui.view">
+            <field name="name">public_budget.budget.form</field>
+            <field name="model">public_budget.budget</field>
+            <field name="inherit_id" ref="public_budget.view_public_budget_budget_form"/>
+            <field name="arch" type="xml">
+                <field name="fiscalyear_id" position="after">
+                    <field name="receiptbook_id"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
+     -->
