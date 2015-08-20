@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data> 
-
+        <!-- l10n_ar_account_voucher mods -->
+        <record id="view_vendor_payment_l10n_ar_mods_form" model="ir.ui.view">
+            <field name="name">account.voucher.customer.pay.form</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="l10n_ar_account_voucher.view_vendor_payment_form"/>
+            <field name="arch" type="xml">
+                <field name="receiptbook_id" position="attributes">
+                    <attribute name="required">1</attribute>
+                </field>
+                <field name="next_receipt_number" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <!-- we use force number as a hack to compute document number on creation -->
+                <field name="force_number" position="attributes">
+                    <attribute name="string">Document Number</attribute>
+                    <attribute name="readonly">1</attribute>
+                </field>
+            </field>
+        </record>
 
         <!-- make print button available in all states -->
         <record id="view_print_button_vendor_payment_form" model="ir.ui.view">

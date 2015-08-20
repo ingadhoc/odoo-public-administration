@@ -45,6 +45,21 @@ class account_voucher(models.Model):
         compute='_get_paid_withholding'
         )
 
+    @api.model
+    def create(self, vals):
+        """
+        we use force number as a hack to compute document number on creation
+        """
+        voucher_type = vals.get(
+            'type', self._context.get('default_type', False))
+        receiptbook = self.receiptbook_id.browse(
+            vals.get('receiptbook_id', False))
+        if receiptbook and voucher_type == 'payment':
+            force_number = self.env['ir.sequence'].next_by_id(
+                    receiptbook.sequence_id.id)
+            vals['force_number'] = force_number
+        return super(account_voucher, self).create(vals)
+
     @api.one
     def _get_paid_withholding(self):
         paid_move_ids = [
