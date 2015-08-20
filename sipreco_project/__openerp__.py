@@ -38,6 +38,8 @@ Modulos principales del proyecto:
         # 'sipreco_account_chart',
         'sipreco_public_budget',
         'account_cancel',
+        'account_voucher_multic_fix',
+        'account_multic_fix',
         'admin_technical_features',
         'account_accountant',
         'account_clean_cancelled_invoice_number',
