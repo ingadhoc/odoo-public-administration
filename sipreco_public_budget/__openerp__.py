@@ -39,6 +39,7 @@
         'demo/account.checkbook.csv',
         'demo/account_properties.xml',
         'demo/account_period.xml',
+        'demo/receipt_demo.xml',
         'demo/taxes.xml',
         'demo/tax_settlement.xml',
         'demo/account.tax.withholding.csv',

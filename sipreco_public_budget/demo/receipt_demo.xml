@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!--
+        Receiptbook Sequence
+        -->         
+
+        <record id="sequence_payment_order_actual" model="ir.sequence">
+            <field name="name" eval="'Ordenes de pago ' +time.strftime('%Y')"/>
+            <field name="padding" eval="8"/>
+            <field name="prefix">OP/%(year)s/</field>
+            <field name="company_id" ref="company_sipreco"/>
+        </record>      
+
+        <!--
+        Account Voucher Receiptbook
+        -->
+
+        <record id="payment_order_actual" model="account.voucher.receiptbook">
+            <field name="name" eval="'Ordenes de pago ' +time.strftime('%Y')"/>
+            <field name="type">payment</field>
+            <field name="sequence_type">automatic</field>
+            <field name="sequence_id" ref="sequence_payment_order_actual"/>
+            <field name="document_class_id" ref="l10n_ar_invoice.dc_recibo_x"/>
+            <field name="manual_prefix"></field>
+            <field name="sequence" eval="10"/>
+            <field name="company_id" ref="company_sipreco"/>
+        </record>
+    </data>
+</openerp>
