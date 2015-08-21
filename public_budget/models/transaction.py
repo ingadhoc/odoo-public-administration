@@ -286,19 +286,36 @@ class transaction(models.Model):
             advance_preventive_amount - advance_to_pay_amount)
 
     @api.multi
-    def asda(self):
+    def mass_voucher_create(self):
         self.ensure_one()
         vouchers = self.env['account.voucher']
-        for invoice in self.transaction_id.invoice_ids.filtered(
+        for invoice in self.invoice_ids.filtered(
                 lambda r: r.state == 'open'):
+            journal = self.env['account.journal'].search([
+                ('company_id', '=', invoice.company_id.id),
+                ('type', 'in', ('cash', 'bank'))], limit=1)
+            voucher_data = vouchers.onchange_partner_id(
+                invoice.partner_id.id, journal.id, 0.0,
+                invoice.currency_id.id, 'payment', False)
+            line_cr_ids = [
+                (0, 0, vals) for vals in voucher_data['value'].get(
+                    'line_cr_ids', False) if isinstance(vals, dict)]
+            line_dr_ids = [
+                (0, 0, vals) for vals in voucher_data['value'].get(
+                    'line_dr_ids', False) if isinstance(vals, dict)]
             voucher_vals = {
                 'type': 'payment',
+                'receiptbook_id': self.budget_id.receiptbook_id.id,
+                'expedient_id': self.expedient_id.id,
                 'partner_id': invoice.partner_id.id,
-                'transaction_id': self.transaction_id.id,
+                'transaction_id': self.id,
+                'journal_id': journal.id,
+                'account_id': voucher_data['value'].get('account_id', False),
+                'line_cr_ids': line_cr_ids,
+                'line_dr_ids': line_dr_ids,
                 }
-            vouchers += vouchers.create(voucher_vals)
-
-        return vouchers
+            vouchers.create(voucher_vals)
+        return True
 
     @api.one
     @api.depends(

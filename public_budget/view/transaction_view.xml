@@ -111,7 +111,7 @@
                             <page string="Payment Orders" attrs="{'invisible':[('type_with_advance_payment','=',True)]}">
                                 <button class="oe_link" string="Create Payment Order" states="open" type="object" name="action_new_voucher"/>
                                 or 
-                                <button class="oe_link" string="Mass Payment Order Create" states="open" type="action" name="%(public_budget.action_definitive_mass_voucher_create)d"/>
+                                <button class="oe_link" string="Mass Payment Order Create" states="open" type="object" name="mass_voucher_create"/>
                                 <field name="voucher_ids" context="{'default_type': 'payment', 'default_transaction_id':id, 'form_view_ref': 'account_voucher.view_vendor_payment_form','tree_view_ref': 'account_voucher.view_voucher_tree'}"/>
                             </page>
                             <page string="Notes">
