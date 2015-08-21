@@ -3,7 +3,7 @@ from openerp import models, fields, api, _
 from openerp.exceptions import Warning
 
 
-class public_budget_definitive_mass_invoice(models.TransientModel):
+class public_budget_definitive_mass_invoice_create(models.TransientModel):
     _name = "public_budget.definitive.mass.invoice.create"
     _description = "Transaction Definitive Mass Invoice Create"
 

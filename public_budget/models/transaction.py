@@ -285,6 +285,21 @@ class transaction(models.Model):
         self.advance_remaining_amount = (
             advance_preventive_amount - advance_to_pay_amount)
 
+    @api.multi
+    def asda(self):
+        self.ensure_one()
+        vouchers = self.env['account.voucher']
+        for invoice in self.transaction_id.invoice_ids.filtered(
+                lambda r: r.state == 'open'):
+            voucher_vals = {
+                'type': 'payment',
+                'partner_id': invoice.partner_id.id,
+                'transaction_id': self.transaction_id.id,
+                }
+            vouchers += vouchers.create(voucher_vals)
+
+        return vouchers
+
     @api.one
     @api.depends(
         'preventive_line_ids',
