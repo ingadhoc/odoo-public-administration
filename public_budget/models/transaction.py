@@ -285,6 +285,38 @@ class transaction(models.Model):
         self.advance_remaining_amount = (
             advance_preventive_amount - advance_to_pay_amount)
 
+    @api.multi
+    def mass_voucher_create(self):
+        self.ensure_one()
+        vouchers = self.env['account.voucher']
+        for invoice in self.invoice_ids.filtered(
+                lambda r: r.state == 'open'):
+            journal = self.env['account.journal'].search([
+                ('company_id', '=', invoice.company_id.id),
+                ('type', 'in', ('cash', 'bank'))], limit=1)
+            voucher_data = vouchers.onchange_partner_id(
+                invoice.partner_id.id, journal.id, 0.0,
+                invoice.currency_id.id, 'payment', False)
+            line_cr_ids = [
+                (0, 0, vals) for vals in voucher_data['value'].get(
+                    'line_cr_ids', False) if isinstance(vals, dict)]
+            line_dr_ids = [
+                (0, 0, vals) for vals in voucher_data['value'].get(
+                    'line_dr_ids', False) if isinstance(vals, dict)]
+            voucher_vals = {
+                'type': 'payment',
+                'receiptbook_id': self.budget_id.receiptbook_id.id,
+                'expedient_id': self.expedient_id.id,
+                'partner_id': invoice.partner_id.id,
+                'transaction_id': self.id,
+                'journal_id': journal.id,
+                'account_id': voucher_data['value'].get('account_id', False),
+                'line_cr_ids': line_cr_ids,
+                'line_dr_ids': line_dr_ids,
+                }
+            vouchers.create(voucher_vals)
+        return True
+
     @api.one
     @api.depends(
         'preventive_line_ids',
@@ -307,6 +339,57 @@ class transaction(models.Model):
         self.invoiced_amount = invoiced_amount
         self.to_pay_amount = to_pay_amount
         self.paid_amount = paid_amount
+
+    @api.multi
+    def get_invoice_vals(
+            self, supplier, journal, invoice_date,
+            supplier_invoice_number, inv_lines, advance_account=False):
+        self.ensure_one()
+        journal_type = journal.type
+        if journal_type == 'sale':
+            inv_type = 'out_invoice'
+        elif journal_type == 'purchase':
+            inv_type = 'in_invoice'
+        elif journal_type == 'sale_refund':
+            inv_type = 'out_refund'
+        else:
+            inv_type = 'in_refund'
+
+        company = self.env.user.company_id
+        partner_data = self.env['account.invoice'].onchange_partner_id(
+            inv_type, supplier.id, company_id=company.id)
+        periods = self.env['account.period'].find(
+            invoice_date)
+        if not periods:
+            raise Warning(_('Not period found for this date'))
+        period_id = periods.id
+
+        if advance_account:
+            account_id = advance_account.id
+        else:
+            account_id = partner_data['value'].get('account_id', False)
+
+        vals = {
+            'partner_id': supplier.id,
+            'date_invoice': invoice_date,
+            'supplier_invoice_number': supplier_invoice_number,
+            'invoice_line': [(6, 0, inv_lines.ids)],
+            # 'name': invoice.name,
+            'type': inv_type,
+            'account_id': account_id,
+            # 'direct_payment_journal_id': advance_journal_id,
+            'journal_id': journal.id,
+            # 'currency_id': invoice.currency_id and invoice.currency_id.id,
+            'fiscal_position': partner_data['value'].get(
+                'fiscal_position', False),
+            'payment_term': partner_data['value'].get('payment_term', False),
+            'company_id': company.id,
+            'transaction_id': self.id,
+            'period_id': period_id,
+            'partner_bank_id': partner_data['value'].get(
+                'partner_bank_id', False),
+        }
+        return vals
 
     @api.multi
     def action_cancel_draft(self):

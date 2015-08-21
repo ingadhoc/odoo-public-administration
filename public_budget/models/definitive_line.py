@@ -150,4 +150,23 @@ class definitive_line(models.Model):
         self.to_pay_amount = to_pay_amount
         self.paid_amount = paid_amount
 
+    @api.multi
+    def get_invoice_line_vals(self, to_invoice_amount=False):
+        self.ensure_one()
+        if not to_invoice_amount:
+            to_invoice_amount = self.residual_amount
+        preventive_line = self.preventive_line_id
+        line_vals = {
+            'name': preventive_line.budget_position_id.name,
+            'price_unit': to_invoice_amount,
+            'quantity': 1,
+            'definitive_line_id': self.id,
+            'account_id': preventive_line.account_id.id,
+            # 'discount': ,
+            # 'product_id': line.product_id.id or False,
+            # 'uos_id': line.uos_id.id or False,
+            # 'sequence': line.sequence,
+        }
+        return line_vals
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
