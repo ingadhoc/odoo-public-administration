@@ -1,2 +1,2 @@
-id,fiscalyear_id/id,name,income_account_id/id,expedient_id/id,company_id/id
-budget_actual,account.data_fiscalyear,Presupuesto Actual,account_account_114,budget_exp_caso_11,company_sipreco
+id,fiscalyear_id/id,name,income_account_id/id,expedient_id/id,company_id/id,receiptbook_id/id
+budget_actual,account.data_fiscalyear,Presupuesto Actual,account_account_114,budget_exp_caso_11,company_sipreco,payment_order_actual
