@@ -4,6 +4,7 @@
     'data': [
                 'security/public_budget_group.xml',
                 'wizard/transaction_definitive_make_invoice_view.xml',
+                'wizard/transaction_definitive_mass_invoice_create_view.xml',
                 'view/inventory_rule_view.xml',
                 'view/voucher_view.xml',
                 'view/invoice_view.xml',

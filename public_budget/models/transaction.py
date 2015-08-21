@@ -309,6 +309,57 @@ class transaction(models.Model):
         self.paid_amount = paid_amount
 
     @api.multi
+    def get_invoice_vals(
+            self, supplier, journal, invoice_date,
+            supplier_invoice_number, inv_lines, advance_account=False):
+        self.ensure_one()
+        journal_type = journal.type
+        if journal_type == 'sale':
+            inv_type = 'out_invoice'
+        elif journal_type == 'purchase':
+            inv_type = 'in_invoice'
+        elif journal_type == 'sale_refund':
+            inv_type = 'out_refund'
+        else:
+            inv_type = 'in_refund'
+
+        company = self.env.user.company_id
+        partner_data = self.env['account.invoice'].onchange_partner_id(
+            inv_type, supplier.id, company_id=company.id)
+        periods = self.env['account.period'].find(
+            invoice_date)
+        if not periods:
+            raise Warning(_('Not period found for this date'))
+        period_id = periods.id
+
+        if advance_account:
+            account_id = advance_account.id
+        else:
+            account_id = partner_data['value'].get('account_id', False)
+
+        vals = {
+            'partner_id': supplier.id,
+            'date_invoice': invoice_date,
+            'supplier_invoice_number': supplier_invoice_number,
+            'invoice_line': [(6, 0, inv_lines.ids)],
+            # 'name': invoice.name,
+            'type': inv_type,
+            'account_id': account_id,
+            # 'direct_payment_journal_id': advance_journal_id,
+            'journal_id': journal.id,
+            # 'currency_id': invoice.currency_id and invoice.currency_id.id,
+            'fiscal_position': partner_data['value'].get(
+                'fiscal_position', False),
+            'payment_term': partner_data['value'].get('payment_term', False),
+            'company_id': company.id,
+            'transaction_id': self.id,
+            'period_id': period_id,
+            'partner_bank_id': partner_data['value'].get(
+                'partner_bank_id', False),
+        }
+        return vals
+
+    @api.multi
     def action_cancel_draft(self):
         """ go from canceled state to draft state"""
         self.write({'state': 'draft'})
