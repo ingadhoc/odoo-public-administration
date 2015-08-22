@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- FORMVIEW -->
+        <record id="view_public_budget_preventive_line_form" model="ir.ui.view">
+            <field name="name">public_budget.preventive_line.form</field>
+            <field name="model">public_budget.preventive_line</field>
+            <field name="inherit_id" ref="public_budget.view_public_budget_preventive_line_form"/>
+            <field name="arch" type="xml">
+                 <field name="definitive_line_ids" position="attributes">
+                    <attribute name="context">{'from_preventive':True,'default_amount':remaining_amount, 'definitive_partner_type': definitive_partner_type}</attribute>
+                </field>
+                <form>
+                    <field name="definitive_partner_type" invisible="1"/>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
+     -->
