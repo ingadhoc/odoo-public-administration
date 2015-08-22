@@ -86,8 +86,7 @@ class public_budget_definitive_make_invoice(models.TransientModel):
         'res.partner',
         string='Supplier',
         required=True,
-        domain=[('supplier', '=', True)],
-        context={'default_supplier': True}
+        # context={'default_supplier': True}
     )
     line_ids = fields.One2many(
         'public_budget.definitive.make.invoice.detail',
@@ -112,17 +111,10 @@ class public_budget_definitive_make_invoice(models.TransientModel):
     @api.one
     @api.depends('transaction_id')
     def _get_supplier_ids(self):
-        self.supplier_ids = self.env['res.partner']
-        definitive_lines = self.env[
-            'public_budget.definitive_line'].search([
-                ('preventive_line_id.transaction_id',
-                    '=', self.transaction_id.id)])
-        supplier_ids = []
-        for line in definitive_lines:
-            # No lo buscamos arriba porque no es un campo stored
-            if line.residual_amount > 0:
-                supplier_ids.append(line.supplier_id.id)
-        self.supplier_ids = supplier_ids
+        self.supplier_ids = self.transaction_id.mapped(
+            'preventive_line_ids.definitive_line_ids').filtered(
+            lambda r: r.residual_amount != 0).mapped(
+            'supplier_id')
 
     @api.one
     @api.onchange('supplier_id')
