@@ -27,7 +27,7 @@ class transaction_type(models.Model):
         string='Advance Account',
         context={'default_type': 'other'},
         # we use receivable to get debt but we dont reconcile
-        domain=[('type', 'in', ('receivable')), ('reconcile', '=', False)],
+        domain=[('type', 'in', ['receivable']), ('reconcile', '=', False)],
         help='This account will be used on advance payments. Must be a payable account.',
         )
     advance_journal_id = fields.Many2one(
