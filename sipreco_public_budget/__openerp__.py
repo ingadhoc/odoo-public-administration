@@ -21,6 +21,8 @@
         'views/remit_view.xml',
         'views/expedient_view.xml',
         'views/transaction_view.xml',
+        'views/definitive_line_view.xml',
+        'views/transaction_type_view.xml',
         'workflow/account_voucher_workflow.xml',
         'workflow/account_check_workflow.xml',
         'data/data.xml',
