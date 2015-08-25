@@ -114,14 +114,14 @@ class account_voucher(models.Model):
 
     state = fields.Selection(
         selection=[
-            ('draft', 'Draft'),
-            ('confirmed', 'Confirmed'),
-            ('signature_process', 'Signature Process'),
-            ('signed', 'Signed'),
-            ('cancel', 'Cancelled'),
+            ('draft', 'Borrador'),
+            ('confirmed', 'Confirmado'),
+            ('signature_process', 'En Proceso de Firma'),
+            ('signed', 'Firmado'),
+            ('cancel', 'Cancelado'),
             ('proforma', 'Pro-forma'),
             # we also change posted for paid
-            ('posted', 'Paid')
+            ('posted', 'Pagado')
         ])
 
     @api.multi
@@ -130,6 +130,6 @@ class account_voucher(models.Model):
         """
         for voucher in self:
             if voucher.amount != voucher.to_pay_amount:
-                raise Warning(_('You can not send to sign process a Voucher \
-                    that has Total Amount different from To Pay Amount'))
+                raise Warning(_('No puedes enviar a Firmar una Orden de Pago \
+                    que tenga un Importe Total distinto al Monto a Pagar'))
         return True

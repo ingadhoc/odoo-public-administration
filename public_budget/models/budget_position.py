@@ -45,31 +45,31 @@ class budget_position(models.Model):
         digits=dp.get_precision('Account'),
         )
     preventive_amount = fields.Float(
-        string='Preventive Amount',
+        string='Preventivo',
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     definitive_amount = fields.Float(
-        string='Definitive Amount',
+        string='Definitivo',
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     to_pay_amount = fields.Float(
-        string='To Pay Amount',
+        string='Mandado a Pagar',
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     paid_amount = fields.Float(
-        string='Paid Amount',
+        string='Pagado',
         compute='_get_amounts'
         )
     balance_amount = fields.Float(
-        string='Balance Amount',
+        string='Saldo',
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     projected_amount = fields.Float(
-        string='Projected Amount',
+        string='Consumo Proyectado',
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
@@ -79,12 +79,12 @@ class budget_position(models.Model):
         digits=dp.get_precision('Account'),
         )
     preventive_avg = fields.Float(
-        string='Preventive Perc.',
+        string='Porcentaje',
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     amount = fields.Float(
-        string='Amount',
+        string='Monto',
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
