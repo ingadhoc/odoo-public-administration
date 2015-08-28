@@ -90,7 +90,7 @@
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create"> Click to create a Employees.</p>
             </field>
-            <field name="context">{'search_default_employee':1}</field>
+            <field name="context">{'search_default_employee':1,'default_employee':1}</field>
         </record>
 
         <menuitem
