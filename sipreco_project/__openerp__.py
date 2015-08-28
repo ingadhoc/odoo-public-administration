@@ -50,6 +50,7 @@ Modulos principales del proyecto:
         'account_voucher_popup_print',
         'account_balance_constraint',
         'partner_vat_unique',
+        # por alguna razon no lo instala, ver con juan
         'portal',   # necesitamos portal por un error raro al crear un voucher
         # es un error de javascript pero con portal de alguna manera se
         # resuelve. Luego de instalar portal refrescar pantalla
