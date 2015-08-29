@@ -5,9 +5,9 @@
     <!-- Partners for companies -->
         <record id="partner_sipreco" model="res.partner">
             <field name='responsability_id' ref='l10n_ar_invoice.res_IVAE'/>
-            <field name='vat'>AR30111111118</field>
+            <field name='vat'>AR30666666662</field>
             <field name='document_type_id' ref="l10n_ar_invoice.dt_CUIT"/>
-            <field name='document_number'>30111111118</field>
+            <field name='document_number'>30666666662</field>
             <field name="name">Tribunal Municipal de Cuentas</field>
             <field name="street">Calle Falsa 456</field>
             <field name="city">Rosario</field>

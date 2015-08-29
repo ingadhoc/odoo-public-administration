@@ -1,5 +1,5 @@
 id,name,code,type,use_documents,default_credit_account_id/id,default_debit_account_id/id,check_type,entry_posted,update_posted
-account.cash_journal,Efectivo,01EFE,cash,,sipreco_account_chart.account_account_6,sipreco_account_chart.account_account_6,,True,True
+account.cash_journal,Efectivo,01EFE,general,,sipreco_account_chart.account_account_6,sipreco_account_chart.account_account_6,,True,True
 account.bank_journal,Transferencias - Banco Municipal - Cta A,02BCM,bank,,sipreco_account_chart.account_account_13,sipreco_account_chart.account_account_13,,True,True
 account.check_journal,Cheques - Banco Municipal - Cta A,03CHB,bank,,sipreco_account_chart.account_account_13,sipreco_account_chart.account_account_13,issue,True,True
 account.expenses_journal,Facturas de Compra,04CPR,purchase,True,,,,True,True

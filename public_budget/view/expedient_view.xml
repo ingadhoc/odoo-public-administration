@@ -79,6 +79,7 @@
                                 <field name="first_location_id" options="{'no_create': True}" domain="[('id','in',user_location_ids[0][2])]"/>
                                 <field name="current_location_id"/>
                                 <field name="final_location" states="closed,annulled"/>
+                                <field name="pages"/>
                             </group>
                         </group>
                         <notebook>
@@ -115,6 +116,7 @@
                     <field name="type"/>
                     <field name="current_location_id"/>
                     <field name="in_transit"/>
+                    <field name="pages"/>
                     <field name="user_id"/>
                     <field name="state"/>
                 </tree>
