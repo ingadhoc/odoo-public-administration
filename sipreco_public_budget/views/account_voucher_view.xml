@@ -14,7 +14,7 @@
                     <attribute name="invisible">1</attribute>
                 </field>
                 <!-- we use force number as a hack to compute document number on creation -->
-                <field name="document_number" position="document_number">
+                <field name="document_number" position="after">
                     <field name="force_number" string="Document Number" readonly="1" attrs="{'invisible':['|',('receiptbook_sequence_type','!=','automatic'),('state','!=','draft')]}"/>
                 </field>
             </field>
