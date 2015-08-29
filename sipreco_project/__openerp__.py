@@ -39,7 +39,7 @@ Modulos principales del proyecto:
         'account_move_line_no_filter',
         'sipreco_public_budget',
         'account_cancel',
-        'account_voucher_multic_fix',
+        'account_voucher_multic_fix',   
         'account_multic_fix',
         'admin_technical_features',
         'account_accountant',
@@ -49,6 +49,8 @@ Modulos principales del proyecto:
         'account_statement_disable_invoice_import',
         'account_voucher_popup_print',
         'account_balance_constraint',
+        'partner_vat_unique',
+        # por alguna razon no lo instala, ver con juan
         'portal',   # necesitamos portal por un error raro al crear un voucher
         # es un error de javascript pero con portal de alguna manera se
         # resuelve. Luego de instalar portal refrescar pantalla

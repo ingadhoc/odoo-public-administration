@@ -71,6 +71,9 @@ class expedient(models.Model):
     note = fields.Text(
         string='Note'
         )
+    pages = fields.Integer(
+        string='Pages'
+        )
     final_location = fields.Char(
         string='Final Location'
         )
