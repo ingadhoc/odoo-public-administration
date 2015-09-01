@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: odoo-public-administration (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-01 16:16+0000\n"
-"PO-Revision-Date: 2015-09-01 16:16+0000\n"
+"POT-Creation-Date: 2015-09-01 16:33+0000\n"
+"PO-Revision-Date: 2015-09-01 16:30+0000\n"
 "Last-Translator: Gonzalo Ruzafa <gr@ingadhoc.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/adhoc/ingadhoc-odoo-public-administration-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -111,7 +111,7 @@ msgstr "Tipo de Empresa Definitiva"
 #. module: sipreco_public_budget
 #: view:account.voucher:sipreco_public_budget.view_vendor_payment_l10n_ar_mods_form
 msgid "Document Number"
-msgstr "Document Number"
+msgstr "Número de Documento"
 
 #. module: sipreco_public_budget
 #: model:ir.actions.report.xml,name:sipreco_public_budget.action_aeroo_report_expedient

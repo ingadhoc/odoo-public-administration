@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: odoo-public-administration (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-01 13:40+0000\n"
-"PO-Revision-Date: 2015-09-01 13:54+0000\n"
+"POT-Creation-Date: 2015-09-01 16:33+0000\n"
+"PO-Revision-Date: 2015-09-01 16:53+0000\n"
 "Last-Translator: Gonzalo Ruzafa <gr@ingadhoc.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/adhoc/ingadhoc-odoo-public-administration-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -845,7 +845,7 @@ msgstr "En cada Rama, sólo una Partida Presupuestaria puede tener la opción \"
 msgid ""
 "In payment of advance transaction type, you need to                    an "
 "advance account in transaction type!"
-msgstr ""
+msgstr "En el pago de una Transacción con Pago Adelantado, necesitas una cuenta de adelanto en el Tipo de Transacción"
 
 #. module: public_budget
 #: field:public_budget.budget,income_account_id:0
@@ -860,7 +860,7 @@ msgstr "Incremento / Disminución"
 #. module: public_budget
 #: field:public_budget.budget_detail,initial_amount:0
 msgid "Initial Amount"
-msgstr ""
+msgstr "Monto Inicial"
 
 #. module: public_budget
 #: field:public_budget.budget_position,inventariable:0
@@ -921,7 +921,7 @@ msgstr "Fecha Emisión"
 #. module: public_budget
 #: model:ir.actions.act_window,name:public_budget.action_budget_position_items
 msgid "Items"
-msgstr ""
+msgstr "Items"
 
 #. module: public_budget
 #: field:public_budget.definitive.make.invoice,journal_id:0
@@ -938,7 +938,7 @@ msgstr "Registro de Diario"
 #. module: public_budget
 #: model:ir.model,name:public_budget.model_account_move_line
 msgid "Journal Items"
-msgstr ""
+msgstr "Apuntes Contables"
 
 #. module: public_budget
 #: view:public_budget.expedient:public_budget.view_public_budget_expedient_filter
@@ -1043,12 +1043,12 @@ msgstr "Responsable"
 #: model:ir.actions.act_window,name:public_budget.action_definitive_mass_invoice_create
 #: view:public_budget.transaction:public_budget.view_public_budget_transaction_form
 msgid "Mass Invoice Create"
-msgstr ""
+msgstr "Creación Masiva de Comprobantes"
 
 #. module: public_budget
 #: view:public_budget.transaction:public_budget.view_public_budget_transaction_form
 msgid "Mass Payment Order Create"
-msgstr ""
+msgstr "Creación Masiva de Órdenes de Pago"
 
 #. module: public_budget
 #: field:public_budget.budget_pos_exc_rest,message:0
@@ -1105,13 +1105,13 @@ msgstr "Normal"
 #, python-format
 msgid ""
 "Not Transaction in actual invoice, can not create             direct Payment"
-msgstr ""
+msgstr "No existe Transacción en el presente Comprobante, no puedes crear Pago Directo"
 
 #. module: public_budget
 #: code:addons/public_budget/models/transaction.py:364
 #, python-format
 msgid "Not period found for this date"
-msgstr ""
+msgstr "No hay periodo encontrado para esta fecha."
 
 #. module: public_budget
 #: field:public_budget.expedient,note:0 field:public_budget.transaction,note:0
@@ -1122,7 +1122,7 @@ msgstr "Nota"
 #: view:public_budget.expedient:public_budget.view_public_budget_expedient_form
 #: view:public_budget.transaction:public_budget.view_public_budget_transaction_form
 msgid "Notes"
-msgstr ""
+msgstr "Notas"
 
 #. module: public_budget
 #: field:public_budget.expedient,number:0 field:public_budget.remit,number:0
@@ -1136,7 +1136,7 @@ msgstr "Número"
 msgid ""
 "On Advance Transactions, transaction advance type                    must "
 "have and advance account configured!"
-msgstr ""
+msgstr "En Transacciónes con Pago Adelantado, necesitas una cuenta de adelanto en el Tipo de Transacción!"
 
 #. module: public_budget
 #: view:public_budget.budget:public_budget.view_public_budget_budget_form
@@ -1155,7 +1155,7 @@ msgstr "Categoría Origen"
 #. module: public_budget
 #: field:public_budget.expedient,pages:0
 msgid "Pages"
-msgstr ""
+msgstr "Folios"
 
 #. module: public_budget
 #: field:public_budget.budget_prec_detail,paid_amount:0
@@ -1165,7 +1165,7 @@ msgstr "Monto Pagado"
 #. module: public_budget
 #: view:res.company:public_budget.view_public_budget_company_form
 msgid "Parameters"
-msgstr ""
+msgstr "Parámetros"
 
 #. module: public_budget
 #: field:public_budget.budget_position,parent_id:0
@@ -1203,7 +1203,7 @@ msgstr "Ordenes de Pago"
 #. module: public_budget
 #: view:public_budget.transaction:public_budget.view_public_budget_transaction_form
 msgid "Payment Orders and Refunds"
-msgstr ""
+msgstr "Órdenes de Pago y Devoluciones"
 
 #. module: public_budget
 #: model:ir.actions.act_window,name:public_budget.action_public_budget_budget_pos_exc_rest_position_exc__rest_
@@ -1220,7 +1220,7 @@ msgstr "Tipos de Partidas"
 #. module: public_budget
 #: view:public_budget.budget:public_budget.view_public_budget_budget_form
 msgid "Position analysis"
-msgstr ""
+msgstr "Análisis de Partidas"
 
 #. module: public_budget
 #: model:ir.actions.act_window,name:public_budget.action_public_budget_budget_position_positions
@@ -1286,7 +1286,7 @@ msgstr "Líneas Preventivas"
 msgid ""
 "Preventive Total, Type and Date are not compatible with Transaction Amount "
 "Restrictions"
-msgstr ""
+msgstr "El monto total Preventivo, Tipo de Transacción y Fecha no son compatibles con las Restricciones de Monto del Tipo de Transacción."
 
 #. module: public_budget
 #: model:ir.module.category,description:public_budget.module_category_public_budget
@@ -1315,14 +1315,14 @@ msgstr "Partidas Presupuestarias Relacionadas"
 #: view:public_budget.remit:public_budget.view_public_budget_remit_form
 #: view:public_budget.remit:public_budget.view_public_budget_remit_tree
 msgid "Remit"
-msgstr ""
+msgstr "Remito"
 
 #. module: public_budget
 #: model:ir.actions.act_window,name:public_budget.action_public_budget_remit_remits
 #: model:ir.ui.menu,name:public_budget.menu_remits
 #: field:public_budget.expedient,remit_ids:0
 msgid "Remits"
-msgstr ""
+msgstr "Remitos"
 
 #. module: public_budget
 #: selection:public_budget.funding_move,type:0
@@ -1332,7 +1332,7 @@ msgstr "Requerimiento"
 #. module: public_budget
 #: view:public_budget.transaction:public_budget.view_public_budget_transaction_form
 msgid "Salary Advance Returns"
-msgstr ""
+msgstr "Devoluciones de Adelanto de Salarios"
 
 #. module: public_budget
 #: model:res.groups,name:public_budget.group_secretary
@@ -1342,7 +1342,7 @@ msgstr "Secretario/a"
 #. module: public_budget
 #: view:public_budget.transaction:public_budget.view_public_budget_transaction_form
 msgid "Settlement Lines"
-msgstr ""
+msgstr "Lineas Consolidadas"
 
 #. module: public_budget
 #: field:public_budget.remit,location_id:0
@@ -1394,7 +1394,7 @@ msgstr "La referencia de este comprobante como es suministrada por el proveedor.
 #, python-format
 msgid ""
 "The selected budget position (%s) has not a related assigment position!"
-msgstr ""
+msgstr "La Partidas Presupuestaria seleccionada (%s) no posee una Partida de Asignación Relacionada!"
 
 #. module: public_budget
 #: code:addons/public_budget/models/preventive_line.py:219
@@ -1402,18 +1402,18 @@ msgstr ""
 msgid ""
 "There is not enough Balance Amount to assign (%s) to Budget Position '%s'.\n"
 "* Balance available for '%s': %s"
-msgstr ""
+msgstr "No hay suficiente Saldo Presupuestario para asignar (%s) a la Partida Presupuestari '%s'\n* Saldo disponible para  '%s': %s"
 
 #. module: public_budget
 #: help:public_budget.transaction_type,advance_account_id:0
 msgid ""
 "This account will be used on advance payments. Must be a payable account."
-msgstr ""
+msgstr "Esta cuenta será usada en pagos adelantados. Debe ser una cuenta del tipo Payable."
 
 #. module: public_budget
 #: help:public_budget.transaction_type,advance_journal_id:0
 msgid "This journal balance advance payments and supplier invoices"
-msgstr ""
+msgstr "Este diario balancea pagos adelantados y comprobantes de proveedor."
 
 #. module: public_budget
 #: field:public_budget.transaction_type_amo_rest,to_amount:0
@@ -1438,7 +1438,7 @@ msgstr "A Borrador"
 #. module: public_budget
 #: view:public_budget.remit:public_budget.view_public_budget_remit_form
 msgid "To In Transit"
-msgstr ""
+msgstr "Pasar a \"En Tránsito\""
 
 #. module: public_budget
 #: code:addons/public_budget/wizard/transaction_definitive_make_invoice.py:41
@@ -1462,7 +1462,7 @@ msgstr "A Revision"
 msgid ""
 "To close a transaction there must be at least one                    "
 "preventive line"
-msgstr ""
+msgstr "Para cerrar una Transacción tiene que haber al menos una línea Preventiva."
 
 #. module: public_budget
 #: code:addons/public_budget/models/transaction.py:428
@@ -1471,7 +1471,7 @@ msgid ""
 "To close a transaction to return amount must be 0!\n"
 "* To return amount = advance paid amount - invoiced amount\n"
 "(%s = %s - %s)"
-msgstr ""
+msgstr "Para cerrar una Transacción, el monto A devolver debe ser 0!\n* Monto a Devolver = Monto pagado por adelantado - Monto Devengado\n(%s = %s - %s)"
 
 #. module: public_budget
 #: code:addons/public_budget/models/transaction.py:417
@@ -1479,7 +1479,7 @@ msgstr ""
 msgid ""
 "To close a transaction, Preventive, Definitive, Invoiced,"
 "                    To Pay and Paid amount must be the same for each line"
-msgstr ""
+msgstr "Para cerrar una transacción, los montos Preventivos, Definitivos, Devengados, a Pagar y Pagasos, deben ser iguales para cada línea."
 
 #. module: public_budget
 #: view:public_budget.budget_detail:public_budget.view_public_budget_budget_detail_tree
@@ -1507,7 +1507,7 @@ msgstr "Transacción Definitiva Crear Comprobante"
 #. module: public_budget
 #: model:ir.model,name:public_budget.model_public_budget_definitive_mass_invoice_create
 msgid "Transaction Definitive Mass Invoice Create"
-msgstr ""
+msgstr "Creación Masiva y Definitiva de Comprobantes"
 
 #. module: public_budget
 #: model:ir.model,name:public_budget.model_public_budget_transaction_type
@@ -1560,12 +1560,12 @@ msgstr "Usuario"
 #: model:ir.model,name:public_budget.model_res_users
 #: field:public_budget.location,user_ids:0
 msgid "Users"
-msgstr ""
+msgstr "Usuarios"
 
 #. module: public_budget
 #: view:account.invoice:public_budget.view_public_budget_invoice_tree
 msgid "Validate"
-msgstr ""
+msgstr "Validar"
 
 #. module: public_budget
 #: selection:public_budget.budget_position,type:0
@@ -1576,12 +1576,12 @@ msgstr "Vista"
 #: field:account.move.line,voucher_line_ids:0
 #: model:ir.model,name:public_budget.model_account_voucher_line
 msgid "Voucher Lines"
-msgstr ""
+msgstr "Líneas de Comprobantes"
 
 #. module: public_budget
 #: view:public_budget.transaction:public_budget.view_public_budget_transaction_filter
 msgid "With Advance Payment"
-msgstr ""
+msgstr "Con Pago Anticipado?"
 
 #. module: public_budget
 #: field:public_budget.transaction_type,with_salary_advance:0
@@ -1604,7 +1604,7 @@ msgstr "Con Pago Anticipado?"
 msgid ""
 "You can Not Confirme a Remit of a Location where your are not"
 "                authorized!"
-msgstr ""
+msgstr "No puedes Confirmar un Remito de una Ubicacion donde no estás Autorizado!"
 
 #. module: public_budget
 #: code:addons/public_budget/models/remit.py:100
@@ -1612,7 +1612,7 @@ msgstr ""
 msgid ""
 "You can Not cancel a remit that is not the last one                        "
 "for all the expedients"
-msgstr ""
+msgstr "No puedes cancelar un remito que no es el último para todos los expedientes que incluye."
 
 #. module: public_budget
 #: code:addons/public_budget/models/funding_move.py:85
@@ -1626,7 +1626,7 @@ msgstr "No es posible cancelar un Movimiento de Fondos que tiene un Movimiento C
 #: code:addons/public_budget/models/remit.py:124
 #, python-format
 msgid "You can not delete a Remit that is not in Cancel State"
-msgstr ""
+msgstr "No puedes borrar un remito que no se encuentre en Estado Cancelado"
 
 #. module: public_budget
 #: code:addons/public_budget/models/definitive_line.py:107
@@ -1641,7 +1641,7 @@ msgid ""
 "You can not invoice more than Advance Remaining Amount!\n"
 "* Amount to invoice: %s\n"
 "* Advance Remaining Amount: %s"
-msgstr ""
+msgstr "No puedes Devengar más que el Monto de Adelanto remanente\n* Monto a Devengar: %s\n* Monto Remanente de Adelanto: %s"
 
 #. module: public_budget
 #: code:addons/public_budget/models/budget_modification_detail.py:41
@@ -1658,7 +1658,7 @@ msgid ""
 "You can not set 'Budget Assignment Allowed' to false if                "
 "budget position is being used in a budget detail or                "
 "modification."
-msgstr ""
+msgstr "No puedes setear 'Asignación de Presupuesto Admitida' a Falso, si la Partida está siendo utilizada en un Presupuesto o Modificacion de Presupuesto"
 
 #. module: public_budget
 #: code:addons/public_budget/models/budget_position.py:278
@@ -1666,7 +1666,7 @@ msgstr ""
 msgid ""
 "You can not set position %s to Budget Posistion                         "
 "Allowed as the child position %s has Allowed."
-msgstr ""
+msgstr "No puedes setear la Partida %s a \"Asignación de Presupuesto Admitida\" ya que la Partida Hija %s lo tiene seteado"
 
 #. module: public_budget
 #: code:addons/public_budget/models/invoice.py:70
@@ -1674,7 +1674,7 @@ msgstr ""
 msgid ""
 "You cannot cancel an invoice which has been sent to pay.                    "
 "You need to cancel related payments first."
-msgstr ""
+msgstr "No puedes cancelar un comprobante que ha sido enviado a pagar. Necesitas cancelar los Pagos Relacionados antes."
 
 #. module: public_budget
 #: code:addons/public_budget/models/budget_position.py:247
@@ -1755,7 +1755,7 @@ msgstr "detalle_presupuesto"
 #. module: public_budget
 #: field:public_budget.budget_position,budget_detail_ids:0
 msgid "budget_detail_ids"
-msgstr ""
+msgstr "budget_detail_ids"
 
 #. module: public_budget
 #: field:public_budget.budget_detail,budget_id:0
@@ -1766,7 +1766,7 @@ msgstr "budget_id"
 #. module: public_budget
 #: field:public_budget.budget_position,budget_modification_detail_ids:0
 msgid "budget_modification_detail_ids"
-msgstr ""
+msgstr "budget_modification_detail_ids"
 
 #. module: public_budget
 #: view:public_budget.budget_prec_detail:public_budget.view_public_budget_budget_prec_detail_filter
@@ -1779,7 +1779,7 @@ msgstr "budget_prec_detail"
 #: view:account.voucher:public_budget.view_vendor_payment_form
 #: view:account.voucher:public_budget.view_voucher_tree
 msgid "false"
-msgstr ""
+msgstr "false"
 
 #. module: public_budget
 #: model:ir.model,name:public_budget.model_public_budget_funding_move
@@ -1803,7 +1803,7 @@ msgstr "invoice_line"
 #: view:public_budget.definitive.mass.invoice.create:public_budget.view_definitive_mass_invoice_create
 #: view:public_budget.transaction:public_budget.view_public_budget_transaction_form
 msgid "or"
-msgstr ""
+msgstr "o"
 
 #. module: public_budget
 #: model:ir.model,name:public_budget.model_public_budget_rest_type
@@ -1834,4 +1834,4 @@ msgid ""
 "{'invoice_currency':currency_id, 'default_customer': 0, "
 "'search_default_supplier': 1, 'default_supplier': 1, 'transaction_id': "
 "transaction_id}"
-msgstr ""
+msgstr "{'invoice_currency':currency_id, 'default_customer': 0, 'search_default_supplier': 1, 'default_supplier': 1, 'transaction_id': transaction_id}"
