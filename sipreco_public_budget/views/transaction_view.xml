@@ -11,6 +11,16 @@
                 <button name="action_cancel_draft" position="before">
                     <button name="%(action_aeroo_report_transaction)d" class="oe_highlight" string="Print" type="action"/>
                 </button>
+                <form>
+                    <field name="definitive_partner_type" invisible="1"/>
+                </form>
+                <!-- because it wont update till we save it we add definitive part tipe in context -->
+                 <field name="advance_preventive_line_ids" position="attributes">
+                    <attribute name="context">{'default_definitive_partner_type': definitive_partner_type}</attribute>
+                </field>
+                 <field name="preventive_line_ids" position="attributes">
+                    <attribute name="context">{'default_definitive_partner_type': definitive_partner_type}</attribute>
+                </field>
             </field>
         </record>
 
