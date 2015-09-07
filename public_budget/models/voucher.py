@@ -76,36 +76,21 @@ class account_voucher(models.Model):
                 partner_ids = self.transaction_id.supplier_ids
         self.partner_ids = partner_ids
 
-    @api.multi
-    def onchange_partner_id(
-            self, partner_id, journal_id, amount, currency_id, ttype,
-            date):
+    @api.model
+    def get_move_lines(self, ttype, partner_id, journal_id):
         """
-        We add transaction on partner change
+        We add transaction to get_move_lines function
         """
+        move_lines = super(account_voucher, self).get_move_lines(
+            ttype, partner_id, journal_id)
         transaction_id = self._context.get(
             'transaction_id',
             self._context.get('transaction_id', False))
-        move_lines = self.get_transaction_move_lines(
-            ttype, partner_id, transaction_id)
-        return super(account_voucher, self.with_context(
-            move_line_ids=move_lines.ids)).onchange_partner_id(
-            partner_id, journal_id, amount, currency_id, ttype, date)
-
-    @api.model
-    def get_transaction_move_lines(self, ttype, partner_id, transaction_id):
-        if ttype == 'payment':
-            account_type = 'payable'
-        else:
-            account_type = 'receivable'
-        move_lines = self.env['account.move.line'].search([
-            ('state', '=', 'valid'),
-            ('account_id.type', '=', account_type),
-            ('reconcile_id', '=', False),
-            ('partner_id', '=', partner_id),
-            '|', ('invoice', '=', False),
-            ('invoice.transaction_id', '=', transaction_id),
-            ])
+        if transaction_id:
+            move_lines = move_lines.filtered(
+                lambda r: (
+                    not r.invoice or
+                    r.invoice.transaction_id.id == transaction_id))
         return move_lines
 
     def writeoff_move_line_get(
