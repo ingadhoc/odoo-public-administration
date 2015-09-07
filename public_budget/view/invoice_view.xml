@@ -35,6 +35,9 @@
                 <tree position="inside">
                     <button name="invoice_open" states="draft,proforma2" string="Validate" class="oe_highlight" groups="account.group_account_invoice" icon="gtk-go-forward"/>
                 </tree>
+                <field name="amount_total" position="after">
+                    <field name="signed_amount" sum="Total Amount"/>
+                </field>
             </field>
         </record>
 
