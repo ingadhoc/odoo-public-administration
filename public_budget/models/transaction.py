@@ -207,9 +207,11 @@ class transaction(models.Model):
         'transaction_id',
         string='Payment Orders',
         readonly=True,
-        domain=[('type', '=', 'payment')],
         context={'default_type': 'payment'},
         states={'open': [('readonly', False)]},
+        domain=[
+            ('type', '=', 'payment'),
+            ('transaction_with_advance_payment', '=', False)],
         )
     # basicamente es el mismo campo de arriba pero lo separamos para poner en
     # otro lugar de la vista
@@ -218,7 +220,9 @@ class transaction(models.Model):
         'transaction_id',
         string='Advance Payment Orders',
         readonly=True,
-        domain=[('type', '=', 'payment')],
+        domain=[
+            ('type', '=', 'payment'),
+            ('transaction_with_advance_payment', '=', True)],
         context={'default_type': 'payment'},
         states={'open': [('readonly', False)]},
         )

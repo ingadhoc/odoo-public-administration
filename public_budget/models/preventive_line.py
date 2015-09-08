@@ -223,4 +223,12 @@ class preventive_line(models.Model):
                 preventive_amount, self.budget_position_id.name,
                 assignment_position.name, position_balance))
 
+    @api.one
+    def unlink(self):
+        if self.definitive_line_ids:
+            raise Warning(_(
+                "You can not delete a preventive line that has definitive "
+                "lines"))
+        return super(preventive_line, self).unlink()
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
