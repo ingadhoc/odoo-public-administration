@@ -20,6 +20,7 @@ class account_check(models.Model):
             ('rejected', 'Rejected'),
             ('debited', 'Debited'),
             ('returned', 'Returned'),
+            ('changed', 'Changed'),
             ('cancel', 'Cancel'),
         ]
         )

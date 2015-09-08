@@ -11,6 +11,9 @@
                     <button name="to_be_handed" string="Handed" attrs="{'invisible':['|',('type','!=','issue_check'),('state','!=','to_be_handed')]}" />
                     <button name="back_to_be_handed" string="Back To Be Handed" attrs="{'invisible':['|',('type','!=','issue_check'),('state','!=','handed')]}" />
                 </button>
+                <button name="%(account_check.action_account_change_check)d" position="attributes">
+                    <attribute name="attrs">{'invisible':['|', ('type', '!=', 'third_check'), ('state', '!=', 'holding'), '|', ('type', '!=', 'issue_check'), ('state', 'not in', ['handed', 'to_be_handed'])]}</attribute>
+                </button>
             </field>
         </record>
     </data>

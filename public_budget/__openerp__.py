@@ -50,6 +50,7 @@
              ],
     'depends': [
         'account',
+        'account_voucher_multic_fix',
         'account_invoice_auto_pay',
         'account_voucher_double_validation',
     ],

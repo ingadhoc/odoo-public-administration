@@ -34,12 +34,25 @@ class invoice(models.Model):
         readonly=True,
         store=True,
         )
+    signed_amount = fields.Float(
+        'Signed Amount',
+        compute='get_signed_amount',
+        )
     to_pay_amount = fields.Float(
         string='To Pay Amount',
         digits=dp.get_precision('Account'),
         compute='_compute_to_pay_amount',
         # store=True, #TODO ver si lo hacemos stored
         )
+
+    @api.one
+    @api.depends('type', 'amount_total')
+    def get_signed_amount(self):
+        if self.type in ('in_refund', 'out_refund'):
+            signed_amount = -1.0 * self.amount_total
+        else:
+            signed_amount = self.amount_total
+        self.signed_amount = signed_amount
 
     @api.one
     @api.depends(

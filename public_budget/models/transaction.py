@@ -28,7 +28,6 @@ class transaction(models.Model):
 
     issue_date = fields.Date(
         string='Issue Date',
-        track_visibility='always',
         readonly=True,
         required=True,
         default=fields.Date.context_today
@@ -74,11 +73,6 @@ class transaction(models.Model):
         string='Partner',
         readonly=True,
         states={'draft': [('readonly', False)]}
-        )
-    invoice_ids = fields.Many2one(
-        'account.invoice',
-        string='Invoices',
-        readonly=True
         )
     note = fields.Html(
         string='Note'
@@ -205,8 +199,8 @@ class transaction(models.Model):
         'account.invoice',
         'transaction_id',
         string='Invoices',
-        track_visibility='always',
-        readonly=True
+        readonly=True,
+        states={'open': [('readonly', False)]}
         )
     voucher_ids = fields.One2many(
         'account.voucher',

@@ -34,5 +34,21 @@
             <field name="condition">type == 'issue_check'</field>
         </record>
 
+        <!-- add transitions to allow change to be handed checs -->
+        <record id="transs_to_be_handed_changed" model="workflow.transition">
+            <field name="act_from" ref="actt_to_be_handed"/>
+            <field name="act_to" ref="account_check.actt_changed"/>
+            <field name="signal">change_check</field>
+            <field name="condition">type == 'issue_check'</field>
+        </record>
+
+        <!-- if cancel changed check, send to to be handed-->
+        <record id="account_check.transs_changed_handed" model="workflow.transition">
+            <field name="act_from" ref="account_check.actt_changed"/>
+            <field name="act_to" ref="actt_to_be_handed"/>
+            <!-- <field name="signal">cancel_change</field> -->
+            <!-- <field name="condition">type == 'issue_check'</field> -->
+        </record>
+
     </data>
 </openerp>
