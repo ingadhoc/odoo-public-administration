@@ -207,7 +207,6 @@ class transaction(models.Model):
         'transaction_id',
         string='Payment Orders',
         readonly=True,
-        # domain=[('type', '=', 'payment')],
         context={'default_type': 'payment'},
         states={'open': [('readonly', False)]},
         domain=[
