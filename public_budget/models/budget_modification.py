@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import models, fields, api
+from openerp import models, fields, api, _
 
 
 class budget_modification(models.Model):
@@ -32,12 +32,12 @@ class budget_modification(models.Model):
         required=True
         )
     rest_message = fields.Char(
-        string='Message',
+        string=_('Message'),
         compute='_get_restriction_data'
         )
     rest_type = fields.Many2one(
         'public_budget.rest_type',
-        string='Restriction Type',
+        string=_('Restriction Type'),
         compute='_get_restriction_data'
         )
     budget_id = fields.Many2one(
