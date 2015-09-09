@@ -66,7 +66,7 @@ class preventive_line(models.Model):
             ('open', _('Open')),
             ('definitive', _('Definitive')),
             ('invoiced', _('Invoiced')),
-            ('closed', _('closed')),
+            ('closed', _('Closed')),
             ('cancel', _('Cancel'))],
         string=_('States'),
         compute='_get_state',

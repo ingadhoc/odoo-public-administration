@@ -94,21 +94,21 @@ class transaction(models.Model):
     supplier_ids = fields.Many2many(
         relation='transaction_res_partner_rel',
         comodel_name='res.partner',
-        string='Suppliers',
+        string=_('Suppliers'),
         store=True,
         compute='_get_suppliers'
         )
     budget_position_ids = fields.Many2many(
         relation='transaction_position_rel',
         comodel_name='public_budget.budget_position',
-        string='Related Budget Positions',
+        string=_('Related Budget Positions'),
         store=True,
         compute='_get_budget_positions'
         )
     advance_preventive_line_ids = fields.One2many(
         comodel_name='public_budget.preventive_line',
         inverse_name='transaction_id',
-        string='Advance Preventive Lines',
+        string=_('Advance Preventive Lines'),
         readonly=True,
         states={'open': [('readonly', False)]},
         context={
@@ -118,54 +118,54 @@ class transaction(models.Model):
         domain=[('advance_line', '=', True)]
         )
     preventive_amount = fields.Float(
-        string='Preventive Amount',
+        string=_('Preventive Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     definitive_amount = fields.Float(
-        string='Definitive Amount',
+        string=_('Definitive Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     invoiced_amount = fields.Float(
-        string='Invoiced Amount',
+        string=_('Invoiced Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     to_pay_amount = fields.Float(
-        string='To Pay Amount',
+        string=_('To Pay Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     paid_amount = fields.Float(
-        string='Paid Amount',
+        string=_('Paid Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     advance_preventive_amount = fields.Float(
-        string='Advance Preventive Amount',
+        string=_('Advance Preventive Amount'),
         compute='_get_advance_amounts',
         digits=dp.get_precision('Account'),
         )
     advance_to_pay_amount = fields.Float(
-        string='Advance To Pay Amount',
+        string=_('Advance To Pay Amount'),
         compute='_get_advance_amounts',
         digits=dp.get_precision('Account'),
         )
     advance_paid_amount = fields.Float(
-        string='Advance Paid Amount',
+        string=_('Advance Paid Amount'),
         compute='_get_advance_amounts',
         digits=dp.get_precision('Account'),
         )
     # TODO IMPLEMENTAR
     advance_remaining_amount = fields.Float(
-        string='Advance Remaining Amount',
+        string=_('Advance Remaining Amount'),
         compute='_get_advance_amounts',
         digits=dp.get_precision('Account'),
         )
     # TODO IMPLEMENTAR
     advance_to_return_amount = fields.Float(
-        string='To Return Amount',
+        string=_('To Return Amount'),
         compute='_get_advance_to_return_amount',
         digits=dp.get_precision('Account'),
         )

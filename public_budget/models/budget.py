@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import models, fields, api
+from openerp import models, fields, api, _
 import openerp.addons.decimal_precision as dp
 
 
@@ -61,29 +61,29 @@ class budget(models.Model):
         digits=dp.get_precision('Account'),
         )
     total_preventive = fields.Float(
-        string='Total Preventive',
+        string=_('Total Preventive'),
         compute='_get_totals',
         digits=dp.get_precision('Account'),
         )
     total_authorized = fields.Float(
-        string='Total Authorized',
+        string=_('Total Authorized'),
         compute='_get_totals',
         digits=dp.get_precision('Account'),
         )
     total_requested = fields.Float(
-        string='Total Requested',
+        string=_('Total Requested'),
         compute='_get_totals',
         digits=dp.get_precision('Account'),
         )
     passive_residue = fields.Float(
-        string='Total Residue',
+        string=_('Total Residue'),
         compute='_get_totals',
         digits=dp.get_precision('Account'),
         )
     budget_position_ids = fields.Many2many(
         relation='public_budget_budget_position_rel',
         comodel_name='public_budget.budget_position',
-        string='Budget Positions',
+        string=_('Budget Positions'),
         # store=True, #TODO ver si agregamos el store
         compute='_get_budget_positions'
         )

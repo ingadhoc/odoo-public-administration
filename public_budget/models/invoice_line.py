@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import models, fields, api
+from openerp import models, fields, api, _
 import openerp.addons.decimal_precision as dp
 
 
@@ -11,12 +11,12 @@ class invoice_line(models.Model):
     _inherit = ['account.invoice.line']
 
     to_pay_amount = fields.Float(
-        string='To Pay Amount',
+        string=_('To Pay Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     paid_amount = fields.Float(
-        string='Paid Amount',
+        string=_('Paid Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )

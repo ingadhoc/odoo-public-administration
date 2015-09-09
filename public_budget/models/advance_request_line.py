@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import models, fields, api
+from openerp import models, fields, api, _
 import openerp.addons.decimal_precision as dp
 
 
@@ -26,12 +26,12 @@ class advance_request_line(models.Model):
         required=True,
         )
     balance_amount = fields.Float(
-        string='Balance Amount',
+        string=_('Balance Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     returned_amount = fields.Float(
-        string='Returned Amount',
+        string=_('Returned Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
