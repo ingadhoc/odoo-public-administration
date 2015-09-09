@@ -32,47 +32,47 @@ class preventive_line(models.Model):
         string='advance_line',
         )
     remaining_amount = fields.Float(
-        string='Remaining Amount',
+        string=_('Remaining Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     definitive_amount = fields.Float(
-        string='Definitive Amount',
+        string=_('Definitive Amount'),
         compute='_get_amounts',
         # store=True,
         digits=dp.get_precision('Account'),
         )
     invoiced_amount = fields.Float(
-        string='Invoiced Amount',
+        string=_('Invoiced Amount'),
         compute='_get_amounts',
         # store=True,
         digits=dp.get_precision('Account'),
         )
     to_pay_amount = fields.Float(
-        string='To Pay Amount',
+        string=_('To Pay Amount'),
         compute='_get_amounts',
         # store=True,
         digits=dp.get_precision('Account'),
         )
     paid_amount = fields.Float(
-        string='Paid Amount',
+        string=_('Paid Amount'),
         compute='_get_amounts',
         # store=True,
         digits=dp.get_precision('Account'),
         )
     state = fields.Selection(
         selection=[
-            ('draft', 'Draft'),
-            ('open', 'Open'),
-            ('definitive', 'definitive'),
-            ('invoiced', 'invoiced'),
-            ('closed', 'closed'),
-            ('cancel', 'Cancel')],
-        string='States',
-        compute='_get_state'
+            ('draft', _('Draft')),
+            ('open', _('Open')),
+            ('definitive', _('Definitive')),
+            ('invoiced', _('Invoiced')),
+            ('closed', _('closed')),
+            ('cancel', _('Cancel'))],
+        string=_('States'),
+        compute='_get_state',
         )
     affects_budget = fields.Boolean(
-        'Affects Budget?',
+        _('Affects Budget?'),
         store=True,
         compute='_get_affects_budget',
         )
