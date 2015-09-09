@@ -43,12 +43,11 @@
         </record>
 
         <!-- if cancel changed check, send to to be handed-->
-        <record id="account_check.transs_changed_handed" model="workflow.transition">
+        <!-- change check cancellation not implemented yet -->
+<!--         <record id="account_check.transs_changed_handed" model="workflow.transition">
             <field name="act_from" ref="account_check.actt_changed"/>
             <field name="act_to" ref="actt_to_be_handed"/>
-            <!-- <field name="signal">cancel_change</field> -->
-            <!-- <field name="condition">type == 'issue_check'</field> -->
-        </record>
+        </record> -->
 
     </data>
 </openerp>
