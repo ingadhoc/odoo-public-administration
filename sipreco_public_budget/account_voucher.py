@@ -113,14 +113,14 @@ class account_voucher(models.Model):
 
     state = fields.Selection(
         selection=[
-            ('draft', 'Draft'),
-            ('confirmed', 'Confirmed'),
-            ('signature_process', 'Signature Process'),
-            ('signed', 'Signed'),
-            ('cancel', 'Cancelled'),
-            ('proforma', 'Pro-forma'),
+            ('draft', _('Draft')),
+            ('confirmed', _('Confirmed')),
+            ('signature_process', _('Signature Process')),
+            ('signed', _('Signed')),
+            ('cancel', _('Cancelled')),
+            ('proforma', _('Pro-forma')),
             # we also change posted for paid
-            ('posted', 'Paid')
+            ('posted', _('Paid'))
         ])
 
     @api.multi
