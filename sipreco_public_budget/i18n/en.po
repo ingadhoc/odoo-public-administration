@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: odoo-public-administration (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-09 15:13+0000\n"
-"PO-Revision-Date: 2015-09-08 12:07+0000\n"
+"POT-Creation-Date: 2015-09-09 19:05+0000\n"
+"PO-Revision-Date: 2015-09-09 19:05+0000\n"
 "Last-Translator: Juan Jose Scarafia <scarafia.juanjose@gmail.com>\n"
 "Language-Team: English (http://www.transifex.com/adhoc/ingadhoc-odoo-public-administration-8-0/language/en/)\n"
 "MIME-Version: 1.0\n"
@@ -215,6 +215,12 @@ msgid "Otras Retenciones"
 msgstr "Otras Retenciones"
 
 #. module: sipreco_public_budget
+#: code:addons/sipreco_public_budget/account_voucher.py:43
+#, python-format
+msgid "Paid Withholdings"
+msgstr "Paid Withholdings"
+
+#. module: sipreco_public_budget
 #: model:ir.model,name:sipreco_public_budget.model_res_partner
 msgid "Partner"
 msgstr "Partner"
@@ -298,6 +304,12 @@ msgid "Retención de Ganancias Aplicada"
 msgstr "Retención de Ganancias Aplicada"
 
 #. module: sipreco_public_budget
+#: code:addons/sipreco_public_budget/account_voucher.py:38
+#, python-format
+msgid "Show Print Receipt Button"
+msgstr "Show Print Receipt Button"
+
+#. module: sipreco_public_budget
 #: view:account.voucher:sipreco_public_budget.view_vendor_payment_signature_form
 msgid "Signed"
 msgstr "Signed"
@@ -363,6 +375,12 @@ msgstr "Transaction Type"
 #: view:account.voucher:sipreco_public_budget.view_vendor_payment_signature_form
 msgid "True"
 msgstr "True"
+
+#. module: sipreco_public_budget
+#: code:addons/sipreco_public_budget/account_voucher.py:44
+#, python-format
+msgid "Withholding being paid with this voucher"
+msgstr "Withholding being paid with this voucher"
 
 #. module: sipreco_public_budget
 #: code:addons/sipreco_public_budget/account_check.py:33
