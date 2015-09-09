@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: odoo-public-administration (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-01 16:16+0000\n"
-"PO-Revision-Date: 2015-08-22 04:37+0000\n"
+"POT-Creation-Date: 2015-09-09 15:13+0000\n"
+"PO-Revision-Date: 2015-09-08 12:07+0000\n"
 "Last-Translator: Juan Jose Scarafia <scarafia.juanjose@gmail.com>\n"
 "Language-Team: English (http://www.transifex.com/adhoc/ingadhoc-odoo-public-administration-8-0/language/en/)\n"
 "MIME-Version: 1.0\n"
@@ -48,6 +48,11 @@ msgstr "Back To Be Handed"
 #: model:ir.model,name:sipreco_public_budget.model_public_budget_budget
 msgid "Budget"
 msgstr "Budget"
+
+#. module: sipreco_public_budget
+#: model:ir.model,name:sipreco_public_budget.model_public_budget_transaction
+msgid "Budget Transaction"
+msgstr "Budget Transaction"
 
 #. module: sipreco_public_budget
 #: view:account.voucher:sipreco_public_budget.view_vendor_payment_signature_form
@@ -360,7 +365,7 @@ msgid "True"
 msgstr "True"
 
 #. module: sipreco_public_budget
-#: code:addons/sipreco_public_budget/account_check.py:32
+#: code:addons/sipreco_public_budget/account_check.py:33
 #, python-format
 msgid ""
 "You can not cancel issue checks in states other than \"draft or \"handed\". "
@@ -368,7 +373,7 @@ msgid ""
 msgstr "You can not cancel issue checks in states other than \"draft or \"handed\". First try to change check state."
 
 #. module: sipreco_public_budget
-#: code:addons/sipreco_public_budget/account_check.py:38
+#: code:addons/sipreco_public_budget/account_check.py:39
 #, python-format
 msgid ""
 "You can not cancel third checks in states other than \"draft or \"holding\"."
@@ -376,13 +381,13 @@ msgid ""
 msgstr "You can not cancel third checks in states other than \"draft or \"holding\". First try to change check state."
 
 #. module: sipreco_public_budget
-#: code:addons/sipreco_public_budget/account_check.py:42
+#: code:addons/sipreco_public_budget/account_check.py:43
 #, python-format
 msgid "You can not cancel third checks that are being used on payments"
 msgstr "You can not cancel third checks that are being used on payments"
 
 #. module: sipreco_public_budget
-#: code:addons/sipreco_public_budget/account_voucher.py:109
+#: code:addons/sipreco_public_budget/account_voucher.py:108
 #, python-format
 msgid ""
 "You can not confirm a voucher with to pay                    amount equal to"
@@ -390,7 +395,7 @@ msgid ""
 msgstr "You can not confirm a voucher with to pay                    amount equal to 0"
 
 #. module: sipreco_public_budget
-#: code:addons/sipreco_public_budget/account_voucher.py:133
+#: code:addons/sipreco_public_budget/account_voucher.py:132
 #, python-format
 msgid ""
 "You can not send to sign process a Voucher                     that has "
@@ -419,11 +424,24 @@ msgid "transaction Report"
 msgstr "transaction Report"
 
 #. module: sipreco_public_budget
+#: view:public_budget.transaction:sipreco_public_budget.view_public_budget_transaction_form
+msgid "{'default_definitive_partner_type': definitive_partner_type}"
+msgstr "{'default_definitive_partner_type': definitive_partner_type}"
+
+#. module: sipreco_public_budget
 #: view:public_budget.preventive_line:sipreco_public_budget.view_public_budget_preventive_line_form
 msgid ""
 "{'from_preventive':True,'default_amount':remaining_amount, "
 "'definitive_partner_type': definitive_partner_type}"
 msgstr "{'from_preventive':True,'default_amount':remaining_amount, 'definitive_partner_type': definitive_partner_type}"
+
+#. module: sipreco_public_budget
+#: view:account.check:sipreco_public_budget.view_account_check_form
+msgid ""
+"{'invisible':['|', ('type', '!=', 'third_check'), ('state', '!=', "
+"'holding'), '|', ('type', '!=', 'issue_check'), ('state', 'not in', "
+"['handed', 'to_be_handed'])]}"
+msgstr "{'invisible':['|', ('type', '!=', 'third_check'), ('state', '!=', 'holding'), '|', ('type', '!=', 'issue_check'), ('state', 'not in', ['handed', 'to_be_handed'])]}"
 
 #. module: sipreco_public_budget
 #: view:account.voucher:sipreco_public_budget.view_vendor_payment_signature_form

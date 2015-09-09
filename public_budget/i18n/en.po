@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: odoo-public-administration (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-29 21:02+0000\n"
-"PO-Revision-Date: 2015-08-29 20:51+0000\n"
+"POT-Creation-Date: 2015-09-09 15:13+0000\n"
+"PO-Revision-Date: 2015-09-08 13:23+0000\n"
 "Last-Translator: Juan Jose Scarafia <scarafia.juanjose@gmail.com>\n"
 "Language-Team: English (http://www.transifex.com/adhoc/ingadhoc-odoo-public-administration-8-0/language/en/)\n"
 "MIME-Version: 1.0\n"
@@ -817,7 +817,7 @@ msgid "In Transit?"
 msgstr "In Transit?"
 
 #. module: public_budget
-#: code:addons/public_budget/models/voucher.py:139
+#: code:addons/public_budget/models/voucher.py:126
 #, python-format
 msgid ""
 "In advance transactions, payment orders amount (%s) can not be greater than "
@@ -825,7 +825,7 @@ msgid ""
 msgstr "In advance transactions, payment orders amount (%s) can not be greater than transaction advance remaining amount (%s)"
 
 #. module: public_budget
-#: code:addons/public_budget/models/voucher.py:158
+#: code:addons/public_budget/models/voucher.py:145
 #, python-format
 msgid "In each line, Amount can not be greater than Open Balance"
 msgstr "In each line, Amount can not be greater than Open Balance"
@@ -839,7 +839,7 @@ msgid ""
 msgstr "In one branch only one budget position can                    have Budget Assignment Allowed."
 
 #. module: public_budget
-#: code:addons/public_budget/models/voucher.py:124
+#: code:addons/public_budget/models/voucher.py:111
 #, python-format
 msgid ""
 "In payment of advance transaction type, you need to                    an "
@@ -1100,14 +1100,14 @@ msgid "Normal"
 msgstr "Normal"
 
 #. module: public_budget
-#: code:addons/public_budget/models/invoice.py:93
+#: code:addons/public_budget/models/invoice.py:106
 #, python-format
 msgid ""
 "Not Transaction in actual invoice, can not create             direct Payment"
 msgstr "Not Transaction in actual invoice, can not create             direct Payment"
 
 #. module: public_budget
-#: code:addons/public_budget/models/transaction.py:364
+#: code:addons/public_budget/models/transaction.py:363
 #, python-format
 msgid "Not period found for this date"
 msgstr "Not period found for this date"
@@ -1280,7 +1280,7 @@ msgid "Preventive Lines"
 msgstr "Preventive Lines"
 
 #. module: public_budget
-#: code:addons/public_budget/models/transaction.py:446
+#: code:addons/public_budget/models/transaction.py:445
 #, python-format
 msgid ""
 "Preventive Total, Type and Date are not compatible with Transaction Amount "
@@ -1456,7 +1456,7 @@ msgid "To Revision"
 msgstr "To Revision"
 
 #. module: public_budget
-#: code:addons/public_budget/models/transaction.py:407
+#: code:addons/public_budget/models/transaction.py:406
 #, python-format
 msgid ""
 "To close a transaction there must be at least one                    "
@@ -1464,7 +1464,7 @@ msgid ""
 msgstr "To close a transaction there must be at least one                    preventive line"
 
 #. module: public_budget
-#: code:addons/public_budget/models/transaction.py:428
+#: code:addons/public_budget/models/transaction.py:427
 #, python-format
 msgid ""
 "To close a transaction to return amount must be 0!\n"
@@ -1473,7 +1473,7 @@ msgid ""
 msgstr "To close a transaction to return amount must be 0!\n* To return amount = advance paid amount - invoiced amount\n(%s = %s - %s)"
 
 #. module: public_budget
-#: code:addons/public_budget/models/transaction.py:417
+#: code:addons/public_budget/models/transaction.py:416
 #, python-format
 msgid ""
 "To close a transaction, Preventive, Definitive, Invoiced,"
@@ -1487,6 +1487,11 @@ msgstr "To close a transaction, Preventive, Definitive, Invoiced,               
 #: view:public_budget.preventive_line:public_budget.view_public_budget_preventive_line_tree
 msgid "Total"
 msgstr "Total"
+
+#. module: public_budget
+#: view:account.invoice:public_budget.view_public_budget_invoice_tree
+msgid "Total Amount"
+msgstr "Total Amount"
 
 #. module: public_budget
 #: field:account.invoice,transaction_id:0
@@ -1634,6 +1639,12 @@ msgid "You can not delete a definitive line that has been invoiced"
 msgstr "You can not delete a definitive line that has been invoiced"
 
 #. module: public_budget
+#: code:addons/public_budget/models/preventive_line.py:229
+#, python-format
+msgid "You can not delete a preventive line that has definitive lines"
+msgstr "You can not delete a preventive line that has definitive lines"
+
+#. module: public_budget
 #: code:addons/public_budget/wizard/transaction_definitive_make_invoice.py:161
 #, python-format
 msgid ""
@@ -1668,7 +1679,7 @@ msgid ""
 msgstr "You can not set position %s to Budget Posistion                         Allowed as the child position %s has Allowed."
 
 #. module: public_budget
-#: code:addons/public_budget/models/invoice.py:70
+#: code:addons/public_budget/models/invoice.py:83
 #, python-format
 msgid ""
 "You cannot cancel an invoice which has been sent to pay.                    "
@@ -1775,6 +1786,7 @@ msgid "budget_prec_detail"
 msgstr "budget_prec_detail"
 
 #. module: public_budget
+#: view:account.invoice:public_budget.view_public_budget_invoice_tree
 #: view:account.voucher:public_budget.view_vendor_payment_form
 #: view:account.voucher:public_budget.view_voucher_tree
 msgid "false"
@@ -1834,3 +1846,8 @@ msgid ""
 "'search_default_supplier': 1, 'default_supplier': 1, 'transaction_id': "
 "transaction_id}"
 msgstr "{'invoice_currency':currency_id, 'default_customer': 0, 'search_default_supplier': 1, 'default_supplier': 1, 'transaction_id': transaction_id}"
+
+#. module: public_budget
+#: view:account.voucher:public_budget.view_vendor_payment_form
+msgid "{'transaction_id': transaction_id}"
+msgstr "{'transaction_id': transaction_id}"
