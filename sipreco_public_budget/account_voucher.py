@@ -35,13 +35,13 @@ class account_voucher(models.Model):
         states={'confirmed': [('readonly', False)]}
         )
     show_print_receipt_button = fields.Boolean(
-        'Show Print Receipt Button',
+        _('Show Print Receipt Button'),
         compute='get_show_print_receipt_button',
         )
     paid_withholding_ids = fields.Many2many(
         comodel_name='account.voucher.withholding',
-        string='Paid Withholdings',
-        help='Withholding being paid with this voucher',
+        string=_('Paid Withholdings'),
+        help=_('Withholding being paid with this voucher'),
         compute='_get_paid_withholding'
         )
 
