@@ -71,9 +71,11 @@ class account_voucher(models.Model):
         if self.transaction_id:
             if self.transaction_id.type_id.with_advance_payment and (
                     self.transaction_id.partner_id):
-                partner_ids = [self.transaction_id.partner_id.id]
+                partner_ids = [
+                    self.transaction_id.partner_id.commercial_partner_id.id]
             else:
-                partner_ids = self.transaction_id.supplier_ids
+                partner_ids = self.mapped(
+                    'transaction_id.supplier_ids.commercial_partner_id')
         self.partner_ids = partner_ids
 
     @api.model
