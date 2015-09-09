@@ -292,8 +292,9 @@ class transaction(models.Model):
             journal = self.env['account.journal'].search([
                 ('company_id', '=', invoice.company_id.id),
                 ('type', 'in', ('cash', 'bank'))], limit=1)
+            partner = invoice.partner_id.commercial_partner_id
             voucher_data = vouchers.onchange_partner_id(
-                invoice.partner_id.id, journal.id, 0.0,
+                partner.id, journal.id, 0.0,
                 invoice.currency_id.id, 'payment', False)
             line_cr_ids = [
                 (0, 0, vals) for vals in voucher_data['value'].get(
@@ -305,7 +306,7 @@ class transaction(models.Model):
                 'type': 'payment',
                 'receiptbook_id': self.budget_id.receiptbook_id.id,
                 'expedient_id': self.expedient_id.id,
-                'partner_id': invoice.partner_id.id,
+                'partner_id': partner.id,
                 'transaction_id': self.id,
                 'journal_id': journal.id,
                 'account_id': voucher_data['value'].get('account_id', False),
