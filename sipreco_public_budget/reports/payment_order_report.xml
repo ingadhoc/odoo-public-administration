@@ -8,6 +8,7 @@
             <field name="use_background_image" eval="False"/>
             <field name="styles_mode">specified</field>
             <field name="stylesheet_id" ref="sipreco_stylesheet"/>
+            <field name="name">Orden de Pago</field>
         </record>
     </data>
 </openerp>
