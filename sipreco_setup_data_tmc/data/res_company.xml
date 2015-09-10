@@ -6,18 +6,18 @@
     <!-- Partners for companies -->
         <record id="base.main_partner" model="res.partner">
             <field name='responsability_id' ref='l10n_ar_invoice.res_IVAE'/>
-            <field name='vat'>AR30666666662</field>
+            <field name='vat'>AR30690884905</field>
             <field name='document_type_id' ref="l10n_ar_invoice.dt_CUIT"/>
-            <field name='document_number'>30666666662</field>
+            <field name='document_number'>30690884905</field>
             <field name="name">Tribunal Municipal de Cuentas</field>
-            <field name="street">Calle Falsa 456</field>
+            <field name="street">Laprida 1527</field>
             <field name="city">Rosario</field>
             <field name="country_id" ref="base.ar"/>
             <field name="state_id" ref="l10n_ar_states.S"/>
             <field name="zip">2000</field>
-            <field name="phone">+1 555 123 8069</field>
-            <field name="email">info@yourcompany.example.com</field>
-            <field name="website">www.example.com</field>
+            <field name="phone">480 2614</field>
+            <field name="email"></field>
+            <field name="website">www.concejorosario.gov.ar</field>
             <field name="supplier" eval="True"/>
         </record>
     <!-- Partner bank -->
