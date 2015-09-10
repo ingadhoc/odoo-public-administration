@@ -14,9 +14,9 @@
         <record id="sipreco_public_budget.budg_pos_20" model="public_budget.budget_position">
             <field name="code">01.01</field>
             <field name="name">Personal Permanente pos_categ_expense</field>
-            <field name="category_id" ref="pos_categ_expense"/>
+            <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
             <field name="type">normal</field>
-            <field name="parent_id" ref="budg_pos_10"/>
+            <field name="parent_id" ref="sipreco_public_budget.budg_pos_10"/>
             <field name="budget_assignment_allowed" eval="True"/>
         </record>
 

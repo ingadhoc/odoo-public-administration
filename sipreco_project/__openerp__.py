@@ -50,6 +50,7 @@ Modulos principales del proyecto:
         'account_statement_disable_invoice_import',
         'account_voucher_popup_print',
         'account_balance_constraint',
+        'base_state_active',
         'partner_vat_unique',
         # por alguna razon no lo instala, ver con juan
         'portal',   # necesitamos portal por un error raro al crear un voucher

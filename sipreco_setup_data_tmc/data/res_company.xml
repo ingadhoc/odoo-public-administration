@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data noupdate="1">
+    <data>
+    <!-- <data noupdate="1"> -->
 
     <!-- Partners for companies -->
         <record id="base.main_partner" model="res.partner">
@@ -12,7 +13,7 @@
             <field name="street">Calle Falsa 456</field>
             <field name="city">Rosario</field>
             <field name="country_id" ref="base.ar"/>
-            <field name="state_id" ref="l10n_ar_invoice.demo_S"/>
+            <field name="state_id" ref="l10n_ar_states.S"/>
             <field name="zip">2000</field>
             <field name="phone">+1 555 123 8069</field>
             <field name="email">info@yourcompany.example.com</field>
@@ -20,9 +21,13 @@
             <field name="supplier" eval="True"/>
         </record>
     <!-- Partner bank -->
-        <record id="sipreco_public_budget.partner_bank_1" model="res.partner">
-            <!-- <field name='bank_name' ref='l10n_ar_invoice.res_IVAE'/> -->
+        <record id="sipreco_public_budget.partner_bank_1" model="res.partner.bank">
+            <field name="state">bank</field>
+            <field name="acc_number">123456</field>
+            <field name='bank' ref='l10n_ar_bank.00065'/>
+            <field name="bank_name">Banco Municipal De Rosario</field>
             <field name='journal_id' ref='l10n_ar_invoice.res_IVAE'/>
+            <field name='company_id' ref='base.main_company'/>
         </record>
 
     <!-- Companies -->

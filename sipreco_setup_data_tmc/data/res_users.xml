@@ -1,51 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data noupdate="1">
+    <data>
+    <!-- <data noupdate="1"> -->
 
 <!-- Partners para usuarios -->
-        <record id="secretaria_user_partner" model="res.partner">
-            <field name="name">Secretaria User</field>
-            <field name="company_id" ref="company_sipreco"/>
+        <record id="sipreco_public_budget.res_partner_alejandro" model="res.partner">
+            <field name="name">Alejandro Pendino</field>
+            <field name="email">alejandro@mail.com</field>
+            <field name="document_type_id" ref="l10n_ar_invoice.dt_DNI"/>
+            <field name="document_number">31393297</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
             <field name="customer" eval="False"/>
-            <field name="email">secretaria_user@yourcompany.example.com</field>
         </record>
-<!-- id  name    email   document_type_id/id document_number responsability_id/id
-res_partner_alejandro   Alejandro Pendino   alejandro@mail.com  l10n_ar_invoice.dt_DNI  31393297    l10n_ar_invoice.res_CF
-res_partner_jonatan Jonatan Santos  jonatan@mail.com    l10n_ar_invoice.dt_DNI  31393297    l10n_ar_invoice.res_CF
-res_partner_gustavo Gustavo Pelegrino   gustavo@mail.com    l10n_ar_invoice.dt_DNI  31393297    l10n_ar_invoice.res_CF
-res_partner_marina  Marina Marcilli marina@mail.com l10n_ar_invoice.dt_DNI  31393297    l10n_ar_invoice.res_CF
-res_partner_marcelo Marcelo Pazos   marcelo@mail.com    l10n_ar_invoice.dt_DNI  31393297    l10n_ar_invoice.res_CF
-res_partner_gonzalo Gonzalo Aciar   gonzalo@mail.com    l10n_ar_invoice.dt_DNI  31393297    l10n_ar_invoice.res_CF
-res_partner_silvina Silvina Nicoli  silvina@mail.com    l10n_ar_invoice.dt_DNI  31393297    l10n_ar_invoice.res_CF
-res_partner_mariano Mariano Roca    mariano@mail.com    l10n_ar_invoice.dt_DNI  31393297    l10n_ar_invoice.res_CF
-res_partner_mesadeentrada   Mesa de Entrada mesa@mail.com   l10n_ar_invoice.dt_DNI  31393297    l10n_ar_invoice.res_CF
-res_partner_efren   José Efren  jose@mail.com   l10n_ar_invoice.dt_DNI  31393297    l10n_ar_invoice.res_CF
-res_partner_jesus   Jesus Farias    jesus@mail.com  l10n_ar_invoice.dt_DNI  31393297    l10n_ar_invoice.res_CF -->
+
+        <record id="sipreco_public_budget.res_partner_jonatan" model="res.partner">
+            <field name="name">Jonatan Santos</field>
+            <field name="email">jonatan@mail.com</field>
+            <field name="document_type_id" ref="l10n_ar_invoice.dt_DNI"/>
+            <field name="document_number">31393297</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+
+        </record>
+
+        <record id="sipreco_public_budget.res_partner_gustavo" model="res.partner">
+            <field name="name">Gustavo Pelegrino</field>
+            <field name="email">gustavo@mail.com</field>
+            <field name="document_type_id" ref="l10n_ar_invoice.dt_DNI"/>
+            <field name="document_number">31393297</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.res_partner_marcelo" model="res.partner">
+            <field name="name">Marcelo Pazos</field>
+            <field name="email">marcelo@mail.com</field>
+            <field name="document_type_id" ref="l10n_ar_invoice.dt_DNI"/>
+            <field name="document_number">31393297</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.res_partner_silvina" model="res.partner">
+            <field name="name">Silvina Nicoli</field>
+            <field name="email">silvina@mail.com</field>
+            <field name="document_type_id" ref="l10n_ar_invoice.dt_DNI"/>
+            <field name="document_number">31393297</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.res_partner_jesus" model="res.partner">
+            <field name="name">Jesus Farias</field>
+            <field name="email">jesus@mail.com</field>
+            <field name="document_type_id" ref="l10n_ar_invoice.dt_DNI"/>
+            <field name="document_number">31393297</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="customer" eval="False"/>
+        </record>
+
 <!-- Usuarios -->
     <!-- Users -->
 
-        <record id="secretaria_user_user" model="res.users">
-            <field name="partner_id" ref="secretaria_user_partner"/>
-            <field name="login">secretaria_user</field>
-            <field name="password">secretaria_user</field>
-            <field name="company_id" ref="company_sipreco"/>
-            <field name="company_ids" eval="[(4,ref('company_sipreco'))]"/>
+        <record id="sipreco_public_budget.res_user_alejandro" model="res.users">
+            <field name="login">apendino</field>
+            <field name="password">apendino</field>
+            <field name="partner_id" ref="sipreco_public_budget.res_partner_alejandro"/>
             <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/>
-            <field name="location_ids" eval="[(6,0,[ref('public_location_secretaria'), ref('public_location_habilitaciones'), ref('public_location_contaduria'),  ref('public_location_mesa_de_entrada'), ref('public_location_compras'), ref('public_location_tmc')])]"/>
-            <field name="image" type="base64" file="base/static/img/user_demo-image.jpg"/>
+            <field name="location_ids" eval="[(6,0,[ref('sipreco_public_budget.public_location_secretaria'), ref('sipreco_public_budget.public_location_habilitaciones'), ref('sipreco_public_budget.public_location_contaduria'),  ref('sipreco_public_budget.public_location_mesa_de_entrada'), ref('sipreco_public_budget.public_location_compras'), ref('sipreco_public_budget.public_location_tmc')])]"/>
+        </record>
+
+        <record id="sipreco_public_budget.res_user_jonatan" model="res.users">
+            <field name="login">jsantos</field>
+            <field name="password">jsantos</field>
+            <field name="partner_id" ref="sipreco_public_budget.res_partner_jonatan"/>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/>
+            <field name="location_ids" eval="[(6,0,[ref('sipreco_public_budget.public_location_secretaria'), ref('sipreco_public_budget.public_location_habilitaciones'), ref('sipreco_public_budget.public_location_contaduria'),  ref('sipreco_public_budget.public_location_mesa_de_entrada'), ref('sipreco_public_budget.public_location_compras'), ref('sipreco_public_budget.public_location_tmc')])]"/>
+        </record>
+
+        <record id="sipreco_public_budget.res_user_gustavo" model="res.users">
+            <field name="login">gpellegrino</field>
+            <field name="password">gpellegrino</field>
+            <field name="partner_id" ref="sipreco_public_budget.res_partner_gustavo"/>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/>
+            <field name="location_ids" eval="[(6,0,[ref('sipreco_public_budget.public_location_secretaria'), ref('sipreco_public_budget.public_location_habilitaciones'), ref('sipreco_public_budget.public_location_contaduria'),  ref('sipreco_public_budget.public_location_mesa_de_entrada'), ref('sipreco_public_budget.public_location_compras'), ref('sipreco_public_budget.public_location_tmc')])]"/>
+        </record>
+
+        <record id="sipreco_public_budget.res_user_marcelo" model="res.users">
+            <field name="login">mpazos</field>
+            <field name="password">mpazos</field>
+            <field name="partner_id" ref="sipreco_public_budget.res_partner_marcelo"/>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/>
+            <field name="location_ids" eval="[(6,0,[ref('sipreco_public_budget.public_location_secretaria'), ref('sipreco_public_budget.public_location_habilitaciones'), ref('sipreco_public_budget.public_location_contaduria'),  ref('sipreco_public_budget.public_location_mesa_de_entrada'), ref('sipreco_public_budget.public_location_compras'), ref('sipreco_public_budget.public_location_tmc')])]"/>
+        </record>
+
+        <record id="sipreco_public_budget.res_user_silvina" model="res.users">
+            <field name="login">snicoli</field>
+            <field name="password">snicoli</field>
+            <field name="partner_id" ref="sipreco_public_budget.res_partner_silvina"/>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/>
+            <field name="location_ids" eval="[(6,0,[ref('sipreco_public_budget.public_location_secretaria'), ref('sipreco_public_budget.public_location_habilitaciones'), ref('sipreco_public_budget.public_location_contaduria'),  ref('sipreco_public_budget.public_location_mesa_de_entrada'), ref('sipreco_public_budget.public_location_compras'), ref('sipreco_public_budget.public_location_tmc')])]"/>
+        </record>
+
+        <record id="sipreco_public_budget.res_user_jesus" model="res.users">
+            <field name="login">jfarias</field>
+            <field name="password">jfarias</field>
+            <field name="partner_id" ref="sipreco_public_budget.res_partner_jesus"/>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/>
+            <field name="location_ids" eval="[(6,0,[ref('sipreco_public_budget.public_location_secretaria'), ref('sipreco_public_budget.public_location_habilitaciones'), ref('sipreco_public_budget.public_location_contaduria'),  ref('sipreco_public_budget.public_location_mesa_de_entrada'), ref('sipreco_public_budget.public_location_compras'), ref('sipreco_public_budget.public_location_tmc')])]"/>
         </record>
     </data>
 </openerp>
-
-<!-- id  name    login   password    partner_id/id   groups_id/id
-res_user_alejandro  Alejandro Pendino   apendino    apendino    res_partner_alejandro   base.group_user,account.group_account_manager,public_budget.group_manager,public_budget.group_secretary,base.group_partner_manager
-res_user_jonatan    Jonatan Santos  jsantos jsantos res_partner_jonatan base.group_user
-res_user_gustavo    Gustavo Pelegrino   gpellegrino gpellegrino res_partner_gustavo base.group_user
-res_user_marina Marina Marsilli mmarsilli   mmarsilli   res_partner_marina  base.group_user
-res_user_marcelo    Marcelo Pazos   mpazos  mpazos  res_partner_marcelo base.group_user,account.group_account_manager,public_budget.group_manager,public_budget.group_secretary,base.group_partner_manager
-res_user_gonzalo    Gonzalo Aciar   gaciar  gaciar  res_partner_gonzalo base.group_user
-res_user_silvina    Silvina Nicoli  snicoli snicoli res_partner_silvina base.group_user
-res_user_mariano    Mariano Roca    mroca   mroca   res_partner_mariano base.group_user
-res_user_mesadeentrada  Mesa de Entrada mentrada    mentrada    res_partner_mesadeentrada   base.group_user
-res_user_efren  Jose Efren  jefren  jefren  res_partner_efren   base.group_user
-res_user_jesus  Jesus Farias    jfarias jfarias res_partner_jesus   base.group_user -->

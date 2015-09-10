@@ -15,10 +15,14 @@ Sipreco Set Up Data TMC
     ],
     'depends': [
         'sipreco_public_budget',
+        'l10n_ar_bank',
+        'l10n_ar_states',
     ],
     'data': [
         'data/location.xml',
         'data/budget_position.xml',
+        'data/res_company.xml',
+        'data/res_users.xml',
     ],
     'demo': [
     ],
