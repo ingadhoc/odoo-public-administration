@@ -39,6 +39,7 @@
         'data/account_properties.xml',
         'data/location.xml',
         'data/account_fiscal_year.xml',
+        'data/res_partner.xml',
         'data/tax_settlement.xml',
         'security/security.xml',
     ],
