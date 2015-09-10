@@ -31,6 +31,13 @@
         'data/transaction_type.xml',
         'data/position_category.xml',
         'data/position_exc_restrictions.xml',
+        'data/account_account.xml',
+        'data/account_journal.xml',
+        'data/account_checbook.xml',
+        'data/taxes.xml',
+        'data/account_tax_withholding.xml',
+        'data/account_properties.xml',
+        'data/location.xml',
         'security/security.xml',
     ],
     'demo': [
