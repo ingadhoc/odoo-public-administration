@@ -1,6 +1,0 @@
-id,code,name,parent_id/id,reconcile,user_type/id,type
-account_account_10,1111030,Caja chica,,False,account.data_account_type_receivable,receivable
-account_account_401,11300010,Anticipo para Gastos a Rendir,,False,account.data_account_type_receivable,receivable
-account_account_409,11300090,Subsidios con cargo a rendir,,False,account.data_account_type_receivable,receivable
-account_account_114,4100010,Ingreso 2014,,False,account.data_account_type_income,other
-account_account_115,4100020,Ingreso 2015,,False,account.data_account_type_income,other
