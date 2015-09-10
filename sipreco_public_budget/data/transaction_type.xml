@@ -26,7 +26,7 @@
             <field name="definitive_partner_type">supplier</field>
         </record>
 
-        <record id="sipreco_public_budget.budget_pos_exc_rest" model="public_budget.transaction_type">
+        <record id="sipreco_public_budget.purchase_type_concurso_precios" model="public_budget.transaction_type">
             <field name="name">Concurso de Precios</field>
             <field name="with_advance_payment" eval="False"/>
             <field name="definitive_partner_type">supplier</field>

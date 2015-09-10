@@ -17,7 +17,7 @@
         <record id="proffit_ret_per_settlement" model="account.tax.settlement">
             <field name="company_id" ref="base.main_company"/>
             <field name="journal_id" ref="journal_ret_per_proffit_settlement"/>
-            <field name="fiscalyear_id" ref="data_fiscalyear"/>
+            <field name="fiscalyear_id" ref="account.data_fiscalyear"/>
             <field name="moves_state">all</field>
         </record>
 
@@ -35,7 +35,7 @@
         <record id="ret_per_iibb_sf_settlement" model="account.tax.settlement">
             <field name="company_id" ref="base.main_company"/>
             <field name="journal_id" ref="journal_ret_per_iibb_sf_settlement"/>
-            <field name="fiscalyear_id" ref="data_fiscalyear"/>
+            <field name="fiscalyear_id" ref="account.data_fiscalyear"/>
             <field name="moves_state">all</field>
         </record>
 
@@ -53,7 +53,7 @@
         <record id="ret_per_drei_ros_settlement" model="account.tax.settlement">
             <field name="company_id" ref="base.main_company"/>
             <field name="journal_id" ref="journal_ret_per_drei_ros_settlement"/>
-            <field name="fiscalyear_id" ref="data_fiscalyear"/>
+            <field name="fiscalyear_id" ref="account.data_fiscalyear"/>
             <field name="moves_state">all</field>
         </record>
 
@@ -71,7 +71,7 @@
         <record id="ret_per_varias_settlement" model="account.tax.settlement">
             <field name="company_id" ref="base.main_company"/>
             <field name="journal_id" ref="journal_ret_per_varias_settlement"/>
-            <field name="fiscalyear_id" ref="data_fiscalyear"/>
+            <field name="fiscalyear_id" ref="account.data_fiscalyear"/>
             <field name="moves_state">all</field>
         </record>
 
