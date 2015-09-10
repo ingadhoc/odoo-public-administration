@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import models, fields, api
+from openerp import models, fields, api, _
 
 
 class expedient(models.Model):
@@ -30,7 +30,7 @@ class expedient(models.Model):
         default=fields.Datetime.now
         )
     cover = fields.Char(
-        string='Cover',
+        string=_('Cover'),
         store=True,
         compute='_get_cover'
         )
@@ -39,7 +39,7 @@ class expedient(models.Model):
         required=True
         )
     last_move_date = fields.Date(
-        string='Last Move',
+        string=_('Last Move'),
         store=True,
         compute='_get_current_location'
         )
@@ -64,7 +64,7 @@ class expedient(models.Model):
         )
     current_location_id = fields.Many2one(
         'public_budget.location',
-        string='Current Location',
+        string=_('Current Location'),
         store=True,
         compute='_get_current_location'
         )
@@ -78,11 +78,11 @@ class expedient(models.Model):
         string='Final Location'
         )
     year = fields.Integer(
-        string='Year',
+        string=_('Year'),
         compute='_get_year'
         )
     in_transit = fields.Boolean(
-        string='In Transit?',
+        string=_('In Transit?'),
         store=True,
         compute='_get_current_location'
         )

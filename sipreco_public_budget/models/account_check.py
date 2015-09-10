@@ -12,16 +12,16 @@ class account_check(models.Model):
     state = fields.Selection(
         # selection_add=[('to_be_handed', 'To Be Handed')]
         [
-            ('draft', 'Draft'),
-            ('holding', 'Holding'),
-            ('deposited', 'Deposited'),
-            ('to_be_handed', 'To Be Handed'),
-            ('handed', 'Handed'),
-            ('rejected', 'Rejected'),
-            ('debited', 'Debited'),
-            ('returned', 'Returned'),
-            ('changed', 'Changed'),
-            ('cancel', 'Cancel'),
+            ('draft', _('Draft')),
+            ('holding', _('Holding')),
+            ('deposited', _('Deposited')),
+            ('to_be_handed', _('To Be Handed')),
+            ('handed', _('Handed')),
+            ('rejected', _('Rejected')),
+            ('debited', _('Debited')),
+            ('returned', _('Returned')),
+            ('changed', _('Changed')),
+            ('cancel', _('Cancel')),
         ]
         )
 

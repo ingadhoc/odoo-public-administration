@@ -40,51 +40,51 @@ class budget_position(models.Model):
         string='Inventariable?'
         )
     draft_amount = fields.Float(
-        string='Draft Amount',
+        string=_('Draft Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     preventive_amount = fields.Float(
-        string='Preventive Amount',
+        string=_('Preventive Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     definitive_amount = fields.Float(
-        string='Definitive Amount',
+        string=_('Definitive Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     to_pay_amount = fields.Float(
-        string='To Pay Amount',
+        string=_('To Pay Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     paid_amount = fields.Float(
-        string='Paid Amount',
+        string=_('Paid Amount'),
         compute='_get_amounts'
         )
     balance_amount = fields.Float(
-        string='Balance Amount',
+        string=_('Balance Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     projected_amount = fields.Float(
-        string='Projected Amount',
+        string=_('Projected Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     projected_avg = fields.Float(
-        string='Projected Avg',
+        string=_('Projected Avg'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     preventive_avg = fields.Float(
-        string='Preventive Perc.',
+        string=_('Preventive Perc.'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     amount = fields.Float(
-        string='Amount',
+        string=_('Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
@@ -125,7 +125,7 @@ class budget_position(models.Model):
         )
     assignment_position_id = fields.Many2one(
         'public_budget.budget_position',
-        string='Assignment Position',
+        string=_('Assignment Position'),
         compute='_get_assignment_position',
         store=True,
         )

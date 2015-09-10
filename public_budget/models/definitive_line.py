@@ -35,22 +35,22 @@ class definitive_line(models.Model):
         digits=dp.get_precision('Account'),
         )
     residual_amount = fields.Float(
-        string='Residual Amount',
+        string=_('Residual Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     to_pay_amount = fields.Float(
-        string='To Pay Amount',
+        string=_('To Pay Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     paid_amount = fields.Float(
-        string='Paid Amount',
+        string=_('Paid Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     invoiced_amount = fields.Float(
-        string='Invoiced Amount',
+        string=_('Invoiced Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
@@ -71,8 +71,8 @@ class definitive_line(models.Model):
         related='preventive_line_id.budget_id'
         )
     state = fields.Selection(
-        selection=[('draft', 'Draft'), ('invoiced', 'Invoiced')],
-        string='State',
+        selection=[('draft', _('Draft')), ('invoiced', _('Invoiced'))],
+        string=_('State'),
         states={'draft': [('readonly', False)]},
         default='draft',
         compute='_get_state'

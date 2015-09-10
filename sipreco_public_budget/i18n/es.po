@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: odoo-public-administration (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-01 16:33+0000\n"
-"PO-Revision-Date: 2015-09-01 16:30+0000\n"
+"POT-Creation-Date: 2015-09-09 19:05+0000\n"
+"PO-Revision-Date: 2015-09-09 19:20+0000\n"
 "Last-Translator: Gonzalo Ruzafa <gr@ingadhoc.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/adhoc/ingadhoc-odoo-public-administration-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -49,6 +49,11 @@ msgstr "Volver a Pendiente de Entrega"
 #: model:ir.model,name:sipreco_public_budget.model_public_budget_budget
 msgid "Budget"
 msgstr "Presupuesto"
+
+#. module: sipreco_public_budget
+#: model:ir.model,name:sipreco_public_budget.model_public_budget_transaction
+msgid "Budget Transaction"
+msgstr "Transacción Presupuestaria"
 
 #. module: sipreco_public_budget
 #: view:account.voucher:sipreco_public_budget.view_vendor_payment_signature_form
@@ -211,6 +216,12 @@ msgid "Otras Retenciones"
 msgstr "Otras Retenciones"
 
 #. module: sipreco_public_budget
+#: code:addons/sipreco_public_budget/account_voucher.py:43
+#, python-format
+msgid "Paid Withholdings"
+msgstr "Retenciones Pagadas"
+
+#. module: sipreco_public_budget
 #: model:ir.model,name:sipreco_public_budget.model_res_partner
 msgid "Partner"
 msgstr "Cliente/Proveedor"
@@ -294,6 +305,12 @@ msgid "Retención de Ganancias Aplicada"
 msgstr "Retención de Ganancias Aplicada"
 
 #. module: sipreco_public_budget
+#: code:addons/sipreco_public_budget/account_voucher.py:38
+#, python-format
+msgid "Show Print Receipt Button"
+msgstr "Mostrar Botón de Imprimir Recibo"
+
+#. module: sipreco_public_budget
 #: view:account.voucher:sipreco_public_budget.view_vendor_payment_signature_form
 msgid "Signed"
 msgstr "Firmado"
@@ -361,7 +378,13 @@ msgid "True"
 msgstr "Verdadero"
 
 #. module: sipreco_public_budget
-#: code:addons/sipreco_public_budget/account_check.py:32
+#: code:addons/sipreco_public_budget/account_voucher.py:44
+#, python-format
+msgid "Withholding being paid with this voucher"
+msgstr "Retenciones pagadas con este voucher"
+
+#. module: sipreco_public_budget
+#: code:addons/sipreco_public_budget/account_check.py:33
 #, python-format
 msgid ""
 "You can not cancel issue checks in states other than \"draft or \"handed\". "
@@ -369,7 +392,7 @@ msgid ""
 msgstr "No puede cancelar cheques entregados en estados distintos a \"draft or \"handed\". Primero intente cambiar el estado del cheque."
 
 #. module: sipreco_public_budget
-#: code:addons/sipreco_public_budget/account_check.py:38
+#: code:addons/sipreco_public_budget/account_check.py:39
 #, python-format
 msgid ""
 "You can not cancel third checks in states other than \"draft or \"holding\"."
@@ -377,13 +400,13 @@ msgid ""
 msgstr "No puede cancelar Cheques de Terceros en estados de  \"draft or \"holding\". Primero intente cambiar el estado del cheque."
 
 #. module: sipreco_public_budget
-#: code:addons/sipreco_public_budget/account_check.py:42
+#: code:addons/sipreco_public_budget/account_check.py:43
 #, python-format
 msgid "You can not cancel third checks that are being used on payments"
 msgstr "No puede cancelar Cheques de Terceros, que estén siendo usados en pagos."
 
 #. module: sipreco_public_budget
-#: code:addons/sipreco_public_budget/account_voucher.py:109
+#: code:addons/sipreco_public_budget/account_voucher.py:108
 #, python-format
 msgid ""
 "You can not confirm a voucher with to pay                    amount equal to"
@@ -391,7 +414,7 @@ msgid ""
 msgstr "No puedes Confirmar una Orden de Pago si su monto A Pagar es igual a 0."
 
 #. module: sipreco_public_budget
-#: code:addons/sipreco_public_budget/account_voucher.py:133
+#: code:addons/sipreco_public_budget/account_voucher.py:132
 #, python-format
 msgid ""
 "You can not send to sign process a Voucher                     that has "
@@ -420,11 +443,24 @@ msgid "transaction Report"
 msgstr "Reporte de Transacción"
 
 #. module: sipreco_public_budget
+#: view:public_budget.transaction:sipreco_public_budget.view_public_budget_transaction_form
+msgid "{'default_definitive_partner_type': definitive_partner_type}"
+msgstr "{'default_definitive_partner_type': definitive_partner_type}"
+
+#. module: sipreco_public_budget
 #: view:public_budget.preventive_line:sipreco_public_budget.view_public_budget_preventive_line_form
 msgid ""
 "{'from_preventive':True,'default_amount':remaining_amount, "
 "'definitive_partner_type': definitive_partner_type}"
 msgstr "{'from_preventive':True,'default_amount':remaining_amount, 'definitive_partner_type': definitive_partner_type}"
+
+#. module: sipreco_public_budget
+#: view:account.check:sipreco_public_budget.view_account_check_form
+msgid ""
+"{'invisible':['|', ('type', '!=', 'third_check'), ('state', '!=', "
+"'holding'), '|', ('type', '!=', 'issue_check'), ('state', 'not in', "
+"['handed', 'to_be_handed'])]}"
+msgstr "{'invisible':['|', ('type', '!=', 'third_check'), ('state', '!=', 'holding'), '|', ('type', '!=', 'issue_check'), ('state', 'not in', ['handed', 'to_be_handed'])]}"
 
 #. module: sipreco_public_budget
 #: view:account.voucher:sipreco_public_budget.view_vendor_payment_signature_form
