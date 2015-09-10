@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+    <!-- Partners for companies -->
+        <record id="base.main_partner" model="res.partner">
+            <field name='responsability_id' ref='l10n_ar_invoice.res_IVAE'/>
+            <field name='vat'>AR30666666662</field>
+            <field name='document_type_id' ref="l10n_ar_invoice.dt_CUIT"/>
+            <field name='document_number'>30666666662</field>
+            <field name="name">Tribunal Municipal de Cuentas</field>
+            <field name="street">Calle Falsa 456</field>
+            <field name="city">Rosario</field>
+            <field name="country_id" ref="base.ar"/>
+            <field name="state_id" ref="l10n_ar_invoice.demo_S"/>
+            <field name="zip">2000</field>
+            <field name="phone">+1 555 123 8069</field>
+            <field name="email">info@yourcompany.example.com</field>
+            <field name="website">www.example.com</field>
+            <field name="supplier" eval="True"/>
+        </record>
+    <!-- Partner bank -->
+        <record id="sipreco_public_budget.partner_bank_1" model="res.partner">
+            <!-- <field name='bank_name' ref='l10n_ar_invoice.res_IVAE'/> -->
+            <field name='journal_id' ref='l10n_ar_invoice.res_IVAE'/>
+        </record>
+
+    <!-- Companies -->
+        <record id="base.main_company" model="res.company">
+            <field name="logo" type="base64" file="sipreco_setup_data_tmc/data/SIPRECO_Logo.png"/>
+            <field name='currency_id' ref='base.ARS'/>
+            <field name="use_argentinian_localization" eval="True"/>
+        </record>
+
+    </data>
+</openerp>

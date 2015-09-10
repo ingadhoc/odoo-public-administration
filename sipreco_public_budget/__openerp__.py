@@ -37,8 +37,8 @@
         'data/taxes.xml',
         'data/account_tax_withholding.xml',
         'data/account_properties.xml',
-        'data/location.xml',
-        'data/account_fiscal_year.xml',
+        # we can not make it compatible with demo data and test
+        # 'data/account_fiscal_year.xml',
         'data/res_partner.xml',
         'data/tax_settlement.xml',
         'security/security.xml',

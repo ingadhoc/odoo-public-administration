@@ -14,13 +14,6 @@
             <field name="default_debit_account_id" ref="account_account_60"/>
         </record>
 
-        <record id="proffit_ret_per_settlement" model="account.tax.settlement">
-            <field name="company_id" ref="base.main_company"/>
-            <field name="journal_id" ref="journal_ret_per_proffit_settlement"/>
-            <field name="fiscalyear_id" ref="account.data_fiscalyear"/>
-            <field name="moves_state">all</field>
-        </record>
-
         <!-- ret/per sf iibb -->
         <record id="journal_ret_per_iibb_sf_settlement" model="account.journal">
             <field name="name">Liquidacion IIBB Santa Fe Aplicadas</field>
@@ -30,13 +23,6 @@
             <field name="partner_id" ref="res_partner_api"/>
             <field name="tax_code_id" ref="ri_tax_code_ret_per_iibb_sf_aplicada"/>
             <field name="default_debit_account_id" ref="account_account_62"/>
-        </record>
-
-        <record id="ret_per_iibb_sf_settlement" model="account.tax.settlement">
-            <field name="company_id" ref="base.main_company"/>
-            <field name="journal_id" ref="journal_ret_per_iibb_sf_settlement"/>
-            <field name="fiscalyear_id" ref="account.data_fiscalyear"/>
-            <field name="moves_state">all</field>
         </record>
 
         <!-- ret/per drei -->
@@ -50,13 +36,6 @@
             <field name="default_debit_account_id" ref="account_account_64"/>
         </record>
 
-        <record id="ret_per_drei_ros_settlement" model="account.tax.settlement">
-            <field name="company_id" ref="base.main_company"/>
-            <field name="journal_id" ref="journal_ret_per_drei_ros_settlement"/>
-            <field name="fiscalyear_id" ref="account.data_fiscalyear"/>
-            <field name="moves_state">all</field>
-        </record>
-
         <!-- ret/per otrs -->
         <record id="journal_ret_per_varias_settlement" model="account.journal">
             <field name="name">Liquidacion Ret/Perc Varias Aplicadas</field>
@@ -66,13 +45,6 @@
             <field name="partner_id" ref="res_partner_muni_rosario"/>
             <field name="tax_code_id" ref="ri_tax_code_ret_otras_view"/>
             <field name="default_debit_account_id" ref="account_account_66"/>
-        </record>
-
-        <record id="ret_per_varias_settlement" model="account.tax.settlement">
-            <field name="company_id" ref="base.main_company"/>
-            <field name="journal_id" ref="journal_ret_per_varias_settlement"/>
-            <field name="fiscalyear_id" ref="account.data_fiscalyear"/>
-            <field name="moves_state">all</field>
         </record>
 
     </data>

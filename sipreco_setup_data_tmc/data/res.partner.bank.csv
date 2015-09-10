@@ -1,3 +1,0 @@
-id,journal_id/id,bank_name,acc_number,state
-account_payment.partner_bank_1,,,987654321,bank
-account_payment.res_partner_bank_2,account.bank_journal,Banco Municipal,XXXXXX,bank

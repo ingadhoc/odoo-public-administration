@@ -17,14 +17,8 @@ Sipreco Set Up Data TMC
         'sipreco_public_budget',
     ],
     'data': [
-        'data/account/account_period.xml',
-        'data/account.journal.csv',
-        'data/users/res.partner.csv',
-        'data/users/admin_user/res.users.csv',
-        'data/users/res.users.csv',
-        'data/res.partner.bank.csv',
-        'data/account.tax.withholding.csv',
-        'data/public_budget.budget_position.csv',
+        'data/location.xml',
+        'data/budget_position.xml',
     ],
     'demo': [
     ],
