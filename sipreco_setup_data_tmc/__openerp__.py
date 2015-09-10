@@ -9,34 +9,26 @@
 Sipreco Set Up Data TMC
 =======================
     """,
-    'author':  'Ingenieria ADHOC',
-    'website': 'www.ingadhoc.com',
+    'author':  'ADHOC SA',
+    'website': 'www.adhoc.com.ar',
     'images': [
     ],
     'depends': [
-        'sipreco_account_chart',
         'sipreco_public_budget',
-        'account_check',
         'l10n_ar_bank',
-        # 'l10n_ar_invoice',
-        'account_tax_settlement_voucher',
-        # 'account_balance_constraint',
+        'l10n_ar_states',
     ],
     'data': [
-        'data/account/account_period.xml',
-        'data/account.journal.csv',
-        'data/users/res.partner.csv',
-        'data/users/admin_user/res.users.csv',
-        'data/users/res.users.csv',
-        'data/res.partner.bank.csv',
-        'data/account.tax.withholding.csv',
-        'data/public_budget.budget_position.csv',
+        'data/location.xml',
+        'data/budget_position.xml',
+        'data/res_company.xml',
+        'data/res_users.xml',
     ],
     'demo': [
     ],
     'test': [
     ],
-    'installable': False,
+    'installable': True,
     'auto_install': False,
     'application': False,
 }

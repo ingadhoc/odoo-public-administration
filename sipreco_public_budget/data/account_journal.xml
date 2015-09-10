@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+    <!-- <data noupdate="1"> -->
+        <record id="sipreco_public_budget.cash_journal" model="account.journal">
+            <field name="name">Efectivo</field>
+            <field name="code">01EFE</field>
+            <field name="type">cash</field>
+            <field name="use_documents" eval="False"/>
+            <field name="default_credit_account_id" ref="account_account_6"/>
+            <field name="default_debit_account_id" ref="account_account_6"/>
+            <field name="payment_subtype"></field>
+            <field name="entry_posted" eval="True"/>
+            <field name="update_posted" eval="True"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        <record id="sipreco_public_budget.bank_journal" model="account.journal">
+            <field name="name">Transferencias - Banco Municipal - Cta A</field>
+            <field name="code">02BCM</field>
+            <field name="type">bank</field>
+            <field name="use_documents" eval="False"/>
+            <field name="default_credit_account_id" ref="account_account_13"/>
+            <field name="default_debit_account_id" ref="account_account_13"/>
+            <field name="payment_subtype"></field>
+            <field name="entry_posted" eval="True"/>
+            <field name="update_posted" eval="True"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        <record id="sipreco_public_budget.check_journal" model="account.journal">
+            <field name="name">Cheques - Banco Municipal - Cta A</field>
+            <field name="code">03CHB</field>
+            <field name="type">bank</field>
+            <field name="use_documents" eval="False"/>
+            <field name="payment_subtype">issue_check</field>
+            <field name="entry_posted" eval="True"/>
+            <field name="update_posted" eval="True"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        <record id="sipreco_public_budget.expenses_journal" model="account.journal">
+            <field name="name">Facturas de Compra</field>
+            <field name="code">04CPR</field>
+            <field name="type">purchase</field>
+            <field name="use_documents" eval="True"/>
+            <field name="payment_subtype">issue_check</field>
+            <field name="entry_posted" eval="True"/>
+            <field name="update_posted" eval="True"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        <record id="sipreco_public_budget.refund_expenses_journal" model="account.journal">
+            <field name="name">Notas de Crédito Compras</field>
+            <field name="code">05NCC</field>
+            <field name="type">purchase_refund</field>
+            <field name="use_documents" eval="True"/>
+            <field name="payment_subtype">issue_check</field>
+            <field name="entry_posted" eval="True"/>
+            <field name="update_posted" eval="True"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        <record id="sipreco_public_budget.other_documents" model="account.journal">
+            <field name="name">Otros Comprobantes</field>
+            <field name="code">05OCC</field>
+            <field name="type">purchase</field>
+            <field name="use_documents" eval="False"/>
+            <field name="payment_subtype">issue_check</field>
+            <field name="entry_posted" eval="True"/>
+            <field name="update_posted" eval="True"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        <record id="sipreco_public_budget.opening_journal" model="account.journal">
+            <field name="name">Apertura y Cierre</field>
+            <field name="code">08AC</field>
+            <field name="type">situation</field>
+            <field name="use_documents" eval="False"/>
+            <field name="payment_subtype">issue_check</field>
+            <field name="entry_posted" eval="True"/>
+            <field name="update_posted" eval="True"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        <record id="sipreco_public_budget.miscellaneous_journal" model="account.journal">
+            <field name="name">Varios</field>
+            <field name="code">99VAR</field>
+            <field name="type">general</field>
+            <field name="use_documents" eval="False"/>
+            <field name="payment_subtype">issue_check</field>
+            <field name="entry_posted" eval="True"/>
+            <field name="update_posted" eval="True"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+    </data>
+</openerp>

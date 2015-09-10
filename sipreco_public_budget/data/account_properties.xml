@@ -4,18 +4,19 @@
 
         <!-- Properties -->
         <!-- Para que no de un error... -->
-        <record id="account_account_661" model="account.account">
-        </record>
+<!--         <record id="account_account_661" model="account.account">
+        </record> -->
+
         <record forcecreate="True" id="property_account_receivable" model="ir.property">
             <field name="name">property_account_receivable</field>
             <field name="fields_id" search="[('model','=','res.partner'),('name','=','property_account_receivable')]"/>
-            <field eval="'account.account,'+str(account_account_661)" name="value"/>
+            <field eval="'account.account,'+str(account_account_56)" name="value"/>
             <field name="company_id" ref="base.main_company"/>
         </record>
         <record forcecreate="True" id="property_account_payable" model="ir.property">
             <field name="name">property_account_payable</field>
             <field name="fields_id" search="[('model','=','res.partner'),('name','=','property_account_payable')]"/>
-            <field eval="'account.account,'+str(account_account_661)" name="value"/>
+            <field eval="'account.account,'+str(account_account_56)" name="value"/>
             <field name="company_id" ref="base.main_company"/>
         </record>
 <!--         <record forcecreate="True" id="property_account_position" model="ir.property">

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+    <!-- <data noupdate="1"> -->
+    <!-- IMPORTANTE USAR EN LOS ID budg_position_xx y no budg_pos_xx asi no se pisa con los datos demo -->
+        <record id="sipreco_public_budget.budg_position_10" model="public_budget.budget_position">
+            <field name="code">01</field>
+            <field name="name">Personal</field>
+            <field name="category_id" ref=""/>
+            <field name="type">view</field>
+            <field name="parent_id" ref=""/>
+            <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_20" model="public_budget.budget_position">
+            <field name="code">01.01</field>
+            <field name="name">Personal Permanente pos_categ_expense</field>
+            <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+            <field name="type">normal</field>
+            <field name="parent_id" ref="sipreco_public_budget.budg_position_10"/>
+            <field name="budget_assignment_allowed" eval="True"/>
+        </record>
+
+    </data>
+</openerp>
