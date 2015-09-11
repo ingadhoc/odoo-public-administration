@@ -17,7 +17,7 @@
             <field name="zip">2000</field>
             <field name="phone">480 2614</field>
             <field name="email"></field>
-            <field name="website">www.concejorosario.gov.ar</field>
+            <field name="website">www.tmc.gov.ar</field>
             <field name="supplier" eval="True"/>
         </record>
     <!-- Partner bank -->
