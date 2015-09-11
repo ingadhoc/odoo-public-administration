@@ -9,15 +9,15 @@
             <field name='vat'>AR30690884905</field>
             <field name='document_type_id' ref="l10n_ar_invoice.dt_CUIT"/>
             <field name='document_number'>30690884905</field>
-            <field name="name">Tribunal Municipal de Cuentas</field>
-            <field name="street">Laprida 1527</field>
+            <field name="name">Concejo Municipal de Rosario</field>
+            <field name="street">Cordoba 501</field>
             <field name="city">Rosario</field>
             <field name="country_id" ref="base.ar"/>
             <field name="state_id" ref="l10n_ar_states.S"/>
             <field name="zip">2000</field>
             <field name="phone">480 2614</field>
             <field name="email"></field>
-            <field name="website">www.tmc.gov.ar</field>
+            <field name="website">www.cdm.gov.ar</field>
             <field name="supplier" eval="True"/>
         </record>
     <!-- Partner bank -->
@@ -32,7 +32,7 @@
 
     <!-- Companies -->
         <record id="base.main_company" model="res.company">
-            <field name="logo" type="base64" file="sipreco_setup_data_tmc/data/logo_TMC.jpg"/>
+            <field name="logo" type="base64" file="sipreco_setup_data_cmd/data/logo_CMR.jpg"/>
             <field name='currency_id' ref='base.ARS'/>
             <field name="use_argentinian_localization" eval="True"/>
         </record>
