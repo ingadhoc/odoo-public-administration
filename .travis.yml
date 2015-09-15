@@ -41,13 +41,11 @@ install:
 
   # odoo argentina
   - git clone https://github.com/ingadhoc/odoo-argentina.git -b 8.0.x ${HOME}/odoo-argentina
-  - pip install geopy==0.95.1 BeautifulSoup 
 
   # oca OCA/web
   - git clone https://github.com/OCA/web.git ${HOME}/web
 
   # oca server tools
-  - pip install python-ldap
   - git clone https://github.com/OCA/server-tools.git ${HOME}/server-tools
 
   # repository requirements
