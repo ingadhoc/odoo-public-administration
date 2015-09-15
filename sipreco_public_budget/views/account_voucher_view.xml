@@ -55,6 +55,18 @@
             </field>
         </record>
 
+        <!-- tree view modification -->
+        <record id="voucher_receipts_form_inherit_view" model="ir.ui.view">
+            <field name="name">account.voucher.customer.pay.tree</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="l10n_ar_account_voucher.voucher_receipts_form_inherit_view"/>
+            <field name="arch" type="xml">
+                <field name="document_number" position="replace">
+                    <field name="force_number" string="Document Number"/>
+                </field>
+            </field>
+        </record>
+
         <!-- vies modifications because of signature required -->
         <record id="view_vendor_payment_signature_form" model="ir.ui.view">
             <field name="name">account.voucher.customer.pay.form</field>
