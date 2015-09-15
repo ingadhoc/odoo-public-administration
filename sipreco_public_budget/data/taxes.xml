@@ -604,7 +604,7 @@
                     </record>
 
                 <record model="account.tax.code" id="ri_tax_code_ret_otras_view">
-                    <field name="name">Otras Retenciones</field>
+                    <field name="name">Otras Retenciones/SIJP</field>
                     <field name="code">3.2.00.000</field>
                     <field name="sign">1</field>
                     <field name="type">view</field>
@@ -614,7 +614,7 @@
                 <record model="account.tax.code" id="ri_tax_code_otras_retenciones">
                     <!-- <field name="code"></field> -->
                     <field name="code">3.2.00.010</field>
-                    <field name="name">Otras Retenciones</field>
+                    <field name="name">Otras Retenciones/SIJP</field>
                     <field name="sign">1</field>
                     <field name="parent_id" ref="ri_tax_code_ret_otras_view"/>
                     <field name="company_id" ref="base.main_company"/>

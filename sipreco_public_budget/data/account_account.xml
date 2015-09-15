@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
-    <data>
     <data noupdate="0">
         <record model='account.account' id='account_account_0'>
                 <field name='code'>0</field>
@@ -593,7 +592,7 @@
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
                 <field name='parent_id' ref="account_account_58"/>
-                <field name='name'>Otras Retenciones Aplicadas</field>
+                <field name='name'>Otras Retenciones Aplicadas/SIJP</field>
         </record>
         <record model='account.account' id='account_account_66'>
                 <field name='code'>2130045</field>
@@ -602,7 +601,7 @@
                 <field name='type'>payable</field>
                 <field name="company_id" ref="base.main_company"/>
                 <field name='parent_id' ref="account_account_58"/>
-                <field name='name'>Otras Retenciones a pagar</field>
+                <field name='name'>Otras Retenciones a pagar/SIJP</field>
         </record>
         <record model='account.account' id='account_account_67'>
                 <field name='code'>214</field>

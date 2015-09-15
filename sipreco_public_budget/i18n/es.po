@@ -263,8 +263,8 @@ msgstr "Otras Operaciones"
 #. module: sipreco_public_budget
 #: model:account.tax.code,name:sipreco_public_budget.ri_tax_code_otras_retenciones
 #: model:account.tax.code,name:sipreco_public_budget.ri_tax_code_ret_otras_view
-msgid "Otras Retenciones"
-msgstr "Otras Retenciones"
+msgid "Otras Retenciones/SIJP"
+msgstr "Otras Retenciones/SIJP"
 
 #. module: sipreco_public_budget
 #: code:addons/sipreco_public_budget/account_voucher.py:123
