@@ -57,6 +57,7 @@ Modulos principales del proyecto:
         # es un error de javascript pero con portal de alguna manera se
         # resuelve. Luego de instalar portal refrescar pantalla
         'disable_openerp_online',
+        'web_export_view',
     ],
     'data': [
     ],
