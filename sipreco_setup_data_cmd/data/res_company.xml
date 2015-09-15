@@ -25,10 +25,19 @@
             <field name="state">bank</field>
             <field name="acc_number">123456</field>
             <field name='bank' ref='l10n_ar_bank.00065'/>
-            <field name="bank_name">Banco Municipal De Rosario</field>
+            <field name="bank_name">Banco Municipal De Rosario - Cta A</field>
             <field name='journal_id' ref='l10n_ar_invoice.res_IVAE'/>
             <field name='company_id' ref='base.main_company'/>
         </record>
+        <record id="sipreco_public_budget.partner_bank_2" model="res.partner.bank">
+            <field name="state">bank</field>
+            <field name="acc_number">123456</field>
+            <field name='bank' ref='l10n_ar_bank.00065'/>
+            <field name="bank_name">Banco Municipal De Rosario - Cta B</field>
+            <field name='journal_id' ref='l10n_ar_invoice.res_IVAE'/>
+            <field name='company_id' ref='base.main_company'/>
+        </record>
+
 
     <!-- Companies -->
         <record id="base.main_company" model="res.company">
