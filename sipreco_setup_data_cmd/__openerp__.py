@@ -23,9 +23,8 @@ Sipreco Set Up Data TMC
         'data/budget_position.xml',
         'data/res_company.xml',
         'data/res_users.xml',
-        'data/account_account.xml'
+        'data/account_account.xml',
         'data/account_journal.xml'
-
     ],
     'demo': [
     ],

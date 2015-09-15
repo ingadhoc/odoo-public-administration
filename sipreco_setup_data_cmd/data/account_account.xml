@@ -8,7 +8,7 @@
                 <field name='user_type' ref="account.data_account_type_bank"/>
                 <field name='type'>liquidity</field>
                 <field name="company_id" ref="base.main_company"/>
-                <field name='parent_id' ref="account_account_8"/>
+                <field name='parent_id' ref="sipreco_public_budget.account_account_8"/>
                 <field name='name'>Banco Municipal Cuenta Corriente - Cta B</field>
         </record>
 
