@@ -53,6 +53,7 @@
         'account_voucher_multic_fix',
         'account_invoice_auto_pay',
         'account_voucher_double_validation',
+        'web_export_view',
     ],
     'description': """
 Public Budget
