@@ -2,7 +2,7 @@
 <openerp>
     <data noupdate="0">
 
-        <record id="sipreco_public_budget.bank_journal" model="account.journal">
+        <record id="sipreco_public_budget.bank_journal_2" model="account.journal">
             <field name="name">Transferencias - Banco Municipal - Cta B</field>
             <field name="code">04BCM</field>
             <field name="type">bank</field>
@@ -14,7 +14,7 @@
             <field name="update_posted" eval="True"/>
             <field name="company_id" ref="base.main_company"/>
         </record>
-        <record id="sipreco_public_budget.check_journal" model="account.journal">
+        <record id="sipreco_public_budget.check_journal_2" model="account.journal">
             <field name="name">Cheques - Banco Municipal - Cta B</field>
             <field name="code">05CHB</field>
             <field name="type">bank</field>
