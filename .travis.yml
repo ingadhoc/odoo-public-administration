@@ -4,13 +4,6 @@ addons:
       - expect-dev  # provides unbuffer utility
       - python-lxml # because pip installation is slow
       - libcups2-dev # for aeroo
-      # odoo-argentina fe
-      - python-dev
-      - swig
-      - libffi-dev
-      - libssl-dev
-      - python-m2crypto
-      - python-httplib2
 
 language: python
 sudo: false
@@ -48,18 +41,12 @@ install:
 
   # odoo argentina
   - git clone https://github.com/ingadhoc/odoo-argentina.git -b 8.0.x ${HOME}/odoo-argentina
-  - pip install geopy==0.95.1 BeautifulSoup 
-
-  # odoo argentina fe
-  - pip install pyOpenSSL suds httplib2 pysimplesoap==1.08.8 m2crypto fpdf dbf Pillow
-  # install pyafipws after others dependencies because dependency erro
-  - pip install pyafipws
+  - pip install geopy==0.95.1 BeautifulSoup # because l10n_ar_states module is installed
 
   # oca OCA/web
   - git clone https://github.com/OCA/web.git ${HOME}/web
 
   # oca server tools
-  - pip install python-ldap
   - git clone https://github.com/OCA/server-tools.git ${HOME}/server-tools
 
   # repository requirements
