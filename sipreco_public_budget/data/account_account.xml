@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
     <data>
-    <!-- <data noupdate="True"> -->
+    <data noupdate="0">
         <record model='account.account' id='account_account_0'>
                 <field name='code'>0</field>
                 <field name='reconcile'>False</field>
@@ -639,6 +639,15 @@
                 <field name="company_id" ref="base.main_company"/>
                 <field name='parent_id' ref="account_account_0"/>
                 <field name='name'>PATRIMONIO NETO</field>
+        </record>
+        <record model='account.account' id='account_account_70-1'>
+                <field name='code'>30000001</field>
+                <field name='reconcile'>False</field>
+                <field name='user_type' ref="account.account_type_cash_equity"/>
+                <field name='type'>other</field>
+                <field name="company_id" ref="base.main_company"/>
+                <field name='parent_id' ref="account_account_70"/>
+                <field name='name'>Patrimonio Neto</field>
         </record>
         <record model='account.account' id='account_account_71'>
                 <field name='code'>4</field>
