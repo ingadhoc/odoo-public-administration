@@ -375,6 +375,8 @@ class transaction(models.Model):
             'invoice_line': [(6, 0, inv_lines.ids)],
             # 'name': invoice.name,
             'type': inv_type,
+            'currency_id': (
+                journal.currency.id or journal.company_id.currency_id.id),
             'account_id': account_id,
             # 'direct_payment_journal_id': advance_journal_id,
             'journal_id': journal.id,

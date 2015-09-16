@@ -180,7 +180,8 @@ class public_budget_definitive_make_invoice(models.TransientModel):
             wizard.supplier_id, wizard.journal_id, wizard.invoice_date,
             wizard.supplier_invoice_number, inv_lines, advance_account)
 
-        invoice = self.env['account.invoice'].create(invoice_vals)
+        invoice = self.env['account.invoice'].with_context(
+            type='in_invoice').create(invoice_vals)
 
         # Buscamos la vista de supplier invoices
         action = self.env['ir.model.data'].xmlid_to_object(

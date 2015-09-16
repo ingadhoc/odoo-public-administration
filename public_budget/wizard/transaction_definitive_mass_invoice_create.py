@@ -73,7 +73,7 @@ class public_budget_definitive_mass_invoice_create(models.TransientModel):
                 definitive_line.supplier_id, wizard.journal_id,
                 wizard.invoice_date, False, inv_line, advance_account)
 
-            invoices.create(invoice_vals)
+            invoices.with_context(type='in_invoice').create(invoice_vals)
 
         return True
 
