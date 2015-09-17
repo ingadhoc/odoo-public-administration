@@ -32,7 +32,7 @@
 
         <record id="sipreco_public_budget.budget_position_40" model="public_budget.budget_position">
             <field name="code">01.05</field>
-            <field name="name">Personal No Permanente</field>
+            <field name="name">Personal No Permanente - A. Superior</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
             <field name="type">normal</field>
             <field name="parent_id" ref="sipreco_public_budget.budget_position_10"/>
@@ -192,7 +192,7 @@
 
         <record id="sipreco_public_budget.budget_position_200" model="public_budget.budget_position">
             <field name="code">05.01.04</field>
-            <field name="name">Secretariado Permanentes</field>
+            <field name="name">Aportes Asociación Nacional Tribunales de Cuenta</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
             <field name="type">normal</field>
             <field name="parent_id" ref="sipreco_public_budget.budget_position_190"/>

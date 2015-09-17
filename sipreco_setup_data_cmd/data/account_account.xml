@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+    <!-- <data noupdate="True"> -->
+        <record model='account.account' id='account_account_9_1'>
+                <field name='code'>1112020</field>
+                <field name='reconcile'>False</field>
+                <field name='user_type' ref="account.data_account_type_bank"/>
+                <field name='type'>liquidity</field>
+                <field name="company_id" ref="base.main_company"/>
+                <field name='parent_id' ref="sipreco_public_budget.account_account_8"/>
+                <field name='name'>Banco Municipal Cuenta Corriente - Cta B</field>
+        </record>
+
+    </data>
+</openerp>

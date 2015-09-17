@@ -32,7 +32,7 @@
 
     <!-- Companies -->
         <record id="base.main_company" model="res.company">
-            <field name="logo" type="base64" file="sipreco_setup_data_tmc/data/logo_TMC.jpg"/>
+            <field name="logo" type="base64" file="sipreco_setup_data_tmc/data/logo_TMC.png"/>
             <field name='currency_id' ref='base.ARS'/>
             <field name="use_argentinian_localization" eval="True"/>
         </record>

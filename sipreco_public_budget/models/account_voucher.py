@@ -80,9 +80,15 @@ class account_voucher(models.Model):
         show_print_receipt_button = False
         not_handed_checks = self.issued_check_ids.filtered(
             lambda r: r.state not in ('handed', 'returned', 'debited'))
-        if self.state == 'posted' and not not_handed_checks:
+        # Se anula por ahora la validación de cheques entregados para imprimir recibo
+        # por potenciales dificultades para imprimir al momento de entregar el cheque
+        # if self.state == 'posted' and not not_handed_checks:
+        #     show_print_receipt_button = True
+        # self.show_print_receipt_button = show_print_receipt_button
+        if self.state == 'posted':
             show_print_receipt_button = True
         self.show_print_receipt_button = show_print_receipt_button
+
 
     @api.one
     @api.depends('payment_base_date', 'payment_days')

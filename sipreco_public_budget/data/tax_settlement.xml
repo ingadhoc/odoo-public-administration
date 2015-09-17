@@ -38,7 +38,7 @@
 
         <!-- ret/per otrs -->
         <record id="journal_ret_per_varias_settlement" model="account.journal">
-            <field name="name">Liquidacion Ret/Perc Varias Aplicadas</field>
+            <field name="name">Liquidacion Ret/Perc SIJP/Varias Aplicadas</field>
             <field name="company_id" ref="base.main_company"/>
             <field name="code">LRVA</field>
             <field name="type">tax_settlement</field>
