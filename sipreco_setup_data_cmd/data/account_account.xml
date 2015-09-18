@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
-    <data>
-    <!-- <data noupdate="True"> -->
+    <data noupdate="True">
         <record model='account.account' id='account_account_9_1'>
                 <field name='code'>1112020</field>
                 <field name='reconcile'>False</field>
