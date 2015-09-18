@@ -16,7 +16,7 @@
                 </form>
                 <!-- because it wont update till we save it we add definitive part tipe in context -->
                  <field name="advance_preventive_line_ids" position="attributes">
-                    <attribute name="context">{'default_definitive_partner_type': definitive_partner_type}</attribute>
+                    <attribute name="context">{'default_definitive_partner_type': definitive_partner_type, 'default_advance_line': 1, 'default_preventive_status': 'confirmed', 'advance_line': 1}</attribute>
                 </field>
                  <field name="preventive_line_ids" position="attributes">
                     <attribute name="context">{'default_definitive_partner_type': definitive_partner_type}</attribute>
