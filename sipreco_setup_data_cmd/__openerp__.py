@@ -25,7 +25,7 @@ Sipreco Set Up Data TMC
         'data/res_users.xml',
         'data/account_account.xml',
         'data/account_journal.xml',
-        'reports/payment_order_report.xml'
+        'reports/payment_order_report.xml',
     ],
     'demo': [
     ],

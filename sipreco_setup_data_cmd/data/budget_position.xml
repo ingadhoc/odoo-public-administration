@@ -16,7 +16,7 @@
             <field name="code">01.01</field>
             <field name="name">Personal Permanente</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_10"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
@@ -25,7 +25,7 @@
             <field name="code">01.05</field>
             <field name="name">Personal No Permanente - Autoridades Superiores, Pers. Legislativo y de Control</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_10"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
@@ -34,7 +34,7 @@
             <field name="code">01.08</field>
             <field name="name">Asistencia Social al personal</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_10"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
@@ -43,7 +43,7 @@
             <field name="code">01.09</field>
             <field name="name">Beneficios y compensaciones</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_10"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
@@ -63,7 +63,7 @@
             <field name="code">02.01</field>
             <field name="name">Productos Alimenticios, Agropecuarios y Forestales</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_60"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
@@ -71,7 +71,7 @@
             <field name="code">02.02</field>
             <field name="name">Textiles y Vestuarios</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_60"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
@@ -79,7 +79,7 @@
             <field name="code">02.03</field>
             <field name="name">Productos de papel, cartón e impresos</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_60"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
@@ -87,7 +87,7 @@
             <field name="code">02.04</field>
             <field name="name">Productos de cuero y caucho</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_60"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
@@ -95,7 +95,7 @@
             <field name="code">02.05</field>
             <field name="name">Productos químicas, combustibles y lubricantes</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_60"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
@@ -103,7 +103,7 @@
             <field name="code">02.06</field>
             <field name="name">Productos minerales no metálicos</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_60"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
@@ -111,7 +111,7 @@
             <field name="code">02.07</field>
             <field name="name">Productos Metálicos</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_60"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
@@ -119,7 +119,7 @@
             <field name="code">02.08</field>
             <field name="name">Minerales</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_60"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
@@ -127,7 +127,7 @@
             <field name="code">02.09</field>
             <field name="name">Otros Bienes de Consumo</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_60"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
@@ -146,7 +146,7 @@
             <field name="code">03.01</field>
             <field name="name">Servicios Básicos</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_160"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
@@ -154,7 +154,7 @@
             <field name="code">03.02</field>
             <field name="name">Alquileres y Derechos</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_160"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
@@ -162,7 +162,7 @@
             <field name="code">03.03</field>
             <field name="name">Mantenimiento, reparación y limpieza de bienes de dominio privado</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_160"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
@@ -170,7 +170,7 @@
             <field name="code">03.04</field>
             <field name="name">Servicios Técnicos y Profesionales</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_160"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
@@ -178,7 +178,7 @@
             <field name="code">03.05</field>
             <field name="name">Servicios comerciales y financieros</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_160"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
@@ -186,7 +186,7 @@
             <field name="code">03.06</field>
             <field name="name">Servicios Públicos Ejecutados por Terceros</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_160"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
@@ -194,7 +194,7 @@
             <field name="code">03.07</field>
             <field name="name">Publicidad y Propaganda</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_160"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
@@ -202,7 +202,7 @@
             <field name="code">03.08</field>
             <field name="name">Impuestos, derechos y tasas, multas y gastos judiciales e indemnizaciones</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_160"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
@@ -210,7 +210,7 @@
             <field name="code">03.09</field>
             <field name="name">Otros Servicios</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_160"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
@@ -218,7 +218,7 @@
             <field name="code">03.99</field>
             <field name="name">Servicios no personales a discriminar</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_160"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
@@ -236,7 +236,7 @@
             <field name="code">04.01</field>
             <field name="name">Bienes Preexistentes</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_270"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
@@ -244,7 +244,7 @@
             <field name="code">04.03</field>
             <field name="name">Maquinaria y Equipo</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_270"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
@@ -252,7 +252,7 @@
             <field name="code">04.05</field>
             <field name="name">Libros, Revistas y otros elementos coleccionables</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_270"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
@@ -260,14 +260,14 @@
             <field name="code">04.08</field>
             <field name="name">Activos Intangibles</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_270"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
 
         <record id="sipreco_public_budget.budg_position_320" model="public_budget.budget_position">
             <field name="code">05</field>
-            <field name="name">BIENES DE USO</field>
+            <field name="name">TRANSFERENCIAS</field>
             <field name="category_id" ref=""/>
             <field name="type">view</field>
             <field name="parent_id" ref=""/>
@@ -277,7 +277,7 @@
             <field name="code">05.01</field>
             <field name="name">Transferencias al Sector Privado para erogaciones corrientes</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_320"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
@@ -285,7 +285,7 @@
             <field name="code">05.05</field>
             <field name="name">Transferencias al Sector Público Provincial para erogaciones corrientes</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_320"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
@@ -293,7 +293,7 @@
             <field name="code">05.06</field>
             <field name="name">Transferencias al Sector Público Provincial para erogaciones de capital</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_320"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
@@ -301,29 +301,1245 @@
             <field name="code">05.07</field>
             <field name="name">Transferencias al Sector Público Municipal para erogaciones corrientes</field>
             <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="type">normal</field>
+            <field name="type">view</field>
             <field name="parent_id" ref="sipreco_public_budget.budg_position_320"/>
             <field name="budget_assignment_allowed" eval="False"/>
         </record>
 
+<!-- incisos -->
 
+        <record id="sipreco_public_budget.budg_position_1000" model="public_budget.budget_position">
+        <field name="code">01.01.01</field>
+        <field name="name">Retribuciones del Cargo</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_20"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
 
+        <record id="sipreco_public_budget.budg_position_1010" model="public_budget.budget_position">
+        <field name="code">01.01.04</field>
+        <field name="name">Sueldo Anual Complementario</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_20"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
 
+        <record id="sipreco_public_budget.budg_position_1020" model="public_budget.budget_position">
+        <field name="code">01.01.06</field>
+        <field name="name">Contribuciones Patronales</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_20"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
 
+        <record id="sipreco_public_budget.budg_position_1030" model="public_budget.budget_position">
+        <field name="code">01.05.01</field>
+        <field name="name">Retribuciones del Cargo</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_30"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
 
+        <record id="sipreco_public_budget.budg_position_1040" model="public_budget.budget_position">
+        <field name="code">01.05.04</field>
+        <field name="name">Sueldo Anual Complementario</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_30"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
 
+        <record id="sipreco_public_budget.budg_position_1050" model="public_budget.budget_position">
+        <field name="code">01.05.06</field>
+        <field name="name">Contribuciones Patronales</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_30"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
 
+        <record id="sipreco_public_budget.budg_position_1060" model="public_budget.budget_position">
+        <field name="code">01.08.01</field>
+        <field name="name">Indemnizaciones P/Licencias No Usufructuadas</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_40"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
 
+        <record id="sipreco_public_budget.budg_position_1070" model="public_budget.budget_position">
+        <field name="code">01.08.02</field>
+        <field name="name">Movilidad Discapacitados Ord.5819/94</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_40"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
 
+        <record id="sipreco_public_budget.budg_position_1080" model="public_budget.budget_position">
+        <field name="code">01.08.03</field>
+        <field name="name">Adelantos Gastos Defensa Judicial</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_40"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
 
+        <record id="sipreco_public_budget.budg_position_1090" model="public_budget.budget_position">
+        <field name="code">01.08.04</field>
+        <field name="name">Gastos por Accidentes de Trabajo</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_40"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
 
+        <record id="sipreco_public_budget.budg_position_1100" model="public_budget.budget_position">
+        <field name="code">01.09.01</field>
+        <field name="name">Indemnizaciones P/Accidentes de Trabajo</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_50"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
 
+        <record id="sipreco_public_budget.budg_position_1110" model="public_budget.budget_position">
+        <field name="code">01.09.02</field>
+        <field name="name">Indemnizaciones P/Fallecimiento</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_50"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
 
+        <record id="sipreco_public_budget.budg_position_1120" model="public_budget.budget_position">
+        <field name="code">01.09.03</field>
+        <field name="name">Indemnizaciones P/Invalidez</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_50"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
 
+        <record id="sipreco_public_budget.budg_position_1130" model="public_budget.budget_position">
+        <field name="code">01.09.04</field>
+        <field name="name">Indemnizaciones P/Despido</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_50"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
 
+        <record id="sipreco_public_budget.budg_position_1140" model="public_budget.budget_position">
+        <field name="code">01.09.05</field>
+        <field name="name">Indemnizaciones Varias</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_50"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
 
+        <record id="sipreco_public_budget.budg_position_1150" model="public_budget.budget_position">
+        <field name="code">02.01.01</field>
+        <field name="name">Alimentos Para Personas</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_70"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
 
+        <record id="sipreco_public_budget.budg_position_1160" model="public_budget.budget_position">
+        <field name="code">02.01.04</field>
+        <field name="name">Productos Agroforestales</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_70"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
 
+        <record id="sipreco_public_budget.budg_position_1170" model="public_budget.budget_position">
+        <field name="code">02.01.05</field>
+        <field name="name">Madera, Corcho y sus Manufacturas</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_70"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1180" model="public_budget.budget_position">
+        <field name="code">02.01.09</field>
+        <field name="name">Otros No Especificados</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_70"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1190" model="public_budget.budget_position">
+        <field name="code">02.02.01</field>
+        <field name="name">Hilados y Telas</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_80"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1200" model="public_budget.budget_position">
+        <field name="code">02.02.02</field>
+        <field name="name">Prendas de Vestir</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_80"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1210" model="public_budget.budget_position">
+        <field name="code">02.02.03</field>
+        <field name="name">Confecciones Textiles</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_80"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1220" model="public_budget.budget_position">
+        <field name="code">02.02.09</field>
+        <field name="name">Otros No Especificados</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_80"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1230" model="public_budget.budget_position">
+        <field name="code">02.03.01</field>
+        <field name="name">Papel de Escritorio</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_90"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1240" model="public_budget.budget_position">
+        <field name="code">02.03.02</field>
+        <field name="name">Papel de Computación</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_90"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1250" model="public_budget.budget_position">
+        <field name="code">02.03.03</field>
+        <field name="name">Otros Artículos de Papel o Cartón</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_90"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1260" model="public_budget.budget_position">
+        <field name="code">02.03.04</field>
+        <field name="name">Libros, Revistas y Periódicos</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_90"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1270" model="public_budget.budget_position">
+        <field name="code">02.03.05</field>
+        <field name="name">Textos de Enseñanza</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_90"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1280" model="public_budget.budget_position">
+        <field name="code">02.03.06</field>
+        <field name="name">Especies Timbradas y Valores</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_90"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1290" model="public_budget.budget_position">
+        <field name="code">02.03.09</field>
+        <field name="name">Otros No Especificados</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_90"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1300" model="public_budget.budget_position">
+        <field name="code">02.04.01</field>
+        <field name="name">Cueros y Pieles</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_100"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1310" model="public_budget.budget_position">
+        <field name="code">02.04.02</field>
+        <field name="name">Artículos de Cuero</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_100"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1320" model="public_budget.budget_position">
+        <field name="code">02.04.03</field>
+        <field name="name">Artículos de Caucho</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_100"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1330" model="public_budget.budget_position">
+        <field name="code">02.04.04</field>
+        <field name="name">Cubiertas y Cámaras de Aire</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_100"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1340" model="public_budget.budget_position">
+        <field name="code">02.04.09</field>
+        <field name="name">Otros No Especificados</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_100"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1350" model="public_budget.budget_position">
+        <field name="code">02.05.01</field>
+        <field name="name">Compuestos Químicos</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_110"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1360" model="public_budget.budget_position">
+        <field name="code">02.05.02</field>
+        <field name="name">Productos Farmacéuticos y Medicinales</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_110"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1370" model="public_budget.budget_position">
+        <field name="code">02.05.03</field>
+        <field name="name">Abonos y Fertilizantes</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_110"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1380" model="public_budget.budget_position">
+        <field name="code">02.05.04</field>
+        <field name="name">Insecticidas, Fumigantes y Otros</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_110"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1390" model="public_budget.budget_position">
+        <field name="code">02.05.05</field>
+        <field name="name">Tintas, Pinturas y Colorantes</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_110"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1400" model="public_budget.budget_position">
+        <field name="code">02.05.06</field>
+        <field name="name">Combustibles y Lubricantes</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_110"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1410" model="public_budget.budget_position">
+        <field name="code">02.05.07</field>
+        <field name="name">Específicos Veterinarios</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_110"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1420" model="public_budget.budget_position">
+        <field name="code">02.05.08</field>
+        <field name="name">Productos de Material Plástico</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_110"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1430" model="public_budget.budget_position">
+        <field name="code">02.05.09</field>
+        <field name="name">Otros No Especificados</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_110"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1440" model="public_budget.budget_position">
+        <field name="code">02.06.01</field>
+        <field name="name">Productos de Arcilla y Cerámica</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_120"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1450" model="public_budget.budget_position">
+        <field name="code">02.06.02</field>
+        <field name="name">Productos de Vidrio</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_120"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1460" model="public_budget.budget_position">
+        <field name="code">02.06.03</field>
+        <field name="name">Productos de Loza y Porcelana</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_120"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1470" model="public_budget.budget_position">
+        <field name="code">02.06.04</field>
+        <field name="name">Productos de Cemento, Asbesto y Yeso</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_120"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1480" model="public_budget.budget_position">
+        <field name="code">02.06.05</field>
+        <field name="name">Cemento, Cal y Yeso</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_120"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1490" model="public_budget.budget_position">
+        <field name="code">02.06.09</field>
+        <field name="name">Otros No Especificados</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_120"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1500" model="public_budget.budget_position">
+        <field name="code">02.07.01</field>
+        <field name="name">Productos Ferrosos</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_130"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1510" model="public_budget.budget_position">
+        <field name="code">02.07.02</field>
+        <field name="name">Productos No Ferrosos</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_130"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1520" model="public_budget.budget_position">
+        <field name="code">02.07.03</field>
+        <field name="name">Material de Guerra</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_130"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1530" model="public_budget.budget_position">
+        <field name="code">02.07.04</field>
+        <field name="name">Estructuras Metálicas Acabadas</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_130"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1540" model="public_budget.budget_position">
+        <field name="code">02.07.05</field>
+        <field name="name">Herramientas Menores</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_130"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1550" model="public_budget.budget_position">
+        <field name="code">02.07.09</field>
+        <field name="name">Otros No Especificados</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_130"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1560" model="public_budget.budget_position">
+        <field name="code">02.08.04</field>
+        <field name="name">Piedra, Arcilla y Arena</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_140"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1570" model="public_budget.budget_position">
+        <field name="code">02.08.09</field>
+        <field name="name">Otros No Especificados</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_140"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1580" model="public_budget.budget_position">
+        <field name="code">02.09.01</field>
+        <field name="name">Elementos de Limpieza</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_150"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1590" model="public_budget.budget_position">
+        <field name="code">02.09.02</field>
+        <field name="name">Utiles de Escritorio, Oficina y Enseñanza</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_150"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1600" model="public_budget.budget_position">
+        <field name="code">02.09.03</field>
+        <field name="name">Utiles y Materiales Eléctricos</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_150"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1610" model="public_budget.budget_position">
+        <field name="code">02.09.04</field>
+        <field name="name">Utensilios de Cocina y Comedor</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_150"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1620" model="public_budget.budget_position">
+        <field name="code">02.09.05</field>
+        <field name="name">Utiles Menores Médicos, Quirúrgicos y de Lab.</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_150"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1630" model="public_budget.budget_position">
+        <field name="code">02.09.06</field>
+        <field name="name">Repuestos y Accesorios</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_150"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1640" model="public_budget.budget_position">
+        <field name="code">02.09.09</field>
+        <field name="name">Otros No Especificados</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_150"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1650" model="public_budget.budget_position">
+        <field name="code">03.01.01</field>
+        <field name="name">Energía Eléctrica</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_170"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1660" model="public_budget.budget_position">
+        <field name="code">03.01.02</field>
+        <field name="name">Agua y Servicios Sanitarios</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_170"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1670" model="public_budget.budget_position">
+        <field name="code">03.01.03</field>
+        <field name="name">Gas</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_170"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1680" model="public_budget.budget_position">
+        <field name="code">03.01.04</field>
+        <field name="name">Teléfonos, Telex y Telefax</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_170"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1690" model="public_budget.budget_position">
+        <field name="code">03.01.05</field>
+        <field name="name">Correos y Telégrafos</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_170"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1700" model="public_budget.budget_position">
+        <field name="code">03.01.09</field>
+        <field name="name">Otros No Especificados</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_170"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1710" model="public_budget.budget_position">
+        <field name="code">03.02.01</field>
+        <field name="name">Alquiler de Edificios y Locales</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_180"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1720" model="public_budget.budget_position">
+        <field name="code">03.02.02</field>
+        <field name="name">Alquiler de Máquinas, Equipo y Medios de Transporte</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_180"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1730" model="public_budget.budget_position">
+        <field name="code">03.02.03</field>
+        <field name="name">Alquiler de Equipos de Computación</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_180"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1740" model="public_budget.budget_position">
+        <field name="code">03.02.04</field>
+        <field name="name">Alquiler de Fotocopiadoras</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_180"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1750" model="public_budget.budget_position">
+        <field name="code">03.02.05</field>
+        <field name="name">Arrendamiento de Tierras y Terrenos</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_180"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1760" model="public_budget.budget_position">
+        <field name="code">03.02.06</field>
+        <field name="name">Derechos de Bienes Intangibles</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_180"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1770" model="public_budget.budget_position">
+        <field name="code">03.02.09</field>
+        <field name="name">Otros No Especificados</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_180"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1780" model="public_budget.budget_position">
+        <field name="code">03.03.01</field>
+        <field name="name">Mantenimiento y Reparación de Edificios y Locales</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_190"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1790" model="public_budget.budget_position">
+        <field name="code">03.03.02</field>
+        <field name="name">Mantenimiento y Reparación de Vehículos</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_190"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1800" model="public_budget.budget_position">
+        <field name="code">03.03.03</field>
+        <field name="name">Mantenimiento y Reparación de Maquinaria y Equipo</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_190"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1810" model="public_budget.budget_position">
+        <field name="code">03.03.04</field>
+        <field name="name">Limpieza, Aseo y Fumigación de Edificios y Locales</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_190"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1820" model="public_budget.budget_position">
+        <field name="code">03.03.09</field>
+        <field name="name">Otros No Especificados</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_190"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1830" model="public_budget.budget_position">
+        <field name="code">03.04.01</field>
+        <field name="name">Estudios, Investigación y Proyectos de Factibilidad</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_200"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1840" model="public_budget.budget_position">
+        <field name="code">03.04.02</field>
+        <field name="name">Médicos, Sanitarios y Asistenciales</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_200"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1850" model="public_budget.budget_position">
+        <field name="code">03.04.03</field>
+        <field name="name">Jurídicos</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_200"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1860" model="public_budget.budget_position">
+        <field name="code">03.04.04</field>
+        <field name="name">Contabilidad, Auditoría y Administración</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_200"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1870" model="public_budget.budget_position">
+        <field name="code">03.04.05</field>
+        <field name="name">De Capacitación y Educación</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_200"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1880" model="public_budget.budget_position">
+        <field name="code">03.04.06</field>
+        <field name="name">De Informática y Sistemas de Información</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_200"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1890" model="public_budget.budget_position">
+        <field name="code">03.04.07</field>
+        <field name="name">De Cultura y Turismo</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_200"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1900" model="public_budget.budget_position">
+        <field name="code">03.04.09</field>
+        <field name="name">Otros No Especificados</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_200"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1910" model="public_budget.budget_position">
+        <field name="code">03.05.01</field>
+        <field name="name">Transporte</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_210"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1920" model="public_budget.budget_position">
+        <field name="code">03.05.03</field>
+        <field name="name">Imprenta, Publicaciones y Reproducciones</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_210"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1930" model="public_budget.budget_position">
+        <field name="code">03.05.04</field>
+        <field name="name">Primas y Gastos de Seguros</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_210"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1940" model="public_budget.budget_position">
+        <field name="code">03.05.05</field>
+        <field name="name">Comisiones y Gastos Bancarios</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_210"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1950" model="public_budget.budget_position">
+        <field name="code">03.05.09</field>
+        <field name="name">Otros No Especificados</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_210"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1960" model="public_budget.budget_position">
+        <field name="code">03.07.01</field>
+        <field name="name">Publicidad y Propaganda</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_230"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1970" model="public_budget.budget_position">
+        <field name="code">03.08.01</field>
+        <field name="name">Impuestos Directos e Indirectos</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_240"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1980" model="public_budget.budget_position">
+        <field name="code">03.08.02</field>
+        <field name="name">Tasas y Derechos</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_240"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_1990" model="public_budget.budget_position">
+        <field name="code">03.08.03</field>
+        <field name="name">Multas, Recargos e Intereses P/Mora e Indemniz.</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_240"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2000" model="public_budget.budget_position">
+        <field name="code">03.08.05</field>
+        <field name="name">Gastos Judiciales</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_240"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2010" model="public_budget.budget_position">
+        <field name="code">03.08.09</field>
+        <field name="name">Otros No Especificados</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_240"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2020" model="public_budget.budget_position">
+        <field name="code">03.09.01</field>
+        <field name="name">Servicio de Ceremonial y Protocolo</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_250"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2030" model="public_budget.budget_position">
+        <field name="code">03.09.02</field>
+        <field name="name">Gastos Reservados</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_250"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2040" model="public_budget.budget_position">
+        <field name="code">03.09.03</field>
+        <field name="name">Servicios de Vigilancia</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_250"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2050" model="public_budget.budget_position">
+        <field name="code">03.09.04</field>
+        <field name="name">Viáticos y Movilidad</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_250"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2060" model="public_budget.budget_position">
+        <field name="code">03.09.05</field>
+        <field name="name">Cursos y Congresos</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_250"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2070" model="public_budget.budget_position">
+        <field name="code">03.09.06</field>
+        <field name="name">Reconocimiento Gastos Procuradores</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_250"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2080" model="public_budget.budget_position">
+        <field name="code">03.09.07</field>
+        <field name="name">Premios por Concursos y Otros</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_250"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2090" model="public_budget.budget_position">
+        <field name="code">03.09.09</field>
+        <field name="name">Otros No Especificados</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_250"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2100" model="public_budget.budget_position">
+        <field name="code">03.99.10</field>
+        <field name="name">Servicios No Personales a Discriminar</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_260"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2110" model="public_budget.budget_position">
+        <field name="code">04.01.01</field>
+        <field name="name">Tierras y Terrenos</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_280"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2120" model="public_budget.budget_position">
+        <field name="code">04.01.02</field>
+        <field name="name">Edificios e instalaciones</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_280"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2130" model="public_budget.budget_position">
+        <field name="code">04.01.03</field>
+        <field name="name">Otros Bienes Preexistentes</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_280"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2140" model="public_budget.budget_position">
+        <field name="code">04.03.02</field>
+        <field name="name">Equipo de Transporte, Tracción y Elevación</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_290"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2150" model="public_budget.budget_position">
+        <field name="code">04.03.04</field>
+        <field name="name">Equipo de Comunicación y Señalamiento</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_290"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2160" model="public_budget.budget_position">
+        <field name="code">04.03.05</field>
+        <field name="name">Equipo Educacional y Recreativo</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_290"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2170" model="public_budget.budget_position">
+        <field name="code">04.03.06</field>
+        <field name="name">Equipo de Computación</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_290"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2180" model="public_budget.budget_position">
+        <field name="code">04.03.07</field>
+        <field name="name">Equipamiento y Mobiliario</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_290"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2190" model="public_budget.budget_position">
+        <field name="code">04.03.08</field>
+        <field name="name">Herramientas y Repuestos Mayores</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_290"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2200" model="public_budget.budget_position">
+        <field name="code">04.03.09</field>
+        <field name="name">Otras Maquinarias y Equipos Sin Discriminar</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_290"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2210" model="public_budget.budget_position">
+        <field name="code">04.05.01</field>
+        <field name="name">Colecciones y Elem. P/Bibliotecas y Mapotecas</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_300"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2220" model="public_budget.budget_position">
+        <field name="code">04.05.02</field>
+        <field name="name">Colecciones y Elementos P/Videotecas</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_300"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2230" model="public_budget.budget_position">
+        <field name="code">04.05.04</field>
+        <field name="name">Otros Elementos Coleccionables No Especific.</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_300"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2240" model="public_budget.budget_position">
+        <field name="code">04.08.01</field>
+        <field name="name">Software y Licencias de Computación</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_310"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2250" model="public_budget.budget_position">
+        <field name="code">04.08.02</field>
+        <field name="name">Sistemas y Desarrollos Informáticos</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_310"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2260" model="public_budget.budget_position">
+        <field name="code">04.08.09</field>
+        <field name="name">Otros Activos Intangibles</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_310"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2270" model="public_budget.budget_position">
+        <field name="code">05.01.03</field>
+        <field name="name">Aportes Sociales y Culturales a Personas</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_330"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2280" model="public_budget.budget_position">
+        <field name="code">05.01.04</field>
+        <field name="name">Transf. a Inst.Enseñanza, Act.Científicas y/o Académicas</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_330"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2290" model="public_budget.budget_position">
+        <field name="code">05.01.05</field>
+        <field name="name">Transf.a Inst.Cult.y Soc.Sin Fines de Lucro</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_330"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2300" model="public_budget.budget_position">
+        <field name="code">05.01.06</field>
+        <field name="name">Transferencias a Cooperativas</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_330"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2310" model="public_budget.budget_position">
+        <field name="code">05.01.07</field>
+        <field name="name">Transferencias a Empresas Privadas y Organizaciones Intermedias</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_330"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2320" model="public_budget.budget_position">
+        <field name="code">05.01.08</field>
+        <field name="name">Becas</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_330"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2330" model="public_budget.budget_position">
+        <field name="code">05.01.09</field>
+        <field name="name">Pasantías</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_330"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2340" model="public_budget.budget_position">
+        <field name="code">05.05.06</field>
+        <field name="name">A Otras Instit. del Sector Público Provincial</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_340"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2350" model="public_budget.budget_position">
+        <field name="code">05.06.06</field>
+        <field name="name">A Otras Instit. del Sector Público Provincial</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_350"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.budg_position_2360" model="public_budget.budget_position">
+        <field name="code">05.07.00</field>
+        <field name="name">Transf.al Sector Público Munic.P/E.Corrientes</field>
+        <field name="category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+        <field name="type">normal</field>
+        <field name="parent_id" ref="sipreco_public_budget.budg_position_360"/>
+        <field name="budget_assignment_allowed" eval="False"/>
+        </record>
 
 
     </data>
