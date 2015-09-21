@@ -32,6 +32,7 @@
         'data/position_category.xml',
         'data/position_exc_restrictions.xml',
         'data/account_account.xml',
+        'data/journal_sequence.xml',
         'data/account_journal.xml',
         'data/account_checbook.xml',
         'data/taxes.xml',

@@ -13,6 +13,7 @@
             <field name="entry_posted" eval="True"/>
             <field name="update_posted" eval="True"/>
             <field name="company_id" ref="base.main_company"/>
+            <field name="sequence_id" ref="sipreco_public_budget.general_journal_sequence"/>
         </record>
         <record id="sipreco_public_budget.check_journal_2" model="account.journal">
             <field name="name">Cheques - Banco Municipal - Cta B</field>
@@ -25,6 +26,7 @@
             <field name="entry_posted" eval="True"/>
             <field name="update_posted" eval="True"/>
             <field name="company_id" ref="base.main_company"/>
+            <field name="sequence_id" ref="sipreco_public_budget.general_journal_sequence"/>
         </record>
 
     </data>
