@@ -12,6 +12,7 @@
             <field name="partner_id" ref="l10n_ar_invoice.partner_afip"/>
             <field name="tax_code_id" ref="ri_tax_code_ret_per_ganancias_aplicada"/>
             <field name="default_debit_account_id" ref="account_account_60"/>
+            <field name="sequence_id" ref="sipreco_public_budget.general_journal_sequence"/>
         </record>
 
         <!-- ret/per sf iibb -->
@@ -23,6 +24,7 @@
             <field name="partner_id" ref="res_partner_api"/>
             <field name="tax_code_id" ref="ri_tax_code_ret_per_iibb_sf_aplicada"/>
             <field name="default_debit_account_id" ref="account_account_62"/>
+            <field name="sequence_id" ref="sipreco_public_budget.general_journal_sequence"/>
         </record>
 
         <!-- ret/per drei -->
@@ -34,6 +36,7 @@
             <field name="partner_id" ref="res_partner_muni_rosario"/>
             <field name="tax_code_id" ref="ri_tax_code_ret_drei_rosario"/>
             <field name="default_debit_account_id" ref="account_account_64"/>
+            <field name="sequence_id" ref="sipreco_public_budget.general_journal_sequence"/>
         </record>
 
         <!-- ret/per otrs -->
@@ -45,6 +48,7 @@
             <field name="partner_id" ref="res_partner_muni_rosario"/>
             <field name="tax_code_id" ref="ri_tax_code_ret_otras_view"/>
             <field name="default_debit_account_id" ref="account_account_66"/>
+            <field name="sequence_id" ref="sipreco_public_budget.general_journal_sequence"/>
         </record>
 
     </data>

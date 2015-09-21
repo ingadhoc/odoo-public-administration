@@ -25,6 +25,7 @@
             <field name="entry_posted" eval="True"/>
             <field name="update_posted" eval="True"/>
             <field name="company_id" ref="base.main_company"/>
+            <field name="sequence_id" ref="sipreco_public_budget.general_journal_sequence"/>
         </record>
         <record id="sipreco_public_budget.check_journal" model="account.journal">
             <field name="name">Cheques - Banco Municipal - Cta A</field>
@@ -36,6 +37,7 @@
             <field name="entry_posted" eval="True"/>
             <field name="update_posted" eval="True"/>
             <field name="company_id" ref="base.main_company"/>
+            <field name="sequence_id" ref="sipreco_public_budget.general_journal_sequence"/>
         </record>
         <record id="sipreco_public_budget.expenses_journal" model="account.journal">
             <field name="name">Facturas de Compra</field>
@@ -45,6 +47,7 @@
             <field name="entry_posted" eval="True"/>
             <field name="update_posted" eval="True"/>
             <field name="company_id" ref="base.main_company"/>
+            <field name="sequence_id" ref="sipreco_public_budget.general_journal_sequence"/>
         </record>
         <record id="sipreco_public_budget.refund_expenses_journal" model="account.journal">
             <field name="name">Notas de Crédito Compras</field>
@@ -54,6 +57,7 @@
             <field name="entry_posted" eval="True"/>
             <field name="update_posted" eval="True"/>
             <field name="company_id" ref="base.main_company"/>
+            <field name="sequence_id" ref="sipreco_public_budget.general_journal_sequence"/>
         </record>
         <record id="sipreco_public_budget.other_documents" model="account.journal">
             <field name="name">Otros Comprobantes</field>
@@ -63,6 +67,7 @@
             <field name="entry_posted" eval="True"/>
             <field name="update_posted" eval="True"/>
             <field name="company_id" ref="base.main_company"/>
+            <field name="sequence_id" ref="sipreco_public_budget.general_journal_sequence"/>
         </record>
         <record id="sipreco_public_budget.opening_journal" model="account.journal">
             <field name="name">Apertura y Cierre</field>
@@ -72,6 +77,7 @@
             <field name="entry_posted" eval="True"/>
             <field name="update_posted" eval="True"/>
             <field name="company_id" ref="base.main_company"/>
+            <field name="sequence_id" ref="sipreco_public_budget.general_journal_sequence"/>
         </record>
         <record id="sipreco_public_budget.miscellaneous_journal" model="account.journal">
             <field name="name">Varios</field>
@@ -81,6 +87,7 @@
             <field name="entry_posted" eval="True"/>
             <field name="update_posted" eval="True"/>
             <field name="company_id" ref="base.main_company"/>
+            <field name="sequence_id" ref="sipreco_public_budget.general_journal_sequence"/>
         </record>
 
     </data>
