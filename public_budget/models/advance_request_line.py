@@ -84,27 +84,12 @@ class advance_request_line(models.Model):
             voucher_data = vouchers.onchange_partner_id(
                 partner.id, journal.id, 0.0,
                 currency.id, 'payment', False)
-            print 'voucher_data', voucher_data
-            print 'journal', journal
-            print 'currency', currency
-            # we dont want to pay anything
-            # line_cr_ids = [
-            #     (0, 0, vals) for vals in voucher_data['value'].get(
-            #         'line_cr_ids', False) if isinstance(vals, dict)]
-            # line_dr_ids = [
-            #     (0, 0, vals) for vals in voucher_data['value'].get(
-            #         'line_dr_ids', False) if isinstance(vals, dict)]
             voucher_vals = {
                 'type': 'payment',
-                # 'receiptbook_id': self.budget_id.receiptbook_id.id,
-                # 'expedient_id': self.expedient_id.id,
                 'partner_id': partner.id,
-                # 'transaction_id': self.id,
                 'journal_id': journal.id,
                 'advance_amount': amount,
                 'account_id': voucher_data['value'].get('account_id', False),
-                # 'line_cr_ids': line_cr_ids,
-                # 'line_dr_ids': line_dr_ids,
                 }
             voucher = vouchers.create(voucher_vals)
             line.voucher_id = voucher.id
