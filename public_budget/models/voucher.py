@@ -121,7 +121,6 @@ class account_voucher(models.Model):
             elif voucher.advance_request_line_ids:
                 request = (
                     voucher.advance_request_line_ids[0].advance_request_id)
-                print 'request.type_id.account_id', request.type_id.account_id
                 res['account_id'] = request.type_id.account_id.id
         return res
 
