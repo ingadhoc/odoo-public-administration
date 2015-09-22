@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Sipreco Project',
-    'version': '8.0.0.0.0',
+    'version': '8.0.1.1.0',
     'category': 'Accounting',
     'sequence': 14,
     'summary': '',
@@ -39,6 +39,7 @@ Modulos principales del proyecto:
         'account_move_line_no_filter',
         'sipreco_public_budget',
         'web_sheet_full_width',
+        'account_partner_balance',
         'account_cancel',
         'account_voucher_multic_fix',
         'account_multic_fix',

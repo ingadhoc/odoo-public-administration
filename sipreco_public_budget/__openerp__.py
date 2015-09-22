@@ -28,10 +28,10 @@
         'data/ir_parameters.xml',
         'data/expedient_category.xml',
         'data/expedient_founder.xml',
-        'data/transaction_type.xml',
         'data/position_category.xml',
         'data/position_exc_restrictions.xml',
         'data/account_account.xml',
+        'data/transaction_type.xml',
         'data/journal_sequence.xml',
         'data/account_journal.xml',
         'data/account_checbook.xml',
@@ -42,6 +42,7 @@
         # 'data/account_fiscal_year.xml',
         'data/res_partner.xml',
         'data/tax_settlement.xml',
+        'data/advance_request_type.xml',
         'security/security.xml',
     ],
     'demo': [
@@ -70,6 +71,8 @@
         'demo/public_budget.remit.csv',
         'demo/public_budget.budget_modification.csv',
         'demo/public_budget.budget_modification_detail.csv',
+        'demo/advance_request_type.xml',
+        'demo/advance_request.xml',
     ],
     'depends': [
         'l10n_ar_invoice',
@@ -91,4 +94,4 @@ Customizaciones especificas al modulo public_budget para SIPRECO
     'installable': True,
     'name': 'Public Budget Sipreco Customizations',
     'test': [],
-    'version': '8.0.0.1.0'}
+    'version': '8.0.0.2.0'}

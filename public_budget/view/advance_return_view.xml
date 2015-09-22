@@ -6,10 +6,16 @@
             <field name="name">public_budget.advance_return.select</field>
             <field name="model">public_budget.advance_return</field>
             <field name="arch" type="xml">
-                <search string="advance_return">
+                <search string="Advance Return">
+                    <field name="name"/>
                     <field name="date"/>
                     <field name="user_id"/>
+                    <field name="type_id"/>
+                    <field name="state"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
                     <group expand="0" string="Group By">
+                        <field name="type_id" string="Type" context="{'group_by':'type_id'}"/>
+                        <field name="state" string="State" context="{'group_by':'state'}"/>
                     </group>
                 </search>
             </field>
@@ -20,19 +26,21 @@
             <field name="name">public_budget.advance_return.form</field>
             <field name="model">public_budget.advance_return</field>
             <field name="arch" type="xml">
-                <form string="advance_return">
+                <form string="Advance Return">
                     <header>
-                        <button name="sgn_confirm"
+                        <button name="action_confirm"
                             states="draft"
                             string="Confirm"
+                            type="object"
                             class="oe_highlight"/>
                         <button name="action_cancel_draft"
-                            type="object"
                             states="cancel"
+                            type="object"
                             string="To Draft"/>
-                        <button name="sgn_cancel"
+                        <button name="action_cancel"
                             states="confirmed,draft"
                             string="Cancel"
+                            type="object"
                             groups="base.group_no_one"/>
                         <field name="state" widget="statusbar"
                             statusbar_colors='{}'/>
@@ -41,11 +49,23 @@
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
                      <group>
+                        <field name="name"/> 
+                        <field name="type_id"/> 
                         <field name="date"/> 
                         <field name="user_id"/> 
                         <field name="move_id"/> 
-                        <field name="return_line_ids"/> 
+                        <field name="company_id" groups="base.group_multi_company"/>
                      </group>
+                    <field name="return_line_ids"> 
+                        <tree string="Advance Return Line"
+                            editable="top"
+                            >
+                            <field name="employee_id"/>
+                            <field name="debt_amount" states="draft" sum="Total"/>
+                            <field name="returned_amount" sum="Total"/>
+                            <field name="state" invisible="1"/>
+                        </tree>
+                    </field>
                     </sheet>
 
                 </form>
@@ -57,11 +77,14 @@
             <field name="name">public_budget.advance_return.tree</field>
             <field name="model">public_budget.advance_return</field>
             <field name="arch" type="xml">
-                <tree string="advance_return"
+                <tree string="Advance Return"
                     colors="grey:state=='cancelled';blue:state in (u'draft',);black:state in (u'confirmed',);red:state in ()"
                     >
+                    <field name="name"/> 
+                    <field name="type_id"/> 
                     <field name="date"/>
                     <field name="user_id"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
                     <field name="state"/>
                 </tree>
             </field>

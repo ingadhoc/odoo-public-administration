@@ -55,7 +55,6 @@
                         <field name="id" invisible="True"/> 
                         <field name="user_location_ids" invisible="True"/> 
                         <field name="type_with_advance_payment" invisible="1"/>
-                        <field name="type_with_salary_advance" invisible="1"/>
                         <!-- si no lo agregamos aca no refresca en voucher, raro... -->
                         <field name="supplier_ids" invisible="1"/>
                         <group>
@@ -104,9 +103,6 @@
                                 or 
                                 <button class="oe_link" string="Mass Invoice Create" states="open" type="action" name="%(public_budget.action_definitive_mass_invoice_create)d"/>
                                 <field name="invoice_ids" nolabel="1"/>
-                            </page>
-                            <page string="Salary Advance Returns" attrs="{'invisible':[('type_with_salary_advance','=',False)]}">
-                                <field name="advance_return_ids"/>
                             </page>
                             <page string="Payment Orders" attrs="{'invisible':[('type_with_advance_payment','=',True)]}">
                                 <button class="oe_link" string="Create Payment Order" states="open" type="object" name="action_new_voucher"/>

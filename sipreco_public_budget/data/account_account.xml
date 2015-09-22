@@ -3,7 +3,7 @@
     <data noupdate="1">
         <record model='account.account' id='account_account_0'>
                 <field name='code'>0</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -11,7 +11,7 @@
         </record>
         <record model='account.account' id='account_account_1'>
                 <field name='code'>1</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -20,7 +20,7 @@
         </record>
         <record model='account.account' id='account_account_2'>
                 <field name='code'>11</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -29,7 +29,7 @@
         </record>
         <record model='account.account' id='account_account_3'>
                 <field name='code'>111</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -38,7 +38,7 @@
         </record>
         <record model='account.account' id='account_account_4'>
                 <field name='code'>1111</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -47,7 +47,7 @@
         </record>
         <record model='account.account' id='account_account_5'>
                 <field name='code'>1111010</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_cash"/>
                 <field name='type'>liquidity</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -56,7 +56,7 @@
         </record>
         <record model='account.account' id='account_account_6'>
                 <field name='code'>1111030</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_receivable"/>
                 <field name='type'>receivable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -65,7 +65,7 @@
         </record>
         <record model='account.account' id='account_account_7'>
                 <field name='code'>1111040</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_cash"/>
                 <field name='type'>liquidity</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -74,7 +74,7 @@
         </record>
         <record model='account.account' id='account_account_8'>
                 <field name='code'>1112</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -83,7 +83,7 @@
         </record>
         <record model='account.account' id='account_account_9'>
                 <field name='code'>1112010</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_bank"/>
                 <field name='type'>liquidity</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -92,7 +92,7 @@
         </record>
         <record model='account.account' id='account_account_10'>
                 <field name='code'>1113</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -101,7 +101,7 @@
         </record>
         <record model='account.account' id='account_account_11'>
                 <field name='code'>11300010</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_receivable"/>
                 <field name='type'>receivable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -110,7 +110,7 @@
         </record>
         <record model='account.account' id='account_account_12'>
                 <field name='code'>11300020</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_receivable"/>
                 <field name='type'>receivable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -119,7 +119,7 @@
         </record>
         <record model='account.account' id='account_account_13'>
                 <field name='code'>11300030</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_receivable"/>
                 <field name='type'>receivable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -128,7 +128,7 @@
         </record>
         <record model='account.account' id='account_account_14'>
                 <field name='code'>11300040</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_receivable"/>
                 <field name='type'>receivable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -137,7 +137,7 @@
         </record>
         <record model='account.account' id='account_account_15'>
                 <field name='code'>11300050</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_receivable"/>
                 <field name='type'>receivable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -146,7 +146,7 @@
         </record>
         <record model='account.account' id='account_account_16'>
                 <field name='code'>11300060</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_receivable"/>
                 <field name='type'>receivable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -155,7 +155,7 @@
         </record>
         <record model='account.account' id='account_account_17'>
                 <field name='code'>11300070</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_receivable"/>
                 <field name='type'>receivable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -164,7 +164,7 @@
         </record>
         <record model='account.account' id='account_account_18'>
                 <field name='code'>11300080</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_receivable"/>
                 <field name='type'>receivable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -173,16 +173,34 @@
         </record>
         <record model='account.account' id='account_account_19'>
                 <field name='code'>11300090</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_receivable"/>
                 <field name='type'>receivable</field>
                 <field name="company_id" ref="base.main_company"/>
                 <field name='parent_id' ref="account_account_10"/>
                 <field name='name'>Subsidios con cargo a rendir</field>
         </record>
+        <record model='account.account' id='account_account_19_1'>
+                <field name='code'>11300100</field>
+                <field name='reconcile' eval='False'/>
+                <field name='user_type' ref="account.data_account_type_receivable"/>
+                <field name='type'>payable</field>
+                <field name="company_id" ref="base.main_company"/>
+                <field name='parent_id' ref="account_account_10"/>
+                <field name='name'>Adelantos de Personal</field>
+        </record>
+        <record model='account.account' id='account_account_19_2'>
+                <field name='code'>11300110</field>
+                <field name='reconcile' eval='False'/>
+                <field name='user_type' ref="account.data_account_type_receivable"/>
+                <field name='type'>payable</field>
+                <field name="company_id" ref="base.main_company"/>
+                <field name='parent_id' ref="account_account_10"/>
+                <field name='name'>Adelantos por Ordenes de Pago</field>
+        </record>
         <record model='account.account' id='account_account_20'>
                 <field name='code'>12</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -191,7 +209,7 @@
         </record>
         <record model='account.account' id='account_account_21'>
                 <field name='code'>121</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -200,7 +218,7 @@
         </record>
         <record model='account.account' id='account_account_22'>
                 <field name='code'>1211</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -209,7 +227,7 @@
         </record>
         <record model='account.account' id='account_account_23'>
                 <field name='code'>1211030</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_asset"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -218,7 +236,7 @@
         </record>
         <record model='account.account' id='account_account_24'>
                 <field name='code'>1212</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -227,7 +245,7 @@
         </record>
         <record model='account.account' id='account_account_25'>
                 <field name='code'>1212010</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_asset"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -236,7 +254,7 @@
         </record>
         <record model='account.account' id='account_account_26'>
                 <field name='code'>1212020</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_asset"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -245,7 +263,7 @@
         </record>
         <record model='account.account' id='account_account_27'>
                 <field name='code'>1212030</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_asset"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -254,7 +272,7 @@
         </record>
         <record model='account.account' id='account_account_28'>
                 <field name='code'>1213</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -263,7 +281,7 @@
         </record>
         <record model='account.account' id='account_account_29'>
                 <field name='code'>1213010</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_asset"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -272,7 +290,7 @@
         </record>
         <record model='account.account' id='account_account_30'>
                 <field name='code'>1213020</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_asset"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -281,7 +299,7 @@
         </record>
         <record model='account.account' id='account_account_31'>
                 <field name='code'>122</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -290,7 +308,7 @@
         </record>
         <record model='account.account' id='account_account_32'>
                 <field name='code'>1221010</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_asset"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -299,7 +317,7 @@
         </record>
         <record model='account.account' id='account_account_33'>
                 <field name='code'>2</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -308,7 +326,7 @@
         </record>
         <record model='account.account' id='account_account_34'>
                 <field name='code'>21</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -317,7 +335,7 @@
         </record>
         <record model='account.account' id='account_account_35'>
                 <field name='code'>211</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -326,7 +344,7 @@
         </record>
         <record model='account.account' id='account_account_36'>
                 <field name='code'>2110010</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>payable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -335,7 +353,7 @@
         </record>
         <record model='account.account' id='account_account_37'>
                 <field name='code'>2110020</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>payable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -344,7 +362,7 @@
         </record>
         <record model='account.account' id='account_account_38'>
                 <field name='code'>2110030</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>payable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -353,7 +371,7 @@
         </record>
         <record model='account.account' id='account_account_39'>
                 <field name='code'>2110040</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>payable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -362,7 +380,7 @@
         </record>
         <record model='account.account' id='account_account_40'>
                 <field name='code'>2110050</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>payable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -371,7 +389,7 @@
         </record>
         <record model='account.account' id='account_account_41'>
                 <field name='code'>2110060</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>payable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -380,7 +398,7 @@
         </record>
         <record model='account.account' id='account_account_42'>
                 <field name='code'>2110070</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>payable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -389,7 +407,7 @@
         </record>
         <record model='account.account' id='account_account_43'>
                 <field name='code'>2110080</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>payable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -398,7 +416,7 @@
         </record>
         <record model='account.account' id='account_account_44'>
                 <field name='code'>2110090</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>payable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -407,7 +425,7 @@
         </record>
         <record model='account.account' id='account_account_45'>
                 <field name='code'>2110100</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>payable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -416,7 +434,7 @@
         </record>
         <record model='account.account' id='account_account_46'>
                 <field name='code'>2110110</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>payable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -425,7 +443,7 @@
         </record>
         <record model='account.account' id='account_account_47'>
                 <field name='code'>2110120</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>payable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -434,7 +452,7 @@
         </record>
         <record model='account.account' id='account_account_48'>
                 <field name='code'>2110130</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>payable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -443,7 +461,7 @@
         </record>
         <record model='account.account' id='account_account_49'>
                 <field name='code'>2110140</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>payable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -452,7 +470,7 @@
         </record>
         <record model='account.account' id='account_account_50'>
                 <field name='code'>2110150</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>payable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -461,7 +479,7 @@
         </record>
         <record model='account.account' id='account_account_51'>
                 <field name='code'>2110160</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>payable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -470,7 +488,7 @@
         </record>
         <record model='account.account' id='account_account_52'>
                 <field name='code'>2110170</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>payable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -479,7 +497,7 @@
         </record>
         <record model='account.account' id='account_account_53'>
                 <field name='code'>2110180</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>payable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -488,7 +506,7 @@
         </record>
         <record model='account.account' id='account_account_54'>
                 <field name='code'>2110190</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>payable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -497,7 +515,7 @@
         </record>
         <record model='account.account' id='account_account_55'>
                 <field name='code'>212</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -506,7 +524,7 @@
         </record>
         <record model='account.account' id='account_account_56'>
                 <field name='code'>2120010</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>payable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -515,7 +533,7 @@
         </record>
         <record model='account.account' id='account_account_57'>
                 <field name='code'>2120020</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>payable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -524,7 +542,7 @@
         </record>
         <record model='account.account' id='account_account_58'>
                 <field name='code'>213</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -533,7 +551,7 @@
         </record>
         <record model='account.account' id='account_account_59'>
                 <field name='code'>2130010</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -542,7 +560,7 @@
         </record>
         <record model='account.account' id='account_account_60'>
                 <field name='code'>2130015</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>payable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -551,7 +569,7 @@
         </record>
         <record model='account.account' id='account_account_61'>
                 <field name='code'>2130020</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -560,7 +578,7 @@
         </record>
         <record model='account.account' id='account_account_62'>
                 <field name='code'>2130025</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>payable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -569,7 +587,7 @@
         </record>
         <record model='account.account' id='account_account_63'>
                 <field name='code'>2130030</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -578,7 +596,7 @@
         </record>
         <record model='account.account' id='account_account_64'>
                 <field name='code'>2130035</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>payable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -587,7 +605,7 @@
         </record>
         <record model='account.account' id='account_account_65'>
                 <field name='code'>2130040</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -596,7 +614,7 @@
         </record>
         <record model='account.account' id='account_account_66'>
                 <field name='code'>2130045</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>payable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -605,7 +623,7 @@
         </record>
         <record model='account.account' id='account_account_67'>
                 <field name='code'>214</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -614,7 +632,7 @@
         </record>
         <record model='account.account' id='account_account_68'>
                 <field name='code'>2140010</field>
-                <field name='reconcile'>True</field>
+                <field name='reconcile' eval='True'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>payable</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -623,7 +641,7 @@
         </record>
         <record model='account.account' id='account_account_69'>
                 <field name='code'>2140020</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_payable"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -632,7 +650,7 @@
         </record>
         <record model='account.account' id='account_account_70'>
                 <field name='code'>3</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -641,7 +659,7 @@
         </record>
         <record model='account.account' id='account_account_70_1'>
                 <field name='code'>30000001</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_asset"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -650,7 +668,7 @@
         </record>
         <record model='account.account' id='account_account_71'>
                 <field name='code'>4</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -659,7 +677,7 @@
         </record>
         <record model='account.account' id='account_account_72'>
                 <field name='code'>41</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -668,7 +686,7 @@
         </record>
         <record model='account.account' id='account_account_73'>
                 <field name='code'>4100010</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_income"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -677,7 +695,7 @@
         </record>
         <record model='account.account' id='account_account_74'>
                 <field name='code'>4100020</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_income"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -686,7 +704,7 @@
         </record>
         <record model='account.account' id='account_account_75'>
                 <field name='code'>42</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -695,7 +713,7 @@
         </record>
         <record model='account.account' id='account_account_76'>
                 <field name='code'>4200010</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_income"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -704,7 +722,7 @@
         </record>
         <record model='account.account' id='account_account_77'>
                 <field name='code'>43</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_income"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -713,7 +731,7 @@
         </record>
         <record model='account.account' id='account_account_78'>
                 <field name='code'>4300010</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_income"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -722,7 +740,7 @@
         </record>
         <record model='account.account' id='account_account_79'>
                 <field name='code'>5</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -731,7 +749,7 @@
         </record>
         <record model='account.account' id='account_account_80'>
                 <field name='code'>51</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -740,7 +758,7 @@
         </record>
         <record model='account.account' id='account_account_81'>
                 <field name='code'>511</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -749,7 +767,7 @@
         </record>
         <record model='account.account' id='account_account_82'>
                 <field name='code'>5110010</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_expense"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -758,7 +776,7 @@
         </record>
         <record model='account.account' id='account_account_83'>
                 <field name='code'>5110020</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_expense"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -767,7 +785,7 @@
         </record>
         <record model='account.account' id='account_account_84'>
                 <field name='code'>5110030</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_expense"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -776,7 +794,7 @@
         </record>
         <record model='account.account' id='account_account_85'>
                 <field name='code'>512</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -785,7 +803,7 @@
         </record>
         <record model='account.account' id='account_account_86'>
                 <field name='code'>5120010</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_expense"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -794,7 +812,7 @@
         </record>
         <record model='account.account' id='account_account_87'>
                 <field name='code'>513</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -803,7 +821,7 @@
         </record>
         <record model='account.account' id='account_account_88'>
                 <field name='code'>5130010</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_expense"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -812,7 +830,7 @@
         </record>
         <record model='account.account' id='account_account_89'>
                 <field name='code'>5130020</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_expense"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -821,7 +839,7 @@
         </record>
         <record model='account.account' id='account_account_90'>
                 <field name='code'>5130030</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_expense"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -830,7 +848,7 @@
         </record>
         <record model='account.account' id='account_account_91'>
                 <field name='code'>5130040</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_expense"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -839,7 +857,7 @@
         </record>
         <record model='account.account' id='account_account_92'>
                 <field name='code'>5130050</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_expense"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -848,7 +866,7 @@
         </record>
         <record model='account.account' id='account_account_93'>
                 <field name='code'>514</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -857,7 +875,7 @@
         </record>
         <record model='account.account' id='account_account_94'>
                 <field name='code'>5140010</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_expense"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -866,7 +884,7 @@
         </record>
         <record model='account.account' id='account_account_95'>
                 <field name='code'>515</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -875,7 +893,7 @@
         </record>
         <record model='account.account' id='account_account_96'>
                 <field name='code'>5150010</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_expense"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -884,7 +902,7 @@
         </record>
         <record model='account.account' id='account_account_97'>
                 <field name='code'>5150020</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_expense"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -893,7 +911,7 @@
         </record>
         <record model='account.account' id='account_account_98'>
                 <field name='code'>5150030</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_expense"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -902,7 +920,7 @@
         </record>
         <record model='account.account' id='account_account_99'>
                 <field name='code'>5150040</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_expense"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -911,7 +929,7 @@
         </record>
         <record model='account.account' id='account_account_100'>
                 <field name='code'>52</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_view"/>
                 <field name='type'>view</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -920,7 +938,7 @@
         </record>
         <record model='account.account' id='account_account_101'>
                 <field name='code'>5200010</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_expense"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -929,7 +947,7 @@
         </record>
         <record model='account.account' id='account_account_102'>
                 <field name='code'>5200020</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_expense"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -938,7 +956,7 @@
         </record>
         <record model='account.account' id='account_account_103'>
                 <field name='code'>5200030</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_expense"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
@@ -947,7 +965,7 @@
         </record>
         <record model='account.account' id='account_account_104'>
                 <field name='code'>5200040</field>
-                <field name='reconcile'>False</field>
+                <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_expense"/>
                 <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>

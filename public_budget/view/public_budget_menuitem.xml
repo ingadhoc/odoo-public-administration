@@ -36,16 +36,17 @@
             sequence="20"
             parent="menu_budget_main"
             />
+
+        <menuitem
+            name="Advance Requests"
+            id="menu_advance_requests_main"
+            sequence="25"
+            parent="menu_budget_main"
+            />
+
         <record id="action_public_budget_advance_request_advance_requests" model="ir.actions.act_window">
             <field name="name">Advance Requests</field>
             <field name="res_model">public_budget.advance_request</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_id" ref="view_public_budget_advance_request_tree"/>
-            <field name="search_view_id" ref="view_public_budget_advance_request_filter"/>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create"> Click to create a Advance Requests.</p>
-            </field>
         </record>
 
         <menuitem
@@ -53,7 +54,32 @@
             id="menu_advance_requests"
             sequence="10"
             action="action_public_budget_advance_request_advance_requests"
-            parent="menu_contacts"
+            parent="menu_advance_requests_main"
+            />
+
+        <record id="action_public_budget_advance_returns" model="ir.actions.act_window">
+            <field name="name">Advance Returns</field>
+            <field name="res_model">public_budget.advance_return</field>
+        </record>
+
+        <menuitem
+            name="Advance Returns"
+            id="menu_advance_returns"
+            sequence="20"
+            action="action_public_budget_advance_returns"
+            parent="menu_advance_requests_main"
+            />
+
+        <record id="action_public_budget_advance_request_types" model="ir.actions.act_window">
+            <field name="name">Advance Request Types</field>
+            <field name="res_model">public_budget.advance_request_type</field>
+        </record>
+
+        <menuitem
+            id="menu_advance_request_types"
+            sequence="10"
+            action="action_public_budget_advance_request_types"
+            parent="menu_configuration"
             />
 
         <menuitem

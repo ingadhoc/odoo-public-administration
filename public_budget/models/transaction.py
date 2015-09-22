@@ -66,6 +66,7 @@ class transaction(models.Model):
         string='Type',
         readonly=True,
         required=True,
+        domain="[('company_id', '=', company_id)]",
         states={'draft': [('readonly', False)]}
         )
     partner_id = fields.Many2one(
@@ -80,10 +81,6 @@ class transaction(models.Model):
     type_with_advance_payment = fields.Boolean(
         readonly=True,
         related='type_id.with_advance_payment'
-        )
-    type_with_salary_advance = fields.Boolean(
-        readonly=True,
-        related='type_id.with_salary_advance'
         )
     definitive_line_ids = fields.One2many(
         comodel_name='public_budget.definitive_line',
@@ -226,13 +223,13 @@ class transaction(models.Model):
         context={'default_type': 'payment'},
         states={'open': [('readonly', False)]},
         )
-    advance_return_ids = fields.One2many(
-        'public_budget.advance_return',
-        'transaction_id',
-        string='Advance Returns',
-        readonly=True,
-        states={'draft': [('readonly', False)], 'open': [('readonly', False)]}
-        )
+
+    @api.one
+    @api.constrains('type_id', 'company_id')
+    def check_type_company(self):
+        if self.type_id.company_id != self.company_id:
+            raise Warning(_(
+                'Company must be the same as Type Company!'))
 
     @api.one
     @api.depends(
@@ -292,6 +289,10 @@ class transaction(models.Model):
             journal = self.env['account.journal'].search([
                 ('company_id', '=', invoice.company_id.id),
                 ('type', 'in', ('cash', 'bank'))], limit=1)
+            if not journal:
+                raise Warning(_(
+                    'No bank or cash journal found for company "%s"') % (
+                    invoice.company_id.name))
             partner = invoice.partner_id.commercial_partner_id
             voucher_data = vouchers.onchange_partner_id(
                 partner.id, journal.id, 0.0,
