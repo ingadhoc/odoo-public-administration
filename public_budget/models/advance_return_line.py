@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import models, fields
+from openerp import models, fields, api
 import openerp.addons.decimal_precision as dp
 
 
@@ -19,6 +19,7 @@ class advance_return_line(models.Model):
     debt_amount = fields.Float(
         string='Debt Amount',
         required=True,
+        compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     returned_amount = fields.Float(
@@ -30,7 +31,20 @@ class advance_return_line(models.Model):
         'public_budget.advance_return',
         ondelete='cascade',
         string='advance_return_id',
-        required=True
+        required=True,
+        auto_join=True
         )
+    state = fields.Selection(
+        related='advance_return_id.state',
+        )
+
+    @api.one
+    @api.depends(
+        'employee_id',
+        )
+    def _get_amounts(self):
+        if self.employee_id:
+            self.debt_amount = self.employee_id.get_debt_amount(
+                self.advance_return_id.type_id)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

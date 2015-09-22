@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from openerp import models, fields, api
+from openerp import models, fields, api, _
+from openerp.exceptions import Warning
 
 
 class advance_request(models.Model):
@@ -13,7 +14,7 @@ class advance_request(models.Model):
         ('draft', 'Draft'),
         ('approved', 'Approved'),
         ('confirmed', 'Confirmed'),
-        ('done', 'Done'),
+        # ('done', 'Done'),
         ('cancel', 'Cancel'),
     ]
 
@@ -22,6 +23,15 @@ class advance_request(models.Model):
         required=True,
         readonly=True,
         states={'draft': [('readonly', False)]},
+        )
+    company_id = fields.Many2one(
+        'res.company',
+        string='Company',
+        required=True,
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+        default=lambda self: self.env['res.company']._company_default_get(
+            'public_budget.advance_request')
         )
     date = fields.Date(
         string='Date',
@@ -43,6 +53,7 @@ class advance_request(models.Model):
         string='Type',
         required=True,
         readonly=True,
+        domain="[('company_id', '=', company_id)]",
         states={'draft': [('readonly', False)]},
         )
     state = fields.Selection(
@@ -58,13 +69,83 @@ class advance_request(models.Model):
         readonly=True,
         states={'draft': [('readonly', False)]},
         )
+    voucher_ids = fields.One2many(
+        'account.voucher',
+        compute='get_vouchers',
+        readonly=False,
+        inverse='dummy_inverse',
+        string='Vouchers',
+        )
+
+    # @api.depends('advance_request_line_ids.voucher_id')
+    @api.one
+    def dummy_inverse(self):
+        print 'self', self._context
+
+    @api.one
+    @api.depends('advance_request_line_ids.voucher_id')
+    def get_vouchers(self):
+        self.voucher_ids = self.mapped(
+            'advance_request_line_ids.voucher_id')
+
+    @api.multi
+    def action_approve(self):
+        self.write({'state': 'approved'})
+        return True
+
+    @api.multi
+    def action_confirm(self):
+        for request in self:
+            request.advance_request_line_ids.create_voucher()
+        self.write({'state': 'confirmed'})
+        return True
+
+    @api.one
+    @api.constrains('state', 'advance_request_line_ids')
+    def check_amounts(self):
+        if self.state == 'approved':
+            cero_lines = self.advance_request_line_ids.filtered(
+                lambda x: not x.approved_amount)
+            if cero_lines:
+                raise Warning(_(
+                    'You can not approve a request with lines without '
+                    'approved amount.'))
+
+    @api.one
+    @api.constrains('type_id', 'company_id')
+    def check_type_company(self):
+        if self.type_id.company_id != self.company_id:
+            raise Warning(_(
+                'Company must be the same as Type Company!'))
+
+    @api.multi
+    def action_cancel(self):
+        for request in self:
+            open_vouchers = self.voucher_ids.filtered(
+                    lambda x: x.state not in ['draft', 'cancel'])
+            if open_vouchers:
+                raise Warning(_(
+                    'You can nopt cancel an advance request with vouchers in '
+                    'other state than "cancel" or "draft".\n'
+                    ' * Request id: %i\n'
+                    ' * Voucher ids: %s'
+                    ) % (request.id, open_vouchers.ids))
+            self.voucher_ids.unlink()
+        self.write({'state': 'cancel'})
+        return True
 
     @api.multi
     def action_cancel_draft(self):
         """ go from canceled state to draft state"""
         self.write({'state': 'draft'})
-        self.delete_workflow()
-        self.create_workflow()
         return True
+
+    @api.one
+    def unlink(self):
+        if self.state not in ['draft', 'cancel']:
+            raise Warning(_(
+                'You can not delete if record is not on "draft" or "cancel" '
+                'state!'))
+        return super(advance_request, self).unlink()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -92,3 +92,5 @@ access_public_budget_location_secretary,public_budget_location.secretary,model_p
 access_res_users_manager,res_users.manager,model_res_users,group_manager,1,1,1,1
 access_res_users_user,res_users.user,model_res_users,group_user,1,1,1,1
 access_res_users_secretary,res_users.secretary,model_res_users,group_secretary,1,1,1,1
+access_public_budget_advance_request_type_manager,public_budget_advance_request_type.manager,model_public_budget_advance_request_type,group_manager,1,1,1,1
+access_public_budget_advance_request_type_user,public_budget_advance_request_type.user,model_public_budget_advance_request_type,group_user,1,1,1,1

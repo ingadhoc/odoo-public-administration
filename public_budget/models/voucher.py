@@ -49,6 +49,11 @@ class account_voucher(models.Model):
     partner_id = fields.Many2one(
         domain="[('id', 'in', partner_ids[0][2])]",
         )
+    advance_request_line_ids = fields.One2many(
+        'public_budget.advance_request_line',
+        'voucher_id',
+        'Advance Request Line',
+        )
     transaction_with_advance_payment = fields.Boolean(
         readonly=True,
         related='transaction_id.type_id.with_advance_payment',
@@ -105,13 +110,19 @@ class account_voucher(models.Model):
             company_currency, current_currency, context=context)
         voucher = self.browse(cr, uid, voucher_id, context=context)
 
-        if res and voucher.transaction_with_advance_payment:
-            account = voucher.transaction_id.type_id.advance_account_id
-            if not account:
-                raise Warning(_(
-                    'In payment of advance transaction type, you need to\
-                    an advance account in transaction type!'))
-            res['account_id'] = account.id
+        if res:
+            if voucher.transaction_with_advance_payment:
+                account = voucher.transaction_id.type_id.advance_account_id
+                if not account:
+                    raise Warning(_(
+                        'In payment of advance transaction type, you need to\
+                        an advance account in transaction type!'))
+                res['account_id'] = account.id
+            elif voucher.advance_request_line_ids:
+                request = (
+                    voucher.advance_request_line_ids[0].advance_request_id)
+                print 'request.type_id.account_id', request.type_id.account_id
+                res['account_id'] = request.type_id.account_id.id
         return res
 
     @api.one

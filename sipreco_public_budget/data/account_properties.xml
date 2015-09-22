@@ -3,10 +3,8 @@
     <data noupdate="1">
 
         <!-- Properties -->
-        <!-- Para que no de un error... -->
-<!--         <record id="account_account_661" model="account.account">
-        </record> -->
 
+    <!-- Partner properties -->
         <record forcecreate="True" id="property_account_receivable" model="ir.property">
             <field name="name">property_account_receivable</field>
             <field name="fields_id" search="[('model','=','res.partner'),('name','=','property_account_receivable')]"/>

@@ -34,10 +34,15 @@
 
         <!-- ponemos funding moves dentro del anterior -->
         <record id="public_budget.menu_funding_moves" model="ir.ui.menu">
+            <field name="sequence" eval="5"/>
             <field name="parent_id" ref="other_operations"/>
         </record>
 
         <record id="public_budget.menu_advance_requests" model="ir.ui.menu">
+            <field name="parent_id" ref="other_operations"/>
+        </record>
+
+        <record id="public_budget.menu_advance_returns" model="ir.ui.menu">
             <field name="parent_id" ref="other_operations"/>
         </record>
 

@@ -1,12 +1,12 @@
-id,advance_account_id/id
-purchase_type_fondo_fijo,account_account_demo_10
-purchase_type_compra_directa,
-purchase_type_lprivada,
-purchase_type_lpublica,
-purchase_type_concurso_precios,
-purchase_type_sueldos,
-purchase_type_anticipo_gasto,account_account_demo_401
-purchase_type_subsidio_con_cargo,account_account_demo_409
-purchase_type_subsidio_sin_cargo,
-purchase_type_compra_directa_con_autorizacion,
-purchase_type_orden_de_trabajo,
+id,advance_account_id/id,name,with_advance_payment,definitive_partner_type,company_id/id
+purchase_type_fondo_fijo_demo,account_account_demo_10,Fondo Fijo / Caja Chica,True,supplier,company_sipreco
+purchase_type_compra_directa_demo,,Compra Directa,,supplier,company_sipreco
+purchase_type_lprivada_demo,,Licitación Privada,,supplier,company_sipreco
+purchase_type_lpublica_dmo,,Licitación Pública,,supplier,company_sipreco
+purchase_type_concurso_precios_demo,,Concurso de Precios,,supplier,company_sipreco
+purchase_type_sueldos_demo,,Sueldos,,supplier,company_sipreco
+purchase_type_anticipo_gasto_demo,account_account_demo_401,Anticipo de Gastos,True,supplier,company_sipreco
+purchase_type_subsidio_con_cargo_demo,account_account_demo_409,Anticipo de Gastos,True,subsidy_recipient,company_sipreco
+purchase_type_subsidio_sin_cargo_demo,,Subsidio sin Cargo de Rendición,,subsidy_recipient,company_sipreco
+purchase_type_compra_directa_con_autorizacion_demo,,Compra Directa con autorización de cuerpo,,supplier,company_sipreco
+purchase_type_orden_de_trabajo_demo,,Orden de Trabajo (adicional empleado),,supplier,company_sipreco

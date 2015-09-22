@@ -1,11 +1,11 @@
 id,name,code,type,use_documents,default_credit_account_id/id,default_debit_account_id/id,payment_subtype,entry_posted,update_posted,company_id/id
-bank_journal,Transferencias - Banco Municipal - Cta A,02BCM,bank,,account_account_demo_13,account_account_demo_13,,True,True,company_sipreco
-check_journal,Cheques - Banco Municipal - Cta A,03CHB,bank,,account_account_demo_13,account_account_demo_13,issue_check,True,True,company_sipreco
-expenses_journal,Facturas de Compra,04CPR,purchase,True,,,,True,True,company_sipreco
-refund_expenses_journal,Notas de Crédito Compras,05NCC,purchase_refund,True,,,,True,True,company_sipreco
-other_documents,Otros Comprobantes,05OCC,purchase,,,,,True,True,company_sipreco
-sales_journal,Ventas,06VEN,sale,,,,,True,True,company_sipreco
-refund_sales_journal,Notas de Crédito Ventas,07NCV,sale_refund,,,,,True,True,company_sipreco
-opening_journal,Apertura y Cierre,08AC,situation,,,,,True,True,company_sipreco
-bank_journal_usd,General,99GEN,general,,,,,True,True,company_sipreco
-miscellaneous_journal,Varios,99VAR,general,,,,,True,True,company_sipreco
+bank_journal_demo,Transferencias - Banco Municipal - Cta A,02BCM,bank,,account_account_demo_13,account_account_demo_13,,True,True,company_sipreco
+check_journal_demo,Cheques - Banco Municipal - Cta A,03CHB,bank,,account_account_demo_13,account_account_demo_13,issue_check,True,True,company_sipreco
+expenses_journal_demo,Facturas de Compra,04CPR,purchase,True,,,,True,True,company_sipreco
+refund_expenses_journal_demo,Notas de Crédito Compras,05NCC,purchase_refund,True,,,,True,True,company_sipreco
+other_documents_demo,Otros Comprobantes,05OCC,purchase,,,,,True,True,company_sipreco
+sales_journal_demo,Ventas,06VEN,sale,,,,,True,True,company_sipreco
+refund_sales_journal_demo,Notas de Crédito Ventas,07NCV,sale_refund,,,,,True,True,company_sipreco
+opening_journal_demo,Apertura y Cierre,08AC,situation,,,,,True,True,company_sipreco
+bank_journal_usd_demo,General,99GEN,general,,,,,True,True,company_sipreco
+miscellaneous_journal_demo,Varios,99VAR,general,,,,,True,True,company_sipreco

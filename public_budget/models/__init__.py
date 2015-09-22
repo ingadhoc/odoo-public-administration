@@ -1,4 +1,5 @@
 import inventory_rule
+import res_partner
 import voucher
 import invoice
 import advance_request_type

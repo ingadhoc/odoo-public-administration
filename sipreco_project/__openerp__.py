@@ -39,6 +39,7 @@ Modulos principales del proyecto:
         'account_move_line_no_filter',
         'sipreco_public_budget',
         'web_sheet_full_width',
+        'account_partner_balance',
         'account_cancel',
         'account_voucher_multic_fix',
         'account_multic_fix',

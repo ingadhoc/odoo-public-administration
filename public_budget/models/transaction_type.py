@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import models, fields
+from openerp import models, fields, api, _
 
 
 class transaction_type(models.Model):
@@ -24,22 +24,30 @@ class transaction_type(models.Model):
         string='Advance Account',
         context={'default_type': 'other'},
         # we use receivable to get debt but we dont reconcile
-        domain=[('type', 'in', ['receivable']), ('reconcile', '=', False)],
+        domain="[('type', 'in', ['receivable']), ('reconcile', '=', False), ('company_id', '=', company_id)]",
         help='This account will be used on advance payments. Must be a payable account.',
-        )
-    advance_journal_id = fields.Many2one(
-        'account.journal',
-        string='Advance Journal',
-        context={'default_type': 'cash', 'default_allow_direct_payment': True},
-        domain=[
-            ('type', 'in', ('cash', 'bank')),
-            ('allow_direct_payment', '=', True)],
-        help='This journal balance advance payments and supplier invoices',
         )
     amount_restriction_ids = fields.One2many(
         'public_budget.transaction_type_amo_rest',
         'transaction_type_id',
         string='Amount Restrictions'
         )
+    company_id = fields.Many2one(
+        'res.company',
+        string='Company',
+        required=True,
+        default=lambda self: self.env['res.company']._company_default_get(
+            'public_budget.transaction_type')
+        )
+
+    @api.one
+    @api.constrains('type_id', 'company_id')
+    def check_account_company(self):
+        if (
+                self.advance_account_id and
+                self.advance_account_id.company_id != self.company_id
+                ):
+            raise Warning(_(
+                'Company must be the same as Account Company!'))
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

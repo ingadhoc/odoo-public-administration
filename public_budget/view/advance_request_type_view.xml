@@ -8,6 +8,7 @@
             <field name="arch" type="xml">
                 <search string="Advance Request Type">
                     <field name="name"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
                     <group expand="0" string="Group By">
                     </group>
                 </search>
@@ -28,6 +29,8 @@
                      <group>
                         <field name="name"/> 
                         <field name="general_return_partner_id"/> 
+                        <field name="account_id"/> 
+                        <field name="company_id" groups="base.group_multi_company"/>
                      </group>
                     </sheet>
                 </form>
@@ -43,6 +46,8 @@
                     >
                     <field name="name"/>
                     <field name="general_return_partner_id"/>
+                    <field name="account_id"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
                 </tree>
             </field>
         </record>

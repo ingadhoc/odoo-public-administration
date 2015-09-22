@@ -66,6 +66,7 @@ class transaction(models.Model):
         string='Type',
         readonly=True,
         required=True,
+        domain="[('company_id', '=', company_id)]",
         states={'draft': [('readonly', False)]}
         )
     partner_id = fields.Many2one(
@@ -224,6 +225,13 @@ class transaction(models.Model):
         )
 
     @api.one
+    @api.constrains('type_id', 'company_id')
+    def check_type_company(self):
+        if self.type_id.company_id != self.company_id:
+            raise Warning(_(
+                'Company must be the same as Type Company!'))
+
+    @api.one
     @api.depends(
         'partner_id',
         'preventive_line_ids.definitive_line_ids.supplier_id',
@@ -281,6 +289,10 @@ class transaction(models.Model):
             journal = self.env['account.journal'].search([
                 ('company_id', '=', invoice.company_id.id),
                 ('type', 'in', ('cash', 'bank'))], limit=1)
+            if not journal:
+                raise Warning(_(
+                    'No bank or cash journal found for company "%s"') % (
+                    invoice.company_id.name))
             partner = invoice.partner_id.commercial_partner_id
             voucher_data = vouchers.onchange_partner_id(
                 partner.id, journal.id, 0.0,
