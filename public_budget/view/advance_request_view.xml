@@ -59,7 +59,7 @@
                             </field>
                         </page>
                         <page string="Vouchers">
-                            <field name="voucher_ids" readonly="0" context="{'default_type': 'payment', 'form_view_ref': 'account_voucher.view_vendor_payment_form','tree_view_ref': 'account_voucher.view_voucher_tree'}"/> 
+                            <field name="voucher_ids" context="{'default_type': 'payment', 'form_view_ref': 'account_voucher.view_vendor_payment_form','tree_view_ref': 'account_voucher.view_voucher_tree'}"/> 
                         </page>
                      </notebook>
                     </sheet>

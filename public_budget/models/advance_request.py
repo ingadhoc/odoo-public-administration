@@ -72,15 +72,16 @@ class advance_request(models.Model):
     voucher_ids = fields.One2many(
         'account.voucher',
         compute='get_vouchers',
-        readonly=False,
         inverse='dummy_inverse',
         string='Vouchers',
         )
 
-    # @api.depends('advance_request_line_ids.voucher_id')
     @api.one
     def dummy_inverse(self):
-        print 'self', self._context
+        """
+        Dummy Inverse function so that we can edit vouchers and save changes
+        """
+        return True
 
     @api.one
     @api.depends('advance_request_line_ids.voucher_id')
