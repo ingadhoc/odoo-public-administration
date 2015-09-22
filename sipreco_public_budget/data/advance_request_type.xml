@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+    <!-- <data noupdate="1"> -->
+        <record id="sipreco_public_budget.advance_request_type_1" model="public_budget.advance_request_type">
+            <field name="name">Solicitud de Adelanto</field>
+        </record>
+
+        <record id="sipreco_public_budget.advance_request_type_2" model="public_budget.advance_request_type">
+            <field name="name">Orden de Pago</field>
+        </record>
+    </data>
+</openerp>

@@ -7,9 +7,14 @@
             <field name="model">public_budget.advance_request</field>
             <field name="arch" type="xml">
                 <search string="advance_request">
+                    <field name="name"/>
                     <field name="date"/>
                     <field name="user_id"/>
+                    <field name="type_id"/>
+                    <field name="state"/>
                     <group expand="0" string="Group By">
+                        <field name="type_id" string="Type" context="{'group_by':'type_id'}"/>
+                        <field name="state" string="State" context="{'group_by':'state'}"/>
                     </group>
                 </search>
             </field>
@@ -22,21 +27,23 @@
             <field name="arch" type="xml">
                 <form string="advance_request">
                     <header>
-                        <button name="sgn_approve" states="draft" string="Approve" class="oe_highlight"/>
+                        <button name="action_approve" states="draft" string="Approve" type="object" class="oe_highlight"/>
+                        <button name="action_confirm" states="approved" string="Confirm" type="object" class="oe_highlight"/>
                         <button name="action_cancel_draft" type="object" states="cancel" string="To Draft"/>
-                        <button name="sgn_cancel" states="approved,draft" string="Cancel" groups="base.group_no_one"/>
+                        <button name="sgn_cancel" states="approved,confirmed,draft" string="Cancel" type="object" groups="base.group_no_one"/>
                         <field name="state" widget="statusbar" statusbar_colors='{}'/>
                     </header>
                     <sheet string="advance_request">
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
                      <group>
+                        <field name="name"/> 
+                        <field name="type_id"/> 
                         <field name="date"/> 
                         <field name="user_id"/> 
-                        <field name="advance_request_line_ids"/> 
                      </group>
+                    <field name="advance_request_line_ids"/> 
                     </sheet>
-
                 </form>
             </field>
         </record>
@@ -47,9 +54,10 @@
             <field name="model">public_budget.advance_request</field>
             <field name="arch" type="xml">
                 <tree string="advance_request"
-                    editable="top"
-                    colors="grey:state=='cancelled';blue:state in (u'draft',);black:state in (u'approved',);red:state in ()"
+                    colors="grey:state=='cancelled';blue:state in (u'draft',);black:state in (u'approved', 'confirmed');red:state in ()"
                     >
+                    <field name="name"/>
+                    <field name="type_id"/>
                     <field name="date"/>
                     <field name="user_id"/>
                     <field name="state"/>

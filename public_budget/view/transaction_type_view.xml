@@ -9,7 +9,6 @@
                 <search string="Transaction Type">
                     <field name="name"/>
                     <field name="with_amount_restriction"/>
-                    <field name="with_salary_advance"/>
                     <field name="with_advance_payment"/>
                     <group expand="0" string="Group By">
                     </group>
@@ -31,7 +30,6 @@
                      <group>
                         <field name="name"/> 
                         <field name="with_amount_restriction"/> 
-                        <field name="with_salary_advance"/> 
                         <field name="with_advance_payment"/> 
                         <!-- TODO ver si lo borramos ya que no lo necesitamos -->
 <!--                         <field name="advance_journal_id"
@@ -56,7 +54,6 @@
                     >
                     <field name="name"/>
                     <field name="with_amount_restriction"/>
-                    <field name="with_salary_advance"/>
                     <field name="with_advance_payment"/>
                 </tree>
             </field>

@@ -1,6 +1,7 @@
 import inventory_rule
 import voucher
 import invoice
+import advance_request_type
 import advance_request
 import transaction_type
 import transaction_type_amo_rest

@@ -81,10 +81,6 @@ class transaction(models.Model):
         readonly=True,
         related='type_id.with_advance_payment'
         )
-    type_with_salary_advance = fields.Boolean(
-        readonly=True,
-        related='type_id.with_salary_advance'
-        )
     definitive_line_ids = fields.One2many(
         comodel_name='public_budget.definitive_line',
         inverse_name='transaction_id',
@@ -225,13 +221,6 @@ class transaction(models.Model):
             ('transaction_with_advance_payment', '=', True)],
         context={'default_type': 'payment'},
         states={'open': [('readonly', False)]},
-        )
-    advance_return_ids = fields.One2many(
-        'public_budget.advance_return',
-        'transaction_id',
-        string='Advance Returns',
-        readonly=True,
-        states={'draft': [('readonly', False)], 'open': [('readonly', False)]}
         )
 
     @api.one

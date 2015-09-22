@@ -16,8 +16,8 @@ class advance_request_line(models.Model):
         context={'default_employee': 1},
         domain=[('employee', '=', True)]
         )
-    amount = fields.Float(
-        string='Amount',
+    requested_amount = fields.Float(
+        string='Requested Amount',
         required=True,
         digits=dp.get_precision('Account'),
         )
@@ -25,14 +25,13 @@ class advance_request_line(models.Model):
         string='Description',
         required=True,
         )
-    balance_amount = fields.Float(
-        string=_('Balance Amount'),
+    debt_amount = fields.Float(
+        string=_('Debt Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
-    returned_amount = fields.Float(
-        string=_('Returned Amount'),
-        compute='_get_amounts',
+    approved_amount = fields.Float(
+        string='Approved Amount',
         digits=dp.get_precision('Account'),
         )
     advance_request_id = fields.Many2one(
@@ -41,20 +40,14 @@ class advance_request_line(models.Model):
         string='advance_request_id',
         required=True
         )
-    advance_line_ids = fields.One2many(
-        'public_budget.advance_return_line',
-        'advance_request_line_id',
-        string='advance_line_ids'
-        )
 
     @api.one
     @api.depends(
-        'amount',
+        'employee_id',
         # TODO completar con el campo o2m que vamos a agregar
         )
     def _get_amounts(self):
         # TODO implementar!
-        self.returned_amount = False
-        self.balance_amount = False
+        self.debt_amount = False
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

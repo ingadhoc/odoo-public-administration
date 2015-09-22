@@ -16,9 +16,6 @@ class transaction_type(models.Model):
     with_amount_restriction = fields.Boolean(
         string='With Amount Restriction?'
         )
-    with_salary_advance = fields.Boolean(
-        string='With Advance Salary'
-        )
     with_advance_payment = fields.Boolean(
         string='With advance payment?'
         )

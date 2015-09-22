@@ -9,8 +9,20 @@ class advance_return_line(models.Model):
     _name = 'public_budget.advance_return_line'
     _description = 'advance_return_line'
 
-    amount = fields.Float(
-        string='Amount',
+    employee_id = fields.Many2one(
+        'res.partner',
+        string='Employee',
+        required=True,
+        context={'default_employee': 1},
+        domain=[('employee', '=', True)]
+        )
+    debt_amount = fields.Float(
+        string='Debt Amount',
+        required=True,
+        digits=dp.get_precision('Account'),
+        )
+    returned_amount = fields.Float(
+        string='Returned Amount',
         required=True,
         digits=dp.get_precision('Account'),
         )
@@ -18,11 +30,6 @@ class advance_return_line(models.Model):
         'public_budget.advance_return',
         ondelete='cascade',
         string='advance_return_id',
-        required=True
-        )
-    advance_request_line_id = fields.Many2one(
-        'public_budget.advance_request_line',
-        string='advance_request_line_id',
         required=True
         )
 

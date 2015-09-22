@@ -42,6 +42,7 @@
         # 'data/account_fiscal_year.xml',
         'data/res_partner.xml',
         'data/tax_settlement.xml',
+        'data/advance_request_type.xml',
         'security/security.xml',
     ],
     'demo': [
