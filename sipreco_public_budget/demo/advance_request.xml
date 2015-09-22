@@ -6,7 +6,7 @@
         <record id="request_1" model="public_budget.advance_request">
             <field name="name">Solicitud 1</field>
             <field name="company_id" ref="company_sipreco"/>
-            <field name="type_id" ref="adelanto_personal_permanente"/>
+            <field name="type_id" ref="adelanto_personal_permanente_demo"/>
         </record>
 
         <record id="request_1_line1" model="public_budget.advance_request_line">
@@ -28,7 +28,7 @@
         <record id="request_2" model="public_budget.advance_request">
             <field name="name">Solicitud 2</field>
             <field name="company_id" ref="company_sipreco"/>
-            <field name="type_id" ref="adelanto_personal_no_permanente"/>
+            <field name="type_id" ref="adelanto_personal_no_permanente_demo"/>
         </record>
 
         <record id="request_2_line1" model="public_budget.advance_request_line">
@@ -52,7 +52,7 @@
         <record id="return_1" model="public_budget.advance_return">
             <field name="name">Devolucion 1</field>
             <field name="company_id" ref="company_sipreco"/>
-            <field name="type_id" ref="adelanto_personal_permanente"/>
+            <field name="type_id" ref="adelanto_personal_permanente_demo"/>
         </record>
 
         <record id="return_1_line1" model="public_budget.advance_return_line">

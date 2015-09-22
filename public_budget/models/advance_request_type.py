@@ -23,6 +23,12 @@ class advance_request_type(models.Model):
         domain="[('type', '=', 'payable'), ('company_id', '=', company_id)]",
         required=True,
         )
+    return_journal_id = fields.Many2one(
+        'account.journal',
+        string='Return Journal',
+        domain="[('company_id', '=', company_id)]",
+        required=True,
+        )
     company_id = fields.Many2one(
         'res.company',
         string='Company',
@@ -32,8 +38,11 @@ class advance_request_type(models.Model):
         )
 
     @api.one
-    @api.constrains('type_id', 'company_id')
-    def check_account_company(self):
-        if self.account_id and self.account_id.company_id != self.company_id:
+    @api.constrains('type_id', 'company_id', 'return_journal_id')
+    def check_company(self):
+        if self.account_id.company_id != self.company_id:
             raise Warning(_(
                 'Company must be the same as Account Company!'))
+        if self.return_journal_id.company_id != self.company_id:
+            raise Warning(_(
+                'Company must be the same as Journal Company!'))

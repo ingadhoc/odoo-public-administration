@@ -71,6 +71,7 @@
         'demo/public_budget.remit.csv',
         'demo/public_budget.budget_modification.csv',
         'demo/public_budget.budget_modification_detail.csv',
+        'demo/advance_request_type.xml',
         'demo/advance_request.xml',
     ],
     'depends': [
@@ -93,4 +94,4 @@ Customizaciones especificas al modulo public_budget para SIPRECO
     'installable': True,
     'name': 'Public Budget Sipreco Customizations',
     'test': [],
-    'version': '8.0.0.1.0'}
+    'version': '8.0.0.2.0'}

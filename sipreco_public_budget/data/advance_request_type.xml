@@ -8,6 +8,7 @@
             <field name="name">Solicitud de Adelanto - Personal Permanente</field>
             <field name="general_return_partner_id" ref="sipreco_public_budget.personal_permanente"/>
             <field name="account_id" ref="sipreco_public_budget.account_account_19_1"/>
+            <field name="return_journal_id" ref="sipreco_public_budget.miscellaneous_journal"/>
             <field name="company_id" ref="base.main_company"/>
         </record>
 
@@ -15,6 +16,7 @@
             <field name="name">Solicitud de Adelanto - Personal  No Permanente</field>
             <field name="general_return_partner_id" ref="sipreco_public_budget.personal_no_permanente"/>
             <field name="account_id" ref="sipreco_public_budget.account_account_19_1"/>
+            <field name="return_journal_id" ref="sipreco_public_budget.miscellaneous_journal"/>
             <field name="company_id" ref="base.main_company"/>
         </record>
 
@@ -22,6 +24,7 @@
             <field name="name">Solicitud de Adelanto - Personal  Transitorio</field>
             <field name="general_return_partner_id" ref="sipreco_public_budget.personal_transitorio"/>
             <field name="account_id" ref="sipreco_public_budget.account_account_19_1"/>
+            <field name="return_journal_id" ref="sipreco_public_budget.miscellaneous_journal"/>
             <field name="company_id" ref="base.main_company"/>
         </record>
 
@@ -30,6 +33,7 @@
             <field name="name">Orden de Pago - Personal Permanente</field>
             <field name="general_return_partner_id" ref="sipreco_public_budget.personal_permanente"/>
             <field name="account_id" ref="sipreco_public_budget.account_account_19_2"/>
+            <field name="return_journal_id" ref="sipreco_public_budget.miscellaneous_journal"/>
             <field name="company_id" ref="base.main_company"/>
         </record>
 
@@ -37,6 +41,7 @@
             <field name="name">Orden de Pago - Personal  No Permanente</field>
             <field name="general_return_partner_id" ref="sipreco_public_budget.personal_no_permanente"/>
             <field name="account_id" ref="sipreco_public_budget.account_account_19_2"/>
+            <field name="return_journal_id" ref="sipreco_public_budget.miscellaneous_journal"/>
             <field name="company_id" ref="base.main_company"/>
         </record>
 
@@ -44,6 +49,7 @@
             <field name="name">Orden de Pago - Personal  Transitorio</field>
             <field name="general_return_partner_id" ref="sipreco_public_budget.personal_transitorio"/>
             <field name="account_id" ref="sipreco_public_budget.account_account_19_2"/>
+            <field name="return_journal_id" ref="sipreco_public_budget.miscellaneous_journal"/>
             <field name="company_id" ref="base.main_company"/>
         </record>
 

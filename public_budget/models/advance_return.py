@@ -74,11 +74,43 @@ class advance_return(models.Model):
         )
 
     @api.multi
+    def get_move_vals(self):
+        self.ensure_one()
+        lines_vals = []
+        total_returned_amount = 0.0
+        for line in self.return_line_ids:
+            total_returned_amount += line.returned_amount
+            lines_vals.append(
+                (0, 0, {
+                    'partner_id': line.employee_id.id,
+                    'credit': line.returned_amount,
+                    'debit': 0.0,
+                    'account_id': self.type_id.account_id.id,
+                    'name': self.name,
+                    }))
+        return_partner = self.type_id.general_return_partner_id
+        journal = self.type_id.return_journal_id
+        ref = journal.sequence_id._next()
+        lines_vals.append(
+            (0, 0, {
+                'partner_id': return_partner.id,
+                'debit': total_returned_amount,
+                'credit': 0.0,
+                'account_id': return_partner.property_account_payable.id,
+                'name': self.name,
+                }))
+
+        return {
+            'line_id': lines_vals,
+            'ref': ref,
+            'name': self.name,
+            'journal_id': journal.id,
+        }
+
+    @api.multi
     def action_confirm(self):
         for record in self:
-            move_vals = {
-                'das': 'sada',
-            }
+            move_vals = record.get_move_vals()
             move = self.move_id.create(move_vals)
             self.move_id = move.id
         self.write({'state': 'confirmed'})
@@ -86,6 +118,11 @@ class advance_return(models.Model):
 
     @api.multi
     def action_cancel(self):
+        for record in self:
+            if record.move_id:
+                raise Warning(_(
+                    'You can not cancel a return if there is a move linked!\n'
+                    'Please delete it first'))
         self.write({'state': 'cancel'})
         return True
 
