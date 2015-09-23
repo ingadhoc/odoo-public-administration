@@ -107,12 +107,54 @@ class account_voucher(models.Model):
                 business_days_to_add -= 1
         self.payment_date = current_date
 
-    @api.constrains('state', 'to_pay_amount')
-    def check_to_pay_amount(self):
-        for voucher in self:
-            if self.state == 'confirmed' and not voucher.to_pay_amount:
-                raise Warning(_('You can not confirm a voucher with to pay\
-                    amount equal to 0'))
+    # no need for this, dlete if needed
+    # @api.constrains('state', 'journal_id', 'amount')
+    # def check_journal_amount_restriction(self):
+    #     """
+    #     We overwrrite 'account_voucher_constraint' function to check also
+    #     for "to signature" state
+    #     """
+    #     for voucher in self.filtered(
+    #             lambda x: x.state in ['posted', 'signature_process']):
+    #         journal = self.journal_id
+    #         if (
+    #                 journal.voucher_amount_restriction == 'cant_be_cero' and
+    #                 not voucher.amount
+    #                 ):
+    #             raise Warning(_(
+    #                 "On Journal '%s' amount can't be cero!\n"
+    #                 "* Voucher id: %i") % (journal.name, voucher.id))
+    #         elif (
+    #                 journal.voucher_amount_restriction == 'must_be_cero' and
+    #                 voucher.amount
+    #                 ):
+    #             raise Warning(_(
+    #                 "On Journal '%s' amount must be cero!\n"
+    #                 "* Voucher id: %i") % (journal.name, voucher.id))
+    #     return True
+
+    @api.constrains('state', 'journal_id', 'to_pay_amount')
+    def check_journal_amount_restriction_with_double_validation(self):
+        """
+        We add this constraint that lins double validation module and
+        voucher reconcile
+        """
+        for voucher in self.filtered(lambda x: x.state == 'confirmed'):
+            journal = self.journal_id
+            if (
+                    journal.voucher_amount_restriction == 'cant_be_cero' and
+                    not voucher.to_pay_amount
+                    ):
+                raise Warning(_(
+                    "On Journal '%s' to pay amount can't be cero!\n"
+                    "* Voucher id: %i") % (journal.name, voucher.id))
+            elif (
+                    journal.voucher_amount_restriction == 'must_be_cero' and
+                    voucher.to_pay_amount
+                    ):
+                raise Warning(_(
+                    "On Journal '%s' to pay amount must be cero!\n"
+                    "* Voucher id: %i") % (journal.name, voucher.id))
         return True
 
 # We add signature states

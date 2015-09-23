@@ -78,6 +78,7 @@
         'l10n_ar_invoice',
         'l10n_ar_aeroo_voucher',
         'public_budget',
+        'account_voucher_constraint',
         'account_asset',
         'account_statement_aeroo_report',
         'share',
@@ -94,4 +95,4 @@ Customizaciones especificas al modulo public_budget para SIPRECO
     'installable': True,
     'name': 'Public Budget Sipreco Customizations',
     'test': [],
-    'version': '8.0.0.2.0'}
+    'version': '8.0.1.2.0'}
