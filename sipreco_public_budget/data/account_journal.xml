@@ -100,7 +100,7 @@
             <field name="update_posted" eval="True"/>
             <field name="company_id" ref="base.main_company"/>
             <field name="sequence_id" ref="sipreco_public_budget.general_journal_sequence"/>
-            <field name="voucher_amount_restriction">must_be_cero"</field>
+            <field name="voucher_amount_restriction">must_be_cero</field>
         </record>
 
     </data>
