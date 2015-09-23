@@ -3,12 +3,18 @@ from openerp import models, fields, api, _
 from openerp.exceptions import Warning
 
 
+class account_voucher_line(models.Model):
+    _inherit = 'account.voucher.line'
+
+    to_pay_amount = fields.Float(
+        related='move_line_id.invoice.to_pay_amount'
+        )
+
+
 class account_voucher(models.Model):
     """"""
 
-    _name = 'account.voucher'
-    _inherits = {}
-    _inherit = ['account.voucher']
+    _inherit = 'account.voucher'
 
     budget_id = fields.Many2one(
         related='transaction_id.budget_id',

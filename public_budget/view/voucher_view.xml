@@ -35,6 +35,14 @@
                     <attribute name="create">false</attribute>
                 </form>
 
+                <xpath expr="//field[@name='line_dr_ids']//field[@name='amount_unreconciled']" position="after">
+                    <field name="to_pay_amount"/>
+                </xpath>
+
+                <xpath expr="//field[@name='line_cr_ids']//field[@name='amount_unreconciled']" position="after">
+                    <field name="to_pay_amount"/>
+                </xpath>
+
                 <!-- we add transaciton on jorunal an partner for onchange -->
                 <field name="journal_id" position="attributes">
                     <attribute name="context">{'transaction_id': transaction_id}</attribute>
