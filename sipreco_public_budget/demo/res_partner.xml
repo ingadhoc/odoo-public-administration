@@ -2,20 +2,8 @@
 <openerp>
     <data>
     <!-- <data noupdate="True"> -->
-        <!-- ret/per sf iibb -->
-        <record id="sipreco_public_budget.res_partner_api" model="res.partner">
-            <field name="name">API Santa Fe</field>
-            <field name="supplier" eval="True"/>
-        </record>
-
-        <record id="sipreco_public_budget.res_partner_muni_rosario" model="res.partner">
-            <field name="name">Municipalidad Rosario</field>
-            <field name="supplier" eval="True"/>
-        </record>
-
     <!-- Partners de sueldos -->
-    <!-- Los movimos a demo, no los cargamos porque la los cargaron a mano -->
-<!--         <record id="sipreco_public_budget.personal_permanente" model="res.partner">
+        <record id="sipreco_public_budget.personal_permanente" model="res.partner">
             <field name="name">Personal Permanente</field>
             <field name="supplier" eval="True"/>
             <field name="responsability_id" ref="l10n_ar_invoice.res_IVAE"/>
@@ -37,6 +25,6 @@
             <field name="responsability_id" ref="l10n_ar_invoice.res_IVAE"/>
             <field name="document_type_id" ref="l10n_ar_invoice.res_IVAE"/>
             <field name="document_number">30000000</field>
-        </record> -->
+        </record>
     </data>
 </openerp>

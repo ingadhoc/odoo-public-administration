@@ -48,6 +48,7 @@
     'demo': [
         'demo/company_demo.xml',
         'demo/res.partner.csv',
+        'demo/res_partner.xml',
         'demo/public_budget.location.csv',
         'demo/user_demo.xml',
         'demo/account.account.csv',
