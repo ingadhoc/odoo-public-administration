@@ -309,7 +309,7 @@ class transaction(models.Model):
                     'line_dr_ids', False) if isinstance(vals, dict)]
             voucher_vals = {
                 'type': 'payment',
-                'receiptbook_id': self.budget_id.receiptbook_id.id,
+                # 'receiptbook_id': self.budget_id.receiptbook_id.id,
                 'expedient_id': self.expedient_id.id,
                 'partner_id': partner.id,
                 'transaction_id': self.id,

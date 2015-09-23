@@ -14,7 +14,8 @@
         </record>
 
     <!-- Partners de sueldos -->
-        <record id="sipreco_public_budget.personal_permanente" model="res.partner">
+    <!-- No los cargamos porque la los cargaron a mano -->
+<!--         <record id="sipreco_public_budget.personal_permanente" model="res.partner">
             <field name="name">Personal Permanente</field>
             <field name="supplier" eval="True"/>
             <field name="responsability_id" ref="l10n_ar_invoice.res_IVAE"/>
@@ -36,6 +37,6 @@
             <field name="responsability_id" ref="l10n_ar_invoice.res_IVAE"/>
             <field name="document_type_id" ref="l10n_ar_invoice.res_IVAE"/>
             <field name="document_number">30000000</field>
-        </record>
+        </record> -->
     </data>
 </openerp>

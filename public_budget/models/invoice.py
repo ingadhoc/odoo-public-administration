@@ -65,15 +65,18 @@ class invoice(models.Model):
     # number of times this reconciliation is used in an invoice (so we split
     # the residual amount between all invoice)
     def _compute_to_pay_amount(self):
-        paid_amount = self.amount_total - self.residual
         voucher_lines = self.env['account.voucher.line'].search([
             ('move_line_id.move_id', '=', self.move_id.id),
             ('amount', '!=', 0),
             ('voucher_id.state', 'not in', ('cancel', 'draft')),
             ])
         to_pay_amount = sum([x.amount for x in voucher_lines])
-        if paid_amount > to_pay_amount:
-            to_pay_amount = paid_amount
+        # if invoice is open we ensure that to paid amount is not lower than
+        # paid amount
+        if self.state in ['open']:
+            paid_amount = self.amount_total - self.residual
+            if paid_amount > to_pay_amount:
+                to_pay_amount = paid_amount
         self.to_pay_amount = to_pay_amount
 
     @api.multi
