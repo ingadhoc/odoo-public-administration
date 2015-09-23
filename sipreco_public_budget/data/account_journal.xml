@@ -90,7 +90,7 @@
             <field name="sequence_id" ref="sipreco_public_budget.general_journal_sequence"/>
         </record>
         <record id="sipreco_public_budget.concillation_journal" model="account.journal">
-            <field name="name">Varios</field>
+            <field name="name">Conciliación (Vales/OP)</field>
             <field name="code">09CO</field>
             <field name="type">bank</field>
             <field name="default_credit_account_id" ref="account_account_9"/>
