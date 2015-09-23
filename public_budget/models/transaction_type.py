@@ -36,8 +36,7 @@ class transaction_type(models.Model):
         'res.company',
         string='Company',
         required=True,
-        default=lambda self: self.env['res.company']._company_default_get(
-            'public_budget.transaction_type')
+        default=lambda self: self.env.user.company_id,
         )
 
     @api.one

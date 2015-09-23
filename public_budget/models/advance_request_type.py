@@ -33,8 +33,7 @@ class advance_request_type(models.Model):
         'res.company',
         string='Company',
         required=True,
-        default=lambda self: self.env['res.company']._company_default_get(
-            'public_budget.advance_request_type')
+        default=lambda self: self.env.user.company_id,
         )
 
     @api.one
