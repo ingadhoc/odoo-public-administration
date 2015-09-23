@@ -89,6 +89,19 @@
             <field name="company_id" ref="base.main_company"/>
             <field name="sequence_id" ref="sipreco_public_budget.general_journal_sequence"/>
         </record>
+        <record id="sipreco_public_budget.concillation_journal" model="account.journal">
+            <field name="name">Conciliación (Vales/OP)</field>
+            <field name="code">09CO</field>
+            <field name="type">bank</field>
+            <field name="default_credit_account_id" ref="account_account_9"/>
+            <field name="default_debit_account_id" ref="account_account_9"/>
+            <field name="use_documents" eval="False"/>
+            <field name="entry_posted" eval="True"/>
+            <field name="update_posted" eval="True"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="sequence_id" ref="sipreco_public_budget.general_journal_sequence"/>
+            <field name="voucher_amount_restriction">must_be_cero</field>
+        </record>
 
     </data>
 </openerp>
