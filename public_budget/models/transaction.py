@@ -287,6 +287,9 @@ class transaction(models.Model):
         vouchers = self.env['account.voucher']
         for invoice in self.invoice_ids.filtered(
                 lambda r: r.state == 'open'):
+            # exclude invoices that hast been send to paid
+            if invoice.to_pay_amount == invoice.residual:
+                continue
             journal = self.env['account.journal'].search([
                 ('company_id', '=', invoice.company_id.id),
                 ('type', 'in', ('cash', 'bank'))], limit=1)
