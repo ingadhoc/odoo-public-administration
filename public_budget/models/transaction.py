@@ -283,6 +283,7 @@ class transaction(models.Model):
     @api.multi
     def mass_voucher_create(self):
         self.ensure_one()
+        self = self.with_context(transaction_id=self.id)
         vouchers = self.env['account.voucher']
         for invoice in self.invoice_ids.filtered(
                 lambda r: r.state == 'open'):
