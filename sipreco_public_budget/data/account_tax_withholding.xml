@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data noupdate="0">
+    <data noupdate="1">
     <!-- <data noupdate="1"> -->
         <record id="sipreco_public_budget.retencion_ganancias" model="account.tax.withholding">
             <field name="name">AFIP Retención Impuesto a las Ganancias</field>
