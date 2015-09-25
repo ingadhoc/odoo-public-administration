@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data noupdate="False">
+        <record model='afip.document_type' id='dt_File'>
+                <field name='code'>Legajo</field>
+                <field name='name'>Legajo</field>
+                <field name='afip_code'>100</field>
+        <field name='active' eval="True"/>
+        </record> 
+    </data>
+</openerp>
