@@ -44,6 +44,7 @@
         'data/tax_settlement.xml',
         'data/advance_request_type.xml',
         'security/security.xml',
+        'data/document_type.xml',
     ],
     'demo': [
         'demo/company_demo.xml',

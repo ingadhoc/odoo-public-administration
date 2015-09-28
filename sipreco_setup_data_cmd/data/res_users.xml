@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data>
-    <!-- <data noupdate="1"> -->
+    <!-- <data> -->
+    <data noupdate="1">
 
 <!-- Partners para usuarios -->
        <!--  <record id="sipreco_public_budget.res_partner_alejandro" model="res.partner">
@@ -78,7 +78,7 @@
         </record>
 
         <record id="sipreco_public_budget.res_partner_jesus" model="res.partner">
-            <field name="name">Jesus Farias</field>
+            <field name="name">Jesus Ferreri</field>
             <field name="email">jesus@mail.com</field>
             <field name="document_type_id" ref="l10n_ar_invoice.dt_DNI"/>
             <field name="document_number">31393297</field>
@@ -155,8 +155,8 @@
         </record>
 
         <record id="sipreco_public_budget.res_user_jesus" model="res.users">
-            <field name="login">jfarias</field>
-            <field name="password">jfarias</field>
+            <field name="login">jferreri</field>
+            <field name="password">jferreri</field>
             <field name="partner_id" ref="sipreco_public_budget.res_partner_jesus"/>
             <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/>
             <field name="location_ids" eval="[(6,0,[ref('sipreco_public_budget.public_location_habilitaciones')])]"/>

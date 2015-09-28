@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data>
-    <!-- <data noupdate="1"> -->
+    <!-- <data> -->
+    <data noupdate="1">
 
 <!-- Partners para usuarios -->
         <record id="sipreco_public_budget.res_partner_alejandro" model="res.partner">
@@ -15,7 +15,7 @@
         </record>
 
         <record id="sipreco_public_budget.res_partner_ivan" model="res.partner">
-            <field name="name">Ivan Michniuk</field>
+            <field name="name">Iván Michniuk</field>
             <field name="email">ivan@mail.com</field>
             <field name="document_type_id" ref="l10n_ar_invoice.dt_DNI"/>
             <field name="document_number">31393297</field>

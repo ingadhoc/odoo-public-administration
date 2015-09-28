@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data noupdate="0">
+    <data noupdate="1">
     <!-- <data noupdate="1"> -->
     <!-- IMPORTANTE USAR EN LOS ID budg_position_xx y no budg_pos_xx asi no se pisa con los datos demo -->
         <record id="sipreco_public_budget.budg_position_10" model="public_budget.budget_position">

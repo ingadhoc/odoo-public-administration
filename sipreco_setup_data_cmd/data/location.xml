@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data noupdate="0">
+    <data noupdate="1">
     <!-- <data noupdate="1"> -->
         <record id="sipreco_public_budget.public_location_secretaria" model="public_budget.location">
             <field name="name">Secretaria</field>
