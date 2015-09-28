@@ -12,6 +12,10 @@
             <field name="name">Municipalidad Rosario</field>
             <field name="supplier" eval="True"/>
         </record>
+        <record id="sipreco_public_budget.res_partner_afip" model="res.partner">
+            <field name="name">AFIP Ganancias</field>
+            <field name="supplier" eval="True"/>
+        </record>
 
     <!-- Partners de sueldos -->
     <!-- Los movimos a demo, no los cargamos porque la los cargaron a mano -->
