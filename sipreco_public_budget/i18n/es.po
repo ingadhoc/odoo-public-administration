@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: odoo-public-administration (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-23 11:35+0000\n"
-"PO-Revision-Date: 2015-09-23 12:00+0000\n"
+"POT-Creation-Date: 2015-09-28 15:03+0000\n"
+"PO-Revision-Date: 2015-09-28 13:27+0000\n"
 "Last-Translator: Gonzalo Ruzafa <gr@ingadhoc.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/adhoc/ingadhoc-odoo-public-administration-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -69,7 +69,7 @@ msgid "Cancel Receipt"
 msgstr "Cancelar Recibo"
 
 #. module: sipreco_public_budget
-#: code:addons/sipreco_public_budget/models/account_voucher.py:126
+#: code:addons/sipreco_public_budget/models/account_voucher.py:173
 #, python-format
 msgid "Cancelled"
 msgstr "Cancelado"
@@ -99,7 +99,7 @@ msgid "Concurso de Precios"
 msgstr "Concurso de Precios"
 
 #. module: sipreco_public_budget
-#: code:addons/sipreco_public_budget/models/account_voucher.py:123
+#: code:addons/sipreco_public_budget/models/account_voucher.py:170
 #, python-format
 msgid "Confirmed"
 msgstr "Confirmado"
@@ -162,7 +162,7 @@ msgstr "Número de Documento"
 
 #. module: sipreco_public_budget
 #: code:addons/sipreco_public_budget/models/account_check.py:15
-#: code:addons/sipreco_public_budget/models/account_voucher.py:122
+#: code:addons/sipreco_public_budget/models/account_voucher.py:169
 #, python-format
 msgid "Draft"
 msgstr "Borrador"
@@ -255,6 +255,22 @@ msgid "OTROS IMPUESTOS"
 msgstr "OTROS IMPUESTOS"
 
 #. module: sipreco_public_budget
+#: code:addons/sipreco_public_budget/models/account_voucher.py:153
+#, python-format
+msgid ""
+"On Journal '%s' to pay amount can't be cero!\n"
+"* Voucher id: %i"
+msgstr "En el Diario '%s' el Monto a Pagar no puede ser Cero!\n* Id de Comprobante: %i"
+
+#. module: sipreco_public_budget
+#: code:addons/sipreco_public_budget/models/account_voucher.py:160
+#, python-format
+msgid ""
+"On Journal '%s' to pay amount must be cero!\n"
+"* Voucher id: %i"
+msgstr "En el Diario '%s' el Monto a Pagar no puede ser Cero!\n* Id de Comprobante: %i"
+
+#. module: sipreco_public_budget
 #: model:public_budget.transaction_type,name:sipreco_public_budget.purchase_type_orden_de_trabajo
 #: model:public_budget.transaction_type,name:sipreco_public_budget.purchase_type_orden_de_trabajo_demo
 msgid "Orden de Trabajo (adicional empleado)"
@@ -277,7 +293,7 @@ msgid "Otras Retenciones/SIJP"
 msgstr "Otras Retenciones/SIJP"
 
 #. module: sipreco_public_budget
-#: code:addons/sipreco_public_budget/models/account_voucher.py:129
+#: code:addons/sipreco_public_budget/models/account_voucher.py:176
 #, python-format
 msgid "Paid"
 msgstr "Pagado"
@@ -347,7 +363,7 @@ msgid "Print Receipt"
 msgstr "Imprimir Recibo"
 
 #. module: sipreco_public_budget
-#: code:addons/sipreco_public_budget/models/account_voucher.py:127
+#: code:addons/sipreco_public_budget/models/account_voucher.py:174
 #, python-format
 msgid "Pro-forma"
 msgstr "Pro-Forma"
@@ -396,14 +412,14 @@ msgid "Show Print Receipt Button"
 msgstr "Mostrar Botón de Imprimir Recibo"
 
 #. module: sipreco_public_budget
-#: code:addons/sipreco_public_budget/models/account_voucher.py:124
+#: code:addons/sipreco_public_budget/models/account_voucher.py:171
 #, python-format
 msgid "Signature Process"
 msgstr "Proceso de Firma"
 
 #. module: sipreco_public_budget
 #: view:account.voucher:sipreco_public_budget.view_vendor_payment_signature_form
-#: code:addons/sipreco_public_budget/models/account_voucher.py:125
+#: code:addons/sipreco_public_budget/models/account_voucher.py:172
 #, python-format
 msgid "Signed"
 msgstr "Firmado"
@@ -507,15 +523,7 @@ msgid "You can not cancel third checks that are being used on payments"
 msgstr "No puede cancelar Cheques de Terceros, que estén siendo usados en pagos."
 
 #. module: sipreco_public_budget
-#: code:addons/sipreco_public_budget/models/account_voucher.py:114
-#, python-format
-msgid ""
-"You can not confirm a voucher with to pay                    amount equal to"
-" 0"
-msgstr "No puedes Confirmar una Orden de Pago si su monto A Pagar es igual a 0."
-
-#. module: sipreco_public_budget
-#: code:addons/sipreco_public_budget/models/account_voucher.py:138
+#: code:addons/sipreco_public_budget/models/account_voucher.py:185
 #, python-format
 msgid ""
 "You can not send to sign process a Voucher                     that has "

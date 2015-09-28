@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: odoo-public-administration (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-23 11:35+0000\n"
+"POT-Creation-Date: 2015-09-28 15:03+0000\n"
 "PO-Revision-Date: 2015-09-23 12:00+0000\n"
 "Last-Translator: Gonzalo Ruzafa <gr@ingadhoc.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/adhoc/ingadhoc-odoo-public-administration-8-0/language/es/)\n"
@@ -505,14 +505,14 @@ msgid "Company"
 msgstr "Compañía"
 
 #. module: public_budget
-#: code:addons/public_budget/models/advance_request_type.py:44
-#: code:addons/public_budget/models/transaction_type.py:50
+#: code:addons/public_budget/models/advance_request_type.py:43
+#: code:addons/public_budget/models/transaction_type.py:49
 #, python-format
 msgid "Company must be the same as Account Company!"
 msgstr "La Compañía debe ser la misma que la Compañía de la cuenta!"
 
 #. module: public_budget
-#: code:addons/public_budget/models/advance_request_type.py:47
+#: code:addons/public_budget/models/advance_request_type.py:46
 #, python-format
 msgid "Company must be the same as Journal Company!"
 msgstr "La compañía debe ser la misma que la Compañía del Diario!"
@@ -949,7 +949,7 @@ msgid "In Transit?"
 msgstr "En tránsito?"
 
 #. module: public_budget
-#: code:addons/public_budget/models/voucher.py:136
+#: code:addons/public_budget/models/voucher.py:142
 #, python-format
 msgid ""
 "In advance transactions, payment orders amount (%s) can not be greater than "
@@ -957,7 +957,7 @@ msgid ""
 msgstr "En Transacciones con Adelanto, el monto de las Órdenes de Pago (%s) no puede ser superior que el monto remanente de adelanto (%s)"
 
 #. module: public_budget
-#: code:addons/public_budget/models/voucher.py:155
+#: code:addons/public_budget/models/voucher.py:161
 #, python-format
 msgid "In each line, Amount can not be greater than Open Balance"
 msgstr "En cada línea, el Monto no puede ser superior que el Saldo Abierto"
@@ -971,7 +971,7 @@ msgid ""
 msgstr "En cada Rama, sólo una Partida Presupuestaria puede tener la opción \"Asignación de Presupuesto Permitida\" activada"
 
 #. module: public_budget
-#: code:addons/public_budget/models/voucher.py:117
+#: code:addons/public_budget/models/voucher.py:123
 #, python-format
 msgid ""
 "In payment of advance transaction type, you need to                        "
@@ -1254,7 +1254,7 @@ msgstr "Nombre"
 
 #. module: public_budget
 #: code:addons/public_budget/models/advance_request_line.py:79
-#: code:addons/public_budget/models/transaction.py:294
+#: code:addons/public_budget/models/transaction.py:297
 #, python-format
 msgid "No bank or cash journal found for company \"%s\""
 msgstr "No existe diario de banco o caja para la compañía \"%s\""
@@ -1265,14 +1265,14 @@ msgid "Normal"
 msgstr "Normal"
 
 #. module: public_budget
-#: code:addons/public_budget/models/invoice.py:106
+#: code:addons/public_budget/models/invoice.py:109
 #, python-format
 msgid ""
 "Not Transaction in actual invoice, can not create             direct Payment"
 msgstr "No existe Transacción en el presente Comprobante, no puedes crear Pago Directo"
 
 #. module: public_budget
-#: code:addons/public_budget/models/transaction.py:365
+#: code:addons/public_budget/models/transaction.py:368
 #, python-format
 msgid "Not period found for this date"
 msgstr "No hay periodo encontrado para esta fecha."
@@ -1363,7 +1363,7 @@ msgid "Partner"
 msgstr "Cliente/Proveedor"
 
 #. module: public_budget
-#: code:addons/public_budget/models/voucher.py:46
+#: code:addons/public_budget/models/voucher.py:52
 #, python-format
 msgid "Partners"
 msgstr "Empresas/Partners"
@@ -1469,7 +1469,7 @@ msgid "Preventive Perc."
 msgstr "% Preventivo"
 
 #. module: public_budget
-#: code:addons/public_budget/models/transaction.py:449
+#: code:addons/public_budget/models/transaction.py:452
 #, python-format
 msgid ""
 "Preventive Total, Type and Date are not compatible with Transaction Amount "
@@ -1506,14 +1506,14 @@ msgstr "Devolución"
 
 #. module: public_budget
 #: code:addons/public_budget/models/transaction.py:101
-#: code:addons/public_budget/models/voucher.py:36
+#: code:addons/public_budget/models/voucher.py:42
 #: field:public_budget.transaction,budget_position_ids:0
 #, python-format
 msgid "Related Budget Positions"
 msgstr "Partidas Presupuestarias Relacionadas"
 
 #. module: public_budget
-#: code:addons/public_budget/models/voucher.py:41
+#: code:addons/public_budget/models/voucher.py:47
 #, python-format
 msgid "Related Invoices"
 msgstr "Comprobantes Relacionados"
@@ -1720,7 +1720,7 @@ msgid "To Revision"
 msgstr "A Revision"
 
 #. module: public_budget
-#: code:addons/public_budget/models/transaction.py:410
+#: code:addons/public_budget/models/transaction.py:413
 #, python-format
 msgid ""
 "To close a transaction there must be at least one                    "
@@ -1728,7 +1728,7 @@ msgid ""
 msgstr "Para cerrar una Transacción tiene que haber al menos una línea Preventiva."
 
 #. module: public_budget
-#: code:addons/public_budget/models/transaction.py:431
+#: code:addons/public_budget/models/transaction.py:434
 #, python-format
 msgid ""
 "To close a transaction to return amount must be 0!\n"
@@ -1737,7 +1737,7 @@ msgid ""
 msgstr "Para cerrar una Transacción, el monto A devolver debe ser 0!\n* Monto a Devolver = Monto pagado por adelantado - Monto Devengado\n(%s = %s - %s)"
 
 #. module: public_budget
-#: code:addons/public_budget/models/transaction.py:420
+#: code:addons/public_budget/models/transaction.py:423
 #, python-format
 msgid ""
 "To close a transaction, Preventive, Definitive, Invoiced,"
@@ -2020,7 +2020,7 @@ msgid ""
 msgstr "No puedes setear la Partida %s a \"Asignación de Presupuesto Admitida\" ya que la Partida Hija %s lo tiene seteado"
 
 #. module: public_budget
-#: code:addons/public_budget/models/invoice.py:83
+#: code:addons/public_budget/models/invoice.py:86
 #, python-format
 msgid ""
 "You cannot cancel an invoice which has been sent to pay.                    "
