@@ -1,0 +1,2623 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* sipreco_public_budget
+#	* public_budget
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-09-29 11:41+0000\n"
+"PO-Revision-Date: 2015-09-29 11:41+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: public_budget
+#: model:ir.actions.act_window,help:public_budget.action_public_budget_budget_budgets
+msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Budgets.</p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Budgets.</p>\n"
+"            "
+
+#. module: public_budget
+#: model:ir.actions.act_window,help:public_budget.action_public_budget_expedient_category_categories
+msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Categories.</p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Categories.</p>\n"
+"            "
+
+#. module: public_budget
+#: model:ir.actions.act_window,help:public_budget.action_res_partner_employees
+msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Employees.</p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Employees.</p>\n"
+"            "
+
+#. module: public_budget
+#: model:ir.actions.act_window,help:public_budget.action_public_budget_expedient_expedients
+msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Expedients.</p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Expedients.</p>\n"
+"            "
+
+#. module: public_budget
+#: model:ir.actions.act_window,help:public_budget.action_public_budget_expedient_founder_founders
+msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Founders.</p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Founders.</p>\n"
+"            "
+
+#. module: public_budget
+#: model:ir.actions.act_window,help:public_budget.action_public_budget_location_locations
+msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Locations.</p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Locations.</p>\n"
+"            "
+
+#. module: public_budget
+#: model:ir.actions.act_window,help:public_budget.action_public_budget_budget_pos_exc_rest_position_exc__rest_
+msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Position Exc. Rest..</p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Position Exc. Rest..</p>\n"
+"            "
+
+#. module: public_budget
+#: model:ir.actions.act_window,help:public_budget.action_public_budget_budget_position_category_position_types
+msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Position Types.</p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Position Types.</p>\n"
+"            "
+
+#. module: public_budget
+#: model:ir.actions.act_window,help:public_budget.action_public_budget_budget_position_positions
+msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Positions.</p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Positions.</p>\n"
+"            "
+
+#. module: public_budget
+#: model:ir.actions.act_window,help:public_budget.action_public_budget_remit_remits
+msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Remits.</p>\n"
+"            "
+msgstr "Click para Crear Remitos"
+
+#. module: sipreco_public_budget
+#: model:ir.actions.act_window,help:sipreco_public_budget.action_res_partner_suppliers
+msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Subsidy Recipent.</p>\n"
+"            "
+msgstr "Click para Crear un Receptor de Subsidios"
+
+#. module: public_budget
+#: model:ir.actions.act_window,help:public_budget.action_res_partner_suppliers
+msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Suppliers.</p>\n"
+"            "
+msgstr "Click para Crear Proveedores"
+
+#. module: public_budget
+#: model:ir.actions.act_window,help:public_budget.action_public_budget_transaction_type_transaction_types
+msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Transaction Types.</p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Transaction Types.</p>\n"
+"            "
+
+#. module: public_budget
+#: model:ir.actions.act_window,help:public_budget.action_public_budget_transaction_transactions
+msgid "<p class=\"oe_view_nocontent_create\"> Click to create a Transactions.</p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\"> Click to create a Transactions.</p>\n"
+"            "
+
+#. module: public_budget
+#: field:public_budget.advance_request_type,account_id:0
+#: field:public_budget.preventive_line,account_id:0
+msgid "Account"
+msgstr "Cuenta"
+
+#. module: sipreco_public_budget
+#: model:ir.model,name:sipreco_public_budget.model_account_check
+msgid "Account Check"
+msgstr "Cheque"
+
+#. modules: sipreco_public_budget, public_budget
+#: model:ir.model,name:public_budget.model_account_voucher
+#: model:ir.model,name:sipreco_public_budget.model_account_voucher
+msgid "Accounting Voucher"
+msgstr "Voucher de contabilidad"
+
+#. module: public_budget
+#: field:public_budget.transaction_type,advance_account_id:0
+msgid "Advance Account"
+msgstr "Cuenta Adelanto"
+
+#. module: public_budget
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_form
+msgid "Advance Lines"
+msgstr "Lineas Adelanto"
+
+#. module: public_budget
+#: code:addons/public_budget/models/transaction.py:153
+#, python-format
+msgid "Advance Paid Amount"
+msgstr "Monto de Adelanto Pagado"
+
+#. module: public_budget
+#: field:public_budget.transaction,advance_voucher_ids:0
+msgid "Advance Payment Orders"
+msgstr "Órdenes de Pago Adelantado"
+
+#. module: public_budget
+#: code:addons/public_budget/models/transaction.py:143
+#, python-format
+msgid "Advance Preventive Amount"
+msgstr "Monto Preventivo de Adelanto"
+
+#. module: public_budget
+#: code:addons/public_budget/models/transaction.py:108
+#: field:public_budget.transaction,advance_preventive_line_ids:0
+#, python-format
+msgid "Advance Preventive Lines"
+msgstr "Lineas Preventivas Adelanto"
+
+#. module: public_budget
+#: code:addons/public_budget/models/transaction.py:159
+#, python-format
+msgid "Advance Remaining Amount"
+msgstr "Monto Remanente de Adelanto"
+
+#. module: public_budget
+#: field:account.voucher,advance_request_line_ids:0
+#: model:ir.model,name:public_budget.model_public_budget_advance_request_line
+msgid "Advance Request Line"
+msgstr "Advance Request Line"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_advance_request_type
+#: view:public_budget.advance_request_type:public_budget.view_public_budget_advance_request_type_filter
+#: view:public_budget.advance_request_type:public_budget.view_public_budget_advance_request_type_form
+#: view:public_budget.advance_request_type:public_budget.view_public_budget_advance_request_type_tree
+msgid "Advance Request Type"
+msgstr "Tipo de Requerimiento de Adelanto"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_public_budget_advance_request_types
+#: model:ir.ui.menu,name:public_budget.menu_advance_request_types
+msgid "Advance Request Types"
+msgstr "Tipos de Requerimientos de Adelanto"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_public_budget_advance_request_advance_requests
+#: model:ir.ui.menu,name:public_budget.menu_advance_requests
+#: model:ir.ui.menu,name:public_budget.menu_advance_requests_main
+msgid "Advance Requests"
+msgstr "Requerimientos de Adelanto"
+
+#. module: public_budget
+#: view:public_budget.advance_return:public_budget.view_public_budget_advance_return_filter
+#: view:public_budget.advance_return:public_budget.view_public_budget_advance_return_form
+#: view:public_budget.advance_return:public_budget.view_public_budget_advance_return_tree
+msgid "Advance Return"
+msgstr "Devolución de Adelanto"
+
+#. module: public_budget
+#: view:public_budget.advance_return:public_budget.view_public_budget_advance_return_form
+msgid "Advance Return Line"
+msgstr "Linea de Devolución de Adelanto"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_public_budget_advance_returns
+#: model:ir.ui.menu,name:public_budget.menu_advance_returns
+msgid "Advance Returns"
+msgstr "Devoluciones de Adelanto"
+
+#. module: public_budget
+#: code:addons/public_budget/models/transaction.py:148
+#, python-format
+msgid "Advance To Pay Amount"
+msgstr "Monto de Adelanto a Pagar"
+
+#. module: public_budget
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_form
+msgid "Affectations"
+msgstr "Afectaciones"
+
+#. module: public_budget
+#: code:addons/public_budget/models/preventive_line.py:75
+#: field:public_budget.preventive_line,affects_budget:0
+#, python-format
+msgid "Affects Budget?"
+msgstr "Afecta Presupuesto?"
+
+#. module: public_budget
+#: selection:public_budget.budget_pos_exc_rest,type:0
+msgid "Alert"
+msgstr "Alerta"
+
+#. module: public_budget
+#: view:res.users:public_budget.view_public_budget_users_form
+msgid "Allowed Companies"
+msgstr "Compañías Permitidas"
+
+#. module: public_budget
+#: view:res.users:public_budget.view_public_budget_users_form
+#: field:res.users,location_ids:0
+msgid "Allowed Locations"
+msgstr "Ubicaciones Permitidas"
+
+#. module: public_budget
+#: code:addons/public_budget/models/budget_position.py:87
+#: field:public_budget.budget_modification_detail,amount:0
+#: field:public_budget.budget_prec_detail,amount:0
+#: field:public_budget.definitive.make.invoice.detail,to_invoice_amount:0
+#: field:public_budget.definitive_line,amount:0
+#: field:public_budget.funding_move,amount:0
+#, python-format
+msgid "Amount"
+msgstr "Monto"
+
+#. module: public_budget
+#: field:public_budget.transaction_type,amount_restriction_ids:0
+msgid "Amount Restrictions"
+msgstr "Restricciones de Monto"
+
+#. module: public_budget
+#: view:public_budget.budget:public_budget.view_public_budget_budget_form
+msgid "Analysis"
+msgstr "Análisis"
+
+#. module: public_budget
+#: selection:public_budget.expedient,state:0
+msgid "Annulled"
+msgstr "Anulado"
+
+#. module: sipreco_public_budget
+#: model:public_budget.transaction_type,name:sipreco_public_budget.purchase_type_anticipo_gasto
+msgid "Anticipo de Gastos"
+msgstr "Anticipo de Gastos"
+
+#. module: public_budget
+#: view:public_budget.advance_request:public_budget.view_public_budget_advance_request_form
+msgid "Approve"
+msgstr "Aprobar"
+
+#. module: public_budget
+#: selection:public_budget.advance_request,state:0
+msgid "Approved"
+msgstr "Aprobado"
+
+#. module: public_budget
+#: field:public_budget.advance_request_line,approved_amount:0
+msgid "Approved Amount"
+msgstr "Monto Aprobado"
+
+#. module: public_budget
+#: code:addons/public_budget/models/advance_request_line.py:66
+#, python-format
+msgid "Approved Amount can not be greater than Requested Amount"
+msgstr "El  Monto Aprobado no puede superar el Monto Requerido"
+
+#. module: public_budget
+#: code:addons/public_budget/models/budget_position.py:128
+#: field:public_budget.budget_position,assignment_position_id:0
+#, python-format
+msgid "Assignment Position"
+msgstr "Partida Asignada"
+
+#. module: public_budget
+#: selection:public_budget.expedient,type:0
+msgid "Authorizing"
+msgstr "Autorizante"
+
+#. module: sipreco_public_budget
+#: view:account.check:sipreco_public_budget.view_account_check_form
+msgid "Back To Be Handed"
+msgstr "Volver a Pendiente de Entrega"
+
+#. module: public_budget
+#: code:addons/public_budget/models/budget_position.py:67
+#: field:public_budget.budget_prec_detail,balance_amount:0
+#, python-format
+msgid "Balance Amount"
+msgstr "Monto Remanente"
+
+#. module: public_budget
+#: selection:public_budget.budget_pos_exc_rest,type:0
+msgid "Block"
+msgstr "Bloque"
+
+#. modules: sipreco_public_budget, public_budget
+#: field:account.invoice,budget_id:0
+#: field:account.voucher,budget_id:0
+#: model:ir.model,name:public_budget.model_public_budget_budget
+#: model:ir.ui.menu,name:public_budget.menu_budget
+#: model:ir.ui.menu,name:public_budget.menu_budget_conf
+#: model:ir.ui.menu,name:public_budget.menu_budget_main
+#: view:public_budget.budget:public_budget.view_public_budget_budget_filter
+#: view:public_budget.budget:public_budget.view_public_budget_budget_form
+#: view:public_budget.budget:public_budget.view_public_budget_budget_tree
+#: field:public_budget.budget_modification,budget_id:0
+#: field:public_budget.definitive_line,budget_id:0
+#: field:public_budget.funding_move,budget_id:0
+#: field:public_budget.preventive_line,budget_id:0
+#: field:public_budget.transaction,budget_id:0
+#: model:ir.model,name:sipreco_public_budget.model_public_budget_budget
+msgid "Budget"
+msgstr "Presupuesto"
+
+#. module: public_budget
+#: field:public_budget.budget_position,budget_assignment_allowed:0
+msgid "Budget Assignment Allowed?"
+msgstr "Budget Assignment Allowed?"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_budget_modification
+#: view:public_budget.budget_modification:public_budget.view_public_budget_budget_modification_filter
+#: view:public_budget.budget_modification:public_budget.view_public_budget_budget_modification_form
+#: view:public_budget.budget_modification:public_budget.view_public_budget_budget_modification_tree
+msgid "Budget Modification"
+msgstr "Modificación de Presupuesto"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_budget_modification_detail
+#: view:public_budget.budget_modification_detail:public_budget.view_public_budget_budget_modification_detail_filter
+#: view:public_budget.budget_modification_detail:public_budget.view_public_budget_budget_modification_detail_form
+#: view:public_budget.budget_modification_detail:public_budget.view_public_budget_budget_modification_detail_tree
+msgid "Budget Modification Detail"
+msgstr "Detalle de Modificación de Presupuesto"
+
+#. module: public_budget
+#: field:public_budget.budget_modification,type:0
+msgid "Budget Modification Type"
+msgstr "Tipo de Modificación de Presupuesto"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_budget_position
+#: field:public_budget.budget_detail,budget_position_id:0
+#: field:public_budget.budget_modification_detail,budget_position_id:0
+#: view:public_budget.budget_position:public_budget.view_public_budget_budget_position_filter
+#: view:public_budget.budget_position:public_budget.view_public_budget_budget_position_form
+#: view:public_budget.budget_position:public_budget.view_public_budget_budget_position_tree
+#: field:public_budget.budget_prec_detail,budget_position_id:0
+#: field:public_budget.preventive_line,budget_position_id:0
+msgid "Budget Position"
+msgstr "Partida Presupuestaria"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_budget_position_category
+#: view:public_budget.budget_position_category:public_budget.view_public_budget_budget_position_category_filter
+#: view:public_budget.budget_position_category:public_budget.view_public_budget_budget_position_category_form
+#: view:public_budget.budget_position_category:public_budget.view_public_budget_budget_position_category_tree
+msgid "Budget Position Category"
+msgstr "Categoría de Partida Presupuestaria"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_budget_pos_exc_rest
+#: view:public_budget.budget_pos_exc_rest:public_budget.view_public_budget_budget_pos_exc_rest_filter
+#: view:public_budget.budget_pos_exc_rest:public_budget.view_public_budget_budget_pos_exc_rest_form
+#: view:public_budget.budget_pos_exc_rest:public_budget.view_public_budget_budget_pos_exc_rest_tree
+msgid "Budget Position Exchange Restriction"
+msgstr "Restricción de Intercambio de Partidas Presupuestarias"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_position_analysis_tree
+msgid "Budget Position analysis"
+msgstr "Analisis de Partidas"
+
+#. module: public_budget
+#: code:addons/public_budget/models/budget_detail.py:39
+#: sql_constraint:public_budget.budget_detail:0
+#, python-format
+msgid "Budget Position must be unique per Budget."
+msgstr "Las Partidas deben ser únicas por Presupuesto"
+
+#. module: public_budget
+#: code:addons/public_budget/models/budget.py:86
+#, python-format
+msgid "Budget Positions"
+msgstr "Partidas Presupuestarias"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_budget_prec_detail
+msgid "Budget Preclose Detail"
+msgstr "Detalle de Pre-Cierre de Presupuesto"
+
+#. modules: sipreco_public_budget, public_budget
+#: model:ir.model,name:public_budget.model_public_budget_transaction
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_filter
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_form
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_tree
+#: model:ir.model,name:sipreco_public_budget.model_public_budget_transaction
+msgid "Budget Transaction"
+msgstr "Transacción Presupuestaria"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_public_budget_budget_budgets
+#: model:ir.ui.menu,name:public_budget.menu_budgets
+msgid "Budgets"
+msgstr "Presupuestos"
+
+#. modules: sipreco_public_budget, public_budget
+#: code:addons/public_budget/models/preventive_line.py:70
+#: view:public_budget.advance_request:public_budget.view_public_budget_advance_request_form
+#: selection:public_budget.advance_request,state:0
+#: view:public_budget.advance_return:public_budget.view_public_budget_advance_return_form
+#: selection:public_budget.advance_return,state:0
+#: view:public_budget.budget:public_budget.view_public_budget_budget_form
+#: selection:public_budget.budget,state:0
+#: view:public_budget.definitive.make.invoice:public_budget.view_definitive_make_invoice
+#: view:public_budget.definitive.mass.invoice.create:public_budget.view_definitive_mass_invoice_create
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_form
+#: selection:public_budget.expedient,state:0
+#: view:public_budget.funding_move:public_budget.view_public_budget_funding_move_form
+#: selection:public_budget.funding_move,state:0
+#: view:public_budget.remit:public_budget.view_public_budget_remit_form
+#: selection:public_budget.remit,state:0
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_form
+#: selection:public_budget.transaction,state:0
+#: code:addons/sipreco_public_budget/models/account_check.py:24
+#, python-format
+msgid "Cancel"
+msgstr "Cancelado"
+
+#. module: sipreco_public_budget
+#: view:account.voucher:sipreco_public_budget.view_vendor_payment_signature_form
+msgid "Cancel Receipt"
+msgstr "Cancelar Recibo"
+
+#. module: sipreco_public_budget
+#: code:addons/sipreco_public_budget/models/account_voucher.py:173
+#, python-format
+msgid "Cancelled"
+msgstr "Cancelado"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_public_budget_expedient_category_categories
+#: model:ir.ui.menu,name:public_budget.menu_categories
+msgid "Categories"
+msgstr "Categorías"
+
+#. module: public_budget
+#: field:public_budget.budget_position,category_id:0
+#: field:public_budget.expedient,category_id:0
+msgid "Category"
+msgstr "Categoría"
+
+#. module: sipreco_public_budget
+#: code:addons/sipreco_public_budget/models/account_check.py:23
+#, python-format
+msgid "Changed"
+msgstr "Reemplazado"
+
+#. module: public_budget
+#: view:public_budget.preventive_line:public_budget.view_public_budget_preventive_line_filter
+msgid "Child Of Budget Position"
+msgstr "Hijo de Partida Presupuestaria"
+
+#. module: public_budget
+#: field:public_budget.budget_position,child_ids:0
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_form
+#: field:public_budget.expedient,child_ids:0
+msgid "Childs"
+msgstr "Hijos"
+
+#. module: public_budget
+#: view:public_budget.budget:public_budget.view_public_budget_budget_form
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_form
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_form
+msgid "Close"
+msgstr "Cerrar"
+
+#. module: public_budget
+#: code:addons/public_budget/models/preventive_line.py:69
+#: selection:public_budget.budget,state:0
+#: selection:public_budget.expedient,state:0
+#: selection:public_budget.transaction,state:0
+#, python-format
+msgid "Closed"
+msgstr "Cerrado"
+
+#. module: public_budget
+#: field:public_budget.budget_position,code:0
+msgid "Code"
+msgstr "Código"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: public_budget
+#: field:public_budget.advance_request,company_id:0
+#: field:public_budget.advance_request_type,company_id:0
+#: field:public_budget.advance_return,company_id:0
+#: field:public_budget.budget,company_id:0
+#: field:public_budget.definitive.make.invoice,company_id:0
+#: field:public_budget.definitive.mass.invoice.create,company_id:0
+#: field:public_budget.inventory_rule,company_id:0
+#: field:public_budget.transaction,company_id:0
+#: field:public_budget.transaction_type,company_id:0
+msgid "Company"
+msgstr "Compañía"
+
+#. module: public_budget
+#: code:addons/public_budget/models/advance_request_type.py:43
+#: code:addons/public_budget/models/transaction_type.py:49
+#, python-format
+msgid "Company must be the same as Account Company!"
+msgstr "La Compañía debe ser la misma que la Compañía de la cuenta!"
+
+#. module: public_budget
+#: code:addons/public_budget/models/advance_request_type.py:46
+#, python-format
+msgid "Company must be the same as Journal Company!"
+msgstr "La compañía debe ser la misma que la Compañía del Diario!"
+
+#. module: public_budget
+#: code:addons/public_budget/models/advance_request.py:119
+#: code:addons/public_budget/models/advance_return.py:133
+#: code:addons/public_budget/models/transaction.py:231
+#, python-format
+msgid "Company must be the same as Type Company!"
+msgstr "La Compañía debe ser la misma que la Compañía del Tipo especificado!"
+
+#. module: sipreco_public_budget
+#: model:public_budget.transaction_type,name:sipreco_public_budget.purchase_type_compra_directa
+msgid "Compra Directa"
+msgstr "Compra Directa"
+
+#. module: sipreco_public_budget
+#: model:public_budget.transaction_type,name:sipreco_public_budget.purchase_type_compra_directa_con_autorizacion
+msgid "Compra Directa con autorización de cuerpo"
+msgstr "Compra Directa con Autorización de Cuerpo"
+
+#. module: sipreco_public_budget
+#: model:public_budget.transaction_type,name:sipreco_public_budget.purchase_type_concurso_precios
+msgid "Concurso de Precios"
+msgstr "Concurso de Precios"
+
+#. module: public_budget
+#: model:ir.ui.menu,name:public_budget.menu_configuration
+msgid "Configuration"
+msgstr "Configuración"
+
+#. module: public_budget
+#: view:public_budget.advance_request:public_budget.view_public_budget_advance_request_form
+#: view:public_budget.advance_return:public_budget.view_public_budget_advance_return_form
+#: view:public_budget.funding_move:public_budget.view_public_budget_funding_move_form
+#: view:public_budget.remit:public_budget.view_public_budget_remit_form
+msgid "Confirm"
+msgstr "Confirmar"
+
+#. module: public_budget
+#: field:public_budget.remit,confirmation_date:0
+msgid "Confirmation Date"
+msgstr "Fecha de Confirmación"
+
+#. module: public_budget
+#: field:public_budget.remit,confirmation_user_id:0
+msgid "Confirmation User"
+msgstr "Usuario de Confirmación"
+
+#. modules: sipreco_public_budget, public_budget
+#: selection:public_budget.advance_request,state:0
+#: selection:public_budget.advance_return,state:0
+#: selection:public_budget.funding_move,state:0
+#: selection:public_budget.remit,state:0
+#: code:addons/sipreco_public_budget/models/account_voucher.py:170
+#, python-format
+msgid "Confirmed"
+msgstr "Confirmado"
+
+#. module: public_budget
+#: model:ir.ui.menu,name:public_budget.menu_contacts
+msgid "Contacts"
+msgstr "Contactos"
+
+#. module: public_budget
+#: code:addons/public_budget/models/expedient.py:33
+#: field:public_budget.expedient,cover:0
+#, python-format
+msgid "Cover"
+msgstr "Carátula"
+
+#. module: public_budget
+#: view:public_budget.definitive.make.invoice:public_budget.view_definitive_make_invoice
+#: view:public_budget.definitive.mass.invoice.create:public_budget.view_definitive_mass_invoice_create
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_form
+msgid "Create Invoice"
+msgstr "Crear Comprobante"
+
+#. module: public_budget
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_form
+msgid "Create Payment Order"
+msgstr "Crear Órden de Pago"
+
+#. module: public_budget
+#: field:public_budget.advance_request,create_uid:0
+#: field:public_budget.advance_request_line,create_uid:0
+#: field:public_budget.advance_request_type,create_uid:0
+#: field:public_budget.advance_return,create_uid:0
+#: field:public_budget.advance_return_line,create_uid:0
+#: field:public_budget.budget,create_uid:0
+#: field:public_budget.budget_detail,create_uid:0
+#: field:public_budget.budget_modification,create_uid:0
+#: field:public_budget.budget_modification_detail,create_uid:0
+#: field:public_budget.budget_pos_exc_rest,create_uid:0
+#: field:public_budget.budget_position,create_uid:0
+#: field:public_budget.budget_position_category,create_uid:0
+#: field:public_budget.budget_prec_detail,create_uid:0
+#: field:public_budget.definitive.make.invoice,create_uid:0
+#: field:public_budget.definitive.make.invoice.detail,create_uid:0
+#: field:public_budget.definitive.mass.invoice.create,create_uid:0
+#: field:public_budget.definitive_line,create_uid:0
+#: field:public_budget.expedient,create_uid:0
+#: field:public_budget.expedient_category,create_uid:0
+#: field:public_budget.expedient_founder,create_uid:0
+#: field:public_budget.funding_move,create_uid:0
+#: field:public_budget.inventory_rule,create_uid:0
+#: field:public_budget.location,create_uid:0
+#: field:public_budget.preventive_line,create_uid:0
+#: field:public_budget.remit,create_uid:0
+#: field:public_budget.rest_type,create_uid:0
+#: field:public_budget.transaction,create_uid:0
+#: field:public_budget.transaction_type,create_uid:0
+#: field:public_budget.transaction_type_amo_rest,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: public_budget
+#: field:public_budget.advance_request,create_date:0
+#: field:public_budget.advance_request_line,create_date:0
+#: field:public_budget.advance_request_type,create_date:0
+#: field:public_budget.advance_return,create_date:0
+#: field:public_budget.advance_return_line,create_date:0
+#: field:public_budget.budget,create_date:0
+#: field:public_budget.budget_detail,create_date:0
+#: field:public_budget.budget_modification,create_date:0
+#: field:public_budget.budget_modification_detail,create_date:0
+#: field:public_budget.budget_pos_exc_rest,create_date:0
+#: field:public_budget.budget_position,create_date:0
+#: field:public_budget.budget_position_category,create_date:0
+#: field:public_budget.budget_prec_detail,create_date:0
+#: field:public_budget.definitive.make.invoice,create_date:0
+#: field:public_budget.definitive.make.invoice.detail,create_date:0
+#: field:public_budget.definitive.mass.invoice.create,create_date:0
+#: field:public_budget.definitive_line,create_date:0
+#: field:public_budget.expedient,create_date:0
+#: field:public_budget.expedient_category,create_date:0
+#: field:public_budget.expedient_founder,create_date:0
+#: field:public_budget.funding_move,create_date:0
+#: field:public_budget.inventory_rule,create_date:0
+#: field:public_budget.location,create_date:0
+#: field:public_budget.preventive_line,create_date:0
+#: field:public_budget.remit,create_date:0
+#: field:public_budget.rest_type,create_date:0
+#: field:public_budget.transaction,create_date:0
+#: field:public_budget.transaction_type,create_date:0
+#: field:public_budget.transaction_type_amo_rest,create_date:0
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: public_budget
+#: code:addons/public_budget/models/expedient.py:67
+#: field:public_budget.expedient,current_location_id:0
+#, python-format
+msgid "Current Location"
+msgstr "Ubicación Actual"
+
+#. module: sipreco_public_budget
+#: model:account.tax.code,name:sipreco_public_budget.ri_tax_code_ret_drei_rosario_view
+msgid "DREI Rosario Ret/Perc Aplicada"
+msgstr "DREI Rosario Ret/Perc Aplicada"
+
+#. module: public_budget
+#: field:public_budget.advance_request,date:0
+#: field:public_budget.advance_return,date:0
+#: field:public_budget.budget_modification,date:0
+#: field:public_budget.funding_move,date:0
+#: field:public_budget.inventory_rule,date:0
+#: field:public_budget.remit,date:0
+#: field:public_budget.transaction_type_amo_rest,date:0
+msgid "Date"
+msgstr "Fecha"
+
+#. module: sipreco_public_budget
+#: help:account.voucher,payment_base_date:0
+msgid "Date used to calculate payment date"
+msgstr "Fecha Utilizada para el cálculo de la fecha de pago"
+
+#. module: sipreco_public_budget
+#: help:account.voucher,payment_days:0
+msgid "Days added to payment base date to get the payment date"
+msgstr "Días agregados a la fecha base de pago para obtener la Fecha de Pago"
+
+#. module: sipreco_public_budget
+#: code:addons/sipreco_public_budget/models/account_check.py:21
+#, python-format
+msgid "Debited"
+msgstr "Debitado"
+
+#. module: public_budget
+#: code:addons/public_budget/models/advance_request_line.py:29
+#, python-format
+msgid "Debt Amount"
+msgstr "Deuda"
+
+#. module: public_budget
+#: field:public_budget.definitive.make.invoice.detail,definitive_line_id:0
+#: field:public_budget.definitive.make.invoice.detail,definitive_make_invoice_id:0
+msgid "Def Make Invoice"
+msgstr "Crear Comprobantes"
+
+#. module: public_budget
+#: code:addons/public_budget/models/preventive_line.py:67
+#, python-format
+msgid "Definitive"
+msgstr "Definitiva"
+
+#. module: public_budget
+#: code:addons/public_budget/models/budget_position.py:53
+#: code:addons/public_budget/models/preventive_line.py:40
+#: code:addons/public_budget/models/transaction.py:123
+#: field:public_budget.budget_prec_detail,definitive_amount:0
+#, python-format
+msgid "Definitive Amount"
+msgstr "Monto Definitivo"
+
+#. module: public_budget
+#: code:addons/public_budget/models/preventive_line.py:199
+#, python-format
+msgid "Definitive Amount can't be greater than Preventive Amount"
+msgstr "El Monto Definitivo no puede superar el Monto Preventivo"
+
+#. modules: sipreco_public_budget, public_budget
+#: field:account.invoice.line,definitive_line_id:0
+#: model:ir.model,name:public_budget.model_public_budget_definitive_line
+#: view:public_budget.definitive_line:public_budget.view_public_budget_definitive_line_filter
+#: view:public_budget.definitive_line:public_budget.view_public_budget_definitive_line_form
+#: view:public_budget.definitive_line:public_budget.view_public_budget_definitive_line_tree
+#: model:ir.model,name:sipreco_public_budget.model_public_budget_definitive_line
+msgid "Definitive Line"
+msgstr "Afectación Definitiva"
+
+#. module: public_budget
+#: view:public_budget.preventive_line:public_budget.view_public_budget_preventive_line_form
+#: field:public_budget.preventive_line,definitive_line_ids:0
+#: field:public_budget.transaction,definitive_line_ids:0
+msgid "Definitive Lines"
+msgstr "Afectaciones Definitivas"
+
+#. module: sipreco_public_budget
+#: field:public_budget.transaction_type,definitive_partner_type:0
+msgid "Definitive Partner Type"
+msgstr "Tipo de Empresa Definitiva"
+
+#. module: sipreco_public_budget
+#: code:addons/sipreco_public_budget/models/account_check.py:17
+#, python-format
+msgid "Deposited"
+msgstr "Depositado"
+
+#. module: public_budget
+#: field:public_budget.advance_request_line,description:0
+#: field:public_budget.expedient,description:0
+msgid "Description"
+msgstr "Descripción"
+
+#. module: public_budget
+#: field:public_budget.remit,location_dest_id:0
+msgid "Destination Location"
+msgstr "Ubicación Destino"
+
+#. module: public_budget
+#: field:public_budget.budget_pos_exc_rest,destiny_category_id:0
+msgid "Destiny Category"
+msgstr "Categoría Destino"
+
+#. module: public_budget
+#: view:public_budget.budget:public_budget.view_public_budget_budget_form
+msgid "Detail"
+msgstr "Inicial"
+
+#. module: public_budget
+#: field:public_budget.budget,budget_detail_ids:0
+#: field:public_budget.budget_modification,budget_modification_detail_ids:0
+msgid "Details"
+msgstr "Detalles"
+
+#. module: sipreco_public_budget
+#: view:account.voucher:sipreco_public_budget.view_vendor_payment_l10n_ar_mods_form
+#: view:account.voucher:sipreco_public_budget.voucher_receipts_form_inherit_view
+msgid "Document Number"
+msgstr "Número de Documento"
+
+#. modules: sipreco_public_budget, public_budget
+#: code:addons/public_budget/models/definitive_line.py:74
+#: code:addons/public_budget/models/preventive_line.py:65
+#: selection:public_budget.advance_request,state:0
+#: selection:public_budget.advance_return,state:0
+#: selection:public_budget.budget,state:0
+#: selection:public_budget.funding_move,state:0
+#: selection:public_budget.transaction,state:0
+#: code:addons/sipreco_public_budget/models/account_check.py:15
+#: code:addons/sipreco_public_budget/models/account_voucher.py:169
+#, python-format
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: public_budget
+#: code:addons/public_budget/models/budget_position.py:43
+#: field:public_budget.budget_prec_detail,draft_amount:0
+#, python-format
+msgid "Draft Amount"
+msgstr "Monto Borrador"
+
+#. module: public_budget
+#: field:public_budget.advance_request_line,employee_id:0
+#: field:public_budget.advance_return_line,employee_id:0
+#: view:res.partner:public_budget.view_partner_person_filter
+msgid "Employee"
+msgstr "Empleado"
+
+#. module: public_budget
+#: view:res.partner:public_budget.view_partner_person_filter
+msgid "Employee Partners"
+msgstr "Partners Empleados"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_res_partner_employees
+#: model:ir.ui.menu,name:public_budget.menu_employees
+msgid "Employees"
+msgstr "Empleados"
+
+#. module: public_budget
+#: selection:public_budget.budget_modification,type:0
+msgid "Exchange"
+msgstr "Reasignación"
+
+#. module: public_budget
+#: field:account.voucher,expedient_id:0
+#: model:ir.model,name:public_budget.model_public_budget_expedient
+#: field:public_budget.budget,expedient_id:0
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_filter
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_form
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_tree
+#: field:public_budget.transaction,expedient_id:0
+msgid "Expedient"
+msgstr "Expediente"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_expedient_category
+#: view:public_budget.expedient_category:public_budget.view_public_budget_expedient_category_filter
+#: view:public_budget.expedient_category:public_budget.view_public_budget_expedient_category_form
+#: view:public_budget.expedient_category:public_budget.view_public_budget_expedient_category_tree
+msgid "Expedient Category"
+msgstr "Categoría de Expediente"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_expedient_founder
+#: view:public_budget.expedient_founder:public_budget.view_public_budget_expedient_founder_filter
+#: view:public_budget.expedient_founder:public_budget.view_public_budget_expedient_founder_form
+#: view:public_budget.expedient_founder:public_budget.view_public_budget_expedient_founder_tree
+msgid "Expedient Founder"
+msgstr "Causante de Expediente"
+
+#. module: sipreco_public_budget
+#: model:ir.actions.report.xml,name:sipreco_public_budget.action_aeroo_report_expedient
+msgid "Expedient Report"
+msgstr "Reporte de Expediente"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_public_budget_expedient_expedients
+#: model:ir.ui.menu,name:public_budget.menu_expedient_main
+#: model:ir.ui.menu,name:public_budget.menu_expedients
+#: model:ir.ui.menu,name:public_budget.menu_expedients_conf
+#: field:public_budget.remit,expedient_ids:0
+msgid "Expedients"
+msgstr "Expedientes"
+
+#. module: public_budget
+#: field:public_budget.expedient,final_location:0
+msgid "Final Location"
+msgstr "Ubicación Destino"
+
+#. module: public_budget
+#: field:public_budget.expedient,first_location_id:0
+msgid "First Location"
+msgstr "Primer Ubicación"
+
+#. module: public_budget
+#: field:public_budget.budget,fiscalyear_id:0
+msgid "Fiscal Year"
+msgstr "Año Fiscal"
+
+#. module: sipreco_public_budget
+#: model:public_budget.transaction_type,name:sipreco_public_budget.purchase_type_fondo_fijo
+msgid "Fondo Fijo / Caja Chica"
+msgstr "Fondo Fijo / Caja Chica"
+
+#. module: public_budget
+#: field:public_budget.expedient,founder_id:0
+msgid "Founder"
+msgstr "Causante"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_public_budget_expedient_founder_founders
+#: model:ir.ui.menu,name:public_budget.menu_founders
+msgid "Founders"
+msgstr "Causantes"
+
+#. module: public_budget
+#: field:public_budget.transaction_type_amo_rest,from_amount:0
+msgid "From Amount"
+msgstr "Desde Monto"
+
+#. module: public_budget
+#: field:public_budget.definitive.make.invoice.detail,full_imputation:0
+msgid "Full Imputation?"
+msgstr "Imputación Total?"
+
+#. module: public_budget
+#: view:public_budget.funding_move:public_budget.view_public_budget_funding_move_filter
+#: view:public_budget.funding_move:public_budget.view_public_budget_funding_move_form
+#: view:public_budget.funding_move:public_budget.view_public_budget_funding_move_tree
+msgid "Funding Move"
+msgstr "Movimiento de Fondo"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_public_budget_funding_move
+#: model:ir.ui.menu,name:public_budget.menu_funding_moves
+#: view:public_budget.budget:public_budget.view_public_budget_budget_form
+#: field:public_budget.budget,funding_move_ids:0
+msgid "Funding Moves"
+msgstr "Movimientos de Fondos"
+
+#. module: sipreco_public_budget
+#: model:account.tax.code,name:sipreco_public_budget.ri_tax_code_ret_per_ganancias_aplicada
+msgid "Ganacias Ret/Perc Aplicadas"
+msgstr "Ganacias Ret/Perc Aplicadas"
+
+#. module: sipreco_public_budget
+#: model:account.tax.code,name:sipreco_public_budget.ri_tax_code_ganancias_vista
+msgid "Ganancias"
+msgstr "Ganancias"
+
+#. module: public_budget
+#: field:public_budget.advance_request_type,general_return_partner_id:0
+msgid "General Return Partner"
+msgstr "Proveedor General de Devolución"
+
+#. module: public_budget
+#: view:account.invoice.line:public_budget.view_public_budget_invoice_line_filter
+#: view:public_budget.advance_request:public_budget.view_public_budget_advance_request_filter
+#: view:public_budget.advance_request_type:public_budget.view_public_budget_advance_request_type_filter
+#: view:public_budget.advance_return:public_budget.view_public_budget_advance_return_filter
+#: view:public_budget.budget:public_budget.view_public_budget_budget_filter
+#: view:public_budget.budget_detail:public_budget.view_public_budget_budget_detail_filter
+#: view:public_budget.budget_modification:public_budget.view_public_budget_budget_modification_filter
+#: view:public_budget.budget_modification_detail:public_budget.view_public_budget_budget_modification_detail_filter
+#: view:public_budget.budget_pos_exc_rest:public_budget.view_public_budget_budget_pos_exc_rest_filter
+#: view:public_budget.budget_position:public_budget.view_public_budget_budget_position_filter
+#: view:public_budget.budget_position_category:public_budget.view_public_budget_budget_position_category_filter
+#: view:public_budget.budget_prec_detail:public_budget.view_public_budget_budget_prec_detail_filter
+#: view:public_budget.definitive_line:public_budget.view_public_budget_definitive_line_filter
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_filter
+#: view:public_budget.expedient_category:public_budget.view_public_budget_expedient_category_filter
+#: view:public_budget.expedient_founder:public_budget.view_public_budget_expedient_founder_filter
+#: view:public_budget.funding_move:public_budget.view_public_budget_funding_move_filter
+#: view:public_budget.inventory_rule:public_budget.view_public_budget_inventory_rule_filter
+#: view:public_budget.location:public_budget.view_public_budget_location_filter
+#: view:public_budget.preventive_line:public_budget.view_public_budget_preventive_line_filter
+#: view:public_budget.remit:public_budget.view_public_budget_remit_filter
+#: view:public_budget.rest_type:public_budget.view_public_budget_rest_type_filter
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_filter
+#: view:public_budget.transaction_type:public_budget.view_public_budget_transaction_type_filter
+#: view:public_budget.transaction_type_amo_rest:public_budget.view_public_budget_transaction_type_amo_rest_filter
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: sipreco_public_budget
+#: view:account.check:sipreco_public_budget.view_account_check_form
+#: code:addons/sipreco_public_budget/models/account_check.py:19
+#, python-format
+msgid "Handed"
+msgstr "Entregado"
+
+#. module: sipreco_public_budget
+#: code:addons/sipreco_public_budget/models/account_check.py:16
+#, python-format
+msgid "Holding"
+msgstr "En Cartera"
+
+#. module: public_budget
+#: field:public_budget.advance_request,id:0
+#: field:public_budget.advance_request_line,id:0
+#: field:public_budget.advance_request_type,id:0
+#: field:public_budget.advance_return,id:0
+#: field:public_budget.advance_return_line,id:0
+#: field:public_budget.budget,id:0
+#: field:public_budget.budget_detail,id:0
+#: field:public_budget.budget_modification,id:0
+#: field:public_budget.budget_modification_detail,id:0
+#: field:public_budget.budget_pos_exc_rest,id:0
+#: field:public_budget.budget_position,id:0
+#: field:public_budget.budget_position_category,id:0
+#: field:public_budget.budget_prec_detail,id:0
+#: field:public_budget.definitive.make.invoice,id:0
+#: field:public_budget.definitive.make.invoice.detail,id:0
+#: field:public_budget.definitive.mass.invoice.create,id:0
+#: field:public_budget.definitive_line,id:0
+#: field:public_budget.expedient,id:0
+#: field:public_budget.expedient_category,id:0
+#: field:public_budget.expedient_founder,id:0
+#: field:public_budget.funding_move,id:0
+#: field:public_budget.inventory_rule,id:0
+#: field:public_budget.location,id:0
+#: field:public_budget.preventive_line,id:0
+#: field:public_budget.remit,id:0
+#: field:public_budget.rest_type,id:0
+#: field:public_budget.transaction,id:0
+#: field:public_budget.transaction_type,id:0
+#: field:public_budget.transaction_type_amo_rest,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: sipreco_public_budget
+#: model:account.tax.code,name:sipreco_public_budget.ri_tax_code_iibb_sf
+msgid "IIBB Prov. Santa Fé"
+msgstr "IIBB Prov. Santa Fé"
+
+#. module: sipreco_public_budget
+#: model:account.tax.code,name:sipreco_public_budget.ri_tax_code_ret_per_iibb_sf_aplicada
+msgid "IIBB Santa Fé Ret/Perc Aplicada"
+msgstr "IIBB Santa Fé Ret/Perc Aplicada"
+
+#. module: sipreco_public_budget
+#: model:account.tax.code,name:sipreco_public_budget.ri_impuestos_nacionales
+msgid "IMPUESTOS NACIONALES"
+msgstr "IMPUESTOS NACIONALES"
+
+#. module: sipreco_public_budget
+#: model:account.tax.code,name:sipreco_public_budget.ri_tax_code_impuestos_provinciales
+msgid "IMPUESTOS PROVINCIALES"
+msgstr "IMPUESTOS PROVINCIALES"
+
+#. module: sipreco_public_budget
+#: model:account.tax.code,name:sipreco_public_budget.ri_tax_code_iva
+msgid "IVA"
+msgstr "IVA"
+
+#. module: public_budget
+#: selection:public_budget.expedient,state:0
+msgid "In Revision"
+msgstr "En Revisión"
+
+#. module: public_budget
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_filter
+#: selection:public_budget.remit,state:0
+msgid "In Transit"
+msgstr "En tránsito"
+
+#. module: public_budget
+#: code:addons/public_budget/models/expedient.py:86
+#: field:public_budget.expedient,in_transit:0
+#, python-format
+msgid "In Transit?"
+msgstr "En tránsito?"
+
+#. module: public_budget
+#: code:addons/public_budget/models/voucher.py:142
+#, python-format
+msgid "In advance transactions, payment orders amount (%s) can not be greater than transaction advance remaining amount (%s)"
+msgstr "En Transacciones con Adelanto, el monto de las Órdenes de Pago (%s) no puede ser superior que el monto remanente de adelanto (%s)"
+
+#. module: public_budget
+#: code:addons/public_budget/models/voucher.py:161
+#, python-format
+msgid "In each line, Amount can not be greater than Open Balance"
+msgstr "En cada línea, el Monto no puede ser superior que el Saldo Abierto"
+
+#. module: public_budget
+#: code:addons/public_budget/models/budget_position.py:269
+#, python-format
+msgid "In one branch only one budget position can                    have Budget Assignment Allowed."
+msgstr "En cada Rama, sólo una Partida Presupuestaria puede tener la opción \"Asignación de Presupuesto Permitida\" activada"
+
+#. module: public_budget
+#: code:addons/public_budget/models/voucher.py:123
+#, python-format
+msgid "In payment of advance transaction type, you need to                        an advance account in transaction type!"
+msgstr "En el pago de Transacciones de Tipo Adelanto, necesitas una cuenta de Adelanto en el tipo de Transacción!"
+
+#. module: public_budget
+#: field:public_budget.budget,income_account_id:0
+msgid "Income Account"
+msgstr "Cuenta de Ingresos"
+
+#. module: public_budget
+#: selection:public_budget.budget_modification,type:0
+msgid "Increase / Decrease"
+msgstr "Incremento / Disminución"
+
+#. module: public_budget
+#: field:public_budget.budget_detail,initial_amount:0
+msgid "Initial Amount"
+msgstr "Monto Inicial"
+
+#. module: public_budget
+#: field:public_budget.budget_position,inventariable:0
+msgid "Inventariable?"
+msgstr "Inventariable?"
+
+#. module: public_budget
+#: view:public_budget.inventory_rule:public_budget.view_public_budget_inventory_rule_filter
+#: view:public_budget.inventory_rule:public_budget.view_public_budget_inventory_rule_form
+#: view:public_budget.inventory_rule:public_budget.view_public_budget_inventory_rule_tree
+msgid "Inventory Rule"
+msgstr "Regla de Inventariado"
+
+#. module: public_budget
+#: field:res.company,inventory_rule_ids:0
+msgid "Inventory Rules"
+msgstr "Reglas de Inventariado"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_account_invoice
+msgid "Invoice"
+msgstr "Factura"
+
+#. module: public_budget
+#: field:public_budget.definitive.make.invoice,invoice_date:0
+#: field:public_budget.definitive.mass.invoice.create,invoice_date:0
+msgid "Invoice Date"
+msgstr "Fecha Comprobante"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "Línea de factura"
+
+#. module: public_budget
+#: field:public_budget.definitive_line,invoice_line_ids:0
+msgid "Invoice Lines"
+msgstr "Líneas de Comprobantes"
+
+#. module: sipreco_public_budget
+#: field:public_budget.definitive.make.invoice,invoice_number:0
+msgid "Invoice Number"
+msgstr "Número de Comprobante"
+
+#. module: sipreco_public_budget
+#: code:addons/sipreco_public_budget/wizard/transaction_definitive_make_invoice.py:32
+#, python-format
+msgid "Invoice number must be lower than 99999999"
+msgstr "El número de comprobante debe ser inferior a 99999999"
+
+#. module: public_budget
+#: code:addons/public_budget/models/definitive_line.py:74
+#: code:addons/public_budget/models/preventive_line.py:68
+#, python-format
+msgid "Invoiced"
+msgstr "Devengado"
+
+#. module: public_budget
+#: code:addons/public_budget/models/definitive_line.py:53
+#: code:addons/public_budget/models/preventive_line.py:46
+#: code:addons/public_budget/models/transaction.py:128
+#, python-format
+msgid "Invoiced Amount"
+msgstr "Monto Devengado"
+
+#. module: public_budget
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_form
+#: field:public_budget.transaction,invoice_ids:0
+msgid "Invoices"
+msgstr "Comprobantes"
+
+#. module: public_budget
+#: field:public_budget.budget_modification,initial_approval:0
+msgid "Is Initial Approval?"
+msgstr "Es Aprobación Inicial?"
+
+#. module: public_budget
+#: field:public_budget.definitive_line,issue_date:0
+#: field:public_budget.expedient,issue_date:0
+#: field:public_budget.transaction,issue_date:0
+msgid "Issue Date"
+msgstr "Fecha Emisión"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_budget_position_items
+msgid "Items"
+msgstr "Items"
+
+#. module: public_budget
+#: field:public_budget.definitive.make.invoice,journal_id:0
+#: field:public_budget.definitive.mass.invoice.create,journal_id:0
+#: field:public_budget.funding_move,journal_id:0
+msgid "Journal"
+msgstr "Diario"
+
+#. module: public_budget
+#: field:public_budget.funding_move,move_id:0
+msgid "Journal Entry"
+msgstr "Registro de Diario"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_account_move_line
+msgid "Journal Items"
+msgstr "Elementos del Diario"
+
+#. module: public_budget
+#: code:addons/public_budget/models/expedient.py:42
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_filter
+#: field:public_budget.expedient,last_move_date:0
+#, python-format
+msgid "Last Move"
+msgstr "Ultimo Movimiento"
+
+#. module: public_budget
+#: field:public_budget.advance_request,write_uid:0
+#: field:public_budget.advance_request_line,write_uid:0
+#: field:public_budget.advance_request_type,write_uid:0
+#: field:public_budget.advance_return,write_uid:0
+#: field:public_budget.advance_return_line,write_uid:0
+#: field:public_budget.budget,write_uid:0
+#: field:public_budget.budget_detail,write_uid:0
+#: field:public_budget.budget_modification,write_uid:0
+#: field:public_budget.budget_modification_detail,write_uid:0
+#: field:public_budget.budget_pos_exc_rest,write_uid:0
+#: field:public_budget.budget_position,write_uid:0
+#: field:public_budget.budget_position_category,write_uid:0
+#: field:public_budget.budget_prec_detail,write_uid:0
+#: field:public_budget.definitive.make.invoice,write_uid:0
+#: field:public_budget.definitive.make.invoice.detail,write_uid:0
+#: field:public_budget.definitive.mass.invoice.create,write_uid:0
+#: field:public_budget.definitive_line,write_uid:0
+#: field:public_budget.expedient,write_uid:0
+#: field:public_budget.expedient_category,write_uid:0
+#: field:public_budget.expedient_founder,write_uid:0
+#: field:public_budget.funding_move,write_uid:0
+#: field:public_budget.inventory_rule,write_uid:0
+#: field:public_budget.location,write_uid:0
+#: field:public_budget.preventive_line,write_uid:0
+#: field:public_budget.remit,write_uid:0
+#: field:public_budget.rest_type,write_uid:0
+#: field:public_budget.transaction,write_uid:0
+#: field:public_budget.transaction_type,write_uid:0
+#: field:public_budget.transaction_type_amo_rest,write_uid:0
+msgid "Last Updated by"
+msgstr "Ultima Actualización por"
+
+#. module: public_budget
+#: field:public_budget.advance_request,write_date:0
+#: field:public_budget.advance_request_line,write_date:0
+#: field:public_budget.advance_request_type,write_date:0
+#: field:public_budget.advance_return,write_date:0
+#: field:public_budget.advance_return_line,write_date:0
+#: field:public_budget.budget,write_date:0
+#: field:public_budget.budget_detail,write_date:0
+#: field:public_budget.budget_modification,write_date:0
+#: field:public_budget.budget_modification_detail,write_date:0
+#: field:public_budget.budget_pos_exc_rest,write_date:0
+#: field:public_budget.budget_position,write_date:0
+#: field:public_budget.budget_position_category,write_date:0
+#: field:public_budget.budget_prec_detail,write_date:0
+#: field:public_budget.definitive.make.invoice,write_date:0
+#: field:public_budget.definitive.make.invoice.detail,write_date:0
+#: field:public_budget.definitive.mass.invoice.create,write_date:0
+#: field:public_budget.definitive_line,write_date:0
+#: field:public_budget.expedient,write_date:0
+#: field:public_budget.expedient_category,write_date:0
+#: field:public_budget.expedient_founder,write_date:0
+#: field:public_budget.funding_move,write_date:0
+#: field:public_budget.inventory_rule,write_date:0
+#: field:public_budget.location,write_date:0
+#: field:public_budget.preventive_line,write_date:0
+#: field:public_budget.remit,write_date:0
+#: field:public_budget.rest_type,write_date:0
+#: field:public_budget.transaction,write_date:0
+#: field:public_budget.transaction_type,write_date:0
+#: field:public_budget.transaction_type_amo_rest,write_date:0
+msgid "Last Updated on"
+msgstr "Ultima Actualización en"
+
+#. module: sipreco_public_budget
+#: model:public_budget.transaction_type,name:sipreco_public_budget.purchase_type_lprivada
+msgid "Licitación Privada"
+msgstr "Licitación Privada"
+
+#. module: sipreco_public_budget
+#: model:public_budget.transaction_type,name:sipreco_public_budget.purchase_type_lpublica
+msgid "Licitación Pública"
+msgstr "Licitación Pública"
+
+#. module: public_budget
+#: view:public_budget.advance_request:public_budget.view_public_budget_advance_request_form
+#: field:public_budget.advance_request,advance_request_line_ids:0
+#: field:public_budget.advance_return,return_line_ids:0
+#: field:public_budget.definitive.make.invoice,line_ids:0
+msgid "Lines"
+msgstr "Lines"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_location
+#: view:public_budget.location:public_budget.view_public_budget_location_filter
+#: view:public_budget.location:public_budget.view_public_budget_location_form
+#: view:public_budget.location:public_budget.view_public_budget_location_tree
+msgid "Location"
+msgstr "Ubicación"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_public_budget_location_locations
+#: model:ir.ui.menu,name:public_budget.menu_locations
+msgid "Locations"
+msgstr "Ubicaciones"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_definitive_make_invoice
+msgid "Make Invoice"
+msgstr "Crear Comprobante"
+
+#. module: public_budget
+#: model:res.groups,name:public_budget.group_manager
+msgid "Manager"
+msgstr "Responsable"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_definitive_mass_invoice_create
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_form
+msgid "Mass Invoice Create"
+msgstr "Creación Masiva de Comprobantes"
+
+#. module: public_budget
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_form
+msgid "Mass Payment Order Create"
+msgstr "Creación Masiva de Órdenes de Pago"
+
+#. module: public_budget
+#: code:addons/public_budget/models/budget_modification.py:35
+#: field:public_budget.budget_pos_exc_rest,message:0
+#, python-format
+msgid "Message"
+msgstr "Mensaje"
+
+#. module: public_budget
+#: field:public_budget.inventory_rule,min_amount:0
+msgid "Minimum Amount"
+msgstr "Monto Mínimo"
+
+#. module: public_budget
+#: field:public_budget.budget_modification_detail,budget_modification_id:0
+msgid "Modification"
+msgstr "Modificación"
+
+#. module: public_budget
+#: field:public_budget.budget,budget_modification_ids:0
+msgid "Modifications"
+msgstr "Modificaciones"
+
+#. module: public_budget
+#: field:public_budget.advance_return,move_id:0
+msgid "Move"
+msgstr "Movimiento"
+
+#. module: public_budget
+#: view:public_budget.budget:public_budget.view_public_budget_budget_form
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_form
+msgid "Moves"
+msgstr "Modificaciones"
+
+#. module: public_budget
+#: field:public_budget.advance_request,name:0
+#: field:public_budget.advance_request_type,name:0
+#: field:public_budget.advance_return,name:0
+#: field:public_budget.budget,name:0
+#: field:public_budget.budget_modification,name:0
+#: field:public_budget.budget_position,name:0
+#: field:public_budget.budget_position_category,name:0
+#: field:public_budget.expedient_category,name:0
+#: field:public_budget.expedient_founder,name:0
+#: field:public_budget.funding_move,name:0
+#: view:public_budget.location:public_budget.view_public_budget_location_filter
+#: field:public_budget.location,name:0
+#: field:public_budget.transaction,name:0
+#: field:public_budget.transaction_type,name:0
+msgid "Name"
+msgstr "Nombre"
+
+#. module: public_budget
+#: code:addons/public_budget/models/advance_request_line.py:79
+#: code:addons/public_budget/models/transaction.py:297
+#, python-format
+msgid "No bank or cash journal found for company \"%s\""
+msgstr "No existe diario de banco o caja para la compañía \"%s\""
+
+#. module: public_budget
+#: selection:public_budget.budget_position,type:0
+msgid "Normal"
+msgstr "Normal"
+
+#. module: public_budget
+#: code:addons/public_budget/models/invoice.py:109
+#, python-format
+msgid "Not Transaction in actual invoice, can not create             direct Payment"
+msgstr "No existe Transacción en el presente Comprobante, no puedes crear Pago Directo"
+
+#. module: public_budget
+#: code:addons/public_budget/models/transaction.py:368
+#, python-format
+msgid "Not period found for this date"
+msgstr "No hay periodo encontrado para esta fecha."
+
+#. module: public_budget
+#: field:public_budget.expedient,note:0
+#: field:public_budget.transaction,note:0
+msgid "Note"
+msgstr "Nota"
+
+#. module: public_budget
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_form
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_form
+msgid "Notes"
+msgstr "Notas"
+
+#. module: public_budget
+#: field:public_budget.expedient,number:0
+#: field:public_budget.remit,number:0
+msgid "Number"
+msgstr "Número"
+
+#. module: sipreco_public_budget
+#: model:account.tax.code,name:sipreco_public_budget.ri_tax_code_otros_impuestos
+msgid "OTROS IMPUESTOS"
+msgstr "OTROS IMPUESTOS"
+
+#. module: public_budget
+#: code:addons/public_budget/wizard/transaction_definitive_make_invoice.py:151
+#: code:addons/public_budget/wizard/transaction_definitive_mass_invoice_create.py:60
+#, python-format
+msgid "On Advance Transactions, transaction advance type                    must have and advance account configured!"
+msgstr "En Transacciónes con Pago Adelantado, necesitas una cuenta de adelanto en el Tipo de Transacción!"
+
+#. module: sipreco_public_budget
+#: code:addons/sipreco_public_budget/models/account_voucher.py:153
+#, python-format
+msgid "On Journal '%s' to pay amount can't be cero!\n"
+"* Voucher id: %i"
+msgstr "En el Diario '%s' el Monto a Pagar no puede ser Cero!\n"
+"* Id de Comprobante: %i"
+
+#. module: sipreco_public_budget
+#: code:addons/sipreco_public_budget/models/account_voucher.py:160
+#, python-format
+msgid "On Journal '%s' to pay amount must be cero!\n"
+"* Voucher id: %i"
+msgstr "En el Diario '%s' el Monto a Pagar no puede ser Cero!\n"
+"* Id de Comprobante: %i"
+
+#. module: public_budget
+#: code:addons/public_budget/models/preventive_line.py:66
+#: view:public_budget.budget:public_budget.view_public_budget_budget_form
+#: selection:public_budget.budget,state:0
+#: selection:public_budget.expedient,state:0
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_form
+#: selection:public_budget.transaction,state:0
+#, python-format
+msgid "Open"
+msgstr "Abrir"
+
+#. module: sipreco_public_budget
+#: model:public_budget.transaction_type,name:sipreco_public_budget.purchase_type_orden_de_trabajo
+msgid "Orden de Trabajo (adicional empleado)"
+msgstr "Orden de Trabajo (adicional empleado)"
+
+#. module: sipreco_public_budget
+#: model:ir.ui.menu,name:sipreco_public_budget.payment_orders
+msgid "Ordenes de Pago"
+msgstr "Ordenes de Pago"
+
+#. module: public_budget
+#: field:public_budget.budget_pos_exc_rest,origin_category_id:0
+msgid "Origin Category"
+msgstr "Categoría Origen"
+
+#. module: sipreco_public_budget
+#: model:ir.ui.menu,name:sipreco_public_budget.other_operations
+msgid "Otras Operaciones"
+msgstr "Otras Operaciones"
+
+#. module: sipreco_public_budget
+#: model:account.tax.code,name:sipreco_public_budget.ri_tax_code_otras_retenciones
+#: model:account.tax.code,name:sipreco_public_budget.ri_tax_code_ret_otras_view
+msgid "Otras Retenciones/SIJP"
+msgstr "Otras Retenciones/SIJP"
+
+#. module: public_budget
+#: field:public_budget.expedient,pages:0
+msgid "Pages"
+msgstr "Folios"
+
+#. module: sipreco_public_budget
+#: code:addons/sipreco_public_budget/models/account_voucher.py:176
+#, python-format
+msgid "Paid"
+msgstr "Pagado"
+
+#. module: public_budget
+#: code:addons/public_budget/models/budget_position.py:63
+#: code:addons/public_budget/models/definitive_line.py:48
+#: code:addons/public_budget/models/invoice_line.py:19
+#: code:addons/public_budget/models/preventive_line.py:58
+#: code:addons/public_budget/models/transaction.py:138
+#: field:public_budget.budget_prec_detail,paid_amount:0
+#, python-format
+msgid "Paid Amount"
+msgstr "Monto Pagado"
+
+#. module: sipreco_public_budget
+#: code:addons/sipreco_public_budget/models/account_voucher.py:43
+#, python-format
+msgid "Paid Withholdings"
+msgstr "Retenciones Pagadas"
+
+#. module: public_budget
+#: view:res.company:public_budget.view_public_budget_company_form
+msgid "Parameters"
+msgstr "Parámetros"
+
+#. module: public_budget
+#: field:public_budget.budget_position,parent_id:0
+#: field:public_budget.expedient,parent_id:0
+msgid "Parent"
+msgstr "Padre"
+
+#. module: public_budget
+#: field:public_budget.budget_position,parent_left:0
+#: field:public_budget.budget_prec_detail,order_int:0
+msgid "Parent Left"
+msgstr "Padre"
+
+#. module: public_budget
+#: field:public_budget.budget_position,parent_right:0
+msgid "Parent Right"
+msgstr "Padre"
+
+#. modules: sipreco_public_budget, public_budget
+#: model:ir.model,name:public_budget.model_res_partner
+#: field:public_budget.transaction,partner_id:0
+#: model:ir.model,name:sipreco_public_budget.model_res_partner
+msgid "Partner"
+msgstr "Cliente/Proveedor"
+
+#. module: public_budget
+#: code:addons/public_budget/models/voucher.py:52
+#, python-format
+msgid "Partners"
+msgstr "Empresas/Partners"
+
+#. module: public_budget
+#: selection:public_budget.expedient,type:0
+msgid "Payment"
+msgstr "Pago"
+
+#. module: sipreco_public_budget
+#: field:account.voucher,payment_base_date:0
+msgid "Payment Base Date"
+msgstr "Fecha Base de Cálculo de Pago"
+
+#. module: sipreco_public_budget
+#: field:account.voucher,payment_days:0
+msgid "Payment Days"
+msgstr "Días hasta el Pago"
+
+#. module: public_budget
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_form
+#: field:public_budget.transaction,voucher_ids:0
+msgid "Payment Orders"
+msgstr "Ordenes de Pago"
+
+#. module: public_budget
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_form
+msgid "Payment Orders and Refunds"
+msgstr "Órdenes de Pago y Devoluciones"
+
+#. module: sipreco_public_budget
+#: model:ir.actions.report.xml,name:sipreco_public_budget.action_aeroo_report_payment_receipt
+msgid "Payment Receipt Report"
+msgstr "Reporte de Recibo"
+
+#. module: sipreco_public_budget
+#: model:account.tax.code,name:sipreco_public_budget.ri_tax_code_chart_root
+msgid "Plan de Impuestos"
+msgstr "Plan de Impuestos"
+
+#. module: sipreco_public_budget
+#: field:public_budget.definitive.make.invoice,point_of_sale:0
+msgid "Point Of Sale"
+msgstr "Punto de Venta"
+
+#. module: sipreco_public_budget
+#: code:addons/sipreco_public_budget/wizard/transaction_definitive_make_invoice.py:29
+#, python-format
+msgid "Point of Sale must be lower than 9999"
+msgstr "El Punto de venta debe ser inferior a 9999"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_public_budget_budget_pos_exc_rest_position_exc__rest_
+#: model:ir.ui.menu,name:public_budget.menu_position_exc__rest_
+msgid "Position Exc. Rest."
+msgstr "Restricción de Intercambio de Partidas"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_public_budget_budget_position_category_position_types
+#: model:ir.ui.menu,name:public_budget.menu_position_types
+msgid "Position Types"
+msgstr "Tipos de Partidas"
+
+#. module: public_budget
+#: view:public_budget.budget:public_budget.view_public_budget_budget_form
+msgid "Position analysis"
+msgstr "Análisis de Partidas"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_public_budget_budget_position_positions
+#: model:ir.ui.menu,name:public_budget.menu_positions
+msgid "Positions"
+msgstr "Partidas"
+
+#. module: public_budget
+#: view:public_budget.budget:public_budget.view_public_budget_budget_form
+msgid "Pre Close"
+msgstr "Pre Cerrar"
+
+#. module: public_budget
+#: view:public_budget.budget:public_budget.view_public_budget_budget_form
+#: field:public_budget.budget,budget_prec_detail_ids:0
+msgid "Pre Close Detail"
+msgstr "Detalle de Pre Cierre"
+
+#. module: public_budget
+#: field:public_budget.budget,prec_passive_residue:0
+msgid "Pre Close Passive Residue"
+msgstr "Residuo Pasivo al Pre-Cierre"
+
+#. module: public_budget
+#: field:public_budget.budget,prec_total_requested:0
+msgid "Pre Close Total Requested"
+msgstr "Total Requerido al Pre-Cierre"
+
+#. module: public_budget
+#: selection:public_budget.budget,state:0
+msgid "Pre Closed"
+msgstr "Pre Cerrado"
+
+#. module: public_budget
+#: field:public_budget.preventive_line,preventive_amount:0
+msgid "Preventive"
+msgstr "Preventivo"
+
+#. module: public_budget
+#: code:addons/public_budget/models/budget_position.py:48
+#: code:addons/public_budget/models/transaction.py:118
+#: field:public_budget.budget_prec_detail,preventive_amount:0
+#, python-format
+msgid "Preventive Amount"
+msgstr "Monto Preventivo"
+
+#. modules: sipreco_public_budget, public_budget
+#: model:ir.model,name:public_budget.model_public_budget_preventive_line
+#: field:public_budget.definitive_line,preventive_line_id:0
+#: view:public_budget.preventive_line:public_budget.view_public_budget_preventive_line_analysis_tree
+#: view:public_budget.preventive_line:public_budget.view_public_budget_preventive_line_filter
+#: view:public_budget.preventive_line:public_budget.view_public_budget_preventive_line_form
+#: view:public_budget.preventive_line:public_budget.view_public_budget_preventive_line_tree
+#: model:ir.model,name:sipreco_public_budget.model_public_budget_preventive_line
+msgid "Preventive Line"
+msgstr "Afectación Preventiva"
+
+#. module: public_budget
+#: field:public_budget.budget_position,preventive_line_ids:0
+#: field:public_budget.transaction,preventive_line_ids:0
+msgid "Preventive Lines"
+msgstr "Líneas Preventivas"
+
+#. module: public_budget
+#: code:addons/public_budget/models/budget_position.py:82
+#, python-format
+msgid "Preventive Perc."
+msgstr "% Preventivo"
+
+#. module: public_budget
+#: code:addons/public_budget/models/transaction.py:452
+#, python-format
+msgid "Preventive Total, Type and Date are not compatible with Transaction Amount Restrictions"
+msgstr "El monto total Preventivo, Tipo de Transacción y Fecha no son compatibles con las Restricciones de Monto del Tipo de Transacción."
+
+#. module: sipreco_public_budget
+#: view:public_budget.expedient:sipreco_public_budget.view_public_budget_expedient_form
+#: view:public_budget.remit:sipreco_public_budget.view_public_budget_remit_form
+#: view:public_budget.transaction:sipreco_public_budget.view_public_budget_transaction_form
+msgid "Print"
+msgstr "Imprimir"
+
+#. module: sipreco_public_budget
+#: view:account.voucher:sipreco_public_budget.view_print_button_vendor_payment_form
+msgid "Print Payment Order"
+msgstr "Imprimir Orden de Pago"
+
+#. module: sipreco_public_budget
+#: view:account.voucher:sipreco_public_budget.view_print_button_vendor_payment_form
+msgid "Print Receipt"
+msgstr "Imprimir Recibo"
+
+#. module: sipreco_public_budget
+#: code:addons/sipreco_public_budget/models/account_voucher.py:174
+#, python-format
+msgid "Pro-forma"
+msgstr "Pro-Forma"
+
+#. module: public_budget
+#: code:addons/public_budget/models/budget_position.py:72
+#, python-format
+msgid "Projected Amount"
+msgstr "Monto Proyectado"
+
+#. module: public_budget
+#: code:addons/public_budget/models/budget_position.py:77
+#, python-format
+msgid "Projected Avg"
+msgstr "Proyectado"
+
+#. module: public_budget
+#: model:ir.module.category,description:public_budget.module_category_public_budget
+#: model:ir.module.category,name:public_budget.module_category_public_budget
+msgid "Public Budget"
+msgstr "Public Budget"
+
+#. module: sipreco_public_budget
+#: field:public_budget.budget,receiptbook_id:0
+msgid "ReceiptBook"
+msgstr "Talonario Órdenes de Pago"
+
+#. module: public_budget
+#: field:public_budget.budget_modification,reference:0
+msgid "Reference"
+msgstr "Referencia"
+
+#. module: public_budget
+#: selection:public_budget.funding_move,type:0
+msgid "Refund"
+msgstr "Devolución"
+
+#. module: sipreco_public_budget
+#: code:addons/sipreco_public_budget/models/account_check.py:20
+#, python-format
+msgid "Rejected"
+msgstr "Rechazado"
+
+#. module: public_budget
+#: code:addons/public_budget/models/transaction.py:101
+#: code:addons/public_budget/models/voucher.py:42
+#: field:public_budget.transaction,budget_position_ids:0
+#, python-format
+msgid "Related Budget Positions"
+msgstr "Partidas Presupuestarias Relacionadas"
+
+#. module: public_budget
+#: code:addons/public_budget/models/voucher.py:47
+#, python-format
+msgid "Related Invoices"
+msgstr "Comprobantes Relacionados"
+
+#. module: public_budget
+#: code:addons/public_budget/models/preventive_line.py:35
+#, python-format
+msgid "Remaining Amount"
+msgstr "Monto Remanente"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_remit
+#: view:public_budget.remit:public_budget.view_public_budget_remit_filter
+#: view:public_budget.remit:public_budget.view_public_budget_remit_form
+#: view:public_budget.remit:public_budget.view_public_budget_remit_tree
+msgid "Remit"
+msgstr "Remito"
+
+#. module: sipreco_public_budget
+#: model:ir.actions.report.xml,name:sipreco_public_budget.action_aeroo_report_remit
+msgid "Remit Report"
+msgstr "Reporte Remito"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_public_budget_remit_remits
+#: model:ir.ui.menu,name:public_budget.menu_remits
+#: field:public_budget.expedient,remit_ids:0
+msgid "Remits"
+msgstr "Remitos"
+
+#. module: public_budget
+#: selection:public_budget.funding_move,type:0
+msgid "Request"
+msgstr "Requerimiento"
+
+#. module: public_budget
+#: field:public_budget.advance_request_line,requested_amount:0
+msgid "Requested Amount"
+msgstr "Solicitado"
+
+#. module: public_budget
+#: code:addons/public_budget/models/definitive_line.py:38
+#, python-format
+msgid "Residual Amount"
+msgstr "Monto Residual"
+
+#. module: public_budget
+#: code:addons/public_budget/models/budget_modification.py:40
+#, python-format
+msgid "Restriction Type"
+msgstr "Tipo de Restricción"
+
+#. module: sipreco_public_budget
+#: model:account.tax.code,name:sipreco_public_budget.ri_tax_code_ret_drei_rosario
+msgid "Retencion DREI Rosario"
+msgstr "Retencion DREI Rosario"
+
+#. module: sipreco_public_budget
+#: model:account.tax.code,name:sipreco_public_budget.ri_tax_code_iibb_sf_retencion_aplicada
+msgid "Retención IIBB Santa Fé Aplicada"
+msgstr "Retención IIBB Santa Fé Aplicada"
+
+#. module: sipreco_public_budget
+#: model:account.tax.code,name:sipreco_public_budget.ri_tax_code_ganancias_ret_aplicada
+msgid "Retención de Ganancias Aplicada"
+msgstr "Retención de Ganancias Aplicada"
+
+#. module: public_budget
+#: field:public_budget.advance_request_type,return_journal_id:0
+msgid "Return Journal"
+msgstr "Diario de Devolución"
+
+#. module: sipreco_public_budget
+#: code:addons/sipreco_public_budget/models/account_check.py:22
+#, python-format
+msgid "Returned"
+msgstr "Devuelto"
+
+#. module: public_budget
+#: field:public_budget.advance_return_line,returned_amount:0
+msgid "Returned Amount"
+msgstr "Monto Devuelto"
+
+#. module: public_budget
+#: model:res.groups,name:public_budget.group_secretary
+msgid "Secretary"
+msgstr "Secretario/a"
+
+#. module: public_budget
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_form
+msgid "Settlement Lines"
+msgstr "Lineas Consolidadas"
+
+#. module: sipreco_public_budget
+#: code:addons/sipreco_public_budget/models/account_voucher.py:38
+#, python-format
+msgid "Show Print Receipt Button"
+msgstr "Mostrar Botón de Imprimir Recibo"
+
+#. module: sipreco_public_budget
+#: code:addons/sipreco_public_budget/models/account_voucher.py:171
+#, python-format
+msgid "Signature Process"
+msgstr "Proceso de Firma"
+
+#. module: sipreco_public_budget
+#: view:account.voucher:sipreco_public_budget.view_vendor_payment_signature_form
+#: code:addons/sipreco_public_budget/models/account_voucher.py:172
+#, python-format
+msgid "Signed"
+msgstr "Firmado"
+
+#. module: public_budget
+#: code:addons/public_budget/models/invoice.py:38
+#, python-format
+msgid "Signed Amount"
+msgstr "Monto Firmado"
+
+#. module: public_budget
+#: field:public_budget.remit,location_id:0
+msgid "Source Location"
+msgstr "Ubicación Origen"
+
+#. module: public_budget
+#: code:addons/public_budget/models/definitive_line.py:75
+#: view:public_budget.advance_request:public_budget.view_public_budget_advance_request_filter
+#: field:public_budget.advance_request,state:0
+#: view:public_budget.advance_return:public_budget.view_public_budget_advance_return_filter
+#: field:public_budget.advance_return,state:0
+#: field:public_budget.budget,state:0
+#: field:public_budget.expedient,state:0
+#: field:public_budget.funding_move,state:0
+#: field:public_budget.remit,state:0
+#: field:public_budget.transaction,state:0
+#, python-format
+msgid "State"
+msgstr "Estado"
+
+#. module: public_budget
+#: code:addons/public_budget/models/preventive_line.py:71
+#, python-format
+msgid "States"
+msgstr "Estados"
+
+#. module: sipreco_public_budget
+#: model:public_budget.transaction_type,name:sipreco_public_budget.purchase_type_subsidio_con_cargo
+msgid "Subsidio con Cargo de Rendición"
+msgstr "Subsidio con Cargo de Rendición"
+
+#. module: sipreco_public_budget
+#: model:public_budget.transaction_type,name:sipreco_public_budget.purchase_type_subsidio_sin_cargo
+msgid "Subsidio sin Cargo de Rendición"
+msgstr "Subsidio sin Cargo de Rendición"
+
+#. module: sipreco_public_budget
+#: model:ir.actions.act_window,name:sipreco_public_budget.action_res_partner_suppliers
+#: model:ir.ui.menu,name:sipreco_public_budget.menu_subsidy_recipient
+msgid "Subsidy Recipents"
+msgstr "Receptores de Subsidios"
+
+#. module: sipreco_public_budget
+#: view:res.partner:sipreco_public_budget.view_partner_person_filter
+#: field:res.partner,subsidy_recipient:0
+msgid "Subsidy Recipient"
+msgstr "Receptor de Subsidio"
+
+#. module: sipreco_public_budget
+#: view:res.partner:sipreco_public_budget.view_partner_person_filter
+msgid "Subsidy Recipient Partners"
+msgstr "Receptor de Subsidio"
+
+#. module: sipreco_public_budget
+#: selection:public_budget.transaction_type,definitive_partner_type:0
+msgid "Subsidy Recipients"
+msgstr "Receptores de Subsidios"
+
+#. module: sipreco_public_budget
+#: model:public_budget.transaction_type,name:sipreco_public_budget.purchase_type_sueldos
+msgid "Sueldos"
+msgstr "Sueldos"
+
+#. module: public_budget
+#: field:public_budget.definitive.make.invoice,supplier_id:0
+#: field:public_budget.definitive_line,supplier_id:0
+msgid "Supplier"
+msgstr "Proveedor"
+
+#. module: public_budget
+#: field:public_budget.definitive.make.invoice,supplier_invoice_number:0
+msgid "Supplier Invoice Number"
+msgstr "Número de Comprobante Proveedor"
+
+#. modules: sipreco_public_budget, public_budget
+#: code:addons/public_budget/models/transaction.py:94
+#: model:ir.actions.act_window,name:public_budget.action_res_partner_suppliers
+#: model:ir.ui.menu,name:public_budget.menu_suppliers
+#: field:public_budget.expedient,supplier_ids:0
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_filter
+#: field:public_budget.transaction,supplier_ids:0
+#: selection:public_budget.transaction_type,definitive_partner_type:0
+#, python-format
+msgid "Suppliers"
+msgstr "Proveedores"
+
+#. module: public_budget
+#: code:addons/public_budget/models/funding_move.py:77
+#, python-format
+msgid "The funding move must be in draft state for unlink !"
+msgstr "El movimiento de fondo debe estar en borrador para desvincular!"
+
+#. module: public_budget
+#: help:public_budget.definitive.make.invoice,supplier_invoice_number:0
+msgid "The reference of this invoice as provided by the supplier."
+msgstr "La referencia de este comprobante como es suministrada por el proveedor."
+
+#. module: public_budget
+#: code:addons/public_budget/models/preventive_line.py:213
+#, python-format
+msgid "The selected budget position (%s) has not a related assigment position!"
+msgstr "La Partidas Presupuestaria seleccionada (%s) no posee una Partida de Asignación Relacionada!"
+
+#. module: public_budget
+#: code:addons/public_budget/models/preventive_line.py:219
+#, python-format
+msgid "There is not enough Balance Amount to assign (%s) to Budget Position '%s'.\n"
+"* Balance available for '%s': %s"
+msgstr "No hay suficiente Saldo Presupuestario para asignar (%s) a la Partida Presupuestari '%s'\n"
+"* Saldo disponible para  '%s': %s"
+
+#. module: public_budget
+#: help:public_budget.transaction_type,advance_account_id:0
+msgid "This account will be used on advance payments. Must be a payable account."
+msgstr "Esta cuenta será usada en pagos adelantados. Debe ser una cuenta del tipo Payable."
+
+#. module: public_budget
+#: field:public_budget.transaction_type_amo_rest,to_amount:0
+msgid "To Amount"
+msgstr "Hasta Monto"
+
+#. module: public_budget
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_form
+msgid "To Annulled"
+msgstr "Anular"
+
+#. module: sipreco_public_budget
+#: code:addons/sipreco_public_budget/models/account_check.py:18
+#, python-format
+msgid "To Be Handed"
+msgstr "Para ser Entregado"
+
+#. module: public_budget
+#: view:public_budget.advance_request:public_budget.view_public_budget_advance_request_form
+#: view:public_budget.advance_return:public_budget.view_public_budget_advance_return_form
+#: view:public_budget.budget:public_budget.view_public_budget_budget_form
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_form
+#: view:public_budget.funding_move:public_budget.view_public_budget_funding_move_form
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_form
+msgid "To Draft"
+msgstr "A Borrador"
+
+#. module: public_budget
+#: view:public_budget.remit:public_budget.view_public_budget_remit_form
+msgid "To In Transit"
+msgstr "Pasar a \"En Tránsito\""
+
+#. module: public_budget
+#: code:addons/public_budget/wizard/transaction_definitive_make_invoice.py:41
+#, python-format
+msgid "To Invoice Amount can't be greater than Residual Amount"
+msgstr "El monto a Devengar no puede superar el Monto Residual de al afectación definitiva"
+
+#. module: public_budget
+#: code:addons/public_budget/models/budget_position.py:58
+#: code:addons/public_budget/models/definitive_line.py:43
+#: code:addons/public_budget/models/invoice.py:42
+#: code:addons/public_budget/models/invoice_line.py:14
+#: code:addons/public_budget/models/preventive_line.py:52
+#: code:addons/public_budget/models/transaction.py:133
+#: field:public_budget.budget_prec_detail,to_pay_amount:0
+#, python-format
+msgid "To Pay Amount"
+msgstr "Monto A Pagar"
+
+#. module: public_budget
+#: code:addons/public_budget/models/transaction.py:165
+#, python-format
+msgid "To Return Amount"
+msgstr "Monto a Devolver"
+
+#. module: public_budget
+#: view:public_budget.expedient:public_budget.view_public_budget_expedient_form
+msgid "To Revision"
+msgstr "A Revision"
+
+#. module: sipreco_public_budget
+#: view:account.voucher:sipreco_public_budget.view_vendor_payment_signature_form
+msgid "To Signature Process"
+msgstr "Enviar a Proceso de Firma"
+
+#. module: public_budget
+#: code:addons/public_budget/models/transaction.py:413
+#, python-format
+msgid "To close a transaction there must be at least one                    preventive line"
+msgstr "Para cerrar una Transacción tiene que haber al menos una línea Preventiva."
+
+#. module: public_budget
+#: code:addons/public_budget/models/transaction.py:434
+#, python-format
+msgid "To close a transaction to return amount must be 0!\n"
+"* To return amount = advance paid amount - invoiced amount\n"
+"(%s = %s - %s)"
+msgstr "Para cerrar una Transacción, el monto A devolver debe ser 0!\n"
+"* Monto a Devolver = Monto pagado por adelantado - Monto Devengado\n"
+"(%s = %s - %s)"
+
+#. module: public_budget
+#: code:addons/public_budget/models/transaction.py:423
+#, python-format
+msgid "To close a transaction, Preventive, Definitive, Invoiced,                    To Pay and Paid amount must be the same for each line"
+msgstr "Para cerrar una transacción, los montos Preventivos, Definitivos, Devengados, a Pagar y Pagasos, deben ser iguales para cada línea."
+
+#. module: public_budget
+#: view:public_budget.advance_request:public_budget.view_public_budget_advance_request_form
+#: view:public_budget.advance_return:public_budget.view_public_budget_advance_return_form
+#: view:public_budget.budget_detail:public_budget.view_public_budget_budget_detail_tree
+#: view:public_budget.budget_prec_detail:public_budget.view_public_budget_budget_prec_detail_tree
+#: view:public_budget.preventive_line:public_budget.view_public_budget_preventive_line_analysis_tree
+#: view:public_budget.preventive_line:public_budget.view_public_budget_preventive_line_tree
+msgid "Total"
+msgstr "Total"
+
+#. module: public_budget
+#: view:account.invoice:public_budget.view_public_budget_invoice_tree
+msgid "Total Amount"
+msgstr "Monto Total"
+
+#. module: public_budget
+#: code:addons/public_budget/models/budget.py:69
+#, python-format
+msgid "Total Authorized"
+msgstr "Total Autorizado"
+
+#. module: public_budget
+#: code:addons/public_budget/models/budget.py:64
+#, python-format
+msgid "Total Preventive"
+msgstr "Total Preventivo"
+
+#. module: public_budget
+#: code:addons/public_budget/models/budget.py:74
+#, python-format
+msgid "Total Requested"
+msgstr "Total Requerido"
+
+#. module: public_budget
+#: code:addons/public_budget/models/budget.py:79
+#, python-format
+msgid "Total Residue"
+msgstr "Residual Total"
+
+#. module: public_budget
+#: field:account.invoice,transaction_id:0
+#: field:account.voucher,transaction_id:0
+#: field:public_budget.definitive.make.invoice,transaction_id:0
+#: field:public_budget.definitive.mass.invoice.create,transaction_id:0
+#: field:public_budget.definitive_line,transaction_id:0
+#: field:public_budget.preventive_line,transaction_id:0
+msgid "Transaction"
+msgstr "Transacción"
+
+#. modules: sipreco_public_budget, public_budget
+#: model:ir.model,name:public_budget.model_public_budget_definitive_make_invoice
+#: model:ir.model,name:sipreco_public_budget.model_public_budget_definitive_make_invoice
+msgid "Transaction Definitive Make Invoice"
+msgstr "Transacción Definitiva Crear Comprobante"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_definitive_mass_invoice_create
+msgid "Transaction Definitive Mass Invoice Create"
+msgstr "Creación Masiva y Definitiva de Comprobantes"
+
+#. modules: sipreco_public_budget, public_budget
+#: model:ir.model,name:public_budget.model_public_budget_transaction_type
+#: view:public_budget.transaction_type:public_budget.view_public_budget_transaction_type_filter
+#: view:public_budget.transaction_type:public_budget.view_public_budget_transaction_type_form
+#: view:public_budget.transaction_type:public_budget.view_public_budget_transaction_type_tree
+#: model:ir.model,name:sipreco_public_budget.model_public_budget_transaction_type
+msgid "Transaction Type"
+msgstr "Tipo de Transacción"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_transaction_type_amo_rest
+#: view:public_budget.transaction_type_amo_rest:public_budget.view_public_budget_transaction_type_amo_rest_filter
+#: view:public_budget.transaction_type_amo_rest:public_budget.view_public_budget_transaction_type_amo_rest_form
+#: view:public_budget.transaction_type_amo_rest:public_budget.view_public_budget_transaction_type_amo_rest_tree
+msgid "Transaction Type Amount Restriction"
+msgstr "Restricción de Monto de Tipo de Transacción "
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_public_budget_transaction_type_transaction_types
+#: model:ir.ui.menu,name:public_budget.menu_transaction_types
+msgid "Transaction Types"
+msgstr "Tipos de Transacciones"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_public_budget_transaction_transactions
+#: model:ir.ui.menu,name:public_budget.menu_transactions
+#: field:public_budget.budget,transaction_ids:0
+msgid "Transactions"
+msgstr "Transacciones"
+
+#. module: sipreco_public_budget
+#: view:account.voucher:sipreco_public_budget.view_vendor_payment_signature_form
+msgid "True"
+msgstr "Verdadero"
+
+#. module: public_budget
+#: view:public_budget.advance_request:public_budget.view_public_budget_advance_request_filter
+#: field:public_budget.advance_request,type_id:0
+#: view:public_budget.advance_return:public_budget.view_public_budget_advance_return_filter
+#: field:public_budget.advance_return,type_id:0
+#: field:public_budget.budget_pos_exc_rest,type:0
+#: field:public_budget.budget_position,type:0
+#: field:public_budget.expedient,type:0
+#: field:public_budget.funding_move,type:0
+#: field:public_budget.transaction,type_id:0
+msgid "Type"
+msgstr "Tipo"
+
+#. module: public_budget
+#: field:public_budget.advance_request,user_id:0
+#: field:public_budget.advance_return,user_id:0
+#: field:public_budget.expedient,user_id:0
+#: field:public_budget.remit,user_id:0
+#: field:public_budget.transaction,user_id:0
+#: model:res.groups,name:public_budget.group_user
+msgid "User"
+msgstr "Usuario"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_res_users
+#: field:public_budget.location,user_ids:0
+msgid "Users"
+msgstr "Usuarios"
+
+#. module: public_budget
+#: view:account.invoice:public_budget.view_public_budget_invoice_tree
+msgid "Validate"
+msgstr "Validar"
+
+#. module: public_budget
+#: selection:public_budget.budget_position,type:0
+msgid "View"
+msgstr "Vista"
+
+#. module: public_budget
+#: field:public_budget.advance_request_line,voucher_id:0
+msgid "Voucher"
+msgstr "Órden de Pago"
+
+#. module: public_budget
+#: field:account.move.line,voucher_line_ids:0
+#: model:ir.model,name:public_budget.model_account_voucher_line
+msgid "Voucher Lines"
+msgstr "Líneas de Comprobantes"
+
+#. module: public_budget
+#: view:public_budget.advance_request:public_budget.view_public_budget_advance_request_form
+msgid "Vouchers"
+msgstr "Órdenes de Pago"
+
+#. module: public_budget
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_filter
+msgid "With Advance Payment"
+msgstr "Con Pago Anticipado?"
+
+#. module: public_budget
+#: field:public_budget.transaction_type,with_amount_restriction:0
+msgid "With Amount Restriction?"
+msgstr "Con Restricción de Monto?"
+
+#. module: public_budget
+#: field:public_budget.transaction_type,with_advance_payment:0
+msgid "With advance payment?"
+msgstr "Con Pago Anticipado?"
+
+#. module: sipreco_public_budget
+#: code:addons/sipreco_public_budget/models/account_voucher.py:44
+#, python-format
+msgid "Withholding being paid with this voucher"
+msgstr "Retenciones pagadas con este voucher"
+
+#. module: public_budget
+#: code:addons/public_budget/models/expedient.py:82
+#, python-format
+msgid "Year"
+msgstr "Año"
+
+#. module: public_budget
+#: code:addons/public_budget/models/remit.py:109
+#, python-format
+msgid "You can Not Confirme a Remit of a Location where your are not                authorized!"
+msgstr "No puedes Confirmar un Remito de una Ubicacion donde no estás Autorizado!"
+
+#. module: public_budget
+#: code:addons/public_budget/models/remit.py:100
+#, python-format
+msgid "You can Not cancel a remit that is not the last one                        for all the expedients"
+msgstr "No puedes cancelar un remito que no es el último para todos los expedientes que incluye."
+
+#. module: public_budget
+#: code:addons/public_budget/models/advance_request.py:128
+#, python-format
+msgid "You can nopt cancel an advance request with vouchers in other state than \"cancel\" or \"draft\".\n"
+" * Request id: %i\n"
+" * Voucher ids: %s"
+msgstr "No puedes cancelar un Requerimiento de Adelanto con Órdenes de Pago en estados distintos a \"Cancelado\" o \"Borrador\".\n"
+" * Id de Requerimiento: %i\n"
+" * Ids de Órdenes de Pago: %s"
+
+#. module: public_budget
+#: code:addons/public_budget/models/advance_request.py:111
+#, python-format
+msgid "You can not approve a request with lines without approved amount."
+msgstr "No puedes aprobar un requerimiento con lineas sin Monto Aprobado"
+
+#. module: public_budget
+#: code:addons/public_budget/models/advance_return.py:143
+#, python-format
+msgid "You can not approve a return with lines without returned amount."
+msgstr "No puedes aprobar una devolución con líneas sin Monto Devuelto"
+
+#. module: public_budget
+#: code:addons/public_budget/models/funding_move.py:85
+#, python-format
+msgid "You can not cancel a Funding Move that has a related                 Account Move. Delete it first"
+msgstr "No es posible cancelar un Movimiento de Fondos que tiene un Movimiento Contable relacionado. Borrar este movimiento previamente."
+
+#. module: public_budget
+#: code:addons/public_budget/models/advance_return.py:123
+#, python-format
+msgid "You can not cancel a return if there is a move linked!\n"
+"Please delete it first"
+msgstr "No puedes cancelar una devolución si existe un asiento conectado!!\n"
+"Por favor bórralo primero"
+
+#. module: sipreco_public_budget
+#: code:addons/sipreco_public_budget/models/account_check.py:33
+#, python-format
+msgid "You can not cancel issue checks in states other than \"draft or \"handed\". First try to change check state."
+msgstr "No puede cancelar cheques entregados en estados distintos a \"draft or \"handed\". Primero intente cambiar el estado del cheque."
+
+#. module: sipreco_public_budget
+#: code:addons/sipreco_public_budget/models/account_check.py:39
+#, python-format
+msgid "You can not cancel third checks in states other than \"draft or \"holding\". First try to change check state."
+msgstr "No puede cancelar Cheques de Terceros en estados de  \"draft or \"holding\". Primero intente cambiar el estado del cheque."
+
+#. module: sipreco_public_budget
+#: code:addons/sipreco_public_budget/models/account_check.py:43
+#, python-format
+msgid "You can not cancel third checks that are being used on payments"
+msgstr "No puede cancelar Cheques de Terceros, que estén siendo usados en pagos."
+
+#. module: public_budget
+#: code:addons/public_budget/models/remit.py:124
+#, python-format
+msgid "You can not delete a Remit that is not in Cancel State"
+msgstr "No puedes borrar un remito que no se encuentre en Estado Cancelado"
+
+#. module: public_budget
+#: code:addons/public_budget/models/definitive_line.py:107
+#, python-format
+msgid "You can not delete a definitive line that has been invoiced"
+msgstr "No es posible borrar una línea definitiva que ya fue devengada."
+
+#. module: public_budget
+#: code:addons/public_budget/models/preventive_line.py:229
+#, python-format
+msgid "You can not delete a preventive line that has definitive lines"
+msgstr "No puede borrar una línea preventiva que tiene líneas definitivas"
+
+#. module: public_budget
+#: code:addons/public_budget/models/advance_request.py:147
+#: code:addons/public_budget/models/advance_return.py:158
+#, python-format
+msgid "You can not delete if record is not on \"draft\" or \"cancel\" state!"
+msgstr "No puedes borrar un registro si no esta en estado \"Borrador\" o \"Cancelado\""
+
+#. module: public_budget
+#: code:addons/public_budget/wizard/transaction_definitive_make_invoice.py:161
+#, python-format
+msgid "You can not invoice more than Advance Remaining Amount!\n"
+"* Amount to invoice: %s\n"
+"* Advance Remaining Amount: %s"
+msgstr "No puedes Devengar más que el Monto de Adelanto remanente\n"
+"* Monto a Devengar: %s\n"
+"* Monto Remanente de Adelanto: %s"
+
+#. module: public_budget
+#: code:addons/public_budget/models/budget_modification_detail.py:41
+#, python-format
+msgid "You can not make this modification as '%s' will have a                     negative balance"
+msgstr "No puede realizar esta modificación, ya que '%s' terminaría con balance negativo."
+
+#. module: sipreco_public_budget
+#: code:addons/sipreco_public_budget/models/account_voucher.py:185
+#, python-format
+msgid "You can not send to sign process a Voucher                     that has Total Amount different from To Pay Amount"
+msgstr "No puedes Enviar a Proceso de Firma una Orden de Pago cuyo Monto Total es diferente al Monto a Pagar"
+
+#. module: public_budget
+#: code:addons/public_budget/models/budget_position.py:262
+#, python-format
+msgid "You can not set 'Budget Assignment Allowed' to false if                budget position is being used in a budget detail or                modification."
+msgstr "No puedes setear 'Asignación de Presupuesto Admitida' a Falso, si la Partida está siendo utilizada en un Presupuesto o Modificacion de Presupuesto"
+
+#. module: public_budget
+#: code:addons/public_budget/models/budget_position.py:278
+#, python-format
+msgid "You can not set position %s to Budget Posistion                         Allowed as the child position %s has Allowed."
+msgstr "No puedes setear la Partida %s a \"Asignación de Presupuesto Admitida\" ya que la Partida Hija %s lo tiene seteado"
+
+#. module: public_budget
+#: code:addons/public_budget/models/invoice.py:86
+#, python-format
+msgid "You cannot cancel an invoice which has been sent to pay.                    You need to cancel related payments first."
+msgstr "No puedes cancelar un comprobante que ha sido enviado a pagar. Necesitas cancelar los Pagos Relacionados antes."
+
+#. module: public_budget
+#: code:addons/public_budget/models/budget_position.py:247
+#, python-format
+msgid "You cannot define children to an account with                 internal type different of \"View\"."
+msgstr "No puedes definir hijos a una cuenta con tipo interno diferente a  \"View\"."
+
+#. module: public_budget
+#: code:addons/public_budget/wizard/transaction_definitive_make_invoice.py:176
+#, python-format
+msgid "You should set at least one line with amount greater than 0"
+msgstr "Debes completar al menos una línea con un monto mayor a cero "
+
+#. module: public_budget
+#: field:public_budget.preventive_line,advance_line:0
+msgid "advance_line"
+msgstr "Línea Adelanto"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_advance_request
+#: view:public_budget.advance_request:public_budget.view_public_budget_advance_request_filter
+#: view:public_budget.advance_request:public_budget.view_public_budget_advance_request_form
+#: view:public_budget.advance_request:public_budget.view_public_budget_advance_request_tree
+#: view:public_budget.advance_request_type:public_budget.view_public_budget_advance_request_type_form
+msgid "advance_request"
+msgstr "Requerimiento de Adelanto"
+
+#. module: public_budget
+#: field:public_budget.advance_request_line,advance_request_id:0
+msgid "advance_request_id"
+msgstr "Requerimiento de Adelanto"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_advance_return
+#: view:public_budget.advance_return:public_budget.view_public_budget_advance_return_form
+msgid "advance_return"
+msgstr "Retorno de Adelanto"
+
+#. module: public_budget
+#: field:public_budget.advance_return_line,advance_return_id:0
+msgid "advance_return_id"
+msgstr "Retorno de Adelanto"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_advance_return_line
+msgid "advance_return_line"
+msgstr "Línea de Retorno de Adelanto"
+
+#. module: sipreco_public_budget
+#: view:account.asset.asset:sipreco_public_budget.view_account_asset_asset_form
+#: view:account.voucher:sipreco_public_budget.view_vendor_payment_form
+msgid "base.group_no_one"
+msgstr "base.group_no_one"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_budget_detail
+#: view:public_budget.budget_detail:public_budget.view_public_budget_budget_detail_filter
+#: view:public_budget.budget_detail:public_budget.view_public_budget_budget_detail_form
+#: view:public_budget.budget_detail:public_budget.view_public_budget_budget_detail_tree
+msgid "budget_detail"
+msgstr "detalle_presupuesto"
+
+#. module: public_budget
+#: field:public_budget.budget_position,budget_detail_ids:0
+msgid "budget_detail_ids"
+msgstr "budget_detail_ids"
+
+#. module: public_budget
+#: field:public_budget.budget_detail,budget_id:0
+#: field:public_budget.budget_prec_detail,budget_id:0
+msgid "budget_id"
+msgstr "budget_id"
+
+#. module: public_budget
+#: field:public_budget.budget_position,budget_modification_detail_ids:0
+msgid "budget_modification_detail_ids"
+msgstr "budget_modification_detail_ids"
+
+#. module: public_budget
+#: view:public_budget.budget_prec_detail:public_budget.view_public_budget_budget_prec_detail_filter
+#: view:public_budget.budget_prec_detail:public_budget.view_public_budget_budget_prec_detail_form
+#: view:public_budget.budget_prec_detail:public_budget.view_public_budget_budget_prec_detail_tree
+msgid "budget_prec_detail"
+msgstr "budget_prec_detail"
+
+#. module: sipreco_public_budget
+#: view:account.voucher:sipreco_public_budget.view_vendor_payment_signature_form
+msgid "draft,confirmed,signature_process,signed,posted"
+msgstr "Borrador,Confirmado,En Proceso de Firma,Firmado,Validado"
+
+#. module: public_budget
+#: view:account.invoice:public_budget.view_public_budget_invoice_tree
+#: view:account.voucher:public_budget.view_vendor_payment_form
+#: view:account.voucher:public_budget.view_voucher_tree
+msgid "false"
+msgstr "false"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_funding_move
+msgid "funding_move"
+msgstr "funding_move"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_inventory_rule
+msgid "inventory_rule"
+msgstr "inventory_rule"
+
+#. module: public_budget
+#: view:account.invoice.line:public_budget.view_public_budget_invoice_line_filter
+#: view:account.invoice.line:public_budget.view_public_budget_invoice_line_form
+#: view:account.invoice.line:public_budget.view_public_budget_invoice_line_tree
+msgid "invoice_line"
+msgstr "invoice_line"
+
+#. module: public_budget
+#: view:public_budget.definitive.make.invoice:public_budget.view_definitive_make_invoice
+#: view:public_budget.definitive.mass.invoice.create:public_budget.view_definitive_mass_invoice_create
+#: view:public_budget.transaction:public_budget.view_public_budget_transaction_form
+msgid "or"
+msgstr "o"
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_public_budget_rest_type
+#: view:public_budget.rest_type:public_budget.view_public_budget_rest_type_filter
+#: view:public_budget.rest_type:public_budget.view_public_budget_rest_type_form
+#: view:public_budget.rest_type:public_budget.view_public_budget_rest_type_tree
+msgid "rest_type"
+msgstr "rest_type"
+
+#. module: sipreco_public_budget
+#: view:account.voucher:sipreco_public_budget.view_vendor_payment_signature_form
+msgid "signed"
+msgstr "Firmado"
+
+#. module: sipreco_public_budget
+#: model:ir.actions.report.xml,name:sipreco_public_budget.action_aeroo_report_transaction
+msgid "transaction Report"
+msgstr "Reporte de Transacción"
+
+#. module: public_budget
+#: field:public_budget.transaction_type_amo_rest,transaction_type_id:0
+msgid "transaction_type_id"
+msgstr "transaction_type_id"
+
+#. module: sipreco_public_budget
+#: view:public_budget.transaction:sipreco_public_budget.view_public_budget_transaction_form
+msgid "{'default_definitive_partner_type': definitive_partner_type, 'default_advance_line': 1, 'default_preventive_status': 'confirmed', 'advance_line': 1}"
+msgstr "{'default_definitive_partner_type': definitive_partner_type, 'default_advance_line': 1, 'default_preventive_status': 'confirmed', 'advance_line': 1}"
+
+#. module: sipreco_public_budget
+#: view:public_budget.transaction:sipreco_public_budget.view_public_budget_transaction_form
+msgid "{'default_definitive_partner_type': definitive_partner_type}"
+msgstr "{'default_definitive_partner_type': definitive_partner_type}"
+
+#. module: sipreco_public_budget
+#: view:public_budget.preventive_line:sipreco_public_budget.view_public_budget_preventive_line_form
+msgid "{'from_preventive':True,'default_amount':remaining_amount, 'definitive_partner_type': definitive_partner_type}"
+msgstr "{'from_preventive':True,'default_amount':remaining_amount, 'definitive_partner_type': definitive_partner_type}"
+
+#. module: sipreco_public_budget
+#: view:account.check:sipreco_public_budget.view_account_check_form
+msgid "{'invisible':['|', ('type', '!=', 'third_check'), ('state', '!=', 'holding'), '|', ('type', '!=', 'issue_check'), ('state', 'not in', ['handed', 'to_be_handed'])]}"
+msgstr "{'invisible':['|', ('type', '!=', 'third_check'), ('state', '!=', 'holding'), '|', ('type', '!=', 'issue_check'), ('state', 'not in', ['handed', 'to_be_handed'])]}"
+
+#. module: sipreco_public_budget
+#: view:account.voucher:sipreco_public_budget.view_vendor_payment_signature_form
+msgid "{'invisible':[('transaction_with_advance_payment', '=', False)]}"
+msgstr "{'invisible':[('transaction_with_advance_payment', '=', False)]}"
+
+#. module: public_budget
+#: view:account.voucher:public_budget.view_vendor_payment_form
+msgid "{'invoice_currency':currency_id, 'default_customer': 0, 'search_default_supplier': 1, 'default_supplier': 1, 'transaction_id': transaction_id}"
+msgstr "{'invoice_currency':currency_id, 'default_customer': 0, 'search_default_supplier': 1, 'default_supplier': 1, 'transaction_id': transaction_id}"
+
+#. module: sipreco_public_budget
+#: view:public_budget.definitive.make.invoice:sipreco_public_budget.view_definitive_make_invoice
+msgid "{'required':[('use_documents', '=', True)]}"
+msgstr "{'required':[('use_documents', '=', True)]}"
+
+#. module: public_budget
+#: view:account.voucher:public_budget.view_vendor_payment_form
+msgid "{'transaction_id': transaction_id}"
+msgstr "{'transaction_id': transaction_id}"
+
