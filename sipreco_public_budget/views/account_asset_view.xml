@@ -53,6 +53,28 @@
                 </page> -->
             </field>
         </record>
+
+<!-- TREEVIEW -->
+
+        <record model="ir.ui.view" id="view_account_asset_asset_tree">
+            <field name="name">account.asset.asset.tree</field>
+            <field name="model">account.asset.asset</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_asset_tree"/>
+            <field name="arch" type="xml">
+                <field name="purchase_value" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="value_residual" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="partner_id" position="after">
+                    <field name="value_residual" sum="Total"/>
+                </field>
+            </field>
+        </record>
+
+<!-- SEARCH -->
+
         
     </data>
 </openerp>
