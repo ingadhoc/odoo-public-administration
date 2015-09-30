@@ -68,14 +68,26 @@
                     <attribute name="invisible">1</attribute>
                 </field>
                 <field name="partner_id" position="after">
-                    <field name="value_residual" sum="Total"/>
+                    <field name="purchase_value" sum="Total"/>
                 </field>
             </field>
         </record>
 
 <!-- SEARCH -->
 
-        
+        <record id="view_account_asset_search" model="ir.ui.view">
+            <field name="name">account.asset.asset.search</field>
+            <field name="model">account.asset.asset</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_search"/>
+            <field name="arch" type="xml">
+                <search string="Account Asset">
+                    <group expand="0" string="Group By">
+                        <filter string="Category" domain="[]" context="{'group_by':'category_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+       
     </data>
 </openerp>
 <!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
