@@ -64,6 +64,9 @@
                 <field name="document_number" position="replace">
                     <field name="force_number" string="Document Number"/>
                 </field>
+                <tree position="inside">
+                    <button name="%(l10n_ar_aeroo_voucher.action_aeroo_report_ar_voucher)d" class="oe_highlight" string="Print Payment Order" type="action" icon="gtk-print"/>
+                </tree>
             </field>
         </record>
 
