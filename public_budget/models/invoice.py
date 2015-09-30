@@ -73,7 +73,7 @@ class invoice(models.Model):
         to_pay_amount = sum([x.amount for x in voucher_lines])
         # if invoice is open we ensure that to paid amount is not lower than
         # paid amount
-        if self.state in ['open']:
+        if self.state in ['open', 'paid']:
             paid_amount = self.amount_total - self.residual
             if paid_amount > to_pay_amount:
                 to_pay_amount = paid_amount
@@ -82,7 +82,13 @@ class invoice(models.Model):
     @api.multi
     def action_cancel(self):
         for inv in self:
-            if inv.to_pay_amount:
+            # if invoice has been send to pay but it is not and advance
+            # transaction where they are not actuallly sent to paid, then
+            # first you should cancel payment
+            if (
+                    inv.to_pay_amount and
+                    not inv.transaction_id.type_id.with_advance_payment
+                    ):
                 raise Warning(_(
                     'You cannot cancel an invoice which has been sent to pay.\
                     You need to cancel related payments first.'))
