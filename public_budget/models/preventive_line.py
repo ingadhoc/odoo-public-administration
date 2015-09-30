@@ -192,6 +192,16 @@ class preventive_line(models.Model):
         self.paid_amount = paid_amount
 
     @api.one
+    @api.constrains('account_id', 'transaction_id')
+    def check_type_company(self):
+        if (
+                self.account_id and self.transaction_id and
+                self.account_id.company_id != self.transaction_id.company_id
+                ):
+            raise Warning(_(
+                'Transaction Company and Account Company must be the same!'))
+
+    @api.one
     @api.constrains('definitive_line_ids', 'preventive_amount')
     def _check_number(self):
         if self.preventive_amount < self.definitive_amount:
