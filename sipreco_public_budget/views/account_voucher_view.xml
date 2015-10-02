@@ -109,8 +109,10 @@
                 </field>
 
                 <!-- make date invisible -->
+                <!-- Originalmente estaba invisible, pero se pone visible para los casos en los que el registro
+                de un pago se registra en el sistema posteriormente al pago, ej: gastos bancarios -->
                 <field name="date" position="attributes">
-                    <attribute name="invisible">True</attribute>
+                    <attribute name="invisible">False</attribute>
                 </field>
             </field>
         </record>
