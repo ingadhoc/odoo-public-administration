@@ -1,0 +1,1648 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <!-- <data> -->
+    <data noupdate="0">
+        <record id="sipreco_public_budget.res_employee_1" model="res.partner">
+            <field name="name">Nombre Empleado</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">1111111</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+
+
+
+        <record id="sipreco_public_budget.res_employee_1" model="res.partner">
+            <field name="name">ACOSTA ALBERTO RAMON</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.152</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_2" model="res.partner">
+            <field name="name">AGUIRRE CELINA I</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">103.028</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_3" model="res.partner">
+            <field name="name">AGUIRRE CLAUDIA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.183</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_4" model="res.partner">
+            <field name="name">AHUMADA CLARISA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.157</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_5" model="res.partner">
+            <field name="name">AIELLO ANDREA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.174</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_6" model="res.partner">
+            <field name="name">ALAMANNI LEONARDO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.153</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_7" model="res.partner">
+            <field name="name">ALARCON MARIA SOLEDAD</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.167</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_8" model="res.partner">
+            <field name="name">ALBERTO ANA MARIA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">145.431</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_9" model="res.partner">
+            <field name="name">ALVAREZ ULLES EMILIANO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.172</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_10" model="res.partner">
+            <field name="name">ANDRE LUCIANA MARINA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">153.992</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_11" model="res.partner">
+            <field name="name">ANGIRAMA LUCIA AURELIA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">109.183</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_12" model="res.partner">
+            <field name="name">ANTENUCCI GRISELDA HILDA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">115.867</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_13" model="res.partner">
+            <field name="name">ARANDA NORA ALEJANDRA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">100.027</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_14" model="res.partner">
+            <field name="name">ARCURI NESTOR CARLOS</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">100.005</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_15" model="res.partner">
+            <field name="name">ARIAS CARLOS ALBERTO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.006</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_16" model="res.partner">
+            <field name="name">ARIAS HECTOR ALBERTO C</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">100.028</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_17" model="res.partner">
+            <field name="name">ARRASTIA CLAUDIO LUIS</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">115.871</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_18" model="res.partner">
+            <field name="name">AYDAR MARIA ARGELIA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">100.008</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_19" model="res.partner">
+            <field name="name">BALKENENDE ELBA ZULEMA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.010</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_20" model="res.partner">
+            <field name="name">BASUALDO JULIAN M</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">150.818</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_21" model="res.partner">
+            <field name="name">BELLINGERI EMILCE</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.138</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_22" model="res.partner">
+            <field name="name">BRITOS MARCELO RUBEN</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.160</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_23" model="res.partner">
+            <field name="name">BUSTOS LUCAS MIGUEL</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">45.357</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_24" model="res.partner">
+            <field name="name">CABRERA MARIA LORENA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">80.117</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_25" model="res.partner">
+            <field name="name">CABRERA SIRSKI JUAN MARIO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">100.033</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_26" model="res.partner">
+            <field name="name">CAPEZIO ANALIA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">115.839</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_27" model="res.partner">
+            <field name="name">CAPUTO LILIANA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.159</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_28" model="res.partner">
+            <field name="name">CARBAJALES PAULA SUSANA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">47.800</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_29" model="res.partner">
+            <field name="name">CASAGRANDE MIRIAM BEATRIZ</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">100.163</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_30" model="res.partner">
+            <field name="name">CASTAÑO LAUTARO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">155.610</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_31" model="res.partner">
+            <field name="name">CATALANO CRISTINA MIRIAM</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">115.807</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_32" model="res.partner">
+            <field name="name">CHERUSE LILIAN HAYDEE</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">100.014</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_33" model="res.partner">
+            <field name="name">CIAMMARRIELLO ARIADNA NATALIA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.171</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_34" model="res.partner">
+            <field name="name">COLOMBINO CRISTIAN CARLOS</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.145</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_35" model="res.partner">
+            <field name="name">CONTE HUGO ALBERTO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">109.175</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_36" model="res.partner">
+            <field name="name">CORIA LUCAS</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.132</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_37" model="res.partner">
+            <field name="name">D&apos;ANGELO ARIEL ARMANDO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">100.011</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_38" model="res.partner">
+            <field name="name">D&apos;ORAZIO HECTOR ARIEL</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.143</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_39" model="res.partner">
+            <field name="name">DARIGO SILVINA ANDREA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">100.013</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_40" model="res.partner">
+            <field name="name">DATO NORMA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">100.166</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_41" model="res.partner">
+            <field name="name">DE DOMINICIS ARIEL LUCIO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">109.196</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_42" model="res.partner">
+            <field name="name">DELLACASA FABIANA BEATRIZ</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.036</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_43" model="res.partner">
+            <field name="name">DI FRANCO GUSTAVO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">140.046</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_44" model="res.partner">
+            <field name="name">DI MAURIZIO MARIA INES</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">109.227</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_45" model="res.partner">
+            <field name="name">DIACO FEDERICO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.156</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_46" model="res.partner">
+            <field name="name">DOPAZO DAMIAN</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.185</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_47" model="res.partner">
+            <field name="name">DUARTE RAMON</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">115.851</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_48" model="res.partner">
+            <field name="name">ECHEVARRIA LUIS  FERNANDO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.176</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_49" model="res.partner">
+            <field name="name">ESCALANTE MARIO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.141</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_50" model="res.partner">
+            <field name="name">FACCINI ANTONIO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.187</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_51" model="res.partner">
+            <field name="name">FARIAS JESUS NAZARENO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.041</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_52" model="res.partner">
+            <field name="name">FEDERICO FERNANDO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.043</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_53" model="res.partner">
+            <field name="name">FEIBELMANN JUAN</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.154</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_54" model="res.partner">
+            <field name="name">FERNANDEZ DORA SUSANA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">100.037</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_55" model="res.partner">
+            <field name="name">FERNANDEZ LEON SILVIA NELIDA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">115.502</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+<!--         <record id="sipreco_public_budget.res_employee_56" model="res.partner">
+            <field name="name">FERRERI JESUS HECTOR</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">100.009</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record> -->
+        <record id="sipreco_public_budget.res_employee_57" model="res.partner">
+            <field name="name">FIORANO PATRICIA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.151</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_58" model="res.partner">
+            <field name="name">FORMENTE FEDERICO GUILLERMO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.133</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_59" model="res.partner">
+            <field name="name">FORTE SILVIA BEATRIZ</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">100.012</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_60" model="res.partner">
+            <field name="name">FRANETOVICH SILVIA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.047</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_61" model="res.partner">
+            <field name="name">GOMEZ MARIANA RITA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.146</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_62" model="res.partner">
+            <field name="name">GROSS PAOLA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.178</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_63" model="res.partner">
+            <field name="name">HIAYES DANIEL ENRIQUE</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.056</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_64" model="res.partner">
+            <field name="name">HILDEBRATD ADOLFO ARNALDO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">40.333</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_65" model="res.partner">
+            <field name="name">IGUARAN JOSE LUIS</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">115.840</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_66" model="res.partner">
+            <field name="name">KALBERMATTER RENE OMAR</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">80.112</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_67" model="res.partner">
+            <field name="name">LACROIX GUILLERMO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.135</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_68" model="res.partner">
+            <field name="name">LAFERLA JOSE NICOLAS</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">115.501</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_69" model="res.partner">
+            <field name="name">LANZA MARIA ALEJANDRA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">115.852</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_70" model="res.partner">
+            <field name="name">LANZA MARIA ELIDE</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">80.107</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_71" model="res.partner">
+            <field name="name">LAPETINA JOSE EMIDIO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.169</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_72" model="res.partner">
+            <field name="name">LASAGA SOLEDAD CELIA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.149</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_73" model="res.partner">
+            <field name="name">LAZZARINO MARIA PIA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.144</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_74" model="res.partner">
+            <field name="name">LIMAS JUAN ALFREDO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.060</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_75" model="res.partner">
+            <field name="name">LOMBARDERO JOSE MARIA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">100.284</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+<!--         <record id="sipreco_public_budget.res_employee_76" model="res.partner">
+            <field name="name">LOPEZ PATRICIA HEBE</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.063</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record> -->
+        <record id="sipreco_public_budget.res_employee_77" model="res.partner">
+            <field name="name">LOPEZ PERSICO SERGIO JOSE</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">107.914</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_78" model="res.partner">
+            <field name="name">LUNA DANIEL GERMAN</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">80.109</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_79" model="res.partner">
+            <field name="name">MANSILLA ARIEL</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.180</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_80" model="res.partner">
+            <field name="name">MARCONI RICARDO F</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.069</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_81" model="res.partner">
+            <field name="name">MARCOS GERARDO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.139</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_82" model="res.partner">
+            <field name="name">MARINO MARIA SOLEDAD</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.173</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_83" model="res.partner">
+            <field name="name">MARTINEZ NORBERTO MIGUEL</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">103.879</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_84" model="res.partner">
+            <field name="name">MARUSSO LEANDRO DAVID</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">100.579</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_85" model="res.partner">
+            <field name="name">MASSOLA LUIS ANGEL</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.075</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_86" model="res.partner">
+            <field name="name">MELGRATTI Y SCHAPIRA BARBARA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.147</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_87" model="res.partner">
+            <field name="name">MEONIS AMERICO RAMON</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">115.833</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_88" model="res.partner">
+            <field name="name">MESSANA MARIA BEATRIZ</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">115.814</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_89" model="res.partner">
+            <field name="name">MORAN LINA EUGENIA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.086</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_90" model="res.partner">
+            <field name="name">MULHALL MARIELA ANA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.150</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_91" model="res.partner">
+            <field name="name">NAVARRO NESTOR FABIAN</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">109.229</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+<!--         <record id="sipreco_public_budget.res_employee_92" model="res.partner">
+            <field name="name">NICOLI SILVINA BEATRIZ</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">115.845</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record> -->
+        <record id="sipreco_public_budget.res_employee_93" model="res.partner">
+            <field name="name">NOGARA JUAN CARLOS</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">115.849</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_94" model="res.partner">
+            <field name="name">NOGUERA MARICEL BEATRIZ</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.155</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_95" model="res.partner">
+            <field name="name">ODERA ANA MARIA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.095</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_96" model="res.partner">
+            <field name="name">OLIVE BEATRIZ SUSANA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">48.011</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_97" model="res.partner">
+            <field name="name">ORREGO RAMON OSCAR</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.165</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_98" model="res.partner">
+            <field name="name">PAGURA CLAUDIO ANTONIO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">108.013</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_99" model="res.partner">
+            <field name="name">PALACIO JUAN MANUEL</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.179</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+<!--         <record id="sipreco_public_budget.res_employee_100" model="res.partner">
+            <field name="name">PAZOS MARCELO FABIAN</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.099</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record> -->
+<!--         <record id="sipreco_public_budget.res_employee_101" model="res.partner">
+            <field name="name">PELLEGRINO EDUARDO GUSTAVO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">100.024</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record> -->
+        <record id="sipreco_public_budget.res_employee_102" model="res.partner">
+            <field name="name">PELLO JULIA AGUSTINA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">115.844</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_103" model="res.partner">
+            <field name="name">PELLO LEONARDO PABLO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.100</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_104" model="res.partner">
+            <field name="name">PEREZ EDGARDO ADRIAN</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">47.218</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_105" model="res.partner">
+            <field name="name">PEREZ MONICA LEONOR</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">115.843</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_106" model="res.partner">
+            <field name="name">PEZZUTI NADIA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.161</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_107" model="res.partner">
+            <field name="name">PIANCATELLI CLAUDIO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.186</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_108" model="res.partner">
+            <field name="name">PIATTI RUBEN ALBERTO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">17.783</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_109" model="res.partner">
+            <field name="name">PISARZ ROSALIA ROJMAN DE</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">101.909</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_110" model="res.partner">
+            <field name="name">POBLETE LUIS FRANCISCO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.105</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_111" model="res.partner">
+            <field name="name">POUDES OSCAR SALVADOR</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">108.610</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_112" model="res.partner">
+            <field name="name">PREMOLI MARIA DE LOS ANGELES</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.162</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_113" model="res.partner">
+            <field name="name">PUGLIANI LAURA MARISA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.148</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_114" model="res.partner">
+            <field name="name">RAMACCIOTTI MIRTA INES</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.106</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_115" model="res.partner">
+            <field name="name">RASCHIA NELSO LEOPOLDO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.170</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_116" model="res.partner">
+            <field name="name">RATERO HECTOR OMAR</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">109.176</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_117" model="res.partner">
+            <field name="name">RIOS HECTOR</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.137</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_118" model="res.partner">
+            <field name="name">ROMERO EDGARDO DAVID</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.168</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_119" model="res.partner">
+            <field name="name">ROSELLO CARINA ALEJANDRA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">115.838</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_120" model="res.partner">
+            <field name="name">ROSSI ALICIA GRACIELA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">115.825</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_121" model="res.partner">
+            <field name="name">RUBERTO CECILIA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.184</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_122" model="res.partner">
+            <field name="name">RUIZ ROBERTO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.113</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_123" model="res.partner">
+            <field name="name">SAHD ANA GABRIELA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.166</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_124" model="res.partner">
+            <field name="name">SALERNO JORGE GUSTAVO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">100.039</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_125" model="res.partner">
+            <field name="name">SANCHEZ MARIA FERNANDA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">43.454</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_126" model="res.partner">
+            <field name="name">SANTOYO SILVANA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.182</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_127" model="res.partner">
+            <field name="name">SARNARI HERNAN</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">100.007</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_128" model="res.partner">
+            <field name="name">SCAMPOLI MIGUEL</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.134</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_129" model="res.partner">
+            <field name="name">SCARABINO JULIO CESAR</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">104.363</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_130" model="res.partner">
+            <field name="name">SCARPIGNATO ANTONIA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.118</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_131" model="res.partner">
+            <field name="name">SCASCIAFRATTI LILIANA C</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">109.186</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_132" model="res.partner">
+            <field name="name">SCIARRA LUCIANO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.181</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_133" model="res.partner">
+            <field name="name">SELLARES MIRTA ROSA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">129.364</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_134" model="res.partner">
+            <field name="name">SILVA MARIO GUILLERMO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">148.911</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_135" model="res.partner">
+            <field name="name">SOTELO ANTONIA ELBA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.121</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_136" model="res.partner">
+            <field name="name">SPINELLI MARIA ELENA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.142</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_137" model="res.partner">
+            <field name="name">TEGA MARIO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">144.021</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_138" model="res.partner">
+            <field name="name">TOLOZA ALEJANDRO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">115.857</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_139" model="res.partner">
+            <field name="name">TUSIANI CARLOS</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.175</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_140" model="res.partner">
+            <field name="name">URBANO MARIO CEFERINO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">50.625</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_141" model="res.partner">
+            <field name="name">VALDEZ HORACIO ALBERTO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">107.114</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_142" model="res.partner">
+            <field name="name">VAN DER MEULEN ALDANA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.177</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_143" model="res.partner">
+            <field name="name">VEGA RUBEN GREGORIO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">109.169</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_144" model="res.partner">
+            <field name="name">VIGLIERCHIO FERNANDO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.136</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_145" model="res.partner">
+            <field name="name">VIVONO ALFREDO NESTOR</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.164</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_146" model="res.partner">
+            <field name="name">ZACARIAS MARCELA ALEJANDRA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.129</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_147" model="res.partner">
+            <field name="name">ZAMBRANO JOSE VIRGILIO</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">109.188</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_employee_148" model="res.partner">
+            <field name="name">ZILBERBERG ANA</field>
+            <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
+            <field name="document_number">90.163</field>
+            <field name="email">-</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="employee" eval="True"/>
+            <field name="supplier" eval="False"/>
+        </record>
+    </data>
+</openerp>
