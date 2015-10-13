@@ -32,22 +32,22 @@ virtualenv:
 
 install:
   # aeroo reports
-  - git clone https://github.com/aeroo/aeroo_reports.git ${HOME}/aeroo_reports
+  - git clone https://github.com/aeroo/aeroo_reports.git ${HOME}/aeroo_reports -b ${VERSION}
   - pip install git+https://github.com/aeroo/aeroolib.git@master pycups==1.9.68
 
   # odoo addons adhoc
   # TODO change to 8.0 when ready
-  - git clone https://github.com/ingadhoc/odoo-addons.git -b 8.0.x ${HOME}/odoo-addons
+  - git clone https://github.com/ingadhoc/odoo-addons.git ${HOME}/odoo-addons -b ${VERSION}
 
   # odoo argentina
-  - git clone https://github.com/ingadhoc/odoo-argentina.git -b 8.0.x ${HOME}/odoo-argentina
+  - git clone https://github.com/ingadhoc/odoo-argentina.git ${HOME}/odoo-argentina -b ${VERSION}
   - pip install geopy==0.95.1 BeautifulSoup # because l10n_ar_states module is installed
 
   # oca OCA/web
-  - git clone https://github.com/OCA/web.git ${HOME}/web
+  - git clone https://github.com/OCA/web.git ${HOME}/web -b ${VERSION}
 
   # oca server tools
-  - git clone https://github.com/OCA/server-tools.git ${HOME}/server-tools
+  - git clone https://github.com/OCA/server-tools.git ${HOME}/server-tools -b ${VERSION}
 
   # repository requirements
   - pip install -r requirements.txt
