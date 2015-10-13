@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <!-- <data> -->
-    <data noupdate="0">
+    <data noupdate="1">
         <record id="sipreco_public_budget.res_employee_1" model="res.partner">
             <field name="name">Nombre Empleado</field>
             <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
