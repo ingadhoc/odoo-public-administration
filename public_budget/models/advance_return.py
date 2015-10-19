@@ -160,4 +160,23 @@ class advance_return(models.Model):
                 'state!'))
         return super(advance_return, self).unlink()
 
+    @api.onchange('type_id')
+    def change_type(self):
+        self.return_line_ids = False
+
+    @api.one
+    def compute_debtors(self):
+        actual_employees = self.return_line_ids.mapped('employee_id')
+        employees = self.env['res.partner'].search([
+            ('employee', '=', True),
+            ('id', 'not in', actual_employees.ids)])
+        line_vals = []
+        for employee in employees:
+            if employee.get_debt_amount(advance_return_type=self.type_id):
+                line_vals.append((0, False, {
+                    'employee_id': employee.id,
+                    'returned_amount': 0.0,
+                    }))
+        self.return_line_ids = line_vals
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

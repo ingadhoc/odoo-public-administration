@@ -48,15 +48,16 @@
                     <sheet string="advance_return">
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
-                     <group>
+                    <group>
                         <field name="name"/> 
                         <field name="type_id"/> 
                         <field name="date"/> 
                         <field name="user_id"/> 
                         <field name="move_id"/> 
                         <field name="company_id" groups="base.group_multi_company"/>
-                     </group>
-                    <field name="return_line_ids"> 
+                    </group>
+                    <button name="compute_debtors" type="object" string="Fill with Debtors" states="draft"/>
+                    <field name="return_line_ids">
                         <tree string="Advance Return Line"
                             editable="top"
                             >
