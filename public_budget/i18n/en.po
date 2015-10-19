@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: odoo-public-administration (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-28 15:03+0000\n"
-"PO-Revision-Date: 2015-09-22 23:01+0000\n"
+"POT-Creation-Date: 2015-10-19 18:41+0000\n"
+"PO-Revision-Date: 2015-10-19 18:41+0000\n"
 "Last-Translator: Juan Jose Scarafia <scarafia.juanjose@gmail.com>\n"
 "Language-Team: English (http://www.transifex.com/adhoc/ingadhoc-odoo-public-administration-8-0/language/en/)\n"
 "MIME-Version: 1.0\n"
@@ -160,7 +160,11 @@ msgid "Advance Remaining Amount"
 msgstr "Advance Remaining Amount"
 
 #. module: public_budget
-#: field:account.voucher,advance_request_line_ids:0
+#: field:account.voucher,advance_request_id:0
+msgid "Advance Request"
+msgstr "Advance Request"
+
+#. module: public_budget
 #: model:ir.model,name:public_budget.model_public_budget_advance_request_line
 msgid "Advance Request Line"
 msgstr "Advance Request Line"
@@ -503,21 +507,21 @@ msgid "Company"
 msgstr "Company"
 
 #. module: public_budget
-#: code:addons/public_budget/models/advance_request_type.py:43
+#: code:addons/public_budget/models/advance_request_type.py:47
 #: code:addons/public_budget/models/transaction_type.py:49
 #, python-format
 msgid "Company must be the same as Account Company!"
 msgstr "Company must be the same as Account Company!"
 
 #. module: public_budget
-#: code:addons/public_budget/models/advance_request_type.py:46
+#: code:addons/public_budget/models/advance_request_type.py:50
 #, python-format
 msgid "Company must be the same as Journal Company!"
 msgstr "Company must be the same as Journal Company!"
 
 #. module: public_budget
-#: code:addons/public_budget/models/advance_request.py:119
-#: code:addons/public_budget/models/advance_return.py:133
+#: code:addons/public_budget/models/advance_request.py:147
+#: code:addons/public_budget/models/advance_return.py:146
 #: code:addons/public_budget/models/transaction.py:231
 #, python-format
 msgid "Company must be the same as Type Company!"
@@ -689,7 +693,7 @@ msgid "Definitive Amount"
 msgstr "Definitive Amount"
 
 #. module: public_budget
-#: code:addons/public_budget/models/preventive_line.py:199
+#: code:addons/public_budget/models/preventive_line.py:209
 #, python-format
 msgid "Definitive Amount can't be greater than Preventive Amount"
 msgstr "Definitive Amount can't be greater than Preventive Amount"
@@ -814,6 +818,11 @@ msgstr "Expedient Founder"
 #: field:public_budget.remit,expedient_ids:0
 msgid "Expedients"
 msgstr "Expedients"
+
+#. module: public_budget
+#: view:public_budget.advance_return:public_budget.view_public_budget_advance_return_form
+msgid "Fill with Debtors"
+msgstr "Fill with Debtors"
 
 #. module: public_budget
 #: field:public_budget.expedient,final_location:0
@@ -947,7 +956,7 @@ msgid "In Transit?"
 msgstr "In Transit?"
 
 #. module: public_budget
-#: code:addons/public_budget/models/voucher.py:142
+#: code:addons/public_budget/models/voucher.py:146
 #, python-format
 msgid ""
 "In advance transactions, payment orders amount (%s) can not be greater than "
@@ -955,7 +964,7 @@ msgid ""
 msgstr "In advance transactions, payment orders amount (%s) can not be greater than transaction advance remaining amount (%s)"
 
 #. module: public_budget
-#: code:addons/public_budget/models/voucher.py:161
+#: code:addons/public_budget/models/voucher.py:165
 #, python-format
 msgid "In each line, Amount can not be greater than Open Balance"
 msgstr "In each line, Amount can not be greater than Open Balance"
@@ -969,7 +978,7 @@ msgid ""
 msgstr "In one branch only one budget position can                    have Budget Assignment Allowed."
 
 #. module: public_budget
-#: code:addons/public_budget/models/voucher.py:123
+#: code:addons/public_budget/models/voucher.py:128
 #, python-format
 msgid ""
 "In payment of advance transaction type, you need to                        "
@@ -1251,7 +1260,7 @@ msgid "Name"
 msgstr "Name"
 
 #. module: public_budget
-#: code:addons/public_budget/models/advance_request_line.py:79
+#: code:addons/public_budget/models/advance_request.py:114
 #: code:addons/public_budget/models/transaction.py:297
 #, python-format
 msgid "No bank or cash journal found for company \"%s\""
@@ -1263,7 +1272,7 @@ msgid "Normal"
 msgstr "Normal"
 
 #. module: public_budget
-#: code:addons/public_budget/models/invoice.py:109
+#: code:addons/public_budget/models/invoice.py:115
 #, python-format
 msgid ""
 "Not Transaction in actual invoice, can not create             direct Payment"
@@ -1643,14 +1652,14 @@ msgid "The reference of this invoice as provided by the supplier."
 msgstr "The reference of this invoice as provided by the supplier."
 
 #. module: public_budget
-#: code:addons/public_budget/models/preventive_line.py:213
+#: code:addons/public_budget/models/preventive_line.py:223
 #, python-format
 msgid ""
 "The selected budget position (%s) has not a related assigment position!"
 msgstr "The selected budget position (%s) has not a related assigment position!"
 
 #. module: public_budget
-#: code:addons/public_budget/models/preventive_line.py:219
+#: code:addons/public_budget/models/preventive_line.py:229
 #, python-format
 msgid ""
 "There is not enough Balance Amount to assign (%s) to Budget Position '%s'.\n"
@@ -1746,6 +1755,7 @@ msgstr "To close a transaction, Preventive, Definitive, Invoiced,               
 #: view:public_budget.advance_request:public_budget.view_public_budget_advance_request_form
 #: view:public_budget.advance_return:public_budget.view_public_budget_advance_return_form
 #: view:public_budget.budget_detail:public_budget.view_public_budget_budget_detail_tree
+#: view:public_budget.budget_position:public_budget.view_budget_position_budget_tree
 #: view:public_budget.budget_prec_detail:public_budget.view_public_budget_budget_prec_detail_tree
 #: view:public_budget.preventive_line:public_budget.view_public_budget_preventive_line_analysis_tree
 #: view:public_budget.preventive_line:public_budget.view_public_budget_preventive_line_tree
@@ -1790,6 +1800,12 @@ msgstr "Total Residue"
 #: field:public_budget.preventive_line,transaction_id:0
 msgid "Transaction"
 msgstr "Transaction"
+
+#. module: public_budget
+#: code:addons/public_budget/models/preventive_line.py:201
+#, python-format
+msgid "Transaction Company and Account Company must be the same!"
+msgstr "Transaction Company and Account Company must be the same!"
 
 #. module: public_budget
 #: model:ir.model,name:public_budget.model_public_budget_definitive_make_invoice
@@ -1869,11 +1885,6 @@ msgid "View"
 msgstr "View"
 
 #. module: public_budget
-#: field:public_budget.advance_request_line,voucher_id:0
-msgid "Voucher"
-msgstr "Voucher"
-
-#. module: public_budget
 #: field:account.move.line,voucher_line_ids:0
 #: model:ir.model,name:public_budget.model_account_voucher_line
 msgid "Voucher Lines"
@@ -1881,6 +1892,7 @@ msgstr "Voucher Lines"
 
 #. module: public_budget
 #: view:public_budget.advance_request:public_budget.view_public_budget_advance_request_form
+#: field:public_budget.advance_request,voucher_ids:0
 msgid "Vouchers"
 msgstr "Vouchers"
 
@@ -1922,7 +1934,7 @@ msgid ""
 msgstr "You can Not cancel a remit that is not the last one                        for all the expedients"
 
 #. module: public_budget
-#: code:addons/public_budget/models/advance_request.py:128
+#: code:addons/public_budget/models/advance_request.py:156
 #, python-format
 msgid ""
 "You can nopt cancel an advance request with vouchers in other state than \"cancel\" or \"draft\".\n"
@@ -1931,13 +1943,13 @@ msgid ""
 msgstr "You can nopt cancel an advance request with vouchers in other state than \"cancel\" or \"draft\".\n * Request id: %i\n * Voucher ids: %s"
 
 #. module: public_budget
-#: code:addons/public_budget/models/advance_request.py:111
+#: code:addons/public_budget/models/advance_request.py:139
 #, python-format
 msgid "You can not approve a request with lines without approved amount."
 msgstr "You can not approve a request with lines without approved amount."
 
 #. module: public_budget
-#: code:addons/public_budget/models/advance_return.py:143
+#: code:addons/public_budget/models/advance_return.py:156
 #, python-format
 msgid "You can not approve a return with lines without returned amount."
 msgstr "You can not approve a return with lines without returned amount."
@@ -1951,7 +1963,7 @@ msgid ""
 msgstr "You can not cancel a Funding Move that has a related                 Account Move. Delete it first"
 
 #. module: public_budget
-#: code:addons/public_budget/models/advance_return.py:123
+#: code:addons/public_budget/models/advance_return.py:136
 #, python-format
 msgid ""
 "You can not cancel a return if there is a move linked!\n"
@@ -1971,14 +1983,14 @@ msgid "You can not delete a definitive line that has been invoiced"
 msgstr "You can not delete a definitive line that has been invoiced"
 
 #. module: public_budget
-#: code:addons/public_budget/models/preventive_line.py:229
+#: code:addons/public_budget/models/preventive_line.py:239
 #, python-format
 msgid "You can not delete a preventive line that has definitive lines"
 msgstr "You can not delete a preventive line that has definitive lines"
 
 #. module: public_budget
-#: code:addons/public_budget/models/advance_request.py:147
-#: code:addons/public_budget/models/advance_return.py:158
+#: code:addons/public_budget/models/advance_request.py:175
+#: code:addons/public_budget/models/advance_return.py:171
 #, python-format
 msgid "You can not delete if record is not on \"draft\" or \"cancel\" state!"
 msgstr "You can not delete if record is not on \"draft\" or \"cancel\" state!"
@@ -2018,7 +2030,7 @@ msgid ""
 msgstr "You can not set position %s to Budget Posistion                         Allowed as the child position %s has Allowed."
 
 #. module: public_budget
-#: code:addons/public_budget/models/invoice.py:86
+#: code:addons/public_budget/models/invoice.py:92
 #, python-format
 msgid ""
 "You cannot cancel an invoice which has been sent to pay.                    "
