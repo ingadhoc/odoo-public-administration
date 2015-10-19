@@ -184,7 +184,7 @@
                 <field name='code'>11300100</field>
                 <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_receivable"/>
-                <field name='type'>payable</field>
+                <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
                 <field name='parent_id' ref="account_account_10"/>
                 <field name='name'>Adelantos de Personal</field>
@@ -193,7 +193,7 @@
                 <field name='code'>11300110</field>
                 <field name='reconcile' eval='False'/>
                 <field name='user_type' ref="account.data_account_type_receivable"/>
-                <field name='type'>payable</field>
+                <field name='type'>other</field>
                 <field name="company_id" ref="base.main_company"/>
                 <field name='parent_id' ref="account_account_10"/>
                 <field name='name'>Adelantos por Ordenes de Pago</field>

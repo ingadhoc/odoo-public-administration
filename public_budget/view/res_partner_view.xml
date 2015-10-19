@@ -26,6 +26,19 @@
                 </xpath>
             </field>
         </record>
+ 
+        <!-- INHERITED TREE -->
+        <record id="view_partner_tree" model="ir.ui.view">
+            <field name="name">partner.tree</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="advance_request_debt" attrs="{'invisible': [('employee', '=', False)]}"/>
+                    <field name="employee" invisible="True"/>
+                </tree>
+            </field>
+        </record>
 
     </data>
 </openerp>

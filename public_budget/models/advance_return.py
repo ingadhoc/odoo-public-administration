@@ -76,19 +76,32 @@ class advance_return(models.Model):
     @api.multi
     def get_move_vals(self):
         self.ensure_one()
-        lines_vals = []
-        total_returned_amount = 0.0
-        for line in self.return_line_ids:
-            total_returned_amount += line.returned_amount
-            lines_vals.append(
-                (0, 0, {
-                    'partner_id': line.employee_id.id,
-                    'credit': line.returned_amount,
-                    'debit': 0.0,
-                    'account_id': self.type_id.account_id.id,
-                    'name': self.name,
-                    }))
         return_partner = self.type_id.general_return_partner_id
+        lines_vals = []
+
+        total_returned_amount = sum(
+            self.return_line_ids.mapped('returned_amount'))
+        lines_vals.append(
+            (0, 0, {
+                'partner_id': return_partner.id,
+                'credit': total_returned_amount,
+                'debit': 0.0,
+                'account_id': self.type_id.account_id.id,
+                'name': self.name,
+                }))
+        # old method to add a line for each return, now they want everyhing
+        # on one partner
+        # total_returned_amount = 0.0
+        # for line in self.return_line_ids:
+        #     total_returned_amount += line.returned_amount
+        #     lines_vals.append(
+        #         (0, 0, {
+        #             'partner_id': line.employee_id.id,
+        #             'credit': line.returned_amount,
+        #             'debit': 0.0,
+        #             'account_id': self.type_id.account_id.id,
+        #             'name': self.name,
+        #             }))
         journal = self.type_id.return_journal_id
         ref = journal.sequence_id._next()
         lines_vals.append(
@@ -159,5 +172,24 @@ class advance_return(models.Model):
                 'You can not delete if record is not on "draft" or "cancel" '
                 'state!'))
         return super(advance_return, self).unlink()
+
+    @api.onchange('type_id')
+    def change_type(self):
+        self.return_line_ids = False
+
+    @api.one
+    def compute_debtors(self):
+        actual_employees = self.return_line_ids.mapped('employee_id')
+        employees = self.env['res.partner'].search([
+            ('employee', '=', True),
+            ('id', 'not in', actual_employees.ids)])
+        line_vals = []
+        for employee in employees:
+            if employee.get_debt_amount(advance_return_type=self.type_id):
+                line_vals.append((0, False, {
+                    'employee_id': employee.id,
+                    'returned_amount': 0.0,
+                    }))
+        self.return_line_ids = line_vals
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -97,4 +97,4 @@ Customizaciones especificas al modulo public_budget para SIPRECO
     'installable': True,
     'name': 'Public Budget Sipreco Customizations',
     'test': [],
-    'version': '8.0.1.4.0'}
+    'version': '8.0.1.5.0'}

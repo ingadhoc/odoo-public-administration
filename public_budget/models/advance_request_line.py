@@ -44,11 +44,11 @@ class advance_request_line(models.Model):
     state = fields.Selection(
         related='advance_request_id.state',
         )
-    voucher_id = fields.Many2one(
-        'account.voucher',
-        'Voucher',
-        readonly=True,
-        )
+    # voucher_id = fields.Many2one(
+    #     'account.voucher',
+    #     'Voucher',
+    #     readonly=True,
+    #     )
 
     @api.one
     @api.depends(
@@ -66,32 +66,35 @@ class advance_request_line(models.Model):
             raise Warning(_(
                 'Approved Amount can not be greater than Requested Amount'))
 
-    @api.multi
-    def create_voucher(self):
-        vouchers = self.env['account.voucher']
-        for line in self:
-            request = line.advance_request_id
-            amount = line.approved_amount
-            journal = self.env['account.journal'].search([
-                ('company_id', '=', request.company_id.id),
-                ('type', 'in', ('cash', 'bank'))], limit=1)
-            if not journal:
-                raise Warning(_(
-                    'No bank or cash journal found for company "%s"') % (
-                    request.company_id.name))
-            partner = line.employee_id
-            currency = journal.currency or request.company_id.currency_id
-            voucher_data = vouchers.onchange_partner_id(
-                partner.id, journal.id, 0.0,
-                currency.id, 'payment', False)
-            voucher_vals = {
-                'type': 'payment',
-                'partner_id': partner.id,
-                'journal_id': journal.id,
-                'advance_amount': amount,
-                'account_id': voucher_data['value'].get('account_id', False),
-                }
-            voucher = vouchers.create(voucher_vals)
-            line.voucher_id = voucher.id
+    # old method that make on voucher per each line/employee. Now we make
+    # one voucher for all employess, we keep it just in case they want
+    # this usability again
+    # @api.multi
+    # def create_voucher(self):
+    #     vouchers = self.env['account.voucher']
+    #     for line in self:
+    #         request = line.advance_request_id
+    #         amount = line.approved_amount
+    #         journal = self.env['account.journal'].search([
+    #             ('company_id', '=', request.company_id.id),
+    #             ('type', 'in', ('cash', 'bank'))], limit=1)
+    #         if not journal:
+    #             raise Warning(_(
+    #                 'No bank or cash journal found for company "%s"') % (
+    #                 request.company_id.name))
+    #         partner = line.employee_id
+    #         currency = journal.currency or request.company_id.currency_id
+    #         voucher_data = vouchers.onchange_partner_id(
+    #             partner.id, journal.id, 0.0,
+    #             currency.id, 'payment', False)
+    #         voucher_vals = {
+    #             'type': 'payment',
+    #             'partner_id': partner.id,
+    #             'journal_id': journal.id,
+    #             'advance_amount': amount,
+    #             'account_id': voucher_data['value'].get('account_id', False),
+    #             }
+    #         voucher = vouchers.create(voucher_vals)
+    #         line.voucher_id = voucher.id
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
