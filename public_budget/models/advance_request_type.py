@@ -20,7 +20,11 @@ class advance_request_type(models.Model):
     account_id = fields.Many2one(
         'account.account',
         string='Account',
-        domain="[('type', '=', 'payable'), ('company_id', '=', company_id)]",
+        domain="[('type', '=', 'other'), ('company_id', '=', company_id)]",
+        # ahora no queremos que sea payable porque no queremos que se lleve
+        # a la deuda del partner generico, queremos que para que se lleve haga
+        # falta hacer una devolucion
+        # domain="[('type', '=', 'payable'), ('company_id', '=', company_id)]",
         required=True,
         )
     return_journal_id = fields.Many2one(

@@ -55,10 +55,15 @@ class account_voucher(models.Model):
     partner_id = fields.Many2one(
         domain="[('id', 'in', partner_ids[0][2])]",
         )
-    advance_request_line_ids = fields.One2many(
-        'public_budget.advance_request_line',
-        'voucher_id',
-        'Advance Request Line',
+    # advance_request_line_ids = fields.One2many(
+    #     'public_budget.advance_request_line',
+    #     'voucher_id',
+    #     'Advance Request Line',
+    #     )
+    advance_request_id = fields.Many2one(
+        'public_budget.advance_request',
+        'Advance Request',
+        readonly=True,
         )
     transaction_with_advance_payment = fields.Boolean(
         readonly=True,
@@ -110,7 +115,7 @@ class account_voucher(models.Model):
             self, cr, uid, voucher_id, line_total, move_id, name,
             company_currency, current_currency, context=None):
         """Cambiamos la cuenta que usa el adelanto para utilizar aquella que
-        viene de la transaccion de adelanto"""
+        viene de la transaccion de adelanto o del request"""
         res = super(account_voucher, self).writeoff_move_line_get(
             cr, uid, voucher_id, line_total, move_id, name,
             company_currency, current_currency, context=context)
@@ -124,10 +129,9 @@ class account_voucher(models.Model):
                         'In payment of advance transaction type, you need to\
                         an advance account in transaction type!'))
                 res['account_id'] = account.id
-            elif voucher.advance_request_line_ids:
-                request = (
-                    voucher.advance_request_line_ids[0].advance_request_id)
-                res['account_id'] = request.type_id.account_id.id
+            elif voucher.advance_request_id:
+                res['account_id'] = (
+                    voucher.advance_request_id.type_id.account_id.id)
         return res
 
     @api.one

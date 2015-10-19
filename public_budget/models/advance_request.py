@@ -71,23 +71,24 @@ class advance_request(models.Model):
         )
     voucher_ids = fields.One2many(
         'account.voucher',
-        compute='get_vouchers',
-        inverse='dummy_inverse',
+        'advance_request_id',
+        # compute='get_vouchers',
+        # inverse='dummy_inverse',
         string='Vouchers',
         )
 
-    @api.one
-    def dummy_inverse(self):
-        """
-        Dummy Inverse function so that we can edit vouchers and save changes
-        """
-        return True
+    # @api.one
+    # def dummy_inverse(self):
+    #     """
+    #     Dummy Inverse function so that we can edit vouchers and save changes
+    #     """
+    #     return True
 
-    @api.one
-    @api.depends('advance_request_line_ids.voucher_id')
-    def get_vouchers(self):
-        self.voucher_ids = self.mapped(
-            'advance_request_line_ids.voucher_id')
+    # @api.one
+    # @api.depends('advance_request_line_ids.voucher_id')
+    # def get_vouchers(self):
+    #     self.voucher_ids = self.mapped(
+    #         'advance_request_line_ids.voucher_id')
 
     @api.multi
     def action_approve(self):
@@ -97,9 +98,36 @@ class advance_request(models.Model):
     @api.multi
     def action_confirm(self):
         for request in self:
-            request.advance_request_line_ids.create_voucher()
+            # request.advance_request_line_ids.create_voucher()
+            self.create_voucher()
         self.write({'state': 'confirmed'})
         return True
+
+    @api.one
+    def create_voucher(self):
+        vouchers = self.env['account.voucher']
+        amount = sum(self.advance_request_line_ids.mapped('approved_amount'))
+        journal = self.env['account.journal'].search([
+            ('company_id', '=', self.company_id.id),
+            ('type', 'in', ('cash', 'bank'))], limit=1)
+        if not journal:
+            raise Warning(_(
+                'No bank or cash journal found for company "%s"') % (
+                self.company_id.name))
+        partner = self.type_id.general_return_partner_id
+        currency = journal.currency or self.company_id.currency_id
+        voucher_data = vouchers.onchange_partner_id(
+            partner.id, journal.id, 0.0,
+            currency.id, 'payment', False)
+        voucher_vals = {
+            'type': 'payment',
+            'partner_id': partner.id,
+            'journal_id': journal.id,
+            'advance_amount': amount,
+            'advance_request_id': self.id,
+            'account_id': voucher_data['value'].get('account_id', False),
+            }
+        return vouchers.create(voucher_vals)
 
     @api.one
     @api.constrains('state', 'advance_request_line_ids')
