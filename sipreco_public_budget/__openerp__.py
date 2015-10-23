@@ -45,6 +45,7 @@
         'data/advance_request_type.xml',
         'security/security.xml',
         'data/document_type.xml',
+        'reports/budget_report.xml',
     ],
     'demo': [
         'demo/company_demo.xml',

@@ -11,6 +11,9 @@
                 <field name="fiscalyear_id" position="after">
                     <field name="receiptbook_id"/>
                 </field>
+                <button name="sgn_open" position="before">
+                    <button name="%(action_aeroo_report_budget)d" class="oe_highlight" string="Print" type="action"/>
+                </button>
             </field>
         </record>
 
