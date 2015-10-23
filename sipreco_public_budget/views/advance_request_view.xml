@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- FORMVIEW -->
+        <record id="view_public_budget_advance_request_form" model="ir.ui.view">
+            <field name="name">public_budget.advance_request.form</field>
+            <field name="model">public_budget.advance_request</field>
+            <field name="inherit_id" ref="public_budget.view_public_budget_advance_request_form"/>
+            <field name="arch" type="xml">
+                <button name="action_approve" position="before">
+                    <button name="%(action_aeroo_report_advance_request)d" class="oe_highlight" string="Print" type="action"/>
+                </button>
+            </field>
+        </record>
+
+    </data>
+</openerp>
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
+     -->
