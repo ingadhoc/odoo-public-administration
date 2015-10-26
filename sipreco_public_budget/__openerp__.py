@@ -5,6 +5,7 @@
     'category': 'Accounting & Finance',
     'data': [
         'wizard/transaction_definitive_make_invoice_view.xml',
+        'wizard/account_check_handed_wizard_view.xml',
         'reports/stylesheet.xml',
         'reports/payment_order_report.xml',
         'reports/remit_report.xml',
@@ -102,4 +103,4 @@ Customizaciones especificas al modulo public_budget para SIPRECO
     'installable': True,
     'name': 'Public Budget Sipreco Customizations',
     'test': [],
-    'version': '8.0.1.5.0'}
+    'version': '8.0.1.6.0'}
