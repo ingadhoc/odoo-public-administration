@@ -185,10 +185,12 @@ class advance_return(models.Model):
             ('id', 'not in', actual_employees.ids)])
         line_vals = []
         for employee in employees:
-            if employee.get_debt_amount(advance_return_type=self.type_id):
+            employee_debt = employee.get_debt_amount(
+                advance_return_type=self.type_id)
+            if employee_debt:
                 line_vals.append((0, False, {
                     'employee_id': employee.id,
-                    'returned_amount': 0.0,
+                    'returned_amount': employee_debt,
                     }))
         self.return_line_ids = line_vals
 
