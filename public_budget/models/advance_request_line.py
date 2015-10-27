@@ -59,6 +59,10 @@ class advance_request_line(models.Model):
             self.debt_amount = self.employee_id.get_debt_amount(
                 self.advance_request_id.type_id)
 
+    @api.onchange('requested_amount')
+    def change_(self):
+        self.approved_amount = self.requested_amount
+
     @api.one
     @api.constrains('requested_amount', 'approved_amount')
     def check_amounts(self):
