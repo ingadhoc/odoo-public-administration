@@ -18,6 +18,9 @@
             <field name="users" eval="[(4, ref('base.user_root'))]"/>
             <field name="category_id" ref="category_secretaria"/>
         </record>
+            <record id="account.menu_finance" model="ir.ui.menu">
+                <field name="groups_id" eval="[(4, ref('group_secretary_usuario'))]"/>
+            </record>
     	<record id="group_secretary_director" model="res.groups">
             <field name="name">Director</field>
             <field name="users" eval="[(4, ref('base.user_root'))]"/>

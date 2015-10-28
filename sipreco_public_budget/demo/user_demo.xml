@@ -3,6 +3,12 @@
     <data noupdate="1">
 
 <!-- Partners para usuarios -->
+        <record id="general_user_partner" model="res.partner">
+            <field name="name">General User</field>
+            <field name="company_id" ref="company_sipreco"/>
+            <field name="customer" eval="False"/>
+            <field name="email">general_user@yourcompany.example.com</field>
+        </record>
         <record id="secretaria_user_partner" model="res.partner">
             <field name="name">Secretaria User</field>
             <field name="company_id" ref="company_sipreco"/>
@@ -49,13 +55,23 @@
             <field name="location_ids" eval="[(6,0,[ref('public_location_secretaria'), ref('public_location_habilitaciones'), ref('public_location_contaduria'),  ref('public_location_mesa_de_entrada'), ref('public_location_compras'), ref('public_location_tmc')])]"/>
         </record>
 
+        <record id="general_user_user" model="res.users">
+            <field name="partner_id" ref="general_user_partner"/>
+            <field name="login">general</field>
+            <field name="password">general</field>
+            <field name="company_id" ref="company_sipreco"/>
+            <field name="company_ids" eval="[(4,ref('company_sipreco'))]"/>
+            <!-- <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/> -->
+            <field name="location_ids" eval="[(6,0,[ref('public_location_secretaria'), ref('public_location_habilitaciones'), ref('public_location_contaduria'),  ref('public_location_mesa_de_entrada'), ref('public_location_compras'), ref('public_location_tmc')])]"/>
+            <field name="image" type="base64" file="base/static/img/user_demo-image.jpg"/>
+        </record>
         <record id="secretaria_user_user" model="res.users">
             <field name="partner_id" ref="secretaria_user_partner"/>
             <field name="login">secretaria_user</field>
             <field name="password">secretaria_user</field>
             <field name="company_id" ref="company_sipreco"/>
             <field name="company_ids" eval="[(4,ref('company_sipreco'))]"/>
-            <!-- <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/> -->
+            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('public_budget.group_secretary_usuario')])]"/>
             <field name="location_ids" eval="[(6,0,[ref('public_location_secretaria'), ref('public_location_habilitaciones'), ref('public_location_contaduria'),  ref('public_location_mesa_de_entrada'), ref('public_location_compras'), ref('public_location_tmc')])]"/>
             <field name="image" type="base64" file="base/static/img/user_demo-image.jpg"/>
         </record>

@@ -88,7 +88,8 @@ class expedient(models.Model):
         compute='_get_current_location'
         )
     user_location_ids = fields.Many2many(
-        related='user_id.location_ids'
+        related='user_id.location_ids',
+        readonly=True,
         )
     user_id = fields.Many2one(
         'res.users',
