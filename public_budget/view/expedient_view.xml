@@ -18,6 +18,7 @@
                     <filter name="in_transit" string="In Transit" domain="[('in_transit','=','True')]"/>
                     <field name="user_id"/>
                     <field name="supplier_ids"/>
+                    <field name="subsidy_recipient_doc"/>
                     <group expand="0" string="Group By">
                         <field name="last_move_date" string="Last Move" context="{'group_by':'last_move_date'}"/>
                     </group>
@@ -80,6 +81,7 @@
                                 <field name="current_location_id"/>
                                 <field name="final_location" states="closed,annulled"/>
                                 <field name="pages"/>
+                                <field name="subsidy_recipient_doc"/>
                             </group>
                         </group>
                         <notebook>
