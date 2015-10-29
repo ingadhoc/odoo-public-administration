@@ -106,16 +106,17 @@
 
                 <!-- Add cancel on sign states but only tech-->
                 <button name="proforma_voucher" position="after">
-                     <button name="cancel_voucher" string="Cancel Receipt" states="signature_process,signed" groups="base.group_no_one"/>
+                    <button name="cancel_voucher" string="Cancel Receipt" states="signature_process,signed"/>
+                    <!-- groups="base.group_no_one" -->
                 </button>
 
                 <!-- cancel buttons only for tech.. -->
-                <button string="Cancel Voucher" position="attributes">
+<!--                 <button string="Cancel Voucher" position="attributes">
                     <attribute name="groups">base.group_no_one</attribute>
                 </button>
                 <button string="Unreconcile" position="attributes">
                     <attribute name="groups">base.group_no_one</attribute>
-                </button>
+                </button> -->
 
                 <!-- hide advance amount on not advance transactions  -->
                 <field name="advance_amount" position="attributes">

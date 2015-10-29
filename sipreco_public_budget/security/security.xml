@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
+        <!-- crud for checks only for habilitaciones -->
+        <record id="account_check.account_check_access_full" model="ir.model.access">
+            <field name="group_id" ref="public_budget.group_habilitacion_usuario"/>
+        </record>
+
         <!-- Grupo cobros y pagos -->
         <record id="account.group_account_invoice" model="res.groups">
             <field name="category_id" ref="base.module_category_hidden"/>
