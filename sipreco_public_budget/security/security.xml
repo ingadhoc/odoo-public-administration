@@ -6,6 +6,16 @@
             <field name="group_id" ref="public_budget.group_habilitacion_usuario"/>
         </record>
 
+        <!-- crud for withholdings only for habilitaciones -->
+        <record id="account_voucher_withholding.account_voucher_withholding_user" model="ir.model.access">
+            <!-- disbable this rule -->
+            <field name="active" eval="False"/>
+        </record>
+        <record id="account_voucher_withholding.account_voucher_withholding_manager" model="ir.model.access">
+            <!-- keep only this one for habilitaciones -->
+            <field name="group_id" ref="public_budget.group_habilitacion_usuario"/>
+        </record>
+
         <!-- Grupo cobros y pagos -->
         <record id="account.group_account_invoice" model="res.groups">
             <field name="category_id" ref="base.module_category_hidden"/>
