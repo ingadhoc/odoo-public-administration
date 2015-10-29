@@ -3,6 +3,7 @@
     'category': 'base.module_category_knowledge_management',
     'data': [
                 'security/public_budget_group.xml',
+                'security/ir.model.access.csv',
                 'wizard/transaction_definitive_make_invoice_view.xml',
                 'wizard/transaction_definitive_mass_invoice_create_view.xml',
                 'view/inventory_rule_view.xml',
@@ -41,7 +42,6 @@
                 'workflow/expedient_workflow.xml',
                 'workflow/funding_move_workflow.xml',
                 'workflow/remit_workflow.xml',
-                'security/ir.model.access.csv',
                 'view/public_budget_menuitem.xml',
                 'view/public_budget_actions.xml',
              ],

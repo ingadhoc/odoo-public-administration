@@ -36,4 +36,10 @@ class partner(models.Model):
                     'subsidio!\n'
                     '* ids de receptores: %s') % same_document_partners.ids)
 
+    @api.multi
+    def mark_as_reconciled(self):
+        # run with sudo because it gives error if you dont have rights to write
+        # on partner
+        return super(partner, self.sudo()).mark_as_reconciled()
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

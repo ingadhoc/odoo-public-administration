@@ -20,7 +20,7 @@
             id="menu_configuration"
             sequence="100"
             parent="menu_budget_main"
-            groups="group_manager"
+            groups="base.group_system"
             />
 
         <menuitem
@@ -87,7 +87,6 @@
             id="menu_budget_conf"
             sequence="100"
             parent="menu_configuration"
-            groups="group_manager"
             />
         <record id="action_public_budget_budget_budgets" model="ir.actions.act_window">
             <field name="name">Budgets</field>
@@ -163,7 +162,6 @@
             sequence="20"
             action="action_public_budget_location_locations"
             parent="menu_configuration"
-            groups="group_manager"
             />
         <record id="action_public_budget_remit_remits" model="ir.actions.act_window">
             <field name="name">Remits</field>
@@ -220,7 +218,6 @@
             sequence="10"
             action="action_public_budget_transaction_type_transaction_types"
             parent="menu_configuration"
-            groups="group_manager"
             />
         <record id="action_public_budget_transaction_transactions" model="ir.actions.act_window">
             <field name="name">Transactions</field>
@@ -247,7 +244,6 @@
             id="menu_expedients_conf"
             sequence="40"
             parent="menu_budget_conf"
-            groups="group_manager"
             />
         <record id="action_public_budget_budget_pos_exc_rest_position_exc__rest_" model="ir.actions.act_window">
             <field name="name">Position Exc. Rest.</field>
@@ -267,7 +263,6 @@
             sequence="20"
             action="action_public_budget_budget_pos_exc_rest_position_exc__rest_"
             parent="menu_budget_conf"
-            groups="group_manager"
             />
         <record id="action_public_budget_budget_position_category_position_types" model="ir.actions.act_window">
             <field name="name">Position Types</field>
@@ -287,7 +282,6 @@
             sequence="10"
             action="action_public_budget_budget_position_category_position_types"
             parent="menu_budget_conf"
-            groups="group_manager"
             />
         <record id="action_public_budget_budget_position_positions" model="ir.actions.act_window">
             <field name="name">Positions</field>
@@ -307,7 +301,6 @@
             sequence="30"
             action="action_public_budget_budget_position_positions"
             parent="menu_budget_conf"
-            groups="group_manager"
             />
         <record id="action_public_budget_expedient_category_categories" model="ir.actions.act_window">
             <field name="name">Categories</field>
@@ -327,7 +320,6 @@
             sequence="10"
             action="action_public_budget_expedient_category_categories"
             parent="menu_expedients_conf"
-            groups="group_manager"
             />
         <record id="action_public_budget_expedient_founder_founders" model="ir.actions.act_window">
             <field name="name">Founders</field>
@@ -347,7 +339,6 @@
             sequence="40"
             action="action_public_budget_expedient_founder_founders"
             parent="menu_expedients_conf"
-            groups="group_manager"
             />
 
 <!-- Menus agregados por nosotros -->

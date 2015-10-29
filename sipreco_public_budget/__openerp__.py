@@ -50,6 +50,7 @@
         'data/tax_settlement.xml',
         'data/advance_request_type.xml',
         'security/security.xml',
+        'security/ir.model.access.csv',
         'data/document_type.xml',
     ],
     'demo': [
