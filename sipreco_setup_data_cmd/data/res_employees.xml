@@ -621,7 +621,7 @@
             <field name="employee" eval="True"/>
             <field name="supplier" eval="False"/>
         </record>
-<!--         <record id="sipreco_public_budget.res_employee_56" model="res.partner">
+        <record id="sipreco_public_budget.res_employee_56" model="res.partner">
             <field name="name">FERRERI JESUS HECTOR</field>
             <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
             <field name="document_number">100.009</field>
@@ -631,7 +631,7 @@
             <field name="customer" eval="False"/>
             <field name="employee" eval="True"/>
             <field name="supplier" eval="False"/>
-        </record> -->
+        </record>
         <record id="sipreco_public_budget.res_employee_57" model="res.partner">
             <field name="name">FIORANO PATRICIA</field>
             <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
@@ -841,7 +841,7 @@
             <field name="employee" eval="True"/>
             <field name="supplier" eval="False"/>
         </record>
-<!--         <record id="sipreco_public_budget.res_employee_76" model="res.partner">
+        <record id="sipreco_public_budget.res_employee_76" model="res.partner">
             <field name="name">LOPEZ PATRICIA HEBE</field>
             <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
             <field name="document_number">90.063</field>
@@ -851,7 +851,7 @@
             <field name="customer" eval="False"/>
             <field name="employee" eval="True"/>
             <field name="supplier" eval="False"/>
-        </record> -->
+        </record>
         <record id="sipreco_public_budget.res_employee_77" model="res.partner">
             <field name="name">LOPEZ PERSICO SERGIO JOSE</field>
             <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
@@ -1017,7 +1017,7 @@
             <field name="employee" eval="True"/>
             <field name="supplier" eval="False"/>
         </record>
-<!--         <record id="sipreco_public_budget.res_employee_92" model="res.partner">
+        <record id="sipreco_public_budget.res_employee_92" model="res.partner">
             <field name="name">NICOLI SILVINA BEATRIZ</field>
             <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
             <field name="document_number">115.845</field>
@@ -1027,7 +1027,7 @@
             <field name="customer" eval="False"/>
             <field name="employee" eval="True"/>
             <field name="supplier" eval="False"/>
-        </record> -->
+        </record>
         <record id="sipreco_public_budget.res_employee_93" model="res.partner">
             <field name="name">NOGARA JUAN CARLOS</field>
             <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
@@ -1105,7 +1105,7 @@
             <field name="employee" eval="True"/>
             <field name="supplier" eval="False"/>
         </record>
-<!--         <record id="sipreco_public_budget.res_employee_100" model="res.partner">
+        <record id="sipreco_public_budget.res_employee_100" model="res.partner">
             <field name="name">PAZOS MARCELO FABIAN</field>
             <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
             <field name="document_number">90.099</field>
@@ -1115,8 +1115,8 @@
             <field name="customer" eval="False"/>
             <field name="employee" eval="True"/>
             <field name="supplier" eval="False"/>
-        </record> -->
-<!--         <record id="sipreco_public_budget.res_employee_101" model="res.partner">
+        </record>
+        <record id="sipreco_public_budget.res_employee_101" model="res.partner">
             <field name="name">PELLEGRINO EDUARDO GUSTAVO</field>
             <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
             <field name="document_number">100.024</field>
@@ -1126,7 +1126,7 @@
             <field name="customer" eval="False"/>
             <field name="employee" eval="True"/>
             <field name="supplier" eval="False"/>
-        </record> -->
+        </record>
         <record id="sipreco_public_budget.res_employee_102" model="res.partner">
             <field name="name">PELLO JULIA AGUSTINA</field>
             <field name="document_type_id" ref="sipreco_public_budget.dt_File"/>
