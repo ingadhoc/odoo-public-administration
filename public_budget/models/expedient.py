@@ -75,6 +75,10 @@ class expedient(models.Model):
         string='Pages',
         required=True
         )
+    subsidy_recipient_doc = fields.Integer(
+        string='DNI Receptor Potencial Subsidio',
+        required=False
+        )
     final_location = fields.Char(
         string='Final Location'
         )

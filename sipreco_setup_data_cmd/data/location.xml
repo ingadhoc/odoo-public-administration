@@ -3,7 +3,7 @@
     <data noupdate="1">
     <!-- <data noupdate="1"> -->
         <record id="sipreco_public_budget.public_location_secretaria" model="public_budget.location">
-            <field name="name">Secretaria</field>
+            <field name="name">Secretaria Adm.</field>
         </record>
         <record id="sipreco_public_budget.public_location_contaduria" model="public_budget.location">
             <field name="name">Contaduría</field>
@@ -11,14 +11,18 @@
         <record id="sipreco_public_budget.public_location_habilitaciones" model="public_budget.location">
             <field name="name">Habilitacion</field>
         </record>
-        <record id="sipreco_public_budget.public_location_mesa_de_entrada" model="public_budget.location">
-            <field name="name">Mesa de Entrada</field>
+        <record id="sipreco_public_budget.public_location_oficina_de_ingresos" model="public_budget.location">
+            <field name="name">Oficina de Ingresos</field>
         </record>
         <record id="sipreco_public_budget.public_location_compras" model="public_budget.location">
-            <field name="name">Compras</field>
+            <field name="name">Compras y Sum.</field>
         </record>
-<!--         <record id="sipreco_public_budget.public_location_tmc" model="public_budget.location">
-            <field name="name">Tribunal de Cuentas</field>
-        </record> -->
+        <record id="sipreco_public_budget.public_location_presidencia" model="public_budget.location">
+            <field name="name">Presidencia</field>
+        </record>
+        <record id="sipreco_public_budget.public_location_personal" model="public_budget.location">
+            <field name="name">Personal</field>
+        </record>
+
     </data>
 </openerp>
