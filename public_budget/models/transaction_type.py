@@ -40,7 +40,7 @@ class transaction_type(models.Model):
         )
 
     @api.one
-    @api.constrains('type_id', 'company_id')
+    @api.constrains('advance_account_id', 'company_id')
     def check_account_company(self):
         if (
                 self.advance_account_id and

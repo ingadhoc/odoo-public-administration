@@ -28,7 +28,8 @@
         </record>
  
         <!-- INHERITED TREE -->
-        <record id="view_partner_tree" model="ir.ui.view">
+        <!-- IMPORTANTE; si lo activamos hay que hacerlo con vista par aun grupo distinto a employee porque si no da error de acceso -->
+<!--         <record id="view_partner_tree" model="ir.ui.view">
             <field name="name">partner.tree</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_tree"/>
@@ -38,7 +39,7 @@
                     <field name="employee" invisible="True"/>
                 </tree>
             </field>
-        </record>
+        </record> -->
 
     </data>
 </openerp>
