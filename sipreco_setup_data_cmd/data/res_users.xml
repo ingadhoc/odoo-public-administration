@@ -3,164 +3,162 @@
     <!-- <data> -->
     <data noupdate="1">
 
-        <record id="sipreco_public_budget.res_partner_gaciar" model="res.partner">
-            <field name="name">Gonzalo Aciar</field>
-            <field name="email">gonzalo@mail.com</field>
+<!-- Partners para usuarios -->
+       <!--  <record id="sipreco_public_budget.res_partner_alejandro" model="res.partner">
+            <field name="name">Alejandro Pendino</field>
+            <field name="email">alejandro@mail.com</field>
+            <field name="document_type_id" ref="l10n_ar_invoice.dt_DNI"/>
+            <field name="document_number">31393297</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_partner_ivan" model="res.partner">
+            <field name="name">Ivan Michniuk</field>
+            <field name="email">ivan@mail.com</field>
+            <field name="document_type_id" ref="l10n_ar_invoice.dt_DNI"/>
+            <field name="document_number">31393297</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_partner_montiano" model="res.partner">
+            <field name="name">Marcelo Montiano</field>
+            <field name="email">marcelo@mail.com</field>
+            <field name="document_type_id" ref="l10n_ar_invoice.dt_DNI"/>
+            <field name="document_number">31393297</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+        </record>
+        <record id="sipreco_public_budget.res_partner_jonatan" model="res.partner">
+            <field name="name">Jonatan Santos</field>
+            <field name="email">jonatan@mail.com</field>
+            <field name="document_type_id" ref="l10n_ar_invoice.dt_DNI"/>
+            <field name="document_number">31393297</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+        </record> -->
+
+        <record id="sipreco_public_budget.res_partner_gustavo" model="res.partner">
+            <field name="name">Gustavo Pellegrino</field>
+            <field name="email">gustavo@mail.com</field>
+            <field name="document_type_id" ref="l10n_ar_invoice.dt_DNI"/>
+            <field name="document_number">31393297</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.res_partner_marcelo" model="res.partner">
+            <field name="name">Marcelo Pazos</field>
+            <field name="email">marcelo@mail.com</field>
+            <field name="document_type_id" ref="l10n_ar_invoice.dt_DNI"/>
+            <field name="document_number">31393297</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.res_partner_silvina" model="res.partner">
+            <field name="name">Silvina Nicoli</field>
+            <field name="email">silvina@mail.com</field>
+            <field name="document_type_id" ref="l10n_ar_invoice.dt_DNI"/>
+            <field name="document_number">31393297</field>
+            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+        </record>
+
+        <record id="sipreco_public_budget.res_partner_jesus" model="res.partner">
+            <field name="name">Jesus Ferreri</field>
+            <field name="email">jesus@mail.com</field>
             <field name="document_type_id" ref="l10n_ar_invoice.dt_DNI"/>
             <field name="document_number">31393297</field>
             <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
             <field name="customer" eval="False"/>
-            <field name="employee" eval="True"/>
-            <field name="supplier" eval="False"/>
         </record>
 
-        <record id="sipreco_public_budget.res_partner_mroca" model="res.partner">
-            <field name="name">Mariano Roca</field>
-            <field name="email">mariano@mail.com</field>
+
+        <record id="sipreco_public_budget.res_partner_patricia" model="res.partner">
+            <field name="name">Patricia Lopez</field>
+            <field name="email">patricia@mail.com</field>
             <field name="document_type_id" ref="l10n_ar_invoice.dt_DNI"/>
             <field name="document_number">31393297</field>
             <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
             <field name="customer" eval="False"/>
-            <field name="employee" eval="True"/>
-            <field name="supplier" eval="False"/>
         </record>
-        <record id="sipreco_public_budget.res_partner_mzamarini" model="res.partner">
-            <field name="name">Miguel Zamarini</field>
-            <field name="email">mariano@mail.com</field>
-            <field name="document_type_id" ref="l10n_ar_invoice.dt_DNI"/>
-            <field name="document_number">31393297</field>
-            <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
-            <field name="customer" eval="False"/>
-            <field name="employee" eval="True"/>
-            <field name="supplier" eval="False"/>
-        </record>
-
-
 
 <!-- Usuarios -->
     <!-- Users -->
-
+<!-- 
+        <record id="sipreco_public_budget.res_user_alejandro" model="res.users">
+            <field name="login">apendino</field>
+            <field name="password">apendino</field>
+            <field name="partner_id" ref="sipreco_public_budget.res_partner_alejandro"/>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/>
+            <field name="location_ids" eval="[(6,0,[ref('sipreco_public_budget.public_location_tmc')])]"/>
+        </record>
+        <record id="sipreco_public_budget.res_user_ivan" model="res.users">
+            <field name="login">imichniuk</field>
+            <field name="password">imichniuk</field>
+            <field name="partner_id" ref="sipreco_public_budget.res_partner_alejandro"/>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/>
+            <field name="location_ids" eval="[(6,0,[ref('sipreco_public_budget.public_location_tmc')])]"/>
+        </record>
+        <record id="sipreco_public_budget.res_user_montiano" model="res.users">
+            <field name="login">mmontiano</field>
+            <field name="password">mmontiano</field>
+            <field name="partner_id" ref="sipreco_public_budget.res_partner_alejandro"/>
+            <field name="groups_id" eval="[(6,0,[ref('sipreco_public_budget.public_location_tmc')])]"/>
+        </record>
+        <record id="sipreco_public_budget.res_user_jonatan" model="res.users">
+            <field name="login">jsantos</field>
+            <field name="password">jsantos</field>
+            <field name="partner_id" ref="sipreco_public_budget.res_partner_jonatan"/>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/>
+            <field name="location_ids" eval="[(6,0,[ref('sipreco_public_budget.public_location_tmc')])]"/>
+        </record> -->
 
         <record id="sipreco_public_budget.res_user_gustavo" model="res.users">
-            <field name="login">epellegrino</field>
-            <field name="password">epellegrino</field>
-            <field name="partner_id" ref="sipreco_public_budget.res_employee_101"/>
-            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/>
-            <field name="location_ids" eval="[(6,0,[ref('sipreco_public_budget.public_location_contaduria')])]"/>
-        </record>
-        <record id="sipreco_public_budget.res_user_jscarabino" model="res.users">
-            <field name="login">jscarabino</field>
-            <field name="password">jscarabino</field>
-            <field name="partner_id" ref="sipreco_public_budget.res_employee_129"/>
-            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/>
+            <field name="login">gpellegrino</field>
+            <field name="password">gpellegrino</field>
+            <field name="partner_id" ref="sipreco_public_budget.res_partner_gustavo"/>
+            <!-- <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/> -->
             <field name="location_ids" eval="[(6,0,[ref('sipreco_public_budget.public_location_contaduria')])]"/>
         </record>
 
         <record id="sipreco_public_budget.res_user_marcelo" model="res.users">
             <field name="login">mpazos</field>
             <field name="password">mpazos</field>
-            <field name="partner_id" ref="sipreco_public_budget.res_employee_100"/>
-            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/>
-            <field name="location_ids" eval="[(6,0,[ref('sipreco_public_budget.public_location_contaduria')])]"/>
-        </record>
-
-        <record id="sipreco_public_budget.res_user_jlimas" model="res.users">
-            <field name="login">jlimas</field>
-            <field name="password">jlimas</field>
-            <field name="partner_id" ref="sipreco_public_budget.res_employee_74"/>
-            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/>
-            <field name="location_ids" eval="[(6,0,[ref('sipreco_public_budget.public_location_contaduria')])]"/>
-        </record>
-
-        <record id="sipreco_public_budget.res_user_hsarnari" model="res.users">
-            <field name="login">hsarnari</field>
-            <field name="password">hsarnari</field>
-            <field name="partner_id" ref="sipreco_public_budget.res_employee_127"/>
-            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/>
+            <field name="partner_id" ref="sipreco_public_budget.res_partner_marcelo"/>
+            <!-- <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/> -->
             <field name="location_ids" eval="[(6,0,[ref('sipreco_public_budget.public_location_contaduria')])]"/>
         </record>
 
         <record id="sipreco_public_budget.res_user_silvina" model="res.users">
             <field name="login">snicoli</field>
             <field name="password">snicoli</field>
-            <field name="partner_id" ref="sipreco_public_budget.res_employee_92"/>
-            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/>
+            <field name="partner_id" ref="sipreco_public_budget.res_partner_silvina"/>
+            <!-- <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/> -->
             <field name="location_ids" eval="[(6,0,[ref('sipreco_public_budget.public_location_secretaria')])]"/>
         </record>
 
         <record id="sipreco_public_budget.res_user_jesus" model="res.users">
             <field name="login">jferreri</field>
             <field name="password">jferreri</field>
-            <field name="partner_id" ref="sipreco_public_budget.res_employee_56"/>
-            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/>
-            <field name="location_ids" eval="[(6,0,[ref('sipreco_public_budget.public_location_habilitaciones')])]"/>
-        </record>
-        <record id="sipreco_public_budget.res_user_mroca" model="res.users">
-            <field name="login">mroca</field>
-            <field name="password">mroca</field>
-            <field name="partner_id" ref="sipreco_public_budget.res_partner_mroca"/>
-            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/>
-            <field name="location_ids" eval="[(6,0,[ref('sipreco_public_budget.public_location_habilitaciones')])]"/>
-        </record>
-        <record id="sipreco_public_budget.res_user_rkalbermatter" model="res.users">
-            <field name="login">rkalbermatter</field>
-            <field name="password">rkalbermatter</field>
-            <field name="partner_id" ref="sipreco_public_budget.res_employee_66"/>
-            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/>
+            <field name="partner_id" ref="sipreco_public_budget.res_partner_jesus"/>
+            <!-- <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/> -->
             <field name="location_ids" eval="[(6,0,[ref('sipreco_public_budget.public_location_habilitaciones')])]"/>
         </record>
 
         <record id="sipreco_public_budget.res_user_patricia" model="res.users">
             <field name="login">plopez</field>
             <field name="password">plopez</field>
-            <field name="partner_id" ref="sipreco_public_budget.res_employee_76"/>
-            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/>
-            <field name="location_ids" eval="[(6,0,[ref('sipreco_public_budget.public_location_oficina_de_ingresos')])]"/>
+            <field name="partner_id" ref="sipreco_public_budget.res_partner_patricia"/>
+            <!-- <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/> -->
+            <field name="location_ids" eval="[(6,0,[ref('sipreco_public_budget.public_location_mesa_de_entrada')])]"/>
         </record>
-
-        <record id="sipreco_public_budget.res_user_gaciar" model="res.users">
-            <field name="login">gaciar</field>
-            <field name="password">gaciar</field>
-            <field name="partner_id" ref="sipreco_public_budget.res_partner_gaciar"/>
-            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/>
-            <field name="location_ids" eval="[(6,0,[ref('sipreco_public_budget.public_location_secretaria')])]"/>
-        </record>
-
-        <record id="sipreco_public_budget.res_user_mnoguera" model="res.users">
-            <field name="login">mnoguera</field>
-            <field name="password">mnoguera</field>
-            <field name="partner_id" ref="sipreco_public_budget.res_employee_94"/>
-            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/>
-            <field name="location_ids" eval="[(6,0,[ref('sipreco_public_budget.public_location_secretaria')])]"/>
-        </record>
-        <record id="sipreco_public_budget.res_user_carrastia" model="res.users">
-            <field name="login">carrastia</field>
-            <field name="password">carrastia</field>
-            <field name="partner_id" ref="sipreco_public_budget.res_employee_17"/>
-            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/>
-            <field name="location_ids" eval="[(6,0,[ref('sipreco_public_budget.public_location_compras')])]"/>
-        </record>
-        <record id="sipreco_public_budget.res_user_eperez" model="res.users">
-            <field name="login">eperez</field>
-            <field name="password">eperez</field>
-            <field name="partner_id" ref="sipreco_public_budget.res_employee_104"/>
-            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/>
-            <field name="location_ids" eval="[(6,0,[ref('sipreco_public_budget.public_location_compras')])]"/>
-        </record>
-        <record id="sipreco_public_budget.res_user_mzamarini" model="res.users">
-            <field name="login">mzamarini</field>
-            <field name="password">mzamarini</field>
-            <field name="partner_id" ref="sipreco_public_budget.res_partner_mzamarini"/>
-            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/>
-            <field name="location_ids" eval="[(6,0,[ref('sipreco_public_budget.public_location_presidencia')])]"/>
-        </record>
-        <record id="sipreco_public_budget.res_user_ccatalano" model="res.users">
-            <field name="login">ccatalano</field>
-            <field name="password">ccatalano</field>
-            <field name="partner_id" ref="sipreco_public_budget.res_employee_31"/>
-            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('account.group_account_manager'), ref('base.group_partner_manager'), ref('public_budget.group_manager'), ref('public_budget.group_secretary')])]"/>
-            <field name="location_ids" eval="[(6,0,[ref('sipreco_public_budget.public_location_presidencia')])]"/>
-        </record>
-
     </data>
 </openerp>
