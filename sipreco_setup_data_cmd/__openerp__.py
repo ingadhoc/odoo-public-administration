@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Sipreco Set Up Data CMD',
-    'version': '8.0.0.0.0',
+    'version': '8.0.0.1.0',
     'category': 'Accounting',
     'sequence': 14,
     'summary': '',
@@ -28,6 +28,7 @@ Sipreco Set Up Data TMC
         'data/account_journal.xml',
         'reports/payment_order_report.xml',
         'reports/payment_receipt_report.xml',
+        'reports/stylesheet.xml',
     ],
     'demo': [
     ],
