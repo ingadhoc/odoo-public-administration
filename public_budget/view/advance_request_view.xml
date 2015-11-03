@@ -28,8 +28,8 @@
             <field name="arch" type="xml">
                 <form string="advance_request">
                     <header>
-                        <button name="action_approve" states="draft" string="Approve" type="object" class="oe_highlight"/>
-                        <button name="action_confirm" states="approved" string="Confirm" type="object" class="oe_highlight" groups="base.group_no_one,account.group_account_user"/>
+                        <button name="action_approve" states="draft" string="Approve" type="object" class="oe_highlight" groups="public_budget.group_secretary_director"/>
+                        <button name="action_confirm" states="approved" string="Confirm" type="object" class="oe_highlight" groups="account.group_account_user"/>
                         <button name="action_cancel_draft" type="object" states="cancel" string="To Draft"/>
                         <button name="action_cancel" states="approved,confirmed,draft" string="Cancel" type="object" groups="base.group_no_one"/>
                         <field name="state" widget="statusbar" statusbar_colors='{}'/>
