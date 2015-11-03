@@ -45,7 +45,7 @@
                         <button name="sgn_cancel"
                             states="closed,draft,open"
                             string="Cancel"
-                            groups="base.group_no_one"/>
+                            groups="base.group_no_one,account.group_account_user"/>
                         <field name="state" widget="statusbar"
                             statusbar_colors='{}'/>
                     </header>
