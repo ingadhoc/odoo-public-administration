@@ -28,8 +28,8 @@
             <field name="arch" type="xml">
                 <form string="advance_request">
                     <header>
-                        <button name="action_approve" states="draft" string="Approve" type="object" class="oe_highlight"/>
-                        <button name="action_confirm" states="approved" string="Confirm" type="object" class="oe_highlight"/>
+                        <button name="action_approve" states="draft" string="Approve" type="object" class="oe_highlight" groups="public_budget.group_secretary_director"/>
+                        <button name="action_confirm" states="approved" string="Confirm" type="object" class="oe_highlight" groups="account.group_account_user"/>
                         <button name="action_cancel_draft" type="object" states="cancel" string="To Draft"/>
                         <button name="action_cancel" states="approved,confirmed,draft" string="Cancel" type="object" groups="base.group_no_one"/>
                         <field name="state" widget="statusbar" statusbar_colors='{}'/>
@@ -51,8 +51,8 @@
                                     >
                                     <field name="employee_id"/>
                                     <field name="description"/>
-                                    <field name="requested_amount" sum="Total"/>
                                     <field name="debt_amount" states="draft" sum="Total"/>
+                                    <field name="requested_amount" sum="Total"/>
                                     <field name="approved_amount" sum="Total"/>
                                     <field name="state" invisible="1"/>
                                 </tree>
