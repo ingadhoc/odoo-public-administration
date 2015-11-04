@@ -48,6 +48,23 @@
         <record id="account.menu_finance" model="ir.ui.menu">
             <field name="groups_id" eval="[(4, ref('group_secretary_usuario')), (4, ref('group_habilitacion_usuario'))]"/>
         </record>
+        <record id="account.menu_finance_bank_and_cash" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4, ref('group_habilitacion_usuario'))]"/>
+        </record>
+        <!-- make tax settlement child of bank and cash so that habilitaciones user see them-->
+        <record id="account_tax_settlement.account_tax_settlement_menu" model="ir.ui.menu">
+            <field name="parent_id" ref="account.menu_finance_bank_and_cash"/>
+            <field name="sequence" eval="50"/>
+        </record>
+
+        <!-- share chart account wit hab manager-->
+        <record id="account.menu_finance_charts" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4, ref('group_habilitacion_director'))]"/>
+        </record>
+
+<!--         <record id="account.menu_finance_periodical_processing" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4, ref('group_habilitacion_usuario'))]"/>
+        </record> -->
     </data>
 </openerp>
 <!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
