@@ -29,6 +29,7 @@
         'views/transaction_type_view.xml',
         'views/advance_request_view.xml',
         'views/advance_return_view.xml',
+        'views/account_checkbook_view.xml',
         'workflow/account_voucher_workflow.xml',
         'workflow/account_check_workflow.xml',
         'data/ir_parameters.xml',
@@ -104,4 +105,4 @@ Customizaciones especificas al modulo public_budget para SIPRECO
     'installable': True,
     'name': 'Public Budget Sipreco Customizations',
     'test': [],
-    'version': '8.0.1.7.0'}
+    'version': '8.0.1.8.0'}

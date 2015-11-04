@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+       <record model="ir.ui.view" id="view_account_checkbook_form">
+            <field name="name">account.checkbook.form</field>
+            <field name="model">account.checkbook</field>
+            <field name="inherit_id" ref="account_check.view_account_checkbook_form"/>
+            <field name="arch" type="xml">
+                <field name="name" position="before">
+                    <field name="journal_id"/>
+                </field>
+            </field>
+        </record>
+        <record id="action_manage_checkbooks" model="ir.actions.act_window">
+            <field name="name">Gestionar Chequeras</field>
+            <field name="res_model">account.checkbook</field>
+        </record>
+
+        <menuitem
+            id="menu_manage_checkbooks"
+            sequence="30"
+            action="action_manage_checkbooks"
+            parent="sipreco_public_budget.other_operations"
+            groups="public_budget.group_habilitacion_director,account.group_account_invoice"
+        />
+    </data>
+</openerp>

@@ -18,39 +18,39 @@
 #
 # [código de tributo][código de impuesto]:[V: Ventas, C: Compra, P: Percepción, R: Retención, B: Valor bruto de la factura]
 #
-        <record id="ri_tax_code_chart_root" model="account.tax.code">
+        <record id="demo_ri_tax_code_chart_root" model="account.tax.code">
             <field name="name">Plan de Impuestos</field>
             <field name="code">IVARI</field>
             <field name="parent_id" eval="False"/>
             <field name="company_id" ref="company_sipreco"/>
         </record>
 
-        <record model="account.tax.code" id="ri_impuestos_nacionales">
+        <record model="account.tax.code" id="demo_ri_impuestos_nacionales">
             <field name="name">IMPUESTOS NACIONALES</field>
             <field name="code">1.0.00.000</field>
             <field name="sign">1</field>
-            <field name="parent_id" ref="ri_tax_code_chart_root"/>
+            <field name="parent_id" ref="demo_ri_tax_code_chart_root"/>
             <field name="type">view</field>
             <field name="application">national_taxes</field>
             <field name="company_id" ref="company_sipreco"/>
         </record>
 
-                <record model="account.tax.code" id="ri_tax_code_iva">
+                <record model="account.tax.code" id="demo_ri_tax_code_iva">
                     <field name="name">IVA</field>
                     <field name="code">1.1.00.000</field>
                     <field name="sign">1</field>
-                    <field name="parent_id" ref="ri_impuestos_nacionales"/>
+                    <field name="parent_id" ref="demo_ri_impuestos_nacionales"/>
                     <field name="tax">vat</field>
                     <field name="type">view</field>
                     <field name="application">national_taxes</field>
                     <field name="company_id" ref="company_sipreco"/>
                 </record>
     
-<!--                         <record model="account.tax.code" id="ri_tax_code_iva_venta_no_gravado">
+<!--                         <record model="account.tax.code" id="demo_ri_tax_code_iva_venta_no_gravado">
                             <field name="code">1.1.00.010</field>
                             <field name="name">IVA Ventas No Gravado</field>
                             <field name="sign">1</field>
-                            <field name="parent_id" ref="ri_tax_code_iva"/>
+                            <field name="parent_id" ref="demo_ri_tax_code_iva"/>
                             <field name="afip_code" eval="1"/>
                             <field name="tax">vat</field>
                             <field name="type">tax</field>
@@ -58,11 +58,11 @@
                             <field name="company_id" ref="company_sipreco"/>
                         </record>
 
-                        <record model="account.tax.code" id="ri_tax_code_iva_compras_no_gravado">
+                        <record model="account.tax.code" id="demo_ri_tax_code_iva_compras_no_gravado">
                             <field name="code">1.1.00.020</field>
                             <field name="name">IVA Compra No Gravado</field>
                             <field name="sign">-1</field>
-                            <field name="parent_id" ref="ri_tax_code_iva"/>
+                            <field name="parent_id" ref="demo_ri_tax_code_iva"/>
                             <field name="afip_code" eval="1"/>
                             <field name="tax">vat</field>
                             <field name="type">tax</field>
@@ -70,11 +70,11 @@
                             <field name="company_id" ref="company_sipreco"/>
                         </record>
 
-                        <record model="account.tax.code" id="ri_tax_code_iva_venta_exento">
+                        <record model="account.tax.code" id="demo_ri_tax_code_iva_venta_exento">
                             <field name="code">1.1.00.030</field>
                             <field name="name">IVA Ventas Exento</field>
                             <field name="sign">1</field>
-                            <field name="parent_id" ref="ri_tax_code_iva"/>
+                            <field name="parent_id" ref="demo_ri_tax_code_iva"/>
                             <field name="afip_code" eval="2"/>
                             <field name="tax">vat</field>
                             <field name="type">tax</field>
@@ -82,11 +82,11 @@
                             <field name="company_id" ref="company_sipreco"/>
                         </record>
 
-                        <record model="account.tax.code" id="ri_tax_code_iva_compras_exento">
+                        <record model="account.tax.code" id="demo_ri_tax_code_iva_compras_exento">
                             <field name="code">1.1.00.040</field>
                             <field name="name">IVA Compra Exento</field>
                             <field name="sign">-1</field>
-                            <field name="parent_id" ref="ri_tax_code_iva"/>
+                            <field name="parent_id" ref="demo_ri_tax_code_iva"/>
                             <field name="afip_code" eval="2"/>
                             <field name="tax">vat</field>
                             <field name="type">tax</field>
@@ -94,11 +94,11 @@
                             <field name="company_id" ref="company_sipreco"/>
                         </record>
 
-                        <record model="account.tax.code" id="ri_tax_code_iva_venta0">
+                        <record model="account.tax.code" id="demo_ri_tax_code_iva_venta0">
                             <field name="code">1.1.00.050</field>
                             <field name="name">IVA Ventas 0%</field>
                             <field name="sign">1</field>
-                            <field name="parent_id" ref="ri_tax_code_iva"/>
+                            <field name="parent_id" ref="demo_ri_tax_code_iva"/>
                             <field name="afip_code" eval="3"/>
                             <field name="tax">vat</field>
                             <field name="type">tax</field>
@@ -106,11 +106,11 @@
                             <field name="company_id" ref="company_sipreco"/>
                         </record>
 
-                        <record model="account.tax.code" id="ri_tax_code_iva_compras0">
+                        <record model="account.tax.code" id="demo_ri_tax_code_iva_compras0">
                             <field name="code">1.1.00.060</field>
                             <field name="name">IVA Compra 0%</field>
                             <field name="sign">-1</field>
-                            <field name="parent_id" ref="ri_tax_code_iva"/>
+                            <field name="parent_id" ref="demo_ri_tax_code_iva"/>
                             <field name="afip_code" eval="3"/>
                             <field name="tax">vat</field>
                             <field name="type">tax</field>
@@ -118,11 +118,11 @@
                             <field name="company_id" ref="company_sipreco"/>
                         </record>
 
-                        <record model="account.tax.code" id="ri_tax_code_iva_venta10">
+                        <record model="account.tax.code" id="demo_ri_tax_code_iva_venta10">
                             <field name="code">1.1.00.070</field>
                             <field name="name">IVA Ventas 10.5%</field>
                             <field name="sign">1</field>
-                            <field name="parent_id" ref="ri_tax_code_iva"/>
+                            <field name="parent_id" ref="demo_ri_tax_code_iva"/>
                             <field name="afip_code" eval="4"/>
                             <field name="tax">vat</field>
                             <field name="type">tax</field>
@@ -130,11 +130,11 @@
                             <field name="company_id" ref="company_sipreco"/>
                         </record>
 
-                        <record model="account.tax.code" id="ri_tax_code_iva_compras10">
+                        <record model="account.tax.code" id="demo_ri_tax_code_iva_compras10">
                             <field name="code">1.1.00.080</field>
                             <field name="name">IVA Compras 10.5%</field>
                             <field name="sign">-1</field>
-                            <field name="parent_id" ref="ri_tax_code_iva"/>
+                            <field name="parent_id" ref="demo_ri_tax_code_iva"/>
                             <field name="afip_code" eval="4"/>
                             <field name="tax">vat</field>
                             <field name="type">tax</field>
@@ -142,11 +142,11 @@
                             <field name="company_id" ref="company_sipreco"/>
                         </record>
 
-                        <record model="account.tax.code" id="ri_tax_code_iva_venta21">
+                        <record model="account.tax.code" id="demo_ri_tax_code_iva_venta21">
                             <field name="code">1.1.00.090</field>
                             <field name="name">IVA Ventas 21%</field>
                             <field name="sign">1</field>
-                            <field name="parent_id" ref="ri_tax_code_iva"/>
+                            <field name="parent_id" ref="demo_ri_tax_code_iva"/>
                             <field name="afip_code" eval="5"/>
                             <field name="tax">vat</field>
                             <field name="type">tax</field>
@@ -154,11 +154,11 @@
                             <field name="company_id" ref="company_sipreco"/>
                         </record>
 
-                        <record model="account.tax.code" id="ri_tax_code_iva_compras21">
+                        <record model="account.tax.code" id="demo_ri_tax_code_iva_compras21">
                             <field name="code">1.1.00.100</field>
                             <field name="name">IVA Compras 21%</field>
                             <field name="sign">-1</field>
-                            <field name="parent_id" ref="ri_tax_code_iva"/>
+                            <field name="parent_id" ref="demo_ri_tax_code_iva"/>
                             <field name="afip_code" eval="5"/>
                             <field name="tax">vat</field>
                             <field name="type">tax</field>
@@ -166,11 +166,11 @@
                             <field name="company_id" ref="company_sipreco"/>
                         </record>
 
-                        <record model="account.tax.code" id="ri_tax_code_iva_venta27">
+                        <record model="account.tax.code" id="demo_ri_tax_code_iva_venta27">
                             <field name="code">1.1.00.110</field>
                             <field name="name">IVA Ventas 27%</field>
                             <field name="sign">1</field>
-                            <field name="parent_id" ref="ri_tax_code_iva"/>
+                            <field name="parent_id" ref="demo_ri_tax_code_iva"/>
                             <field name="afip_code" eval="6"/>
                             <field name="tax">vat</field>
                             <field name="type">tax</field>
@@ -178,11 +178,11 @@
                             <field name="company_id" ref="company_sipreco"/>
                         </record>
 
-                        <record model="account.tax.code" id="ri_tax_code_iva_compras27">
+                        <record model="account.tax.code" id="demo_ri_tax_code_iva_compras27">
                             <field name="code">1.1.00.120</field>
                             <field name="name">IVA Compras 27%</field>
                             <field name="sign">-1</field>
-                            <field name="parent_id" ref="ri_tax_code_iva"/>
+                            <field name="parent_id" ref="demo_ri_tax_code_iva"/>
                             <field name="afip_code" eval="6"/>
                             <field name="tax">vat</field>
                             <field name="type">tax</field>
@@ -190,44 +190,44 @@
                             <field name="company_id" ref="company_sipreco"/>
                         </record>
 
-                        <record model="account.tax.code" id="ri_tax_code_iva_compras_adicional">
+                        <record model="account.tax.code" id="demo_ri_tax_code_iva_compras_adicional">
                             <field name="code">1.1.00.130</field>
                             <field name="name">IVA Compras Adicional</field>
                             <field name="sign">-1</field>
-                            <field name="parent_id" ref="ri_tax_code_iva"/>
+                            <field name="parent_id" ref="demo_ri_tax_code_iva"/>
                             <field name="tax">vat</field>
                             <field name="type">tax</field>
                             <field name="application">national_taxes</field>
                             <field name="company_id" ref="company_sipreco"/>
                         </record>
 
-                        <record model="account.tax.code" id="ri_tax_code_iva_saldo_a_favor">
+                        <record model="account.tax.code" id="demo_ri_tax_code_iva_saldo_a_favor">
                             <field name="code">1.1.00.140</field>
                             <field name="name">IVA Saldo a Favor</field>
                             <field name="sign">-1</field>
-                            <field name="parent_id" ref="ri_tax_code_iva"/>
+                            <field name="parent_id" ref="demo_ri_tax_code_iva"/>
                             <field name="tax">vat</field>
                             <field name="type">other</field>
                             <field name="application">national_taxes</field>
                             <field name="company_id" ref="company_sipreco"/>
                         </record>
 
-                <record model="account.tax.code" id="ri_tax_code_ret_per_iva_sufrida">
+                <record model="account.tax.code" id="demo_ri_tax_code_ret_per_iva_sufrida">
                     <field name="name">IVA Ret/Perc Sufridas</field>
                     <field name="code">1.2.00.000</field>
                     <field name="sign">1</field>
-                    <field name="parent_id" ref="ri_impuestos_nacionales"/>
+                    <field name="parent_id" ref="demo_ri_impuestos_nacionales"/>
                     <field name="tax">vat</field>
                     <field name="type">view</field>
                     <field name="application">national_taxes</field>
                     <field name="company_id" ref="company_sipreco"/>
                 </record>
 
-                        <record model="account.tax.code" id="ri_tax_code_iva_compras_percepcion">
+                        <record model="account.tax.code" id="demo_ri_tax_code_iva_compras_percepcion">
                             <field name="code">1.2.00.010</field>
                             <field name="name">Percepción IVA sufrida</field>
                             <field name="sign">-1</field>
-                            <field name="parent_id" ref="ri_tax_code_ret_per_iva_sufrida"/>
+                            <field name="parent_id" ref="demo_ri_tax_code_ret_per_iva_sufrida"/>
                             <field name="afip_code" eval="6"/>
                             <field name="tax">vat</field>
                             <field name="type">perception</field>
@@ -235,11 +235,11 @@
                             <field name="company_id" ref="company_sipreco"/>
                         </record>
 
-                        <record model="account.tax.code" id="ri_tax_code_iva_compras_retencion">
+                        <record model="account.tax.code" id="demo_ri_tax_code_iva_compras_retencion">
                             <field name="code">1.2.00.020</field>
                             <field name="name">Retención IVA Sufrida</field>
                             <field name="sign">-1</field>
-                            <field name="parent_id" ref="ri_tax_code_ret_per_iva_sufrida"/>
+                            <field name="parent_id" ref="demo_ri_tax_code_ret_per_iva_sufrida"/>
                             <field name="afip_code" eval="6"/>
                             <field name="tax">vat</field>
                             <field name="type">withholding</field>
@@ -247,22 +247,22 @@
                             <field name="company_id" ref="company_sipreco"/>
                         </record> -->
 
-<!--                 <record model="account.tax.code" id="ri_tax_code_ret_per_iva_aplicada">
+<!--                 <record model="account.tax.code" id="demo_ri_tax_code_ret_per_iva_aplicada">
                     <field name="name">IVA Ret/Perc Aplicadas</field>
                     <field name="code">1.3.00.000</field>
                     <field name="sign">1</field>
-                    <field name="parent_id" ref="ri_impuestos_nacionales"/>
+                    <field name="parent_id" ref="demo_ri_impuestos_nacionales"/>
                     <field name="tax">vat</field>
                     <field name="type">view</field>
                     <field name="application">national_taxes</field>
                     <field name="company_id" ref="company_sipreco"/>
                 </record>
 
-                        <record model="account.tax.code" id="ri_tax_code_percepcion_iva_aplicada">
+                        <record model="account.tax.code" id="demo_ri_tax_code_percepcion_iva_aplicada">
                             <field name="code">1.3.00.010</field>
                             <field name="name">Percepción IVA Aplicada</field>
                             <field name="sign">1</field>
-                            <field name="parent_id" ref="ri_tax_code_ret_per_iva_aplicada"/>
+                            <field name="parent_id" ref="demo_ri_tax_code_ret_per_iva_aplicada"/>
                             <field name="afip_code" eval="6"/>
                             <field name="tax">vat</field>
                             <field name="type">perception</field>
@@ -270,11 +270,11 @@
                             <field name="company_id" ref="company_sipreco"/>
                         </record>
 
-                        <record model="account.tax.code" id="ri_tax_code_retencion_iva_aplicada">
+                        <record model="account.tax.code" id="demo_ri_tax_code_retencion_iva_aplicada">
                             <field name="code">1.3.00.020</field>
                             <field name="name">Retención IVA Aplicada</field>
                             <field name="sign">1</field>
-                            <field name="parent_id" ref="ri_tax_code_ret_per_iva_aplicada"/>
+                            <field name="parent_id" ref="demo_ri_tax_code_ret_per_iva_aplicada"/>
                             <field name="afip_code" eval="6"/>
                             <field name="tax">vat</field>
                             <field name="type">withholding</field>
@@ -282,326 +282,326 @@
                             <field name="company_id" ref="company_sipreco"/>
                         </record>
  -->
-                <record model="account.tax.code" id="ri_tax_code_ganancias_vista">
+                <record model="account.tax.code" id="demo_ri_tax_code_ganancias_vista">
                     <field name="name">Ganancias</field>
                     <field name="code">1.4.00.000</field>
                     <field name="sign">1</field>
-                    <field name="parent_id" ref="ri_impuestos_nacionales"/>
+                    <field name="parent_id" ref="demo_ri_impuestos_nacionales"/>
                     <field name="tax">profits</field>
                     <field name="type">view</field>
                     <field name="application">national_taxes</field>
                     <field name="company_id" ref="company_sipreco"/>
                 </record>
 
-<!--                     <record model="account.tax.code" id="ri_tax_code_ganancias">
+<!--                     <record model="account.tax.code" id="demo_ri_tax_code_ganancias">
                         <field name="name">Ganancias</field>
                         <field name="code">1.4.00.010</field>
                         <field name="sign">1</field>
-                        <field name="parent_id" ref="ri_tax_code_ganancias_vista"/>
+                        <field name="parent_id" ref="demo_ri_tax_code_ganancias_vista"/>
                         <field name="tax">profits</field>
                         <field name="type">tax</field>
                         <field name="application">national_taxes</field>
                         <field name="company_id" ref="company_sipreco"/>
                     </record>
 
-                    <record model="account.tax.code" id="ri_tax_code_imp_ganancias_a_favor">
+                    <record model="account.tax.code" id="demo_ri_tax_code_imp_ganancias_a_favor">
                         <field name="code">1.4.00.020</field>
                         <field name="name">Impuesto a las Ganancias a favor</field>
                         <field name="sign">-1</field>
-                        <field name="parent_id" ref="ri_tax_code_ganancias_vista"/>
+                        <field name="parent_id" ref="demo_ri_tax_code_ganancias_vista"/>
                         <field name="tax">profits</field>
                         <field name="type">other</field>
                         <field name="application">national_taxes</field>
                         <field name="company_id" ref="company_sipreco"/>
                     </record>
 
-                <record model="account.tax.code" id="ri_tax_code_ret_per_ganancias_sufrida">
+                <record model="account.tax.code" id="demo_ri_tax_code_ret_per_ganancias_sufrida">
                     <field name="name">Ganacias Ret/Perc Sufridas</field>
                     <field name="code">1.5.00.000</field>
                     <field name="sign">1</field>
-                    <field name="parent_id" ref="ri_impuestos_nacionales"/>
+                    <field name="parent_id" ref="demo_ri_impuestos_nacionales"/>
                     <field name="tax">profits</field>
                     <field name="type">view</field>
                     <field name="application">national_taxes</field>
                     <field name="company_id" ref="company_sipreco"/>
                 </record>
 
-                    <record model="account.tax.code" id="ri_tax_code_ganancias_per_sufrida">
+                    <record model="account.tax.code" id="demo_ri_tax_code_ganancias_per_sufrida">
                         <field name="name">Percepción de Ganancias Sufrida</field>
                         <field name="code">1.5.00.010</field>
                         <field name="sign">-1</field>
-                        <field name="parent_id" ref="ri_tax_code_ret_per_ganancias_sufrida"/>
+                        <field name="parent_id" ref="demo_ri_tax_code_ret_per_ganancias_sufrida"/>
                         <field name="tax">profits</field>
                         <field name="type">perception</field>
                         <field name="application">national_taxes</field>
                         <field name="company_id" ref="company_sipreco"/>
                     </record>
 
-                    <record model="account.tax.code" id="ri_tax_code_ganancias_ret_sufrida">
+                    <record model="account.tax.code" id="demo_ri_tax_code_ganancias_ret_sufrida">
                         <field name="name">Retención de Ganancias Sufrida</field>
                         <field name="code">1.5.00.020</field>
                         <field name="sign">-1</field>
-                        <field name="parent_id" ref="ri_tax_code_ret_per_ganancias_sufrida"/>
+                        <field name="parent_id" ref="demo_ri_tax_code_ret_per_ganancias_sufrida"/>
                         <field name="tax">profits</field>
                         <field name="type">withholding</field>
                         <field name="application">national_taxes</field>
                         <field name="company_id" ref="company_sipreco"/>
                     </record> -->
 
-                <record model="account.tax.code" id="ri_tax_code_ret_per_ganancias_aplicada">
+                <record model="account.tax.code" id="demo_ri_tax_code_ret_per_ganancias_aplicada">
                     <field name="name">Ganacias Ret/Perc Aplicadas</field>
                     <field name="code">1.6.00.000</field>
                     <field name="sign">1</field>
-                    <field name="parent_id" ref="ri_impuestos_nacionales"/>
+                    <field name="parent_id" ref="demo_ri_impuestos_nacionales"/>
                     <field name="tax">profits</field>
                     <field name="type">view</field>
                     <field name="application">national_taxes</field>
                     <field name="company_id" ref="company_sipreco"/>
                 </record>
 
-                    <record model="account.tax.code" id="ri_tax_code_ganancias_ret_aplicada">
+                    <record model="account.tax.code" id="demo_ri_tax_code_ganancias_ret_aplicada">
                         <field name="name">Retención de Ganancias Aplicada</field>
                         <field name="code">1.6.00.010</field>
                         <field name="sign">1</field>
-                        <field name="parent_id" ref="ri_tax_code_ret_per_ganancias_aplicada"/>
+                        <field name="parent_id" ref="demo_ri_tax_code_ret_per_ganancias_aplicada"/>
                         <field name="tax">profits</field>
                         <field name="type">withholding</field>
                         <field name="application">national_taxes</field>
                         <field name="company_id" ref="company_sipreco"/>
                     </record>
 
-<!--                     <record model="account.tax.code" id="ri_tax_code_ganancias_per_aplicada">
+<!--                     <record model="account.tax.code" id="demo_ri_tax_code_ganancias_per_aplicada">
                         <field name="name">Percepción de Ganancias Aplicada</field>
                         <field name="code">1.6.00.020</field>
                         <field name="sign">1</field>
-                        <field name="parent_id" ref="ri_tax_code_ret_per_ganancias_aplicada"/>
+                        <field name="parent_id" ref="demo_ri_tax_code_ret_per_ganancias_aplicada"/>
                         <field name="tax">profits</field>
                         <field name="type">perception</field>
                         <field name="application">national_taxes</field>
                         <field name="company_id" ref="company_sipreco"/>
                     </record> -->
 
-<!--                     <record model="account.tax.code" id="ri_tax_code_ganancias_per_ret_a_favor">
+<!--                     <record model="account.tax.code" id="demo_ri_tax_code_ganancias_per_ret_a_favor">
                         <field name="name">Ret/Perc Ganancias a Favor</field>
                         <field name="code">1.6.00.030</field>
                         <field name="sign">-1</field>
-                        <field name="parent_id" ref="ri_tax_code_ret_per_ganancias_aplicada"/>
+                        <field name="parent_id" ref="demo_ri_tax_code_ret_per_ganancias_aplicada"/>
                         <field name="tax">profits</field>
                         <field name="type">other</field>
                         <field name="application">national_taxes</field>
                         <field name="company_id" ref="company_sipreco"/>
                     </record> -->
 
-        <record model="account.tax.code" id="ri_tax_code_impuestos_provinciales">
+        <record model="account.tax.code" id="demo_ri_tax_code_impuestos_provinciales">
             <field name="name">IMPUESTOS PROVINCIALES</field>
             <field name="code">2.0.00.000</field>
             <field name="sign">1</field>
-            <field name="parent_id" ref="ri_tax_code_chart_root"/>
+            <field name="parent_id" ref="demo_ri_tax_code_chart_root"/>
             <field name="type">view</field>
             <field name="application">provincial_taxes</field>
             <field name="company_id" ref="company_sipreco"/>
         </record>
 <!-- 
-                <record model="account.tax.code" id="ri_tax_code_iibb_cf">
+                <record model="account.tax.code" id="demo_ri_tax_code_iibb_cf">
                     <field name="code">2.1.00.000</field>
                     <field name="name">IIBB Capital Federal</field>
                     <field name="sign">1</field>
-                    <field name="parent_id" ref="ri_tax_code_impuestos_provinciales"/>
+                    <field name="parent_id" ref="demo_ri_tax_code_impuestos_provinciales"/>
                     <field name="tax">gross_income</field>
                     <field name="type">view</field>
                     <field name="application">provincial_taxes</field>
                     <field name="company_id" ref="company_sipreco"/>
                 </record>
 
-                        <record model="account.tax.code" id="ri_tax_code_iibb_cf_percepcion">
+                        <record model="account.tax.code" id="demo_ri_tax_code_iibb_cf_percepcion">
                             <field name="code">2.1.00.010</field>
                             <field name="name">Percepción IIBB Capital Federal</field>
                             <field name="sign">-1</field>
-                            <field name="parent_id" ref="ri_tax_code_iibb_cf"/>
+                            <field name="parent_id" ref="demo_ri_tax_code_iibb_cf"/>
                             <field name="tax">gross_income</field>
                             <field name="type">perception</field>
                             <field name="application">provincial_taxes</field>
                             <field name="company_id" ref="company_sipreco"/>
                         </record>
 
-                        <record model="account.tax.code" id="ri_tax_code_iibb_cf_retencion">
+                        <record model="account.tax.code" id="demo_ri_tax_code_iibb_cf_retencion">
                             <field name="code">2.1.00.020</field>
                             <field name="name">Retención IIBB Capital Federal</field>
                             <field name="sign">-1</field>
-                            <field name="parent_id" ref="ri_tax_code_iibb_cf"/>
+                            <field name="parent_id" ref="demo_ri_tax_code_iibb_cf"/>
                             <field name="tax">gross_income</field>
                             <field name="type">withholding</field>
                             <field name="application">provincial_taxes</field>
                             <field name="company_id" ref="company_sipreco"/>
                         </record>
 
-                        <record model="account.tax.code" id="ri_tax_code_iibb_cf_facturado">
+                        <record model="account.tax.code" id="demo_ri_tax_code_iibb_cf_facturado">
                             <field name="code">2.1.00.030</field>
                             <field name="name">Facturado IIBB Capital Federal</field>
                             <field name="sign">0.02</field>
-                            <field name="parent_id" ref="ri_tax_code_iibb_cf"/>
+                            <field name="parent_id" ref="demo_ri_tax_code_iibb_cf"/>
                             <field name="tax">gross_income</field>
                             <field name="type">tax</field>
                             <field name="application">provincial_taxes</field>
                             <field name="company_id" ref="company_sipreco"/>
                         </record> -->
 
-                <!-- <record model="account.tax.code" id="ri_tax_code_iibb_ba">
+                <!-- <record model="account.tax.code" id="demo_ri_tax_code_iibb_ba">
                     <field name="code">2.2.00.000</field>
                     <field name="name">IIBB Prov. Buenos Aires</field>
                     <field name="sign">1</field>
-                    <field name="parent_id" ref="ri_tax_code_impuestos_provinciales"/>
+                    <field name="parent_id" ref="demo_ri_tax_code_impuestos_provinciales"/>
                     <field name="company_id" ref="company_sipreco"/>
                 </record>
 
-                        <record model="account.tax.code" id="ri_tax_code_iibb_ba_percepcion">
+                        <record model="account.tax.code" id="demo_ri_tax_code_iibb_ba_percepcion">
                             <field name="code">2.2.00.010</field>
                             <field name="name">Percepción IIBB Prov. Buenos Aires</field>
                             <field name="sign">-1</field>
-                            <field name="parent_id" ref="ri_tax_code_iibb_ba"/>
+                            <field name="parent_id" ref="demo_ri_tax_code_iibb_ba"/>
                             <field name="tax">gross_income</field>
                             <field name="type">perception</field>
                             <field name="application">provincial_taxes</field>
                             <field name="company_id" ref="company_sipreco"/>
                         </record>
 
-                        <record model="account.tax.code" id="ri_tax_code_iibb_ba_retencion">
+                        <record model="account.tax.code" id="demo_ri_tax_code_iibb_ba_retencion">
                             <field name="code">2.2.00.020</field>
                             <field name="name">Retención IIBB Prov. Buenos Aires</field>
                             <field name="sign">-1</field>
-                            <field name="parent_id" ref="ri_tax_code_iibb_ba"/>
+                            <field name="parent_id" ref="demo_ri_tax_code_iibb_ba"/>
                             <field name="tax">gross_income</field>
                             <field name="type">withholding</field>
                             <field name="application">provincial_taxes</field>
                             <field name="company_id" ref="company_sipreco"/>
                         </record>
 
-                        <record model="account.tax.code" id="ri_tax_code_iibb_ba_facturado">
+                        <record model="account.tax.code" id="demo_ri_tax_code_iibb_ba_facturado">
                             <field name="code">2.2.00.030</field>
                             <field name="name">Facturado IIBB Prov. Buenos Aires</field>
                             <field name="sign">0.02</field>
-                            <field name="parent_id" ref="ri_tax_code_iibb_ba"/>
+                            <field name="parent_id" ref="demo_ri_tax_code_iibb_ba"/>
                             <field name="tax">gross_income</field>
                             <field name="type">tax</field>
                             <field name="application">provincial_taxes</field>
                             <field name="company_id" ref="company_sipreco"/>
                         </record> -->
 
-               <!--  <record model="account.tax.code" id="ri_tax_code_iibb_co">
+               <!--  <record model="account.tax.code" id="demo_ri_tax_code_iibb_co">
                     <field name="code">2.3.00.000</field>
                     <field name="name">IIBB Prov. Córdoba</field>
                     <field name="sign">1</field>
-                    <field name="parent_id" ref="ri_tax_code_impuestos_provinciales"/>
+                    <field name="parent_id" ref="demo_ri_tax_code_impuestos_provinciales"/>
                     <field name="company_id" ref="company_sipreco"/>
                 </record>
 
-                        <record model="account.tax.code" id="ri_tax_code_iibb_co_percepcion">
+                        <record model="account.tax.code" id="demo_ri_tax_code_iibb_co_percepcion">
                             <field name="code">2.3.00.010</field>
                             <field name="name">Percepción IIBB Prov. Córdoba</field>
                             <field name="sign">-1</field>
-                            <field name="parent_id" ref="ri_tax_code_iibb_co"/>
+                            <field name="parent_id" ref="demo_ri_tax_code_iibb_co"/>
                             <field name="tax">gross_income</field>
                             <field name="type">perception</field>
                             <field name="application">provincial_taxes</field>
                             <field name="company_id" ref="company_sipreco"/>
                         </record>
 
-                        <record model="account.tax.code" id="ri_tax_code_iibb_co_retencion">
+                        <record model="account.tax.code" id="demo_ri_tax_code_iibb_co_retencion">
                             <field name="code">2.3.00.020</field>
                             <field name="name">Retención IIBB Prov. Córdoba</field>
                             <field name="sign">-1</field>
-                            <field name="parent_id" ref="ri_tax_code_iibb_co"/>
+                            <field name="parent_id" ref="demo_ri_tax_code_iibb_co"/>
                             <field name="tax">gross_income</field>
                             <field name="type">withholding</field>
                             <field name="application">provincial_taxes</field>
                             <field name="company_id" ref="company_sipreco"/>
                         </record>
 
-                        <record model="account.tax.code" id="ri_tax_code_iibb_co_facturado">
+                        <record model="account.tax.code" id="demo_ri_tax_code_iibb_co_facturado">
                             <field name="code">2.3.00.030</field>
                             <field name="name">Facturado IIBB Prov. Córdoba</field>
                             <field name="sign">0.02</field>
-                            <field name="parent_id" ref="ri_tax_code_iibb_co"/>
+                            <field name="parent_id" ref="demo_ri_tax_code_iibb_co"/>
                             <field name="tax">gross_income</field>
                             <field name="type">tax</field>
                             <field name="application">provincial_taxes</field>
                             <field name="company_id" ref="company_sipreco"/>
                         </record>
  -->
-                <record model="account.tax.code" id="ri_tax_code_iibb_sf">
+                <record model="account.tax.code" id="demo_ri_tax_code_iibb_sf">
                     <field name="code">2.4.00.000</field>
                     <field name="name">IIBB Prov. Santa Fé</field>
                     <field name="sign">1</field>
-                    <field name="parent_id" ref="ri_tax_code_impuestos_provinciales"/>
+                    <field name="parent_id" ref="demo_ri_tax_code_impuestos_provinciales"/>
                     <field name="company_id" ref="company_sipreco"/>
                 </record>
 
-                        <!-- <record model="account.tax.code" id="ri_tax_code_iibb_sf_percepcion">
+                        <!-- <record model="account.tax.code" id="demo_ri_tax_code_iibb_sf_percepcion">
                             <field name="code">2.4.00.010</field>
                             <field name="name">Percepción IIBB Prov. Santa Fé</field>
                             <field name="sign">-1</field>
-                            <field name="parent_id" ref="ri_tax_code_iibb_sf"/>
+                            <field name="parent_id" ref="demo_ri_tax_code_iibb_sf"/>
                             <field name="tax">gross_income</field>
                             <field name="type">perception</field>
                             <field name="application">provincial_taxes</field>
                             <field name="company_id" ref="company_sipreco"/>
                         </record>
 
-                        <record model="account.tax.code" id="ri_tax_code_iibb_sf_retencion">
+                        <record model="account.tax.code" id="demo_ri_tax_code_iibb_sf_retencion">
                             <field name="code">2.4.00.020</field>
                             <field name="name">Retención IIBB Prov. Santa Fé</field>
                             <field name="sign">-1</field>
-                            <field name="parent_id" ref="ri_tax_code_iibb_sf"/>
+                            <field name="parent_id" ref="demo_ri_tax_code_iibb_sf"/>
                             <field name="tax">gross_income</field>
                             <field name="type">withholding</field>
                             <field name="application">provincial_taxes</field>
                             <field name="company_id" ref="company_sipreco"/>
                         </record>
 
-                        <record model="account.tax.code" id="ri_tax_code_iibb_sf_facturado">
+                        <record model="account.tax.code" id="demo_ri_tax_code_iibb_sf_facturado">
                             <field name="code">2.4.00.030</field>
                             <field name="name">Facturado IIBB Prov. Santa Fé</field>
                             <field name="sign">0.02</field>
-                            <field name="parent_id" ref="ri_tax_code_iibb_sf"/>
+                            <field name="parent_id" ref="demo_ri_tax_code_iibb_sf"/>
                             <field name="tax">gross_income</field>
                             <field name="type">tax</field>
                             <field name="application">provincial_taxes</field>
                             <field name="company_id" ref="company_sipreco"/>
                         </record> -->
 
-                <record model="account.tax.code" id="ri_tax_code_ret_per_iibb_sf_aplicada">
+                <record model="account.tax.code" id="demo_ri_tax_code_ret_per_iibb_sf_aplicada">
                     <field name="name">IIBB Santa Fé Ret/Perc Aplicada</field>
                     <field name="code">2.4.10.000</field>
                     <field name="sign">1</field>
-                    <field name="parent_id" ref="ri_impuestos_nacionales"/>
+                    <field name="parent_id" ref="demo_ri_impuestos_nacionales"/>
                     <field name="tax">gross_income</field>
                     <field name="type">view</field>
                     <field name="application">provincial_taxes</field>
                     <field name="company_id" ref="company_sipreco"/>
                 </record>
 
-                    <record model="account.tax.code" id="ri_tax_code_iibb_sf_retencion_aplicada">
+                    <record model="account.tax.code" id="demo_ri_tax_code_iibb_sf_retencion_aplicada">
                         <field name="name">Retención IIBB Santa Fé Aplicada</field>
                         <field name="code">2.4.10.010</field>
                         <field name="sign">1</field>
-                        <field name="parent_id" ref="ri_tax_code_ret_per_iibb_sf_aplicada"/>
+                        <field name="parent_id" ref="demo_ri_tax_code_ret_per_iibb_sf_aplicada"/>
                         <field name="tax">gross_income</field>
                         <field name="type">withholding</field>
                         <field name="application">provincial_taxes</field>
                         <field name="company_id" ref="company_sipreco"/>
                     </record>
 
-        <record model="account.tax.code" id="ri_tax_code_otros_impuestos">
+        <record model="account.tax.code" id="demo_ri_tax_code_otros_impuestos">
             <field name="name">OTROS IMPUESTOS</field>
             <field name="code">3.0.00.000</field>
             <field name="sign">1</field>
-            <field name="parent_id" ref="ri_tax_code_chart_root"/>
+            <field name="parent_id" ref="demo_ri_tax_code_chart_root"/>
             <field name="type">view</field>
             <field name="application">provincial_taxes</field>
             <field name="company_id" ref="company_sipreco"/>
         </record>
 
-                <record model="account.tax.code" id="ri_tax_code_ret_drei_rosario_view">
+                <record model="account.tax.code" id="demo_ri_tax_code_ret_drei_rosario_view">
                     <field name="name">DREI Rosario Ret/Perc Aplicada</field>
                     <field name="code">3.1.00.000</field>
                     <field name="sign">1</field>
@@ -609,16 +609,16 @@
                     <field name="company_id" ref="company_sipreco"/>
                 </record>
 
-                    <record model="account.tax.code" id="ri_tax_code_ret_drei_rosario">
+                    <record model="account.tax.code" id="demo_ri_tax_code_ret_drei_rosario">
                         <!-- <field name="code"></field> -->
                         <field name="code">3.1.00.010</field>
                         <field name="name">Retencion DREI Rosario</field>
                         <field name="sign">1</field>
-                        <field name="parent_id" ref="ri_tax_code_otros_impuestos"/>
+                        <field name="parent_id" ref="demo_ri_tax_code_otros_impuestos"/>
                         <field name="company_id" ref="company_sipreco"/>
                     </record>
 
-                <record model="account.tax.code" id="ri_tax_code_ret_otras_view">
+                <record model="account.tax.code" id="demo_ri_tax_code_ret_otras_view">
                     <field name="name">Otras Retenciones/SIJP</field>
                     <field name="code">3.2.00.000</field>
                     <field name="sign">1</field>
@@ -626,12 +626,12 @@
                     <field name="company_id" ref="company_sipreco"/>
                 </record>
 
-                <record model="account.tax.code" id="ri_tax_code_otras_retenciones">
+                <record model="account.tax.code" id="demo_ri_tax_code_otras_retenciones">
                     <!-- <field name="code"></field> -->
                     <field name="code">3.2.00.010</field>
                     <field name="name">Otras Retenciones/SIJP</field>
                     <field name="sign">1</field>
-                    <field name="parent_id" ref="ri_tax_code_ret_otras_view"/>
+                    <field name="parent_id" ref="demo_ri_tax_code_ret_otras_view"/>
                     <field name="company_id" ref="company_sipreco"/>
                 </record>
 #
@@ -639,7 +639,7 @@
 #
 # IVA
 #
- <!--        <record id="ri_tax_vat_no_gravado_ventas" model="account.tax">
+ <!--        <record id="demo_ri_tax_vat_no_gravado_ventas" model="account.tax">
             <field name="company_id" ref="company_sipreco"/>
             <field name="description">IVA No Gravado</field>
             <field name="name">IVA Ventas No Gravado</field>
@@ -653,7 +653,7 @@
             <field name="ref_tax_sign" eval="-1"/>
         </record>
 
-        <record id="ri_tax_vat_no_gravado_compras" model="account.tax">
+        <record id="demo_ri_tax_vat_no_gravado_compras" model="account.tax">
             <field name="company_id" ref="company_sipreco"/>
             <field name="description">IVA No Gravado</field>
             <field name="name">IVA Compras No Gravado</field>
@@ -667,7 +667,7 @@
             <field name="ref_tax_sign" eval="-1"/>
         </record>
 
-        <record id="ri_tax_vat_exento_ventas" model="account.tax">
+        <record id="demo_ri_tax_vat_exento_ventas" model="account.tax">
             <field name="company_id" ref="company_sipreco"/>
             <field name="description">IVA Exento</field>
             <field name="name">IVA Ventas Exento</field>
@@ -681,7 +681,7 @@
             <field name="ref_tax_sign" eval="-1"/>
         </record>
 
-        <record id="ri_tax_vat_exento_compras" model="account.tax">
+        <record id="demo_ri_tax_vat_exento_compras" model="account.tax">
             <field name="company_id" ref="company_sipreco"/>
             <field name="description">IVA Exento</field>
             <field name="name">IVA Compras Exento</field>
@@ -695,7 +695,7 @@
             <field name="ref_tax_sign" eval="-1"/>
         </record>
 
-        <record id="ri_tax_vat_0_ventas" model="account.tax">
+        <record id="demo_ri_tax_vat_0_ventas" model="account.tax">
             <field name="company_id" ref="company_sipreco"/>
             <field name="description">IVA 0%</field>
             <field name="name">IVA Ventas 0%</field>
@@ -710,7 +710,7 @@
             <field name="ref_tax_sign" eval="-1"/>
         </record>
 
-        <record id="ri_tax_vat_0_compras" model="account.tax">
+        <record id="demo_ri_tax_vat_0_compras" model="account.tax">
             <field name="company_id" ref="company_sipreco"/>
             <field name="description">IVA 0%</field>
             <field name="name">IVA Compras 0%</field>
@@ -725,7 +725,7 @@
             <field name="ref_tax_sign" eval="-1"/>
         </record>
 
-        <record id="ri_tax_vat_10_ventas" model="account.tax">
+        <record id="demo_ri_tax_vat_10_ventas" model="account.tax">
             <field name="company_id" ref="company_sipreco"/>
             <field name="description">IVA 10.0%</field>
             <field name="name">IVA Ventas 10.5%</field>
@@ -740,7 +740,7 @@
             <field name="ref_tax_sign" eval="-1"/>
         </record>
 
-        <record id="ri_tax_vat_10_compras" model="account.tax">
+        <record id="demo_ri_tax_vat_10_compras" model="account.tax">
             <field name="company_id" ref="company_sipreco"/>
             <field name="description">IVA 10.0%</field>
             <field name="name">IVA Compras 10.5%</field>
@@ -755,7 +755,7 @@
             <field name="ref_tax_sign" eval="-1"/>
         </record>
 
-        <record id="ri_tax_vat_21_ventas" model="account.tax">
+        <record id="demo_ri_tax_vat_21_ventas" model="account.tax">
             <field name="company_id" ref="company_sipreco"/>
             <field name="name">IVA Ventas 21%</field>
             <field name="sequence">1</field>
@@ -770,7 +770,7 @@
             <field name="ref_tax_sign" eval="-1"/>
         </record>
 
-        <record id="ri_tax_vat_21_compras" model="account.tax">
+        <record id="demo_ri_tax_vat_21_compras" model="account.tax">
             <field name="company_id" ref="company_sipreco"/>
             <field name="name">IVA Compras 21%</field>
             <field name="sequence">1</field>
@@ -785,7 +785,7 @@
             <field name="ref_tax_sign" eval="-1"/>
         </record>
 
-        <record id="ri_tax_vat_27_ventas" model="account.tax">
+        <record id="demo_ri_tax_vat_27_ventas" model="account.tax">
             <field name="company_id" ref="company_sipreco"/>
             <field name="name">IVA Ventas 27%</field>
             <field name="sequence">3</field>
@@ -800,7 +800,7 @@
             <field name="ref_tax_sign" eval="-1"/>
         </record>
 
-        <record id="ri_tax_vat_27_compras" model="account.tax">
+        <record id="demo_ri_tax_vat_27_compras" model="account.tax">
             <field name="company_id" ref="company_sipreco"/>
             <field name="name">IVA Compras 27%</field>
             <field name="sequence">3</field>
@@ -815,7 +815,7 @@
             <field name="ref_tax_sign" eval="-1"/>
         </record>
 
-        <record id="ri_tax_vat_percepcion_ventas" model="account.tax">
+        <record id="demo_ri_tax_vat_percepcion_ventas" model="account.tax">
             <field name="company_id" ref="company_sipreco"/>
             <field name="name">Percepción IVA Aplicada</field>
             <field name="sequence">4</field>
@@ -829,7 +829,7 @@
             <field name="ref_tax_sign" eval="-1"/>
         </record>
 
-        <record id="ri_tax_vat_percepcion_compras" model="account.tax">
+        <record id="demo_ri_tax_vat_percepcion_compras" model="account.tax">
             <field name="company_id" ref="company_sipreco"/>
             <field name="name">Percepción IVA Sufrida</field>
             <field name="sequence">4</field>
@@ -843,7 +843,7 @@
             <field name="ref_tax_sign" eval="-1"/>
         </record>
 
-        <record id="ri_tax_ganancias_percepcion_ventas" model="account.tax">
+        <record id="demo_ri_tax_ganancias_percepcion_ventas" model="account.tax">
             <field name="company_id" ref="company_sipreco"/>
             <field name="name">Percepción Ganancias Aplicada</field>
             <field name="sequence">4</field>
@@ -857,7 +857,7 @@
             <field name="ref_tax_sign" eval="-1"/>
         </record>
 
-        <record id="ri_tax_ganancias_percepcion_compras" model="account.tax">
+        <record id="demo_ri_tax_ganancias_percepcion_compras" model="account.tax">
             <field name="company_id" ref="company_sipreco"/>
             <field name="name">Percepción Ganancias Sufrida</field>
             <field name="sequence">4</field>
@@ -876,7 +876,7 @@
 #
 
 # CABA
-        <record id="ri_tax_iibb_cf_percepcion" model="account.tax">
+        <record id="demo_ri_tax_iibb_cf_percepcion" model="account.tax">
             <field name="company_id" ref="company_sipreco"/>
             <field name="name">Percepción de Ingresos Brutos CABA</field>
             <field name="sequence">100</field>
@@ -891,7 +891,7 @@
             <field name="ref_tax_sign" eval="-1"/>
         </record>
 
-        <record id="ri_tax_iibb_cf_retencion" model="account.tax">
+        <record id="demo_ri_tax_iibb_cf_retencion" model="account.tax">
             <field name="company_id" ref="company_sipreco"/>
             <field name="name">Ret IIBB CABA</field>
             <field name="sequence">100</field>
@@ -906,7 +906,7 @@
             <field name="ref_tax_sign" eval="-1"/>
         </record>
 
-        <record id="ri_tax_iibb_cf_facturado" model="account.tax">
+        <record id="demo_ri_tax_iibb_cf_facturado" model="account.tax">
             <field name="company_id" ref="company_sipreco"/>
             <field name="name">Fac IIBB CABA</field>
             <field name="sequence">100</field>
@@ -923,7 +923,7 @@
 
 # Prov. BsAs.
 
-        <record id="ri_tax_iibb_ba_percepcion" model="account.tax">
+        <record id="demo_ri_tax_iibb_ba_percepcion" model="account.tax">
             <field name="company_id" ref="company_sipreco"/>
             <field name="name">Perc IIBB BS AS</field>
             <field name="sequence">100</field>
@@ -938,7 +938,7 @@
             <field name="ref_tax_sign" eval="-1"/>
         </record>
 
-        <record id="ri_tax_iibb_ba_retencion" model="account.tax">
+        <record id="demo_ri_tax_iibb_ba_retencion" model="account.tax">
             <field name="company_id" ref="company_sipreco"/>
             <field name="name">Ret IIBB BS AS</field>
             <field name="sequence">100</field>
@@ -953,7 +953,7 @@
             <field name="ref_tax_sign" eval="-1"/>
         </record>
 
-        <record id="ri_tax_iibb_ba_facturado" model="account.tax">
+        <record id="demo_ri_tax_iibb_ba_facturado" model="account.tax">
             <field name="company_id" ref="company_sipreco"/>
             <field name="name">Fac IIBB BS AS</field>
             <field name="sequence">100</field>
@@ -970,7 +970,7 @@
 
 # Prov. Córdoba.
 
-        <record id="ri_tax_iibb_co_percepcion" model="account.tax">
+        <record id="demo_ri_tax_iibb_co_percepcion" model="account.tax">
             <field name="company_id" ref="company_sipreco"/>
             <field name="name">Per IIBB Cordoba</field>
             <field name="sequence">100</field>
@@ -985,7 +985,7 @@
             <field name="ref_tax_sign" eval="-1"/>
         </record>
 
-        <record id="ri_tax_iibb_co_retencion" model="account.tax">
+        <record id="demo_ri_tax_iibb_co_retencion" model="account.tax">
             <field name="company_id" ref="company_sipreco"/>
             <field name="name">Ret IIBB Cordoba</field>
             <field name="sequence">100</field>
@@ -1000,7 +1000,7 @@
             <field name="ref_tax_sign" eval="-1"/>
         </record>
 
-        <record id="ri_tax_iibb_co_facturado" model="account.tax">
+        <record id="demo_ri_tax_iibb_co_facturado" model="account.tax">
             <field name="company_id" ref="company_sipreco"/>
             <field name="name">Fac IIBB Cordoba</field>
             <field name="sequence">100</field>
@@ -1017,7 +1017,7 @@
 
 # Prov. Santa Fé
 
-        <record id="ri_tax_iibb_sf_percepcion" model="account.tax">
+        <record id="demo_ri_tax_iibb_sf_percepcion" model="account.tax">
             <field name="company_id" ref="company_sipreco"/>
             <field name="name">Per IIBB Santa Fé</field>
             <field name="sequence">100</field>
@@ -1032,7 +1032,7 @@
             <field name="ref_tax_sign" eval="-1"/>
         </record>
 
-        <record id="ri_tax_iibb_sf_retencion" model="account.tax">
+        <record id="demo_ri_tax_iibb_sf_retencion" model="account.tax">
             <field name="company_id" ref="company_sipreco"/>
             <field name="name">Ret IIBB Santa Fé</field>
             <field name="sequence">100</field>
@@ -1047,7 +1047,7 @@
             <field name="ref_tax_sign" eval="-1"/>
         </record>
 
-        <record id="ri_tax_iibb_sf_facturado" model="account.tax">
+        <record id="demo_ri_tax_iibb_sf_facturado" model="account.tax">
             <field name="company_id" ref="company_sipreco"/>
             <field name="name">Fac IIBB Santa Fé</field>
             <field name="sequence">100</field>

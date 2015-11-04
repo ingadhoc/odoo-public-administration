@@ -48,6 +48,21 @@
         <record id="account.menu_finance" model="ir.ui.menu">
             <field name="groups_id" eval="[(4, ref('group_secretary_usuario')), (4, ref('group_habilitacion_usuario'))]"/>
         </record>
+        <record id="account.menu_finance_bank_and_cash" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4, ref('group_habilitacion_usuario'))]"/>
+        </record>
+        <record id="account.menu_finance_reports" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4, ref('group_habilitacion_director'))]"/>
+        </record>
+
+        <!-- share chart account wit hab manager-->
+        <record id="account.menu_finance_charts" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4, ref('group_habilitacion_director'))]"/>
+        </record>
+
+<!--         <record id="account.menu_finance_periodical_processing" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4, ref('group_habilitacion_usuario'))]"/>
+        </record> -->
     </data>
 </openerp>
 <!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4

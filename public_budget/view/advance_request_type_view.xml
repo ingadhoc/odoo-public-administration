@@ -33,6 +33,12 @@
                         <field name="account_id"/> 
                         <field name="return_journal_id"/>
                         <field name="company_id" groups="base.group_multi_company"/>
+                        <field name="employee_ids">
+                            <tree>
+                                <field name="name"/>
+                                <field name="advance_request_debt"/>
+                            </tree>
+                        </field>
                      </group>
                     </sheet>
                 </form>

@@ -5,6 +5,15 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
+class account_checkook(models.Model):
+
+    _inherit = ['account.checkbook']
+
+    journal_id = fields.Many2one(
+        domain=[('payment_subtype', '=', 'issue_check')]
+        )
+
+
 class account_check(models.Model):
 
     _inherit = ['account.check']

@@ -30,7 +30,7 @@ class budget(models.Model):
         'account.fiscalyear',
         'Fiscal Year',
         required=True,
-        states={'done': [('readonly', True)]},
+        states={'draft': [('readonly', False)]},
         select=True)
     income_account_id = fields.Many2one(
         'account.account',
@@ -91,6 +91,7 @@ class budget(models.Model):
         'res.company',
         string='Company',
         required=True,
+        states={'draft': [('readonly', False)]},
         default=lambda self: self.env['res.company']._company_default_get(
             'public_budget.budget')
         )

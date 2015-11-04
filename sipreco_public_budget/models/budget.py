@@ -16,5 +16,6 @@ class budget(models.Model):
         'account.voucher.receiptbook',
         'ReceiptBook',
         required=True,
+        states={'draft': [('readonly', False)]},
         domain="[('type', '=', 'payment'), ('company_id', '=', company_id)]",
         )
