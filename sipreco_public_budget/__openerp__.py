@@ -29,6 +29,7 @@
         'views/transaction_type_view.xml',
         'views/advance_request_view.xml',
         'views/advance_return_view.xml',
+        'views/account_checkbook_view.xml',
         'workflow/account_voucher_workflow.xml',
         'workflow/account_check_workflow.xml',
         'data/ir_parameters.xml',
