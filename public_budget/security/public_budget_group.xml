@@ -51,10 +51,8 @@
         <record id="account.menu_finance_bank_and_cash" model="ir.ui.menu">
             <field name="groups_id" eval="[(4, ref('group_habilitacion_usuario'))]"/>
         </record>
-        <!-- make tax settlement child of bank and cash so that habilitaciones user see them-->
-        <record id="account_tax_settlement.account_tax_settlement_menu" model="ir.ui.menu">
-            <field name="parent_id" ref="account.menu_finance_bank_and_cash"/>
-            <field name="sequence" eval="50"/>
+        <record id="account.menu_finance_reports" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4, ref('group_habilitacion_director'))]"/>
         </record>
 
         <!-- share chart account wit hab manager-->

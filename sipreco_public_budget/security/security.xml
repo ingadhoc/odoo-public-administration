@@ -2,6 +2,12 @@
 <openerp>
     <data>
 
+        <!-- make tax settlement child of bank and cash so that habilitaciones user see them-->
+        <record id="account_tax_settlement.account_tax_settlement_menu" model="ir.ui.menu">
+            <field name="parent_id" ref="account.menu_finance_bank_and_cash"/>
+            <field name="sequence" eval="50"/>
+        </record>
+
         <!-- Grupo cobros y pagos -->
         <record id="account.group_account_invoice" model="res.groups">
             <field name="category_id" ref="base.module_category_hidden"/>
