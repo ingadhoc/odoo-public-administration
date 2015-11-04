@@ -16,7 +16,11 @@ class res_partner(models.Model):
 
     @api.one
     def get_advance_request_debt(self):
-        self.advance_request_debt = self.get_debt_amount()
+        advance_return_type = self.env[
+            'public_budget.advance_request_type'].browse(self._context.get(
+                'advance_return_type_id', False))
+        self.advance_request_debt = self.get_debt_amount(
+            advance_return_type)
 
     @api.multi
     def get_debt_amount(self, advance_return_type=False):

@@ -39,6 +39,18 @@ class advance_request_type(models.Model):
         required=True,
         default=lambda self: self.env.user.company_id,
         )
+    employee_ids = fields.Many2many(
+        'res.partner',
+        compute='get_employee_ids',
+        context="{'advance_return_type_id': id}",
+        )
+
+    @api.one
+    def get_employee_ids(self):
+        employees = self.env['res.partner'].search([
+            ('employee', '=', True)]).filtered(
+            lambda x: x.get_debt_amount(self))
+        self.employee_ids = employees
 
     @api.one
     @api.constrains('type_id', 'company_id', 'return_journal_id')

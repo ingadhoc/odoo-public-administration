@@ -21,6 +21,7 @@
             sequence="30"
             action="action_manage_checkbooks"
             parent="sipreco_public_budget.other_operations"
+            groups="public_budget.group_habilitacion_director,account.group_account_invoice"
         />
     </data>
 </openerp>
