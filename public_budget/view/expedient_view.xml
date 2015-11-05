@@ -82,6 +82,7 @@
                                 <field name="final_location" states="closed,annulled"/>
                                 <field name="pages"/>
                                 <field name="subsidy_recipient_doc"/>
+                                <field name="subsidy_amount"/>
                             </group>
                         </group>
                         <notebook>
