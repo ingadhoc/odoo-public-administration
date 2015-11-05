@@ -134,6 +134,15 @@
                 </field>
             </field>
         </record>
-
+        <record model="ir.ui.view" id="account_voucher_view_voucher_filter_vendor_pay">
+            <field name="name">account.voucher.filter</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher.view_voucher_filter_vendor_pay"/>
+            <field name="arch" type="xml">
+                <field name="number" position="before">
+                    <field name="force_number" string="Nro Orden de Pago"/>
+                </field>
+            </field>
+        </record>
     </data>
 </openerp>
