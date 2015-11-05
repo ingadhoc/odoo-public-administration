@@ -79,6 +79,10 @@ class expedient(models.Model):
         string='DNI Receptor Potencial Subsidio',
         required=False
         )
+    subsidy_amount = fields.Integer(
+        string='Monto',
+        required=False
+        )
     final_location = fields.Char(
         string='Final Location'
         )
