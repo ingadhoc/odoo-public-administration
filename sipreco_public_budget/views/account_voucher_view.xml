@@ -69,6 +69,9 @@
                     <button name="proforma_confirmed" string="Confirm" states="draft" icon="gtk-go-forward"/>
                    <!--  <button name="proforma_confirmed" class="oe_highlight" string="Confirm" states="draft"/> -->
                 </tree>
+                <tree position="attributes">
+                    <attribute name="default_order">force_number desc</attribute>
+                </tree>
             </field>
         </record>
 
