@@ -102,6 +102,20 @@ class remit(models.Model):
                         for all the expedients'))
 
     @api.one
+    @api.constrains('date', 'expedient_ids')
+    def check_dates(self):
+        future_expedients = self.expedient_ids.search([
+            ('last_move_date', '>', self.date),
+            ('id', 'in', self.expedient_ids.ids),
+            ])
+        if future_expedients:
+            raise Warning(
+                'No puede mover expedientes que hayan sido movidos en un '
+                'remito con fecha mayor a la de este remito!\n'
+                '* Expedientes: %s' % (', '.join(
+                    future_expedients.mapped('number'))))
+
+    @api.one
     def check_user_location(self):
         self.confirmation_user_id = self.env.user
         self.confirmation_date = fields.Datetime.now()
