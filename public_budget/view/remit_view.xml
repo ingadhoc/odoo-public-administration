@@ -53,7 +53,8 @@
                             <field name="date"/> 
                             <field name="location_id"
                                 domain="[('id','in',user_location_ids[0][2])]"
-                                options="{'no_create': True}"/>
+                                options="{'no_create': True}"
+                                atts="{'readonly': [('expedient_ids', '!=', [(6, False, [])])]}"/>
                             <field name="location_dest_id"
                                 domain="[('id','!=',location_id)]" options="{'no_create': True}"/> 
                         </group>
