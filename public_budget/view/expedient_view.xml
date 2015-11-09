@@ -81,8 +81,10 @@
                                 <field name="current_location_id"/>
                                 <field name="final_location" states="closed,annulled"/>
                                 <field name="pages"/>
-                                <field name="subsidy_recipient_doc"/>
-                                <field name="subsidy_amount"/>
+                                <field name="subsidy_expedient"/>
+                                <field name="subsidy_recipient_doc" attrs="{'invisible': [('subsidy_expedient', '!=', True)]}" />
+                                <field name="subsidy_amount" attrs="{'invisible': [('subsidy_expedient', '!=', True)]}" />
+                                <field name="employee_subsidy_requestor" attrs="{'invisible': [('subsidy_expedient', '!=', True)]}" />
                             </group>
                         </group>
                         <notebook>

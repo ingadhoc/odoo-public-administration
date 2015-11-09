@@ -75,6 +75,10 @@ class expedient(models.Model):
         string='Pages',
         required=True
         )
+    subsidy_expedient = fields.Boolean(
+        string='Expediente de Solicitud Subsidio?',
+        required=False
+        )
     subsidy_recipient_doc = fields.Integer(
         string='DNI Receptor Potencial Subsidio',
         required=False
@@ -82,6 +86,11 @@ class expedient(models.Model):
     subsidy_amount = fields.Integer(
         string='Monto',
         required=False
+        )
+    employee_subsidy_requestor = fields.Many2one(
+        'res.partner',
+        string='Empleado Solicitud',
+        domain=[('employee', '=', True)]
         )
     final_location = fields.Char(
         string='Final Location'
