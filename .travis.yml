@@ -58,7 +58,7 @@ install:
   - pip install git+https://github.com/aeroo/aeroolib.git@master pycups==1.9.68
 
   # odoo argentina
-  # - pip install geopy==0.95.1 BeautifulSoup # because l10n_ar_states module is installed
+  - pip install geopy==0.95.1 BeautifulSoup # because l10n_ar_states module is installed
 
   # repository requirements
   - pip install -r requirements.txt
