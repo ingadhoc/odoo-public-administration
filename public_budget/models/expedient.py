@@ -87,6 +87,10 @@ class expedient(models.Model):
         string='Monto',
         required=False
         )
+    subsidy_approved = fields.Boolean(
+        string='Aprobado?',
+        required=False
+        )
     employee_subsidy_requestor = fields.Many2one(
         'res.partner',
         string='Empleado Solicitud',
