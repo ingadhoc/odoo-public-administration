@@ -84,6 +84,7 @@
                                 <field name="subsidy_expedient"/>
                                 <field name="subsidy_recipient_doc" attrs="{'invisible': [('subsidy_expedient', '!=', True)]}" />
                                 <field name="subsidy_amount" attrs="{'invisible': [('subsidy_expedient', '!=', True)]}" />
+                                <field name="subsidy_approved" attrs="{'invisible': [('subsidy_expedient', '!=', True)]}" />
                                 <field name="employee_subsidy_requestor" attrs="{'invisible': [('subsidy_expedient', '!=', True)]}" />
                             </group>
                         </group>
@@ -123,6 +124,7 @@
                     <field name="in_transit"/>
                     <field name="pages"/>
                     <field name="user_id"/>
+                    <field name="subsidy_approved"/>
                     <field name="state"/>
                 </tree>
             </field>
