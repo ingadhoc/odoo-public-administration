@@ -36,6 +36,8 @@ env:
   - VERSION="8.0" TESTS="0" LINT_CHECK="0" TRANSIFEX="0"
   - TRANSIFEX_USER='jjscarafia'
   - TRANSIFEX_ORGANIZATION='adhoc'
+  # exclude sipreco_project as it is only a dependencies module
+  - EXCLUDE='sipreco_project'
   # to get secure, run 'travis encrypt TRANSIFEX_PASSWORD=[transifex_password] -r [github_repo]'
   # example of github repo 'ingadhoc/odoo-infrastructure'
   - secure: id4QDeYqCR1eHQQIu1oZb7ap6a+2dk59tymtitbLcBZ+cPjuHjZU6utIyt7wP3OoivN7pRmWsr6sHUd4tB5M5nP5PZI+JrzyagcQeTnw9PmGrOZV6GIXfZxLSpHqzw+ytd0IW6wlKDb9m0GudHs/8wsHClFY0IJwsj1GPQmYSL1TKNp/vH63e6YCHNMx2DP/SpCS9LFbES0wws2aAe5EFi46aUugyIvkNI/nNXrjjrLiLzJAY4eLymE0+b6bCINnGGMWvvPTvWpThOkzCZ9RFsZxgVYi7XQ//D4XYWzV1nGctph0KiGvRJz9B44Ig1wLGfFceK/9Y/qyTs8Y2aIN/DBPTQ3GWPQ121fA6cgLDQZOrU+RCVeO/1dTJMJxcAph8yKfbpUOgeqPApfv5JvjveHfyMzxJLoUF0VSFmyfqjNyPMFjUTJuVkx28Zxpk/d/paWe0I+04kEtJ4GJqSse6usPodloCm5+3d2VjNv2RN0uSjmUsF7sIEOBeZfCrxaaL8M3KrZXK2F2qLb4ZgkJ1S88llFqAA/RU13wT2b7FQH1D1pTwzxrrYS/wYPw8yHDKJeD0M99fDk+f9L20NFC/lez6UhziqtK7rp/rTfWMK8dKerDI13Ip/CFj//tGbNxJmIxoHH2gmwCeGQ1743EJNH3U3EOBFvGh0tLL7wJoyI=
