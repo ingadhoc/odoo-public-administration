@@ -1,0 +1,4 @@
+aeroo_reports https://github.com/aeroo/aeroo_reports.git
+server-tools https://github.com/OCA/server-tools.git
+odoo-addons https://github.com/ingadhoc/odoo-addons.git
+odoo-argentina https://github.com/ingadhoc/odoo-argentina.git
