@@ -42,7 +42,8 @@ class invoice(models.Model):
         string=_('To Pay Amount'),
         digits=dp.get_precision('Account'),
         compute='_compute_to_pay_amount',
-        # store=True, #TODO ver si lo hacemos stored
+        store=True,
+        # TODO ver si lo hacemos stored
         )
 
     @api.one
@@ -78,6 +79,13 @@ class invoice(models.Model):
             if paid_amount > to_pay_amount:
                 to_pay_amount = paid_amount
         self.to_pay_amount = to_pay_amount
+
+    @api.one
+    @api.constrains('to_pay_amount', 'amount_total')
+    def check_to_pay_amount(self):
+        if self.to_pay_amount > self.amount_total:
+            raise Warning(_(
+                'To Pay Amount can Not be greater than Total Amount'))
 
     @api.multi
     def action_cancel(self):
