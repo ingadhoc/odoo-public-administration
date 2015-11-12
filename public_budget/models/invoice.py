@@ -84,8 +84,9 @@ class invoice(models.Model):
     @api.constrains('to_pay_amount', 'amount_total')
     def check_to_pay_amount(self):
         if self.to_pay_amount > self.amount_total:
-            raise Warning(_(
-                'To Pay Amount can Not be greater than Total Amount'))
+            raise Warning((
+                'El importe mandado a pagar no puede ser mayor al importe '
+                'de la factura'))
 
     @api.multi
     def action_cancel(self):
