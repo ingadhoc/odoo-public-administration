@@ -15,7 +15,7 @@
     <field name="parser_state">default</field>
     <field name="report_rml">sipreco_setup_data_cmd/reports/remit_report_subsidy.ods</field>
     <field name="tml_source">file</field>
-    <field name="out_format" ref="report_aeroo.report_mimetypes_pdf_odt"/>
+    <field name="out_format" ref="report_aeroo.report_mimetypes_xls_odt"/>
     <field name="styles_mode">specified</field>
     <field name="stylesheet_id" ref="sipreco_public_budget.sipreco_stylesheet"/>
 </record>
