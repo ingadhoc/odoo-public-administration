@@ -21,6 +21,8 @@
         <!-- Grupo compartiendo -->
         <record id="share.group_share_user" model="res.groups">
             <field name="category_id" ref="base.module_category_hidden"/>
+            <!-- tengo que cambiarle nombre porque el nombre debe ser unico por aplicación -->
+            <field name="name">Share / User</field>
         </record>
         <!-- Menu messaging a techincal features -->
         <record id="base.group_sale_salesman" model="res.groups">
