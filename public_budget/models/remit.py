@@ -70,6 +70,10 @@ class remit(models.Model):
         required=True,
         states={'in_transit': [('readonly', False)]}
         )
+    reference = fields.Char(
+        string='Referencia',
+        readonly=False
+        )
     user_location_ids = fields.Many2many(
         comodel_name='public_budget.location',
         string='User Locations',

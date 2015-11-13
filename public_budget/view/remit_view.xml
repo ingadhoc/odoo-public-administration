@@ -57,6 +57,7 @@
                                 atts="{'readonly': [('expedient_ids', '!=', [(6, False, [])])]}"/>
                             <field name="location_dest_id"
                                 domain="[('id','!=',location_id)]" options="{'no_create': True}"/> 
+                            <field name="reference"/> 
                         </group>
                         <group>
                             <field name="user_id"/> 
