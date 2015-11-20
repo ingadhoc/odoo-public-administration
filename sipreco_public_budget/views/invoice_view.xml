@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- FORMVIEW -->
+        <record id="view_public_budget_invoice_form" model="ir.ui.view">
+            <field name="name">public_budget.invoice.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <button name="invoice_cancel" position="before">
+                    <button name="%(action_aeroo_report_liquidation)d" class="oe_highlight" string="Imprimir Liquidación" type="action"/>
+                </button>
+            </field>
+        </record>
+
+    </data>
+</openerp>
