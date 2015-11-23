@@ -11,7 +11,7 @@
         </record>
 
         <record id="sipreco_public_budget.purchase_type_compra_directa" model="public_budget.transaction_type">
-            <field name="name">Compra Directa</field>
+            <field name="name">Directa</field>
             <field name="with_advance_payment" eval="False"/>
             <field name="definitive_partner_type">supplier</field>
             <field name="company_id" ref="base.main_company"/>
