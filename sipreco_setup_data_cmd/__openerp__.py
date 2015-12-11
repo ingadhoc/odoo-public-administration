@@ -30,6 +30,7 @@ Sipreco Set Up Data TMC
         'reports/payment_receipt_report.xml',
         'reports/remit_report_subsidy.xml',
         'reports/payment_order_cmd_list.xml',
+        'reports/payment_order_cmd_multi.xml',
         'reports/stylesheet.xml',
     ],
     'demo': [
