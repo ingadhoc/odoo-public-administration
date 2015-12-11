@@ -2,13 +2,13 @@
 <openerp>
     <data noupdate="0">
         <record id="l10n_ar_aeroo_voucher.action_aeroo_report_ar_voucher" model="ir.actions.report.xml">
-            <field name="report_rml">sipreco_setup_data_cmd/reports/payment_order_cmd_multi.odt</field>
+            <field name="report_rml">sipreco_setup_data_cmd/reports/payment_order_cmd.odt</field>
         </record>
         <ir_set>
             <field eval="'action'" name="key"/>
             <field eval="'client_print_multi'" name="key2"/>
             <field eval="['account.voucher']" name="models"/>
-            <field name="name">Ordenes de Pago - Multiple</field>
+            <field name="name">Orden de Pago</field>
             <field eval="'ir.actions.report.xml,'+str(action_aeroo_report_ar_voucher)" name="value"/>
             <field eval="True" name="isobject"/>
             <field eval="True" name="replace"/>
