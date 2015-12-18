@@ -3,11 +3,11 @@
     <data>
 
 <!-- Printed Invoice -->
-<record id="action_aeroo_report_payment_order_list" model="ir.actions.report.xml">
-    <field name="name">Ordenes de Pago - Listado</field>
+<record id="action_aeroo_report_payment_order_list_checks" model="ir.actions.report.xml">
+    <field name="name">Ordenes de Pago - Listado con Cheques</field>
     <field name="type">ir.actions.report.xml</field>
     <field name="model">account.voucher</field>
-    <field name="report_name">payment_order_list</field>
+    <field name="report_name">payment_order_list_checks</field>
     <field name="report_type">aeroo</field>
     <field name="in_format">oo-odt</field>
     <!-- <field name="parser_loc">l10n_ar_aeroo_base/parser.py</field> -->
@@ -23,8 +23,8 @@
     <field eval="'action'" name="key"/>
     <field eval="'client_print_multi'" name="key2"/>
     <field eval="['account.voucher']" name="models"/>
-    <field name="name">Ordenes de Pago - Listado</field>
-    <field eval="'ir.actions.report.xml,'+str(action_aeroo_report_payment_order_list)" name="value"/>
+    <field name="name">Ordenes de Pago - Listado con Cheques</field>
+    <field eval="'ir.actions.report.xml,'+str(action_aeroo_report_payment_order_list_checks)" name="value"/>
     <field eval="True" name="isobject"/>
     <field eval="True" name="replace"/>
 </ir_set>
