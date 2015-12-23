@@ -3,6 +3,8 @@ from openerp import models, fields, api, _
 from openerp.exceptions import Warning
 from datetime import datetime
 import openerp.addons.decimal_precision as dp
+import logging
+_logger = logging.getLogger(__name__)
 
 
 class budget_position(models.Model):
@@ -150,6 +152,7 @@ class budget_position(models.Model):
         -balance_amount: diffference between budget position and preventive
         amount
         """
+        _logger.info('Getting amounts for budget position %s' % self.name)
         if self.type == 'view':
             operator = 'child_of'
         if self.type == 'normal':
@@ -163,6 +166,7 @@ class budget_position(models.Model):
 
         budget_id = self._context.get('budget_id', False)
         # we add budget_assignment_allowed condition to optimize
+        _logger.info('Getting budget amounts')
         if budget_id and self.budget_assignment_allowed:
             domain.append(('budget_id', '=', budget_id))
             modification_lines = self.env[
@@ -185,34 +189,52 @@ class budget_position(models.Model):
         if excluded_line_id:
             domain.append(('id', '!=', excluded_line_id))
 
+        # we use sql instead of orm becuase as this computed fields are not
+        # stored, the computation use methods and not stored values
+        _logger.info('Getting budget general amounts')
+
         draft_preventive_lines = self.env[
             'public_budget.preventive_line'].search(
             domain
             )
+        if draft_preventive_lines:
+            self._cr.execute(
+                'SELECT preventive_amount '
+                'FROM public_budget_preventive_line '
+                'WHERE id IN %s', (tuple(draft_preventive_lines.ids),))
+            self.draft_amount = sum([x[0] for x in self._cr.fetchall()])
+
+        _logger.info('Getting budget general amounts')
+
         active_preventive_lines = self.env[
             'public_budget.preventive_line'].search(
             domain
             )
 
-        preventive_amount = sum(
-            [line.preventive_amount for line in active_preventive_lines])
-        self.draft_amount = sum([
-            line.preventive_amount
-            for line
-            in draft_preventive_lines])
+        preventive_amount = definitive_amount = to_pay_amount = paid_amount = 0
+        if active_preventive_lines:
+            self._cr.execute(
+                'SELECT preventive_amount, definitive_amount, to_pay_amount, '
+                'paid_amount '
+                'FROM public_budget_preventive_line '
+                'WHERE id IN %s', (tuple(active_preventive_lines.ids),))
+            for r in self._cr.fetchall():
+                preventive_amount += r[0]
+                definitive_amount += r[1]
+                to_pay_amount += r[2]
+                paid_amount += r[3]
+
         self.preventive_amount = preventive_amount
-        self.definitive_amount = sum(
-            [line.definitive_amount for line in active_preventive_lines])
-        self.to_pay_amount = sum(
-            [line.to_pay_amount for line in active_preventive_lines])
-        self.paid_amount = sum(
-            [line.paid_amount for line in active_preventive_lines])
+        self.definitive_amount = definitive_amount
+        self.to_pay_amount = to_pay_amount
+        self.paid_amount = paid_amount
 
         day_of_year = datetime.now().timetuple().tm_yday
         projected_amount = preventive_amount / day_of_year * 365
         self.projected_amount = projected_amount
 
         if self.budget_assignment_allowed:
+            _logger.info('Getting budget assignment amounts')
             projected_avg = amount and \
                 projected_amount / amount * 100.0 or 0.0
             self.projected_avg = projected_avg
@@ -221,6 +243,8 @@ class budget_position(models.Model):
                 preventive_amount / amount * 100.0 or 0.0
             self.preventive_avg = preventive_avg
             self.balance_amount = self.amount - preventive_amount
+        _logger.info(
+            'Finish getting amounts for budget position %s' % self.name)
 
     @api.multi
     def name_get(self):

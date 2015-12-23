@@ -64,21 +64,25 @@ class budget(models.Model):
         string=_('Total Preventive'),
         compute='_get_totals',
         digits=dp.get_precision('Account'),
+        # store=True,
         )
     total_authorized = fields.Float(
         string=_('Total Authorized'),
         compute='_get_totals',
         digits=dp.get_precision('Account'),
+        # store=True,
         )
     total_requested = fields.Float(
         string=_('Total Requested'),
         compute='_get_totals',
         digits=dp.get_precision('Account'),
+        # store=True,
         )
     passive_residue = fields.Float(
         string=_('Total Residue'),
         compute='_get_totals',
         digits=dp.get_precision('Account'),
+        # store=True,
         )
     budget_position_ids = fields.Many2many(
         relation='public_budget_budget_position_rel',
@@ -187,11 +191,17 @@ class budget(models.Model):
         self.total_preventive = total_preventive
         self.total_requested = total_requested
 
+        # we use sql instead of orm becuase as this computed fields are not
+        # stored, the computation use methods and not stored values
         # Get passive residue
         definitive_lines = self.env['public_budget.definitive_line'].search(
             [('budget_id', '=', self.id)])
-        passive_residue = sum([x.residual_amount for x in definitive_lines])
-        self.passive_residue = passive_residue
+        if definitive_lines:
+            self._cr.execute(
+                'SELECT residual_amount '
+                'FROM public_budget_definitive_line '
+                'WHERE id IN %s', (tuple(definitive_lines.ids),))
+            self.passive_residue = sum([x[0] for x in self._cr.fetchall()])
 
     @api.multi
     def action_cancel_draft(self):

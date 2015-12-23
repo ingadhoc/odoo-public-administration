@@ -2,6 +2,8 @@
 from openerp import models, fields, api, _
 from openerp.exceptions import Warning
 import openerp.addons.decimal_precision as dp
+import logging
+_logger = logging.getLogger(__name__)
 
 
 class preventive_line(models.Model):
@@ -35,29 +37,30 @@ class preventive_line(models.Model):
         string=_('Remaining Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
+        store=True,
         )
     definitive_amount = fields.Float(
         string=_('Definitive Amount'),
         compute='_get_amounts',
-        # store=True,
+        store=True,
         digits=dp.get_precision('Account'),
         )
     invoiced_amount = fields.Float(
         string=_('Invoiced Amount'),
         compute='_get_amounts',
-        # store=True,
+        store=True,
         digits=dp.get_precision('Account'),
         )
     to_pay_amount = fields.Float(
         string=_('To Pay Amount'),
         compute='_get_amounts',
-        # store=True,
+        store=True,
         digits=dp.get_precision('Account'),
         )
     paid_amount = fields.Float(
         string=_('Paid Amount'),
         compute='_get_amounts',
-        # store=True,
+        store=True,
         digits=dp.get_precision('Account'),
         )
     state = fields.Selection(
@@ -70,6 +73,7 @@ class preventive_line(models.Model):
             ('cancel', _('Cancel'))],
         string=_('States'),
         compute='_get_state',
+        store=True,
         )
     affects_budget = fields.Boolean(
         _('Affects Budget?'),
@@ -103,12 +107,12 @@ class preventive_line(models.Model):
 
     @api.one
     @api.depends(
-        'preventive_amount',
-        'definitive_line_ids',
+        'invoiced_amount',
     )
     def _get_state(self):
         """Por ahora solo implementamos los estados invoiced y draft
         """
+        _logger.info('Getting state for preventive line %s' % self.id)
         state = 'draft'
         if self.invoiced_amount:
             state = 'invoiced'
@@ -146,6 +150,9 @@ class preventive_line(models.Model):
         'transaction_id.advance_voucher_ids.state',
         'transaction_id.advance_voucher_ids.to_pay_amount',
         'transaction_id.advance_voucher_ids.amount',
+        # estas dos no harian falta porque son los depends de arriba
+        # 'transaction_id.advance_preventive_amount',
+        # 'transaction_id.advance_to_pay_amount',
         'definitive_line_ids.amount',
         'definitive_line_ids.invoiced_amount',
         'definitive_line_ids.to_pay_amount',
@@ -164,7 +171,9 @@ class preventive_line(models.Model):
         -balance_amount: diffference between budget position and preventive
         amount
         """
+        _logger.info('Getting amounts for preventive line %s' % self.id)
         if self.advance_line:
+            _logger.info('Getting advance line values')
             transaction = self.transaction_id
             if transaction.advance_preventive_amount:
                 preventive_perc = (
@@ -177,6 +186,7 @@ class preventive_line(models.Model):
             paid_amount = (transaction.advance_paid_amount * preventive_perc)
             invoiced_amount = 0.0
         else:
+            _logger.info('Getting none advance line values')
             definitive_amount = sum(self.mapped(
                 'definitive_line_ids.amount'))
             invoiced_amount = sum(self.mapped(
@@ -190,6 +200,7 @@ class preventive_line(models.Model):
         self.invoiced_amount = invoiced_amount
         self.to_pay_amount = to_pay_amount
         self.paid_amount = paid_amount
+        _logger.info('Finish getting amounts for preventive line %s' % self.id)
 
     @api.one
     @api.constrains('account_id', 'transaction_id')
