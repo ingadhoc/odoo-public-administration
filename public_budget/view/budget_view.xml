@@ -68,7 +68,7 @@
                         </group>
                         <notebook>
                             <page string="Analysis">
-                                <field name="budget_position_ids" context="{'budget_id':active_id, 'tree_view_ref': 'public_budget.view_budget_position_budget_tree', 'form_view_ref': 'public_budget.view_budget_position_budget_form'}"/>
+                                <field name="budget_position_ids" context="{'budget_id':active_id, 'tree_view_ref': 'public_budget.view_budget_position_budget_tree'}"/>
                             </page>
                             <page string="Detail">
                                 <field name="budget_detail_ids"/>

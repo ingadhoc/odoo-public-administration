@@ -40,7 +40,7 @@
                         <field name="assignment_position_id"/> 
                         <field name="inventariable" attrs="{'invisible': [('type', '=', 'view')]}"/> 
                         <field name="category_id" attrs="{'invisible': [('type', '=', 'view')], 'required':[('type', '=', 'normal')]}"/> 
-                        <field name="child_ids" attrs="{'invisible':[('type','!=','view')]}"/>
+                        <field name="child_ids" context="{'budget_id':context.get('budget_id')}" attrs="{'invisible':[('type','!=','view')]}"/>
                      </group>
                     </sheet>
 
@@ -61,35 +61,6 @@
                     <field name="type" invisible="True"/>
                     <field name="budget_assignment_allowed"/>
                 </tree>
-            </field>
-        </record>
-
-        <!-- FORMVIEW for budget-->
-        <record id="view_budget_position_budget_form" model="ir.ui.view">
-            <field name="name">public_budget.budget_position.budget.form</field>
-            <field name="model">public_budget.budget_position</field>
-            <field name="priority" eval="99"/>
-            <field name="arch" type="xml">
-                <form string="Budget Position">
-                    <header>
-                    </header>
-                    <sheet string="Budget Position">
-                       <div class="oe_right oe_button_box" name="buttons">
-                       </div>
-                     <group>
-                        <field name="code"/> 
-                        <field name="name"/> 
-                        <field name="type"/> 
-                        <field name="parent_id"/> 
-                        <field name="budget_assignment_allowed"/> 
-                        <field name="assignment_position_id"/> 
-                        <field name="inventariable" attrs="{'invisible': [('type', '=', 'view')]}"/> 
-                        <field name="category_id" attrs="{'invisible': [('type', '=', 'view')], 'required':[('type', '=', 'normal')]}"/> 
-                        <field name="child_ids" context="{'budget_id':budget_id}" attrs="{'invisible':[('type','!=','view')]}"/>
-                     </group>
-                    </sheet>
-
-                </form>
             </field>
         </record>
 
@@ -157,7 +128,7 @@
         <act_window
             id="action_budget_position_items"
             name="Items"
-            context="{'search_default_budget_position_id': [active_id], 'budget_id': context.get('budget_id')}"
+            context="{'search_default_budget_position_id': [active_id], 'search_default_budget_id': context.get('budget_id')}"
             res_model="public_budget.preventive_line"
             src_model="public_budget.budget_position"
             view_id="view_public_budget_preventive_line_analysis_tree"
