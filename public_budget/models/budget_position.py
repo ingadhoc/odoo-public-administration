@@ -165,6 +165,11 @@ class budget_position(models.Model):
             ]
 
         budget_id = self._context.get('budget_id', False)
+        # we check it is a report because if not it will get wrong budget
+        # on positions
+        if not budget_id and 'aeroo_docs' in self._context:
+            budget_id = self._context.get('active_id', False)
+
         if budget_id:
             domain.append(('budget_id', '=', budget_id))
 
