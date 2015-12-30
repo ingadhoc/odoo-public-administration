@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
 import openerp.addons.decimal_precision as dp
+import logging
+_logger = logging.getLogger(__name__)
 
 
 class invoice_line(models.Model):
@@ -14,11 +16,13 @@ class invoice_line(models.Model):
         string=_('To Pay Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
+        # store=True,
         )
     paid_amount = fields.Float(
         string=_('Paid Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
+        # store=True,
         )
     definitive_line_id = fields.Many2one(
         'public_budget.definitive_line',
@@ -38,6 +42,7 @@ class invoice_line(models.Model):
         proporcionalmente por linea, porque sabemos el total a nivel factura
         -paid_amount: vemos el porcentaje que se pago de la factura y,
         al total de cada linea lo multiplicamos por ese porcentaje"""
+        _logger.info('Getting amounts for invoice line %s' % self.id)
         invoice_total = self.invoice_id.amount_total
         if invoice_total and self.invoice_id.state not in ('draft', 'cancel'):
             invoice_paid_perc = (

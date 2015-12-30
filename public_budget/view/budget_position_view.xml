@@ -40,7 +40,7 @@
                         <field name="assignment_position_id"/> 
                         <field name="inventariable" attrs="{'invisible': [('type', '=', 'view')]}"/> 
                         <field name="category_id" attrs="{'invisible': [('type', '=', 'view')], 'required':[('type', '=', 'normal')]}"/> 
-                        <field name="child_ids" attrs="{'invisible':[('type','!=','view')]}"/>
+                        <field name="child_ids" context="{'budget_id':context.get('budget_id')}" attrs="{'invisible':[('type','!=','view')]}"/>
                      </group>
                     </sheet>
 
@@ -68,6 +68,7 @@
         <record id="view_budget_position_budget_tree" model="ir.ui.view">
             <field name="name">public_budget.budget_position.budget.tree</field>
             <field name="model">public_budget.budget_position</field>
+            <field name="priority" eval="99"/>
             <field name="field_parent">child_ids</field>
             <field name="arch" type="xml">
                 <tree colors="blue:type=='view'; green:budget_assignment_allowed; red: budget_assignment_allowed and projected_amount > amount;">
@@ -127,7 +128,7 @@
         <act_window
             id="action_budget_position_items"
             name="Items"
-            context="{'search_default_budget_position_id': [active_id], 'budget_id': context.get('budget_id')}"
+            context="{'search_default_budget_position_id': [active_id], 'search_default_budget_id': context.get('budget_id')}"
             res_model="public_budget.preventive_line"
             src_model="public_budget.budget_position"
             view_id="view_public_budget_preventive_line_analysis_tree"
