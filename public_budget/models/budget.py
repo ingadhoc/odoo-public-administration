@@ -177,10 +177,10 @@ class budget(models.Model):
     @api.one
     def _get_totals(self):
         total_authorized = sum([x.amount for x in self.with_context(
-            budget_id=self.id).budget_position_ids if x.type != 'view'])
+            budget_id=self.id).budget_position_ids if x.budget_assignment_allowed])
         total_preventive = sum(
             [x.preventive_amount for x in self.with_context(
-                budget_id=self.id).budget_position_ids if x.type != 'view'])
+                budget_id=self.id).budget_position_ids if x.budget_assignment_allowed])
         total_requested = sum(
             [x.amount for x in self.with_context(
                 budget_id=self.id).funding_move_ids if x.type == 'request']) - sum(
