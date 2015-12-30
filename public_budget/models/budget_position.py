@@ -165,10 +165,12 @@ class budget_position(models.Model):
             ]
 
         budget_id = self._context.get('budget_id', False)
+        if budget_id:
+            domain.append(('budget_id', '=', budget_id))
+
         # we add budget_assignment_allowed condition to optimize
         _logger.info('Getting budget amounts')
         if budget_id and self.budget_assignment_allowed:
-            domain.append(('budget_id', '=', budget_id))
             modification_lines = self.env[
                 'public_budget.budget_modification_detail'].search([
                     ('budget_modification_id.budget_id', '=', budget_id),

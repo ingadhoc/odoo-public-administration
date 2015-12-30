@@ -64,10 +64,40 @@
             </field>
         </record>
 
+        <!-- FORMVIEW for budget-->
+        <record id="view_budget_position_budget_form" model="ir.ui.view">
+            <field name="name">public_budget.budget_position.budget.form</field>
+            <field name="model">public_budget.budget_position</field>
+            <field name="priority" eval="99"/>
+            <field name="arch" type="xml">
+                <form string="Budget Position">
+                    <header>
+                    </header>
+                    <sheet string="Budget Position">
+                       <div class="oe_right oe_button_box" name="buttons">
+                       </div>
+                     <group>
+                        <field name="code"/> 
+                        <field name="name"/> 
+                        <field name="type"/> 
+                        <field name="parent_id"/> 
+                        <field name="budget_assignment_allowed"/> 
+                        <field name="assignment_position_id"/> 
+                        <field name="inventariable" attrs="{'invisible': [('type', '=', 'view')]}"/> 
+                        <field name="category_id" attrs="{'invisible': [('type', '=', 'view')], 'required':[('type', '=', 'normal')]}"/> 
+                        <field name="child_ids" context="{'budget_id':budget_id}" attrs="{'invisible':[('type','!=','view')]}"/>
+                     </group>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
         <!-- TREEVIEW for budget -->
         <record id="view_budget_position_budget_tree" model="ir.ui.view">
             <field name="name">public_budget.budget_position.budget.tree</field>
             <field name="model">public_budget.budget_position</field>
+            <field name="priority" eval="99"/>
             <field name="field_parent">child_ids</field>
             <field name="arch" type="xml">
                 <tree colors="blue:type=='view'; green:budget_assignment_allowed; red: budget_assignment_allowed and projected_amount > amount;">
