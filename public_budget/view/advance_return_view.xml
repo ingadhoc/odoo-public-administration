@@ -32,7 +32,8 @@
                             states="draft"
                             string="Confirm"
                             type="object"
-                            class="oe_highlight"/>
+                            class="oe_highlight"
+                            groups="account.group_account_user"/>
                         <button name="action_cancel_draft"
                             states="cancel"
                             type="object"
