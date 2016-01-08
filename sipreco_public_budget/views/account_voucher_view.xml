@@ -15,7 +15,7 @@
                 </field>
                 <!-- we use force number as a hack to compute document number on creation -->
                 <field name="document_number" position="replace">
-                    <field name="force_number" string="Document Number" readonly="1"/>
+                    <field name="force_number" string="Número de Documento" readonly="1"/>
                 </field>
             </field>
         </record>
@@ -62,7 +62,7 @@
             <field name="inherit_id" ref="l10n_ar_account_voucher.voucher_receipts_form_inherit_view"/>
             <field name="arch" type="xml">
                 <field name="document_number" position="replace">
-                    <field name="force_number" string="Document Number"/>
+                    <field name="force_number" string="Número de Documento"/>
                 </field>
                 <tree position="inside">
                     <button name="%(l10n_ar_aeroo_voucher.action_aeroo_report_ar_voucher)d" class="oe_highlight" string="Print Payment Order" type="action" icon="gtk-print"/>
