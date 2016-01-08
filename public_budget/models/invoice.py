@@ -35,11 +35,11 @@ class invoice(models.Model):
         store=True,
         )
     signed_amount = fields.Float(
-        _('Signed Amount'),
+        'Monto Firmado',
         compute='get_signed_amount',
         )
     to_pay_amount = fields.Float(
-        string=_('To Pay Amount'),
+        string='Monto A Pagar',
         digits=dp.get_precision('Account'),
         compute='_compute_to_pay_amount',
         store=True,
