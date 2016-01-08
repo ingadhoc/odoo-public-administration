@@ -115,27 +115,27 @@ class transaction(models.Model):
         domain=[('advance_line', '=', True)]
         )
     preventive_amount = fields.Float(
-        string=_('Preventive Amount'),
+        string='Monto Preventivo',
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     definitive_amount = fields.Float(
-        string=_('Definitive Amount'),
+        string='Monto Definitivo',
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     invoiced_amount = fields.Float(
-        string=_('Invoiced Amount'),
+        string='Monto Devengado',
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     to_pay_amount = fields.Float(
-        string=_('To Pay Amount'),
+        string='Monto A Pagar',
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     paid_amount = fields.Float(
-        string=_('Paid Amount'),
+        string=_('Monto Pagado'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )

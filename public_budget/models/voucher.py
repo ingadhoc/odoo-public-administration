@@ -31,12 +31,12 @@ class account_voucher(models.Model):
     budget_position_ids = fields.Many2many(
         relation='voucher_position_rel',
         comodel_name='public_budget.budget_position',
-        string=_('Related Budget Positions'),
+        string='Partidas Presupuestarias Relacionadas',
         compute='_get_budget_positions_and_invoices'
         )
     invoice_ids = fields.Many2many(
         comodel_name='account.invoice',
-        string=_('Related Invoices'),
+        string='Facturas Relacionadas',
         compute='_get_budget_positions_and_invoices'
         )
     partner_ids = fields.Many2many(
