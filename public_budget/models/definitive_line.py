@@ -2,6 +2,8 @@
 from openerp import models, fields, api, _
 from openerp.exceptions import Warning
 import openerp.addons.decimal_precision as dp
+import logging
+_logger = logging.getLogger(__name__)
 
 
 class definitive_line(models.Model):
@@ -38,21 +40,25 @@ class definitive_line(models.Model):
         string=_('Residual Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
+        store=True,
         )
     to_pay_amount = fields.Float(
         string=_('To Pay Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
+        store=True,
         )
     paid_amount = fields.Float(
         string=_('Paid Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
+        store=True,
         )
     invoiced_amount = fields.Float(
         string=_('Invoiced Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
+        store=True,
         )
     preventive_line_id = fields.Many2one(
         'public_budget.preventive_line',
@@ -86,6 +92,7 @@ class definitive_line(models.Model):
 
     @api.one
     def _get_state(self):
+        _logger.info('Getting state for definitive line %s' % self.id)
         if self.invoice_line_ids:
             self.state = 'invoiced'
         else:
@@ -111,7 +118,11 @@ class definitive_line(models.Model):
     @api.one
     @api.depends(
         'amount',
-        'invoice_line_ids',
+        'invoice_line_ids.invoice_id.state',
+        'invoice_line_ids.invoice_id.type',
+        'invoice_line_ids.price_subtotal',
+        'invoice_line_ids.to_pay_amount',
+        'invoice_line_ids.paid_amount',
     )
     def _get_amounts(self):
         """Update the following fields with the related values to the budget
@@ -123,6 +134,7 @@ class definitive_line(models.Model):
         -paid_amount: amount sum of lines that has a related voucher in open
         state
         """
+        _logger.info('Getting amounts for definitive line %s' % self.id)
         debit_invoice_lines = self.invoice_line_ids.filtered(
             lambda r: (
                 r.invoice_id.state not in ('cancel', 'draft') and
@@ -131,7 +143,6 @@ class definitive_line(models.Model):
             lambda r: (
                 r.invoice_id.state not in ('cancel', 'draft') and
                 r.invoice_id.type in ('out_refund', 'in_refund')))
-
         invoiced_amount = (
             sum(debit_invoice_lines.mapped('price_subtotal')) -
             sum(credit_invoice_lines.mapped('price_subtotal'))
@@ -149,6 +160,7 @@ class definitive_line(models.Model):
         self.residual_amount = self.amount - invoiced_amount
         self.to_pay_amount = to_pay_amount
         self.paid_amount = paid_amount
+        _logger.info('Finish getting amounts for definitive line %s' % self.id)
 
     @api.multi
     def get_invoice_line_vals(self, to_invoice_amount=False):
