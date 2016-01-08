@@ -94,7 +94,7 @@ msgstr "Reemplazado"
 #: model:public_budget.transaction_type,name:sipreco_public_budget.purchase_type_compra_directa
 #: model:public_budget.transaction_type,name:sipreco_public_budget.purchase_type_compra_directa_demo
 msgid "Compra Directa"
-msgstr "Compra Directa"
+msgstr "Directa"
 
 #. module: sipreco_public_budget
 #: model:public_budget.transaction_type,name:sipreco_public_budget.purchase_type_compra_directa_con_autorizacion
