@@ -101,6 +101,10 @@ class account_voucher(models.Model):
                 lambda r: (
                     not r.invoice or
                     r.invoice.transaction_id.id == transaction_id))
+        # agregamos esto para que no lleve facturas a vouchers que no esten
+        # dentro del marco de una transaccion (por ej. pago de adelantos)
+        else:
+            move_lines = move_lines.filtered(lambda r: (not r.invoice))
         return move_lines
 
     def writeoff_move_line_get(
