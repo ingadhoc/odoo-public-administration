@@ -66,12 +66,12 @@ class budget_position(models.Model):
         compute='_get_amounts'
         )
     balance_amount = fields.Float(
-        string=_('Balance Amount'),
+        string=_('Saldo'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     projected_amount = fields.Float(
-        string=_('Projected Amount'),
+        string=_('Monto Proyectado'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
@@ -81,12 +81,12 @@ class budget_position(models.Model):
         digits=dp.get_precision('Account'),
         )
     preventive_avg = fields.Float(
-        string=_('Preventive Perc.'),
+        string=_('Porc. Preventivo'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     amount = fields.Float(
-        string=_('Amount'),
+        string=_('Monto'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )

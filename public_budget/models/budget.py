@@ -61,25 +61,25 @@ class budget(models.Model):
         digits=dp.get_precision('Account'),
         )
     total_preventive = fields.Float(
-        string=_('Total Preventive'),
+        string=_('Total Preventivo'),
         compute='_get_totals',
         digits=dp.get_precision('Account'),
         # store=True,
         )
     total_authorized = fields.Float(
-        string=_('Total Authorized'),
+        string=_('Total Autorizado'),
         compute='_get_totals',
         digits=dp.get_precision('Account'),
         # store=True,
         )
     total_requested = fields.Float(
-        string=_('Total Requested'),
+        string=_('Total Requerido'),
         compute='_get_totals',
         digits=dp.get_precision('Account'),
         # store=True,
         )
     passive_residue = fields.Float(
-        string=_('Total Residue'),
+        string=_('Total Residuo'),
         compute='_get_totals',
         digits=dp.get_precision('Account'),
         # store=True,
