@@ -115,54 +115,54 @@ class transaction(models.Model):
         domain=[('advance_line', '=', True)]
         )
     preventive_amount = fields.Float(
-        string=_('Preventive Amount'),
+        string='Monto Preventivo',
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     definitive_amount = fields.Float(
-        string=_('Definitive Amount'),
+        string='Monto Definitivo',
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     invoiced_amount = fields.Float(
-        string=_('Invoiced Amount'),
+        string='Monto Devengado',
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     to_pay_amount = fields.Float(
-        string=_('To Pay Amount'),
+        string='Monto A Pagar',
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     paid_amount = fields.Float(
-        string=_('Paid Amount'),
+        string=_('Monto Pagado'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
     advance_preventive_amount = fields.Float(
-        string=_('Advance Preventive Amount'),
+        string=_('Monto Preventivo de Adelanto'),
         compute='_get_advance_amounts',
         digits=dp.get_precision('Account'),
         )
     advance_to_pay_amount = fields.Float(
-        string=_('Advance To Pay Amount'),
+        string=_('Monto de Adelanto a Pagar'),
         compute='_get_advance_amounts',
         digits=dp.get_precision('Account'),
         )
     advance_paid_amount = fields.Float(
-        string=_('Advance Paid Amount'),
+        string=_('Monto de Adelanto Pagado'),
         compute='_get_advance_amounts',
         digits=dp.get_precision('Account'),
         )
     # TODO IMPLEMENTAR
     advance_remaining_amount = fields.Float(
-        string=_('Advance Remaining Amount'),
+        string=_('Monto Remanente de Adelanto'),
         compute='_get_advance_amounts',
         digits=dp.get_precision('Account'),
         )
     # TODO IMPLEMENTAR
     advance_to_return_amount = fields.Float(
-        string=_('To Return Amount'),
+        string=_('Monto a Devolver'),
         compute='_get_advance_to_return_amount',
         digits=dp.get_precision('Account'),
         )

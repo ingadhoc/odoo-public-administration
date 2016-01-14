@@ -22,6 +22,7 @@ class account_voucher(models.Model):
         )
     payment_date = fields.Date(
         compute='get_payment_date',
+        string='Fecha de Pago',
         states={},
         store=True,
         )
@@ -40,8 +41,8 @@ class account_voucher(models.Model):
         )
     paid_withholding_ids = fields.Many2many(
         comodel_name='account.voucher.withholding',
-        string=_('Paid Withholdings'),
-        help=_('Withholding being paid with this voucher'),
+        string='Retenciones Pagadas',
+        help='Retenciones pagadas con este voucher',
         compute='_get_paid_withholding'
         )
 
