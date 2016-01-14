@@ -100,7 +100,7 @@ class expedient(models.Model):
         string='Final Location'
         )
     year = fields.Integer(
-        string=_('Year'),
+        string=_('Año'),
         compute='_get_year'
         )
     in_transit = fields.Boolean(
