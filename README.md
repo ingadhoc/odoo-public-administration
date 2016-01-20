@@ -1,35 +1,21 @@
-[![Build Status](https://travis-ci.org/ingadhoc/odoo-public-administration.svg?branch=8.0)](https://travis-ci.org/ingadhoc/odoo-public-administration)
-[![Coverage Status](https://coveralls.io/repos/ingadhoc/odoo-public-administration/badge.png?branch=8.0)](https://coveralls.io/r/ingadhoc/odoo-public-administration?branch=8.0)
+[![Runbot Status](http://runbot.adhoc.com.ar/runbot/badge/flat/2835/8.0.svg)](http://runbot.adhoc.com.ar/runbot/repo/github-com-ingadhoc-public-budget-35)
+[![Build Status](https://travis-ci.org/ingadhoc/public-budget.svg?branch=8.0)](https://travis-ci.org/ingadhoc/public-budget)
+[![Coverage Status](https://coveralls.io/repos/ingadhoc/public-budget/badge.png?branch=8.0)](https://coveralls.io/r/ingadhoc/public-budget?branch=8.0)
+[![Code Climate](https://codeclimate.com/github/ingadhoc/public-budget/badges/gpa.svg)](https://codeclimate.com/github/ingadhoc/public-budget)
 
-# SIPRECO
+# ADHOC public-budget
 
-## Installation
+ADHOC Odoo public-budget related Addons
 
-### Dependencies
+[//]: # (addons)
+This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+[//]: # (end addons)
 
-    sudo pip install -r requirements.txt
+Translation Status
+------------------
+[![Transifex Status](https://www.transifex.com/projects/p/ingadhoc-public-budget-8-0/chart/image_png)](https://www.transifex.com/projects/p/ingadhoc-public-budget-8-0)
 
-If you don't have Pip, find it here: http://pypi.python.org/pypi/pip
+----
 
-## Contributing
-We follow some guidelines and advice than [Odoo Argentina](https://github.com/ingadhoc/odoo-argentina/wiki). In summary:
-
-1. Fork it!
-2. Create your feature branch: `git checkout -b my-new-feature`
-3. Commit your changes: `git commit -am 'Add some feature'`
-4. Push to the branch: `git push origin my-new-feature`
-5. Submit a pull request :D
-
-## Credits
-<p>
 <img alt="ADHOC" src="http://fotos.subefotos.com/83fed853c1e15a8023b86b2b22d6145bo.png" />
-</p>
 **Adhoc SA** - www.adhoc.com.ar
-
-## License
-
-This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
-
-You should have received a copy of the GNU Affero General Public License along with this program. If not, see http://www.gnu.org/licenses/.
