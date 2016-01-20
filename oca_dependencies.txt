@@ -5,3 +5,4 @@ adhoc-account-payment https://github.com/ingadhoc/account-payment.git
 odoo-argentina https://github.com/ingadhoc/odoo-argentina.git
 adhoc-account-financial-tools https://github.com/ingadhoc/account-financial-tools.git
 adhoc-account-invoicing https://github.com/ingadhoc/account-invoicing.git
+adhoc-miscellaneous https://github.com/ingadhoc/miscellaneous.git
