@@ -7,3 +7,4 @@ adhoc-account-financial-tools https://github.com/ingadhoc/account-financial-tool
 adhoc-account-invoicing https://github.com/ingadhoc/account-invoicing.git
 adhoc-miscellaneous https://github.com/ingadhoc/miscellaneous.git
 adhoc-partner https://github.com/ingadhoc/partner.git
+adhoc-reporting-engine https://github.com/ingadhoc/reporting-engine.git
