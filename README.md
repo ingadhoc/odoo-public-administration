@@ -1,11 +1,11 @@
-[![Runbot Status](http://runbot.adhoc.com.ar/runbot/badge/flat/2835/8.0.svg)](http://runbot.adhoc.com.ar/runbot/repo/github-com-ingadhoc-public-administration-35)
-[![Build Status](https://travis-ci.org/ingadhoc/public-administration.svg?branch=8.0)](https://travis-ci.org/ingadhoc/public-administration)
-[![Coverage Status](https://coveralls.io/repos/ingadhoc/public-administration/badge.png?branch=8.0)](https://coveralls.io/r/ingadhoc/public-administration?branch=8.0)
-[![Code Climate](https://codeclimate.com/github/ingadhoc/public-administration/badges/gpa.svg)](https://codeclimate.com/github/ingadhoc/public-administration)
+[![Runbot Status](http://runbot.adhoc.com.ar/runbot/badge/flat/35/8.0.svg)](http://runbot.adhoc.com.ar/runbot/repo/github-com-ingadhoc-odoo-public-administration-35)
+[![Build Status](https://travis-ci.org/ingadhoc/odoo-public-administration.svg?branch=8.0)](https://travis-ci.org/ingadhoc/odoo-public-administration)
+[![Coverage Status](https://coveralls.io/repos/ingadhoc/odoo-public-administration/badge.png?branch=8.0)](https://coveralls.io/r/ingadhoc/odoo-public-administration?branch=8.0)
+[![Code Climate](https://codeclimate.com/github/ingadhoc/odoo-public-administration/badges/gpa.svg)](https://codeclimate.com/github/ingadhoc/odoo-public-administration)
 
-# ADHOC public-administration
+# ADHOC odoo-public-administration
 
-ADHOC Odoo public-administration related Addons
+ADHOC Odoo odoo-public-administration related Addons
 
 [//]: # (addons)
 This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
@@ -13,7 +13,7 @@ This part will be replaced when running the oca-gen-addons-table script from OCA
 
 Translation Status
 ------------------
-[![Transifex Status](https://www.transifex.com/projects/p/ingadhoc-public-administration-8-0/chart/image_png)](https://www.transifex.com/projects/p/ingadhoc-public-administration-8-0)
+[![Transifex Status](https://www.transifex.com/projects/p/ingadhoc-odoo-public-administration-8-0/chart/image_png)](https://www.transifex.com/projects/p/ingadhoc-odoo-public-administration-8-0)
 
 ----
 
