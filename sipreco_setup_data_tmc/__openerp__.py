@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Sipreco Set Up Data TMC',
-    'version': '8.0.0.1.0',
+    'version': '8.0.0.2.0',
     'category': 'Accounting',
     'sequence': 14,
     'summary': '',
