@@ -135,14 +135,34 @@ class definitive_line(models.Model):
         state
         """
         _logger.info('Getting amounts for definitive line %s' % self.id)
-        debit_invoice_lines = self.invoice_line_ids.filtered(
-            lambda r: (
-                r.invoice_id.state not in ('cancel', 'draft') and
-                r.invoice_id.type in ('out_invoice', 'in_invoice')))
-        credit_invoice_lines = self.invoice_line_ids.filtered(
-            lambda r: (
-                r.invoice_id.state not in ('cancel', 'draft') and
-                r.invoice_id.type in ('out_refund', 'in_refund')))
+
+        if not self.invoice_line_ids:
+            return False
+
+        filter_domain = [
+            ('id', 'in', self.invoice_line_ids.ids),
+            ('invoice_id.state', 'not in ', ('cancel', 'draft'))]
+
+        # Add this to allow analysis between dates
+        # from_date = self._context.get('analysis_from_date', False)
+        to_date = self._context.get('analysis_to_date', False)
+        print '22222222'
+        print '22222222'
+        print '22222222', to_date
+        # if from_date:
+        #     filter_domain += [('invoice_id.date_invoice', '>=', from_date)]
+        if to_date:
+            filter_domain += [('invoice_id.date_invoice', '<=', to_date)]
+
+        debit_filter_domain = filter_domain + [
+            ('invoice_id.type', 'in', ('out_invoice', 'in_invoice'))]
+        credit_filter_domain = filter_domain + [
+            ('invoice_id.type', 'in', ('out_refund', 'in_refund'))]
+        debit_invoice_lines = self.invoice_line_ids.search(
+            debit_filter_domain)
+        credit_invoice_lines = self.invoice_line_ids.search(
+            credit_filter_domain)
+
         invoiced_amount = (
             sum(debit_invoice_lines.mapped('price_subtotal')) -
             sum(credit_invoice_lines.mapped('price_subtotal'))

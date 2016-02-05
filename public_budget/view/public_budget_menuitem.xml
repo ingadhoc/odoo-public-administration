@@ -44,6 +44,14 @@
             parent="menu_budget_main"
             />
 
+        <menuitem
+            name="Budget Analysis"
+            id="menu_budget_analysis"
+            action="action_budget_analysis"
+            sequence="20"
+            parent="menu_budget"
+            />
+
         <record id="action_public_budget_advance_request_advance_requests" model="ir.actions.act_window">
             <field name="name">Advance Requests</field>
             <field name="res_model">public_budget.advance_request</field>

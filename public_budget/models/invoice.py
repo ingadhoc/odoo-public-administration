@@ -66,11 +66,20 @@ class invoice(models.Model):
     # number of times this reconciliation is used in an invoice (so we split
     # the residual amount between all invoice)
     def _compute_to_pay_amount(self):
-        voucher_lines = self.env['account.voucher.line'].search([
+        domain = [
             ('move_line_id.move_id', '=', self.move_id.id),
             ('amount', '!=', 0),
-            ('voucher_id.state', 'not in', ('cancel', 'draft')),
-            ])
+            ('voucher_id.state', 'not in', ('cancel', 'draft'))
+            ]
+        # Add this to allow analysis between dates
+        # from_date = self._context.get('analysis_from_date', False)
+        to_date = self._context.get('analysis_to_date', False)
+        # if from_date:
+        #     domain += [('confirmation_date', '>=', from_date)]
+        if to_date:
+            domain += [('confirmation_date', '<=', to_date)]
+
+        voucher_lines = self.env['account.voucher.line'].search(domain)
         to_pay_amount = sum([x.amount for x in voucher_lines])
         # if invoice is open we ensure that to paid amount is not lower than
         # paid amount
