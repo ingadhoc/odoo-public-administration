@@ -175,10 +175,11 @@ class preventive_line(models.Model):
         if self.advance_line:
             _logger.info('Getting advance line values')
             transaction = self.transaction_id
-            if transaction.advance_preventive_amount:
+            advance_preventive_amount = transaction.advance_preventive_amount
+            if advance_preventive_amount:
                 preventive_perc = (
                     self.preventive_amount /
-                    transaction.advance_preventive_amount)
+                    advance_preventive_amount)
             else:
                 preventive_perc = 0.0
             definitive_amount = to_pay_amount = (
@@ -194,10 +195,6 @@ class preventive_line(models.Model):
             # Add this to allow analysis between dates
             # from_date = self._context.get('analysis_from_date', False)
             to_date = self._context.get('analysis_to_date', False)
-
-            print '1111111111111'
-            print '1111111111111'
-            print '1111111111111', to_date
 
             filter_domain = []
             # if from_date:

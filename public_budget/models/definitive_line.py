@@ -90,6 +90,13 @@ class definitive_line(models.Model):
         readonly=True
         )
 
+    @api.constrains('issue_date')
+    def check_dates(self):
+        if self.issue_date < self.transaction_id.issue_date:
+            raise Warning(_(
+                'La fecha de la línea definitiva debe ser mayor a la fecha de '
+                'la transacción'))
+
     @api.one
     def _get_state(self):
         _logger.info('Getting state for definitive line %s' % self.id)
@@ -137,18 +144,17 @@ class definitive_line(models.Model):
         _logger.info('Getting amounts for definitive line %s' % self.id)
 
         if not self.invoice_line_ids:
+            self.residual_amount = self.amount
             return False
 
         filter_domain = [
             ('id', 'in', self.invoice_line_ids.ids),
-            ('invoice_id.state', 'not in ', ('cancel', 'draft'))]
+            ('invoice_id.state', 'not in', ('cancel', 'draft'))]
 
         # Add this to allow analysis between dates
         # from_date = self._context.get('analysis_from_date', False)
         to_date = self._context.get('analysis_to_date', False)
-        print '22222222'
-        print '22222222'
-        print '22222222', to_date
+
         # if from_date:
         #     filter_domain += [('invoice_id.date_invoice', '>=', from_date)]
         if to_date:

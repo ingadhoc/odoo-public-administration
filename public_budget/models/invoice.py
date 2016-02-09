@@ -2,6 +2,8 @@
 from openerp import models, fields, api, _
 from openerp.exceptions import Warning
 import openerp.addons.decimal_precision as dp
+import logging
+_logger = logging.getLogger(__name__)
 
 
 class account_move_line(models.Model):
@@ -55,6 +57,30 @@ class invoice(models.Model):
             signed_amount = self.amount_total
         self.signed_amount = signed_amount
 
+    @api.multi
+    def _get_paid_amount_to_date(self):
+        self.ensure_one()
+        _logger.info('Get paid amount for to_date')
+        to_date = self._context.get('analysis_to_date', False)
+        if not to_date:
+            return 0.0
+
+        # if invoice is paid and not payments, then it is autopaid and after
+        # validation we consider it as send to paid and paid
+        if self.state == 'paid' and not self.payment_ids:
+            return self.amount_total
+
+        domain = [
+            ('move_line_id.move_id', '=', self.move_id.id),
+            ('amount', '!=', 0),
+            ('voucher_id.state', '=', 'posted')
+            ]
+        if to_date:
+            domain += [('voucher_id.date', '<=', to_date)]
+
+        voucher_lines = self.env['account.voucher.line'].search(domain)
+        return sum([x.amount for x in voucher_lines])
+
     @api.one
     @api.depends(
         'state', 'currency_id',
@@ -66,6 +92,12 @@ class invoice(models.Model):
     # number of times this reconciliation is used in an invoice (so we split
     # the residual amount between all invoice)
     def _compute_to_pay_amount(self):
+        # if invoice is paid and not payments, then it is autopaid and after
+        # validation we consider it as send to paid and paid
+        if self.state == 'paid' and not self.payment_ids:
+            self.to_pay_amount = self.amount_total
+            return True
+
         domain = [
             ('move_line_id.move_id', '=', self.move_id.id),
             ('amount', '!=', 0),
@@ -77,17 +109,29 @@ class invoice(models.Model):
         # if from_date:
         #     domain += [('confirmation_date', '>=', from_date)]
         if to_date:
-            domain += [('confirmation_date', '<=', to_date)]
+            domain += [('voucher_id.confirmation_date', '<=', to_date)]
 
         voucher_lines = self.env['account.voucher.line'].search(domain)
         to_pay_amount = sum([x.amount for x in voucher_lines])
         # if invoice is open we ensure that to paid amount is not lower than
         # paid amount
-        if self.state in ['open', 'paid']:
-            paid_amount = self.amount_total - self.residual
-            if paid_amount > to_pay_amount:
-                to_pay_amount = paid_amount
+        # we remove this that should works ok without this
+        # if self.state in ['open', 'paid']:
+        #     paid_amount = self.amount_total - self.residual
+        #     if paid_amount > to_pay_amount:
+        #         to_pay_amount = paid_amount
         self.to_pay_amount = to_pay_amount
+
+    @api.one
+    @api.constrains('date_invoice', 'invoice_line')
+    def check_dates(self):
+        if not self.date_invoice:
+            return True
+        for definitive_line in self.mapped('invoice_line.definitive_line_id'):
+            if self.date_invoice < definitive_line.issue_date:
+                raise Warning(_(
+                    'La fecha de la factura no puede ser menor a la fecha '
+                    'de la linea definitiva relacionada'))
 
     @api.one
     @api.constrains('to_pay_amount', 'amount_total')

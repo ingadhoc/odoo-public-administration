@@ -23,7 +23,7 @@
             <field name="model">public_budget.budget</field>
             <field name="arch" type="xml">
                 <form string="Budget">
-                    <header>
+                    <header invisible="context.get('analysis_to_date')">
                         <button name="sgn_open"
                             states="draft"
                             string="Open"
@@ -68,7 +68,7 @@
                         </group>
                         <notebook>
                             <page string="Analysis">
-                                <field name="budget_position_ids" context="{'budget_id':active_id, 'tree_view_ref': 'public_budget.view_budget_position_budget_tree'}"/>
+                                <field name="budget_position_ids" context="{'budget_id':active_id, 'analysis_to_date': analysis_to_date, 'tree_view_ref': 'public_budget.view_budget_position_budget_tree'}"/>
                             </page>
                             <page string="Detail">
                                 <field name="budget_detail_ids"/>

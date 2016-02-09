@@ -131,6 +131,27 @@ class account_voucher(models.Model):
         return res
 
     @api.one
+    @api.constrains('confirmation_date', 'date')
+    def check_date(self):
+        if not self.confirmation_date or not self.date:
+            return True
+        if self.date < self.confirmation_date:
+            raise Warning(_(
+                'La fecha de validacion del pago no puede ser menor a la fecha'
+                ' de confirmación'))
+
+    @api.one
+    @api.constrains('confirmation_date', 'date')
+    def check_confirmation_date(self):
+        if not self.confirmation_date:
+            return True
+        for invoice in self.invoice_ids:
+            if self.confirmation_date < invoice.date_invoice:
+                raise Warning(_(
+                    'La fecha de confirmación no puede ser menor a la fecha '
+                    'de la factura que se esta pagando'))
+
+    @api.one
     @api.constrains('advance_amount', 'transaction_id', 'state')
     def check_voucher_transaction_amount(self):
         """
