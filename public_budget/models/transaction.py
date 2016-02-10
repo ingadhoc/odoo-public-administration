@@ -266,15 +266,25 @@ class transaction(models.Model):
     def _get_advance_amounts(self):
         advance_preventive_amount = sum(self.mapped(
             'advance_preventive_line_ids.preventive_amount'))
+        self.advance_preventive_amount = advance_preventive_amount
+        if not self.advance_voucher_ids:
+            return False
+
+        domain = [('id', 'in', self.advance_voucher_ids.ids)]
+        to_pay_domain = domain + [('state', 'not in', ('cancel', 'draft'))]
+        paid_domain = domain + [('state', '=', 'posted')]
+
+        to_date = self._context.get('analysis_to_date', False)
+        if to_date:
+            to_pay_domain += [('confirmation_date', '<=', to_date)]
+            paid_domain += [('date', '<=', to_date)]
+
         advance_to_pay_amount = sum(
-            self.advance_voucher_ids.filtered(
-                lambda r: r.state not in ('cancel', 'draft')).mapped(
+            self.advance_voucher_ids.search(to_pay_domain).mapped(
                 'to_pay_amount'))
         advance_paid_amount = sum(
-            self.advance_voucher_ids.filtered(
-                lambda r: r.state == 'posted').mapped(
+            self.advance_voucher_ids.search(paid_domain).mapped(
                 'amount'))
-        self.advance_preventive_amount = advance_preventive_amount
         self.advance_to_pay_amount = advance_to_pay_amount
         self.advance_paid_amount = advance_paid_amount
         self.advance_remaining_amount = (

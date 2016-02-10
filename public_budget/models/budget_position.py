@@ -165,6 +165,9 @@ class budget_position(models.Model):
             ]
 
         budget_id = self._context.get('budget_id', False)
+        # from_date = self._context.get('analysis_from_date', False)
+        to_date = self._context.get('analysis_to_date', False)
+
         # we check it is a report because if not it will get wrong budget
         # on positions
         if not budget_id and 'aeroo_docs' in self._context:
@@ -172,14 +175,30 @@ class budget_position(models.Model):
 
         if budget_id:
             domain.append(('budget_id', '=', budget_id))
+        # if from_date:
+        #     _logger.info('Getting budget amounts with from_date %s' % (
+        #         from_date))
+        #     domain += [('transaction_id.issue_date', '>=', from_date)]
+        if to_date:
+            _logger.info('Getting budget amounts with to_date %s' % (
+                to_date))
+            domain += [('transaction_id.issue_date', '<=', to_date)]
 
         # we add budget_assignment_allowed condition to optimize
         _logger.info('Getting budget amounts')
         if budget_id and self.budget_assignment_allowed:
-            modification_lines = self.env[
-                'public_budget.budget_modification_detail'].search([
+            modification_domain = [
                     ('budget_modification_id.budget_id', '=', budget_id),
-                    ('budget_position_id', operator, self.id)])
+                    ('budget_position_id', operator, self.id)]
+            # if from_date:
+            #     modification_domain += [
+            #         ('budget_modification_id.date', '>=', from_date)]
+            if to_date:
+                modification_domain += [
+                    ('budget_modification_id.date', '<=', to_date)]
+            modification_lines = self.env[
+                'public_budget.budget_modification_detail'].search(
+                    modification_domain)
             modification_amounts = [line.amount for line in modification_lines]
             initial_lines = self.env['public_budget.budget_detail'].search([
                 ('budget_id', '=', budget_id),
@@ -204,6 +223,7 @@ class budget_position(models.Model):
             'public_budget.preventive_line'].search(
             domain
             )
+
         if draft_preventive_lines:
             self._cr.execute(
                 'SELECT preventive_amount '
@@ -220,23 +240,43 @@ class budget_position(models.Model):
 
         preventive_amount = definitive_amount = to_pay_amount = paid_amount = 0
         if active_preventive_lines:
-            self._cr.execute(
-                'SELECT preventive_amount, definitive_amount, to_pay_amount, '
-                'paid_amount '
-                'FROM public_budget_preventive_line '
-                'WHERE id IN %s', (tuple(active_preventive_lines.ids),))
-            for r in self._cr.fetchall():
-                preventive_amount += r[0]
-                definitive_amount += r[1]
-                to_pay_amount += r[2]
-                paid_amount += r[3]
+            # if from_date or to_date we can not use stored value, we should
+            # get method value (using computed fields)
+            # if from_date or to_date:
+            if to_date:
+                _logger.info('Getting values from computed fields methods')
+                preventive_amount = sum(
+                    active_preventive_lines.mapped('preventive_amount'))
+                definitive_amount = sum(
+                    active_preventive_lines.mapped('definitive_amount'))
+                to_pay_amount = sum(
+                    active_preventive_lines.mapped('to_pay_amount'))
+                paid_amount = sum(
+                    active_preventive_lines.mapped('paid_amount'))
+            else:
+                _logger.info('Getting values from stored fields')
+                self._cr.execute(
+                    'SELECT preventive_amount, definitive_amount, '
+                    'to_pay_amount, paid_amount '
+                    'FROM public_budget_preventive_line '
+                    'WHERE id IN %s', (tuple(active_preventive_lines.ids),))
+                for r in self._cr.fetchall():
+                    preventive_amount += r[0]
+                    definitive_amount += r[1]
+                    to_pay_amount += r[2]
+                    paid_amount += r[3]
 
         self.preventive_amount = preventive_amount
         self.definitive_amount = definitive_amount
         self.to_pay_amount = to_pay_amount
         self.paid_amount = paid_amount
 
-        day_of_year = datetime.now().timetuple().tm_yday
+        # if to_date use it, if not, then use now
+        if to_date:
+            day_of_year = fields.Datetime.from_string(
+                to_date).timetuple().tm_yday
+        else:
+            day_of_year = datetime.now().timetuple().tm_yday
         projected_amount = preventive_amount / day_of_year * 365
         self.projected_amount = projected_amount
 

@@ -175,10 +175,11 @@ class preventive_line(models.Model):
         if self.advance_line:
             _logger.info('Getting advance line values')
             transaction = self.transaction_id
-            if transaction.advance_preventive_amount:
+            advance_preventive_amount = transaction.advance_preventive_amount
+            if advance_preventive_amount:
                 preventive_perc = (
                     self.preventive_amount /
-                    transaction.advance_preventive_amount)
+                    advance_preventive_amount)
             else:
                 preventive_perc = 0.0
             definitive_amount = to_pay_amount = (
@@ -187,14 +188,27 @@ class preventive_line(models.Model):
             invoiced_amount = 0.0
         else:
             _logger.info('Getting none advance line values')
-            definitive_amount = sum(self.mapped(
-                'definitive_line_ids.amount'))
-            invoiced_amount = sum(self.mapped(
-                'definitive_line_ids.invoiced_amount'))
-            to_pay_amount = sum(self.mapped(
-                'definitive_line_ids.to_pay_amount'))
-            paid_amount = sum(self.mapped(
-                'definitive_line_ids.paid_amount'))
+            definitive_lines = self.definitive_line_ids
+            if not definitive_lines:
+                return False
+
+            # Add this to allow analysis between dates
+            # from_date = self._context.get('analysis_from_date', False)
+            to_date = self._context.get('analysis_to_date', False)
+
+            filter_domain = []
+            # if from_date:
+            #     filter_domain += [('issue_date', '>=', from_date)]
+            if to_date:
+                filter_domain += [('issue_date', '<=', to_date)]
+            if filter_domain:
+                filter_domain += [('id', 'in', definitive_lines.ids)]
+                definitive_lines = definitive_lines.search(filter_domain)
+
+            definitive_amount = sum(definitive_lines.mapped('amount'))
+            invoiced_amount = sum(definitive_lines.mapped('invoiced_amount'))
+            to_pay_amount = sum(definitive_lines.mapped('to_pay_amount'))
+            paid_amount = sum(definitive_lines.mapped('paid_amount'))
         self.remaining_amount = self.preventive_amount - definitive_amount
         self.definitive_amount = definitive_amount
         self.invoiced_amount = invoiced_amount
