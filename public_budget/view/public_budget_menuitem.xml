@@ -52,7 +52,7 @@
             />
 
         <menuitem
-            name="Budget Analysis"
+            name="Presupuesto a Fecha"
             id="menu_budget_analysis"
             action="action_budget_analysis"
             sequence="20"
