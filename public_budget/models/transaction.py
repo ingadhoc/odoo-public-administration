@@ -30,7 +30,8 @@ class transaction(models.Model):
         string='Issue Date',
         readonly=True,
         required=True,
-        default=fields.Date.context_today
+        default=fields.Date.context_today,
+        states={'draft': [('readonly', False)]},
         )
     name = fields.Char(
         string='Name',

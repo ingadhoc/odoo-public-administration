@@ -53,6 +53,7 @@
                                     <field name="employee_id"/>
                                     <field name="description"/>
                                     <field name="debt_amount" states="draft" sum="Total"/>
+                                    <field name="pending_return_amount" states="draft" sum="Total"/>
                                     <field name="requested_amount" sum="Total"/>
                                     <field name="approved_amount" sum="Total"/>
                                     <field name="state" invisible="1"/>

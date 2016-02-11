@@ -30,6 +30,13 @@ class advance_request_line(models.Model):
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         )
+    pending_return_amount = fields.Float(
+        string='Devolucion Pendiente',
+        help='Monto de Devolucion Pendiente de Confirmación en devolución '
+        'de adelanto',
+        compute='_get_amounts',
+        digits=dp.get_precision('Account'),
+        )
     approved_amount = fields.Float(
         string='Approved Amount',
         digits=dp.get_precision('Account'),
@@ -58,6 +65,13 @@ class advance_request_line(models.Model):
         if self.employee_id:
             self.debt_amount = self.employee_id.get_debt_amount(
                 self.advance_request_id.type_id)
+            pending_return_domain = [
+                ('employee_id', '=', self.employee_id.id),
+                ('advance_return_id.state', 'in', ['draft']),
+                ]
+            self.pending_return_amount = sum(
+                self.env['public_budget.advance_return_line'].search(
+                    pending_return_domain).mapped('returned_amount'))
 
     @api.onchange('requested_amount')
     def change_(self):

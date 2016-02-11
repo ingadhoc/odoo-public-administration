@@ -31,6 +31,13 @@
             />
 
         <menuitem
+            name="Reportes"
+            id="menu_reports"
+            sequence="35"
+            parent="menu_budget_main"
+            />
+
+        <menuitem
             name="Expedients"
             id="menu_expedient_main"
             sequence="20"
@@ -45,11 +52,11 @@
             />
 
         <menuitem
-            name="Budget Analysis"
+            name="Presupuesto a Fecha"
             id="menu_budget_analysis"
             action="action_budget_analysis"
             sequence="20"
-            parent="menu_budget"
+            parent="menu_reports"
             />
 
         <record id="action_public_budget_advance_request_advance_requests" model="ir.actions.act_window">

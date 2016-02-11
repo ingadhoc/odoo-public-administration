@@ -8,14 +8,14 @@ class public_budget_budget_analysis_wizard(models.TransientModel):
 
     budget_id = fields.Many2one(
         'public_budget.budget',
-        'Budget',
+        'Presupuesto',
         required=True,
         )
     # from_date = fields.Date(
     #     'From Date',
     # )
     to_date = fields.Date(
-        'To Date',
+        'Hasta Fecha',
     )
 
     @api.multi
