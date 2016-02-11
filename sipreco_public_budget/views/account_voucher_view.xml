@@ -141,6 +141,7 @@
             <field name="arch" type="xml">
                 <field name="number" position="before">
                     <field name="force_number" string="Nro Orden de Pago"/>
+                    <field name="budget_position_ids"/>
                 </field>
             </field>
         </record>
