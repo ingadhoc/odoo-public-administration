@@ -61,6 +61,6 @@ Modulo generico para gestion publica presupuestaria/contable
     'license': 'AGPL-3',
     'name': 'Public Budget',
     'test': [],
-    'version': '8.0.0.7.2',
+    'version': '8.0.0.8.2',
     'website': ''}
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
