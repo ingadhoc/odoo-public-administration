@@ -180,14 +180,14 @@ class account_voucher(models.Model):
 
     state = fields.Selection(
         selection=[
-            ('draft', _('Draft')),
-            ('confirmed', _('Confirmed')),
-            ('signature_process', _('Signature Process')),
-            ('signed', _('Signed')),
-            ('cancel', _('Cancelled')),
+            ('draft', _('Boorador')),
+            ('confirmed', _('Confirmado')),
+            ('signature_process', _('En Proceso de Firma')),
+            ('signed', _('Firmado')),
+            ('cancel', _('Cancelado')),
             ('proforma', _('Pro-forma')),
             # we also change posted for paid
-            ('posted', _('Paid'))
+            ('posted', _('Pagado'))
         ])
 
     @api.multi
@@ -195,6 +195,8 @@ class account_voucher(models.Model):
         """
         """
         for voucher in self:
+            print 'voucher.amount', voucher.amount
+            print 'voucher.to_pay_amount', voucher.to_pay_amount
             if voucher.amount != voucher.to_pay_amount:
                 raise Warning(_('You can not send to sign process a Voucher \
                     that has Total Amount different from To Pay Amount'))
