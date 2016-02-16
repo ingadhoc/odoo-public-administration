@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <record id="view_advance_request_analysis_graph" model="ir.ui.view">
+         <field name="name">advance.request.analysis.graph</field>
+         <field name="model">advance.request.analysis</field>
+         <field name="arch" type="xml">
+             <graph string="Advance Request Analysis" type="pivot">
+                 <!-- <field name="type_id"/> -->
+                 <field name="type_id" type="row"/>
+                 <field name="employee_id" type="row"/>
+                 <field name="direction" type="row"/>
+                 <!-- <field name="date" type="col"/> -->
+                 <field name="amount" type="measure"/>
+             </graph>
+         </field>
+    </record>
+
+    <!-- Custom reports (aka filters) -->
+<!--     <record id="filter_request_analysis_type" model="ir.filters">
+        <field name="name">By Type</field>
+        <field name="model_id">advance.request.analysis</field>
+        <field name="domain">[]</field>
+        <field name="user_id" eval="False"/>
+        <field name="context">{'group_by': ['date:month', 'type_id']}</field>
+    </record> -->
+
+    <record id="view_advance_request_analysis_search" model="ir.ui.view">
+        <field name="name">advance.request.analysis.search</field>
+        <field name="model">advance.request.analysis</field>
+        <field name="arch" type="xml">
+            <search string="Advance Request Analysis">
+                <field name="date"/>
+                <field name="approval_date"/>
+                <field name="confirmation_date"/>
+                <field name="employee_id"/>
+                <field name="direction"/>
+                <field name="type_id"/>
+                <field name="state"/>
+                <filter string="Activas" name="active_lines" domain="[('state','not in',['draft', 'cancel'])]"/>
+<!--                 <filter string="This Year" name="thisyear" domain="['|', ('date', '=', False), '&amp;',('date','&lt;=', time.strftime('%%Y-12-31')),('date','&gt;=',time.strftime('%%Y-01-01'))]" help="Journal Advance Request with period in current year"/>
+                <separator/>
+                <filter string="To Invoice" domain="[('state','=','draft')]" help = "Draft Invoices"/>
+                <filter string="Invoiced" name="current" domain="[('state','not in', ('draft','cancel','proforma','proforma2'))]"/>
+                <separator/>
+                <filter string="Customer" name="customer" domain="['|', ('type','=','out_invoice'),('type','=','out_refund')]"/>
+                <filter string="Vendor" name="supplier" domain="['|', ('type','=','in_invoice'),('type','=','in_refund')]"/>
+                <separator/>
+                <filter string="Invoice" domain="['|', ('type','=','out_invoice'),('type','=','in_invoice')]"/>
+                <filter string="Refund" domain="['|', ('type','=','out_refund'),('type','=','in_refund')]"/>
+                <field name="partner_id" operator="child_of"/>
+                <field name="user_id" />
+                <field name="categ_id" filter_domain="[('categ_id', 'child_of', self)]"/> -->
+                <group expand="1" string="Group By">
+                    <filter string="Fecha" name="date" context="{'group_by':'date'}"/>
+                    <filter string="Fecha de Aprobación" name="approval_date" context="{'group_by':'approval_date'}"/>
+                    <filter string="Fecha de Confirmación" name="confirmation_date" context="{'group_by':'confirmation_date'}"/>
+                    <filter string="Empleado" name="employee" context="{'group_by':'employee_id'}"/>
+                    <filter string="Solicitud / Devolución" name='direction' context="{'group_by':'direction'}"/>
+                    <filter string="Tipo" domain="[]" name="type" context="{'group_by':'type_id'}"/>
+                    <filter string="Estado" name="state" context="{'group_by':'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_advance_request_analysis_all" model="ir.actions.act_window">
+        <field name="name">Analisis de Requerimientos de Adelanto</field>
+        <field name="res_model">advance.request.analysis</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">graph</field>
+        <field name="context">{'search_default_active_lines':1}</field>
+        <field name="search_view_id" ref="view_advance_request_analysis_search"/>
+    </record>
+
+</data>
+</openerp>

@@ -8,7 +8,7 @@ class public_budget_avance_request_report_wizard(models.TransientModel):
 
     type_id = fields.Many2one(
         'public_budget.advance_request_type',
-        string='Type',
+        string='Tipo',
         required=True,
         )
     to_date = fields.Date(

@@ -8,6 +8,7 @@
                 'wizard/transaction_definitive_mass_invoice_create_view.xml',
                 'wizard/budget_analysis_wizard_view.xml',
                 'wizard/avance_request_report_wizard_view.xml',
+                'reports/advance_request_analysis_view.xml',
                 'view/inventory_rule_view.xml',
                 'view/voucher_view.xml',
                 'view/invoice_view.xml',

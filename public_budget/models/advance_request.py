@@ -8,6 +8,7 @@ class advance_request(models.Model):
 
     _name = 'public_budget.advance_request'
     _description = 'advance_request'
+    _order = 'date desc'
 
     _states_ = [
         # State machine: untitle
@@ -38,17 +39,20 @@ class advance_request(models.Model):
         required=True,
         readonly=True,
         states={'draft': [('readonly', False)]},
-        default=fields.Date.context_today
+        default=fields.Date.context_today,
+        copy=False,
         )
     approval_date = fields.Date(
         string='Fecha de Aprobación',
         readonly=True,
         states={'draft': [('readonly', False)]},
+        copy=False,
         )
     confirmation_date = fields.Date(
         string='Fecha de Confirmación',
         readonly=True,
         states={'draft': [('readonly', False)]},
+        copy=False,
         )
     user_id = fields.Many2one(
         'res.users',

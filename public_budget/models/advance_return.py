@@ -8,6 +8,7 @@ class advance_return(models.Model):
 
     _name = 'public_budget.advance_return'
     _description = 'advance_return'
+    _order = 'date desc'
 
     _states_ = [
         # State machine: untitle
@@ -36,12 +37,14 @@ class advance_return(models.Model):
         required=True,
         readonly=True,
         states={'draft': [('readonly', False)]},
-        default=fields.Date.context_today
+        default=fields.Date.context_today,
+        copy=False,
         )
     confirmation_date = fields.Date(
         string='Fecha de Confirmación',
         readonly=True,
         states={'draft': [('readonly', False)]},
+        copy=False,
         )
     user_id = fields.Many2one(
         'res.users',
