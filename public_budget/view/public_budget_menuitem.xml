@@ -59,6 +59,14 @@
             parent="menu_reports"
             />
 
+        <menuitem
+            name="Informe de deudas Adelantos"
+            id="menu_advance_request_debt_wizard"
+            action="action_advance_request_debt_report_wizard"
+            sequence="20"
+            parent="menu_reports"
+            />
+
         <record id="action_public_budget_advance_request_advance_requests" model="ir.actions.act_window">
             <field name="name">Advance Requests</field>
             <field name="res_model">public_budget.advance_request</field>

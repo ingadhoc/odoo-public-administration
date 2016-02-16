@@ -40,6 +40,16 @@ class advance_request(models.Model):
         states={'draft': [('readonly', False)]},
         default=fields.Date.context_today
         )
+    approval_date = fields.Date(
+        string='Fecha de Aprobación',
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+        )
+    confirmation_date = fields.Date(
+        string='Fecha de Confirmación',
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+        )
     user_id = fields.Many2one(
         'res.users',
         string='User',
@@ -92,15 +102,20 @@ class advance_request(models.Model):
 
     @api.multi
     def action_approve(self):
-        self.write({'state': 'approved'})
+        for record in self:
+            record.state = 'approved'
+            if not record.approval_date:
+                record.approval_date = fields.Datetime.now()
         return True
 
     @api.multi
     def action_confirm(self):
-        for request in self:
+        for record in self:
             # request.advance_request_line_ids.create_voucher()
-            self.create_voucher()
-        self.write({'state': 'confirmed'})
+            record.create_voucher()
+            record.state = 'confirmed'
+            if not record.confirmation_date:
+                record.confirmation_date = fields.Datetime.now()
         return True
 
     @api.one

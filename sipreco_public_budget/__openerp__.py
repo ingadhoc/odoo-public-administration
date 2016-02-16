@@ -17,6 +17,7 @@
         'reports/advance_request_report.xml',
         'reports/advance_return_report.xml',
         'reports/liquidation_report.xml',
+        'reports/advance_request_debt_report.xml',
         'views/res_partner_view.xml',
         'views/custom_views.xml',
         'views/account_asset_view.xml',
