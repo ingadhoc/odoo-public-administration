@@ -8,6 +8,7 @@ class advance_request(models.Model):
 
     _name = 'public_budget.advance_request'
     _description = 'advance_request'
+    _order = 'date desc'
 
     _states_ = [
         # State machine: untitle
@@ -38,7 +39,20 @@ class advance_request(models.Model):
         required=True,
         readonly=True,
         states={'draft': [('readonly', False)]},
-        default=fields.Date.context_today
+        default=fields.Date.context_today,
+        copy=False,
+        )
+    approval_date = fields.Date(
+        string='Fecha de Aprobación',
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+        copy=False,
+        )
+    confirmation_date = fields.Date(
+        string='Fecha de Confirmación',
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+        copy=False,
         )
     user_id = fields.Many2one(
         'res.users',
@@ -92,15 +106,20 @@ class advance_request(models.Model):
 
     @api.multi
     def action_approve(self):
-        self.write({'state': 'approved'})
+        for record in self:
+            record.state = 'approved'
+            if not record.approval_date:
+                record.approval_date = fields.Datetime.now()
         return True
 
     @api.multi
     def action_confirm(self):
-        for request in self:
+        for record in self:
             # request.advance_request_line_ids.create_voucher()
-            self.create_voucher()
-        self.write({'state': 'confirmed'})
+            record.create_voucher()
+            record.state = 'confirmed'
+            if not record.confirmation_date:
+                record.confirmation_date = fields.Datetime.now()
         return True
 
     @api.one

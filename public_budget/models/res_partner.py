@@ -23,7 +23,7 @@ class res_partner(models.Model):
             advance_return_type)
 
     @api.multi
-    def get_debt_amount(self, advance_return_type=False):
+    def get_debt_amount(self, advance_return_type=False, to_date=False):
         self.ensure_one()
         requested_domain = [
             ('employee_id', '=', self.id),
@@ -39,6 +39,12 @@ class res_partner(models.Model):
                 ('advance_request_id.type_id', '=', advance_return_type.id))
             returned_domain.append(
                 ('advance_return_id.type_id', '=', advance_return_type.id))
+
+        if to_date:
+            requested_domain.append(
+                ('advance_request_id.approval_date', '<=', to_date))
+            returned_domain.append(
+                ('advance_return_id.confirmation_date', '<=', to_date))
 
         requested_amount = sum(
             self.env['public_budget.advance_request_line'].search(

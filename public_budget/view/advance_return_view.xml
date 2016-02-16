@@ -14,8 +14,8 @@
                     <field name="state"/>
                     <field name="company_id" groups="base.group_multi_company"/>
                     <group expand="0" string="Group By">
-                        <field name="type_id" string="Type" context="{'group_by':'type_id'}"/>
-                        <field name="state" string="State" context="{'group_by':'state'}"/>
+                        <filter name="group_by_type_id" string="Type" context="{'group_by':'type_id'}"/>
+                        <filter name="group_by_state" string="State" context="{'group_by':'state'}"/>
                     </group>
                 </search>
             </field>
@@ -42,7 +42,7 @@
                             states="confirmed,draft"
                             string="Cancel"
                             type="object"
-                            groups="base.group_no_one"/>
+                            groups="account.group_account_user"/>
                         <field name="state" widget="statusbar"
                             statusbar_colors='{}'/>
                     </header>
@@ -50,12 +50,17 @@
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
                     <group>
-                        <field name="name"/> 
-                        <field name="type_id"/> 
-                        <field name="date"/> 
-                        <field name="user_id"/> 
-                        <field name="move_id"/> 
-                        <field name="company_id" groups="base.group_multi_company"/>
+                        <group>
+                            <field name="name"/> 
+                            <field name="type_id"/> 
+                            <field name="date"/> 
+                        </group>
+                        <group>
+                            <field name="user_id"/> 
+                            <field name="confirmation_date" attrs="{'invisible': [('confirmation_date', '=', False)]}"/>
+                            <field name="move_id"/> 
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
                     </group>
                     <button name="compute_debtors" type="object" string="Fill with Debtors" states="draft"/>
                     <field name="return_line_ids">

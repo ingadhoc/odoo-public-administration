@@ -8,6 +8,7 @@ class advance_return(models.Model):
 
     _name = 'public_budget.advance_return'
     _description = 'advance_return'
+    _order = 'date desc'
 
     _states_ = [
         # State machine: untitle
@@ -36,7 +37,14 @@ class advance_return(models.Model):
         required=True,
         readonly=True,
         states={'draft': [('readonly', False)]},
-        default=fields.Date.context_today
+        default=fields.Date.context_today,
+        copy=False,
+        )
+    confirmation_date = fields.Date(
+        string='Fecha de Confirmación',
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+        copy=False,
         )
     user_id = fields.Many2one(
         'res.users',
@@ -125,8 +133,12 @@ class advance_return(models.Model):
         for record in self:
             move_vals = record.get_move_vals()
             move = self.move_id.create(move_vals)
-            self.move_id = move.id
-        self.write({'state': 'confirmed'})
+            record.write({
+                'move_id': move.id,
+                'state': 'confirmed',
+                })
+            if not record.confirmation_date:
+                record.confirmation_date = fields.Datetime.now()
         return True
 
     @api.multi
@@ -177,8 +189,9 @@ class advance_return(models.Model):
     def change_type(self):
         self.return_line_ids = False
 
-    @api.one
+    @api.multi
     def compute_debtors(self):
+        self.ensure_one()
         actual_employees = self.return_line_ids.mapped('employee_id')
         employees = self.env['res.partner'].search([
             ('employee', '=', True),

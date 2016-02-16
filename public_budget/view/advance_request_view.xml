@@ -14,8 +14,8 @@
                     <field name="state"/>
                     <field name="company_id" groups="base.group_multi_company"/>
                     <group expand="0" string="Group By">
-                        <field name="type_id" string="Type" context="{'group_by':'type_id'}"/>
-                        <field name="state" string="State" context="{'group_by':'state'}"/>
+                        <filter name="group_by_type_id" string="Type" context="{'group_by':'type_id'}"/>
+                        <filter name="group_by_state" string="State" context="{'group_by':'state'}"/>
                     </group>
                 </search>
             </field>
@@ -31,19 +31,25 @@
                         <button name="action_approve" states="draft" string="Approve" type="object" class="oe_highlight" groups="public_budget.group_secretary_director"/>
                         <button name="action_confirm" states="approved" string="Confirm" type="object" class="oe_highlight" groups="account.group_account_user"/>
                         <button name="action_cancel_draft" type="object" states="cancel" string="To Draft"/>
-                        <button name="action_cancel" states="approved,confirmed,draft" string="Cancel" type="object" groups="base.group_no_one"/>
-                        <button name="action_cancel_users" states="approved,draft" string="Cancel" type="object" groups="public_budget.group_secretary_director,account.group_account_user"/>
+                        <button name="action_cancel" states="confirmed" string="Cancel" type="object" groups="account.group_account_user"/>
+                        <button name="action_cancel" states="approved,draft" string="Cancel" type="object" groups="public_budget.group_secretary_director,account.group_account_user"/>
                         <field name="state" widget="statusbar" statusbar_colors='{}'/>
                     </header>
                     <sheet string="advance_request">
                        <div class="oe_right oe_button_box" name="buttons">
                        </div>
                      <group>
-                        <field name="name"/> 
-                        <field name="type_id"/> 
-                        <field name="date"/> 
-                        <field name="user_id"/> 
-                        <field name="company_id" groups="base.group_multi_company"/>
+                        <group>
+                            <field name="name"/> 
+                            <field name="type_id"/> 
+                            <field name="date"/> 
+                        </group>
+                        <group>
+                            <field name="user_id"/> 
+                            <field name="approval_date" attrs="{'invisible': [('approval_date', '=', False)]}"/> 
+                            <field name="confirmation_date" attrs="{'invisible': [('confirmation_date', '=', False)]}"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
                      </group>
                      <notebook>
                         <page string="Lines">

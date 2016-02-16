@@ -59,9 +59,23 @@
             parent="menu_reports"
             />
 
+        <menuitem
+            action="action_advance_request_analysis_all"
+            id="menu_action_advance_request_analysis_all"
+            parent="menu_reports"
+            sequence="20"/>
+
+        <menuitem
+            id="menu_advance_request_debt_wizard"
+            action="action_advance_request_debt_report_wizard"
+            sequence="20"
+            parent="menu_reports"
+            />
+
         <record id="action_public_budget_advance_request_advance_requests" model="ir.actions.act_window">
             <field name="name">Advance Requests</field>
             <field name="res_model">public_budget.advance_request</field>
+            <field name="context">{'search_default_group_by_type_id': 1, }</field>
         </record>
 
         <menuitem
@@ -75,6 +89,7 @@
         <record id="action_public_budget_advance_returns" model="ir.actions.act_window">
             <field name="name">Advance Returns</field>
             <field name="res_model">public_budget.advance_return</field>
+            <field name="context">{'search_default_group_by_type_id': 1, }</field>
         </record>
 
         <menuitem

@@ -7,6 +7,8 @@
                 'wizard/transaction_definitive_make_invoice_view.xml',
                 'wizard/transaction_definitive_mass_invoice_create_view.xml',
                 'wizard/budget_analysis_wizard_view.xml',
+                'wizard/avance_request_report_wizard_view.xml',
+                'reports/advance_request_analysis_view.xml',
                 'view/inventory_rule_view.xml',
                 'view/voucher_view.xml',
                 'view/invoice_view.xml',
@@ -61,6 +63,6 @@ Modulo generico para gestion publica presupuestaria/contable
     'license': 'AGPL-3',
     'name': 'Public Budget',
     'test': [],
-    'version': '8.0.0.7.1',
+    'version': '8.0.0.8.0',
     'website': ''}
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
