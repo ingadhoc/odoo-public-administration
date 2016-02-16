@@ -18,6 +18,8 @@ class advance_request(models.Model):
         ('cancel', 'Cancel'),
     ]
 
+    _order = "date desc"
+
     name = fields.Char(
         string='Name',
         required=True,

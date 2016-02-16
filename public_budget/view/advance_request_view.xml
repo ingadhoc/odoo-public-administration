@@ -14,8 +14,8 @@
                     <field name="state"/>
                     <field name="company_id" groups="base.group_multi_company"/>
                     <group expand="0" string="Group By">
-                        <field name="type_id" string="Type" context="{'group_by':'type_id'}"/>
-                        <field name="state" string="State" context="{'group_by':'state'}"/>
+                        <filter name="type_id" string="Type" context="{'group_by':'type_id'}"/>
+                        <filter name="state" string="State" context="{'group_by':'state'}"/>
                     </group>
                 </search>
             </field>

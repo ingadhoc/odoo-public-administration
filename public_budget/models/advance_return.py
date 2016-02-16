@@ -16,6 +16,8 @@ class advance_return(models.Model):
         ('cancel', 'Cancel'),
     ]
 
+    _order = "date desc"
+
     name = fields.Char(
         string='Name',
         required=True,
