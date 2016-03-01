@@ -11,15 +11,18 @@ class partner(models.Model):
         'Subsidy Recipient',
         )
     # Make some fields require
-    responsability_id = fields.Many2one(
-        required=True,
-        )
-    document_type_id = fields.Many2one(
-        required=True,
-        )
-    document_number = fields.Char(
-        required=True,
-        )
+    # we make it required in the view so we dont have error in tests
+    # and also because it is more correct, this fields should be required
+    # only for a certain group of partners (perhups employees, suppliers, etc)
+    # responsability_id = fields.Many2one(
+    #     required=True,
+    #     )
+    # document_type_id = fields.Many2one(
+    #     required=True,
+    #     )
+    # document_number = fields.Char(
+    #     required=True,
+    #     )
 
     @api.one
     @api.constrains('subsidy_recipient', 'document_number')
