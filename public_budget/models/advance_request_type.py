@@ -53,7 +53,7 @@ class advance_request_type(models.Model):
         self.employee_ids = employees
 
     @api.one
-    @api.constrains('type_id', 'company_id', 'return_journal_id')
+    @api.constrains('account_id', 'company_id', 'return_journal_id')
     def check_company(self):
         if self.account_id.company_id != self.company_id:
             raise Warning(_(

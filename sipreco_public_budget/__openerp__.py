@@ -86,6 +86,7 @@
         'demo/public_budget.budget_modification_detail.csv',
         'demo/advance_request_type.xml',
         'demo/advance_request.xml',
+        'demo/partners_without_doc/res.partner.csv',
     ],
     'depends': [
         'l10n_ar_invoice',
