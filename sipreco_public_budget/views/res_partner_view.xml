@@ -16,10 +16,26 @@
         </record>
  
         <!-- INHERITED FORM -->
+        <record id="view_res_partner_form" model="ir.ui.view">
+            <field name="name">partner.person.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="l10n_ar_invoice.view_res_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="document_type_id" position="attributes">
+                    <attribute name="required">True</attribute>
+                </field>
+                <field name="document_number" position="attributes">
+                    <attribute name="required">True</attribute>
+                </field>
+                <field name="responsability_id" position="attributes">
+                    <attribute name="required">True</attribute>
+                </field>
+            </field>
+        </record>
+
         <record id="view_partner_person_form" model="ir.ui.view">
             <field name="name">partner.person.form</field>
             <field name="model">res.partner</field>
-            <!-- <field name="inherit_id" ref="l10n_ar_invoice.view_res_partner_form"/> -->
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//page[@name='sales_purchases']//field[@name='supplier']" position="before">

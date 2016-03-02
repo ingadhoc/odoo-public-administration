@@ -21,7 +21,6 @@ addons:
       - python-simplejson
       - python-serial
       - python-yaml
-      - libcups2-dev # for aeroo
       # FE
       - python-dev
       - swig
@@ -64,15 +63,6 @@ virtualenv:
   system_site_packages: true
 
 install:
-  # aeroo reports
-  - pip install git+https://github.com/aeroo/aeroolib.git@master pycups==1.9.68
-
-  # odoo argentina
-  - pip install geopy==0.95.1 BeautifulSoup # because l10n_ar_states module is installed
-
-  # repository requirements
-  - pip install -r requirements.txt
-
   - git clone --depth=1 https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly
