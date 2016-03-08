@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
 from openerp.exceptions import Warning
+import logging
+_logger = logging.getLogger(__name__)
 
 
 class account_voucher(models.Model):
@@ -26,6 +28,11 @@ class account_voucher(models.Model):
         'public_budget.transaction',
         string='Transaction',
         # required=True,
+        readonly=True,
+        )
+    advance_transaction_id = fields.Many2one(
+        'public_budget.transaction',
+        string='Advance Transaction',
         readonly=True,
         )
     budget_position_ids = fields.Many2many(
@@ -59,7 +66,7 @@ class account_voucher(models.Model):
         )
     transaction_with_advance_payment = fields.Boolean(
         readonly=True,
-        related='transaction_id.type_id.with_advance_payment',
+        related='advance_transaction_id.type_id.with_advance_payment',
         )
 
     @api.one
@@ -72,18 +79,21 @@ class account_voucher(models.Model):
     @api.one
     @api.depends(
         'transaction_id',
+        'advance_transaction_id',
         )
     def _get_partners(self):
+        _logger.info('Get partners from transaction')
         self.partner_ids = self.env['res.partner']
         partner_ids = []
-        if self.transaction_id:
-            if self.transaction_id.type_id.with_advance_payment and (
-                    self.transaction_id.partner_id):
+        transaction = self.transaction_id or self.advance_transaction_id
+        if transaction:
+            if transaction.type_id.with_advance_payment and (
+                    transaction.partner_id):
                 partner_ids = [
-                    self.transaction_id.partner_id.commercial_partner_id.id]
+                    transaction.partner_id.commercial_partner_id.id]
             else:
-                partner_ids = self.mapped(
-                    'transaction_id.supplier_ids.commercial_partner_id')
+                partner_ids = transaction.mapped(
+                    'supplier_ids.commercial_partner_id')
         self.partner_ids = partner_ids
 
     @api.model
@@ -91,6 +101,7 @@ class account_voucher(models.Model):
         """
         We add transaction to get_move_lines function
         """
+        _logger.info('Get move lines filtered by transaction')
         move_lines = super(account_voucher, self).get_move_lines(
             ttype, partner_id, journal_id)
         transaction_id = self._context.get(
@@ -112,6 +123,7 @@ class account_voucher(models.Model):
             company_currency, current_currency, context=None):
         """Cambiamos la cuenta que usa el adelanto para utilizar aquella que
         viene de la transaccion de adelanto o del request"""
+        _logger.info('Replace account using for advance transaction')
         res = super(account_voucher, self).writeoff_move_line_get(
             cr, uid, voucher_id, line_total, move_id, name,
             company_currency, current_currency, context=context)
@@ -119,7 +131,7 @@ class account_voucher(models.Model):
 
         if res:
             if voucher.transaction_with_advance_payment:
-                account = voucher.transaction_id.type_id.advance_account_id
+                account = voucher.advance_transaction_id.type_id.advance_account_id
                 if not account:
                     raise Warning(_(
                         'In payment of advance transaction type, you need to\
@@ -133,6 +145,7 @@ class account_voucher(models.Model):
     @api.one
     @api.constrains('confirmation_date', 'date')
     def check_date(self):
+        _logger.info('Checking date')
         if not self.confirmation_date or not self.date:
             return True
         if self.date < self.confirmation_date:
@@ -143,6 +156,7 @@ class account_voucher(models.Model):
     @api.one
     @api.constrains('confirmation_date', 'date')
     def check_confirmation_date(self):
+        _logger.info('Checking confirmation date')
         if not self.confirmation_date:
             return True
         for invoice in self.invoice_ids:
@@ -152,13 +166,14 @@ class account_voucher(models.Model):
                     'de la factura que se esta pagando'))
 
     @api.one
-    @api.constrains('advance_amount', 'transaction_id', 'state')
+    @api.constrains('advance_amount', 'advance_transaction_id', 'state')
     def check_voucher_transaction_amount(self):
         """
         """
+        _logger.info('Checking voucher transaction amount')
         if self.transaction_with_advance_payment:
             advance_remaining_amount = (
-                self.transaction_id.advance_remaining_amount)
+                self.advance_transaction_id.advance_remaining_amount)
             if advance_remaining_amount < 0.0:
                 raise Warning(_(
                     'In advance transactions, payment orders amount (%s) can '
@@ -182,6 +197,7 @@ class account_voucher_line(models.Model):
     def check_voucher_transaction_amount(self):
         """
         """
+        _logger.info('Checking voucher line transaction amount')
         if self.amount > self.amount_unreconciled:
             raise Warning(_(
                 'In each line, Amount can not be greater than Open Balance'))

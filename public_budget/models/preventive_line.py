@@ -147,12 +147,11 @@ class preventive_line(models.Model):
     @api.depends(
         'advance_line',
         'preventive_amount',
-        'transaction_id.advance_voucher_ids.state',
-        'transaction_id.advance_voucher_ids.to_pay_amount',
-        'transaction_id.advance_voucher_ids.amount',
-        # estas dos no harian falta porque son los depends de arriba
-        # 'transaction_id.advance_preventive_amount',
-        # 'transaction_id.advance_to_pay_amount',
+        # este depende de una funcion
+        'transaction_id.advance_preventive_amount',
+        # este depende de otras
+        'transaction_id.advance_to_pay_amount',
+        'transaction_id.advance_paid_amount',
         'definitive_line_ids.amount',
         'definitive_line_ids.invoiced_amount',
         'definitive_line_ids.to_pay_amount',
@@ -172,6 +171,8 @@ class preventive_line(models.Model):
         amount
         """
         _logger.info('Getting amounts for preventive line %s' % self.id)
+        # TODO this should be improoved and dependency to advance_voucher_ids
+        # or to advance amounst must be removed
         if self.advance_line:
             _logger.info('Getting advance line values')
             transaction = self.transaction_id

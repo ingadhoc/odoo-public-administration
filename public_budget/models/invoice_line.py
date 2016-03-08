@@ -34,7 +34,8 @@ class invoice_line(models.Model):
     @api.depends(
         'price_subtotal',
         'invoice_id.amount_total',
-        'invoice_id.residual')
+        'invoice_id.residual'
+        )
     def _get_amounts(self):
         """Update the following fields:
         -to_pay_amount: is the amount of this invoice that is in draft vouchers

@@ -2,6 +2,8 @@
 from openerp import models, fields, api, _
 from openerp.exceptions import Warning
 import openerp.addons.decimal_precision as dp
+import logging
+_logger = logging.getLogger(__name__)
 
 
 class transaction(models.Model):
@@ -117,55 +119,63 @@ class transaction(models.Model):
         )
     preventive_amount = fields.Float(
         string='Monto Preventivo',
-        compute='_get_amounts',
+        compute='_get_preventive_amount',
         digits=dp.get_precision('Account'),
+        store=True,
         )
     definitive_amount = fields.Float(
         string='Monto Definitivo',
-        compute='_get_amounts',
+        compute='_get_definitive_amount',
         digits=dp.get_precision('Account'),
+        store=True,
         )
     invoiced_amount = fields.Float(
         string='Monto Devengado',
-        compute='_get_amounts',
+        compute='_get_invoiced_amount',
         digits=dp.get_precision('Account'),
+        store=True,
         )
     to_pay_amount = fields.Float(
         string='Monto A Pagar',
-        compute='_get_amounts',
+        compute='_get_to_pay_amount',
         digits=dp.get_precision('Account'),
+        store=True,
         )
     paid_amount = fields.Float(
         string=_('Monto Pagado'),
-        compute='_get_amounts',
+        compute='_get_paid_amount',
         digits=dp.get_precision('Account'),
+        store=True,
         )
     advance_preventive_amount = fields.Float(
         string=_('Monto Preventivo de Adelanto'),
-        compute='_get_advance_amounts',
+        compute='_get_advance_preventive_amount',
         digits=dp.get_precision('Account'),
+        store=True,
         )
     advance_to_pay_amount = fields.Float(
         string=_('Monto de Adelanto a Pagar'),
         compute='_get_advance_amounts',
         digits=dp.get_precision('Account'),
+        store=True,
         )
     advance_paid_amount = fields.Float(
         string=_('Monto de Adelanto Pagado'),
         compute='_get_advance_amounts',
         digits=dp.get_precision('Account'),
+        store=True,
         )
-    # TODO IMPLEMENTAR
     advance_remaining_amount = fields.Float(
         string=_('Monto Remanente de Adelanto'),
-        compute='_get_advance_amounts',
+        compute='_get_advance_remaining_amount',
         digits=dp.get_precision('Account'),
+        store=True,
         )
-    # TODO IMPLEMENTAR
     advance_to_return_amount = fields.Float(
         string=_('Monto a Devolver'),
         compute='_get_advance_to_return_amount',
         digits=dp.get_precision('Account'),
+        store=True,
         )
     company_id = fields.Many2one(
         'res.company',
@@ -209,18 +219,23 @@ class transaction(models.Model):
         states={'open': [('readonly', False)]},
         domain=[
             ('type', '=', 'payment'),
-            ('transaction_with_advance_payment', '=', False)],
+            # ('transaction_with_advance_payment', '=', False)
+            ],
         )
-    # basicamente es el mismo campo de arriba pero lo separamos para poner en
-    # otro lugar de la vista
+    # Usamos otro campo por que si no el depends de advance_voucher_ids se
+    # toma en cuenta igual que si fuese el de vouchers y necesitamos que sea
+    # distinto para que no recalcule tantas veces. Si no la idea sería que
+    # sea basicamente es el mismo campo de arriba pero lo separamos para poner
+    # en otro lugar de la vista
     advance_voucher_ids = fields.One2many(
         'account.voucher',
-        'transaction_id',
+        'advance_transaction_id',
         string='Advance Payment Orders',
         readonly=True,
         domain=[
             ('type', '=', 'payment'),
-            ('transaction_with_advance_payment', '=', True)],
+            # ('transaction_with_advance_payment', '=', True)
+            ],
         context={'default_type': 'payment'},
         states={'open': [('readonly', False)]},
         )
@@ -252,22 +267,43 @@ class transaction(models.Model):
 
     @api.one
     @api.depends(
+        # TODO este depends puede hacer que se recalcule todo al crear un
+        # voucher
         'invoiced_amount',
         'advance_paid_amount',
     )
     def _get_advance_to_return_amount(self):
+        _logger.info('Getting Transaction Advance To Return Amount')
         self.advance_to_return_amount = (
             self.advance_paid_amount - self.invoiced_amount)
 
     @api.one
     @api.depends(
         'advance_preventive_line_ids.preventive_amount',
-        'voucher_ids.state',
     )
-    def _get_advance_amounts(self):
+    def _get_advance_preventive_amount(self):
+        _logger.info('Getting Transaction Advance Preventive Amount')
         advance_preventive_amount = sum(self.mapped(
             'advance_preventive_line_ids.preventive_amount'))
         self.advance_preventive_amount = advance_preventive_amount
+
+    @api.one
+    @api.depends(
+        # TODO ver que esto no deberia llamarse tantas veces
+        'advance_preventive_amount',
+        'advance_to_pay_amount',
+    )
+    def _get_advance_remaining_amount(self):
+        _logger.info('Getting Transaction Advance Remaining Amount')
+        self.advance_remaining_amount = (
+            self.advance_preventive_amount - self.advance_to_pay_amount)
+
+    @api.one
+    @api.depends(
+        'advance_voucher_ids.state',
+    )
+    def _get_advance_amounts(self):
+        _logger.info('Getting Transaction Advance Amounts')
         if not self.advance_voucher_ids:
             return False
 
@@ -288,8 +324,6 @@ class transaction(models.Model):
                 'amount'))
         self.advance_to_pay_amount = advance_to_pay_amount
         self.advance_paid_amount = advance_paid_amount
-        self.advance_remaining_amount = (
-            advance_preventive_amount - advance_to_pay_amount)
 
     @api.multi
     def mass_voucher_create(self):
@@ -298,6 +332,7 @@ class transaction(models.Model):
         vouchers = self.env['account.voucher']
         for invoice in self.invoice_ids.filtered(
                 lambda r: r.state == 'open'):
+            _logger.info('Mass Create Voucher for invoice %s' % invoice.id)
             # exclude invoices that hast been send to paid
             if invoice.to_pay_amount == invoice.residual:
                 continue
@@ -334,26 +369,43 @@ class transaction(models.Model):
 
     @api.one
     @api.depends(
-        'preventive_line_ids',
-        'voucher_ids.state',
-    )
-    def _get_amounts(self):
-        preventive_amount = sum(self.mapped(
+        'preventive_line_ids.preventive_amount',
+     )
+    def _get_preventive_amount(self):
+        self.preventive_amount = sum(self.mapped(
             'preventive_line_ids.preventive_amount'))
-        definitive_amount = sum(self.mapped(
-            'preventive_line_ids.definitive_amount'))
-        invoiced_amount = sum(self.mapped(
-            'preventive_line_ids.invoiced_amount'))
-        to_pay_amount = sum(self.mapped(
-            'preventive_line_ids.to_pay_amount'))
-        paid_amount = sum(self.mapped(
-            'preventive_line_ids.paid_amount'))
 
-        self.preventive_amount = preventive_amount
-        self.definitive_amount = definitive_amount
-        self.invoiced_amount = invoiced_amount
-        self.to_pay_amount = to_pay_amount
-        self.paid_amount = paid_amount
+    @api.one
+    @api.depends(
+        'preventive_line_ids.definitive_amount',
+     )
+    def _get_definitive_amount(self):
+        self.definitive_amount = sum(self.mapped(
+            'preventive_line_ids.definitive_amount'))
+
+    @api.one
+    @api.depends(
+        'preventive_line_ids.invoiced_amount',
+     )
+    def _get_invoiced_amount(self):
+        self.invoiced_amount = sum(self.mapped(
+            'preventive_line_ids.invoiced_amount'))
+
+    @api.one
+    @api.depends(
+        'preventive_line_ids.to_pay_amount',
+     )
+    def _get_to_pay_amount(self):
+        self.to_pay_amount = sum(self.mapped(
+            'preventive_line_ids.to_pay_amount'))
+
+    @api.one
+    @api.depends(
+        'preventive_line_ids.paid_amount',
+     )
+    def _get_paid_amount(self):
+        self.paid_amount = sum(self.mapped(
+            'preventive_line_ids.paid_amount'))
 
     @api.multi
     def get_invoice_vals(
