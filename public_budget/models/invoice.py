@@ -45,7 +45,6 @@ class invoice(models.Model):
         digits=dp.get_precision('Account'),
         compute='_compute_to_pay_amount',
         store=True,
-        # TODO ver si lo hacemos stored
         )
 
     @api.one
@@ -92,6 +91,7 @@ class invoice(models.Model):
     # number of times this reconciliation is used in an invoice (so we split
     # the residual amount between all invoice)
     def _compute_to_pay_amount(self):
+        _logger.info('Getting to pay amount for invoice %s' % self.id)
         # if invoice is paid and not payments, then it is autopaid and after
         # validation we consider it as send to paid and paid
         if self.state == 'paid' and not self.payment_ids:
@@ -125,6 +125,7 @@ class invoice(models.Model):
     @api.one
     @api.constrains('date_invoice', 'invoice_line')
     def check_dates(self):
+        _logger.info('Checking invoice dates')
         if not self.date_invoice:
             return True
         for definitive_line in self.mapped('invoice_line.definitive_line_id'):
@@ -133,13 +134,16 @@ class invoice(models.Model):
                     'La fecha de la factura no puede ser menor a la fecha '
                     'de la linea definitiva relacionada'))
 
-    @api.one
-    @api.constrains('to_pay_amount', 'amount_total')
-    def check_to_pay_amount(self):
-        if self.to_pay_amount > self.amount_total:
-            raise Warning((
-                'El importe mandado a pagar no puede ser mayor al importe '
-                'de la factura'))
+    # we move this to voucher to improove performance
+    # @api.one
+    # @api.constrains('to_pay_amount', 'amount_total')
+    # def check_to_pay_amount(self):
+    #     _logger.info('Checking to pay amount on invoice %s' % self.id)
+    #     # TODO mejorar, lo hacemos asi por errores de redondeo
+    #     if (self.to_pay_amount - self.amount_total) > 0.01:
+    #         raise Warning((
+    #             'El importe mandado a pagar no puede ser mayor al importe '
+    #             'de la factura'))
 
     @api.multi
     def action_cancel(self):

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
 from openerp.exceptions import Warning
+import logging
+_logger = logging.getLogger(__name__)
 
 
 class account_voucher(models.Model):
@@ -59,6 +61,7 @@ class account_voucher(models.Model):
         )
     transaction_with_advance_payment = fields.Boolean(
         readonly=True,
+        store=True,
         related='transaction_id.type_id.with_advance_payment',
         )
 
@@ -74,6 +77,7 @@ class account_voucher(models.Model):
         'transaction_id',
         )
     def _get_partners(self):
+        _logger.info('Get partners from transaction')
         self.partner_ids = self.env['res.partner']
         partner_ids = []
         if self.transaction_id:
@@ -91,6 +95,7 @@ class account_voucher(models.Model):
         """
         We add transaction to get_move_lines function
         """
+        _logger.info('Get move lines filtered by transaction')
         move_lines = super(account_voucher, self).get_move_lines(
             ttype, partner_id, journal_id)
         transaction_id = self._context.get(
@@ -112,6 +117,7 @@ class account_voucher(models.Model):
             company_currency, current_currency, context=None):
         """Cambiamos la cuenta que usa el adelanto para utilizar aquella que
         viene de la transaccion de adelanto o del request"""
+        _logger.info('Replace account using for advance transaction')
         res = super(account_voucher, self).writeoff_move_line_get(
             cr, uid, voucher_id, line_total, move_id, name,
             company_currency, current_currency, context=context)
@@ -133,6 +139,7 @@ class account_voucher(models.Model):
     @api.one
     @api.constrains('confirmation_date', 'date')
     def check_date(self):
+        _logger.info('Checking date')
         if not self.confirmation_date or not self.date:
             return True
         if self.date < self.confirmation_date:
@@ -141,8 +148,33 @@ class account_voucher(models.Model):
                 ' de confirmación'))
 
     @api.one
+    @api.constrains('state')
+    def check_to_pay_amount(self):
+        if self.state != 'confirmed':
+            return True
+        to_pay_lines = self.env['account.voucher.line'].search([
+            ('voucher_id', '=', self.id),
+            ('amount', '!=', 0.0),
+            ])
+        to_remove_lines = self.env['account.voucher.line'].search([
+            ('voucher_id', '=', self.id),
+            ('amount', '=', 0.0),
+            ])
+        to_remove_lines.unlink()
+
+        for line in to_pay_lines:
+            inv = line.move_line_id.invoice
+            _logger.info('Checking to pay amount on invoice %s' % inv.id)
+            # TODO mejorar, lo hacemos asi por errores de redondeo
+            if inv and (inv.to_pay_amount - inv.amount_total) > 0.01:
+                raise Warning((
+                    'El importe mandado a pagar no puede ser mayor al importe '
+                    'de la factura'))
+
+    @api.one
     @api.constrains('confirmation_date', 'date')
     def check_confirmation_date(self):
+        _logger.info('Checking confirmation date')
         if not self.confirmation_date:
             return True
         for invoice in self.invoice_ids:
@@ -156,6 +188,7 @@ class account_voucher(models.Model):
     def check_voucher_transaction_amount(self):
         """
         """
+        _logger.info('Checking transaction amount on voucher %s' % self.id)
         if self.transaction_with_advance_payment:
             advance_remaining_amount = (
                 self.transaction_id.advance_remaining_amount)
@@ -174,14 +207,18 @@ class account_voucher_line(models.Model):
     _inherit = 'account.voucher.line'
 
     to_pay_amount = fields.Float(
-        related='move_line_id.invoice.to_pay_amount'
+        related='move_line_id.invoice.to_pay_amount',
+        store=True,
         )
 
     @api.one
-    @api.constrains('amount_unreconciled', 'amount')
+    # @api.constrains('amount_unreconciled', 'amount')
     def check_voucher_transaction_amount(self):
         """
         """
+        _logger.info(
+            'Checking voucher line transaction amount for voucher %s' % (
+                self.id))
         if self.amount > self.amount_unreconciled:
             raise Warning(_(
                 'In each line, Amount can not be greater than Open Balance'))
