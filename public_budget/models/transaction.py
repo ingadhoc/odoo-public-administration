@@ -219,7 +219,7 @@ class transaction(models.Model):
         states={'open': [('readonly', False)]},
         domain=[
             ('type', '=', 'payment'),
-            # ('transaction_with_advance_payment', '=', False)
+            ('transaction_with_advance_payment', '=', False)
             ],
         )
     # Usamos otro campo por que si no el depends de advance_voucher_ids se
@@ -229,12 +229,12 @@ class transaction(models.Model):
     # en otro lugar de la vista
     advance_voucher_ids = fields.One2many(
         'account.voucher',
-        'advance_transaction_id',
+        'transaction_id',
         string='Advance Payment Orders',
         readonly=True,
         domain=[
             ('type', '=', 'payment'),
-            # ('transaction_with_advance_payment', '=', True)
+            ('transaction_with_advance_payment', '=', True)
             ],
         context={'default_type': 'payment'},
         states={'open': [('readonly', False)]},
@@ -333,8 +333,9 @@ class transaction(models.Model):
         for invoice in self.invoice_ids.filtered(
                 lambda r: r.state == 'open'):
             _logger.info('Mass Create Voucher for invoice %s' % invoice.id)
+            invoice_to_pay_amount = invoice.residual - invoice.to_pay_amount
             # exclude invoices that hast been send to paid
-            if invoice.to_pay_amount == invoice.residual:
+            if not invoice_to_pay_amount or invoice_to_pay_amount == 0.0:
                 continue
             journal = self.env['account.journal'].search([
                 ('company_id', '=', invoice.company_id.id),
@@ -347,12 +348,20 @@ class transaction(models.Model):
             voucher_data = vouchers.onchange_partner_id(
                 partner.id, journal.id, 0.0,
                 invoice.currency_id.id, 'payment', False)
-            line_cr_ids = [
-                (0, 0, vals) for vals in voucher_data['value'].get(
-                    'line_cr_ids', False) if isinstance(vals, dict)]
-            line_dr_ids = [
-                (0, 0, vals) for vals in voucher_data['value'].get(
-                    'line_dr_ids', False) if isinstance(vals, dict)]
+            invoice_move_lines = invoice.move_id.line_id.ids
+            # only debit lines
+            # line_cr_ids = [
+            #     (0, 0, vals) for vals in voucher_data['value'].get(
+            #         'line_cr_ids', False) if isinstance(vals, dict)]
+            line_dr_ids = []
+            for vals in voucher_data['value'].get('line_dr_ids', False):
+                if (
+                        isinstance(vals, dict) and
+                        vals.get('move_line_id') in invoice_move_lines):
+                    vals['amount'] = invoice_to_pay_amount
+                    vals['reconcile'] = True
+                    line_dr_ids.append((0, 0, vals))
+            account_id = voucher_data['value'].get('account_id', False)
             voucher_vals = {
                 'type': 'payment',
                 # 'receiptbook_id': self.budget_id.receiptbook_id.id,
@@ -360,8 +369,8 @@ class transaction(models.Model):
                 'partner_id': partner.id,
                 'transaction_id': self.id,
                 'journal_id': journal.id,
-                'account_id': voucher_data['value'].get('account_id', False),
-                'line_cr_ids': line_cr_ids,
+                'account_id': account_id,
+                # 'line_cr_ids': line_cr_ids,
                 'line_dr_ids': line_dr_ids,
                 }
             vouchers.create(voucher_vals)

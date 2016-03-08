@@ -134,15 +134,16 @@ class invoice(models.Model):
                     'La fecha de la factura no puede ser menor a la fecha '
                     'de la linea definitiva relacionada'))
 
-    @api.one
-    @api.constrains('to_pay_amount', 'amount_total')
-    def check_to_pay_amount(self):
-        _logger.info('Checking to pay amount on invoice %s' % self.id)
-        # TODO mejorar, lo hacemos asi por errores de redondeo
-        if (self.to_pay_amount - self.amount_total) > 0.01:
-            raise Warning((
-                'El importe mandado a pagar no puede ser mayor al importe '
-                'de la factura'))
+    # we move this to voucher to improove performance
+    # @api.one
+    # @api.constrains('to_pay_amount', 'amount_total')
+    # def check_to_pay_amount(self):
+    #     _logger.info('Checking to pay amount on invoice %s' % self.id)
+    #     # TODO mejorar, lo hacemos asi por errores de redondeo
+    #     if (self.to_pay_amount - self.amount_total) > 0.01:
+    #         raise Warning((
+    #             'El importe mandado a pagar no puede ser mayor al importe '
+    #             'de la factura'))
 
     @api.multi
     def action_cancel(self):

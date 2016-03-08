@@ -30,11 +30,6 @@ class account_voucher(models.Model):
         # required=True,
         readonly=True,
         )
-    advance_transaction_id = fields.Many2one(
-        'public_budget.transaction',
-        string='Advance Transaction',
-        readonly=True,
-        )
     budget_position_ids = fields.Many2many(
         relation='voucher_position_rel',
         comodel_name='public_budget.budget_position',
@@ -66,7 +61,8 @@ class account_voucher(models.Model):
         )
     transaction_with_advance_payment = fields.Boolean(
         readonly=True,
-        related='advance_transaction_id.type_id.with_advance_payment',
+        store=True,
+        related='transaction_id.type_id.with_advance_payment',
         )
 
     @api.one
@@ -79,21 +75,19 @@ class account_voucher(models.Model):
     @api.one
     @api.depends(
         'transaction_id',
-        'advance_transaction_id',
         )
     def _get_partners(self):
         _logger.info('Get partners from transaction')
         self.partner_ids = self.env['res.partner']
         partner_ids = []
-        transaction = self.transaction_id or self.advance_transaction_id
-        if transaction:
-            if transaction.type_id.with_advance_payment and (
-                    transaction.partner_id):
+        if self.transaction_id:
+            if self.transaction_id.type_id.with_advance_payment and (
+                    self.transaction_id.partner_id):
                 partner_ids = [
-                    transaction.partner_id.commercial_partner_id.id]
+                    self.transaction_id.partner_id.commercial_partner_id.id]
             else:
-                partner_ids = transaction.mapped(
-                    'supplier_ids.commercial_partner_id')
+                partner_ids = self.mapped(
+                    'transaction_id.supplier_ids.commercial_partner_id')
         self.partner_ids = partner_ids
 
     @api.model
@@ -131,7 +125,7 @@ class account_voucher(models.Model):
 
         if res:
             if voucher.transaction_with_advance_payment:
-                account = voucher.advance_transaction_id.type_id.advance_account_id
+                account = voucher.transaction_id.type_id.advance_account_id
                 if not account:
                     raise Warning(_(
                         'In payment of advance transaction type, you need to\
@@ -154,6 +148,30 @@ class account_voucher(models.Model):
                 ' de confirmación'))
 
     @api.one
+    @api.constrains('state')
+    def check_to_pay_amount(self):
+        if self.state != 'confirmed':
+            return True
+        to_pay_lines = self.env['account.voucher.line'].search([
+            ('voucher_id', '=', self.id),
+            ('amount', '!=', 0.0),
+            ])
+        to_remove_lines = self.env['account.voucher.line'].search([
+            ('voucher_id', '=', self.id),
+            ('amount', '=', 0.0),
+            ])
+        to_remove_lines.unlink()
+
+        for line in to_pay_lines:
+            inv = line.move_line_id.invoice
+            _logger.info('Checking to pay amount on invoice %s' % inv.id)
+            # TODO mejorar, lo hacemos asi por errores de redondeo
+            if inv and (inv.to_pay_amount - inv.amount_total) > 0.01:
+                raise Warning((
+                    'El importe mandado a pagar no puede ser mayor al importe '
+                    'de la factura'))
+
+    @api.one
     @api.constrains('confirmation_date', 'date')
     def check_confirmation_date(self):
         _logger.info('Checking confirmation date')
@@ -166,14 +184,14 @@ class account_voucher(models.Model):
                     'de la factura que se esta pagando'))
 
     @api.one
-    @api.constrains('advance_amount', 'advance_transaction_id', 'state')
+    @api.constrains('advance_amount', 'transaction_id', 'state')
     def check_voucher_transaction_amount(self):
         """
         """
-        _logger.info('Checking voucher transaction amount')
+        _logger.info('Checking transaction amount on voucher %s' % self.id)
         if self.transaction_with_advance_payment:
             advance_remaining_amount = (
-                self.advance_transaction_id.advance_remaining_amount)
+                self.transaction_id.advance_remaining_amount)
             if advance_remaining_amount < 0.0:
                 raise Warning(_(
                     'In advance transactions, payment orders amount (%s) can '
@@ -189,15 +207,18 @@ class account_voucher_line(models.Model):
     _inherit = 'account.voucher.line'
 
     to_pay_amount = fields.Float(
-        related='move_line_id.invoice.to_pay_amount'
+        related='move_line_id.invoice.to_pay_amount',
+        store=True,
         )
 
     @api.one
-    @api.constrains('amount_unreconciled', 'amount')
+    # @api.constrains('amount_unreconciled', 'amount')
     def check_voucher_transaction_amount(self):
         """
         """
-        _logger.info('Checking voucher line transaction amount')
+        _logger.info(
+            'Checking voucher line transaction amount for voucher %s' % (
+                self.id))
         if self.amount > self.amount_unreconciled:
             raise Warning(_(
                 'In each line, Amount can not be greater than Open Balance'))
