@@ -123,6 +123,20 @@ class transaction(models.Model):
         digits=dp.get_precision('Account'),
         store=True,
         )
+    preventive_balance = fields.Float(
+        string='Saldo Preventivo',
+        compute='_get_preventive_balance',
+        digits=dp.get_precision('Account'),
+        store=True,
+        help='Saldo Preventivo',
+        )
+    definitive_balance = fields.Float(
+        string='Saldo Definitivo',
+        compute='_get_definitive_balance',
+        digits=dp.get_precision('Account'),
+        store=True,
+        help='Saldo Definitivo',
+        )
     definitive_amount = fields.Float(
         string='Monto Definitivo',
         compute='_get_definitive_amount',
@@ -383,6 +397,28 @@ class transaction(models.Model):
     def _get_preventive_amount(self):
         self.preventive_amount = sum(self.mapped(
             'preventive_line_ids.preventive_amount'))
+
+    @api.one
+    @api.depends(
+        'preventive_amount',
+        'definitive_amount',
+     )
+    def _get_preventive_balance(self):
+        _logger.info(
+            'Getting preventive balance for transaction_id %s' % self.id)
+        self.preventive_balance = (
+            self.preventive_amount - self.definitive_amount)
+
+    @api.one
+    @api.depends(
+        'definitive_amount',
+        'invoiced_amount',
+     )
+    def _get_definitive_balance(self):
+        _logger.info(
+            'Getting definitive balance for transaction_id %s' % self.id)
+        self.definitive_balance = (
+            self.definitive_amount - self.invoiced_amount)
 
     @api.one
     @api.depends(

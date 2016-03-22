@@ -72,8 +72,16 @@
                             </group>
                             <group col="1">
                                 <group name="amounts">
-                                    <field name="preventive_amount"/>
-                                    <field name="definitive_amount"/>
+                                    <label for="preventive_amount"/>
+                                    <div>
+                                        <field name="preventive_amount" class="oe_inline"/> / 
+                                        <field name="preventive_balance" class="oe_inline"/>
+                                    </div>
+                                    <label for="definitive_amount"/>
+                                    <div>
+                                        <field name="definitive_amount" class="oe_inline"/> / 
+                                        <field name="definitive_balance" class="oe_inline"/>
+                                    </div>
                                     <field name="invoiced_amount"/>
                                     <field name="to_pay_amount"/>
                                     <field name="paid_amount"/>
