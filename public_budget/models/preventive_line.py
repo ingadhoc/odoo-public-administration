@@ -236,6 +236,15 @@ class preventive_line(models.Model):
 
     @api.one
     @api.constrains(
+        'preventive_amount')
+    def check_budget_state_open(self):
+        if self.budget_id and self.budget_id.state not in 'open':
+            raise Warning(
+                'Solo puede cambiar afectaciones preventivas si '
+                'el presupuesto está abierto')
+
+    @api.one
+    @api.constrains(
         'transaction_id',
         'budget_position_id',
         'preventive_amount')

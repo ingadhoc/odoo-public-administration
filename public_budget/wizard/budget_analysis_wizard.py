@@ -37,7 +37,7 @@ class public_budget_budget_analysis_wizard(models.TransientModel):
         if not actions:
             return False
         form_view = self.env.ref(
-            'public_budget.view_public_budget_budget_form')
+            'public_budget.view_public_budget_budget_to_date_form')
         action_read = actions.read()[0]
         action_read.pop('views')
         action_read['target'] = 'inlineview'

@@ -63,11 +63,13 @@ class advance_request_line(models.Model):
         )
     def _get_amounts(self):
         if self.employee_id:
+            request_type = self.advance_request_id.type_id
             self.debt_amount = self.employee_id.get_debt_amount(
-                self.advance_request_id.type_id)
+                request_type)
             pending_return_domain = [
                 ('employee_id', '=', self.employee_id.id),
                 ('advance_return_id.state', 'in', ['draft']),
+                ('advance_return_id.type_id', '=', request_type.id),
                 ]
             self.pending_return_amount = sum(
                 self.env['public_budget.advance_return_line'].search(

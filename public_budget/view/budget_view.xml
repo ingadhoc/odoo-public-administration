@@ -23,7 +23,7 @@
             <field name="model">public_budget.budget</field>
             <field name="arch" type="xml">
                 <form string="Budget">
-                    <header invisible="context.get('analysis_to_date')">
+                    <header>
                         <button name="sgn_open"
                             states="draft"
                             string="Open"
@@ -89,6 +89,23 @@
                         </notebook>
                     </sheet>
                 </form>
+            </field>
+        </record>
+
+        <!-- Delete header for to_date analisis -->
+        <record id="view_public_budget_budget_to_date_form" model="ir.ui.view">
+            <field name="name">public_budget.budget.to_date.form</field>
+            <field name="model">public_budget.budget</field>
+            <field name="mode">primary</field>
+            <field name="inherit_id" ref="public_budget.view_public_budget_budget_form"/>
+            <field eval="99" name="priority"/>
+            <field name="arch" type="xml">
+                <header position="replace">
+                    <header>
+                        <field name="state" widget="statusbar"
+                            invisible="1"/>
+                    </header>
+                </header>
             </field>
         </record>
 

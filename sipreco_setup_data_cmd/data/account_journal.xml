@@ -12,6 +12,8 @@
             <field name="payment_subtype"></field>
             <field name="entry_posted" eval="True"/>
             <field name="update_posted" eval="True"/>
+            <field name="double_validation" eval="True"/>
+            <field name="voucher_amount_restriction">cant_be_cero</field>
             <field name="company_id" ref="base.main_company"/>
             <field name="sequence_id" ref="sipreco_public_budget.general_journal_sequence"/>
         </record>
@@ -25,6 +27,8 @@
             <field name="payment_subtype">issue_check</field>
             <field name="entry_posted" eval="True"/>
             <field name="update_posted" eval="True"/>
+            <field name="double_validation" eval="True"/>
+            <field name="voucher_amount_restriction">cant_be_cero</field>
             <field name="company_id" ref="base.main_company"/>
             <field name="sequence_id" ref="sipreco_public_budget.general_journal_sequence"/>
         </record>

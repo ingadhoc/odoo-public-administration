@@ -207,4 +207,13 @@ class definitive_line(models.Model):
         }
         return line_vals
 
+    @api.one
+    @api.constrains(
+        'amount')
+    def check_budget_state_open(self):
+        if self.budget_id and self.budget_id.state not in 'open':
+            raise Warning(
+                'Solo puede cambiar afectaciones definitivas si '
+                'el presupuesto está abierto')
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
