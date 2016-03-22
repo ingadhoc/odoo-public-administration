@@ -67,6 +67,7 @@ class PublicBudgetSubsidy(models.Model):
         )
     accountability_overcome = fields.Boolean(
         compute='_get_accountability_expiry_date',
+        search='search_accountability_overcome',
         string='Rendición Vencida?',
         )
     accountability_expiry_date = fields.Date(
@@ -89,6 +90,25 @@ class PublicBudgetSubsidy(models.Model):
         'subsidy_id',
         'Claims',
         )
+
+    @api.model
+    def search_accountability_overcome(self, operator, value):
+        to_date = date.today() + relativedelta(days=-30)
+        overcome_checks = self.env['account.check'].search([
+            ('voucher_id.transaction_id', '=', self.transaction_id.id),
+            ('handed_date', '<', fields.Date.to_string(to_date)),
+            ], limit=1)
+
+        transaction_ids = overcome_checks.mapped(
+            'voucher_id.transaction_id.id')
+        # TODO check that value should be True
+        if operator == '=':
+            operator = 'in'
+        elif operator == '!=':
+            operator = 'not in'
+        else:
+            return []
+        return [('transaction_id', 'in', transaction_ids)]
 
     @api.one
     def _get_accountability_expiry_date(self):

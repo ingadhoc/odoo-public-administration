@@ -87,6 +87,7 @@
                     <field name="parliamentary_resolution_date"/>
                     <field name="parliamentary_expedient_id"/>
                     <field name="accountability_administrative_expedient_id"/>
+                    <filter string="Rendición Vencida" name="accountability_overcome" domain="[('accountability_overcome', '=', True)]"/>
                     <group expand="1" string="Group By">
                         <filter string="Estado de la Transacción" name="state" context="{'group_by':'state'}"/>
                         <filter string="Estado de la Rendición" name="accountability_state" context="{'group_by':'accountability_state'}"/>
