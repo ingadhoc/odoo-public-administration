@@ -62,30 +62,32 @@ class advance_request_type(models.Model):
             raise Warning(_(
                 'Company must be the same as Journal Company!'))
 
-    @api.multi
-    def get_debtors_detail(self):
-        self.ensure_one()
-        employees = self.env['res.partner'].search([
-            ('employee', '=', True)])
-        lines = []
-        to_date = self._context.get('to_date', False)
-        for employee in employees:
-            employee_debt = employee.get_debt_amount(
-                advance_return_type=self, to_date=to_date)
-            if employee_debt:
-                pending_return_domain = [
-                    ('employee_id', '=', employee.id),
-                    ('advance_return_id.state', 'in', ['draft']),
-                    ]
-                if to_date:
-                    pending_return_domain.append(
-                        ('advance_return_id.date', '<=', to_date))
-                pending_return_amount = sum(
-                    self.env['public_budget.advance_return_line'].search(
-                        pending_return_domain).mapped('returned_amount'))
-                lines.append({
-                    'employee': employee,
-                    'debt': employee_debt,
-                    'pending_return': pending_return_amount,
-                    })
-        return lines
+    # TODO borrar si no la usamos
+    # @api.multi
+    # def get_debtors_detail(self):
+    #     self.ensure_one()
+    #     employees = self.env['res.partner'].search([
+    #         ('employee', '=', True)])
+    #     lines = []
+    #     to_date = self._context.get('to_date', False)
+    #     for employee in employees:
+    #         employee_debt = employee.get_debt_amount(
+    #             advance_return_type=self, to_date=to_date)
+    #         if employee_debt:
+    #             pending_return_domain = [
+    #                 ('employee_id', '=', employee.id),
+    #                 ('advance_return_id.state', 'in', ['draft']),
+    #                 ('advance_return_id.type_id', '=', self.id),
+    #                 ]
+    #             if to_date:
+    #                 pending_return_domain.append(
+    #                     ('advance_return_id.date', '<=', to_date))
+    #             pending_return_amount = sum(
+    #                 self.env['public_budget.advance_return_line'].search(
+    #                     pending_return_domain).mapped('returned_amount'))
+    #             lines.append({
+    #                 'employee': employee,
+    #                 'debt': employee_debt,
+    #                 'pending_return': pending_return_amount,
+    #                 })
+    #     return lines
