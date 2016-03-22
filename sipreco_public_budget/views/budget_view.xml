@@ -17,6 +17,18 @@
             </field>
         </record>
 
+        <!-- add report also to to_date view -->
+        <record id="view_public_budget_budget_to_date_form" model="ir.ui.view">
+            <field name="name">public_budget.budget.form</field>
+            <field name="model">public_budget.budget</field>
+            <field name="inherit_id" ref="public_budget.view_public_budget_budget_to_date_form"/>
+            <field name="arch" type="xml">
+                <header>
+                    <button name="%(action_aeroo_report_budget)d" class="oe_highlight" string="Print" type="action"/>
+                </header>
+            </field>
+        </record>
+
     </data>
 </openerp>
 <!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
