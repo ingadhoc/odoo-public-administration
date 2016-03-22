@@ -236,25 +236,12 @@ class preventive_line(models.Model):
 
     @api.one
     @api.constrains(
-        'preventive_amount', 'definitive_amount', 'budget_id')
+        'preventive_amount')
     def check_budget_state_open(self):
-        if self.budget_id.state not in 'open':
+        if self.budget_id and self.budget_id.state not in 'open':
             raise Warning(
-                'Solo puede cambiar afectaciones preventivas o definitivas si '
+                'Solo puede cambiar afectaciones preventivas si '
                 'el presupuesto está abierto')
-
-    @api.one
-    @api.constrains(
-        'invoiced_amount',
-        'to_pay_amount',
-        'paid_amount',
-        'budget_id'
-        )
-    def check_budget_state_open_pre_closed(self):
-        if self.budget_id.state not in ['open', 'pre_closed']:
-            raise Warning(
-                'Solo puede cambiar montos a devegados, a pagar o pagados si '
-                'el presupuesto está abierto o en pre-cierre')
 
     @api.one
     @api.constrains(

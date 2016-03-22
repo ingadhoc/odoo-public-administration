@@ -186,4 +186,16 @@ class invoice(models.Model):
         res['expedient_id'] = self.transaction_id.expedient_id.id
         return res
 
+    @api.one
+    @api.constrains(
+        'state',
+        'budget_id',
+        )
+    def check_budget_state_open_pre_closed(self):
+        if self.budget_id and self.budget_id.state not in [
+                'open', 'pre_closed']:
+            raise Warning(
+                'Solo puede cambiar o registrar comprobantes si '
+                'el presupuesto está abierto o en pre-cierre')
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

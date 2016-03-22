@@ -200,6 +200,18 @@ class account_voucher(models.Model):
                     self.advance_amount,
                     advance_remaining_amount + self.advance_amount))
 
+    @api.one
+    @api.constrains(
+        'budget_id',
+        'state',
+        )
+    def check_budget_state_open_pre_closed(self):
+        if self.budget_id and self.budget_id.state not in [
+                'open', 'pre_closed']:
+            raise Warning(
+                'Solo puede cambiar o crear pagos si '
+                'el presupuesto vinculado está abierto o en pre-cierre')
+
 
 class account_voucher_line(models.Model):
     """"""

@@ -60,4 +60,15 @@ class invoice_line(models.Model):
             self.to_pay_amount = self.price_subtotal * invoice_to_pay_perc
             self.paid_amount = self.price_subtotal * invoice_paid_perc
 
+    @api.one
+    @api.constrains(
+        'definitive_line_id',
+        )
+    def check_budget_state_open_pre_closed(self):
+        budget = self.definitive_line_id.budget_id
+        if budget and budget.state not in ['open', 'pre_closed']:
+            raise Warning(
+                'Solo puede cambiar o registrar comprobantes si '
+                'el presupuesto está abierto o en pre-cierre')
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
