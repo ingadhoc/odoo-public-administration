@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+    <!-- <data noupdate="1"> -->
+        <record id="sipreco_public_budget.purchase_type_fondo_fijo" model="public_budget.transaction_type">
+            <field name="name">Fondo Fijo / Caja Chica</field>
+            <field name="with_advance_payment" eval="True"/>
+            <field name="advance_account_id" ref="sipreco_public_budget.account_account_6"/>
+            <field name="definitive_partner_type">supplier</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="sipreco_public_budget.purchase_type_compra_directa" model="public_budget.transaction_type">
+            <field name="name">Directa</field>
+            <field name="with_advance_payment" eval="False"/>
+            <field name="definitive_partner_type">supplier</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="sipreco_public_budget.purchase_type_lprivada" model="public_budget.transaction_type">
+            <field name="name">Licitación Privada</field>
+            <field name="with_advance_payment" eval="False"/>
+            <field name="definitive_partner_type">supplier</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="sipreco_public_budget.purchase_type_lpublica" model="public_budget.transaction_type">
+            <field name="name">Licitación Pública</field>
+            <field name="with_advance_payment" eval="False"/>
+            <field name="definitive_partner_type">supplier</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="sipreco_public_budget.purchase_type_concurso_precios" model="public_budget.transaction_type">
+            <field name="name">Concurso de Precios</field>
+            <field name="with_advance_payment" eval="False"/>
+            <field name="definitive_partner_type">supplier</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="sipreco_public_budget.purchase_type_sueldos" model="public_budget.transaction_type">
+            <field name="name">Sueldos</field>
+            <field name="with_advance_payment" eval="False"/>
+            <field name="definitive_partner_type">supplier</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="sipreco_public_budget.purchase_type_anticipo_gasto" model="public_budget.transaction_type">
+            <field name="name">Anticipo de Gastos</field>
+            <field name="with_advance_payment" eval="True"/>
+            <field name="advance_account_id" ref="sipreco_public_budget.account_account_11"/>
+            <field name="definitive_partner_type">supplier</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="sipreco_public_budget.purchase_type_subsidio_con_cargo" model="public_budget.transaction_type">
+            <field name="name">Subsidio con Cargo de Rendición</field>
+            <field name="with_advance_payment" eval="True"/>
+            <field name="advance_account_id" ref="sipreco_public_budget.account_account_19"/>
+            <field name="definitive_partner_type">subsidy_recipient</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="sipreco_public_budget.purchase_type_subsidio_sin_cargo" model="public_budget.transaction_type">
+            <field name="name">Subsidio sin Cargo de Rendición</field>
+            <field name="with_advance_payment" eval="False"/>
+            <field name="definitive_partner_type">subsidy_recipient</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="sipreco_public_budget.purchase_type_compra_directa_con_autorizacion" model="public_budget.transaction_type">
+            <field name="name">Compra Directa con autorización de cuerpo</field>
+            <field name="with_advance_payment" eval="False"/>
+            <field name="definitive_partner_type">supplier</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="sipreco_public_budget.purchase_type_orden_de_trabajo" model="public_budget.transaction_type">
+            <field name="name">Orden de Trabajo (adicional empleado)</field>
+            <field name="with_advance_payment" eval="False"/>
+            <field name="definitive_partner_type">supplier</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+
+    </data>
+</openerp>

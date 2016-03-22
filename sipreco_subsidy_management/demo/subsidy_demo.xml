@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- FORMVIEW -->
+        <record id="budg_subsidy_trans_caso_9" model="public_budget.subsidy">
+            <field name="transaction_id" ref="sipreco_public_budget.budg_trans_caso_9"/>
+        </record>
+
+    </data>
+</openerp>

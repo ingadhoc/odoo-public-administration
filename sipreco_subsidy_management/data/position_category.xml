@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+    <!-- <data noupdate="1"> -->
+        <record id="sipreco_public_budget.pos_categ_expense" model="public_budget.budget_position_category">
+            <field name="name">Gasto</field>
+        </record>
+
+        <record id="sipreco_public_budget.pos_categ_capital" model="public_budget.budget_position_category">
+            <field name="name">Capital</field>
+        </record>
+    </data>
+</openerp>
