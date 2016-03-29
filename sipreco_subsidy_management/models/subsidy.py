@@ -34,10 +34,6 @@ class PublicBudgetSubsidy(models.Model):
         ondelete='cascade',
         auto_join=True
         )
-    administrative_management_start = fields.Date(
-        'Inicio Gestión Administrativa',
-        default=fields.Date.context_today,
-        )
     request_administrative_expedient_id = fields.Many2one(
         'public_budget.expedient',
         'Expediente Administrativo de Solicitud',

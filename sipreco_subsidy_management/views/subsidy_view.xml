@@ -15,7 +15,6 @@
                         <group>
                             <field name="transaction_id" readonly="1" required="0"/>
                             <field name="state" string="Transaction State" readonly="1"/>
-                            <field name="administrative_management_start"/>
                             <field name="request_administrative_expedient_id"/>
                             <field name="parliamentary_resolution_date"/>
                             <field name="parliamentary_expedient_id"/>
@@ -70,7 +69,6 @@
             <field name="arch" type="xml">
                 <tree string="Subsidios">
                     <field name="name"/>
-                    <field name="administrative_management_start"/>
                     <field name="state" invisible="1"/>
                 </tree>
             </field>
