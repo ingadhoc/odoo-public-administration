@@ -21,3 +21,9 @@ class PublicBudgetSubsidyClaim(models.Model):
         required=True,
         default=fields.Date.context_today
         )
+    type = fields.Selection([
+        ('first', 'Primer reclamo'),
+        ('last', 'Ultimo aviso')],
+        'Tipo',
+        required=True,
+        )

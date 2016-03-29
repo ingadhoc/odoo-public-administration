@@ -6,7 +6,9 @@
     'data': [
         'views/subsidy_view.xml',
         'views/transaction_type_view.xml',
+        'views/approval_arrangement_view.xml',
         'security/ir.model.access.csv',
+        'data/sequence_data.xml',
     ],
     'demo': [
         'demo/public_budget.transaction_type.csv',
