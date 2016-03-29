@@ -42,8 +42,7 @@ class PublicBudgetSubsidy(models.Model):
     parliamentary_resolution_date = fields.Date(
         'Fecha de Resolución Parlamentaria',
         )
-    parliamentary_expedient_id = fields.Many2one(
-        'public_budget.expedient',
+    parliamentary_expedient = fields.Char(
         'Expediente Parlamentario',
         )
     check_handed_date = fields.Date(

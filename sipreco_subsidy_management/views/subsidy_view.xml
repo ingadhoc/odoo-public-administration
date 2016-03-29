@@ -17,7 +17,7 @@
                             <field name="state" string="Transaction State" readonly="1"/>
                             <field name="request_administrative_expedient_id"/>
                             <field name="parliamentary_resolution_date"/>
-                            <field name="parliamentary_expedient_id"/>
+                            <field name="parliamentary_expedient"/>
                             <field name="accountability_administrative_expedient_id"/>
                             <!-- fields from transaction -->
                             <field name="name"/>
@@ -83,7 +83,7 @@
                     <field name="name"/>
                     <field name="request_administrative_expedient_id"/>
                     <field name="parliamentary_resolution_date"/>
-                    <field name="parliamentary_expedient_id"/>
+                    <field name="parliamentary_expedient"/>
                     <field name="accountability_administrative_expedient_id"/>
                     <filter string="Rendición Vencida" name="accountability_overcome" domain="[('accountability_overcome', '=', True)]"/>
                     <group expand="1" string="Group By">
