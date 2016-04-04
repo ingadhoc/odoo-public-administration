@@ -124,7 +124,7 @@ class account_voucher(models.Model):
                 # if current_date in holidays:
                 #     continue
                 business_days_to_add -= 1
-        self.payment_date = current_date
+        self.payment_date = fields.Date.to_string(current_date)
 
     # no need for this, dlete if needed
     # @api.constrains('state', 'journal_id', 'amount')

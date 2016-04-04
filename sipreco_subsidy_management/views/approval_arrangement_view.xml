@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- FORMVIEW -->
+        <record id="view_public_budget_approval_arrangement_form" model="ir.ui.view">
+            <field name="name">public_budget.approval_arrangement.form</field>
+            <field name="model">public_budget.approval_arrangement</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="number" required="False"/>
+                            <field name="subsidy_id"/>
+                            <field name="approved_amount"/>
+                            <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- TREEVIEW -->
+        <record id="view_public_budget_approval_arrangement_tree" model="ir.ui.view">
+            <field name="name">public_budget.approval_arrangement.tree</field>
+            <field name="model">public_budget.approval_arrangement</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="number"/>
+                    <field name="subsidy_id"/>
+                    <field name="approved_amount"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_public_budget_approval_arrangement" model="ir.actions.act_window">
+            <field name="name">Disposiciones de aprobación</field>
+            <field name="res_model">public_budget.approval_arrangement</field>
+        </record>
+
+        <menuitem
+            id="menu_public_budget_approval_arrangement"
+            sequence="20"
+            action="action_public_budget_approval_arrangement"
+            parent="menu_responsible_accounting"
+            />
+    </data>
+</openerp>
+

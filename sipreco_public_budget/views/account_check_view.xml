@@ -25,6 +25,10 @@
 <!--                 <button string="Cancel Change" position="attributes">
                     <attribute name="groups">public_budget.group_habilitacion_usuario</attribute>
                 </button> -->
+                
+                <field name="payment_date" position="after">
+                    <field name="handed_date"/>
+                </field>
 
                 <!-- buttons to add to_be_handed behaviour -->
                 <button position="after">

@@ -18,6 +18,10 @@ class account_check(models.Model):
 
     _inherit = ['account.check']
 
+    handed_date = fields.Date(
+        'Fecha de Entrega',
+        readonly=True,
+        )
     state = fields.Selection(
         # selection_add=[('to_be_handed', 'To Be Handed')]
         [
@@ -33,6 +37,11 @@ class account_check(models.Model):
             ('cancel', _('Cancel')),
         ]
         )
+
+    @api.multi
+    def action_hand(self):
+        self.write({'handed_date': fields.Date.today()})
+        return super(account_check, self).action_hand()
 
     @api.multi
     def check_check_cancellation(self):
