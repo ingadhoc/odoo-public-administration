@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Sipreco Set Up Data TMC',
-    'version': '8.0.0.2.0',
+    'version': '8.0.0.3.0',
     'category': 'Accounting',
     'sequence': 14,
     'summary': '',
@@ -24,6 +24,7 @@ Sipreco Set Up Data TMC
         'data/res_company.xml',
         'data/res_users.xml',
         'reports/stylesheet.xml',
+        'reports/payment_order_multi.xml'
     ],
     'demo': [
     ],

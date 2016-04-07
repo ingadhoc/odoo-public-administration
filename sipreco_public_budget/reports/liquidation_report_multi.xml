@@ -3,8 +3,8 @@
     <data>
 
         <!-- Printed Invoice -->
-        <record id="action_aeroo_report_liquidation" model="ir.actions.report.xml">
-            <field name="name">Liquidation Report Multi</field>
+        <record id="action_aeroo_report_liquidation_multi" model="ir.actions.report.xml">
+            <field name="name">Reporte de Liquidación Múltiple</field>
             <field name="type">ir.actions.report.xml</field>
             <field name="model">account.invoice</field>
             <field name="report_name">liquidation_report_multi</field>
