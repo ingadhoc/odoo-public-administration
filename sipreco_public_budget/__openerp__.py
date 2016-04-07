@@ -17,6 +17,7 @@
         'reports/advance_request_report.xml',
         'reports/advance_return_report.xml',
         'reports/liquidation_report.xml',
+        'reports/liquidation_report_multi.xml',
         'reports/advance_request_debt_report.xml',
         'views/res_partner_view.xml',
         'views/custom_views.xml',
@@ -108,4 +109,4 @@ Customizaciones especificas al modulo public_budget para SIPRECO
     'installable': True,
     'name': 'Public Budget Sipreco Customizations',
     'test': [],
-    'version': '8.0.1.13.1'}
+    'version': '8.0.1.14.1'}
