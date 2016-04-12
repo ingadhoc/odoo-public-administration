@@ -10,6 +10,7 @@
                     <field name="number"/>
                     <field name="issue_date"/>
                     <field name="description"/>
+                    <field name="reference"/>
                     <field name="last_move_date"/>
                     <field name="founder_id"/>
                     <field name="category_id"/>
@@ -71,6 +72,7 @@
                                 <field name="supplier_ids" widget="many2many_tags"/>
                                 <field name="cover"/>
                                 <field name="user_id"/>
+                                <field name="reference"/>
                             </group>
                             <group>
                                 <field name="founder_id"/>
@@ -116,6 +118,7 @@
                     <field name="number"/>
                     <field name="issue_date"/>
                     <field name="cover"/>
+                    <field name="reference"/>
                     <field name="last_move_date"/>
                     <field name="founder_id"/>
                     <field name="category_id"/>

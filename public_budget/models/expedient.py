@@ -38,6 +38,10 @@ class expedient(models.Model):
         string='Description',
         required=True
         )
+    reference = fields.Char(
+        string='Referencia',
+        required=False
+        )
     last_move_date = fields.Date(
         string=_('Last Move'),
         store=True,
