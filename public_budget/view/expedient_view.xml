@@ -58,6 +58,7 @@
                     </header>
                     <sheet string="Expedient">
                         <field name="user_location_ids" invisible="1"/>
+                        <field name="id" invisible="1"/>
                         <h1>
                             <label for="number"/>
                             <field name="number" class="oe_inline" readonly="1"/>
@@ -68,7 +69,7 @@
                             <group>
                                 <field name="issue_date"/>
                                 <field name="year"/>
-                                <field name="description"/>
+                                <field name="description" attrs="{'readonly: [('id', '!=', False)]}"/>
                                 <field name="supplier_ids" widget="many2many_tags"/>
                                 <field name="cover"/>
                                 <field name="user_id"/>

@@ -38,8 +38,8 @@ class PublicBudgetExpedient(models.Model):
     description = fields.Char(
         string='Description',
         required=True,
-        readonly=True,
-        states={'cancel': [('readonly', False)]}
+        # readonly=True,
+        # states={'cancel': [('readonly', False)]}
     )
     reference = fields.Char(
         string='Referencia',
