@@ -69,7 +69,7 @@
                             <group>
                                 <field name="issue_date"/>
                                 <field name="year"/>
-                                <field name="description" attrs="{'readonly: [('id', '!=', False)]}"/>
+                                <field name="description" attrs="{'readonly': [('id', '!=', False)]}"/>
                                 <field name="supplier_ids" widget="many2many_tags"/>
                                 <field name="cover"/>
                                 <field name="user_id"/>
