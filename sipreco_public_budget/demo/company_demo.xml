@@ -26,6 +26,7 @@
             <field name='parent_id' ref='base.main_company'/>
             <field name='currency_id' ref='base.ARS'/>
             <field name='partner_id' ref='partner_sipreco'/>
+            <field name='double_validation' eval='True'/>
             <field name="name">Tribunal Municipal de Cuentas (Demo)</field>
             <field name="use_argentinian_localization" eval="True"/>
         </record>
