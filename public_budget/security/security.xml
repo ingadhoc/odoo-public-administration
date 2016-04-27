@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="expedient_in_user_locations_rule" model="ir.rule">
+            <field name="name">Expedient only in user locations</field>
+            <field name="model_id" ref="public_budget.model_public_budget_expedient"/>
+            <field eval="True" name="global"/>
+            <field eval="False" name="perm_read"/>
+            <field name="domain_force">[('current_location_id', 'in', user.location_ids.ids)]</field>
+        </record>
+    </data>
+</openerp>

@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
+from openerp.exceptions import Warning
 
 
-class expedient(models.Model):
+class PublicBudgetExpedient(models.Model):
     """Expedient"""
 
     _name = 'public_budget.expedient'
@@ -22,121 +23,123 @@ class expedient(models.Model):
     number = fields.Char(
         string='Number',
         readonly=True
-        )
+    )
     issue_date = fields.Datetime(
         string='Issue Date',
         readonly=True,
         required=True,
         default=fields.Datetime.now
-        )
+    )
     cover = fields.Char(
         string=_('Cover'),
         store=True,
         compute='_get_cover'
-        )
+    )
     description = fields.Char(
         string='Description',
-        required=True
-        )
+        required=True,
+        readonly=True,
+        states={'cancel': [('readonly', False)]}
+    )
     reference = fields.Char(
         string='Referencia',
         required=False
-        )
+    )
     last_move_date = fields.Date(
         string=_('Last Move'),
         store=True,
         compute='_get_current_location'
-        )
+    )
     founder_id = fields.Many2one(
         'public_budget.expedient_founder',
         string='Founder',
         required=True
-        )
+    )
     category_id = fields.Many2one(
         'public_budget.expedient_category',
         string='Category',
         required=True
-        )
+    )
     type = fields.Selection(
         [(u'payment', u'Payment'), (u'authorizing', u'Authorizing')],
         string='Type'
-        )
+    )
     first_location_id = fields.Many2one(
         'public_budget.location',
         string='First Location',
         required=True
-        )
+    )
     current_location_id = fields.Many2one(
         'public_budget.location',
         string=_('Current Location'),
         store=True,
         compute='_get_current_location'
-        )
+    )
     note = fields.Text(
         string='Note'
-        )
+    )
     pages = fields.Integer(
         string='Pages',
         required=True
-        )
+    )
     subsidy_expedient = fields.Boolean(
         string='Expediente de Solicitud Subsidio?',
         required=False
-        )
+    )
     subsidy_recipient_doc = fields.Integer(
         string='DNI Receptor Potencial Subsidio',
         required=False
-        )
+    )
     subsidy_amount = fields.Integer(
         string='Monto',
         required=False
-        )
+    )
     subsidy_approved = fields.Boolean(
         string='Aprobado?',
         required=False
-        )
+    )
     employee_subsidy_requestor = fields.Many2one(
         'res.partner',
         string='Empleado Solicitud',
         domain=[('employee', '=', True)]
-        )
+    )
     final_location = fields.Char(
         string='Final Location'
-        )
+    )
     year = fields.Integer(
         string=_('Año'),
         compute='_get_year'
-        )
+    )
     in_transit = fields.Boolean(
         string=_('In Transit?'),
         store=True,
         compute='_get_current_location'
-        )
+    )
     user_location_ids = fields.Many2many(
         related='user_id.location_ids',
         readonly=True,
-        )
+    )
     user_id = fields.Many2one(
         'res.users',
         string='User',
         readonly=True,
         required=True,
         default=lambda self: self.env.user
-        )
+    )
     state = fields.Selection(
         _states_,
         'State',
         default='open',
-        )
+    )
     child_ids = fields.One2many(
         'public_budget.expedient',
         'parent_id',
         string='Childs'
-        )
+    )
     parent_id = fields.Many2one(
         'public_budget.expedient',
         string='Parent'
-        )
+    )
     supplier_ids = fields.Many2many(
         'res.partner',
         'public_budget_expedient_ids_supplier_ids_rel',
@@ -145,7 +148,7 @@ class expedient(models.Model):
         string='Suppliers',
         context={'default_supplier': 1},
         domain=[('supplier', '=', True)]
-        )
+    )
     remit_ids = fields.Many2many(
         'public_budget.remit',
         'public_budget_remit_ids_expedient_ids_rel',
@@ -154,7 +157,7 @@ class expedient(models.Model):
         string='Remits',
         readonly=True,
         states={'in_transit': [('readonly', False)]}
-        )
+    )
 
     @api.one
     @api.depends(
@@ -163,7 +166,7 @@ class expedient(models.Model):
         'remit_ids.location_id',
         'remit_ids.location_dest_id',
         'remit_ids.state',
-        )
+    )
     def _get_current_location(self):
         """
         current_location_id no es computed
@@ -190,6 +193,34 @@ class expedient(models.Model):
         self.current_location_id = current_location_id
         self.last_move_date = last_move_date
         self.in_transit = in_transit
+
+    @api.multi
+    def write(self, vals):
+        if 'pages' in vals:
+            new_pages = vals.get('pages')
+            for record in self:
+                if new_pages < record.pages:
+                    raise Warning(
+                        'No puede disminuir la cantidad de páginas de un '
+                        'expediente')
+        return super(PublicBudgetExpedient, self).write(vals)
+
+    @api.multi
+    def check_expedients_exist(self):
+        for expedient in self:
+            transactions = self.env['public_budget.transaction'].search([
+                ('expedient_id', '=', expedient.id)])
+            if transactions:
+                raise Warning(
+                    'No puede anular este expediente ya que es utilizado en '
+                    'las siguientes transacciones %s' % transactions.ids)
+            vouchers = self.env['account.voucher'].search([
+                ('expedient_id', '=', expedient.id)])
+            if vouchers:
+                raise Warning(
+                    'No puede anular este expediente ya que es utilizado en '
+                    'las siguientes ordenes de pago %s' % vouchers.ids)
+        return True
 
     @api.one
     @api.depends('issue_date')
@@ -242,6 +273,6 @@ class expedient(models.Model):
     def create(self, vals):
         vals['number'] = self.env[
             'ir.sequence'].get('public_budget.expedient') or '/'
-        return super(expedient, self).create(vals)
+        return super(PublicBudgetExpedient, self).create(vals)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
