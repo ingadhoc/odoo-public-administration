@@ -6,7 +6,7 @@
             <field name="model_id" ref="public_budget.model_public_budget_expedient"/>
             <field eval="True" name="global"/>
             <field eval="False" name="perm_read"/>
-            <field name="domain_force">[('current_location_id', 'in', user.location_ids.ids)]</field>
+            <field name="domain_force">['|' ,('current_location_id', 'in', user.location_ids.ids), ('current_location_id', '=', False)]</field>
         </record>
     </data>
 </openerp>
