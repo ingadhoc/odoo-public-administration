@@ -4,6 +4,7 @@
     'data': [
                 'security/public_budget_group.xml',
                 'security/ir.model.access.csv',
+                'security/security.xml',
                 'wizard/transaction_definitive_make_invoice_view.xml',
                 'wizard/transaction_definitive_mass_invoice_create_view.xml',
                 'wizard/budget_analysis_wizard_view.xml',
@@ -63,6 +64,6 @@ Modulo generico para gestion publica presupuestaria/contable
     'license': 'AGPL-3',
     'name': 'Public Budget',
     'test': [],
-    'version': '8.0.0.11.2',
+    'version': '8.0.0.12.0',
     'website': ''}
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

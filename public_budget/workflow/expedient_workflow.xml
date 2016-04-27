@@ -97,7 +97,7 @@
             <field name="act_from" ref="a_130C_13D8"/>
             <field name="act_to" ref="a_130C_1788"/>
             <field name="signal">sgn_to_annulled</field>
-            <field name="condition">True</field>
+            <field name="condition">check_expedients_exist()</field>
         </record>
         <record id="t_130C_178A" model="workflow.transition">
             <field name="act_from" ref="a_130C_1788"/>
