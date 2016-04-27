@@ -97,7 +97,7 @@
 
                 <!-- Make validate only visible from signed -->
                 <button name="proforma_voucher" position="attributes">
-                    <attribute name="attrs">{'invisible': ['|', ('journal_double_validation', '=', False), ('state', '!=', 'signed')]}</attribute>
+                    <attribute name="attrs">{'invisible': ['|', ('company_double_validation', '=', False), ('state', '!=', 'signed')]}</attribute>
                     <attribute name="groups">public_budget.group_habilitacion_director</attribute>
                 </button>
 

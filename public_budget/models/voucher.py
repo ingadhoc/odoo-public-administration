@@ -106,6 +106,10 @@ class account_voucher(models.Model):
                 lambda r: (
                     # sacamos estas porquer serian por ej. las liquidaciones
                     # not r.invoice or
+                    # agregamos esto para que traiga las devoluciones de
+                    # adelantos, en realidad va a traer cualquier cosa
+                    # que sea un credito
+                    r.debit or
                     r.invoice.transaction_id.id == transaction_id))
         # agregamos esto para que no lleve facturas a vouchers que no esten
         # dentro del marco de una transaccion (por ej. pago de adelantos)
