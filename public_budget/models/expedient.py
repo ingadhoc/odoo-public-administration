@@ -48,6 +48,7 @@ class PublicBudgetExpedient(models.Model):
     last_move_date = fields.Date(
         string=_('Last Move'),
         store=True,
+        compute_sudo=True,
         compute='_get_current_location'
     )
     founder_id = fields.Many2one(
@@ -73,6 +74,7 @@ class PublicBudgetExpedient(models.Model):
         'public_budget.location',
         string=_('Current Location'),
         store=True,
+        compute_sudo=True,
         compute='_get_current_location'
     )
     note = fields.Text(
@@ -113,7 +115,8 @@ class PublicBudgetExpedient(models.Model):
     in_transit = fields.Boolean(
         string=_('In Transit?'),
         store=True,
-        compute='_get_current_location'
+        compute='_get_current_location',
+        compute_sudo=True,
     )
     user_location_ids = fields.Many2many(
         related='user_id.location_ids',
@@ -172,6 +175,7 @@ class PublicBudgetExpedient(models.Model):
         current_location_id no es computed
         los otros dos si
         """
+        # self = self.sudo()
         last_move_date = False
         current_location_id = False
         in_transit = False
