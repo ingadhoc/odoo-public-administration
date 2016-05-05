@@ -171,7 +171,8 @@ class account_voucher(models.Model):
             inv = line.move_line_id.invoice
             _logger.info('Checking to pay amount on invoice %s' % inv.id)
             # TODO mejorar, lo hacemos asi por errores de redondeo
-            if inv and (inv.to_pay_amount - inv.amount_total) > 0.01:
+            if inv and self.currency_id.round(
+                    inv.to_pay_amount - inv.amount_total) > 0.0:
                 raise Warning((
                     'El importe mandado a pagar no puede ser mayor al importe '
                     'de la factura'))
@@ -195,7 +196,7 @@ class account_voucher(models.Model):
         """
         _logger.info('Checking transaction amount on voucher %s' % self.id)
         if self.transaction_with_advance_payment:
-            advance_remaining_amount = (
+            advance_remaining_amount = self.currency_id.round(
                 self.transaction_id.advance_remaining_amount)
             if advance_remaining_amount < 0.0:
                 raise Warning(_(
