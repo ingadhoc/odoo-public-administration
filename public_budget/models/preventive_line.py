@@ -230,7 +230,8 @@ class preventive_line(models.Model):
     @api.one
     @api.constrains('definitive_line_ids', 'preventive_amount')
     def _check_number(self):
-        if self.preventive_amount < self.definitive_amount:
+        if self.transaction_id.company_id.currency_id.round(
+                self.preventive_amount - self.definitive_amount) < 0.0:
             raise Warning(
                 _("Definitive Amount can't be greater than Preventive Amount"))
 

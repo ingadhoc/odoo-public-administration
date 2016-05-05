@@ -549,14 +549,17 @@ class transaction(models.Model):
     @api.constrains('preventive_line_ids', 'type_id', 'expedient_id')
     def _check_transaction_type(self):
         if self.type_id.with_amount_restriction:
-            restriction = self.env[
+            rest = self.env[
                 'public_budget.transaction_type_amo_rest'].search(
                 [('transaction_type_id', '=', self.type_id.id),
                  ('date', '<=', self.expedient_id.issue_date)],
                 order='date desc', limit=1)
-            if restriction:
-                if restriction.to_amount < self.preventive_amount or \
-                        restriction.from_amount > self.preventive_amount:
+            if rest:
+                if (
+                        (self.company_id.currency_id.round(
+                            rest.to_amount - self.preventive_amount) < 0) or
+                        (self.company_id.currency_id.round(
+                            rest.from_amount - self.preventive_amount) > 0)):
                     raise Warning(_(
                         "Preventive Total, Type and Date are not compatible "
                         "with Transaction Amount Restrictions"))
