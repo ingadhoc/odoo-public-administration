@@ -195,9 +195,7 @@ class account_voucher(models.Model):
         """
         """
         for voucher in self:
-            print 'voucher.amount', voucher.amount
-            print 'voucher.to_pay_amount', voucher.to_pay_amount
-            if voucher.amount != voucher.to_pay_amount:
+            if self.currency_id.round(voucher.amount - voucher.to_pay_amount):
                 raise Warning(_('You can not send to sign process a Voucher \
                     that has Total Amount different from To Pay Amount'))
         return True
