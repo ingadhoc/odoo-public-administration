@@ -67,7 +67,7 @@ class public_budget_definitive_mass_invoice_create(models.TransientModel):
                 'preventive_line_ids.definitive_line_ids').filtered(
                 lambda r: r.residual_amount):
             line_vals = definitive_line.get_invoice_line_vals(
-                journal=wizard.journal)
+                journal=wizard.journal_id)
             inv_line = self.env['account.invoice.line'].create(line_vals)
 
             invoice_vals = wizard.transaction_id.get_invoice_vals(
