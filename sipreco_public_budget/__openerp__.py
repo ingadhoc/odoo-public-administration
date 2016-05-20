@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {'active': False,
-    'author':  'Ingenieria ADHOC',
+    'author': 'Ingenieria ADHOC',
     'website': 'www.ingadhoc.com',
     'category': 'Accounting & Finance',
     'data': [
@@ -110,4 +110,4 @@ Customizaciones especificas al modulo public_budget para SIPRECO
     'installable': True,
     'name': 'Public Budget Sipreco Customizations',
     'test': [],
-    'version': '8.0.1.17.0'}
+    'version': '8.0.1.18.0'}
