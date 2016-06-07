@@ -18,7 +18,7 @@
             <field name="name">Mariano Roca</field>
             <field name="email">mariano@mail.com</field>
             <field name="document_type_id" ref="l10n_ar_invoice.dt_DNI"/>
-            <field name="document_number">31393297</field>
+            <field name="document_number">121321312</field>
             <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
             <field name="customer" eval="False"/>
             <field name="employee" eval="True"/>
@@ -28,7 +28,7 @@
             <field name="name">Miguel Zamarini</field>
             <field name="email">mariano@mail.com</field>
             <field name="document_type_id" ref="l10n_ar_invoice.dt_DNI"/>
-            <field name="document_number">31393297</field>
+            <field name="document_number">54654654</field>
             <field name="responsability_id" ref="l10n_ar_invoice.res_CF"/>
             <field name="customer" eval="False"/>
             <field name="employee" eval="True"/>
