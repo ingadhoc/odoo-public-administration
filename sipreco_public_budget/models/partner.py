@@ -26,7 +26,7 @@ class partner(models.Model):
 
     @api.one
     @api.constrains('subsidy_recipient', 'document_number')
-    def check_unique_document_number(self):
+    def check_unique_document_number_subsidy_recipient(self):
         if self.subsidy_recipient and self.document_number:
             same_document_partners = self.search([
                 ('document_number', '=', self.document_number),
@@ -37,7 +37,21 @@ class partner(models.Model):
                 raise Warning(_(
                     'El número de documento debe ser único por receptor de '
                     'subsidio!\n'
-                    '* ids de receptores: %s') % same_document_partners.ids)
+                    '* Receptor existente: %s') % same_document_partners.name)
+
+    @api.one
+    @api.constrains('employee', 'document_number')
+    def check_unique_document_number_employee(self):
+        if self.employee and self.document_number:
+            same_document_partners = self.search([
+                ('document_number', '=', self.document_number),
+                ('employee', '=', True),
+                ('id', '!=', self.id),
+                ])
+            if same_document_partners:
+                raise Warning(_(
+                    'El número de documento debe ser único por empleado!\n'
+                    '* Empleado existente: %s') % same_document_partners.name)
 
     @api.multi
     def mark_as_reconciled(self):
