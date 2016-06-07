@@ -189,10 +189,14 @@ class definitive_line(models.Model):
         _logger.info('Finish getting amounts for definitive line %s' % self.id)
 
     @api.multi
-    def get_invoice_line_vals(self, to_invoice_amount=False):
+    def get_invoice_line_vals(self, to_invoice_amount=False, journal=False):
         self.ensure_one()
         if not to_invoice_amount:
             to_invoice_amount = self.residual_amount
+        print 'wizard.journal_id.type', journal.type
+        if journal.type in ('sale_refund', 'purchase_refund'):
+            to_invoice_amount = -1.0 * to_invoice_amount
+        print 'refund2', to_invoice_amount
         preventive_line = self.preventive_line_id
         line_vals = {
             'name': preventive_line.budget_position_id.name,

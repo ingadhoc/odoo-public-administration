@@ -97,8 +97,8 @@ class public_budget_definitive_make_invoice(models.TransientModel):
         'account.journal',
         string='Journal',
         required=True,
-        domain="[('type', 'in', ('purchase','purchase_refund')),\
-        ('company_id','=',company_id)]",
+        domain="[('type', 'in', ('purchase','purchase_refund')),"
+        "('company_id','=',company_id)]",
         default=_get_default_journal
     )
     transaction_id = fields.Many2one(
@@ -149,8 +149,8 @@ class public_budget_definitive_make_invoice(models.TransientModel):
         if tran_type.with_advance_payment:
             if not tran_type.advance_account_id:
                 raise Warning(_(
-                    "On Advance Transactions, transaction advance type\
-                    must have and advance account configured!"))
+                    "On Advance Transactions, transaction advance type"
+                    "must have and advance account configured!"))
             advance_account = tran_type.advance_account_id
             # Check advance remaining amount
             total_to_invoice_amount = sum(
@@ -161,14 +161,14 @@ class public_budget_definitive_make_invoice(models.TransientModel):
                 raise Warning(_(
                     "You can not invoice more than Advance Remaining Amount!\n"
                     "* Amount to invoice: %s\n"
-                    "* Advance Remaining Amount: %s"
-                    ) % (total_to_invoice_amount, advance_to_return_amount))
+                    "* Advance Remaining Amount: %s") % (
+                    total_to_invoice_amount, advance_to_return_amount))
 
         inv_lines = self.env['account.invoice.line']
         for line in wizard.line_ids.filtered(lambda r: r.to_invoice_amount):
             definitive_line = line.definitive_line_id
             line_vals = definitive_line.get_invoice_line_vals(
-                line.to_invoice_amount)
+                line.to_invoice_amount, journal=wizard.journal_id)
             inv_lines += inv_lines.create(line_vals)
 
         # Si no hay se creo alguna linea es porque todas tienen amount 0

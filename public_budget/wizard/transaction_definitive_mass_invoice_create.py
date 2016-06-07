@@ -58,15 +58,16 @@ class public_budget_definitive_mass_invoice_create(models.TransientModel):
         if tran_type.with_advance_payment:
             if not tran_type.advance_account_id:
                 raise Warning(_(
-                    "On Advance Transactions, transaction advance type\
-                    must have and advance account configured!"))
+                    "On Advance Transactions, transaction advance type"
+                    "must have and advance account configured!"))
             advance_account = tran_type.advance_account_id
 
         invoices = self.env['account.invoice']
         for definitive_line in self.transaction_id.mapped(
                 'preventive_line_ids.definitive_line_ids').filtered(
                 lambda r: r.residual_amount):
-            line_vals = definitive_line.get_invoice_line_vals()
+            line_vals = definitive_line.get_invoice_line_vals(
+                journal=wizard.journal_id)
             inv_line = self.env['account.invoice.line'].create(line_vals)
 
             invoice_vals = wizard.transaction_id.get_invoice_vals(
