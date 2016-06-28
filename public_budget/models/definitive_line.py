@@ -127,7 +127,9 @@ class definitive_line(models.Model):
         'amount',
         'invoice_line_ids.invoice_id.state',
         'invoice_line_ids.invoice_id.type',
-        'invoice_line_ids.price_subtotal',
+        # no haria falta depende de price_subtotal porque to pay amount y paid
+        # amount ya lo tienen como dependencia (corre dos veces el calculo)
+        # 'invoice_line_ids.price_subtotal',
         'invoice_line_ids.to_pay_amount',
         'invoice_line_ids.paid_amount',
     )
@@ -149,7 +151,8 @@ class definitive_line(models.Model):
 
         filter_domain = [
             ('id', 'in', self.invoice_line_ids.ids),
-            ('invoice_id.state', 'not in', ('cancel', 'draft'))]
+            ('invoice_id.state', 'not in', ('cancel', 'draft'))
+            ]
 
         # Add this to allow analysis between dates
         # from_date = self._context.get('analysis_from_date', False)
