@@ -64,17 +64,20 @@ class definitive_line(models.Model):
         'public_budget.preventive_line',
         ondelete='cascade',
         string='Preventive Line',
-        required=True
+        required=True,
+        auto_join=True,
         )
     transaction_id = fields.Many2one(
         readonly=True,
         store=True,
-        related='preventive_line_id.transaction_id'
+        related='preventive_line_id.transaction_id',
+        auto_join=True,
         )
     budget_id = fields.Many2one(
         readonly=True,
         store=True,
-        related='preventive_line_id.budget_id'
+        related='preventive_line_id.budget_id',
+        auto_join=True,
         )
     state = fields.Selection(
         selection=[('draft', _('Draft')), ('invoiced', _('Invoiced'))],
@@ -87,7 +90,8 @@ class definitive_line(models.Model):
         'account.invoice.line',
         'definitive_line_id',
         string='Invoice Lines',
-        readonly=True
+        readonly=True,
+        auto_join=True,
         )
 
     @api.constrains('issue_date')

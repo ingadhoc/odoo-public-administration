@@ -62,7 +62,8 @@ class transaction(models.Model):
         default=_get_default_budget,
         readonly=True,
         states={'draft': [('readonly', False)]},
-        domain=[('state', '=', 'open')]
+        domain=[('state', '=', 'open')],
+        auto_join=True,
         )
     type_id = fields.Many2one(
         'public_budget.transaction_type',
@@ -89,7 +90,8 @@ class transaction(models.Model):
         comodel_name='public_budget.definitive_line',
         inverse_name='transaction_id',
         string='Definitive Lines',
-        readonly=True
+        readonly=True,
+        auto_join=True,
         )
     supplier_ids = fields.Many2many(
         relation='transaction_res_partner_rel',
@@ -103,7 +105,8 @@ class transaction(models.Model):
         comodel_name='public_budget.budget_position',
         string=_('Related Budget Positions'),
         store=True,
-        compute='_get_budget_positions'
+        compute='_get_budget_positions',
+        auto_join=True,
         )
     advance_preventive_line_ids = fields.One2many(
         comodel_name='public_budget.preventive_line',
@@ -115,7 +118,8 @@ class transaction(models.Model):
             'default_advance_line': 1,
             'default_preventive_status': 'confirmed',
             'advance_line': 1},
-        domain=[('advance_line', '=', True)]
+        domain=[('advance_line', '=', True)],
+        auto_join=True,
         )
     preventive_amount = fields.Float(
         string='Monto Preventivo',
@@ -214,6 +218,7 @@ class transaction(models.Model):
         'transaction_id',
         string='Preventive Lines',
         readonly=True,
+        auto_join=True,
         states={'open': [('readonly', False)]},
         domain=[('advance_line', '=', False)]
         )
@@ -222,6 +227,7 @@ class transaction(models.Model):
         'transaction_id',
         string='Invoices',
         readonly=True,
+        auto_join=True,
         states={'open': [('readonly', False)]}
         )
     voucher_ids = fields.One2many(
@@ -231,6 +237,7 @@ class transaction(models.Model):
         readonly=True,
         context={'default_type': 'payment'},
         states={'open': [('readonly', False)]},
+        auto_join=True,
         domain=[
             ('type', '=', 'payment'),
             ('transaction_with_advance_payment', '=', False)
@@ -251,6 +258,7 @@ class transaction(models.Model):
             ('transaction_with_advance_payment', '=', True)
             ],
         context={'default_type': 'payment'},
+        auto_join=True,
         states={'open': [('readonly', False)]},
         )
 

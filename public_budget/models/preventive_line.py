@@ -84,17 +84,20 @@ class preventive_line(models.Model):
         'public_budget.transaction',
         ondelete='cascade',
         string='Transaction',
-        required=True
+        required=True,
+        auto_join=True,
         )
     definitive_line_ids = fields.One2many(
         'public_budget.definitive_line',
         'preventive_line_id',
-        string='Definitive Lines'
+        string='Definitive Lines',
+        auto_join=True,
         )
     budget_id = fields.Many2one(
         readonly=True,
         store=True,
-        related='transaction_id.budget_id'
+        related='transaction_id.budget_id',
+        auto_join=True,
         )
     budget_position_id = fields.Many2one(
         'public_budget.budget_position',
@@ -102,7 +105,8 @@ class preventive_line(models.Model):
         required=True,
         states={'invoiced': [('readonly', True)]},
         context={'default_type': 'normal'},
-        domain=[('type', '=', 'normal')]
+        domain=[('type', '=', 'normal')],
+        auto_join=True,
         )
 
     @api.one

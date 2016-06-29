@@ -29,12 +29,14 @@ class invoice(models.Model):
         string='Transaction',
         copy=False,
         readonly=True,
+        auto_join=True,
         # required=True,
         )
     budget_id = fields.Many2one(
         related='transaction_id.budget_id',
         readonly=True,
         store=True,
+        auto_join=True,
         )
     signed_amount = fields.Float(
         'Monto Firmado',

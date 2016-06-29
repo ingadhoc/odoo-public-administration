@@ -27,7 +27,8 @@ class invoice_line(models.Model):
     definitive_line_id = fields.Many2one(
         'public_budget.definitive_line',
         string='Definitive Line',
-        readonly=True
+        readonly=True,
+        auto_join=True,
         )
 
     @api.one
