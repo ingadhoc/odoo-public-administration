@@ -84,7 +84,8 @@ class definitive_line(models.Model):
         string=_('State'),
         states={'draft': [('readonly', False)]},
         default='draft',
-        compute='_get_state'
+        compute='_get_state',
+        store=True,
     )
     invoice_line_ids = fields.One2many(
         'account.invoice.line',
@@ -102,6 +103,7 @@ class definitive_line(models.Model):
                 'la transacción'))
 
     @api.one
+    @api.depends('invoice_line_ids')
     def _get_state(self):
         _logger.info('Getting state for definitive line %s' % self.id)
         if self.invoice_line_ids:
