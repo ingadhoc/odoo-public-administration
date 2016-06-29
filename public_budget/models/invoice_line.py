@@ -17,26 +17,26 @@ class invoice_line(models.Model):
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         # store=True,
-        )
+    )
     paid_amount = fields.Float(
         string=_('Paid Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         # store=True,
-        )
+    )
     definitive_line_id = fields.Many2one(
         'public_budget.definitive_line',
         string='Definitive Line',
         readonly=True,
         auto_join=True,
-        )
+    )
 
     @api.one
     @api.depends(
         'price_subtotal',
         'invoice_id.amount_total',
         'invoice_id.residual'
-        )
+    )
     def _get_amounts(self):
         """Update the following fields:
         -to_pay_amount: is the amount of this invoice that is in draft vouchers
@@ -64,7 +64,7 @@ class invoice_line(models.Model):
     @api.one
     @api.constrains(
         'definitive_line_id',
-        )
+    )
     def check_budget_state_open_pre_closed(self):
         budget = self.definitive_line_id.budget_id
         if budget and budget.state not in ['open', 'pre_closed']:

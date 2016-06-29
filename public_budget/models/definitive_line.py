@@ -19,7 +19,7 @@ class definitive_line(models.Model):
         required=True,
         states={'draft': [('readonly', False)]},
         default=fields.Date.context_today
-        )
+    )
     supplier_id = fields.Many2one(
         'res.partner',
         string='Supplier',
@@ -28,71 +28,71 @@ class definitive_line(models.Model):
         states={'draft': [('readonly', False)]},
         context={'default_supplier': True},
         domain=[('supplier', '=', True)]
-        )
+    )
     amount = fields.Float(
         string='Amount',
         readonly=True,
         required=True,
         states={'draft': [('readonly', False)]},
         digits=dp.get_precision('Account'),
-        )
+    )
     residual_amount = fields.Float(
         string=_('Residual Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         store=True,
-        )
+    )
     to_pay_amount = fields.Float(
         string=_('To Pay Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         store=True,
-        )
+    )
     paid_amount = fields.Float(
         string=_('Paid Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         store=True,
-        )
+    )
     invoiced_amount = fields.Float(
         string=_('Invoiced Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         store=True,
-        )
+    )
     preventive_line_id = fields.Many2one(
         'public_budget.preventive_line',
         ondelete='cascade',
         string='Preventive Line',
         required=True,
         auto_join=True,
-        )
+    )
     transaction_id = fields.Many2one(
         readonly=True,
         store=True,
         related='preventive_line_id.transaction_id',
         auto_join=True,
-        )
+    )
     budget_id = fields.Many2one(
         readonly=True,
         store=True,
         related='preventive_line_id.budget_id',
         auto_join=True,
-        )
+    )
     state = fields.Selection(
         selection=[('draft', _('Draft')), ('invoiced', _('Invoiced'))],
         string=_('State'),
         states={'draft': [('readonly', False)]},
         default='draft',
         compute='_get_state'
-        )
+    )
     invoice_line_ids = fields.One2many(
         'account.invoice.line',
         'definitive_line_id',
         string='Invoice Lines',
         readonly=True,
         auto_join=True,
-        )
+    )
 
     @api.constrains('issue_date')
     def check_dates(self):
@@ -156,7 +156,7 @@ class definitive_line(models.Model):
         filter_domain = [
             ('id', 'in', self.invoice_line_ids.ids),
             ('invoice_id.state', 'not in', ('cancel', 'draft'))
-            ]
+        ]
 
         # Add this to allow analysis between dates
         # from_date = self._context.get('analysis_from_date', False)
@@ -179,15 +179,15 @@ class definitive_line(models.Model):
         invoiced_amount = (
             sum(debit_invoice_lines.mapped('price_subtotal')) -
             sum(credit_invoice_lines.mapped('price_subtotal'))
-            )
+        )
         to_pay_amount = (
             sum(debit_invoice_lines.mapped('to_pay_amount')) -
             sum(credit_invoice_lines.mapped('to_pay_amount'))
-            )
+        )
         paid_amount = (
             sum(debit_invoice_lines.mapped('paid_amount')) -
             sum(credit_invoice_lines.mapped('paid_amount'))
-            )
+        )
 
         self.invoiced_amount = invoiced_amount
         self.residual_amount = self.amount - invoiced_amount

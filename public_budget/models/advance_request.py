@@ -24,7 +24,7 @@ class advance_request(models.Model):
         required=True,
         readonly=True,
         states={'draft': [('readonly', False)]},
-        )
+    )
     company_id = fields.Many2one(
         'res.company',
         string='Company',
@@ -33,7 +33,7 @@ class advance_request(models.Model):
         states={'draft': [('readonly', False)]},
         default=lambda self: self.env['res.company']._company_default_get(
             'public_budget.advance_request')
-        )
+    )
     date = fields.Date(
         string='Date',
         required=True,
@@ -41,19 +41,19 @@ class advance_request(models.Model):
         states={'draft': [('readonly', False)]},
         default=fields.Date.context_today,
         copy=False,
-        )
+    )
     approval_date = fields.Date(
         string='Fecha de Aprobación',
         readonly=True,
         states={'draft': [('readonly', False)]},
         copy=False,
-        )
+    )
     confirmation_date = fields.Date(
         string='Fecha de Confirmación',
         readonly=True,
         states={'draft': [('readonly', False)]},
         copy=False,
-        )
+    )
     user_id = fields.Many2one(
         'res.users',
         string='User',
@@ -61,7 +61,7 @@ class advance_request(models.Model):
         readonly=True,
         default=lambda self: self.env.user,
         states={'draft': [('readonly', False)]},
-        )
+    )
     type_id = fields.Many2one(
         'public_budget.advance_request_type',
         string='Type',
@@ -69,27 +69,27 @@ class advance_request(models.Model):
         readonly=True,
         domain="[('company_id', '=', company_id)]",
         states={'draft': [('readonly', False)]},
-        )
+    )
     state = fields.Selection(
         _states_,
         'State',
         default='draft',
         readonly=True,
-        )
+    )
     advance_request_line_ids = fields.One2many(
         'public_budget.advance_request_line',
         'advance_request_id',
         string='Lines',
         readonly=True,
         states={'draft': [('readonly', False)]},
-        )
+    )
     voucher_ids = fields.One2many(
         'account.voucher',
         'advance_request_id',
         # compute='get_vouchers',
         # inverse='dummy_inverse',
         string='Vouchers',
-        )
+    )
 
     # @api.one
     # def dummy_inverse(self):
@@ -145,7 +145,7 @@ class advance_request(models.Model):
             'advance_amount': amount,
             'advance_request_id': self.id,
             'account_id': voucher_data['value'].get('account_id', False),
-            }
+        }
         return vouchers.create(voucher_vals)
 
     @api.one
@@ -170,14 +170,14 @@ class advance_request(models.Model):
     def action_cancel(self):
         for request in self:
             open_vouchers = self.voucher_ids.filtered(
-                    lambda x: x.state not in ['draft', 'cancel'])
+                lambda x: x.state not in ['draft', 'cancel'])
             if open_vouchers:
                 raise Warning(_(
                     'You can nopt cancel an advance request with vouchers in '
                     'other state than "cancel" or "draft".\n'
                     ' * Request id: %i\n'
                     ' * Voucher ids: %s'
-                    ) % (request.id, open_vouchers.ids))
+                ) % (request.id, open_vouchers.ids))
             self.voucher_ids.unlink()
         self.write({'state': 'cancel'})
         return True

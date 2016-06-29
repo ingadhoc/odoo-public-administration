@@ -34,27 +34,27 @@ class transaction(models.Model):
         required=True,
         default=fields.Date.context_today,
         states={'draft': [('readonly', False)]},
-        )
+    )
     name = fields.Char(
         string='Name',
         readonly=True,
         required=True,
         states={'draft': [('readonly', False)], 'open': [('readonly', False)]}
-        )
+    )
     user_id = fields.Many2one(
         'res.users',
         string='User',
         readonly=True,
         required=True,
         default=lambda self: self.env.user
-        )
+    )
     expedient_id = fields.Many2one(
         'public_budget.expedient',
         string='Expedient',
         readonly=True,
         required=True,
         states={'draft': [('readonly', False)]}
-        )
+    )
     budget_id = fields.Many2one(
         'public_budget.budget',
         string='Budget',
@@ -64,7 +64,7 @@ class transaction(models.Model):
         states={'draft': [('readonly', False)]},
         domain=[('state', '=', 'open')],
         auto_join=True,
-        )
+    )
     type_id = fields.Many2one(
         'public_budget.transaction_type',
         string='Type',
@@ -72,34 +72,34 @@ class transaction(models.Model):
         required=True,
         domain="[('company_id', '=', company_id)]",
         states={'draft': [('readonly', False)]}
-        )
+    )
     partner_id = fields.Many2one(
         'res.partner',
         string='Partner',
         readonly=True,
         states={'draft': [('readonly', False)]}
-        )
+    )
     note = fields.Html(
         string='Note'
-        )
+    )
     type_with_advance_payment = fields.Boolean(
         readonly=True,
         related='type_id.with_advance_payment'
-        )
+    )
     definitive_line_ids = fields.One2many(
         comodel_name='public_budget.definitive_line',
         inverse_name='transaction_id',
         string='Definitive Lines',
         readonly=True,
         auto_join=True,
-        )
+    )
     supplier_ids = fields.Many2many(
         relation='transaction_res_partner_rel',
         comodel_name='res.partner',
         string=_('Suppliers'),
         store=True,
         compute='_get_suppliers'
-        )
+    )
     budget_position_ids = fields.Many2many(
         relation='transaction_position_rel',
         comodel_name='public_budget.budget_position',
@@ -107,7 +107,7 @@ class transaction(models.Model):
         store=True,
         compute='_get_budget_positions',
         auto_join=True,
-        )
+    )
     advance_preventive_line_ids = fields.One2many(
         comodel_name='public_budget.preventive_line',
         inverse_name='transaction_id',
@@ -120,81 +120,81 @@ class transaction(models.Model):
             'advance_line': 1},
         domain=[('advance_line', '=', True)],
         auto_join=True,
-        )
+    )
     preventive_amount = fields.Float(
         string='Monto Preventivo',
         compute='_get_preventive_amount',
         digits=dp.get_precision('Account'),
         store=True,
-        )
+    )
     preventive_balance = fields.Float(
         string='Saldo Preventivo',
         compute='_get_preventive_balance',
         digits=dp.get_precision('Account'),
         store=True,
         help='Saldo Preventivo',
-        )
+    )
     definitive_balance = fields.Float(
         string='Saldo Definitivo',
         compute='_get_definitive_balance',
         digits=dp.get_precision('Account'),
         store=True,
         help='Saldo Definitivo',
-        )
+    )
     definitive_amount = fields.Float(
         string='Monto Definitivo',
         compute='_get_definitive_amount',
         digits=dp.get_precision('Account'),
         store=True,
-        )
+    )
     invoiced_amount = fields.Float(
         string='Monto Devengado',
         compute='_get_invoiced_amount',
         digits=dp.get_precision('Account'),
         store=True,
-        )
+    )
     to_pay_amount = fields.Float(
         string='Monto A Pagar',
         compute='_get_to_pay_amount',
         digits=dp.get_precision('Account'),
         store=True,
-        )
+    )
     paid_amount = fields.Float(
         string=_('Monto Pagado'),
         compute='_get_paid_amount',
         digits=dp.get_precision('Account'),
         store=True,
-        )
+    )
     advance_preventive_amount = fields.Float(
         string=_('Monto Preventivo de Adelanto'),
         compute='_get_advance_preventive_amount',
         digits=dp.get_precision('Account'),
         store=True,
-        )
+    )
     advance_to_pay_amount = fields.Float(
         string=_('Monto de Adelanto a Pagar'),
         compute='_get_advance_amounts',
         digits=dp.get_precision('Account'),
         store=True,
-        )
+    )
     advance_paid_amount = fields.Float(
         string=_('Monto de Adelanto Pagado'),
         compute='_get_advance_amounts',
         digits=dp.get_precision('Account'),
         store=True,
-        )
+    )
     advance_remaining_amount = fields.Float(
         string=_('Monto Remanente de Adelanto'),
         compute='_get_advance_remaining_amount',
         digits=dp.get_precision('Account'),
         store=True,
-        )
+    )
     advance_to_return_amount = fields.Float(
         string=_('Monto a Devolver'),
         compute='_get_advance_to_return_amount',
         digits=dp.get_precision('Account'),
         store=True,
-        )
+    )
     company_id = fields.Many2one(
         'res.company',
         string='Company',
@@ -203,16 +203,16 @@ class transaction(models.Model):
         states={'draft': [('readonly', False)]},
         default=lambda self: self.env['res.company']._company_default_get(
             'public_budget.transaction')
-        )
+    )
     user_location_ids = fields.Many2many(
         string='User Locations',
         related='user_id.location_ids'
-        )
+    )
     state = fields.Selection(
         _states_,
         'State',
         default='draft',
-        )
+    )
     preventive_line_ids = fields.One2many(
         'public_budget.preventive_line',
         'transaction_id',
@@ -221,7 +221,7 @@ class transaction(models.Model):
         auto_join=True,
         states={'open': [('readonly', False)]},
         domain=[('advance_line', '=', False)]
-        )
+    )
     invoice_ids = fields.One2many(
         'account.invoice',
         'transaction_id',
@@ -229,7 +229,7 @@ class transaction(models.Model):
         readonly=True,
         auto_join=True,
         states={'open': [('readonly', False)]}
-        )
+    )
     voucher_ids = fields.One2many(
         'account.voucher',
         'transaction_id',
@@ -241,8 +241,8 @@ class transaction(models.Model):
         domain=[
             ('type', '=', 'payment'),
             ('transaction_with_advance_payment', '=', False)
-            ],
-        )
+        ],
+    )
     # Usamos otro campo por que si no el depends de advance_voucher_ids se
     # toma en cuenta igual que si fuese el de vouchers y necesitamos que sea
     # distinto para que no recalcule tantas veces. Si no la idea sería que
@@ -256,11 +256,11 @@ class transaction(models.Model):
         domain=[
             ('type', '=', 'payment'),
             ('transaction_with_advance_payment', '=', True)
-            ],
+        ],
         context={'default_type': 'payment'},
         auto_join=True,
         states={'open': [('readonly', False)]},
-        )
+    )
 
     @api.one
     @api.constrains('type_id', 'company_id')
@@ -394,14 +394,14 @@ class transaction(models.Model):
                 'account_id': account_id,
                 # 'line_cr_ids': line_cr_ids,
                 'line_dr_ids': line_dr_ids,
-                }
+            }
             vouchers.create(voucher_vals)
         return True
 
     @api.one
     @api.depends(
         'preventive_line_ids.preventive_amount',
-     )
+    )
     def _get_preventive_amount(self):
         self.preventive_amount = sum(self.mapped(
             'preventive_line_ids.preventive_amount'))
@@ -410,7 +410,7 @@ class transaction(models.Model):
     @api.depends(
         'preventive_amount',
         'definitive_amount',
-     )
+    )
     def _get_preventive_balance(self):
         _logger.info(
             'Getting preventive balance for transaction_id %s' % self.id)
@@ -421,7 +421,7 @@ class transaction(models.Model):
     @api.depends(
         'definitive_amount',
         'invoiced_amount',
-     )
+    )
     def _get_definitive_balance(self):
         _logger.info(
             'Getting definitive balance for transaction_id %s' % self.id)
@@ -431,7 +431,7 @@ class transaction(models.Model):
     @api.one
     @api.depends(
         'preventive_line_ids.definitive_amount',
-     )
+    )
     def _get_definitive_amount(self):
         self.definitive_amount = sum(self.mapped(
             'preventive_line_ids.definitive_amount'))
@@ -439,7 +439,7 @@ class transaction(models.Model):
     @api.one
     @api.depends(
         'preventive_line_ids.invoiced_amount',
-     )
+    )
     def _get_invoiced_amount(self):
         self.invoiced_amount = sum(self.mapped(
             'preventive_line_ids.invoiced_amount'))
@@ -447,7 +447,7 @@ class transaction(models.Model):
     @api.one
     @api.depends(
         'preventive_line_ids.to_pay_amount',
-     )
+    )
     def _get_to_pay_amount(self):
         self.to_pay_amount = sum(self.mapped(
             'preventive_line_ids.to_pay_amount'))
@@ -455,7 +455,7 @@ class transaction(models.Model):
     @api.one
     @api.depends(
         'preventive_line_ids.paid_amount',
-     )
+    )
     def _get_paid_amount(self):
         self.paid_amount = sum(self.mapped(
             'preventive_line_ids.paid_amount'))
@@ -526,9 +526,9 @@ class transaction(models.Model):
         """ Check preventive lines
         """
         if not self.preventive_line_ids:
-                raise Warning(_(
-                    'To close a transaction there must be at least one\
-                    preventive line'))
+            raise Warning(_(
+                'To close a transaction there must be at least one'
+                ' preventive line'))
 
         for line in self.preventive_line_ids:
             if (
@@ -537,8 +537,8 @@ class transaction(models.Model):
                     line.preventive_amount != line.to_pay_amount) or (
                     line.preventive_amount != line.paid_amount):
                 raise Warning(_(
-                    'To close a transaction, Preventive, Definitive, Invoiced,\
-                    To Pay and Paid amount must be the same for each line'))
+                    'To close a transaction, Preventive, Definitive, Invoiced,'
+                    ' To Pay and Paid amount must be the same for each line'))
 
         # Check advance transactions
         if self.type_id.with_advance_payment:
@@ -597,6 +597,6 @@ class transaction(models.Model):
             'default_transaction_id': self.id,
             'default_partner_id': partner_id and partner_id.id or False,
             'default_type': 'payment',
-            }
+        }
         return res
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

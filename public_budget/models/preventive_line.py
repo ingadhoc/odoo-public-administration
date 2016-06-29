@@ -20,49 +20,49 @@ class preventive_line(models.Model):
         domain=[
             ('type', 'in', ['other']),
             ('user_type.report_type', 'in', ['expense', 'asset'])]
-        )
+    )
     expedient_id = fields.Many2one(
         related='transaction_id.expedient_id',
-        )
+    )
     preventive_amount = fields.Float(
         string='Preventive',
         required=True,
         digits=dp.get_precision('Account'),
         states={'closed': [('readonly', True)]}
-        )
+    )
     advance_line = fields.Boolean(
         string='advance_line',
-        )
+    )
     remaining_amount = fields.Float(
         string=_('Remaining Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         store=True,
-        )
+    )
     definitive_amount = fields.Float(
         string=_('Definitive Amount'),
         compute='_get_amounts',
         store=True,
         digits=dp.get_precision('Account'),
-        )
+    )
     invoiced_amount = fields.Float(
         string=_('Invoiced Amount'),
         compute='_get_amounts',
         store=True,
         digits=dp.get_precision('Account'),
-        )
+    )
     to_pay_amount = fields.Float(
         string=_('To Pay Amount'),
         compute='_get_amounts',
         store=True,
         digits=dp.get_precision('Account'),
-        )
+    )
     paid_amount = fields.Float(
         string=_('Paid Amount'),
         compute='_get_amounts',
         store=True,
         digits=dp.get_precision('Account'),
-        )
+    )
     state = fields.Selection(
         selection=[
             ('draft', _('Draft')),
@@ -74,31 +74,31 @@ class preventive_line(models.Model):
         string=_('States'),
         compute='_get_state',
         store=True,
-        )
+    )
     affects_budget = fields.Boolean(
         _('Affects Budget?'),
         store=True,
         compute='_get_affects_budget',
-        )
+    )
     transaction_id = fields.Many2one(
         'public_budget.transaction',
         ondelete='cascade',
         string='Transaction',
         required=True,
         auto_join=True,
-        )
+    )
     definitive_line_ids = fields.One2many(
         'public_budget.definitive_line',
         'preventive_line_id',
         string='Definitive Lines',
         auto_join=True,
-        )
+    )
     budget_id = fields.Many2one(
         readonly=True,
         store=True,
         related='transaction_id.budget_id',
         auto_join=True,
-        )
+    )
     budget_position_id = fields.Many2one(
         'public_budget.budget_position',
         string='Budget Position',
@@ -107,7 +107,7 @@ class preventive_line(models.Model):
         context={'default_type': 'normal'},
         domain=[('type', '=', 'normal')],
         auto_join=True,
-        )
+    )
 
     @api.one
     @api.depends(
@@ -227,7 +227,7 @@ class preventive_line(models.Model):
         if (
                 self.account_id and self.transaction_id and
                 self.account_id.company_id != self.transaction_id.company_id
-                ):
+        ):
             raise Warning(_(
                 'Transaction Company and Account Company must be the same!'))
 
@@ -257,7 +257,7 @@ class preventive_line(models.Model):
         self = self.with_context(
             budget_id=self.transaction_id.budget_id.id,
             excluded_line_id=self.id,
-            )
+        )
         assignment_position = self.budget_position_id.assignment_position_id
         if not assignment_position:
             raise Warning(_(

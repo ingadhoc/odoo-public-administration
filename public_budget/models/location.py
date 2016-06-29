@@ -13,13 +13,13 @@ class location(models.Model):
     name = fields.Char(
         string='Name',
         required=True
-        )
+    )
     user_ids = fields.Many2many(
         'res.users',
         'public_budget_user_ids_location_ids_rel',
         'location_id',
         'users_id',
         string='Users'
-        )
+    )
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

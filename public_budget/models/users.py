@@ -15,6 +15,6 @@ class users(models.Model):
         'users_id',
         'location_id',
         string='Allowed Locations'
-        )
+    )
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

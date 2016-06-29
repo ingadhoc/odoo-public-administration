@@ -13,23 +13,23 @@ class inventory_rule(models.Model):
         string='Date',
         required=True,
         default=fields.Date.context_today
-        )
+    )
     min_amount = fields.Float(
         string='Minimum Amount',
         required=True,
         digits=dp.get_precision('Account'),
-        )
+    )
     company_id = fields.Many2one(
         'res.company',
         string='Company',
         required=True,
         default=lambda self: self.env['res.company']._company_default_get(
             'public_budget.inventory_rule')
-        )
+    )
     company_id = fields.Many2one(
         'res.company',
         string='Company',
         required=True
-        )
+    )
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

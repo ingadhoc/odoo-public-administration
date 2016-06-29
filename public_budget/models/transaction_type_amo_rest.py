@@ -15,22 +15,22 @@ class transaction_type_amo_rest(models.Model):
         string='Date',
         required=True,
         default=fields.Date.context_today
-        )
+    )
     from_amount = fields.Float(
         string='From Amount',
         required=True,
         digits=dp.get_precision('Account'),
-        )
+    )
     to_amount = fields.Float(
         string='To Amount',
         required=True,
         digits=dp.get_precision('Account'),
-        )
+    )
     transaction_type_id = fields.Many2one(
         'public_budget.transaction_type',
         ondelete='cascade',
         string='transaction_type_id',
         required=True
-        )
+    )
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

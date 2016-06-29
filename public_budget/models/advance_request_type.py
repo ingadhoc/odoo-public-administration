@@ -11,12 +11,12 @@ class advance_request_type(models.Model):
     name = fields.Char(
         'Name',
         required=True,
-        )
+    )
     general_return_partner_id = fields.Many2one(
         'res.partner',
         string='General Return Partner',
         required=True
-        )
+    )
     account_id = fields.Many2one(
         'account.account',
         string='Account',
@@ -26,24 +26,24 @@ class advance_request_type(models.Model):
         # falta hacer una devolucion
         # domain="[('type', '=', 'payable'), ('company_id', '=', company_id)]",
         required=True,
-        )
+    )
     return_journal_id = fields.Many2one(
         'account.journal',
         string='Return Journal',
         domain="[('company_id', '=', company_id)]",
         required=True,
-        )
+    )
     company_id = fields.Many2one(
         'res.company',
         string='Company',
         required=True,
         default=lambda self: self.env.user.company_id,
-        )
+    )
     employee_ids = fields.Many2many(
         'res.partner',
         compute='get_employee_ids',
         context="{'advance_return_type_id': id}",
-        )
+    )
 
     @api.one
     def get_employee_ids(self):

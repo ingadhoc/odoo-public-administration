@@ -14,13 +14,13 @@ class budget_modification_detail(models.Model):
         string='Amount',
         required=True,
         digits=dp.get_precision('Account'),
-        )
+    )
     budget_modification_id = fields.Many2one(
         'public_budget.budget_modification',
         ondelete='cascade',
         string='Modification',
         required=True
-        )
+    )
     budget_position_id = fields.Many2one(
         'public_budget.budget_position',
         string='Budget Position',
@@ -28,7 +28,7 @@ class budget_modification_detail(models.Model):
         context={
             'default_type': 'normal', 'default_budget_assignment_allowed': 1},
         domain=[('budget_assignment_allowed', '=', True)]
-        )
+    )
 
     @api.one
     @api.constrains('budget_position_id', 'amount')
@@ -38,7 +38,7 @@ class budget_modification_detail(models.Model):
                 self.with_context(
                 budget_id=budget_id).budget_position_id.balance_amount < 0.0):
             raise Warning(
-                _("You can not make this modification as '%s' will have a \
-                    negative balance") % (self.budget_position_id.name))
+                _("You can not make this modification as '%s' will have a "
+                    "negative balance") % (self.budget_position_id.name))
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

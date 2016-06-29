@@ -12,7 +12,7 @@ class res_partner(models.Model):
         'Advance Request Debt',
         compute='get_advance_request_debt',
         digits=dp.get_precision('Account'),
-        )
+    )
 
     @api.one
     def get_advance_request_debt(self):
@@ -28,11 +28,11 @@ class res_partner(models.Model):
         requested_domain = [
             ('employee_id', '=', self.id),
             ('advance_request_id.state', 'not in', ['draft', 'cancel']),
-            ]
+        ]
         returned_domain = [
             ('employee_id', '=', self.id),
             ('advance_return_id.state', 'not in', ['draft', 'cancel']),
-            ]
+        ]
 
         if advance_return_type:
             requested_domain.append(

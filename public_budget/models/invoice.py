@@ -13,7 +13,7 @@ class account_move_line(models.Model):
         'account.voucher.line',
         'move_line_id',
         'Voucher Lines'
-        )
+    )
 
 
 class invoice(models.Model):
@@ -31,23 +31,23 @@ class invoice(models.Model):
         readonly=True,
         auto_join=True,
         # required=True,
-        )
+    )
     budget_id = fields.Many2one(
         related='transaction_id.budget_id',
         readonly=True,
         store=True,
         auto_join=True,
-        )
+    )
     signed_amount = fields.Float(
         'Monto Firmado',
         compute='get_signed_amount',
-        )
+    )
     to_pay_amount = fields.Float(
         string='Monto A Pagar',
         digits=dp.get_precision('Account'),
         compute='_compute_to_pay_amount',
         store=True,
-        )
+    )
 
     @api.one
     @api.depends('type', 'amount_total')
@@ -75,7 +75,7 @@ class invoice(models.Model):
             ('move_line_id.move_id', '=', self.move_id.id),
             ('amount', '!=', 0),
             ('voucher_id.state', '=', 'posted')
-            ]
+        ]
         if to_date:
             domain += [('voucher_id.date', '<=', to_date)]
 
@@ -104,7 +104,7 @@ class invoice(models.Model):
             ('move_line_id.move_id', '=', self.move_id.id),
             ('amount', '!=', 0),
             ('voucher_id.state', 'not in', ('cancel', 'draft'))
-            ]
+        ]
         # Add this to allow analysis between dates
         # from_date = self._context.get('analysis_from_date', False)
         to_date = self._context.get('analysis_to_date', False)
@@ -156,10 +156,10 @@ class invoice(models.Model):
             if (
                     inv.to_pay_amount and
                     not inv.transaction_id.type_id.with_advance_payment
-                    ):
+            ):
                 raise Warning(_(
-                    'You cannot cancel an invoice which has been sent to pay.\
-                    You need to cancel related payments first.'))
+                    'You cannot cancel an invoice which has been sent to pay.'
+                    ' You need to cancel related payments first.'))
         return super(invoice, self).action_cancel()
 
     @api.multi
@@ -180,8 +180,9 @@ class invoice(models.Model):
     def prepare_direct_payment_voucher_vals(self):
         """Add some values to direct payment voucher creation"""
         if not self.transaction_id:
-            raise Warning(_('Not Transaction in actual invoice, can not create\
-             direct Payment'))
+            raise Warning(_(
+                'Not Transaction in actual invoice, can not create direct '
+                'Payment'))
         res = super(
             invoice, self).prepare_direct_payment_voucher_vals()
         res['transaction_id'] = self.transaction_id.id
@@ -192,7 +193,7 @@ class invoice(models.Model):
     @api.constrains(
         'state',
         'budget_id',
-        )
+    )
     def check_budget_state_open_pre_closed(self):
         if self.budget_id and self.budget_id.state not in [
                 'open', 'pre_closed']:
