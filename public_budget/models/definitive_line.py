@@ -129,8 +129,8 @@ class definitive_line(models.Model):
     @api.one
     @api.depends(
         'amount',
-        'invoice_line_ids.invoice_id.state',
-        'invoice_line_ids.invoice_id.type',
+        # 'invoice_line_ids.invoice_id.state',
+        # 'invoice_line_ids.invoice_id.type',
         # no haria falta depende de price_subtotal porque to pay amount y paid
         # amount ya lo tienen como dependencia (corre dos veces el calculo)
         # 'invoice_line_ids.price_subtotal',
