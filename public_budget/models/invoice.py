@@ -45,8 +45,8 @@ class invoice(models.Model):
     to_pay_amount = fields.Float(
         string='Monto A Pagar',
         digits=dp.get_precision('Account'),
-        compute='_compute_to_pay_amount',
-        store=True,
+        # compute='_compute_to_pay_amount',
+        # store=True,
     )
 
     @api.one

@@ -14,13 +14,13 @@ class invoice_line(models.Model):
 
     to_pay_amount = fields.Float(
         string=_('To Pay Amount'),
-        compute='_get_amounts',
+        # compute='_get_amounts',
         digits=dp.get_precision('Account'),
         # store=True,
     )
     paid_amount = fields.Float(
         string=_('Paid Amount'),
-        compute='_get_amounts',
+        # compute='_get_amounts',
         digits=dp.get_precision('Account'),
         # store=True,
     )
