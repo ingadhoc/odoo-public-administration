@@ -59,19 +59,18 @@ class invoice(models.Model):
         self.signed_amount = signed_amount
 
     @api.one
-    # @api.constrains('state')
-    @api.constrains('state', 'to_pay_amount')
+    @api.constrains('state')
     def update_definitive_invoiced_amount(self):
         _logger.info('Updating invoice line amounts from invoice')
-        # if invoice state or to_pay_amount changes, we recompute all invoice
-        # line values
-        # we force an update of invoice line computed fields
-        self.invoice_line._get_amounts()
-        self.mapped('invoice_line.definitive_line_id')._get_amounts()
+        # if invoice state changes, we recompute to_pay_amount
+        self._compute_to_pay_amount()
 
     @api.one
     def _compute_to_pay_amount(self):
         self.to_pay_amount = self._get_to_pay_amount_to_date()
+        # we force an update of invoice line computed fields
+        self.invoice_line._get_amounts()
+        self.mapped('invoice_line.definitive_line_id')._get_amounts()
 
     @api.multi
     def _get_to_pay_amount_to_date(self):
