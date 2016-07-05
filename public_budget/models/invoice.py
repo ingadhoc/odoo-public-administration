@@ -65,8 +65,9 @@ class invoice(models.Model):
         _logger.info('Updating invoice line amounts from invoice')
         # if invoice state or to_pay_amount changes, we recompute all invoice
         # line values
+        # we force an update of invoice line computed fields
+        self.invoice_line._get_amounts()
         self.mapped('invoice_line.definitive_line_id')._get_amounts()
-        # self.invoice_line._get_amounts()
 
     @api.one
     def _compute_to_pay_amount(self):

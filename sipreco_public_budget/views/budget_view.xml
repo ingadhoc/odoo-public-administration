@@ -23,6 +23,7 @@
             <field name="model">public_budget.budget</field>
             <field name="inherit_id" ref="public_budget.view_public_budget_budget_to_date_form"/>
             <field name="arch" type="xml">
+                <group name="totals" position="replace"/>
                 <header>
                     <button name="%(action_aeroo_report_budget)d" class="oe_highlight" string="Print" type="action"/>
                 </header>

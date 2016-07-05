@@ -190,6 +190,8 @@ class definitive_line(models.Model):
 
         if to_date:
             filter_domain += [('invoice_id.date_invoice', '<=', to_date)]
+        # TODO borrar esto que no seria necesario porque forzamos recalculo
+        # en invoice.py con self.invoice_line._get_amounts()
         # else:
         #     # we invalidate cache because of invoice line computed fields
         #     self.invalidate_cache()
