@@ -14,13 +14,13 @@ class invoice_line(models.Model):
 
     to_pay_amount = fields.Float(
         string=_('To Pay Amount'),
-        # compute='_get_amounts',
+        compute='_get_amounts',
         digits=dp.get_precision('Account'),
         # store=True,
     )
     paid_amount = fields.Float(
         string=_('Paid Amount'),
-        # compute='_get_amounts',
+        compute='_get_amounts',
         digits=dp.get_precision('Account'),
         # store=True,
     )
@@ -33,9 +33,10 @@ class invoice_line(models.Model):
 
     @api.one
     @api.depends(
-        'price_subtotal',
-        'invoice_id.amount_total',
-        'invoice_id.residual'
+        # 'price_subtotal',
+        # 'invoice_id.amount_total',
+        'invoice_id.residual',
+        'invoice_id.to_pay_amount',
     )
     def _get_amounts(self):
         """Update the following fields:
@@ -53,13 +54,18 @@ class invoice_line(models.Model):
             if to_date:
                 invoice_paid_perc = (
                     self.invoice_id._get_paid_amount_to_date() / invoice_total)
+                invoice_to_pay_perc = (
+                    self.invoice_id._get_to_pay_amount_to_date() / invoice_total)
             else:
                 invoice_paid_perc = (
                     invoice_total - self.invoice_id.residual) / invoice_total
-            invoice_to_pay_perc = (
-                self.invoice_id.to_pay_amount) / invoice_total
+                invoice_to_pay_perc = (
+                    self.invoice_id.to_pay_amount) / invoice_total
             self.to_pay_amount = self.price_subtotal * invoice_to_pay_perc
             self.paid_amount = self.price_subtotal * invoice_paid_perc
+        # if someone calls for this recomputation then we call for
+        # recomputation on related definitive lines
+        # self.definitive_line_id._get_amounts()
 
     @api.one
     @api.constrains(

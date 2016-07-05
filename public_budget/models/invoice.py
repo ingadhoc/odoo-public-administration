@@ -58,10 +58,46 @@ class invoice(models.Model):
             signed_amount = self.amount_total
         self.signed_amount = signed_amount
 
+    @api.one
+    # @api.constrains('state')
+    @api.constrains('state', 'to_pay_amount')
+    def update_definitive_invoiced_amount(self):
+        _logger.info('Updating invoice line amounts from invoice')
+        # if invoice state or to_pay_amount changes, we recompute all invoice
+        # line values
+        self.mapped('invoice_line.definitive_line_id')._get_amounts()
+        # self.invoice_line._get_amounts()
+
+    @api.one
+    def _compute_to_pay_amount(self):
+        self.to_pay_amount = self._get_to_pay_amount_to_date()
+
+    @api.multi
+    def _get_to_pay_amount_to_date(self):
+        self.ensure_one()
+        _logger.info('Getting to pay amount for invoice %s' % self.id)
+        # if invoice is paid and not payments, then it is autopaid and after
+        # validation we consider it as send to paid and paid
+        if self.state == 'paid' and not self.payment_ids:
+            return self.amount_total
+        domain = [
+            ('move_line_id.move_id', '=', self.move_id.id),
+            ('amount', '!=', 0),
+            ('voucher_id.state', 'not in', ('cancel', 'draft'))
+        ]
+        # Add this to allow analysis between dates
+        # from_date = self._context.get('analysis_from_date', False)
+        to_date = self._context.get('analysis_to_date', False)
+        if to_date:
+            domain += [('voucher_id.confirmation_date', '<=', to_date)]
+
+        voucher_lines = self.env['account.voucher.line'].search(domain)
+        return sum([x.amount for x in voucher_lines])
+
     @api.multi
     def _get_paid_amount_to_date(self):
         self.ensure_one()
-        _logger.info('Get paid amount for to_date')
+        _logger.info('Get paid amount to_date for invoice %s' % self.id)
         to_date = self._context.get('analysis_to_date', False)
         if not to_date:
             return 0.0
@@ -83,48 +119,6 @@ class invoice(models.Model):
         return sum([x.amount for x in voucher_lines])
 
     @api.one
-    @api.depends(
-        'state', 'currency_id',
-        'move_id.line_id.voucher_line_ids.amount',
-        'move_id.line_id.voucher_line_ids.voucher_id.state',
-    )
-    # An invoice's to pay amount is the sum of its unreconciled move lines and,
-    # for partially reconciled move lines, their residual amount divided by the
-    # number of times this reconciliation is used in an invoice (so we split
-    # the residual amount between all invoice)
-    def _compute_to_pay_amount(self):
-        _logger.info('Getting to pay amount for invoice %s' % self.id)
-        # if invoice is paid and not payments, then it is autopaid and after
-        # validation we consider it as send to paid and paid
-        if self.state == 'paid' and not self.payment_ids:
-            self.to_pay_amount = self.amount_total
-            return True
-
-        domain = [
-            ('move_line_id.move_id', '=', self.move_id.id),
-            ('amount', '!=', 0),
-            ('voucher_id.state', 'not in', ('cancel', 'draft'))
-        ]
-        # Add this to allow analysis between dates
-        # from_date = self._context.get('analysis_from_date', False)
-        to_date = self._context.get('analysis_to_date', False)
-        # if from_date:
-        #     domain += [('confirmation_date', '>=', from_date)]
-        if to_date:
-            domain += [('voucher_id.confirmation_date', '<=', to_date)]
-
-        voucher_lines = self.env['account.voucher.line'].search(domain)
-        to_pay_amount = sum([x.amount for x in voucher_lines])
-        # if invoice is open we ensure that to paid amount is not lower than
-        # paid amount
-        # we remove this that should works ok without this
-        # if self.state in ['open', 'paid']:
-        #     paid_amount = self.amount_total - self.residual
-        #     if paid_amount > to_pay_amount:
-        #         to_pay_amount = paid_amount
-        self.to_pay_amount = to_pay_amount
-
-    @api.one
     @api.constrains('date_invoice', 'invoice_line')
     def check_dates(self):
         _logger.info('Checking invoice dates')
@@ -135,17 +129,6 @@ class invoice(models.Model):
                 raise Warning(_(
                     'La fecha de la factura no puede ser menor a la fecha '
                     'de la linea definitiva relacionada'))
-
-    # we move this to voucher to improove performance
-    # @api.one
-    # @api.constrains('to_pay_amount', 'amount_total')
-    # def check_to_pay_amount(self):
-    #     _logger.info('Checking to pay amount on invoice %s' % self.id)
-    #     # TODO mejorar, lo hacemos asi por errores de redondeo
-    #     if (self.to_pay_amount - self.amount_total) > 0.01:
-    #         raise Warning((
-    #             'El importe mandado a pagar no puede ser mayor al importe '
-    #             'de la factura'))
 
     @api.multi
     def action_cancel(self):

@@ -143,6 +143,14 @@ class account_voucher(models.Model):
         return res
 
     @api.one
+    @api.constrains('state')
+    def update_invoice_amounts(self):
+        _logger.info('Updating invoice amounts from voucher')
+        # when voucher state changes we recomputed related invoice values
+        # we could improove this filtering by relevant states
+        self.invoice_ids._compute_to_pay_amount()
+
+    @api.one
     @api.constrains('confirmation_date', 'date')
     def check_date(self):
         _logger.info('Checking date')
@@ -215,7 +223,8 @@ class account_voucher_line(models.Model):
 
     to_pay_amount = fields.Float(
         related='move_line_id.invoice.to_pay_amount',
-        store=True,
+        # TODO reactivar si es necesario o borrar
+        # store=True,
     )
 
     @api.one

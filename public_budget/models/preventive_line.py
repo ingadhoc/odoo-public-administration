@@ -197,23 +197,27 @@ class preventive_line(models.Model):
             if not definitive_lines:
                 return False
 
-            # Add this to allow analysis between dates
-            # from_date = self._context.get('analysis_from_date', False)
+            invoiced_amount_field = 'invoiced_amount'
+            to_pay_amount_field = 'to_pay_amount'
+            paid_amount_field = 'paid_amount'
+
+            # Add this to allow analysis between dates, we used computed fields
+            # in this case instead of normal fields
             to_date = self._context.get('analysis_to_date', False)
-
-            filter_domain = []
-            # if from_date:
-            #     filter_domain += [('issue_date', '>=', from_date)]
             if to_date:
-                filter_domain += [('issue_date', '<=', to_date)]
-            if filter_domain:
-                filter_domain += [('id', 'in', definitive_lines.ids)]
+                filter_domain = [
+                    ('issue_date', '<=', to_date),
+                    ('id', 'in', definitive_lines.ids)]
                 definitive_lines = definitive_lines.search(filter_domain)
-
-            definitive_amount = sum(definitive_lines.mapped('amount'))
-            invoiced_amount = sum(definitive_lines.mapped('invoiced_amount'))
-            to_pay_amount = sum(definitive_lines.mapped('to_pay_amount'))
-            paid_amount = sum(definitive_lines.mapped('paid_amount'))
+                invoiced_amount_field = 'computed_invoiced_amount'
+                to_pay_amount_field = 'computed_to_pay_amount'
+                paid_amount_field = 'computed_paid_amount'
+            definitive_amount = invoiced_amount = to_pay_amount = paid_amount = 0
+            for dl in definitive_lines:
+                definitive_amount += dl.amount
+                invoiced_amount += getattr(dl, invoiced_amount_field)
+                to_pay_amount += getattr(dl, to_pay_amount_field)
+                paid_amount += getattr(dl, paid_amount_field)
         self.remaining_amount = self.preventive_amount - definitive_amount
         self.definitive_amount = definitive_amount
         self.invoiced_amount = invoiced_amount

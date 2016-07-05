@@ -165,7 +165,6 @@ class budget_position(models.Model):
         ]
 
         budget_id = self._context.get('budget_id', False)
-        # from_date = self._context.get('analysis_from_date', False)
         to_date = self._context.get('analysis_to_date', False)
 
         # we check it is a report because if not it will get wrong budget
@@ -175,10 +174,6 @@ class budget_position(models.Model):
 
         if budget_id:
             domain.append(('budget_id', '=', budget_id))
-        # if from_date:
-        #     _logger.info('Getting budget amounts with from_date %s' % (
-        #         from_date))
-        #     domain += [('transaction_id.issue_date', '>=', from_date)]
         if to_date:
             _logger.info('Getting budget amounts with to_date %s' % (
                 to_date))
@@ -190,9 +185,6 @@ class budget_position(models.Model):
             modification_domain = [
                 ('budget_modification_id.budget_id', '=', budget_id),
                 ('budget_position_id', operator, self.id)]
-            # if from_date:
-            #     modification_domain += [
-            #         ('budget_modification_id.date', '>=', from_date)]
             if to_date:
                 modification_domain += [
                     ('budget_modification_id.date', '<=', to_date)]
@@ -245,14 +237,11 @@ class budget_position(models.Model):
             # if from_date or to_date:
             if to_date:
                 _logger.info('Getting values from computed fields methods')
-                preventive_amount = sum(
-                    active_preventive_lines.mapped('preventive_amount'))
-                definitive_amount = sum(
-                    active_preventive_lines.mapped('definitive_amount'))
-                to_pay_amount = sum(
-                    active_preventive_lines.mapped('to_pay_amount'))
-                paid_amount = sum(
-                    active_preventive_lines.mapped('paid_amount'))
+                for pl in active_preventive_lines:
+                    preventive_amount += pl.preventive_amount
+                    definitive_amount += pl.definitive_amount
+                    to_pay_amount += pl.to_pay_amount
+                    paid_amount += pl.paid_amount
             else:
                 _logger.info('Getting values from stored fields')
                 self._cr.execute(
