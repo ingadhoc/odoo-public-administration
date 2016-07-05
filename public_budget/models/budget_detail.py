@@ -15,16 +15,16 @@ class budget_detail(models.Model):
         string='Initial Amount',
         required=True,
         digits=dp.get_precision('Account'),
-        )
+    )
     state = fields.Selection(
         related='budget_id.state'
-        )
+    )
     budget_id = fields.Many2one(
         'public_budget.budget',
         ondelete='cascade',
         string='budget_id',
         required=True
-        )
+    )
     budget_position_id = fields.Many2one(
         'public_budget.budget_position',
         string='Budget Position',
@@ -32,7 +32,7 @@ class budget_detail(models.Model):
         context={
             'default_type': 'normal', 'default_budget_assignment_allowed': 1},
         domain=[('budget_assignment_allowed', '=', True)]
-        )
+    )
 
     _sql_constraints = [
         ('position_unique', 'unique(budget_position_id, budget_id)',

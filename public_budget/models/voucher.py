@@ -14,7 +14,7 @@ class account_voucher(models.Model):
         related='transaction_id.budget_id',
         readonly=True,
         store=True,
-        )
+    )
     expedient_id = fields.Many2one(
         'public_budget.expedient',
         string='Expedient',
@@ -23,32 +23,32 @@ class account_voucher(models.Model):
         domain=[('type', '=', 'payment'), ('state', '=', 'open')],
         context={'default_type': 'payment'},
         states={'draft': [('readonly', False)]}
-        )
+    )
     transaction_id = fields.Many2one(
         'public_budget.transaction',
         string='Transaction',
         # required=True,
         readonly=True,
-        )
+    )
     budget_position_ids = fields.Many2many(
         relation='voucher_position_rel',
         comodel_name='public_budget.budget_position',
         string='Partidas Presupuestarias Relacionadas',
         compute='_get_budget_positions_and_invoices'
-        )
+    )
     invoice_ids = fields.Many2many(
         comodel_name='account.invoice',
         string='Facturas Relacionadas',
         compute='_get_budget_positions_and_invoices'
-        )
+    )
     partner_ids = fields.Many2many(
         comodel_name='res.partner',
         string=_('Partners'),
         compute='_get_partners'
-        )
+    )
     partner_id = fields.Many2one(
         domain="[('id', 'in', partner_ids[0][2])]",
-        )
+    )
     # advance_request_line_ids = fields.One2many(
     #     'public_budget.advance_request_line',
     #     'voucher_id',
@@ -58,24 +58,25 @@ class account_voucher(models.Model):
         'public_budget.advance_request',
         'Advance Request',
         readonly=True,
-        )
+    )
     transaction_with_advance_payment = fields.Boolean(
         readonly=True,
         store=True,
         related='transaction_id.type_id.with_advance_payment',
-        )
+    )
 
     @api.one
     def _get_budget_positions_and_invoices(self):
         self.invoice_ids = self.line_ids.filtered('amount').mapped(
             'move_line_id.invoice')
         self.budget_position_ids = self.invoice_ids.mapped(
-            'invoice_line.definitive_line_id.preventive_line_id.budget_position_id')
+            'invoice_line.definitive_line_id.preventive_line_id.'
+            'budget_position_id')
 
     @api.one
     @api.depends(
         'transaction_id',
-        )
+    )
     def _get_partners(self):
         _logger.info('Get partners from transaction')
         self.partner_ids = self.env['res.partner']
@@ -133,13 +134,21 @@ class account_voucher(models.Model):
                 account = voucher.transaction_id.type_id.advance_account_id
                 if not account:
                     raise Warning(_(
-                        'In payment of advance transaction type, you need to\
-                        an advance account in transaction type!'))
+                        'In payment of advance transaction type, you need to '
+                        'set an advance account in transaction type!'))
                 res['account_id'] = account.id
             elif voucher.advance_request_id:
                 res['account_id'] = (
                     voucher.advance_request_id.type_id.account_id.id)
         return res
+
+    @api.one
+    @api.constrains('state')
+    def update_invoice_amounts(self):
+        _logger.info('Updating invoice amounts from voucher')
+        # when voucher state changes we recomputed related invoice values
+        # we could improove this filtering by relevant states
+        self.invoice_ids._compute_to_pay_amount()
 
     @api.one
     @api.constrains('confirmation_date', 'date')
@@ -160,11 +169,11 @@ class account_voucher(models.Model):
         to_pay_lines = self.env['account.voucher.line'].search([
             ('voucher_id', '=', self.id),
             ('amount', '!=', 0.0),
-            ])
+        ])
         to_remove_lines = self.env['account.voucher.line'].search([
             ('voucher_id', '=', self.id),
             ('amount', '=', 0.0),
-            ])
+        ])
         to_remove_lines.unlink()
 
         for line in to_pay_lines:
@@ -206,18 +215,6 @@ class account_voucher(models.Model):
                     self.advance_amount,
                     advance_remaining_amount + self.advance_amount))
 
-    # @api.one
-    # @api.constrains(
-    #     'budget_id',
-    #     'state',
-    #     )
-    # def check_budget_state_open_pre_closed(self):
-    #     if self.budget_id and self.budget_id.state not in [
-    #             'open', 'pre_closed']:
-    #         raise Warning(
-    #             'Solo puede cambiar o crear pagos si '
-    #             'el presupuesto vinculado está abierto o en pre-cierre')
-
 
 class account_voucher_line(models.Model):
     """"""
@@ -226,8 +223,9 @@ class account_voucher_line(models.Model):
 
     to_pay_amount = fields.Float(
         related='move_line_id.invoice.to_pay_amount',
-        store=True,
-        )
+        # TODO reactivar si es necesario o borrar
+        # store=True,
+    )
 
     @api.one
     # @api.constrains('amount_unreconciled', 'amount')

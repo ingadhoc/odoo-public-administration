@@ -22,7 +22,7 @@ class advance_return(models.Model):
         required=True,
         readonly=True,
         states={'draft': [('readonly', False)]},
-        )
+    )
     company_id = fields.Many2one(
         'res.company',
         string='Company',
@@ -31,7 +31,7 @@ class advance_return(models.Model):
         states={'draft': [('readonly', False)]},
         default=lambda self: self.env['res.company']._company_default_get(
             'public_budget.advance_return')
-        )
+    )
     date = fields.Date(
         string='Date',
         required=True,
@@ -39,13 +39,13 @@ class advance_return(models.Model):
         states={'draft': [('readonly', False)]},
         default=fields.Date.context_today,
         copy=False,
-        )
+    )
     confirmation_date = fields.Date(
         string='Fecha de Confirmación',
         readonly=True,
         states={'draft': [('readonly', False)]},
         copy=False,
-        )
+    )
     user_id = fields.Many2one(
         'res.users',
         string='User',
@@ -53,7 +53,7 @@ class advance_return(models.Model):
         readonly=True,
         default=lambda self: self.env.user,
         states={'draft': [('readonly', False)]},
-        )
+    )
     type_id = fields.Many2one(
         'public_budget.advance_request_type',
         string='Type',
@@ -61,25 +61,25 @@ class advance_return(models.Model):
         readonly=True,
         domain="[('company_id', '=', company_id)]",
         states={'draft': [('readonly', False)]},
-        )
+    )
     move_id = fields.Many2one(
         'account.move',
         string='Move',
         readonly=True,
-        )
+    )
     state = fields.Selection(
         _states_,
         'State',
         default='draft',
         readonly=True,
-        )
+    )
     return_line_ids = fields.One2many(
         'public_budget.advance_return_line',
         'advance_return_id',
         string='Lines',
         readonly=True,
         states={'draft': [('readonly', False)]},
-        )
+    )
 
     @api.multi
     def get_move_vals(self):
@@ -96,7 +96,7 @@ class advance_return(models.Model):
                 'debit': 0.0,
                 'account_id': self.type_id.account_id.id,
                 'name': self.name,
-                }))
+            }))
         # old method to add a line for each return, now they want everyhing
         # on one partner
         # total_returned_amount = 0.0
@@ -119,7 +119,7 @@ class advance_return(models.Model):
                 'credit': 0.0,
                 'account_id': return_partner.property_account_payable.id,
                 'name': self.name,
-                }))
+            }))
 
         return {
             'line_id': lines_vals,
@@ -136,7 +136,7 @@ class advance_return(models.Model):
             record.write({
                 'move_id': move.id,
                 'state': 'confirmed',
-                })
+            })
             if not record.confirmation_date:
                 record.confirmation_date = fields.Datetime.now()
         return True
@@ -204,7 +204,7 @@ class advance_return(models.Model):
                 line_vals.append((0, False, {
                     'employee_id': employee.id,
                     'returned_amount': employee_debt,
-                    }))
+                }))
         self.return_line_ids = line_vals
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

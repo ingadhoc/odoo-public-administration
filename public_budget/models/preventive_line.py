@@ -20,49 +20,49 @@ class preventive_line(models.Model):
         domain=[
             ('type', 'in', ['other']),
             ('user_type.report_type', 'in', ['expense', 'asset'])]
-        )
+    )
     expedient_id = fields.Many2one(
         related='transaction_id.expedient_id',
-        )
+    )
     preventive_amount = fields.Float(
         string='Preventive',
         required=True,
         digits=dp.get_precision('Account'),
         states={'closed': [('readonly', True)]}
-        )
+    )
     advance_line = fields.Boolean(
         string='advance_line',
-        )
+    )
     remaining_amount = fields.Float(
         string=_('Remaining Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         store=True,
-        )
+    )
     definitive_amount = fields.Float(
         string=_('Definitive Amount'),
         compute='_get_amounts',
         store=True,
         digits=dp.get_precision('Account'),
-        )
+    )
     invoiced_amount = fields.Float(
         string=_('Invoiced Amount'),
         compute='_get_amounts',
         store=True,
         digits=dp.get_precision('Account'),
-        )
+    )
     to_pay_amount = fields.Float(
         string=_('To Pay Amount'),
         compute='_get_amounts',
         store=True,
         digits=dp.get_precision('Account'),
-        )
+    )
     paid_amount = fields.Float(
         string=_('Paid Amount'),
         compute='_get_amounts',
         store=True,
         digits=dp.get_precision('Account'),
-        )
+    )
     state = fields.Selection(
         selection=[
             ('draft', _('Draft')),
@@ -74,36 +74,40 @@ class preventive_line(models.Model):
         string=_('States'),
         compute='_get_state',
         store=True,
-        )
+    )
     affects_budget = fields.Boolean(
         _('Affects Budget?'),
         store=True,
         compute='_get_affects_budget',
-        )
+    )
     transaction_id = fields.Many2one(
         'public_budget.transaction',
         ondelete='cascade',
         string='Transaction',
-        required=True
-        )
+        required=True,
+        auto_join=True,
+    )
     definitive_line_ids = fields.One2many(
         'public_budget.definitive_line',
         'preventive_line_id',
-        string='Definitive Lines'
-        )
+        string='Definitive Lines',
+        auto_join=True,
+    )
     budget_id = fields.Many2one(
         readonly=True,
         store=True,
-        related='transaction_id.budget_id'
-        )
+        related='transaction_id.budget_id',
+        auto_join=True,
+    )
     budget_position_id = fields.Many2one(
         'public_budget.budget_position',
         string='Budget Position',
         required=True,
         states={'invoiced': [('readonly', True)]},
         context={'default_type': 'normal'},
-        domain=[('type', '=', 'normal')]
-        )
+        domain=[('type', '=', 'normal')],
+        auto_join=True,
+    )
 
     @api.one
     @api.depends(
@@ -193,23 +197,27 @@ class preventive_line(models.Model):
             if not definitive_lines:
                 return False
 
-            # Add this to allow analysis between dates
-            # from_date = self._context.get('analysis_from_date', False)
+            invoiced_amount_field = 'invoiced_amount'
+            to_pay_amount_field = 'to_pay_amount'
+            paid_amount_field = 'paid_amount'
+
+            # Add this to allow analysis between dates, we used computed fields
+            # in this case instead of normal fields
             to_date = self._context.get('analysis_to_date', False)
-
-            filter_domain = []
-            # if from_date:
-            #     filter_domain += [('issue_date', '>=', from_date)]
             if to_date:
-                filter_domain += [('issue_date', '<=', to_date)]
-            if filter_domain:
-                filter_domain += [('id', 'in', definitive_lines.ids)]
+                filter_domain = [
+                    ('issue_date', '<=', to_date),
+                    ('id', 'in', definitive_lines.ids)]
                 definitive_lines = definitive_lines.search(filter_domain)
-
-            definitive_amount = sum(definitive_lines.mapped('amount'))
-            invoiced_amount = sum(definitive_lines.mapped('invoiced_amount'))
-            to_pay_amount = sum(definitive_lines.mapped('to_pay_amount'))
-            paid_amount = sum(definitive_lines.mapped('paid_amount'))
+                invoiced_amount_field = 'computed_invoiced_amount'
+                to_pay_amount_field = 'computed_to_pay_amount'
+                paid_amount_field = 'computed_paid_amount'
+            definitive_amount = invoiced_amount = to_pay_amount = paid_amount = 0
+            for dl in definitive_lines:
+                definitive_amount += dl.amount
+                invoiced_amount += getattr(dl, invoiced_amount_field)
+                to_pay_amount += getattr(dl, to_pay_amount_field)
+                paid_amount += getattr(dl, paid_amount_field)
         self.remaining_amount = self.preventive_amount - definitive_amount
         self.definitive_amount = definitive_amount
         self.invoiced_amount = invoiced_amount
@@ -223,7 +231,7 @@ class preventive_line(models.Model):
         if (
                 self.account_id and self.transaction_id and
                 self.account_id.company_id != self.transaction_id.company_id
-                ):
+        ):
             raise Warning(_(
                 'Transaction Company and Account Company must be the same!'))
 
@@ -253,7 +261,7 @@ class preventive_line(models.Model):
         self = self.with_context(
             budget_id=self.transaction_id.budget_id.id,
             excluded_line_id=self.id,
-            )
+        )
         assignment_position = self.budget_position_id.assignment_position_id
         if not assignment_position:
             raise Warning(_(

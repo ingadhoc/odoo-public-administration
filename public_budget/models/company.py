@@ -13,6 +13,6 @@ class company(models.Model):
         'public_budget.inventory_rule',
         'company_id',
         string='Inventory Rules'
-        )
+    )
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

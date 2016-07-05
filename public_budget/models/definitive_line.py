@@ -19,7 +19,7 @@ class definitive_line(models.Model):
         required=True,
         states={'draft': [('readonly', False)]},
         default=fields.Date.context_today
-        )
+    )
     supplier_id = fields.Many2one(
         'res.partner',
         string='Supplier',
@@ -28,67 +28,87 @@ class definitive_line(models.Model):
         states={'draft': [('readonly', False)]},
         context={'default_supplier': True},
         domain=[('supplier', '=', True)]
-        )
+    )
     amount = fields.Float(
         string='Amount',
         readonly=True,
         required=True,
         states={'draft': [('readonly', False)]},
         digits=dp.get_precision('Account'),
-        )
+    )
     residual_amount = fields.Float(
         string=_('Residual Amount'),
-        compute='_get_amounts',
+        compute='_get_residual_amount',
         digits=dp.get_precision('Account'),
         store=True,
-        )
+    )
     to_pay_amount = fields.Float(
         string=_('To Pay Amount'),
-        compute='_get_amounts',
+        # compute='_get_amounts',
         digits=dp.get_precision('Account'),
-        store=True,
-        )
+        # store=True,
+    )
     paid_amount = fields.Float(
         string=_('Paid Amount'),
-        compute='_get_amounts',
+        # compute='_get_amounts',
         digits=dp.get_precision('Account'),
-        store=True,
-        )
+        # store=True,
+    )
     invoiced_amount = fields.Float(
         string=_('Invoiced Amount'),
-        compute='_get_amounts',
+        # compute='_get_amounts',
         digits=dp.get_precision('Account'),
-        store=True,
-        )
+        # store=True,
+    )
+    computed_to_pay_amount = fields.Float(
+        string=_('To Pay Amount'),
+        compute='_get_computed_amounts',
+        digits=dp.get_precision('Account'),
+    )
+    computed_paid_amount = fields.Float(
+        string=_('Paid Amount'),
+        compute='_get_computed_amounts',
+        digits=dp.get_precision('Account'),
+    )
+    computed_invoiced_amount = fields.Float(
+        string=_('Invoiced Amount'),
+        compute='_get_computed_amounts',
+        digits=dp.get_precision('Account'),
+    )
     preventive_line_id = fields.Many2one(
         'public_budget.preventive_line',
         ondelete='cascade',
         string='Preventive Line',
-        required=True
-        )
+        required=True,
+        auto_join=True,
+    )
     transaction_id = fields.Many2one(
         readonly=True,
         store=True,
-        related='preventive_line_id.transaction_id'
-        )
+        related='preventive_line_id.transaction_id',
+        auto_join=True,
+    )
     budget_id = fields.Many2one(
         readonly=True,
         store=True,
-        related='preventive_line_id.budget_id'
-        )
+        related='preventive_line_id.budget_id',
+        auto_join=True,
+    )
     state = fields.Selection(
         selection=[('draft', _('Draft')), ('invoiced', _('Invoiced'))],
         string=_('State'),
         states={'draft': [('readonly', False)]},
         default='draft',
-        compute='_get_state'
-        )
+        compute='_get_state',
+        store=True,
+    )
     invoice_line_ids = fields.One2many(
         'account.invoice.line',
         'definitive_line_id',
         string='Invoice Lines',
-        readonly=True
-        )
+        readonly=True,
+        auto_join=True,
+    )
 
     @api.constrains('issue_date')
     def check_dates(self):
@@ -98,6 +118,7 @@ class definitive_line(models.Model):
                 'la transacción'))
 
     @api.one
+    @api.depends('invoice_line_ids')
     def _get_state(self):
         _logger.info('Getting state for definitive line %s' % self.id)
         if self.invoice_line_ids:
@@ -123,15 +144,30 @@ class definitive_line(models.Model):
         return super(definitive_line, self).unlink()
 
     @api.one
-    @api.depends(
-        'amount',
-        'invoice_line_ids.invoice_id.state',
-        'invoice_line_ids.invoice_id.type',
-        'invoice_line_ids.price_subtotal',
-        'invoice_line_ids.to_pay_amount',
-        'invoice_line_ids.paid_amount',
-    )
+    @api.depends('amount', 'invoiced_amount')
+    def _get_residual_amount(self):
+        self.residual_amount = self.amount - self.invoiced_amount
+
+    @api.one
+    def _get_computed_amounts(self):
+        # computed fields for to date anlysis
+        invoiced_amount, to_pay_amount, paid_amount = (
+            self._get_amounts_to_date())
+        self.computed_invoiced_amount = invoiced_amount
+        self.computed_to_pay_amount = to_pay_amount
+        self.computed_paid_amount = paid_amount
+
+    @api.one
     def _get_amounts(self):
+        # normal fields for good performance
+        invoiced_amount, to_pay_amount, paid_amount = (
+            self._get_amounts_to_date())
+        self.invoiced_amount = invoiced_amount
+        self.to_pay_amount = to_pay_amount
+        self.paid_amount = paid_amount
+
+    @api.multi
+    def _get_amounts_to_date(self):
         """Update the following fields with the related values to the budget
         and the budget position:
         -invoiced_amount: amount sum of lines with a related invoice line
@@ -141,24 +177,24 @@ class definitive_line(models.Model):
         -paid_amount: amount sum of lines that has a related voucher in open
         state
         """
+        self.ensure_one()
         _logger.info('Getting amounts for definitive line %s' % self.id)
-
-        if not self.invoice_line_ids:
-            self.residual_amount = self.amount
-            return False
 
         filter_domain = [
             ('id', 'in', self.invoice_line_ids.ids),
-            ('invoice_id.state', 'not in', ('cancel', 'draft'))]
+            ('invoice_id.state', 'not in', ('cancel', 'draft'))
+        ]
 
         # Add this to allow analysis between dates
-        # from_date = self._context.get('analysis_from_date', False)
         to_date = self._context.get('analysis_to_date', False)
 
-        # if from_date:
-        #     filter_domain += [('invoice_id.date_invoice', '>=', from_date)]
         if to_date:
             filter_domain += [('invoice_id.date_invoice', '<=', to_date)]
+        # TODO borrar esto que no seria necesario porque forzamos recalculo
+        # en invoice.py con self.invoice_line._get_amounts()
+        # else:
+        #     # we invalidate cache because of invoice line computed fields
+        #     self.invalidate_cache()
 
         debit_filter_domain = filter_domain + [
             ('invoice_id.type', 'in', ('out_invoice', 'in_invoice'))]
@@ -169,34 +205,27 @@ class definitive_line(models.Model):
         credit_invoice_lines = self.invoice_line_ids.search(
             credit_filter_domain)
 
-        invoiced_amount = (
-            sum(debit_invoice_lines.mapped('price_subtotal')) -
-            sum(credit_invoice_lines.mapped('price_subtotal'))
-            )
-        to_pay_amount = (
-            sum(debit_invoice_lines.mapped('to_pay_amount')) -
-            sum(credit_invoice_lines.mapped('to_pay_amount'))
-            )
-        paid_amount = (
-            sum(debit_invoice_lines.mapped('paid_amount')) -
-            sum(credit_invoice_lines.mapped('paid_amount'))
-            )
+        # all computed fields, no problem for analysis to date
+        invoiced_amount = to_pay_amount = paid_amount = 0
+        for dil in debit_invoice_lines:
+            invoiced_amount += dil.price_subtotal
+            to_pay_amount += dil.to_pay_amount
+            paid_amount += dil.paid_amount
+        for cil in credit_invoice_lines:
+            invoiced_amount += cil.price_subtotal
+            to_pay_amount += cil.to_pay_amount
+            paid_amount += cil.paid_amount
 
-        self.invoiced_amount = invoiced_amount
-        self.residual_amount = self.amount - invoiced_amount
-        self.to_pay_amount = to_pay_amount
-        self.paid_amount = paid_amount
         _logger.info('Finish getting amounts for definitive line %s' % self.id)
+        return (invoiced_amount, to_pay_amount, paid_amount)
 
     @api.multi
     def get_invoice_line_vals(self, to_invoice_amount=False, journal=False):
         self.ensure_one()
         if not to_invoice_amount:
             to_invoice_amount = self.residual_amount
-        print 'wizard.journal_id.type', journal.type
         if journal.type in ('sale_refund', 'purchase_refund'):
             to_invoice_amount = -1.0 * to_invoice_amount
-        print 'refund2', to_invoice_amount
         preventive_line = self.preventive_line_id
         line_vals = {
             'name': preventive_line.budget_position_id.name,

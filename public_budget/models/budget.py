@@ -25,7 +25,7 @@ class budget(models.Model):
         readonly=True,
         required=True,
         states={'draft': [('readonly', False)]}
-        )
+    )
     fiscalyear_id = fields.Many2one(
         'account.fiscalyear',
         'Fiscal Year',
@@ -42,55 +42,55 @@ class budget(models.Model):
         domain=[
             ('type', '=', 'other'),
             ('user_type.report_type', 'in', ['income'])]
-        )
+    )
     expedient_id = fields.Many2one(
         'public_budget.expedient',
         string='Expedient',
         readonly=True,
         required=True,
         states={'draft': [('readonly', False)]}
-        )
+    )
     prec_passive_residue = fields.Float(
         string='Pre Close Passive Residue',
         readonly=True,
         digits=dp.get_precision('Account'),
-        )
+    )
     prec_total_requested = fields.Float(
         string='Pre Close Total Requested',
         readonly=True,
         digits=dp.get_precision('Account'),
-        )
+    )
     total_preventive = fields.Float(
         string=_('Total Preventivo'),
         compute='_get_totals',
         digits=dp.get_precision('Account'),
         # store=True,
-        )
+    )
     total_authorized = fields.Float(
         string=_('Total Autorizado'),
         compute='_get_totals',
         digits=dp.get_precision('Account'),
         # store=True,
-        )
+    )
     total_requested = fields.Float(
         string=_('Total Requerido'),
         compute='_get_totals',
         digits=dp.get_precision('Account'),
         # store=True,
-        )
+    )
     passive_residue = fields.Float(
         string=_('Total Residuo'),
         compute='_get_totals',
         digits=dp.get_precision('Account'),
         # store=True,
-        )
+    )
     budget_position_ids = fields.Many2many(
         relation='public_budget_budget_position_rel',
         comodel_name='public_budget.budget_position',
         string=_('Budget Positions'),
         # store=True, #TODO ver si agregamos el store
         compute='_get_budget_positions'
-        )
+    )
     company_id = fields.Many2one(
         'res.company',
         string='Company',
@@ -98,12 +98,12 @@ class budget(models.Model):
         states={'draft': [('readonly', False)]},
         default=lambda self: self.env['res.company']._company_default_get(
             'public_budget.budget')
-        )
+    )
     state = fields.Selection(
         _states_,
         'State',
         default='draft',
-        )
+    )
     budget_modification_ids = fields.One2many(
         'public_budget.budget_modification',
         'budget_id',
@@ -111,20 +111,20 @@ class budget(models.Model):
         readonly=True,
         states={'draft': [('readonly', False)], 'open': [('readonly', False)]},
         domain=[('initial_approval', '=', False)]
-        )
+    )
     budget_detail_ids = fields.One2many(
         'public_budget.budget_detail',
         'budget_id',
         string='Details',
         readonly=True,
         states={'draft': [('readonly', False)]}
-        )
+    )
     budget_prec_detail_ids = fields.One2many(
         'public_budget.budget_prec_detail',
         'budget_id',
         string='Pre Close Detail',
         readonly=True
-        )
+    )
     funding_move_ids = fields.One2many(
         'public_budget.funding_move',
         'budget_id',
@@ -134,12 +134,12 @@ class budget(models.Model):
             'open': [('readonly', False)],
             'pre_closed': [('readonly', False)]},
         context={'from_budget': True}
-        )
+    )
     transaction_ids = fields.One2many(
         'public_budget.transaction',
         'budget_id',
         string='Transactions'
-        )
+    )
 
     @api.one
     @api.depends(

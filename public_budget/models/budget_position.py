@@ -20,117 +20,117 @@ class budget_position(models.Model):
     code = fields.Char(
         string='Code',
         required=True
-        )
+    )
     name = fields.Char(
         string='Name',
         required=True
-        )
+    )
     type = fields.Selection(
         [(u'normal', u'Normal'), (u'view', u'View')],
         string='Type',
         required=True,
         default='normal'
-        )
+    )
     budget_assignment_allowed = fields.Boolean(
         string='Budget Assignment Allowed?'
-        )
+    )
     category_id = fields.Many2one(
         'public_budget.budget_position_category',
         string='Category'
-        )
+    )
     inventariable = fields.Boolean(
         string='Inventariable?'
-        )
+    )
     draft_amount = fields.Float(
         string=_('Draft Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
-        )
+    )
     preventive_amount = fields.Float(
         string='Monto Preventivo',
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
-        )
+    )
     definitive_amount = fields.Float(
         string='Monto Definitivo',
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
-        )
+    )
     to_pay_amount = fields.Float(
         string='Monto A Pagar',
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
-        )
+    )
     paid_amount = fields.Float(
         string='Monto Pagado',
         compute='_get_amounts'
-        )
+    )
     balance_amount = fields.Float(
         string=_('Saldo'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
-        )
+    )
     projected_amount = fields.Float(
         string=_('Monto Proyectado'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
-        )
+    )
     projected_avg = fields.Float(
         string=_('Projected Avg'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
-        )
+    )
     preventive_avg = fields.Float(
         string=_('Porc. Preventivo'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
-        )
+    )
     amount = fields.Float(
         string=_('Monto'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
-        )
+    )
     parent_left = fields.Integer(
         string='Parent Left',
         select=True
-        )
+    )
     parent_right = fields.Integer(
         string='Parent Right',
         select=True
-        )
+    )
     child_ids = fields.One2many(
         'public_budget.budget_position',
         'parent_id',
         string='Childs'
-        )
+    )
     parent_id = fields.Many2one(
         'public_budget.budget_position',
         string='Parent',
         ondelete='cascade',
         context={'default_type': 'view'},
         domain=[('type', '=', 'view')]
-        )
+    )
     budget_detail_ids = fields.One2many(
         'public_budget.budget_detail',
         'budget_position_id',
         string='budget_detail_ids'
-        )
+    )
     budget_modification_detail_ids = fields.One2many(
         'public_budget.budget_modification_detail',
         'budget_position_id',
         string='budget_modification_detail_ids'
-        )
+    )
     preventive_line_ids = fields.One2many(
         'public_budget.preventive_line',
         'budget_position_id',
         string='Preventive Lines'
-        )
+    )
     assignment_position_id = fields.Many2one(
         'public_budget.budget_position',
         string=_('Assignment Position'),
         compute='_get_assignment_position',
         store=True,
-        )
+    )
 
     @api.one
     # @api.depends(
@@ -162,10 +162,9 @@ class budget_position(models.Model):
             ('budget_position_id', operator, self.id),
             ('transaction_id.state', 'in', ('open', 'closed')),
             ('affects_budget', '=', True),
-            ]
+        ]
 
         budget_id = self._context.get('budget_id', False)
-        # from_date = self._context.get('analysis_from_date', False)
         to_date = self._context.get('analysis_to_date', False)
 
         # we check it is a report because if not it will get wrong budget
@@ -175,10 +174,6 @@ class budget_position(models.Model):
 
         if budget_id:
             domain.append(('budget_id', '=', budget_id))
-        # if from_date:
-        #     _logger.info('Getting budget amounts with from_date %s' % (
-        #         from_date))
-        #     domain += [('transaction_id.issue_date', '>=', from_date)]
         if to_date:
             _logger.info('Getting budget amounts with to_date %s' % (
                 to_date))
@@ -188,11 +183,8 @@ class budget_position(models.Model):
         _logger.info('Getting budget amounts')
         if budget_id and self.budget_assignment_allowed:
             modification_domain = [
-                    ('budget_modification_id.budget_id', '=', budget_id),
-                    ('budget_position_id', operator, self.id)]
-            # if from_date:
-            #     modification_domain += [
-            #         ('budget_modification_id.date', '>=', from_date)]
+                ('budget_modification_id.budget_id', '=', budget_id),
+                ('budget_position_id', operator, self.id)]
             if to_date:
                 modification_domain += [
                     ('budget_modification_id.date', '<=', to_date)]
@@ -222,7 +214,7 @@ class budget_position(models.Model):
         draft_preventive_lines = self.env[
             'public_budget.preventive_line'].search(
             domain
-            )
+        )
 
         if draft_preventive_lines:
             self._cr.execute(
@@ -236,7 +228,7 @@ class budget_position(models.Model):
         active_preventive_lines = self.env[
             'public_budget.preventive_line'].search(
             domain
-            )
+        )
 
         preventive_amount = definitive_amount = to_pay_amount = paid_amount = 0
         if active_preventive_lines:
@@ -245,14 +237,11 @@ class budget_position(models.Model):
             # if from_date or to_date:
             if to_date:
                 _logger.info('Getting values from computed fields methods')
-                preventive_amount = sum(
-                    active_preventive_lines.mapped('preventive_amount'))
-                definitive_amount = sum(
-                    active_preventive_lines.mapped('definitive_amount'))
-                to_pay_amount = sum(
-                    active_preventive_lines.mapped('to_pay_amount'))
-                paid_amount = sum(
-                    active_preventive_lines.mapped('paid_amount'))
+                for pl in active_preventive_lines:
+                    preventive_amount += pl.preventive_amount
+                    definitive_amount += pl.definitive_amount
+                    to_pay_amount += pl.to_pay_amount
+                    paid_amount += pl.paid_amount
             else:
                 _logger.info('Getting values from stored fields')
                 self._cr.execute(
@@ -315,8 +304,9 @@ class budget_position(models.Model):
     @api.constrains('child_ids', 'type', 'parent_id')
     def _check_type(self):
         if self.child_ids and self.type not in ('view'):
-            raise Warning(_('You cannot define children to an account with \
-                internal type different of "View".'))
+            raise Warning(_(
+                'You cannot define children to an account with '
+                'internal type different of "View".'))
 
     @api.one
     @api.constrains(
@@ -331,14 +321,15 @@ class budget_position(models.Model):
         if not self.budget_assignment_allowed and (
                 self.budget_modification_detail_ids or self.budget_detail_ids):
             raise Warning(_(
-                "You can not set 'Budget Assignment Allowed' to false if\
-                budget position is being used in a budget detail or\
-                modification."))
+                "You can not set 'Budget Assignment Allowed' to false if "
+                "budget position is being used in a budget detail or "
+                "modification."))
         if self.budget_assignment_allowed:
             # Check no parent has budget allowed
             if len(self.get_parent_assignment_position()) >= 1:
-                raise Warning(_('In one branch only one budget position can\
-                    have Budget Assignment Allowed.'))
+                raise Warning(_(
+                    'In one branch only one budget position can '
+                    'have Budget Assignment Allowed.'))
             # Check no children has budget allowed
             else:
                 children_allowed = self.search([
@@ -347,8 +338,8 @@ class budget_position(models.Model):
                     ('budget_assignment_allowed', '=', True)])
                 if children_allowed:
                     raise Warning(_(
-                        'You can not set position %s to Budget Posistion \
-                        Allowed as the child position %s has Allowed.') % (
+                        'You can not set position %s to Budget Posistion '
+                        'Allowed as the child position %s has Allowed.') % (
                         self.name, children_allowed[0].name))
 
     @api.multi

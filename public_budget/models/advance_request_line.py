@@ -16,41 +16,41 @@ class advance_request_line(models.Model):
         required=True,
         context={'default_employee': 1},
         domain=[('employee', '=', True)]
-        )
+    )
     requested_amount = fields.Float(
         string='Requested Amount',
         required=True,
         digits=dp.get_precision('Account'),
-        )
+    )
     description = fields.Char(
         string='Description',
-        )
+    )
     debt_amount = fields.Float(
         string=_('Debt Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
-        )
+    )
     pending_return_amount = fields.Float(
         string='Devolucion Pendiente',
         help='Monto de Devolucion Pendiente de Confirmación en devolución '
         'de adelanto',
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
-        )
+    )
     approved_amount = fields.Float(
         string='Approved Amount',
         digits=dp.get_precision('Account'),
-        )
+    )
     advance_request_id = fields.Many2one(
         'public_budget.advance_request',
         ondelete='cascade',
         string='advance_request_id',
         required=True,
         auto_join=True
-        )
+    )
     state = fields.Selection(
         related='advance_request_id.state',
-        )
+    )
     # voucher_id = fields.Many2one(
     #     'account.voucher',
     #     'Voucher',
@@ -60,7 +60,7 @@ class advance_request_line(models.Model):
     @api.one
     @api.depends(
         'employee_id',
-        )
+    )
     def _get_amounts(self):
         if self.employee_id:
             request_type = self.advance_request_id.type_id
@@ -70,7 +70,7 @@ class advance_request_line(models.Model):
                 ('employee_id', '=', self.employee_id.id),
                 ('advance_return_id.state', 'in', ['draft']),
                 ('advance_return_id.type_id', '=', request_type.id),
-                ]
+            ]
             self.pending_return_amount = sum(
                 self.env['public_budget.advance_return_line'].search(
                     pending_return_domain).mapped('returned_amount'))

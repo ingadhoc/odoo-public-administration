@@ -17,25 +17,27 @@ class invoice_line(models.Model):
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         # store=True,
-        )
+    )
     paid_amount = fields.Float(
         string=_('Paid Amount'),
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         # store=True,
-        )
+    )
     definitive_line_id = fields.Many2one(
         'public_budget.definitive_line',
         string='Definitive Line',
-        readonly=True
-        )
+        readonly=True,
+        auto_join=True,
+    )
 
     @api.one
     @api.depends(
-        'price_subtotal',
-        'invoice_id.amount_total',
-        'invoice_id.residual'
-        )
+        # 'price_subtotal',
+        # 'invoice_id.amount_total',
+        'invoice_id.residual',
+        'invoice_id.to_pay_amount',
+    )
     def _get_amounts(self):
         """Update the following fields:
         -to_pay_amount: is the amount of this invoice that is in draft vouchers
@@ -52,18 +54,23 @@ class invoice_line(models.Model):
             if to_date:
                 invoice_paid_perc = (
                     self.invoice_id._get_paid_amount_to_date() / invoice_total)
+                invoice_to_pay_perc = (
+                    self.invoice_id._get_to_pay_amount_to_date() / invoice_total)
             else:
                 invoice_paid_perc = (
                     invoice_total - self.invoice_id.residual) / invoice_total
-            invoice_to_pay_perc = (
-                self.invoice_id.to_pay_amount) / invoice_total
+                invoice_to_pay_perc = (
+                    self.invoice_id.to_pay_amount) / invoice_total
             self.to_pay_amount = self.price_subtotal * invoice_to_pay_perc
             self.paid_amount = self.price_subtotal * invoice_paid_perc
+        # if someone calls for this recomputation then we call for
+        # recomputation on related definitive lines
+        # self.definitive_line_id._get_amounts()
 
     @api.one
     @api.constrains(
         'definitive_line_id',
-        )
+    )
     def check_budget_state_open_pre_closed(self):
         budget = self.definitive_line_id.budget_id
         if budget and budget.state not in ['open', 'pre_closed']:

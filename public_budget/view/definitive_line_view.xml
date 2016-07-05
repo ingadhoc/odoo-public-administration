@@ -44,7 +44,7 @@
             <field name="model">public_budget.definitive_line</field>
             <field name="arch" type="xml">
                 <tree string="Definitive Line"
-                    editable="top"
+                    editable="bottom"
                     >
                     <field name="issue_date"/>
                     <field name="supplier_id"/>

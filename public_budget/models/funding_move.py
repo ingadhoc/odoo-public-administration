@@ -21,46 +21,46 @@ class funding_move(models.Model):
         string='Date',
         required=True,
         default=fields.Date.context_today
-        )
+    )
     name = fields.Char(
         string='Name',
         required=True
-        )
+    )
     type = fields.Selection(
         [(u'request', u'Request'), (u'refund', u'Refund')],
         string='Type',
         required=True,
         default='request'
-        )
+    )
     journal_id = fields.Many2one(
         'account.journal',
         string='Journal',
         required=True,
         domain=[('type', 'in', ('cash', 'bank'))]
-        )
+    )
     amount = fields.Float(
         string='Amount',
         required=True,
         digits=dp.get_precision('Account'),
-        )
+    )
     move_id = fields.Many2one(
         'account.move',
         string='Journal Entry',
         readonly=True,
         copy=False
-        )
+    )
     state = fields.Selection(
         _states_,
         'State',
         default='draft',
-        )
+    )
     budget_id = fields.Many2one(
         'public_budget.budget',
         ondelete='cascade',
         string='Budget',
         required=True,
         domain=[('state', '=', 'open')]
-        )
+    )
 
     @api.multi
     def action_cancel_draft(self):
@@ -81,9 +81,9 @@ class funding_move(models.Model):
     @api.constrains('state')
     def _check_cancel(self):
         if self.state == 'cancel' and self.move_id:
-            raise Warning(
-                _("You can not cancel a Funding Move that has a related \
-                Account Move. Delete it first"))
+            raise Warning(_(
+                "You can not cancel a Funding Move that has a related "
+                "Account Move. Delete it first"))
 
     @api.one
     def action_confirm(self):

@@ -1,0 +1,56 @@
+CHANGELOG:
+* JULIO 2016
+** Hicimos:
+    account.invoice
+        hicismos campo normal a to_pay_amount (_compute_to_pay_amount)
+    public_budget.definitive_line
+        hicismos campo normal a to_pay_amount (_get_amounts)
+        hicismos campo normal a paid_amount (_get_amounts)
+        hicismos campo normal a invoiced_amount (_get_amounts)
+    para que funcione bien en reporte a fecha, además agregamos campos auxilaires calculados
+    Agregamos auto_join
+
+POSIBLES MEJORAS
+* Si necesitamos más performance:
+    la alternativa es hacer no computados a campos de invoice.line
+    probar unificar métodos de campos calculados en transacion
+    probar separar algunos métodos de definitive line
+
+ANALAISIS DEPENDS (VIEJO; YA CAMBIAMOS MUCHAS COSAS)
+
+invoice_line
+    @api.one
+    @api.depends(
+        'price_subtotal',
+        'invoice_id.amount_total',
+        'invoice_id.residual'
+        )
+    def _get_amounts(self):
+        to_pay_amount - NO STORED
+        paid_amount - NO STORED
+
+invoice
+    @api.one
+    @api.depends(
+        'state', 'currency_id',
+        'move_id.line_id.voucher_line_ids.amount',
+        'move_id.line_id.voucher_line_ids.voucher_id.state',
+    )
+    def _compute_to_pay_amount(self):
+        to_pay_amount - STORED
+
+definitive
+    @api.one
+    @api.depends(
+        'amount',
+        'invoice_line_ids.invoice_id.state',
+        'invoice_line_ids.invoice_id.type',
+        'invoice_line_ids.price_subtotal',
+        'invoice_line_ids.to_pay_amount',
+        'invoice_line_ids.paid_amount',
+    )
+    def _get_amounts(self):
+        self.invoiced_amount = invoiced_amount - STORED
+        self.residual_amount = self.amount - invoiced_amount - STORED
+        self.to_pay_amount = to_pay_amount - STORED
+        self.paid_amount = paid_amount - STORED
