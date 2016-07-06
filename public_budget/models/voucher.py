@@ -148,7 +148,7 @@ class account_voucher(models.Model):
         _logger.info('Updating invoice amounts from voucher')
         # when voucher state changes we recomputed related invoice values
         # we could improove this filtering by relevant states
-        self.invoice_ids._compute_to_pay_amount()
+        self.invoice_ids.sudo()._compute_to_pay_amount()
 
     @api.one
     @api.constrains('confirmation_date', 'date')
