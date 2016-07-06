@@ -63,7 +63,7 @@ class invoice(models.Model):
     def update_definitive_invoiced_amount(self):
         _logger.info('Updating invoice line amounts from invoice')
         # if invoice state changes, we recompute to_pay_amount
-        self._compute_to_pay_amount()
+        self.sudo()._compute_to_pay_amount()
 
     @api.one
     def _compute_to_pay_amount(self):
