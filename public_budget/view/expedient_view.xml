@@ -42,8 +42,10 @@
                             type="object"
                             states="cancel"
                             string="To Draft"/>
+                        <!-- por pedido de ellos solo desde secretaria se pueden anular -->
                         <button name="sgn_to_annulled"
                             states="open"
+                            groups="public_budget.group_secretary_usuario"
                             string="To Annulled"/>
                         <button name="sgn_close"
                             states="in_revision"

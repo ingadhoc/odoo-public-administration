@@ -212,14 +212,20 @@ class PublicBudgetExpedient(models.Model):
     @api.multi
     def check_expedients_exist(self):
         for expedient in self:
+            # no se puede si esta en transacciones no canceladas
             transactions = self.env['public_budget.transaction'].search([
-                ('expedient_id', '=', expedient.id)])
+                ('expedient_id', '=', expedient.id),
+                ('state', '!=', 'cancel'),
+            ])
             if transactions:
                 raise Warning(
                     'No puede anular este expediente ya que es utilizado en '
                     'las siguientes transacciones %s' % transactions.ids)
+            # no se puede si esta en vouchers no cancelados
             vouchers = self.env['account.voucher'].search([
-                ('expedient_id', '=', expedient.id)])
+                ('expedient_id', '=', expedient.id),
+                ('state', '!=', 'cancel'),
+            ])
             if vouchers:
                 raise Warning(
                     'No puede anular este expediente ya que es utilizado en '

@@ -20,7 +20,9 @@ class account_voucher(models.Model):
         string='Expedient',
         readonly=True,
         # required=True,
-        domain=[('type', '=', 'payment'), ('state', '=', 'open')],
+        # domain=[('type', '=', 'payment'), ('state', '=', 'open')],
+        domain="[('type', '=', 'payment'), ('state', '=', 'open'), "
+        "('current_location_id', 'in', user_location_ids[0][2])]",
         context={'default_type': 'payment'},
         states={'draft': [('readonly', False)]}
     )
@@ -64,6 +66,17 @@ class account_voucher(models.Model):
         store=True,
         related='transaction_id.type_id.with_advance_payment',
     )
+    user_location_ids = fields.Many2many(
+        compute='get_user_locations',
+        comodel_name='public_budget.location',
+        string='User Locations',
+    )
+
+    @api.one
+    # dummy depends to compute values on create
+    @api.depends('transaction_id')
+    def get_user_locations(self):
+        self.user_location_ids = self.env.user.location_ids
 
     @api.one
     def _get_budget_positions_and_invoices(self):
@@ -185,6 +198,14 @@ class account_voucher(models.Model):
                 raise Warning((
                     'El importe mandado a pagar no puede ser mayor al importe '
                     'de la factura'))
+
+    @api.multi
+    def proforma_voucher(self):
+        if self.expedient_id.current_location_id not in self.user_location_ids:
+            raise Warning(
+                'No puede confirmar un pago si el expediente no está en una '
+                'ubicación autorizada para ústed')
+        return super(account_voucher, self).proforma_voucher
 
     @api.one
     @api.constrains('confirmation_date', 'date')
