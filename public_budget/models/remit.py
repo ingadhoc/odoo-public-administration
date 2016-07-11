@@ -63,6 +63,7 @@ class remit(models.Model):
         string='Referencia',
         readonly=False
     )
+    # TODO esto deberia ser computado como en voucher?
     user_location_ids = fields.Many2many(
         comodel_name='public_budget.location',
         string='User Locations',

@@ -204,6 +204,7 @@ class transaction(models.Model):
         default=lambda self: self.env['res.company']._company_default_get(
             'public_budget.transaction')
     )
+    # TODO esto deberia ser computado como en voucher?
     user_location_ids = fields.Many2many(
         string='User Locations',
         related='user_id.location_ids'
