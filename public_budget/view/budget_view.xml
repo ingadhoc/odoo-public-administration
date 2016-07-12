@@ -68,7 +68,7 @@
                         </group>
                         <notebook>
                             <page string="Analysis">
-                                <field name="budget_position_ids" context="{'budget_id':active_id, 'analysis_to_date': analysis_to_date, 'tree_view_ref': 'public_budget.view_budget_position_budget_tree'}"/>
+                                <field name="budget_position_ids" context="{'budget_id':active_id, 'tree_view_ref': 'public_budget.view_budget_position_budget_tree'}"/>
                             </page>
                             <page string="Detail">
                                 <field name="budget_detail_ids"/>
@@ -106,6 +106,10 @@
                             invisible="1"/>
                     </header>
                 </header>
+                <!-- agregamos analysis_to_date acá para que no de error desde otros lugares -->
+                <field name="budget_position_ids" position="attributes">
+                    <attribute name="context">{'budget_id':active_id, 'analysis_to_date': analysis_to_date, 'tree_view_ref': 'public_budget.view_budget_position_budget_tree'}</attribute>
+                </field>
             </field>
         </record>
 
