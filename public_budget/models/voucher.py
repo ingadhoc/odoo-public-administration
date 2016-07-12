@@ -205,7 +205,7 @@ class account_voucher(models.Model):
             raise Warning(
                 'No puede confirmar un pago si el expediente no está en una '
                 'ubicación autorizada para ústed')
-        return super(account_voucher, self).proforma_voucher
+        return super(account_voucher, self).proforma_voucher()
 
     @api.one
     @api.constrains('confirmation_date', 'date')
