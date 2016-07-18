@@ -34,85 +34,85 @@ class PublicBudgetSubsidy(models.Model):
         required=True,
         ondelete='cascade',
         auto_join=True
-        )
+    )
     # expedient_id = fields.Many2one(
     #     'Expediente Administrativo de Solicitud',
     #     )
     parliamentary_resolution_date = fields.Date(
         'Fecha de Resolución Parlamentaria',
-        )
+    )
     parliamentary_expedient = fields.Char(
         'Expediente Parlamentario',
-        )
+    )
     charge_date = fields.Date(
         compute='get_charge_date',
         string='Fecha del Cargo',
-        )
+    )
     dispositional_order = fields.Char(
         'Orden de disposición',
         readonly=True,
-        )
+    )
     accountability_state = fields.Selection([
         ('charge_made', 'Cargo Efectuado'),
         ('rendition_presented', 'Rendición Presentada'),
         ('rendition_approved', 'Rendición Aprobada'),
-        ],
+    ],
         'Estado de la Rendición',
-        )
+    )
     accountability_overcome = fields.Boolean(
         compute='_get_accountability_expiry_date',
         search='search_accountability_overcome',
         string='Rendición Vencida?',
-        )
+    )
     accountability_expiry_date = fields.Date(
         compute='_get_accountability_expiry_date',
         string='Vencimiento de Rendición ',
         help='Fecha de vencimiento de presentación de rendición',
-        )
+    )
     accountability_administrative_expedient_id = fields.Many2one(
         'public_budget.expedient',
         'Expediente Administrativo de Rendición',
         help='Expediente Administrativo de Rendición de Subsidio',
-        )
+    )
     rendition_ids = fields.One2many(
         'public_budget.subsidy.rendition',
         'subsidy_id',
         'Renditions',
-        )
+    )
     claim_ids = fields.One2many(
         'public_budget.subsidy.claim',
         'subsidy_id',
         'Claims',
-        )
+    )
     destination = fields.Char(
-        )
+    )
     amount = fields.Float(
         string='Amount',
         required=True,
         digits=dp.get_precision('Account'),
         # states={'closed': [('readonly', True)]},
-        )
+    )
     rendition_amount = fields.Float(
         'Monto Rendido',
         compute='get_amounts',
         store=True,
-        )
+    )
     approved_amount = fields.Float(
         'Monto Aprobado',
         compute='get_amounts',
         store=True,
-        )
+    )
     pending_amount = fields.Float(
         'Monto Pendiente',
         compute='get_amounts',
         store=True,
-        )
+    )
 
     @api.one
     @api.depends(
         'rendition_ids.rendition_amount',
         'rendition_ids.approved_amount',
-        )
+    )
     def get_amounts(self):
         rendition_amount = sum(
             self.rendition_ids.mapped('rendition_amount'))
@@ -140,7 +140,7 @@ class PublicBudgetSubsidy(models.Model):
         overcome_checks = self.env['account.check'].search([
             ('voucher_id.transaction_id', 'in', subsidy_transactions.ids),
             ('handed_date', '<', fields.Date.to_string(to_date)),
-            ], limit=1)
+        ], limit=1)
 
         transaction_ids = overcome_checks.mapped(
             'voucher_id.transaction_id.id')
@@ -184,5 +184,5 @@ class PublicBudgetSubsidy(models.Model):
         # issued_checks = self.advance_voucher_ids.mapped('issued_check_ids')
         last_check = self.env['account.check'].search([
             ('voucher_id.transaction_id', '=', self.transaction_id.id),
-            ], order='handed_date desc', limit=1)
+        ], order='handed_date desc', limit=1)
         self.charge_date = last_check.handed_date

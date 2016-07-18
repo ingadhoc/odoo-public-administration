@@ -25,7 +25,7 @@
                             <field name="partner_id"/>
                             <field name="user_id"/>
                             <field name="budget_id"/>
-                            <field name="issue_date"/>
+                            <field name="issue_date" invisible="1"/>
                             <field name="destination"/>
                             <field name="company_id" groups="base.group_multi_company"/>
                         </group>
