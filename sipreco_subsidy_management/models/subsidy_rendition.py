@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from openerp import fields, models, api
+from openerp.exceptions import Warning
 import openerp.addons.decimal_precision as dp
 import logging
 _logger = logging.getLogger(__name__)
@@ -14,35 +15,43 @@ class PublicBudgetSubsidyRendition(models.Model):
         'Subsidy',
         required=True,
         ondelete='cascade',
-        )
+    )
     date = fields.Date(
         required=True,
         default=fields.Date.context_today
-        )
-    approval_arrangement_ids = fields.Many2many(
-        'public_budget.approval_arrangement',
-        'public_budget_rendition_approval_arrangement_rel',
-        'rendition_id', 'approval_arrangement_id',
+    )
+    approval_arrangement_ids = fields.One2many(
+        'public_budget.subsidy.approval_arrangement',
+        'rendition_id',
+        # 'public_budget_rendition_approval_arrangement_rel',
+        # 'rendition_id', 'approval_arrangement_id',
         'Disposiciones de aprobación',
-        )
+    )
     rendition_amount = fields.Float(
-        'Monto Rendido',
+        'Importe Rendido',
         digits=dp.get_precision('Account'),
-        )
+    )
     approved_amount = fields.Float(
-        'Monto Aprobado',
+        'Importe Aprobado',
         digits=dp.get_precision('Account'),
-        )
+    )
     pending_amount = fields.Float(
-        'Monto Pendiente',
+        'Importe Pendiente',
         digits=dp.get_precision('Account'),
         compute='get_pending_amount',
-        )
+    )
     expedient_id = fields.Many2one(
         'public_budget.expedient',
         'Expediente',
         help='Expediente Administrativo de Rendición de Subsidio',
-        )
+    )
+
+    @api.one
+    @api.constrains('rendition_amount', 'approved_amount')
+    def check_amounts(self):
+        if self.approved_amount > self.rendition_amount:
+            raise Warning(
+                'Importe Aprobado no puede ser mayor al importe rendido')
 
     @api.one
     @api.depends('rendition_amount', 'approved_amount')
