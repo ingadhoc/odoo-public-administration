@@ -47,6 +47,7 @@ class PublicBudgetSubsidy(models.Model):
     cargo_date = fields.Date(
         compute='get_cargo_data',
         string='Fecha del Cargo',
+        store=True,
     )
     dispositional_order = fields.Char(
         'Orden de disposición',
@@ -72,6 +73,11 @@ class PublicBudgetSubsidy(models.Model):
         string='Vencimiento de Rendición ',
         help='Fecha de vencimiento de presentación de rendición',
         store=True,
+    )
+    request_expedient_id = fields.Many2one(
+        'public_budget.expedient',
+        'Expediente de Solicitud',
+        # help='Expediente Administrativo de Rendición de Subsidio',
     )
     accountability_administrative_expedient_id = fields.Many2one(
         'public_budget.expedient',
@@ -154,13 +160,19 @@ class PublicBudgetSubsidy(models.Model):
 
     @api.one
     @api.depends(
-        'pendientes_aprobacion_amount',
+        'amount',
+        'aprobado_amount',
+        'cargo_amount',
     )
     def get_state(self):
-        if self.pendientes_aprobacion_amount:
-            accountability_state = 'pending'
-        else:
+        # consideramos aprobada solo si hay monto y es igual al cargo y a
+        # aprobado
+        if (
+                self.amount and
+                self.amount == self.cargo_amount == self.aprobado_amount):
             accountability_state = 'approved'
+        else:
+            accountability_state = 'pending'
         self.accountability_state = accountability_state
 
     @api.one
@@ -202,3 +214,10 @@ class PublicBudgetSubsidy(models.Model):
             cargo_amount - self.rendido_amount)
         self.pendientes_aprobacion_amount = (
             cargo_amount - self.aprobado_amount)
+
+    @api.one
+    @api.constrains('cargo_amount', 'rendido_amount')
+    def check_renditions(self):
+        if self.rendido_amount > self.cargo_amount:
+            raise Warning(
+                'El importe rendido no puede ser mayor al importe de cargo')

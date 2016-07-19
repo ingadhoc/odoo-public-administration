@@ -18,8 +18,9 @@
                         <group>
                             <group>
                                 <field name="transaction_id" readonly="1" required="0"/>
-                                <field name="expedient_id" string="Expediente Administrativo de Solicitud"/>
                                 <field name="amount"/>
+                                <field name="expedient_id" string="Expediente Autorizante"/>
+                                <field name="request_expedient_id"/>
                                 <field name="parliamentary_resolution_date"/>
                                 <field name="parliamentary_expedient"/>
                                 <field name="accountability_administrative_expedient_id"/>
@@ -42,11 +43,24 @@
                         </group>
                         <notebook>
                             <page string="Renditions">
-                                <field name="rendition_ids" context="{'default_expedient_id': accountability_administrative_expedient_id}">
+                                <field name="rendition_ids" context="{'default_expedient_id': accountability_administrative_expedient_id, 'default_rendition_amount': pendientes_rendicion_amount}">
                                     <tree editable="bottom">
                                         <field name="date"/>
                                         <field name="expedient_id"/>
-                                        <field name="approval_arrangement_ids" widget="many2many_tags"/>
+                                        <!-- nos da error al pasar este default por contexto -->
+                                        <!-- context="{'default_approved_amount': rendition_amount} -->
+                                        <field name="approval_arrangement_ids" widget="one2many_tags">
+                                            <form>
+                                                <header>
+                                                    <button name="%(action_aeroo_subsidy_approval_arrangement_report)d" string="Print" type="action"/>
+                                                </header>
+                                                <group>
+                                                    <field name="number" required="False"/>
+                                                    <field name="approved_amount"/>
+                                                    <field name="fojas"/>
+                                                </group>
+                                            </form>
+                                        </field>
                                         <field name="rendition_amount" sum="Total"/>
                                         <field name="approved_amount" sum="Total"/>
                                         <field name="pending_amount" sum="Total"/>
@@ -57,8 +71,10 @@
                                 <field name="claim_ids">
                                     <tree editable="bottom">
                                         <field name="date"/>
-                                        <field name="type"/>
+                                        <field name="type_id"/>
+                                        <!-- <field name="type"/> -->
                                         <field name="name"/>
+                                        <button name="%(action_aeroo_subsidy_claim_report)d" string="Print" icon="gtk-print" type="action"/>
                                     </tree>
                                 </field>
                             </page>
@@ -108,11 +124,11 @@
                     <field name="name"/>
                     <field name="amount"/>
                     <field name="destination"/>
+                    <field name="expedient_id" string="Expediente Autorizante"/>
+                    <field name="request_expedient_id"/>
                     <field name="parliamentary_resolution_date"/>
                     <field name="parliamentary_expedient"/>
-                    <field name="expedient_id" string="Expediente Administrativo de Solicitud"/>
                     <field name="accountability_administrative_expedient_id"/>
-                    <!-- <filter string="Rendición Vencida" name="accountability_overcome" domain="[('accountability_overcome', '=', True)]"/> -->
                     <filter
                         string="Vencida"
                         domain="[('accountability_expiry_date', '!=', False), ('accountability_expiry_date', '&lt;=', time.strftime('%%Y-%%m-%%d'))]"
@@ -121,6 +137,14 @@
                         string="Próxima a vencer"
                         domain="[('accountability_expiry_date', '!=', False), ('accountability_expiry_date', '&gt;', time.strftime('%%Y-%%m-%%d')), ('accountability_expiry_date', '&lt;=', (context_today() + datetime.timedelta(15)).strftime('%%Y-%%m-%%d'))]"
                         help="Rendición que vencerá en los próximos 15 días"
+                        />
+                    <filter
+                        string="Entregados no rendidos"
+                        domain="[('pendientes_rendicion_amount', '&gt;', 0.0), ('cargo_amount', '&gt;', 0.0)]"
+                        />
+                    <filter
+                        string="Pendientes aprobación"
+                        domain="[('pendientes_aprobacion_amount', '&gt;', 0.0), ('cargo_amount', '&gt;', 0.0)]"
                         />
                     <group expand="1" string="Group By">
                         <filter string="Estado de la Transacción" name="state" context="{'group_by':'state'}"/>

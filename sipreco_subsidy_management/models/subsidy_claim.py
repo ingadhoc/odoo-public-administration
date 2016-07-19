@@ -21,9 +21,14 @@ class PublicBudgetSubsidyClaim(models.Model):
         required=True,
         default=fields.Date.context_today
     )
-    type = fields.Selection([
-        ('first', 'Primer reclamo'),
-        ('last', 'Ultimo aviso')],
-        'Tipo',
+    # type = fields.Selection([
+    #     ('first', 'Primer reclamo'),
+    #     ('last', 'Ultimo aviso')],
+    #     'Tipo',
+    #     required=True,
+    # )
+    type_id = fields.Many2one(
+        'public_budget.subsidy.claim.type',
+        string='Tipo',
         required=True,
     )

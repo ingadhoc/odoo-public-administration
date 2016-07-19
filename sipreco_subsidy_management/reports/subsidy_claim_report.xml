@@ -3,31 +3,31 @@
     <data>
 
 <!-- Printed Invoice -->
-<record id="action_aeroo_report_payment_receipt" model="ir.actions.report.xml">
-    <field name="name">Payment Receipt Report</field>
+<record id="action_aeroo_subsidy_claim_report" model="ir.actions.report.xml">
+    <field name="name">Subsidy Claim Report</field>
     <field name="type">ir.actions.report.xml</field>
-    <field name="model">account.voucher</field>
-    <field name="report_name">payment_receipt_report</field>
+    <field name="model">public_budget.subsidy.claim</field>
+    <field name="report_name">subsidy_claim_report</field>
     <field name="report_type">aeroo</field>
     <field name="in_format">oo-odt</field>
     <!-- <field name="parser_loc">l10n_ar_aeroo_base/parser.py</field> -->
     <!-- <field name="parser_state">loc</field> -->
     <field name="parser_state">default</field>
-    <field name="report_rml">sipreco_public_budget/reports/payment_receipt_report.odt</field>
+    <field name="report_rml">sipreco_subsidy_management/reports/subsidy_claim_report.odt</field>
     <field name="tml_source">file</field>
-    <field name="out_format" ref="report_aeroo.report_mimetypes_pdf_odt"/>
+    <field name="out_format" ref="report_aeroo.report_mimetypes_doc_odt"/>
     <field name="styles_mode">specified</field>
-    <field name="stylesheet_id" ref="sipreco_stylesheet"/>
+    <field name="stylesheet_id" ref="sipreco_public_budget.sipreco_stylesheet"/>
 </record>
+
 <ir_set>
     <field eval="'action'" name="key"/>
     <field eval="'client_print_multi'" name="key2"/>
-    <field eval="['account.voucher']" name="models"/>
-    <field name="name">Payment Receipt</field>
-    <field eval="'ir.actions.report.xml,'+str(action_aeroo_report_transaction)" name="value"/>
+    <field eval="['public_budget.subsidy.claim']" name="models"/>
+    <field name="name">asset</field>
+    <field eval="'ir.actions.report.xml,'+str(action_aeroo_subsidy_claim_report)" name="value"/>
     <field eval="True" name="isobject"/>
     <field eval="True" name="replace"/>
 </ir_set>
-
     </data>
 </openerp>
