@@ -11,23 +11,34 @@
                     <field name="name" invisible="1"/>
                     <field name="state" string="Transaction State" invisible="1"/>
                     <header>
-                        <field name="accountability_state" widget="statusbar" clickable="true"/>
+                        <field name="accountability_state" widget="statusbar"/>
+                         <!-- clickable="true" -->
                     </header>
                     <sheet string="Subsidios">
                         <group>
-                            <field name="transaction_id" readonly="1" required="0"/>
-                            <field name="expedient_id" string="Expediente Administrativo de Solicitud"/>
-                            <field name="amount"/>
-                            <field name="parliamentary_resolution_date"/>
-                            <field name="parliamentary_expedient"/>
-                            <field name="accountability_administrative_expedient_id"/>
-                            <!-- fields from transaction -->
-                            <field name="partner_id"/>
-                            <field name="user_id"/>
-                            <field name="budget_id"/>
-                            <field name="issue_date" invisible="1"/>
-                            <field name="destination"/>
-                            <field name="company_id" groups="base.group_multi_company"/>
+                            <group>
+                                <field name="transaction_id" readonly="1" required="0"/>
+                                <field name="expedient_id" string="Expediente Administrativo de Solicitud"/>
+                                <field name="amount"/>
+                                <field name="parliamentary_resolution_date"/>
+                                <field name="parliamentary_expedient"/>
+                                <field name="accountability_administrative_expedient_id"/>
+                                <!-- fields from transaction -->
+                                <field name="partner_id"/>
+                                <field name="user_id"/>
+                                <field name="budget_id"/>
+                                <field name="issue_date" invisible="1"/>
+                                <field name="destination"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                            </group>
+                            <group>
+                                <field name="cargo_amount"/>
+                                <field name="rendido_amount"/>
+                                <field name="aprobado_amount"/>
+                                <field name="pendientes_rendicion_amount"/>
+                                <field name="revision_amount"/>
+                                <field name="pendientes_aprobacion_amount"/>
+                            </group>
                         </group>
                         <notebook>
                             <page string="Renditions">
@@ -54,9 +65,9 @@
                             <page string="Payment Orders and Refunds">
                                 <group>
                                     <field name="advance_paid_amount"/>
-                                    <field name="charge_date"/>
+                                    <field name="cargo_date"/>
                                     <field name="accountability_expiry_date"/>
-                                    <field name="accountability_overcome"/>
+                                    <!-- <field name="accountability_overcome"/> -->
                                 </group>
                                 <field name="advance_voucher_ids" context="{'default_transaction_id':id, 'default_partner_id': partner_id, 'default_type': 'payment', 'form_view_ref': 'account_voucher.view_vendor_payment_form','tree_view_ref': 'account_voucher.view_voucher_tree'}"/>
                             </page>
@@ -74,10 +85,15 @@
                 <tree string="Subsidios">
                     <field name="name"/>
                     <field name="amount"/>
-                    <field name="rendition_amount"/>
-                    <field name="approved_amount"/>
-                    <field name="pending_amount"/>
+                    <field name="cargo_amount" sum="Total"/>
+                    <field name="rendido_amount" sum="Total"/>
+                    <field name="aprobado_amount" sum="Total"/>
+                    <field name="pendientes_rendicion_amount" sum="Total"/>
+                    <field name="revision_amount" sum="Total"/>
+                    <field name="pendientes_aprobacion_amount" sum="Total"/>
                     <field name="accountability_state"/>
+                    <field name="cargo_date" invisible="0"/>
+                    <field name="accountability_expiry_date" invisible="0"/>
                     <field name="state" invisible="1"/>
                 </tree>
             </field>
@@ -96,7 +112,16 @@
                     <field name="parliamentary_expedient"/>
                     <field name="expedient_id" string="Expediente Administrativo de Solicitud"/>
                     <field name="accountability_administrative_expedient_id"/>
-                    <filter string="Rendición Vencida" name="accountability_overcome" domain="[('accountability_overcome', '=', True)]"/>
+                    <!-- <filter string="Rendición Vencida" name="accountability_overcome" domain="[('accountability_overcome', '=', True)]"/> -->
+                    <filter
+                        string="Vencida"
+                        domain="[('accountability_expiry_date', '!=', False), ('accountability_expiry_date', '&lt;=', time.strftime('%%Y-%%m-%%d'))]"
+                        />
+                    <filter
+                        string="Próxima a vencer"
+                        domain="[('accountability_expiry_date', '!=', False), ('accountability_expiry_date', '&gt;', time.strftime('%%Y-%%m-%%d')), ('accountability_expiry_date', '&lt;=', (context_today() + datetime.timedelta(15)).strftime('%%Y-%%m-%%d'))]"
+                        help="Rendición que vencerá en los próximos 15 días"
+                        />
                     <group expand="1" string="Group By">
                         <filter string="Estado de la Transacción" name="state" context="{'group_by':'state'}"/>
                         <filter string="Estado de la Rendición" name="accountability_state" context="{'group_by':'accountability_state'}"/>
