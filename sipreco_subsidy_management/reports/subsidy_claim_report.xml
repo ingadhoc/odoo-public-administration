@@ -10,8 +10,8 @@
     <field name="report_name">subsidy_claim_report</field>
     <field name="report_type">aeroo</field>
     <field name="in_format">oo-odt</field>
-    <!-- <field name="parser_loc">l10n_ar_aeroo_base/parser.py</field> -->
-    <!-- <field name="parser_state">loc</field> -->
+    <field name="parser_loc">l10n_ar_aeroo_base/parser.py</field>
+    <field name="parser_state">loc</field>
     <field name="parser_state">default</field>
     <field name="report_rml">sipreco_subsidy_management/reports/subsidy_claim_report.odt</field>
     <field name="tml_source">file</field>
