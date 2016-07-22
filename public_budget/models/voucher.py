@@ -201,7 +201,9 @@ class account_voucher(models.Model):
 
     @api.multi
     def proforma_voucher(self):
-        if self.expedient_id.current_location_id not in self.user_location_ids:
+        if (
+                self.expedient_id and self.expedient_id.current_location_id
+                not in self.user_location_ids):
             raise Warning(
                 'No puede confirmar un pago si el expediente no está en una '
                 'ubicación autorizada para ústed')
