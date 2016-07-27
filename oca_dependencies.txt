@@ -1,6 +1,7 @@
 adhoc-aeroo_reports https://github.com/ingadhoc/aeroo_reports.git
 server-tools https://github.com/OCA/server-tools.git
-web https://github.com/OCA/web.git
+oca-web https://github.com/OCA/web.git
+oca-hr https://github.com/OCA/hr.git
 adhoc-account-payment https://github.com/ingadhoc/account-payment.git
 odoo-argentina https://github.com/ingadhoc/odoo-argentina.git
 adhoc-account-financial-tools https://github.com/ingadhoc/account-financial-tools.git
