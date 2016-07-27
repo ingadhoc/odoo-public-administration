@@ -38,6 +38,11 @@ class PublicBudgetSubsidy(models.Model):
     # expedient_id = fields.Many2one(
     #     'Expediente Administrativo de Solicitud',
     #     )
+    rendiciones_pendientes_otros_subsidios = fields.Float(
+        'Rend. Pendientes Otros Subsidios',
+        help='Rendiciones Pendientes de Otros Subsidios',
+        compute='get_rendiciones_pendientes_otros_subsidios',
+    )
     parliamentary_resolution_date = fields.Date(
         'Fecha de Resolución Parlamentaria',
     )
@@ -157,6 +162,21 @@ class PublicBudgetSubsidy(models.Model):
     def set_subsidy_name(self):
         self.name = '%s - %s' % (
             self.expedient_id.number or '', self.partner_id.name or '')
+
+    @api.one
+    @api.depends(
+        'partner_id',
+    )
+    def get_rendiciones_pendientes_otros_subsidios(self):
+        if not self.partner_id:
+            amount = False
+        else:
+            others = self.search([
+                ('partner_id', '=', self.partner_id.id),
+                ('id', '!=', self.id),
+            ])
+            amount = sum(others.mapped('pendientes_rendicion_amount'))
+        self.rendiciones_pendientes_otros_subsidios = amount
 
     @api.one
     @api.depends(

@@ -26,6 +26,7 @@
                                 <field name="accountability_administrative_expedient_id"/>
                                 <!-- fields from transaction -->
                                 <field name="partner_id"/>
+                                <field name="rendiciones_pendientes_otros_subsidios"/>
                                 <field name="user_id"/>
                                 <field name="budget_id"/>
                                 <field name="issue_date" invisible="1"/>
