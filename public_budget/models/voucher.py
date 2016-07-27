@@ -36,7 +36,8 @@ class account_voucher(models.Model):
         relation='voucher_position_rel',
         comodel_name='public_budget.budget_position',
         string='Partidas Presupuestarias Relacionadas',
-        compute='_get_budget_positions_and_invoices'
+        compute='_get_budget_positions_and_invoices',
+        search='_search_budget_positions',
     )
     invoice_ids = fields.Many2many(
         comodel_name='account.invoice',
@@ -77,6 +78,13 @@ class account_voucher(models.Model):
     @api.depends('transaction_id')
     def get_user_locations(self):
         self.user_location_ids = self.env.user.location_ids
+
+    @api.model
+    def _search_budget_positions(self, operator, value):
+        return [
+            ('line_ids.move_line_id.invoice.invoice_line.'
+                'definitive_line_id.preventive_line_id.budget_position_id',
+                operator, value)]
 
     @api.one
     def _get_budget_positions_and_invoices(self):
