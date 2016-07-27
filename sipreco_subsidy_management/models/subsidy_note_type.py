@@ -4,9 +4,9 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class PublicBudgetSubsidyClaimType(models.Model):
+class PublicBudgetSubsidyNoteType(models.Model):
 
-    _name = 'public_budget.subsidy.claim.type'
+    _name = 'public_budget.subsidy.note.type'
     _order = 'sequence'
 
     sequence = fields.Integer(

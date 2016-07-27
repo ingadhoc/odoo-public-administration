@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
+        <!-- Menu hr a techincal features -->
+        <record id="hr.menu_hr_main" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
+        </record>
+
         <!-- Menu messaging a techincal features -->
         <record id="base.menu_reporting" model="ir.ui.menu">
             <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>

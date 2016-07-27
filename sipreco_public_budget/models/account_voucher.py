@@ -13,38 +13,38 @@ class account_voucher(models.Model):
         default=fields.Date.context_today,
         states={'draft': [('readonly', False)]},
         help='Date used to calculate payment date',
-        )
+    )
     payment_days = fields.Integer(
         string='Payment Days',
         readonly=True,
         states={'draft': [('readonly', False)]},
         help='Days added to payment base date to get the payment date',
-        )
+    )
     payment_date = fields.Date(
         compute='get_payment_date',
         string='Fecha de Pago',
         states={},
         store=True,
-        )
+    )
     net_amount = fields.Float(
         states={'confirmed': [('readonly', False)]}
-        )
+    )
     issued_check_ids = fields.One2many(
         states={'confirmed': [('readonly', False)]}
-        )
+    )
     withholding_ids = fields.One2many(
         states={'confirmed': [('readonly', False)]}
-        )
+    )
     show_print_receipt_button = fields.Boolean(
         _('Show Print Receipt Button'),
         compute='get_show_print_receipt_button',
-        )
+    )
     paid_withholding_ids = fields.Many2many(
         comodel_name='account.voucher.withholding',
         string='Retenciones Pagadas',
         help='Retenciones pagadas con este voucher',
         compute='_get_paid_withholding'
-        )
+    )
 
     @api.constrains('receiptbook_id', 'state', 'type')
     def check_receiptbook(self):
@@ -54,7 +54,7 @@ class account_voucher(models.Model):
                 self.state == 'confirmed' and
                 self.type == 'payment' and
                 not self.receiptbook_id
-                ):
+        ):
             raise Warning(_(
                 'You can not confirm a payment order without ReceiptBook'))
 
@@ -73,9 +73,9 @@ class account_voucher(models.Model):
                 self.type == 'payment' and
                 not self.force_number and
                 not self.document_number
-                ):
+        ):
             self.force_number = self.env['ir.sequence'].next_by_id(
-                    self.receiptbook_id.sequence_id.id)
+                self.receiptbook_id.sequence_id.id)
             # vals['force_number'] = force_number
         # return super(account_voucher, self).create(vals)
 
@@ -119,7 +119,9 @@ class account_voucher(models.Model):
             while business_days_to_add > 0:
                 current_date = current_date + relativedelta(days=1)
                 weekday = current_date.weekday()
-                if weekday >= 5:    # sunday = 6
+                # sunday = 6
+                if weekday >= 5 or self.env[
+                        'hr.holidays.public'].is_public_holiday(current_date):
                     continue
                 # if current_date in holidays:
                 #     continue
@@ -163,14 +165,14 @@ class account_voucher(models.Model):
             if (
                     journal.voucher_amount_restriction == 'cant_be_cero' and
                     not voucher.to_pay_amount
-                    ):
+            ):
                 raise Warning(_(
                     "On Journal '%s' to pay amount can't be cero!\n"
                     "* Voucher id: %i") % (journal.name, voucher.id))
             elif (
                     journal.voucher_amount_restriction == 'must_be_cero' and
                     voucher.to_pay_amount
-                    ):
+            ):
                 raise Warning(_(
                     "On Journal '%s' to pay amount must be cero!\n"
                     "* Voucher id: %i") % (journal.name, voucher.id))

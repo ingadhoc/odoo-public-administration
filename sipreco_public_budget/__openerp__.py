@@ -37,6 +37,7 @@
         'views/advance_return_view.xml',
         'views/account_checkbook_view.xml',
         'views/invoice_view.xml',
+        'views/hr_public_holidays_view.xml',
         'workflow/account_voucher_workflow.xml',
         'workflow/account_check_workflow.xml',
         'data/ir_parameters.xml',
@@ -102,6 +103,7 @@
         'account_statement_move_import',
         'web_m2x_options',
         'account_tax_settlement_withholding',
+        'hr_public_holidays',
     ],
     'description': '''
 Public Budget Sipreco Customizations
