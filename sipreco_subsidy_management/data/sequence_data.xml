@@ -11,7 +11,7 @@
         <record id="seq_approval_arrangement" model="ir.sequence">
             <field name="name">Disposición de aprobacion</field>
             <field name="code">approval_arrangement</field>
-            <field name="suffix">/%(y)s</field>
+            <field name="suffix">/%(y)s-N</field>
             <field name="padding">4</field>
             <field name="company_id" eval="False"/>
         </record>
