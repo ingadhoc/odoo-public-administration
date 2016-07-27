@@ -201,10 +201,10 @@ class PublicBudgetSubsidy(models.Model):
             while business_days_to_add > 0:
                 expiry_date = expiry_date + relativedelta(days=+1)
                 weekday = expiry_date.weekday()
-                if weekday >= 5:    # sunday = 6
+                # sunday = 6
+                if weekday >= 5 or self.env[
+                        'hr.holidays.public'].is_public_holiday(expiry_date):
                     continue
-                # if to_date in holidays:
-                #     continue
                 business_days_to_add -= 1
         self.cargo_date = cargo_date
         self.accountability_expiry_date = fields.Date.to_string(
