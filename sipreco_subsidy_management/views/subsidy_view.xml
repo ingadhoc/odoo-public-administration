@@ -132,11 +132,11 @@
                     <field name="accountability_administrative_expedient_id"/>
                     <filter
                         string="Vencida"
-                        domain="[('accountability_expiry_date', '!=', False), ('accountability_expiry_date', '&lt;=', time.strftime('%%Y-%%m-%%d'))]"
+                        domain="[('accountability_state', '!=', 'approved') , ('accountability_expiry_date', '!=', False), ('accountability_expiry_date', '&lt;=', time.strftime('%%Y-%%m-%%d'))]"
                         />
                     <filter
                         string="Próxima a vencer"
-                        domain="[('accountability_expiry_date', '!=', False), ('accountability_expiry_date', '&gt;', time.strftime('%%Y-%%m-%%d')), ('accountability_expiry_date', '&lt;=', (context_today() + datetime.timedelta(15)).strftime('%%Y-%%m-%%d'))]"
+                        domain="[('accountability_state', '!=', 'approved'), ('accountability_expiry_date', '!=', False), ('accountability_expiry_date', '&gt;', time.strftime('%%Y-%%m-%%d')), ('accountability_expiry_date', '&lt;=', (context_today() + datetime.timedelta(15)).strftime('%%Y-%%m-%%d'))]"
                         help="Rendición que vencerá en los próximos 15 días"
                         />
                     <filter
@@ -144,9 +144,14 @@
                         domain="[('pendientes_rendicion_amount', '&gt;', 0.0), ('cargo_amount', '&gt;', 0.0)]"
                         />
                     <filter
+                        string="Pendientes de revisión"
+                        domain="[('revision_amount', '&gt;', 0.0)]"
+                        />
+                        <!-- no lo neceistan, pidieron pendiente de revision -->
+                    <!-- <filter
                         string="Pendientes aprobación"
                         domain="[('pendientes_aprobacion_amount', '&gt;', 0.0), ('cargo_amount', '&gt;', 0.0)]"
-                        />
+                        /> -->
                     <filter
                         string="Aprobados"
                         domain="[('accountability_state', '=', 'approved'), ('cargo_amount', '&gt;', 0.0)]"
