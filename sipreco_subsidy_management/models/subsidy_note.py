@@ -4,9 +4,9 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class PublicBudgetSubsidyClaim(models.Model):
+class PublicBudgetSubsidyNote(models.Model):
 
-    _name = 'public_budget.subsidy.claim'
+    _name = 'public_budget.subsidy.note'
 
     subsidy_id = fields.Many2one(
         'public_budget.subsidy',
@@ -28,7 +28,7 @@ class PublicBudgetSubsidyClaim(models.Model):
     #     required=True,
     # )
     type_id = fields.Many2one(
-        'public_budget.subsidy.claim.type',
+        'public_budget.subsidy.note.type',
         string='Tipo',
         required=True,
     )

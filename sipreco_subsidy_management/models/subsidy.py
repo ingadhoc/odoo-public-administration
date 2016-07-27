@@ -89,10 +89,10 @@ class PublicBudgetSubsidy(models.Model):
         'subsidy_id',
         'Renditions',
     )
-    claim_ids = fields.One2many(
-        'public_budget.subsidy.claim',
+    note_ids = fields.One2many(
+        'public_budget.subsidy.note',
         'subsidy_id',
-        'Claims',
+        'Notes',
     )
     destination = fields.Char(
     )

@@ -67,14 +67,14 @@
                                     </tree>
                                 </field>
                             </page>
-                            <page string="Claims">
-                                <field name="claim_ids">
+                            <page string="Notes">
+                                <field name="note_ids">
                                     <tree editable="bottom">
                                         <field name="date"/>
                                         <field name="type_id"/>
                                         <!-- <field name="type"/> -->
                                         <field name="name"/>
-                                        <button name="%(action_aeroo_subsidy_claim_report)d" string="Print" icon="gtk-print" type="action"/>
+                                        <button name="%(action_aeroo_subsidy_note_report)d" string="Print" icon="gtk-print" type="action"/>
                                     </tree>
                                 </field>
                             </page>
