@@ -146,6 +146,10 @@
                         string="Pendientes aprobación"
                         domain="[('pendientes_aprobacion_amount', '&gt;', 0.0), ('cargo_amount', '&gt;', 0.0)]"
                         />
+                    <filter
+                        string="Aprobados"
+                        domain="[('accountability_state', '=', 'approved'), ('cargo_amount', '&gt;', 0.0)]"
+                        />
                     <group expand="1" string="Group By">
                         <filter string="Estado de la Transacción" name="state" context="{'group_by':'state'}"/>
                         <filter string="Estado de la Rendición" name="accountability_state" context="{'group_by':'accountability_state'}"/>
