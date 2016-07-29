@@ -173,8 +173,8 @@ class PublicBudgetSubsidy(models.Model):
         else:
             others = self.search([
                 ('partner_id', '=', self.partner_id.id),
-                ('id', '!=', self.id),
             ])
+            others -= self
             amount = sum(others.mapped('pendientes_rendicion_amount'))
         self.rendiciones_pendientes_otros_subsidios = amount
 
