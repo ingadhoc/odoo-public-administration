@@ -3,15 +3,16 @@
 # * sipreco_public_budget
 # 
 # Translators:
-# Gonzalo Ruzafa <gr@ingadhoc.com>, 2015
+# Gonzalo Ruzafa <gr@ingadhoc.com>, 2015-2016
+# Juan José Scarafía <scarafia.juanjose@gmail.com>, 2016
 # Juan José Scarafía <scarafia.juanjose@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: odoo-public-administration (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-27 21:10+0000\n"
-"PO-Revision-Date: 2016-07-27 21:10+0000\n"
-"Last-Translator: Juan José Scarafía <scarafia.juanjose@gmail.com>\n"
+"POT-Creation-Date: 2016-07-29 21:26+0000\n"
+"PO-Revision-Date: 2016-07-28 14:23+0000\n"
+"Last-Translator: Gonzalo Ruzafa <gr@ingadhoc.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/adhoc/ingadhoc-odoo-public-administration-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,7 +50,7 @@ msgstr "Comprobante Contable"
 #. module: sipreco_public_budget
 #: model:ir.actions.report.xml,name:sipreco_public_budget.action_aeroo_advance_request_debt_report
 msgid "Advance Request Debt Report"
-msgstr ""
+msgstr "Reporte de Requerimiento de Adelanto"
 
 #. module: sipreco_public_budget
 #: model:ir.actions.report.xml,name:sipreco_public_budget.action_aeroo_report_advance_request
@@ -77,7 +78,7 @@ msgstr "Volver a Pendiente de Entrega"
 #: code:addons/sipreco_public_budget/models/account_voucher.py:185
 #, python-format
 msgid "Boorador"
-msgstr ""
+msgstr "Boorador"
 
 #. module: sipreco_public_budget
 #: model:ir.model,name:sipreco_public_budget.model_public_budget_budget
@@ -119,7 +120,7 @@ msgstr "Cancelar Rechazo"
 #: code:addons/sipreco_public_budget/models/account_voucher.py:189
 #, python-format
 msgid "Cancelado"
-msgstr ""
+msgstr "Cancelado"
 
 #. module: sipreco_public_budget
 #: view:account.check.handed.wizard:sipreco_public_budget.account_check_handed_wizard_view
@@ -147,7 +148,7 @@ msgstr "Reemplazado"
 #: model:ir.actions.act_window,name:sipreco_public_budget.action_account_check_to_date_report
 #: model:ir.ui.menu,name:sipreco_public_budget.menu_account_check_to_date_report
 msgid "Cheques pendientes a fecha"
-msgstr ""
+msgstr "Cheques pendientes a fecha"
 
 #. module: sipreco_public_budget
 #: model:public_budget.transaction_type,name:sipreco_public_budget.purchase_type_compra_directa_demo
@@ -175,25 +176,25 @@ msgstr "Confirmar"
 #: code:addons/sipreco_public_budget/models/account_voucher.py:186
 #, python-format
 msgid "Confirmado"
-msgstr ""
+msgstr "Confirmado"
 
 #. module: sipreco_public_budget
 #: view:account.check.handed.wizard:sipreco_public_budget.account_check_handed_wizard_view
 #: view:account.check.to_date.report.wizard:sipreco_public_budget.account_check_to_date_report_view
 msgid "Confirmar"
-msgstr ""
+msgstr "Confirmar"
 
 #. module: sipreco_public_budget
 #: field:account.check.handed.wizard,create_uid:0
 #: field:account.check.to_date.report.wizard,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: sipreco_public_budget
 #: field:account.check.handed.wizard,create_date:0
 #: field:account.check.to_date.report.wizard,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creado el"
 
 #. module: sipreco_public_budget
 #: model:account.tax.code,name:sipreco_public_budget.demo_ri_tax_code_ret_drei_rosario_view
@@ -256,18 +257,18 @@ msgstr "Depositado"
 #. module: sipreco_public_budget
 #: field:account.check.to_date.report.wizard,journal_id:0
 msgid "Diario"
-msgstr ""
+msgstr "Diario"
 
 #. module: sipreco_public_budget
 #: model:public_budget.transaction_type,name:sipreco_public_budget.purchase_type_compra_directa
 msgid "Directa"
-msgstr ""
+msgstr "Directa"
 
 #. module: sipreco_public_budget
 #: field:account.check.handed.wizard,display_name:0
 #: field:account.check.to_date.report.wizard,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre Mostrado"
 
 #. module: sipreco_public_budget
 #: code:addons/sipreco_public_budget/models/account_check.py:28
@@ -281,7 +282,7 @@ msgstr "Borrador"
 msgid ""
 "El número de documento debe ser único por empleado!\n"
 "* Empleado existente: %s"
-msgstr ""
+msgstr "El número de documento debe ser único por empleado!\n* Empleado existente: %s"
 
 #. module: sipreco_public_budget
 #: code:addons/sipreco_public_budget/models/partner.py:37
@@ -289,20 +290,20 @@ msgstr ""
 msgid ""
 "El número de documento debe ser único por receptor de subsidio!\n"
 "* Receptor existente: %s"
-msgstr ""
+msgstr "El número de documento debe ser único por receptor de subsidio!\n* Receptor existente: %s"
 
 #. module: sipreco_public_budget
 #: code:addons/sipreco_public_budget/models/account_voucher.py:187
 #, python-format
 msgid "En Proceso de Firma"
-msgstr ""
+msgstr "En Proceso de Firma"
 
 #. module: sipreco_public_budget
 #: view:account.check.handed.wizard:sipreco_public_budget.account_check_handed_wizard_view
 #: view:account.check.to_date.report.wizard:sipreco_public_budget.account_check_to_date_report_view
 #: model:ir.actions.act_window,name:sipreco_public_budget.action_account_check_handed_wizard
 msgid "Entregar Cheques"
-msgstr ""
+msgstr "Entregar Cheques"
 
 #. module: sipreco_public_budget
 #: model:ir.actions.report.xml,name:sipreco_public_budget.action_aeroo_report_expedient
@@ -312,18 +313,18 @@ msgstr "Reporte de Expediente"
 #. module: sipreco_public_budget
 #: view:account.voucher:sipreco_public_budget.view_vendor_payment_signature_form
 msgid "False"
-msgstr ""
+msgstr "False"
 
 #. module: sipreco_public_budget
 #: field:account.check,handed_date:0
 msgid "Fecha de Entrega"
-msgstr ""
+msgstr "Fecha de Entrega"
 
 #. module: sipreco_public_budget
 #: code:addons/sipreco_public_budget/models/account_voucher.py:188
 #, python-format
 msgid "Firmado"
-msgstr ""
+msgstr "Firmado"
 
 #. module: sipreco_public_budget
 #: model:public_budget.transaction_type,name:sipreco_public_budget.purchase_type_fondo_fijo
@@ -347,12 +348,12 @@ msgstr "Ganancias"
 #: model:ir.actions.act_window,name:sipreco_public_budget.action_manage_checkbooks
 #: model:ir.ui.menu,name:sipreco_public_budget.menu_manage_checkbooks
 msgid "Gestionar Chequeras"
-msgstr ""
+msgstr "Gestionar Chequeras"
 
 #. module: sipreco_public_budget
 #: view:account.asset.asset:sipreco_public_budget.view_account_asset_search
 msgid "Group By"
-msgstr ""
+msgstr "Agrupar por"
 
 #. module: sipreco_public_budget
 #: view:account.check:sipreco_public_budget.view_account_check_form
@@ -364,7 +365,7 @@ msgstr "Entregado"
 #. module: sipreco_public_budget
 #: field:account.check.to_date.report.wizard,to_date:0
 msgid "Hasta Fecha"
-msgstr ""
+msgstr "Hasta Fecha"
 
 #. module: sipreco_public_budget
 #: code:addons/sipreco_public_budget/models/account_check.py:29
@@ -376,7 +377,7 @@ msgstr "En Cartera"
 #: field:account.check.handed.wizard,id:0
 #: field:account.check.to_date.report.wizard,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: sipreco_public_budget
 #: model:account.tax.code,name:sipreco_public_budget.demo_ri_tax_code_iibb_sf
@@ -411,7 +412,7 @@ msgstr "IVA"
 #. module: sipreco_public_budget
 #: view:account.invoice:sipreco_public_budget.view_public_budget_invoice_form
 msgid "Imprimir Liquidación"
-msgstr ""
+msgstr "Imprimir Liquidación"
 
 #. module: sipreco_public_budget
 #: field:public_budget.definitive.make.invoice,invoice_number:0
@@ -428,19 +429,19 @@ msgstr "El número de comprobante debe ser inferior a 99999999"
 #: field:account.check.handed.wizard,__last_update:0
 #: field:account.check.to_date.report.wizard,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima Actualización en"
 
 #. module: sipreco_public_budget
 #: field:account.check.handed.wizard,write_uid:0
 #: field:account.check.to_date.report.wizard,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultima Actualización por"
 
 #. module: sipreco_public_budget
 #: field:account.check.handed.wizard,write_date:0
 #: field:account.check.to_date.report.wizard,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultima Actualización en"
 
 #. module: sipreco_public_budget
 #: model:public_budget.transaction_type,name:sipreco_public_budget.purchase_type_lprivada
@@ -462,13 +463,13 @@ msgstr "Reporte de Liquidación"
 #. module: sipreco_public_budget
 #: view:account.voucher:sipreco_public_budget.account_voucher_view_voucher_filter_vendor_pay
 msgid "Nro Orden de Pago"
-msgstr ""
+msgstr "Nro Orden de Pago"
 
 #. module: sipreco_public_budget
 #: view:account.voucher:sipreco_public_budget.view_vendor_payment_l10n_ar_mods_form
 #: view:account.voucher:sipreco_public_budget.voucher_receipts_form_inherit_view
 msgid "Número de Documento"
-msgstr ""
+msgstr "Número de Documento"
 
 #. module: sipreco_public_budget
 #: model:account.tax.code,name:sipreco_public_budget.demo_ri_tax_code_otros_impuestos
@@ -520,7 +521,7 @@ msgstr "Otras Retenciones/SIJP"
 #: code:addons/sipreco_public_budget/models/account_voucher.py:192
 #, python-format
 msgid "Pagado"
-msgstr ""
+msgstr "Pagado"
 
 #. module: sipreco_public_budget
 #: model:ir.model,name:sipreco_public_budget.model_res_partner
@@ -594,7 +595,7 @@ msgstr "Pro-Forma"
 #. module: sipreco_public_budget
 #: model:ir.ui.menu,name:sipreco_public_budget.menu_public_holidays_view
 msgid "Public Holidays"
-msgstr ""
+msgstr "Feriados"
 
 #. module: sipreco_public_budget
 #: field:public_budget.budget,receiptbook_id:0
@@ -620,17 +621,17 @@ msgstr "Reporte Remito"
 #. module: sipreco_public_budget
 #: model:ir.actions.report.xml,name:sipreco_public_budget.action_aeroo_report_asset
 msgid "Reporte de Activos"
-msgstr ""
+msgstr "Reporte de Activos"
 
 #. module: sipreco_public_budget
 #: model:ir.actions.report.xml,name:sipreco_public_budget.action_account_checks_to_date_report
 msgid "Reporte de Cheques a Fecha"
-msgstr ""
+msgstr "Reporte de Cheques a Fecha"
 
 #. module: sipreco_public_budget
 #: model:ir.actions.report.xml,name:sipreco_public_budget.action_aeroo_report_liquidation_multi
 msgid "Reporte de Liquidación Múltiple"
-msgstr ""
+msgstr "Reporte de Liquidación Múltiple"
 
 #. module: sipreco_public_budget
 #: model:account.tax.code,name:sipreco_public_budget.demo_ri_tax_code_ret_drei_rosario
@@ -641,12 +642,12 @@ msgstr "Retencion DREI Rosario"
 #. module: sipreco_public_budget
 #: field:account.voucher,paid_withholding_ids:0
 msgid "Retenciones Pagadas"
-msgstr ""
+msgstr "Retenciones Pagadas"
 
 #. module: sipreco_public_budget
 #: help:account.voucher,paid_withholding_ids:0
 msgid "Retenciones pagadas con este voucher"
-msgstr ""
+msgstr "Retenciones pagadas con este voucher"
 
 #. module: sipreco_public_budget
 #: model:account.tax.code,name:sipreco_public_budget.demo_ri_tax_code_iibb_sf_retencion_aplicada
@@ -736,7 +737,7 @@ msgstr "Enviar a Proceso de Firma"
 #. module: sipreco_public_budget
 #: view:account.asset.asset:sipreco_public_budget.view_account_asset_asset_tree
 msgid "Total"
-msgstr ""
+msgstr "Total"
 
 #. module: sipreco_public_budget
 #: model:ir.model,name:sipreco_public_budget.model_public_budget_definitive_make_invoice
@@ -751,17 +752,17 @@ msgstr "Tipo de Transacción"
 #. module: sipreco_public_budget
 #: view:res.partner:sipreco_public_budget.view_res_partner_form
 msgid "True"
-msgstr ""
+msgstr "Verdadero"
 
 #. module: sipreco_public_budget
 #: field:public_budget.definitive.make.invoice,use_documents:0
 msgid "Use Documents?"
-msgstr ""
+msgstr "Usar Documentos?"
 
 #. module: sipreco_public_budget
 #: view:account.check.handed.wizard:sipreco_public_budget.account_check_handed_wizard_view
 msgid "Va a proceder a entregar los cheques seleccionados. Desea proceder?"
-msgstr ""
+msgstr "Va a proceder a entregar los cheques seleccionados. Desea proceder?"
 
 #. module: sipreco_public_budget
 #: code:addons/sipreco_public_budget/models/account_check.py:51
@@ -802,7 +803,7 @@ msgstr "No puedes Enviar a Proceso de Firma una Orden de Pago cuyo Monto Total e
 #. module: sipreco_public_budget
 #: view:account.voucher:sipreco_public_budget.view_vendor_payment_signature_form
 msgid "account.group_account_manager"
-msgstr ""
+msgstr "account.group_account_manager"
 
 #. module: sipreco_public_budget
 #: view:account.asset.asset:sipreco_public_budget.view_account_asset_asset_form
@@ -818,7 +819,7 @@ msgstr "Borrador,Confirmado,En Proceso de Firma,Firmado,Validado"
 #. module: sipreco_public_budget
 #: view:account.voucher:sipreco_public_budget.voucher_receipts_form_inherit_view
 msgid "force_number desc"
-msgstr ""
+msgstr "force_number desc"
 
 #. module: sipreco_public_budget
 #: view:account.check.handed.wizard:sipreco_public_budget.account_check_handed_wizard_view
@@ -829,12 +830,12 @@ msgstr "o"
 #. module: sipreco_public_budget
 #: view:account.voucher:sipreco_public_budget.view_vendor_payment_signature_form
 msgid "public_budget.group_habilitacion_director"
-msgstr ""
+msgstr "public_budget.group_habilitacion_director"
 
 #. module: sipreco_public_budget
 #: view:account.check:sipreco_public_budget.view_account_check_form
 msgid "public_budget.group_habilitacion_usuario"
-msgstr ""
+msgstr "public_budget.group_habilitacion_usuario"
 
 #. module: sipreco_public_budget
 #: model:ir.actions.report.xml,name:sipreco_public_budget.action_aeroo_report_transaction
@@ -866,7 +867,7 @@ msgstr "{'from_preventive':True,'default_amount':remaining_amount, 'definitive_p
 msgid ""
 "{'invisible': ['|', ('company_double_validation', '=', False), ('state', "
 "'!=', 'signed')]}"
-msgstr ""
+msgstr "{'invisible': ['|', ('company_double_validation', '=', False), ('state', '!=', 'signed')]}"
 
 #. module: sipreco_public_budget
 #: view:account.check:sipreco_public_budget.view_account_check_form
