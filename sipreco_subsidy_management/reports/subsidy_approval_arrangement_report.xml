@@ -12,7 +12,6 @@
     <field name="in_format">oo-odt</field>
     <field name="parser_loc">l10n_ar_aeroo_base/parser.py</field>
     <field name="parser_state">loc</field>
-    <field name="parser_state">default</field>
     <field name="report_rml">sipreco_subsidy_management/reports/subsidy_approval_arrangement_report.odt</field>
     <field name="tml_source">file</field>
     <field name="out_format" ref="report_aeroo.report_mimetypes_doc_odt"/>
