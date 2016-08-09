@@ -14,6 +14,7 @@
             <field name="prefix">TA-%(year)s-</field>
             <field name="padding">6</field>
             <field name="company_id" eval="False"/>
+            <field name="implementation">no_gap</field>
         </record>
 
         <!-- Sequences for remit -->
