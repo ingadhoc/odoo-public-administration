@@ -66,6 +66,15 @@ class invoice(models.Model):
         self.sudo()._compute_to_pay_amount()
 
     @api.one
+    @api.constrains('to_pay_amount')
+    def check_to_pay_amount(self):
+        if self.to_pay_amount and self.currency_id.round(
+                self.to_pay_amount - self.amount_total) > 0.0:
+            raise Warning((
+                'El importe mandado a pagar no puede ser mayor al importe '
+                'de la factura'))
+
+    @api.one
     def _compute_to_pay_amount(self):
         self.to_pay_amount = self._get_to_pay_amount_to_date()
         # we force an update of invoice line computed fields

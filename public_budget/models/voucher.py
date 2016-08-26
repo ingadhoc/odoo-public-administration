@@ -187,25 +187,11 @@ class account_voucher(models.Model):
     def check_to_pay_amount(self):
         if self.state != 'confirmed':
             return True
-        to_pay_lines = self.env['account.voucher.line'].search([
-            ('voucher_id', '=', self.id),
-            ('amount', '!=', 0.0),
-        ])
         to_remove_lines = self.env['account.voucher.line'].search([
             ('voucher_id', '=', self.id),
             ('amount', '=', 0.0),
         ])
         to_remove_lines.unlink()
-
-        for line in to_pay_lines:
-            inv = line.move_line_id.invoice
-            _logger.info('Checking to pay amount on invoice %s' % inv.id)
-            # TODO mejorar, lo hacemos asi por errores de redondeo
-            if inv and self.currency_id.round(
-                    inv.to_pay_amount - inv.amount_total) > 0.0:
-                raise Warning((
-                    'El importe mandado a pagar no puede ser mayor al importe '
-                    'de la factura'))
 
     @api.multi
     def proforma_voucher(self):
