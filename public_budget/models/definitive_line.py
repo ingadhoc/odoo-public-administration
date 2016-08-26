@@ -197,9 +197,9 @@ class definitive_line(models.Model):
         #     self.invalidate_cache()
 
         debit_filter_domain = filter_domain + [
-            ('invoice_id.type', 'in', ('out_invoice', 'in_invoice'))]
+            ('invoice_id.type', 'in', ('out_refund', 'in_invoice'))]
         credit_filter_domain = filter_domain + [
-            ('invoice_id.type', 'in', ('out_refund', 'in_refund'))]
+            ('invoice_id.type', 'in', ('out_invoice', 'in_refund'))]
         debit_invoice_lines = self.invoice_line_ids.search(
             debit_filter_domain)
         credit_invoice_lines = self.invoice_line_ids.search(
@@ -212,9 +212,9 @@ class definitive_line(models.Model):
             to_pay_amount += dil.to_pay_amount
             paid_amount += dil.paid_amount
         for cil in credit_invoice_lines:
-            invoiced_amount += cil.price_subtotal
-            to_pay_amount += cil.to_pay_amount
-            paid_amount += cil.paid_amount
+            invoiced_amount -= cil.price_subtotal
+            to_pay_amount -= cil.to_pay_amount
+            paid_amount -= cil.paid_amount
 
         _logger.info('Finish getting amounts for definitive line %s' % self.id)
         return (invoiced_amount, to_pay_amount, paid_amount)

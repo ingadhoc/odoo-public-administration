@@ -57,8 +57,13 @@ class invoice_line(models.Model):
                 invoice_to_pay_perc = (
                     self.invoice_id._get_to_pay_amount_to_date() / invoice_total)
             else:
+                # odoo compute residual always positive, no matter invoice
+                # is negative
+                residual = self.invoice_id.residual
+                if invoice_total < 0:
+                    residual = -residual
                 invoice_paid_perc = (
-                    invoice_total - self.invoice_id.residual) / invoice_total
+                    invoice_total - residual) / invoice_total
                 invoice_to_pay_perc = (
                     self.invoice_id.to_pay_amount) / invoice_total
             self.to_pay_amount = self.price_subtotal * invoice_to_pay_perc
