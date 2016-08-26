@@ -258,6 +258,7 @@ class account_voucher_line(models.Model):
         related='move_line_id.invoice.to_pay_amount',
         # TODO reactivar si es necesario o borrar
         # store=True,
+        readonly=True,
     )
 
     @api.one

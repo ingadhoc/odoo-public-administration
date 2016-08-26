@@ -14,6 +14,7 @@ class public_budget_definitive_make_invoice_detail(models.TransientModel):
     definitive_line_id = fields.Many2one(
         'public_budget.definitive_line',
         'Def Make Invoice',
+        readonly=True,
     )
     residual_amount = fields.Float(
         related='definitive_line_id.residual_amount',

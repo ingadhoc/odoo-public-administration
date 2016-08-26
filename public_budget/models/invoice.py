@@ -39,7 +39,7 @@ class invoice(models.Model):
         auto_join=True,
     )
     signed_amount = fields.Float(
-        'Monto Firmado',
+        'Monto con Signo',
         compute='get_signed_amount',
     )
     to_pay_amount = fields.Float(
@@ -92,7 +92,12 @@ class invoice(models.Model):
             domain += [('voucher_id.confirmation_date', '<=', to_date)]
 
         voucher_lines = self.env['account.voucher.line'].search(domain)
-        return sum([x.amount for x in voucher_lines])
+        # si es credito entonces restamos entonces
+        amount = sum(
+            [x.type == 'dr' and x.amount or -x.amount for x in voucher_lines])
+        if self.type in ('in_refund', 'out_refund'):
+            amount = -amount
+        return amount
 
     @api.multi
     def _get_paid_amount_to_date(self):
@@ -116,7 +121,12 @@ class invoice(models.Model):
             domain += [('voucher_id.date', '<=', to_date)]
 
         voucher_lines = self.env['account.voucher.line'].search(domain)
-        return sum([x.amount for x in voucher_lines])
+        # si es credito entonces restamos entonces
+        amount = sum(
+            [x.type == 'dr' and x.amount or -x.amount for x in voucher_lines])
+        if self.type in ('in_refund', 'out_refund'):
+            amount = -amount
+        return amount
 
     @api.one
     @api.constrains('date_invoice', 'invoice_line')
