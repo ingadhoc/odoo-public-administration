@@ -40,6 +40,7 @@ class definitive_line(models.Model):
         string=_('Residual Amount'),
         compute='_get_residual_amount',
         digits=dp.get_precision('Account'),
+        # TODO, esto no deberia ser no stored?
         store=True,
     )
     to_pay_amount = fields.Float(
