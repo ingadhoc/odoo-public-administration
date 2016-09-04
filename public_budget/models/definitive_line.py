@@ -45,21 +45,15 @@ class definitive_line(models.Model):
     )
     to_pay_amount = fields.Float(
         string=_('To Pay Amount'),
-        # compute='_get_amounts',
         digits=dp.get_precision('Account'),
-        # store=True,
     )
     paid_amount = fields.Float(
         string=_('Paid Amount'),
-        # compute='_get_amounts',
         digits=dp.get_precision('Account'),
-        # store=True,
     )
     invoiced_amount = fields.Float(
         string=_('Invoiced Amount'),
-        # compute='_get_amounts',
         digits=dp.get_precision('Account'),
-        # store=True,
     )
     computed_to_pay_amount = fields.Float(
         string=_('To Pay Amount'),

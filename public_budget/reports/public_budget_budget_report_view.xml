@@ -6,11 +6,13 @@
          <field name="model">public_budget.budget.report</field>
          <field name="arch" type="xml">
              <graph string="Analisis de Presupuesto" type="pivot">
-                 <field name="supplier_id" type="row"/>
-                 <field name="definitive_date" type="col"/>
+                 <field name="budget_position_id" type="row"/>
+                 <!-- <field name="definitive_date" type="col"/> -->
                  <field name="preventive_amount" type="measure"/>
                  <field name="definitive_amount" type="measure"/>
                  <field name="invoiced_amount" type="measure"/>
+                 <field name="to_pay_amount" type="measure"/>
+                 <field name="paid_amount" type="measure"/>
              </graph>
          </field>
     </record>
@@ -33,6 +35,8 @@
                 <field name="preventive_amount"/>
                 <field name="definitive_amount"/>
                 <field name="invoiced_amount"/>
+                <field name="to_pay_amount"/>
+                <field name="paid_amount"/>
                 <field name="budget_id"/>
                 <field name="transaction_id"/>
                 <field name="transaction_type_id"/>
@@ -41,6 +45,9 @@
                 <field name="transaction_partner_id"/>
                 <field name="supplier_id"/>
                 <field name="budget_position_id"/>
+                <field name="invoice_id"/>
+                <field name="voucher_id"/>
+                <field name="voucher_expedient_id"/>
                 <group expand="1" string="Group By">
                     <filter string="Budget" name="group_budget_id" context="{'group_by':'budget_id'}"/>
                     <filter string="Transaction" name="group_transaction_id" context="{'group_by':'transaction_id'}"/>
@@ -51,6 +58,9 @@
                     <filter string="Budget Position" name="group_budget_position_id" context="{'group_by':'budget_position_id'}"/>
                     <filter string="Definitive Date" name="group_definitive_date" context="{'group_by':'definitive_date'}"/>
                     <filter string="Supplier" name="group_supplier_id" context="{'group_by':'supplier_id'}"/>
+                    <filter string="Invoice" name="group_invoice_id" context="{'group_by':'invoice_id'}"/>
+                    <filter string="Voucher" name="group_voucher_id" context="{'group_by':'voucher_id'}"/>
+                    <filter string="Voucher Exedient" name="group_voucher_expedient_id" context="{'group_by':'voucher_expedient_id'}"/>
                 </group>
             </search>
         </field>
@@ -64,9 +74,13 @@
                 <field name="transaction_id"/>
                 <field name="budget_position_id"/>
                 <field name="supplier_id"/>
+                <field name="invoice_id"/>
+                <field name="voucher_id"/>
                 <field name="preventive_amount"/>
                 <field name="definitive_amount"/>
                 <field name="invoiced_amount"/>
+                <field name="to_pay_amount"/>
+                <field name="paid_amount"/>
             </tree>
         </field>
     </record>
@@ -75,8 +89,9 @@
         <field name="name">Analisis de Presupuesto</field>
         <field name="res_model">public_budget.budget.report</field>
         <field name="view_type">form</field>
-        <field name="view_mode">graph,tree</field>
+        <field name="view_mode">graph,tree,form</field>
         <!-- <field name="context">{'search_default_active_lines':1}</field> -->
+        <field name="domain">[('invoice_state', 'not in', ['cancel', 'draft']), ('voucher_state', 'not in', ['cancel', 'draft']), ('affects_budget', '=', True)]</field>
         <field name="search_view_id" ref="view_public_budget_budget_report_search"/>
     </record>
 
