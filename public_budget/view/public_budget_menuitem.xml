@@ -67,6 +67,12 @@
             sequence="19"/>
 
         <menuitem
+            action="action_public_budget_budget_report_2_all"
+            id="menu_public_budget_budget_report_2_all"
+            parent="menu_reports"
+            sequence="19"/>
+
+        <menuitem
             action="action_advance_request_analysis_all"
             id="menu_action_advance_request_analysis_all"
             parent="menu_reports"
