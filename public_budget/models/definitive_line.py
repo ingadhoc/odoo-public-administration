@@ -41,6 +41,7 @@ class definitive_line(models.Model):
         compute='_get_residual_amount',
         digits=dp.get_precision('Account'),
         store=True,
+        compute_sudo=True,
     )
     to_pay_amount = fields.Float(
         string=_('To Pay Amount'),
@@ -101,6 +102,7 @@ class definitive_line(models.Model):
         default='draft',
         compute='_get_state',
         store=True,
+        compute_sudo=True,
     )
     invoice_line_ids = fields.One2many(
         'account.invoice.line',
