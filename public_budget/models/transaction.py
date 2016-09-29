@@ -150,6 +150,7 @@ class transaction(models.Model):
         compute='_get_definitive_amount',
         digits=dp.get_precision('Account'),
         store=True,
+        compute_sudo=True,
     )
     invoiced_amount = fields.Float(
         string='Monto Devengado',
