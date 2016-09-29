@@ -38,29 +38,34 @@ class preventive_line(models.Model):
         compute='_get_amounts',
         digits=dp.get_precision('Account'),
         store=True,
+        compute_sudo=True,
     )
     definitive_amount = fields.Float(
         string=_('Definitive Amount'),
         compute='_get_amounts',
         store=True,
+        compute_sudo=True,
         digits=dp.get_precision('Account'),
     )
     invoiced_amount = fields.Float(
         string=_('Invoiced Amount'),
         compute='_get_amounts',
         store=True,
+        compute_sudo=True,
         digits=dp.get_precision('Account'),
     )
     to_pay_amount = fields.Float(
         string=_('To Pay Amount'),
         compute='_get_amounts',
         store=True,
+        compute_sudo=True,
         digits=dp.get_precision('Account'),
     )
     paid_amount = fields.Float(
         string=_('Paid Amount'),
         compute='_get_amounts',
         store=True,
+        compute_sudo=True,
         digits=dp.get_precision('Account'),
     )
     state = fields.Selection(
@@ -79,6 +84,7 @@ class preventive_line(models.Model):
         _('Affects Budget?'),
         store=True,
         compute='_get_affects_budget',
+        compute_sudo=True,
     )
     transaction_id = fields.Many2one(
         'public_budget.transaction',
