@@ -105,6 +105,7 @@ class transaction(models.Model):
         comodel_name='public_budget.budget_position',
         string=_('Related Budget Positions'),
         store=True,
+        compute_sudo=True,
         compute='_get_budget_positions',
         auto_join=True,
     )
@@ -126,12 +127,14 @@ class transaction(models.Model):
         compute='_get_preventive_amount',
         digits=dp.get_precision('Account'),
         store=True,
+        compute_sudo=True,
     )
     preventive_balance = fields.Float(
         string='Saldo Preventivo',
         compute='_get_preventive_balance',
         digits=dp.get_precision('Account'),
         store=True,
+        compute_sudo=True,
         help='Saldo Preventivo',
     )
     definitive_balance = fields.Float(
@@ -139,6 +142,7 @@ class transaction(models.Model):
         compute='_get_definitive_balance',
         digits=dp.get_precision('Account'),
         store=True,
+        compute_sudo=True,
         help='Saldo Definitivo',
     )
     definitive_amount = fields.Float(
@@ -152,48 +156,56 @@ class transaction(models.Model):
         compute='_get_invoiced_amount',
         digits=dp.get_precision('Account'),
         store=True,
+        compute_sudo=True,
     )
     to_pay_amount = fields.Float(
         string='Monto A Pagar',
         compute='_get_to_pay_amount',
         digits=dp.get_precision('Account'),
         store=True,
+        compute_sudo=True,
     )
     paid_amount = fields.Float(
         string=_('Monto Pagado'),
         compute='_get_paid_amount',
         digits=dp.get_precision('Account'),
         store=True,
+        compute_sudo=True,
     )
     advance_preventive_amount = fields.Float(
         string=_('Monto Preventivo de Adelanto'),
         compute='_get_advance_preventive_amount',
         digits=dp.get_precision('Account'),
         store=True,
+        compute_sudo=True,
     )
     advance_to_pay_amount = fields.Float(
         string=_('Monto de Adelanto a Pagar'),
         compute='_get_advance_amounts',
         digits=dp.get_precision('Account'),
         store=True,
+        compute_sudo=True,
     )
     advance_paid_amount = fields.Float(
         string=_('Monto de Adelanto Pagado'),
         compute='_get_advance_amounts',
         digits=dp.get_precision('Account'),
         store=True,
+        compute_sudo=True,
     )
     advance_remaining_amount = fields.Float(
         string=_('Monto Remanente de Adelanto'),
         compute='_get_advance_remaining_amount',
         digits=dp.get_precision('Account'),
         store=True,
+        compute_sudo=True,
     )
     advance_to_return_amount = fields.Float(
         string=_('Monto a Devolver'),
         compute='_get_advance_to_return_amount',
         digits=dp.get_precision('Account'),
         store=True,
+        compute_sudo=True,
     )
     company_id = fields.Many2one(
         'res.company',
