@@ -122,8 +122,9 @@ class advance_request(models.Model):
                 record.confirmation_date = fields.Datetime.now()
         return True
 
-    @api.one
+    @api.multi
     def create_voucher(self):
+        self.ensure_one()
         vouchers = self.env['account.voucher']
         amount = sum(self.advance_request_line_ids.mapped('approved_amount'))
         journal = self.env['account.journal'].search([
