@@ -9,7 +9,7 @@
 Sipreco Set Up Data TMC
 =======================
     """,
-    'author':  'ADHOC SA',
+    'author': 'ADHOC SA',
     'website': 'www.adhoc.com.ar',
     'images': [
     ],
@@ -17,6 +17,7 @@ Sipreco Set Up Data TMC
         'sipreco_public_budget',
         'l10n_ar_bank',
         'l10n_ar_states',
+        'l10n_ar_afipws_fe',
     ],
     'data': [
         'data/location.xml',
