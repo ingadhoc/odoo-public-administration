@@ -43,6 +43,10 @@ class AccountVoucherPaymentLine(models.Model):
         self.ensure_one()
         # if not self.partner_id.numero_legajo:
         #     UserError(_('El partner %s no tiene número de legajo'))
+        if not self.partner_id.numero_legajo:
+            raise UserError(_(
+                'Se requiere numero de legajo en partner %s') % (
+                self.partner_id.name))
         if (
                 not self.bank_account_id.acc_number or
                 not self.bank_account_id.numero_de_sucursal):
