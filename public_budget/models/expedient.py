@@ -7,6 +7,7 @@ class PublicBudgetExpedient(models.Model):
     """Expedient"""
 
     _name = 'public_budget.expedient'
+    _inherit = ['mail.thread']
     _description = 'Expedient'
 
     _order = "id desc"
@@ -82,7 +83,8 @@ class PublicBudgetExpedient(models.Model):
     )
     pages = fields.Integer(
         string='Pages',
-        required=True
+        required=True,
+        track_visibility='onchange',
     )
     subsidy_expedient = fields.Boolean(
         string='Expediente de Solicitud Subsidio?',
@@ -133,6 +135,7 @@ class PublicBudgetExpedient(models.Model):
         _states_,
         'State',
         default='open',
+        track_visibility='onchange',
     )
     child_ids = fields.One2many(
         'public_budget.expedient',
