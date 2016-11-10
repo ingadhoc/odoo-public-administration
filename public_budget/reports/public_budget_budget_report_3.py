@@ -1,0 +1,450 @@
+# -*- coding: utf-8 -*-
+
+from openerp import tools
+from openerp import models, fields, api
+import openerp.addons.decimal_precision as dp
+from openerp.addons.public_budget.models.transaction import transaction
+
+
+class PublicBudgetBudgetReport(models.Model):
+    _name = "public_budget.budget.report_3"
+    _description = "Budget Report"
+    _auto = False
+    # _order = 'date desc'
+    # _rec_name = 'date'
+
+    # date = fields.Date(readonly=True, string="Fecha")
+    # approval_date = fields.Date(
+    #     readonly=True, string="Fecha de Aprobación")
+    # confirmation_date = fields.Date(
+    #     readonly=True, string="Fecha de Confirmación")
+    # employee_id = fields.Many2one(
+    #     'res.partner', string='Empleado', readonly=True)
+    # amount = fields.Float(string='Monto', readonly=True)
+    # # TODO make selection
+    # state = fields.Char(string='Estado', readonly=True)
+    # direction = fields.Selection(
+    #     [('request', 'Solicitud'), ('return', 'Devolución')],
+    #     string='Solicitud / Devolución', readonly=True)
+    # type_id = fields.Many2one(
+    #     'public_budget.advance_request_type',
+    #     string='Type',
+    # )
+
+    @api.model
+    def _reference_models(self):
+        return []
+
+    resource = fields.Reference(
+        selection='_reference_models'
+    )
+    model = fields.Char(
+        readonly=True,
+    )
+    res_id = fields.Integer(
+        readonly=True,
+    )
+    # transaction fields
+    budget_id = fields.Many2one(
+        'public_budget.budget',
+        string='Budget',
+        readonly=True,
+    )
+    transaction_date = fields.Date(
+        readonly=True,
+    )
+    transaction_type_id = fields.Many2one(
+        'public_budget.transaction_type',
+        string='Transaction Type',
+        readonly=True,
+    )
+    transaction_partner_id = fields.Many2one(
+        'res.partner',
+        string='Transaction Partner',
+        readonly=True,
+    )
+    transaction_state = fields.Selection(
+        # 'res.partner',
+        transaction._states_,
+        readonly=True,
+    )
+    transaction_id = fields.Many2one(
+        'public_budget.transaction',
+        string='Transaction',
+        readonly=True,
+    )
+    transaction_expedient_id = fields.Many2one(
+        'public_budget.expedient',
+        string='Transaction Expedient',
+        readonly=True,
+    )
+
+    # preventive fields
+    affects_budget = fields.Boolean(
+        readonly=True,
+    )
+    advance_line = fields.Boolean(
+        readonly=True,
+    )
+    preventive_line_id = fields.Many2one(
+        'public_budget.preventive_line',
+        readonly=True,
+        string='Preventive Line',
+    )
+    # preventive_amount = fields.Float(
+    #     digits=dp.get_precision('Account'),
+    #     readonly=True,
+    # )
+    budget_position_id = fields.Many2one(
+        'public_budget.budget_position',
+        string='Budget Position',
+        readonly=True,
+    )
+    assignment_position_id = fields.Many2one(
+        'public_budget.budget_position',
+        string='Assignment Position',
+        readonly=True,
+    )
+
+    # definitive fields
+    # definitive_amount = fields.Float(
+    #     digits=dp.get_precision('Account'),
+    #     readonly=True,
+    # )
+    # supplier_id = fields.Many2one(
+    #     'res.partner',
+    #     string='Supplier',
+    #     readonly=True,
+    # )
+    # definitive_date = fields.Date(
+    #     readonly=True,
+    # )
+
+    # invoice line fields
+    # invoiced_amount = fields.Float(
+    #     digits=dp.get_precision('Account'),
+    #     readonly=True,
+    # )
+
+    # invoice fields
+    # invoice_state = fields.Char(
+    #     readonly=True,
+    # )
+    # invoice_type = fields.Char(
+    #     readonly=True,
+    # )
+    # invoice_id = fields.Many2one(
+    #     'account.invoice',
+    #     'Invoice',
+    #     readonly=True,
+    # )
+
+    # voucher line fields
+    # voucher_state = fields.Char(
+    #     readonly=True,
+    # )
+    # voucher_type = fields.Char(
+    #     readonly=True,
+    # )
+    # voucher_id = fields.Many2one(
+    #     'account.voucher',
+    #     'Voucher',
+    #     readonly=True,
+    # )
+    amount = fields.Float(
+        digits=dp.get_precision('Account'),
+        readonly=True,
+    )
+
+    # voucher fields
+    type = fields.Selection([
+        ('1_preventive', 'Preventiva'),
+        ('2_definitive', 'Definitiva'),
+        ('3_invoiced', 'Devengado'),
+        ('4_to_pay', 'A Pagar'),
+        ('5_paid', 'Pagado'),
+    ],
+        readonly=True,
+    )
+    # voucher fields
+    # voucher_state = fields.Char(
+    #     readonly=True,
+    # )
+    # voucher_id = fields.Many2one(
+    #     'account.voucher',
+    #     'Voucher',
+    #     readonly=True,
+    # )
+    # voucher_expedient_id = fields.Many2one(
+    #     'public_budget.expedient',
+    #     string='Voucher Expedient',
+    #     readonly=True,
+    # )
+
+    _depends = {
+        # 'public_budget.definitive_line': [
+        #     'issue_date', 'supplier_id', 'amount',
+        # ],
+        # 'public_budget.preventive_line': [
+        #     'affects_budget', 'advance_line', 'preventive_amount',
+        #     'budget_position_id',
+        # ],
+        # 'account.invoice.line': [
+        #     'price_subtotal',
+        # ],
+        # 'account.invoice': [
+        #     'state', 'type',
+        # ],
+        # 'account.voucher': [
+        #     'state',
+        # ],
+        # 'account.voucher.line': [
+        #     'amount',
+        # ],
+        # 'public_budget.advance_request_line': [
+        #     'employee_id', 'approved_amount', 'advance_request_id',
+        # ],
+        # 'public_budget.advance_return': [
+        #     'type_id', 'date', 'state',
+        # ],
+        # 'public_budget.advance_return_line': [
+        #     'employee_id', 'returned_amount', 'advance_return_id',
+        # ],
+    }
+
+    def init(self, cr):
+        """
+        hacemos una sucesión de consultas que devuelvan:
+        * type:
+            * 1_preventive (preventives)
+            * 2_definitive (definitives)
+            * 3_invoiced (invoice lines con invoices)
+            * 4_to_pay (voucher con voucher lines)
+            * 5_paid (voucher con voucher lines)
+        * amount para cada una
+        * preventive_line_id a la que está vinculado (
+            TODO hace esto bien para los pagos)
+
+        Además unimos para cada type casos especiales de lineas de adelanto
+
+        Unimos todo eso y le hacemos un select para agregar datos genericos:
+        * transaction
+        * budget position
+        * etc..
+        """
+
+        tools.drop_view_if_exists(cr, self._table)
+
+        # consulta template de voucher que luego aplicamos para obtener
+        # paid y to_paid. TODO llegar a preventive_line_id
+        voucher_template = """
+            SELECT
+                '%s' as type,
+                'account.voucher.line' as model,
+                vl.id as res_id,
+                CONCAT('account.voucher.line', ',', CAST(vl.id AS VARCHAR)) as resource,
+                -- vo.id as voucher_id,
+                -- vo.state as voucher_state,
+                -- vo.expedient_id as voucher_expedient_id,
+                -- vl.move_id as move_id,
+                0 as preventive_line_id,
+                vl.amount * vl.sign as amount
+            FROM
+                (SELECT
+                    vl.id,
+                    vl.type,
+                    vl.amount,
+                    vl.voucher_id,
+                    CASE
+                        WHEN vl.type = 'dr'
+                        THEN 1
+                        ELSE -1
+                    END AS sign,
+                    ml.move_id
+                FROM
+                    account_voucher_line vl
+                    left join
+                    account_move_line ml on (
+                        ml.id = vl.move_line_id)
+                ) vl
+                left join
+                account_voucher vo on (
+                    vo.id = vl.voucher_id)
+            WHERE
+                %s
+            """
+
+        # aplicamos la consulta anterior para paid y to_pay
+        paid_query = voucher_template % (
+            "5_paid", "vo.state = 'posted'")
+        to_pay_query = voucher_template % (
+            "4_to_pay", "vo.state not in ('cancel', 'draft')")
+
+        # consulta sobre facturas
+        invoice_query = """
+            SELECT
+                '3_invoiced' as type,
+                'account.invoice.line' as model,
+                il.id as res_id,
+                CONCAT('account.invoice.line', ',', CAST(il.id AS VARCHAR)) as resource,
+                -- iv.id as invoice_id,
+                -- iv.state as invoice_state,
+                -- iv.type as invoice_type,
+                -- il.definitive_line_id as definitive_line_id,
+                dl.preventive_line_id as preventive_line_id,
+                (il.price_subtotal * iv.sign) as amount
+            FROM
+                account_invoice_line il
+            LEFT JOIN
+                public_budget_definitive_line as dl on (
+                dl.id = il.definitive_line_id)
+            LEFT JOIN
+                (SELECT
+                    *,
+                    CASE
+                        WHEN type IN ('out_invoice', 'in_refund')
+                        THEN -1
+                        ELSE 1
+                    END AS sign
+                FROM
+                    account_invoice) iv on (iv.id = il.invoice_id)
+            WHERE
+                iv.type not in ('cancel', 'draft')
+            """
+
+        # consulta sobre definitivas
+        definitive_query = """
+            SELECT
+                '2_definitive' as type,
+                'public_budget.definitive_line' as model,
+                dl.id as res_id,
+                CONCAT('public_budget.definitive_line', ',', CAST(dl.id AS VARCHAR)) as resource,
+                -- dl.supplier_id as supplier_id,
+                -- dl.issue_date as definitive_date,
+                dl.preventive_line_id as preventive_line_id,
+                dl.amount as amount
+            FROM
+                public_budget_definitive_line dl
+            """
+
+        # consulta sobre preventivas
+        preventive_query = """
+            SELECT
+                '1_preventive' as type,
+                'public_budget.preventive_line' as model,
+                pl.id as res_id,
+                CONCAT('public_budget.preventive_line', ',', CAST(pl.id AS VARCHAR)) as resource,
+                pl.id as preventive_line_id,
+                pl.preventive_amount as amount
+            FROM
+                public_budget_preventive_line pl
+            -- WHERE
+            --     advance_line = False
+            """
+
+        # consulta sobre lineas de adelanto para definir monto preventivo
+        advance_preventive = """
+            SELECT
+                '1_preventive' as type,
+                'public_budget.preventive_line' as model,
+                pl.id as res_id,
+                CONCAT('public_budget.preventive_line', ',', CAST(pl.id AS VARCHAR)) as resource,
+                pl.id as preventive_line_id,
+                pl.preventive_amount as amount
+            FROM
+                public_budget_preventive_line pl
+            WHERE
+                advance_line = True
+            """
+
+        # template sobre vouchers ligados a transacciones de adelanto
+        # para definir montos definitivos, devengados, a pagar y pagados segun
+        # el estado de los vouchers
+        advance_template = """
+            SELECT
+                '%s' as type,
+                'public_budget.preventive_line' as model,
+                pl.id as res_id,
+                CONCAT('public_budget.preventive_line', ',', CAST(pl.id AS VARCHAR)) as resource,
+                pl.id as preventive_line_id,
+                av.advance_amount * (
+                    pl.preventive_amount /
+                    SUM(preventive_amount) OVER(PARTITION BY pl.transaction_id)
+                ) as amount
+            FROM
+                account_voucher as av
+            LEFT JOIN
+                public_budget_preventive_line as pl on (
+                    pl.transaction_id = av.transaction_id)
+            WHERE
+                av.transaction_with_advance_payment = True and
+                pl.advance_line = True and
+                -- TODO aca o en algun lugar por aca hay un error!!!
+                %s
+                -- av.state not in ('cancel', 'draft')
+            """
+
+        # partimos de la la consulta de adelanto preventiva y le vamos
+        # uniendo las consultas para las definitivas, devengas y a pagar
+        advance_query = advance_preventive
+        for affect_type in [
+                '2_definitive', '3_invoiced', '4_to_pay']:
+            advance_query = "%s UNION %s" % (
+                advance_query, advance_template % (
+                    affect_type, "av.state not in ('cancel', 'draft')"))
+
+        # unimos consulta de las de adelanto pagadas
+        advance_query = "%s UNION %s" % (
+            advance_query, advance_template % (
+                affect_type, "av.state = 'posted'"))
+
+        query = """
+            SELECT
+            -- agregamos a la consult acore datos globales de linea preventiva
+            -- y lineas definitivas
+                CAST(ROW_NUMBER() OVER (ORDER BY query.type) AS INTEGER) as id,
+                pl.budget_position_id as budget_position_id,
+                pl.transaction_id as transaction_id,
+                pl.affects_budget as affects_budget,
+                pl.advance_line as advance_line,
+                tr.budget_id as budget_id,
+                tr.issue_date as transaction_date,
+                tr.type_id as transaction_type_id,
+                tr.partner_id as transaction_partner_id,
+                tr.state as transaction_state,
+                tr.expedient_id as transaction_expedient_id,
+                bp.assignment_position_id as assignment_position_id,
+                query.*
+            -- consulta core uniendo todas las lineas
+            FROM (
+                %s
+                UNION
+                %s
+                UNION
+                %s
+                UNION
+                %s
+                UNION
+                %s
+                UNION
+                %s
+            ) as query
+            LEFT JOIN
+                public_budget_preventive_line as pl on (
+                    pl.id = query.preventive_line_id)
+            LEFT JOIN
+                public_budget_transaction as tr on (
+                    tr.id = pl.transaction_id)
+            LEFT JOIN
+                public_budget_budget_position as bp on (
+                    pl.budget_position_id = bp.id)
+            """ % (
+                to_pay_query,
+                paid_query,
+                invoice_query,
+                definitive_query,
+                preventive_query,
+                advance_query,
+        )
+        cr.execute("""CREATE or REPLACE VIEW %s as (%s
+        )""" % (self._table, query))

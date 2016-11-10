@@ -37,9 +37,6 @@ class PublicBudgetBudgetReport(models.Model):
         string='Budget',
         readonly=True,
     )
-    transaction_date = fields.Date(
-        readonly=True,
-    )
     transaction_type_id = fields.Many2one(
         'public_budget.transaction_type',
         string='Transaction Type',
@@ -72,11 +69,6 @@ class PublicBudgetBudgetReport(models.Model):
     )
     advance_line = fields.Boolean(
         readonly=True,
-    )
-    preventive_line_id = fields.Many2one(
-        'public_budget.preventive_line',
-        readonly=True,
-        string='Preventive Line',
     )
     preventive_amount = fields.Float(
         digits=dp.get_precision('Account'),
@@ -112,48 +104,8 @@ class PublicBudgetBudgetReport(models.Model):
     invoice_state = fields.Char(
         readonly=True,
     )
+    # invoice fields
     invoice_type = fields.Char(
-        readonly=True,
-    )
-    invoice_id = fields.Many2one(
-        'account.invoice',
-        'Invoice',
-        readonly=True,
-    )
-
-    # voucher line fields
-    # voucher_state = fields.Char(
-    #     readonly=True,
-    # )
-    # voucher_type = fields.Char(
-    #     readonly=True,
-    # )
-    # voucher_id = fields.Many2one(
-    #     'account.voucher',
-    #     'Voucher',
-    #     readonly=True,
-    # )
-    to_pay_amount = fields.Float(
-        digits=dp.get_precision('Account'),
-        readonly=True,
-    )
-    paid_amount = fields.Float(
-        digits=dp.get_precision('Account'),
-        readonly=True,
-    )
-
-    # voucher fields
-    voucher_state = fields.Char(
-        readonly=True,
-    )
-    voucher_id = fields.Many2one(
-        'account.voucher',
-        'Voucher',
-        readonly=True,
-    )
-    voucher_expedient_id = fields.Many2one(
-        'public_budget.expedient',
-        string='Voucher Expedient',
         readonly=True,
     )
 
@@ -171,12 +123,6 @@ class PublicBudgetBudgetReport(models.Model):
         'account.invoice': [
             'state', 'type',
         ],
-        'account.voucher': [
-            'state',
-        ],
-        'account.voucher.line': [
-            'amount',
-        ],
         # 'public_budget.advance_request_line': [
         #     'employee_id', 'approved_amount', 'advance_request_id',
         # ],
@@ -190,119 +136,70 @@ class PublicBudgetBudgetReport(models.Model):
 
     def init(self, cr):
         tools.drop_view_if_exists(cr, self._table)
-        # vamos anidando querys desde el pago hasta la transaccion
-        # si hay importe de, por ejemplo, pago, usamos ese para la facturada
-        # eso es porque una linea factura podría habrirse en varios pagos
-        # y quedaría duplicado
-        pay_query = """
+        query = """
             SELECT
-                vo.id as voucher_id,
-                vo.state as voucher_state,
-                vo.expedient_id as voucher_expedient_id,
-                vl.move_id as move_id,
-                CASE
-                    WHEN vo.state not in ('cancel', 'draft')
-                    THEN vl.amount * vl.sign
-                    ELSE 0
-                END AS to_pay_amount,
-                CASE
-                    WHEN vo.state = 'posted'
-                    THEN vl.amount * vl.sign
-                    ELSE 0
-                END AS paid_amount
-            FROM
-                (SELECT
-                    vl.id,
-                    vl.type,
-                    vl.amount,
-                    vl.voucher_id,
-                    CASE
-                        WHEN vl.type = 'dr'
-                        THEN 1
-                        ELSE -1
-                    END AS sign,
-                    ml.move_id
-                FROM
-                    account_voucher_line vl
-                    left join
-                    account_move_line ml on (
-                        ml.id = vl.move_line_id)
-                ) vl
-                left join
-                account_voucher vo on (
-                    vo.id = vl.voucher_id)
-            """
-
-        invoice_query = """
-            SELECT
-                COALESCE(pq.to_pay_amount, il.price_subtotal * iv.sign)
-                    as invoiced_amount,
-                iv.id as invoice_id,
-                iv.state as invoice_state,
-                iv.type as invoice_type,
-                il.definitive_line_id as definitive_line_id,
-                pq.*
-            FROM
-                account_invoice_line il
-            LEFT JOIN
-                (SELECT
-                    *,
-                    CASE
-                        WHEN type IN ('out_invoice', 'in_refund')
-                        THEN 1
-                        ELSE -1
-                    END AS sign
-                FROM
-                    account_invoice) iv on (iv.id = il.invoice_id)
-            LEFT JOIN
-                (%s) as pq on (iv.move_id = pq.move_id)
-            """ % (pay_query)
-
-        definitive_query = """
-            SELECT
-                COALESCE(iq.invoiced_amount, dl.amount)
-                    as definitive_amount,
+                dl.id as id,
+                dl.amount as definitive_amount,
                 dl.supplier_id as supplier_id,
                 dl.issue_date as definitive_date,
-                dl.preventive_line_id as preventive_line_id,
-                iq.*
-            FROM
-                public_budget_definitive_line dl
-            LEFT JOIN
-                (%s) as iq on (dl.id = iq.definitive_line_id)
-            """ % (invoice_query)
-
-        preventive_query = """
-            SELECT
-                COALESCE(dq.definitive_amount, pl.preventive_amount)
-                    as preventive_amount,
+                pl.preventive_amount as preventive_amount,
                 pl.advance_line as advance_line,
                 pl.budget_position_id as budget_position_id,
                 pl.affects_budget as affects_budget,
-                pl.transaction_id as transaction_id,
-                dq.*
-            FROM
-                public_budget_preventive_line pl
-            LEFT JOIN
-                (%s) as dq on (pl.id = dq.preventive_line_id)
-            """ % (definitive_query)
-
-        transaction_query = """
-            SELECT
-                CAST(ROW_NUMBER() OVER (
-                    ORDER BY tr.issue_date) AS INTEGER) as id,
                 tr.budget_id as budget_id,
-                tr.issue_date as transaction_date,
                 tr.type_id as transaction_type_id,
                 tr.partner_id as transaction_partner_id,
                 tr.state as transaction_state,
+                tr.id as transaction_id,
                 tr.expedient_id as transaction_expedient_id,
-                pq.*
+                il.price_subtotal as invoiced_amount,
+                iv.state as invoice_state,
+                iv.type as invoice_type
+                -- TODO filtrar por out_invoice', 'in_refund'
+                -- am.date as date,
+                -- l.date_maturity as date_maturity,
+                -- am.ref as ref,
+                -- am.state as move_state,
+                -- l.reconcile_id as reconcile_id,
+                -- l.reconcile_partial_id as reconcile_partial_id,
+                -- l.move_id as move_id,
+                -- l.partner_id as partner_id,
+                -- am.company_id as company_id,
+                -- am.journal_id as journal_id,
+                -- p.fiscalyear_id as fiscalyear_id,
+                -- am.period_id as period_id,
+                -- l.account_id as account_id,
+                -- l.analytic_account_id as analytic_account_id,
+                -- a.type as type,
+                -- a.user_type as account_type,
+                -- l.currency_id as currency_id,
+                -- l.amount_currency as amount_currency,
+                -- pa.user_id as user_id,
+                -- coalesce(l.debit, 0.0) - coalesce(l.credit, 0.0) as amount
             FROM
                 public_budget_transaction tr
-            LEFT JOIN
-                (%s) as pq on (tr.id = pq.transaction_id)
-            """ % (preventive_query)
-
+                left join
+                public_budget_preventive_line pl on (
+                    tr.id = pl.transaction_id)
+                left join
+                public_budget_budget_position bp on (
+                    bp.id = pl.budget_position_id)
+                left join
+                public_budget_definitive_line dl on (
+                    pl.id = dl.preventive_line_id)
+                left join
+                account_invoice_line il on (
+                    dl.id = il.definitive_line_id)
+                left join
+                account_invoice iv on (
+                    iv.id = il.invoice_id)
+                -- left join account_move am on (am.id=l.move_id)
+                -- left join account_period p on (am.period_id=p.id)
+                -- left join res_partner pa on (l.partner_id=pa.id)
+            WHERE
+                pl.affects_budget = True
+                -- AND
+                -- iv.state NOT IN ('cancel', 'draft')
+        """
         cr.execute("""CREATE or REPLACE VIEW %s as (%s
-        )""" % (self._table, transaction_query))
+        )""" % (self._table, query))

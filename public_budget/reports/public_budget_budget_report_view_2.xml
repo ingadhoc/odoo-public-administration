@@ -86,7 +86,7 @@
     </record>
 
     <record id="action_public_budget_budget_report_2_all" model="ir.actions.act_window">
-        <field name="name">Analisis de Presupuesto</field>
+        <field name="name">Analisis de Presupuesto 2</field>
         <field name="res_model">public_budget.budget.report_2</field>
         <field name="view_type">form</field>
         <field name="view_mode">graph,tree,form</field>
