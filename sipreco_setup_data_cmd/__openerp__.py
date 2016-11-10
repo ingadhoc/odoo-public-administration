@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Sipreco Set Up Data CMD',
-    'version': '8.0.0.3.0',
+    'version': '8.0.0.4.0',
     'category': 'Accounting',
     'sequence': 14,
     'summary': '',
