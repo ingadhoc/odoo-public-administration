@@ -7,6 +7,9 @@ class partner(models.Model):
 
     _inherit = 'res.partner'
 
+    numero_legajo = fields.Char(
+        'Numero de Legajo',
+    )
     subsidy_recipient = fields.Boolean(
         'Subsidy Recipient',
         )

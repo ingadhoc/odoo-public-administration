@@ -46,6 +46,7 @@ class account_voucher(models.Model):
         compute='_get_paid_withholding'
     )
 
+    @api.one
     @api.constrains('receiptbook_id', 'state', 'type')
     def check_receiptbook(self):
         """
@@ -58,6 +59,7 @@ class account_voucher(models.Model):
             raise Warning(_(
                 'You can not confirm a payment order without ReceiptBook'))
 
+    @api.one
     @api.constrains('receiptbook_id', 'state')
     def add_force_number(self):
         """
