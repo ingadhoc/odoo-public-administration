@@ -61,6 +61,7 @@ class invoice(models.Model):
     @api.one
     @api.constrains('state')
     def update_definitive_invoiced_amount(self):
+        # this method update all amounts on the upstream
         _logger.info('Updating invoice line amounts from invoice')
         # if invoice state changes, we recompute to_pay_amount
         self.sudo()._compute_to_pay_amount()
