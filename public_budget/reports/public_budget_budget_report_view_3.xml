@@ -19,9 +19,11 @@
         <field name="model">public_budget.budget.report_3</field>
         <field name="arch" type="xml">
             <search string="Analisis de Presupuesto">
-                <filter string="Affects Budget" name="affects_budget" domain="[('affects_budget', '=', True)]"/>
+                <filter string="Afecta Presupuesto" name="affects_budget" domain="[('affects_budget', '=', True)]"/>
                 <field name="type"/>
+                <field name="document_number"/>
                 <field name="reference"/>
+                <field name="name"/>
                 <field name="resource"/>
                 <field name="amount"/>
                 <field name="preventive_line_id"/>
@@ -39,14 +41,17 @@
                 <!-- <field name="voucher_id"/> -->
                 <!-- <field name="voucher_expedient_id"/> -->
                 <group expand="1" string="Group By">
-                    <filter string="Type" name="group_type" context="{'group_by':'type'}"/>
-                    <filter string="Budget" name="group_budget_id" context="{'group_by':'budget_id'}"/>
-                    <filter string="Transaction" name="group_transaction_id" context="{'group_by':'transaction_id'}"/>
-                    <filter string="Transaction Type" name="group_transaction_type_id" context="{'group_by':'transaction_type_id'}"/>
-                    <filter string="Transaction Expedient" name="group_transaction_expedient_id" context="{'group_by':'transaction_expedient_id'}"/>
-                    <filter string="Transaction State" name="group_transaction_state" context="{'group_by':'transaction_state'}"/>
-                    <filter string="Transaction Partner" name="group_transaction_partner_id" context="{'group_by':'transaction_partner_id'}"/>
-                    <filter string="Budget Position" name="group_budget_position_id" context="{'group_by':'budget_position_id'}"/>
+                    <filter string="Tipo" name="group_type" context="{'group_by':'type'}"/>
+                    <filter string="Nro de OP/Comprobante" name="group_type" context="{'group_by':'document_number'}"/>
+                    <filter string="Proveedor/Empleado" name="group_type" context="{'group_by':'partner_id'}"/>
+                    <filter string="Presupuesto" name="group_budget_id" context="{'group_by':'budget_id'}"/>
+                    <filter string="Transacción" name="group_transaction_id" context="{'group_by':'transaction_id'}"/>
+                    <filter string="Partida Presupuestaria" name="group_budget_position_id" context="{'group_by':'budget_position_id'}"/>
+                    <filter string="Inciso" name="group_budget_position_id" context="{'group_by':'assignment_position_id'}"/>
+                    <filter string="Tipo de Transacción" name="group_transaction_type_id" context="{'group_by':'transaction_type_id'}"/>
+                    <filter string="Expediente de Transacción" name="group_transaction_expedient_id" context="{'group_by':'transaction_expedient_id'}"/>
+                    <filter string="Estado de Transacción" name="group_transaction_state" context="{'group_by':'transaction_state'}"/>
+                    <filter string="Partner de Transacción" name="group_transaction_partner_id" context="{'group_by':'transaction_partner_id'}"/>
                     <!-- <filter string="Definitive Date" name="group_definitive_date" context="{'group_by':'definitive_date'}"/> -->
                     <!-- <filter string="Supplier" name="group_supplier_id" context="{'group_by':'supplier_id'}"/> -->
                     <!-- <filter string="Invoice" name="group_invoice_id" context="{'group_by':'invoice_id'}"/> -->

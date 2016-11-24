@@ -9,6 +9,7 @@ from openerp.addons.public_budget.models.transaction import transaction
 class PublicBudgetBudgetReport(models.Model):
     _name = "public_budget.budget.report_3"
     _description = "Budget Report"
+    _rec_name = "resource"
     _auto = False
     # _order = 'date desc'
     # _rec_name = 'date'
@@ -42,7 +43,8 @@ class PublicBudgetBudgetReport(models.Model):
 
 # campos que obtenemos en todas las consultas
     resource = fields.Reference(
-        selection='_reference_models'
+        selection='_reference_models',
+        string='Recurso',
     )
     model = fields.Char(
         readonly=True,
@@ -52,60 +54,89 @@ class PublicBudgetBudgetReport(models.Model):
     )
     partner_id = fields.Many2one(
         'res.partner',
-        string='Partner',
+        string='Proveedor/Empleado',
         readonly=True,
+    )
+    document_number = fields.Char(
+        readonly=True,
+        help='Por ejemplo numero de orden de pago, numero de factura, etc',
+        string='Nro de OP/Comprobante',
     )
     reference = fields.Char(
         readonly=True,
-        help='Por ejemplo numero de orden de pago, numero de factura, etc',
+        # help='Por ejemplo numero de orden de pago, numero de factura, etc',
+        string='Referencia de OP/Comprobante',
+    )
+    name = fields.Char(
+        readonly=True,
+        # help='Por ejemplo numero de orden de pago, numero de factura, etc',
+        string='Memoria de OP/Comprobante',
+    )
+    amount = fields.Float(
+        digits=dp.get_precision('Account'),
+        readonly=True,
+    )
+    type = fields.Selection([
+        ('1_preventive', 'Preventiva'),
+        ('2_definitive', 'Definitiva'),
+        ('3_invoiced', 'Devengado'),
+        ('4_to_pay', 'A Pagar'),
+        ('5_paid', 'Pagado'),
+    ],
+        readonly=True,
+        string='Tipo',
     )
 
     # transaction fields
     budget_id = fields.Many2one(
         'public_budget.budget',
-        string='Budget',
+        string='Presupuesto',
         readonly=True,
     )
     transaction_date = fields.Date(
         readonly=True,
+        string='Fecha de Transacción',
     )
     transaction_type_id = fields.Many2one(
         'public_budget.transaction_type',
-        string='Transaction Type',
+        string='Tipo de Transacción',
         readonly=True,
     )
     transaction_partner_id = fields.Many2one(
         'res.partner',
-        string='Transaction Partner',
+        string='Partner de Transacción',
         readonly=True,
     )
     transaction_state = fields.Selection(
         # 'res.partner',
         transaction._states_,
+        string='Estado de Transacción',
         readonly=True,
     )
     transaction_id = fields.Many2one(
         'public_budget.transaction',
-        string='Transaction',
+        string='Transacción',
         readonly=True,
     )
     transaction_expedient_id = fields.Many2one(
         'public_budget.expedient',
-        string='Transaction Expedient',
+        string='Expediente de Transacción',
         readonly=True,
     )
 
     # preventive fields
     affects_budget = fields.Boolean(
         readonly=True,
+        string='Afecta Presupuesto',
     )
     advance_line = fields.Boolean(
         readonly=True,
+        string='Línea de Adelanto',
     )
     preventive_line_id = fields.Many2one(
         'public_budget.preventive_line',
         readonly=True,
-        string='Preventive Line',
+        string='Línea Preventiva',
     )
     # preventive_amount = fields.Float(
     #     digits=dp.get_precision('Account'),
@@ -113,12 +144,13 @@ class PublicBudgetBudgetReport(models.Model):
     # )
     budget_position_id = fields.Many2one(
         'public_budget.budget_position',
-        string='Budget Position',
+        string='Partida Presupuestaria',
         readonly=True,
     )
     assignment_position_id = fields.Many2one(
         'public_budget.budget_position',
-        string='Assignment Position',
+        # string='Partida Presupuestaria',
+        string='Inciso',
         readonly=True,
     )
 
@@ -167,21 +199,6 @@ class PublicBudgetBudgetReport(models.Model):
     #     'Voucher',
     #     readonly=True,
     # )
-    amount = fields.Float(
-        digits=dp.get_precision('Account'),
-        readonly=True,
-    )
-
-    # voucher fields
-    type = fields.Selection([
-        ('1_preventive', 'Preventiva'),
-        ('2_definitive', 'Definitiva'),
-        ('3_invoiced', 'Devengado'),
-        ('4_to_pay', 'A Pagar'),
-        ('5_paid', 'Pagado'),
-    ],
-        readonly=True,
-    )
     # voucher fields
     # voucher_state = fields.Char(
     #     readonly=True,
@@ -238,8 +255,7 @@ class PublicBudgetBudgetReport(models.Model):
             * 4_to_pay (voucher con voucher lines)
             * 5_paid (voucher con voucher lines)
         * amount para cada una
-        * preventive_line_id a la que está vinculado (
-            TODO hace esto bien para los pagos)
+        * preventive_line_id a la que está vinculado
 
         Además unimos para cada type casos especiales de lineas de adelanto
 
@@ -259,7 +275,9 @@ class PublicBudgetBudgetReport(models.Model):
                 vl.model,
                 vl.res_id,
                 vl.resource,
+                vl.document_number,
                 vl.reference,
+                vl.name,
                 vl.partner_id,
                 dl.preventive_line_id,
                 (il.price_subtotal * vl.amount * iv.sign
@@ -284,14 +302,15 @@ class PublicBudgetBudgetReport(models.Model):
         """
 
         # consulta template de voucher que luego aplicamos para obtener
-        # paid y to_paid. TODO llegar a preventive_line_id
         voucher_template = """
             SELECT
                 '%s' as type,
                 'account.voucher.line' as model,
                 vl.id as res_id,
                 CONCAT('account.voucher', ',', CAST(vo.id AS VARCHAR)) as resource,
-                vo.force_number as reference,
+                vo.force_number as document_number,
+                vo.reference as reference,
+                vo.name as name,
                 -- vo.id as voucher_id,
                 -- vo.state as voucher_state,
                 -- vo.expedient_id as voucher_expedient_id,
@@ -338,7 +357,10 @@ class PublicBudgetBudgetReport(models.Model):
                 CONCAT('account.invoice', ',', CAST(iv.id AS VARCHAR)) as resource,
                 -- TODO tal vez un join para sacar de document_number de move o
                 -- o un or para sacar number si no seteado
-                iv.afip_document_number as reference,
+                -- iv.afip_document_number as document_number,
+                COALESCE(iv.afip_document_number, iv.number) as document_number,
+                iv.reference as reference,
+                iv.name as name,
                 -- iv.id as invoice_id,
                 -- iv.state as invoice_state,
                 -- iv.type as invoice_type,
@@ -372,7 +394,9 @@ class PublicBudgetBudgetReport(models.Model):
                 'public_budget.definitive_line' as model,
                 dl.id as res_id,
                 CONCAT('public_budget.definitive_line', ',', CAST(dl.id AS VARCHAR)) as resource,
+                null as document_number,
                 null as reference,
+                null as name,
                 -- dl.supplier_id as supplier_id,
                 -- dl.issue_date as definitive_date,
                 dl.supplier_id as partner_id,
@@ -389,7 +413,9 @@ class PublicBudgetBudgetReport(models.Model):
                 'public_budget.preventive_line' as model,
                 pl.id as res_id,
                 CONCAT('public_budget.preventive_line', ',', CAST(pl.id AS VARCHAR)) as resource,
+                null as document_number,
                 null as reference,
+                null as name,
                 0 as partner_id,
                 pl.id as preventive_line_id,
                 pl.preventive_amount as amount
@@ -406,7 +432,9 @@ class PublicBudgetBudgetReport(models.Model):
                 'public_budget.preventive_line' as model,
                 pl.id as res_id,
                 CONCAT('public_budget.preventive_line', ',', CAST(pl.id AS VARCHAR)) as resource,
+                null as document_number,
                 null as reference,
+                null as name,
                 0 as partner_id,
                 pl.id as preventive_line_id,
                 pl.preventive_amount as amount
@@ -425,7 +453,9 @@ class PublicBudgetBudgetReport(models.Model):
                 'public_budget.preventive_line' as model,
                 pl.id as res_id,
                 CONCAT('public_budget.preventive_line', ',', CAST(pl.id AS VARCHAR)) as resource,
+                null as document_number,
                 null as reference,
+                null as name,
                 0 as partner_id,
                 pl.id as preventive_line_id,
                 av.advance_amount * (
