@@ -35,6 +35,7 @@ class PublicBudgetBudgetReport(models.Model):
     def _reference_models(self):
         return []
 
+# campos que obtenemos en todas las consultas
     resource = fields.Reference(
         selection='_reference_models'
     )
@@ -44,6 +45,12 @@ class PublicBudgetBudgetReport(models.Model):
     res_id = fields.Integer(
         readonly=True,
     )
+    # partner_id = fields.Many2one(
+    #     'res.partner',
+    #     string='Partner',
+    #     readonly=True,
+    # )
+
     # transaction fields
     budget_id = fields.Many2one(
         'public_budget.budget',
@@ -243,19 +250,11 @@ class PublicBudgetBudgetReport(models.Model):
                 vl.model,
                 vl.res_id,
                 vl.resource,
-                il.preventive_line_id,
+                dl.preventive_line_id,
                 (il.price_subtotal * vl.amount * iv.sign
                     ) / iv.amount_total as amount
             FROM
-                (SELECT
-                    *,
-                    dl.amount,
-                    dl.preventive_line_id as definitive_amount
-                FROM
-                    account_invoice_line il
-                LEFT JOIN
-                    public_budget_definitive_line as dl on
-                        il.definitive_line_id = dl.id) as il
+                account_invoice_line il
             LEFT JOIN
                 (SELECT
                     *,
@@ -266,6 +265,9 @@ class PublicBudgetBudgetReport(models.Model):
                     END AS sign
                 FROM
                     account_invoice) iv on (iv.id = il.invoice_id)
+            LEFT JOIN
+                public_budget_definitive_line as dl on (
+                    il.definitive_line_id = dl.id )
             RIGHT JOIN
                 (%s) as vl on (iv.move_id = vl.move_id)
         """
