@@ -235,6 +235,41 @@ class PublicBudgetBudgetReport(models.Model):
 
         tools.drop_view_if_exists(cr, self._table)
 
+        # consulta que agrega a la de payments el preventive_line_id y ademas
+        # reparte el amount
+        invoice_for_voucher_query = """
+            SELECT
+                vl.type,
+                vl.model,
+                vl.res_id,
+                vl.resource,
+                il.preventive_line_id,
+                (il.price_subtotal * vl.amount * iv.sign
+                    ) / iv.amount_total as amount
+            FROM
+                (SELECT
+                    *,
+                    dl.amount,
+                    dl.preventive_line_id as definitive_amount
+                FROM
+                    account_invoice_line il
+                LEFT JOIN
+                    public_budget_definitive_line as dl on
+                        il.definitive_line_id = dl.id) as il
+            LEFT JOIN
+                (SELECT
+                    *,
+                    CASE
+                        WHEN type IN ('in_invoice', 'out_refund')
+                        THEN 1
+                        ELSE -1
+                    END AS sign
+                FROM
+                    account_invoice) iv on (iv.id = il.invoice_id)
+            RIGHT JOIN
+                (%s) as vl on (iv.move_id = vl.move_id)
+        """
+
         # consulta template de voucher que luego aplicamos para obtener
         # paid y to_paid. TODO llegar a preventive_line_id
         voucher_template = """
@@ -246,7 +281,7 @@ class PublicBudgetBudgetReport(models.Model):
                 -- vo.id as voucher_id,
                 -- vo.state as voucher_state,
                 -- vo.expedient_id as voucher_expedient_id,
-                -- vl.move_id as move_id,
+                vl.move_id as move_id,
                 0 as preventive_line_id,
                 vl.amount * vl.sign as amount
             FROM
@@ -267,7 +302,7 @@ class PublicBudgetBudgetReport(models.Model):
                     account_move_line ml on (
                         ml.id = vl.move_line_id)
                 ) vl
-                left join
+                LEFT JOIN
                 account_voucher vo on (
                     vo.id = vl.voucher_id)
             WHERE
@@ -275,10 +310,10 @@ class PublicBudgetBudgetReport(models.Model):
             """
 
         # aplicamos la consulta anterior para paid y to_pay
-        paid_query = voucher_template % (
-            "5_paid", "vo.state = 'posted'")
-        to_pay_query = voucher_template % (
-            "4_to_pay", "vo.state not in ('cancel', 'draft')")
+        paid_query = invoice_for_voucher_query % (voucher_template % (
+            "5_paid", "vo.state = 'posted'"))
+        to_pay_query = invoice_for_voucher_query % (voucher_template % (
+            "4_to_pay", "vo.state not in ('cancel', 'draft')"))
 
         # consulta sobre facturas
         invoice_query = """
