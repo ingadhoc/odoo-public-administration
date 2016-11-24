@@ -21,10 +21,12 @@
             <search string="Analisis de Presupuesto">
                 <filter string="Affects Budget" name="affects_budget" domain="[('affects_budget', '=', True)]"/>
                 <field name="type"/>
+                <field name="reference"/>
                 <field name="resource"/>
-                <field name="preventive_line_id"/>
                 <field name="amount"/>
+                <field name="preventive_line_id"/>
                 <field name="budget_position_id"/>
+                <field name="partner_id"/>
                 <field name="budget_id"/>
                 <field name="advance_line"/>
                 <field name="transaction_id"/>
@@ -65,13 +67,49 @@
                 <field name="transaction_id"/>
                 <!-- <field name="model"/> -->
                 <!-- <field name="res_id"/> -->
+                <field name="reference"/>
                 <field name="resource"/>
+                <field name="partner_id"/>
                 <field name="budget_position_id"/>
                 <field name="amount" sum="Total"/>
                 <!-- <field name="supplier_id"/> -->
                 <!-- <field name="invoice_id"/> -->
                 <!-- <field name="voucher_id"/> -->
             </tree>
+        </field>
+    </record>
+
+    <record id="view_public_budget_budget_report_3_form" model="ir.ui.view">
+        <field name="name">public_budget.budget.report_3.form</field>
+        <field name="model">public_budget.budget.report_3</field>
+        <field name="arch" type="xml">
+            <form string="Analisis de Presupuesto">
+                <group>
+                    <group>
+                        <field name="type"/>
+                        <field name="reference"/>
+                        <field name="resource"/>
+                        <!-- <field name="res_id"/> -->
+                        <!-- <field name="model"/> -->
+                        <field name="partner_id"/>
+                        <field name="affects_budget"/>
+                        <field name="advance_line"/>
+                        <field name="preventive_line_id"/>
+                        <field name="budget_position_id"/>
+                        <field name="assignment_position_id"/>
+                        <field name="amount"/>
+                    </group>
+                    <group>
+                    <!-- transaction fields -->
+                        <field name="budget_id"/>
+                        <field name="transaction_date"/>
+                        <field name="transaction_type_id"/>
+                        <field name="transaction_partner_id"/>
+                        <field name="transaction_state"/>
+                        <field name="transaction_id"/>
+                    </group>
+                </group>
+            </form>
         </field>
     </record>
 

@@ -33,7 +33,12 @@ class PublicBudgetBudgetReport(models.Model):
 
     @api.model
     def _reference_models(self):
-        return []
+        return [
+            ('account.voucher', 'Voucher'),
+            ('account.invoice', 'Invoice'),
+            ('public_budget.definitive_line', 'Definitive Line'),
+            ('public_budget.preventive_line', 'Preventive Line'),
+        ]
 
 # campos que obtenemos en todas las consultas
     resource = fields.Reference(
@@ -45,11 +50,15 @@ class PublicBudgetBudgetReport(models.Model):
     res_id = fields.Integer(
         readonly=True,
     )
-    # partner_id = fields.Many2one(
-    #     'res.partner',
-    #     string='Partner',
-    #     readonly=True,
-    # )
+    partner_id = fields.Many2one(
+        'res.partner',
+        string='Partner',
+        readonly=True,
+    )
+    reference = fields.Char(
+        readonly=True,
+        help='Por ejemplo numero de orden de pago, numero de factura, etc',
+    )
 
     # transaction fields
     budget_id = fields.Many2one(
@@ -250,6 +259,8 @@ class PublicBudgetBudgetReport(models.Model):
                 vl.model,
                 vl.res_id,
                 vl.resource,
+                vl.reference,
+                vl.partner_id,
                 dl.preventive_line_id,
                 (il.price_subtotal * vl.amount * iv.sign
                     ) / iv.amount_total as amount
@@ -279,12 +290,13 @@ class PublicBudgetBudgetReport(models.Model):
                 '%s' as type,
                 'account.voucher.line' as model,
                 vl.id as res_id,
-                CONCAT('account.voucher.line', ',', CAST(vl.id AS VARCHAR)) as resource,
+                CONCAT('account.voucher', ',', CAST(vo.id AS VARCHAR)) as resource,
+                vo.force_number as reference,
                 -- vo.id as voucher_id,
                 -- vo.state as voucher_state,
                 -- vo.expedient_id as voucher_expedient_id,
                 vl.move_id as move_id,
-                0 as preventive_line_id,
+                vo.partner_id as partner_id,
                 vl.amount * vl.sign as amount
             FROM
                 (SELECT
@@ -323,11 +335,15 @@ class PublicBudgetBudgetReport(models.Model):
                 '3_invoiced' as type,
                 'account.invoice.line' as model,
                 il.id as res_id,
-                CONCAT('account.invoice.line', ',', CAST(il.id AS VARCHAR)) as resource,
+                CONCAT('account.invoice', ',', CAST(iv.id AS VARCHAR)) as resource,
+                -- TODO tal vez un join para sacar de document_number de move o
+                -- o un or para sacar number si no seteado
+                iv.afip_document_number as reference,
                 -- iv.id as invoice_id,
                 -- iv.state as invoice_state,
                 -- iv.type as invoice_type,
                 -- il.definitive_line_id as definitive_line_id,
+                iv.partner_id as partner_id,
                 dl.preventive_line_id as preventive_line_id,
                 (il.price_subtotal * iv.sign) as amount
             FROM
@@ -346,7 +362,7 @@ class PublicBudgetBudgetReport(models.Model):
                 FROM
                     account_invoice) iv on (iv.id = il.invoice_id)
             WHERE
-                iv.type not in ('cancel', 'draft')
+                iv.state not in ('cancel', 'draft')
             """
 
         # consulta sobre definitivas
@@ -356,8 +372,10 @@ class PublicBudgetBudgetReport(models.Model):
                 'public_budget.definitive_line' as model,
                 dl.id as res_id,
                 CONCAT('public_budget.definitive_line', ',', CAST(dl.id AS VARCHAR)) as resource,
+                null as reference,
                 -- dl.supplier_id as supplier_id,
                 -- dl.issue_date as definitive_date,
+                dl.supplier_id as partner_id,
                 dl.preventive_line_id as preventive_line_id,
                 dl.amount as amount
             FROM
@@ -371,6 +389,8 @@ class PublicBudgetBudgetReport(models.Model):
                 'public_budget.preventive_line' as model,
                 pl.id as res_id,
                 CONCAT('public_budget.preventive_line', ',', CAST(pl.id AS VARCHAR)) as resource,
+                null as reference,
+                0 as partner_id,
                 pl.id as preventive_line_id,
                 pl.preventive_amount as amount
             FROM
@@ -386,6 +406,8 @@ class PublicBudgetBudgetReport(models.Model):
                 'public_budget.preventive_line' as model,
                 pl.id as res_id,
                 CONCAT('public_budget.preventive_line', ',', CAST(pl.id AS VARCHAR)) as resource,
+                null as reference,
+                0 as partner_id,
                 pl.id as preventive_line_id,
                 pl.preventive_amount as amount
             FROM
@@ -403,6 +425,8 @@ class PublicBudgetBudgetReport(models.Model):
                 'public_budget.preventive_line' as model,
                 pl.id as res_id,
                 CONCAT('public_budget.preventive_line', ',', CAST(pl.id AS VARCHAR)) as resource,
+                null as reference,
+                0 as partner_id,
                 pl.id as preventive_line_id,
                 av.advance_amount * (
                     pl.preventive_amount /
