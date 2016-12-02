@@ -99,5 +99,8 @@ class AccountVoucher(models.Model):
         lines_data = []
         for line in self.payment_line_ids:
             lines_data.append(line._get_linea_archivo_banco())
-        self.archivo_banco = base64.encodestring('\n'.join(lines_data))
+        # FOR windows \r\n is required
+        # we also add one new line at the end as xls does
+        self.archivo_banco = base64.encodestring(
+            '\r\n'.join(lines_data) + '\r\n')
         self.archivo_banco_name = 'Archivo banco %s.txt' % fields.Date.today()
