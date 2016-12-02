@@ -1,4 +1,4 @@
-{'active': False,
+{
     'author': 'ADHOC SA',
     'category': 'base.module_category_knowledge_management',
     'data': [
@@ -51,7 +51,7 @@
                 'workflow/remit_workflow.xml',
                 'view/public_budget_menuitem.xml',
                 'view/public_budget_actions.xml',
-             ],
+    ],
     'depends': [
         'account',
         'account_voucher_multic_fix',
@@ -67,6 +67,5 @@ Modulo generico para gestion publica presupuestaria/contable
     'license': 'AGPL-3',
     'name': 'Public Budget',
     'test': [],
-    'version': '8.0.0.19.0',
+    'version': '8.0.0.20.0',
     'website': ''}
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

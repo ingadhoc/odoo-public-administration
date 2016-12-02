@@ -8,9 +8,10 @@
             <field name="arch" type="xml">
                 <search string="Expedient">
                     <field name="number"/>
-                    <field name="issue_date"/>
+                    <field name="cover"/>
                     <field name="description"/>
                     <field name="reference"/>
+                    <field name="issue_date"/>
                     <field name="last_move_date"/>
                     <field name="founder_id"/>
                     <field name="category_id"/>
