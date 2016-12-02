@@ -201,6 +201,13 @@ class PublicBudgetExpedient(models.Model):
         self.last_move_date = last_move_date
         self.in_transit = in_transit
 
+    @api.one
+    @api.constrains('pages')
+    def check_pages_not_dni(self):
+        if self.pages > 10000:
+            raise Warning(
+                'No puede poner número de páginas mayor a 10.000')
+
     @api.multi
     def write(self, vals):
         if 'pages' in vals:
