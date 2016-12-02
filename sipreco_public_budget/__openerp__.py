@@ -104,6 +104,7 @@
         'web_m2x_options',
         'account_tax_settlement_withholding',
         'hr_public_holidays',
+        'account_transfer',
     ],
     'description': '''
 Public Budget Sipreco Customizations

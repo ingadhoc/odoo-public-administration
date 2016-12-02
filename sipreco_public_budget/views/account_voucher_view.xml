@@ -107,10 +107,22 @@
                     <button name="signature_process_signed" class="oe_highlight" string="Signed" groups="public_budget.group_habilitacion_director" states="signature_process"/>
                 </button>
 
-                <!-- Add cancel on sign states but only tech-->
+                <!-- Add cancel on sign states but only for account user -->
                 <button name="proforma_voucher" position="after">
-                    <button name="cancel_voucher" string="Cancel Receipt" states="signature_process,signed"/>
-                    <!-- groups="base.group_no_one" -->
+                    <button name="cancel_voucher" string="Cancel Receipt" states="signature_process,signed" groups="account.group_account_user"/>
+                </button>
+                <!-- inherit every cancel button and to draft button and give only to account user -->
+                <button name="cancel_voucher" position="attributes">
+                    <attribute name="groups">account.group_account_user</attribute>
+                </button>
+                <button name="action_cancel_draft" position="attributes">
+                    <attribute name="groups">account.group_account_user</attribute>
+                </button>
+                <button string="Cancel Voucher" position="attributes">
+                    <attribute name="groups">account.group_account_user</attribute>
+                </button>
+                <button string="Unreconcile" position="attributes">
+                    <attribute name="groups">account.group_account_user</attribute>
                 </button>
 
                 <!-- cancel buttons only for tech.. -->
