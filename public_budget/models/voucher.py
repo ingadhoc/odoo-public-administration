@@ -22,7 +22,8 @@ class account_voucher(models.Model):
         # required=True,
         # domain=[('type', '=', 'payment'), ('state', '=', 'open')],
         domain="[('type', '=', 'payment'), ('state', '=', 'open'), "
-        "('current_location_id', 'in', user_location_ids[0][2])]",
+        "('current_location_id', 'in', user_location_ids[0][2]), "
+        "('in_transit', '=', False)]",
         context={'default_type': 'payment'},
         states={'draft': [('readonly', False)]}
     )
