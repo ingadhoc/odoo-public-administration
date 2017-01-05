@@ -203,3 +203,25 @@ class account_voucher(models.Model):
                 raise Warning(_('You can not send to sign process a Voucher \
                     that has Total Amount different from To Pay Amount'))
         return True
+
+    # modificamos estas funciones para que si esta en borrador no setee ningun
+    # valor por defecto
+    @api.onchange('retencion_ganancias', 'partner_id_copy')
+    def change_retencion_ganancias(self):
+        def_regimen = False
+        if self.state != 'draft' and self.retencion_ganancias == 'nro_regimen':
+            cia_regs = self.company_regimenes_ganancias_ids
+            partner_regimen = self.partner_id.default_regimen_ganancias_id
+            if partner_regimen and partner_regimen in cia_regs:
+                def_regimen = partner_regimen
+            elif cia_regs:
+                def_regimen = cia_regs[0]
+        self.regimen_ganancias_id = def_regimen
+
+    @api.onchange('company_regimenes_ganancias_ids')
+    def change_company_regimenes_ganancias(self):
+        if (
+                self.state != 'draft' and
+                self.company_regimenes_ganancias_ids and
+                self.type == 'payment'):
+            self.retencion_ganancias = 'nro_regimen'
