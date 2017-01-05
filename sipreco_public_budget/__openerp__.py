@@ -94,6 +94,7 @@
     ],
     'depends': [
         'l10n_ar_invoice',
+        'l10n_ar_account_withholding',
         'l10n_ar_aeroo_voucher',
         'public_budget',
         'account_voucher_constraint',

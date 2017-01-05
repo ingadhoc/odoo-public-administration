@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data> 
+        <record id="view_vendor_payment_l10n_ar_with_mods_form" model="ir.ui.view">
+            <field name="name">account.voucher.customer.pay.form</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="l10n_ar_account_withholding.view_vendor_payment_form"/>
+            <field name="arch" type="xml">
+                <!-- quieren que las retenciones se definan una vez confirmado el pago -->
+                <field name="retencion_ganancias" position="attributes">
+                    <attribute name="attrs">{'required': [('company_regimenes_ganancias_ids', '!=', [(6, False, [])]), ('state', '!=', 'draft')]}</attribute>
+                </field>
+            </field>
+        </record>
+        
         <!-- l10n_ar_account_voucher mods -->
         <record id="view_vendor_payment_l10n_ar_mods_form" model="ir.ui.view">
             <field name="name">account.voucher.customer.pay.form</field>
             <field name="model">account.voucher</field>
             <field name="inherit_id" ref="l10n_ar_account_voucher.view_vendor_payment_form"/>
             <field name="arch" type="xml">
-                <!-- quieren que las retenciones se definan una vez confirmado el pago -->
-                <field name="retencion_ganancias" position="attributes">
-                    <attribute name="attrs">{'required': [('company_regimenes_ganancias_ids', '!=', [(6, False, [])]), ('state', '!=', 'draft')]}</attribute>
-                </field>
-
                 <field name="receiptbook_id" position="attributes">
                     <attribute name="required">1</attribute>
                 </field>
