@@ -76,6 +76,7 @@
                     <field name="code"/>
                     <field name="name"/>
                     <field name="type" invisible="1"/>
+                    <field name="child_ids" invisible="1"/>
                     <field name="amount" sum="Total"/>
                     <field name="preventive_amount" sum="Total"/>
                     <field name="definitive_amount" sum="Total"/>
@@ -83,7 +84,8 @@
                     <field name="paid_amount" sum="Total"/>
                     <field name="projected_amount" sum="Total"/>
                     <!-- A este campo le dejamos el attrs porque lo renderiza igual al widget por mas que el campo tenga valor False -->
-                    <field name="preventive_avg" widget="progressbar" attrs="{'invisible':[('budget_assignment_allowed','=',False)]}"/>
+                    <!-- <field name="preventive_avg" widget="progressbar" attrs="{'invisible':[('budget_assignment_allowed','=',False)]}"/> -->
+                    <field name="preventive_avg" widget="progressbar" attrs="{'invisible':[('budget_assignment_allowed','=',False), ('child_ids','=',[])]}"/>
                     <field name="preventive_avg" widget="integer" string="%"/>
                     <field name="balance_amount" sum="Total"/>
                     <field name="budget_assignment_allowed" invisible="1"/>

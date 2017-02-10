@@ -160,6 +160,8 @@ class budget_position(models.Model):
 
         domain = [
             ('budget_position_id', operator, self.id),
+            # esto podria no ir porque el affects_budget ya tiene en cuetna
+            # el estado de la transaccion
             ('transaction_id.state', 'in', ('open', 'closed')),
             ('affects_budget', '=', True),
         ]
@@ -181,7 +183,8 @@ class budget_position(models.Model):
 
         # we add budget_assignment_allowed condition to optimize
         _logger.info('Getting budget amounts')
-        if budget_id and self.budget_assignment_allowed:
+        # if budget_id and self.budget_assignment_allowed:
+        if budget_id and (self.budget_assignment_allowed or self.child_ids):
             modification_domain = [
                 ('budget_modification_id.budget_id', '=', budget_id),
                 ('budget_position_id', operator, self.id)]
@@ -269,7 +272,8 @@ class budget_position(models.Model):
         projected_amount = preventive_amount / day_of_year * 365
         self.projected_amount = projected_amount
 
-        if self.budget_assignment_allowed:
+        # if self.budget_assignment_allowed:
+        if self.budget_assignment_allowed or self.child_ids:
             _logger.info('Getting budget assignment amounts')
             projected_avg = amount and \
                 projected_amount / amount * 100.0 or 0.0

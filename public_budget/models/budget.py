@@ -84,6 +84,11 @@ class budget(models.Model):
         digits=dp.get_precision('Account'),
         # store=True,
     )
+    parent_budget_position_ids = fields.Many2many(
+        comodel_name='public_budget.budget_position',
+        string=_('Budget Positions'),
+        compute='_get_budget_positions'
+    )
     budget_position_ids = fields.Many2many(
         relation='public_budget_budget_position_rel',
         comodel_name='public_budget.budget_position',
@@ -173,6 +178,8 @@ class budget(models.Model):
             position_ids += parents.ids
         self.budget_position_ids = budget_positions.browse(
             list(set(position_ids))).sorted(key=lambda r: r.parent_left)
+        self.parent_budget_position_ids = self.budget_position_ids.filtered(
+            lambda x: not x.parent_id)
 
     @api.one
     def _get_totals(self):
