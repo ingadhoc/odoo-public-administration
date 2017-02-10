@@ -555,9 +555,13 @@ class transaction(models.Model):
 
 # Constraints
     @api.one
-    @api.constrains('preventive_line_ids', 'type_id', 'expedient_id')
+    @api.constrains(
+        'preventive_amount',
+        'type_id',
+        'expedient_id')
     def _check_transaction_type(self):
-        if self.type_id.with_amount_restriction:
+        # solo controlamos si hay lineas preventivas
+        if self.preventive_line_ids and self.type_id.with_amount_restriction:
             rest = self.env[
                 'public_budget.transaction_type_amo_rest'].search(
                 [('transaction_type_id', '=', self.type_id.id),
