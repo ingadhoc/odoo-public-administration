@@ -8,7 +8,7 @@
             <field name="arch" type="xml">
                 <!-- quieren que las retenciones se definan una vez confirmado el pago -->
                 <field name="retencion_ganancias" position="attributes">
-                    <attribute name="attrs">{'required': [('company_regimenes_ganancias_ids', '!=', [(6, False, [])]), ('state', '!=', 'draft')]}</attribute>
+                    <attribute name="attrs">{'required': [('company_regimenes_ganancias_ids', '!=', [(6, False, [])]), ('state', 'not in', ['draft', 'cancel'])]}</attribute>
                 </field>
             </field>
         </record>
