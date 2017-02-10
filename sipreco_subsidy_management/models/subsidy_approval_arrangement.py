@@ -10,14 +10,14 @@ class ApprovalArrangement(models.Model):
     _name = 'public_budget.subsidy.approval_arrangement'
     _rec_name = 'number'
 
-    @api.model
-    def _get_approved_amount(self):
-        # lo hacemos asi porque mandando por vista nos daba error
-        rendition_id = self._context.get('default_rendition_id')
-        if rendition_id:
-            return self.env['public_budget.subsidy.rendition'].browse(
-                rendition_id).rendition_amount
-        return False
+    # @api.model
+    # def _get_approved_amount(self):
+    #     # lo hacemos asi porque mandando por vista nos daba error
+    #     rendition_id = self._context.get('default_rendition_id')
+    #     if rendition_id:
+    #         return self.env['public_budget.subsidy.rendition'].browse(
+    #             rendition_id).rendition_amount
+    #     return False
 
     @api.model
     def create(self, vals):
@@ -34,11 +34,17 @@ class ApprovalArrangement(models.Model):
     fojas = fields.Integer(
         required=True,
     )
-    rendition_id = fields.Many2one(
+    rendition_ids = fields.One2many(
         'public_budget.subsidy.rendition',
+        'approval_arrangement_id',
         'Rendición',
-        required=True,
+        # required=True,
     )
+    # rendition_id = fields.Many2one(
+    #     'public_budget.subsidy.rendition',
+    #     'Rendición',
+    #     required=True,
+    # )
     # subsidy_id = fields.Many2one(
     #     'public_budget.subsidy',
     #     'Subsidio',
@@ -48,16 +54,9 @@ class ApprovalArrangement(models.Model):
         'Monto Aprobado',
         required=True,
         digits=dp.get_precision('Account'),
-        default=_get_approved_amount,
+        # default=_get_approved_amount,
     )
 
     _sql_constraints = [
         ('number_unique', 'unique(number)',
             ('El número debe ser único en las disposiciones de aprobación'))]
-
-    @api.one
-    @api.constrains('rendition_id', 'approved_amount')
-    def check_amounts(self):
-        if self.approved_amount > self.rendition_id.rendition_amount:
-            raise Warning(
-                'Importe Aprobado no puede ser mayor al importe rendido')

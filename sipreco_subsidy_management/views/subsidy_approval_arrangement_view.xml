@@ -11,10 +11,11 @@
                     <sheet>
                         <group>
                             <field name="number" required="False"/>
-                            <field name="rendition_id"/>
+                            <!-- <field name="rendition_id"/> -->
                             <field name="approved_amount"/>
                             <field name="fojas"/>
                         </group>
+                        <!-- <field name="rendition_ids"/> -->
                     </sheet>
                 </form>
             </field>
@@ -27,14 +28,14 @@
             <field name="arch" type="xml">
                 <tree>
                     <field name="number"/>
-                    <field name="rendition_id"/>
+                    <!-- <field name="rendition_ids"/> -->
                     <field name="approved_amount"/>
                     <field name="fojas"/>
                 </tree>
             </field>
         </record>
 
-<!--         <record id="action_public_budget_subsidy_approval_arrangement" model="ir.actions.act_window">
+        <record id="action_public_budget_subsidy_approval_arrangement" model="ir.actions.act_window">
             <field name="name">Disposiciones de aprobación</field>
             <field name="res_model">public_budget.subsidy.approval_arrangement</field>
         </record>
@@ -44,7 +45,7 @@
             sequence="20"
             action="action_public_budget_subsidy_approval_arrangement"
             parent="menu_responsible_accounting"
-            /> -->
+            />
     </data>
 </openerp>
 

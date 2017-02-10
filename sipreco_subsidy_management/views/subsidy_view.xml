@@ -18,12 +18,13 @@
                         <group>
                             <group>
                                 <field name="transaction_id" readonly="1" required="0"/>
-                                <field name="amount"/>
+                                <field name="amount" string="Importe s/Res"/>
                                 <field name="expedient_id" string="Expediente Autorizante"/>
                                 <field name="request_expedient_id"/>
                                 <field name="parliamentary_resolution_date"/>
                                 <field name="parliamentary_expedient"/>
                                 <field name="accountability_administrative_expedient_id"/>
+                                <field name="other_accountability_expedient_ids" widget="many2many_tags"/>
                                 <!-- fields from transaction -->
                                 <field name="partner_id"/>
                                 <field name="rendiciones_pendientes_otros_subsidios"/>
@@ -48,9 +49,10 @@
                                     <tree editable="bottom">
                                         <field name="date"/>
                                         <field name="expedient_id"/>
+                                        <field name="rendition_amount" sum="Total"/>
                                         <!-- nos da error al pasar este default por contexto -->
                                         <!-- context="{'default_approved_amount': rendition_amount} -->
-                                        <field name="approval_arrangement_ids" widget="one2many_tags">
+                                        <!-- <field name="approval_arrangement_ids" widget="one2many_tags">
                                             <form>
                                                 <header>
                                                     <button name="%(action_aeroo_subsidy_approval_arrangement_report)d" string="Print" type="action"/>
@@ -61,8 +63,8 @@
                                                     <field name="fojas"/>
                                                 </group>
                                             </form>
-                                        </field>
-                                        <field name="rendition_amount" sum="Total"/>
+                                        </field> -->
+                                        <field name="approval_arrangement_id" options="{'create': True, 'create_edit': True}" context="{'default_approved_amount': rendition_amount}"/>
                                         <field name="approved_amount" sum="Total"/>
                                         <field name="pending_amount" sum="Total"/>
                                     </tree>
@@ -101,14 +103,14 @@
             <field name="arch" type="xml">
                 <tree string="Subsidios">
                     <field name="name"/>
-                    <field name="amount"/>
+                    <field name="amount" string="Importe s/Res"/>
                     <field name="cargo_amount" sum="Total"/>
                     <field name="rendido_amount" sum="Total"/>
                     <field name="aprobado_amount" sum="Total"/>
                     <field name="pendientes_rendicion_amount" sum="Total"/>
                     <field name="revision_amount" sum="Total"/>
                     <field name="pendientes_aprobacion_amount" sum="Total"/>
-                    <field name="accountability_state"/>
+                    <field name="accountability_state" string="Estado" />
                     <field name="cargo_date" invisible="0"/>
                     <field name="accountability_expiry_date" invisible="0"/>
                     <field name="state" invisible="1"/>
@@ -158,7 +160,7 @@
                         />
                     <group expand="1" string="Group By">
                         <filter string="Estado de la Transacción" name="state" context="{'group_by':'state'}"/>
-                        <filter string="Estado de la Rendición" name="accountability_state" context="{'group_by':'accountability_state'}"/>
+                        <filter string="Estado" name="accountability_state" context="{'group_by':'accountability_state'}"/>
                         <filter string="Fecha" name="date" context="{'group_by':'date'}"/>
                     </group>
                 </search>

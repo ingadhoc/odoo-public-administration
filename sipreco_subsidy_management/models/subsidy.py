@@ -62,7 +62,8 @@ class PublicBudgetSubsidy(models.Model):
         ('pending', 'Cargos Pendientes'),
         ('approved', 'Aprobada'),
     ],
-        'Estado de la Rendición',
+        'Estado',
+        # 'Estado de la Rendición',
         compute='get_state',
         store=True,
     )
@@ -88,6 +89,11 @@ class PublicBudgetSubsidy(models.Model):
         'public_budget.expedient',
         'Expediente Administrativo de Rendición',
         help='Expediente Administrativo de Rendición de Subsidio',
+    )
+    other_accountability_expedient_ids = fields.Many2many(
+        relation='public_budget_subsidy_other_expedient_rel',
+        comodel_name='public_budget.expedient',
+        string='Expedientes de Rendicion agregados',
     )
     rendition_ids = fields.One2many(
         'public_budget.subsidy.rendition',

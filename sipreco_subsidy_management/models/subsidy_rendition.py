@@ -20,12 +20,19 @@ class PublicBudgetSubsidyRendition(models.Model):
         required=True,
         default=fields.Date.context_today
     )
-    approval_arrangement_ids = fields.One2many(
+    # approval_arrangement_ids = fields.One2many(
+    #     'public_budget.subsidy.approval_arrangement',
+    #     'rendition_id',
+    #     # 'public_budget_rendition_approval_arrangement_rel',
+    #     # 'rendition_id', 'approval_arrangement_id',
+    #     'Disposiciones de aprobación',
+    # )
+    approval_arrangement_id = fields.Many2one(
         'public_budget.subsidy.approval_arrangement',
-        'rendition_id',
+        # 'rendition_id',
         # 'public_budget_rendition_approval_arrangement_rel',
         # 'rendition_id', 'approval_arrangement_id',
-        'Disposiciones de aprobación',
+        'Disposición de aprobación',
     )
     rendition_amount = fields.Float(
         'Importe Rendido',
@@ -33,7 +40,10 @@ class PublicBudgetSubsidyRendition(models.Model):
     )
     approved_amount = fields.Float(
         'Importe Aprobado',
-        digits=dp.get_precision('Account'),
+        related='approval_arrangement_id.approved_amount',
+        readonly=True,
+        store=True,
+        # digits=dp.get_precision('Account'),
     )
     pending_amount = fields.Float(
         'Importe Pendiente',
