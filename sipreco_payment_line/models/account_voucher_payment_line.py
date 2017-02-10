@@ -43,7 +43,8 @@ class AccountVoucherPaymentLine(models.Model):
         self.ensure_one()
         # if not self.partner_id.numero_legajo:
         #     UserError(_('El partner %s no tiene número de legajo'))
-        if not self.partner_id.numero_legajo:
+        numero_legajo = self.partner_id.numero_legajo
+        if not numero_legajo:
             raise UserError(_(
                 'Se requiere numero de legajo en partner %s') % (
                 self.partner_id.name))
@@ -62,13 +63,18 @@ class AccountVoucherPaymentLine(models.Model):
         Registro += voucher.sucursal_de_cuenta_debito.rjust(2, '0')
 
         # Right("00000000" & CLng(Cuenta), 8)
-        Registro += only_digits(self.bank_account_id.acc_number).rjust(8, '0')
+        acc_number = only_digits(self.bank_account_id.acc_number).rjust(8, '0')
+        if len(acc_number) > 8:
+            raise UserError(_(
+                'La cuenta bancaria de "%s" no puede tener más de 8 digitos'
+            ) % (self.partner_id.name))
+        Registro += acc_number
 
         Registro += "62"
 
         # Right("000000" & CLng(Legajo), 6)
-        Registro += (
-            only_digits(self.partner_id.numero_legajo) or '').rjust(6, '0')
+        numero_legajo = (only_digits(numero_legajo) or '').rjust(6, '0')
+        Registro += numero_legajo[:6]
 
         # Right("00000000000000" & CLng(Importe * 100), 14)
         Registro += str(int(self.amount * 100)).rjust(14, '0')
