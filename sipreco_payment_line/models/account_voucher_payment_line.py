@@ -36,6 +36,16 @@ class AccountVoucherPaymentLine(models.Model):
     )
 
     @api.multi
+    def refresh_bank_account(self):
+        for rec in self:
+            banks = self.partner_id.bank_ids
+            if rec.voucher_id.state == 'posted':
+                raise UserError(
+                    'No se puede cambiar la cuenta de una orden de pago '
+                    'validada')
+            rec.bank_account_id = banks and banks[0].id or False
+
+    @api.multi
     def _get_linea_archivo_banco(self):
         def only_digits(string):
             return filter(lambda x: x.isdigit(), string)
@@ -60,7 +70,12 @@ class AccountVoucherPaymentLine(models.Model):
         Registro = ""
 
         # Right("00" & CLng(Sucursal), 2)
-        Registro += voucher.sucursal_de_cuenta_debito.rjust(2, '0')
+        sucursal = self.bank_account_id.numero_de_sucursal.rjust(2, '0')
+        if len(sucursal) > 2:
+            raise UserError(_(
+                'La sucursal de la cuenta bancaria de "%s" no puede tener más '
+                'de 2 digitos') % (self.partner_id.name))
+        Registro += sucursal
 
         # Right("00000000" & CLng(Cuenta), 8)
         acc_number = only_digits(self.bank_account_id.acc_number).rjust(8, '0')

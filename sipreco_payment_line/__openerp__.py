@@ -23,4 +23,4 @@ Add payment lines on vouchers
     'installable': True,
     'name': 'Sipreco Payment Lines',
     'test': [],
-    'version': '8.0.1.0.0'}
+    'version': '8.0.1.1.0'}
