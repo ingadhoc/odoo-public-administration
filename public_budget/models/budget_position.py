@@ -273,15 +273,18 @@ class budget_position(models.Model):
         self.projected_amount = projected_amount
 
         # if self.budget_assignment_allowed:
-        if self.budget_assignment_allowed or self.child_ids:
+        # if self.budget_assignment_allowed or self.child_ids:
+        if amount:
             _logger.info('Getting budget assignment amounts')
-            projected_avg = amount and \
-                projected_amount / amount * 100.0 or 0.0
-            self.projected_avg = projected_avg
+            # projected_avg = amount and \
+            #     projected_amount / amount * 100.0 or 0.0
+            # self.projected_avg = projected_avg
+            self.projected_avg = projected_amount / amount * 100.0
             self.amount = amount
-            preventive_avg = amount and \
-                preventive_amount / amount * 100.0 or 0.0
-            self.preventive_avg = preventive_avg
+            # preventive_avg = amount and \
+            #     preventive_amount / amount * 100.0 or 0.0
+            # self.preventive_avg = preventive_avg
+            self.preventive_avg = preventive_amount / amount * 100.0
             self.balance_amount = self.amount - preventive_amount
         _logger.info(
             'Finish getting amounts for budget position %s' % self.name)
