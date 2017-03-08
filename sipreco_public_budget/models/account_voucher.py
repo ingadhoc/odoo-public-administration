@@ -99,17 +99,16 @@ class account_voucher(models.Model):
     @api.depends('issued_check_ids.state', 'state')
     def get_show_print_receipt_button(self):
         show_print_receipt_button = False
-        # Se anula por ahora la validación de cheques entregados para imprimir
-        # recibo por potenciales dificultades para imprimir al momento de
-        # entregar el cheque
-        # not_handed_checks = self.issued_check_ids.filtered(
-        #     lambda r: r.state not in ('handed', 'returned', 'debited'))
-        # if self.state == 'posted' and not not_handed_checks:
-        #     show_print_receipt_button = True
-        # self.show_print_receipt_button = show_print_receipt_button
-        if self.state == 'posted':
+        not_handed_checks = self.issued_check_ids.filtered(
+            lambda r: r.state not in ('handed', 'returned', 'debited'))
+        if self.state == 'posted' and not not_handed_checks:
             show_print_receipt_button = True
         self.show_print_receipt_button = show_print_receipt_button
+        # dejamos esta parte de codigo por si en tmc piden que si se pueda
+        # imprimir sin importar si fue entregado o no
+        # if self.state == 'posted':
+        #     show_print_receipt_button = True
+        # self.show_print_receipt_button = show_print_receipt_button
 
     @api.one
     @api.depends('payment_base_date', 'payment_days')
