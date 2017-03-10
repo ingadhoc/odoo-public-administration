@@ -23,15 +23,18 @@
             <field name="model">public_budget.funding_move</field>
             <field name="arch" type="xml">
                 <form string="Funding Move">
+                    <field name="currency_id" invisible="1"/> 
                     <header>
-                        <button name="sgn_confirm"
+                        <button name="action_confirm"
+                            type="object"
                             states="draft"
                             string="Confirm"/>
                         <button name="action_cancel_draft"
                             type="object"
                             states="cancel"
                             string="To Draft"/>
-                        <button name="sgn_cancel"
+                        <button name="action_cancel"
+                            type="object"
                             states="confirmed,draft"
                             string="Cancel"
                             groups="base.group_no_one"/>
@@ -75,11 +78,10 @@
                     <field name="budget_id"
                             invisible="'from_budget' in context"/>
                     <field name="state"/>
+                    <field name="currency_id" invisible="1"/> 
                 </tree>
             </field>
         </record>
 
     </data>
 </openerp>
-<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
-     -->

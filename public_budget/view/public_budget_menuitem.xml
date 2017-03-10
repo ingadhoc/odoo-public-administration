@@ -60,23 +60,12 @@
             groups="public_budget.group_secretary_director,account.group_account_user"
             />
 
-<!--         <menuitem
-            action="action_public_budget_budget_report_all"
-            id="menu_public_budget_budget_report_all"
-            parent="menu_reports"
-            sequence="19"/>
-
-        <menuitem
-            action="action_public_budget_budget_report_2_all"
-            id="menu_public_budget_budget_report_2_all"
-            parent="menu_reports"
-            sequence="19"/> -->
-
-        <menuitem
+        <!-- TODO re activar -->
+        <!-- <menuitem
             action="action_public_budget_budget_report_3_all"
             id="menu_public_budget_budget_report_3_all"
             parent="menu_reports"
-            sequence="20"/>
+            sequence="20"/> -->
 
         <menuitem
             action="action_advance_request_analysis_all"
@@ -411,5 +400,3 @@
             />     
     </data>
 </openerp>
-<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
-     -->

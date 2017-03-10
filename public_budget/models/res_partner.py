@@ -1,26 +1,23 @@
 # -*- coding: utf-8 -*-
 from openerp import models, api, fields
-import openerp.addons.decimal_precision as dp
 
 
-class res_partner(models.Model):
-    """"""
+class ResPartner(models.Model):
 
     _inherit = 'res.partner'
 
-    advance_request_debt = fields.Float(
-        'Advance Request Debt',
+    advance_request_debt = fields.Monetary(
         compute='get_advance_request_debt',
-        digits=dp.get_precision('Account'),
     )
 
-    @api.one
+    @api.multi
     def get_advance_request_debt(self):
         advance_return_type = self.env[
             'public_budget.advance_request_type'].browse(self._context.get(
                 'advance_return_type_id', False))
-        self.advance_request_debt = self.get_debt_amount(
-            advance_return_type)
+        for rec in self:
+            rec.advance_request_debt = rec.get_debt_amount(
+                advance_return_type)
 
     @api.multi
     def get_debt_amount(self, advance_return_type=False, to_date=False):

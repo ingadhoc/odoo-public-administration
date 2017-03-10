@@ -1,19 +1,16 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
-from openerp.exceptions import Warning
-import openerp.addons.decimal_precision as dp
+from openerp.exceptions import ValidationError
 
 
-class budget_modification_detail(models.Model):
-    """Budget Modification Detail"""
+class BudgetModificationDetail(models.Model):
 
     _name = 'public_budget.budget_modification_detail'
     _description = 'Budget Modification Detail'
 
-    amount = fields.Float(
+    amount = fields.Monetary(
         string='Amount',
         required=True,
-        digits=dp.get_precision('Account'),
     )
     budget_modification_id = fields.Many2one(
         'public_budget.budget_modification',
@@ -29,16 +26,20 @@ class budget_modification_detail(models.Model):
             'default_type': 'normal', 'default_budget_assignment_allowed': 1},
         domain=[('budget_assignment_allowed', '=', True)]
     )
+    currency_id = fields.Many2one(
+        related='budget_modification_id.budget_id.currency_id',
+        readonly=True,
+    )
 
-    @api.one
+    @api.multi
     @api.constrains('budget_position_id', 'amount')
     def _check_modification(self):
-        budget_id = self.budget_modification_id.budget_id.id
-        if self.budget_position_id.budget_assignment_allowed and (
-                self.with_context(
-                budget_id=budget_id).budget_position_id.balance_amount < 0.0):
-            raise Warning(
-                _("You can not make this modification as '%s' will have a "
-                    "negative balance") % (self.budget_position_id.name))
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+        for rec in self:
+            budget_id = rec.budget_modification_id.budget_id.id
+            if rec.budget_position_id.budget_assignment_allowed and (
+                    rec.with_context(
+                        budget_id=budget_id
+                    ).budget_position_id.balance_amount < 0.0):
+                raise ValidationError(
+                    _("You can not make this modification as '%s' will have a "
+                        "negative balance") % (rec.budget_position_id.name))

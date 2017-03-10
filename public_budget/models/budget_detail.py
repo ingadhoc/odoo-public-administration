@@ -1,20 +1,17 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, _
-import openerp.addons.decimal_precision as dp
 
 
-class budget_detail(models.Model):
-    """"""
+class BudgetDetail(models.Model):
 
     _name = 'public_budget.budget_detail'
-    _description = 'budget_detail'
+    _description = 'Budget Detail'
 
     _order = "budget_position_id"
 
-    initial_amount = fields.Float(
+    initial_amount = fields.Monetary(
         string='Initial Amount',
         required=True,
-        digits=dp.get_precision('Account'),
     )
     state = fields.Selection(
         related='budget_id.state'
@@ -33,9 +30,11 @@ class budget_detail(models.Model):
             'default_type': 'normal', 'default_budget_assignment_allowed': 1},
         domain=[('budget_assignment_allowed', '=', True)]
     )
+    currency_id = fields.Many2one(
+        related='budget_id.currency_id',
+        readonly=True,
+    )
 
     _sql_constraints = [
         ('position_unique', 'unique(budget_position_id, budget_id)',
             _('Budget Position must be unique per Budget.'))]
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

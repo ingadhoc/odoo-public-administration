@@ -1,20 +1,17 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
-from openerp.exceptions import Warning
-import openerp.addons.decimal_precision as dp
+from openerp.exceptions import ValidationError
 import logging
 _logger = logging.getLogger(__name__)
 
 
-class definitive_line(models.Model):
-    """Definitive Line"""
+class DefinitiveLine(models.Model):
 
     _name = 'public_budget.definitive_line'
     _description = 'Definitive Line'
     _rec_name = 'preventive_line_id'
 
     issue_date = fields.Date(
-        string='Issue Date',
         readonly=True,
         required=True,
         states={'draft': [('readonly', False)]},
@@ -29,45 +26,32 @@ class definitive_line(models.Model):
         context={'default_supplier': True},
         domain=[('supplier', '=', True)]
     )
-    amount = fields.Float(
-        string='Amount',
+    amount = fields.Monetary(
         readonly=True,
         required=True,
         states={'draft': [('readonly', False)]},
-        digits=dp.get_precision('Account'),
     )
-    residual_amount = fields.Float(
-        string=_('Residual Amount'),
+    residual_amount = fields.Monetary(
         compute='_get_residual_amount',
-        digits=dp.get_precision('Account'),
         store=True,
     )
-    to_pay_amount = fields.Float(
-        string=_('To Pay Amount'),
-        digits=dp.get_precision('Account'),
+    to_pay_amount = fields.Monetary(
     )
-    paid_amount = fields.Float(
-        string=_('Paid Amount'),
-        digits=dp.get_precision('Account'),
+    paid_amount = fields.Monetary(
     )
-    invoiced_amount = fields.Float(
-        string=_('Invoiced Amount'),
-        digits=dp.get_precision('Account'),
+    invoiced_amount = fields.Monetary(
     )
-    computed_to_pay_amount = fields.Float(
-        string=_('To Pay Amount'),
+    computed_to_pay_amount = fields.Monetary(
+        string='To Pay Amount',
         compute='_get_computed_amounts',
-        digits=dp.get_precision('Account'),
     )
-    computed_paid_amount = fields.Float(
-        string=_('Paid Amount'),
+    computed_paid_amount = fields.Monetary(
+        string='Paid Amount',
         compute='_get_computed_amounts',
-        digits=dp.get_precision('Account'),
     )
-    computed_invoiced_amount = fields.Float(
-        string=_('Invoiced Amount'),
+    computed_invoiced_amount = fields.Monetary(
+        string='Invoiced Amount',
         compute='_get_computed_amounts',
-        digits=dp.get_precision('Account'),
     )
     preventive_line_id = fields.Many2one(
         'public_budget.preventive_line',
@@ -82,6 +66,10 @@ class definitive_line(models.Model):
         related='preventive_line_id.transaction_id',
         auto_join=True,
     )
+    currency_id = fields.Many2one(
+        related='transaction_id.currency_id',
+        readonly=True,
+    )
     budget_id = fields.Many2one(
         readonly=True,
         store=True,
@@ -90,7 +78,7 @@ class definitive_line(models.Model):
     )
     state = fields.Selection(
         selection=[('draft', _('Draft')), ('invoiced', _('Invoiced'))],
-        string=_('State'),
+        string='State',
         states={'draft': [('readonly', False)]},
         default='draft',
         compute='_get_state',
@@ -104,21 +92,24 @@ class definitive_line(models.Model):
         auto_join=True,
     )
 
+    @api.multi
     @api.constrains('issue_date')
     def check_dates(self):
-        if self.issue_date < self.transaction_id.issue_date:
-            raise Warning(_(
-                'La fecha de la línea definitiva debe ser mayor a la fecha de '
-                'la transacción'))
+        for rec in self:
+            if rec.issue_date < rec.transaction_id.issue_date:
+                raise ValidationError(_(
+                    'La fecha de la línea definitiva debe ser mayor a la fecha'
+                    ' de la transacción'))
 
-    @api.one
+    @api.multi
     @api.depends('invoice_line_ids')
     def _get_state(self):
-        _logger.info('Getting state for definitive line %s' % self.id)
-        if self.invoice_line_ids:
-            self.state = 'invoiced'
-        else:
-            self.state = 'draft'
+        for rec in self:
+            _logger.info('Getting state for definitive line %s' % rec.id)
+            if rec.invoice_line_ids:
+                rec.state = 'invoiced'
+            else:
+                rec.state = 'draft'
 
     @api.multi
     def write(self, vals):
@@ -128,37 +119,42 @@ class definitive_line(models.Model):
         # vinculos desde las invoice lines a las definitives
         if 'invoice_line_ids' in vals:
             vals.pop('invoice_line_ids')
-        return super(definitive_line, self).write(vals)
+        return super(DefinitiveLine, self).write(vals)
 
-    @api.one
+    @api.multi
     def unlink(self):
-        if self.invoice_line_ids:
-            raise Warning(_(
-                "You can not delete a definitive line that has been invoiced"))
-        return super(definitive_line, self).unlink()
+        for rec in self:
+            if rec.invoice_line_ids:
+                raise ValidationError(_(
+                    "You can not delete a definitive line that has been "
+                    "invoiced"))
+        return super(DefinitiveLine, self).unlink()
 
-    @api.one
+    @api.multi
     @api.depends('amount', 'invoiced_amount')
     def _get_residual_amount(self):
-        self.residual_amount = self.amount - self.invoiced_amount
+        for rec in self:
+            rec.residual_amount = rec.amount - rec.invoiced_amount
 
-    @api.one
+    @api.multi
     def _get_computed_amounts(self):
         # computed fields for to date anlysis
-        invoiced_amount, to_pay_amount, paid_amount = (
-            self._get_amounts_to_date())
-        self.computed_invoiced_amount = invoiced_amount
-        self.computed_to_pay_amount = to_pay_amount
-        self.computed_paid_amount = paid_amount
+        for rec in self:
+            invoiced_amount, to_pay_amount, paid_amount = (
+                rec._get_amounts_to_date())
+            rec.computed_invoiced_amount = invoiced_amount
+            rec.computed_to_pay_amount = to_pay_amount
+            rec.computed_paid_amount = paid_amount
 
-    @api.one
+    @api.multi
     def _get_amounts(self):
         # normal fields for good performance
-        invoiced_amount, to_pay_amount, paid_amount = (
-            self._get_amounts_to_date())
-        self.invoiced_amount = invoiced_amount
-        self.to_pay_amount = to_pay_amount
-        self.paid_amount = paid_amount
+        for rec in self:
+            invoiced_amount, to_pay_amount, paid_amount = (
+                rec._get_amounts_to_date())
+            rec.invoiced_amount = invoiced_amount
+            rec.to_pay_amount = to_pay_amount
+            rec.paid_amount = paid_amount
 
     @api.multi
     def _get_amounts_to_date(self):
@@ -234,13 +230,12 @@ class definitive_line(models.Model):
         }
         return line_vals
 
-    @api.one
+    @api.multi
     @api.constrains(
         'amount')
     def check_budget_state_open(self):
-        if self.budget_id and self.budget_id.state not in 'open':
-            raise Warning(
-                'Solo puede cambiar afectaciones definitivas si '
-                'el presupuesto está abierto')
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+        for rec in self:
+            if rec.budget_id and rec.budget_id.state not in 'open':
+                raise ValidationError(
+                    'Solo puede cambiar afectaciones definitivas si '
+                    'el presupuesto está abierto')

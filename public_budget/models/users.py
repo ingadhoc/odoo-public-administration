@@ -2,11 +2,8 @@
 from openerp import models, fields
 
 
-class users(models.Model):
-    """"""
+class ResUsers(models.Model):
 
-    _name = 'res.users'
-    _inherits = {}
     _inherit = ['res.users']
 
     location_ids = fields.Many2many(
@@ -16,5 +13,3 @@ class users(models.Model):
         'location_id',
         string='Allowed Locations'
     )
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

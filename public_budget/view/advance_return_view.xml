@@ -71,6 +71,7 @@
                             <field name="debt_amount" states="draft" sum="Total"/>
                             <field name="returned_amount" sum="Total"/>
                             <field name="state" invisible="1"/>
+                            <field name="currency_id" invisible="1"/>
                         </tree>
                     </field>
                     </sheet>
@@ -99,5 +100,3 @@
 
     </data>
 </openerp>
-<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
-     -->

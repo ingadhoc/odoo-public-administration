@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
-from openerp import models, fields, api, _
+from openerp import models, fields, api
 
 
-class budget_modification(models.Model):
-    """Budget Modification"""
+class BudgetModification(models.Model):
 
     _name = 'public_budget.budget_modification'
     _description = 'Budget Modification'
 
     date = fields.Date(
-        string='Date',
         required=True,
         default=fields.Date.context_today
     )
@@ -24,20 +22,18 @@ class budget_modification(models.Model):
         default='increase_decrease'
     )
     name = fields.Char(
-        string='Name',
         required=True
     )
     reference = fields.Char(
-        string='Reference',
         required=True
     )
     rest_message = fields.Char(
-        string=_('Message'),
+        string='Message',
         compute='_get_restriction_data'
     )
     rest_type = fields.Many2one(
         'public_budget.rest_type',
-        string=_('Restriction Type'),
+        string='Restriction Type',
         compute='_get_restriction_data'
     )
     budget_id = fields.Many2one(
@@ -52,36 +48,33 @@ class budget_modification(models.Model):
         string='Details'
     )
 
-    @api.one
+    @api.multi
     @api.depends(
         'budget_modification_detail_ids.budget_position_id',
         'budget_modification_detail_ids.amount',
     )
     def _get_restriction_data(self):
-        """
-        """
-        rest_message = False
-        rest_type = False
-        if self.type == 'exchange':
-            decrease_category_ids = [
-                x.budget_position_id.category_id.id for x in (
-                    self.budget_modification_detail_ids) if x.amount < 0.0]
-            increase_category_ids = [
-                x.budget_position_id.category_id.id for x in (
-                    self.budget_modification_detail_ids) if x.amount > 0.0]
-            domain = [('origin_category_id', 'in', decrease_category_ids),
-                      ('destiny_category_id', 'in', increase_category_ids)]
-            restrictions = self.env[
-                'public_budget.budget_pos_exc_rest'].search(
-                domain + [('type', '=', 'block')])
-            if not restrictions:
-                restrictions = self.env[
+        for rec in self:
+            rest_message = False
+            rest_type = False
+            if rec.type == 'exchange':
+                decrease_category_ids = [
+                    x.budget_position_id.category_id.id for x in (
+                        rec.budget_modification_detail_ids) if x.amount < 0.0]
+                increase_category_ids = [
+                    x.budget_position_id.category_id.id for x in (
+                        rec.budget_modification_detail_ids) if x.amount > 0.0]
+                domain = [('origin_category_id', 'in', decrease_category_ids),
+                          ('destiny_category_id', 'in', increase_category_ids)]
+                restrictions = rec.env[
                     'public_budget.budget_pos_exc_rest'].search(
-                    domain + [('type', '=', 'alert')])
+                    domain + [('type', '=', 'block')])
+                if not restrictions:
+                    restrictions = rec.env[
+                        'public_budget.budget_pos_exc_rest'].search(
+                        domain + [('type', '=', 'alert')])
 
-            rest_message = restrictions.message
-            rest_type = restrictions.type
-        self.rest_message = rest_message
-        self.rest_type = rest_type
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+                rest_message = restrictions.message
+                rest_type = restrictions.type
+            rec.rest_message = rest_message
+            rec.rest_type = rest_type

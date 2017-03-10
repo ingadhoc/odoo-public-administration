@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from openerp import api, models, fields, _
-from openerp.exceptions import Warning as UserError
+from openerp.exceptions import ValidationError as UserError
 from openerp.addons.decimal_precision import decimal_precision as dp
 import logging
 
@@ -31,8 +31,7 @@ class AccountVoucherPaymentLine(models.Model):
         string='Bank Account',
         domain="[('partner_id', '=', partner_id)]",
     )
-    amount = fields.Float(
-        digits=dp.get_precision('Account'),
+    amount = fields.Monetary(
     )
 
     @api.multi

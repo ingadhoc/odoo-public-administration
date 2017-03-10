@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
-from openerp.exceptions import Warning
+from openerp.exceptions import ValidationError
 
 
 class PublicBudgetExpedient(models.Model):
-    """Expedient"""
 
     _name = 'public_budget.expedient'
     _inherit = ['mail.thread']
@@ -13,7 +12,6 @@ class PublicBudgetExpedient(models.Model):
     _order = "id desc"
 
     _states_ = [
-        # State machine: untitle
         ('open', 'Open'),
         ('in_revision', 'In Revision'),
         ('closed', 'Closed'),
@@ -22,32 +20,27 @@ class PublicBudgetExpedient(models.Model):
     ]
 
     number = fields.Char(
-        string='Number',
         readonly=True
     )
     issue_date = fields.Datetime(
-        string='Issue Date',
         readonly=True,
         required=True,
         default=fields.Datetime.now
     )
     cover = fields.Char(
-        string=_('Cover'),
         store=True,
         compute='_get_cover'
     )
     description = fields.Char(
-        string='Description',
         required=True,
         # readonly=True,
         # states={'cancel': [('readonly', False)]}
     )
     reference = fields.Char(
-        string='Referencia',
         required=False
     )
     last_move_date = fields.Date(
-        string=_('Last Move'),
+        string='Last Move',
         store=True,
         compute_sudo=True,
         compute='_get_current_location'
@@ -64,7 +57,6 @@ class PublicBudgetExpedient(models.Model):
     )
     type = fields.Selection(
         [(u'payment', u'Payment'), (u'authorizing', u'Authorizing')],
-        string='Type'
     )
     first_location_id = fields.Many2one(
         'public_budget.location',
@@ -79,10 +71,8 @@ class PublicBudgetExpedient(models.Model):
         compute='_get_current_location'
     )
     note = fields.Text(
-        string='Note'
     )
     pages = fields.Integer(
-        string='Pages',
         required=True,
         track_visibility='onchange',
     )
@@ -108,14 +98,12 @@ class PublicBudgetExpedient(models.Model):
         domain=[('employee', '=', True)]
     )
     final_location = fields.Char(
-        string='Final Location'
     )
     year = fields.Integer(
-        string=_('Año'),
         compute='_get_year'
     )
     in_transit = fields.Boolean(
-        string=_('In Transit?'),
+        string='In Transit?',
         store=True,
         compute='_get_current_location',
         compute_sudo=True,
@@ -133,7 +121,6 @@ class PublicBudgetExpedient(models.Model):
     )
     state = fields.Selection(
         _states_,
-        'State',
         default='open',
         track_visibility='onchange',
     )
@@ -165,7 +152,7 @@ class PublicBudgetExpedient(models.Model):
         states={'in_transit': [('readonly', False)]}
     )
 
-    @api.one
+    @api.multi
     @api.depends(
         'first_location_id',
         'remit_ids',
@@ -178,35 +165,36 @@ class PublicBudgetExpedient(models.Model):
         current_location_id no es computed
         los otros dos si
         """
-        # self = self.sudo()
-        last_move_date = False
-        current_location_id = False
-        in_transit = False
+        for rec in self:
+            last_move_date = False
+            current_location_id = False
+            in_transit = False
 
-        if self.remit_ids:
-            remits = self.env['public_budget.remit'].search([
-                ('expedient_ids', '=', self.id), ('state', '!=', 'cancel')],
-                order='date desc')
-            if remits:
-                current_location_id = remits[0].location_dest_id.id
-                last_move_date = remits[0].date
-                if remits[0].state == 'in_transit':
-                    in_transit = True
-                else:
-                    in_transit = False
-        else:
-            current_location_id = self.first_location_id.id
+            if rec.remit_ids:
+                remits = rec.env['public_budget.remit'].search([
+                    ('expedient_ids', '=', rec.id), ('state', '!=', 'cancel')],
+                    order='date desc')
+                if remits:
+                    current_location_id = remits[0].location_dest_id.id
+                    last_move_date = remits[0].date
+                    if remits[0].state == 'in_transit':
+                        in_transit = True
+                    else:
+                        in_transit = False
+            else:
+                current_location_id = rec.first_location_id.id
 
-        self.current_location_id = current_location_id
-        self.last_move_date = last_move_date
-        self.in_transit = in_transit
+            rec.current_location_id = current_location_id
+            rec.last_move_date = last_move_date
+            rec.in_transit = in_transit
 
-    @api.one
+    @api.multi
     @api.constrains('pages')
     def check_pages_not_dni(self):
-        if self.pages > 10000:
-            raise Warning(
-                'No puede poner número de páginas mayor a 10.000')
+        for rec in self:
+            if rec.pages > 10000:
+                raise ValidationError(
+                    'No puede poner número de páginas mayor a 10.000')
 
     @api.multi
     def write(self, vals):
@@ -214,7 +202,7 @@ class PublicBudgetExpedient(models.Model):
             new_pages = vals.get('pages')
             for record in self:
                 if new_pages < record.pages:
-                    raise Warning(
+                    raise ValidationError(
                         'No puede disminuir la cantidad de páginas de un '
                         'expediente')
         return super(PublicBudgetExpedient, self).write(vals)
@@ -228,7 +216,7 @@ class PublicBudgetExpedient(models.Model):
                 ('state', '!=', 'cancel'),
             ])
             if transactions:
-                raise Warning(
+                raise ValidationError(
                     'No puede anular este expediente ya que es utilizado en '
                     'las siguientes transacciones %s' % transactions.ids)
             # no se puede si esta en vouchers no cancelados
@@ -237,37 +225,55 @@ class PublicBudgetExpedient(models.Model):
                 ('state', '!=', 'cancel'),
             ])
             if vouchers:
-                raise Warning(
+                raise ValidationError(
                     'No puede anular este expediente ya que es utilizado en '
                     'las siguientes ordenes de pago %s' % vouchers.ids)
         return True
 
-    @api.one
+    @api.multi
     @api.depends('issue_date')
     def _get_year(self):
-        """"""
-        year = False
-        if self.issue_date:
-            issue_date = fields.Datetime.from_string(self.issue_date)
-            year = issue_date.year
-        self.year = year
+        for rec in self:
+            year = False
+            if rec.issue_date:
+                issue_date = fields.Datetime.from_string(rec.issue_date)
+                year = issue_date.year
+            rec.year = year
 
-    @api.one
+    @api.multi
     @api.depends('supplier_ids', 'description')
     def _get_cover(self):
-        """"""
-        supplier_names = [x.name for x in self.supplier_ids]
-        cover = self.description
-        if supplier_names:
-            cover += ' - ' + ', '.join(supplier_names)
-        self.cover = cover
+        for rec in self:
+            supplier_names = [x.name for x in rec.supplier_ids]
+            cover = rec.description
+            if supplier_names:
+                cover += ' - ' + ', '.join(supplier_names)
+            rec.cover = cover
 
     @api.multi
     def action_cancel_open(self):
         """ go from canceled state to draft state"""
         self.write({'state': 'open'})
-        self.delete_workflow()
-        self.create_workflow()
+        return True
+
+    @api.multi
+    def action_close(self):
+        self.write({'state': 'close'})
+        return True
+
+    @api.multi
+    def action_in_revision(self):
+        self.write({'state': 'in_revision'})
+        return True
+
+    @api.multi
+    def action_annulled(self):
+        self.write({'state': 'annulled'})
+        return True
+
+    @api.multi
+    def action_cancel(self):
+        self.write({'state': 'cancel'})
         return True
 
     @api.multi
@@ -294,5 +300,3 @@ class PublicBudgetExpedient(models.Model):
         vals['number'] = self.env[
             'ir.sequence'].get('public_budget.expedient') or '/'
         return super(PublicBudgetExpedient, self).create(vals)
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

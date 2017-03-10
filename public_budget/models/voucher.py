@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
-from openerp.exceptions import Warning
+from openerp.exceptions import ValidationError
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -155,7 +155,7 @@ class account_voucher(models.Model):
             if voucher.transaction_with_advance_payment:
                 account = voucher.transaction_id.type_id.advance_account_id
                 if not account:
-                    raise Warning(_(
+                    raise ValidationError(_(
                         'In payment of advance transaction type, you need to '
                         'set an advance account in transaction type!'))
                 res['account_id'] = account.id
@@ -179,7 +179,7 @@ class account_voucher(models.Model):
         if not self.confirmation_date or not self.date:
             return True
         if self.date < self.confirmation_date:
-            raise Warning(_(
+            raise ValidationError(_(
                 'La fecha de validacion del pago no puede ser menor a la fecha'
                 ' de confirmación'))
 
@@ -199,7 +199,7 @@ class account_voucher(models.Model):
         if (
                 self.expedient_id and self.expedient_id.current_location_id
                 not in self.user_location_ids):
-            raise Warning(
+            raise ValidationError(
                 'No puede confirmar un pago si el expediente no está en una '
                 'ubicación autorizada para ústed')
         return super(account_voucher, self).proforma_voucher()
@@ -212,7 +212,7 @@ class account_voucher(models.Model):
             return True
         for invoice in self.invoice_ids:
             if self.confirmation_date < invoice.date_invoice:
-                raise Warning(_(
+                raise ValidationError(_(
                     'La fecha de confirmación no puede ser menor a la fecha '
                     'de la factura que se esta pagando'))
 
@@ -228,7 +228,7 @@ class account_voucher(models.Model):
             advance_remaining_amount = self.currency_id.round(
                 self.transaction_id.advance_remaining_amount)
             if advance_remaining_amount < 0.0:
-                raise Warning(_(
+                raise ValidationError(_(
                     'In advance transactions, payment orders amount (%s) can '
                     'not be greater than transaction advance remaining amount '
                     '(%s)') % (
@@ -241,7 +241,7 @@ class account_voucher_line(models.Model):
 
     _inherit = 'account.voucher.line'
 
-    to_pay_amount = fields.Float(
+    to_pay_amount = fields.Monetary(
         related='move_line_id.invoice.to_pay_amount',
         # TODO reactivar si es necesario o borrar
         # store=True,
@@ -257,7 +257,5 @@ class account_voucher_line(models.Model):
             'Checking voucher line transaction amount for voucher %s' % (
                 self.id))
         if self.amount > self.amount_unreconciled:
-            raise Warning(_(
+            raise ValidationError(_(
                 'In each line, Amount can not be greater than Open Balance'))
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields
-import openerp.addons.decimal_precision as dp
 
 
-class transaction_type_amo_rest(models.Model):
+class TransactionTypeAmountRestriction(models.Model):
     """Transaction Type Amount Restriction"""
 
     _name = 'public_budget.transaction_type_amo_rest'
@@ -12,19 +11,14 @@ class transaction_type_amo_rest(models.Model):
     _order = "date desc"
 
     date = fields.Date(
-        string='Date',
         required=True,
         default=fields.Date.context_today
     )
-    from_amount = fields.Float(
-        string='From Amount',
+    from_amount = fields.Monetary(
         required=True,
-        digits=dp.get_precision('Account'),
     )
-    to_amount = fields.Float(
-        string='To Amount',
+    to_amount = fields.Monetary(
         required=True,
-        digits=dp.get_precision('Account'),
     )
     transaction_type_id = fields.Many2one(
         'public_budget.transaction_type',
@@ -32,5 +26,7 @@ class transaction_type_amo_rest(models.Model):
         string='transaction_type_id',
         required=True
     )
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+    currency_id = fields.Many2one(
+        related='transaction_type_id.company_id.currency_id',
+        readonly=True,
+    )

@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-
 from openerp import tools
 from openerp import models, fields, api
-import openerp.addons.decimal_precision as dp
-from openerp.addons.public_budget.models.transaction import transaction
+from openerp.addons.public_budget.models.transaction import BudgetTransaction
 
 
 class PublicBudgetBudgetReport(models.Model):
@@ -21,7 +19,7 @@ class PublicBudgetBudgetReport(models.Model):
     #     readonly=True, string="Fecha de Confirmación")
     # employee_id = fields.Many2one(
     #     'res.partner', string='Empleado', readonly=True)
-    # amount = fields.Float(string='Monto', readonly=True)
+    # amount = fields.Monetary(string='Monto', readonly=True)
     # # TODO make selection
     # state = fields.Char(string='Estado', readonly=True)
     # direction = fields.Selection(
@@ -72,8 +70,7 @@ class PublicBudgetBudgetReport(models.Model):
         # help='Por ejemplo numero de orden de pago, numero de factura, etc',
         string='Memoria de OP/Comprobante',
     )
-    amount = fields.Float(
-        digits=dp.get_precision('Account'),
+    amount = fields.Monetary(
         readonly=True,
     )
     type = fields.Selection([
@@ -109,7 +106,7 @@ class PublicBudgetBudgetReport(models.Model):
     )
     transaction_state = fields.Selection(
         # 'res.partner',
-        transaction._states_,
+        BudgetTransaction._states_,
         string='Estado de Transacción',
         readonly=True,
     )
@@ -138,7 +135,7 @@ class PublicBudgetBudgetReport(models.Model):
         readonly=True,
         string='Línea Preventiva',
     )
-    # preventive_amount = fields.Float(
+    # preventive_amount = fields.Monetary(
     #     digits=dp.get_precision('Account'),
     #     readonly=True,
     # )
@@ -155,7 +152,7 @@ class PublicBudgetBudgetReport(models.Model):
     )
 
     # definitive fields
-    # definitive_amount = fields.Float(
+    # definitive_amount = fields.Monetary(
     #     digits=dp.get_precision('Account'),
     #     readonly=True,
     # )
@@ -169,7 +166,7 @@ class PublicBudgetBudgetReport(models.Model):
     # )
 
     # invoice line fields
-    # invoiced_amount = fields.Float(
+    # invoiced_amount = fields.Monetary(
     #     digits=dp.get_precision('Account'),
     #     readonly=True,
     # )

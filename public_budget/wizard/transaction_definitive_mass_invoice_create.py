@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
-from openerp.exceptions import Warning
+from openerp.exceptions import ValidationError
 
 
 class public_budget_definitive_mass_invoice_create(models.TransientModel):
@@ -57,7 +57,7 @@ class public_budget_definitive_mass_invoice_create(models.TransientModel):
         advance_account = False
         if tran_type.with_advance_payment:
             if not tran_type.advance_account_id:
-                raise Warning(_(
+                raise ValidationError(_(
                     "On Advance Transactions, transaction advance type"
                     "must have and advance account configured!"))
             advance_account = tran_type.advance_account_id
@@ -77,5 +77,3 @@ class public_budget_definitive_mass_invoice_create(models.TransientModel):
             invoices.with_context(type='in_invoice').create(invoice_vals)
 
         return True
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

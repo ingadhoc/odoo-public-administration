@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
+from openerp.exceptions import ValidationError
 
 
-class transaction_type(models.Model):
+class TransactionType(models.Model):
     """Transaction Type"""
 
     _name = 'public_budget.transaction_type'
     _description = 'Transaction Type'
 
     name = fields.Char(
-        string='Name',
         required=True,
         translate=True
     )
@@ -23,9 +23,11 @@ class transaction_type(models.Model):
         'account.account',
         string='Advance Account',
         context={'default_type': 'other'},
+        # TODO re implementar este dominio y funcionalidad ya que en v9
+        # no se permite recivible sin conciliar
         # we use receivable to get debt but we dont reconcile
-        domain="[('type', 'in', ['receivable']), ('reconcile', '=', False), "
-        "('company_id', '=', company_id)]",
+        # domain="[('type', 'in', ['receivable']), ('reconcile', '=', False), "
+        # "('company_id', '=', company_id)]",
         help='This account will be used on advance payments. Must be a payable'
         ' account.',
     )
@@ -41,14 +43,13 @@ class transaction_type(models.Model):
         default=lambda self: self.env.user.company_id,
     )
 
-    @api.one
+    @api.multi
     @api.constrains('advance_account_id', 'company_id')
     def check_account_company(self):
-        if (
-                self.advance_account_id and
-                self.advance_account_id.company_id != self.company_id
-        ):
-            raise Warning(_(
-                'Company must be the same as Account Company!'))
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+        for rec in self:
+            if (
+                    rec.advance_account_id and
+                    rec.advance_account_id.company_id != rec.company_id
+            ):
+                raise ValidationError(_(
+                    'Company must be the same as Account Company!'))

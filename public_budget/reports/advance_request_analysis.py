@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from openerp import tools
-from openerp import models, fields, api
+from openerp import models, fields
 
 
 class AdvanceRequestAnalysis(models.Model):
@@ -18,6 +18,7 @@ class AdvanceRequestAnalysis(models.Model):
         readonly=True, string="Fecha de Confirmación")
     employee_id = fields.Many2one(
         'res.partner', string='Empleado', readonly=True)
+    # TODO agregar currency y transformar a monetary
     amount = fields.Float(string='Monto', readonly=True)
     # TODO make selection
     state = fields.Char(string='Estado', readonly=True)
@@ -27,7 +28,7 @@ class AdvanceRequestAnalysis(models.Model):
     type_id = fields.Many2one(
         'public_budget.advance_request_type',
         string='Type',
-        )
+    )
 
     _depends = {
         'public_budget.advance_request': [
@@ -61,4 +62,4 @@ class AdvanceRequestAnalysis(models.Model):
             INNER JOIN public_budget_advance_return rt
             ON rt.id = rtl.advance_return_id
             )""" % (
-                self._table, common_fields, common_fields))
+            self._table, common_fields, common_fields))

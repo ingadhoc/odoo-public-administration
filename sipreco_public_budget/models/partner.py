@@ -37,7 +37,7 @@ class partner(models.Model):
                 ('id', '!=', self.id),
                 ])
             if same_document_partners:
-                raise Warning(_(
+                raise ValidationError(_(
                     'El número de documento debe ser único por receptor de '
                     'subsidio!\n'
                     '* Receptor existente: %s') % same_document_partners.name)
@@ -52,7 +52,7 @@ class partner(models.Model):
                 ('id', '!=', self.id),
                 ])
             if same_document_partners:
-                raise Warning(_(
+                raise ValidationError(_(
                     'El número de documento debe ser único por empleado!\n'
                     '* Empleado existente: %s') % same_document_partners.name)
 
@@ -61,5 +61,3 @@ class partner(models.Model):
         # run with sudo because it gives error if you dont have rights to write
         # on partner
         return super(partner, self.sudo()).mark_as_reconciled()
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -35,8 +35,9 @@
             <field name="arch" type="xml">
                 <form string="Expedient">
                     <header>
-                        <button name="sgn_to_revision"
+                        <button name="action_in_revision"
                             states="open"
+                            type="object"
                             string="To Revision"
                             class="oe_highlight"/>
                         <button name="action_cancel_open"
@@ -44,16 +45,19 @@
                             states="cancel"
                             string="To Draft"/>
                         <!-- por pedido de ellos solo desde secretaria se pueden anular -->
-                        <button name="sgn_to_annulled"
+                        <button name="action_annulled"
                             states="open"
+                            type="object"
                             groups="public_budget.group_secretary_usuario"
                             string="To Annulled"/>
-                        <button name="sgn_close"
+                        <button name="action_close"
                             states="in_revision"
+                            type="object"
                             string="Close"
                             class="oe_highlight"/>
-                        <button name="sgn_cancel"
+                        <button name="action_cancel"
                             states="annulled,closed,in_revision,open"
+                            type="object"
                             string="Cancel"
                             groups="base.group_no_one"/>
                         <field name="state" widget="statusbar"
@@ -142,5 +146,3 @@
 
     </data>
 </openerp>
-<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
-     -->

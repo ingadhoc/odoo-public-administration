@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
-from openerp.exceptions import Warning
+from openerp.exceptions import ValidationError
 from dateutil.relativedelta import relativedelta
 
 
@@ -26,7 +26,7 @@ class account_voucher(models.Model):
         states={},
         store=True,
     )
-    net_amount = fields.Float(
+    net_amount = fields.Monetary(
         states={'confirmed': [('readonly', False)]}
     )
     issued_check_ids = fields.One2many(
@@ -56,7 +56,7 @@ class account_voucher(models.Model):
                 self.type == 'payment' and
                 not self.receiptbook_id
         ):
-            raise Warning(_(
+            raise ValidationError(_(
                 'You can not confirm a payment order without ReceiptBook'))
 
     @api.one
@@ -143,14 +143,14 @@ class account_voucher(models.Model):
     #                 journal.voucher_amount_restriction == 'cant_be_cero' and
     #                 not voucher.amount
     #                 ):
-    #             raise Warning(_(
+    #             raise ValidationError(_(
     #                 "On Journal '%s' amount can't be cero!\n"
     #                 "* Voucher id: %i") % (journal.name, voucher.id))
     #         elif (
     #                 journal.voucher_amount_restriction == 'must_be_cero' and
     #                 voucher.amount
     #                 ):
-    #             raise Warning(_(
+    #             raise ValidationError(_(
     #                 "On Journal '%s' amount must be cero!\n"
     #                 "* Voucher id: %i") % (journal.name, voucher.id))
     #     return True
@@ -167,14 +167,14 @@ class account_voucher(models.Model):
                     journal.voucher_amount_restriction == 'cant_be_cero' and
                     not voucher.to_pay_amount
             ):
-                raise Warning(_(
+                raise ValidationError(_(
                     "On Journal '%s' to pay amount can't be cero!\n"
                     "* Voucher id: %i") % (journal.name, voucher.id))
             elif (
                     journal.voucher_amount_restriction == 'must_be_cero' and
                     voucher.to_pay_amount
             ):
-                raise Warning(_(
+                raise ValidationError(_(
                     "On Journal '%s' to pay amount must be cero!\n"
                     "* Voucher id: %i") % (journal.name, voucher.id))
         return True
@@ -199,7 +199,7 @@ class account_voucher(models.Model):
         """
         for voucher in self:
             if self.currency_id.round(voucher.amount - voucher.to_pay_amount):
-                raise Warning(_('You can not send to sign process a Voucher \
+                raise ValidationError(_('You can not send to sign process a Voucher \
                     that has Total Amount different from To Pay Amount'))
         return True
 

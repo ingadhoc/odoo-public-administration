@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
-from openerp.exceptions import Warning
+from openerp.exceptions import ValidationError
 from datetime import datetime
-import openerp.addons.decimal_precision as dp
 import logging
 _logger = logging.getLogger(__name__)
 
 
-class budget_position(models.Model):
+class BudgetPosition(models.Model):
     """Budget Position"""
 
     _name = 'public_budget.budget_position'
@@ -18,16 +17,13 @@ class budget_position(models.Model):
     _order = "parent_left"
 
     code = fields.Char(
-        string='Code',
         required=True
     )
     name = fields.Char(
-        string='Name',
         required=True
     )
     type = fields.Selection(
         [(u'normal', u'Normal'), (u'view', u'View')],
-        string='Type',
         required=True,
         default='normal'
     )
@@ -41,54 +37,44 @@ class budget_position(models.Model):
     inventariable = fields.Boolean(
         string='Inventariable?'
     )
-    draft_amount = fields.Float(
-        string=_('Draft Amount'),
+    draft_amount = fields.Monetary(
         compute='_get_amounts',
-        digits=dp.get_precision('Account'),
     )
-    preventive_amount = fields.Float(
+    preventive_amount = fields.Monetary(
         string='Monto Preventivo',
         compute='_get_amounts',
-        digits=dp.get_precision('Account'),
     )
-    definitive_amount = fields.Float(
+    definitive_amount = fields.Monetary(
         string='Monto Definitivo',
         compute='_get_amounts',
-        digits=dp.get_precision('Account'),
     )
-    to_pay_amount = fields.Float(
+    to_pay_amount = fields.Monetary(
         string='Monto A Pagar',
         compute='_get_amounts',
-        digits=dp.get_precision('Account'),
     )
-    paid_amount = fields.Float(
+    paid_amount = fields.Monetary(
         string='Monto Pagado',
         compute='_get_amounts'
     )
-    balance_amount = fields.Float(
-        string=_('Saldo'),
+    balance_amount = fields.Monetary(
+        string='Saldo',
         compute='_get_amounts',
-        digits=dp.get_precision('Account'),
     )
-    projected_amount = fields.Float(
-        string=_('Monto Proyectado'),
+    projected_amount = fields.Monetary(
+        string='Monto Proyectado',
         compute='_get_amounts',
-        digits=dp.get_precision('Account'),
     )
-    projected_avg = fields.Float(
-        string=_('Projected Avg'),
+    projected_avg = fields.Monetary(
+        string='Projected Avg',
         compute='_get_amounts',
-        digits=dp.get_precision('Account'),
     )
-    preventive_avg = fields.Float(
+    preventive_avg = fields.Monetary(
         string=_('Porc. Preventivo'),
         compute='_get_amounts',
-        digits=dp.get_precision('Account'),
     )
-    amount = fields.Float(
+    amount = fields.Monetary(
         string=_('Monto'),
         compute='_get_amounts',
-        digits=dp.get_precision('Account'),
     )
     parent_left = fields.Integer(
         string='Parent Left',
@@ -130,6 +116,16 @@ class budget_position(models.Model):
         string=_('Assignment Position'),
         compute='_get_assignment_position',
         store=True,
+    )
+    company_id = fields.Many2one(
+        'res.company',
+        string='Company',
+        required=True,
+        default=lambda self: self.env.user.company_id,
+    )
+    currency_id = fields.Many2one(
+        related='company_id.currency_id',
+        readonly=True,
     )
 
     @api.one
@@ -307,15 +303,16 @@ class budget_position(models.Model):
             recs = self.search([('name', operator, name)] + args, limit=limit)
         return recs.name_get()
 
-    @api.one
+    @api.multi
     @api.constrains('child_ids', 'type', 'parent_id')
     def _check_type(self):
-        if self.child_ids and self.type not in ('view'):
-            raise Warning(_(
-                'You cannot define children to an account with '
-                'internal type different of "View".'))
+        for rec in self:
+            if rec.child_ids and rec.type not in ('view'):
+                raise ValidationError(_(
+                    'You cannot define children to an account with '
+                    'internal type different of "View".'))
 
-    @api.one
+    @api.multi
     @api.constrains(
         'budget_modification_detail_ids',
         'budget_detail_ids',
@@ -324,30 +321,34 @@ class budget_position(models.Model):
         'parent_id'
     )
     def _check_budget_assignment_allowed(self):
-        # Check before seting budget_assignment_allowed false if position used
-        if not self.budget_assignment_allowed and (
-                self.budget_modification_detail_ids or self.budget_detail_ids):
-            raise Warning(_(
-                "You can not set 'Budget Assignment Allowed' to false if "
-                "budget position is being used in a budget detail or "
-                "modification."))
-        if self.budget_assignment_allowed:
-            # Check no parent has budget allowed
-            if len(self.get_parent_assignment_position()) >= 1:
-                raise Warning(_(
-                    'In one branch only one budget position can '
-                    'have Budget Assignment Allowed.'))
-            # Check no children has budget allowed
-            else:
-                children_allowed = self.search([
-                    ('id', 'child_of', self.id),
-                    ('id', '!=', self.id),
-                    ('budget_assignment_allowed', '=', True)])
-                if children_allowed:
-                    raise Warning(_(
-                        'You can not set position %s to Budget Posistion '
-                        'Allowed as the child position %s has Allowed.') % (
-                        self.name, children_allowed[0].name))
+        """
+        Check before seting budget_assignment_allowed false if position used
+        """
+        for rec in self:
+            if not rec.budget_assignment_allowed and (
+                    rec.budget_modification_detail_ids or
+                    rec.budget_detail_ids):
+                raise ValidationError(_(
+                    "You can not set 'Budget Assignment Allowed' to false if "
+                    "budget position is being used in a budget detail or "
+                    "modification."))
+            if rec.budget_assignment_allowed:
+                # Check no parent has budget allowed
+                if len(rec.get_parent_assignment_position()) >= 1:
+                    raise ValidationError(_(
+                        'In one branch only one budget position can '
+                        'have Budget Assignment Allowed.'))
+                # Check no children has budget allowed
+                else:
+                    children_allowed = rec.search([
+                        ('id', 'child_of', rec.id),
+                        ('id', '!=', rec.id),
+                        ('budget_assignment_allowed', '=', True)])
+                    if children_allowed:
+                        raise ValidationError(_(
+                            'You can not set position %s to Budget Posistion '
+                            'Allowed as the child position %s has Allowed.'
+                        ) % (rec.name, children_allowed[0].name))
 
     @api.multi
     def get_parent_assignment_position(self):
@@ -360,17 +361,16 @@ class budget_position(models.Model):
             parent = parent.parent_id
         return assignment_allowed
 
-    @api.one
+    @api.multi
     @api.depends(
         'parent_id',
         'child_ids',
         'budget_assignment_allowed',
     )
     def _get_assignment_position(self):
-        if self.budget_assignment_allowed:
-            assignment_position = self
-        else:
-            assignment_position = self.get_parent_assignment_position()
-        self.assignment_position_id = assignment_position.id
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+        for rec in self:
+            if rec.budget_assignment_allowed:
+                assignment_position = rec
+            else:
+                assignment_position = rec.get_parent_assignment_position()
+            rec.assignment_position_id = assignment_position.id

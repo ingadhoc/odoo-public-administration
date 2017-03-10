@@ -1,17 +1,18 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
-from openerp.exceptions import Warning
+from openerp.exceptions import ValidationError
 
 
-class advance_request(models.Model):
-    """"""
+class AdvanceRequest(models.Model):
+    """
+    This model is to deal with advance request made by employees
+    """
 
     _name = 'public_budget.advance_request'
-    _description = 'advance_request'
+    _description = 'Advance Requests'
     _order = 'date desc'
 
     _states_ = [
-        # State machine: untitle
         ('draft', 'Draft'),
         ('approved', 'Approved'),
         ('confirmed', 'Confirmed'),
@@ -20,14 +21,12 @@ class advance_request(models.Model):
     ]
 
     name = fields.Char(
-        string='Name',
         required=True,
         readonly=True,
         states={'draft': [('readonly', False)]},
     )
     company_id = fields.Many2one(
         'res.company',
-        string='Company',
         required=True,
         readonly=True,
         states={'draft': [('readonly', False)]},
@@ -35,7 +34,6 @@ class advance_request(models.Model):
             'public_budget.advance_request')
     )
     date = fields.Date(
-        string='Date',
         required=True,
         readonly=True,
         states={'draft': [('readonly', False)]},
@@ -43,13 +41,11 @@ class advance_request(models.Model):
         copy=False,
     )
     approval_date = fields.Date(
-        string='Fecha de Aprobación',
         readonly=True,
         states={'draft': [('readonly', False)]},
         copy=False,
     )
     confirmation_date = fields.Date(
-        string='Fecha de Confirmación',
         readonly=True,
         states={'draft': [('readonly', False)]},
         copy=False,
@@ -83,26 +79,14 @@ class advance_request(models.Model):
         readonly=True,
         states={'draft': [('readonly', False)]},
     )
-    voucher_ids = fields.One2many(
-        'account.voucher',
-        'advance_request_id',
-        # compute='get_vouchers',
-        # inverse='dummy_inverse',
-        string='Vouchers',
-    )
-
-    # @api.one
-    # def dummy_inverse(self):
-    #     """
-    #     Dummy Inverse function so that we can edit vouchers and save changes
-    #     """
-    #     return True
-
-    # @api.one
-    # @api.depends('advance_request_line_ids.voucher_id')
-    # def get_vouchers(self):
-    #     self.voucher_ids = self.mapped(
-    #         'advance_request_line_ids.voucher_id')
+    # TODO implementar y migrar datos
+    # voucher_ids = fields.One2many(
+    #     'account.voucher',
+    #     'advance_request_id',
+    #     # compute='get_vouchers',
+    #     # inverse='dummy_inverse',
+    #     string='Vouchers',
+    # )
 
     @api.multi
     def action_approve(self):
@@ -115,7 +99,6 @@ class advance_request(models.Model):
     @api.multi
     def action_confirm(self):
         for record in self:
-            # request.advance_request_line_ids.create_voucher()
             record.create_voucher()
             record.state = 'confirmed'
             if not record.confirmation_date:
@@ -131,7 +114,7 @@ class advance_request(models.Model):
             ('company_id', '=', self.company_id.id),
             ('type', 'in', ('cash', 'bank'))], limit=1)
         if not journal:
-            raise Warning(_(
+            raise ValidationError(_(
                 'No bank or cash journal found for company "%s"') % (
                 self.company_id.name))
         partner = self.type_id.general_return_partner_id
@@ -149,23 +132,25 @@ class advance_request(models.Model):
         }
         return vouchers.create(voucher_vals)
 
-    @api.one
+    @api.multi
     @api.constrains('state', 'advance_request_line_ids')
     def check_amounts(self):
-        if self.state == 'approved':
-            cero_lines = self.advance_request_line_ids.filtered(
-                lambda x: not x.approved_amount)
-            if cero_lines:
-                raise Warning(_(
-                    'You can not approve a request with lines without '
-                    'approved amount.'))
+        for rec in self:
+            if rec.state == 'approved':
+                cero_lines = rec.advance_request_line_ids.filtered(
+                    lambda x: not x.approved_amount)
+                if cero_lines:
+                    raise ValidationError(_(
+                        'You can not approve a request with lines without '
+                        'approved amount.'))
 
-    @api.one
+    @api.multi
     @api.constrains('type_id', 'company_id')
     def check_type_company(self):
-        if self.type_id.company_id != self.company_id:
-            raise Warning(_(
-                'Company must be the same as Type Company!'))
+        for rec in self:
+            if rec.type_id.company_id != rec.company_id:
+                raise ValidationError(_(
+                    'Company must be the same as Type Company!'))
 
     @api.multi
     def action_cancel(self):
@@ -173,7 +158,7 @@ class advance_request(models.Model):
             open_vouchers = self.voucher_ids.filtered(
                 lambda x: x.state not in ['draft', 'cancel'])
             if open_vouchers:
-                raise Warning(_(
+                raise ValidationError(_(
                     'You can nopt cancel an advance request with vouchers in '
                     'other state than "cancel" or "draft".\n'
                     ' * Request id: %i\n'
@@ -189,12 +174,11 @@ class advance_request(models.Model):
         self.write({'state': 'draft'})
         return True
 
-    @api.one
+    @api.multi
     def unlink(self):
-        if self.state not in ['draft', 'cancel']:
-            raise Warning(_(
-                'You can not delete if record is not on "draft" or "cancel" '
-                'state!'))
-        return super(advance_request, self).unlink()
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+        for rec in self:
+            if rec.state not in ['draft', 'cancel']:
+                raise ValidationError(_(
+                    'You can not delete if record is not on "draft" or '
+                    '"cancel" state!'))
+        return super(AdvanceRequest, self).unlink()

@@ -2,11 +2,8 @@
 from openerp import models, fields
 
 
-class company(models.Model):
-    """"""
+class ResCompany(models.Model):
 
-    _name = 'res.company'
-    _inherits = {}
     _inherit = ['res.company']
 
     inventory_rule_ids = fields.One2many(
@@ -14,5 +11,3 @@ class company(models.Model):
         'company_id',
         string='Inventory Rules'
     )
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

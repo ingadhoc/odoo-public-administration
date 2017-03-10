@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields
-import openerp.addons.decimal_precision as dp
 
 
-class budget_prec_detail(models.Model):
+class BudgetPrecloseDetail(models.Model):
     """"""
 
     _name = 'public_budget.budget_prec_detail'
@@ -15,47 +14,33 @@ class budget_prec_detail(models.Model):
         string='Budget Position',
         required=True
     )
-    amount = fields.Float(
-        string='Amount',
+    amount = fields.Monetary(
         readonly=True,
         required=True,
-        digits=dp.get_precision('Account'),
     )
-    draft_amount = fields.Float(
-        string='Draft Amount',
+    draft_amount = fields.Monetary(
         readonly=True,
         required=True,
-        digits=dp.get_precision('Account'),
     )
-    preventive_amount = fields.Float(
-        string='Preventive Amount',
+    preventive_amount = fields.Monetary(
         readonly=True,
         required=True,
-        digits=dp.get_precision('Account'),
     )
-    definitive_amount = fields.Float(
-        string='Definitive Amount',
+    definitive_amount = fields.Monetary(
         readonly=True,
         required=True,
-        digits=dp.get_precision('Account'),
     )
-    to_pay_amount = fields.Float(
-        string='To Pay Amount',
+    to_pay_amount = fields.Monetary(
         readonly=True,
         required=True,
-        digits=dp.get_precision('Account'),
     )
-    paid_amount = fields.Float(
-        string='Paid Amount',
+    paid_amount = fields.Monetary(
         readonly=True,
         required=True,
-        digits=dp.get_precision('Account'),
     )
-    balance_amount = fields.Float(
-        string='Balance Amount',
+    balance_amount = fields.Monetary(
         readonly=True,
         required=True,
-        digits=dp.get_precision('Account'),
     )
     account_type = fields.Selection(
         string='Type',
@@ -70,5 +55,7 @@ class budget_prec_detail(models.Model):
         string='budget_id',
         required=True
     )
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+    currency_id = fields.Many2one(
+        related='budget_id.company_id.currency_id',
+        readonly=True,
+    )

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
-from openerp.exceptions import Warning as UserError
+from openerp.exceptions import ValidationError as UserError
 import base64
 
 
@@ -40,10 +40,10 @@ class AccountVoucher(models.Model):
         size=1,
         states={'posted': [('readonly', True)]},
     )
-    importe_total = fields.Float(
+    importe_total = fields.Monetary(
         compute='compute_importe_total'
     )
-    cantidad = fields.Float(
+    cantidad = fields.Monetary(
         compute='compute_importe_total'
     )
     archivo_banco = fields.Binary(

@@ -18,6 +18,7 @@
                                 <field name="residual_amount"/>
                                 <field name="to_invoice_amount"/>
                                 <field name="full_imputation"/>
+                                <field name="currency_id" invisible="1"/>
                             </tree>
                         </field>
                         <field name="invoice_date"/>

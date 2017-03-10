@@ -63,11 +63,12 @@
                                     <field name="requested_amount" sum="Total"/>
                                     <field name="approved_amount" sum="Total"/>
                                     <field name="state" invisible="1"/>
+                                    <field name="currency_id" invisible="1"/>
                                 </tree>
                             </field>
                         </page>
                         <page string="Vouchers">
-                            <field name="voucher_ids" context="{'default_type': 'payment', 'form_view_ref': 'account_voucher.view_vendor_payment_form','tree_view_ref': 'account_voucher.view_voucher_tree'}"/> 
+                            <!-- <field name="voucher_ids" context="{'default_type': 'payment', 'form_view_ref': 'account_voucher.view_vendor_payment_form','tree_view_ref': 'account_voucher.view_voucher_tree'}"/>  -->
                         </page>
                      </notebook>
                     </sheet>
@@ -95,5 +96,3 @@
 
     </data>
 </openerp>
-<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
-     -->

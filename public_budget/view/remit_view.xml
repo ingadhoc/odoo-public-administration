@@ -11,7 +11,7 @@
                     <field name="date"/>
                     <field name="user_id"/>
                     <field name="location_id"/>
-                    <field name="location_dest_id"/>/>
+                    <field name="location_dest_id"/>
                     <group expand="0" string="Group By">
                     </group>
                 </search>
@@ -25,7 +25,8 @@
             <field name="arch" type="xml">
                 <form string="Remit">
                     <header>
-                        <button name="sgn_confirm"
+                        <button name="action_confirm"
+                            type="object"
                             states="in_transit"
                             string="Confirm"
                             class="oe_highlight"/>
@@ -33,7 +34,8 @@
                             type="object"
                             states="cancel"
                             string="To In Transit"/>
-                        <button name="sgn_cancel"
+                        <button name="action_cancel"
+                            type="object"
                             states="confirmed,in_transit"
                             string="Cancel"
                             groups="base.group_no_one"/>
@@ -94,5 +96,3 @@
 
     </data>
 </openerp>
-<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
-     -->

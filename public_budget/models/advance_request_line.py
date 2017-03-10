@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
-import openerp.addons.decimal_precision as dp
-from openerp.exceptions import Warning
+from openerp.exceptions import ValidationError
 
 
-class advance_request_line(models.Model):
-    """Advance Request Line"""
+class AdvanceRequestLine(models.Model):
 
     _name = 'public_budget.advance_request_line'
     _description = 'Advance Request Line'
@@ -17,29 +15,20 @@ class advance_request_line(models.Model):
         context={'default_employee': 1},
         domain=[('employee', '=', True)]
     )
-    requested_amount = fields.Float(
-        string='Requested Amount',
+    requested_amount = fields.Monetary(
         required=True,
-        digits=dp.get_precision('Account'),
     )
     description = fields.Char(
-        string='Description',
     )
-    debt_amount = fields.Float(
-        string=_('Debt Amount'),
+    debt_amount = fields.Monetary(
         compute='_get_amounts',
-        digits=dp.get_precision('Account'),
     )
-    pending_return_amount = fields.Float(
-        string='Devolucion Pendiente',
+    pending_return_amount = fields.Monetary(
         help='Monto de Devolucion Pendiente de Confirmación en devolución '
         'de adelanto',
         compute='_get_amounts',
-        digits=dp.get_precision('Account'),
     )
-    approved_amount = fields.Float(
-        string='Approved Amount',
-        digits=dp.get_precision('Account'),
+    approved_amount = fields.Monetary(
     )
     advance_request_id = fields.Many2one(
         'public_budget.advance_request',
@@ -51,11 +40,10 @@ class advance_request_line(models.Model):
     state = fields.Selection(
         related='advance_request_id.state',
     )
-    # voucher_id = fields.Many2one(
-    #     'account.voucher',
-    #     'Voucher',
-    #     readonly=True,
-    #     )
+    currency_id = fields.Many2one(
+        related='advance_request_id.company_id.currency_id',
+        readonly=True,
+    )
 
     @api.one
     @api.depends(
@@ -83,38 +71,5 @@ class advance_request_line(models.Model):
     @api.constrains('requested_amount', 'approved_amount')
     def check_amounts(self):
         if self.approved_amount > self.requested_amount:
-            raise Warning(_(
+            raise ValidationError(_(
                 'Approved Amount can not be greater than Requested Amount'))
-
-    # old method that make on voucher per each line/employee. Now we make
-    # one voucher for all employess, we keep it just in case they want
-    # this usability again
-    # @api.multi
-    # def create_voucher(self):
-    #     vouchers = self.env['account.voucher']
-    #     for line in self:
-    #         request = line.advance_request_id
-    #         amount = line.approved_amount
-    #         journal = self.env['account.journal'].search([
-    #             ('company_id', '=', request.company_id.id),
-    #             ('type', 'in', ('cash', 'bank'))], limit=1)
-    #         if not journal:
-    #             raise Warning(_(
-    #                 'No bank or cash journal found for company "%s"') % (
-    #                 request.company_id.name))
-    #         partner = line.employee_id
-    #         currency = journal.currency or request.company_id.currency_id
-    #         voucher_data = vouchers.onchange_partner_id(
-    #             partner.id, journal.id, 0.0,
-    #             currency.id, 'payment', False)
-    #         voucher_vals = {
-    #             'type': 'payment',
-    #             'partner_id': partner.id,
-    #             'journal_id': journal.id,
-    #             'advance_amount': amount,
-    #             'account_id': voucher_data['value'].get('account_id', False),
-    #             }
-    #         voucher = vouchers.create(voucher_vals)
-    #         line.voucher_id = voucher.id
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

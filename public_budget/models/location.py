@@ -2,8 +2,7 @@
 from openerp import models, fields
 
 
-class location(models.Model):
-    """Location"""
+class Location(models.Model):
 
     _name = 'public_budget.location'
     _description = 'Location'
@@ -11,7 +10,6 @@ class location(models.Model):
     _order = "name"
 
     name = fields.Char(
-        string='Name',
         required=True
     )
     user_ids = fields.Many2many(
@@ -21,5 +19,3 @@ class location(models.Model):
         'users_id',
         string='Users'
     )
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

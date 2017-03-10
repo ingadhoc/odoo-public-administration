@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 from openerp import fields, models, api
-from openerp.exceptions import Warning
+from openerp.exceptions import ValidationError
 from dateutil.relativedelta import relativedelta
 # from datetime import date
-import openerp.addons.decimal_precision as dp
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -20,7 +19,7 @@ class PublicBudgetSubsidy(models.Model):
         transaction_type = self.env['public_budget.transaction_type'].search(
             [('subsidy', '=', True)], limit=1)
         if not transaction_type:
-            raise Warning(
+            raise ValidationError(
                 'No Se encontró ningún tipo de transacción del tipo subsidio')
         return transaction_type
 
@@ -38,7 +37,7 @@ class PublicBudgetSubsidy(models.Model):
     # expedient_id = fields.Many2one(
     #     'Expediente Administrativo de Solicitud',
     #     )
-    rendiciones_pendientes_otros_subsidios = fields.Float(
+    rendiciones_pendientes_otros_subsidios = fields.Monetary(
         'Rend. Pendientes Otros Subsidios',
         help='Rendiciones Pendientes de Otros Subsidios',
         compute='get_rendiciones_pendientes_otros_subsidios',
@@ -107,43 +106,42 @@ class PublicBudgetSubsidy(models.Model):
     )
     destination = fields.Char(
     )
-    amount = fields.Float(
+    amount = fields.Monetary(
         string='Amount',
         required=True,
-        digits=dp.get_precision('Account'),
         # states={'closed': [('readonly', True)]},
     )
-    cargo_amount = fields.Float(
+    cargo_amount = fields.Monetary(
         'Cargos',
         help='Cargos Efectuados',
         compute='get_cargo_data',
         store=True,
     )
-    pendientes_rendicion_amount = fields.Float(
+    pendientes_rendicion_amount = fields.Monetary(
         'Pendiente Rendición',
         help='Cargos Pendientes de Rendición',
         compute='get_cargo_data',
         store=True,
     )
-    pendientes_aprobacion_amount = fields.Float(
+    pendientes_aprobacion_amount = fields.Monetary(
         'Pendiente Aprobación',
         help='Cargos Pendientes de Aprobación',
         compute='get_cargo_data',
         store=True,
     )
-    rendido_amount = fields.Float(
+    rendido_amount = fields.Monetary(
         'Rendido',
         help='Rendiciones Presentadas',
         compute='get_amounts',
         store=True,
     )
-    aprobado_amount = fields.Float(
+    aprobado_amount = fields.Monetary(
         'Aprobado',
         help='Rendiciones Aprobadas',
         compute='get_amounts',
         store=True,
     )
-    revision_amount = fields.Float(
+    revision_amount = fields.Monetary(
         'En Revisión',
         help='Rendiciones presentadas en Revisión',
         compute='get_amounts',
@@ -245,5 +243,5 @@ class PublicBudgetSubsidy(models.Model):
     @api.constrains('cargo_amount', 'rendido_amount')
     def check_renditions(self):
         if self.rendido_amount > self.cargo_amount:
-            raise Warning(
+            raise ValidationError(
                 'El importe rendido no puede ser mayor al importe de cargo')

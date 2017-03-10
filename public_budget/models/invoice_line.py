@@ -1,27 +1,20 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
-import openerp.addons.decimal_precision as dp
+from openerp.exceptions import ValidationError
 import logging
 _logger = logging.getLogger(__name__)
 
 
-class invoice_line(models.Model):
-    """"""
+class AccountInvoiceLine(models.Model):
 
-    _name = 'account.invoice.line'
-    _inherits = {}
     _inherit = ['account.invoice.line']
 
-    to_pay_amount = fields.Float(
-        string=_('To Pay Amount'),
+    to_pay_amount = fields.Monetary(
         compute='_get_amounts',
-        digits=dp.get_precision('Account'),
         # store=True,
     )
-    paid_amount = fields.Float(
-        string=_('Paid Amount'),
+    paid_amount = fields.Monetary(
         compute='_get_amounts',
-        digits=dp.get_precision('Account'),
         # store=True,
     )
     definitive_line_id = fields.Many2one(
@@ -55,7 +48,8 @@ class invoice_line(models.Model):
                 invoice_paid_perc = (
                     self.invoice_id._get_paid_amount_to_date() / invoice_total)
                 invoice_to_pay_perc = (
-                    self.invoice_id._get_to_pay_amount_to_date() / invoice_total)
+                    self.invoice_id._get_to_pay_amount_to_date() /
+                    invoice_total)
             else:
                 # odoo compute residual always positive, no matter invoice
                 # is negative
@@ -79,8 +73,6 @@ class invoice_line(models.Model):
     def check_budget_state_open_pre_closed(self):
         budget = self.definitive_line_id.budget_id
         if budget and budget.state not in ['open', 'pre_closed']:
-            raise Warning(
+            raise ValidationError(_(
                 'Solo puede cambiar o registrar comprobantes si '
-                'el presupuesto está abierto o en pre-cierre')
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+                'el presupuesto está abierto o en pre-cierre'))

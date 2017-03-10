@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
-from openerp import models, fields, api, _
-import openerp.addons.decimal_precision as dp
+from openerp import models, fields, api
 
 
-class budget(models.Model):
-    """Budget"""
+class Budget(models.Model):
 
     _name = 'public_budget.budget'
     _description = 'Budget'
 
-    _order = "fiscalyear_id desc"
+    # _order = "fiscalyear_id desc"
 
     _states_ = [
         # State machine: untitle
@@ -21,17 +19,16 @@ class budget(models.Model):
     ]
 
     name = fields.Char(
-        string='Name',
         readonly=True,
         required=True,
         states={'draft': [('readonly', False)]}
     )
-    fiscalyear_id = fields.Many2one(
-        'account.fiscalyear',
-        'Fiscal Year',
-        required=True,
-        states={'draft': [('readonly', False)]},
-        select=True)
+    # fiscalyear_id = fields.Many2one(
+    #     'account.fiscalyear',
+    #     'Fiscal Year',
+    #     required=True,
+    #     states={'draft': [('readonly', False)]},
+    #     select=True)
     income_account_id = fields.Many2one(
         'account.account',
         string='Income Account',
@@ -39,9 +36,9 @@ class budget(models.Model):
         required=True,
         states={'draft': [('readonly', False)]},
         context={'default_type': 'other'},
-        domain=[
-            ('type', '=', 'other'),
-            ('user_type.report_type', 'in', ['income'])]
+        domain="[('type', '=', 'other'), ('company_id', '=', company_id), "
+        "('deprecated', '=', False)]",
+
     )
     expedient_id = fields.Many2one(
         'public_budget.expedient',
@@ -50,49 +47,43 @@ class budget(models.Model):
         required=True,
         states={'draft': [('readonly', False)]}
     )
-    prec_passive_residue = fields.Float(
+    prec_passive_residue = fields.Monetary(
         string='Pre Close Passive Residue',
         readonly=True,
-        digits=dp.get_precision('Account'),
     )
-    prec_total_requested = fields.Float(
+    prec_total_requested = fields.Monetary(
         string='Pre Close Total Requested',
         readonly=True,
-        digits=dp.get_precision('Account'),
     )
-    total_preventive = fields.Float(
-        string=_('Total Preventivo'),
+    total_preventive = fields.Monetary(
+        string='Total Preventivo',
         compute='_get_totals',
-        digits=dp.get_precision('Account'),
         # store=True,
     )
-    total_authorized = fields.Float(
-        string=_('Total Autorizado'),
+    total_authorized = fields.Monetary(
+        string='Total Autorizado',
         compute='_get_totals',
-        digits=dp.get_precision('Account'),
         # store=True,
     )
-    total_requested = fields.Float(
-        string=_('Total Requerido'),
+    total_requested = fields.Monetary(
+        string='Total Requerido',
         compute='_get_totals',
-        digits=dp.get_precision('Account'),
         # store=True,
     )
-    passive_residue = fields.Float(
-        string=_('Total Residuo'),
+    passive_residue = fields.Monetary(
+        string='Total Residuo',
         compute='_get_totals',
-        digits=dp.get_precision('Account'),
         # store=True,
     )
     parent_budget_position_ids = fields.Many2many(
         comodel_name='public_budget.budget_position',
-        string=_('Budget Positions'),
+        string='Budget Positions',
         compute='_get_budget_positions'
     )
     budget_position_ids = fields.Many2many(
         relation='public_budget_budget_position_rel',
         comodel_name='public_budget.budget_position',
-        string=_('Budget Positions'),
+        string='Budget Positions',
         # store=True, #TODO ver si agregamos el store
         compute='_get_budget_positions'
     )
@@ -104,9 +95,12 @@ class budget(models.Model):
         default=lambda self: self.env['res.company']._company_default_get(
             'public_budget.budget')
     )
+    currency_id = fields.Many2one(
+        related='company_id.currency_id',
+        readonly=True,
+    )
     state = fields.Selection(
         _states_,
-        'State',
         default='draft',
     )
     budget_modification_ids = fields.One2many(
@@ -150,7 +144,8 @@ class budget(models.Model):
     @api.depends(
         'budget_detail_ids.budget_position_id',
         'transaction_ids.preventive_line_ids.budget_position_id',
-        'budget_modification_ids.budget_modification_detail_ids.budget_position_id',
+        'budget_modification_ids.budget_modification_detail_ids.'
+        'budget_position_id',
     )
     def _get_budget_positions(self):
         """ Definimos por ahora llevar solamente las posiciones que tienen
@@ -184,15 +179,19 @@ class budget(models.Model):
     @api.one
     def _get_totals(self):
         total_authorized = sum([x.amount for x in self.with_context(
-            budget_id=self.id).budget_position_ids if x.budget_assignment_allowed])
+            budget_id=self.id).budget_position_ids
+            if x.budget_assignment_allowed])
         total_preventive = sum(
             [x.preventive_amount for x in self.with_context(
-                budget_id=self.id).budget_position_ids if x.budget_assignment_allowed])
+                budget_id=self.id).budget_position_ids
+                if x.budget_assignment_allowed])
         total_requested = sum(
             [x.amount for x in self.with_context(
-                budget_id=self.id).funding_move_ids if x.type == 'request']) - sum(
-            [x.amount for x in self.with_context(
-                budget_id=self.id).funding_move_ids if x.type == 'refund'])
+                budget_id=self.id).funding_move_ids
+                if x.type == 'request']) - sum(
+                    [x.amount for x in self.with_context(
+                        budget_id=self.id).funding_move_ids
+                        if x.type == 'refund'])
 
         self.total_authorized = total_authorized
         self.total_preventive = total_preventive
@@ -214,33 +213,46 @@ class budget(models.Model):
     def action_cancel_draft(self):
         """ go from canceled state to draft state"""
         self.write({'state': 'draft'})
-        self.delete_workflow()
-        self.create_workflow()
         return True
 
-    @api.one
+    @api.multi
+    def action_open(self):
+        self.write({'state': 'open'})
+        return True
+
+    @api.multi
+    def action_close(self):
+        self.write({'state': 'closed'})
+        return True
+
+    @api.multi
+    def action_cancel(self):
+        self.write({'state': 'cancel'})
+        return True
+
+    @api.multi
     def action_pre_close(self):
         # Unlink any previous pre close detail
-        self.budget_prec_detail_ids.unlink()
-        self = self.with_context(budget_id=self.id)
+        for rec in self:
+            rec.budget_prec_detail_ids.unlink()
+            rec = rec.with_context(budget_id=rec.id)
 
-        self.prec_passive_residue = self.passive_residue
-        self.prec_total_requested = self.total_requested
+            rec.prec_passive_residue = rec.passive_residue
+            rec.prec_total_requested = rec.total_requested
 
-        for line in self.budget_position_ids:
-            vals = {
-                'budget_position_id': line.id,
-                'amount': line.amount,
-                'draft_amount': line.draft_amount,
-                'preventive_amount': line.preventive_amount,
-                'definitive_amount': line.definitive_amount,
-                'to_pay_amount': line.to_pay_amount,
-                'paid_amount': line.paid_amount,
-                'balance_amount': line.balance_amount,
-                'parent_left': line.parent_left,
-                'order_int': line.parent_left,
-                'budget_id': self.id,
-            }
-            self.budget_prec_detail_ids.create(vals)
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+            for line in rec.budget_position_ids:
+                vals = {
+                    'budget_position_id': line.id,
+                    'amount': line.amount,
+                    'draft_amount': line.draft_amount,
+                    'preventive_amount': line.preventive_amount,
+                    'definitive_amount': line.definitive_amount,
+                    'to_pay_amount': line.to_pay_amount,
+                    'paid_amount': line.paid_amount,
+                    'balance_amount': line.balance_amount,
+                    'parent_left': line.parent_left,
+                    'order_int': line.parent_left,
+                    'budget_id': rec.id,
+                }
+                rec.budget_prec_detail_ids.create(vals)
+        self.write({'state': 'closed'})

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from openerp import fields, models, api
-from openerp.exceptions import Warning
-import openerp.addons.decimal_precision as dp
+from openerp.exceptions import ValidationError
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -34,20 +33,18 @@ class PublicBudgetSubsidyRendition(models.Model):
         # 'rendition_id', 'approval_arrangement_id',
         'Disposición de aprobación',
     )
-    rendition_amount = fields.Float(
+    rendition_amount = fields.Monetary(
         'Importe Rendido',
-        digits=dp.get_precision('Account'),
     )
-    approved_amount = fields.Float(
+    approved_amount = fields.Monetary(
         'Importe Aprobado',
         related='approval_arrangement_id.approved_amount',
         readonly=True,
         store=True,
         # digits=dp.get_precision('Account'),
     )
-    pending_amount = fields.Float(
+    pending_amount = fields.Monetary(
         'Importe Pendiente',
-        digits=dp.get_precision('Account'),
         compute='get_pending_amount',
     )
     expedient_id = fields.Many2one(
@@ -60,7 +57,7 @@ class PublicBudgetSubsidyRendition(models.Model):
     @api.constrains('rendition_amount', 'approved_amount')
     def check_amounts(self):
         if self.approved_amount > self.rendition_amount:
-            raise Warning(
+            raise ValidationError(
                 'Importe Aprobado no puede ser mayor al importe rendido')
 
     @api.one

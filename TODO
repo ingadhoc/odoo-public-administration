@@ -1,0 +1,42 @@
+TODO
+advance request
+    implementar link a voucher y pagos
+public budget
+    ver si es necesario para algo fiscalyear y definir orden
+
+expediente
+    revisar no workflow
+
+account_move_line
+    funcionalidad de voucher_line_ids
+
+account invice  
+    # TODO validar que la factura
+    # no se pueda validar en un fiscalyear distinto al del budget id
+    # TODO como lo implementamos ahora?
+
+voucher completo
+    access_account_voucher_secretary_user,account_voucher.secretary_user,model_account_voucher,group_secretary_usuario,1,1,1,1
+    access_account_voucher_line_secretary_user,account_voucher_line.secretary_user,model_account_voucher_line,group_secretary_usuario,1,1,1,1
+    access_account_voucher_habilitacion_usuario,account_voucher.habilitacion_usuario,model_account_voucher,group_habilitacion_usuario,1,1,1,0
+access_account_voucher_line_habilitacion_usuario,account_voucher_line.habilitacion_usuario,model_account_voucher_line,group_habilitacion_usuario,1,1,1,1
+
+transaction
+    voucher_ids
+    advance_voucher_ids
+
+transaction type
+    implementar lo que figur aen advance_account_id
+
+reports
+
+reactivar menu action_public_budget_budget_report_3_all
+    access_public_budget_budget_report_3_cont_user,access_public_budget_budget_report_3,model_public_budget_budget_report_3,account.group_account_user,1,0,0,0
+access_public_budget_budget_report_3_hab_user,access_public_budget_budget_report_3,model_public_budget_budget_report_3,group_habilitacion_usuario,1,0,0,0
+
+advance.request.analysis
+    TODO agregar currency y transformar a monetary
+
+requerimos permisos:
+    access_account_move_reconcile_habilitaciones_user,account.model_account_move_reconcile_habilitaciones_user,account.model_account_move_reconcile,group_habilitacion_usuario,1,1,1,1
+access_account_move_reconcile_secretary_user,account.model_account_move_reconcile_secretary_user,account.model_account_move_reconcile,group_secretary_usuario,1,1,1,1

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api
-# from openerp.exceptions import Warning
+# from openerp.exceptions import ValidationError
 
 
 class public_budget_avance_request_report_wizard(models.TransientModel):
@@ -10,10 +10,10 @@ class public_budget_avance_request_report_wizard(models.TransientModel):
         'public_budget.advance_request_type',
         string='Tipo',
         required=True,
-        )
+    )
     to_date = fields.Date(
         'Hasta Fecha',
-        )
+    )
 
     @api.multi
     def confirm(self):
@@ -21,7 +21,7 @@ class public_budget_avance_request_report_wizard(models.TransientModel):
         return self.env['report'].with_context(
             to_date=self.to_date,
             # type_id=self.type_id.id,
-            ).get_action(self.type_id, 'advance_request_debt_report')
+        ).get_action(self.type_id, 'advance_request_debt_report')
 
         # actions = self.env.ref(
         #     'public_budget.action_position_analysis_tree')
@@ -51,5 +51,3 @@ class public_budget_avance_request_report_wizard(models.TransientModel):
         #     'analysis_to_date': self.to_date,
         # }
         # return action_read
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

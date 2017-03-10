@@ -22,6 +22,7 @@
             <field name="model">public_budget.definitive_line</field>
             <field name="arch" type="xml">
                 <form string="Definitive Line">
+                    <field name="currency_id" invisible="1"/> 
                     <header>
                         <field name="state" widget="statusbar"/>
                     </header>
@@ -50,11 +51,10 @@
                     <field name="supplier_id"/>
                     <field name="amount"/>
                     <field name="state" invisible="True"/>
+                    <field name="currency_id" invisible="1"/> 
                 </tree>
             </field>
         </record>
 
     </data>
 </openerp>
-<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
-     -->

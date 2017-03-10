@@ -34,15 +34,18 @@
                             type="object"
                             states="cancel"
                             string="To Draft"/>
-                        <button name="sgn_open"
+                        <button name="action_open"
+                            type="object"
                             states="draft"
                             string="Open"
                             class="oe_highlight"/>
-                        <button name="sgn_close"
+                        <button name="action_close"
+                            type="object"
                             states="open"
                             string="Close"
                             class="oe_highlight"/>
-                        <button name="sgn_cancel"
+                        <button name="action_cancel"
+                            type="object"
                             states="closed,draft,open"
                             string="Cancel"
                             groups="account.group_account_user"/>
@@ -104,7 +107,8 @@
                             </page>
                             <page string="Payment Orders and Refunds" attrs="{'invisible':[('type_with_advance_payment','=',False)]}">
                                 <button class="oe_link" string="Create Payment Order" states="open" type="object" name="action_new_voucher"/>
-                                <field name="advance_voucher_ids" context="{'default_transaction_id':id, 'default_partner_id': partner_id, 'default_type': 'payment', 'form_view_ref': 'account_voucher.view_vendor_payment_form','tree_view_ref': 'account_voucher.view_voucher_tree'}"/>
+                                <!-- TODO imeplementar -->
+                                <!-- <field name="advance_voucher_ids" context="{'default_transaction_id':id, 'default_partner_id': partner_id, 'default_type': 'payment', 'form_view_ref': 'account_voucher.view_vendor_payment_form','tree_view_ref': 'account_voucher.view_voucher_tree'}"/> -->
                             </page>
                             <page string="Invoices">
                                 <button class="oe_link" string="Create Invoice" states="open" type="action" name="%(public_budget.action_definitive_make_invoice)d"/>
@@ -116,7 +120,8 @@
                                 <button class="oe_link" string="Create Payment Order" states="open" type="object" name="action_new_voucher"/>
                                 or 
                                 <button class="oe_link" string="Mass Payment Order Create" states="open" type="object" name="mass_voucher_create"/>
-                                <field name="voucher_ids" context="{'default_type': 'payment', 'default_transaction_id':id, 'form_view_ref': 'account_voucher.view_vendor_payment_form','tree_view_ref': 'account_voucher.view_voucher_tree'}"/>
+                                <!-- TODO imeplementar -->
+                                <!-- <field name="voucher_ids" context="{'default_type': 'payment', 'default_transaction_id':id, 'form_view_ref': 'account_voucher.view_vendor_payment_form','tree_view_ref': 'account_voucher.view_voucher_tree'}"/> -->
                             </page>
                             <page string="Notes">
                                 <field name="note"/>
@@ -148,5 +153,3 @@
 
     </data>
 </openerp>
-<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
-     -->

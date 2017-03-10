@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
-from openerp.exceptions import Warning
-import openerp.addons.decimal_precision as dp
+from openerp.exceptions import ValidationError
 
 
 class public_budget_definitive_make_invoice_detail(models.TransientModel):
@@ -16,15 +15,18 @@ class public_budget_definitive_make_invoice_detail(models.TransientModel):
         'Def Make Invoice',
         readonly=True,
     )
-    residual_amount = fields.Float(
+    residual_amount = fields.Monetary(
         related='definitive_line_id.residual_amount',
     )
-    to_invoice_amount = fields.Float(
+    to_invoice_amount = fields.Monetary(
         'Amount',
-        digits=dp.get_precision('Account'),
     )
     full_imputation = fields.Boolean(
         'Full Imputation?',
+    )
+    currency_id = fields.Many2one(
+        related='definitive_line_id.currency_id',
+        readonly=True,
     )
 
     @api.onchange('full_imputation')
@@ -38,7 +40,7 @@ class public_budget_definitive_make_invoice_detail(models.TransientModel):
     )
     def _check_amounts(self):
         if self.residual_amount < self.to_invoice_amount:
-            raise Warning(
+            raise ValidationError(
                 _("To Invoice Amount can't be greater than Residual Amount"))
 
 
@@ -149,7 +151,7 @@ class public_budget_definitive_make_invoice(models.TransientModel):
         advance_account = False
         if tran_type.with_advance_payment:
             if not tran_type.advance_account_id:
-                raise Warning(_(
+                raise ValidationError(_(
                     "On Advance Transactions, transaction advance type"
                     "must have and advance account configured!"))
             advance_account = tran_type.advance_account_id
@@ -159,7 +161,7 @@ class public_budget_definitive_make_invoice(models.TransientModel):
             advance_to_return_amount = (
                 wizard.transaction_id.advance_to_return_amount)
             if total_to_invoice_amount > advance_to_return_amount:
-                raise Warning(_(
+                raise ValidationError(_(
                     "You can not invoice more than Advance Remaining Amount!\n"
                     "* Amount to invoice: %s\n"
                     "* Advance Remaining Amount: %s") % (
@@ -174,7 +176,7 @@ class public_budget_definitive_make_invoice(models.TransientModel):
 
         # Si no hay se creo alguna linea es porque todas tienen amount 0
         if not inv_lines:
-            raise Warning(_(
+            raise ValidationError(_(
                 "You should set at least one line with amount greater than 0"))
 
         invoice_vals = wizard.transaction_id.get_invoice_vals(
@@ -201,4 +203,3 @@ class public_budget_definitive_make_invoice(models.TransientModel):
             invoice.signal_workflow('invoice_open')
             return True
         return res
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

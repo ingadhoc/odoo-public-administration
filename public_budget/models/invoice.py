@@ -1,27 +1,12 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
-from openerp.exceptions import Warning
-import openerp.addons.decimal_precision as dp
+from openerp.exceptions import ValidationError
 import logging
 _logger = logging.getLogger(__name__)
 
 
-class account_move_line(models.Model):
-    _inherit = ['account.move.line']
+class AccountInvoice(models.Model):
 
-    voucher_line_ids = fields.One2many(
-        'account.voucher.line',
-        'move_line_id',
-        'Voucher Lines'
-    )
-
-
-class invoice(models.Model):
-    """"""
-    # TODO validar que la factura
-    # no se pueda validar en un fiscalyear distinto al del budget id
-    _name = 'account.invoice'
-    _inherits = {}
     _inherit = ['account.invoice']
 
     transaction_id = fields.Many2one(
@@ -38,49 +23,52 @@ class invoice(models.Model):
         store=True,
         auto_join=True,
     )
-    signed_amount = fields.Float(
+    signed_amount = fields.Monetary(
         'Monto con Signo',
         compute='get_signed_amount',
     )
-    to_pay_amount = fields.Float(
+    to_pay_amount = fields.Monetary(
         string='Monto A Pagar',
-        digits=dp.get_precision('Account'),
         # compute='_compute_to_pay_amount',
         # store=True,
     )
 
-    @api.one
+    @api.multi
     @api.depends('type', 'amount_total')
     def get_signed_amount(self):
-        if self.type in ('in_refund', 'out_refund'):
-            signed_amount = -1.0 * self.amount_total
-        else:
-            signed_amount = self.amount_total
-        self.signed_amount = signed_amount
+        for rec in self:
+            if rec.type in ('in_refund', 'out_refund'):
+                signed_amount = -1.0 * rec.amount_total
+            else:
+                signed_amount = rec.amount_total
+            rec.signed_amount = signed_amount
 
-    @api.one
+    @api.multi
     @api.constrains('state')
     def update_definitive_invoiced_amount(self):
         # this method update all amounts on the upstream
         _logger.info('Updating invoice line amounts from invoice')
-        # if invoice state changes, we recompute to_pay_amount
-        self.sudo()._compute_to_pay_amount()
+        for rec in self:
+            # if invoice state changes, we recompute to_pay_amount
+            rec.sudo()._compute_to_pay_amount()
 
-    @api.one
+    @api.multi
     @api.constrains('to_pay_amount')
     def check_to_pay_amount(self):
-        if self.to_pay_amount and self.currency_id.round(
-                self.to_pay_amount - self.amount_total) > 0.0:
-            raise Warning((
-                'El importe mandado a pagar no puede ser mayor al importe '
-                'de la factura'))
+        for rec in self:
+            if rec.to_pay_amount and rec.currency_id.round(
+                    rec.to_pay_amount - rec.amount_total) > 0.0:
+                raise ValidationError((
+                    'El importe mandado a pagar no puede ser mayor al importe '
+                    'de la factura'))
 
-    @api.one
+    @api.multi
     def _compute_to_pay_amount(self):
-        self.to_pay_amount = self._get_to_pay_amount_to_date()
-        # we force an update of invoice line computed fields
-        self.invoice_line._get_amounts()
-        self.mapped('invoice_line.definitive_line_id')._get_amounts()
+        for rec in self:
+            rec.to_pay_amount = rec._get_to_pay_amount_to_date()
+            # we force an update of invoice line computed fields
+            rec.invoice_line._get_amounts()
+            rec.mapped('invoice_line.definitive_line_id')._get_amounts()
 
     @api.multi
     def _get_to_pay_amount_to_date(self):
@@ -138,17 +126,19 @@ class invoice(models.Model):
             amount = -amount
         return amount
 
-    @api.one
+    @api.multi
     @api.constrains('date_invoice', 'invoice_line')
     def check_dates(self):
         _logger.info('Checking invoice dates')
-        if not self.date_invoice:
-            return True
-        for definitive_line in self.mapped('invoice_line.definitive_line_id'):
-            if self.date_invoice < definitive_line.issue_date:
-                raise Warning(_(
-                    'La fecha de la factura no puede ser menor a la fecha '
-                    'de la linea definitiva relacionada'))
+        for rec in self:
+            if not rec.date_invoice:
+                return True
+            for definitive_line in rec.mapped(
+                    'invoice_line.definitive_line_id'):
+                if rec.date_invoice < definitive_line.issue_date:
+                    raise ValidationError(_(
+                        'La fecha de la factura no puede ser menor a la fecha '
+                        'de la linea definitiva relacionada'))
 
     @api.multi
     def action_cancel(self):
@@ -160,14 +150,14 @@ class invoice(models.Model):
                     inv.to_pay_amount and
                     not inv.transaction_id.type_id.with_advance_payment
             ):
-                raise Warning(_(
+                raise ValidationError(_(
                     'You cannot cancel an invoice which has been sent to pay.'
                     ' You need to cancel related payments first.'))
-        return super(invoice, self).action_cancel()
+        return super(AccountInvoice, self).action_cancel()
 
     @api.multi
     def invoice_validate(self):
-        res = super(invoice, self).invoice_validate()
+        res = super(AccountInvoice, self).invoice_validate()
         for inv in self:
             if inv.transaction_id.type_id.with_advance_payment:
                 domain = [
@@ -183,25 +173,24 @@ class invoice(models.Model):
     def prepare_direct_payment_voucher_vals(self):
         """Add some values to direct payment voucher creation"""
         if not self.transaction_id:
-            raise Warning(_(
+            raise ValidationError(_(
                 'Not Transaction in actual invoice, can not create direct '
                 'Payment'))
         res = super(
-            invoice, self).prepare_direct_payment_voucher_vals()
+            AccountInvoice, self).prepare_direct_payment_voucher_vals()
         res['transaction_id'] = self.transaction_id.id
         res['expedient_id'] = self.transaction_id.expedient_id.id
         return res
 
-    @api.one
+    @api.multi
     @api.constrains(
         'state',
         'budget_id',
     )
     def check_budget_state_open_pre_closed(self):
-        if self.budget_id and self.budget_id.state not in [
-                'open', 'pre_closed']:
-            raise Warning(
-                'Solo puede cambiar o registrar comprobantes si '
-                'el presupuesto está abierto o en pre-cierre')
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+        for rec in self:
+            if rec.budget_id and rec.budget_id.state not in [
+                    'open', 'pre_closed']:
+                raise ValidationError(
+                    'Solo puede cambiar o registrar comprobantes si '
+                    'el presupuesto está abierto o en pre-cierre')

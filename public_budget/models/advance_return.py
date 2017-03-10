@@ -1,24 +1,24 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
-from openerp.exceptions import Warning
+from openerp.exceptions import ValidationError
 
 
-class advance_return(models.Model):
-    """"""
+class AdvanceReturn(models.Model):
+    """
+    This model is to deal with advance returns of employees
+    """
 
     _name = 'public_budget.advance_return'
-    _description = 'advance_return'
+    _description = 'Advance Returns'
     _order = 'date desc'
 
     _states_ = [
-        # State machine: untitle
         ('draft', 'Draft'),
         ('confirmed', 'Confirmed'),
         ('cancel', 'Cancel'),
     ]
 
     name = fields.Char(
-        string='Name',
         required=True,
         readonly=True,
         states={'draft': [('readonly', False)]},
@@ -33,7 +33,6 @@ class advance_return(models.Model):
             'public_budget.advance_return')
     )
     date = fields.Date(
-        string='Date',
         required=True,
         readonly=True,
         states={'draft': [('readonly', False)]},
@@ -41,7 +40,6 @@ class advance_return(models.Model):
         copy=False,
     )
     confirmation_date = fields.Date(
-        string='Fecha de Confirmación',
         readonly=True,
         states={'draft': [('readonly', False)]},
         copy=False,
@@ -69,7 +67,6 @@ class advance_return(models.Model):
     )
     state = fields.Selection(
         _states_,
-        'State',
         default='draft',
         readonly=True,
     )
@@ -97,19 +94,6 @@ class advance_return(models.Model):
                 'account_id': self.type_id.account_id.id,
                 'name': self.name,
             }))
-        # old method to add a line for each return, now they want everyhing
-        # on one partner
-        # total_returned_amount = 0.0
-        # for line in self.return_line_ids:
-        #     total_returned_amount += line.returned_amount
-        #     lines_vals.append(
-        #         (0, 0, {
-        #             'partner_id': line.employee_id.id,
-        #             'credit': line.returned_amount,
-        #             'debit': 0.0,
-        #             'account_id': self.type_id.account_id.id,
-        #             'name': self.name,
-        #             }))
         journal = self.type_id.return_journal_id
         ref = journal.sequence_id._next()
         lines_vals.append(
@@ -145,29 +129,31 @@ class advance_return(models.Model):
     def action_cancel(self):
         for record in self:
             if record.move_id:
-                raise Warning(_(
+                raise ValidationError(_(
                     'You can not cancel a return if there is a move linked!\n'
                     'Please delete it first'))
         self.write({'state': 'cancel'})
         return True
 
-    @api.one
+    @api.multi
     @api.constrains('type_id', 'company_id')
     def check_type_company(self):
-        if self.type_id.company_id != self.company_id:
-            raise Warning(_(
-                'Company must be the same as Type Company!'))
+        for rec in self:
+            if rec.type_id.company_id != rec.company_id:
+                raise ValidationError(_(
+                    'Company must be the same as Type Company!'))
 
-    @api.one
+    @api.multi
     @api.constrains('state', 'return_line_ids')
     def check_amounts(self):
-        if self.state == 'approved':
-            cero_lines = self.return_line_ids.filtered(
-                lambda x: not x.returned_amount)
-            if cero_lines:
-                raise Warning(_(
-                    'You can not approve a return with lines without '
-                    'returned amount.'))
+        for rec in self:
+            if rec.state == 'approved':
+                cero_lines = rec.return_line_ids.filtered(
+                    lambda x: not x.returned_amount)
+                if cero_lines:
+                    raise ValidationError(_(
+                        'You can not approve a return with lines without '
+                        'returned amount.'))
 
     @api.multi
     def action_cancel_draft(self):
@@ -177,13 +163,14 @@ class advance_return(models.Model):
         self.create_workflow()
         return True
 
-    @api.one
+    @api.multi
     def unlink(self):
-        if self.state not in ['draft', 'cancel']:
-            raise Warning(_(
-                'You can not delete if record is not on "draft" or "cancel" '
-                'state!'))
-        return super(advance_return, self).unlink()
+        for rec in self:
+            if rec.state not in ['draft', 'cancel']:
+                raise ValidationError(_(
+                    'You can not delete if record is not on "draft" or '
+                    '"cancel" state!'))
+        return super(AdvanceReturn, self).unlink()
 
     @api.onchange('type_id')
     def change_type(self):
@@ -206,5 +193,3 @@ class advance_return(models.Model):
                     'returned_amount': employee_debt,
                 }))
         self.return_line_ids = line_vals
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

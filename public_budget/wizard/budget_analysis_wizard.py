@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api
-# from openerp.exceptions import Warning
+# from openerp.exceptions import ValidationError
 
 
 class public_budget_budget_analysis_wizard(models.TransientModel):
@@ -10,7 +10,7 @@ class public_budget_budget_analysis_wizard(models.TransientModel):
         'public_budget.budget',
         'Presupuesto',
         required=True,
-        )
+    )
     # from_date = fields.Date(
     #     'From Date',
     # )
@@ -49,5 +49,3 @@ class public_budget_budget_analysis_wizard(models.TransientModel):
             'analysis_to_date': self.to_date,
         }
         return action_read
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

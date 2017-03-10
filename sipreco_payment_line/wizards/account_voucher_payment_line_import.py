@@ -3,7 +3,7 @@ import logging
 import base64
 from StringIO import StringIO
 from openerp import api, models, fields, _
-from openerp.exceptions import Warning as UserError
+from openerp.exceptions import ValidationError as UserError
 
 _logger = logging.getLogger(__name__)  # pylint: disable=invalid-name
 

@@ -14,7 +14,7 @@ class AccountVoucher(models.Model):
         # necesitamos store para poder ordenarlo
         store=True,
     )
-    cargo_amount = fields.Float(
+    cargo_amount = fields.Monetary(
         'Cargo',
         help='Cargos Efectuados',
         compute='get_cargo_data',

@@ -22,6 +22,7 @@
             <field name="model">public_budget.transaction_type_amo_rest</field>
             <field name="arch" type="xml">
                 <form string="Transaction Type Amount Restriction">
+                    <field name="company_id" invisible="1"/> 
                     <header>
                     </header>
                     <sheet string="Transaction Type Amount Restriction">
@@ -48,11 +49,10 @@
                     <field name="date"/>
                     <field name="from_amount"/>
                     <field name="to_amount"/>
+                    <field name="company_id" invisible="1"/> 
                 </tree>
             </field>
         </record>
 
     </data>
 </openerp>
-<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
-     -->

@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
-from openerp.exceptions import Warning
+from openerp.exceptions import ValidationError
 
 
-class remit(models.Model):
-    """Remit"""
+class Remit(models.Model):
 
     _name = 'public_budget.remit'
     _description = 'Remit'
@@ -13,18 +12,15 @@ class remit(models.Model):
     _order = "date desc"
 
     _states_ = [
-        # State machine: untitle
         ('in_transit', 'In Transit'),
         ('confirmed', 'Confirmed'),
         ('cancel', 'Cancel'),
     ]
 
     number = fields.Char(
-        string='Number',
         readonly=True
     )
     date = fields.Datetime(
-        string='Date',
         readonly=True,
         required=True,
         default=lambda self: fields.Datetime.now()
@@ -71,7 +67,6 @@ class remit(models.Model):
     )
     state = fields.Selection(
         _states_,
-        'State',
         default='in_transit',
     )
     expedient_ids = fields.Many2many(
@@ -82,61 +77,73 @@ class remit(models.Model):
         string='Expedients'
     )
 
-    @api.one
+    @api.multi
     @api.constrains('state')
     def check_state(self):
-        if self.state == 'cancel':
-            for expedient in self.expedient_ids:
-                remits = self.search([
-                    ('expedient_ids', '=', expedient.id)],
-                    order='date desc')
-                if remits[0] != self:
-                    raise Warning(_(
-                        'You can Not cancel a remit that is not the last one '
-                        'for all the expedients'))
+        for rec in self:
+            if rec.state == 'cancel':
+                for expedient in rec.expedient_ids:
+                    remits = rec.search([
+                        ('expedient_ids', '=', expedient.id)],
+                        order='date desc')
+                    if remits[0] != rec:
+                        raise ValidationError(_(
+                            'You can Not cancel a remit that is not the last '
+                            'one for all the expedients'))
 
-    @api.one
+    @api.multi
     @api.constrains('date', 'expedient_ids')
     def check_dates(self):
-        future_expedients = self.expedient_ids.search([
-            ('last_move_date', '>', self.date),
-            ('id', 'in', self.expedient_ids.ids),
-        ])
-        if future_expedients:
-            raise Warning(
-                'No puede mover expedientes que hayan sido movidos en un '
-                'remito con fecha mayor a la de este remito!\n'
-                '* Expedientes: %s' % (', '.join(
-                    future_expedients.mapped('number'))))
+        for rec in self:
+            future_expedients = rec.expedient_ids.search([
+                ('last_move_date', '>', rec.date),
+                ('id', 'in', rec.expedient_ids.ids),
+            ])
+            if future_expedients:
+                raise ValidationError(
+                    'No puede mover expedientes que hayan sido movidos en un '
+                    'remito con fecha mayor a la de este remito!\n'
+                    '* Expedientes: %s' % (', '.join(
+                        future_expedients.mapped('number'))))
 
-    @api.one
+    @api.multi
     def check_user_location(self):
-        self.confirmation_user_id = self.env.user
-        self.confirmation_date = fields.Datetime.now()
-        if self.location_dest_id not in self.env.user.location_ids:
-            raise Warning(_(
-                'You can Not Confirme a Remit of a Location where your are not'
-                ' authorized!'))
+        for rec in self:
+            rec.confirmation_user_id = rec.env.user
+            rec.confirmation_date = fields.Datetime.now()
+            if rec.location_dest_id not in rec.env.user.location_ids:
+                raise ValidationError(_(
+                    'You can Not Confirme a Remit of a Location where your '
+                    'are not authorized!'))
 
     @api.multi
     def action_cancel_in_transit(self):
         """ go from canceled state to draft state"""
         self.write({'state': 'in_transit'})
-        self.delete_workflow()
-        self.create_workflow()
         return True
 
-    @api.one
+    @api.multi
+    def action_cancel(self):
+        """ go from canceled state to draft state"""
+        self.write({'state': 'cancel'})
+        return True
+
+    @api.multi
+    def action_confirm(self):
+        """ go from canceled state to draft state"""
+        self.write({'state': 'confirmed'})
+        return True
+
+    @api.multi
     def unlink(self):
-        if self.state != 'cancel':
-            raise Warning(_(
-                "You can not delete a Remit that is not in Cancel State"))
-        return super(remit, self).unlink()
+        for rec in self:
+            if rec.state != 'cancel':
+                raise ValidationError(_(
+                    "You can not delete a Remit that is not in Cancel State"))
+            return super(Remit, rec).unlink()
 
     @api.model
     def create(self, vals):
         vals['number'] = self.env[
             'ir.sequence'].get('public_budget.remit') or '/'
-        return super(remit, self).create(vals)
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+        return super(Remit, self).create(vals)

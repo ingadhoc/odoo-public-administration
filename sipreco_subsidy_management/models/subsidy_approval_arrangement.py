@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from openerp import fields, models, api
-import openerp.addons.decimal_precision as dp
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -50,10 +49,9 @@ class ApprovalArrangement(models.Model):
     #     'Subsidio',
     #     required=True,
     # )
-    approved_amount = fields.Float(
+    approved_amount = fields.Monetary(
         'Monto Aprobado',
         required=True,
-        digits=dp.get_precision('Account'),
         # default=_get_approved_amount,
     )
 

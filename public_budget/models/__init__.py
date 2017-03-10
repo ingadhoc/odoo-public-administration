@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
 import inventory_rule
 import res_partner
-import voucher
+# TODO migrar voucher completo
+# import voucher
 import invoice
 import advance_request_type
 import advance_request
@@ -30,4 +32,4 @@ import budget_modification
 import expedient
 import advance_request_line
 import expedient_founder
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+import account_move_line

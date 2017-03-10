@@ -1,34 +1,28 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
-from openerp.exceptions import Warning
-import openerp.addons.decimal_precision as dp
+from openerp.exceptions import ValidationError
 
 
-class funding_move(models.Model):
-    """"""
+class FundingMove(models.Model):
 
     _name = 'public_budget.funding_move'
-    _description = 'funding_move'
+    _description = 'Funding Move'
 
     _states_ = [
-        # State machine: untitle
         ('draft', 'Draft'),
         ('confirmed', 'Confirmed'),
         ('cancel', 'Cancel'),
     ]
 
     date = fields.Date(
-        string='Date',
         required=True,
         default=fields.Date.context_today
     )
     name = fields.Char(
-        string='Name',
         required=True
     )
     type = fields.Selection(
         [(u'request', u'Request'), (u'refund', u'Refund')],
-        string='Type',
         required=True,
         default='request'
     )
@@ -38,10 +32,8 @@ class funding_move(models.Model):
         required=True,
         domain=[('type', 'in', ('cash', 'bank'))]
     )
-    amount = fields.Float(
-        string='Amount',
+    amount = fields.Monetary(
         required=True,
-        digits=dp.get_precision('Account'),
     )
     move_id = fields.Many2one(
         'account.move',
@@ -51,7 +43,6 @@ class funding_move(models.Model):
     )
     state = fields.Selection(
         _states_,
-        'State',
         default='draft',
     )
     budget_id = fields.Many2one(
@@ -61,67 +52,72 @@ class funding_move(models.Model):
         required=True,
         domain=[('state', '=', 'open')]
     )
+    currency_id = fields.Many2one(
+        related='budget_id.currency_id',
+        readonly=True,
+    )
 
     @api.multi
     def action_cancel_draft(self):
         """ go from canceled state to draft state"""
         self.write({'state': 'draft'})
-        self.delete_workflow()
-        self.create_workflow()
         return True
 
-    @api.one
-    def unlink(self):
-        if self.state not in ('draft'):
-            raise Warning(
-                _('The funding move must be in draft state for unlink !'))
-        return super(funding_move, self).unlink()
+    @api.multi
+    def action_cancel(self):
+        self.write({'state': 'cancel'})
+        return True
 
-    @api.one
+    @api.multi
+    def unlink(self):
+        for rec in self:
+            if rec.state not in ('draft'):
+                raise ValidationError(
+                    _('The funding move must be in draft state for unlink !'))
+        return super(FundingMove, self).unlink()
+
+    @api.multi
     @api.constrains('state')
     def _check_cancel(self):
-        if self.state == 'cancel' and self.move_id:
-            raise Warning(_(
-                "You can not cancel a Funding Move that has a related "
-                "Account Move. Delete it first"))
+        for rec in self:
+            if rec.state == 'cancel' and self.move_id:
+                raise ValidationError(_(
+                    "You can not cancel a Funding Move that has a related "
+                    "Account Move. Delete it first"))
 
-    @api.one
+    @api.multi
     def action_confirm(self):
-        if self.type == 'refund':
-            account_id = self.journal_id.default_debit_account_id.id
-            debit = 0.0
-            credit = self.amount
-        else:
-            account_id = self.journal_id.default_credit_account_id.id
-            credit = 0.0
-            debit = self.amount
+        for rec in self:
+            if rec.type == 'refund':
+                account_id = rec.journal_id.default_debit_account_id.id
+                debit = 0.0
+                credit = rec.amount
+            else:
+                account_id = rec.journal_id.default_credit_account_id.id
+                credit = 0.0
+                debit = rec.amount
 
-        move_line1 = {
-            'name': self.name[:64],
-            'date': self.date,
-            'debit': debit,
-            'credit': credit,
-            'account_id': account_id,
-        }
-        move_line2 = {
-            'name': self.name[:64],
-            'date': self.date,
-            'debit': credit,
-            'credit': debit,
-            'account_id': self.budget_id.income_account_id.id,
-        }
+            move_line1 = {
+                'name': rec.name[:64],
+                'date': rec.date,
+                'debit': debit,
+                'credit': credit,
+                'account_id': account_id,
+            }
+            move_line2 = {
+                'name': rec.name[:64],
+                'date': rec.date,
+                'debit': credit,
+                'credit': debit,
+                'account_id': rec.budget_id.income_account_id.id,
+            }
 
-        period = self.env['account.period'].find(self.date)[:1]
-
-        move_vals = {
-            'ref': self.name,
-            'line_id': [(0, 0, move_line2), (0, 0, move_line1)],
-            'journal_id': self.journal_id.id,
-            'date': self.date,
-            'period_id': period.id,
-        }
-        move = self.env['account.move'].create(move_vals)
-        self.write({'move_id': move.id, 'state': 'confirmed'})
-        move.post()
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+            move_vals = {
+                'ref': rec.name,
+                'line_id': [(0, 0, move_line2), (0, 0, move_line1)],
+                'journal_id': rec.journal_id.id,
+                'date': rec.date,
+            }
+            move = rec.env['account.move'].create(move_vals)
+            rec.write({'move_id': move.id, 'state': 'confirmed'})
+            move.post()

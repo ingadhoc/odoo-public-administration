@@ -89,6 +89,7 @@
                     <field name="preventive_avg" widget="integer" string="%"/>
                     <field name="balance_amount" sum="Total"/>
                     <field name="budget_assignment_allowed" invisible="1"/>
+                    <field name="currency_id" invisible="1"/>
                 </tree>
             </field>
         </record>
@@ -113,6 +114,7 @@
                     <field name="preventive_avg" widget="integer" string="%"/>
                     <field name="balance_amount"/>
                     <field name="budget_assignment_allowed" invisible="1"/>
+                    <field name="currency_id" invisible="1"/>
                 </tree>
             </field>
         </record>
@@ -138,5 +140,3 @@
             key2="tree_but_open"/>
     </data>
 </openerp>
-<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
-     -->

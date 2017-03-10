@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
-from openerp.exceptions import Warning
-import openerp.addons.decimal_precision as dp
+from openerp.exceptions import ValidationError
 import logging
 _logger = logging.getLogger(__name__)
 
 
-class preventive_line(models.Model):
-    """Preventive Line"""
+class PreventiveLine(models.Model):
 
     _name = 'public_budget.preventive_line'
     _description = 'Preventive Line'
@@ -17,51 +15,48 @@ class preventive_line(models.Model):
         'account.account',
         string='Account',
         states={'invoiced': [('readonly', True)]},
-        domain=[
-            ('type', 'in', ['other']),
-            ('user_type.report_type', 'in', ['expense', 'asset'])]
+        domain="[('type', '=', 'other'), ('company_id', '=', company_id), "
+        "('deprecated', '=', False)]",
+    )
+    company_id = fields.Many2one(
+        related='transaction_id.company_id',
+        readonly=True,
+    )
+    currency_id = fields.Many2one(
+        related='transaction_id.currency_id',
+        readonly=True,
     )
     expedient_id = fields.Many2one(
         related='transaction_id.expedient_id',
+        readonly=True,
     )
-    preventive_amount = fields.Float(
+    preventive_amount = fields.Monetary(
         string='Preventive',
         required=True,
-        digits=dp.get_precision('Account'),
         states={'closed': [('readonly', True)]}
     )
     advance_line = fields.Boolean(
-        string='advance_line',
+        string='Advance Line?',
     )
-    remaining_amount = fields.Float(
-        string=_('Remaining Amount'),
-        compute='_get_amounts',
-        digits=dp.get_precision('Account'),
-        store=True,
-    )
-    definitive_amount = fields.Float(
-        string=_('Definitive Amount'),
+    remaining_amount = fields.Monetary(
         compute='_get_amounts',
         store=True,
-        digits=dp.get_precision('Account'),
     )
-    invoiced_amount = fields.Float(
-        string=_('Invoiced Amount'),
+    definitive_amount = fields.Monetary(
         compute='_get_amounts',
         store=True,
-        digits=dp.get_precision('Account'),
     )
-    to_pay_amount = fields.Float(
-        string=_('To Pay Amount'),
+    invoiced_amount = fields.Monetary(
         compute='_get_amounts',
         store=True,
-        digits=dp.get_precision('Account'),
     )
-    paid_amount = fields.Float(
-        string=_('Paid Amount'),
+    to_pay_amount = fields.Monetary(
         compute='_get_amounts',
         store=True,
-        digits=dp.get_precision('Account'),
+    )
+    paid_amount = fields.Monetary(
+        compute='_get_amounts',
+        store=True,
     )
     state = fields.Selection(
         selection=[
@@ -71,12 +66,11 @@ class preventive_line(models.Model):
             ('invoiced', _('Invoiced')),
             ('closed', _('Closed')),
             ('cancel', _('Cancel'))],
-        string=_('States'),
         compute='_get_state',
         store=True,
     )
     affects_budget = fields.Boolean(
-        _('Affects Budget?'),
+        'Affects Budget?',
         store=True,
         compute='_get_affects_budget',
     )
@@ -109,20 +103,21 @@ class preventive_line(models.Model):
         auto_join=True,
     )
 
-    @api.one
+    @api.multi
     @api.depends(
         'invoiced_amount',
     )
     def _get_state(self):
         """Por ahora solo implementamos los estados invoiced y draft
         """
-        _logger.info('Getting state for preventive line %s' % self.id)
-        state = 'draft'
-        if self.invoiced_amount:
-            state = 'invoiced'
-        self.state = state
+        for rec in self:
+            _logger.info('Getting state for preventive line %s' % rec.id)
+            state = 'draft'
+            if rec.invoiced_amount:
+                state = 'invoiced'
+            rec.state = state
 
-    @api.one
+    @api.multi
     @api.depends(
         'transaction_id.state',
         'transaction_id.type_id.with_advance_payment',
@@ -133,19 +128,21 @@ class preventive_line(models.Model):
         el budget de acuerdo a el estado de la transaccion y a sí son lineas
         de adelanto o no.
         """
-        affects_budget = False
-        with_advance_payment = self.transaction_id.type_id.with_advance_payment
-        transaction_state = self.transaction_id.state
-        if with_advance_payment:
-            if self.advance_line and transaction_state == 'open':
-                affects_budget = True
-            elif not self.advance_line and transaction_state == 'closed':
-                affects_budget = True
-        else:
-            if not self.advance_line and transaction_state in (
-                    'open', 'closed'):
-                affects_budget = True
-        self.affects_budget = affects_budget
+        for rec in self:
+            affects_budget = False
+            with_advance_payment = (
+                rec.transaction_id.type_id.with_advance_payment)
+            transaction_state = rec.transaction_id.state
+            if with_advance_payment:
+                if rec.advance_line and transaction_state == 'open':
+                    affects_budget = True
+                elif not rec.advance_line and transaction_state == 'closed':
+                    affects_budget = True
+            else:
+                if not rec.advance_line and transaction_state in (
+                        'open', 'closed'):
+                    affects_budget = True
+            rec.affects_budget = affects_budget
 
     @api.one
     @api.depends(
@@ -212,7 +209,8 @@ class preventive_line(models.Model):
                 invoiced_amount_field = 'computed_invoiced_amount'
                 to_pay_amount_field = 'computed_to_pay_amount'
                 paid_amount_field = 'computed_paid_amount'
-            definitive_amount = invoiced_amount = to_pay_amount = paid_amount = 0
+            definitive_amount = invoiced_amount = \
+                to_pay_amount = paid_amount = 0
             for dl in definitive_lines:
                 definitive_amount += dl.amount
                 invoiced_amount += getattr(dl, invoiced_amount_field)
@@ -225,64 +223,69 @@ class preventive_line(models.Model):
         self.paid_amount = paid_amount
         _logger.info('Finish getting amounts for preventive line %s' % self.id)
 
-    @api.one
+    @api.multi
     @api.constrains('account_id', 'transaction_id')
     def check_type_company(self):
-        if (
-                self.account_id and self.transaction_id and
-                self.account_id.company_id != self.transaction_id.company_id
-        ):
-            raise Warning(_(
-                'Transaction Company and Account Company must be the same!'))
+        for rec in self:
+            if (
+                    rec.account_id and rec.transaction_id and
+                    rec.account_id.company_id != rec.transaction_id.company_id
+            ):
+                raise ValidationError(_(
+                    'Transaction Company and Account Company must be the '
+                    'same!'))
 
-    @api.one
+    @api.multi
     @api.constrains('definitive_line_ids', 'preventive_amount')
     def _check_number(self):
-        if self.transaction_id.company_id.currency_id.round(
-                self.preventive_amount - self.definitive_amount) < 0.0:
-            raise Warning(
-                _("Definitive Amount can't be greater than Preventive Amount"))
+        for rec in self:
+            if rec.currency_id.round(
+                    rec.preventive_amount - rec.definitive_amount) < 0.0:
+                raise ValidationError(_(
+                    "Definitive Amount can't be greater than Preventive "
+                    "Amount"))
 
-    @api.one
+    @api.multi
     @api.constrains(
         'preventive_amount')
     def check_budget_state_open(self):
-        if self.budget_id and self.budget_id.state not in 'open':
-            raise Warning(
-                'Solo puede cambiar afectaciones preventivas si '
-                'el presupuesto está abierto')
+        for rec in self:
+            if rec.budget_id and rec.budget_id.state not in 'open':
+                raise ValidationError(
+                    'Solo puede cambiar afectaciones preventivas si '
+                    'el presupuesto está abierto')
 
-    @api.one
+    @api.multi
     @api.constrains(
         'transaction_id',
         'budget_position_id',
         'preventive_amount')
     def _check_position_balance_amount(self):
-        self = self.with_context(
-            budget_id=self.transaction_id.budget_id.id,
-            excluded_line_id=self.id,
-        )
-        assignment_position = self.budget_position_id.assignment_position_id
-        if not assignment_position:
-            raise Warning(_(
-                "The selected budget position (%s) has not a related assigment"
-                " position!" % self.budget_position_id.name))
-        position_balance = (assignment_position.balance_amount)
-        preventive_amount = self.preventive_amount
-        if position_balance < preventive_amount:
-            raise Warning(_(
-                "There is not enough Balance Amount to assign (%s) to Budget "
-                "Position '%s'.\n"
-                "* Balance available for '%s': %s") % (
-                preventive_amount, self.budget_position_id.name,
-                assignment_position.name, position_balance))
+        for rec in self:
+            rec = rec.with_context(
+                budget_id=rec.transaction_id.budget_id.id,
+                excluded_line_id=rec.id,
+            )
+            assignment_position = rec.budget_position_id.assignment_position_id
+            if not assignment_position:
+                raise ValidationError(_(
+                    "The selected budget position (%s) has not a related "
+                    "assigment position!" % rec.budget_position_id.name))
+            position_balance = (assignment_position.balance_amount)
+            preventive_amount = rec.preventive_amount
+            if position_balance < preventive_amount:
+                raise ValidationError(_(
+                    "There is not enough Balance Amount to assign (%s) to "
+                    "Budget Position '%s'.\n"
+                    "* Balance available for '%s': %s") % (
+                    preventive_amount, rec.budget_position_id.name,
+                    assignment_position.name, position_balance))
 
-    @api.one
+    @api.multi
     def unlink(self):
-        if self.definitive_line_ids:
-            raise Warning(_(
-                "You can not delete a preventive line that has definitive "
-                "lines"))
-        return super(preventive_line, self).unlink()
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+        for rec in self:
+            if rec.definitive_line_ids:
+                raise ValidationError(_(
+                    "You can not delete a preventive line that has definitive "
+                    "lines"))
+        return super(PreventiveLine, self).unlink()
