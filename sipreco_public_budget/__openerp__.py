@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-{'active': False,
-    'author': 'Ingenieria ADHOC',
-    'website': 'www.ingadhoc.com',
+{
+    'author': 'ADHOC SA',
+    'website': 'www.adhoc.com.ar',
     'category': 'Accounting & Finance',
     'data': [
         'wizard/transaction_definitive_make_invoice_view.xml',
@@ -107,13 +107,8 @@
         'hr_public_holidays',
         'account_transfer',
     ],
-    'description': '''
-Public Budget Sipreco Customizations
-====================================
-Customizaciones especificas al modulo public_budget para SIPRECO
-* Agregar punto de venta y numero de factura en wizar de generacion de factura
-''',
-    'installable': True,
+    'installable': False,
     'name': 'Public Budget Sipreco Customizations',
     'test': [],
-    'version': '8.0.1.25.0'}
+    'version': '9.0.1.0.0',
+}

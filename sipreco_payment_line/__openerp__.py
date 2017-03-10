@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 {
-    'active': False,
     'author': 'ADHOC SA',
     'website': 'www.adhoc.com.ar',
     'category': 'Accounting & Finance',
@@ -15,12 +14,8 @@
     'depends': [
         'public_budget',
     ],
-    'description': '''
-Sipreco Payment Lines
-=====================
-Add payment lines on vouchers
-''',
-    'installable': True,
+    'installable': False,
     'name': 'Sipreco Payment Lines',
     'test': [],
-    'version': '8.0.1.1.0'}
+    'version': '9.0.1.0.0',
+}

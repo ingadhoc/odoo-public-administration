@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 {
-    'active': False,
     'author': 'ADHOC SA',
     'website': 'www.adhoc.com.ar',
     'category': 'Accounting & Finance',
@@ -23,11 +22,8 @@
         'sipreco_public_budget',
         'web_widget_one2many_tags',
     ],
-    'description': '''
-Public Budget Subsidy Management
-================================
-''',
-    'installable': True,
+    'installable': False,
     'name': 'Public Budget Subsidy Management',
     'test': [],
-    'version': '8.0.0.2.0'}
+    'version': '9.0.1.0.0',
+}

@@ -42,8 +42,8 @@ addons:
 
 env:
   global:
-  - VERSION="8.0" TESTS="0" LINT_CHECK="0" TRANSIFEX="0"
-  - EXCLUDE='sipreco_project'
+  - VERSION="9.0" TESTS="0" LINT_CHECK="0" TRANSIFEX="0"
+  # - EXCLUDE='sipreco_project'
   - TRANSIFEX_USER='jjscarafia'
   # exclude sipreco_project as it is only a dependencies module
   # to get secure, run 'travis encrypt TRANSIFEX_PASSWORD=[transifex_password] -r [github_repo]'
@@ -53,7 +53,7 @@ env:
   - TRANSIFEX_TEAM='46451'
 
   matrix:
-  #- LINT_CHECK="1"
+  - LINT_CHECK="1"
   - TRANSIFEX="1"
   - TESTS="1" ODOO_REPO="odoo/odoo"
 # either use the two lines above or the two below. Don't change the default if

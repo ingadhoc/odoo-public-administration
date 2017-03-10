@@ -1,5 +1,6 @@
 {
     'author': 'ADHOC SA',
+    'website': 'www.adhoc.com.ar',
     'category': 'base.module_category_knowledge_management',
     'data': [
                 'security/public_budget_group.xml',
@@ -58,14 +59,10 @@
         'account_invoice_auto_pay',
         'account_voucher_double_validation',
     ],
-    'description': """
-Public Budget
-=============
-Modulo generico para gestion publica presupuestaria/contable
-""",
-    'installable': True,
+    'installable': False,
     'license': 'AGPL-3',
     'name': 'Public Budget',
     'test': [],
-    'version': '8.0.0.21.0',
-    'website': ''}
+    'version': '9.0.1.0.0',
+    'website': ''
+}

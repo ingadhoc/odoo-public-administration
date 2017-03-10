@@ -1,15 +1,11 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Sipreco Set Up Data TMC',
-    'version': '8.0.0.4.0',
+    'version': '9.0.1.0.0',
     'category': 'Accounting',
     'sequence': 14,
     'summary': '',
-    'description': """
-Sipreco Set Up Data TMC
-=======================
-    """,
-    'author':  'ADHOC SA',
+    'author': 'ADHOC SA',
     'website': 'www.adhoc.com.ar',
     'images': [
     ],
@@ -31,8 +27,7 @@ Sipreco Set Up Data TMC
     ],
     'test': [
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
     'application': False,
 }
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
