@@ -6,7 +6,7 @@ _logger = logging.getLogger(__name__)
 
 class account_move_line(models.Model):
 
-    _inherit = ['account.move.line']
+    _inherit = 'account.move.line'
 
     # TODO implementar esto
     # voucher_line_ids = fields.One2many(

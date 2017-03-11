@@ -10,4 +10,4 @@ def migrate(cr, version):
         "SELECT vl.id FROM account_voucher_line as vl "
         "INNER JOIN account_voucher as v on vl.voucher_id = v.id "
         "WHERE vl.amount = 0.0 and v.state != 'draft')"
-        )
+    )

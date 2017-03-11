@@ -7,7 +7,7 @@ _logger = logging.getLogger(__name__)
 
 class AccountInvoiceLine(models.Model):
 
-    _inherit = ['account.invoice.line']
+    _inherit = 'account.invoice.line'
 
     to_pay_amount = fields.Monetary(
         compute='_get_amounts',

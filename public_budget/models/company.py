@@ -4,7 +4,7 @@ from openerp import models, fields
 
 class ResCompany(models.Model):
 
-    _inherit = ['res.company']
+    _inherit = 'res.company'
 
     inventory_rule_ids = fields.One2many(
         'public_budget.inventory_rule',

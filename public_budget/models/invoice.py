@@ -7,7 +7,7 @@ _logger = logging.getLogger(__name__)
 
 class AccountInvoice(models.Model):
 
-    _inherit = ['account.invoice']
+    _inherit = 'account.invoice'
 
     transaction_id = fields.Many2one(
         'public_budget.transaction',
