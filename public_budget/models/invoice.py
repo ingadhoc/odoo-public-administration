@@ -23,25 +23,11 @@ class AccountInvoice(models.Model):
         store=True,
         auto_join=True,
     )
-    signed_amount = fields.Monetary(
-        'Monto con Signo',
-        compute='get_signed_amount',
-    )
     to_pay_amount = fields.Monetary(
         string='Monto A Pagar',
         # compute='_compute_to_pay_amount',
         # store=True,
     )
-
-    @api.multi
-    @api.depends('type', 'amount_total')
-    def get_signed_amount(self):
-        for rec in self:
-            if rec.type in ('in_refund', 'out_refund'):
-                signed_amount = -1.0 * rec.amount_total
-            else:
-                signed_amount = rec.amount_total
-            rec.signed_amount = signed_amount
 
     @api.multi
     @api.constrains('state')
@@ -67,74 +53,78 @@ class AccountInvoice(models.Model):
         for rec in self:
             rec.to_pay_amount = rec._get_to_pay_amount_to_date()
             # we force an update of invoice line computed fields
-            rec.invoice_line._get_amounts()
-            rec.mapped('invoice_line.definitive_line_id')._get_amounts()
+            rec.invoice_line_ids._get_amounts()
+            rec.mapped('invoice_line_ids.definitive_line_id')._get_amounts()
 
     @api.multi
     def _get_to_pay_amount_to_date(self):
         self.ensure_one()
-        _logger.info('Getting to pay amount for invoice %s' % self.id)
-        # if invoice is paid and not payments, then it is autopaid and after
-        # validation we consider it as send to paid and paid
-        if self.state == 'paid' and not self.payment_ids:
-            return self.amount_total
-        domain = [
-            ('move_line_id.move_id', '=', self.move_id.id),
-            ('amount', '!=', 0),
-            ('voucher_id.state', 'not in', ('cancel', 'draft'))
-        ]
-        # Add this to allow analysis between dates
-        # from_date = self._context.get('analysis_from_date', False)
-        to_date = self._context.get('analysis_to_date', False)
-        if to_date:
-            domain += [('voucher_id.confirmation_date', '<=', to_date)]
+        return True
+        # TODO implementar
+        # _logger.info('Getting to pay amount for invoice %s' % self.id)
+        # # if invoice is paid and not payments, then it is autopaid and after
+        # # validation we consider it as send to paid and paid
+        # if self.state == 'paid' and not self.payment_ids:
+        #     return self.amount_total
+        # domain = [
+        #     ('move_line_id.move_id', '=', self.move_id.id),
+        #     ('amount', '!=', 0),
+        #     ('voucher_id.state', 'not in', ('cancel', 'draft'))
+        # ]
+        # # Add this to allow analysis between dates
+        # # from_date = self._context.get('analysis_from_date', False)
+        # to_date = self._context.get('analysis_to_date', False)
+        # if to_date:
+        #     domain += [('voucher_id.confirmation_date', '<=', to_date)]
 
-        voucher_lines = self.env['account.voucher.line'].search(domain)
-        # si es credito entonces restamos entonces
-        amount = sum(
-            [x.type == 'dr' and x.amount or -x.amount for x in voucher_lines])
-        if self.type in ('in_refund', 'out_refund'):
-            amount = -amount
-        return amount
+        # voucher_lines = self.env['account.voucher.line'].search(domain)
+        # # si es credito entonces restamos entonces
+        # amount = sum(
+        #     [x.type == 'dr' and x.amount or -x.amount for x in voucher_lines])
+        # if self.type in ('in_refund', 'out_refund'):
+        #     amount = -amount
+        # return amount
 
     @api.multi
     def _get_paid_amount_to_date(self):
         self.ensure_one()
-        _logger.info('Get paid amount to_date for invoice %s' % self.id)
-        to_date = self._context.get('analysis_to_date', False)
-        if not to_date:
-            return 0.0
+        return True
+        # TODO implementar
+        # _logger.info('Get paid amount to_date for invoice %s' % self.id)
+        # to_date = self._context.get('analysis_to_date', False)
+        # if not to_date:
+        #     return 0.0
 
-        # if invoice is paid and not payments, then it is autopaid and after
-        # validation we consider it as send to paid and paid
-        if self.state == 'paid' and not self.payment_ids:
-            return self.amount_total
+        # # if invoice is paid and not payments, then it is autopaid and after
+        # # validation we consider it as send to paid and paid
+        # if self.state == 'paid' and not self.payment_ids:
+        #     return self.amount_total
 
-        domain = [
-            ('move_line_id.move_id', '=', self.move_id.id),
-            ('amount', '!=', 0),
-            ('voucher_id.state', '=', 'posted')
-        ]
-        if to_date:
-            domain += [('voucher_id.date', '<=', to_date)]
+        # domain = [
+        #     ('move_line_id.move_id', '=', self.move_id.id),
+        #     ('amount', '!=', 0),
+        #     ('voucher_id.state', '=', 'posted')
+        # ]
+        # if to_date:
+        #     domain += [('voucher_id.date', '<=', to_date)]
 
-        voucher_lines = self.env['account.voucher.line'].search(domain)
-        # si es credito entonces restamos entonces
-        amount = sum(
-            [x.type == 'dr' and x.amount or -x.amount for x in voucher_lines])
-        if self.type in ('in_refund', 'out_refund'):
-            amount = -amount
-        return amount
+        # voucher_lines = self.env['account.voucher.line'].search(domain)
+        # # si es credito entonces restamos entonces
+        # amount = sum(
+        #     [x.type == 'dr' and x.amount or -x.amount for x in voucher_lines])
+        # if self.type in ('in_refund', 'out_refund'):
+        #     amount = -amount
+        # return amount
 
     @api.multi
-    @api.constrains('date_invoice', 'invoice_line')
+    @api.constrains('date_invoice', 'invoice_line_ids')
     def check_dates(self):
         _logger.info('Checking invoice dates')
         for rec in self:
             if not rec.date_invoice:
                 return True
             for definitive_line in rec.mapped(
-                    'invoice_line.definitive_line_id'):
+                    'invoice_line_ids.definitive_line_id'):
                 if rec.date_invoice < definitive_line.issue_date:
                     raise ValidationError(_(
                         'La fecha de la factura no puede ser menor a la fecha '

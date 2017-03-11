@@ -83,7 +83,7 @@ class account_voucher(models.Model):
     @api.model
     def _search_budget_positions(self, operator, value):
         return [
-            ('line_ids.move_line_id.invoice.invoice_line.'
+            ('line_ids.move_line_id.invoice.invoice_line_ids.'
                 'definitive_line_id.preventive_line_id.budget_position_id',
                 operator, value)]
 
@@ -92,7 +92,7 @@ class account_voucher(models.Model):
         self.invoice_ids = self.line_ids.filtered('amount').mapped(
             'move_line_id.invoice')
         self.budget_position_ids = self.invoice_ids.mapped(
-            'invoice_line.definitive_line_id.preventive_line_id.'
+            'invoice_line_ids.definitive_line_id.preventive_line_id.'
             'budget_position_id')
 
     @api.one

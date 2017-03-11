@@ -7,6 +7,8 @@
     'category': 'base.module_category_knowledge_management',
     'depends': [
         'account',
+        # menu cash and bank
+        'account_payment_fix',
     ],
     'data': [
         'security/public_budget_group.xml',

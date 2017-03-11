@@ -497,7 +497,7 @@ class BudgetTransaction(models.Model):
             'partner_id': supplier.id,
             'date_invoice': invoice_date,
             'supplier_invoice_number': supplier_invoice_number,
-            'invoice_line': [(6, 0, inv_lines.ids)],
+            'invoice_line_ids': [(6, 0, inv_lines.ids)],
             # 'name': invoice.name,
             'type': inv_type,
             'currency_id': (
