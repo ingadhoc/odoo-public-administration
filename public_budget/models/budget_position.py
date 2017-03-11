@@ -7,7 +7,6 @@ _logger = logging.getLogger(__name__)
 
 
 class BudgetPosition(models.Model):
-    """Budget Position"""
 
     _name = 'public_budget.budget_position'
     _description = 'Budget Position'
@@ -69,11 +68,11 @@ class BudgetPosition(models.Model):
         compute='_get_amounts',
     )
     preventive_avg = fields.Monetary(
-        string=_('Porc. Preventivo'),
+        string='Porc. Preventivo',
         compute='_get_amounts',
     )
     amount = fields.Monetary(
-        string=_('Monto'),
+        string='Monto',
         compute='_get_amounts',
     )
     parent_left = fields.Integer(
@@ -113,7 +112,7 @@ class BudgetPosition(models.Model):
     )
     assignment_position_id = fields.Many2one(
         'public_budget.budget_position',
-        string=_('Assignment Position'),
+        string='Assignment Position',
         compute='_get_assignment_position',
         store=True,
     )

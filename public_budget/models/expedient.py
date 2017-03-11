@@ -65,7 +65,7 @@ class PublicBudgetExpedient(models.Model):
     )
     current_location_id = fields.Many2one(
         'public_budget.location',
-        string=_('Current Location'),
+        string='Current Location',
         store=True,
         compute_sudo=True,
         compute='_get_current_location'

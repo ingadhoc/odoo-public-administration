@@ -12,9 +12,10 @@
                 <filter name="customer" position="before">
                     <filter string="Employee" name="employee" domain="[('employee','=',1)]" help="Employee Partners"/>
                 </filter>    
-                <field name="name" position="after">
+                <!-- TODO ver si lo borramos, ya estaria -->
+                <!-- <field name="name" position="after">
                     <field name="document_number" filter_domain="[('document_number','=',self)]"/>
-                </field>
+                </field> -->
             </field>
         </record>
  

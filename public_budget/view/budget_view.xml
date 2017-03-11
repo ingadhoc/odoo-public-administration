@@ -8,7 +8,7 @@
             <field name="arch" type="xml">
                 <search string="Budget">
                     <field name="name"/>
-                    <field name="fiscalyear_id"/>
+                    <!-- <field name="fiscalyear_id"/> -->
                     <field name="income_account_id"/>
                     <field name="expedient_id"/>
                     <group expand="0" string="Group By">
@@ -59,7 +59,7 @@
                         <group>
                             <group>
                                 <field name="name"/>
-                                <field name="fiscalyear_id"/>
+                                <!-- <field name="fiscalyear_id"/> -->
                                 <field name="expedient_id"/>
                                 <field name="income_account_id"/>
                                 <field name="company_id" groups="base.group_multi_company"/>
@@ -127,7 +127,7 @@
                     colors="grey:state=='cancelled';blue:state in (u'draft',);black:state in (u'pre_closed', u'open', u'closed');red:state in ()"
                     >
                     <field name="name"/>
-                    <field name="fiscalyear_id"/>
+                    <!-- <field name="fiscalyear_id"/> -->
                     <field name="income_account_id"/>
                     <field name="expedient_id"/>
                     <field name="state"/>

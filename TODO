@@ -14,6 +14,7 @@ account invice
     # TODO validar que la factura
     # no se pueda validar en un fiscalyear distinto al del budget id
     # TODO como lo implementamos ahora?
+    cargar vista invoices, ver signed amount que no haria falta, es nativo.
 
 voucher completo
     access_account_voucher_secretary_user,account_voucher.secretary_user,model_account_voucher,group_secretary_usuario,1,1,1,1
@@ -34,9 +35,16 @@ reactivar menu action_public_budget_budget_report_3_all
     access_public_budget_budget_report_3_cont_user,access_public_budget_budget_report_3,model_public_budget_budget_report_3,account.group_account_user,1,0,0,0
 access_public_budget_budget_report_3_hab_user,access_public_budget_budget_report_3,model_public_budget_budget_report_3,group_habilitacion_usuario,1,0,0,0
 
+
 advance.request.analysis
     TODO agregar currency y transformar a monetary
 
 requerimos permisos:
     access_account_move_reconcile_habilitaciones_user,account.model_account_move_reconcile_habilitaciones_user,account.model_account_move_reconcile,group_habilitacion_usuario,1,1,1,1
 access_account_move_reconcile_secretary_user,account.model_account_move_reconcile_secretary_user,account.model_account_move_reconcile,group_secretary_usuario,1,1,1,1
+
+
+REvisar en public group:
+    <!-- <record id="account.menu_finance_charts" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4, ref('group_habilitacion_director'))]"/>
+        </record> -->

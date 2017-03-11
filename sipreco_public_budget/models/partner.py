@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
+from openerp.exceptions import ValidationError
 
 
 class partner(models.Model):
@@ -12,7 +13,7 @@ class partner(models.Model):
     )
     subsidy_recipient = fields.Boolean(
         'Subsidy Recipient',
-        )
+    )
     # Make some fields require
     # we make it required in the view so we dont have error in tests
     # and also because it is more correct, this fields should be required
@@ -28,14 +29,14 @@ class partner(models.Model):
     #     )
 
     @api.one
-    @api.constrains('subsidy_recipient', 'document_number')
+    @api.constrains('subsidy_recipient', 'main_id_number')
     def check_unique_document_number_subsidy_recipient(self):
         if self.subsidy_recipient and self.document_number:
             same_document_partners = self.search([
-                ('document_number', '=', self.document_number),
+                ('main_id_number', '=', self.main_id_number),
                 ('subsidy_recipient', '=', True),
                 ('id', '!=', self.id),
-                ])
+            ])
             if same_document_partners:
                 raise ValidationError(_(
                     'El número de documento debe ser único por receptor de '
@@ -43,14 +44,14 @@ class partner(models.Model):
                     '* Receptor existente: %s') % same_document_partners.name)
 
     @api.one
-    @api.constrains('employee', 'document_number')
+    @api.constrains('employee', 'main_id_number')
     def check_unique_document_number_employee(self):
         if self.employee and self.document_number:
             same_document_partners = self.search([
-                ('document_number', '=', self.document_number),
+                ('main_id_number', '=', self.main_id_number),
                 ('employee', '=', True),
                 ('id', '!=', self.id),
-                ])
+            ])
             if same_document_partners:
                 raise ValidationError(_(
                     'El número de documento debe ser único por empleado!\n'

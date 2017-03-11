@@ -3,11 +3,6 @@
     <data noupdate="1">
 
         <!-- Sequences for expedient -->
-        <record id="seq_type_expedient" model="ir.sequence.type">
-            <field name="name">Expedient</field>
-            <field name="code">public_budget.expedient</field>
-        </record>
-
         <record id="seq_expedient" model="ir.sequence">
             <field name="name">Expedient</field>
             <field name="code">public_budget.expedient</field>
@@ -18,10 +13,6 @@
         </record>
 
         <!-- Sequences for remit -->
-        <record id="seq_type_remit" model="ir.sequence.type">
-            <field name="name">Remit</field>
-            <field name="code">public_budget.remit</field>
-        </record>
 
         <record id="seq_remit" model="ir.sequence">
             <field name="name">Remit</field>
