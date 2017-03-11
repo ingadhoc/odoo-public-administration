@@ -4,7 +4,7 @@
     'version': '9.0.1.0.0',
     'author': 'ADHOC SA',
     'website': 'www.adhoc.com.ar',
-    'category': 'base.module_category_knowledge_management',
+    'category': 'Accounting & Finance',
     'depends': [
         'account',
         # menu cash and bank
