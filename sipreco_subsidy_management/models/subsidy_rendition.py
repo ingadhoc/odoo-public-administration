@@ -55,6 +55,7 @@ class PublicBudgetSubsidyRendition(models.Model):
         'Expediente',
         help='Expediente Administrativo de Rendición de Subsidio',
     )
+    editable_line = fields.Boolean('Block editing line', default=True)
 
     @api.one
     @api.constrains('rendition_amount', 'approved_amount')
@@ -67,3 +68,13 @@ class PublicBudgetSubsidyRendition(models.Model):
     @api.depends('rendition_amount', 'approved_amount')
     def get_pending_amount(self):
         self.pending_amount = self.rendition_amount - self.approved_amount
+
+    @api.multi
+    def unlink(self):
+        for record in self:
+            if record.approval_arrangement_id and record.editable_line:
+                raise Warning(
+                    'No es posible borrar una rendición'
+                    ' que presente montos Aprobados')
+            else:
+                return super(PublicBudgetSubsidyRendition, self).unlink()

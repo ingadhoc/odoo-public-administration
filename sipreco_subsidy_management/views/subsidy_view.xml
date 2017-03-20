@@ -47,9 +47,9 @@
                             <page string="Renditions">
                                 <field name="rendition_ids" context="{'default_expedient_id': accountability_administrative_expedient_id, 'default_rendition_amount': pendientes_rendicion_amount}">
                                     <tree editable="bottom">
-                                        <field name="date"/>
-                                        <field name="expedient_id"/>
-                                        <field name="rendition_amount" sum="Total"/>
+                                        <field name="date" attrs="{'readonly': [('editable_line','=',True)]}"/>
+                                        <field name="expedient_id" attrs="{'readonly': [('editable_line','=',True)]}"/>
+                                        <field name="rendition_amount" sum="Total" attrs="{'readonly': [('editable_line','=',True)]}"/>
                                         <!-- nos da error al pasar este default por contexto -->
                                         <!-- context="{'default_approved_amount': rendition_amount} -->
                                         <!-- <field name="approval_arrangement_ids" widget="one2many_tags">
@@ -64,7 +64,8 @@
                                                 </group>
                                             </form>
                                         </field> -->
-                                        <field name="approval_arrangement_id" options="{'create': True, 'create_edit': True}" context="{'default_approved_amount': rendition_amount}"/>
+                                        <field name="approval_arrangement_id" options="{'create': True, 'create_edit': True}" context="{'default_approved_amount': rendition_amount}" attrs="{'readonly': [('editable_line','=',True)]}"/>
+                                        <field name="editable_line"/>
                                         <field name="approved_amount" sum="Total"/>
                                         <field name="pending_amount" sum="Total"/>
                                     </tree>
