@@ -30,4 +30,4 @@ Public Budget Subsidy Management
     'installable': True,
     'name': 'Public Budget Subsidy Management',
     'test': [],
-    'version': '8.0.0.2.0'}
+    'version': '8.0.0.3.0'}
