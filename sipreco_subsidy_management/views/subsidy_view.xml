@@ -102,7 +102,8 @@
             <field name="model">public_budget.subsidy</field>
             <field name="arch" type="xml">
                 <tree string="Subsidios">
-                    <field name="name"/>
+                    <field name="parliamentary_resolution_date"/>
+                    <field name="partner_id" string="Beneficiary"/>
                     <field name="amount" string="Importe s/Res"/>
                     <field name="cargo_amount" sum="Total"/>
                     <field name="rendido_amount" sum="Total"/>
@@ -126,6 +127,8 @@
                 <search string="Subsidios">
                     <field name="name"/>
                     <field name="amount"/>
+                    <field name="partner_id" string="Beneficiary"/>
+                    <field name="budget_id"/>
                     <field name="destination"/>
                     <field name="expedient_id" string="Expediente Autorizante"/>
                     <field name="request_expedient_id"/>
