@@ -55,7 +55,9 @@ class PublicBudgetSubsidyRendition(models.Model):
         'Expediente',
         help='Expediente Administrativo de Rendición de Subsidio',
     )
-    editable_line = fields.Boolean('Block editing line', default=True)
+    editable_line = fields.Boolean(
+        'Block editing line',
+        default=False)
 
     @api.one
     @api.constrains('rendition_amount', 'approved_amount')
@@ -78,3 +80,9 @@ class PublicBudgetSubsidyRendition(models.Model):
                     ' que presente montos Aprobados')
             else:
                 return super(PublicBudgetSubsidyRendition, self).unlink()
+
+    @api.one
+    @api.constrains('approval_arrangement_id')
+    def on_change_approval_arrangement_id(self):
+        if self.approval_arrangement_id:
+            self.editable_line = True
