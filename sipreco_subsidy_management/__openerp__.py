@@ -7,6 +7,7 @@
     'data': [
         'reports/subsidy_note_report.xml',
         'reports/subsidy_approval_arrangement_report.xml',
+        'reports/subsidy_report.xml',
         'views/subsidy_view.xml',
         'views/transaction_type_view.xml',
         'views/subsidy_approval_arrangement_view.xml',
@@ -30,4 +31,4 @@ Public Budget Subsidy Management
     'installable': True,
     'name': 'Public Budget Subsidy Management',
     'test': [],
-    'version': '8.0.0.4.0'}
+    'version': '8.0.0.5.0'}
