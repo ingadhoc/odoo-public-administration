@@ -4,7 +4,7 @@
 
 <!-- Printed Invoice -->
 <record id="action_aeroo_report_subsidy_form" model="ir.actions.report.xml">
-    <field name="name">Reporte Minuta Individual por Responsable</field>
+    <field name="name">Reporte Subsidio Individual</field>
     <field name="type">ir.actions.report.xml</field>
     <field name="model">public_budget.subsidy</field>
     <field name="report_name">subsidy_form_report</field>
