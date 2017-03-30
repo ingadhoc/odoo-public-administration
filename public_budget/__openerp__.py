@@ -54,6 +54,9 @@
         'view/public_budget_menuitem.xml',
         'view/public_budget_actions.xml',
     ],
+    'demo': [
+        'demo/res_users_demo.xml',
+    ],
     'test': [],
     'installable': True,
 }
