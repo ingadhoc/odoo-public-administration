@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+            <!-- 
+            Enable Light Multi Company
+            Contabilidad analítica
+            Manage Multiple Locations and Warehouses
+            Manage Inventory Valuation and Costing Methods
+            Analytic Accounting for Sales
+            Analytic Accounting for Purchases
+            Discount on lines
+             -->
+        <!-- <record id="base.group_user" model="res.groups">
+            <field eval="[
+                (4, ref('base.group_light_multi_company')),
+                (4, ref('base.group_multi_company')),
+                (4, ref('analytic.group_analytic_accounting')),
+                (4, ref('stock.group_locations')),
+                (4, ref('stock_account.group_inventory_valuation')),
+                (4, ref('sale.group_analytic_accounting')),
+                (4, ref('purchase.group_analytic_accounting')),
+                (4, ref('sale.group_discount_per_so_line')),
+                (3, ref('product.group_product_pricelist')),
+            ]" name="implied_ids"/>
+        </record> -->
+
+    </data>
+</openerp>
+
