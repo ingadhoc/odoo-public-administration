@@ -47,9 +47,9 @@
                             <page string="Renditions">
                                 <field name="rendition_ids" context="{'default_expedient_id': accountability_administrative_expedient_id, 'default_rendition_amount': pendientes_rendicion_amount}">
                                     <tree editable="bottom">
-                                        <field name="date"/>
-                                        <field name="expedient_id"/>
-                                        <field name="rendition_amount" sum="Total"/>
+                                        <field name="date" attrs="{'readonly': [('editable_line','=',True)]}"/>
+                                        <field name="expedient_id" attrs="{'readonly': [('editable_line','=',True)]}"/>
+                                        <field name="rendition_amount" sum="Total" attrs="{'readonly': [('editable_line','=',True)]}"/>
                                         <!-- nos da error al pasar este default por contexto -->
                                         <!-- context="{'default_approved_amount': rendition_amount} -->
                                         <!-- <field name="approval_arrangement_ids" widget="one2many_tags">
@@ -64,7 +64,8 @@
                                                 </group>
                                             </form>
                                         </field> -->
-                                        <field name="approval_arrangement_id" options="{'create': True, 'create_edit': True}" context="{'default_approved_amount': rendition_amount}"/>
+                                        <field name="approval_arrangement_id" options="{'create': True, 'create_edit': True}" context="{'default_approved_amount': rendition_amount}" attrs="{'readonly': [('editable_line','=',True)]}"/>
+                                        <field name="editable_line" readonly="1"/>
                                         <field name="approved_amount" sum="Total"/>
                                         <field name="pending_amount" sum="Total"/>
                                     </tree>
@@ -96,13 +97,26 @@
             </field>
         </record>
 
+        <record id="view_public_budget_subsidy_form_inherit" model="ir.ui.view">
+            <field name="name">public_budget.subsidy.form.inherit</field>
+            <field name="model">public_budget.subsidy</field>
+            <field name="inherit_id" ref="view_public_budget_subsidy_form"/>
+            <field name="groups_id" eval="[(6, 0, [ref('account.group_account_manager')])]" />                
+            <field name="arch" type="xml">                                   
+                <field name="editable_line" position="attributes">
+                   <attribute name="readonly">0</attribute>                   
+                </field>                              
+            </field>
+        </record>
+
         <!-- TREE VIEW -->
         <record id="view_public_budget_subsidy_tree" model="ir.ui.view">
             <field name="name">public_budget.subsidy.tree</field>
             <field name="model">public_budget.subsidy</field>
             <field name="arch" type="xml">
                 <tree string="Subsidios">
-                    <field name="name"/>
+                    <field name="parliamentary_resolution_date"/>
+                    <field name="partner_id" string="Beneficiary"/>
                     <field name="amount" string="Importe s/Res"/>
                     <field name="cargo_amount" sum="Total"/>
                     <field name="rendido_amount" sum="Total"/>
@@ -126,6 +140,8 @@
                 <search string="Subsidios">
                     <field name="name"/>
                     <field name="amount"/>
+                    <field name="partner_id" string="Beneficiary"/>
+                    <field name="budget_id"/>
                     <field name="destination"/>
                     <field name="expedient_id" string="Expediente Autorizante"/>
                     <field name="request_expedient_id"/>
