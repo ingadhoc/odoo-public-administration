@@ -8,10 +8,10 @@
     self.pool['res.partner'].write(cr, uid, partner_ids, vals)
 # otra alternativa es usar este gist
 # https://gist.github.com/moylop260/d3bad1e96e46cae0cd99bb6db224ed60
--
-  set language to website
--
-  !python {model: website, id: website.default_website}: |
-    lang_code = 'es_AR'
-    lang_id = self.pool['res.lang'].search(cr, uid, [('code', '=', lang_code)])[0]
-    self[0].write({'default_lang_id': lang_id, 'language_ids': [(6, 0, [lang_id])]})
+# -
+#   set language to website
+# -
+#   !python {model: website, id: website.default_website}: |
+#     lang_code = 'es_AR'
+#     lang_id = self.pool['res.lang'].search(cr, uid, [('code', '=', lang_code)])[0]
+#     self[0].write({'default_lang_id': lang_id, 'language_ids': [(6, 0, [lang_id])]})
