@@ -15,5 +15,21 @@
             <field name="padding">4</field>
             <field name="company_id" eval="False"/>
         </record>
+
+        <!-- Subsidy Internal number -->
+        <record id="subsidy_internal_number" model="ir.sequence.type">
+            <field name="name">Subsidy Internal number</field>
+            <field name="code">subsidy_internal_number</field>
+        </record>
+
+        <record id="seq_subsidy_internal_number" model="ir.sequence">
+            <field name="name">Subsidy Internal number</field>
+            <field name="code">subsidy_internal_number</field>
+            <field name="prefix">OI-%(year)s-</field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+            <field name="implementation">no_gap</field>
+        </record>
+
     </data>
 </openerp>

@@ -22,7 +22,7 @@
 <ir_set>
     <field eval="'action'" name="key"/>
     <field eval="'client_print_multi'" name="key2"/>
-    <field eval="['account.voucher']" name="models"/>
+    <field eval="['public_budget.subsidy']" name="models"/>
     <field name="name">Reporte Subsidio Individual</field>
     <field eval="'ir.actions.report.xml,'+str(action_aeroo_report_subsidy_form)" name="value"/>
     <field eval="True" name="isobject"/>
