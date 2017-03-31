@@ -65,6 +65,7 @@
                                             </form>
                                         </field> -->
                                         <field name="approval_arrangement_id" options="{'create': True, 'create_edit': True}" context="{'default_approved_amount': rendition_amount}" attrs="{'readonly': [('editable_line','=',True)]}"/>
+                                        <button name="%(action_aeroo_subsidy_approval_arrangement_report)d" string="Print" icon="gtk-print" type="action"/>
                                         <field name="editable_line" readonly="1"/>
                                         <field name="approved_amount" sum="Total"/>
                                         <field name="pending_amount" sum="Total"/>
