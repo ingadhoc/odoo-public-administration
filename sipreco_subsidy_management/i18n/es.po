@@ -5,13 +5,14 @@
 # Translators:
 # Gonzalo Ruzafa <gr@ingadhoc.com>, 2016
 # Juan José Scarafía <scarafia.juanjose@gmail.com>, 2016
+# Nicolas Mac Rouillon <nmr@ingadhoc.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: odoo-public-administration (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-29 21:26+0000\n"
-"PO-Revision-Date: 2016-07-28 14:24+0000\n"
-"Last-Translator: Gonzalo Ruzafa <gr@ingadhoc.com>\n"
+"POT-Creation-Date: 2017-03-31 17:20+0000\n"
+"PO-Revision-Date: 2017-03-31 17:20+0000\n"
+"Last-Translator: Juan José Scarafía <scarafia.juanjose@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/adhoc/ingadhoc-odoo-public-administration-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,6 +54,17 @@ msgstr "Aprobado"
 #: view:public_budget.subsidy:sipreco_subsidy_management.view_public_budget_subsidy_search
 msgid "Aprobados"
 msgstr "Aprobados"
+
+#. module: sipreco_subsidy_management
+#: view:public_budget.subsidy:sipreco_subsidy_management.view_public_budget_subsidy_search
+#: view:public_budget.subsidy:sipreco_subsidy_management.view_public_budget_subsidy_tree
+msgid "Beneficiary"
+msgstr "Beneficiario"
+
+#. module: sipreco_subsidy_management
+#: field:public_budget.subsidy.rendition,editable_line:0
+msgid "Block editing line"
+msgstr "Bloquear linea"
 
 #. module: sipreco_subsidy_management
 #: field:public_budget.subsidy,budget_id:0
@@ -154,9 +166,15 @@ msgid "Display Name"
 msgstr "Nombre a Mostrar"
 
 #. module: sipreco_subsidy_management
-#: field:public_budget.subsidy.rendition,approval_arrangement_ids:0
+#: model:ir.actions.act_window,name:sipreco_subsidy_management.action_public_budget_subsidy_approval_arrangement
+#: model:ir.ui.menu,name:sipreco_subsidy_management.menu_public_budget_subsidy_approval_arrangement
 msgid "Disposiciones de aprobación"
 msgstr "Disposiciones de aprobación"
+
+#. module: sipreco_subsidy_management
+#: field:public_budget.subsidy.rendition,approval_arrangement_id:0
+msgid "Disposición de aprobación"
+msgstr ""
 
 #. module: sipreco_subsidy_management
 #: sql_constraint:public_budget.subsidy.approval_arrangement:0
@@ -175,9 +193,10 @@ msgstr "Entregados no rendidos"
 
 #. module: sipreco_subsidy_management
 #: view:public_budget.subsidy:sipreco_subsidy_management.view_public_budget_subsidy_search
+#: view:public_budget.subsidy:sipreco_subsidy_management.view_public_budget_subsidy_tree
 #: field:public_budget.subsidy,accountability_state:0
-msgid "Estado de la Rendición"
-msgstr "Estado de la Rendición"
+msgid "Estado"
+msgstr ""
 
 #. module: sipreco_subsidy_management
 #: view:public_budget.subsidy:sipreco_subsidy_management.view_public_budget_subsidy_search
@@ -220,6 +239,11 @@ msgstr "Expediente Parlamentario"
 #: field:public_budget.subsidy,request_expedient_id:0
 msgid "Expediente de Solicitud"
 msgstr "Expediente de Solicitud"
+
+#. module: sipreco_subsidy_management
+#: field:public_budget.subsidy,other_accountability_expedient_ids:0
+msgid "Expedientes de Rendicion agregados"
+msgstr ""
 
 #. module: sipreco_subsidy_management
 #: view:public_budget.subsidy:sipreco_subsidy_management.view_public_budget_subsidy_search
@@ -274,6 +298,17 @@ msgstr "Importe Pendiente"
 #: field:public_budget.subsidy.rendition,rendition_amount:0
 msgid "Importe Rendido"
 msgstr "Importe Rendido"
+
+#. module: sipreco_subsidy_management
+#: view:public_budget.subsidy:sipreco_subsidy_management.view_public_budget_subsidy_form
+#: view:public_budget.subsidy:sipreco_subsidy_management.view_public_budget_subsidy_tree
+msgid "Importe s/Res"
+msgstr ""
+
+#. module: sipreco_subsidy_management
+#: field:public_budget.subsidy,internal_number:0
+msgid "Internal number"
+msgstr ""
 
 #. module: sipreco_subsidy_management
 #: field:public_budget.subsidy,invoice_ids:0
@@ -470,7 +505,7 @@ msgid "Rendiciones presentadas en Revisión"
 msgstr "Rendiciones presentadas en Revisión"
 
 #. module: sipreco_subsidy_management
-#: field:public_budget.subsidy.approval_arrangement,rendition_id:0
+#: field:public_budget.subsidy.approval_arrangement,rendition_ids:0
 msgid "Rendición"
 msgstr "Rendición"
 
@@ -489,6 +524,16 @@ msgstr "Rendido"
 #: field:public_budget.subsidy,rendition_ids:0
 msgid "Renditions"
 msgstr "Rendiciones"
+
+#. module: sipreco_subsidy_management
+#: model:ir.actions.report.xml,name:sipreco_subsidy_management.action_aeroo_report_subsidy_form
+msgid "Reporte Subsidio Individual"
+msgstr ""
+
+#. module: sipreco_subsidy_management
+#: model:ir.actions.report.xml,name:sipreco_subsidy_management.action_aeroo_subsidy_report
+msgid "Reporte Tabla Subsidios"
+msgstr ""
 
 #. module: sipreco_subsidy_management
 #: field:public_budget.subsidy,definitive_balance:0
