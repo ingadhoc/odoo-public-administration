@@ -6,7 +6,7 @@
 <record id="action_aeroo_subsidy_approval_arrangement_report" model="ir.actions.report.xml">
     <field name="name">Subsidy Approval Arrangement</field>
     <field name="type">ir.actions.report.xml</field>
-    <field name="model">public_budget.subsidy.approval_arrangement</field>
+    <field name="model">public_budget.subsidy.rendition</field>
     <field name="report_name">subsidy_approval_arrangement_report</field>
     <field name="report_type">aeroo</field>
     <field name="in_format">oo-odt</field>
@@ -22,7 +22,7 @@
 <ir_set>
     <field eval="'action'" name="key"/>
     <field eval="'client_print_multi'" name="key2"/>
-    <field eval="['public_budget.subsidy.approval_arrangement']" name="models"/>
+    <field eval="['public_budget.subsidy.rendition']" name="models"/>
     <field name="name">asset</field>
     <field eval="'ir.actions.report.xml,'+str(action_aeroo_subsidy_approval_arrangement_report)" name="value"/>
     <field eval="True" name="isobject"/>

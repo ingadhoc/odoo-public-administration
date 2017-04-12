@@ -67,7 +67,8 @@ virtualenv:
 
 install:
   - if [[ "${OCA_RUNBOT}" == "1" ]]; then locale-gen es_AR.UTF-8 && locale-gen es_ES.UTF-8; fi
-  - if [[ "${OCA_RUNBOT}" == "1" ]]; then git clone -b 9.0 git@github.com:odoo/enterprise.git /root/dependencies/odoo-enterprise; fi
+  # checkout para evitar error de dominios
+  - if [[ "${OCA_RUNBOT}" == "1" ]]; then git clone -b 9.0 git@github.com:odoo/enterprise.git /root/dependencies/odoo-enterprise && cd /root/dependencies/odoo-enterprise && git checkout e0157b6 && cd /; fi
   # - if [[ "${OCA_RUNBOT}" == "1" ]]; then git clone -b 9.0 git@github.com:odoo/enterprise.git ${HOME}/odoo-enterprise; fi
   - git clone --depth=1 https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
