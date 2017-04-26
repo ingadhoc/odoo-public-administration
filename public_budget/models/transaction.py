@@ -627,3 +627,16 @@ class BudgetTransaction(models.Model):
             'default_type': 'payment',
         }
         return res
+
+    @api.multi
+    def copy(self, default=None):
+        res = super(BudgetTransaction, self).copy(default)
+        attachments = self.env['ir.attachment'].search(
+            [('res_model', '=', 'public_budget.transaction'),
+             ('res_id', '=', self.id)])
+        for att in attachments:
+            att.copy(default={
+                'res_id': res.id,
+                'name': att.name,
+            })
+        return res
