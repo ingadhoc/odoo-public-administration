@@ -604,4 +604,16 @@ class transaction(models.Model):
             'default_type': 'payment',
         }
         return res
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+
+    @api.multi
+    def copy(self, default=None):
+        res = super(transaction, self).copy(default)
+        attachments = self.env['ir.attachment'].search(
+            [('res_model', '=', 'public_budget.transaction'),
+             ('res_id', '=', self.id)])
+        for att in attachments:
+            att.copy(default={
+                'res_id': res.id,
+                'name': att.name,
+            })
+        return res
