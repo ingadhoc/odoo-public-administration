@@ -46,10 +46,10 @@
             />
 
         <menuitem
-            name="Otras Operaciones"
+            name="Advance Requests"
+            id="menu_advance_requests_main"
             sequence="3"
             parent="account.menu_finance"
-            id="other_operations"
             />
 
         <menuitem
@@ -93,7 +93,7 @@
             id="menu_advance_requests"
             sequence="10"
             action="action_public_budget_advance_request_advance_requests"
-            parent="other_operations"
+            parent="menu_advance_requests_main"
             />
 
         <record id="action_public_budget_advance_returns" model="ir.actions.act_window">
@@ -107,7 +107,7 @@
             id="menu_advance_returns"
             sequence="20"
             action="action_public_budget_advance_returns"
-            parent="other_operations"
+            parent="menu_advance_requests_main"
             />
 
         <record id="action_public_budget_advance_request_types" model="ir.actions.act_window">
@@ -118,9 +118,9 @@
         <!-- child of other operations so that secretary can see this -->
         <menuitem
             id="menu_advance_request_types"
-            sequence="7"
+            sequence="90"
             action="action_public_budget_advance_request_types"
-            parent="other_operations"
+            parent="menu_advance_requests_main"
             />
 
         <menuitem
@@ -398,7 +398,7 @@
             id="menu_funding_moves"
             sequence="5"
             action="action_public_budget_funding_move"
-            parent="other_operations"
+            parent="account.menu_finance_bank_and_cash"
             />     
     </data>
 </openerp>
