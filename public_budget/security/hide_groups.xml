@@ -2,23 +2,13 @@
 <openerp>
     <data>
 
-        <!-- advance request type to other operations so that hab and secretary can see them -->
-        <record id="public_budget.menu_advance_request_types" model="ir.ui.menu">
-            <field name="sequence" eval="7"/>
-            <field name="parent_id" ref="sipreco_public_budget.other_operations"/>
-        </record>
-
         <!-- Hide unused groups to make user configuration easier -->
         <!-- Grupo cobros y pagos -->
         <record id="account.group_account_invoice" model="res.groups">
             <field name="category_id" ref="base.module_category_hidden"/>
         </record>
         <!-- Grupo compartiendo -->
-        <record id="share.group_share_user" model="res.groups">
-            <field name="category_id" ref="base.module_category_hidden"/>
-            <!-- tengo que cambiarle nombre porque el nombre debe ser unico por aplicación -->
-            <field name="name">Share / User</field>
-        </record>
+
         <!-- Menu messaging a techincal features -->
         <record id="base.group_sale_salesman" model="res.groups">
             <field name="category_id" ref="base.module_category_hidden"/>

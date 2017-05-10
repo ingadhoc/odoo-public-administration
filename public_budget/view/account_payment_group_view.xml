@@ -88,7 +88,7 @@
                     <field name="force_number" string="Número de Documento"/>
                 </field>
                 <tree position="inside">
-                    <button name="%(l10n_ar_aeroo_voucher.action_aeroo_report_ar_voucher)d" class="oe_highlight" string="Print Payment Order" type="action" icon="gtk-print"/>
+                    <button name="%(action_aeroo_report_payment)d" class="oe_highlight" string="Print Payment Order" type="action" icon="gtk-print"/>
                     <button name="proforma_confirmed" string="Confirm" states="draft" icon="gtk-go-forward" groups="account.group_account_manager"/>
                    <!--  <button name="proforma_confirmed" class="oe_highlight" string="Confirm" states="draft"/> -->
                 </tree>

@@ -15,54 +15,15 @@
             <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
         </record>
 
-        <!-- Menu messaging a techincal features -->
-        <record id="base.menu_reporting" model="ir.ui.menu">
-            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
-        </record>
-
-        <!-- Menu messaging a techincal features -->
-        <record id="mail.mail_feeds_main" model="ir.ui.menu">
-            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
-        </record>
-
+        <!-- sacamos menu de contabilidad / clientes -->
         <record id="account.menu_finance_receivables" model="ir.ui.menu">
             <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
         </record>
 
-        <!-- Creamos menu padre para ordenes de pago -->
-        <menuitem name="Ordenes de Pago" sequence="2" parent="account.menu_finance" id="payment_orders"/>
-
-        <!-- Sacamos pagos de proveedores y lo llevamos como ordenes de pago -->
-        <record id="account_voucher.menu_action_vendor_payment" model="ir.ui.menu">
-            <field name="parent_id" ref="payment_orders"/>
-            <!-- <field name="name">Ordenes de Pago</field> -->
-        </record>
-
-        <!-- ocultamos recibos del proveedor -->
-        <record id="account_voucher.menu_action_purchase_receipt" model="ir.ui.menu">
-            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
-        </record>
-
-        <!-- Creamos item otras operaciones -->
-        <menuitem name="Otras Operaciones" sequence="3" parent="account.menu_finance" id="other_operations"/>
-
-        <!-- ponemos funding moves dentro del anterior -->
-        <record id="public_budget.menu_funding_moves" model="ir.ui.menu">
-            <field name="parent_id" ref="other_operations"/>
-        </record>
-
-        <!-- ponemos funding moves dentro del anterior -->
-        <record id="public_budget.menu_funding_moves" model="ir.ui.menu">
-            <field name="sequence" eval="5"/>
-            <field name="parent_id" ref="other_operations"/>
-        </record>
-
-        <record id="public_budget.menu_advance_requests" model="ir.ui.menu">
-            <field name="parent_id" ref="other_operations"/>
-        </record>
-
-        <record id="public_budget.menu_advance_returns" model="ir.ui.menu">
-            <field name="parent_id" ref="other_operations"/>
+        <!-- acceso a ordenes de pago diretamente sin entrar en proveedores -->
+        <record id="account_payment_group.menu_action_account_payments_group_payable" model="ir.ui.menu">
+            <field name="sequence" eval="2"/>
+            <field name="parent_id" ref="account.menu_finance"/>
         </record>
 
     </data>

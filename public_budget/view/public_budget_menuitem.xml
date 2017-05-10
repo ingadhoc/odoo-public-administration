@@ -6,6 +6,7 @@
             name="Budget"
             id="menu_budget_main"
             sequence="45"
+            web_icon="public_budget,static/description/icon.png"
             />
 
         <menuitem
@@ -45,10 +46,10 @@
             />
 
         <menuitem
-            name="Advance Requests"
-            id="menu_advance_requests_main"
-            sequence="25"
-            parent="menu_budget_main"
+            name="Otras Operaciones"
+            sequence="3"
+            parent="account.menu_finance"
+            id="other_operations"
             />
 
         <menuitem
@@ -92,7 +93,7 @@
             id="menu_advance_requests"
             sequence="10"
             action="action_public_budget_advance_request_advance_requests"
-            parent="menu_advance_requests_main"
+            parent="other_operations"
             />
 
         <record id="action_public_budget_advance_returns" model="ir.actions.act_window">
@@ -106,7 +107,7 @@
             id="menu_advance_returns"
             sequence="20"
             action="action_public_budget_advance_returns"
-            parent="menu_advance_requests_main"
+            parent="other_operations"
             />
 
         <record id="action_public_budget_advance_request_types" model="ir.actions.act_window">
@@ -114,11 +115,12 @@
             <field name="res_model">public_budget.advance_request_type</field>
         </record>
 
+        <!-- child of other operations so that secretary can see this -->
         <menuitem
             id="menu_advance_request_types"
-            sequence="10"
+            sequence="7"
             action="action_public_budget_advance_request_types"
-            parent="menu_configuration"
+            parent="other_operations"
             />
 
         <menuitem
@@ -394,9 +396,9 @@
 
         <menuitem
             id="menu_funding_moves"
-            sequence="10"
+            sequence="5"
             action="action_public_budget_funding_move"
-            parent="account.menu_finance_bank_and_cash"
+            parent="other_operations"
             />     
     </data>
 </openerp>

@@ -6,7 +6,7 @@
         <record id="view_public_budget_invoice_tree" model="ir.ui.view">
             <field name="name">public_budget.invoice.tree</field>
             <field name="model">account.invoice</field>
-            <field name="inherit_id" ref="account.invoice_tree"/>
+            <field name="inherit_id" ref="account.invoice_supplier_tree"/>
             <field name="arch" type="xml">
                 <tree position="attributes">
                     <attribute name="create">false</attribute>
@@ -21,7 +21,7 @@
         <record id="invoice_supplier_form" model="ir.ui.view">
             <field name="name">account.invoice.supplier.form</field>
             <field name="model">account.invoice</field>
-            <field name="inherit_id" ref="account_voucher.view_invoice_supplier"/>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
             <field name="arch" type="xml">
                 <button name="invoice_cancel" position="before">
                     <button name="%(action_aeroo_report_liquidation)d" class="oe_highlight" string="Imprimir Liquidación" type="action"/>
@@ -32,7 +32,7 @@
                     <attribute name="invisible">1</attribute>
                 </button>
 
-                <xpath expr="//field[@name='invoice_line']/tree/field[@name='account_id']" position="after">
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='account_id']" position="after">
                     <field name="definitive_line_id"/>
                 </xpath>
                 <!-- TODO ver si queremos sacar el botón o no hace falta -->

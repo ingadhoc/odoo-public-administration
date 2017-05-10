@@ -17,7 +17,7 @@
     <field name="tml_source">file</field>
     <field name="out_format" ref="report_aeroo.report_mimetypes_pdf_odt"/>
     <!-- <field name="styles_mode">specified</field> -->
-    <!-- <field name="stylesheet_id" ref="sipreco_public_budget.sipreco_stylesheet"/> -->
+    <!-- <field name="stylesheet_id" ref="public_budget.sipreco_stylesheet"/> -->
 </record>
 <ir_set>
     <field eval="'action'" name="key"/>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data noupdate="0">
-        <record id="sipreco_public_budget.sipreco_stylesheet" model="report.stylesheets">
+        <record id="public_budget.sipreco_stylesheet" model="report.stylesheets">
             <!-- <field name="name">Sipreco Style Sheet</field> -->
             <field name="report_styles" type="base64"  file="sipreco_setup_data_tmc/reports/reports_stylesheet.odt"/>
         </record>

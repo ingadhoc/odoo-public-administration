@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data noupdate="1">
-        <record id="sipreco_public_budget.general_journal_sequence" model="ir.sequence">
+        <record id="general_journal_sequence" model="ir.sequence">
             <field name="name">Secuencia Libro Diario General</field>
             <field name="prefix">AS - %(year)s - </field>
             <field name="padding">6</field>

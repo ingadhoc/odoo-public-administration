@@ -2,35 +2,35 @@
 <openerp>
     <data noupdate="1">
     <!-- <data noupdate="1"> -->
-        <record id="sipreco_public_budget.expedient_founder_1" model="public_budget.expedient_founder">
+        <record id="expedient_founder_1" model="public_budget.expedient_founder">
             <field name="name">Protocolo</field>
         </record>
 
-        <record id="sipreco_public_budget.expedient_founder_2" model="public_budget.expedient_founder">
+        <record id="expedient_founder_2" model="public_budget.expedient_founder">
             <field name="name">Compras</field>
         </record>
 
-        <record id="sipreco_public_budget.expedient_founder_3" model="public_budget.expedient_founder">
+        <record id="expedient_founder_3" model="public_budget.expedient_founder">
             <field name="name">Prensa</field>
         </record>
 
-        <record id="sipreco_public_budget.expedient_founder_4" model="public_budget.expedient_founder">
+        <record id="expedient_founder_4" model="public_budget.expedient_founder">
             <field name="name">DAF</field>
         </record>
 
-        <record id="sipreco_public_budget.expedient_founder_5" model="public_budget.expedient_founder">
+        <record id="expedient_founder_5" model="public_budget.expedient_founder">
             <field name="name">Otros</field>
         </record>
 
-        <record id="sipreco_public_budget.expedient_founder_6" model="public_budget.expedient_founder">
+        <record id="expedient_founder_6" model="public_budget.expedient_founder">
             <field name="name">Habilitaciones</field>
         </record>
 
-        <record id="sipreco_public_budget.expedient_founder_7" model="public_budget.expedient_founder">
+        <record id="expedient_founder_7" model="public_budget.expedient_founder">
             <field name="name">Secretaría Administrativa</field>
         </record>
 
-        <record id="sipreco_public_budget.expedient_founder_8" model="public_budget.expedient_founder">
+        <record id="expedient_founder_8" model="public_budget.expedient_founder">
             <field name="name">Contaduria</field>
         </record>
     </data>

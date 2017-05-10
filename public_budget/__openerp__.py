@@ -10,6 +10,11 @@
         'account_payment_group_document',
         'account_asset',
         'hr_public_holidays',
+        'report_aeroo',
+        'account_statement_aeroo_report',
+        'report_custom_filename',
+        # estrictamente solo requerido por algunos campos en vista de partner
+        'l10n_ar_account',
     ],
     'data': [
         'security/public_budget_group.xml',
@@ -71,9 +76,9 @@
         'view/res_partner_view.xml',
         'view/account_asset_view.xml',
         # TODO mig vista
-        'view/account_check_view.xml',
+        # 'view/account_check_view.xml',
         # TODO mig vista
-        'view/account_payment_group_view.xml',
+        # 'view/account_payment_group_view.xml',
         'view/hr_public_holidays_view.xml',
         'view/custom_views.xml',
         'data/sequence.xml',
