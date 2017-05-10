@@ -2,7 +2,7 @@
 <openerp>
     <data>
 
-        <!-- FORMVIEW -->
+    <!-- FORMVIEW -->
         <record id="view_account_asset_asset_form" model="ir.ui.view">
             <field name="name">account.asset.asset.form</field>
             <field name="model">account.asset.asset</field>
@@ -15,46 +15,13 @@
                 <field name="parent_id" position="attributes">
                     <attribute name="groups">base.group_no_one</attribute>
                 </field>
-<!--                 <field name="salvage_value" position="attributes">
-                    <attribute name="groups">base.group_no_one</attribute>
-                </field>
-                <field name="value_residual" position="attributes">
-                    <attribute name="groups">base.group_no_one</attribute>
-                </field>
-                <field name="partner_id" position="attributes">
-                    <attribute name="groups">base.group_no_one</attribute>
-                </field>
-                <field name="method" position="attributes">
-                    <attribute name="groups">base.group_no_one</attribute>
-                </field>
-                <field name="method_time" position="attributes">
-                    <attribute name="groups">base.group_no_one</attribute>
-                </field>
-                <field name="method_period" position="attributes">
-                    <attribute name="groups">base.group_no_one</attribute>
-                </field>
-                <field name="method_number" position="attributes">
-                    <attribute name="groups">base.group_no_one</attribute>
-                </field>
-                <field name="prorata" position="attributes">
-                    <attribute name="groups">base.group_no_one</attribute>
-                </field> -->
                 <notebook position="attributes">
                     <attribute name="groups">base.group_no_one</attribute>
                 </notebook>
-<!--                 <page string="General" position="attributes">
-                    <attribute name="groups">base.group_no_one</attribute>
-                </page>
-                <page string="Depreciation Board" position="attributes">
-                    <attribute name="groups">base.group_no_one</attribute>
-                </page>
-                <page string="History" position="attributes">
-                    <attribute name="groups">base.group_no_one</attribute>
-                </page> -->
             </field>
         </record>
 
-<!-- TREEVIEW -->
+    <!-- TREEVIEW -->
 
         <record model="ir.ui.view" id="view_account_asset_asset_tree">
             <field name="name">account.asset.asset.tree</field>
@@ -73,7 +40,7 @@
             </field>
         </record>
 
-<!-- SEARCH -->
+    <!-- SEARCH -->
 
         <record id="view_account_asset_search" model="ir.ui.view">
             <field name="name">account.asset.asset.search</field>

@@ -37,6 +37,7 @@
         # 'web_export_view',
     ],
     'data': [
+        'data/ir_parameters.xml',
     ],
     'demo': [
         'demo/config_data.xml',

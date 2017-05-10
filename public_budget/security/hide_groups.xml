@@ -2,18 +2,13 @@
 <openerp>
     <data>
 
-        <!-- make tax settlement child of bank and cash so that habilitaciones user see them-->
-        <record id="account_tax_settlement.account_tax_settlement_menu" model="ir.ui.menu">
-            <field name="parent_id" ref="account.menu_finance_bank_and_cash"/>
-            <field name="sequence" eval="50"/>
-        </record>
-
         <!-- advance request type to other operations so that hab and secretary can see them -->
         <record id="public_budget.menu_advance_request_types" model="ir.ui.menu">
             <field name="sequence" eval="7"/>
             <field name="parent_id" ref="sipreco_public_budget.other_operations"/>
         </record>
 
+        <!-- Hide unused groups to make user configuration easier -->
         <!-- Grupo cobros y pagos -->
         <record id="account.group_account_invoice" model="res.groups">
             <field name="category_id" ref="base.module_category_hidden"/>
@@ -34,11 +29,6 @@
         <record id="base.group_sale_manager" model="res.groups">
             <field name="category_id" ref="base.module_category_hidden"/>
         </record>
-
-<!-- Este me daba error y no lo pude ocultar -->
-<!--         <record id="share.group_share_user" model="res.groups">
-            <field name="category_id" ref="base.module_category_hidden"/>
-        </record> -->
 
         <record id="base.group_public" model="res.groups">
             <field name="category_id" ref="base.module_category_hidden"/>

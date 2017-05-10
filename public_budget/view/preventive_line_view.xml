@@ -25,6 +25,7 @@
                 <form string="Preventive Line">
                     <field name="currency_id" invisible="1"/>
                     <field name="company_id" invisible="1"/>
+                    <field name="definitive_partner_type" invisible="1"/>
                     <header>
                     </header>
                     <sheet string="Preventive Line">
@@ -40,7 +41,7 @@
                         <field name="state" invisible="True"/> 
                      </group>
                      <group string="Definitive Lines" attrs="{'invisible':[('advance_line','=',True)]}">
-                        <field name="definitive_line_ids"     nolabel="1"     context="{'from_preventive':True,'default_amount':remaining_amount}"/>
+                        <field name="definitive_line_ids" nolabel="1" context="{'from_preventive':True,'default_amount':remaining_amount, 'definitive_partner_type': definitive_partner_type}"/>
                      </group>
                     </sheet>
                 </form>

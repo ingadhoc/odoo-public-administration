@@ -42,8 +42,12 @@ class AccountInvoice(models.Model):
     @api.constrains('to_pay_amount')
     def check_to_pay_amount(self):
         for rec in self:
-            if rec.to_pay_amount and rec.currency_id.round(
-                    rec.to_pay_amount - rec.amount_total) > 0.0:
+            # TODO ver si el control lo hacemos por cia o de otra manera
+            # only check if invoice has a related transaction, this is more
+            # related to demo data
+            if rec.transaction_id and (
+                    rec.to_pay_amount and rec.currency_id.round(
+                    rec.to_pay_amount - rec.amount_total) > 0.0):
                 raise ValidationError((
                     'El importe mandado a pagar no puede ser mayor al importe '
                     'de la factura'))

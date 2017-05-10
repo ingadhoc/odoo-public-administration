@@ -5,23 +5,14 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class account_checkook(models.Model):
+class AccountCheck(models.Model):
 
-    _inherit = ['account.checkbook']
-
-    journal_id = fields.Many2one(
-        domain=[('payment_subtype', '=', 'issue_check')]
-        )
-
-
-class account_check(models.Model):
-
-    _inherit = ['account.check']
+    _inherit = 'account.check'
 
     handed_date = fields.Date(
         'Fecha de Entrega',
         readonly=True,
-        )
+    )
     state = fields.Selection(
         # selection_add=[('to_be_handed', 'To Be Handed')]
         [
@@ -36,12 +27,12 @@ class account_check(models.Model):
             ('changed', _('Changed')),
             ('cancel', _('Cancel')),
         ]
-        )
+    )
 
     @api.multi
     def action_hand(self):
         self.write({'handed_date': fields.Date.today()})
-        return super(account_check, self).action_hand()
+        return super(AccountCheck, self).action_hand()
 
     @api.multi
     def check_check_cancellation(self):
@@ -62,3 +53,19 @@ class account_check(models.Model):
                     'You can not cancel third checks that are being used on '
                     'payments'))
         return True
+
+    # TODO agregar este check
+    # @api.multi
+    # def action_confirm(self):
+    #     self.ensure_one()
+
+    #     for check in self.env['account.check'].browse(
+    #             self._context.get('active_ids', [])):
+    #         if check.type != 'issue_check':
+    #             raise ValidationError(
+    #                 'Los cheques seleccionados deben ser "Cheques Propios"')
+    #         if check.state != 'to_be_handed':
+    #             raise ValidationError(
+    #                 'Los cheques deben estar en estado "Para Ser Entregado"')
+    #         check.signal_workflow('to_be_handed')
+    #     return True

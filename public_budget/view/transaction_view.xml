@@ -30,6 +30,7 @@
             <field name="arch" type="xml">
                 <form string="Budget Transaction">
                     <header>
+                        <button name="%(action_aeroo_report_transaction)d" class="oe_highlight" string="Print" type="action"/>
                         <button name="action_cancel_draft"
                             type="object"
                             states="cancel"
@@ -60,6 +61,7 @@
                         <field name="type_with_advance_payment" invisible="1"/>
                         <!-- si no lo agregamos aca no refresca en voucher, raro... -->
                         <field name="supplier_ids" invisible="1"/>
+                        <field name="definitive_partner_type" invisible="1"/>
                         <group>
                             <group>
                                 <field name="issue_date"/>
@@ -100,10 +102,11 @@
                         </group>
                         <notebook>
                             <page string="Affectations">
+                            <!-- because it wont update till we save it we add definitive partner_type in context -->
                                 <label for="advance_preventive_line_ids" string="Advance Lines" attrs="{'invisible':[('type_with_advance_payment','=',False)]}"/>
-                                <field name="advance_preventive_line_ids" attrs="{'invisible':[('type_with_advance_payment','=',False)]}"/>
+                                <field name="advance_preventive_line_ids" attrs="{'invisible':[('type_with_advance_payment','=',False)]}" context="{'default_definitive_partner_type': definitive_partner_type, 'default_advance_line': 1, 'default_preventive_status': 'confirmed', 'advance_line': 1}"/>
                                 <label for="preventive_line_ids" string="Settlement Lines" attrs="{'invisible':[('type_with_advance_payment','=',False)]}"/>
-                                <field name="preventive_line_ids"/>
+                                <field name="preventive_line_ids" context="{'default_definitive_partner_type': definitive_partner_type}"/>
                             </page>
                             <page string="Payment Orders and Refunds" attrs="{'invisible':[('type_with_advance_payment','=',False)]}">
                                 <button class="oe_link" string="Create Payment Order" states="open" type="object" name="action_new_voucher"/>

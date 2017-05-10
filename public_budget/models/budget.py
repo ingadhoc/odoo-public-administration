@@ -139,6 +139,14 @@ class Budget(models.Model):
         'budget_id',
         string='Transactions'
     )
+    receiptbook_id = fields.Many2one(
+        'account.payment.receiptbook',
+        'ReceiptBook',
+        required=True,
+        states={'draft': [('readonly', False)]},
+        domain="[('partner_type', '=', 'supplier'), "
+        "('company_id', '=', company_id)]",
+    )
 
     @api.one
     @api.depends(

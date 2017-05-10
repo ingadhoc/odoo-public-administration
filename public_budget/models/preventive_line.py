@@ -102,6 +102,9 @@ class PreventiveLine(models.Model):
         domain=[('type', '=', 'normal')],
         auto_join=True,
     )
+    definitive_partner_type = fields.Selection(
+        related='transaction_id.type_id.definitive_partner_type'
+    )
 
     @api.multi
     @api.depends(
