@@ -46,7 +46,7 @@
             />
 
         <menuitem
-            name="Advance Requests"
+            name="Adelantos"
             id="menu_advance_requests_main"
             sequence="3"
             parent="account.menu_finance"
@@ -89,7 +89,7 @@
         </record>
 
         <menuitem
-            name="Advance Requests"
+            name="Requerimientos"
             id="menu_advance_requests"
             sequence="10"
             action="action_public_budget_advance_request_advance_requests"
@@ -103,7 +103,7 @@
         </record>
 
         <menuitem
-            name="Advance Returns"
+            name="Devoluciones"
             id="menu_advance_returns"
             sequence="20"
             action="action_public_budget_advance_returns"
@@ -118,6 +118,7 @@
         <!-- child of other operations so that secretary can see this -->
         <menuitem
             id="menu_advance_request_types"
+            name="Tipos de Requerimientos"
             sequence="90"
             action="action_public_budget_advance_request_types"
             parent="menu_advance_requests_main"
@@ -167,6 +168,14 @@
             action="action_res_partner_employees"
             parent="menu_contacts"
             />
+
+        <menuitem
+            id="menu_subsidy_recipient"
+            sequence="15"
+            action="action_res_partner_suppliers"
+            parent="menu_contacts"
+            />
+
         <record id="action_public_budget_expedient_expedients" model="ir.actions.act_window">
             <field name="name">Expedients</field>
             <field name="res_model">public_budget.expedient</field>

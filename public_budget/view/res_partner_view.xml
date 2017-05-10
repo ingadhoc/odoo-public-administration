@@ -63,13 +63,6 @@
             <field name="context">{'search_default_subsidy_recipient': 1,'default_customer': 0,'default_subsidy_recipient': 1}</field>
         </record>
 
-        <menuitem
-            id="menu_subsidy_recipient"
-            sequence="15"
-            action="action_res_partner_suppliers"
-            parent="public_budget.menu_contacts"
-            />
-
         <!-- INHERITED TREE -->
         <!-- IMPORTANTE; si lo activamos hay que hacerlo con vista par aun grupo distinto a employee porque si no da error de acceso -->
 <!--         <record id="view_partner_tree" model="ir.ui.view">
