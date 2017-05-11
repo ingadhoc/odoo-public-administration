@@ -4,98 +4,91 @@
         <field name="preventive_line_id" ref="prev_line_1"/>
         <field name="supplier_id" ref="res_partner_airoldi"/>
         <field name="amount" eval="20000"/>
-        <field name="date" eval="time.strftime('%Y-%m-05')"/>
+        <field name="issue_date" eval="time.strftime('%Y-%m-05')"/>
     </record>
 
     <record id="definitive_line_2" model="public_budget.definitive_line">
-        <field name="preventive_line_id" ref="prev_line_2"/>
+        <field name="preventive_line_id" ref="prev_line_1"/>
         <field name="supplier_id" ref="res_partner_gabe"/>
         <field name="amount" eval="10000"/>
-        <field name="date" eval="time.strftime('%Y-%m-09')"/>
+        <field name="issue_date" eval="time.strftime('%Y-%m-09')"/>
     </record>
 
     <record id="definitive_line_3" model="public_budget.definitive_line">
-        <field name="preventive_line_id" ref="prev_line_3"/>
+        <field name="preventive_line_id" ref="prev_line_2"/>
         <field name="supplier_id" ref="res_partner_airoldi"/>
         <field name="amount" eval="10000"/>
-        <field name="date" eval="time.strftime('%Y-%m-10')"/>
+        <field name="issue_date" eval="time.strftime('%Y-%m-10')"/>
     </record>
 
     <record id="definitive_line_4" model="public_budget.definitive_line">
-        <field name="preventive_line_id" ref="prev_line_4"/>
+        <field name="preventive_line_id" ref="prev_line_2"/>
         <field name="supplier_id" ref="res_partner_gabe"/>
         <field name="amount" eval="10000"/>
-        <field name="date" eval="time.strftime('%Y-%m-12')"/>
+        <field name="issue_date" eval="time.strftime('%Y-%m-12')"/>
     </record>
 
     <record id="definitive_line_5" model="public_budget.definitive_line">
-        <field name="preventive_line_id" ref="prev_line_5"/>
+        <field name="preventive_line_id" ref="prev_line_3"/>
         <field name="supplier_id" ref="res_partner_adhoc"/>
         <field name="amount" eval="30000"/>
-        <field name="date" eval="time.strftime('%Y-%m-13')"/>
+        <field name="issue_date" eval="time.strftime('%Y-%m-13')"/>
     </record>
 
-    <!-- <record id="definitive_line_1" model="public_budget.definitive_line">
-        <field name="preventive_line_id" ref="prev_line_1"/>
-        <field name="supplier_id" ref="res_partner_airoldi"/>
-        <field name="amount" eval="20000"/>
-        <field name="date" eval="time.strftime('%Y-%m-05')"/>
-    </record> -->
-
     <record id="definitive_line_7" model="public_budget.definitive_line">
-        <field name="preventive_line_id" ref="prev_line_7"/>
+        <field name="preventive_line_id" ref="prev_line_5"/>
         <field name="supplier_id" ref="res_partner_gabe"/>
         <field name="amount" eval="800"/>
-        <field name="date" eval="time.strftime('%Y-%m-15')"/>
+        <field name="issue_date" eval="time.strftime('%Y-%m-15')"/>
     </record>
 
     <record id="definitive_line_8" model="public_budget.definitive_line">
-        <field name="preventive_line_id" ref="prev_line_8"/>
+        <field name="preventive_line_id" ref="prev_line_6"/>
         <field name="supplier_id" ref="res_partner_epe"/>
         <field name="amount" eval="1300"/>
-        <field name="date" eval="time.strftime('%Y-%m-16')"/>
+        <field name="issue_date" eval="time.strftime('%Y-%m-16')"/>
     </record>
 
     <record id="definitive_line_9" model="public_budget.definitive_line">
         <field name="preventive_line_id" ref="prev_line_9"/>
         <field name="supplier_id" ref="res_partner_propietario"/>
         <field name="amount" eval="15000"/>
-        <field name="date" eval="time.strftime('%Y-%m-17')"/>
+        <field name="issue_date" eval="time.strftime('%Y-%m-28')"/>
     </record>
 
     <record id="definitive_line_10" model="public_budget.definitive_line">
         <field name="preventive_line_id" ref="prev_line_10"/>
         <field name="supplier_id" ref="res_partner_sueldos"/>
         <field name="amount" eval="30000"/>
-        <field name="date" eval="time.strftime('%Y-%m-18')"/>
+        <field name="issue_date" eval="time.strftime('%Y-%m-28')"/>
     </record>
 
     <record id="definitive_line_11" model="public_budget.definitive_line">
         <field name="preventive_line_id" ref="prev_line_11"/>
         <field name="supplier_id" ref="res_partner_sueldos"/>
         <field name="amount" eval="10000"/>
-        <field name="date" eval="time.strftime('%Y-%m-21')"/>
+        <field name="issue_date" eval="time.strftime('%Y-%m-28')"/>
     </record>
 
     <record id="definitive_line_12" model="public_budget.definitive_line">
         <field name="preventive_line_id" ref="prev_line_12"/>
         <field name="supplier_id" ref="res_partner_sueldos"/>
         <field name="amount" eval="10000"/>
-        <field name="date" eval="time.strftime('%Y-%m-21')"/>
+        <field name="issue_date" eval="time.strftime('%Y-%m-28')"/>
     </record>
 
     <record id="definitive_line_13" model="public_budget.definitive_line">
         <field name="preventive_line_id" ref="prev_line_13"/>
         <field name="supplier_id" ref="res_partner_pepito"/>
         <field name="amount" eval="1500"/>
-        <field name="date" eval="time.strftime('%Y-%m-22')"/>
+        <field name="issue_date" eval="time.strftime('%Y-%m-28')"/>
     </record>
 
     <record id="definitive_line_14" model="public_budget.definitive_line">
         <field name="preventive_line_id" ref="prev_line_14"/>
         <field name="supplier_id" ref="res_partner_roberto"/>
         <field name="amount" eval="1000"/>
-        <field name="date" eval="time.strftime('%Y-%m-29')"/>
+        <field name="issue_date" eval="time.strftime('%Y-%m-28')"/>
     </record>
 
 </odoo>

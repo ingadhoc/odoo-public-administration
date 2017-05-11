@@ -116,8 +116,9 @@
         'demo/public_budget.remit.csv',
         'demo/public_budget.budget_modification.csv',
         'demo/public_budget.budget_modification_detail.csv',
-        'demo/advance_request_type.xml',
-        'demo/advance_request.xml',
+        # TODO crear diario de devoluciones y agregar
+        # 'demo/advance_request_type.xml',
+        # 'demo/advance_request.xml',
     ],
     'test': [],
     'installable': True,
