@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data>
+    <data noupdate="1">
     <!-- <data noupdate="1"> -->
 
         <record id="ri_tax_code_chart_root" model="account.tax.code">

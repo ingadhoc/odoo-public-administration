@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
-    <data noupdate="False">
+    <data noupdate="1">
         <record model='afip.document_type' id='dt_File'>
                 <field name='code'>Legajo</field>
                 <field name='name'>Legajo</field>
