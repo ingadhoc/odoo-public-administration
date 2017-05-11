@@ -1,6 +1,0 @@
-<?xml version="1.0" ?>
-<openerp>
-    <data>
-        <workflow action="sgn_open" model="public_budget.budget" ref="budget_actual"/>
-    </data>
-</openerp>

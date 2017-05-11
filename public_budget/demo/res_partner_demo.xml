@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    <!-- <data noupdate="True"> -->
+    <!-- Partners de sueldos -->
+        <record id="personal_permanente" model="res.partner">
+            <field name="name">Personal Permanente</field>
+            <field name="supplier" eval="True"/>
+            <field name="afip_responsability_type_id" ref="l10n_ar_account.res_IVAE"/>
+            <field name="main_id_category_id" ref="l10n_ar_partner.dt_DNI"/>
+            <field name="main_id_number">30000001</field>
+        </record>
+
+        <record id="personal_no_permanente" model="res.partner">
+            <field name="name">Personal No Permanente</field>
+            <field name="supplier" eval="True"/>
+            <field name="afip_responsability_type_id" ref="l10n_ar_account.res_IVAE"/>
+            <field name="main_id_category_id" ref="l10n_ar_partner.dt_DNI"/>
+            <field name="main_id_number">30000002</field>
+        </record>
+
+        <record id="personal_transitorio" model="res.partner">
+            <field name="name">Personal Transitorio</field>
+            <field name="supplier" eval="True"/>
+            <field name="afip_responsability_type_id" ref="l10n_ar_account.res_IVAE"/>
+            <field name="main_id_category_id" ref="l10n_ar_partner.dt_DNI"/>
+            <field name="main_id_number">30000003</field>
+        </record>
+    </data>
+</openerp>
