@@ -21,7 +21,7 @@ class ApprovalArrangement(models.Model):
     @api.model
     def create(self, vals):
         if not vals.get('number'):
-            vals['number'] = self.env['ir.sequence'].get(
+            vals['number'] = self.env['ir.sequence'].next_by_code(
                 'approval_arrangement')
         return super(ApprovalArrangement, self).create(vals)
 
