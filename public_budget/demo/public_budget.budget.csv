@@ -1,0 +1,2 @@
+id,name,income_account_id/id,expedient_id/id,company_id/id,receiptbook_id/id,state
+budget_actual,Presupuesto Actual,account_ingresos,budget_exp_caso_11,company_sipreco,payment_order_actual,open

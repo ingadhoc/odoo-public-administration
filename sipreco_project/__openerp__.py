@@ -14,6 +14,7 @@
         # 'account_move_line_no_filter',
         # 'sipreco_public_budget',
         'public_budget',
+        'l10n_ar_account_withholding',
         # 'web_sheet_full_width',
         # 'account_partner_balance',
         # 'account_cancel',

@@ -344,7 +344,8 @@ class AccountPaymentGroup(models.Model):
                     'that has Total Amount different from To Pay Amount'))
         return True
 
-# TODO ver donde agregamos esto sin que dependa de loc ar
+# TODO ver si son necesarias o no y mover dependencia de sipreco_project
+# a este
 # modificamos estas funciones para que si esta en borrador no setee ningun
 # valor por defecto
 # @api.onchange('retencion_ganancias', 'partner_id_copy')

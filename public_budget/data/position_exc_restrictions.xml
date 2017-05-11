@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data noupdate="0">
-    <!-- <data noupdate="1"> -->
+    <data noupdate="1">
         <record id="pos_exc_res_cap_expense" model="public_budget.budget_pos_exc_rest">
             <field name="message">¡Advertencia! Recuerde que no es posible reasignar saldo de una partida del tipo Capital a una del tipo Gastos.</field>
             <field name="type">block</field>

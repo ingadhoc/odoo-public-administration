@@ -24,7 +24,8 @@
             <field name="inherit_id" ref="l10n_ar_account.view_res_partner_form"/>
             <field name="arch" type="xml">
                 <field name="afip_responsability_type_id" position="attributes">
-                    <attribute name="required">True</attribute>
+                    <!-- only required if is company or not parent -->
+                    <attribute name="attrs">{'invisible': [('is_company','=',False), ('parent_id','!=',False)], 'required': ['|', ('is_company','=',True), ('parent_id','=',False)]}</attribute>
                 </field>
             </field>
         </record>
