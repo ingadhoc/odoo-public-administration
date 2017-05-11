@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data>
-    <!-- <data noupdate="True"> -->
+    <data noupdate="True">
         <!-- ret/per sf iibb -->
         <record id="sipreco_public_budget.res_partner_api" model="res.partner">
             <field name="name">API Santa Fe</field>
