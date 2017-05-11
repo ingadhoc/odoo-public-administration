@@ -5,7 +5,7 @@ from . import res_partner
 # from . import account_payment_group
 # TODO terminar de migrar
 # from . import account_check
-from . import invoice
+from . import account_invoice
 from . import advance_request_type
 from . import advance_request
 from . import transaction_type
@@ -15,7 +15,7 @@ from . import expedient_category
 from . import location
 from . import budget_modification_detail
 from . import funding_move
-from . import invoice_line
+from . import account_invoice_line
 from . import rest_type
 from . import users
 from . import budget_position
