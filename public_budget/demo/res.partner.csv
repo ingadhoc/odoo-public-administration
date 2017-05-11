@@ -8,7 +8,7 @@ res_partner_shell,Shell,,l10n_ar_account.res_IVARI,l10n_ar_partner.dt_CUIT,20111
 res_partner_comercios_varios,Comercios Varios,,l10n_ar_account.res_RM,l10n_ar_partner.dt_CUIT,20111111155,
 res_partner_pepito,Pepito Rodriguez,,l10n_ar_account.res_RM,l10n_ar_partner.dt_DNI,1231254,
 res_partner_roberto,Roberto Perez,,l10n_ar_account.res_RM,l10n_ar_partner.dt_DNI,1231255,
-res_partner_epe,EPE,,l10n_ar_account.res_IVARI,,,
+res_partner_epe,EPE,,l10n_ar_account.res_IVARI,l10n_ar_partner.dt_CUIT,20111111163,
 res_partner_api,API,True,l10n_ar_account.res_IVAE,l10n_ar_partner.dt_DNI,1231231,
 res_partner_muni_rosario,Municipalidad de Rosario,True,l10n_ar_account.res_IVAE,l10n_ar_partner.dt_DNI,1231232,
 res_partner_1,Acreedores Judiciales,True,l10n_ar_account.res_IVAE,l10n_ar_partner.dt_DNI,1231233,
