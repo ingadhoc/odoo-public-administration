@@ -172,8 +172,17 @@ class AccountPaymentGroup(models.Model):
     @api.depends('issued_check_ids.state', 'state')
     def get_show_print_receipt_button(self):
         show_print_receipt_button = False
+
+        # not_handed_checks = self.issued_check_ids.filtered(
+        #     lambda r: r.state not in (
+        #         'handed', 'returned', 'debited', 'changed'))
+        # parece mas facil chequear por los que tengo en mano
+        # total los cancelados y en borrador se controlan por estado del
+        # voucher
         not_handed_checks = self.issued_check_ids.filtered(
-            lambda r: r.state not in ('handed', 'returned', 'debited'))
+            lambda r: r.state in (
+                'holding', 'to_be_handed'))
+
         if self.state == 'posted' and not not_handed_checks:
             show_print_receipt_button = True
         self.show_print_receipt_button = show_print_receipt_button
