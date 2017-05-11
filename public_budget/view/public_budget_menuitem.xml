@@ -6,6 +6,7 @@
             name="Budget"
             id="menu_budget_main"
             sequence="45"
+            web_icon="public_budget,static/description/icon.png"
             />
 
         <menuitem
@@ -45,10 +46,10 @@
             />
 
         <menuitem
-            name="Advance Requests"
+            name="Adelantos"
             id="menu_advance_requests_main"
-            sequence="25"
-            parent="menu_budget_main"
+            sequence="3"
+            parent="account.menu_finance"
             />
 
         <menuitem
@@ -88,7 +89,7 @@
         </record>
 
         <menuitem
-            name="Advance Requests"
+            name="Requerimientos"
             id="menu_advance_requests"
             sequence="10"
             action="action_public_budget_advance_request_advance_requests"
@@ -102,7 +103,7 @@
         </record>
 
         <menuitem
-            name="Advance Returns"
+            name="Devoluciones"
             id="menu_advance_returns"
             sequence="20"
             action="action_public_budget_advance_returns"
@@ -114,11 +115,13 @@
             <field name="res_model">public_budget.advance_request_type</field>
         </record>
 
+        <!-- child of other operations so that secretary can see this -->
         <menuitem
             id="menu_advance_request_types"
-            sequence="10"
+            name="Tipos de Requerimientos"
+            sequence="90"
             action="action_public_budget_advance_request_types"
-            parent="menu_configuration"
+            parent="menu_advance_requests_main"
             />
 
         <menuitem
@@ -165,6 +168,14 @@
             action="action_res_partner_employees"
             parent="menu_contacts"
             />
+
+        <menuitem
+            id="menu_subsidy_recipient"
+            sequence="15"
+            action="action_res_partner_suppliers"
+            parent="menu_contacts"
+            />
+
         <record id="action_public_budget_expedient_expedients" model="ir.actions.act_window">
             <field name="name">Expedients</field>
             <field name="res_model">public_budget.expedient</field>
@@ -394,7 +405,7 @@
 
         <menuitem
             id="menu_funding_moves"
-            sequence="10"
+            sequence="5"
             action="action_public_budget_funding_move"
             parent="account.menu_finance_bank_and_cash"
             />     

@@ -217,6 +217,10 @@ class BudgetTransaction(models.Model):
         auto_join=True,
         states={'open': [('readonly', False)]}
     )
+    definitive_partner_type = fields.Selection(
+        related='type_id.definitive_partner_type'
+    )
+
     # TODO re implementar
     # voucher_ids = fields.One2many(
     #     'account.voucher',

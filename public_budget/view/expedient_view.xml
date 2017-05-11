@@ -35,6 +35,7 @@
             <field name="arch" type="xml">
                 <form string="Expedient">
                     <header>
+                        <button name="%(action_aeroo_report_expedient)d" class="oe_highlight" string="Print" type="action"/>
                         <button name="action_in_revision"
                             states="open"
                             type="object"

@@ -11,26 +11,58 @@
             <field name="arch" type="xml">
                 <filter name="customer" position="before">
                     <filter string="Employee" name="employee" domain="[('employee','=',1)]" help="Employee Partners"/>
-                </filter>    
-                <!-- TODO ver si lo borramos, ya estaria -->
-                <!-- <field name="name" position="after">
-                    <field name="document_number" filter_domain="[('document_number','=',self)]"/>
-                </field> -->
+                    <filter string="Subsidy Recipient" name="subsidy_recipient" domain="[('subsidy_recipient','=',1)]" help="Subsidy Recipient Partners"/>
+                </filter>
             </field>
         </record>
  
+        <!-- TODO tal vez en v10 queremos sacar depdencia a l10n_ar_account y esto va por interfaz o algo asi -->
         <!-- INHERITED FORM -->
-        <record id="view_partner_person_form" model="ir.ui.view">
-            <field name="name">partner.person.form</field>
+        <record id="view_ar_account_partnerform" model="ir.ui.view">
+            <field name="name">partner.ar_account.form</field>
             <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="inherit_id" ref="l10n_ar_account.view_res_partner_form"/>
             <field name="arch" type="xml">
+                <field name="afip_responsability_type_id" position="attributes">
+                    <attribute name="required">True</attribute>
+                </field>
+            </field>
+        </record>
+        
+        <record id="view_ar_partnerform" model="ir.ui.view">
+            <field name="name">partner.ar.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="l10n_ar_partner.view_partner_form"/>
+            <field name="arch" type="xml">
+                <!-- TODO ENABLE!! -->
+                <label for="main_id_number" position="before">
+                    <field name="numero_legajo" attrs="{'invisible': [('employee', '=', False)]}"/>
+                </label>
+                <field name="main_id_category_id" position="attributes">
+                    <attribute name="required">True</attribute>
+                </field>
+                <field name="main_id_number" position="attributes">
+                    <attribute name="required">True</attribute>
+                </field>
+
                 <xpath expr="//page[@name='sales_purchases']//field[@name='supplier']" position="before">
+                    <field name="subsidy_recipient"/>
                     <field name="employee"/>
                 </xpath>
             </field>
         </record>
  
+        <record id="action_res_partner_suppliers" model="ir.actions.act_window">
+            <field name="name">Subsidy Recipents</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create"> Click to create a Subsidy Recipent.</p>
+            </field>
+            <field name="context">{'search_default_subsidy_recipient': 1,'default_customer': 0,'default_subsidy_recipient': 1}</field>
+        </record>
+
         <!-- INHERITED TREE -->
         <!-- IMPORTANTE; si lo activamos hay que hacerlo con vista par aun grupo distinto a employee porque si no da error de acceso -->
 <!--         <record id="view_partner_tree" model="ir.ui.view">

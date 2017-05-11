@@ -48,3 +48,7 @@ REvisar en public group:
     <!-- <record id="account.menu_finance_charts" model="ir.ui.menu">
             <field name="groups_id" eval="[(4, ref('group_habilitacion_director'))]"/>
         </record> -->
+
+
+
+TODo renombrar todos los ids sipreco_public_budget para que queden sin nada pero hacer script de mig

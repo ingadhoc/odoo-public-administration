@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+        <record id="action_aeroo_report_payment" model="ir.actions.report.xml">
+            <field name="name">Orden de Pago</field>
+            <field name="type">ir.actions.report.xml</field>
+            <field name="model">account.payment.group</field>
+            <field name="report_name">aeroo_report_payment</field>
+            <field name="report_type">aeroo</field>
+            <field name="in_format">oo-odt</field>
+            <!-- <field name="parser_loc">l10n_aeroo_base/parser.py</field> -->
+            <!-- <field name="parser_state">loc</field> -->
+            <field name="report_rml">public_budget/reports/payment_order.odt</field>
+            <field name="tml_source">file</field>
+            <field name="styles_mode">specified</field>
+            <field name="stylesheet_id" ref="sipreco_stylesheet"/>
+            <field name="out_format" ref="report_aeroo.report_mimetypes_pdf_odt"/>
+            <field name="download_filename">${o.partner_type == 'supplier' and 'Órden de pago' or 'Recibo'} ${o.document_number}.pdf</field>
+        </record>
+
+    </data>
+</openerp>

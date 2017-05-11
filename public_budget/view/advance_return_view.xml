@@ -28,6 +28,7 @@
             <field name="arch" type="xml">
                 <form string="Advance Return">
                     <header>
+                        <button name="%(action_aeroo_report_advance_return)d" class="oe_highlight" string="Print" type="action"/>
                         <button name="action_confirm"
                             states="draft"
                             string="Confirm"

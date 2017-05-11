@@ -2,7 +2,7 @@
 <openerp>
     <data noupdate="1">
     <!-- <data noupdate="1"> -->
-<!--         <record id="sipreco_public_budget.cash_journal" model="account.journal">
+<!--         <record id="cash_journal" model="account.journal">
             <field name="name">Efectivo</field>
             <field name="code">01EFE</field>
             <field name="type">cash</field>
@@ -14,7 +14,7 @@
             <field name="update_posted" eval="True"/>
             <field name="company_id" ref="base.main_company"/>
         </record> -->
-        <record id="sipreco_public_budget.bank_journal" model="account.journal">
+        <record id="bank_journal" model="account.journal">
             <field name="name">Transferencias - Banco Municipal - Cta A</field>
             <field name="code">02BCM</field>
             <field name="type">bank</field>
@@ -27,9 +27,9 @@
             <!-- <field name="double_validation" eval="True"/> -->
             <field name="voucher_amount_restriction">cant_be_cero</field>
             <field name="company_id" ref="base.main_company"/>
-            <field name="sequence_id" ref="sipreco_public_budget.general_journal_sequence"/>
+            <field name="sequence_id" ref="general_journal_sequence"/>
         </record>
-        <record id="sipreco_public_budget.check_journal" model="account.journal">
+        <record id="check_journal" model="account.journal">
             <field name="name">Cheques - Banco Municipal - Cta A</field>
             <field name="code">03CHB</field>
             <field name="type">bank</field>
@@ -41,9 +41,9 @@
             <!-- <field name="double_validation" eval="True"/> -->
             <field name="voucher_amount_restriction">cant_be_cero</field>
             <field name="company_id" ref="base.main_company"/>
-            <field name="sequence_id" ref="sipreco_public_budget.general_journal_sequence"/>
+            <field name="sequence_id" ref="general_journal_sequence"/>
         </record>
-        <record id="sipreco_public_budget.expenses_journal" model="account.journal">
+        <record id="expenses_journal" model="account.journal">
             <field name="name">Facturas de Compra</field>
             <field name="code">04CPR</field>
             <field name="type">purchase</field>
@@ -51,9 +51,9 @@
             <field name="entry_posted" eval="True"/>
             <field name="update_posted" eval="True"/>
             <field name="company_id" ref="base.main_company"/>
-            <field name="sequence_id" ref="sipreco_public_budget.general_journal_sequence"/>
+            <field name="sequence_id" ref="general_journal_sequence"/>
         </record>
-        <record id="sipreco_public_budget.refund_expenses_journal" model="account.journal">
+        <record id="refund_expenses_journal" model="account.journal">
             <field name="name">Notas de Crédito Compras</field>
             <field name="code">05NCC</field>
             <field name="type">purchase_refund</field>
@@ -61,9 +61,9 @@
             <field name="entry_posted" eval="True"/>
             <field name="update_posted" eval="True"/>
             <field name="company_id" ref="base.main_company"/>
-            <field name="sequence_id" ref="sipreco_public_budget.general_journal_sequence"/>
+            <field name="sequence_id" ref="general_journal_sequence"/>
         </record>
-        <record id="sipreco_public_budget.other_documents" model="account.journal">
+        <record id="other_documents" model="account.journal">
             <field name="name">Otros Comprobantes</field>
             <field name="code">05OCC</field>
             <field name="type">purchase</field>
@@ -71,9 +71,9 @@
             <field name="entry_posted" eval="True"/>
             <field name="update_posted" eval="True"/>
             <field name="company_id" ref="base.main_company"/>
-            <field name="sequence_id" ref="sipreco_public_budget.general_journal_sequence"/>
+            <field name="sequence_id" ref="general_journal_sequence"/>
         </record>
-        <record id="sipreco_public_budget.opening_journal" model="account.journal">
+        <record id="opening_journal" model="account.journal">
             <field name="name">Apertura y Cierre</field>
             <field name="code">08AC</field>
             <field name="type">situation</field>
@@ -81,9 +81,9 @@
             <field name="entry_posted" eval="True"/>
             <field name="update_posted" eval="True"/>
             <field name="company_id" ref="base.main_company"/>
-            <field name="sequence_id" ref="sipreco_public_budget.general_journal_sequence"/>
+            <field name="sequence_id" ref="general_journal_sequence"/>
         </record>
-        <record id="sipreco_public_budget.miscellaneous_journal" model="account.journal">
+        <record id="miscellaneous_journal" model="account.journal">
             <field name="name">Varios</field>
             <field name="code">99VAR</field>
             <field name="type">general</field>
@@ -91,9 +91,9 @@
             <field name="entry_posted" eval="True"/>
             <field name="update_posted" eval="True"/>
             <field name="company_id" ref="base.main_company"/>
-            <field name="sequence_id" ref="sipreco_public_budget.general_journal_sequence"/>
+            <field name="sequence_id" ref="general_journal_sequence"/>
         </record>
-        <record id="sipreco_public_budget.concillation_journal" model="account.journal">
+        <record id="concillation_journal" model="account.journal">
             <field name="name">Conciliación (Vales/OP)</field>
             <field name="code">09CO</field>
             <field name="type">bank</field>
@@ -104,7 +104,7 @@
             <field name="update_posted" eval="True"/>
             <!-- <field name="double_validation" eval="True"/> -->
             <field name="company_id" ref="base.main_company"/>
-            <field name="sequence_id" ref="sipreco_public_budget.general_journal_sequence"/>
+            <field name="sequence_id" ref="general_journal_sequence"/>
             <field name="voucher_amount_restriction">must_be_cero</field>
         </record>
 

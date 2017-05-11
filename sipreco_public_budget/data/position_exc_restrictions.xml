@@ -2,18 +2,18 @@
 <openerp>
     <data noupdate="0">
     <!-- <data noupdate="1"> -->
-        <record id="sipreco_public_budget.pos_exc_res_cap_expense" model="public_budget.budget_pos_exc_rest">
+        <record id="pos_exc_res_cap_expense" model="public_budget.budget_pos_exc_rest">
             <field name="message">¡Advertencia! Recuerde que no es posible reasignar saldo de una partida del tipo Capital a una del tipo Gastos.</field>
             <field name="type">block</field>
-            <field name="origin_category_id" ref="sipreco_public_budget.pos_categ_capital"/>
-            <field name="destiny_category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+            <field name="origin_category_id" ref="pos_categ_capital"/>
+            <field name="destiny_category_id" ref="pos_categ_expense"/>
         </record>
 
-        <record id="sipreco_public_budget.pos_exc_res_exp_expense" model="public_budget.budget_pos_exc_rest">
+        <record id="pos_exc_res_exp_expense" model="public_budget.budget_pos_exc_rest">
             <field name="message"> Aviso: Esta reasignando saldos entre partidas de tipo Gastos.</field>
             <field name="type">alert</field>
-            <field name="origin_category_id" ref="sipreco_public_budget.pos_categ_expense"/>
-            <field name="destiny_category_id" ref="sipreco_public_budget.pos_categ_expense"/>
+            <field name="origin_category_id" ref="pos_categ_expense"/>
+            <field name="destiny_category_id" ref="pos_categ_expense"/>
         </record>
     </data>
 </openerp>

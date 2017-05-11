@@ -42,6 +42,14 @@ class TransactionType(models.Model):
         required=True,
         default=lambda self: self.env.user.company_id,
     )
+    definitive_partner_type = fields.Selection([
+        ('supplier', 'Suppliers'),
+        ('subsidy_recipient', 'Subsidy Recipients'),
+    ],
+        'Definitive Partner Type',
+        default='supplier',
+        required=True,
+    )
 
     @api.multi
     @api.constrains('advance_account_id', 'company_id')
