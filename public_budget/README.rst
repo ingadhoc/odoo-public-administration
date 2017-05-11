@@ -6,7 +6,21 @@
 Public Budget
 =============
 
-Modulo generico para gestion publica presupuestaria/contable
+Modulo generico para gestion publica presupuestaria/contable.
+
+Datos demo:
+* Compañía a utilizar: SIPRECO
+* Usuarios disponibles (clave igual a usuario):
+    * admin: lo ideal es no usarlo ya que ve todas las compañías y saltea restricciones
+    * demo: director de habilitaciones, contaduria y secretaria y con configuración, ideal para hacer pruebas en vez de usar admin.
+    * habilitaciones_manager: director de habilitaciones
+    * habilitaciones_user: usuario de habilitaciones
+    * contaduria_manager: director de contaduria
+    * contaduria_user: usuario de contaduria
+    * secretaria_manager: director de secretaria
+    * secretaria_user: usuario de secretaria
+    * general: usuario solo empleado, no debería poder hacer nada, por ahora no tienen ningún uso
+
 
 Installation
 ============

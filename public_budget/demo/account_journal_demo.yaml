@@ -1,0 +1,25 @@
+-
+  !python {model: account.journal} : |
+      journal = self.new(cr, uid, {'name': 'Banco', 'bank_id': ref('l10n_ar_bank.00072'), 'bank_acc_number': '12312312', 'type': 'bank', 'payment_subtype': 'bank'})
+      journal.change_payment_subtype()
+      journal.name = 'Banco Santander Rio: 12312312'
+      vals = journal._convert_to_write(journal._cache)
+      journal.create(vals)
+-
+  !python {model: account.journal} : |
+      journal = self.new(cr, uid, {'name': 'name', 'type': 'cash', 'payment_subtype': 'credit_card_out'})
+      journal.change_payment_subtype()
+      journal.name = 'Tarjeta de Crédito Visa Santander Rio (Pagos)'
+      vals = journal._convert_to_write(journal._cache)
+      journal.create(vals)
+-
+  !python {model: account.journal} : |
+      journal = self.new(cr, uid, {'name': 'name', 'type': 'cash', 'payment_subtype': 'credit_debit_card_in'})
+      journal.change_payment_subtype()
+      journal.name = 'Tarjeta de Crédito (POSNET) (Cobros)'
+      vals = journal._convert_to_write(journal._cache)
+      journal.create(vals)
+-
+  !python {model: account.journal} : |
+    journal_ids = self.search(cr, uid, [])
+    self.write(cr, uid, journal_ids, {'update_posted': True})

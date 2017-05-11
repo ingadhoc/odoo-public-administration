@@ -10,6 +10,26 @@
         </record> -->
 
 
+        <!-- Menu Empleados -->
+        <record id="hr.menu_hr_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
+        </record>
+
+        <!-- Menu Ausencias -->
+        <record id="hr_holidays.menu_hr_holidays_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
+        </record>
+
+        <!-- Menu calendario -->
+        <record id="calendar.mail_menu_calendar" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
+        </record>
+
+        <!-- Menu debates -->
+        <record id="mail.mail_channel_menu_root_chat" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
+        </record>
+
         <!-- Menu hr a techincal features -->
         <record id="hr.menu_hr_main" model="ir.ui.menu">
             <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
