@@ -222,38 +222,39 @@ class BudgetTransaction(models.Model):
     )
 
     # TODO re implementar
-    # voucher_ids = fields.One2many(
-    #     'account.voucher',
-    #     'transaction_id',
-    #     string='Payment Orders',
-    #     readonly=True,
-    #     context={'default_type': 'payment'},
-    #     states={'open': [('readonly', False)]},
-    #     auto_join=True,
-    #     domain=[
-    #         ('type', '=', 'payment'),
-    #         ('transaction_with_advance_payment', '=', False)
-    #     ],
-    # )
-    # TODO re implementar
+    # voucher_ids
+    payment_group_ids = fields.One2many(
+        'account.payment.group',
+        'transaction_id',
+        string='Payment Orders',
+        readonly=True,
+        context={'default_partner_type': 'supplier'},
+        states={'open': [('readonly', False)]},
+        auto_join=True,
+        domain=[
+            ('partner_type', '=', 'supplier'),
+            ('transaction_with_advance_payment', '=', False)
+        ],
+    )
     # Usamos otro campo por que si no el depends de advance_voucher_ids se
     # toma en cuenta igual que si fuese el de vouchers y necesitamos que sea
     # distinto para que no recalcule tantas veces. Si no la idea sería que
     # sea basicamente es el mismo campo de arriba pero lo separamos para poner
     # en otro lugar de la vista
     # advance_voucher_ids = fields.One2many(
-    #     'account.voucher',
-    #     'transaction_id',
-    #     string='Advance Payment Orders',
-    #     readonly=True,
-    #     domain=[
-    #         ('type', '=', 'payment'),
-    #         ('transaction_with_advance_payment', '=', True)
-    #     ],
-    #     context={'default_type': 'payment'},
-    #     auto_join=True,
-    #     states={'open': [('readonly', False)]},
-    # )
+    advance_payment_group_ids = fields.One2many(
+        'account.payment.group',
+        'transaction_id',
+        string='Advance Payment Orders',
+        readonly=True,
+        domain=[
+            ('partner_type', '=', 'supplier'),
+            ('transaction_with_advance_payment', '=', True)
+        ],
+        context={'default_partner_type': 'supplier'},
+        auto_join=True,
+        states={'open': [('readonly', False)]},
+    )
 
     @api.multi
     @api.constrains('type_id', 'company_id')
@@ -322,7 +323,7 @@ class BudgetTransaction(models.Model):
     # TODO implementar
     @api.multi
     @api.depends(
-        # 'advance_voucher_ids.state',
+        'advance_payment_group_ids.state',
     )
     def _get_advance_amounts(self):
         _logger.info('Getting Transaction Advance Amounts')
@@ -574,15 +575,15 @@ class BudgetTransaction(models.Model):
                             "Preventive Total, Type and Date are not "
                             "compatible with Transaction Amount Restrictions"))
 
-# Actions
     @api.multi
-    def action_new_voucher(self):
+    def action_new_payment_group(self):
         '''
-        This function returns an action that display a new voucher
+        This function returns an action that display a new payment group.
+        We dont use action on view because it will open on tree view
         '''
         self.ensure_one()
         action = self.env['ir.model.data'].xmlid_to_object(
-            'account_voucher.action_vendor_payment')
+            'account_payment_group.action_account_payments_group_payable')
 
         if not action:
             return False
@@ -590,7 +591,8 @@ class BudgetTransaction(models.Model):
         res = action.read()[0]
 
         form_view_id = self.env['ir.model.data'].xmlid_to_res_id(
-            'account_voucher.view_vendor_payment_form')
+            'action_account_payments_group_payable.'
+            'view_account_payment_group_form')
         res['views'] = [(form_view_id, 'form')]
 
         partner_id = self.partner_id

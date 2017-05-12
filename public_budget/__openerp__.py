@@ -79,8 +79,7 @@
         'view/account_asset_view.xml',
         # TODO mig vista
         # 'view/account_check_view.xml',
-        # TODO mig vista
-        # 'view/account_payment_group_view.xml',
+        'view/account_payment_group_view.xml',
         'view/hr_public_holidays_view.xml',
         'view/custom_views.xml',
         'data/sequence.xml',

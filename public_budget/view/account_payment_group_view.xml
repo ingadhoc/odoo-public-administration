@@ -1,189 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data> 
-        <record id="view_vendor_payment_l10n_ar_with_mods_form" model="ir.ui.view">
-            <field name="name">account.voucher.customer.pay.form</field>
-            <field name="model">account.voucher</field>
-            <field name="inherit_id" ref="l10n_ar_account_withholding.view_vendor_payment_form"/>
-            <field name="arch" type="xml">
-                <!-- quieren que las retenciones se definan una vez confirmado el pago -->
-                <field name="retencion_ganancias" position="attributes">
-                    <attribute name="attrs">{'required': [('company_regimenes_ganancias_ids', '!=', [(6, False, [])]), ('state', 'not in', ['draft', 'cancel'])]}</attribute>
-                </field>
+<odoo>
+
+    <record model="ir.ui.view" id="view_account_payment_group_search">
+        <field name="name">account.payment.group.filter</field>
+        <field name="model">account.payment.group</field>
+        <field name="inherit_id" ref="account_payment_group.view_account_payment_group_search"/>
+        <field name="arch" type="xml">
+            <field name="display_name" position="after">
+                <field name="budget_position_ids"/>
             </field>
-        </record>
-        
-        <!-- l10n_ar_account_voucher mods -->
-        <record id="view_vendor_payment_l10n_ar_mods_form" model="ir.ui.view">
-            <field name="name">account.voucher.customer.pay.form</field>
-            <field name="model">account.voucher</field>
-            <field name="inherit_id" ref="l10n_ar_account_voucher.view_vendor_payment_form"/>
-            <field name="arch" type="xml">
-                <field name="receiptbook_id" position="attributes">
-                    <attribute name="required">1</attribute>
-                </field>
-                <field name="next_receipt_number" position="attributes">
-                    <attribute name="invisible">1</attribute>
-                </field>
-                <!-- we use force number as a hack to compute document number on creation -->
-                <field name="document_number" position="replace">
-                    <field name="force_number" string="Número de Documento" readonly="1"/>
-                </field>
+        </field>
+    </record>
+
+    <!-- tree view modification -->
+    <record id="view_account_payment_group_tree" model="ir.ui.view">
+        <field name="name">account.payment.group.customer.pay.tree</field>
+        <field name="model">account.payment.group</field>
+        <field name="inherit_id" ref="account_payment_group.view_account_payment_group_tree"/>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <tree position="inside">
+                <button name="%(action_aeroo_report_payment)d" class="oe_highlight" string="Print Payment Order" type="action" icon="fa-print"/>
+                <button name="confirm" type="object" string="Confirm" states="draft" icon="fa-arrow-circle-right" groups="account.group_account_manager"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_account_payment_group_form" model="ir.ui.view">
+        <field name="name">account.payment.group.filter</field>
+        <field name="model">account.payment.group</field>
+        <field name="priority">20</field>
+        <field name="inherit_id" ref="account_payment_group.view_account_payment_group_form"/>
+        <field name="arch" type="xml">
+            <form>
+                <!-- used on expedient domain -->
+                <field name="user_location_ids" invisible="1"/>
+                <field name="transaction_with_advance_payment" invisible="1"/>
+                <field name="partner_ids" invisible="1"/>
+                <field name="show_print_receipt_button" invisible="1"/>
+            </form>
+
+            <form position="attributes">
+                <attribute name="create">false</attribute>
+            </form>
+
+            <field name="partner_id" position="attributes">
+                <attribute name="partner_id">[(partner_type, '=', True), ('id', 'in', partner_ids and partner_ids[0][2] or [])]</attribute>
             </field>
-        </record>
+            
+            <!-- confirm only for account manager -->
+            <button name="confirm" position="attributes">
+                <attribute name="groups">account.group_account_manager</attribute>
+            </button>
 
-        <record id="view_vendor_receipt_dialog_form" model="ir.ui.view">
-            <field name="name">account.voucher.customer.pay.form</field>
-            <field name="model">account.voucher</field>
-            <field name="inherit_id" ref="l10n_ar_account_voucher.view_vendor_receipt_dialog_form"/>
-            <field name="arch" type="xml">
-                <!-- para el dialogo del pago de retenciones no queremos elegir orden de pago -->
-                <field name="receiptbook_id" position="replace">
-                </field>
+            <field name="payment_date" position="before">
+                <field name="payment_base_date"/>
+                <field name="payment_days"/>
+                <field name="payment_min_date"/>
+                <field name="confirmation_date"/>
             </field>
-        </record>
 
-        <!-- make print button available in all states -->
-        <record id="view_print_button_vendor_payment_form" model="ir.ui.view">
-            <field name="name">account.voucher.customer.pay.form</field>
-            <field name="model">account.voucher</field>
-            <field name="inherit_id" ref="report_extended_voucher.view_vendor_receipt_dialog_form"/>
-            <field name="arch" type="xml">
-                <form>
-                    <field name="show_print_receipt_button" invisible="0"/>
-                </form>
-                <button name="receipt_print" position="attributes">
-                    <attribute name="states"></attribute>
-                    <attribute name="string">Print Payment Order</attribute>
-                </button>
-                <button name="receipt_print" position="after">
-                    <button name="%(action_aeroo_report_payment_receipt)d" class="oe_highlight" string="Print Receipt" attrs="{'invisible': [('show_print_receipt_button', '=', False)]}" type="action"/>
-                </button>
+            <field name="partner_id" position="after">
+                <field name="transaction_id" attrs="{'invisible': [('transaction_id', '=', False)]}"/>
+                <field name="budget_id" attrs="{'invisible': [('transaction_id', '=', False)]}"/>
+                <field name="expedient_id" attrs="{'required': [('transaction_id', '!=', False)], 'invisible': [('transaction_id', '=', False)]}"/>
             </field>
-        </record>
-        
-        <!-- Supplier Receipt Form  -->
-        <record id="view_vendor_payment_form" model="ir.ui.view">
-            <field name="name">account.voucher.form.receipts.pay.inherit</field>
-            <field name="model">account.voucher</field>
-            <field name="inherit_id" ref="public_budget.view_vendor_payment_form"/>
-            <field name="arch" type="xml">
-                <field name="budget_position_ids" position="after">
-                    <field name="paid_withholding_ids" widget="many2many_tags"/>
-                </field>
 
-                <xpath expr="//page[@string='Payment Information']/group/group[2]/group[2]" position="attributes">
-                    <attribute name="groups">base.group_no_one</attribute>
-                </xpath>
+            <field name="communication" position="after">
+                <field name="budget_position_ids" widget="many2many_tags"/>
+                <!-- TODO enable -->
+                <!-- <field name="paid_withholding_ids" widget="many2many_tags"/> -->
+                <field name="invoice_ids" widget="many2many_tags"/>
             </field>
-        </record>
 
-        <!-- tree view modification -->
-        <record id="voucher_receipts_form_inherit_view" model="ir.ui.view">
-            <field name="name">account.voucher.customer.pay.tree</field>
-            <field name="model">account.voucher</field>
-            <field name="inherit_id" ref="l10n_ar_account_voucher.voucher_receipts_form_inherit_view"/>
-            <field name="arch" type="xml">
-                <field name="document_number" position="replace">
-                    <field name="force_number" string="Número de Documento"/>
-                </field>
-                <tree position="inside">
-                    <button name="%(action_aeroo_report_payment)d" class="oe_highlight" string="Print Payment Order" type="action" icon="gtk-print"/>
-                    <button name="proforma_confirmed" string="Confirm" states="draft" icon="gtk-go-forward" groups="account.group_account_manager"/>
-                   <!--  <button name="proforma_confirmed" class="oe_highlight" string="Confirm" states="draft"/> -->
-                </tree>
-                <tree position="attributes">
-                    <attribute name="default_order">force_number desc</attribute>
-                </tree>
+            <!-- make print button available in all states and rename it -->
+            <button name="payment_print" position="attributes">
+                <attribute name="states"></attribute>
+                <attribute name="string">Print Payment Order</attribute>
+            </button>
+
+            <button name="payment_print" position="after">
+                <button name="%(action_aeroo_report_payment_receipt)d" class="oe_highlight" string="Print Receipt" attrs="{'invisible': [('show_print_receipt_button', '=', False)]}" type="action"/>
+            </button>
+
+            <!-- hide unreconciled_amount on not advance transactions  -->
+            <field name="unreconciled_amount" position="attributes">
+                <attribute name="attrs">{'invisible':[('transaction_with_advance_payment', '=', False)]}</attribute>
             </field>
-        </record>
 
-        <!-- vies modifications because of signature required -->
-        <record id="view_vendor_payment_signature_form" model="ir.ui.view">
-            <field name="name">account.voucher.customer.pay.form</field>
-            <field name="model">account.voucher</field>
-            <field name="inherit_id" ref="account_voucher_double_validation.view_vendor_payment_form"/>
-            <field name="arch" type="xml">
-                <!-- cofirm only for account manager -->
-                <button name="proforma_confirmed" position="attributes">
-                    <attribute name="groups">account.group_account_manager</attribute>
-                </button>
+        <!-- modifications for signature states -->
+            <!-- add states -->
+            <!-- al final no agreguamos estos porque la idea es que no esten siempre -->
+            <!-- <field name="state" position="attributes">
+                <attribute name="statusbar_visible">confirmed,signature_process,signed,posted</attribute>
+            </field> -->
 
-                <field name="payment_date" position="before">
-                    <field name="payment_base_date"/>
-                    <field name="payment_days"/>
-                </field>
+            <!-- Make post only visible from signed and available for hab director -->
+            <button name="post" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', '&amp;', ('payment_subtype', '=', 'simple'), ('state', '!=', 'draft'), '&amp;', ('payment_subtype', '=', 'double_validation'), ('state', '!=', 'signed')]}</attribute>
+                <attribute name="groups">public_budget.group_habilitacion_director</attribute>
+            </button>
 
-                <field name="state" position="attributes">
-                    <attribute name="statusbar_visible">draft,confirmed,signature_process,signed,posted</attribute>
-                </field>
+            <!-- Add signe buttons -->
+            <button name="post" position="before">
+                <button name="to_signature_process" class="oe_highlight" string="To Signature Process" type="object" groups="public_budget.group_habilitacion_usuario" states="confirmed"/>
+                <button name="to_signed" type="object" class="oe_highlight" string="Signed" groups="public_budget.group_habilitacion_director" states="signature_process"/>
+            </button>
 
-                <!-- Make validate only visible from signed -->
-                <button name="proforma_voucher" position="attributes">
-                    <attribute name="attrs">{'invisible': ['|', ('company_double_validation', '=', False), ('state', '!=', 'signed')]}</attribute>
-                    <attribute name="groups">public_budget.group_habilitacion_director</attribute>
-                </button>
+            <!-- cancel button only to account user -->
+            <button name="cancel" position="attributes">
+                <attribute name="groups">account.group_account_user</attribute>
+            </button>
 
-                <!-- Add signe buttons -->
-                <button name="proforma_voucher" position="before">
-                    <button name="confirmed_signature_process" class="oe_highlight" string="To Signature Process" groups="public_budget.group_habilitacion_usuario" states="confirmed"/>
-                    <button name="signature_process_signed" class="oe_highlight" string="Signed" groups="public_budget.group_habilitacion_director" states="signature_process"/>
-                </button>
+        </field>
+    </record>
 
-                <!-- Add cancel on sign states but only for account user -->
-                <button name="proforma_voucher" position="after">
-                    <button name="cancel_voucher" string="Cancel Receipt" states="signature_process,signed" groups="account.group_account_user"/>
-                </button>
-                <!-- inherit every cancel button and to draft button and give only to account user -->
-                <button name="cancel_voucher" position="attributes">
-                    <attribute name="groups">account.group_account_user</attribute>
-                </button>
-                <button name="action_cancel_draft" position="attributes">
-                    <attribute name="groups">account.group_account_user</attribute>
-                </button>
-                <button string="Cancel Voucher" position="attributes">
-                    <attribute name="groups">account.group_account_user</attribute>
-                </button>
-                <button string="Unreconcile" position="attributes">
-                    <attribute name="groups">account.group_account_user</attribute>
-                </button>
-
-                <!-- cancel buttons only for tech.. -->
-<!--                 <button string="Cancel Voucher" position="attributes">
-                    <attribute name="groups">base.group_no_one</attribute>
-                </button>
-                <button string="Unreconcile" position="attributes">
-                    <attribute name="groups">base.group_no_one</attribute>
-                </button> -->
-
-                <!-- escondemos el campo reconciled_amount para que no moleste -->
-                <field name="reconciled_amount" position="attributes">
-                    <attribute name="invisible">1</attribute>
-                </field>
-
-                <!-- hide advance amount on not advance transactions  -->
-                <field name="advance_amount" position="attributes">
-                    <attribute name="attrs">{'invisible':[('transaction_with_advance_payment', '=', False)]}</attribute>
-                </field>
-
-                <!-- make date invisible -->
-                <!-- Originalmente estaba invisible, pero se pone visible para los casos en los que el registro
-                de un pago se registra en el sistema posteriormente al pago, ej: gastos bancarios -->
-                <field name="date" position="attributes">
-                    <attribute name="invisible">False</attribute>
-                </field>
+    <!-- TODO -->
+    <!-- quieren que las retenciones se definan una vez confirmado el pago -->
+    <!-- <record id="view_vendor_payment_l10n_ar_with_mods_form" model="ir.ui.view">
+        <field name="name">account.payment.group.customer.pay.form</field>
+        <field name="model">account.payment.group</field>
+        <field name="inherit_id" ref="l10n_ar_account_withholding.view_vendor_payment_form"/>
+        <field name="arch" type="xml">
+            <field name="retencion_ganancias" position="attributes">
+                <attribute name="attrs">{'required': [('company_regimenes_ganancias_ids', '!=', [(6, False, [])]), ('state', 'not in', ['draft', 'cancel'])]}</attribute>
             </field>
-        </record>
-        <record model="ir.ui.view" id="account_voucher_view_voucher_filter_vendor_pay">
-            <field name="name">account.voucher.filter</field>
-            <field name="model">account.voucher</field>
-            <field name="inherit_id" ref="account_voucher.view_voucher_filter_vendor_pay"/>
-            <field name="arch" type="xml">
-                <field name="number" position="before">
-                    <field name="force_number" string="Nro Orden de Pago"/>
-                    <field name="budget_position_ids"/>
-                </field>
+        </field>
+    </record> -->
+    
+    <!-- TODO -->
+    <!-- para el dialogo del pago de retenciones no queremos elegir orden de pago -->
+    <!-- <record id="view_vendor_receipt_dialog_form" model="ir.ui.view">
+        <field name="name">account.payment.group.customer.pay.form</field>
+        <field name="model">account.payment.group</field>
+        <field name="inherit_id" ref="l10n_ar_account_payment_group.view_vendor_receipt_dialog_form"/>
+        <field name="arch" type="xml">
+            <field name="receiptbook_id" position="replace">
             </field>
-        </record>
-    </data>
-</openerp>
+        </field>
+    </record> -->
+
+</odoo>

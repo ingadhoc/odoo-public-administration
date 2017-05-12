@@ -4,9 +4,6 @@ advance request
 public budget
     ver si es necesario para algo fiscalyear y definir orden
 
-expediente
-    revisar no workflow
-
 account_move_line
     funcionalidad de voucher_line_ids
 
@@ -52,3 +49,6 @@ REvisar en public group:
 
 
 TODo renombrar todos los ids sipreco_public_budget para que queden sin nada pero hacer script de mig
+
+MIGRACION:
+    confirmation_date de account_voucher_double_validation a public_budget

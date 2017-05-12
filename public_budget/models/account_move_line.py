@@ -14,3 +14,7 @@ class account_move_line(models.Model):
     #     'move_line_id',
     #     'Voucher Lines'
     # )
+    # TODO agregar y ver si usamos
+    # to_pay_amount = fields.Monetary(
+    #     related='invoice_id.to_pay_amount',
+    # )
