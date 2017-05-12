@@ -49,7 +49,7 @@
                             <label for="number"/>
                             <field name="number" class="oe_inline" readonly="1"/>
                         </h1>
-                       <div class="oe_right oe_button_box" name="buttons">
+                       <div class="oe_button_box" name="buttons">
                        </div>
                      <group>
                         <group>

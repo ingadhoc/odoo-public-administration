@@ -27,7 +27,7 @@
                         <field name="state" widget="statusbar"/>
                     </header>
                     <sheet string="Definitive Line">
-                       <div class="oe_right oe_button_box" name="buttons">
+                       <div class="oe_button_box" name="buttons">
                        </div>
                      <group>
                         <field name="issue_date"/> 
@@ -45,8 +45,9 @@
             <field name="model">public_budget.definitive_line</field>
             <field name="arch" type="xml">
                 <tree string="Definitive Line"
-                    editable="bottom"
                     >
+                    <!-- sacamos el editable porque nos da un error por sua tree editable en un pop up -->
+                    <!-- editable="bottom" -->
                     <field name="issue_date"/>
                     <field name="supplier_id"/>
                     <field name="amount"/>

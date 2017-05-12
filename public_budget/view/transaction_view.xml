@@ -54,7 +54,7 @@
                             statusbar_colors='{}'/>
                     </header>
                     <sheet string="Budget Transaction">
-                       <div class="oe_right oe_button_box" name="buttons">
+                       <div class="oe_button_box" name="buttons">
                        </div>
                         <field name="id" invisible="True"/> 
                         <field name="user_location_ids" invisible="True"/> 
