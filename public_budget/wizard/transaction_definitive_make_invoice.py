@@ -70,11 +70,6 @@ class public_budget_definitive_make_invoice(models.TransientModel):
         'Invoice Date',
         required=True
     )
-    supplier_invoice_number = fields.Char(
-        string='Supplier Invoice Number',
-        help="The reference of this invoice as provided by the supplier.",
-        required=True,
-    )
     company_id = fields.Many2one(
         'res.company',
         string='Company',
@@ -110,14 +105,71 @@ class public_budget_definitive_make_invoice(models.TransientModel):
         default=_get_transaction_id,
         required=True
     )
+    use_documents = fields.Boolean(
+        related='journal_id.use_documents',
+        string='Use Documents?',
+        readonly=True,
+    )
+    journal_document_type_id = fields.Many2one(
+        'account.journal.document.type',
+        'Document Type',
+        ondelete='cascade',
+    )
+    document_sequence_id = fields.Many2one(
+        related='journal_document_type_id.sequence_id',
+        readonly=True,
+    )
+    document_number = fields.Char(
+        string='Document Number',
+    )
+    available_journal_document_type_ids = fields.Many2many(
+        'account.journal.document.type',
+        compute='get_available_journal_document_types',
+        string='Available Journal Document Types',
+    )
+    # is_refund = fields.Boolean(
+    #     'Is Refund?',
+    # )
+    to_invoice_amount = fields.Float(
+        compute='_compute_to_invoice_amount',
+    )
+
+    @api.multi
+    @api.depends('line_ids.to_invoice_amount')
+    def _compute_to_invoice_amount(self):
+        for rec in self:
+            rec.to_invoice_amount = sum(
+                rec.mapped('line_ids.to_invoice_amount'))
+
+    @api.multi
+    @api.depends('journal_id', 'supplier_id', 'to_invoice_amount')
+    def get_available_journal_document_types(self):
+        for rec in self:
+            if not rec.journal_id or not rec.supplier_id:
+                return True
+            # desde el wizard se pueden crear facturas o reembolsos
+            if rec.to_invoice_amount < 0.0:
+                invoice_type = 'in_refund'
+            else:
+                invoice_type = 'in_invoice'
+            res = rec.env[
+                'account.invoice']._get_available_journal_document_types(
+                rec.journal_id, invoice_type, rec.supplier_id)
+            rec.available_journal_document_type_ids = res[
+                'available_journal_document_types']
+            rec.journal_document_type_id = res[
+                'journal_document_type']
 
     @api.one
     @api.depends('transaction_id')
     def _get_supplier_ids(self):
-        self.supplier_ids = self.transaction_id.mapped(
+        suppliers = self.transaction_id.mapped(
             'preventive_line_ids.definitive_line_ids').filtered(
             lambda r: r.residual_amount != 0).mapped(
             'supplier_id')
+        self.supplier_ids = suppliers
+        if len(suppliers) == 1:
+            self.supplier_id = suppliers.id
 
     @api.one
     @api.onchange('supplier_id')
@@ -145,10 +197,13 @@ class public_budget_definitive_make_invoice(models.TransientModel):
     @api.multi
     def make_invoices(self):
         self.ensure_one()
-        wizard = self
 
-        tran_type = wizard.transaction_id.type_id
+        tran_type = self.transaction_id.type_id
         advance_account = False
+        if self.to_invoice_amount < 0.0:
+            invoice_type = 'in_refund'
+        else:
+            invoice_type = 'in_invoice'
         if tran_type.with_advance_payment:
             if not tran_type.advance_account_id:
                 raise ValidationError(_(
@@ -156,22 +211,20 @@ class public_budget_definitive_make_invoice(models.TransientModel):
                     "must have and advance account configured!"))
             advance_account = tran_type.advance_account_id
             # Check advance remaining amount
-            total_to_invoice_amount = sum(
-                wizard.mapped('line_ids.to_invoice_amount'))
             advance_to_return_amount = (
-                wizard.transaction_id.advance_to_return_amount)
-            if total_to_invoice_amount > advance_to_return_amount:
+                self.transaction_id.advance_to_return_amount)
+            if self.to_invoice_amount > advance_to_return_amount:
                 raise ValidationError(_(
                     "You can not invoice more than Advance Remaining Amount!\n"
                     "* Amount to invoice: %s\n"
                     "* Advance Remaining Amount: %s") % (
-                    total_to_invoice_amount, advance_to_return_amount))
+                    self.to_invoice_amount, advance_to_return_amount))
 
         inv_lines = self.env['account.invoice.line']
-        for line in wizard.line_ids.filtered(lambda r: r.to_invoice_amount):
+        for line in self.line_ids.filtered(lambda r: r.to_invoice_amount):
             definitive_line = line.definitive_line_id
             line_vals = definitive_line.get_invoice_line_vals(
-                line.to_invoice_amount, journal=wizard.journal_id)
+                line.to_invoice_amount, invoice_type=invoice_type)
             inv_lines += inv_lines.create(line_vals)
 
         # Si no hay se creo alguna linea es porque todas tienen amount 0
@@ -179,9 +232,12 @@ class public_budget_definitive_make_invoice(models.TransientModel):
             raise ValidationError(_(
                 "You should set at least one line with amount greater than 0"))
 
-        invoice_vals = wizard.transaction_id.get_invoice_vals(
-            wizard.supplier_id, wizard.journal_id, wizard.invoice_date,
-            wizard.supplier_invoice_number, inv_lines, advance_account)
+        invoice_vals = self.transaction_id.get_invoice_vals(
+            self.supplier_id, self.journal_id, self.invoice_date, invoice_type,
+            inv_lines,
+            document_number=self.document_number,
+            document_type=self.journal_document_type_id,
+            advance_account=advance_account)
 
         invoice = self.env['account.invoice'].with_context(
             type='in_invoice').create(invoice_vals)

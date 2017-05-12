@@ -2,6 +2,7 @@
 
     <record id="budg_trans_caso_1" model="public_budget.transaction">
         <field name="name">Caso 1: Adiqusición de sistema de software (bien/servicio por licitacion/concurso)</field>
+        <field name="state">open</field>
         <field name="type_id" ref="purchase_type_lprivada_demo"/>
         <field name="expedient_id" ref="budget_exp_caso_1"/>
         <field name="issue_date" eval="time.strftime('%Y-%m-03')"/>
@@ -12,6 +13,7 @@
 
     <record id="budg_trans_caso_2" model="public_budget.transaction">
         <field name="name">Caso 2: Adiqusición de bienes inventariables que afectan a más de un presupuesto</field>
+        <field name="state">open</field>
         <field name="type_id" ref="purchase_type_lpublica_demo"/>
         <field name="expedient_id" ref="budget_exp_caso_2"/>
         <field name="issue_date" eval="time.strftime('%Y-%m-05')"/>
@@ -22,6 +24,7 @@
 
     <record id="budg_trans_caso_3" model="public_budget.transaction">
         <field name="name">Caso 3: Compra directa (bien o servicio)</field>
+        <field name="state">open</field>
         <field name="type_id" ref="purchase_type_compra_directa_demo"/>
         <field name="expedient_id" ref="budget_exp_caso_3"/>
         <field name="issue_date" eval="time.strftime('%Y-%m-07')"/>
@@ -32,6 +35,7 @@
 
     <record id="budg_trans_caso_4" model="public_budget.transaction">
         <field name="name">Caso 4: Pago de servicios (luz,agua,etc)</field>
+        <field name="state">open</field>
         <field name="type_id" ref="purchase_type_compra_directa_demo"/>
         <field name="expedient_id" ref="budget_exp_caso_4"/>
         <field name="issue_date" eval="time.strftime('%Y-%m-09')"/>
@@ -42,6 +46,7 @@
 
     <record id="budg_trans_caso_5" model="public_budget.transaction">
         <field name="name">Caso 5: Caja chica</field>
+        <field name="state">open</field>
         <field name="type_id" ref="purchase_type_fondo_fijo_demo"/>
         <field name="expedient_id" ref="budget_exp_caso_5"/>
         <field name="issue_date" eval="time.strftime('%Y-%m-07')"/>
@@ -52,6 +57,7 @@
 
     <record id="budg_trans_caso_6" model="public_budget.transaction">
         <field name="name">Caso 6: Anticipo con cargo de rendición</field>
+        <field name="state">open</field>
         <field name="type_id" ref="purchase_type_anticipo_gasto_demo"/>
         <field name="expedient_id" ref="budget_exp_caso_6"/>
         <field name="issue_date" eval="time.strftime('%Y-%m-17')"/>
@@ -62,6 +68,7 @@
 
     <record id="budg_trans_caso_7" model="public_budget.transaction">
         <field name="name">Caso 7: Pago de alquiler</field>
+        <field name="state">open</field>
         <field name="type_id" ref="purchase_type_compra_directa_demo"/>
         <field name="expedient_id" ref="budget_exp_caso_7"/>
         <field name="issue_date" eval="time.strftime('%Y-%m-19')"/>
@@ -72,6 +79,7 @@
 
     <record id="budg_trans_caso_8" model="public_budget.transaction">
         <field name="name">Caso 8: Pago de sueldos</field>
+        <field name="state">open</field>
         <field name="type_id" ref="purchase_type_sueldos_demo"/>
         <field name="expedient_id" ref="budget_exp_caso_8"/>
         <field name="issue_date" eval="time.strftime('%Y-%m-19')"/>
@@ -82,6 +90,7 @@
 
     <record id="budg_trans_caso_9" model="public_budget.transaction">
         <field name="name">Caso 9: Subsidio con cargo</field>
+        <field name="state">open</field>
         <field name="type_id" ref="purchase_type_subsidio_con_cargo_demo"/>
         <field name="expedient_id" ref="budget_exp_caso_9"/>
         <field name="issue_date" eval="time.strftime('%Y-%m-19')"/>
@@ -92,6 +101,7 @@
 
     <record id="budg_trans_caso_10" model="public_budget.transaction">
         <field name="name">Caso 10: Subsidio sin cargo</field>
+        <field name="state">open</field>
         <field name="type_id" ref="purchase_type_subsidio_sin_cargo_demo"/>
         <field name="expedient_id" ref="budget_exp_caso_10"/>
         <field name="issue_date" eval="time.strftime('%Y-%m-25')"/>

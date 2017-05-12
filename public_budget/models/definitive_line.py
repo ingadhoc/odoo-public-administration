@@ -211,11 +211,10 @@ class DefinitiveLine(models.Model):
         return (invoiced_amount, to_pay_amount, paid_amount)
 
     @api.multi
-    def get_invoice_line_vals(self, to_invoice_amount=False, journal=False):
+    def get_invoice_line_vals(
+            self, to_invoice_amount, invoice_type=False):
         self.ensure_one()
-        if not to_invoice_amount:
-            to_invoice_amount = self.residual_amount
-        if journal.type in ('sale_refund', 'purchase_refund'):
+        if invoice_type in ('in_refund', 'out_refund'):
             to_invoice_amount = -1.0 * to_invoice_amount
         preventive_line = self.preventive_line_id
         line_vals = {

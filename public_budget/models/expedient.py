@@ -258,7 +258,7 @@ class PublicBudgetExpedient(models.Model):
 
     @api.multi
     def action_close(self):
-        self.write({'state': 'close'})
+        self.write({'state': 'closed'})
         return True
 
     @api.multi
