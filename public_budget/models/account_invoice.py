@@ -127,21 +127,20 @@ class AccountInvoice(models.Model):
                         'La fecha de la factura no puede ser menor a la fecha '
                         'de la linea definitiva relacionada'))
 
-# TODO enable
-    # @api.multi
-    # def action_cancel(self):
-    #     for inv in self:
-    #         # if invoice has been send to pay but it is not and advance
-    #         # transaction where they are not actuallly sent to paid, then
-    #         # first you should cancel payment
-    #         if (
-    #                 inv.to_pay_amount and
-    #                 not inv.transaction_id.type_id.with_advance_payment
-    #         ):
-    #             raise ValidationError(_(
-    #                 'You cannot cancel an invoice which has been sent to '
-    #                 'pay. You need to cancel related payments first.'))
-    #     return super(AccountInvoice, self).action_cancel()
+    @api.multi
+    def action_cancel(self):
+        for inv in self:
+            # if invoice has been send to pay but it is not and advance
+            # transaction where they are not actuallly sent to paid, then
+            # first you should cancel payment
+            if (
+                    inv.to_pay_amount and
+                    not inv.transaction_id.type_id.with_advance_payment
+            ):
+                raise ValidationError(_(
+                    'You cannot cancel an invoice which has been sent to '
+                    'pay. You need to cancel related payments first.'))
+        return super(AccountInvoice, self).action_cancel()
 
     @api.multi
     def invoice_validate(self):

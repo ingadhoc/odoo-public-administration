@@ -1,9 +1,3 @@
-TODO
-advance request
-    implementar link a voucher y pagos
-public budget
-    ver si es necesario para algo fiscalyear y definir orden
-
 account_move_line
     funcionalidad de voucher_line_ids
 

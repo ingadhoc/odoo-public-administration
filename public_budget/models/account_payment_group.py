@@ -180,31 +180,6 @@ class AccountPaymentGroup(models.Model):
                 business_days_to_add -= 1
         self.payment_min_date = fields.Date.to_string(current_date)
 
-    # TODO check if needed
-    # @api.constrains('state', 'journal_id', 'to_pay_amount')
-    # def check_journal_amount_restriction_with_double_validation(self):
-    #     """
-    #     We add this constraint that lins double validation module and
-    #     voucher reconcile
-    #     """
-    #     for voucher in self.filtered(lambda x: x.state == 'confirmed'):
-    #         journal = self.journal_id
-    #         if (
-    #                 journal.voucher_amount_restriction == 'cant_be_cero' and
-    #                 not voucher.to_pay_amount
-    #         ):
-    #             raise ValidationError(_(
-    #                 "On Journal '%s' to pay amount can't be cero!\n"
-    #                 "* Voucher id: %i") % (journal.name, voucher.id))
-    #         elif (
-    #                 journal.voucher_amount_restriction == 'must_be_cero' and
-    #                 voucher.to_pay_amount
-    #         ):
-    #             raise ValidationError(_(
-    #                 "On Journal '%s' to pay amount must be cero!\n"
-    #                 "* Voucher id: %i") % (journal.name, voucher.id))
-    #     return True
-
     # TODO enable
     # @api.one
     # def _get_paid_withholding(self):
