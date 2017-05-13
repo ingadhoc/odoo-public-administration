@@ -118,7 +118,7 @@
 
             <!-- quieren que las retenciones se definan una vez confirmado el pago -->
             <field name="retencion_ganancias" position="attributes">
-                <attribute name="attrs">{'required': [('company_regimenes_ganancias_ids', '!=', []), ('state', 'in', ['draft', 'confirmed'])]}</attribute>
+                <attribute name="attrs">{'required': [('company_regimenes_ganancias_ids', '!=', []), ('state', '=', 'confirmed')]}</attribute>
             </field>
         </field>
     </record>

@@ -35,7 +35,6 @@ class public_budget_definitive_make_invoice_detail(models.TransientModel):
 
     @api.one
     @api.constrains(
-        'residual_amount',
         'to_invoice_amount'
     )
     def _check_amounts(self):
@@ -232,12 +231,20 @@ class public_budget_definitive_make_invoice(models.TransientModel):
             raise ValidationError(_(
                 "You should set at least one line with amount greater than 0"))
 
-        invoice_vals = self.transaction_id.get_invoice_vals(
-            self.supplier_id, self.journal_id, self.invoice_date, invoice_type,
-            inv_lines,
-            document_number=self.document_number,
-            document_type=self.journal_document_type_id,
-            advance_account=advance_account)
+        invoice_vals = {
+            'partner_id': self.supplier_id.id,
+            'date_invoice': self.invoice_date,
+            'document_number': self.document_number,
+            'journal_document_type_id': self.journal_document_type_id.id,
+            'invoice_line_ids': [(6, 0, inv_lines.ids)],
+            'type': invoice_type,
+            'account_id': (
+                advance_account and advance_account.id or
+                self.supplier_id.property_account_payable_id.id),
+            'journal_id': self.journal_id.id,
+            'company_id': self.journal_id.company_id.id,
+            'transaction_id': self.transaction_id.id,
+        }
 
         invoice = self.env['account.invoice'].with_context(
             type='in_invoice').create(invoice_vals)

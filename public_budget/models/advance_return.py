@@ -101,7 +101,7 @@ class AdvanceReturn(models.Model):
                 'partner_id': return_partner.id,
                 'debit': total_returned_amount,
                 'credit': 0.0,
-                'account_id': return_partner.property_account_payable.id,
+                'account_id': return_partner.property_account_payable_id.id,
                 'name': self.name,
             }))
 

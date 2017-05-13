@@ -15,7 +15,6 @@ class AccountInvoice(models.Model):
         copy=False,
         readonly=True,
         auto_join=True,
-        # required=True,
     )
     budget_id = fields.Many2one(
         related='transaction_id.budget_id',
@@ -42,9 +41,6 @@ class AccountInvoice(models.Model):
     @api.constrains('to_pay_amount')
     def check_to_pay_amount(self):
         for rec in self:
-            # TODO ver si el control lo hacemos por cia o de otra manera
-            # only check if invoice has a related transaction, this is more
-            # related to demo data
             if rec.transaction_id and (
                     rec.to_pay_amount and rec.currency_id.round(
                     rec.to_pay_amount - rec.amount_total) > 0.0):
@@ -63,31 +59,28 @@ class AccountInvoice(models.Model):
     @api.multi
     def _get_to_pay_amount_to_date(self):
         self.ensure_one()
-        return True
-    # TODO implementar
-    # _logger.info('Getting to pay amount for invoice %s' % self.id)
-    # # if invoice is paid and not payments, then it is autopaid and after
-    # # validation we consider it as send to paid and paid
-    # if self.state == 'paid' and not self.payment_ids:
-    #     return self.amount_total
-    # domain = [
-    #     ('move_line_id.move_id', '=', self.move_id.id),
-    #     ('amount', '!=', 0),
-    #     ('voucher_id.state', 'not in', ('cancel', 'draft'))
-    # ]
-    # # Add this to allow analysis between dates
-    # # from_date = self._context.get('analysis_from_date', False)
-    # to_date = self._context.get('analysis_to_date', False)
-    # if to_date:
-    #     domain += [('voucher_id.confirmation_date', '<=', to_date)]
+        _logger.info('Getting to pay amount for invoice %s' % self.id)
+        # if invoice is paid and not payments, then it is autopaid and after
+        # validation we consider it as send to paid and paid
+        if self.state == 'paid' and not self.payment_ids:
+            return self.amount_total
+        domain = [
+            ('payment_group_ids.state', '!=', 'draft'),
+            ('id', 'in', self.open_move_line_ids.ids),
+        ]
+        # Add this to allow analysis between dates
+        # from_date = self._context.get('analysis_from_date', False)
+        to_date = self._context.get('analysis_to_date', False)
+        if to_date:
+            domain += [('payment_group_ids.confirmation_date', '<=', to_date)]
 
-    # voucher_lines = self.env['account.voucher.line'].search(domain)
-    # # si es credito entonces restamos entonces
-    # amount = sum(
-    #     [x.type == 'dr' and x.amount or -x.amount for x in voucher_lines])
-    # if self.type in ('in_refund', 'out_refund'):
-    #     amount = -amount
-    # return amount
+        lines = self.env['account.move.line'].search(domain)
+
+        # si es credito entonces restamos entonces
+        amount = -sum(lines.mapped('amount_residual'))
+        # if self.type in ('in_refund', 'out_refund'):
+        #     amount = -amount
+        return amount
 
     @api.multi
     def _get_paid_amount_to_date(self):

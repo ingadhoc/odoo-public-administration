@@ -350,54 +350,24 @@ class BudgetTransaction(models.Model):
         # self.advance_paid_amount = advance_paid_amount
 
     @api.multi
-    def mass_voucher_create(self):
+    def mass_payment_group_create(self):
         self.ensure_one()
         self = self.with_context(transaction_id=self.id)
-        vouchers = self.env['account.voucher']
         for invoice in self.invoice_ids.filtered(
                 lambda r: r.state == 'open'):
-            _logger.info('Mass Create Voucher for invoice %s' % invoice.id)
-            invoice_to_pay_amount = invoice.residual - invoice.to_pay_amount
-            # exclude invoices that hast been send to paid
-            if not invoice_to_pay_amount or invoice_to_pay_amount == 0.0:
-                continue
-            journal = self.env['account.journal'].search([
-                ('company_id', '=', invoice.company_id.id),
-                ('type', 'in', ('cash', 'bank'))], limit=1)
-            if not journal:
-                raise ValidationError(_(
-                    'No bank or cash journal found for company "%s"') % (
-                    invoice.company_id.name))
             partner = invoice.partner_id.commercial_partner_id
-            voucher_data = vouchers.onchange_partner_id(
-                partner.id, journal.id, 0.0,
-                invoice.currency_id.id, 'payment', False)
-            invoice_move_lines = invoice.move_id.line_id.ids
-            # only debit lines
-            # line_cr_ids = [
-            #     (0, 0, vals) for vals in voucher_data['value'].get(
-            #         'line_cr_ids', False) if isinstance(vals, dict)]
-            line_dr_ids = []
-            for vals in voucher_data['value'].get('line_dr_ids', False):
-                if (
-                        isinstance(vals, dict) and
-                        vals.get('move_line_id') in invoice_move_lines):
-                    vals['amount'] = invoice_to_pay_amount
-                    vals['reconcile'] = True
-                    line_dr_ids.append((0, 0, vals))
-            account_id = voucher_data['value'].get('account_id', False)
-            voucher_vals = {
-                'type': 'payment',
-                # 'receiptbook_id': self.budget_id.receiptbook_id.id,
-                'expedient_id': self.expedient_id.id,
-                'partner_id': partner.id,
-                'transaction_id': self.id,
-                'journal_id': journal.id,
-                'account_id': account_id,
-                # 'line_cr_ids': line_cr_ids,
-                'line_dr_ids': line_dr_ids,
+            pay_context = {
+                'to_pay_move_line_ids': (invoice.open_move_line_ids.ids),
+                'default_company_id': invoice.company_id.id,
             }
-            vouchers.create(voucher_vals)
+            self.env['account.payment.group'].with_context(
+                pay_context).create({
+                    'partner_type': 'supplier',
+                    'receiptbook_id': self.budget_id.receiptbook_id.id,
+                    'expedient_id': self.expedient_id.id,
+                    'partner_id': partner.id,
+                    'transaction_id': self.id,
+                })
         return True
 
     @api.multi
@@ -468,32 +438,6 @@ class BudgetTransaction(models.Model):
         for rec in self:
             rec.paid_amount = sum(rec.mapped(
                 'preventive_line_ids.paid_amount'))
-
-    @api.multi
-    def get_invoice_vals(
-            self, supplier, journal, invoice_date, invoice_type,
-            inv_lines, document_number=False, document_type=False,
-            advance_account=False):
-        self.ensure_one()
-        company = self.env.user.company_id
-
-        if advance_account:
-            account_id = advance_account.id
-        else:
-            account_id = supplier.property_account_payable_id.id
-        vals = {
-            'partner_id': supplier.id,
-            'date_invoice': invoice_date,
-            'document_number': document_number,
-            'document_type_id': document_type and document_type.id or False,
-            'invoice_line_ids': [(6, 0, inv_lines.ids)],
-            'type': invoice_type,
-            'account_id': account_id,
-            'journal_id': journal.id,
-            'company_id': company.id,
-            'transaction_id': self.id,
-        }
-        return vals
 
     @api.multi
     def action_cancel_draft(self):

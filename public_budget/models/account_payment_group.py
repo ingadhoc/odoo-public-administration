@@ -281,34 +281,20 @@ class AccountPaymentGroup(models.Model):
                 ('invoice_id.transaction_id', '=', self.transaction_id.id))
         return domain
 
-# TODO ver si son necesarias o no y mover dependencia de sipreco_project
-# a este
-# modificamos estas funciones para que si esta en borrador no setee ningun
-# valor por defecto
-# @api.onchange('retencion_ganancias', 'partner_id_copy')
-# def change_retencion_ganancias(self):
-#     def_regimen = False
-#     if self.state != 'draft' and self.retencion_ganancias == 'nro_regimen':
-#         cia_regs = self.company_regimenes_ganancias_ids
-#         partner_regimen = self.partner_id.default_regimen_ganancias_id
-#         if partner_regimen and partner_regimen in cia_regs:
-#             def_regimen = partner_regimen
-#         elif cia_regs:
-#             def_regimen = cia_regs[0]
-#     self.regimen_ganancias_id = def_regimen
-
-# @api.onchange('company_regimenes_ganancias_ids')
-# def change_company_regimenes_ganancias(self):
-#     if (
-#             self.state != 'draft' and
-#             self.company_regimenes_ganancias_ids and
-#             self.type == 'payment'):
-#         self.retencion_ganancias = 'nro_regimen'
+    # modificamos estas funciones para que si esta en borrador no setee ningun
+    # valor por defecto
+    @api.onchange('company_regimenes_ganancias_ids')
+    def change_company_regimenes_ganancias(self):
+        if (
+                self.state != 'draft' and
+                self.company_regimenes_ganancias_ids and
+                self.partner_type == 'supplier'):
+            self.retencion_ganancias = 'nro_regimen'
 
     @api.multi
     @api.constrains('state')
     def update_invoice_amounts(self):
-        _logger.info('Updating invoice amounts from voucher')
+        _logger.info('Updating invoice amounts from payment group')
         # when voucher state changes we recomputed related invoice values
         # we could improove this filtering by relevant states
         for rec in self:
