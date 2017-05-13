@@ -14,7 +14,8 @@ class AccountPayment(models.Model):
     # hacemos que la fecha de pago no sea obligatoria ya que seteamos fecha
     # de validacion si no estaba seteada, la setea el payment group
     payment_date = fields.Date(
-        required=False
+        required=False,
+        default=False,
     )
 
     @api.one

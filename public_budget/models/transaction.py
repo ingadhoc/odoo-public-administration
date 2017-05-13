@@ -480,8 +480,7 @@ class BudgetTransaction(models.Model):
         if advance_account:
             account_id = advance_account.id
         else:
-            account_id = supplier.property_account_receivable_id.id
-
+            account_id = supplier.property_account_payable_id.id
         vals = {
             'partner_id': supplier.id,
             'date_invoice': invoice_date,
@@ -600,7 +599,7 @@ class BudgetTransaction(models.Model):
         res['context'] = {
             'default_transaction_id': self.id,
             'default_partner_id': partner_id and partner_id.id or False,
-            'default_type': 'payment',
+            'default_partner_type': 'supplier',
         }
         return res
 

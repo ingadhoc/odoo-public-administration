@@ -1,57 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data noupdate="0">
-    <!-- <data noupdate="1"> -->
+<odoo>
 
-    <!-- Solicitudes de adelanto -->
-        <record id="adelanto_personal_permanente_demo" model="public_budget.advance_request_type">
-            <field name="name">Solicitud de Adelanto - Personal Permanente</field>
-            <field name="general_return_partner_id" ref="personal_permanente"/>
-            <field name="account_id" ref="account_adelanto_personal"/>
-            <field name="return_journal_id" ref="miscellaneous_journal_demo"/>
-            <field name="company_id" ref="company_sipreco"/>
-        </record>
+<!-- Solicitudes de adelanto -->
+    <record id="adelanto_personal_permanente_demo" model="public_budget.advance_request_type">
+        <field name="name">Solicitud de Adelanto - Personal Permanente</field>
+        <field name="general_return_partner_id" ref="personal_permanente"/>
+        <field name="account_id" ref="account_adelanto_personal"/>
+        <field name="return_journal_id" ref="journal_adelantos"/>
+        <field name="company_id" ref="company_sipreco"/>
+    </record>
 
-        <record id="adelanto_personal_no_permanente_demo" model="public_budget.advance_request_type">
-            <field name="name">Solicitud de Adelanto - Personal  No Permanente</field>
-            <field name="general_return_partner_id" ref="personal_no_permanente"/>
-            <field name="account_id" ref="account_adelanto_personal"/>
-            <field name="return_journal_id" ref="miscellaneous_journal_demo"/>
-            <field name="company_id" ref="company_sipreco"/>
-        </record>
+    <record id="adelanto_personal_no_permanente_demo" model="public_budget.advance_request_type">
+        <field name="name">Solicitud de Adelanto - Personal  No Permanente</field>
+        <field name="general_return_partner_id" ref="personal_no_permanente"/>
+        <field name="account_id" ref="account_adelanto_personal"/>
+        <field name="return_journal_id" ref="journal_adelantos"/>
+        <field name="company_id" ref="company_sipreco"/>
+    </record>
 
-        <record id="adelanto_personal_transitorio_demo" model="public_budget.advance_request_type">
-            <field name="name">Solicitud de Adelanto - Personal  Transitorio</field>
-            <field name="general_return_partner_id" ref="personal_transitorio"/>
-            <field name="account_id" ref="account_adelanto_personal"/>
-            <field name="return_journal_id" ref="miscellaneous_journal_demo"/>
-            <field name="company_id" ref="company_sipreco"/>
-        </record>
+    <record id="adelanto_personal_transitorio_demo" model="public_budget.advance_request_type">
+        <field name="name">Solicitud de Adelanto - Personal  Transitorio</field>
+        <field name="general_return_partner_id" ref="personal_transitorio"/>
+        <field name="account_id" ref="account_adelanto_personal"/>
+        <field name="return_journal_id" ref="journal_adelantos"/>
+        <field name="company_id" ref="company_sipreco"/>
+    </record>
 
-    <!-- Ordenes de pago -->
-        <record id="orden_pago_personal_permanente_demo" model="public_budget.advance_request_type">
-            <field name="name">Orden de Pago - Personal Permanente</field>
-            <field name="general_return_partner_id" ref="personal_permanente"/>
-            <field name="account_id" ref="account_adelanto_orden_pago"/>
-            <field name="return_journal_id" ref="miscellaneous_journal_demo"/>
-            <field name="company_id" ref="company_sipreco"/>
-        </record>
+<!-- Ordenes de pago -->
+    <record id="orden_pago_personal_permanente_demo" model="public_budget.advance_request_type">
+        <field name="name">Orden de Pago - Personal Permanente</field>
+        <field name="general_return_partner_id" ref="personal_permanente"/>
+        <field name="account_id" ref="account_adelanto_orden_pago"/>
+        <field name="return_journal_id" ref="journal_adelantos"/>
+        <field name="company_id" ref="company_sipreco"/>
+    </record>
 
-        <record id="orden_pago_personal_no_permanente_demo" model="public_budget.advance_request_type">
-            <field name="name">Orden de Pago - Personal  No Permanente</field>
-            <field name="general_return_partner_id" ref="personal_no_permanente"/>
-            <field name="account_id" ref="account_adelanto_orden_pago"/>
-            <field name="return_journal_id" ref="miscellaneous_journal_demo"/>
-            <field name="company_id" ref="company_sipreco"/>
-        </record>
+    <record id="orden_pago_personal_no_permanente_demo" model="public_budget.advance_request_type">
+        <field name="name">Orden de Pago - Personal  No Permanente</field>
+        <field name="general_return_partner_id" ref="personal_no_permanente"/>
+        <field name="account_id" ref="account_adelanto_orden_pago"/>
+        <field name="return_journal_id" ref="journal_adelantos"/>
+        <field name="company_id" ref="company_sipreco"/>
+    </record>
 
-        <record id="orden_pago_personal_transitorio_demo" model="public_budget.advance_request_type">
-            <field name="name">Orden de Pago - Personal  Transitorio</field>
-            <field name="general_return_partner_id" ref="personal_transitorio"/>
-            <field name="account_id" ref="account_adelanto_orden_pago"/>
-            <field name="return_journal_id" ref="miscellaneous_journal_demo"/>
-            <field name="company_id" ref="company_sipreco"/>
-        </record>
+    <record id="orden_pago_personal_transitorio_demo" model="public_budget.advance_request_type">
+        <field name="name">Orden de Pago - Personal  Transitorio</field>
+        <field name="general_return_partner_id" ref="personal_transitorio"/>
+        <field name="account_id" ref="account_adelanto_orden_pago"/>
+        <field name="return_journal_id" ref="journal_adelantos"/>
+        <field name="company_id" ref="company_sipreco"/>
+    </record>
 
-    </data>
-</openerp>
+</odoo>

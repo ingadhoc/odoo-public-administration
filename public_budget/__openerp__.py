@@ -7,6 +7,7 @@
     'category': 'Accounting & Finance',
     'depends': [
         'account',
+        'account_check',
         'account_payment_group_document',
         'account_asset',
         'hr_public_holidays',
@@ -17,6 +18,9 @@
         'l10n_ar_account',
         # mas que nada para datos demo y porque lo queremos
         'l10n_ar_states',
+        # solo requerido para establecer datos demo en cia y hacer que las ret
+        # no sean obligatorias en borrador
+        'l10n_ar_account_withholding',
     ],
     'data': [
         'security/public_budget_group.xml',
@@ -47,7 +51,6 @@
         'reports/account_checks_to_date_report.xml',
         # 'reports/public_budget_budget_report_view_3.xml',
         'view/inventory_rule_view.xml',
-        # 'view/voucher_view.xml',
         'view/account_invoice_view.xml',
         'view/advance_request_type_view.xml',
         'view/advance_request_view.xml',
@@ -101,9 +104,6 @@
         'demo/res.partner.csv',
         'demo/account_account_demo.xml',
         'demo/account_payment_receiptbook_demo.xml',
-        # 'demo/taxes.xml',
-        # 'demo/tax_settlement.xml',
-        # 'demo/account.tax.withholding.csv',
         'demo/public_budget.transaction_type.csv',
         'demo/public_budget.expedient.csv',
         'demo/public_budget.budget_position.csv',
@@ -115,9 +115,9 @@
         'demo/public_budget.remit.csv',
         'demo/public_budget.budget_modification.csv',
         'demo/public_budget.budget_modification_detail.csv',
-        # TODO crear diario de devoluciones y agregar
-        # 'demo/advance_request_type.xml',
-        # 'demo/advance_request.xml',
+        'demo/account_journal_demo.xml',
+        'demo/advance_request_type.xml',
+        'demo/advance_request.xml',
     ],
     'test': [],
     'installable': True,

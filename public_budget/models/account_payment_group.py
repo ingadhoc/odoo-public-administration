@@ -103,7 +103,8 @@ class AccountPaymentGroup(models.Model):
     # hacemos que la fecha de pago no sea obligatoria ya que seteamos fecha
     # de validacion si no estaba seteada
     payment_date = fields.Date(
-        required=False
+        required=False,
+        default=False,
     )
     # paid_withholding_ids = fields.Many2many(
     #     comodel_name='account.voucher.withholding',
@@ -120,14 +121,14 @@ class AccountPaymentGroup(models.Model):
     def post(self):
         for rec in self:
             if not rec.payment_date:
-                rec.confirmation_date = fields.Date.today()
+                rec.payment_date = fields.Date.today()
             if (
                     rec.expedient_id and rec.expedient_id.current_location_id
                     not in rec.user_location_ids):
                 raise ValidationError(
                     'No puede validar un pago si el expediente no está en '
                     'una ubicación autorizada para ústed')
-        return super(AccountPaymentGroup, self).confirm()
+        return super(AccountPaymentGroup, self).post()
 
     @api.multi
     @api.constrains('payment_date')
@@ -215,6 +216,11 @@ class AccountPaymentGroup(models.Model):
 
     @api.multi
     def to_signature_process(self):
+        for rec in self:
+            if self.currency_id.round(rec.payments_amount - rec.to_pay_amount):
+                raise ValidationError((
+                    'No puede mandar a pagar una orden de pago que tiene '
+                    'Importe a pagar distinto a Importe de los Pagos'))
         self.write({'state': 'signature_process'})
 
     @api.multi
@@ -257,7 +263,7 @@ class AccountPaymentGroup(models.Model):
             if transaction:
                 if transaction.type_id.with_advance_payment and (
                         transaction.partner_id):
-                    partners = transaction.partner_id.commercial_partner_id.id
+                    partners = transaction.partner_id.commercial_partner_id
                 else:
                     partners = transaction.mapped(
                         'supplier_ids.commercial_partner_id')
@@ -274,17 +280,6 @@ class AccountPaymentGroup(models.Model):
             domain.append(
                 ('invoice_id.transaction_id', '=', self.transaction_id.id))
         return domain
-
-    @api.multi
-    def check_to_sign_process(self):
-        """
-        """
-        for voucher in self:
-            if self.currency_id.round(voucher.amount - voucher.to_pay_amount):
-                raise ValidationError(_(
-                    'You can not send to sign process a Voucher '
-                    'that has Total Amount different from To Pay Amount'))
-        return True
 
 # TODO ver si son necesarias o no y mover dependencia de sipreco_project
 # a este

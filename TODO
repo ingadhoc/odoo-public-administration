@@ -50,5 +50,8 @@ REvisar en public group:
 
 TODo renombrar todos los ids sipreco_public_budget para que queden sin nada pero hacer script de mig
 
+DEMO
+    diarios de liquidación o algo similar
+
 MIGRACION:
     confirmation_date de account_voucher_double_validation a public_budget

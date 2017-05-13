@@ -45,7 +45,7 @@
             </form>
 
             <field name="partner_id" position="attributes">
-                <attribute name="partner_id">[(partner_type, '=', True), ('id', 'in', partner_ids and partner_ids[0][2] or [])]</attribute>
+                <attribute name="domain">[('id', 'in', partner_ids and partner_ids[0][2] or [])]</attribute>
             </field>
             
             <!-- confirm only for account manager -->
@@ -64,9 +64,6 @@
                 <field name="transaction_id" attrs="{'invisible': [('transaction_id', '=', False)]}"/>
                 <field name="budget_id" attrs="{'invisible': [('transaction_id', '=', False)]}"/>
                 <field name="expedient_id" attrs="{'required': [('transaction_id', '!=', False)], 'invisible': [('transaction_id', '=', False)]}"/>
-            </field>
-
-            <field name="communication" position="after">
                 <field name="budget_position_ids" widget="many2many_tags"/>
                 <!-- TODO enable -->
                 <!-- <field name="paid_withholding_ids" widget="many2many_tags"/> -->
@@ -83,9 +80,16 @@
                 <button name="%(action_aeroo_report_payment_receipt)d" class="oe_highlight" string="Print Receipt" attrs="{'invisible': [('show_print_receipt_button', '=', False)]}" type="action"/>
             </button>
 
+        <!-- como ellos pagan con adelanto o conciliando, y no el mix, excondemos deuda seleccionada y importe de ajuste y solo mostramos el a pagar que lo hacemos editable o no segun sea de adelanto o no -->
             <!-- hide unreconciled_amount on not advance transactions  -->
+            <field name="selected_debt" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
             <field name="unreconciled_amount" position="attributes">
-                <attribute name="attrs">{'invisible':[('transaction_with_advance_payment', '=', False)]}</attribute>
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="to_pay_amount" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('payment_subtype', '!=', 'double_validation'), ('state', '=', 'posted')], 'readonly': ['|', ('transaction_with_advance_payment', '=', False), ('state', '!=', 'draft')]}</attribute>
             </field>
 
         <!-- modifications for signature states -->
@@ -112,32 +116,11 @@
                 <attribute name="groups">account.group_account_user</attribute>
             </button>
 
+            <!-- quieren que las retenciones se definan una vez confirmado el pago -->
+            <field name="retencion_ganancias" position="attributes">
+                <attribute name="attrs">{'required': [('company_regimenes_ganancias_ids', '!=', []), ('state', 'in', ['draft', 'confirmed'])]}</attribute>
+            </field>
         </field>
     </record>
-
-    <!-- TODO -->
-    <!-- quieren que las retenciones se definan una vez confirmado el pago -->
-    <!-- <record id="view_vendor_payment_l10n_ar_with_mods_form" model="ir.ui.view">
-        <field name="name">account.payment.group.customer.pay.form</field>
-        <field name="model">account.payment.group</field>
-        <field name="inherit_id" ref="l10n_ar_account_withholding.view_vendor_payment_form"/>
-        <field name="arch" type="xml">
-            <field name="retencion_ganancias" position="attributes">
-                <attribute name="attrs">{'required': [('company_regimenes_ganancias_ids', '!=', [(6, False, [])]), ('state', 'not in', ['draft', 'cancel'])]}</attribute>
-            </field>
-        </field>
-    </record> -->
-    
-    <!-- TODO -->
-    <!-- para el dialogo del pago de retenciones no queremos elegir orden de pago -->
-    <!-- <record id="view_vendor_receipt_dialog_form" model="ir.ui.view">
-        <field name="name">account.payment.group.customer.pay.form</field>
-        <field name="model">account.payment.group</field>
-        <field name="inherit_id" ref="l10n_ar_account_payment_group.view_vendor_receipt_dialog_form"/>
-        <field name="arch" type="xml">
-            <field name="receiptbook_id" position="replace">
-            </field>
-        </field>
-    </record> -->
 
 </odoo>
