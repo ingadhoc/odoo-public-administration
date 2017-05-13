@@ -6,7 +6,7 @@
 <record id="action_aeroo_report_payment_receipt" model="ir.actions.report.xml">
     <field name="name">Payment Receipt Report</field>
     <field name="type">ir.actions.report.xml</field>
-    <field name="model">account.voucher</field>
+    <field name="model">account.payment.group</field>
     <field name="report_name">payment_receipt_report</field>
     <field name="report_type">aeroo</field>
     <field name="in_format">oo-odt</field>
@@ -22,7 +22,7 @@
 <ir_set>
     <field eval="'action'" name="key"/>
     <field eval="'client_print_multi'" name="key2"/>
-    <field eval="['account.voucher']" name="models"/>
+    <field eval="['account.payment.group']" name="models"/>
     <field name="name">Payment Receipt</field>
     <field eval="'ir.actions.report.xml,'+str(action_aeroo_report_transaction)" name="value"/>
     <field eval="True" name="isobject"/>
