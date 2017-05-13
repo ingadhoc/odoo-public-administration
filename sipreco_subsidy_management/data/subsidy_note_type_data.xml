@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
     <data noupdate="1">
 
         <record id="note_type_1" model="public_budget.subsidy.note.type">
@@ -52,4 +52,4 @@
             <field name="company_id" eval="False"/>
         </record>
     </data>
-</openerp>
+</odoo>

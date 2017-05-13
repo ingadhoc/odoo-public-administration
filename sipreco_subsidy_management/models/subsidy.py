@@ -209,14 +209,14 @@ class PublicBudgetSubsidy(models.Model):
     @api.depends(
         'rendido_amount',
         'aprobado_amount',
-        'voucher_ids.cargo_date',
-        'voucher_ids.cargo_amount',
+        'payment_group_ids.cargo_date',
+        'payment_group_ids.cargo_amount',
         # TODO chequear si hace falta esto o no
-        'advance_voucher_ids.cargo_date',
-        'advance_voucher_ids.cargo_amount',
+        'advance_payment_group_ids.cargo_date',
+        'advance_payment_group_ids.cargo_amount',
     )
     def get_cargo_data(self):
-        vouchers = self.voucher_ids + self.advance_voucher_ids
+        vouchers = self.payment_group_ids + self.advance_payment_group_ids
         cargo_amount = sum(vouchers.mapped('cargo_amount'))
         cargo_date = vouchers.search([
             ('id', 'in', vouchers.ids),

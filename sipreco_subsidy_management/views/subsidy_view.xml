@@ -1,209 +1,208 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
+<odoo>
 
-        <!-- FORMVIEW -->
-        <record id="view_public_budget_subsidy_form" model="ir.ui.view">
-            <field name="name">public_budget.subsidy.form</field>
-            <field name="model">public_budget.subsidy</field>
-            <field name="arch" type="xml">
-                <form string="Subsidios">
-                    <field name="name" invisible="1"/>
-                    <field name="state" string="Transaction State" invisible="1"/>
-                    <header>
-                        <field name="accountability_state" widget="statusbar"/>
-                         <!-- clickable="true" -->
-                    </header>
-                    <sheet string="Subsidios">
+    <!-- FORMVIEW -->
+    <record id="view_public_budget_subsidy_form" model="ir.ui.view">
+        <field name="name">public_budget.subsidy.form</field>
+        <field name="model">public_budget.subsidy</field>
+        <field name="arch" type="xml">
+            <form string="Subsidios">
+                <field name="name" invisible="1"/>
+                <field name="state" string="Transaction State" invisible="1"/>
+                <header>
+                    <field name="accountability_state" widget="statusbar"/>
+                     <!-- clickable="true" -->
+                </header>
+                <sheet string="Subsidios">
+                    <group>
                         <group>
-                            <group>
-                                <field name="transaction_id" readonly="1" required="0"/>
-                                <field name="internal_number" readonly="1" required="0"/>
-                                <field name="amount" string="Importe s/Res"/>
-                                <field name="expedient_id" string="Expediente Autorizante"/>
-                                <field name="request_expedient_id"/>
-                                <field name="parliamentary_resolution_date"/>
-                                <field name="parliamentary_expedient"/>
-                                <field name="accountability_administrative_expedient_id"/>
-                                <field name="other_accountability_expedient_ids" widget="many2many_tags"/>
-                                <!-- fields from transaction -->
-                                <field name="partner_id"/>
-                                <field name="rendiciones_pendientes_otros_subsidios"/>
-                                <field name="user_id"/>
-                                <field name="budget_id"/>
-                                <field name="issue_date" invisible="1"/>
-                                <field name="destination"/>
-                                <field name="company_id" groups="base.group_multi_company"/>
-                            </group>
-                            <group>
-                                <field name="cargo_amount"/>
-                                <field name="rendido_amount"/>
-                                <field name="aprobado_amount"/>
-                                <field name="pendientes_rendicion_amount"/>
-                                <field name="revision_amount"/>
-                                <field name="pendientes_aprobacion_amount"/>
-                            </group>
+                            <field name="transaction_id" readonly="1" required="0"/>
+                            <field name="internal_number" readonly="1" required="0"/>
+                            <field name="amount" string="Importe s/Res"/>
+                            <field name="expedient_id" string="Expediente Autorizante"/>
+                            <field name="request_expedient_id"/>
+                            <field name="parliamentary_resolution_date"/>
+                            <field name="parliamentary_expedient"/>
+                            <field name="accountability_administrative_expedient_id"/>
+                            <field name="other_accountability_expedient_ids" widget="many2many_tags"/>
+                            <!-- fields from transaction -->
+                            <field name="partner_id"/>
+                            <field name="rendiciones_pendientes_otros_subsidios"/>
+                            <field name="user_id"/>
+                            <field name="budget_id"/>
+                            <field name="issue_date" invisible="1"/>
+                            <field name="destination"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
                         </group>
-                        <notebook>
-                            <page string="Renditions">
-                                <field name="rendition_ids" context="{'default_expedient_id': accountability_administrative_expedient_id, 'default_rendition_amount': pendientes_rendicion_amount}">
-                                    <tree editable="bottom">
-                                        <field name="date" attrs="{'readonly': [('editable_line','=',True)]}"/>
-                                        <field name="expedient_id" attrs="{'readonly': [('editable_line','=',True)]}"/>
-                                        <field name="rendition_amount" sum="Total" attrs="{'readonly': [('editable_line','=',True)]}"/>
-                                        <!-- nos da error al pasar este default por contexto -->
-                                        <!-- context="{'default_approved_amount': rendition_amount} -->
-                                        <!-- <field name="approval_arrangement_ids" widget="one2many_tags">
-                                            <form>
-                                                <header>
-                                                    <button name="%(action_aeroo_subsidy_approval_arrangement_report)d" string="Print" type="action"/>
-                                                </header>
-                                                <group>
-                                                    <field name="number" required="False"/>
-                                                    <field name="approved_amount"/>
-                                                    <field name="fojas"/>
-                                                </group>
-                                            </form>
-                                        </field> -->
-                                        <field name="approval_arrangement_id" options="{'create': True, 'create_edit': True}" context="{'default_approved_amount': rendition_amount}" attrs="{'readonly': [('editable_line','=',True)]}"/>
-                                        <button name="%(action_aeroo_subsidy_approval_arrangement_report)d" string="Print" icon="gtk-print" type="action"/>
-                                        <field name="editable_line" readonly="1"/>
-                                        <field name="approved_amount" sum="Total"/>
-                                        <field name="pending_amount" sum="Total"/>
-                                    </tree>
-                                </field>
-                            </page>
-                            <page string="Notes">
-                                <field name="note_ids">
-                                    <tree editable="bottom">
-                                        <field name="date"/>
-                                        <field name="type_id"/>
-                                        <!-- <field name="type"/> -->
-                                        <field name="name"/>
-                                        <button name="%(action_aeroo_subsidy_note_report)d" string="Print" icon="gtk-print" type="action"/>
-                                    </tree>
-                                </field>
-                            </page>
-                            <page string="Payment Orders and Refunds">
-                                <group>
-                                    <field name="advance_paid_amount"/>
-                                    <field name="cargo_date"/>
-                                    <field name="accountability_expiry_date"/>
-                                    <!-- <field name="accountability_overcome"/> -->
-                                </group>
-                                <field name="advance_voucher_ids" context="{'default_transaction_id':id, 'default_partner_id': partner_id, 'default_type': 'payment', 'form_view_ref': 'account_voucher.view_vendor_payment_form','tree_view_ref': 'account_voucher.view_voucher_tree'}"/>
-                            </page>
-                        </notebook>
-                    </sheet>
-                </form>
-            </field>
-        </record>
-
-        <record id="view_public_budget_subsidy_form_inherit" model="ir.ui.view">
-            <field name="name">public_budget.subsidy.form.inherit</field>
-            <field name="model">public_budget.subsidy</field>
-            <field name="inherit_id" ref="view_public_budget_subsidy_form"/>
-            <field name="groups_id" eval="[(6, 0, [ref('account.group_account_manager')])]" />                
-            <field name="arch" type="xml">                                   
-                <field name="editable_line" position="attributes">
-                   <attribute name="readonly">0</attribute>                   
-                </field>                              
-            </field>
-        </record>
-
-        <!-- TREE VIEW -->
-        <record id="view_public_budget_subsidy_tree" model="ir.ui.view">
-            <field name="name">public_budget.subsidy.tree</field>
-            <field name="model">public_budget.subsidy</field>
-            <field name="arch" type="xml">
-                <tree string="Subsidios">
-                    <field name="internal_number"/>
-                    <field name="parliamentary_resolution_date"/>
-                    <field name="partner_id" string="Beneficiary"/>
-                    <field name="amount" string="Importe s/Res"/>
-                    <field name="cargo_amount" sum="Total"/>
-                    <field name="rendido_amount" sum="Total"/>
-                    <field name="aprobado_amount" sum="Total"/>
-                    <field name="pendientes_rendicion_amount" sum="Total"/>
-                    <field name="revision_amount" sum="Total"/>
-                    <field name="pendientes_aprobacion_amount" sum="Total"/>
-                    <field name="accountability_state" string="Estado" />
-                    <field name="cargo_date" invisible="0"/>
-                    <field name="accountability_expiry_date" invisible="0"/>
-                    <field name="state" invisible="1"/>
-                </tree>
-            </field>
-        </record>
-
-        <!-- SEARCH VIEW -->
-        <record id="view_public_budget_subsidy_search" model="ir.ui.view">
-            <field name="name">public_budget.subsidy.search</field>
-            <field name="model">public_budget.subsidy</field>
-            <field name="arch" type="xml">
-                <search string="Subsidios">
-                    <field name="name"/>
-                    <field name="amount"/>
-                    <field name="partner_id" string="Beneficiary"/>
-                    <field name="budget_id"/>
-                    <field name="destination"/>
-                    <field name="expedient_id" string="Expediente Autorizante"/>
-                    <field name="request_expedient_id"/>
-                    <field name="parliamentary_resolution_date"/>
-                    <field name="parliamentary_expedient"/>
-                    <field name="accountability_administrative_expedient_id"/>
-                    <filter
-                        string="Vencida"
-                        domain="[('accountability_state', '!=', 'approved') , ('accountability_expiry_date', '!=', False), ('accountability_expiry_date', '&lt;=', time.strftime('%%Y-%%m-%%d'))]"
-                        />
-                    <filter
-                        string="Próxima a vencer"
-                        domain="[('accountability_state', '!=', 'approved'), ('accountability_expiry_date', '!=', False), ('accountability_expiry_date', '&gt;', time.strftime('%%Y-%%m-%%d')), ('accountability_expiry_date', '&lt;=', (context_today() + datetime.timedelta(15)).strftime('%%Y-%%m-%%d'))]"
-                        help="Rendición que vencerá en los próximos 15 días"
-                        />
-                    <filter
-                        string="Entregados no rendidos"
-                        domain="[('pendientes_rendicion_amount', '&gt;', 0.0), ('cargo_amount', '&gt;', 0.0)]"
-                        />
-                    <filter
-                        string="Pendientes de revisión"
-                        domain="[('revision_amount', '&gt;', 0.0)]"
-                        />
-                        <!-- no lo neceistan, pidieron pendiente de revision -->
-                    <!-- <filter
-                        string="Pendientes aprobación"
-                        domain="[('pendientes_aprobacion_amount', '&gt;', 0.0), ('cargo_amount', '&gt;', 0.0)]"
-                        /> -->
-                    <filter
-                        string="Aprobados"
-                        domain="[('accountability_state', '=', 'approved'), ('cargo_amount', '&gt;', 0.0)]"
-                        />
-                    <group expand="1" string="Group By">
-                        <filter string="Estado de la Transacción" name="state" context="{'group_by':'state'}"/>
-                        <filter string="Estado" name="accountability_state" context="{'group_by':'accountability_state'}"/>
-                        <filter string="Fecha" name="date" context="{'group_by':'date'}"/>
+                        <group>
+                            <field name="cargo_amount"/>
+                            <field name="rendido_amount"/>
+                            <field name="aprobado_amount"/>
+                            <field name="pendientes_rendicion_amount"/>
+                            <field name="revision_amount"/>
+                            <field name="pendientes_aprobacion_amount"/>
+                        </group>
                     </group>
-                </search>
-            </field>
-        </record>
+                    <notebook>
+                        <page string="Renditions">
+                            <field name="rendition_ids" context="{'default_expedient_id': accountability_administrative_expedient_id, 'default_rendition_amount': pendientes_rendicion_amount}">
+                                <tree editable="bottom">
+                                    <field name="date" attrs="{'readonly': [('editable_line','=',True)]}"/>
+                                    <field name="expedient_id" attrs="{'readonly': [('editable_line','=',True)]}"/>
+                                    <field name="rendition_amount" sum="Total" attrs="{'readonly': [('editable_line','=',True)]}"/>
+                                    <!-- nos da error al pasar este default por contexto -->
+                                    <!-- context="{'default_approved_amount': rendition_amount} -->
+                                    <!-- <field name="approval_arrangement_ids" widget="one2many_tags">
+                                        <form>
+                                            <header>
+                                                <button name="%(action_aeroo_subsidy_approval_arrangement_report)d" string="Print" type="action"/>
+                                            </header>
+                                            <group>
+                                                <field name="number" required="False"/>
+                                                <field name="approved_amount"/>
+                                                <field name="fojas"/>
+                                            </group>
+                                        </form>
+                                    </field> -->
+                                    <field name="approval_arrangement_id" options="{'create': True, 'create_edit': True}" context="{'default_approved_amount': rendition_amount}" attrs="{'readonly': [('editable_line','=',True)]}"/>
+                                    <button name="%(action_aeroo_subsidy_approval_arrangement_report)d" string="Print" icon="gtk-print" type="action"/>
+                                    <field name="editable_line" readonly="1"/>
+                                    <field name="approved_amount" sum="Total"/>
+                                    <field name="pending_amount" sum="Total"/>
+                                    <field name="currency_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Notes">
+                            <field name="note_ids">
+                                <tree editable="bottom">
+                                    <field name="date"/>
+                                    <field name="type_id"/>
+                                    <!-- <field name="type"/> -->
+                                    <field name="name"/>
+                                    <button name="%(action_aeroo_subsidy_note_report)d" string="Print" icon="gtk-print" type="action"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Payment Orders and Refunds">
+                            <group>
+                                <field name="advance_paid_amount"/>
+                                <field name="cargo_date"/>
+                                <field name="accountability_expiry_date"/>
+                                <!-- <field name="accountability_overcome"/> -->
+                            </group>
+                            <field name="advance_payment_group_ids" context="{'default_transaction_id':id, 'default_partner_id': partner_id, 'default_partner_type': 'supplier'}"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
 
-        <menuitem
-            name="Contabilidad Responsable"
-            id="menu_responsible_accounting"
-            sequence="50"
-            parent="public_budget.menu_budget_main"
-            />
+    <record id="view_public_budget_subsidy_form_inherit" model="ir.ui.view">
+        <field name="name">public_budget.subsidy.form.inherit</field>
+        <field name="model">public_budget.subsidy</field>
+        <field name="inherit_id" ref="view_public_budget_subsidy_form"/>
+        <field name="groups_id" eval="[(6, 0, [ref('account.group_account_manager')])]" />                
+        <field name="arch" type="xml">                                   
+            <field name="editable_line" position="attributes">
+               <attribute name="readonly">0</attribute>                   
+            </field>                              
+        </field>
+    </record>
+
+    <!-- TREE VIEW -->
+    <record id="view_public_budget_subsidy_tree" model="ir.ui.view">
+        <field name="name">public_budget.subsidy.tree</field>
+        <field name="model">public_budget.subsidy</field>
+        <field name="arch" type="xml">
+            <tree string="Subsidios">
+                <field name="internal_number"/>
+                <field name="parliamentary_resolution_date"/>
+                <field name="partner_id" string="Beneficiary"/>
+                <field name="amount" string="Importe s/Res"/>
+                <field name="cargo_amount" sum="Total"/>
+                <field name="rendido_amount" sum="Total"/>
+                <field name="aprobado_amount" sum="Total"/>
+                <field name="pendientes_rendicion_amount" sum="Total"/>
+                <field name="revision_amount" sum="Total"/>
+                <field name="pendientes_aprobacion_amount" sum="Total"/>
+                <field name="accountability_state" string="Estado" />
+                <field name="cargo_date" invisible="0"/>
+                <field name="accountability_expiry_date" invisible="0"/>
+                <field name="state" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- SEARCH VIEW -->
+    <record id="view_public_budget_subsidy_search" model="ir.ui.view">
+        <field name="name">public_budget.subsidy.search</field>
+        <field name="model">public_budget.subsidy</field>
+        <field name="arch" type="xml">
+            <search string="Subsidios">
+                <field name="name"/>
+                <field name="amount"/>
+                <field name="partner_id" string="Beneficiary"/>
+                <field name="budget_id"/>
+                <field name="destination"/>
+                <field name="expedient_id" string="Expediente Autorizante"/>
+                <field name="request_expedient_id"/>
+                <field name="parliamentary_resolution_date"/>
+                <field name="parliamentary_expedient"/>
+                <field name="accountability_administrative_expedient_id"/>
+                <filter
+                    string="Vencida"
+                    domain="[('accountability_state', '!=', 'approved') , ('accountability_expiry_date', '!=', False), ('accountability_expiry_date', '&lt;=', time.strftime('%%Y-%%m-%%d'))]"
+                    />
+                <filter
+                    string="Próxima a vencer"
+                    domain="[('accountability_state', '!=', 'approved'), ('accountability_expiry_date', '!=', False), ('accountability_expiry_date', '&gt;', time.strftime('%%Y-%%m-%%d')), ('accountability_expiry_date', '&lt;=', (context_today() + datetime.timedelta(15)).strftime('%%Y-%%m-%%d'))]"
+                    help="Rendición que vencerá en los próximos 15 días"
+                    />
+                <filter
+                    string="Entregados no rendidos"
+                    domain="[('pendientes_rendicion_amount', '&gt;', 0.0), ('cargo_amount', '&gt;', 0.0)]"
+                    />
+                <filter
+                    string="Pendientes de revisión"
+                    domain="[('revision_amount', '&gt;', 0.0)]"
+                    />
+                    <!-- no lo neceistan, pidieron pendiente de revision -->
+                <!-- <filter
+                    string="Pendientes aprobación"
+                    domain="[('pendientes_aprobacion_amount', '&gt;', 0.0), ('cargo_amount', '&gt;', 0.0)]"
+                    /> -->
+                <filter
+                    string="Aprobados"
+                    domain="[('accountability_state', '=', 'approved'), ('cargo_amount', '&gt;', 0.0)]"
+                    />
+                <group expand="1" string="Group By">
+                    <filter string="Estado de la Transacción" name="state" context="{'group_by':'state'}"/>
+                    <filter string="Estado" name="accountability_state" context="{'group_by':'accountability_state'}"/>
+                    <filter string="Fecha" name="date" context="{'group_by':'date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <menuitem
+        name="Contabilidad Responsable"
+        id="menu_responsible_accounting"
+        sequence="50"
+        parent="public_budget.menu_budget_main"
+        />
 
 
-        <record id="action_public_budget_subsidy" model="ir.actions.act_window">
-            <field name="name">Subsidios</field>
-            <field name="res_model">public_budget.subsidy</field>
-        </record>
+    <record id="action_public_budget_subsidy" model="ir.actions.act_window">
+        <field name="name">Subsidios</field>
+        <field name="res_model">public_budget.subsidy</field>
+    </record>
 
-        <menuitem
-            id="menu_public_budget_subsidy"
-            sequence="10"
-            action="action_public_budget_subsidy"
-            parent="menu_responsible_accounting"
-            />
-    </data>
-</openerp>
+    <menuitem
+        id="menu_public_budget_subsidy"
+        sequence="10"
+        action="action_public_budget_subsidy"
+        parent="menu_responsible_accounting"
+        />
+</odoo>

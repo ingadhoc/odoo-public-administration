@@ -1,3 +1,9 @@
+Validar con gonza:
+    cambios en cheques, al definir esto tmb ver como hacemos lo del cargo en payment group de subsidy management
+    el campo referencia de pago no existe mas, podemos unitifcar con memo? O usamos notas que no se usó nunca en CMR? (ANOTAR PARA MIGRAR ESTO)
+    ver si los reportes separados del cmr hace falta que sean distintos y si los podemos unificar, tal vez llevarlos a por interfaz en vez de modulo, ver que otras apvadas tiene el modulo cmd para sacar todo y poder borrar esas dos customizaciones
+
+
 account_move_line
     funcionalidad de voucher_line_ids
 

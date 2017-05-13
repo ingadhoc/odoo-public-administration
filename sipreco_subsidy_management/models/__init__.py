@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-import subsidy
-import subsidy_approval_arrangement
-import subsidy_rendition
-import subsidy_note
-import subsidy_note_type
-import transaction_type
-import account_voucher
+from . import subsidy
+from . import subsidy_approval_arrangement
+from . import subsidy_rendition
+from . import subsidy_note
+from . import subsidy_note_type
+from . import transaction_type
+from . import account_payment_group
