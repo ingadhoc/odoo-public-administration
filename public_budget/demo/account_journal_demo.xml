@@ -8,7 +8,6 @@
         <field name="name">Adelantos</field>
         <field name="code">99ADE</field>
         <field name="type">general</field>
-        <field name="entry_posted" eval="True"/>
         <field name="update_posted" eval="True"/>
         <field name="company_id" ref="company_sipreco"/>
     </record>
