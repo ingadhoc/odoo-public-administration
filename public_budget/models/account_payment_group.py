@@ -338,8 +338,6 @@ class AccountPaymentGroup(models.Model):
                     'La fecha de validacion del pago no puede ser menor a la '
                     'fecha de confirmación'))
 
-                return True
-
     @api.multi
     @api.constrains('unreconciled_amount', 'transaction_id', 'state')
     def check_voucher_transaction_amount(self):
