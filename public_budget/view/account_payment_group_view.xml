@@ -70,13 +70,9 @@
                 <field name="invoice_ids" widget="many2many_tags"/>
             </field>
 
-            <!-- make print button available in all states and rename it -->
-            <button name="payment_print" position="attributes">
-                <attribute name="states"></attribute>
-                <attribute name="string">Print Payment Order</attribute>
-            </button>
-
-            <button name="payment_print" position="after">
+            <!-- add payment order and print receipt button -->
+            <button name="payment_print" position="replace">
+                <button name="%(action_aeroo_report_payment)" string="Print Payment Order" class="oe_highlight" groups="base.group_user" type="action" />
                 <button name="%(action_aeroo_report_payment_receipt)d" class="oe_highlight" string="Print Receipt" attrs="{'invisible': [('show_print_receipt_button', '=', False)]}" type="action"/>
             </button>
 
