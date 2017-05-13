@@ -222,38 +222,39 @@ class BudgetTransaction(models.Model):
     )
 
     # TODO re implementar
-    # voucher_ids = fields.One2many(
-    #     'account.voucher',
-    #     'transaction_id',
-    #     string='Payment Orders',
-    #     readonly=True,
-    #     context={'default_type': 'payment'},
-    #     states={'open': [('readonly', False)]},
-    #     auto_join=True,
-    #     domain=[
-    #         ('type', '=', 'payment'),
-    #         ('transaction_with_advance_payment', '=', False)
-    #     ],
-    # )
-    # TODO re implementar
+    # voucher_ids
+    payment_group_ids = fields.One2many(
+        'account.payment.group',
+        'transaction_id',
+        string='Payment Orders',
+        readonly=True,
+        context={'default_partner_type': 'supplier'},
+        states={'open': [('readonly', False)]},
+        auto_join=True,
+        domain=[
+            ('partner_type', '=', 'supplier'),
+            ('transaction_with_advance_payment', '=', False)
+        ],
+    )
     # Usamos otro campo por que si no el depends de advance_voucher_ids se
     # toma en cuenta igual que si fuese el de vouchers y necesitamos que sea
     # distinto para que no recalcule tantas veces. Si no la idea sería que
     # sea basicamente es el mismo campo de arriba pero lo separamos para poner
     # en otro lugar de la vista
     # advance_voucher_ids = fields.One2many(
-    #     'account.voucher',
-    #     'transaction_id',
-    #     string='Advance Payment Orders',
-    #     readonly=True,
-    #     domain=[
-    #         ('type', '=', 'payment'),
-    #         ('transaction_with_advance_payment', '=', True)
-    #     ],
-    #     context={'default_type': 'payment'},
-    #     auto_join=True,
-    #     states={'open': [('readonly', False)]},
-    # )
+    advance_payment_group_ids = fields.One2many(
+        'account.payment.group',
+        'transaction_id',
+        string='Advance Payment Orders',
+        readonly=True,
+        domain=[
+            ('partner_type', '=', 'supplier'),
+            ('transaction_with_advance_payment', '=', True)
+        ],
+        context={'default_partner_type': 'supplier'},
+        auto_join=True,
+        states={'open': [('readonly', False)]},
+    )
 
     @api.multi
     @api.constrains('type_id', 'company_id')
@@ -322,7 +323,7 @@ class BudgetTransaction(models.Model):
     # TODO implementar
     @api.multi
     @api.depends(
-        # 'advance_voucher_ids.state',
+        'advance_payment_group_ids.state',
     )
     def _get_advance_amounts(self):
         _logger.info('Getting Transaction Advance Amounts')
@@ -349,54 +350,24 @@ class BudgetTransaction(models.Model):
         # self.advance_paid_amount = advance_paid_amount
 
     @api.multi
-    def mass_voucher_create(self):
+    def mass_payment_group_create(self):
         self.ensure_one()
         self = self.with_context(transaction_id=self.id)
-        vouchers = self.env['account.voucher']
         for invoice in self.invoice_ids.filtered(
                 lambda r: r.state == 'open'):
-            _logger.info('Mass Create Voucher for invoice %s' % invoice.id)
-            invoice_to_pay_amount = invoice.residual - invoice.to_pay_amount
-            # exclude invoices that hast been send to paid
-            if not invoice_to_pay_amount or invoice_to_pay_amount == 0.0:
-                continue
-            journal = self.env['account.journal'].search([
-                ('company_id', '=', invoice.company_id.id),
-                ('type', 'in', ('cash', 'bank'))], limit=1)
-            if not journal:
-                raise ValidationError(_(
-                    'No bank or cash journal found for company "%s"') % (
-                    invoice.company_id.name))
             partner = invoice.partner_id.commercial_partner_id
-            voucher_data = vouchers.onchange_partner_id(
-                partner.id, journal.id, 0.0,
-                invoice.currency_id.id, 'payment', False)
-            invoice_move_lines = invoice.move_id.line_id.ids
-            # only debit lines
-            # line_cr_ids = [
-            #     (0, 0, vals) for vals in voucher_data['value'].get(
-            #         'line_cr_ids', False) if isinstance(vals, dict)]
-            line_dr_ids = []
-            for vals in voucher_data['value'].get('line_dr_ids', False):
-                if (
-                        isinstance(vals, dict) and
-                        vals.get('move_line_id') in invoice_move_lines):
-                    vals['amount'] = invoice_to_pay_amount
-                    vals['reconcile'] = True
-                    line_dr_ids.append((0, 0, vals))
-            account_id = voucher_data['value'].get('account_id', False)
-            voucher_vals = {
-                'type': 'payment',
-                # 'receiptbook_id': self.budget_id.receiptbook_id.id,
-                'expedient_id': self.expedient_id.id,
-                'partner_id': partner.id,
-                'transaction_id': self.id,
-                'journal_id': journal.id,
-                'account_id': account_id,
-                # 'line_cr_ids': line_cr_ids,
-                'line_dr_ids': line_dr_ids,
+            pay_context = {
+                'to_pay_move_line_ids': (invoice.open_move_line_ids.ids),
+                'default_company_id': invoice.company_id.id,
             }
-            vouchers.create(voucher_vals)
+            self.env['account.payment.group'].with_context(
+                pay_context).create({
+                    'partner_type': 'supplier',
+                    'receiptbook_id': self.budget_id.receiptbook_id.id,
+                    'expedient_id': self.expedient_id.id,
+                    'partner_id': partner.id,
+                    'transaction_id': self.id,
+                })
         return True
 
     @api.multi
@@ -467,59 +438,6 @@ class BudgetTransaction(models.Model):
         for rec in self:
             rec.paid_amount = sum(rec.mapped(
                 'preventive_line_ids.paid_amount'))
-
-    @api.multi
-    def get_invoice_vals(
-            self, supplier, journal, invoice_date,
-            supplier_invoice_number, inv_lines, advance_account=False):
-        self.ensure_one()
-        journal_type = journal.type
-        if journal_type == 'sale':
-            inv_type = 'out_invoice'
-        elif journal_type == 'purchase':
-            inv_type = 'in_invoice'
-        elif journal_type == 'sale_refund':
-            inv_type = 'out_refund'
-        else:
-            inv_type = 'in_refund'
-
-        company = self.env.user.company_id
-        partner_data = self.env['account.invoice'].onchange_partner_id(
-            inv_type, supplier.id, company_id=company.id)
-        periods = self.env['account.period'].find(
-            invoice_date)
-        if not periods:
-            raise ValidationError(_('Not period found for this date'))
-        period_id = periods.id
-
-        if advance_account:
-            account_id = advance_account.id
-        else:
-            account_id = partner_data['value'].get('account_id', False)
-
-        vals = {
-            'partner_id': supplier.id,
-            'date_invoice': invoice_date,
-            'supplier_invoice_number': supplier_invoice_number,
-            'invoice_line_ids': [(6, 0, inv_lines.ids)],
-            # 'name': invoice.name,
-            'type': inv_type,
-            'currency_id': (
-                journal.currency.id or journal.company_id.currency_id.id),
-            'account_id': account_id,
-            # 'direct_payment_journal_id': advance_journal_id,
-            'journal_id': journal.id,
-            # 'currency_id': invoice.currency_id and invoice.currency_id.id,
-            'fiscal_position': partner_data['value'].get(
-                'fiscal_position', False),
-            'payment_term': partner_data['value'].get('payment_term', False),
-            'company_id': company.id,
-            'transaction_id': self.id,
-            'period_id': period_id,
-            'partner_bank_id': partner_data['value'].get(
-                'partner_bank_id', False),
-        }
-        return vals
 
     @api.multi
     def action_cancel_draft(self):
@@ -600,15 +518,15 @@ class BudgetTransaction(models.Model):
                             "Preventive Total, Type and Date are not "
                             "compatible with Transaction Amount Restrictions"))
 
-# Actions
     @api.multi
-    def action_new_voucher(self):
+    def action_new_payment_group(self):
         '''
-        This function returns an action that display a new voucher
+        This function returns an action that display a new payment group.
+        We dont use action on view because it will open on tree view
         '''
         self.ensure_one()
         action = self.env['ir.model.data'].xmlid_to_object(
-            'account_voucher.action_vendor_payment')
+            'account_payment_group.action_account_payments_group_payable')
 
         if not action:
             return False
@@ -616,7 +534,8 @@ class BudgetTransaction(models.Model):
         res = action.read()[0]
 
         form_view_id = self.env['ir.model.data'].xmlid_to_res_id(
-            'account_voucher.view_vendor_payment_form')
+            'action_account_payments_group_payable.'
+            'view_account_payment_group_form')
         res['views'] = [(form_view_id, 'form')]
 
         partner_id = self.partner_id
@@ -624,7 +543,7 @@ class BudgetTransaction(models.Model):
         res['context'] = {
             'default_transaction_id': self.id,
             'default_partner_id': partner_id and partner_id.id or False,
-            'default_type': 'payment',
+            'default_partner_type': 'supplier',
         }
         return res
 

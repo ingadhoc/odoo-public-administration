@@ -23,7 +23,7 @@
                     <header>
                     </header>
                     <sheet string="Expedient Founder">
-                       <div class="oe_right oe_button_box" name="buttons">
+                       <div class="oe_button_box" name="buttons">
                        </div>
                      <group>
                         <field name="name"/> 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- adelantos -->
+    <!-- intentamos usar el diario creado por defecto para operacioens varias pero no sabemos como buscarlo ya que nos encuentra uno de otra cia y no sabemos como pasar la cia en el search, intentamos con esto -->
+    <!-- <field name="return_journal_id" search="[('name', '=', 'Operaciones varias'), ('company_id', '=', ref('company_sipreco'))]"/> -->
+
+    <record id="journal_adelantos" model="account.journal">
+        <field name="name">Adelantos</field>
+        <field name="code">99ADE</field>
+        <field name="type">general</field>
+        <field name="update_posted" eval="True"/>
+        <field name="company_id" ref="company_sipreco"/>
+    </record>
+
+</odoo>

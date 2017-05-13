@@ -48,7 +48,7 @@
                             statusbar_colors='{}'/>
                     </header>
                     <sheet string="advance_return">
-                       <div class="oe_right oe_button_box" name="buttons">
+                       <div class="oe_button_box" name="buttons">
                        </div>
                     <group>
                         <group>

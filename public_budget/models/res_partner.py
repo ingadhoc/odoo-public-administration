@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from openerp import models, api, fields, _
-from openerp.exceptions import ValidationError
+from openerp import models, api, fields
+# from openerp.exceptions import ValidationError
 
 
 class ResPartner(models.Model):
@@ -17,35 +17,6 @@ class ResPartner(models.Model):
     subsidy_recipient = fields.Boolean(
         'Subsidy Recipient',
     )
-
-    @api.one
-    @api.constrains('subsidy_recipient', 'main_id_number')
-    def check_unique_document_number_subsidy_recipient(self):
-        if self.subsidy_recipient and self.document_number:
-            same_document_partners = self.search([
-                ('main_id_number', '=', self.main_id_number),
-                ('subsidy_recipient', '=', True),
-                ('id', '!=', self.id),
-            ])
-            if same_document_partners:
-                raise ValidationError(_(
-                    'El número de documento debe ser único por receptor de '
-                    'subsidio!\n'
-                    '* Receptor existente: %s') % same_document_partners.name)
-
-    @api.one
-    @api.constrains('employee', 'main_id_number')
-    def check_unique_document_number_employee(self):
-        if self.employee and self.document_number:
-            same_document_partners = self.search([
-                ('main_id_number', '=', self.main_id_number),
-                ('employee', '=', True),
-                ('id', '!=', self.id),
-            ])
-            if same_document_partners:
-                raise ValidationError(_(
-                    'El número de documento debe ser único por empleado!\n'
-                    '* Empleado existente: %s') % same_document_partners.name)
 
     @api.multi
     def mark_as_reconciled(self):

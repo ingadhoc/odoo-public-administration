@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- TODO en proxima versiones podriamos omitir esto y que se creen solos o usar los "search" -->
+<!-- demo accounts required for demo data -->
+<!-- Usada por el budget -->
+    <record model='account.account' id='account_ingresos'>
+        <field name='code'>4.1.01.00.005</field>
+        <field name='user_type_id' ref="account.data_account_type_revenue"/>
+        <field name="company_id" ref="company_sipreco"/>
+        <field name='name'>Ingresos</field>
+    </record>
+
+<!-- Usada por tipo de transaccion de adelanto -->
+    <record model='account.account' id='account_fondo_fijo'>
+        <field name='code'>1.1.01.10.960</field>
+        <field name='user_type_id' ref="account.data_account_type_receivable"/>
+        <field name="company_id" ref="company_sipreco"/>
+        <field name='name'>Fondo Fijo / Caja Chica</field>
+        <field name="reconcile" eval="True"/>
+    </record>
+
+    <record model='account.account' id='account_anticipo_gastos'>
+        <field name='code'>1.1.01.10.970</field>
+        <field name='user_type_id' ref="account.data_account_type_receivable"/>
+        <field name="company_id" ref="company_sipreco"/>
+        <field name='name'>Anticipo para Gastos a Rendir</field>
+        <field name="reconcile" eval="True"/>
+    </record>
+
+    <record model='account.account' id='account_subsidio_con_cargo'>
+        <field name='code'>1.1.01.10.980</field>
+        <field name='user_type_id' ref="account.data_account_type_receivable"/>
+        <field name="company_id" ref="company_sipreco"/>
+        <field name='name'>Subsidios con cargo a rendir</field>
+        <field name="reconcile" eval="True"/>
+    </record>
+
+<!-- Usada por preventivas -->
+    <record model='account.account' id='account_gastos_varios'>
+        <field name='code'>5.1.02.10.025</field>
+        <field name='user_type_id' ref="account.data_account_type_expenses"/>
+        <field name="company_id" ref="company_sipreco"/>
+        <field name='name'>Gastos Varios</field>
+    </record>
+
+<!-- Usadas para adelantos -->
+    <record model='account.account' id='account_adelanto_personal'>
+        <field name='code'>1.1.03.10.015</field>
+        <field name='user_type_id' ref="account.data_account_type_current_assets"/>
+        <field name="company_id" ref="company_sipreco"/>
+        <field name='name'>Adelantos de Personal</field>
+    </record>
+
+    <record model='account.account' id='account_adelanto_orden_pago'>
+        <field name='code'>1.1.03.10.019</field>
+        <field name='user_type_id' ref="account.data_account_type_current_assets"/>
+        <field name="company_id" ref="company_sipreco"/>
+        <field name='name'>Adelantos por Ordenes de Pago</field>
+    </record>
+
+</odoo>

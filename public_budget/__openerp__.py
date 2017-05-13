@@ -7,6 +7,7 @@
     'category': 'Accounting & Finance',
     'depends': [
         'account',
+        'account_check',
         'account_payment_group_document',
         'account_asset',
         'hr_public_holidays',
@@ -15,6 +16,11 @@
         'report_custom_filename',
         # estrictamente solo requerido por algunos campos en vista de partner
         'l10n_ar_account',
+        # mas que nada para datos demo y porque lo queremos
+        'l10n_ar_states',
+        # solo requerido para establecer datos demo en cia y hacer que las ret
+        # no sean obligatorias en borrador
+        'l10n_ar_account_withholding',
     ],
     'data': [
         'security/public_budget_group.xml',
@@ -45,7 +51,6 @@
         'reports/account_checks_to_date_report.xml',
         # 'reports/public_budget_budget_report_view_3.xml',
         'view/inventory_rule_view.xml',
-        # 'view/voucher_view.xml',
         'view/account_invoice_view.xml',
         'view/advance_request_type_view.xml',
         'view/advance_request_view.xml',
@@ -77,20 +82,42 @@
         'view/account_asset_view.xml',
         # TODO mig vista
         # 'view/account_check_view.xml',
-        # TODO mig vista
-        # 'view/account_payment_group_view.xml',
+        'view/account_payment_group_view.xml',
         'view/hr_public_holidays_view.xml',
         'view/custom_views.xml',
         'data/sequence.xml',
         'data/expedient_category.xml',
         'data/expedient_founder.xml',
         'data/position_category.xml',
-        'data/transaction_type.xml',
+        'data/position_exc_restrictions.xml',
+        'data/ir_config_parameter_data.xml',
         'view/public_budget_menuitem.xml',
         'view/public_budget_actions.xml',
     ],
     'demo': [
+        'demo/res_company_demo.xml',
+        'demo/public_budget.location.csv',
         'demo/res_users_demo.xml',
+        # once admin is in sipreco company, we load chart of account
+        'demo/account_chart_template.yml',
+        'demo/res_partner_demo.xml',
+        'demo/res.partner.csv',
+        'demo/account_account_demo.xml',
+        'demo/account_payment_receiptbook_demo.xml',
+        'demo/public_budget.transaction_type.csv',
+        'demo/public_budget.expedient.csv',
+        'demo/public_budget.budget_position.csv',
+        'demo/public_budget.budget.csv',
+        'demo/public_budget.budget_detail.csv',
+        'demo/public_budget_transaction_demo.xml',
+        'demo/public_budget.preventive_line.csv',
+        'demo/public_budget_definitive_line_demo.xml',
+        'demo/public_budget.remit.csv',
+        'demo/public_budget.budget_modification.csv',
+        'demo/public_budget.budget_modification_detail.csv',
+        'demo/account_journal_demo.xml',
+        'demo/advance_request_type.xml',
+        'demo/advance_request.xml',
     ],
     'test': [],
     'installable': True,

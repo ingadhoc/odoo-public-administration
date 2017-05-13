@@ -37,7 +37,7 @@
                         <field name="state" widget="statusbar" statusbar_colors='{}'/>
                     </header>
                     <sheet string="advance_request">
-                       <div class="oe_right oe_button_box" name="buttons">
+                       <div class="oe_button_box" name="buttons">
                        </div>
                      <group>
                         <group>
@@ -68,8 +68,8 @@
                                 </tree>
                             </field>
                         </page>
-                        <page string="Vouchers">
-                            <!-- <field name="voucher_ids" context="{'default_type': 'payment', 'form_view_ref': 'account_voucher.view_vendor_payment_form','tree_view_ref': 'account_voucher.view_voucher_tree'}"/>  -->
+                        <page string="Payment Orders">
+                            <field name="payment_group_ids" context="{'default_partner_type': 'supplier'}"/> 
                         </page>
                      </notebook>
                     </sheet>

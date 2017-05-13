@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from openerp import api, models, fields, _
 from openerp.exceptions import ValidationError as UserError
-from openerp.addons.decimal_precision import decimal_precision as dp
 import logging
 
 _logger = logging.getLogger(__name__)  # pylint: disable=invalid-name

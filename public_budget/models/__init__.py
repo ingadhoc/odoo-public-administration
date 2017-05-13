@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from . import inventory_rule
 from . import res_partner
-# TODO terminar de migrar
-# from . import account_payment_group
+from . import account_payment_group
+from . import account_payment
 # TODO terminar de migrar
 # from . import account_check
 from . import account_invoice
@@ -34,4 +34,3 @@ from . import budget_modification
 from . import expedient
 from . import advance_request_line
 from . import expedient_founder
-from . import account_move_line

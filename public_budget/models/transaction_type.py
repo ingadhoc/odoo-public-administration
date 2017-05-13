@@ -22,12 +22,12 @@ class TransactionType(models.Model):
     advance_account_id = fields.Many2one(
         'account.account',
         string='Advance Account',
-        context={'default_type': 'other'},
         # TODO re implementar este dominio y funcionalidad ya que en v9
         # no se permite recivible sin conciliar
         # we use receivable to get debt but we dont reconcile
         # domain="[('type', 'in', ['receivable']), ('reconcile', '=', False), "
         # "('company_id', '=', company_id)]",
+        domain="[('company_id', '=', company_id)]",
         help='This account will be used on advance payments. Must be a payable'
         ' account.',
     )

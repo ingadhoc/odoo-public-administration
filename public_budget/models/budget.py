@@ -35,8 +35,8 @@ class Budget(models.Model):
         readonly=True,
         required=True,
         states={'draft': [('readonly', False)]},
-        context={'default_type': 'other'},
-        domain="[('type', '=', 'other'), ('company_id', '=', company_id), "
+        domain="[('internal_type', '=', 'other'), "
+        "('company_id', '=', company_id), "
         "('deprecated', '=', False)]",
 
     )

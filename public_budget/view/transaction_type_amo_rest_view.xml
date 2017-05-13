@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
     <data>
         <!-- SEARCH VIEW -->
         <record id="view_public_budget_transaction_type_amo_rest_filter" model="ir.ui.view">
@@ -26,7 +26,7 @@
                     <header>
                     </header>
                     <sheet string="Transaction Type Amount Restriction">
-                       <div class="oe_right oe_button_box" name="buttons">
+                       <div class="oe_button_box" name="buttons">
                        </div>
                      <group>
                         <field name="date"/> 
@@ -55,4 +55,4 @@
         </record>
 
     </data>
-</openerp>
+</odoo>

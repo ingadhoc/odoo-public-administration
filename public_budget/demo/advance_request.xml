@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- request -->
+    <record id="request_1" model="public_budget.advance_request">
+        <field name="name">Solicitud 1</field>
+        <field name="company_id" ref="company_sipreco"/>
+        <field name="type_id" ref="adelanto_personal_permanente_demo"/>
+    </record>
+
+    <record id="request_1_line1" model="public_budget.advance_request_line">
+        <field name="description">xxxx</field>
+        <field name="employee_id" ref="res_partner_20"/>
+        <field name="requested_amount" eval="500.0"/>
+        <field name="approved_amount" eval="400.0"/>
+        <field name="advance_request_id" ref="request_1"/>
+    </record>
+
+    <record id="request_1_line2" model="public_budget.advance_request_line">
+        <field name="description">xxxx</field>
+        <field name="employee_id" ref="res_partner_21"/>
+        <field name="requested_amount" eval="1000.0"/>
+        <field name="approved_amount" eval="1000.0"/>
+        <field name="advance_request_id" ref="request_1"/>
+    </record>
+
+    <record id="request_2" model="public_budget.advance_request">
+        <field name="name">Solicitud 2</field>
+        <field name="company_id" ref="company_sipreco"/>
+        <field name="type_id" ref="adelanto_personal_no_permanente_demo"/>
+    </record>
+
+    <record id="request_2_line1" model="public_budget.advance_request_line">
+        <field name="description">xxxx</field>
+        <field name="employee_id" ref="res_partner_20"/>
+        <field name="requested_amount" eval="500.0"/>
+        <field name="approved_amount" eval="400.0"/>
+        <field name="advance_request_id" ref="request_2"/>
+    </record>
+
+    <record id="request_2_line2" model="public_budget.advance_request_line">
+        <field name="description">xxxx</field>
+        <field name="employee_id" ref="res_partner_21"/>
+        <field name="requested_amount" eval="1000.0"/>
+        <field name="approved_amount" eval="1000.0"/>
+        <field name="advance_request_id" ref="request_2"/>
+    </record>
+
+<!-- return -->
+
+    <record id="return_1" model="public_budget.advance_return">
+        <field name="name">Devolucion 1</field>
+        <field name="company_id" ref="company_sipreco"/>
+        <field name="type_id" ref="adelanto_personal_permanente_demo"/>
+    </record>
+
+    <record id="return_1_line1" model="public_budget.advance_return_line">
+        <field name="employee_id" ref="res_partner_20"/>
+        <field name="returned_amount" eval="200.0"/>
+        <field name="advance_return_id" ref="return_1"/>
+    </record>
+
+    <record id="return_1_line2" model="public_budget.advance_return_line">
+        <field name="employee_id" ref="res_partner_21"/>
+        <field name="returned_amount" eval="300.0"/>
+        <field name="advance_return_id" ref="return_1"/>
+    </record>
+
+</odoo>

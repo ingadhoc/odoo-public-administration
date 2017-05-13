@@ -258,7 +258,7 @@ class PublicBudgetExpedient(models.Model):
 
     @api.multi
     def action_close(self):
-        self.write({'state': 'close'})
+        self.write({'state': 'closed'})
         return True
 
     @api.multi
@@ -298,5 +298,5 @@ class PublicBudgetExpedient(models.Model):
     @api.model
     def create(self, vals):
         vals['number'] = self.env[
-            'ir.sequence'].get('public_budget.expedient') or '/'
+            'ir.sequence'].next_by_code('public_budget.expedient') or '/'
         return super(PublicBudgetExpedient, self).create(vals)

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
     <data>
         <!-- SEARCH VIEW -->
         <record id="view_public_budget_rest_type_filter" model="ir.ui.view">
@@ -22,7 +22,7 @@
                     <header>
                     </header>
                     <sheet string="rest_type">
-                       <div class="oe_right oe_button_box" name="buttons">
+                       <div class="oe_button_box" name="buttons">
                        </div>
                      <group>
                      </group>
@@ -44,4 +44,4 @@
         </record>
 
     </data>
-</openerp>
+</odoo>

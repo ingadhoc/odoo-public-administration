@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- Partners for companies -->
+    <record id="partner_sipreco" model="res.partner">
+        <field name='afip_responsability_type_id' ref='l10n_ar_account.res_IVAE'/>
+        <field name='main_id_category_id' ref="l10n_ar_partner.dt_CUIT"/>
+        <field name='main_id_number'>30666666662</field>
+        <field name="name">SIPRECO</field>
+        <field name="street">Calle Falsa 456</field>
+        <field name="city">Rosario</field>
+        <field name="country_id" ref="base.ar"/>
+        <field name="state_id" ref="l10n_ar_states.S"/>
+        <field name="zip">2000</field>
+        <field name="phone">+1 555 123 8069</field>
+        <field name="email">info@yourcompany.example.com</field>
+        <field name="website">www.example.com</field>
+        <field name="supplier" eval="True"/>
+        <field name="start_date" eval="time.strftime('%Y-%m')+'-1'"/>
+    </record>
+
+<!-- Companies -->
+    <record id="company_sipreco" model="res.company">
+        <field name="logo" type="base64" file="public_budget/demo/SIPRECO_Logo.png"/>
+        <field name='gross_income_type'>no_liquida</field>
+        <field name='parent_id' ref='base.main_company'/>
+        <field name='currency_id' ref='base.ARS'/>
+        <field name='partner_id' ref='partner_sipreco'/>
+        <field name='double_validation' eval='True'/>
+        <field name='regimenes_ganancias_ids'  eval="[(6, 0, [ref('l10n_ar_account_withholding.regimen_9'), ref('l10n_ar_account_withholding.regimen_12')])]"/>
+        <field name="name">SIPRECO</field>
+    </record>
+
+</odoo>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
     <data>
         <!-- SEARCH VIEW -->
         <record id="view_public_budget_transaction_filter" model="ir.ui.view">
@@ -54,7 +54,7 @@
                             statusbar_colors='{}'/>
                     </header>
                     <sheet string="Budget Transaction">
-                       <div class="oe_right oe_button_box" name="buttons">
+                       <div class="oe_button_box" name="buttons">
                        </div>
                         <field name="id" invisible="True"/> 
                         <field name="user_location_ids" invisible="True"/> 
@@ -106,12 +106,12 @@
                                 <label for="advance_preventive_line_ids" string="Advance Lines" attrs="{'invisible':[('type_with_advance_payment','=',False)]}"/>
                                 <field name="advance_preventive_line_ids" attrs="{'invisible':[('type_with_advance_payment','=',False)]}" context="{'default_definitive_partner_type': definitive_partner_type, 'default_advance_line': 1, 'default_preventive_status': 'confirmed', 'advance_line': 1}"/>
                                 <label for="preventive_line_ids" string="Settlement Lines" attrs="{'invisible':[('type_with_advance_payment','=',False)]}"/>
-                                <field name="preventive_line_ids" context="{'default_definitive_partner_type': definitive_partner_type}"/>
+                                <!-- send transaction to force onchange -->
+                                <field name="preventive_line_ids" context="{'default_transaction_id': id}"/>
                             </page>
                             <page string="Payment Orders and Refunds" attrs="{'invisible':[('type_with_advance_payment','=',False)]}">
-                                <button class="oe_link" string="Create Payment Order" states="open" type="object" name="action_new_voucher"/>
-                                <!-- TODO imeplementar -->
-                                <!-- <field name="advance_voucher_ids" context="{'default_transaction_id':id, 'default_partner_id': partner_id, 'default_type': 'payment', 'form_view_ref': 'account_voucher.view_vendor_payment_form','tree_view_ref': 'account_voucher.view_voucher_tree'}"/> -->
+                                <button class="oe_link" string="Create Payment Order" states="open" type="object" name="action_new_payment_group"/>
+                                <field name="advance_payment_group_ids" context="{'default_transaction_id':id, 'default_partner_id': partner_id, 'default_partner_type': 'supplier'}"/>
                             </page>
                             <page string="Invoices">
                                 <button class="oe_link" string="Create Invoice" states="open" type="action" name="%(public_budget.action_definitive_make_invoice)d"/>
@@ -120,11 +120,10 @@
                                 <field name="invoice_ids" nolabel="1"/>
                             </page>
                             <page string="Payment Orders" attrs="{'invisible':[('type_with_advance_payment','=',True)]}">
-                                <button class="oe_link" string="Create Payment Order" states="open" type="object" name="action_new_voucher"/>
+                                <button class="oe_link" string="Create Payment Order" states="open" type="object" name="action_new_payment_group"/>
                                 or 
-                                <button class="oe_link" string="Mass Payment Order Create" states="open" type="object" name="mass_voucher_create"/>
-                                <!-- TODO imeplementar -->
-                                <!-- <field name="voucher_ids" context="{'default_type': 'payment', 'default_transaction_id':id, 'form_view_ref': 'account_voucher.view_vendor_payment_form','tree_view_ref': 'account_voucher.view_voucher_tree'}"/> -->
+                                <button class="oe_link" string="Mass Payment Order Create" states="open" type="object" name="mass_payment_group_create"/>
+                                <field name="payment_group_ids" context="{'default_partner_type': 'supplier', 'default_transaction_id':id}"/>
                             </page>
                             <page string="Notes">
                                 <field name="note"/>
@@ -155,4 +154,4 @@
         </record>
 
     </data>
-</openerp>
+</odoo>

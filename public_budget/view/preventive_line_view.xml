@@ -26,11 +26,12 @@
                     <field name="currency_id" invisible="1"/>
                     <field name="company_id" invisible="1"/>
                     <field name="definitive_partner_type" invisible="1"/>
+                    <field name="transaction_id" invisible="1"/>
                     <header>
                     </header>
                     <sheet string="Preventive Line">
                        <field name="definitive_amount" invisible="1"/> 
-                       <div class="oe_right oe_button_box" name="buttons">
+                       <div class="oe_button_box" name="buttons">
                        </div>
                      <group string="Preventive Line">
                         <field name="budget_position_id" options="{'no_create': True}"/> 

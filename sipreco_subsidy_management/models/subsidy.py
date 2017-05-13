@@ -26,7 +26,7 @@ class PublicBudgetSubsidy(models.Model):
     @api.model
     def create(self, vals):
         vals['internal_number'] = self.env[
-            'ir.sequence'].get('subsidy_internal_number') or '/'
+            'ir.sequence'].next_by_code('subsidy_internal_number') or '/'
         return super(PublicBudgetSubsidy, self.with_context(
             default_type_id=self.get_type().id)).create(vals)
 
