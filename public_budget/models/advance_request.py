@@ -79,14 +79,11 @@ class AdvanceRequest(models.Model):
         readonly=True,
         states={'draft': [('readonly', False)]},
     )
-    # TODO implementar y migrar datos
-    # voucher_ids = fields.One2many(
-    #     'account.voucher',
-    #     'advance_request_id',
-    #     # compute='get_vouchers',
-    #     # inverse='dummy_inverse',
-    #     string='Vouchers',
-    # )
+    payment_group_ids = fields.One2many(
+        'account.payment.group',
+        'advance_request_id',
+        string='Payment Orders',
+    )
 
     @api.multi
     def action_approve(self):
@@ -99,38 +96,23 @@ class AdvanceRequest(models.Model):
     @api.multi
     def action_confirm(self):
         for record in self:
-            record.create_voucher()
+            record.create_payment_group()
             record.state = 'confirmed'
             if not record.confirmation_date:
                 record.confirmation_date = fields.Datetime.now()
         return True
 
     @api.multi
-    def create_voucher(self):
+    def create_payment_group(self):
         self.ensure_one()
-        vouchers = self.env['account.voucher']
-        amount = sum(self.advance_request_line_ids.mapped('approved_amount'))
-        journal = self.env['account.journal'].search([
-            ('company_id', '=', self.company_id.id),
-            ('type', 'in', ('cash', 'bank'))], limit=1)
-        if not journal:
-            raise ValidationError(_(
-                'No bank or cash journal found for company "%s"') % (
-                self.company_id.name))
         partner = self.type_id.general_return_partner_id
-        currency = journal.currency or self.company_id.currency_id
-        voucher_data = vouchers.onchange_partner_id(
-            partner.id, journal.id, 0.0,
-            currency.id, 'payment', False)
-        voucher_vals = {
-            'type': 'payment',
+        amount = sum(self.advance_request_line_ids.mapped('approved_amount'))
+        return self.payment_group_ids.create({
             'partner_id': partner.id,
-            'journal_id': journal.id,
-            'advance_amount': amount,
+            'unreconciled_amount': amount,
             'advance_request_id': self.id,
-            'account_id': voucher_data['value'].get('account_id', False),
-        }
-        return vouchers.create(voucher_vals)
+            'partner_type': 'supplier',
+        })
 
     @api.multi
     @api.constrains('state', 'advance_request_line_ids')
@@ -154,17 +136,14 @@ class AdvanceRequest(models.Model):
 
     @api.multi
     def action_cancel(self):
-        for request in self:
-            open_vouchers = self.voucher_ids.filtered(
-                lambda x: x.state not in ['draft', 'cancel'])
+        for rec in self:
+            open_vouchers = rec.payment_group_ids.filtered(
+                lambda x: x.state != 'draft')
             if open_vouchers:
                 raise ValidationError(_(
-                    'You can nopt cancel an advance request with vouchers in '
-                    'other state than "cancel" or "draft".\n'
-                    ' * Request id: %i\n'
-                    ' * Voucher ids: %s'
-                ) % (request.id, open_vouchers.ids))
-            self.voucher_ids.unlink()
+                    "You can't cancel an advance request with payment order "
+                    "in other state than 'draft'."))
+            rec.payment_group_ids.unlink()
         self.write({'state': 'cancel'})
         return True
 

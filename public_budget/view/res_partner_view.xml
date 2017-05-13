@@ -62,18 +62,4 @@
         <field name="context">{'search_default_subsidy_recipient': 1,'default_customer': 0,'default_subsidy_recipient': 1}</field>
     </record>
 
-        <!-- INHERITED TREE -->
-        <!-- IMPORTANTE; si lo activamos hay que hacerlo con vista par aun grupo distinto a employee porque si no da error de acceso -->
-<!--         <record id="view_partner_tree" model="ir.ui.view">
-            <field name="name">partner.tree</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_partner_tree"/>
-            <field name="arch" type="xml">
-                <tree>
-                    <field name="advance_request_debt" attrs="{'invisible': [('employee', '=', False)]}"/>
-                    <field name="employee" invisible="True"/>
-                </tree>
-            </field>
-    </record> -->
-
 </odoo>

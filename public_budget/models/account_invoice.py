@@ -146,8 +146,8 @@ class AccountInvoice(models.Model):
     #                 not inv.transaction_id.type_id.with_advance_payment
     #         ):
     #             raise ValidationError(_(
-    #                 'You cannot cancel an invoice which has been sent to pay.'
-    #                 ' You need to cancel related payments first.'))
+    #                 'You cannot cancel an invoice which has been sent to '
+    #                 'pay. You need to cancel related payments first.'))
     #     return super(AccountInvoice, self).action_cancel()
 
     @api.multi

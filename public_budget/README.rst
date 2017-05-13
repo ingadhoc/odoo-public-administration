@@ -11,6 +11,7 @@ Modulo generico para gestion publica presupuestaria/contable.
 Datos demo:
 * Compañía a utilizar: SIPRECO
 * Usuarios disponibles (clave igual a usuario):
+
     * admin: lo ideal es no usarlo ya que ve todas las compañías y saltea restricciones
     * demo: director de habilitaciones, contaduria y secretaria y con configuración, ideal para hacer pruebas en vez de usar admin.
     * habilitaciones_manager: director de habilitaciones
@@ -52,8 +53,6 @@ To use this module, you need to:
 
 Known issues / Roadmap
 ======================
-
-* ...
 
 Bug Tracker
 ===========

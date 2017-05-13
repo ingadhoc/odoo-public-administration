@@ -55,3 +55,4 @@ DEMO
 
 MIGRACION:
     confirmation_date de account_voucher_double_validation a public_budget
+    en los account voucher, advance_request_id debería llevarse al payment group correspondiente
