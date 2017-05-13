@@ -15,8 +15,9 @@ class PreventiveLine(models.Model):
         'account.account',
         string='Account',
         states={'invoiced': [('readonly', True)]},
-        domain="[('internal_type', '=', 'other'), "
-        "('company_id', '=', company_id), "
+        domain="["
+        "('internal_type', '=', 'other'), "
+        # "('company_id', '=', company_id), "
         "('deprecated', '=', False)]",
     )
     company_id = fields.Many2one(

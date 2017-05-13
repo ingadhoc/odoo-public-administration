@@ -34,4 +34,3 @@ from . import budget_modification
 from . import expedient
 from . import advance_request_line
 from . import expedient_founder
-from . import account_move_line

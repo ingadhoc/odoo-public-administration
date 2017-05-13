@@ -1,71 +1,62 @@
 # -*- coding: utf-8 -*-
-from openerp import fields, models, api, _
-from openerp.exceptions import ValidationError
+from openerp import fields, models
+# from openerp.exceptions import ValidationError
 import logging
 _logger = logging.getLogger(__name__)
 
 
 class AccountCheck(models.Model):
+    """
+    Ellos debitan directamente del banco y querían un estado adicional para
+    referirse a la entrega del cheque, entonces directamente renombramos
+    estados:
+    * Entregado --> A ser entregado
+    * Debitado --> Entregado
+    """
 
     _inherit = 'account.check'
 
-    handed_date = fields.Date(
-        'Fecha de Entrega',
-        readonly=True,
-    )
-    state = fields.Selection(
-        # selection_add=[('to_be_handed', 'To Be Handed')]
-        [
-            ('draft', _('Draft')),
-            ('holding', _('Holding')),
-            ('deposited', _('Deposited')),
-            ('to_be_handed', _('To Be Handed')),
-            ('handed', _('Handed')),
-            ('rejected', _('Rejected')),
-            ('debited', _('Debited')),
-            ('returned', _('Returned')),
-            ('changed', _('Changed')),
-            ('cancel', _('Cancel')),
-        ]
-    )
+    # cambiamos la descripción de handed y debited.
+    state = fields.Selection([
+        ('draft', 'Draft'),
+        ('holding', 'Holding'),
+        ('deposited', 'Deposited'),
+        ('selled', 'Selled'),
+        ('delivered', 'Delivered'),
+        ('transfered', 'Transfered'),
+        ('reclaimed', 'Reclaimed'),
+        ('withdrawed', 'Withdrawed'),
+        ('handed', 'A ser entregado'),
+        ('rejected', 'Rejected'),
+        ('debited', 'Entregado'),
+        ('returned', 'Returned'),
+        ('changed', 'Changed'),
+        ('cancel', 'Cancel'),
+    ],)
 
-    @api.multi
-    def action_hand(self):
-        self.write({'handed_date': fields.Date.today()})
-        return super(AccountCheck, self).action_hand()
 
-    @api.multi
-    def check_check_cancellation(self):
-        for check in self:
-            if check.type == 'issue_check' and check.state not in [
-                    'draft', 'to_be_handed', 'handed']:
-                raise ValidationError(_(
-                    'You can not cancel issue checks in states other than '
-                    '"draft or "handed". First try to change check state.'))
-            # third checks received
-            elif check.type == 'third_check' and check.state not in [
-                    'draft', 'holding']:
-                raise ValidationError(_(
-                    'You can not cancel third checks in states other than '
-                    '"draft or "holding". First try to change check state.'))
-            elif check.type == 'third_check' and check.third_handed_voucher_id:
-                raise ValidationError(_(
-                    'You can not cancel third checks that are being used on '
-                    'payments'))
-        return True
+class AccountCheckOperation(models.Model):
 
-    # TODO agregar este check
-    # @api.multi
-    # def action_confirm(self):
-    #     self.ensure_one()
+    _inherit = 'account.check.operation'
 
-    #     for check in self.env['account.check'].browse(
-    #             self._context.get('active_ids', [])):
-    #         if check.type != 'issue_check':
-    #             raise ValidationError(
-    #                 'Los cheques seleccionados deben ser "Cheques Propios"')
-    #         if check.state != 'to_be_handed':
-    #             raise ValidationError(
-    #                 'Los cheques deben estar en estado "Para Ser Entregado"')
-    #         check.signal_workflow('to_be_handed')
-    #     return True
+    # cambiamos la descripción de handed y debited
+    operation = fields.Selection([
+        # from payments
+        ('holding', 'Receive'),
+        ('deposited', 'Deposit'),
+        ('selled', 'Sell'),
+        ('delivered', 'Deliver'),
+        # usado para hacer transferencias internas, es lo mismo que delivered
+        # (endosado) pero no queremos confundir con terminos, a la larga lo
+        # volvemos a poner en holding
+        ('transfered', 'Transfer'),
+        ('handed', 'A ser entregado'),
+        ('withdrawed', 'Withdrawal'),
+        # from checks
+        ('reclaimed', 'Claim'),
+        ('rejected', 'Rejection'),
+        ('debited', 'Entregado'),
+        ('returned', 'Return'),
+        ('changed', 'Change'),
+        ('cancel', 'Cancel'),
+    ],)
