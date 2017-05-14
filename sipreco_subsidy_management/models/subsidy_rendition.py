@@ -36,6 +36,9 @@ class PublicBudgetSubsidyRendition(models.Model):
     rendition_amount = fields.Monetary(
         'Importe Rendido',
     )
+    currency_id = fields.Many2one(
+        related='subsidy_id.currency_id'
+    )
     approved_amount = fields.Monetary(
         'Importe Aprobado',
         related='approval_arrangement_id.approved_amount',

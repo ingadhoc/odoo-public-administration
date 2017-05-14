@@ -4,9 +4,9 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class AccountVoucher(models.Model):
+class AccountPaymentGroup(models.Model):
 
-    _inherit = 'account.voucher'
+    _inherit = 'account.payment.group'
 
     cargo_date = fields.Date(
         compute='get_cargo_data',
@@ -23,28 +23,29 @@ class AccountVoucher(models.Model):
 
     @api.one
     @api.depends(
-        'date',
+        'payment_date',
+        'payments_amount',
         'state',
-        'amount',
-        'issued_check_ids.amount',
-        'issued_check_ids.state',
-        'issued_check_ids.handed_date'
+        'payment_ids.check_ids.amount',
+        'payment_ids.check_ids.state',
     )
     def get_cargo_data(self):
         cargo_amount = 0.0
         cargo_date = False
         if self.state == 'posted':
-            if self.issued_check_ids:
+            check_ids = self.payment_ids.mapped('check_ids')
+            if check_ids:
                 # si hay cheques, controlamos que esten entregados, si no
                 # tomamos el monto del voucher
-                haneded_checks = self.issued_check_ids.search([
-                    ('id', 'in', self.issued_check_ids.ids),
+                haneded_checks = check_ids.search([
+                    ('id', 'in', check_ids.ids),
                     ('state', 'in', ['handed', 'debited'])],
-                    order='handed_date desc')
+                    # order='handed_date desc'
+                )
                 cargo_amount += sum(haneded_checks.mapped('amount'))
-                cargo_date = haneded_checks and haneded_checks[0].handed_date
+                # cargo_date = haneded_checks and haneded_checks[0].handed_date
             else:
-                cargo_amount += self.amount
-                cargo_date = self.date
+                cargo_amount += self.payments_amount
+                cargo_date = self.payment_date
         self.cargo_date = cargo_date
         self.cargo_amount = cargo_amount

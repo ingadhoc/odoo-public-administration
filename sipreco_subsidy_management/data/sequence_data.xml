@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
     <data noupdate="1">
-
-        <!-- Sequences for remit -->
-        <record id="seq_type_approval_arrangement" model="ir.sequence.type">
-            <field name="name">Disposición de aprobacion</field>
-            <field name="code">approval_arrangement</field>
-        </record>
 
         <record id="seq_approval_arrangement" model="ir.sequence">
             <field name="name">Disposición de aprobacion</field>
@@ -14,12 +8,6 @@
             <field name="suffix">/%(y)s-N</field>
             <field name="padding">4</field>
             <field name="company_id" eval="False"/>
-        </record>
-
-        <!-- Subsidy Internal number -->
-        <record id="subsidy_internal_number" model="ir.sequence.type">
-            <field name="name">Subsidy Internal number</field>
-            <field name="code">subsidy_internal_number</field>
         </record>
 
         <record id="seq_subsidy_internal_number" model="ir.sequence">
@@ -32,4 +20,4 @@
         </record>
 
     </data>
-</openerp>
+</odoo>

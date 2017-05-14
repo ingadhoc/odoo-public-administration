@@ -19,10 +19,9 @@
         'demo/subsidy_demo.xml',
     ],
     'depends': [
-        'sipreco_public_budget',
-        'web_widget_one2many_tags',
+        'public_budget',
     ],
-    'installable': False,
+    'installable': True,
     'name': 'Public Budget Subsidy Management',
     'test': [],
     'version': '9.0.1.0.0',

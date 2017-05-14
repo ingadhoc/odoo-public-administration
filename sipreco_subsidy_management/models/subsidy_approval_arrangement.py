@@ -49,11 +49,21 @@ class ApprovalArrangement(models.Model):
     #     'Subsidio',
     #     required=True,
     # )
+    currency_id = fields.Many2one(
+        'res.currency',
+        compute='_compute_currency'
+    )
     approved_amount = fields.Monetary(
         'Monto Aprobado',
         required=True,
         # default=_get_approved_amount,
     )
+
+    @api.multi
+    def _compute_currency(self):
+        currency = self.env.user.company_id.currency_id
+        for rec in self:
+            rec.currency_id = currency
 
     _sql_constraints = [
         ('number_unique', 'unique(number)',
