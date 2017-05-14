@@ -1,4 +1,9 @@
 # because of company being argentina, template should be available
+# not sure why, on transifex build the argentina chart is not installed and it
+# raise an error
 -
-  !python {model: account.chart.template, id: l10n_ar_chart.l10nar_base_chart_template}: |
-    self[0].with_context(with_bank_journal=True, create_point_of_sale_type=True).try_loading_for_current_company()
+  !python {model: account.chart.template, id: l10n_ar_chart.l10nar_ex_chart_template}: |
+    try:
+        self[0].with_context(with_bank_journal=True, create_point_of_sale_type=True).try_loading_for_current_company()
+    except:
+        pass
