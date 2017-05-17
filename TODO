@@ -1,8 +1,19 @@
 Validar con gonza:
     cambios en cheques, al definir esto tmb ver como hacemos lo del cargo en payment group de subsidy management
-    el campo referencia de pago no existe mas, podemos unitifcar con memo? O usamos notas que no se usó nunca en CMR? (ANOTAR PARA MIGRAR ESTO)
+        quedamos por ahora:
+            ver si agregamos parametro direct debit para que debite automáticamente, si no la otra que podemos probar es hacer que le cuenta de cheques sea como transfer internas, conciliable pero no a recibir ni a pagar, entonces tal vez la conciliación bancaria nos sugiere el cheque y no hace falta el débito. lo que si deberíamos hacer es que la conciliación registre el cambio de estado en ese caso
+        para lineas de pago:
+            hacemos que todo se genere usando lógica de los payments
+            datos fijos que vayan a journal o algo así, datos variables a wizard.
+            que se pueda generar archivo desde lista de payment groups y dese uno solo
+            hacer todo esto en módulo de localización
+
+        agregar impresión de cheques desde listado de ordenes de pago
+
+
     ver si los reportes separados del cmr hace falta que sean distintos y si los podemos unificar, tal vez llevarlos a por interfaz en vez de modulo, ver que otras apvadas tiene el modulo cmd para sacar todo y poder borrar esas dos customizaciones
     planificar contratar enterprise teniendo en cuenta que podrían ser menos usuarios pero que no nos va a sumar en ese caso
+    analizar con gonza el payment line, tal vez directamente cada uno es un payment y lo hacemos mas "odoo way" y luego seleccionamos y exportamos?
 
 
 account_move_line
@@ -57,3 +68,9 @@ DEMO
 MIGRACION:
     confirmation_date de account_voucher_double_validation a public_budget
     en los account voucher, advance_request_id debería llevarse al payment group correspondiente
+    migración de los payment lines
+        tenemos que renombrar 
+            account.voucher.payment_line por account.payment.group.line
+    mig de payment group
+        name de voucher va a communication
+        reference a reference

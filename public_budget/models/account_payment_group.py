@@ -21,6 +21,10 @@ class AccountPaymentGroup(models.Model):
             # we also change posted for paid
             ('posted', 'Pagado')
         ])
+    # agregamos reference que fue depreciado y estan acostumbrados a usar
+    reference = fields.Char(
+        string='Ref. pago',
+    )
     budget_id = fields.Many2one(
         related='transaction_id.budget_id',
         readonly=True,
@@ -192,7 +196,15 @@ class AccountPaymentGroup(models.Model):
     @api.multi
     def to_signature_process(self):
         for rec in self:
-            if self.currency_id.round(rec.payments_amount - rec.to_pay_amount):
+            for payment in rec.payment_ids.filtered(
+                    lambda x: x.payment_method_code == 'issue_check'):
+                if not payment.check_number or not payment.check_name:
+                    raise ValidationError(
+                        'Para mandar a proceso de firma debe definir número '
+                        'de cheque en cada línea de pago.\n'
+                        '* ID de orden de pago: %s' % rec.id)
+
+            if rec.currency_id.round(rec.payments_amount - rec.to_pay_amount):
                 raise ValidationError((
                     'No puede mandar a pagar una orden de pago que tiene '
                     'Importe a pagar distinto a Importe de los Pagos'))
@@ -276,8 +288,8 @@ class AccountPaymentGroup(models.Model):
             rec.invoice_ids.sudo()._compute_to_pay_amount()
 
     @api.multi
-    @api.constrains('confirmation_date', 'payment_min_date')
-    def check_date(self):
+    @api.constrains('confirmation_date', 'payment_min_date', 'payment_date')
+    def check_dates(self):
         _logger.info('Checking dates')
         for rec in self:
             if not rec.confirmation_date:
@@ -289,10 +301,14 @@ class AccountPaymentGroup(models.Model):
                         'fecha de la factura que se esta pagando'))
             if not rec.payment_date:
                 continue
-            if rec.payment_date < rec.confirmation_date:
-                raise ValidationError(_(
+            if self.payment_date < self.confirmation_date:
+                raise Warning(_(
                     'La fecha de validacion del pago no puede ser menor a la '
                     'fecha de confirmación'))
+            if self.payment_date < self.payment_min_date:
+                raise Warning(_(
+                    'La fecha de validacion del pago no puede ser menor a la '
+                    'fecha mínima de pago'))
 
     @api.multi
     @api.constrains('unreconciled_amount', 'transaction_id', 'state')

@@ -27,6 +27,11 @@ class AccountInvoice(models.Model):
     )
 
     @api.multi
+    def verify_on_afip(self):
+        super(AccountInvoice, self).verify_on_afip()
+        return {'type': 'ir.actions.act_window.none'}
+
+    @api.multi
     @api.constrains('state')
     def update_definitive_invoiced_amount(self):
         # this method update all amounts on the upstream
