@@ -8,9 +8,6 @@ Validar con gonza:
             que se pueda generar archivo desde lista de payment groups y dese uno solo
             hacer todo esto en módulo de localización
 
-        agregar impresión de cheques desde listado de ordenes de pago
-
-
     ver si los reportes separados del cmr hace falta que sean distintos y si los podemos unificar, tal vez llevarlos a por interfaz en vez de modulo, ver que otras apvadas tiene el modulo cmd para sacar todo y poder borrar esas dos customizaciones
     planificar contratar enterprise teniendo en cuenta que podrían ser menos usuarios pero que no nos va a sumar en ese caso
     analizar con gonza el payment line, tal vez directamente cada uno es un payment y lo hacemos mas "odoo way" y luego seleccionamos y exportamos?
