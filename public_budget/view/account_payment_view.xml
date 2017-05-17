@@ -4,13 +4,48 @@
     <record id="view_account_payment_form" model="ir.ui.view">
         <field name="name">account.payment.form</field>
         <field name="model">account.payment</field>
+        <field name="priority">20</field>
         <field name="inherit_id" ref="account.view_account_payment_form"/>
         <field name="arch" type="xml">
             <!-- hacemos invisible la fecha de pago para no confundir, viene seteada desde el payment group y en sipreco no interesa permitir distintas fechas para un pago -->
             <field name="payment_date" position="attributes">
                 <attribute name="invisible">1</attribute>
             </field>
+
+        <!-- modificamos para que el numero de cheque no sea requerido, se hace requerido al pasar a estado de firma -->
+            <field name="check_number" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('checkbook_block_manual_number', '=', True), ('payment_method_code', 'not in', ['received_third_check', 'issue_check'])], 'readonly': [('state', '!=', 'draft')]}</attribute>
+            </field>
+            <field name="check_name" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('checkbook_block_manual_number', '=', True), ('payment_method_code', 'not in',['received_third_check','issue_check'])]}</attribute>
+            </field>
         </field>
     </record>
+       
+<!-- because we generate checks on post, checks report is made from payments -->
+<!--  Checks printing from payments-->
+    <!-- payments tree view -->
+    <record model="ir.ui.view" id="view_account_payment_tree">
+        <field name="name">account.payment.tree</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_tree"/>
+        <field name="arch" type="xml">
+            <tree>
+                <button name="%(action_aeroo_report_check)d" icon="fa-print " help="Print check" type="action" attrs="{'invisible': ['|', ('payment_method_code', '!=', 'issue_check')]}"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- tree of payments on payment groups -->
+    <record id="view_account_payment_from_group_tree" model="ir.ui.view">
+        <field name="name">account.payment.tree</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account_payment_group.view_account_payment_from_group_tree"/>
+        <field name="arch" type="xml"> 
+            <tree>
+                <button name="%(action_aeroo_report_check)d" icon="fa-print " help="Print check" type="action" attrs="{'invisible': ['|', ('payment_method_code', '!=', 'issue_check')]}"/>
+            </tree>
+        </field>
+    </record>   
 
 </odoo>

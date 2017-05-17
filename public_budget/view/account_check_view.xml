@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-       <record model="ir.ui.view" id="view_account_check_form">
+                <!-- only habilitaciones -->
+    <!-- TODO enable -->
+    <!--    <record model="ir.ui.view" id="view_account_check_form">
             <field name="name">account.check.form</field>
             <field name="model">account.check</field>
             <field name="inherit_id" ref="account_check.view_account_check_form"/>
             <field name="arch" type="xml">
-                <!-- only habilitaciones -->
                 <button string="Change" position="attributes">
                     <attribute name="groups">public_budget.group_habilitacion_usuario</attribute>
                 </button>
@@ -22,23 +23,12 @@
                 <button string="Cancel Rejection" position="attributes">
                     <attribute name="groups">public_budget.group_habilitacion_usuario</attribute>
                 </button>
-<!--                 <button string="Cancel Change" position="attributes">
-                    <attribute name="groups">public_budget.group_habilitacion_usuario</attribute>
-                </button> -->
                 
                 <field name="payment_date" position="after">
                     <field name="handed_date"/>
                 </field>
 
-                <!-- buttons to add to_be_handed behaviour -->
-                <button position="after">
-                    <button name="to_be_handed" string="Handed" attrs="{'invisible':['|',('type','!=','issue_check'),('state','!=','to_be_handed')]}" groups="public_budget.group_habilitacion_usuario"/>
-                    <button name="back_to_be_handed" string="Back To Be Handed" attrs="{'invisible':['|',('type','!=','issue_check'),('state','!=','handed')]}" groups="public_budget.group_habilitacion_usuario"/>
-                </button>
-                <button name="%(account_check.action_account_change_check)d" position="attributes">
-                    <attribute name="attrs">{'invisible':['|', ('type', '!=', 'third_check'), ('state', '!=', 'holding'), '|', ('type', '!=', 'issue_check'), ('state', 'not in', ['handed', 'to_be_handed'])]}</attribute>
-                </button>
             </field>
-        </record>
+        </record> -->
     </data>
 </openerp>

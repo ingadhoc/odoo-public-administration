@@ -19,6 +19,13 @@
         <field name="inherit_id" ref="account_payment_group.view_account_payment_group_tree"/>
         <field name="priority">20</field>
         <field name="arch" type="xml">
+            <!-- para poder ver lo que se manda a pagar antes de que se carguen los pagos -->
+            <field name="payments_amount" position="before">
+                <field name="to_pay_amount" sum="Total"/>
+            </field>
+            <field name="partner_id" position="before">
+                <field name="reference"/>
+            </field>
             <tree position="inside">
                 <button name="%(action_aeroo_report_payment)d" class="oe_highlight" string="Print Payment Order" type="action" icon="fa-print"/>
                 <button name="confirm" type="object" string="Confirm" states="draft" icon="fa-arrow-circle-right" groups="account.group_account_manager"/>
@@ -52,6 +59,10 @@
             <button name="confirm" position="attributes">
                 <attribute name="groups">account.group_account_manager</attribute>
             </button>
+
+            <field name="communication" position="before">
+                <field name="reference"/>
+            </field>
 
             <field name="payment_date" position="before">
                 <field name="payment_base_date"/>
