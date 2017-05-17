@@ -5,7 +5,7 @@
     'category': 'Accounting & Finance',
     'data': [
         'wizards/account_voucher_payment_line_import_view.xml',
-        'views/account_voucher_view.xml',
+        'views/account_payment_group_view.xml',
         'views/res_partner_bank_view.xml',
         'security/ir.model.access.csv',
     ],
@@ -14,7 +14,7 @@
     'depends': [
         'public_budget',
     ],
-    'installable': False,
+    'installable': True,
     'name': 'Sipreco Payment Lines',
     'test': [],
     'version': '9.0.1.0.0',

@@ -4,12 +4,12 @@ from openerp.exceptions import ValidationError as UserError
 import base64
 
 
-class AccountVoucher(models.Model):
-    _inherit = "account.voucher"
+class AccountPaymentGroup(models.Model):
+    _inherit = "account.payment.group"
 
-    payment_line_ids = fields.One2many(
-        'account.voucher.payment_line',
-        'voucher_id',
+    line_ids = fields.One2many(
+        'account.payment.group.line',
+        'payment_group_id',
         'Payment Lines',
         readonly=True,
         states={'draft': [('readonly', False)]},
@@ -54,10 +54,10 @@ class AccountVoucher(models.Model):
     )
 
     @api.one
-    @api.depends('payment_line_ids.amount')
+    @api.depends('line_ids.amount')
     def compute_importe_total(self):
-        self.importe_total = sum(self.payment_line_ids.mapped('amount'))
-        self.cantidad = len(self.payment_line_ids)
+        self.importe_total = sum(self.line_ids.mapped('amount'))
+        self.cantidad = len(self.line_ids)
 
     @api.multi
     def generar_linea(self,):
@@ -89,7 +89,7 @@ class AccountVoucher(models.Model):
         if (
                 self.state == 'confirmed' and
                 self.type == 'payment' and
-                self.payment_line_ids
+                self.line_ids
         ):
             self.check_payment_lines_total()
 
@@ -97,7 +97,7 @@ class AccountVoucher(models.Model):
     def generar_archivo_banco(self):
         self.check_generar_archivo_banco_data()
         lines_data = []
-        for line in self.payment_line_ids:
+        for line in self.line_ids:
             lines_data.append(line._get_linea_archivo_banco())
         # FOR windows \r\n is required
         # we also add one new line at the end as xls does

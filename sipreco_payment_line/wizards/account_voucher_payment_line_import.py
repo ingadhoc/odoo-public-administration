@@ -8,8 +8,8 @@ from openerp.exceptions import ValidationError as UserError
 _logger = logging.getLogger(__name__)  # pylint: disable=invalid-name
 
 
-class AccountVoucherPaymentLineImport(models.TransientModel):
-    _name = 'account.voucher.payment_line.import'
+class AccountPaymentGroupLineImport(models.TransientModel):
+    _name = 'account.payment.payment_line.import'
     _description = 'Account Vouchers Payment Lines Import'
 
     data_file = fields.Binary(

@@ -6,7 +6,8 @@
 Sipreco Payment Lines
 =====================
 
-Add payment lines on payments
+Agregar líneas de pago en ordenes de pago para poder dividir el mismo en varios pagos (para distintos partners), tipicamente utilizado para pagos de sueldos que vienen totalizados y se desglozan por empleado.
+Además permite generar el archivo para subir en home banking y generar las transferencias.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
