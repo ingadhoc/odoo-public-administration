@@ -1,12 +1,11 @@
 Validar con gonza:
-    cambios en cheques, al definir esto tmb ver como hacemos lo del cargo en payment group de subsidy management
-        quedamos por ahora:
-            ver si agregamos parametro direct debit para que debite automáticamente, si no la otra que podemos probar es hacer que le cuenta de cheques sea como transfer internas, conciliable pero no a recibir ni a pagar, entonces tal vez la conciliación bancaria nos sugiere el cheque y no hace falta el débito. lo que si deberíamos hacer es que la conciliación registre el cambio de estado en ese caso
-        para lineas de pago:
-            hacemos que todo se genere usando lógica de los payments
-            datos fijos que vayan a journal o algo así, datos variables a wizard.
-            que se pueda generar archivo desde lista de payment groups y dese uno solo
-            hacer todo esto en módulo de localización
+    que definimos al final??? cambios en cheques, al definir esto tmb ver como hacemos lo del cargo en payment group de subsidy management 
+
+    para lineas de pago:
+        hacemos que todo se genere usando lógica de los payments
+        datos fijos que vayan a journal o algo así, datos variables a wizard.
+        que se pueda generar archivo desde lista de payment groups y dese uno solo
+        hacer todo esto en módulo de localización
 
     ver si los reportes separados del cmr hace falta que sean distintos y si los podemos unificar, tal vez llevarlos a por interfaz en vez de modulo, ver que otras apvadas tiene el modulo cmd para sacar todo y poder borrar esas dos customizaciones
     planificar contratar enterprise teniendo en cuenta que podrían ser menos usuarios pero que no nos va a sumar en ese caso

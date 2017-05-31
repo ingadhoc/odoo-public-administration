@@ -22,6 +22,10 @@ Datos demo:
     * secretaria_user: usuario de secretaria
     * general: usuario solo empleado, no debería poder hacer nada, por ahora no tienen ningún uso
 
+Algunas observaciones de uso/desarrollo
+=======================================
+
+#. Cheques: por ahora no generamos el cheque hasta que se validar el pago, y en ese mismo momento se entrega, es decir, que recien cuando se entrega/n el/los cheque/s se debe validar el pago
 
 Installation
 ============
