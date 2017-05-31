@@ -2,7 +2,7 @@
 <odoo>
 
     <!-- INHERITED SEARCH -->
-    <record id="view_partner_person_filter" model="ir.ui.view">
+    <record id="view_res_partner_filter" model="ir.ui.view">
         <field name="name">partner.person.select</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_res_partner_filter"/>
@@ -14,12 +14,11 @@
         </field>
     </record>
 
-    <!-- TODO tal vez en v10 queremos sacar depdencia a l10n_ar_account y esto va por interfaz o algo asi -->
     <!-- INHERITED FORM -->
-    <record id="view_ar_account_partnerform" model="ir.ui.view">
+    <record id="view_partner_property_form" model="ir.ui.view">
         <field name="name">partner.ar_account.form</field>
         <field name="model">res.partner</field>
-        <field name="inherit_id" ref="l10n_ar_account.view_res_partner_form"/>
+        <field name="inherit_id" ref="l10n_ar_account.view_partner_property_form"/>
         <field name="arch" type="xml">
             <field name="afip_responsability_type_id" position="attributes">
                 <!-- only required if is company or not parent -->
@@ -28,7 +27,7 @@
         </field>
     </record>
     
-    <record id="view_ar_partnerform" model="ir.ui.view">
+    <record id="view_partner_form" model="ir.ui.view">
         <field name="name">partner.ar.form</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="l10n_ar_partner.view_partner_form"/>
