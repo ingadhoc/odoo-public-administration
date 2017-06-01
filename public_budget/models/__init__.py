@@ -3,6 +3,8 @@ from . import inventory_rule
 from . import res_partner
 from . import account_payment_group
 from . import account_payment
+# TODO terminar de migrar
+# from . import account_check
 from . import account_invoice
 from . import advance_request_type
 from . import advance_request
