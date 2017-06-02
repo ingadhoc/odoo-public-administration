@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-17 23:24+0000\n"
-"PO-Revision-Date: 2017-05-17 23:24+0000\n"
+"POT-Creation-Date: 2017-05-31 21:39+0000\n"
+"PO-Revision-Date: 2017-05-31 21:39+0000\n"
 "Last-Translator: Juan José Scarafía <scarafia.juanjose@gmail.com>, 2017\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: public_budget
-#: model:ir.ui.view,arch_db:public_budget.view_ar_partnerform
+#: model:ir.ui.view,arch_db:public_budget.view_partner_form
 msgid ""
 "<?xml version=\"1.0\"?>\n"
 "<data><!-- TODO ENABLE!! -->\n"
@@ -71,7 +71,7 @@ msgid ""
 "                <field name=\"reference\"/>\n"
 "            </field>\n"
 "            <tree position=\"inside\">\n"
-"                <button name=\"326\" class=\"oe_highlight\" string=\"Print Payment Order\" type=\"action\" icon=\"fa-print\"/>\n"
+"                <button name=\"327\" class=\"oe_highlight\" string=\"Print Payment Order\" type=\"action\" icon=\"fa-print\"/>\n"
 "                <button name=\"confirm\" type=\"object\" string=\"Confirm\" states=\"draft\" icon=\"fa-arrow-circle-right\" groups=\"account.group_account_manager\"/>\n"
 "            </tree>\n"
 "        </data>"
@@ -82,7 +82,7 @@ msgstr ""
 msgid ""
 "<?xml version=\"1.0\"?>\n"
 "<data><button name=\"invoice_cancel\" position=\"before\">\n"
-"                    <button name=\"334\" class=\"oe_highlight\" string=\"Imprimir Liquidación\" type=\"action\"/>\n"
+"                    <button name=\"335\" class=\"oe_highlight\" string=\"Imprimir Liquidación\" type=\"action\"/>\n"
 "                </button>\n"
 "\n"
 "                <!-- we hide refund button -->\n"
@@ -171,7 +171,7 @@ msgid ""
 "            <!-- add payment order and print receipt button -->\n"
 "            <button name=\"payment_print\" position=\"replace\">\n"
 "                <button name=\"%(action_aeroo_report_payment)\" string=\"Print Payment Order\" class=\"oe_highlight\" groups=\"base.group_user\" type=\"action\"/>\n"
-"                <button name=\"330\" class=\"oe_highlight\" string=\"Print Receipt\" attrs=\"{'invisible': [('show_print_receipt_button', '=', False)]}\" type=\"action\"/>\n"
+"                <button name=\"331\" class=\"oe_highlight\" string=\"Print Receipt\" attrs=\"{'invisible': [('show_print_receipt_button', '=', False)]}\" type=\"action\"/>\n"
 "            </button>\n"
 "\n"
 "        <!-- como ellos pagan con adelanto o conciliando, y no el mix, excondemos deuda seleccionada y importe de ajuste y solo mostramos el a pagar que lo hacemos editable o no segun sea de adelanto o no -->\n"
@@ -237,7 +237,7 @@ msgid ""
 "<?xml version=\"1.0\"?>\n"
 "<data><header position=\"replace\">\n"
 "                    <header>\n"
-"                        <button name=\"331\" class=\"oe_highlight\" string=\"Print\" type=\"action\"/>\n"
+"                        <button name=\"332\" class=\"oe_highlight\" string=\"Print\" type=\"action\"/>\n"
 "                        <field name=\"state\" widget=\"statusbar\" invisible=\"1\"/>\n"
 "                    </header>\n"
 "                </header>\n"
@@ -262,7 +262,7 @@ msgid ""
 msgstr ""
 
 #. module: public_budget
-#: model:ir.ui.view,arch_db:public_budget.view_ar_account_partnerform
+#: model:ir.ui.view,arch_db:public_budget.view_partner_property_form
 msgid ""
 "<?xml version=\"1.0\"?>\n"
 "<field name=\"afip_responsability_type_id\" position=\"attributes\">\n"
@@ -283,7 +283,7 @@ msgid ""
 msgstr ""
 
 #. module: public_budget
-#: model:ir.ui.view,arch_db:public_budget.view_partner_person_filter
+#: model:ir.ui.view,arch_db:public_budget.view_res_partner_filter
 msgid ""
 "<?xml version=\"1.0\"?>\n"
 "<filter name=\"customer\" position=\"before\">\n"
@@ -327,7 +327,7 @@ msgid ""
 "<?xml version=\"1.0\"?>\n"
 "<form string=\"Advance Return\">\n"
 "                    <header>\n"
-"                        <button name=\"333\" class=\"oe_highlight\" string=\"Print\" type=\"action\"/>\n"
+"                        <button name=\"334\" class=\"oe_highlight\" string=\"Print\" type=\"action\"/>\n"
 "                        <button name=\"action_confirm\" states=\"draft\" string=\"Confirm\" type=\"object\" class=\"oe_highlight\" groups=\"account.group_account_user\"/>\n"
 "                        <button name=\"action_cancel_draft\" states=\"cancel\" type=\"object\" string=\"To Draft\"/>\n"
 "                        <button name=\"action_cancel\" states=\"confirmed,draft\" string=\"Cancel\" type=\"object\" groups=\"account.group_account_user\"/>\n"
@@ -502,7 +502,7 @@ msgid ""
 "<?xml version=\"1.0\"?>\n"
 "<form string=\"Budget Transaction\">\n"
 "                    <header>\n"
-"                        <button name=\"329\" class=\"oe_highlight\" string=\"Print\" type=\"action\"/>\n"
+"                        <button name=\"330\" class=\"oe_highlight\" string=\"Print\" type=\"action\"/>\n"
 "                        <button name=\"action_cancel_draft\" type=\"object\" states=\"cancel\" string=\"To Draft\"/>\n"
 "                        <button name=\"action_open\" type=\"object\" states=\"draft\" string=\"Open\" class=\"oe_highlight\"/>\n"
 "                        <button name=\"action_close\" type=\"object\" states=\"open\" string=\"Close\" class=\"oe_highlight\"/>\n"
@@ -568,9 +568,9 @@ msgid ""
 "                                <field name=\"advance_payment_group_ids\" context=\"{'default_transaction_id':id, 'default_partner_id': partner_id, 'default_partner_type': 'supplier'}\"/>\n"
 "                            </page>\n"
 "                            <page string=\"Invoices\">\n"
-"                                <button class=\"oe_link\" string=\"Create Invoice\" states=\"open\" type=\"action\" name=\"321\"/>\n"
+"                                <button class=\"oe_link\" string=\"Create Invoice\" states=\"open\" type=\"action\" name=\"322\"/>\n"
 "                                or \n"
-"                                <button class=\"oe_link\" string=\"Mass Invoice Create\" states=\"open\" type=\"action\" name=\"322\"/>\n"
+"                                <button class=\"oe_link\" string=\"Mass Invoice Create\" states=\"open\" type=\"action\" name=\"323\"/>\n"
 "                                <field name=\"invoice_ids\" nolabel=\"1\"/>\n"
 "                            </page>\n"
 "                            <page string=\"Payment Orders\" attrs=\"{'invisible':[('type_with_advance_payment','=',True)]}\">\n"
@@ -595,7 +595,7 @@ msgid ""
 "<form string=\"Budget\">\n"
 "                    <field name=\"currency_id\" invisible=\"1\"/>\n"
 "                    <header>\n"
-"                        <button name=\"331\" class=\"oe_highlight\" string=\"Print\" type=\"action\"/>\n"
+"                        <button name=\"332\" class=\"oe_highlight\" string=\"Print\" type=\"action\"/>\n"
 "                        <button name=\"action_open\" type=\"object\" states=\"draft\" string=\"Open\" class=\"oe_highlight\"/>\n"
 "                        <button name=\"action_cancel_draft\" type=\"object\" states=\"cancel\" string=\"To Draft\"/>\n"
 "                        <button name=\"action_pre_close\" states=\"open\" type=\"object\" string=\"Pre Close\" class=\"oe_highlight\"/>\n"
@@ -605,7 +605,7 @@ msgid ""
 "                    </header>\n"
 "                    <sheet string=\"Budget\">\n"
 "                        <div class=\"oe_button_box\" name=\"button_box\">\n"
-"                            <button class=\"oe_stat_button\" icon=\"fa-bars\" name=\"339\" string=\"Position analysis\" type=\"action\" widget=\"statinfo\" context=\"{'budget_id':active_id}\"/>\n"
+"                            <button class=\"oe_stat_button\" icon=\"fa-bars\" name=\"340\" string=\"Position analysis\" type=\"action\" widget=\"statinfo\" context=\"{'budget_id':active_id}\"/>\n"
 "                       </div>\n"
 "                        <group>\n"
 "                            <group>\n"
@@ -724,6 +724,7 @@ msgid ""
 "                        <field name=\"issue_date\"/> \n"
 "                        <field name=\"supplier_id\"/> \n"
 "                        <field name=\"amount\"/> \n"
+"                        <field name=\"to_pay_amount\" invisible=\"1\"/> \n"
 "                     </group>\n"
 "                    </sheet>\n"
 "                </form>\n"
@@ -791,7 +792,7 @@ msgid ""
 "<?xml version=\"1.0\"?>\n"
 "<form string=\"Expedient\">\n"
 "                    <header>\n"
-"                        <button name=\"328\" class=\"oe_highlight\" string=\"Print\" type=\"action\"/>\n"
+"                        <button name=\"329\" class=\"oe_highlight\" string=\"Print\" type=\"action\"/>\n"
 "                        <button name=\"action_in_revision\" states=\"open\" type=\"object\" string=\"To Revision\" class=\"oe_highlight\"/>\n"
 "                        <button name=\"action_cancel_open\" type=\"object\" states=\"cancel\" string=\"To Draft\"/>\n"
 "                        <!-- por pedido de ellos solo desde secretaria se pueden anular -->\n"
@@ -932,6 +933,7 @@ msgid ""
 "                    <field name=\"company_id\" invisible=\"1\"/>\n"
 "                    <field name=\"definitive_partner_type\" invisible=\"1\"/>\n"
 "                    <field name=\"transaction_id\" invisible=\"1\"/>\n"
+"                    <field name=\"to_pay_amount\" invisible=\"1\"/>\n"
 "                    <header>\n"
 "                    </header>\n"
 "                    <sheet string=\"Preventive Line\">\n"
@@ -960,7 +962,7 @@ msgid ""
 "<?xml version=\"1.0\"?>\n"
 "<form string=\"Remit\">\n"
 "                <header>\n"
-"                    <button name=\"327\" class=\"oe_highlight\" string=\"Print\" type=\"action\"/>\n"
+"                    <button name=\"328\" class=\"oe_highlight\" string=\"Print\" type=\"action\"/>\n"
 "                    <button name=\"action_confirm\" type=\"object\" states=\"in_transit\" string=\"Confirm\" class=\"oe_highlight\"/>\n"
 "                    <button name=\"action_cancel_in_transit\" type=\"object\" states=\"cancel\" string=\"To In Transit\"/>\n"
 "                    <button name=\"action_cancel\" type=\"object\" states=\"confirmed,in_transit\" string=\"Cancel\" groups=\"base.group_no_one\"/>\n"
@@ -1047,7 +1049,7 @@ msgid ""
 "<?xml version=\"1.0\"?>\n"
 "<form string=\"advance_request\">\n"
 "                    <header>\n"
-"                        <button name=\"332\" class=\"oe_highlight\" string=\"Print\" type=\"action\"/>\n"
+"                        <button name=\"333\" class=\"oe_highlight\" string=\"Print\" type=\"action\"/>\n"
 "                        <button name=\"action_approve\" states=\"draft\" string=\"Approve\" type=\"object\" class=\"oe_highlight\" groups=\"public_budget.group_secretary_director\"/>\n"
 "                        <button name=\"action_confirm\" states=\"approved\" string=\"Confirm\" type=\"object\" class=\"oe_highlight\" groups=\"account.group_account_user\"/>\n"
 "                        <button name=\"action_cancel_draft\" type=\"object\" states=\"cancel\" string=\"To Draft\"/>\n"
@@ -1801,14 +1803,14 @@ msgstr ""
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_definitive_line_tree
 msgid ""
 "<?xml version=\"1.0\"?>\n"
-"<tree string=\"Definitive Line\">\n"
+"<tree string=\"Definitive Line\" editable=\"bottom\">\n"
 "                    <!-- sacamos el editable porque nos da un error por sua tree editable en un pop up -->\n"
-"                    <!-- editable=\"bottom\" -->\n"
 "                    <field name=\"issue_date\"/>\n"
 "                    <field name=\"supplier_id\"/>\n"
 "                    <field name=\"amount\"/>\n"
 "                    <field name=\"state\" invisible=\"True\"/>\n"
 "                    <field name=\"currency_id\" invisible=\"1\"/> \n"
+"                    <field name=\"to_pay_amount\" invisible=\"1\"/>\n"
 "                </tree>\n"
 "            "
 msgstr ""
@@ -2044,7 +2046,7 @@ msgstr ""
 msgid ""
 "<?xml version=\"1.0\"?>\n"
 "<tree>\n"
-"                <button name=\"337\" icon=\"fa-print \" help=\"Print check\" type=\"action\" attrs=\"{'invisible': ['|', ('payment_method_code', '!=', 'issue_check')]}\"/>\n"
+"                <button name=\"338\" icon=\"fa-print \" help=\"Print check\" type=\"action\" attrs=\"{'invisible': ['|', ('payment_method_code', '!=', 'issue_check')]}\"/>\n"
 "            </tree>\n"
 "        "
 msgstr ""
@@ -2534,7 +2536,7 @@ msgstr "Categorías"
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_category_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_category_id_5580
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_category_id_5615
 #: field:public_budget.budget_position,category_id:0
 #: field:public_budget.expedient,category_id:0
 msgid "Category"
@@ -3445,7 +3447,7 @@ msgstr "Hasta Fecha"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_modification_detail_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_modification_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_pos_exc_rest_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_category_id_5458
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_category_id_5493
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_prec_detail_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_line_id
@@ -3453,7 +3455,7 @@ msgstr "Hasta Fecha"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_make_invoice_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_mass_invoice_create_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_category_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_founder_id_5612
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_founder_id_5647
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_funding_move_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_inventory_rule_id
@@ -5137,14 +5139,14 @@ msgstr "Transacciones"
 #. module: public_budget
 #: field:advance.request.analysis,type_id:0
 #: model:ir.model.fields,field_description:public_budget.field_advance_request_analysis_type_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_request_type_id_5144
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_request_type_id_5179
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_return_type_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_pos_exc_rest_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_prec_detail_account_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_funding_move_type
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_id_5427
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_id_5462
 #: field:public_budget.advance_request,type_id:0
 #: field:public_budget.advance_return,type_id:0
 #: field:public_budget.budget_pos_exc_rest,type:0
@@ -5237,7 +5239,7 @@ msgstr "Con Restricción de Monto?"
 #: field:account.payment.group,transaction_with_advance_payment:0
 #: model:ir.model.fields,field_description:public_budget.field_account_payment_group_transaction_with_advance_payment
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment_5416
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment_5451
 #: field:public_budget.transaction,type_with_advance_payment:0
 #: field:public_budget.transaction_type,with_advance_payment:0
 msgid "With advance payment?"
