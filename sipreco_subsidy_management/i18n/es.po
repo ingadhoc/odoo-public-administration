@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-31 21:39+0000\n"
-"PO-Revision-Date: 2017-05-31 21:39+0000\n"
+"POT-Creation-Date: 2017-06-02 14:35+0000\n"
+"PO-Revision-Date: 2017-06-02 14:35+0000\n"
 "Last-Translator: Juan José Scarafía <scarafia.juanjose@gmail.com>, 2017\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
 "MIME-Version: 1.0\n"
@@ -529,7 +529,7 @@ msgstr "Fojas"
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_approval_arrangement_id
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_id
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_note_id
-#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_note_type_id_5832
+#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_note_type_id_5833
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_rendition_id
 #: field:public_budget.subsidy,id:0
 #: field:public_budget.subsidy.approval_arrangement,id:0
