@@ -459,12 +459,14 @@ class BudgetTransaction(models.Model):
 
     @api.multi
     def action_close(self):
+        self.check_closure()
         self.write({'state': 'closed'})
         return True
 
     @api.multi
     def check_closure(self):
-        """ Check preventive lines
+        """
+        Check preventive lines
         """
         for rec in self:
             if not rec.preventive_line_ids:

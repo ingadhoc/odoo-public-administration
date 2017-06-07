@@ -131,6 +131,7 @@ class Remit(models.Model):
     @api.multi
     def action_confirm(self):
         """ go from canceled state to draft state"""
+        self.check_user_location()
         self.write({'state': 'confirmed'})
         return True
 

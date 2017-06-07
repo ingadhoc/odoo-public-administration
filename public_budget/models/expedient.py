@@ -268,6 +268,7 @@ class PublicBudgetExpedient(models.Model):
 
     @api.multi
     def action_annulled(self):
+        self.check_expedients_exist()
         self.write({'state': 'annulled'})
         return True
 

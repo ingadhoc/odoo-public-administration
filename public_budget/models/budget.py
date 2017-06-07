@@ -263,4 +263,4 @@ class Budget(models.Model):
                     'budget_id': rec.id,
                 }
                 rec.budget_prec_detail_ids.create(vals)
-        self.write({'state': 'closed'})
+        self.write({'state': 'pre_closed'})
