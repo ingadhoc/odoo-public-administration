@@ -7,6 +7,7 @@
             id="menu_budget_main"
             sequence="35"
             web_icon="public_budget,static/description/icon.png"
+            groups="public_budget.group_secretary_director,account.group_account_user"
             />
 
         <menuitem
@@ -41,8 +42,9 @@
         <menuitem
             name="Expedients"
             id="menu_expedient_main"
-            sequence="20"
-            parent="menu_budget_main"
+            sequence="30"
+            web_icon="public_budget,static/description/expedient.png"
+            groups="public_budget.group_portal_expedient,base.group_user"
             />
 
         <menuitem

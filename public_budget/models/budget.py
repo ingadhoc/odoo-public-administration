@@ -57,42 +57,42 @@ class Budget(models.Model):
     )
     total_preventive = fields.Monetary(
         string='Total Preventivo',
-        compute='_get_totals',
+        compute='_compute_totals',
         # store=True,
     )
     total_authorized = fields.Monetary(
         string='Total Autorizado',
-        compute='_get_totals',
+        compute='_compute_totals',
         # store=True,
     )
     total_requested = fields.Monetary(
         string='Total Requerido',
-        compute='_get_totals',
+        compute='_compute_totals',
         # store=True,
     )
     passive_residue = fields.Monetary(
         string='Total Residuo',
-        compute='_get_totals',
+        compute='_compute_totals',
         # store=True,
     )
     parent_budget_position_ids = fields.Many2many(
         comodel_name='public_budget.budget_position',
         string='Budget Positions',
-        compute='_get_budget_positions'
+        compute='_compute_budget_positions'
     )
     budget_position_ids = fields.Many2many(
         relation='public_budget_budget_position_rel',
         comodel_name='public_budget.budget_position',
         string='Budget Positions',
         # store=True, #TODO ver si agregamos el store
-        compute='_get_budget_positions'
+        compute='_compute_budget_positions'
     )
     company_id = fields.Many2one(
         'res.company',
         string='Company',
         required=True,
         states={'draft': [('readonly', False)]},
-        default=lambda self: self.env['res.company']._company_default_get(
+        default=lambda self: self.env['res.company']._company_default_compute(
             'public_budget.budget')
     )
     currency_id = fields.Many2one(
@@ -155,7 +155,7 @@ class Budget(models.Model):
         'budget_modification_ids.budget_modification_detail_ids.'
         'budget_position_id',
     )
-    def _get_budget_positions(self):
+    def _compute_budget_positions(self):
         """ Definimos por ahora llevar solamente las posiciones que tienen
         admitida la asignacion de presupuesto.
         """
@@ -185,7 +185,7 @@ class Budget(models.Model):
             lambda x: not x.parent_id)
 
     @api.one
-    def _get_totals(self):
+    def _compute_totals(self):
         total_authorized = sum([x.amount for x in self.with_context(
             budget_id=self.id).budget_position_ids
             if x.budget_assignment_allowed])

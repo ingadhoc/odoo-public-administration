@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 {
     'name': 'Public Budget',
     'license': 'AGPL-3',
@@ -6,6 +7,7 @@
     'website': 'www.adhoc.com.ar',
     'category': 'Accounting & Finance',
     'depends': [
+        'portal',
         'account',
         'account_check',
         'account_payment_group_document',

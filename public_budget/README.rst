@@ -14,6 +14,8 @@ Datos demo:
 
     * admin: lo ideal es no usarlo ya que ve todas las compañías y saltea restricciones
     * demo: director de habilitaciones, contaduria y secretaria y con configuración, ideal para hacer pruebas en vez de usar admin.
+    * portal_expedientes: usuario portal para trabajar con expedientes
+    * portal: usuario portal todavía no implementado (en el futuro para proveedores por ejemplo)
     * habilitaciones_manager: director de habilitaciones
     * habilitaciones_user: usuario de habilitaciones
     * contaduria_manager: director de contaduria
