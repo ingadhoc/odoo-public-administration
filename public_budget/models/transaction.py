@@ -169,7 +169,7 @@ class BudgetTransaction(models.Model):
     )
     advance_remaining_amount = fields.Monetary(
         string='Monto Remanente de Adelanto',
-        compute='_get_advance_remaining_amount',
+        compute='_compute_advance_remaining_amount',
         store=True,
     )
     advance_to_return_amount = fields.Monetary(
@@ -190,10 +190,10 @@ class BudgetTransaction(models.Model):
         related='company_id.currency_id',
         readonly=True,
     )
-    # TODO esto deberia ser computado como en voucher?
     user_location_ids = fields.Many2many(
         string='User Locations',
-        related='user_id.location_ids'
+        compute='_compute_user_locations',
+        comodel_name='public_budget.location',
     )
     state = fields.Selection(
         _states_,
@@ -220,9 +220,6 @@ class BudgetTransaction(models.Model):
     definitive_partner_type = fields.Selection(
         related='type_id.definitive_partner_type'
     )
-
-    # TODO re implementar
-    # voucher_ids
     payment_group_ids = fields.One2many(
         'account.payment.group',
         'transaction_id',
@@ -255,6 +252,13 @@ class BudgetTransaction(models.Model):
         auto_join=True,
         states={'open': [('readonly', False)]},
     )
+
+    @api.multi
+    # dummy depends to compute values on create
+    @api.depends('company_id')
+    def _compute_user_locations(self):
+        for rec in self:
+            rec.user_location_ids = rec.env.user.location_ids
 
     @api.multi
     @api.constrains('type_id', 'company_id')
@@ -314,40 +318,38 @@ class BudgetTransaction(models.Model):
         'advance_preventive_amount',
         'advance_to_pay_amount',
     )
-    def _get_advance_remaining_amount(self):
+    def _compute_advance_remaining_amount(self):
         _logger.info('Getting Transaction Advance Remaining Amount')
         for rec in self:
             rec.advance_remaining_amount = (
                 rec.advance_preventive_amount - rec.advance_to_pay_amount)
 
-    # TODO implementar
     @api.multi
     @api.depends(
         'advance_payment_group_ids.state',
     )
     def _get_advance_amounts(self):
         _logger.info('Getting Transaction Advance Amounts')
-        return True
-        # if not self.advance_voucher_ids:
-        #     return False
+        if not self.advance_payment_group_ids:
+            return False
 
-        # domain = [('id', 'in', self.advance_voucher_ids.ids)]
-        # to_pay_domain = domain + [('state', 'not in', ('cancel', 'draft'))]
-        # paid_domain = domain + [('state', '=', 'posted')]
+        domain = [('id', 'in', self.advance_payment_group_ids.ids)]
+        to_pay_domain = domain + [('state', 'not in', ('cancel', 'draft'))]
+        paid_domain = domain + [('state', '=', 'posted')]
 
-        # to_date = self._context.get('analysis_to_date', False)
-        # if to_date:
-        #     to_pay_domain += [('confirmation_date', '<=', to_date)]
-        #     paid_domain += [('date', '<=', to_date)]
+        to_date = self._context.get('analysis_to_date', False)
+        if to_date:
+            to_pay_domain += [('confirmation_date', '<=', to_date)]
+            paid_domain += [('payment_date', '<=', to_date)]
 
-        # advance_to_pay_amount = sum(
-        #     self.advance_voucher_ids.search(to_pay_domain).mapped(
-        #         'to_pay_amount'))
-        # advance_paid_amount = sum(
-        #     self.advance_voucher_ids.search(paid_domain).mapped(
-        #         'amount'))
-        # self.advance_to_pay_amount = advance_to_pay_amount
-        # self.advance_paid_amount = advance_paid_amount
+        advance_to_pay_amount = sum(
+            self.advance_payment_group_ids.search(to_pay_domain).mapped(
+                'to_pay_amount'))
+        advance_paid_amount = sum(
+            self.advance_payment_group_ids.search(paid_domain).mapped(
+                'payments_amount'))
+        self.advance_to_pay_amount = advance_to_pay_amount
+        self.advance_paid_amount = advance_paid_amount
 
     @api.multi
     def mass_payment_group_create(self):

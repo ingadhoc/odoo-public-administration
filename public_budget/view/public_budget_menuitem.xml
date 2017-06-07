@@ -171,13 +171,6 @@
             parent="menu_contacts"
             />
 
-        <menuitem
-            id="menu_subsidy_recipient"
-            sequence="15"
-            action="action_res_partner_suppliers"
-            parent="menu_contacts"
-            />
-
         <record id="action_public_budget_expedient_expedients" model="ir.actions.act_window">
             <field name="name">Expedients</field>
             <field name="res_model">public_budget.expedient</field>
@@ -253,6 +246,7 @@
             action="action_res_partner_suppliers"
             parent="menu_contacts"
             />
+
         <record id="action_public_budget_transaction_type_transaction_types" model="ir.actions.act_window">
             <field name="name">Transaction Types</field>
             <field name="res_model">public_budget.transaction_type</field>

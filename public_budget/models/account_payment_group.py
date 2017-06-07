@@ -319,7 +319,7 @@ class AccountPaymentGroup(models.Model):
             _logger.info('Checking transaction amount on voucher %s' % rec.id)
             if rec.transaction_with_advance_payment:
                 # forzamos el recalculo porque al ser store no lo recalculaba
-                rec.transaction_id._get_advance_remaining_amount()
+                rec.transaction_id._compute_advance_remaining_amount()
                 advance_remaining_amount = rec.currency_id.round(
                     rec.transaction_id.advance_remaining_amount)
                 if advance_remaining_amount < 0.0:

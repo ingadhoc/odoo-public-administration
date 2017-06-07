@@ -11,6 +11,8 @@ Validar con gonza:
     planificar contratar enterprise teniendo en cuenta que podrían ser menos usuarios pero que no nos va a sumar en ese caso
     analizar con gonza el payment line, tal vez directamente cada uno es un payment y lo hacemos mas "odoo way" y luego seleccionamos y exportamos?
 
+    usuarios portal para expdientes y remitos https://www.adhoc.com.ar/web?#id=8564&view_type=form&model=project.task&action=197&menu_id=4188
+
 
 account_move_line
     funcionalidad de voucher_line_ids
@@ -27,12 +29,9 @@ voucher completo
     access_account_voucher_habilitacion_usuario,account_voucher.habilitacion_usuario,model_account_voucher,group_habilitacion_usuario,1,1,1,0
 access_account_voucher_line_habilitacion_usuario,account_voucher_line.habilitacion_usuario,model_account_voucher_line,group_habilitacion_usuario,1,1,1,1
 
-transaction
-    voucher_ids
-    advance_voucher_ids
 
 transaction type
-    implementar lo que figur aen advance_account_id
+    implementar lo que figura en advance_account_id
 
 reports
 
