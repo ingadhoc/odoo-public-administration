@@ -2,7 +2,6 @@
 from openerp import models, fields, api, _
 from openerp.exceptions import Warning as UserError
 from openerp.tools import float_is_zero
-import openerp.addons.decimal_precision as dp
 import base64
 
 
@@ -78,10 +77,9 @@ class AccountVoucher(models.Model):
 
     @api.one
     def check_payment_lines_total(self):
-        prec = dp.get_precision('Account')
-        if float_is_zero(
+        if not float_is_zero(
                 self.importe_total - self.to_pay_amount,
-                precision_digits=prec):
+                precision_rounding=self.currency_id.rounding):
             raise UserError(_(
                 'Si existen líneas de pago, el importe a pagar debe ser igual '
                 'a la suma de los importes de las líneas de pago'))
