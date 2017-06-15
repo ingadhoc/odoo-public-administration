@@ -14,11 +14,16 @@
 
     <!-- tree view modification -->
     <record id="view_account_payment_group_tree" model="ir.ui.view">
-        <field name="name">account.payment.group.customer.pay.tree</field>
+        <field name="name">account.payment.group.pay.tree</field>
         <field name="model">account.payment.group</field>
         <field name="inherit_id" ref="account_payment_group.view_account_payment_group_tree"/>
         <field name="priority">20</field>
         <field name="arch" type="xml">
+            <!-- para que solo se puedan crear con el botón -->
+            <tree position="attributes">
+                <attribute name="create">false</attribute>
+            </tree>
+
             <!-- para poder ver lo que se manda a pagar antes de que se carguen los pagos -->
             <field name="payments_amount" position="before">
                 <field name="to_pay_amount" sum="Total"/>

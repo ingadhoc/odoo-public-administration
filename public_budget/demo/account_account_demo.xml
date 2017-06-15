@@ -13,26 +13,26 @@
 <!-- Usada por tipo de transaccion de adelanto -->
     <record model='account.account' id='account_fondo_fijo'>
         <field name='code'>1.1.01.10.960</field>
-        <field name='user_type_id' ref="account.data_account_type_receivable"/>
+        <field name='user_type_id' ref="account.data_account_type_liquidity"/>
         <field name="company_id" ref="company_sipreco"/>
         <field name='name'>Fondo Fijo / Caja Chica</field>
-        <field name="reconcile" eval="True"/>
+        <!-- <field name="reconcile" eval="True"/> -->
     </record>
 
     <record model='account.account' id='account_anticipo_gastos'>
         <field name='code'>1.1.01.10.970</field>
-        <field name='user_type_id' ref="account.data_account_type_receivable"/>
+        <field name='user_type_id' ref="account.data_account_type_liquidity"/>
         <field name="company_id" ref="company_sipreco"/>
         <field name='name'>Anticipo para Gastos a Rendir</field>
-        <field name="reconcile" eval="True"/>
+        <!-- <field name="reconcile" eval="True"/> -->
     </record>
 
     <record model='account.account' id='account_subsidio_con_cargo'>
         <field name='code'>1.1.01.10.980</field>
-        <field name='user_type_id' ref="account.data_account_type_receivable"/>
+        <field name='user_type_id' ref="account.data_account_type_liquidity"/>
         <field name="company_id" ref="company_sipreco"/>
         <field name='name'>Subsidios con cargo a rendir</field>
-        <field name="reconcile" eval="True"/>
+        <!-- <field name="reconcile" eval="True"/> -->
     </record>
 
 <!-- Usada por preventivas -->

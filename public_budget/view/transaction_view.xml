@@ -68,7 +68,7 @@
                                 <field name="budget_id"/>
                                 <field name="name"/>
                                 <field name="expedient_id"
-                                    domain="[('current_location_id','in',user_location_ids[0][2]),('in_transit','=',False),('state','=','open')]" options="{'no_create': True}"
+                                    domain="[('current_location_id', 'in', user_location_ids and user_location_ids[0][2] or []),('in_transit','=',False),('state','=','open')]" options="{'no_create': True}"
                                     /> 
                                 <field name="company_id" groups="base.group_multi_company"/>
                                 <field name="type_id"/>
