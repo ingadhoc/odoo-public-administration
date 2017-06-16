@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api
+from openerp.exceptions import ValidationError
+import time
+import datetime
 
 
 class Budget(models.Model):
@@ -23,12 +26,12 @@ class Budget(models.Model):
         required=True,
         states={'draft': [('readonly', False)]}
     )
-    # fiscalyear_id = fields.Many2one(
-    #     'account.fiscalyear',
-    #     'Fiscal Year',
-    #     required=True,
-    #     states={'draft': [('readonly', False)]},
-    #     select=True)
+    fiscalyear = fields.Char(
+        required=True,
+        default=time.strftime('%Y'),
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+    )
     income_account_id = fields.Many2one(
         'account.account',
         string='Income Account',
@@ -91,6 +94,7 @@ class Budget(models.Model):
         'res.company',
         string='Company',
         required=True,
+        readonly=True,
         states={'draft': [('readonly', False)]},
         default=lambda self: self.env.user.company_id.id
     )
@@ -142,10 +146,48 @@ class Budget(models.Model):
         'account.payment.receiptbook',
         'ReceiptBook',
         required=True,
+        readonly=True,
         states={'draft': [('readonly', False)]},
         domain="[('partner_type', '=', 'supplier'), "
         "('company_id', '=', company_id)]",
     )
+
+    @api.multi
+    @api.onchange('fiscalyear')
+    @api.constrains('fiscalyear')
+    def validate_fiscalyear(self):
+        for rec in self:
+            year = rec.fiscalyear
+            if year.isdigit() and int(year) >= 1900 and int(year) <= 2020:
+                continue
+            raise ValidationError('%s no es un año valido!' % year)
+
+    @api.multi
+    def check_date_in_budget_dates(self, date):
+        """
+        Verifica si una fecha esta dentro de las fechas del presupuesto
+        """
+        self.ensure_one()
+        budget_dates = self.get_budget_fiscalyear_dates()
+        date_from = budget_dates.get('date_from')
+        date_to = budget_dates.get('date_to')
+        if date_from <= date <= date_to:
+            return True
+        return False
+
+    @api.multi
+    def get_budget_fiscalyear_dates(self):
+        """
+        Devolvemos para este budget primer y ultimo día del presupuesto
+        segun configuración de la cia
+        """
+        self.ensure_one()
+        last_month = self.company_id.fiscalyear_last_month
+        last_day = self.company_id.fiscalyear_last_day
+        date_to = datetime.date(int(self.fiscalyear), last_month, last_day)
+        date_from = date_to + datetime.timedelta(days=1)
+        date_from = date_from.replace(year=date_from.year - 1)
+        return {'date_from': date_from, 'date_to': date_to}
 
     @api.one
     @api.depends(
