@@ -219,15 +219,15 @@ class PublicBudgetExpedient(models.Model):
                 raise ValidationError(
                     'No puede anular este expediente ya que es utilizado en '
                     'las siguientes transacciones %s' % transactions.ids)
-            # no se puede si esta en vouchers no cancelados
-            vouchers = self.env['account.voucher'].search([
+            # no se puede si esta en payment_groups no cancelados
+            payment_groups = self.env['account.payment_group'].search([
                 ('expedient_id', '=', expedient.id),
                 ('state', '!=', 'cancel'),
             ])
-            if vouchers:
+            if payment_groups:
                 raise ValidationError(
                     'No puede anular este expediente ya que es utilizado en '
-                    'las siguientes ordenes de pago %s' % vouchers.ids)
+                    'las siguientes ordenes de pago %s' % payment_groups.ids)
         return True
 
     @api.multi

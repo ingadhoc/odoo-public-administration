@@ -137,9 +137,9 @@ class AdvanceRequest(models.Model):
     @api.multi
     def action_cancel(self):
         for rec in self:
-            open_vouchers = rec.payment_group_ids.filtered(
+            open_payments = rec.payment_group_ids.filtered(
                 lambda x: x.state != 'draft')
-            if open_vouchers:
+            if open_payments:
                 raise ValidationError(_(
                     "You can't cancel an advance request with payment order "
                     "in other state than 'draft'."))

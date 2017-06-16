@@ -163,9 +163,9 @@ class DefinitiveLine(models.Model):
         and the budget position:
         -invoiced_amount: amount sum of lines with a related invoice line
         -residual_amount: pending amount to be invoiced
-        -to_pay_amount: amount sum of lines that has a related voucher in draft
+        -to_pay_amount: amount sum of lines that has a related payment in draft
         state
-        -paid_amount: amount sum of lines that has a related voucher in open
+        -paid_amount: amount sum of lines that has a related payment in open
         state
         """
         self.ensure_one()

@@ -169,15 +169,15 @@ class PreventiveLine(models.Model):
         -definitive_amount: amount sum of definitive lines
         -invoiced_amount: amount sum of lines that are related to an invoice
         line
-        -to_pay_amount: amount sum of lines that has a related voucher in draft
+        -to_pay_amount: amount sum of lines that has a related payment in draft
         state
-        -paid_amount: amount sum of lines that has a related voucher in open
+        -paid_amount: amount sum of lines that has a related payment in open
         state
         -balance_amount: diffference between budget position and preventive
         amount
         """
         _logger.info('Getting amounts for preventive line %s' % self.id)
-        # TODO this should be improoved and dependency to advance_voucher_ids
+        # TODO this should be improoved and dependency to payment_groups_ids
         # or to advance amounst must be removed
         if self.advance_line:
             _logger.info('Getting advance line values')

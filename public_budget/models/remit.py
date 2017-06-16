@@ -59,11 +59,10 @@ class Remit(models.Model):
         string='Referencia',
         readonly=False
     )
-    # TODO esto deberia ser computado como en voucher?
     user_location_ids = fields.Many2many(
+        compute='get_user_locations',
         comodel_name='public_budget.location',
         string='User Locations',
-        related='user_id.location_ids'
     )
     state = fields.Selection(
         _states_,
@@ -76,6 +75,13 @@ class Remit(models.Model):
         'expedient_id',
         string='Expedients'
     )
+
+    @api.multi
+    # dummy depends to compute values on create
+    @api.depends('state')
+    def get_user_locations(self):
+        for rec in self:
+            rec.user_location_ids = rec.env.user.location_ids
 
     @api.multi
     @api.constrains('state')

@@ -17,8 +17,6 @@
         'web_sheet_full_width',
         'account_accountant',
         'l10n_ar_bank',
-        # 'account_voucher_popup_print',
-        # 'account_balance_constraint',
         'base_state_active',
         # 'portal',  # necesitamos portal por un error raro al crear un voucher
         # # es un error de javascript pero con portal de alguna manera se

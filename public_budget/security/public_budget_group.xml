@@ -62,6 +62,15 @@
             <field name="groups_id" eval="[(4, ref('group_habilitacion_director'))]"/>
         </record>
 
+        <!-- dashboard contable solo para contaduria -->
+        <record id="account.menu_board_journal_1" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4, ref('account.group_account_user'))]"/>
+        </record>
+
+        <!-- agregamos secretaria y habilitaciones para que puedan ver pagos -->
+        <record id="account_payment_group.menu_action_account_payments_group_payable" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4, ref('group_secretary_usuario')), (4, ref('group_habilitacion_usuario'))]"/>
+        </record>
         <!-- share chart account wit hab manager-->
         <!-- TODo revisar esto -->
         <!-- <record id="account.menu_finance_charts" model="ir.ui.menu">

@@ -36,7 +36,7 @@ class AccountPaymentGroup(models.Model):
             check_ids = self.payment_ids.mapped('check_ids')
             if check_ids:
                 # si hay cheques, controlamos que esten entregados, si no
-                # tomamos el monto del voucher
+                # tomamos el monto del payment
                 haneded_checks = check_ids.search([
                     ('id', 'in', check_ids.ids),
                     ('state', 'in', ['handed', 'debited'])],

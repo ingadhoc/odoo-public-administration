@@ -39,6 +39,10 @@
         <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
     </record>
 
+    <record id="account.menu_finance_receivables" model="ir.ui.menu">
+        <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
+    </record>
+
     <!-- acceso a ordenes de pago diretamente sin entrar en proveedores -->
     <record id="account_payment_group.menu_action_account_payments_group_payable" model="ir.ui.menu">
         <field name="sequence" eval="2"/>

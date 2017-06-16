@@ -233,12 +233,11 @@ class BudgetTransaction(models.Model):
             ('transaction_with_advance_payment', '=', False)
         ],
     )
-    # Usamos otro campo por que si no el depends de advance_voucher_ids se
-    # toma en cuenta igual que si fuese el de vouchers y necesitamos que sea
+    # Usamos otro campo por que si no el depends de advance_payment_group_ids
+    # se toma en cuenta igual que si fuese el de payments y necesitamos que sea
     # distinto para que no recalcule tantas veces. Si no la idea sería que
     # sea basicamente es el mismo campo de arriba pero lo separamos para poner
     # en otro lugar de la vista
-    # advance_voucher_ids = fields.One2many(
     advance_payment_group_ids = fields.One2many(
         'account.payment.group',
         'transaction_id',
@@ -291,7 +290,7 @@ class BudgetTransaction(models.Model):
     @api.multi
     @api.depends(
         # TODO este depends puede hacer que se recalcule todo al crear un
-        # voucher
+        # payment group
         'invoiced_amount',
         'advance_paid_amount',
     )

@@ -140,9 +140,9 @@ class BudgetPosition(models.Model):
         -draft_amount: amount sum on preventive lines in draft state
         -preventive_amount: amount sum on preventive lines not in draft/cancel
         -definitive_amount: amount sum of definitive lines
-        -to_pay_amount: amount sum of lines that has a related voucher in draft
+        -to_pay_amount: amount sum of lines that has a related payment in draft
         state
-        -paid_amount: amount sum of lines that has a related voucher in open
+        -paid_amount: amount sum of lines that has a related payment in open
         state
         -balance_amount: diffference between budget position and preventive
         amount

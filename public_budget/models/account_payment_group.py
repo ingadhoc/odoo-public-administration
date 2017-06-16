@@ -110,6 +110,7 @@ class AccountPaymentGroup(models.Model):
         required=False,
         default=False,
     )
+    # TODO implementar
     # paid_withholding_ids = fields.Many2many(
     #     comodel_name='account.voucher.withholding',
     #     string='Retenciones Pagadas',
@@ -282,7 +283,7 @@ class AccountPaymentGroup(models.Model):
     @api.constrains('state')
     def update_invoice_amounts(self):
         _logger.info('Updating invoice amounts from payment group')
-        # when voucher state changes we recomputed related invoice values
+        # when payment state changes we recomputed related invoice values
         # we could improove this filtering by relevant states
         for rec in self:
             rec.invoice_ids.sudo()._compute_to_pay_amount()
@@ -312,7 +313,7 @@ class AccountPaymentGroup(models.Model):
 
     @api.multi
     @api.constrains('unreconciled_amount', 'transaction_id', 'state')
-    def check_voucher_transaction_amount(self):
+    def check_avance_transaction_amount(self):
         """
         """
         for rec in self:
