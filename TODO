@@ -9,35 +9,18 @@ Validar con gonza:
         que se pueda generar archivo desde lista de payment groups y dese uno solo
         hacer todo esto en módulo de localización
 
-account invice  
-    cargar vista invoices, ver signed amount que no haria falta, es nativo.
+    ver pago a hijos, que lo lleve
 
 
-reactivar menu action_public_budget_budget_report_3_all
-    access_public_budget_budget_report_3_cont_user,access_public_budget_budget_report_3,model_public_budget_budget_report_3,account.group_account_user,1,0,0,0
-access_public_budget_budget_report_3_hab_user,access_public_budget_budget_report_3,model_public_budget_budget_report_3,group_habilitacion_usuario,1,0,0,0
-
-advance.request.analysis
-    TODO agregar currency y transformar a monetary
-
-requerimos permisos:
-    access_account_move_reconcile_habilitaciones_user,account.model_account_move_reconcile_habilitaciones_user,account.model_account_move_reconcile,group_habilitacion_usuario,1,1,1,1
-access_account_move_reconcile_secretary_user,account.model_account_move_reconcile_secretary_user,account.model_account_move_reconcile,group_secretary_usuario,1,1,1,1
+error al agregar segunda linea en definitivas "Uncaught TypeError: Failed to execute 'getComputedStyle' on 'Window': parameter 1 is not of type 'Element'."
 
 
-REvisar en public group:
-    <!-- <record id="account.menu_finance_charts" model="ir.ui.menu">
-            <field name="groups_id" eval="[(4, ref('group_habilitacion_director'))]"/>
-        </record> -->
-
-
-
-TODo renombrar todos los ids sipreco_public_budget para que queden sin nada pero hacer script de mig
-
-DEMO
-    diarios de liquidación o algo similar
+Baja prioridad:
+    terminar de agregar al reporte _3 lo de adelanto y pagos (hay que traerlo de v8 porque lo borre)
+    advance.request.analysis: agregar currency y convertir a monetary
 
 MIGRACION:
+    hacer merge de modulos a public_budget para que no se borre ni pierda nada
     confirmation_date de account_voucher_double_validation a public_budget
     en los account voucher, advance_request_id debería llevarse al payment group correspondiente
     migración de los payment lines

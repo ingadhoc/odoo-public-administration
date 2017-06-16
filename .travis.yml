@@ -68,8 +68,10 @@ virtualenv:
 install:
   - if [[ "${OCA_RUNBOT}" == "1" ]]; then locale-gen es_AR.UTF-8 && locale-gen es_ES.UTF-8; fi
   # checkout para evitar error de dominios
-  - if [[ "${OCA_RUNBOT}" == "1" ]]; then git clone -b 9.0 git@github.com:odoo/enterprise.git /root/dependencies/odoo-enterprise && cd /root/dependencies/odoo-enterprise && git checkout e0157b6 && cd /; fi
   # - if [[ "${OCA_RUNBOT}" == "1" ]]; then git clone -b 9.0 git@github.com:odoo/enterprise.git ${HOME}/odoo-enterprise; fi
+  - if [[ "${OCA_RUNBOT}" == "1" ]]; then git clone -b 9.0 git@github.com:odoo/enterprise.git /root/dependencies/odoo-enterprise && cd /root/dependencies/odoo-enterprise && git checkout e0157b6 && cd /; fi
+  # agregamos este repo para que en runbot se cree otros comprobante sy sea mas parecido a lo que va a ser en produccion
+  - if [[ "${OCA_RUNBOT}" == "1" ]]; then git clone -b 9.0 git@bitbucket.org:ingadhoc/adhoc-saas.git ${HOME}/ingadhoc-adhoc-saas; fi
   - git clone --depth=1 https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly

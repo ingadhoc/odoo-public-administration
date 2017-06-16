@@ -9,31 +9,11 @@ class PublicBudgetBudgetReport(models.Model):
     _description = "Budget Report"
     _rec_name = "resource"
     _auto = False
-    # _order = 'date desc'
-    # _rec_name = 'date'
-
-    # date = fields.Date(readonly=True, string="Fecha")
-    # approval_date = fields.Date(
-    #     readonly=True, string="Fecha de Aprobación")
-    # confirmation_date = fields.Date(
-    #     readonly=True, string="Fecha de Confirmación")
-    # employee_id = fields.Many2one(
-    #     'res.partner', string='Empleado', readonly=True)
-    # amount = fields.Monetary(string='Monto', readonly=True)
-    # # TODO make selection
-    # state = fields.Char(string='Estado', readonly=True)
-    # direction = fields.Selection(
-    #     [('request', 'Solicitud'), ('return', 'Devolución')],
-    #     string='Solicitud / Devolución', readonly=True)
-    # type_id = fields.Many2one(
-    #     'public_budget.advance_request_type',
-    #     string='Type',
-    # )
 
     @api.model
     def _reference_models(self):
         return [
-            ('account.voucher', 'Voucher'),
+            ('account.payment.group', 'Pagos'),
             ('account.invoice', 'Invoice'),
             ('public_budget.definitive_line', 'Definitive Line'),
             ('public_budget.preventive_line', 'Preventive Line'),
@@ -70,7 +50,7 @@ class PublicBudgetBudgetReport(models.Model):
         # help='Por ejemplo numero de orden de pago, numero de factura, etc',
         string='Memoria de OP/Comprobante',
     )
-    amount = fields.Monetary(
+    amount = fields.Float(
         readonly=True,
     )
     type = fields.Selection([
@@ -151,97 +131,6 @@ class PublicBudgetBudgetReport(models.Model):
         readonly=True,
     )
 
-    # definitive fields
-    # definitive_amount = fields.Monetary(
-    #     digits=dp.get_precision('Account'),
-    #     readonly=True,
-    # )
-    # supplier_id = fields.Many2one(
-    #     'res.partner',
-    #     string='Supplier',
-    #     readonly=True,
-    # )
-    # definitive_date = fields.Date(
-    #     readonly=True,
-    # )
-
-    # invoice line fields
-    # invoiced_amount = fields.Monetary(
-    #     digits=dp.get_precision('Account'),
-    #     readonly=True,
-    # )
-
-    # invoice fields
-    # invoice_state = fields.Char(
-    #     readonly=True,
-    # )
-    # invoice_type = fields.Char(
-    #     readonly=True,
-    # )
-    # invoice_id = fields.Many2one(
-    #     'account.invoice',
-    #     'Invoice',
-    #     readonly=True,
-    # )
-
-    # voucher line fields
-    # voucher_state = fields.Char(
-    #     readonly=True,
-    # )
-    # voucher_type = fields.Char(
-    #     readonly=True,
-    # )
-    # voucher_id = fields.Many2one(
-    #     'account.voucher',
-    #     'Voucher',
-    #     readonly=True,
-    # )
-    # voucher fields
-    # voucher_state = fields.Char(
-    #     readonly=True,
-    # )
-    # voucher_id = fields.Many2one(
-    #     'account.voucher',
-    #     'Voucher',
-    #     readonly=True,
-    # )
-    # voucher_expedient_id = fields.Many2one(
-    #     'public_budget.expedient',
-    #     string='Voucher Expedient',
-    #     readonly=True,
-    # )
-
-    _depends = {
-        # 'public_budget.definitive_line': [
-        #     'issue_date', 'supplier_id', 'amount',
-        # ],
-        # 'public_budget.preventive_line': [
-        #     'affects_budget', 'advance_line', 'preventive_amount',
-        #     'budget_position_id',
-        # ],
-        # 'account.invoice.line': [
-        #     'price_subtotal',
-        # ],
-        # 'account.invoice': [
-        #     'state', 'type',
-        # ],
-        # 'account.voucher': [
-        #     'state',
-        # ],
-        # 'account.voucher.line': [
-        #     'amount',
-        # ],
-        # 'public_budget.advance_request_line': [
-        #     'employee_id', 'approved_amount', 'advance_request_id',
-        # ],
-        # 'public_budget.advance_return': [
-        #     'type_id', 'date', 'state',
-        # ],
-        # 'public_budget.advance_return_line': [
-        #     'employee_id', 'returned_amount', 'advance_return_id',
-        # ],
-    }
-
     def init(self, cr):
         """
         hacemos una sucesión de consultas que devuelvan:
@@ -249,8 +138,8 @@ class PublicBudgetBudgetReport(models.Model):
             * 1_preventive (preventives)
             * 2_definitive (definitives)
             * 3_invoiced (invoice lines con invoices)
-            * 4_to_pay (voucher con voucher lines)
-            * 5_paid (voucher con voucher lines)
+            * 4_to_pay (payment groups)
+            * 5_paid (payment groups)
         * amount para cada una
         * preventive_line_id a la que está vinculado
 
@@ -266,86 +155,9 @@ class PublicBudgetBudgetReport(models.Model):
 
         # consulta que agrega a la de payments el preventive_line_id y ademas
         # reparte el amount
-        invoice_for_voucher_query = """
-            SELECT
-                vl.type,
-                vl.model,
-                vl.res_id,
-                vl.resource,
-                vl.document_number,
-                vl.reference,
-                vl.name,
-                vl.partner_id,
-                dl.preventive_line_id,
-                (il.price_subtotal * vl.amount * iv.sign
-                    ) / iv.amount_total as amount
-            FROM
-                account_invoice_line il
-            LEFT JOIN
-                (SELECT
-                    *,
-                    CASE
-                        WHEN type IN ('in_invoice', 'out_refund')
-                        THEN 1
-                        ELSE -1
-                    END AS sign
-                FROM
-                    account_invoice) iv on (iv.id = il.invoice_id)
-            LEFT JOIN
-                public_budget_definitive_line as dl on (
-                    il.definitive_line_id = dl.id )
-            RIGHT JOIN
-                (%s) as vl on (iv.move_id = vl.move_id)
-        """
 
-        # consulta template de voucher que luego aplicamos para obtener
-        voucher_template = """
-            SELECT
-                '%s' as type,
-                'account.voucher.line' as model,
-                vl.id as res_id,
-                CONCAT('account.voucher', ',', CAST(vo.id AS VARCHAR))
-                    as resource,
-                vo.force_number as document_number,
-                vo.reference as reference,
-                vo.name as name,
-                -- vo.id as voucher_id,
-                -- vo.state as voucher_state,
-                -- vo.expedient_id as voucher_expedient_id,
-                vl.move_id as move_id,
-                vo.partner_id as partner_id,
-                vl.amount * vl.sign as amount
-            FROM
-                (SELECT
-                    vl.id,
-                    vl.type,
-                    vl.amount,
-                    vl.voucher_id,
-                    CASE
-                        WHEN vl.type = 'dr'
-                        THEN 1
-                        ELSE -1
-                    END AS sign,
-                    ml.move_id
-                FROM
-                    account_voucher_line vl
-                    left join
-                    account_move_line ml on (
-                        ml.id = vl.move_line_id)
-                ) vl
-                LEFT JOIN
-                account_voucher vo on (
-                    vo.id = vl.voucher_id)
-            WHERE
-                %s
-            """
-
-        # aplicamos la consulta anterior para paid y to_pay
-        paid_query = invoice_for_voucher_query % (voucher_template % (
-            "5_paid", "vo.state = 'posted'"))
-        to_pay_query = invoice_for_voucher_query % (voucher_template % (
-            "4_to_pay", "vo.state not in ('cancel', 'draft')"))
-
+        # TODO falta agregar dodo lo de a pagar, pagado y de lineas de adlanto
+        # hay que ver como hacemos la consulta ahora
         # consulta sobre facturas
         invoice_query = """
             SELECT
@@ -356,15 +168,10 @@ class PublicBudgetBudgetReport(models.Model):
                     as resource,
                 -- TODO tal vez un join para sacar de document_number de move o
                 -- o un or para sacar number si no seteado
-                -- iv.afip_document_number as document_number,
-                COALESCE(iv.afip_document_number, iv.number)
+                COALESCE(iv.document_number, iv.number)
                     as document_number,
                 iv.reference as reference,
                 iv.name as name,
-                -- iv.id as invoice_id,
-                -- iv.state as invoice_state,
-                -- iv.type as invoice_type,
-                -- il.definitive_line_id as definitive_line_id,
                 iv.partner_id as partner_id,
                 dl.preventive_line_id as preventive_line_id,
                 (il.price_subtotal * iv.sign) as amount
@@ -398,8 +205,6 @@ class PublicBudgetBudgetReport(models.Model):
                 null as document_number,
                 null as reference,
                 null as name,
-                -- dl.supplier_id as supplier_id,
-                -- dl.issue_date as definitive_date,
                 dl.supplier_id as partner_id,
                 dl.preventive_line_id as preventive_line_id,
                 dl.amount as amount
@@ -427,72 +232,6 @@ class PublicBudgetBudgetReport(models.Model):
             --     advance_line = False
             """
 
-        # consulta sobre lineas de adelanto para definir monto preventivo
-        advance_preventive = """
-            SELECT
-                '1_preventive' as type,
-                'public_budget.preventive_line' as model,
-                pl.id as res_id,
-                CONCAT('public_budget.preventive_line', ',',
-                    CAST(pl.id AS VARCHAR)) as resource,
-                null as document_number,
-                null as reference,
-                null as name,
-                0 as partner_id,
-                pl.id as preventive_line_id,
-                pl.preventive_amount as amount
-            FROM
-                public_budget_preventive_line pl
-            WHERE
-                advance_line = True
-            """
-
-        # template sobre vouchers ligados a transacciones de adelanto
-        # para definir montos definitivos, devengados, a pagar y pagados segun
-        # el estado de los vouchers
-        advance_template = """
-            SELECT
-                '%s' as type,
-                'public_budget.preventive_line' as model,
-                pl.id as res_id,
-                CONCAT('public_budget.preventive_line', ',',
-                    CAST(pl.id AS VARCHAR)) as resource,
-                null as document_number,
-                null as reference,
-                null as name,
-                0 as partner_id,
-                pl.id as preventive_line_id,
-                av.advance_amount * (
-                    pl.preventive_amount /
-                    SUM(preventive_amount) OVER(PARTITION BY pl.transaction_id)
-                ) as amount
-            FROM
-                account_voucher as av
-            LEFT JOIN
-                public_budget_preventive_line as pl on (
-                    pl.transaction_id = av.transaction_id)
-            WHERE
-                av.transaction_with_advance_payment = True and
-                pl.advance_line = True and
-                -- TODO aca o en algun lugar por aca hay un error!!!
-                %s
-                -- av.state not in ('cancel', 'draft')
-            """
-
-        # partimos de la la consulta de adelanto preventiva y le vamos
-        # uniendo las consultas para las definitivas, devengas y a pagar
-        advance_query = advance_preventive
-        for affect_type in [
-                '2_definitive', '3_invoiced', '4_to_pay']:
-            advance_query = "%s UNION %s" % (
-                advance_query, advance_template % (
-                    affect_type, "av.state not in ('cancel', 'draft')"))
-
-        # unimos consulta de las de adelanto pagadas
-        advance_query = "%s UNION %s" % (
-            advance_query, advance_template % (
-                affect_type, "av.state = 'posted'"))
-
         query = """
             SELECT
             -- agregamos a la consult acore datos globales de linea preventiva
@@ -517,12 +256,6 @@ class PublicBudgetBudgetReport(models.Model):
                 %s
                 UNION
                 %s
-                UNION
-                %s
-                UNION
-                %s
-                UNION
-                %s
             ) as query
             LEFT JOIN
                 public_budget_preventive_line as pl on (
@@ -534,12 +267,12 @@ class PublicBudgetBudgetReport(models.Model):
                 public_budget_budget_position as bp on (
                     pl.budget_position_id = bp.id)
             """ % (
-                to_pay_query,
-                paid_query,
+                # to_pay_query,
+                # paid_query,
                 invoice_query,
                 definitive_query,
                 preventive_query,
-                advance_query,
+                # advance_query,
         )
         cr.execute("""CREATE or REPLACE VIEW %s as (%s
         )""" % (self._table, query))

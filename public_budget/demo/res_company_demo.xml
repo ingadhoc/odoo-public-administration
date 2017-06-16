@@ -26,6 +26,7 @@
         <field name='parent_id' ref='base.main_company'/>
         <field name='currency_id' ref='base.ARS'/>
         <field name='partner_id' ref='partner_sipreco'/>
+        <field name='afip_auth_verify_type'>required</field>
         <field name='double_validation' eval='True'/>
         <field name='regimenes_ganancias_ids'  eval="[(6, 0, [ref('l10n_ar_account_withholding.regimen_9'), ref('l10n_ar_account_withholding.regimen_12')])]"/>
         <field name="name">SIPRECO</field>

@@ -71,10 +71,9 @@
         <record id="account_payment_group.menu_action_account_payments_group_payable" model="ir.ui.menu">
             <field name="groups_id" eval="[(4, ref('group_secretary_usuario')), (4, ref('group_habilitacion_usuario'))]"/>
         </record>
-        <!-- share chart account wit hab manager-->
-        <!-- TODo revisar esto -->
-        <!-- <record id="account.menu_finance_charts" model="ir.ui.menu">
+        <!-- share menu asesor (chart account, entries, etc) with hab manager-->
+        <record id="account.menu_finance_entries" model="ir.ui.menu">
             <field name="groups_id" eval="[(4, ref('group_habilitacion_director'))]"/>
-        </record> -->
+        </record>
     </data>
 </openerp>

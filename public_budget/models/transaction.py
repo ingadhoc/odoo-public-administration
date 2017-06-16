@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
 from openerp.exceptions import ValidationError
+from openerp.tools import float_is_zero
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -474,19 +475,23 @@ class BudgetTransaction(models.Model):
                     ' preventive line'))
 
             for line in rec.preventive_line_ids:
-                if (
-                        line.preventive_amount != line.definitive_amount) or (
-                        line.preventive_amount != line.invoiced_amount) or (
-                        line.preventive_amount != line.to_pay_amount) or (
-                        line.preventive_amount != line.paid_amount):
-                    raise ValidationError(_(
-                        'To close a transaction, Preventive, Definitive, '
-                        'Invoiced, To Pay and Paid amount must be the same '
-                        'for each line'))
+                # Usamos float_is_zero por porisbles errores de redondeo
+                for field in [
+                        'definitive_amount', 'invoiced_amount',
+                        'to_pay_amount', 'paid_amount']:
+                    if not float_is_zero(
+                            (line.preventive_amount - line[field]),
+                            precision_rounding=rec.currency_id.rounding):
+                        raise ValidationError(_(
+                            'To close a transaction, Preventive, Definitive, '
+                            'Invoiced, To Pay and Paid amount must be the '
+                            'same for each line'))
 
             # Check advance transactions
             if rec.type_id.with_advance_payment:
-                if rec.advance_to_return_amount != 0.0:
+                if not float_is_zero(
+                        rec.advance_to_return_amount,
+                        precision_rounding=rec.currency_id.rounding):
                     raise ValidationError(_(
                         'To close a transaction to return amount must be 0!\n'
                         '* To return amount = advance paid amount - '

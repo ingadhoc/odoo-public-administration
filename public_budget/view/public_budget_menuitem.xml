@@ -63,12 +63,11 @@
             groups="public_budget.group_secretary_director,account.group_account_user"
             />
 
-        <!-- TODO re activar -->
-        <!-- <menuitem
+        <menuitem
             action="action_public_budget_budget_report_3_all"
             id="menu_public_budget_budget_report_3_all"
             parent="menu_reports"
-            sequence="20"/> -->
+            sequence="20"/>
 
         <menuitem
             action="action_advance_request_analysis_all"
