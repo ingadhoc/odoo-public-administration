@@ -151,6 +151,7 @@ class Remit(models.Model):
 
     @api.model
     def create(self, vals):
-        vals['number'] = self.env[
+        # con sudo para usuarios portal
+        vals['number'] = self.sudo().env[
             'ir.sequence'].next_by_code('public_budget.remit') or '/'
         return super(Remit, self).create(vals)

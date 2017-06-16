@@ -9,6 +9,8 @@ Validar con gonza:
         que se pueda generar archivo desde lista de payment groups y dese uno solo
         hacer todo esto en módulo de localización
 
+    ver que en teoría remitos filtra ubicaciojnes permitidas, esta haciendo eso?
+
     ver pago a contactos de partner, que no lo cambie, que lleve el contacto
 
     error al agregar segunda linea en definitivas "Uncaught TypeError: Failed to execute 'getComputedStyle' on 'Window': parameter 1 is not of type 'Element'."
