@@ -9,15 +9,15 @@ Validar con gonza:
         que se pueda generar archivo desde lista de payment groups y dese uno solo
         hacer todo esto en módulo de localización
 
-    ver pago a hijos, que lo lleve
+    ver pago a contactos de partner, que no lo cambie, que lleve el contacto
 
-
-error al agregar segunda linea en definitivas "Uncaught TypeError: Failed to execute 'getComputedStyle' on 'Window': parameter 1 is not of type 'Element'."
+    error al agregar segunda linea en definitivas "Uncaught TypeError: Failed to execute 'getComputedStyle' on 'Window': parameter 1 is not of type 'Element'."
 
 
 Baja prioridad:
     terminar de agregar al reporte _3 lo de adelanto y pagos (hay que traerlo de v8 porque lo borre)
     advance.request.analysis: agregar currency y convertir a monetary
+    Calculo de a pagar y pagado en facturas: Si a una factura se le imputa un saldo parcial (por ejemplo factura de sueldos por 1000 que se le impute devolución por 500), no se visualiza como pagado o mandado a pagar, solo cuando se paga completamente
 
 MIGRACION:
     hacer merge de modulos a public_budget para que no se borre ni pierda nada

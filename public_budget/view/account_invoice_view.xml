@@ -21,10 +21,16 @@
         <record id="invoice_supplier_form" model="ir.ui.view">
             <field name="name">account.invoice.supplier.form</field>
             <field name="model">account.invoice</field>
+            <field name="priority">20</field>
             <field name="inherit_id" ref="account.invoice_supplier_form"/>
             <field name="arch" type="xml">
                 <button name="invoice_cancel" position="before">
                     <button name="%(action_aeroo_report_liquidation)d" class="oe_highlight" string="Imprimir Liquidación" type="action"/>
+                </button>
+
+                <!-- ocultamos boton de pago (agregado por payment_group para que se pague desde tansaccion -->
+                <button name="action_account_invoice_payment_group" position="attributes">
+                    <attribute name="invisible">1</attribute>
                 </button>
 
                 <!-- we hide refund button -->

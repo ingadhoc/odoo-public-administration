@@ -28,6 +28,11 @@
         'l10n_ar_account_withholding',
         # usado por algunos reportes como el de cheques y retenciones
         'l10n_ar_aeroo_base',
+        # simplemente para que runbot instale este y se satisfaga todo
+        # lo necesario para que se auto instale adhoc_account_planner
+        # y mejore runboy en demo (en producción se instalaría solo por
+        # adhoc modules)
+        'account_usability',
     ],
     'data': [
         'security/public_budget_group.xml',
