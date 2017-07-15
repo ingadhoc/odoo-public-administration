@@ -330,3 +330,27 @@ class AccountPaymentGroup(models.Model):
                         ' amount (%s)') % (
                         rec.unreconciled_amount,
                         advance_remaining_amount + rec.unreconciled_amount))
+
+    @api.multi
+    @api.constrains('receiptbook_id')
+    def set_document_number(self):
+        """
+        Quieren que en caunto se cree, si tiene talonario, se asigne número
+        """
+        for rec in self:
+            if rec.receiptbook_id.sequence_id and not rec.document_number:
+                rec.document_number = (
+                    rec.receiptbook_id.sequence_id.next_by_id())
+
+    @api.multi
+    def _compute_name(self):
+        """
+        Agregamos numero de documento en todos los estados (no solo posteado)
+        """
+        res = super(AccountPaymentGroup, self)._compute_name()
+        for rec in self.filtered(lambda x: x.state != 'posted'):
+            if rec.document_number and rec.document_type_id:
+                rec.name = ("%s%s" % (
+                    rec.document_type_id.doc_code_prefix or '',
+                    rec.document_number))
+        return res

@@ -18,6 +18,7 @@
         'account_accountant',
         'l10n_ar_bank',
         'base_state_active',
+        'web_pdf_preview',
         # 'portal',  # necesitamos portal por un error raro al crear un voucher
         # # es un error de javascript pero con portal de alguna manera se
         # # resuelve. Luego de instalar portal refrescar pantalla

@@ -10,3 +10,4 @@ ingadhoc-miscellaneous https://github.com/ingadhoc/miscellaneous.git
 ingadhoc-partner https://github.com/ingadhoc/partner.git
 ingadhoc-reporting-engine https://github.com/ingadhoc/reporting-engine.git
 ingadhoc-argentina-reporting https://github.com/ingadhoc/argentina-reporting.git
+ingadhoc-patches https://github.com/ingadhoc/patches.git
