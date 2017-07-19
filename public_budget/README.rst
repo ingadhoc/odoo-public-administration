@@ -27,7 +27,13 @@ Datos demo:
 Algunas observaciones de uso/desarrollo
 =======================================
 
-#. Cheques: por ahora no generamos el cheque hasta que se validar el pago, y en ese mismo momento se entrega, es decir, que recien cuando se entrega/n el/los cheque/s se debe validar el pago
+#. Cheques:
+  * los cheques se generan cuando se valida el pago, en ese momento queda como entregado y afecta la cuenta de "cheques diferidos", cuando lo entregan físicamente marcan el débito, en ese momento registramos la salida del banco.
+#. Subsidios:
+  * La fecha del cargo se calcula en función a todos los pagos vinculados en los cuales se agrego un campo fecha del cargo.
+  * la fecha del cargo en los pagos se calcula como siemrpe que el pago este validado (posted) y según:
+    * si no tiene cheques: se usa la fecha de pago
+    * si tiene cheques: se suma solamente si fue debitado (cuando ellos lo entregan fisicamente) y se usa la fecha de débito
 
 Installation
 ============

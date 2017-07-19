@@ -33,17 +33,19 @@ class AccountPaymentGroup(models.Model):
         cargo_amount = 0.0
         cargo_date = False
         if self.state == 'posted':
-            check_ids = self.payment_ids.mapped('check_ids')
-            if check_ids:
-                # si hay cheques, controlamos que esten entregados, si no
-                # tomamos el monto del payment
-                haneded_checks = check_ids.search([
-                    ('id', 'in', check_ids.ids),
-                    ('state', 'in', ['handed', 'debited'])],
-                    # order='handed_date desc'
-                )
-                cargo_amount += sum(haneded_checks.mapped('amount'))
-                # cargo_date = haneded_checks and haneded_checks[0].handed_date
+            # si hay cheques, controlamos que esten entregados, si no
+            # tomamos el monto del payment
+            # lo que en v8 era handed y debited, ahora es debited
+            # solamente
+            # ('state', 'in', ['handed', 'debited'])],
+            checks = self.payment_ids.mapped('check_ids')
+            if checks:
+                # si no estan debitados entonces el monto es cero
+                debited_checks = checks.filtered(
+                    lambda x: x.state == 'debited')
+                if debited_checks:
+                    cargo_amount += sum(debited_checks.mapped('amount'))
+                    cargo_date = debited_checks._get_operation('debited').date
             else:
                 cargo_amount += self.payments_amount
                 cargo_date = self.payment_date
