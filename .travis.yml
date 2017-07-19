@@ -75,7 +75,7 @@ install:
   # agregamos este repor por account_usability
   - if [[ "${OCA_RUNBOT}" == "1" ]]; then git clone -b 9.0 https://github.com/ingadhoc/enterprise-extensions.git ${HOME}/dependencies/ingadhoc-enterprise-extensions; fi
   # desactivar sipreco en travis
-  - if [[ "${OCA_RUNBOT}" != "1" ]]; then sed  -i "s/'installable':.*/'installable':False,/" ${HOME}/build/ingadhoc/odoo-public-administration/sipreco_project/__openerp__.py; fi
+  - if [[ "${OCA_RUNBOT}" != "1" ]]; then sed  -i "s/'installable':.*/'installable':\ False,/" ${HOME}/build/ingadhoc/odoo-public-administration/sipreco_project/__openerp__.py; fi
   - git clone --depth=1 https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly
