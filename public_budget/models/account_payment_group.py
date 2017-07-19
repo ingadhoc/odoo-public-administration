@@ -144,6 +144,10 @@ class AccountPaymentGroup(models.Model):
     @api.multi
     def confirm(self):
         for rec in self:
+            if not rec.to_pay_amount:
+                raise ValidationError(_(
+                    'No puede confirmar una orden de pago sin importe a pagar')
+                )
             if not rec.confirmation_date:
                 rec.confirmation_date = fields.Date.today()
         return super(AccountPaymentGroup, self).confirm()
