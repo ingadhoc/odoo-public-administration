@@ -13,7 +13,6 @@ class PublicBudgetExpedient(models.Model):
 
     _states_ = [
         ('open', 'Open'),
-        ('in_revision', 'In Revision'),
         ('closed', 'Closed'),
         ('annulled', 'Annulled'),
         ('cancel', 'Cancel'),
@@ -259,11 +258,6 @@ class PublicBudgetExpedient(models.Model):
     @api.multi
     def action_close(self):
         self.write({'state': 'closed'})
-        return True
-
-    @api.multi
-    def action_in_revision(self):
-        self.write({'state': 'in_revision'})
         return True
 
     @api.multi
