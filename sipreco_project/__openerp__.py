@@ -19,9 +19,6 @@
         'l10n_ar_bank',
         'base_state_active',
         'web_pdf_preview',
-        # lo agregamos para que se auto instalen el de usbility y planner
-        # que solo se agregan en runbot y no en travis
-        'account_reports',
         # 'portal',  # necesitamos portal por un error raro al crear un voucher
         # # es un error de javascript pero con portal de alguna manera se
         # # resuelve. Luego de instalar portal refrescar pantalla
