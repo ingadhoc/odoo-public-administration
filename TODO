@@ -1,4 +1,5 @@
 Validar con gonza:
+
     implementar liquidaciónd e impeustos y pagos de retenciones
 
     implementar cambio de cheques solo para sipreco ya que es medio feo porque no va a hacer asientos, un duplicate y no mucho mas, igualmente debería ser desde el estado entregado y no debitado para que desde el banco termine saliendo el cheque correcto. en ellos la cuenta de cheques no sería conciliable. dejamos que se haga al definir esto tmb ver como hacemos lo del cargo en payment group de subsidy management 

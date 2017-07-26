@@ -126,6 +126,15 @@ class BudgetPosition(models.Model):
         related='company_id.currency_id',
         readonly=True,
     )
+    default_account_id = fields.Many2one(
+        'account.account',
+        domain="["
+        "('internal_type', '=', 'other'), "
+        "('company_id', '=', company_id), "
+        "('deprecated', '=', False)]",
+        string='Default Account',
+        help='Default Account on preventive lines of this position'
+    )
 
     @api.one
     # @api.depends(

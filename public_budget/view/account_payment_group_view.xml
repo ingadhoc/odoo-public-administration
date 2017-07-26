@@ -71,7 +71,11 @@
 
             <field name="payment_date" position="before">
                 <field name="payment_base_date"/>
-                <field name="payment_days"/>
+                <label for="payment_days"/>
+                <div class="oe_inline">
+                    <field name="payment_days" class="oe_inline"/>
+                    <field name="days_interval_type" class="oe_inline"/>
+                </div>
                 <field name="payment_min_date"/>
                 <field name="confirmation_date"/>
             </field>
@@ -114,7 +118,9 @@
             <!-- Make post only visible from signed and available for hab director -->
             <button name="post" position="attributes">
                 <attribute name="attrs">{'invisible': ['|', '&amp;', ('payment_subtype', '=', 'simple'), ('state', '!=', 'draft'), '&amp;', ('payment_subtype', '=', 'double_validation'), ('state', '!=', 'signed')]}</attribute>
-                <attribute name="groups">public_budget.group_habilitacion_director</attribute>
+                <!-- <attribute name="groups">public_budget.group_habilitacion_director</attribute> -->
+                <!-- al final hacemos que los usuarios puedan validar porque son los que entregan cheques e hicimos que la entrega del cheque se corresponda con la validación -->
+                <attribute name="groups">public_budget.group_habilitacion_usuario</attribute>
             </button>
 
             <!-- Add signe buttons -->

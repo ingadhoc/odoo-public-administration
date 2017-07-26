@@ -17,7 +17,7 @@ class PreventiveLine(models.Model):
         states={'invoiced': [('readonly', True)]},
         domain="["
         "('internal_type', '=', 'other'), "
-        # "('company_id', '=', company_id), "
+        "('company_id', '=', company_id), "
         "('deprecated', '=', False)]",
     )
     company_id = fields.Many2one(
@@ -107,6 +107,10 @@ class PreventiveLine(models.Model):
     definitive_partner_type = fields.Selection(
         related='transaction_id.type_id.definitive_partner_type'
     )
+
+    @api.onchange('budget_position_id')
+    def change_budget_position(self):
+        self.account_id = self.budget_position_id.default_account_id
 
     @api.multi
     @api.depends(

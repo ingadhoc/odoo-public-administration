@@ -92,6 +92,13 @@ class AccountPaymentGroup(models.Model):
         states={'draft': [('readonly', False)]},
         help='Days added to payment base date to get the payment date',
     )
+    days_interval_type = fields.Selection([
+        ('business_days', 'Business Days'),
+        ('calendar_days', 'Calendar Days')],
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+        default='business_days',
+    )
     payment_min_date = fields.Date(
         compute='get_payment_min_date',
         string='Fecha Min. de Pago',
@@ -171,22 +178,28 @@ class AccountPaymentGroup(models.Model):
         self.show_print_receipt_button = show_print_receipt_button
 
     @api.one
-    @api.depends('payment_base_date', 'payment_days')
+    @api.depends('payment_base_date', 'payment_days', 'days_interval_type')
     def get_payment_min_date(self):
         current_date = False
         business_days_to_add = self.payment_days
         if self.payment_base_date:
-            current_date = fields.Date.from_string(self.payment_base_date)
-            while business_days_to_add > 0:
-                current_date = current_date + relativedelta(days=1)
-                weekday = current_date.weekday()
-                # sunday = 6
-                if weekday >= 5 or self.env[
-                        'hr.holidays.public'].is_public_holiday(current_date):
-                    continue
-                # if current_date in holidays:
-                #     continue
-                business_days_to_add -= 1
+            if self.days_interval_type == 'business_days':
+                current_date = fields.Date.from_string(self.payment_base_date)
+                while business_days_to_add > 0:
+                    current_date = current_date + relativedelta(days=1)
+                    weekday = current_date.weekday()
+                    # sunday = 6
+                    if weekday >= 5 or self.env[
+                            'hr.holidays.public'].is_public_holiday(
+                                current_date):
+                        continue
+                    # if current_date in holidays:
+                    #     continue
+                    business_days_to_add -= 1
+            else:
+                current_date = fields.Date.from_string(self.payment_base_date)
+                current_date = current_date + relativedelta(
+                    days=self.payment_days)
         self.payment_min_date = fields.Date.to_string(current_date)
 
     # TODO enable
@@ -255,10 +268,14 @@ class AccountPaymentGroup(models.Model):
             if transaction:
                 if transaction.type_id.with_advance_payment and (
                         transaction.partner_id):
-                    partners = transaction.partner_id.commercial_partner_id
+                    # no hace falta que sea el comercial...
+                    partners = transaction.partner_id
+                    # partners = transaction.partner_id.commercial_partner_id
                 else:
+                    # no hace falta que sea el comercial...
                     partners = transaction.mapped(
-                        'supplier_ids.commercial_partner_id')
+                        # 'supplier_ids.commercial_partner_id')
+                        'supplier_ids')
                 rec.partner_ids = partners
 
     @api.multi

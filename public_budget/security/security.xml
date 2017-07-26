@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
+        <!-- do not allow to unlink payment orders for anyone (Except admin) -->
+        <record id="account_payment_group.access_account_payment_group" model="ir.model.access">
+            <field eval="False" name="perm_unlink"/>
+        </record>
+
         <record id="expedient_in_user_locations_rule" model="ir.rule">
             <field name="name">Expedient only in user locations</field>
             <field name="model_id" ref="public_budget.model_public_budget_expedient"/>

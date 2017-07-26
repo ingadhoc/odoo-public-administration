@@ -7,10 +7,19 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_res_partner_filter"/>
         <field name="arch" type="xml">
+            <filter name="customer" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </filter>
             <filter name="customer" position="before">
                 <filter string="Employee" name="employee" domain="[('employee','=',1)]" help="Employee Partners"/>
                 <filter string="Subsidy Recipient" name="subsidy_recipient" domain="[('subsidy_recipient','=',1)]" help="Subsidy Recipient Partners"/>
             </filter>
+            <field name="category_id" position="before">
+                <field name="gender"/>
+            </field>
+            <group>
+                <filter string="Gender" context="{'group_by': 'gender'}"/>
+            </group>
         </field>
     </record>
 
@@ -32,8 +41,15 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="l10n_ar_partner.view_partner_form"/>
         <field name="arch" type="xml">
+            <xpath expr="//page[@name='sales_purchases']//field[@name='customer']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <field name="user_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
             <!-- TODO ENABLE!! -->
             <label for="main_id_number" position="before">
+                <field name="gender" attrs="{'invisible': [('company_type', '!=', 'person')]}"/>
                 <field name="numero_legajo" attrs="{'invisible': [('employee', '=', False)]}"/>
             </label>
             <field name="main_id_category_id" position="attributes">

@@ -75,7 +75,9 @@
                                 <field name="partner_id" attrs="{'invisible':[('type_with_advance_payment','=',False)],'required':[('type_with_advance_payment','=',True)]}"/>
                                 <field name="user_id"/>
                             </group>
-                            <group col="1">
+                            <!-- <group col="1"> -->
+                            <!-- asi quedó en 3 columnas y gustó mas -->
+                            <group>
                                 <group name="amounts">
                                     <label for="preventive_amount"/>
                                     <div>
