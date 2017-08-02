@@ -4,14 +4,13 @@
 # 
 # Translators:
 # Juan José Scarafía <scarafia.juanjose@gmail.com>, 2017
-# Nicolas Mac Rouillon <nmr@ingadhoc.com>, 2017
 # Gonzalo Ruzafa <gr@ingadhoc.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-19 22:28+0000\n"
-"PO-Revision-Date: 2017-07-19 22:28+0000\n"
+"POT-Creation-Date: 2017-07-26 20:22+0000\n"
+"PO-Revision-Date: 2017-07-26 20:22+0000\n"
 "Last-Translator: Gonzalo Ruzafa <gr@ingadhoc.com>, 2017\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
 "MIME-Version: 1.0\n"
@@ -117,7 +116,7 @@ msgstr "Reporte de Deuda de Requerimiento de Adelanto"
 #. module: public_budget
 #: model:ir.model,name:public_budget.model_public_budget_advance_request_line
 msgid "Advance Request Line"
-msgstr "Advance Request Line"
+msgstr "Linea de Requerimiento de Adelanto"
 
 #. module: public_budget
 #: model:ir.actions.report.xml,name:public_budget.action_aeroo_report_advance_request
@@ -450,6 +449,16 @@ msgid "Budgets"
 msgstr "Presupuestos"
 
 #. module: public_budget
+#: selection:account.payment.group,days_interval_type:0
+msgid "Business Days"
+msgstr "Dias Habiles"
+
+#. module: public_budget
+#: selection:account.payment.group,days_interval_type:0
+msgid "Calendar Days"
+msgstr "Dias corridos"
+
+#. module: public_budget
 #: code:addons/public_budget/models/preventive_line.py:70
 #: model:ir.ui.view,arch_db:public_budget.view_budget_analysis_form
 #: model:ir.ui.view,arch_db:public_budget.view_definitive_make_invoice
@@ -487,7 +496,7 @@ msgstr "Categorías"
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_category_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_category_id_5617
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_category_id_5623
 msgid "Category"
 msgstr "Categoría"
 
@@ -557,6 +566,11 @@ msgstr "Click para crear una Posición"
 #: model:ir.actions.act_window,help:public_budget.action_public_budget_remit_remits
 msgid "Click to create a Remits."
 msgstr "Click para crear  un Remito"
+
+#. module: public_budget
+#: model:ir.actions.act_window,help:public_budget.action_res_partner_subsidy_recipients
+msgid "Click to create a Subsidy Recipient."
+msgstr "Click para crear Receptor de Subsidio"
 
 #. module: public_budget
 #: model:ir.actions.act_window,help:public_budget.action_res_partner_suppliers
@@ -874,6 +888,11 @@ msgid "Days added to payment base date to get the payment date"
 msgstr "Dias agregados a la fecha base de pago para obtener la fecha de pago"
 
 #. module: public_budget
+#: model:ir.model.fields,field_description:public_budget.field_account_payment_group_days_interval_type
+msgid "Days interval type"
+msgstr "Tipo de dias para intervalo de tiempo"
+
+#. module: public_budget
 #: model:res.company,overdue_msg:public_budget.company_sipreco
 msgid ""
 "Dear Sir/Madam,\n"
@@ -911,6 +930,16 @@ msgid "Def Make Invoice"
 msgstr "Crear Comprobantes"
 
 #. module: public_budget
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_default_account_id
+msgid "Default Account"
+msgstr "Cuenta por Defecto"
+
+#. module: public_budget
+#: model:ir.model.fields,help:public_budget.field_public_budget_budget_position_default_account_id
+msgid "Default Account on preventive lines of this position"
+msgstr "Cuenta por Defecto para lineas preventivas en esta partida"
+
+#. module: public_budget
 #: selection:public_budget.budget.report_3,type:0
 msgid "Definitiva"
 msgstr "Definitiva"
@@ -923,7 +952,7 @@ msgid "Definitive"
 msgstr "Definitiva"
 
 #. module: public_budget
-#: code:addons/public_budget/models/preventive_line.py:249
+#: code:addons/public_budget/models/preventive_line.py:253
 #, python-format
 msgid "Definitive Amount can't be greater than Preventive Amount"
 msgstr "El Monto Definitivo no puede superar el Monto Preventivo"
@@ -955,7 +984,7 @@ msgstr "Tipo de Empresa Definitiva"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_prec_detail_definitive_amount
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_preventive_line_definitive_amount
 msgid "Definitive amount"
-msgstr "Cantidad definitiva"
+msgstr "Definitivo"
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_request_line_description
@@ -1079,6 +1108,11 @@ msgstr "Borrador"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_prec_detail_draft_amount
 msgid "Draft amount"
 msgstr "Proyecto de importe"
+
+#. module: public_budget
+#: model:ir.model.fields,field_description:public_budget.field_res_users_drei_number
+msgid "Drei number"
+msgstr "Número DREI"
 
 #. module: public_budget
 #: model:ir.model.fields,help:public_budget.field_account_payment_group_payment_min_date
@@ -1239,6 +1273,11 @@ msgid "Fecha de Transacción"
 msgstr "Fecha de Transacción"
 
 #. module: public_budget
+#: selection:res.partner,gender:0
+msgid "Female"
+msgstr "Mujer"
+
+#. module: public_budget
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_return_form
 msgid "Fill with Debtors"
 msgstr "Completar con Deudores"
@@ -1326,6 +1365,13 @@ msgid "Ganancias"
 msgstr "Ganancias"
 
 #. module: public_budget
+#: model:ir.model.fields,field_description:public_budget.field_res_partner_gender
+#: model:ir.model.fields,field_description:public_budget.field_res_users_gender
+#: model:ir.ui.view,arch_db:public_budget.view_res_partner_filter
+msgid "Gender"
+msgstr "Género"
+
+#. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_request_type_general_return_partner_id
 msgid "General Return Partner"
 msgstr "Proveedor General de Devolución"
@@ -1407,7 +1453,7 @@ msgstr "Hasta Fecha"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_modification_detail_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_modification_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_pos_exc_rest_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_category_id_5494
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_category_id_5500
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_prec_detail_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_report_3_id
@@ -1416,7 +1462,7 @@ msgstr "Hasta Fecha"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_make_invoice_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_mass_invoice_create_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_category_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_founder_id_5649
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_founder_id_5655
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_funding_move_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_inventory_rule_id
@@ -1472,7 +1518,7 @@ msgid "In Transit?"
 msgstr "En tránsito?"
 
 #. module: public_budget
-#: code:addons/public_budget/models/account_payment_group.py:331
+#: code:addons/public_budget/models/account_payment_group.py:348
 #, python-format
 msgid ""
 "In advance transactions, payment orders amount (%s) can not be greater than "
@@ -1482,7 +1528,7 @@ msgstr ""
 " ser superior que el monto remanente de adelanto (%s)"
 
 #. module: public_budget
-#: code:addons/public_budget/models/budget_position.py:337
+#: code:addons/public_budget/models/budget_position.py:346
 #, python-format
 msgid ""
 "In one branch only one budget position can have Budget Assignment Allowed."
@@ -1583,7 +1629,7 @@ msgstr "Monto Devengado"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_line_invoiced_amount
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_preventive_line_invoiced_amount
 msgid "Invoiced amount"
-msgstr "Cantidad facturada"
+msgstr "Devengado"
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_invoice_ids
@@ -1633,7 +1679,7 @@ msgid "Journal Items"
 msgstr "Apuntes Contables"
 
 #. module: public_budget
-#: code:addons/public_budget/models/account_payment_group.py:304
+#: code:addons/public_budget/models/account_payment_group.py:321
 #, python-format
 msgid ""
 "La fecha de confirmación no puede ser menor a la fecha de la factura que se "
@@ -1661,7 +1707,7 @@ msgstr ""
 "La fecha de la línea definitiva debe ser mayor a la fecha de la transacción"
 
 #. module: public_budget
-#: code:addons/public_budget/models/account_payment_group.py:310
+#: code:addons/public_budget/models/account_payment_group.py:327
 #, python-format
 msgid ""
 "La fecha de validacion del pago no puede ser menor a la fecha de "
@@ -1671,7 +1717,7 @@ msgstr ""
 "confirmación"
 
 #. module: public_budget
-#: code:addons/public_budget/models/account_payment_group.py:314
+#: code:addons/public_budget/models/account_payment_group.py:331
 #, python-format
 msgid ""
 "La fecha de validacion del pago no puede ser menor a la fecha mínima de pago"
@@ -1875,6 +1921,11 @@ msgid "Make Invoice"
 msgstr "Crear Comprobante"
 
 #. module: public_budget
+#: selection:res.partner,gender:0
+msgid "Male"
+msgstr "Hombre"
+
+#. module: public_budget
 #: model:ir.actions.act_window,name:public_budget.action_definitive_mass_invoice_create
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_transaction_form
 msgid "Mass Invoice Create"
@@ -1955,7 +2006,7 @@ msgstr "Monto Devengado"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_paid_amount
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_paid_amount
 msgid "Monto Pagado"
-msgstr "Monto Pagado"
+msgstr "Pagado"
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_preventive_amount
@@ -2030,7 +2081,7 @@ msgid "Name"
 msgstr "Nombre"
 
 #. module: public_budget
-#: code:addons/public_budget/models/account_payment_group.py:148
+#: code:addons/public_budget/models/account_payment_group.py:155
 #, python-format
 msgid "No puede confirmar una orden de pago sin importe a pagar"
 msgstr "No puede confirmar una orden de pago sin importe a pagar"
@@ -2130,6 +2181,11 @@ msgid "Origin Category"
 msgstr "Categoría Origen"
 
 #. module: public_budget
+#: selection:res.partner,gender:0
+msgid "Other"
+msgstr "Otro"
+
+#. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_res_users_other_document_type_ids
 msgid "Other Documents"
 msgstr "Otros Documentos"
@@ -2147,7 +2203,7 @@ msgstr "Folios"
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_line_computed_paid_amount
 msgid "Paid Amount"
-msgstr "Monto Pagado"
+msgstr "Pagado"
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_account_invoice_line_paid_amount
@@ -2155,7 +2211,7 @@ msgstr "Monto Pagado"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_line_paid_amount
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_preventive_line_paid_amount
 msgid "Paid amount"
-msgstr "Monto Pagado"
+msgstr "Pagado"
 
 #. module: public_budget
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_company_form
@@ -2602,7 +2658,7 @@ msgid "Settlement Lines"
 msgstr "Lineas Consolidadas"
 
 #. module: public_budget
-#: code:addons/public_budget/models/account_payment_group.py:121
+#: code:addons/public_budget/models/account_payment_group.py:128
 #: model:ir.model.fields,field_description:public_budget.field_account_payment_group_show_print_receipt_button
 #, python-format
 msgid "Show Print Receipt Button"
@@ -2680,6 +2736,8 @@ msgid "Subsidy Recipient Partners"
 msgstr "Receptores de subsidio"
 
 #. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_res_partner_subsidy_recipients
+#: model:ir.ui.menu,name:public_budget.menu_subsidy_recipients
 #: selection:public_budget.transaction_type,definitive_partner_type:0
 msgid "Subsidy Recipients"
 msgstr "Receptores de Subsidio"
@@ -2729,7 +2787,7 @@ msgstr ""
 "vez que se realizó la conciliación de facturas y pagos."
 
 #. module: public_budget
-#: code:addons/public_budget/models/preventive_line.py:276
+#: code:addons/public_budget/models/preventive_line.py:280
 #, python-format
 msgid ""
 "The selected budget position (%s) has not a related assigment position!"
@@ -2744,7 +2802,7 @@ msgstr ""
 "La provincia de la compañia es considerada la jurisdiccion principal. "
 
 #. module: public_budget
-#: code:addons/public_budget/models/preventive_line.py:282
+#: code:addons/public_budget/models/preventive_line.py:286
 #, python-format
 msgid ""
 "There is not enough Balance Amount to assign (%s) to Budget Position '%s'.\n"
@@ -2917,7 +2975,7 @@ msgstr "A Monto de Comprobante"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_line_to_pay_amount
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_preventive_line_to_pay_amount
 msgid "To pay amount"
-msgstr "Importe a pagar"
+msgstr "A pagar"
 
 #. module: public_budget
 #: model:ir.ui.view,arch_db:public_budget.view_account_payment_group_tree
@@ -2994,7 +3052,7 @@ msgid "Transaction"
 msgstr "Transacción"
 
 #. module: public_budget
-#: code:addons/public_budget/models/preventive_line.py:239
+#: code:addons/public_budget/models/preventive_line.py:243
 #, python-format
 msgid "Transaction Company and Account Company must be the same!"
 msgstr ""
@@ -3041,14 +3099,14 @@ msgstr "Transacciones"
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_advance_request_analysis_type_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_request_type_id_5180
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_request_type_id_5183
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_return_type_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_pos_exc_rest_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_prec_detail_account_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_funding_move_type
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_id_5463
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_id_5469
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_request_filter
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_return_filter
 msgid "Type"
@@ -3130,7 +3188,7 @@ msgstr "Con Restricción de Monto?"
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_account_payment_group_transaction_with_advance_payment
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment_5452
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment_5458
 msgid "With advance payment?"
 msgstr "Con Pago Anticipado?"
 
@@ -3201,7 +3259,7 @@ msgid "You can not delete a definitive line that has been invoiced"
 msgstr "No es posible borrar una línea definitiva que ya fue devengada."
 
 #. module: public_budget
-#: code:addons/public_budget/models/preventive_line.py:293
+#: code:addons/public_budget/models/preventive_line.py:297
 #, python-format
 msgid "You can not delete a preventive line that has definitive lines"
 msgstr "No puede borrar una línea preventiva que tiene líneas definitivas"
@@ -3237,7 +3295,7 @@ msgstr ""
 "negativo."
 
 #. module: public_budget
-#: code:addons/public_budget/models/budget_position.py:330
+#: code:addons/public_budget/models/budget_position.py:339
 #, python-format
 msgid ""
 "You can not set 'Budget Assignment Allowed' to false if budget position is "
@@ -3247,7 +3305,7 @@ msgstr ""
 " está siendo utilizada en un Presupuesto o Modificacion de Presupuesto"
 
 #. module: public_budget
-#: code:addons/public_budget/models/budget_position.py:347
+#: code:addons/public_budget/models/budget_position.py:356
 #, python-format
 msgid ""
 "You can not set position %s to Budget Posistion Allowed as the child "
@@ -3277,7 +3335,7 @@ msgstr ""
 "cancelar los Pagos Relacionados antes."
 
 #. module: public_budget
-#: code:addons/public_budget/models/budget_position.py:310
+#: code:addons/public_budget/models/budget_position.py:319
 #, python-format
 msgid ""
 "You cannot define children to an account with internal type different of "
