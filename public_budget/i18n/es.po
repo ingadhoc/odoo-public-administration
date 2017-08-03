@@ -4,14 +4,13 @@
 # 
 # Translators:
 # Juan José Scarafía <scarafia.juanjose@gmail.com>, 2017
-# Gonzalo Ruzafa <gr@ingadhoc.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-26 20:22+0000\n"
-"PO-Revision-Date: 2017-07-26 20:22+0000\n"
-"Last-Translator: Gonzalo Ruzafa <gr@ingadhoc.com>, 2017\n"
+"POT-Creation-Date: 2017-08-02 12:04+0000\n"
+"PO-Revision-Date: 2017-08-02 12:04+0000\n"
+"Last-Translator: Juan José Scarafía <scarafia.juanjose@gmail.com>, 2017\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -496,7 +495,7 @@ msgstr "Categorías"
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_category_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_category_id_5623
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_category_id_5621
 msgid "Category"
 msgstr "Categoría"
 
@@ -1110,11 +1109,6 @@ msgid "Draft amount"
 msgstr "Proyecto de importe"
 
 #. module: public_budget
-#: model:ir.model.fields,field_description:public_budget.field_res_users_drei_number
-msgid "Drei number"
-msgstr "Número DREI"
-
-#. module: public_budget
 #: model:ir.model.fields,help:public_budget.field_account_payment_group_payment_min_date
 msgid "El pago no puede ser validado antes de esta fecha"
 msgstr "El pago no puede ser validado antes de esta fecha"
@@ -1453,7 +1447,7 @@ msgstr "Hasta Fecha"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_modification_detail_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_modification_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_pos_exc_rest_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_category_id_5500
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_category_id_5498
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_prec_detail_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_report_3_id
@@ -1462,7 +1456,7 @@ msgstr "Hasta Fecha"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_make_invoice_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_mass_invoice_create_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_category_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_founder_id_5655
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_founder_id_5653
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_funding_move_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_inventory_rule_id
@@ -3099,14 +3093,14 @@ msgstr "Transacciones"
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_advance_request_analysis_type_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_request_type_id_5183
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_request_type_id_5182
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_return_type_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_pos_exc_rest_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_prec_detail_account_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_funding_move_type
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_id_5469
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_id_5467
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_request_filter
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_return_filter
 msgid "Type"
@@ -3188,7 +3182,7 @@ msgstr "Con Restricción de Monto?"
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_account_payment_group_transaction_with_advance_payment
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment_5458
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment_5456
 msgid "With advance payment?"
 msgstr "Con Pago Anticipado?"
 
