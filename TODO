@@ -1,5 +1,7 @@
 Validar con gonza:
 
+    TODO implementar stado cancelado de pagos
+
     implementar liquidaciónd e impeustos y pagos de retenciones
 
     implementar cambio de cheques solo para sipreco ya que es medio feo porque no va a hacer asientos, un duplicate y no mucho mas, igualmente debería ser desde el estado entregado y no debitado para que desde el banco termine saliendo el cheque correcto. en ellos la cuenta de cheques no sería conciliable. dejamos que se haga al definir esto tmb ver como hacemos lo del cargo en payment group de subsidy management 
@@ -23,14 +25,17 @@ Baja prioridad:
     Calculo de a pagar y pagado en facturas: Si a una factura se le imputa un saldo parcial (por ejemplo factura de sueldos por 1000 que se le impute devolución por 500), no se visualiza como pagado o mandado a pagar, solo cuando se paga completamente
 
 MIGRACION:
-    hacer merge de modulos a public_budget para que no se borre ni pierda nada
-    confirmation_date de account_voucher_double_validation a public_budget
-    en los account voucher, advance_request_id debería llevarse al payment group correspondiente
-    migración de los payment lines
-        tenemos que renombrar 
-            account.voucher.payment_line por account.payment.group.line
-    mig de payment group
-        name de voucher va a communication
-        reference a reference
     que las cuentas asociadas a tipo de adelanto se conviertan a de liquidez (deberian estar como payable o algo así)
     migrar fiscalyear de budget a integer
+
+VERIFICAR:
+    renombrado de payment lines
+    datos de payment groups
+        transacción
+        expedientes
+        fechas de pago
+        fechas de confirmación
+        payment_reference
+        names en communications
+        advance_request_id
+    verificar estado de los payments, seguramente odoo los migra en estado original

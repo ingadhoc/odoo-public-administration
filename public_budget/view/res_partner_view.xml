@@ -24,6 +24,18 @@
     </record>
 
     <!-- INHERITED FORM -->
+    <record id="view_withholding_partner_form" model="ir.ui.view">
+        <field name="name">partner.ar_account.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="l10n_ar_account_withholding.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="drei" position="after">
+                <field name="drei_number"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- INHERITED FORM -->
     <record id="view_partner_property_form" model="ir.ui.view">
         <field name="name">partner.ar_account.form</field>
         <field name="model">res.partner</field>

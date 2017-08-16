@@ -209,19 +209,25 @@ class PublicBudgetSubsidy(models.Model):
     @api.depends(
         'rendido_amount',
         'aprobado_amount',
-        'payment_group_ids.cargo_date',
-        'payment_group_ids.cargo_amount',
+        'payment_group_ids.state',
+        'payment_group_ids.payment_date',
+        'payment_group_ids.payments_amount',
+        # 'payment_group_ids.cargo_date',
+        # 'payment_group_ids.cargo_amount',
         # TODO chequear si hace falta esto o no
-        'advance_payment_group_ids.cargo_date',
-        'advance_payment_group_ids.cargo_amount',
+        'advance_payment_group_ids.state',
+        'advance_payment_group_ids.payment_date',
+        'advance_payment_group_ids.payments_amount',
+        # 'advance_payment_group_ids.cargo_date',
+        # 'advance_payment_group_ids.cargo_amount',
     )
     def get_cargo_data(self):
         payments = self.payment_group_ids + self.advance_payment_group_ids
-        cargo_amount = sum(payments.mapped('cargo_amount'))
+        cargo_amount = sum(payments.mapped('payments_amount'))
         cargo_date = payments.search([
             ('id', 'in', payments.ids),
-            ('cargo_date', '!=', False),
-        ], order='cargo_date desc', limit=1).cargo_date
+            ('payment_date', '!=', False),
+        ], order='payment_date desc', limit=1).payment_date
 
         expiry_date = False
         if cargo_date:

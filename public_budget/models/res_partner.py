@@ -21,6 +21,8 @@ class ResPartner(models.Model):
         [('male', 'Male'), ('female', 'Female'), ('other', 'Other')],
         'Gender'
     )
+    drei_number = fields.Char(
+    )
 
     @api.multi
     def mark_as_reconciled(self):

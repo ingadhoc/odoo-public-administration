@@ -19,7 +19,8 @@ class AccountPaymentGroup(models.Model):
             ('signature_process', 'En Proceso de Firma'),
             ('signed', 'Firmado'),
             # we also change posted for paid
-            ('posted', 'Pagado')
+            ('posted', 'Pagado'),
+            ('cancel', 'Cancelled'),
         ])
     # agregamos reference que fue depreciado y estan acostumbrados a usar
     reference = fields.Char(
@@ -320,17 +321,29 @@ class AccountPaymentGroup(models.Model):
                 if rec.confirmation_date < invoice.date_invoice:
                     raise ValidationError(_(
                         'La fecha de confirmación no puede ser menor a la '
-                        'fecha de la factura que se esta pagando'))
+                        'fecha de la factura que se esta pagando.\n'
+                        '* Id Factura / Fecha: %s - %s\n'
+                        '* Id Pago / Fecha Confirmación: %s - %s') % (
+                        invoice.id, invoice.date_invoice,
+                        rec.id, rec.confirmation_date))
             if not rec.payment_date:
                 continue
-            if self.payment_date < self.confirmation_date:
+            if rec.payment_date < rec.confirmation_date:
                 raise Warning(_(
                     'La fecha de validacion del pago no puede ser menor a la '
-                    'fecha de confirmación'))
-            if self.payment_date < self.payment_min_date:
+                    'fecha de confirmación.\n'
+                    '* Id de Pago: %s\n'
+                    '* Fecha de pago: %s\n'
+                    '* Fecha de confirmación: %s\n' % (
+                        rec.id, rec.payment_date, rec.confirmation_date)))
+            if rec.payment_date < rec.payment_min_date:
                 raise Warning(_(
                     'La fecha de validacion del pago no puede ser menor a la '
-                    'fecha mínima de pago'))
+                    'fecha mínima de pago\n'
+                    '* Id de Pago: %s\n'
+                    '* Fecha de pago: %s\n'
+                    '* Fecha mínima de pago: %s\n' % (
+                        rec.id, rec.payment_date, rec.payment_min_date)))
 
     @api.multi
     @api.constrains('unreconciled_amount', 'transaction_id', 'state')
