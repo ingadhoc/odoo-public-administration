@@ -6,15 +6,14 @@ import logging
 _logger = logging.getLogger(__name__)  # pylint: disable=invalid-name
 
 
-class AccountVoucherPaymentLine(models.Model):
+class AccountPaymentGroupLine(models.Model):
     """Extend model account.bank.statement."""
-    _name = 'account.voucher.payment_line'
-    # _name = 'account_voucher_payment_line_import'
+    _name = 'account.payment.group.line'
     _description = 'Account Vouchers Payment Lines'
 
-    voucher_id = fields.Many2one(
-        'account.voucher',
-        'Voucher',
+    payment_group_id = fields.Many2one(
+        'account.payment.group',
+        'Payment Group',
         required=True,
         ondelete='cascade'
     )
@@ -32,12 +31,15 @@ class AccountVoucherPaymentLine(models.Model):
     )
     amount = fields.Monetary(
     )
+    currency_id = fields.Many2one(
+        related='payment_group_id.currency_id'
+    )
 
     @api.multi
     def refresh_bank_account(self):
         for rec in self:
             banks = self.partner_id.bank_ids
-            if rec.voucher_id.state == 'posted':
+            if rec.payment_group_id.state == 'posted':
                 raise UserError(
                     'No se puede cambiar la cuenta de una orden de pago '
                     'validada')
@@ -63,7 +65,7 @@ class AccountVoucherPaymentLine(models.Model):
                 'Se requiere cuenta bancaria con número de sucursal.\n'
                 '* Partner: %s') % (self.partner_id.name))
 
-        voucher = self.voucher_id
+        payment_group = self.payment_group_id
 
         Registro = ""
 
@@ -94,7 +96,7 @@ class AccountVoucherPaymentLine(models.Model):
 
         # Format(Range("E5").Text, "YYYYMMDD")
         Registro += fields.Date.from_string(
-            voucher.fecha_de_acreditacion).strftime('%Y%m%d')
+            payment_group.fecha_de_acreditacion).strftime('%Y%m%d')
 
         Registro += "00"
 
@@ -103,22 +105,22 @@ class AccountVoucherPaymentLine(models.Model):
         Registro += "000000000000"
 
         # Right("0" & Range("E7").Value, 1)
-        Registro += voucher.tipo_de_pago.rjust(1, '0')
+        Registro += payment_group.tipo_de_pago.rjust(1, '0')
 
         # Right("000" & Range("E6").Value, 3)
-        Registro += voucher.grupo_asingado_por_bmr.rjust(3, '0')
+        Registro += payment_group.grupo_asingado_por_bmr.rjust(3, '0')
 
         Registro += "     "
 
         Registro += "00000"
 
         # Right("00000" & Range("E10").Value, 5)
-        Registro += voucher.tipo_de_cuenta.rjust(5, '0')
+        Registro += payment_group.tipo_de_cuenta.rjust(5, '0')
 
         # Right("00" & Range("E8").Value, 2)
-        Registro += voucher.sucursal_de_cuenta_debito.rjust(2, '0')
+        Registro += payment_group.sucursal_de_cuenta_debito.rjust(2, '0')
 
         # Right("00000000" & Range("E9").Value, 8)
-        Registro += voucher.numero_de_cuenta_debito.rjust(8, '0')
+        Registro += payment_group.numero_de_cuenta_debito.rjust(8, '0')
 
         return Registro
