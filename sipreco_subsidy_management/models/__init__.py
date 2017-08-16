@@ -5,4 +5,3 @@ from . import subsidy_rendition
 from . import subsidy_note
 from . import subsidy_note_type
 from . import transaction_type
-from . import account_payment_group
