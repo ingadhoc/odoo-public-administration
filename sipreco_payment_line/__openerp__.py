@@ -14,7 +14,8 @@
     'depends': [
         'public_budget',
     ],
-    'installable': True,
+    # TODO todavia no lo activamos porque tal vez lo sacamos fuera de sipreco
+    'installable': False,
     'name': 'Sipreco Payment Lines',
     'test': [],
     'version': '9.0.1.0.0',
