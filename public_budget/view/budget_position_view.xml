@@ -34,10 +34,12 @@
                      <group>
                         <field name="code"/> 
                         <field name="name"/> 
+                        <field name="default_account_id"/> 
                         <field name="type"/> 
                         <field name="parent_id"/> 
                         <field name="budget_assignment_allowed"/> 
                         <field name="assignment_position_id"/> 
+                        <field name="company_id" groups="base.group_multi_company"/>
                         <field name="inventariable" attrs="{'invisible': [('type', '=', 'view')]}"/> 
                         <field name="category_id" attrs="{'invisible': [('type', '=', 'view')], 'required':[('type', '=', 'normal')]}"/> 
                         <field name="child_ids" context="{'budget_id':context.get('budget_id')}" attrs="{'invisible':[('type','!=','view')]}"/>
@@ -71,7 +73,7 @@
             <field name="priority" eval="99"/>
             <field name="field_parent">child_ids</field>
             <field name="arch" type="xml">
-                <tree colors="blue:type=='view'; green:budget_assignment_allowed; red: budget_assignment_allowed and projected_amount > amount;">
+                <tree colors="blue:type=='view'; green:budget_assignment_allowed; red: budget_assignment_allowed and projected_amount &gt; amount;">
                     <field name="parent_left" invisible="1"/>
                     <field name="code"/>
                     <field name="name"/>

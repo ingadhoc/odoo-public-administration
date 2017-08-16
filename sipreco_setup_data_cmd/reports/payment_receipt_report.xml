@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data noupdate="0">
-        <record id="public_budget.action_aeroo_report_payment_receipt" model="ir.actions.report.xml">
-            <field name="report_rml">sipreco_setup_data_cmd/reports/payment_receipt_report.odt</field>
-        </record>
-    </data>
-</openerp>

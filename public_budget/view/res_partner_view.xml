@@ -2,24 +2,44 @@
 <odoo>
 
     <!-- INHERITED SEARCH -->
-    <record id="view_partner_person_filter" model="ir.ui.view">
+    <record id="view_res_partner_filter" model="ir.ui.view">
         <field name="name">partner.person.select</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_res_partner_filter"/>
         <field name="arch" type="xml">
+            <filter name="customer" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </filter>
             <filter name="customer" position="before">
                 <filter string="Employee" name="employee" domain="[('employee','=',1)]" help="Employee Partners"/>
                 <filter string="Subsidy Recipient" name="subsidy_recipient" domain="[('subsidy_recipient','=',1)]" help="Subsidy Recipient Partners"/>
             </filter>
+            <field name="category_id" position="before">
+                <field name="gender"/>
+            </field>
+            <group>
+                <filter string="Gender" context="{'group_by': 'gender'}"/>
+            </group>
         </field>
     </record>
 
-    <!-- TODO tal vez en v10 queremos sacar depdencia a l10n_ar_account y esto va por interfaz o algo asi -->
     <!-- INHERITED FORM -->
-    <record id="view_ar_account_partnerform" model="ir.ui.view">
+    <record id="view_withholding_partner_form" model="ir.ui.view">
         <field name="name">partner.ar_account.form</field>
         <field name="model">res.partner</field>
-        <field name="inherit_id" ref="l10n_ar_account.view_res_partner_form"/>
+        <field name="inherit_id" ref="l10n_ar_account_withholding.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="drei" position="after">
+                <field name="drei_number"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- INHERITED FORM -->
+    <record id="view_partner_property_form" model="ir.ui.view">
+        <field name="name">partner.ar_account.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="l10n_ar_account.view_partner_property_form"/>
         <field name="arch" type="xml">
             <field name="afip_responsability_type_id" position="attributes">
                 <!-- only required if is company or not parent -->
@@ -28,13 +48,20 @@
         </field>
     </record>
     
-    <record id="view_ar_partnerform" model="ir.ui.view">
+    <record id="view_partner_form" model="ir.ui.view">
         <field name="name">partner.ar.form</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="l10n_ar_partner.view_partner_form"/>
         <field name="arch" type="xml">
+            <xpath expr="//page[@name='sales_purchases']//field[@name='customer']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <field name="user_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
             <!-- TODO ENABLE!! -->
             <label for="main_id_number" position="before">
+                <field name="gender" attrs="{'invisible': [('company_type', '!=', 'person')]}"/>
                 <field name="numero_legajo" attrs="{'invisible': [('employee', '=', False)]}"/>
             </label>
             <field name="main_id_category_id" position="attributes">
@@ -49,17 +76,6 @@
                 <field name="employee"/>
             </xpath>
         </field>
-    </record>
-
-    <record id="action_res_partner_suppliers" model="ir.actions.act_window">
-        <field name="name">Subsidy Recipents</field>
-        <field name="res_model">res.partner</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
-        <field name="help" type="html">
-            <p class="oe_view_nocontent_create"> Click to create a Subsidy Recipent.</p>
-        </field>
-        <field name="context">{'search_default_subsidy_recipient': 1,'default_customer': 0,'default_subsidy_recipient': 1}</field>
     </record>
 
 </odoo>

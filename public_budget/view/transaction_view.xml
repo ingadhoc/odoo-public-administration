@@ -68,14 +68,16 @@
                                 <field name="budget_id"/>
                                 <field name="name"/>
                                 <field name="expedient_id"
-                                    domain="[('current_location_id','in',user_location_ids[0][2]),('in_transit','=',False),('state','=','open')]" options="{'no_create': True}"
+                                    domain="[('current_location_id', 'in', user_location_ids and user_location_ids[0][2] or []),('in_transit','=',False),('state','=','open')]" options="{'no_create': True}"
                                     /> 
+                                <field name="company_id" groups="base.group_multi_company"/>
                                 <field name="type_id"/>
                                 <field name="partner_id" attrs="{'invisible':[('type_with_advance_payment','=',False)],'required':[('type_with_advance_payment','=',True)]}"/>
-                                <field name="company_id" groups="base.group_multi_company"/>
                                 <field name="user_id"/>
                             </group>
-                            <group col="1">
+                            <!-- <group col="1"> -->
+                            <!-- asi quedó en 3 columnas y gustó mas -->
+                            <group>
                                 <group name="amounts">
                                     <label for="preventive_amount"/>
                                     <div>

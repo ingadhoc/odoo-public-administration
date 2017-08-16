@@ -26,7 +26,8 @@
                     <field name="currency_id" invisible="1"/>
                     <field name="company_id" invisible="1"/>
                     <field name="definitive_partner_type" invisible="1"/>
-                    <field name="transaction_id" invisible="1"/>
+                    <field name="transaction_id" invisible="1" required="False"/>
+                    <field name="to_pay_amount" invisible="1"/>
                     <header>
                     </header>
                     <sheet string="Preventive Line">

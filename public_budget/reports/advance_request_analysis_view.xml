@@ -5,7 +5,7 @@
          <field name="name">advance.request.analysis.graph</field>
          <field name="model">advance.request.analysis</field>
          <field name="arch" type="xml">
-             <graph string="Advance Request Analysis" type="pivot">
+             <graph string="Advance Request Analysis">
                  <!-- <field name="type_id"/> -->
                  <field name="type_id" type="row"/>
                  <field name="employee_id" type="row"/>
@@ -13,6 +13,21 @@
                  <!-- <field name="date" type="col"/> -->
                  <field name="amount" type="measure"/>
              </graph>
+         </field>
+    </record>
+
+    <record id="view_advance_request_analysis_pivot" model="ir.ui.view">
+         <field name="name">advance.request.analysis.pivot</field>
+         <field name="model">advance.request.analysis</field>
+         <field name="arch" type="xml">
+             <pivot string="Advance Request Analysis">
+                 <!-- <field name="type_id"/> -->
+                 <field name="type_id" type="row"/>
+                 <field name="employee_id" type="row"/>
+                 <field name="direction" type="row"/>
+                 <!-- <field name="date" type="col"/> -->
+                 <field name="amount" type="measure"/>
+             </pivot>
          </field>
     </record>
 
@@ -68,7 +83,7 @@
         <field name="name">Analisis de Requerimientos de Adelanto</field>
         <field name="res_model">advance.request.analysis</field>
         <field name="view_type">form</field>
-        <field name="view_mode">graph</field>
+        <field name="view_mode">graph,pivot</field>
         <field name="context">{'search_default_active_lines':1}</field>
         <field name="search_view_id" ref="view_advance_request_analysis_search"/>
     </record>

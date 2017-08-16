@@ -14,11 +14,23 @@
 
     <!-- tree view modification -->
     <record id="view_account_payment_group_tree" model="ir.ui.view">
-        <field name="name">account.payment.group.customer.pay.tree</field>
+        <field name="name">account.payment.group.pay.tree</field>
         <field name="model">account.payment.group</field>
         <field name="inherit_id" ref="account_payment_group.view_account_payment_group_tree"/>
         <field name="priority">20</field>
         <field name="arch" type="xml">
+            <!-- para que solo se puedan crear con el botón -->
+            <tree position="attributes">
+                <attribute name="create">false</attribute>
+            </tree>
+
+            <!-- para poder ver lo que se manda a pagar antes de que se carguen los pagos -->
+            <field name="payments_amount" position="before">
+                <field name="to_pay_amount" sum="Total"/>
+            </field>
+            <field name="partner_id" position="before">
+                <field name="reference"/>
+            </field>
             <tree position="inside">
                 <button name="%(action_aeroo_report_payment)d" class="oe_highlight" string="Print Payment Order" type="action" icon="fa-print"/>
                 <button name="confirm" type="object" string="Confirm" states="draft" icon="fa-arrow-circle-right" groups="account.group_account_manager"/>
@@ -53,9 +65,17 @@
                 <attribute name="groups">account.group_account_manager</attribute>
             </button>
 
+            <field name="communication" position="before">
+                <field name="reference"/>
+            </field>
+
             <field name="payment_date" position="before">
                 <field name="payment_base_date"/>
-                <field name="payment_days"/>
+                <label for="payment_days"/>
+                <div class="oe_inline">
+                    <field name="payment_days" class="oe_inline"/>
+                    <field name="days_interval_type" class="oe_inline"/>
+                </div>
                 <field name="payment_min_date"/>
                 <field name="confirmation_date"/>
             </field>
@@ -72,7 +92,7 @@
 
             <!-- add payment order and print receipt button -->
             <button name="payment_print" position="replace">
-                <button name="%(action_aeroo_report_payment)" string="Print Payment Order" class="oe_highlight" groups="base.group_user" type="action" />
+                <button name="%(action_aeroo_report_payment)d" string="Print Payment Order" class="oe_highlight" groups="base.group_user" type="action" />
                 <button name="%(action_aeroo_report_payment_receipt)d" class="oe_highlight" string="Print Receipt" attrs="{'invisible': [('show_print_receipt_button', '=', False)]}" type="action"/>
             </button>
 
@@ -98,7 +118,9 @@
             <!-- Make post only visible from signed and available for hab director -->
             <button name="post" position="attributes">
                 <attribute name="attrs">{'invisible': ['|', '&amp;', ('payment_subtype', '=', 'simple'), ('state', '!=', 'draft'), '&amp;', ('payment_subtype', '=', 'double_validation'), ('state', '!=', 'signed')]}</attribute>
-                <attribute name="groups">public_budget.group_habilitacion_director</attribute>
+                <!-- <attribute name="groups">public_budget.group_habilitacion_director</attribute> -->
+                <!-- al final hacemos que los usuarios puedan validar porque son los que entregan cheques e hicimos que la entrega del cheque se corresponda con la validación -->
+                <attribute name="groups">public_budget.group_habilitacion_usuario</attribute>
             </button>
 
             <!-- Add signe buttons -->

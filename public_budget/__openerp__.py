@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 {
     'name': 'Public Budget',
     'license': 'AGPL-3',
@@ -6,6 +7,7 @@
     'website': 'www.adhoc.com.ar',
     'category': 'Accounting & Finance',
     'depends': [
+        'portal',
         'account',
         'account_check',
         'account_payment_group_document',
@@ -16,11 +18,16 @@
         'report_custom_filename',
         # estrictamente solo requerido por algunos campos en vista de partner
         'l10n_ar_account',
+        # solo para el reporte de ordenes de pago que imprime el dato de la
+        # validacion
+        'l10n_ar_afipws_fe',
         # mas que nada para datos demo y porque lo queremos
         'l10n_ar_states',
         # solo requerido para establecer datos demo en cia y hacer que las ret
         # no sean obligatorias en borrador
         'l10n_ar_account_withholding',
+        # usado por algunos reportes como el de cheques y retenciones
+        'l10n_ar_aeroo_base',
     ],
     'data': [
         'security/public_budget_group.xml',
@@ -31,8 +38,6 @@
         'wizard/transaction_definitive_mass_invoice_create_view.xml',
         'wizard/budget_analysis_wizard_view.xml',
         'wizard/avance_request_report_wizard_view.xml',
-        # TODO enable
-        # 'wizard/account_check_handed_wizard_view.xml',
         'reports/advance_request_analysis_view.xml',
         'reports/stylesheet.xml',
         'reports/payment_order_report.xml',
@@ -47,7 +52,9 @@
         'reports/liquidation_report.xml',
         'reports/advance_request_debt_report.xml',
         'reports/asset_report.xml',
-        # 'reports/public_budget_budget_report_view_3.xml',
+        'reports/check_report.xml',
+        'reports/payment_order_list.xml',
+        'reports/public_budget_budget_report_view_3.xml',
         'view/inventory_rule_view.xml',
         'view/account_invoice_view.xml',
         'view/advance_request_type_view.xml',
@@ -78,19 +85,20 @@
         'view/expedient_founder_view.xml',
         'view/res_partner_view.xml',
         'view/account_asset_view.xml',
-        # TODO mig vista
-        # 'view/account_check_view.xml',
+        'view/account_check_view.xml',
         'view/account_payment_group_view.xml',
+        'view/account_payment_view.xml',
         'view/hr_public_holidays_view.xml',
         'view/custom_views.xml',
+        'view/public_budget_menuitem.xml',
+        'view/public_budget_actions.xml',
         'data/sequence.xml',
         'data/expedient_category.xml',
         'data/expedient_founder.xml',
         'data/position_category.xml',
         'data/position_exc_restrictions.xml',
         'data/ir_config_parameter_data.xml',
-        'view/public_budget_menuitem.xml',
-        'view/public_budget_actions.xml',
+        'data/server_actions_data.xml',
     ],
     'demo': [
         'demo/res_company_demo.xml',

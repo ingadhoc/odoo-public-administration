@@ -1,23 +1,23 @@
-id,code,name,category_id/id,type,parent_id/id,budget_assignment_allowed
-budg_pos_personal,01.,Personal,,view,,
-budg_pos_1,01.01.,Personal Permanente,pos_categ_expense,normal,budg_pos_personal,True
-budg_pos_2,01.05.,Personal No Permanente y Transitorio,pos_categ_expense,normal,budg_pos_personal,True
-budg_pos_3,01.04.,Personal No Permanente y A. Superior,pos_categ_expense,normal,budg_pos_personal,True
-budg_pos_bs_y_ser,02.,Bienes de Consumo,,view,,
-budg_pos_31,02.09,Otros Bienes de Consumo,pos_categ_expense,normal,budg_pos_bs_y_ser,True
-budg_pos_ser_no_pers,03.,Servicios No Personales,,view,,
-budg_pos_5,03.01,Servicios Básicos,pos_categ_expense,normal,budg_pos_ser_no_pers,True
-budg_pos_6,03.02,Alquileres y Derechos,pos_categ_expense,normal,budg_pos_ser_no_pers,True
-budg_pos_7,03.03,"Mantenimiento, reparación y limpieza de bienes de dom. Privado",pos_categ_expense,normal,budg_pos_ser_no_pers,True
-budg_pos_8,03.04,Servicios Técnicos y Profesionales,pos_categ_expense,normal,budg_pos_ser_no_pers,True
-budg_pos_9,03.05,Servicios Comerciales y Financieros,pos_categ_expense,normal,budg_pos_ser_no_pers,True
-budg_pos_10,03.07,Publicidad y Propaganda,pos_categ_expense,normal,budg_pos_ser_no_pers,True
-budg_pos_11,03.09,Otros Servicios,pos_categ_expense,normal,budg_pos_ser_no_pers,True
-budg_pos_activos,04.,Bienes de Uso,,view,,
-budg_pos_12,04.03,Maquinaria y Equipo,pos_categ_capital,normal,budg_pos_activos,True
-budg_pos_13,04.05,"Libros, Revistas y Otros Elementos Coleccionables",pos_categ_expense,normal,budg_pos_activos,True
-budg_pos_14,04.08,Activos Intangibles,pos_categ_capital,normal,budg_pos_activos,True
-budg_pos_otros,05.,Transferencias,,view,,True
-budg_pos_15,05.01.04,Aportes Asociación Nacional Tribunales de Cuenta,pos_categ_expense,normal,budg_pos_otros,
-budg_pos_16,05.01.09,Pasantías,pos_categ_expense,normal,budg_pos_otros,
-budg_pos_17,05.03.06.01,Subsidio Universidad Nacional de Rosario,pos_categ_expense,normal,budg_pos_otros,
+id,code,name,category_id/id,type,parent_id/id,budget_assignment_allowed,company_id/id
+budg_pos_personal,01.,Personal,,view,,,public_budget.company_sipreco
+budg_pos_1,01.01.,Personal Permanente,pos_categ_expense,normal,budg_pos_personal,True,public_budget.company_sipreco
+budg_pos_2,01.05.,Personal No Permanente y Transitorio,pos_categ_expense,normal,budg_pos_personal,True,public_budget.company_sipreco
+budg_pos_3,01.04.,Personal No Permanente y A. Superior,pos_categ_expense,normal,budg_pos_personal,True,public_budget.company_sipreco
+budg_pos_bs_y_ser,02.,Bienes de Consumo,,view,,,public_budget.company_sipreco
+budg_pos_31,02.09,Otros Bienes de Consumo,pos_categ_expense,normal,budg_pos_bs_y_ser,True,public_budget.company_sipreco
+budg_pos_ser_no_pers,03.,Servicios No Personales,,view,,,public_budget.company_sipreco
+budg_pos_5,03.01,Servicios Básicos,pos_categ_expense,normal,budg_pos_ser_no_pers,True,public_budget.company_sipreco
+budg_pos_6,03.02,Alquileres y Derechos,pos_categ_expense,normal,budg_pos_ser_no_pers,True,public_budget.company_sipreco
+budg_pos_7,03.03,"Mantenimiento, reparación y limpieza de bienes de dom. Privado",pos_categ_expense,normal,budg_pos_ser_no_pers,True,public_budget.company_sipreco
+budg_pos_8,03.04,Servicios Técnicos y Profesionales,pos_categ_expense,normal,budg_pos_ser_no_pers,True,public_budget.company_sipreco
+budg_pos_9,03.05,Servicios Comerciales y Financieros,pos_categ_expense,normal,budg_pos_ser_no_pers,True,public_budget.company_sipreco
+budg_pos_10,03.07,Publicidad y Propaganda,pos_categ_expense,normal,budg_pos_ser_no_pers,True,public_budget.company_sipreco
+budg_pos_11,03.09,Otros Servicios,pos_categ_expense,normal,budg_pos_ser_no_pers,True,public_budget.company_sipreco
+budg_pos_activos,04.,Bienes de Uso,,view,,,public_budget.company_sipreco
+budg_pos_12,04.03,Maquinaria y Equipo,pos_categ_capital,normal,budg_pos_activos,True,public_budget.company_sipreco
+budg_pos_13,04.05,"Libros, Revistas y Otros Elementos Coleccionables",pos_categ_expense,normal,budg_pos_activos,True,public_budget.company_sipreco
+budg_pos_14,04.08,Activos Intangibles,pos_categ_capital,normal,budg_pos_activos,True,public_budget.company_sipreco
+budg_pos_otros,05.,Transferencias,,view,,True,public_budget.company_sipreco
+budg_pos_15,05.01.04,Aportes Asociación Nacional Tribunales de Cuenta,pos_categ_expense,normal,budg_pos_otros,,public_budget.company_sipreco
+budg_pos_16,05.01.09,Pasantías,pos_categ_expense,normal,budg_pos_otros,,public_budget.company_sipreco
+budg_pos_17,05.03.06.01,Subsidio Universidad Nacional de Rosario,pos_categ_expense,normal,budg_pos_otros,,public_budget.company_sipreco

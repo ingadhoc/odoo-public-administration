@@ -17,9 +17,10 @@
         'web_sheet_full_width',
         'account_accountant',
         'l10n_ar_bank',
-        # 'account_voucher_popup_print',
-        # 'account_balance_constraint',
         'base_state_active',
+        'web_pdf_preview',
+        'account_reports',
+        'adhoc_account_planner',  # para que genere los diarios que queremos
         # 'portal',  # necesitamos portal por un error raro al crear un voucher
         # # es un error de javascript pero con portal de alguna manera se
         # # resuelve. Luego de instalar portal refrescar pantalla

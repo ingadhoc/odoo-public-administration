@@ -1,16 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
 <data>
+
     <record id="view_public_budget_budget_report_3_graph" model="ir.ui.view">
          <field name="name">public_budget.budget.report_3.graph</field>
          <field name="model">public_budget.budget.report_3</field>
          <field name="arch" type="xml">
-             <graph string="Analisis de Presupuesto" type="pivot">
+             <graph string="Analisis de Presupuesto">
                  <field name="assignment_position_id" type="row"/>
                  <field name="budget_position_id" type="row"/>
                  <field name="type" type="col"/>
                  <field name="amount" type="measure"/>
              </graph>
+         </field>
+    </record>
+
+    <record id="view_public_budget_budget_report_3_pivot" model="ir.ui.view">
+         <field name="name">public_budget.budget.report_3.pivot</field>
+         <field name="model">public_budget.budget.report_3</field>
+         <field name="arch" type="xml">
+             <pivot string="Analisis de Presupuesto">
+                 <field name="assignment_position_id" type="row"/>
+                 <field name="budget_position_id" type="row"/>
+                 <field name="type" type="col"/>
+                 <field name="amount" type="measure"/>
+             </pivot>
          </field>
     </record>
 
@@ -36,10 +50,6 @@
                 <field name="transaction_expedient_id"/>
                 <field name="transaction_state"/>
                 <field name="transaction_partner_id"/>
-                <!-- <field name="supplier_id"/> -->
-                <!-- <field name="invoice_id"/> -->
-                <!-- <field name="voucher_id"/> -->
-                <!-- <field name="voucher_expedient_id"/> -->
                 <group expand="1" string="Group By">
                     <filter string="Tipo" name="group_type" context="{'group_by':'type'}"/>
                     <filter string="Nro de OP/Comprobante" name="group_type" context="{'group_by':'document_number'}"/>
@@ -52,11 +62,6 @@
                     <filter string="Expediente de Transacción" name="group_transaction_expedient_id" context="{'group_by':'transaction_expedient_id'}"/>
                     <filter string="Estado de Transacción" name="group_transaction_state" context="{'group_by':'transaction_state'}"/>
                     <filter string="Partner de Transacción" name="group_transaction_partner_id" context="{'group_by':'transaction_partner_id'}"/>
-                    <!-- <filter string="Definitive Date" name="group_definitive_date" context="{'group_by':'definitive_date'}"/> -->
-                    <!-- <filter string="Supplier" name="group_supplier_id" context="{'group_by':'supplier_id'}"/> -->
-                    <!-- <filter string="Invoice" name="group_invoice_id" context="{'group_by':'invoice_id'}"/> -->
-                    <!-- <filter string="Voucher" name="group_voucher_id" context="{'group_by':'voucher_id'}"/> -->
-                    <!-- <filter string="Voucher Exedient" name="group_voucher_expedient_id" context="{'group_by':'voucher_expedient_id'}"/> -->
                 </group>
             </search>
         </field>
@@ -70,16 +75,11 @@
                 <field name="type"/>
                 <field name="preventive_line_id"/>
                 <field name="transaction_id"/>
-                <!-- <field name="model"/> -->
-                <!-- <field name="res_id"/> -->
                 <field name="reference"/>
                 <field name="resource"/>
                 <field name="partner_id"/>
                 <field name="budget_position_id"/>
                 <field name="amount" sum="Total"/>
-                <!-- <field name="supplier_id"/> -->
-                <!-- <field name="invoice_id"/> -->
-                <!-- <field name="voucher_id"/> -->
             </tree>
         </field>
     </record>
@@ -94,8 +94,6 @@
                         <field name="type"/>
                         <field name="reference"/>
                         <field name="resource"/>
-                        <!-- <field name="res_id"/> -->
-                        <!-- <field name="model"/> -->
                         <field name="partner_id"/>
                         <field name="affects_budget"/>
                         <field name="advance_line"/>
@@ -122,7 +120,7 @@
         <field name="name">Analisis de Presupuesto</field>
         <field name="res_model">public_budget.budget.report_3</field>
         <field name="view_type">form</field>
-        <field name="view_mode">graph,tree,form</field>
+        <field name="view_mode">graph,pivot,tree,form</field>
         <field name="context">{'search_default_affects_budget': 1}</field>
         <!-- <field name="domain">[('affects_budget', '=', True)]</field> -->
         <field name="domain">[]</field>

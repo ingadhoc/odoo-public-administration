@@ -13,7 +13,7 @@
                     <field name="document_sequence_id" invisible="1"/>
                     <field name="company_id" invisible="1"/>
                     <group>
-                        <field name="supplier_id" options="{'no_create': True}" domain="[('id','in',supplier_ids[0][2])]"/>
+                        <field name="supplier_id" options="{'no_create': True}" domain="[('id', 'in', supplier_ids and supplier_ids[0][2] or [])]"/>
                         <field name="journal_id"/>
                         <field name="line_ids">
                             <tree create="false" delete="false" editable="top">

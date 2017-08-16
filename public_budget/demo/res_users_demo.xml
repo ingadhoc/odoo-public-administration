@@ -15,6 +15,12 @@
     </record>
 
 <!-- Partners para usuarios -->
+    <record id="portal_expedientes" model="res.partner">
+        <field name="name">Portal Expedientes</field>
+        <field name="company_id" ref="company_sipreco"/>
+        <field name="customer" eval="False"/>
+        <field name="email">portal_expedientes@yourcompany.example.com</field>
+    </record>
     <record id="general_user_partner" model="res.partner">
         <field name="name">General User</field>
         <field name="company_id" ref="company_sipreco"/>
@@ -60,7 +66,16 @@
 
 <!-- Usuarios -->
 <!-- Users -->
-
+    <record id="portal_expedientes_user" model="res.users">
+        <field name="partner_id" ref="portal_expedientes"/>
+        <field name="login">portal_expedientes</field>
+        <field name="password">portal_expedientes</field>
+        <field name="company_id" ref="company_sipreco"/>
+        <field name="company_ids" eval="[(4,ref('company_sipreco'))]"/>
+        <field name="groups_id" eval="[(6,0,[ref('group_portal_expedient')])]"/>
+        <field name="location_ids" eval="[(6,0,[ref('public_location_secretaria'), ref('public_location_habilitaciones'), ref('public_location_contaduria'),  ref('public_location_mesa_de_entrada'), ref('public_location_compras'), ref('public_location_tmc')])]"/>
+        <field name="image" type="base64" file="base/static/img/user_demo-image.jpg"/>
+    </record>
     <record id="general_user_user" model="res.users">
         <field name="partner_id" ref="general_user_partner"/>
         <field name="login">general</field>

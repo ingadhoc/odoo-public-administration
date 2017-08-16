@@ -36,11 +36,6 @@
                 <form string="Expedient">
                     <header>
                         <button name="%(action_aeroo_report_expedient)d" class="oe_highlight" string="Print" type="action"/>
-                        <button name="action_in_revision"
-                            states="open"
-                            type="object"
-                            string="To Revision"
-                            class="oe_highlight"/>
                         <button name="action_cancel_open"
                             type="object"
                             states="cancel"
@@ -52,12 +47,13 @@
                             groups="public_budget.group_secretary_usuario"
                             string="To Annulled"/>
                         <button name="action_close"
-                            states="in_revision"
+                            states="open"
                             type="object"
+                            groups="public_budget.group_secretary_usuario"
                             string="Close"
                             class="oe_highlight"/>
                         <button name="action_cancel"
-                            states="annulled,closed,in_revision,open"
+                            states="annulled,closed,open"
                             type="object"
                             string="Cancel"
                             groups="base.group_no_one"/>
@@ -88,7 +84,7 @@
                                 <field name="category_id"/>
                                 <field name="type"/>
                                 <field name="parent_id"/>
-                                <field name="first_location_id" options="{'no_create': True}" domain="[('id','in',user_location_ids[0][2])]"/>
+                                <field name="first_location_id" options="{'no_create': True}" domain="[('id', 'in', user_location_ids and user_location_ids[0][2] or [])]"/>
                                 <field name="current_location_id"/>
                                 <field name="final_location" states="closed,annulled"/>
                                 <field name="pages"/>
@@ -125,7 +121,7 @@
             <field name="model">public_budget.expedient</field>
             <field name="arch" type="xml">
                 <tree string="Expedient"
-                    colors="grey:state=='cancelled';blue:state in (u'open',);black:state in (u'annulled', u'in_revision', u'closed');red:state in ()"
+                    colors="grey:state=='cancelled';blue:state in (u'open',);black:state in (u'annulled', u'closed');red:state in ()"
                     >
                     <field name="number"/>
                     <field name="issue_date"/>

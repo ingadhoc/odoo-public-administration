@@ -19,8 +19,13 @@ class AccountPaymentGroup(models.Model):
             ('signature_process', 'En Proceso de Firma'),
             ('signed', 'Firmado'),
             # we also change posted for paid
-            ('posted', 'Pagado')
+            ('posted', 'Pagado'),
+            ('cancel', 'Cancelled'),
         ])
+    # agregamos reference que fue depreciado y estan acostumbrados a usar
+    reference = fields.Char(
+        string='Ref. pago',
+    )
     budget_id = fields.Many2one(
         related='transaction_id.budget_id',
         readonly=True,
@@ -88,6 +93,13 @@ class AccountPaymentGroup(models.Model):
         states={'draft': [('readonly', False)]},
         help='Days added to payment base date to get the payment date',
     )
+    days_interval_type = fields.Selection([
+        ('business_days', 'Business Days'),
+        ('calendar_days', 'Calendar Days')],
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+        default='business_days',
+    )
     payment_min_date = fields.Date(
         compute='get_payment_min_date',
         string='Fecha Min. de Pago',
@@ -106,6 +118,7 @@ class AccountPaymentGroup(models.Model):
         required=False,
         default=False,
     )
+    # TODO implementar
     # paid_withholding_ids = fields.Many2many(
     #     comodel_name='account.voucher.withholding',
     #     string='Retenciones Pagadas',
@@ -139,6 +152,10 @@ class AccountPaymentGroup(models.Model):
     @api.multi
     def confirm(self):
         for rec in self:
+            if not rec.to_pay_amount:
+                raise ValidationError(_(
+                    'No puede confirmar una orden de pago sin importe a pagar')
+                )
             if not rec.confirmation_date:
                 rec.confirmation_date = fields.Date.today()
         return super(AccountPaymentGroup, self).confirm()
@@ -162,22 +179,28 @@ class AccountPaymentGroup(models.Model):
         self.show_print_receipt_button = show_print_receipt_button
 
     @api.one
-    @api.depends('payment_base_date', 'payment_days')
+    @api.depends('payment_base_date', 'payment_days', 'days_interval_type')
     def get_payment_min_date(self):
         current_date = False
         business_days_to_add = self.payment_days
         if self.payment_base_date:
-            current_date = fields.Date.from_string(self.payment_base_date)
-            while business_days_to_add > 0:
-                current_date = current_date + relativedelta(days=1)
-                weekday = current_date.weekday()
-                # sunday = 6
-                if weekday >= 5 or self.env[
-                        'hr.holidays.public'].is_public_holiday(current_date):
-                    continue
-                # if current_date in holidays:
-                #     continue
-                business_days_to_add -= 1
+            if self.days_interval_type == 'business_days':
+                current_date = fields.Date.from_string(self.payment_base_date)
+                while business_days_to_add > 0:
+                    current_date = current_date + relativedelta(days=1)
+                    weekday = current_date.weekday()
+                    # sunday = 6
+                    if weekday >= 5 or self.env[
+                            'hr.holidays.public'].is_public_holiday(
+                                current_date):
+                        continue
+                    # if current_date in holidays:
+                    #     continue
+                    business_days_to_add -= 1
+            else:
+                current_date = fields.Date.from_string(self.payment_base_date)
+                current_date = current_date + relativedelta(
+                    days=self.payment_days)
         self.payment_min_date = fields.Date.to_string(current_date)
 
     # TODO enable
@@ -192,7 +215,15 @@ class AccountPaymentGroup(models.Model):
     @api.multi
     def to_signature_process(self):
         for rec in self:
-            if self.currency_id.round(rec.payments_amount - rec.to_pay_amount):
+            for payment in rec.payment_ids.filtered(
+                    lambda x: x.payment_method_code == 'issue_check'):
+                if not payment.check_number or not payment.check_name:
+                    raise ValidationError(
+                        'Para mandar a proceso de firma debe definir número '
+                        'de cheque en cada línea de pago.\n'
+                        '* ID de orden de pago: %s' % rec.id)
+
+            if rec.currency_id.round(rec.payments_amount - rec.to_pay_amount):
                 raise ValidationError((
                     'No puede mandar a pagar una orden de pago que tiene '
                     'Importe a pagar distinto a Importe de los Pagos'))
@@ -238,10 +269,14 @@ class AccountPaymentGroup(models.Model):
             if transaction:
                 if transaction.type_id.with_advance_payment and (
                         transaction.partner_id):
-                    partners = transaction.partner_id.commercial_partner_id
+                    # no hace falta que sea el comercial...
+                    partners = transaction.partner_id
+                    # partners = transaction.partner_id.commercial_partner_id
                 else:
+                    # no hace falta que sea el comercial...
                     partners = transaction.mapped(
-                        'supplier_ids.commercial_partner_id')
+                        # 'supplier_ids.commercial_partner_id')
+                        'supplier_ids')
                 rec.partner_ids = partners
 
     @api.multi
@@ -270,14 +305,14 @@ class AccountPaymentGroup(models.Model):
     @api.constrains('state')
     def update_invoice_amounts(self):
         _logger.info('Updating invoice amounts from payment group')
-        # when voucher state changes we recomputed related invoice values
+        # when payment state changes we recomputed related invoice values
         # we could improove this filtering by relevant states
         for rec in self:
             rec.invoice_ids.sudo()._compute_to_pay_amount()
 
     @api.multi
-    @api.constrains('confirmation_date', 'payment_min_date')
-    def check_date(self):
+    @api.constrains('confirmation_date', 'payment_min_date', 'payment_date')
+    def check_dates(self):
         _logger.info('Checking dates')
         for rec in self:
             if not rec.confirmation_date:
@@ -286,24 +321,40 @@ class AccountPaymentGroup(models.Model):
                 if rec.confirmation_date < invoice.date_invoice:
                     raise ValidationError(_(
                         'La fecha de confirmación no puede ser menor a la '
-                        'fecha de la factura que se esta pagando'))
+                        'fecha de la factura que se esta pagando.\n'
+                        '* Id Factura / Fecha: %s - %s\n'
+                        '* Id Pago / Fecha Confirmación: %s - %s') % (
+                        invoice.id, invoice.date_invoice,
+                        rec.id, rec.confirmation_date))
             if not rec.payment_date:
                 continue
             if rec.payment_date < rec.confirmation_date:
-                raise ValidationError(_(
+                raise Warning(_(
                     'La fecha de validacion del pago no puede ser menor a la '
-                    'fecha de confirmación'))
+                    'fecha de confirmación.\n'
+                    '* Id de Pago: %s\n'
+                    '* Fecha de pago: %s\n'
+                    '* Fecha de confirmación: %s\n' % (
+                        rec.id, rec.payment_date, rec.confirmation_date)))
+            if rec.payment_date < rec.payment_min_date:
+                raise Warning(_(
+                    'La fecha de validacion del pago no puede ser menor a la '
+                    'fecha mínima de pago\n'
+                    '* Id de Pago: %s\n'
+                    '* Fecha de pago: %s\n'
+                    '* Fecha mínima de pago: %s\n' % (
+                        rec.id, rec.payment_date, rec.payment_min_date)))
 
     @api.multi
     @api.constrains('unreconciled_amount', 'transaction_id', 'state')
-    def check_voucher_transaction_amount(self):
+    def check_avance_transaction_amount(self):
         """
         """
         for rec in self:
             _logger.info('Checking transaction amount on voucher %s' % rec.id)
             if rec.transaction_with_advance_payment:
                 # forzamos el recalculo porque al ser store no lo recalculaba
-                rec.transaction_id._get_advance_remaining_amount()
+                rec.transaction_id._compute_advance_remaining_amount()
                 advance_remaining_amount = rec.currency_id.round(
                     rec.transaction_id.advance_remaining_amount)
                 if advance_remaining_amount < 0.0:
@@ -313,3 +364,27 @@ class AccountPaymentGroup(models.Model):
                         ' amount (%s)') % (
                         rec.unreconciled_amount,
                         advance_remaining_amount + rec.unreconciled_amount))
+
+    @api.multi
+    @api.constrains('receiptbook_id')
+    def set_document_number(self):
+        """
+        Quieren que en caunto se cree, si tiene talonario, se asigne número
+        """
+        for rec in self:
+            if rec.receiptbook_id.sequence_id and not rec.document_number:
+                rec.document_number = (
+                    rec.receiptbook_id.sequence_id.next_by_id())
+
+    @api.multi
+    def _compute_name(self):
+        """
+        Agregamos numero de documento en todos los estados (no solo posteado)
+        """
+        res = super(AccountPaymentGroup, self)._compute_name()
+        for rec in self.filtered(lambda x: x.state != 'posted'):
+            if rec.document_number and rec.document_type_id:
+                rec.name = ("%s%s" % (
+                    rec.document_type_id.doc_code_prefix or '',
+                    rec.document_number))
+        return res

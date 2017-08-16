@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api
+from openerp.exceptions import ValidationError
+import time
+import datetime
 
 
 class Budget(models.Model):
@@ -23,12 +26,12 @@ class Budget(models.Model):
         required=True,
         states={'draft': [('readonly', False)]}
     )
-    # fiscalyear_id = fields.Many2one(
-    #     'account.fiscalyear',
-    #     'Fiscal Year',
-    #     required=True,
-    #     states={'draft': [('readonly', False)]},
-    #     select=True)
+    fiscalyear = fields.Char(
+        required=True,
+        default=time.strftime('%Y'),
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+    )
     income_account_id = fields.Many2one(
         'account.account',
         string='Income Account',
@@ -57,43 +60,43 @@ class Budget(models.Model):
     )
     total_preventive = fields.Monetary(
         string='Total Preventivo',
-        compute='_get_totals',
+        compute='_compute_totals',
         # store=True,
     )
     total_authorized = fields.Monetary(
         string='Total Autorizado',
-        compute='_get_totals',
+        compute='_compute_totals',
         # store=True,
     )
     total_requested = fields.Monetary(
         string='Total Requerido',
-        compute='_get_totals',
+        compute='_compute_totals',
         # store=True,
     )
     passive_residue = fields.Monetary(
         string='Total Residuo',
-        compute='_get_totals',
+        compute='_compute_totals',
         # store=True,
     )
     parent_budget_position_ids = fields.Many2many(
         comodel_name='public_budget.budget_position',
         string='Budget Positions',
-        compute='_get_budget_positions'
+        compute='_compute_budget_positions'
     )
     budget_position_ids = fields.Many2many(
         relation='public_budget_budget_position_rel',
         comodel_name='public_budget.budget_position',
         string='Budget Positions',
         # store=True, #TODO ver si agregamos el store
-        compute='_get_budget_positions'
+        compute='_compute_budget_positions'
     )
     company_id = fields.Many2one(
         'res.company',
         string='Company',
         required=True,
+        readonly=True,
         states={'draft': [('readonly', False)]},
-        default=lambda self: self.env['res.company']._company_default_get(
-            'public_budget.budget')
+        default=lambda self: self.env.user.company_id.id
     )
     currency_id = fields.Many2one(
         related='company_id.currency_id',
@@ -143,10 +146,48 @@ class Budget(models.Model):
         'account.payment.receiptbook',
         'ReceiptBook',
         required=True,
+        readonly=True,
         states={'draft': [('readonly', False)]},
         domain="[('partner_type', '=', 'supplier'), "
         "('company_id', '=', company_id)]",
     )
+
+    @api.multi
+    @api.onchange('fiscalyear')
+    @api.constrains('fiscalyear')
+    def validate_fiscalyear(self):
+        for rec in self:
+            year = rec.fiscalyear
+            if year.isdigit() and int(year) >= 1900 and int(year) <= 2020:
+                continue
+            raise ValidationError('%s no es un año valido!' % year)
+
+    @api.multi
+    def check_date_in_budget_dates(self, date):
+        """
+        Verifica si una fecha esta dentro de las fechas del presupuesto
+        """
+        self.ensure_one()
+        budget_dates = self.get_budget_fiscalyear_dates()
+        date_from = budget_dates.get('date_from')
+        date_to = budget_dates.get('date_to')
+        if date_from <= date <= date_to:
+            return True
+        return False
+
+    @api.multi
+    def get_budget_fiscalyear_dates(self):
+        """
+        Devolvemos para este budget primer y ultimo día del presupuesto
+        segun configuración de la cia
+        """
+        self.ensure_one()
+        last_month = self.company_id.fiscalyear_last_month
+        last_day = self.company_id.fiscalyear_last_day
+        date_to = datetime.date(int(self.fiscalyear), last_month, last_day)
+        date_from = date_to + datetime.timedelta(days=1)
+        date_from = date_from.replace(year=date_from.year - 1)
+        return {'date_from': date_from, 'date_to': date_to}
 
     @api.one
     @api.depends(
@@ -155,7 +196,7 @@ class Budget(models.Model):
         'budget_modification_ids.budget_modification_detail_ids.'
         'budget_position_id',
     )
-    def _get_budget_positions(self):
+    def _compute_budget_positions(self):
         """ Definimos por ahora llevar solamente las posiciones que tienen
         admitida la asignacion de presupuesto.
         """
@@ -185,7 +226,7 @@ class Budget(models.Model):
             lambda x: not x.parent_id)
 
     @api.one
-    def _get_totals(self):
+    def _compute_totals(self):
         total_authorized = sum([x.amount for x in self.with_context(
             budget_id=self.id).budget_position_ids
             if x.budget_assignment_allowed])
@@ -263,4 +304,4 @@ class Budget(models.Model):
                     'budget_id': rec.id,
                 }
                 rec.budget_prec_detail_ids.create(vals)
-        self.write({'state': 'closed'})
+        self.write({'state': 'pre_closed'})

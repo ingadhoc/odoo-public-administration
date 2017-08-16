@@ -27,6 +27,11 @@ class AccountInvoice(models.Model):
     )
 
     @api.multi
+    def verify_on_afip(self):
+        super(AccountInvoice, self).verify_on_afip()
+        return {'type': 'ir.actions.act_window.none'}
+
+    @api.multi
     @api.constrains('state')
     def update_definitive_invoiced_amount(self):
         # this method update all amounts on the upstream
@@ -138,6 +143,11 @@ class AccountInvoice(models.Model):
     def invoice_validate(self):
         res = super(AccountInvoice, self).invoice_validate()
         for inv in self:
+            date = fields.Date.from_string(inv.date)
+            if not inv.budget_id.check_date_in_budget_dates(date):
+                raise ValidationError((
+                    'La fecha de la factura tiene que estar dentro del año '
+                    'fiscal del presupuesto!'))
             if inv.transaction_id.type_id.with_advance_payment:
                 domain = [
                     ('move_id', '=', inv.move_id.id),
@@ -146,19 +156,6 @@ class AccountInvoice(models.Model):
                 move_lines = self.env['account.move.line'].search(domain)
                 move_lines.write(
                     {'partner_id': self.transaction_id.partner_id.id})
-        return res
-
-    @api.multi
-    def prepare_direct_payment_voucher_vals(self):
-        """Add some values to direct payment voucher creation"""
-        if not self.transaction_id:
-            raise ValidationError(_(
-                'Not Transaction in actual invoice, can not create direct '
-                'Payment'))
-        res = super(
-            AccountInvoice, self).prepare_direct_payment_voucher_vals()
-        res['transaction_id'] = self.transaction_id.id
-        res['expedient_id'] = self.transaction_id.expedient_id.id
         return res
 
     @api.multi

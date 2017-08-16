@@ -7,6 +7,7 @@
             id="menu_budget_main"
             sequence="35"
             web_icon="public_budget,static/description/icon.png"
+            groups="public_budget.group_secretary_director,account.group_account_user"
             />
 
         <menuitem
@@ -41,8 +42,9 @@
         <menuitem
             name="Expedients"
             id="menu_expedient_main"
-            sequence="20"
-            parent="menu_budget_main"
+            sequence="30"
+            web_icon="public_budget,static/description/expedient.png"
+            groups="public_budget.group_portal_expedient,base.group_user"
             />
 
         <menuitem
@@ -61,12 +63,11 @@
             groups="public_budget.group_secretary_director,account.group_account_user"
             />
 
-        <!-- TODO re activar -->
-        <!-- <menuitem
+        <menuitem
             action="action_public_budget_budget_report_3_all"
             id="menu_public_budget_budget_report_3_all"
             parent="menu_reports"
-            sequence="20"/> -->
+            sequence="20"/>
 
         <menuitem
             action="action_advance_request_analysis_all"
@@ -169,13 +170,6 @@
             parent="menu_contacts"
             />
 
-        <menuitem
-            id="menu_subsidy_recipient"
-            sequence="15"
-            action="action_res_partner_suppliers"
-            parent="menu_contacts"
-            />
-
         <record id="action_public_budget_expedient_expedients" model="ir.actions.act_window">
             <field name="name">Expedients</field>
             <field name="res_model">public_budget.expedient</field>
@@ -233,6 +227,7 @@
             action="action_public_budget_remit_remits"
             parent="menu_expedient_main"
             />
+
         <record id="action_res_partner_suppliers" model="ir.actions.act_window">
             <field name="name">Suppliers</field>
             <field name="res_model">res.partner</field>
@@ -244,13 +239,31 @@
             <field name="context">{'search_default_supplier': 1,'default_customer': 0,'default_supplier': 1}</field>
         </record>
 
+        <record id="action_res_partner_subsidy_recipients" model="ir.actions.act_window">
+            <field name="name">Subsidy Recipients</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create"> Click to create a Subsidy Recipient.</p>
+            </field>
+            <field name="context">{'search_default_subsidy_recipient': 1,'default_customer': 0,'default_subsidy_recipient': 1}</field>
+        </record>
+
         <menuitem
-            name="Suppliers"
             id="menu_suppliers"
             sequence="10"
             action="action_res_partner_suppliers"
             parent="menu_contacts"
             />
+
+        <menuitem
+            id="menu_subsidy_recipients"
+            sequence="15"
+            action="action_res_partner_subsidy_recipients"
+            parent="menu_contacts"
+            />
+
         <record id="action_public_budget_transaction_type_transaction_types" model="ir.actions.act_window">
             <field name="name">Transaction Types</field>
             <field name="res_model">public_budget.transaction_type</field>

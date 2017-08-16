@@ -106,7 +106,7 @@ class AdvanceReturn(models.Model):
             }))
 
         return {
-            'line_id': lines_vals,
+            'line_ids': lines_vals,
             'ref': ref,
             'name': self.name,
             'journal_id': journal.id,
@@ -117,6 +117,7 @@ class AdvanceReturn(models.Model):
         for record in self:
             move_vals = record.get_move_vals()
             move = self.move_id.create(move_vals)
+            move.post()
             record.write({
                 'move_id': move.id,
                 'state': 'confirmed',

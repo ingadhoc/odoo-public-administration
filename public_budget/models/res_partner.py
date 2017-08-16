@@ -17,6 +17,12 @@ class ResPartner(models.Model):
     subsidy_recipient = fields.Boolean(
         'Subsidy Recipient',
     )
+    gender = fields.Selection(
+        [('male', 'Male'), ('female', 'Female'), ('other', 'Other')],
+        'Gender'
+    )
+    drei_number = fields.Char(
+    )
 
     @api.multi
     def mark_as_reconciled(self):

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api, _
 from openerp.exceptions import ValidationError
+from openerp.tools import float_is_zero
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -169,7 +170,7 @@ class BudgetTransaction(models.Model):
     )
     advance_remaining_amount = fields.Monetary(
         string='Monto Remanente de Adelanto',
-        compute='_get_advance_remaining_amount',
+        compute='_compute_advance_remaining_amount',
         store=True,
     )
     advance_to_return_amount = fields.Monetary(
@@ -190,10 +191,10 @@ class BudgetTransaction(models.Model):
         related='company_id.currency_id',
         readonly=True,
     )
-    # TODO esto deberia ser computado como en voucher?
     user_location_ids = fields.Many2many(
         string='User Locations',
-        related='user_id.location_ids'
+        compute='_compute_user_locations',
+        comodel_name='public_budget.location',
     )
     state = fields.Selection(
         _states_,
@@ -220,9 +221,6 @@ class BudgetTransaction(models.Model):
     definitive_partner_type = fields.Selection(
         related='type_id.definitive_partner_type'
     )
-
-    # TODO re implementar
-    # voucher_ids
     payment_group_ids = fields.One2many(
         'account.payment.group',
         'transaction_id',
@@ -236,12 +234,11 @@ class BudgetTransaction(models.Model):
             ('transaction_with_advance_payment', '=', False)
         ],
     )
-    # Usamos otro campo por que si no el depends de advance_voucher_ids se
-    # toma en cuenta igual que si fuese el de vouchers y necesitamos que sea
+    # Usamos otro campo por que si no el depends de advance_payment_group_ids
+    # se toma en cuenta igual que si fuese el de payments y necesitamos que sea
     # distinto para que no recalcule tantas veces. Si no la idea sería que
     # sea basicamente es el mismo campo de arriba pero lo separamos para poner
     # en otro lugar de la vista
-    # advance_voucher_ids = fields.One2many(
     advance_payment_group_ids = fields.One2many(
         'account.payment.group',
         'transaction_id',
@@ -255,6 +252,13 @@ class BudgetTransaction(models.Model):
         auto_join=True,
         states={'open': [('readonly', False)]},
     )
+
+    @api.multi
+    # dummy depends to compute values on create
+    @api.depends('company_id')
+    def _compute_user_locations(self):
+        for rec in self:
+            rec.user_location_ids = rec.env.user.location_ids
 
     @api.multi
     @api.constrains('type_id', 'company_id')
@@ -287,7 +291,7 @@ class BudgetTransaction(models.Model):
     @api.multi
     @api.depends(
         # TODO este depends puede hacer que se recalcule todo al crear un
-        # voucher
+        # payment group
         'invoiced_amount',
         'advance_paid_amount',
     )
@@ -314,40 +318,38 @@ class BudgetTransaction(models.Model):
         'advance_preventive_amount',
         'advance_to_pay_amount',
     )
-    def _get_advance_remaining_amount(self):
+    def _compute_advance_remaining_amount(self):
         _logger.info('Getting Transaction Advance Remaining Amount')
         for rec in self:
             rec.advance_remaining_amount = (
                 rec.advance_preventive_amount - rec.advance_to_pay_amount)
 
-    # TODO implementar
     @api.multi
     @api.depends(
         'advance_payment_group_ids.state',
     )
     def _get_advance_amounts(self):
         _logger.info('Getting Transaction Advance Amounts')
-        return True
-        # if not self.advance_voucher_ids:
-        #     return False
+        if not self.advance_payment_group_ids:
+            return False
 
-        # domain = [('id', 'in', self.advance_voucher_ids.ids)]
-        # to_pay_domain = domain + [('state', 'not in', ('cancel', 'draft'))]
-        # paid_domain = domain + [('state', '=', 'posted')]
+        domain = [('id', 'in', self.advance_payment_group_ids.ids)]
+        to_pay_domain = domain + [('state', 'not in', ('cancel', 'draft'))]
+        paid_domain = domain + [('state', '=', 'posted')]
 
-        # to_date = self._context.get('analysis_to_date', False)
-        # if to_date:
-        #     to_pay_domain += [('confirmation_date', '<=', to_date)]
-        #     paid_domain += [('date', '<=', to_date)]
+        to_date = self._context.get('analysis_to_date', False)
+        if to_date:
+            to_pay_domain += [('confirmation_date', '<=', to_date)]
+            paid_domain += [('payment_date', '<=', to_date)]
 
-        # advance_to_pay_amount = sum(
-        #     self.advance_voucher_ids.search(to_pay_domain).mapped(
-        #         'to_pay_amount'))
-        # advance_paid_amount = sum(
-        #     self.advance_voucher_ids.search(paid_domain).mapped(
-        #         'amount'))
-        # self.advance_to_pay_amount = advance_to_pay_amount
-        # self.advance_paid_amount = advance_paid_amount
+        advance_to_pay_amount = sum(
+            self.advance_payment_group_ids.search(to_pay_domain).mapped(
+                'to_pay_amount'))
+        advance_paid_amount = sum(
+            self.advance_payment_group_ids.search(paid_domain).mapped(
+                'payments_amount'))
+        self.advance_to_pay_amount = advance_to_pay_amount
+        self.advance_paid_amount = advance_paid_amount
 
     @api.multi
     def mass_payment_group_create(self):
@@ -457,12 +459,14 @@ class BudgetTransaction(models.Model):
 
     @api.multi
     def action_close(self):
+        self.check_closure()
         self.write({'state': 'closed'})
         return True
 
     @api.multi
     def check_closure(self):
-        """ Check preventive lines
+        """
+        Check preventive lines
         """
         for rec in self:
             if not rec.preventive_line_ids:
@@ -471,19 +475,23 @@ class BudgetTransaction(models.Model):
                     ' preventive line'))
 
             for line in rec.preventive_line_ids:
-                if (
-                        line.preventive_amount != line.definitive_amount) or (
-                        line.preventive_amount != line.invoiced_amount) or (
-                        line.preventive_amount != line.to_pay_amount) or (
-                        line.preventive_amount != line.paid_amount):
-                    raise ValidationError(_(
-                        'To close a transaction, Preventive, Definitive, '
-                        'Invoiced, To Pay and Paid amount must be the same '
-                        'for each line'))
+                # Usamos float_is_zero por porisbles errores de redondeo
+                for field in [
+                        'definitive_amount', 'invoiced_amount',
+                        'to_pay_amount', 'paid_amount']:
+                    if not float_is_zero(
+                            (line.preventive_amount - line[field]),
+                            precision_rounding=rec.currency_id.rounding):
+                        raise ValidationError(_(
+                            'To close a transaction, Preventive, Definitive, '
+                            'Invoiced, To Pay and Paid amount must be the '
+                            'same for each line'))
 
             # Check advance transactions
             if rec.type_id.with_advance_payment:
-                if rec.advance_to_return_amount != 0.0:
+                if not float_is_zero(
+                        rec.advance_to_return_amount,
+                        precision_rounding=rec.currency_id.rounding):
                     raise ValidationError(_(
                         'To close a transaction to return amount must be 0!\n'
                         '* To return amount = advance paid amount - '

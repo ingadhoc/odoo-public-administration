@@ -6,6 +6,9 @@
     'data': [
         'reports/subsidy_note_report.xml',
         'reports/subsidy_approval_arrangement_report.xml',
+        'reports/remit_report_subsidy.xml',
+        'reports/subsidy_form_report.xml',
+        'reports/subsidy_report.xml',
         'views/subsidy_view.xml',
         'views/transaction_type_view.xml',
         'views/subsidy_approval_arrangement_view.xml',

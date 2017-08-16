@@ -1,4 +1,3 @@
 # -*- coding: utf-8 -*-
 from . import advance_request_analysis
-# TODO enable
-# from . import public_budget_budget_report_3
+from . import public_budget_budget_report_3

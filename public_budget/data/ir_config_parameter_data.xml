@@ -1,8 +1,9 @@
 <odoo>
     <data noupdate="1">
-        <record id="unique_id_numbers" model="ir.config_parameter">
+        <!-- no lo configuramos por acá porque si no da error con la migración que ya lo configura solito, porque haciendo así da error de que existen dos con la misma key. A lo sumo deberiamos hacer que esto se cargue marcando la opción con un yml oa lgo así -->
+<!--         <record id="unique_id_numbers" model="ir.config_parameter">
             <field name="key">l10n_ar_partner.unique_id_numbers</field>
             <field name="value">True</field>
-        </record>
+        </record> -->
     </data>
 </odoo>

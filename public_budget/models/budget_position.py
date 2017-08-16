@@ -126,6 +126,15 @@ class BudgetPosition(models.Model):
         related='company_id.currency_id',
         readonly=True,
     )
+    default_account_id = fields.Many2one(
+        'account.account',
+        domain="["
+        "('internal_type', '=', 'other'), "
+        "('company_id', '=', company_id), "
+        "('deprecated', '=', False)]",
+        string='Default Account',
+        help='Default Account on preventive lines of this position'
+    )
 
     @api.one
     # @api.depends(
@@ -140,9 +149,9 @@ class BudgetPosition(models.Model):
         -draft_amount: amount sum on preventive lines in draft state
         -preventive_amount: amount sum on preventive lines not in draft/cancel
         -definitive_amount: amount sum of definitive lines
-        -to_pay_amount: amount sum of lines that has a related voucher in draft
+        -to_pay_amount: amount sum of lines that has a related payment in draft
         state
-        -paid_amount: amount sum of lines that has a related voucher in open
+        -paid_amount: amount sum of lines that has a related payment in open
         state
         -balance_amount: diffference between budget position and preventive
         amount

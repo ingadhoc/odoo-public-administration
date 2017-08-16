@@ -60,7 +60,7 @@
                         <group>
                             <group>
                                 <field name="name"/>
-                                <!-- <field name="fiscalyear_id"/> -->
+                                <field name="fiscalyear"/>
                                 <field name="receiptbook_id"/>
                                 <field name="expedient_id"/>
                                 <field name="income_account_id"/>

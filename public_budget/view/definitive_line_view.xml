@@ -33,6 +33,7 @@
                         <field name="issue_date"/> 
                         <field name="supplier_id"/> 
                         <field name="amount"/> 
+                        <field name="to_pay_amount" invisible="1"/> 
                      </group>
                     </sheet>
                 </form>
@@ -45,14 +46,15 @@
             <field name="model">public_budget.definitive_line</field>
             <field name="arch" type="xml">
                 <tree string="Definitive Line"
+                    editable="bottom"
                     >
                     <!-- sacamos el editable porque nos da un error por sua tree editable en un pop up -->
-                    <!-- editable="bottom" -->
                     <field name="issue_date"/>
                     <field name="supplier_id"/>
                     <field name="amount"/>
                     <field name="state" invisible="True"/>
                     <field name="currency_id" invisible="1"/> 
+                    <field name="to_pay_amount" invisible="1"/>
                 </tree>
             </field>
         </record>
