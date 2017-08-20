@@ -25,6 +25,7 @@ def migrate(env, version):
 
     IMPORTANTE No buscamos por diario porque podria haber cambiado con cheques
     """
+    correct_advance_account_types(env)
     cr = env.cr
 
     cr.execute("""
@@ -120,3 +121,12 @@ def migrate(env, version):
         # else:
         #     vals['payment_date'] = date
         payment.payment_group_id.write(vals)
+
+
+def correct_advance_account_types(env):
+    accounts = env['public_budget.transaction_type'].search(
+        [('advance_account_id', '!=', False)]).mapped('advance_account_id')
+    accounts.write({
+        'reconcile': False,
+        'user_type_id': env.ref('account.data_account_type_liquidity').id,
+    })
