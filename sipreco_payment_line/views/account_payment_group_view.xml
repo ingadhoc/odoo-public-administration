@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- l10n_ar_account_voucher mods -->
+
     <record id="view_vendor_payment_form" model="ir.ui.view">
         <field name="name">account.payment.group.customer.pay.form</field>
         <field name="model">account.payment.group</field>
-        <field name="inherit_id" ref="l10n_ar_account_voucher.view_vendor_payment_form"/>
+        <field name="inherit_id" ref="account_payment_group.view_account_payment_group_form"/>
         <field name="arch" type="xml">
             <notebook>
                 <page string="Líneas de Pago">
@@ -28,9 +28,9 @@
                             </div>
                         </group>
                     </group>
-                    <button type="action" name="%(sipreco_payment_line.action_account_voucher_payment_line_import)d" string="Importar"/>
+                    <button type="action" name="%(sipreco_payment_line.action_account_payment_line_import)d" string="Importar"/>
                     <button type="object" name="check_payment_lines_total" string="Verificar Total"/>
-                    <field name="payment_line_ids">
+                    <field name="line_ids">
                         <tree editable="bottom">
                             <field name="partner_id"/>
                             <field name="cuit"/>

@@ -92,7 +92,7 @@ class AccountPaymentGroupLine(models.Model):
         Registro += numero_legajo[:6]
 
         # Right("00000000000000" & CLng(Importe * 100), 14)
-        Registro += str(int(self.amount * 100)).rjust(14, '0')
+        Registro += str(int(round(self.amount * 100))).rjust(14, '0')
 
         # Format(Range("E5").Text, "YYYYMMDD")
         Registro += fields.Date.from_string(

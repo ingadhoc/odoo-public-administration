@@ -2,12 +2,12 @@
 <openerp>
     <data>
 
-        <record id="account_voucher_payment_line_import_view" model="ir.ui.view">
-            <field name="name">Import Voucher Payment Lines</field>
-            <field name="model">account.voucher.payment_line.import</field>
+        <record id="account_payment_line_import_view" model="ir.ui.view">
+            <field name="name">Import Payment Lines</field>
+            <field name="model">account.payment.group.line.import</field>
             <field name="priority">1</field>
             <field name="arch" type="xml">
-                <form string="Import Voucher Payment Lines">
+                <form string="Import Payment Lines">
                     <field name="data_file"/>
                     <br/><label string= "Seleccionar el archivo y hacer click en 'Importar'."/>
                     <br/><label string= "Si al importar se encuentra una línea con mismo cuit se sobre escribirá la línea."/>
@@ -20,17 +20,17 @@
             </field>
         </record>
 
-        <record id="action_account_voucher_payment_line_import" model="ir.actions.act_window">
-            <field name="name">Import Voucher Payment Lines</field>
+        <record id="action_account_payment_line_import" model="ir.actions.act_window">
+            <field name="name">Import Payment Lines</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">account.voucher.payment_line.import</field>
+            <field name="res_model">account.payment.group.line.import</field>
             <field name="view_type">form</field>
             <field name="view_mode">form</field>
             <field name="target">new</field>
-            <field name="view_id" ref="account_voucher_payment_line_import_view"/>
+            <field name="view_id" ref="account_payment_line_import_view"/>
         </record>
 
-        <!-- <menuitem id="menu_account_voucher_payment_line_import" parent="account.menu_finance_bank_and_cash" action="action_account_voucher_payment_line_import" sequence="8"/> -->
+        <!-- <menuitem id="menu_account_payment_line_import" parent="account.menu_finance_bank_and_cash" action="action_account_payment_line_import" sequence="8"/> -->
 
     </data>
 </openerp>

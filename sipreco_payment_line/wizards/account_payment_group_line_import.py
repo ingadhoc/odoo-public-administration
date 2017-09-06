@@ -9,8 +9,8 @@ _logger = logging.getLogger(__name__)  # pylint: disable=invalid-name
 
 
 class AccountPaymentGroupLineImport(models.TransientModel):
-    _name = 'account.payment.payment_line.import'
-    _description = 'Account Vouchers Payment Lines Import'
+    _name = 'account.payment.group.line.import'
+    _description = 'Account Payment Lines Import'
 
     data_file = fields.Binary(
         'Archivo de Líneas de Pago',
@@ -25,7 +25,7 @@ class AccountPaymentGroupLineImport(models.TransientModel):
 
     @api.model
     def _import_file(self, data_file):
-        payment_lines = self.env['account.voucher.payment_line']
+        payment_lines = self.env['account.payment.group.line']
         payment_lines_vals = self._parse_file(data_file)
         self._check_parsed_data(payment_lines_vals)
         for payment_line_vals in payment_lines_vals:
@@ -43,7 +43,7 @@ class AccountPaymentGroupLineImport(models.TransientModel):
 
         active_model = self._context.get('active_model')
         active_id = self._context.get('active_id')
-        if active_model != 'account.voucher':
+        if active_model != 'account.payment.group':
             raise UserError(
                 _('No se está ejecutando el asistente desde un pago.')
             )
@@ -51,18 +51,19 @@ class AccountPaymentGroupLineImport(models.TransientModel):
             raise UserError(
                 _('No se encontró un pago activo en el contexto.')
             )
-        voucher = self.env[active_model].browse(active_id)
+        payment_group = self.env[active_model].browse(active_id)
         # check if line already exist
         vals = {
             'cuit': cuit,
             'partner_id': partner.id,
             'bank_account_id': (
                 partner.bank_ids and partner.bank_ids[0].id or False),
-            'voucher_id': voucher.id,
+            'payment_group_id': payment_group.id,
             'amount': payment_line_vals.get('amount'),
         }
-        payment_line = self.env['account.voucher.payment_line'].search(
-            [('cuit', '=', cuit), ('voucher_id', '=', voucher.id)], limit=1)
+        payment_line = self.env['account.payment.group.line'].search([
+            ('cuit', '=', cuit),
+            ('payment_group_id', '=', payment_group.id)], limit=1)
         if payment_line:
             payment_line.write(vals)
         else:
@@ -103,6 +104,6 @@ class AccountPaymentGroupLineImport(models.TransientModel):
     @api.model
     def _find_partner(self, cuit):
         return self.env['res.partner'].search([
-            ('document_type_id.afip_code', '=', 80),
-            ('document_number', '=', cuit),
+            ('main_id_category_id.afip_code', '=', 80),
+            ('main_id_number', '=', cuit),
         ], limit=1)

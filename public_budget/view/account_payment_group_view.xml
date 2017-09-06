@@ -5,8 +5,15 @@
         <field name="name">account.payment.group.filter</field>
         <field name="model">account.payment.group</field>
         <field name="inherit_id" ref="account_payment_group.view_account_payment_group_search"/>
+        <field name="priority">20</field>
         <field name="arch" type="xml">
+            <field name="display_name" position="attributes">
+                <attribute name="filter_domain">['|', '|', ('reference','ilike',self), ('name','ilike',self), ('communication','ilike',self)]</attribute>
+            </field>
             <field name="display_name" position="after">
+                <field name="transaction_id"/>
+                <field name="budget_id"/>
+                <field name="expedient_id"/>
                 <field name="budget_position_ids"/>
             </field>
         </field>

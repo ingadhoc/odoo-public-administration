@@ -2,6 +2,8 @@ Validar con gonza:
 
     implementar liquidaciónd e impeustos y pagos de retenciones
 
+    agregar valdiación de numero con el onchange
+
     implementar subsidy line, para lineas de pago:
         hacemos que todo se genere usando lógica de los payments
         datos fijos que vayan a journal o algo así, datos variables a wizard.
