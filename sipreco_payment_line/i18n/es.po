@@ -4,14 +4,13 @@
 # 
 # Translators:
 # Juan José Scarafía <scarafia.juanjose@gmail.com>, 2017
-# Nicolas Mac Rouillon <nmr@ingadhoc.com>, 2017
 # Gonzalo Ruzafa <gr@ingadhoc.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-06 12:59+0000\n"
-"PO-Revision-Date: 2017-09-06 12:59+0000\n"
+"POT-Creation-Date: 2017-09-07 19:27+0000\n"
+"PO-Revision-Date: 2017-09-07 19:27+0000\n"
 "Last-Translator: Gonzalo Ruzafa <gr@ingadhoc.com>, 2017\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
 "MIME-Version: 1.0\n"
@@ -23,12 +22,12 @@ msgstr ""
 #. module: sipreco_payment_line
 #: model:ir.model,name:sipreco_payment_line.model_account_payment_group_line_import
 msgid "Account Payment Lines Import"
-msgstr ""
+msgstr "Importar Lineas contables de Pago"
 
 #. module: sipreco_payment_line
 #: model:ir.model,name:sipreco_payment_line.model_account_payment_group_line
 msgid "Account Vouchers Payment Lines"
-msgstr ""
+msgstr "Lineas de pago de Vouchers Contables"
 
 #. module: sipreco_payment_line
 #: model:ir.model,name:sipreco_payment_line.model_public_budget_advance_request
@@ -43,27 +42,27 @@ msgstr "Importe"
 #. module: sipreco_payment_line
 #: model:ir.model.fields,field_description:sipreco_payment_line.field_account_payment_group_archivo_banco
 msgid "Archivo banco"
-msgstr ""
+msgstr "Archivo banco"
 
 #. module: sipreco_payment_line
 #: model:ir.model.fields,field_description:sipreco_payment_line.field_account_payment_group_archivo_banco_name
 msgid "Archivo banco name"
-msgstr ""
+msgstr "Nombre Archivo Banco"
 
 #. module: sipreco_payment_line
 #: model:ir.model.fields,field_description:sipreco_payment_line.field_account_payment_group_line_import_data_file
 msgid "Archivo de Líneas de Pago"
-msgstr ""
+msgstr "Archivo de Lineas de PAgo"
 
 #. module: sipreco_payment_line
 #: model:ir.model.fields,field_description:sipreco_payment_line.field_account_payment_group_line_bank_account_id
 msgid "Bank Account"
-msgstr ""
+msgstr "Cuenta Bancaria"
 
 #. module: sipreco_payment_line
 #: model:ir.model,name:sipreco_payment_line.model_res_partner_bank
 msgid "Bank Accounts"
-msgstr ""
+msgstr "Cuentas Bancarias"
 
 #. module: sipreco_payment_line
 #: model:ir.ui.view,arch_db:sipreco_payment_line.account_payment_line_import_view
@@ -73,7 +72,7 @@ msgstr "Cancelado"
 #. module: sipreco_payment_line
 #: model:ir.model.fields,field_description:sipreco_payment_line.field_account_payment_group_cantidad
 msgid "Cantidad"
-msgstr ""
+msgstr "Cantidad"
 
 #. module: sipreco_payment_line
 #: model:ir.model.fields,field_description:sipreco_payment_line.field_account_payment_group_line_create_uid
@@ -90,7 +89,7 @@ msgstr "Creado en"
 #. module: sipreco_payment_line
 #: model:ir.model.fields,field_description:sipreco_payment_line.field_account_payment_group_line_cuit
 msgid "Cuit"
-msgstr ""
+msgstr "Cuit"
 
 #. module: sipreco_payment_line
 #: model:ir.model.fields,field_description:sipreco_payment_line.field_account_payment_group_line_currency_id
@@ -101,7 +100,7 @@ msgstr "Moneda"
 #: code:addons/sipreco_payment_line/models/account_payment_group.py:75
 #, python-format
 msgid "Debe definir un valor para el campo %s"
-msgstr ""
+msgstr "Debe definir un valor para el campo %s"
 
 #. module: sipreco_payment_line
 #: model:ir.model.fields,field_description:sipreco_payment_line.field_account_payment_group_line_display_name
@@ -112,17 +111,17 @@ msgstr "Nombre a Mostrar"
 #. module: sipreco_payment_line
 #: model:ir.model.fields,field_description:sipreco_payment_line.field_account_payment_group_fecha_de_acreditacion
 msgid "Fecha de acreditacion"
-msgstr ""
+msgstr "Fecha de acreditacion"
 
 #. module: sipreco_payment_line
 #: model:ir.ui.view,arch_db:sipreco_payment_line.view_vendor_payment_form
 msgid "Generar Archivo"
-msgstr ""
+msgstr "Generar Archivo"
 
 #. module: sipreco_payment_line
 #: model:ir.model.fields,field_description:sipreco_payment_line.field_account_payment_group_grupo_asingado_por_bmr
 msgid "Grupo Asignado por B.M.R."
-msgstr ""
+msgstr "Grupo Asignado por B.M.R."
 
 #. module: sipreco_payment_line
 #: model:ir.model.fields,field_description:sipreco_payment_line.field_account_payment_group_line_id
@@ -134,24 +133,24 @@ msgstr "ID"
 #: model:ir.actions.act_window,name:sipreco_payment_line.action_account_payment_line_import
 #: model:ir.ui.view,arch_db:sipreco_payment_line.account_payment_line_import_view
 msgid "Import Payment Lines"
-msgstr ""
+msgstr "Importar lineas de pago"
 
 #. module: sipreco_payment_line
 #: model:ir.ui.view,arch_db:sipreco_payment_line.account_payment_line_import_view
 #: model:ir.ui.view,arch_db:sipreco_payment_line.view_vendor_payment_form
 msgid "Importar"
-msgstr ""
+msgstr "Importar"
 
 #. module: sipreco_payment_line
 #: model:ir.model.fields,field_description:sipreco_payment_line.field_account_payment_group_importe_total
 msgid "Importe total"
-msgstr ""
+msgstr "Importe total"
 
 #. module: sipreco_payment_line
 #: code:addons/sipreco_payment_line/models/account_payment_group_line.py:83
 #, python-format
 msgid "La cuenta bancaria de \"%s\" no puede tener más de 8 digitos"
-msgstr ""
+msgstr "La cuenta bancaria de \"%s\" no puede tener más de 8 digitos"
 
 #. module: sipreco_payment_line
 #: code:addons/sipreco_payment_line/models/account_payment_group_line.py:75
@@ -159,6 +158,7 @@ msgstr ""
 msgid ""
 "La sucursal de la cuenta bancaria de \"%s\" no puede tener más de 2 digitos"
 msgstr ""
+"La sucursal de la cuenta bancaria de \"%s\" no puede tener más de 2 digitos"
 
 #. module: sipreco_payment_line
 #: model:ir.model.fields,field_description:sipreco_payment_line.field_account_payment_group_line___last_update
@@ -181,35 +181,35 @@ msgstr "Ultima Actualización en"
 #. module: sipreco_payment_line
 #: model:ir.ui.view,arch_db:sipreco_payment_line.view_vendor_payment_form
 msgid "Líneas de Pago"
-msgstr ""
+msgstr "Líneas de Pago"
 
 #. module: sipreco_payment_line
 #: code:addons/sipreco_payment_line/wizards/account_payment_group_line_import.py:52
 #, python-format
 msgid "No se encontró un pago activo en el contexto."
-msgstr ""
+msgstr "No se encontró un pago activo en el contexto."
 
 #. module: sipreco_payment_line
 #: code:addons/sipreco_payment_line/wizards/account_payment_group_line_import.py:48
 #, python-format
 msgid "No se está ejecutando el asistente desde un pago."
-msgstr ""
+msgstr "No se está ejecutando el asistente desde un pago."
 
 #. module: sipreco_payment_line
 #: code:addons/sipreco_payment_line/wizards/account_payment_group_line_import.py:41
 #, python-format
 msgid "No se pudo encontrar partner para cuit %s."
-msgstr ""
+msgstr "No se pudo encontrar partner para cuit %s."
 
 #. module: sipreco_payment_line
 #: model:ir.model.fields,field_description:sipreco_payment_line.field_account_payment_group_numero_de_cuenta_debito
 msgid "Numero de cuenta debito"
-msgstr ""
+msgstr "Numero de cuenta debito"
 
 #. module: sipreco_payment_line
 #: model:ir.model.fields,field_description:sipreco_payment_line.field_res_partner_bank_numero_de_sucursal
 msgid "Numero de sucursal"
-msgstr ""
+msgstr "Numero de sucursal"
 
 #. module: sipreco_payment_line
 #: code:addons/sipreco_payment_line/wizards/account_payment_group_line_import.py:91
@@ -219,6 +219,9 @@ msgid ""
 "\n"
 " %s"
 msgstr ""
+"Ocurrió un error al importar. El archivo puede no ser valido.\n"
+"\n"
+" %s"
 
 #. module: sipreco_payment_line
 #: model:ir.model.fields,field_description:sipreco_payment_line.field_account_payment_group_line_partner_id
@@ -234,12 +237,12 @@ msgstr "Grupo de Pago"
 #. module: sipreco_payment_line
 #: model:ir.model.fields,field_description:sipreco_payment_line.field_account_payment_group_line_ids
 msgid "Payment Lines"
-msgstr ""
+msgstr "Lineas de Pago"
 
 #. module: sipreco_payment_line
 #: model:ir.model.fields,help:sipreco_payment_line.field_account_payment_group_numero_de_cuenta_debito
 msgid "Por ej. 8114"
-msgstr ""
+msgstr "Por ej. 8114"
 
 #. module: sipreco_payment_line
 #: code:addons/sipreco_payment_line/models/account_payment_group_line.py:64
@@ -248,17 +251,19 @@ msgid ""
 "Se requiere cuenta bancaria con número de sucursal.\n"
 "* Partner: %s"
 msgstr ""
+"Se requiere cuenta bancaria con número de sucursal.\n"
+"* Partner: %s"
 
 #. module: sipreco_payment_line
 #: code:addons/sipreco_payment_line/models/account_payment_group_line.py:58
 #, python-format
 msgid "Se requiere numero de legajo en partner %s"
-msgstr ""
+msgstr "Se requiere numero de legajo en partner %s"
 
 #. module: sipreco_payment_line
 #: model:ir.ui.view,arch_db:sipreco_payment_line.account_payment_line_import_view
 msgid "Seleccionar el archivo y hacer click en 'Importar'."
-msgstr ""
+msgstr "Seleccionar el archivo y hacer click en 'Importar'."
 
 #. module: sipreco_payment_line
 #: model:ir.ui.view,arch_db:sipreco_payment_line.account_payment_line_import_view
@@ -266,6 +271,8 @@ msgid ""
 "Si al importar se encuentra una línea con mismo cuit se sobre escribirá la "
 "línea."
 msgstr ""
+"Si al importar se encuentra una línea con mismo cuit se sobre escribirá la "
+"línea."
 
 #. module: sipreco_payment_line
 #: code:addons/sipreco_payment_line/models/account_payment_group.py:83
@@ -274,27 +281,29 @@ msgid ""
 "Si existen líneas de pago, el importe a pagar debe ser igual a la suma de "
 "los importes de las líneas de pago"
 msgstr ""
+"Si existen líneas de pago, el importe a pagar debe ser igual a la suma de "
+"los importes de las líneas de pago"
 
 #. module: sipreco_payment_line
 #: model:ir.model.fields,field_description:sipreco_payment_line.field_account_payment_group_sucursal_de_cuenta_debito
 msgid "Sucursal de cuenta debito"
-msgstr ""
+msgstr "Sucursal de cuenta debito"
 
 #. module: sipreco_payment_line
 #: code:addons/sipreco_payment_line/wizards/account_payment_group_line_import.py:102
 #, python-format
 msgid "This file doesn't contain any line."
-msgstr ""
+msgstr "El archivo no contiene ninguna linea"
 
 #. module: sipreco_payment_line
 #: model:ir.model.fields,field_description:sipreco_payment_line.field_account_payment_group_tipo_de_cuenta
 msgid "Tipo de cuenta"
-msgstr ""
+msgstr "Tipo de cuenta"
 
 #. module: sipreco_payment_line
 #: model:ir.model.fields,field_description:sipreco_payment_line.field_account_payment_group_tipo_de_pago
 msgid "Tipo de pago"
-msgstr ""
+msgstr "Tipo de pago"
 
 #. module: sipreco_payment_line
 #: model:ir.ui.view,arch_db:sipreco_payment_line.view_vendor_payment_form
@@ -304,7 +313,7 @@ msgstr "Total"
 #. module: sipreco_payment_line
 #: model:ir.ui.view,arch_db:sipreco_payment_line.view_vendor_payment_form
 msgid "Verificar Total"
-msgstr ""
+msgstr "Verificar Total"
 
 #. module: sipreco_payment_line
 #: model:ir.ui.view,arch_db:sipreco_payment_line.account_payment_line_import_view
