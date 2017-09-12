@@ -11,7 +11,7 @@ class AccountPaymentGroup(models.Model):
     line_ids = fields.One2many(
         'account.payment.group.line',
         'payment_group_id',
-        'Payment Lines',
+        'Transfer Lines',
         readonly=True,
         states={'draft': [('readonly', False)]},
     )
@@ -81,8 +81,8 @@ class AccountPaymentGroup(models.Model):
                 self.importe_total - self.to_pay_amount,
                 precision_rounding=self.currency_id.rounding):
             raise UserError(_(
-                'Si existen líneas de pago, el importe a pagar debe ser igual '
-                'a la suma de los importes de las líneas de pago'))
+                'Si existen líneas de transferencia, el importe a pagar debe '
+                'ser igual a la suma de los importes de las líneas de pago'))
 
     @api.one
     @api.constrains('state')
@@ -91,7 +91,7 @@ class AccountPaymentGroup(models.Model):
         """
         if (
                 self.state == 'confirmed' and
-                self.type == 'payment' and
+                self.partner_type == 'supplier' and
                 self.line_ids
         ):
             self.check_payment_lines_total()

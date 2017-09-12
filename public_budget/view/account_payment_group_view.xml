@@ -51,6 +51,12 @@
         <field name="priority">20</field>
         <field name="inherit_id" ref="account_payment_group.view_account_payment_group_form"/>
         <field name="arch" type="xml">
+            <!-- agregamos este campo por compatibilidad con mig desde v8 y además para simplificar liquidación -->
+            <field name="payment_ids" position="after">
+                <label for="withholding_line_ids" string="Detalle de Retenciones" states="posted"/>
+                <field name="withholding_line_ids" context="{'tree_view_ref':'account_tax_settlement.view_account_move_line_tree'}"/>
+            </field>
+
             <form>
                 <!-- used on expedient domain -->
                 <field name="user_location_ids" invisible="1"/>

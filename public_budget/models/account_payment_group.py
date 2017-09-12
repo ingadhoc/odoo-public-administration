@@ -129,6 +129,16 @@ class AccountPaymentGroup(models.Model):
         _('Show Print Receipt Button'),
         compute='get_show_print_receipt_button',
     )
+    withholding_line_ids = fields.Many2many(
+        'account.move.line',
+        compute='_compute_withholding_lines'
+    )
+
+    @api.multi
+    def _compute_withholding_lines(self):
+        for rec in self:
+            rec.withholding_line_ids = rec.move_line_ids.filtered(
+                'tax_line_id')
 
     @api.multi
     def onchange(self, values, field_name, field_onchange):

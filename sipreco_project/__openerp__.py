@@ -19,6 +19,7 @@
         'l10n_ar_bank',
         'base_state_active',
         'web_pdf_preview',
+        'account_tax_settlement',
         'account_reports',
         'adhoc_account_planner',  # para que genere los diarios que queremos
         # 'portal',  # necesitamos portal por un error raro al crear un voucher

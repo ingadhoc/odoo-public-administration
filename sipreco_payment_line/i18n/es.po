@@ -51,8 +51,8 @@ msgstr "Nombre Archivo Banco"
 
 #. module: sipreco_payment_line
 #: model:ir.model.fields,field_description:sipreco_payment_line.field_account_payment_group_line_import_data_file
-msgid "Archivo de Líneas de Pago"
-msgstr "Archivo de Lineas de PAgo"
+msgid "Archivo de Pago"
+msgstr "Archivo de Pago"
 
 #. module: sipreco_payment_line
 #: model:ir.model.fields,field_description:sipreco_payment_line.field_account_payment_group_line_bank_account_id
@@ -180,8 +180,8 @@ msgstr "Ultima Actualización en"
 
 #. module: sipreco_payment_line
 #: model:ir.ui.view,arch_db:sipreco_payment_line.view_vendor_payment_form
-msgid "Líneas de Pago"
-msgstr "Líneas de Pago"
+msgid "Líneas de Transferencia"
+msgstr "Líneas de Transferencia"
 
 #. module: sipreco_payment_line
 #: code:addons/sipreco_payment_line/wizards/account_payment_group_line_import.py:52
@@ -236,8 +236,8 @@ msgstr "Grupo de Pago"
 
 #. module: sipreco_payment_line
 #: model:ir.model.fields,field_description:sipreco_payment_line.field_account_payment_group_line_ids
-msgid "Payment Lines"
-msgstr "Lineas de Pago"
+msgid "Transfer Lines"
+msgstr "Lineas de Transferencia"
 
 #. module: sipreco_payment_line
 #: model:ir.model.fields,help:sipreco_payment_line.field_account_payment_group_numero_de_cuenta_debito
@@ -278,10 +278,10 @@ msgstr ""
 #: code:addons/sipreco_payment_line/models/account_payment_group.py:83
 #, python-format
 msgid ""
-"Si existen líneas de pago, el importe a pagar debe ser igual a la suma de "
+"Si existen líneas de transferencia, el importe a pagar debe ser igual a la suma de "
 "los importes de las líneas de pago"
 msgstr ""
-"Si existen líneas de pago, el importe a pagar debe ser igual a la suma de "
+"Si existen líneas de transferencia, el importe a pagar debe ser igual a la suma de "
 "los importes de las líneas de pago"
 
 #. module: sipreco_payment_line

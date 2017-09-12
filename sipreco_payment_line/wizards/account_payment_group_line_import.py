@@ -13,7 +13,7 @@ class AccountPaymentGroupLineImport(models.TransientModel):
     _description = 'Account Payment Lines Import'
 
     data_file = fields.Binary(
-        'Archivo de Líneas de Pago',
+        'Archivo de Pago',
         required=True,
     )
 
