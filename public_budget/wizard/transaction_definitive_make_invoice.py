@@ -133,6 +133,16 @@ class public_budget_definitive_make_invoice(models.TransientModel):
         compute='_compute_to_invoice_amount',
     )
 
+    @api.onchange('document_number', 'journal_document_type_id')
+    def onchange_document_number(self):
+        # if we have a sequence, number is set by sequence and we dont check
+        sequence = self.journal_document_type_id.sequence_id
+        document_type = self.journal_document_type_id.document_type_id
+        if not sequence and document_type:
+            res = document_type.validate_document_number(self.document_number)
+            if res and res != self.document_number:
+                self.document_number = res
+
     @api.multi
     @api.depends('line_ids.to_invoice_amount')
     def _compute_to_invoice_amount(self):

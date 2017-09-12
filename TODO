@@ -1,20 +1,18 @@
-Validar con gonza:
-
-    implementar liquidaciónd e impeustos y pagos de retenciones
-
-    agregar valdiación de numero con el onchange
-
-    implementar subsidy line, para lineas de pago:
+PARA MAS ADELANTE:
+    * cambiamos implementación de subsidy line? por ej para lineas de pago:
         hacemos que todo se genere usando lógica de los payments
         datos fijos que vayan a journal o algo así, datos variables a wizard.
         que se pueda generar archivo desde lista de payment groups y dese uno solo
         hacer todo esto en módulo de localización
         Si hacemos este cambio deberíamos ver como migramos las payment lines
+    * terminar de agregar al reporte _3 lo de adelanto y pagos (hay que traerlo de v8 porque lo borre)
+    * Calculo de a pagar y pagado en facturas: Si a una factura se le imputa un saldo parcial (por ejemplo factura de sueldos por 1000 que se le impute devolución por 500), no se visualiza como pagado o mandado a pagar, solo cuando se paga completamente
+    * advance.request.analysis: agregar currency y convertir a monetary
 
-    ver que en teoría remitos filtra ubicaciojnes permitidas, esta haciendo eso?
+Validar con gonza:
 
+    Chequear montos de adelanto y numeros de algunos pagos que no se migraron
 
-Baja prioridad:
-    terminar de agregar al reporte _3 lo de adelanto y pagos (hay que traerlo de v8 porque lo borre)
-    advance.request.analysis: agregar currency y convertir a monetary
-    Calculo de a pagar y pagado en facturas: Si a una factura se le imputa un saldo parcial (por ejemplo factura de sueldos por 1000 que se le impute devolución por 500), no se visualiza como pagado o mandado a pagar, solo cuando se paga completamente
+    TERMINAR DE ARREGLAR LIQUIDACION DE IVA
+
+    implementar liquidaciónd e impeustos y pagos de retenciones
