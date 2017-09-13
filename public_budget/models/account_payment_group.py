@@ -159,8 +159,12 @@ class AccountPaymentGroup(models.Model):
     @api.multi
     def post(self):
         for rec in self:
+            # si no estaba seteada la setamos
             if not rec.payment_date:
                 rec.payment_date = fields.Date.today()
+            # idem para los payments
+            rec.payment_ids.filtered(lambda x: not x.payment_date).write(
+                {'payment_date': rec.payment_date})
             if (
                     rec.expedient_id and rec.expedient_id.current_location_id
                     not in rec.user_location_ids):
@@ -169,11 +173,12 @@ class AccountPaymentGroup(models.Model):
                     'una ubicación autorizada para ústed')
         return super(AccountPaymentGroup, self).post()
 
-    @api.multi
-    @api.constrains('payment_date')
-    def update_payment_date(self):
-        for rec in self:
-            rec.payment_ids.write({'payment_date': rec.payment_date})
+    # las seteamos directamente al postear total antes no se usan
+    # @api.multi
+    # @api.constrains('payment_date')
+    # def update_payment_date(self):
+    #     for rec in self:
+    #         rec.payment_ids.write({'payment_date': rec.payment_date})
 
     @api.multi
     def confirm(self):
