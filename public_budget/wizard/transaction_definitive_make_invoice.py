@@ -147,7 +147,8 @@ class public_budget_definitive_make_invoice(models.TransientModel):
         * usae el modulo de web_domain_field que esta en un pr a la oca
         """
         for field in field_onchange.keys():
-            if field.startswith('available_journal_document_type_ids.'):
+            if field.startswith((
+                    'available_journal_document_type_ids.', 'supplier_ids')):
                 del field_onchange[field]
         return super(public_budget_definitive_make_invoice, self).onchange(
             values, field_name, field_onchange)
