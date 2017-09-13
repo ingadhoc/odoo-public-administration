@@ -9,8 +9,3 @@ PARA MAS ADELANTE:
     * Calculo de a pagar y pagado en facturas: Si a una factura se le imputa un saldo parcial (por ejemplo factura de sueldos por 1000 que se le impute devolución por 500), no se visualiza como pagado o mandado a pagar, solo cuando se paga completamente
     * advance.request.analysis: agregar currency y convertir a monetary
 
-Validar con gonza:
-
-    Chequear montos de adelanto y numeros de algunos pagos que no se migraron (ESTADOS??)
-
-    TERMINAR DE ARREGLAR LIQUIDACION DE impeustos y pagos de retenciones

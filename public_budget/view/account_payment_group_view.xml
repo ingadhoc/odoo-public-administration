@@ -54,7 +54,7 @@
             <!-- agregamos este campo por compatibilidad con mig desde v8 y además para simplificar liquidación -->
             <field name="payment_ids" position="after">
                 <label for="withholding_line_ids" string="Detalle de Retenciones" states="posted"/>
-                <field name="withholding_line_ids" context="{'tree_view_ref':'account_tax_settlement.view_account_move_line_tree'}"/>
+                <field name="withholding_line_ids" context="{'tree_view_ref':'account_tax_settlement.view_account_move_line_tree'}" states="posted"/>
             </field>
 
             <form>
@@ -96,7 +96,7 @@
             <field name="partner_id" position="after">
                 <field name="transaction_id" attrs="{'invisible': [('transaction_id', '=', False)]}"/>
                 <field name="budget_id" attrs="{'invisible': [('transaction_id', '=', False)]}"/>
-                <field name="expedient_id" attrs="{'required': [('transaction_id', '!=', False)], 'invisible': [('transaction_id', '=', False)]}"/>
+                <field name="expedient_id" attrs="{'required': [('transaction_id', '!=', False)], 'invisible': [('transaction_id', '=', False)]}" domain="[('type', '=','payment'), ('state', '=', 'open'), ('current_location_id', 'in', user_location_ids[0][2]), ('in_transit', '=', False)]"/>
                 <field name="budget_position_ids" widget="many2many_tags"/>
                 <!-- TODO enable -->
                 <!-- <field name="paid_withholding_ids" widget="many2many_tags"/> -->

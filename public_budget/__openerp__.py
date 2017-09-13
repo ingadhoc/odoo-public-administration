@@ -2,7 +2,7 @@
 {
     'name': 'Public Budget',
     'license': 'AGPL-3',
-    'version': '9.0.1.1.0',
+    'version': '9.0.1.2.0',
     'author': 'ADHOC SA',
     'website': 'www.adhoc.com.ar',
     'category': 'Accounting & Finance',

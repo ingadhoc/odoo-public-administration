@@ -35,9 +35,6 @@ class AccountPaymentGroup(models.Model):
         'public_budget.expedient',
         string='Expedient',
         readonly=True,
-        domain="[('type', '=', 'payment'), ('state', '=', 'open'), "
-        "('current_location_id', 'in', user_location_ids[0][2]), "
-        "('in_transit', '=', False)]",
         context={'default_type': 'payment'},
         states={'draft': [('readonly', False)]}
     )
@@ -154,7 +151,7 @@ class AccountPaymentGroup(models.Model):
         * usae el modulo de web_domain_field que esta en un pr a la oca
         """
         for field in field_onchange.keys():
-            if field.startswith(('partner_ids.', 'expedient_id')):
+            if field.startswith(('partner_ids.', 'user_location_ids')):
                 del field_onchange[field]
         return super(AccountPaymentGroup, self).onchange(
             values, field_name, field_onchange)
