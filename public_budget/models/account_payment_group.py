@@ -154,7 +154,7 @@ class AccountPaymentGroup(models.Model):
         * usae el modulo de web_domain_field que esta en un pr a la oca
         """
         for field in field_onchange.keys():
-            if field.startswith('partner_ids.'):
+            if field.startswith(('partner_ids.', 'expedient_id')):
                 del field_onchange[field]
         return super(AccountPaymentGroup, self).onchange(
             values, field_name, field_onchange)
