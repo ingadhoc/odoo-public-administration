@@ -12,7 +12,7 @@ class advance_request(models.Model):
         payment_group = super(advance_request, self).create_payment_group()
         for line in self.advance_request_line_ids:
             partner = line.employee_id
-            payment_group.payment_line_ids.create({
+            payment_group.line_ids.create({
                 'payment_group_id': payment_group.id,
                 'partner_id': partner.id,
                 'bank_account_id': (
