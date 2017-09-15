@@ -71,10 +71,13 @@
         <record id="account.account_reports_management_menu" model="ir.ui.menu">
             <field name="groups_id" eval="[(4, ref('group_habilitacion_director'))]"/>
         </record>
-        <!-- esto lo hacemos por interfas para no agregar la dependencia -->
+        <!-- el unico que necesta en habilitaciones es cheques y otro que agregamos a mano, no le damos permiso para todo este porque requiere repo enterprise -->
 <!--         <record id="account_reports.account_reports_legal_statements_menu" model="ir.ui.menu">
             <field name="groups_id" eval="[(4, ref('group_habilitacion_director'))]"/>
         </record> -->
+        <record id="l10n_ar_account_reports.menu_account_check_to_date_report" model="ir.ui.menu">
+            <field name="parent_id" ref="account.menu_finance_reports"/>
+        </record>
 
         <!-- dashboard contable solo para contaduria (y agregamos habilitaciones para poder hacer conciliaciones bancarias)-->
         <record id="account.menu_board_journal_1" model="ir.ui.menu">
