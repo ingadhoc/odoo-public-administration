@@ -21,7 +21,29 @@
             </field>
         </field>
     </record>
-       
+
+    <record id="view_account_payment_change_check_form" model="ir.ui.view">
+        <field name="name">account.payment.form</field>
+        <field name="model">account.payment</field>
+        <field name="priority">90</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+            <field name="payment_type_copy" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="amount" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="payment_date" position="attributes">
+                <attribute name="invisible">0</attribute>
+                <attribute name="required">1</attribute>
+            </field>
+            <button position="after">
+                <button name="confirm_check_change" class="oe_highlight" states="draft" string="Confirm Check Change" type="object"/>
+            </button>
+        </field>
+    </record>
 <!-- because we generate checks on post, checks report is made from payments -->
 <!--  Checks printing from payments-->
     <!-- payments tree view -->
@@ -31,7 +53,8 @@
         <field name="inherit_id" ref="account.view_account_payment_tree"/>
         <field name="arch" type="xml">
             <tree>
-                <button name="%(action_aeroo_report_check)d" icon="fa-print " help="Print check" type="action" attrs="{'invisible': ['|', ('payment_method_code', '!=', 'issue_check')]}"/>
+                <button name="%(action_aeroo_report_check)d" icon="fa-print" help="Print check" type="action" attrs="{'invisible': ['|', ('payment_method_code', '!=', 'issue_check')]}"/>
+                <button name="change_check" icon="fa-undo" type="object" attrs="{'invisible': ['|', ('payment_method_code', '!=', 'issue_check')]}"/>
             </tree>
         </field>
     </record>
@@ -44,6 +67,7 @@
         <field name="arch" type="xml"> 
             <tree>
                 <button name="%(action_aeroo_report_check)d" icon="fa-print " help="Print check" type="action" attrs="{'invisible': ['|', ('payment_method_code', '!=', 'issue_check')]}"/>
+                <button name="change_check" icon="fa-undo" type="object" attrs="{'invisible': ['|', ('payment_method_code', '!=', 'issue_check')]}"/>
             </tree>
         </field>
     </record>   
