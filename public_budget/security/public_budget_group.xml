@@ -68,6 +68,12 @@
         <record id="account.menu_finance_reports" model="ir.ui.menu">
             <field name="groups_id" eval="[(4, ref('group_habilitacion_director'))]"/>
         </record>
+        <record id="account.account_reports_management_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4, ref('group_habilitacion_director'))]"/>
+        </record>
+        <record id="account_reports.account_reports_legal_statements_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4, ref('group_habilitacion_director'))]"/>
+        </record>
 
         <!-- dashboard contable solo para contaduria (y agregamos habilitaciones para poder hacer conciliaciones bancarias)-->
         <record id="account.menu_board_journal_1" model="ir.ui.menu">

@@ -28,6 +28,11 @@
         'l10n_ar_account_withholding',
         # usado por algunos reportes como el de cheques y retenciones
         'l10n_ar_aeroo_base',
+        # agregamos este porque se auto instala y termina instalando
+        # date range y entonces tenemos que agregar regla de portal de date
+        # range para que no de error. Si en un futuro evitamos que este modulo
+        # se auto instale en producción, entonces podemos sacarlo como dep
+        'l10n_ar_account_vat_ledger',
     ],
     'data': [
         'security/public_budget_group.xml',
