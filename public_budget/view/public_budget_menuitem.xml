@@ -30,6 +30,7 @@
             id="menu_contacts"
             sequence="30"
             parent="menu_budget_main"
+            groups="public_budget.group_secretary_director,account.group_account_user"
             />
 
         <menuitem
@@ -150,6 +151,7 @@
             sequence="20"
             action="action_public_budget_budget_budgets"
             parent="menu_budget"
+            groups="public_budget.group_secretary_director,account.group_account_user"
             />
         <record id="action_res_partner_employees" model="ir.actions.act_window">
             <field name="name">Employees</field>
