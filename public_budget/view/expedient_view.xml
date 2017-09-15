@@ -50,8 +50,7 @@
                             states="open"
                             type="object"
                             groups="public_budget.group_secretary_usuario"
-                            string="Close"
-                            class="oe_highlight"/>
+                            string="Close"/>
                         <button name="action_cancel"
                             states="annulled,closed,open"
                             type="object"

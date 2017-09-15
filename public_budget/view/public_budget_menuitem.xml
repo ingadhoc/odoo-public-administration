@@ -76,12 +76,21 @@
             parent="menu_reports"
             sequence="20"/>
 
+        <!-- para secretaria -->
         <menuitem
             id="menu_advance_request_debt_wizard"
             action="action_advance_request_debt_report_wizard"
             sequence="20"
             parent="menu_reports"
             groups="public_budget.group_secretary_director,account.group_account_user,public_budget.group_habilitacion_director"
+            />
+
+        <!-- para hab/cont -->
+        <menuitem
+            id="menu_account_advance_request_debt_wizard"
+            action="action_advance_request_debt_report_wizard"
+            sequence="90"
+            parent="account.menu_finance_reports"
             />
 
         <record id="action_public_budget_advance_request_advance_requests" model="ir.actions.act_window">
