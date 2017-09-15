@@ -7,7 +7,7 @@
             id="menu_budget_main"
             sequence="35"
             web_icon="public_budget,static/description/icon.png"
-            groups="public_budget.group_secretary_director,account.group_account_user"
+            groups="public_budget.group_secretary_director,account.group_account_user,public_budget.group_portal_transaction"
             />
 
         <menuitem
@@ -309,6 +309,7 @@
             sequence="40"
             parent="menu_budget_conf"
             />
+
         <record id="action_public_budget_budget_pos_exc_rest_position_exc__rest_" model="ir.actions.act_window">
             <field name="name">Position Exc. Rest.</field>
             <field name="res_model">public_budget.budget_pos_exc_rest</field>

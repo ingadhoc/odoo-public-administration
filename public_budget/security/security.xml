@@ -13,5 +13,16 @@
             <field eval="False" name="perm_read"/>
             <field name="domain_force">['|' ,('current_location_id', 'in', user.location_ids.ids), ('current_location_id', '=', False)]</field>
         </record>
+
+        <!-- portal expedient users can access all partners, we revert original portal group rule -->
+        <record model="ir.rule" id="res_partner_portal_expedient_rule">
+            <field name="name">res_partner: portal expedient</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('group_portal_expedient'))]"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_write" eval="False"/>
+        </record>
     </data>
 </openerp>
