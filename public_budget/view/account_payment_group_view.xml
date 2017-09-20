@@ -94,7 +94,13 @@
                     <field name="days_interval_type" class="oe_inline"/>
                 </div>
                 <field name="payment_min_date"/>
-                <field name="confirmation_date"/>
+                <!-- lo hacemos editable con tec features -->
+                <field name="confirmation_date" readonly="1"/>
+            </field>
+
+            <!-- lo hacemos editable con tec features -->
+            <field name="payment_date" position="attributes">
+                <attribute name="readonly">1</attribute>
             </field>
 
             <field name="partner_id" position="after">
@@ -154,6 +160,23 @@
             <!-- quieren que las retenciones se definan una vez confirmado el pago -->
             <field name="retencion_ganancias" position="attributes">
                 <attribute name="attrs">{'required': [('company_regimenes_ganancias_ids', '!=', []), ('state', '=', 'confirmed')]}</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_account_payment_group_tec_features_form" model="ir.ui.view">
+        <field name="name">account.payment.group.form</field>
+        <field name="model">account.payment.group</field>
+        <field name="inherit_id" ref="view_account_payment_group_form"/>
+        <field name="groups_id" eval="[(4, ref('base.group_configuration'))]"/>
+        <!-- <field name="groups_id" eval="[(4, ref('base.group_no_one'))]"/> -->
+        <!-- no pude hacer que ande como esperaba con el grupo tc features, aún sin modo desarrollador se lo hacía visible, se ve que se comporta distinto que en menus -->
+        <field name="arch" type="xml">
+            <field name="payment_date" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </field>
+            <field name="confirmation_date" position="attributes">
+                <attribute name="readonly">0</attribute>
             </field>
         </field>
     </record>
