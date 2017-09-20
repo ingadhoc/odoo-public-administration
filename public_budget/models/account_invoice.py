@@ -143,11 +143,14 @@ class AccountInvoice(models.Model):
     def invoice_validate(self):
         res = super(AccountInvoice, self).invoice_validate()
         for inv in self:
-            date = fields.Date.from_string(inv.date)
-            if not inv.budget_id.check_date_in_budget_dates(date):
-                raise ValidationError((
-                    'La fecha de la factura tiene que estar dentro del año '
-                    'fiscal del presupuesto!'))
+            # TODO ver si lo borramos, no seria obligatorio que una factura
+            # este en el año fiscal del presupuesto ya que puede ser factura
+            # de residuo pasivo
+            # date = fields.Date.from_string(inv.date)
+            # if not inv.budget_id.check_date_in_budget_dates(date):
+            #     raise ValidationError((
+            #         'La fecha de la factura tiene que estar dentro del año '
+            #         'fiscal del presupuesto!'))
             if inv.transaction_id.type_id.with_advance_payment:
                 domain = [
                     ('move_id', '=', inv.move_id.id),
