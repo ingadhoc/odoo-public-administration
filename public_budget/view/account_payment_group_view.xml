@@ -72,6 +72,7 @@
             </field>
 
             <form>
+                <field name="advance_request_id" invisible="1"/>
                 <!-- used on expedient domain -->
                 <field name="user_location_ids" invisible="1"/>
                 <field name="transaction_with_advance_payment" invisible="1"/>
