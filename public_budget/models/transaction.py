@@ -375,7 +375,7 @@ class BudgetTransaction(models.Model):
         self = self.with_context(transaction_id=self.id)
         for invoice in self.invoice_ids.filtered(
                 lambda r: r.state == 'open'):
-            partner = invoice.partner_id.commercial_partner_id
+            partner = invoice.partner_id
             pay_context = {
                 'to_pay_move_line_ids': (invoice.open_move_line_ids.ids),
                 'default_company_id': invoice.company_id.id,
