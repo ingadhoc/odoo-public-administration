@@ -51,6 +51,16 @@
         <field name="priority">20</field>
         <field name="inherit_id" ref="account_payment_group.view_account_payment_group_form"/>
         <field name="arch" type="xml">
+            <!-- en sipreco, para el pago de retenciones no queremos pasar por todo el circuito de doble confirmación), ademas no queremos que usen talonario de ordenes de pago y es medio complicado generar otro talonario exclsuivo para esto y pasarlo por defecto, entonces hacemos que talonario y numero de docuemnto sean solo requeridos si es pago de transacción o de adelantos -->
+            <field name="receiptbook_id" position="attributes">
+                <attribute name="attrs">{'invisible': [('transaction_id', '=', False), ('advance_request_id', '=', False)], 'required':['|', ('transaction_id', '!=', False), ('advance_request_id', '!=', False)]}</attribute>
+            </field>
+            <field name="document_number" position="attributes">
+                <attribute name="attrs"></attribute>
+                <attribute name="invisible">1</attribute>
+            </field>
+
+
             <button name="action_payment_sent" position="attributes">
                 <attribute name="attrs">{'invisible':[('state', 'not in', ['posted', 'signed'])]}</attribute>
             </button>
