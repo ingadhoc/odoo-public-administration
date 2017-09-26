@@ -227,6 +227,8 @@ class PublicBudgetSubsidy(models.Model):
         cargo_date = payments.search([
             ('id', 'in', payments.ids),
             ('payment_date', '!=', False),
+            # cargo only if payment validated
+            ('state', '=', 'posted'),
         ], order='payment_date desc', limit=1).payment_date
 
         expiry_date = False
