@@ -124,7 +124,7 @@
                             <page string="Payment Orders" attrs="{'invisible':[('type_with_advance_payment','=',True)]}">
                                 <button class="oe_link" string="Create Payment Order" states="open" type="object" name="action_new_payment_group"/>
                                 or 
-                                <button class="oe_link" string="Mass Payment Order Create" states="open" type="object" name="mass_payment_group_create"/>
+                                <button class="oe_link" string="Mass Payment Order Create" states="open" type="object" name="mass_payment_group_create" confirm="Se van a generar ordenes de pago para todos los comprobantes impagos, seguro que quiere continuar?"/>
                                 <field name="payment_group_ids" context="{'default_partner_type': 'supplier', 'default_transaction_id':id}"/>
                             </page>
                             <page string="Notes">

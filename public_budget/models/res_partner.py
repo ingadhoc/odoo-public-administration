@@ -23,6 +23,11 @@ class ResPartner(models.Model):
     )
     drei_number = fields.Char(
     )
+    # por defecto prefieren que sea esta opción para poder poner otros
+    # domicilios
+    type = fields.Selection(
+        default='other',
+    )
 
     @api.multi
     def mark_as_reconciled(self):
