@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- FORMVIEW -->
+    <record id="view_public_budget_subsidy_resolution_form" model="ir.ui.view">
+        <field name="name">public_budget.subsidy.resolution.form</field>
+        <field name="model">public_budget.subsidy.resolution</field>
+        <field name="arch" type="xml">
+            <form string="Resoluciones de Subsidios">
+                <header>
+                    <button type="object" string="Cambiar Estado" name="action_change_state"/>
+                    <field name="state" widget="statusbar" clickable="true"/>
+                </header>
+                <sheet string="Resolucion Subsidios">
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="date"/>
+                        </group>
+                        <group>
+                            <field name="reference"/>
+                            <field name="expedient_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Resoluciones">
+                            <field name="subsidy_resolution_line_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="dni"/>
+                                    <field name="expedient_id"/>
+                                    <field name="partner_id"/>
+                                    <field name="amount"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- TREE VIEW -->
+    <record id="view_public_budget_subsidy_resolution_tree" model="ir.ui.view">
+        <field name="name">public_budget.subsidy.resolution.tree</field>
+        <field name="model">public_budget.subsidy.resolution</field>
+        <field name="arch" type="xml">
+            <tree string="Resoluciones de Subsidios">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="reference"/>
+                <field name="expedient_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- SEARCH VIEW -->
+    <record id="view_public_budget_subsidy_resolution_search" model="ir.ui.view">
+        <field name="name">public_budget.subsidy.resolution.search</field>
+        <field name="model">public_budget.subsidy.resolution</field>
+        <field name="arch" type="xml">
+            <search string="Resoluciones Subsidios">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="reference"/>
+                <field name="expedient_id"/>
+                <field name="state"/>
+                <field name="name" filter_domain="[('subsidy_resolution_line_ids.name','ilike',self)]" string="Nombre de la Resolucion"/>
+                <field name="subsidy_resolution_line_ids" filter_domain="[('subsidy_resolution_line_ids.dni','ilike',self)]" string="DNI"/>
+                <field name="subsidy_resolution_line_ids" filter_domain="[('subsidy_resolution_line_ids.expedient_id.number','ilike',self)]" string="N° Exp. Resolucion"/>
+            </search>
+        </field>
+    </record>
+
+
+
+    <record id="action_public_budget_subsidy_resolution" model="ir.actions.act_window">
+        <field name="name">Resoluciones de Subsidios</field>
+        <field name="res_model">public_budget.subsidy.resolution</field>
+    </record>
+
+    <menuitem
+        id="menu_public_budget_subsidy_resolution"
+        sequence="15"
+        action="action_public_budget_subsidy_resolution"
+        parent="menu_responsible_accounting"
+        />
+</odoo>
