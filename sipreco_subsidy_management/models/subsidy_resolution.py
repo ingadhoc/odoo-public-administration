@@ -61,7 +61,7 @@ class PublicBudgetSubsidyResolutionLines(models.Model):
     )
     partner_id = fields.Many2one(
         'res.partner',
-        'Consejal',
+        'Concejal',
         domain=[('employee', '=', True)],
         required=True,
     )

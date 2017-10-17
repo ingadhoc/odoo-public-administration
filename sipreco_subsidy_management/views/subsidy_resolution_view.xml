@@ -23,7 +23,7 @@
                         </group>
                     </group>
                     <notebook>
-                        <page string="Resoluciones">
+                        <page string="Lineas de Resoluciones">
                             <field name="subsidy_resolution_line_ids">
                                 <tree editable="bottom">
                                     <field name="name"/>
@@ -67,7 +67,7 @@
                 <field name="reference"/>
                 <field name="expedient_id"/>
                 <field name="state"/>
-                <field name="name" filter_domain="[('subsidy_resolution_line_ids.name','ilike',self)]" string="Nombre de la Resolucion"/>
+                <field name="name" filter_domain="[('subsidy_resolution_line_ids.name','ilike',self)]" string="Nombre de Receptor"/>
                 <field name="subsidy_resolution_line_ids" filter_domain="[('subsidy_resolution_line_ids.dni','ilike',self)]" string="DNI"/>
                 <field name="subsidy_resolution_line_ids" filter_domain="[('subsidy_resolution_line_ids.expedient_id.number','ilike',self)]" string="N° Exp. Resolucion"/>
             </search>
