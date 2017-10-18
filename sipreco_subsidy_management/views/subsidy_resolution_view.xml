@@ -26,9 +26,9 @@
                         <page string="Lineas de Resoluciones">
                             <field name="subsidy_resolution_line_ids">
                                 <tree editable="bottom">
+                                    <field name="expedient_id"/>
                                     <field name="name"/>
                                     <field name="dni"/>
-                                    <field name="expedient_id"/>
                                     <field name="partner_id"/>
                                     <field name="amount"/>
                                 </tree>

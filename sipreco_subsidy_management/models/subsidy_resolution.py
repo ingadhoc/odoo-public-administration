@@ -58,6 +58,8 @@ class PublicBudgetSubsidyResolutionLines(models.Model):
     expedient_id = fields.Many2one(
         'public_budget.expedient',
         string='Expediente',
+        domain=[('subsidy_expedient', '=', True)],
+        required=True,
     )
     partner_id = fields.Many2one(
         'res.partner',
@@ -72,3 +74,9 @@ class PublicBudgetSubsidyResolutionLines(models.Model):
     subsidy_resolution_id = fields.Many2one(
         'public_budget.subsidy.resolution'
     )
+
+    @api.onchange('expedient_id')
+    def _onchange_expedient_id(self):
+        self.partner_id = self.expedient_id.employee_subsidy_requestor
+        self.name = self.expedient_id.cover
+        self.dni = self.expedient_id.subsidy_recipient_doc
