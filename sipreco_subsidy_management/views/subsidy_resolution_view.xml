@@ -19,7 +19,6 @@
                         </group>
                         <group>
                             <field name="reference"/>
-                            <field name="expedient_id"/>
                         </group>
                     </group>
                     <notebook>
@@ -50,7 +49,6 @@
                 <field name="name"/>
                 <field name="date"/>
                 <field name="reference"/>
-                <field name="expedient_id"/>
                 <field name="state"/>
             </tree>
         </field>
@@ -65,9 +63,8 @@
                 <field name="name"/>
                 <field name="date"/>
                 <field name="reference"/>
-                <field name="expedient_id"/>
                 <field name="state"/>
-                <field name="name" filter_domain="[('subsidy_resolution_line_ids.name','ilike',self)]" string="Nombre de Receptor"/>
+                <field name="subsidy_resolution_line_ids" filter_domain="[('subsidy_resolution_line_ids.name','ilike',self)]" string="Nombre de Receptor"/>
                 <field name="subsidy_resolution_line_ids" filter_domain="[('subsidy_resolution_line_ids.dni','ilike',self)]" string="DNI"/>
                 <field name="subsidy_resolution_line_ids" filter_domain="[('subsidy_resolution_line_ids.expedient_id.number','ilike',self)]" string="N° Exp. Resolucion"/>
             </search>

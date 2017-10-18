@@ -18,11 +18,6 @@ class PublicBudgetSubsidyResolution(models.Model):
         'Referencia',
         required=True,
     )
-    expedient_id = fields.Many2one(
-        'public_budget.expedient',
-        string='Expediente',
-        required=True,
-    )
     state = fields.Selection([
         ('not_presented', 'No Presentado'),
         ('presented', 'Presentado')],
