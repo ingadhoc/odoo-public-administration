@@ -18,14 +18,15 @@
                             <field name="date"/>
                         </group>
                         <group>
+                            <field name="current_location_id"/>
                             <field name="reference"/>
                         </group>
                     </group>
                     <notebook>
                         <page string="Lineas de Resoluciones">
-                            <field name="subsidy_resolution_line_ids">
+                            <field name="subsidy_resolution_line_ids" context="{'current_location_id':current_location_id}">
                                 <tree editable="bottom">
-                                    <field name="expedient_id"/>
+                                    <field name="expedient_id" domain="[('subsidy_expedient', '=', True),('current_location_id','=', current_location_id)]"/>
                                     <field name="name"/>
                                     <field name="dni"/>
                                     <field name="partner_id"/>

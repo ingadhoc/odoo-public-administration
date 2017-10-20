@@ -11,7 +11,7 @@ class PublicBudgetSubsidyResolution(models.Model):
         required=True
     )
     date = fields.Date(
-        string='Fecha de la Resolucion',
+        'Fecha de la Resolucion',
         required=True
     )
     reference = fields.Char(
@@ -29,6 +29,12 @@ class PublicBudgetSubsidyResolution(models.Model):
         'subsidy_resolution_id'
     )
 
+    current_location_id = fields.Many2one(
+        'public_budget.location',
+        string='Ubicación Actual',
+        required=True,
+    )
+
     @api.multi
     def action_change_state(self):
         for rec in self:
@@ -36,6 +42,14 @@ class PublicBudgetSubsidyResolution(models.Model):
                 rec.state = 'presented'
             elif rec.state == 'presented':
                 rec.state = 'not_presented'
+
+    @api.constrains('state')
+    def _validate_state_presented(self):
+        for rec in self:
+            if rec.state == 'presented':
+                for exp in rec.mapped(
+                        'subsidy_resolution_line_ids.expedient_id'):
+                    exp.subsidy_approved = True
 
 
 class PublicBudgetSubsidyResolutionLines(models.Model):
@@ -53,7 +67,6 @@ class PublicBudgetSubsidyResolutionLines(models.Model):
     expedient_id = fields.Many2one(
         'public_budget.expedient',
         string='Expediente',
-        domain=[('subsidy_expedient', '=', True)],
         required=True,
     )
     partner_id = fields.Many2one(
@@ -69,6 +82,12 @@ class PublicBudgetSubsidyResolutionLines(models.Model):
     subsidy_resolution_id = fields.Many2one(
         'public_budget.subsidy.resolution'
     )
+
+    _sql_constraints = [
+        ('dni', 'unique(dni, subsidy_resolution_id)',
+         '¡DNI duplicado en las lineas! Revisar'),
+        ('expedient_id', 'unique(expedient_id, subsidy_resolution_id)',
+                         '¡Expediente Duplicado! Revisar')]
 
     @api.onchange('expedient_id')
     def _onchange_expedient_id(self):
