@@ -7,21 +7,21 @@ class PublicBudgetSubsidyResolution(models.Model):
     _name = 'public_budget.subsidy.resolution'
 
     name = fields.Char(
-        'Nombre',
+        'Name',
         required=True
     )
     date = fields.Date(
-        'Fecha de la Resolucion',
+        'Date of resolution',
         required=True
     )
     reference = fields.Char(
-        'Referencia',
+        'Reference',
         required=True,
     )
     state = fields.Selection([
-        ('not_presented', 'No Presentado'),
-        ('presented', 'Presentado')],
-        'Estado',
+        ('not_presented', 'Not Presented'),
+        ('presented', 'Presented')],
+        'State',
         default='not_presented'
     )
     subsidy_resolution_line_ids = fields.One2many(
@@ -31,7 +31,7 @@ class PublicBudgetSubsidyResolution(models.Model):
 
     current_location_id = fields.Many2one(
         'public_budget.location',
-        string='Ubicación Actual',
+        string='Current Location',
         required=True,
     )
     location_dest_id = fields.Many2one(
@@ -75,49 +75,37 @@ class PublicBudgetSubsidyResolution(models.Model):
             action_read['domain'] = [('id', '=', remit.id)]
         return action_read
 
-        # return {
-        #     'name': 'Remitos',
-        #     'type': 'ir.actions.act_window',
-        #     'res_model': 'public_budget.remit',
-        #     'view_type': 'form',
-        #     'view_mode': 'tree, form',
-        #     'domain': [('id', '=', remit.id)],
-        # }
-
 
 class PublicBudgetSubsidyResolutionLines(models.Model):
 
     _name = 'public_budget.subsidy.resolution.line'
 
     name = fields.Char(
-        'Nombre de Receptor',
+        'Name of Receiver',
         required=True
     )
     dni = fields.Integer(
-        'DNI de Receptor',
+        'DNI of Receiver',
         required=True
     )
     expedient_id = fields.Many2one(
         'public_budget.expedient',
-        string='Expediente',
+        string='Expedient',
         required=True,
     )
     partner_id = fields.Many2one(
         'res.partner',
-        'Concejal',
+        'Councilor',
         domain=[('employee', '=', True)],
         required=True,
     )
     amount = fields.Integer(
-        'Monto',
+        'Amount',
         required=True,
     )
     subsidy_resolution_id = fields.Many2one(
         'public_budget.subsidy.resolution'
     )
-    # sequence = fields.Integer(
-    #     default=1,
-    # )
 
     _sql_constraints = [
         ('dni', 'unique(dni, subsidy_resolution_id)',
