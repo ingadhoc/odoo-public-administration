@@ -34,6 +34,11 @@ class PublicBudgetSubsidyResolution(models.Model):
         string='Ubicación Actual',
         required=True,
     )
+    location_dest_id = fields.Many2one(
+        'public_budget.location',
+        string='Destination Location',
+        required=True,
+    )
 
     @api.multi
     def action_change_state(self):
@@ -50,6 +55,34 @@ class PublicBudgetSubsidyResolution(models.Model):
                 for exp in rec.mapped(
                         'subsidy_resolution_line_ids.expedient_id'):
                     exp.subsidy_approved = True
+
+    @api.multi
+    def generate_remit(self):
+        vals = {
+            'location_id': self.current_location_id.id,
+            'location_dest_id': self.location_dest_id.id,
+            'reference': self.reference,
+        }
+        remit = self.env['public_budget.remit'].create(vals)
+        remit.expedient_ids = self.mapped(
+            'subsidy_resolution_line_ids.expedient_id').ids
+        action_read = False
+        actions = self.env.ref(
+            'public_budget.action_public_budget_remit_remits')
+        if actions:
+            action_read = actions.read()[0]
+            action_read['name'] = 'Remitos'
+            action_read['domain'] = [('id', '=', remit.id)]
+        return action_read
+
+        # return {
+        #     'name': 'Remitos',
+        #     'type': 'ir.actions.act_window',
+        #     'res_model': 'public_budget.remit',
+        #     'view_type': 'form',
+        #     'view_mode': 'tree, form',
+        #     'domain': [('id', '=', remit.id)],
+        # }
 
 
 class PublicBudgetSubsidyResolutionLines(models.Model):
@@ -82,6 +115,9 @@ class PublicBudgetSubsidyResolutionLines(models.Model):
     subsidy_resolution_id = fields.Many2one(
         'public_budget.subsidy.resolution'
     )
+    # sequence = fields.Integer(
+    #     default=1,
+    # )
 
     _sql_constraints = [
         ('dni', 'unique(dni, subsidy_resolution_id)',
