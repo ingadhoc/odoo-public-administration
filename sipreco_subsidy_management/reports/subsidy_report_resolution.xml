@@ -23,7 +23,7 @@
     <field eval="'action'" name="key"/>
     <field eval="'client_print_multi'" name="key2"/>
     <field eval="['public_budget.subsidy.resolution']" name="models"/>
-    <field name="name">asset</field>
+    <field name="name">Report Tabla Resoluciones de Subsidios</field>
     <field eval="'ir.actions.report.xml,'+str(action_aeroo_subsidy_resolution_report)" name="value"/>
     <field eval="True" name="isobject"/>
     <field eval="True" name="replace"/>
@@ -50,7 +50,7 @@
     <field eval="'action'" name="key"/>
     <field eval="'client_print_multi'" name="key2"/>
     <field eval="['public_budget.subsidy.resolution']" name="models"/>
-    <field name="name">asset</field>
+    <field name="name">Resolucion INSTIT</field>
     <field eval="'ir.actions.report.xml,'+str(action_aeroo_subsidy_resolution_INSTIT)" name="value"/>
     <field eval="True" name="isobject"/>
     <field eval="True" name="replace"/>
@@ -75,7 +75,7 @@
     <field eval="'action'" name="key"/>
     <field eval="'client_print_multi'" name="key2"/>
     <field eval="['public_budget.subsidy.resolution']" name="models"/>
-    <field name="name">asset</field>
+    <field name="name">Resolucion TRANS</field>
     <field eval="'ir.actions.report.xml,'+str(action_aeroo_subsidy_resolution_ITRANS_report)" name="value"/>
     <field eval="True" name="isobject"/>
     <field eval="True" name="replace"/>
@@ -101,7 +101,7 @@
     <field eval="'action'" name="key"/>
     <field eval="'client_print_multi'" name="key2"/>
     <field eval="['public_budget.subsidy.resolution']" name="models"/>
-    <field name="name">asset</field>
+    <field name="name">Resolucion COMUN</field>
     <field eval="'ir.actions.report.xml,'+str(action_aeroo_subsidy_resolution_COMUN_report)" name="value"/>
     <field eval="True" name="isobject"/>
     <field eval="True" name="replace"/>

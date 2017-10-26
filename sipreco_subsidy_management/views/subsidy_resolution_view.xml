@@ -19,7 +19,9 @@
                             <field name="date"/>
                         </group>
                         <group>
-                            <field name="current_location_id"/>
+                            <field name="user_location_ids" invisible="1"/>
+                            <field name="user_id" invisible="1"/>
+                            <field name="current_location_id" domain="[('id', 'in', user_location_ids and user_location_ids[0][2] or [])]"/>
                             <field name="location_dest_id"/>
                             <field name="reference"/>
                         </group>
@@ -85,6 +87,7 @@
         id="menu_public_budget_subsidy_resolution"
         sequence="15"
         action="action_public_budget_subsidy_resolution"
-        parent="menu_responsible_accounting"
+        parent="public_budget.menu_expedient_main"
+        groups="public_budget.group_secretary_usuario"
         />
 </odoo>

@@ -39,6 +39,33 @@ class PublicBudgetSubsidyResolution(models.Model):
         string='Destination Location',
         required=True,
     )
+    user_id = fields.Many2one(
+        'res.users',
+        default=lambda self: self.env.user
+    )
+    user_location_ids = fields.Many2many(
+        related='user_id.location_ids',
+        readonly=True,
+    )
+
+    @api.multi
+    def onchange(self, values, field_name, field_onchange):
+        """
+        Idea obtenida de aca
+        https://github.com/odoo/odoo/issues/16072#issuecomment-289833419
+        por el cambio que se introdujo en esa mimsa conversación, TODO en v11
+        no haría mas falta, simplemente domain="[('id', 'in', x2m_field)]"
+        Otras posibilidades que probamos pero no resultaron del todo fue:
+        * agregar onchange sobre campos calculados y que devuelvan un dict con
+        domain. El tema es que si se entra a un registro guardado el onchange
+        no se ejecuta
+        * usae el modulo de web_domain_field que esta en un pr a la oca
+        """
+        for field in field_onchange.keys():
+            if field.startswith('user_location_ids.'):
+                del field_onchange[field]
+        return super(PublicBudgetSubsidyResolution, self).onchange(
+            values, field_name, field_onchange)
 
     @api.multi
     def action_change_state(self):
