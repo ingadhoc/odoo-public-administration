@@ -41,6 +41,7 @@
                             <field name="pendientes_rendicion_amount"/>
                             <field name="revision_amount"/>
                             <field name="pendientes_aprobacion_amount"/>
+                            <field name="reclaimed"/>
                         </group>
                     </group>
                     <notebook>
@@ -116,8 +117,9 @@
         <field name="name">public_budget.subsidy.tree</field>
         <field name="model">public_budget.subsidy</field>
         <field name="arch" type="xml">
-            <tree string="Subsidios">
+            <tree string="Subsidios" colors="blue:(reclaimed)">
                 <field name="internal_number"/>
+                <field name="reclaimed"/>
                 <field name="parliamentary_resolution_date"/>
                 <field name="partner_id" string="Beneficiary"/>
                 <field name="amount" string="Importe s/Res"/>
@@ -176,6 +178,10 @@
                 <filter
                     string="Aprobados"
                     domain="[('accountability_state', '=', 'approved'), ('cargo_amount', '&gt;', 0.0)]"
+                    />
+                <filter
+                    string="Reclamados"
+                    domain="[('reclaimed', '=', True)]"
                     />
                 <group expand="1" string="Group By">
                     <filter string="Estado de la Transacción" name="state" context="{'group_by':'state'}"/>

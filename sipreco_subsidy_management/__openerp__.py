@@ -27,5 +27,5 @@
     'installable': True,
     'name': 'Public Budget Subsidy Management',
     'test': [],
-    'version': '9.0.1.0.0',
+    'version': '9.0.1.1.0',
 }

@@ -150,6 +150,9 @@ class PublicBudgetExpedient(models.Model):
         readonly=True,
         states={'in_transit': [('readonly', False)]}
     )
+    parliamentary_expedient = fields.Char(
+        string='Expediente Parlamentario'
+    )
 
     @api.multi
     def onchange(self, values, field_name, field_onchange):
