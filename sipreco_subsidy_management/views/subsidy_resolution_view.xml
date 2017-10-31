@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- pylint:disable=duplicate-xml-fields -->
+<odoo>
+
+    <!-- FORMVIEW -->
+    <record id="view_public_budget_subsidy_resolution_form" model="ir.ui.view">
+        <field name="name">public_budget.subsidy.resolution.form</field>
+        <field name="model">public_budget.subsidy.resolution</field>
+        <field name="arch" type="xml">
+            <form string="Resoluciones de Subsidios">
+                <header>
+                    <button type="object" string="Cambiar Estado" name="action_change_state"/>
+                    <button type="object" string="Generar Remito" name="generate_remit"/>
+                    <field name="state" widget="statusbar" clickable="true"/>
+                </header>
+                <sheet string="Resolucion Subsidios">
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="date"/>
+                        </group>
+                        <group>
+                            <field name="user_location_ids" invisible="1"/>
+                            <field name="user_id" invisible="1"/>
+                            <field name="current_location_id" domain="[('id', 'in', user_location_ids and user_location_ids[0][2] or [])]"/>
+                            <field name="location_dest_id"/>
+                            <field name="reference"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Lineas de Resoluciones">
+                            <field name="subsidy_resolution_line_ids" context="{'current_location_id':current_location_id}">
+                                <tree editable="bottom">
+                                    <field name="expedient_id" domain="[('subsidy_expedient', '=', True),('current_location_id','=', current_location_id)]"/>
+                                    <field name="name"/>
+                                    <field name="dni"/>
+                                    <field name="partner_id"/>
+                                    <field name="amount"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- TREE VIEW -->
+    <record id="view_public_budget_subsidy_resolution_tree" model="ir.ui.view">
+        <field name="name">public_budget.subsidy.resolution.tree</field>
+        <field name="model">public_budget.subsidy.resolution</field>
+        <field name="arch" type="xml">
+            <tree string="Resoluciones de Subsidios">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="reference"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- SEARCH VIEW -->
+    <record id="view_public_budget_subsidy_resolution_search" model="ir.ui.view">
+        <field name="name">public_budget.subsidy.resolution.search</field>
+        <field name="model">public_budget.subsidy.resolution</field>
+        <field name="arch" type="xml">
+            <search string="Resoluciones Subsidios">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="reference"/>
+                <field name="state"/>
+                <field name="subsidy_resolution_line_ids" filter_domain="[('subsidy_resolution_line_ids.name','ilike',self)]" string="Nombre de Receptor"/>
+                <field name="subsidy_resolution_line_ids" filter_domain="[('subsidy_resolution_line_ids.dni','ilike',self)]" string="DNI"/>
+                <field name="subsidy_resolution_line_ids" filter_domain="[('subsidy_resolution_line_ids.expedient_id.number','ilike',self)]" string="N° Exp. Resolucion"/>
+            </search>
+        </field>
+    </record>
+
+
+
+    <record id="action_public_budget_subsidy_resolution" model="ir.actions.act_window">
+        <field name="name">Resoluciones de Subsidios</field>
+        <field name="res_model">public_budget.subsidy.resolution</field>
+    </record>
+
+    <menuitem
+        id="menu_public_budget_subsidy_resolution"
+        sequence="15"
+        action="action_public_budget_subsidy_resolution"
+        parent="public_budget.menu_expedient_main"
+        groups="public_budget.group_secretary_usuario"
+        />
+</odoo>
