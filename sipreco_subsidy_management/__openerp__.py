@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 {
-    'author': 'ADHOC SA',
+    'author': 'ADHOC SA, Odoo Community Association (OCA)',
     'website': 'www.adhoc.com.ar',
     'category': 'Accounting & Finance',
+    'license': 'AGPL-3',
     'data': [
         'reports/subsidy_note_report.xml',
         'reports/subsidy_approval_arrangement_report.xml',
