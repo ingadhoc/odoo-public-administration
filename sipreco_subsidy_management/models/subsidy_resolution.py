@@ -79,9 +79,8 @@ class PublicBudgetSubsidyResolution(models.Model):
     def _validate_state_presented(self):
         for rec in self:
             if rec.state == 'presented':
-                for exp in rec.mapped(
-                        'subsidy_resolution_line_ids.expedient_id'):
-                    exp.subsidy_approved = True
+                rec.mapped('subsidy_resolution_line_ids.expedient_id').write(
+                    {'subsidy_approved': True})
 
     @api.multi
     def generate_remit(self):
