@@ -32,11 +32,13 @@ class Budget(models.Model):
         readonly=True,
         states={'draft': [('readonly', False)]},
     )
+    # TODO rename a default_income_account_id?
+    # la dejamos por compatibilidad con CMR
     income_account_id = fields.Many2one(
         'account.account',
-        string='Income Account',
+        string='Default Income Account',
         readonly=True,
-        required=True,
+        # required=True,
         states={'draft': [('readonly', False)]},
         domain="[('internal_type', '=', 'other'), "
         "('company_id', '=', company_id), "

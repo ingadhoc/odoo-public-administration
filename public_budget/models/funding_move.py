@@ -56,6 +56,26 @@ class FundingMove(models.Model):
         related='budget_id.currency_id',
         readonly=True,
     )
+    income_account_id = fields.Many2one(
+        'account.account',
+        string='Income Account',
+        help='If no income account is configured, then income default income '
+        'account configured on budget is going to be used.',
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+        domain="[('internal_type', '=', 'other'), "
+        # no me gasto en este filtro porque no usan multicompany y deberia
+        # llevarla
+        # "('company_id', '=', company_id), "
+        "('deprecated', '=', False)]",
+    )
+    budget_position_id = fields.Many2one(
+        'public_budget.budget_position',
+        string='Budget Position',
+        context={
+            'default_type': 'normal', 'default_budget_assignment_allowed': 1},
+        domain=[('budget_assignment_allowed', '=', True)]
+    )
 
     @api.multi
     def action_cancel_draft(self):
@@ -88,6 +108,12 @@ class FundingMove(models.Model):
     @api.multi
     def action_confirm(self):
         for rec in self:
+            income_account = rec.income_account_id or \
+                rec.budget_id.income_account_id
+            if not income_account:
+                raise ValidationError(_(
+                    'No Income account defined on the funding move or the '
+                    'budget'))
             if rec.type == 'refund':
                 account_id = rec.journal_id.default_debit_account_id.id
                 debit = 0.0
@@ -109,7 +135,7 @@ class FundingMove(models.Model):
                 'date': rec.date,
                 'debit': credit,
                 'credit': debit,
-                'account_id': rec.budget_id.income_account_id.id,
+                'account_id': income_account.id,
             }
 
             move_vals = {
