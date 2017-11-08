@@ -153,6 +153,7 @@ class PublicBudgetSubsidy(models.Model):
         compute='get_amounts',
         store=True,
     )
+    reclaimed = fields.Boolean(string='Reclamado?')
 
     @api.one
     @api.depends(
@@ -259,3 +260,8 @@ class PublicBudgetSubsidy(models.Model):
         if self.rendido_amount > self.cargo_amount:
             raise ValidationError(
                 'El importe rendido no puede ser mayor al importe de cargo')
+
+    @api.onchange('expedient_id')
+    def set_expedient_id(self):
+        self.parliamentary_expedient = self.\
+            expedient_id.parliamentary_expedient
