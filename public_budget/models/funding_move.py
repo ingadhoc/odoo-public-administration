@@ -140,7 +140,7 @@ class FundingMove(models.Model):
 
             move_vals = {
                 'ref': rec.name,
-                'line_id': [(0, 0, move_line2), (0, 0, move_line1)],
+                'line_ids': [(0, 0, move_line2), (0, 0, move_line1)],
                 'journal_id': rec.journal_id.id,
                 'date': rec.date,
             }
