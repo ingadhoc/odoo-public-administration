@@ -40,10 +40,10 @@
                        <div class="oe_button_box" name="buttons">
                        </div>
                      <group string="Preventive Line">
-                        <label for=""/>
+                        <label for="budget_position_id"/>
                         <div>
                             <field name="budget_position_id" options="{'no_create': True}" class="oe_inline"/> 
-                            <button name="%(action_preventive_change_position)d"  type="action" icon="fa-pencil" class="oe_link oe_inline"/>
+                            <button name="%(action_preventive_change_position)d"  type="action" icon="fa-pencil" class="oe_link oe_inline" groups="account.group_account_manager"/>
                         </div>
                         <field name="account_id" attrs="{'required':[('advance_line','=',False)],'invisible':[('advance_line','=',True)]}" options="{'no_create': True}"/> 
                         <field name="preventive_amount"/> 
