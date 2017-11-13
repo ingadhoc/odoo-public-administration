@@ -2,7 +2,7 @@
 {
     'name': 'Public Budget',
     'license': 'AGPL-3',
-    'version': '9.0.1.9.0',
+    'version': '9.0.1.10.0',
     'author': 'ADHOC SA',
     'website': 'www.adhoc.com.ar',
     'category': 'Accounting & Finance',
@@ -43,6 +43,7 @@
         'wizard/transaction_definitive_mass_invoice_create_view.xml',
         'wizard/budget_analysis_wizard_view.xml',
         'wizard/avance_request_report_wizard_view.xml',
+        'wizard/account_check_debit_view.xml',
         'reports/advance_request_analysis_view.xml',
         'reports/stylesheet.xml',
         'reports/payment_order_report.xml',
