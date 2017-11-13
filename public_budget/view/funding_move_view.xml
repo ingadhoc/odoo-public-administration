@@ -49,6 +49,8 @@
                         <field name="name"/> 
                         <field name="type"/> 
                         <field name="journal_id"/> 
+                        <field name="income_account_id"/> 
+                        <field name="budget_position_id"/> 
                         <field name="amount"/> 
                         <field name="move_id"/> 
                         <field name="budget_id"
