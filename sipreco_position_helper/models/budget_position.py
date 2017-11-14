@@ -14,6 +14,7 @@ class BudgetPosition(models.Model):
     code = fields.Char(
         compute='_compute_code',
         store=True,
+        required=False,
     )
 
     @api.multi

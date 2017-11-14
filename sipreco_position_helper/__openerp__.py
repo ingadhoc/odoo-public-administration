@@ -7,6 +7,7 @@
         'views/budget_position_view.xml',
     ],
     'demo': [
+        'demo/public_budget.budget_position.csv',
     ],
     'depends': [
         'public_budget',
