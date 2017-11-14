@@ -17,6 +17,12 @@ class AccountPayment(models.Model):
         required=False,
         default=False,
     )
+    assignee_id = fields.Many2one(
+        'res.partner',
+        'Cesionario',
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+    )
 
     @api.one
     @api.depends('invoice_ids', 'payment_type', 'partner_type', 'partner_id')
