@@ -43,6 +43,7 @@
         'wizard/transaction_definitive_mass_invoice_create_view.xml',
         'wizard/budget_analysis_wizard_view.xml',
         'wizard/avance_request_report_wizard_view.xml',
+        'wizard/public_budget_preventive_changeposition_view.xml',
         'wizard/account_check_debit_view.xml',
         'reports/advance_request_analysis_view.xml',
         'reports/stylesheet.xml',
