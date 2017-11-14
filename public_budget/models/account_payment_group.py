@@ -232,6 +232,13 @@ class AccountPaymentGroup(models.Model):
                 current_date = fields.Date.from_string(self.payment_base_date)
                 current_date = current_date + relativedelta(
                     days=self.payment_days)
+
+            # además hacemos que la fecha mínima no pueda ser día no habil sin
+            # Importar si el intervalo debe considerar días habiles o no
+            while current_date.weekday() >= 5 or self.env[
+                    'hr.holidays.public'].is_public_holiday(
+                        current_date):
+                current_date = current_date + relativedelta(days=1)
         self.payment_min_date = fields.Date.to_string(current_date)
 
     # TODO enable
@@ -274,7 +281,7 @@ class AccountPaymentGroup(models.Model):
     @api.model
     def _search_budget_positions(self, operator, value):
         return [
-            ('line_ids.move_line_id.invoice.invoice_line_ids.'
+            ('to_pay_move_line_ids.invoice_id.invoice_line_ids.'
                 'definitive_line_id.preventive_line_id.budget_position_id',
                 operator, value)]
 
