@@ -80,7 +80,8 @@ class AccountPaymentGroup(models.Model):
     payment_base_date = fields.Date(
         string='Payment Base Date',
         readonly=True,
-        default=fields.Date.context_today,
+        # nos pidieron que no haya valor por defecto
+        # default=fields.Date.context_today,
         states={'draft': [('readonly', False)]},
         help='Date used to calculate payment date',
     )
