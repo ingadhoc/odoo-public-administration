@@ -98,7 +98,7 @@
             </field>
 
             <field name="payment_date" position="before">
-                <field name="payment_base_date"/>
+                <field name="payment_base_date" attrs="{'required':['|', ('transaction_id', '!=', False), ('advance_request_id', '!=', False)]}"/>
                 <label for="payment_days"/>
                 <div class="oe_inline">
                     <field name="payment_days" class="oe_inline"/>
