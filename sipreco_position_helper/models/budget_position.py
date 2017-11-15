@@ -9,7 +9,9 @@ class BudgetPosition(models.Model):
     _inherit = 'public_budget.budget_position'
 
     individual_code = fields.Char(
-        required=True,
+        # lo hacemos no requerido para no tener warnings, no es lo mas elegante
+        # pero funciona, requerido por vista..
+        required=False,
     )
     code = fields.Char(
         compute='_compute_code',
@@ -25,5 +27,5 @@ class BudgetPosition(models.Model):
     def _compute_code(self):
         for rec in self:
             rec.code = "%s%s" % (
-                rec.parent_id.individual_code or '',
-                rec.individual_code)
+                rec.parent_id.code or '',
+                rec.individual_code or '')
