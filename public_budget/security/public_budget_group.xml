@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
+
+<record id="group_change_payment_assignee" model="res.groups">
+    <field name="name">Cambiar Cesionario en Pagos</field>
+    <field name="category_id" ref="base.module_category_usability"/>
+    <!-- o debería ser base.module_category_extra?-->
+    <field name="users" eval="[(4, ref('base.user_root'))]"/>
+</record>
+
 <record model="ir.module.category" id="module_category_public_budget">
     <field name="name">Public Budget</field>
     <field name="description">Public Budget</field>

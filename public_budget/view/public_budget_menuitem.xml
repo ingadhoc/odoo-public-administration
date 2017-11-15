@@ -186,8 +186,9 @@
             <field name="res_model">public_budget.expedient</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="view_id" ref="view_public_budget_expedient_tree"/>
-            <field name="search_view_id" ref="view_public_budget_expedient_filter"/>
+            <!-- no hace falta especificar y nos complica con el orden de carga de los xml -->
+            <!-- <field name="view_id" ref="view_public_budget_expedient_tree"/> -->
+            <!-- <field name="search_view_id" ref="view_public_budget_expedient_filter"/> -->
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create"> Click to create a Expedients.</p>
             </field>
