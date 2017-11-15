@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- FORMVIEW -->
+    <record id="view_public_budget_budget_position_form" model="ir.ui.view">
+        <field name="name">public_budget.budget_position.form</field>
+        <field name="model">public_budget.budget_position</field>
+        <field name="inherit_id" ref="public_budget.view_public_budget_budget_position_form"/>
+        <field name="arch" type="xml">
+            <field name="code" position="before">
+                <field name="individual_code" required="True"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

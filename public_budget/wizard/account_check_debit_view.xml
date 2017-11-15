@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <act_window id="action_account_check_debit_multi"
+        multi="True"
+        key2="client_action_multi" name="Check Debit"
+        res_model="account.check.action.wizard" src_model="account.check"
+        view_mode="form" target="new" view_type="form" context="{'default_action_type': 'bank_debit'}"/>
+</odoo>
