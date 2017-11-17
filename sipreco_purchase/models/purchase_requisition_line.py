@@ -11,5 +11,4 @@ class PurchaseRequisitionLine(models.Model):
 
     name = fields.Text(
         string='Description',
-        required=True
     )

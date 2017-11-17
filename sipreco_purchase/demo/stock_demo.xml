@@ -9,7 +9,7 @@
             <field name="code">SIPRECO</field>
         </record>
 
-        <record id="stock_picking_type_informatica" model="stock.picking.type">
+<!--         <record id="stock_picking_type_informatica" model="stock.picking.type">
             <field name="name">Informática</field>
             <field name="code">outgoing</field>
             <field name="sequence_id" search="[('prefix', 'ilike', 'OUT'), ('company_id.name', 'ilike', 'SIPRECO')]"/>
@@ -23,7 +23,7 @@
             <field name="sequence_id" search="[('prefix', 'ilike', 'OUT'), ('company_id.name', 'ilike', 'SIPRECO')]"/>
             <field name="default_location_src_id" ref="stock.stock_location_stock"/>
             <field name="default_location_dest_id" ref="stock.stock_location_customers"/>
-        </record>
+        </record> -->
 
     </data>
 </odoo>
