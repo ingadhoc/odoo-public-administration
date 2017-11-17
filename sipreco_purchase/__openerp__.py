@@ -4,10 +4,13 @@
     'website': 'www.adhoc.com.ar',
     'category': 'Accounting & Finance',
     'data': [
+        'data/ir_actions_server_data.xml',
         'views/stock_move_view.xml',
         'views/stock_picking_type_view.xml',
         'views/stock_picking_view.xml',
         'views/purchase_requisition_view.xml',
+        'security/sipreco_purchase_security.xml',
+        'security/hide_groups.xml',
     ],
     'demo': [
         'demo/stock_demo.xml',

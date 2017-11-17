@@ -8,6 +8,8 @@ Sipreco Purchase Management
 
 TODO:
 * restringir productos que se pueden agregar en cada picking type
+* hacer que se puedan sacar agregar moves desde una purchse requisition
+* que si se cancela un PR se cancelen los stock.moves
 
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas

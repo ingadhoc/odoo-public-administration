@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+    <!-- Hide unused groups to make user configuration easier -->
+        <!-- Grupo cobros y pagos -->
+        <record id="account.group_account_invoice" model="res.groups">
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+
+        <!-- warehouse manager -->
+        <record id="stock.group_stock_manager" model="res.groups">
+            <field name="category_id" ref="base.module_category_hidden"/>
+            <!-- cambiamos name para que no de error de unicidad -->
+            <field name="name">Stock Manager</field>
+        </record>
+
+    </data>
+</odoo>
