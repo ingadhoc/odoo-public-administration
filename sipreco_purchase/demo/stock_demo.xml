@@ -43,20 +43,20 @@
         <record id="procurement_rule_informatica" model="procurement.rule">
             <field name="name">SIPRECO: Stock (Informática) -> Customers</field>
             <field name="action">move</field>
-            <field name="location_id" search="[('usage', '=', 'internal'), ('company_id.name', 'ilike', 'SIPRECO')]"/>
             <field name="route_id" ref="stock_location_rute_informatica"/>
             <field name="warehouse_id" ref="stock_warehouse_sipreco"/>
-            <field name="location_src_id" ref="stock.stock_location_customers"/>
+            <field name="location_id" ref="stock.stock_location_customers"/>
+            <field name="location_src_id" search="[('usage', '=', 'internal'), ('company_id.name', 'ilike', 'SIPRECO')]"/>
             <field name="picking_type_id" ref="stock_picking_type_informatica"/>
         </record>
 
         <record id="procurement_rule_economato" model="procurement.rule">
             <field name="name">SIPRECO: Stock (Economato) -> Customers</field>
             <field name="action">move</field>
-            <field name="location_id" search="[('usage', '=', 'internal'), ('company_id.name', 'ilike', 'SIPRECO')]"/>
             <field name="route_id" ref="stock_location_rute_economato"/>
             <field name="warehouse_id" ref="stock_warehouse_sipreco"/>
-            <field name="location_src_id" ref="stock.stock_location_customers"/>
+            <field name="location_id" ref="stock.stock_location_customers"/>
+            <field name="location_src_id" search="[('usage', '=', 'internal'), ('company_id.name', 'ilike', 'SIPRECO')]"/>
             <field name="picking_type_id" ref="stock_picking_type_economato"/>
         </record>
 

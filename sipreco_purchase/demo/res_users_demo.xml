@@ -14,25 +14,45 @@
             <field name="password">requirente</field>
             <field name="company_id" ref="public_budget.company_sipreco"/>
             <field name="company_ids" eval="[(4,ref('public_budget.company_sipreco'))]"/>
-            <field name="groups_id" eval="[(6,0,[ref('group_requester'), (6,0,[ref('base.group_user')])]"/>
+            <field name="groups_id" eval="[(6,0,[ref('group_requester'), ref('base.group_user')])]"/>
             <!-- <field name="location_ids" eval="[(6,0,[ref('public_location_secretaria'), ref('public_location_habilitaciones'), ref('public_location_contaduria'),  ref('public_location_mesa_de_entrada'), ref('public_location_compras'), ref('public_location_tmc')])]"/> -->
             <field name="image" type="base64" file="base/static/img/user_demo-image.jpg"/>
         </record>
 
-        <record id="purchase_applicant_partner" model="res.partner">
+        <record id="purchase_applicant_economato_partner" model="res.partner">
             <field name="name">Solicitante</field>
             <field name="company_id" ref="public_budget.company_sipreco"/>
             <field name="customer" eval="False"/>
             <field name="email">requirente@yourcompany.example.com</field>
         </record>
 
-        <record id="purchase_applicant_user" model="res.users">
-            <field name="partner_id" ref="purchase_applicant_partner"/>
-            <field name="login">solicitante</field>
-            <field name="password">solicitante</field>
+        <record id="purchase_applicant_economato_user" model="res.users">
+            <field name="partner_id" ref="purchase_applicant_economato_partner"/>
+            <field name="login">solicitante_economato</field>
+            <field name="password">solicitante_economato</field>
             <field name="company_id" ref="public_budget.company_sipreco"/>
             <field name="company_ids" eval="[(4,ref('public_budget.company_sipreco'))]"/>
             <field name="groups_id" eval="[(6,0,[ref('stock.group_stock_user')])]"/>
+            <field name="picking_type_ids" eval="[(6,0,[ref('stock_picking_type_economato')])]"/>
+            <!-- <field name="location_ids" eval="[(6,0,[ref('public_location_secretaria'), ref('public_location_habilitaciones'), ref('public_location_contaduria'),  ref('public_location_mesa_de_entrada'), ref('public_location_compras'), ref('public_location_tmc')])]"/> -->
+            <field name="image" type="base64" file="base/static/img/user_demo-image.jpg"/>
+        </record>
+
+        <record id="purchase_applicant_informatica_partner" model="res.partner">
+            <field name="name">Solicitante Economato</field>
+            <field name="company_id" ref="public_budget.company_sipreco"/>
+            <field name="customer" eval="False"/>
+            <field name="email">requirente@yourcompany.example.com</field>
+        </record>
+
+        <record id="purchase_applicant_informatica_user" model="res.users">
+            <field name="partner_id" ref="purchase_applicant_informatica_partner"/>
+            <field name="login">solicitante_informatica</field>
+            <field name="password">solicitante_informatica</field>
+            <field name="company_id" ref="public_budget.company_sipreco"/>
+            <field name="company_ids" eval="[(4,ref('public_budget.company_sipreco'))]"/>
+            <field name="groups_id" eval="[(6,0,[ref('stock.group_stock_user')])]"/>
+            <field name="picking_type_ids" eval="[(6,0,[ref('stock_picking_type_informatica')])]"/>
             <!-- <field name="location_ids" eval="[(6,0,[ref('public_location_secretaria'), ref('public_location_habilitaciones'), ref('public_location_contaduria'),  ref('public_location_mesa_de_entrada'), ref('public_location_compras'), ref('public_location_tmc')])]"/> -->
             <field name="image" type="base64" file="base/static/img/user_demo-image.jpg"/>
         </record>

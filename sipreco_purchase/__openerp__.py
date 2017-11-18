@@ -12,6 +12,7 @@
         'views/purchase_requisition_view.xml',
         'views/stock_procurement_request_view.xml',
         'views/procurement_order_view.xml',
+        'views/res_users_view.xml',
         'security/sipreco_purchase_security.xml',
         'security/hide_groups.xml',
         'security/ir.model.access.csv',

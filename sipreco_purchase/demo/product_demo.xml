@@ -5,12 +5,13 @@
         <record id="product_of_informatica_1" model="product.product">
             <field name="name">Producto de Informática 1</field>
             <field name="type">product</field>
+            <field name="route_ids" eval="[(4, ref('stock_location_rute_informatica'))]"/>
         </record>
 
         <record id="product_of_economato_1" model="product.product">
             <field name="name">Producto de Economato 1</field>
             <field name="type">product</field>
-            <field name="route_ids" eval="[(4, ref('stock_location_rute_informatica'))]"/>
+            <field name="route_ids" eval="[(4, ref('stock_location_rute_economato'))]"/>
         </record>
 
         <record id="product_of_economato_2" model="product.product">
