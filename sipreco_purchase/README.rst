@@ -10,6 +10,17 @@ TODO:
 * restringir productos que se pueden agregar en cada picking type
 * hacer que se puedan sacar agregar moves desde una purchse requisition
 * que si se cancela un PR se cancelen los stock.moves
+Compras y Abastecimientos:
+    Requirente
+    Solicitante
+        Generar el purchase requisition
+        Entrega mercaderia
+    Comprador
+        Unir
+
+Secreateria manager:
+    aprobar el purchase requisition
+
 
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas

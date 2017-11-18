@@ -1,0 +1,59 @@
+<odoo>
+    <data noupdate="1">
+
+        <record id="purchase_requester_partner" model="res.partner">
+            <field name="name">Requirente</field>
+            <field name="company_id" ref="public_budget.company_sipreco"/>
+            <field name="customer" eval="False"/>
+            <field name="email">requirente@yourcompany.example.com</field>
+        </record>
+
+        <record id="purchase_requester_user" model="res.users">
+            <field name="partner_id" ref="purchase_requester_partner"/>
+            <field name="login">requirente</field>
+            <field name="password">requirente</field>
+            <field name="company_id" ref="public_budget.company_sipreco"/>
+            <field name="company_ids" eval="[(4,ref('public_budget.company_sipreco'))]"/>
+            <field name="groups_id" eval="[(6,0,[ref('group_requester')])]"/>
+            <!-- <field name="location_ids" eval="[(6,0,[ref('public_location_secretaria'), ref('public_location_habilitaciones'), ref('public_location_contaduria'),  ref('public_location_mesa_de_entrada'), ref('public_location_compras'), ref('public_location_tmc')])]"/> -->
+            <field name="image" type="base64" file="base/static/img/user_demo-image.jpg"/>
+        </record>
+
+        <record id="purchase_applicant_partner" model="res.partner">
+            <field name="name">Solicitante</field>
+            <field name="company_id" ref="public_budget.company_sipreco"/>
+            <field name="customer" eval="False"/>
+            <field name="email">requirente@yourcompany.example.com</field>
+        </record>
+
+        <record id="purchase_applicant_user" model="res.users">
+            <field name="partner_id" ref="purchase_applicant_partner"/>
+            <field name="login">solicitante</field>
+            <field name="password">solicitante</field>
+            <field name="company_id" ref="public_budget.company_sipreco"/>
+            <field name="company_ids" eval="[(4,ref('public_budget.company_sipreco'))]"/>
+            <field name="groups_id" eval="[(6,0,[ref('group_applicant')])]"/>
+            <!-- <field name="location_ids" eval="[(6,0,[ref('public_location_secretaria'), ref('public_location_habilitaciones'), ref('public_location_contaduria'),  ref('public_location_mesa_de_entrada'), ref('public_location_compras'), ref('public_location_tmc')])]"/> -->
+            <field name="image" type="base64" file="base/static/img/user_demo-image.jpg"/>
+        </record>
+
+        <record id="purchase_purchaser_partner" model="res.partner">
+            <field name="name">Comprador</field>
+            <field name="company_id" ref="public_budget.company_sipreco"/>
+            <field name="customer" eval="False"/>
+            <field name="email">requirente@yourcompany.example.com</field>
+        </record>
+
+        <record id="purchase_purchaser_user" model="res.users">
+            <field name="partner_id" ref="purchase_purchaser_partner"/>
+            <field name="login">comprador</field>
+            <field name="password">comprador</field>
+            <field name="company_id" ref="public_budget.company_sipreco"/>
+            <field name="company_ids" eval="[(4,ref('public_budget.company_sipreco'))]"/>
+            <field name="groups_id" eval="[(6,0,[ref('group_applicant')])]"/>
+            <!-- <field name="location_ids" eval="[(6,0,[ref('public_location_secretaria'), ref('public_location_habilitaciones'), ref('public_location_contaduria'),  ref('public_location_mesa_de_entrada'), ref('public_location_compras'), ref('public_location_tmc')])]"/> -->
+            <field name="image" type="base64" file="base/static/img/user_demo-image.jpg"/>
+        </record>
+
+    </data>
+</odoo>

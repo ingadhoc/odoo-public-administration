@@ -2,6 +2,11 @@
 <odoo>
     <data noupdate="1">
 
+        <!-- para que todo se cree bien, ej. secuencias, cambiamos cia momentaneamente -->
+        <record id="base.user_root" model="res.users">
+            <field name="company_id" ref="public_budget.company_sipreco"/>
+        </record>
+
         <record id="stock_warehouse_sipreco" model="stock.warehouse">
             <field name="name">SIPRECO</field>
             <field name="partner_id" ref="public_budget.partner_sipreco"/>
@@ -9,7 +14,7 @@
             <field name="code">SIPRECO</field>
         </record>
 
-<!--         <record id="stock_picking_type_informatica" model="stock.picking.type">
+        <record id="stock_picking_type_informatica" model="stock.picking.type">
             <field name="name">Informática</field>
             <field name="code">outgoing</field>
             <field name="sequence_id" search="[('prefix', 'ilike', 'OUT'), ('company_id.name', 'ilike', 'SIPRECO')]"/>
@@ -23,7 +28,11 @@
             <field name="sequence_id" search="[('prefix', 'ilike', 'OUT'), ('company_id.name', 'ilike', 'SIPRECO')]"/>
             <field name="default_location_src_id" ref="stock.stock_location_stock"/>
             <field name="default_location_dest_id" ref="stock.stock_location_customers"/>
-        </record> -->
+        </record>
+
+        <record id="base.user_root" model="res.users">
+            <field name="company_id" ref="base.main_company"/>
+        </record>
 
     </data>
 </odoo>

@@ -14,11 +14,12 @@
     ],
     'demo': [
         'demo/stock_demo.xml',
+        'demo/res_users_demo.xml',
     ],
     'depends': [
         'public_budget',
         'purchase_requisition',
-        # 'stock_procurement_request',
+        'stock_procurement_request',
     ],
     'installable': True,
     'name': 'Sipreco Purchase Management',
