@@ -5,6 +5,7 @@
     'category': 'Accounting & Finance',
     'data': [
         'data/ir_actions_server_data.xml',
+        'data/sequence_data.xml',
         'views/stock_move_view.xml',
         'views/stock_picking_type_view.xml',
         'views/stock_picking_view.xml',
@@ -13,7 +14,7 @@
         'views/procurement_order_view.xml',
         'security/sipreco_purchase_security.xml',
         'security/hide_groups.xml',
-        'data/sequence_data.xml',
+        'security/ir.model.access.csv',
     ],
     'demo': [
         'demo/stock_demo.xml',

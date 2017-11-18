@@ -50,6 +50,7 @@
 
     <record id="stock_procurement_request.menu_procurement_request" model="ir.ui.menu">
         <field name="parent_id" ref=""/>
+        <field name="web_icon">sipreco_purchase,static/description/procurement_order.png</field>
     </record>
 
 </odoo>

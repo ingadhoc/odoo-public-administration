@@ -14,7 +14,7 @@
             <field name="password">requirente</field>
             <field name="company_id" ref="public_budget.company_sipreco"/>
             <field name="company_ids" eval="[(4,ref('public_budget.company_sipreco'))]"/>
-            <field name="groups_id" eval="[(6,0,[ref('group_requester')])]"/>
+            <field name="groups_id" eval="[(6,0,[ref('group_requester'), (6,0,[ref('base.group_user')])]"/>
             <!-- <field name="location_ids" eval="[(6,0,[ref('public_location_secretaria'), ref('public_location_habilitaciones'), ref('public_location_contaduria'),  ref('public_location_mesa_de_entrada'), ref('public_location_compras'), ref('public_location_tmc')])]"/> -->
             <field name="image" type="base64" file="base/static/img/user_demo-image.jpg"/>
         </record>
@@ -32,7 +32,7 @@
             <field name="password">solicitante</field>
             <field name="company_id" ref="public_budget.company_sipreco"/>
             <field name="company_ids" eval="[(4,ref('public_budget.company_sipreco'))]"/>
-            <field name="groups_id" eval="[(6,0,[ref('group_applicant')])]"/>
+            <field name="groups_id" eval="[(6,0,[ref('stock.group_stock_user')])]"/>
             <!-- <field name="location_ids" eval="[(6,0,[ref('public_location_secretaria'), ref('public_location_habilitaciones'), ref('public_location_contaduria'),  ref('public_location_mesa_de_entrada'), ref('public_location_compras'), ref('public_location_tmc')])]"/> -->
             <field name="image" type="base64" file="base/static/img/user_demo-image.jpg"/>
         </record>
@@ -50,7 +50,7 @@
             <field name="password">comprador</field>
             <field name="company_id" ref="public_budget.company_sipreco"/>
             <field name="company_ids" eval="[(4,ref('public_budget.company_sipreco'))]"/>
-            <field name="groups_id" eval="[(6,0,[ref('group_applicant')])]"/>
+            <field name="groups_id" eval="[(6,0,[ref('purchase.group_purchase_user')])]"/>
             <!-- <field name="location_ids" eval="[(6,0,[ref('public_location_secretaria'), ref('public_location_habilitaciones'), ref('public_location_contaduria'),  ref('public_location_mesa_de_entrada'), ref('public_location_compras'), ref('public_location_tmc')])]"/> -->
             <field name="image" type="base64" file="base/static/img/user_demo-image.jpg"/>
         </record>

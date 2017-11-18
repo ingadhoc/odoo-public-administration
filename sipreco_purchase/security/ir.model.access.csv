@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_stock_move_requester,"access_stock_move_requester (porque solo ventas, portal y otros tienen)",sipreco_purchase.model_stock_move,group_requester,1,1,1,0
+access_stock_picking_requester,"access_stock_picking_requester (porque solo ventas, portal y otros tienen)",sipreco_purchase.model_stock_picking,group_requester,1,1,1,0
