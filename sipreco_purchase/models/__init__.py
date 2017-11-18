@@ -4,3 +4,4 @@ from . import stock_picking_type
 from . import stock_move
 from . import purchase_requisition
 from . import purchase_requisition_line
+from . import stock_procurement_request

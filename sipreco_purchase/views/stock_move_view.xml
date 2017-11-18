@@ -14,6 +14,21 @@
         </field>
     </record>
 
+    <!-- campos que agrega stock usability y queremos ocultar -->
+    <record id="view_move_tree" model="ir.ui.view">
+        <field name="name">stock.move.tree</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock_usability.view_move_tree"/>
+        <field name="arch" type="xml">
+            <field name="picking_create_user_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="product_uom_qty_location" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+        </field>
+    </record>
+
     <record id="view_move_tree" model="ir.ui.view">
         <field name="name">stock.move.tree</field>
         <field name="model">stock.move</field>
@@ -38,7 +53,8 @@
 
             <tree>
                 <field name="requisition_id"/>
-                <field name="picking_partner_id" context="{'contact_display':'partner'}"/>
+                <!-- ahora se instala stock_usability que ya lo agrega -->
+                <!-- <field name="picking_partner_id" context="{'contact_display':'partner'}"/> -->
             </tree>
 
         </field>

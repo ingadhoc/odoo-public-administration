@@ -42,6 +42,14 @@
                 <attribute name="invisible">1</attribute>
             </field>
 
+            <field name="location_id" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+            <field name="location_dest_id" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
             <field name="min_date" position="after">
                 <field name="date"/>
             </field>
@@ -53,52 +61,8 @@
             <page name="extra" position="attributes">
                 <attribute name="invisible">1</attribute>
             </page>
-<!--             <field name="move_type" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </field>
-            <field name="group_id" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </field> -->
-        </field>
-    </record>
-
-    <record id="view_supply_requirement_form" model="ir.ui.view">
-        <field name="name">stock.picking.supply_requirement.form</field>
-        <field name="model">stock.picking</field>
-        <field name="mode">primary</field>
-        <field name="inherit_id" ref="view_stock_picking_form"/>
-        <field name="arch" type="xml">
-            <!-- movemos picking type a primer pestaña y formamoz dominio out -->
-            <field name="picking_type_id" position="replace"/>
-            <field name="partner_id" position="after">
-                <field name="picking_type_id" on_change="onchange_picking_type(picking_type_id,partner_id)" domain="[('code', '=', 'outgoing')]"/>
-            </field>
-
-            <!-- es mas facil hacerle un nuevo header que ocultar -->
-            <header position="replace">
-                <header>
-                    <button name="action_confirm" states="draft" string="Mark as Todo" type="object" class="oe_highlight" groups="base.group_user"/>
-                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,partially_available,assigned,done" statusbar_colors='{"shipping_except":"red","invoice_except":"red","waiting_date":"blue"}'/>
-                </header>
-            </header>
 
         </field>
     </record>
-
-    <record id="action_supply_requirement" model="ir.actions.act_window">
-        <field name="name">Supply Requirement</field>
-        <field name="res_model">stock.picking</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
-        <field name="view_ids" eval="[(5, 0, 0),
-        (0, 0, {'view_mode': 'tree', 'view_id': ref('stock.vpicktree')}),
-        (0, 0, {'view_mode': 'form', 'view_id': ref('view_supply_requirement_form')})]"/>
-        <!-- <field name="view_id" ref="view_supply_requirement_form"/> -->
-        <!-- <field name="search_view_id" ref="view_advance_request_analysis_search"/> -->
-    </record>
-
-    <menuitem action="action_supply_requirement"
-              id="menu_supply_requirement"
-              sequence="20"/>
 
 </odoo>

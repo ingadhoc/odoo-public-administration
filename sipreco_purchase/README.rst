@@ -7,19 +7,18 @@ Sipreco Purchase Management
 ===========================
 
 TODO:
-* restringir productos que se pueden agregar en cada picking type
 * hacer que se puedan sacar agregar moves desde una purchse requisition
 * que si se cancela un PR se cancelen los stock.moves
-Compras y Abastecimientos:
-    Requirente
-    Solicitante
-        Generar el purchase requisition
-        Entrega mercaderia
-    Comprador
-        Unir
-
-Secreateria manager:
-    aprobar el purchase requisition
+* Permisos
+  Compras y Abastecimientos:
+      Requirente
+      Solicitante
+          Generar el purchase requisition
+          Entrega mercaderia
+      Comprador
+          Unir
+  Secreateria manager:
+      aprobar el purchase requisition
 
 
 

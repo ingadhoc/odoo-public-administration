@@ -9,6 +9,7 @@
         'views/stock_picking_type_view.xml',
         'views/stock_picking_view.xml',
         'views/purchase_requisition_view.xml',
+        'views/stock_procurement_request_view.xml',
         'security/sipreco_purchase_security.xml',
         'security/hide_groups.xml',
     ],

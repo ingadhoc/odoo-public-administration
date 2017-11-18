@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_procurement_request_form" model="ir.ui.view">
+        <field name="name">stock.procurement.request.form</field>
+        <field name="model">stock.procurement.request</field>
+        <field name="inherit_id" ref="stock_procurement_request.view_procurement_request_form"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="partner_id"/>
+            </field>
+
+            <field name="warehouse_id" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+            <field name="location_id" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+            <field name="route_ids" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+            <field name="date_planned" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+            <field name="priority" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+            <field name="group_id" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+        </field>
+    </record>
+
+    <record id="action_procurement_request" model="ir.actions.act_window">
+        <field name="name">Procurement Requests</field>
+        <field name="res_model">stock.procurement.request</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="stock_procurement_request.menu_procurement_request" model="ir.ui.menu">
+        <field name="parent_id" ref=""/>
+    </record>
+
+</odoo>
