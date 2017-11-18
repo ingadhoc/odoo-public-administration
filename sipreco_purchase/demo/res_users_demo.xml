@@ -20,7 +20,7 @@
         </record>
 
         <record id="purchase_applicant_economato_partner" model="res.partner">
-            <field name="name">Solicitante</field>
+            <field name="name">Solicitante Economato</field>
             <field name="company_id" ref="public_budget.company_sipreco"/>
             <field name="customer" eval="False"/>
             <field name="email">requirente@yourcompany.example.com</field>
@@ -39,7 +39,7 @@
         </record>
 
         <record id="purchase_applicant_informatica_partner" model="res.partner">
-            <field name="name">Solicitante Economato</field>
+            <field name="name">Solicitante Informatica</field>
             <field name="company_id" ref="public_budget.company_sipreco"/>
             <field name="customer" eval="False"/>
             <field name="email">requirente@yourcompany.example.com</field>

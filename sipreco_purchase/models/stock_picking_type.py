@@ -14,6 +14,14 @@ class StockPickingType(models.Model):
     count_pending_procurements = fields.Integer(
         compute='_compute_procurements_count',
     )
+    user_ids = fields.Many2many(
+        'res.users',
+        'stock_picking_type_users_rel',
+        'picking_type_id',
+        'user_id',
+        string='Users',
+        copy=False
+    )
 
     @api.multi
     def _compute_procurements_count(self):

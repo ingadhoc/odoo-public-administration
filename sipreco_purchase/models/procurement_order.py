@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import models, fields
+from openerp import models, fields, api
 # from openerp.exceptions import ValidationError
 # from dateutil.relativedelta import relativedelta
 import logging
@@ -21,3 +21,12 @@ class ProcurementOrder(models.Model):
         related='group_id.partner_id',
         readonly=True,
     )
+
+    @api.multi
+    def onchange_product_id(self, product_id):
+        res = super(ProcurementOrder, self).onchange_product_id(product_id)
+        if 'value' not in res:
+            res['value'] = {}
+        res['value']['name'] = self.env['product.product'].browse(
+            product_id).partner_ref
+        return res

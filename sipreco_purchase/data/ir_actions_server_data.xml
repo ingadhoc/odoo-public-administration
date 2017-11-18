@@ -16,7 +16,8 @@ if recs.filtered('manual_requisition_id'):
 lines = []
 for rec in recs:
     lines.append((0, 0, {'product_id': rec.product_id.id, 'product_uom_id': rec.product_uom.id, 'product_qty': rec.product_qty,  'name': rec.name}))
-requisition = env['purchase.requisition'].sudo().create({'line_ids': lines})
+# usamos sudo para no tener que darle permiso a secuencias y cosas de compras
+requisition = env['purchase.requisition'].sudo().create({'line_ids': lines, 'company_id': env.user.company_id.id})
 recs.write({'manual_requisition_id': requisition.id})
         </field>
     </record>

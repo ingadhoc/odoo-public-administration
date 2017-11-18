@@ -11,4 +11,8 @@ class ResUsers(models.Model):
 
     picking_type_ids = fields.Many2many(
         'stock.picking.type',
+        'stock_picking_type_users_rel',
+        'user_id',
+        'picking_type_id',
+        'Restricted Picking Types',
     )
