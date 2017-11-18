@@ -10,7 +10,10 @@ class PurchaseRequisition(models.Model):
     _inherit = 'purchase.requisition'
 
     move_ids = fields.One2many(
-        'stock.move',
-        'requisition_id',
-        'Supply Requirements',
+        'procurement.order',
+        'manual_requisition_id',
+        'Procurements',
+        # 'stock.move',
+        # 'requisition_id',
+        # 'Supply Requirements',
     )

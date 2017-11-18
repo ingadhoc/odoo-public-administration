@@ -15,6 +15,9 @@ class StockProcurementRequest(models.Model):
         required=True,
         default=lambda self: self.env.user.partner_id
     )
+    name = fields.Char(
+        default='/',
+    )
 
     @api.onchange('company_id')
     def change_company_id(self):
@@ -36,4 +39,8 @@ class StockProcurementRequest(models.Model):
             group = self.group_id.create(
                 {'partner_id': vals.get('partner_id')})
             vals['group_id'] = group.id
+
+        if vals.get('name', '/') == '/':
+            vals['name'] = self.env[
+                'ir.sequence'].next_by_code('stock.procurement.request')
         return super(StockProcurementRequest, self).create(vals)

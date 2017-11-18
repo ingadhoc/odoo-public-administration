@@ -3,31 +3,31 @@
     
     <record model="ir.actions.server" id="action_create_purchase_requisition">
         <field name="name">Create Purchase Requisition</field>
-        <field name="model_id" ref="stock.model_stock_move"/>
+        <field name="model_id" ref="procurement.model_procurement_order"/>
         <field name="code">
 active_ids = context.get('active_ids')
-moves = env['stock.move'].browse(active_ids)
-if moves.filtered(lambda x: x.state not in ('waiting', 'confirmed', 'assigned')):
-    raise Warning('aaa')
+recs = env['procurement.order'].browse(active_ids)
+if recs.filtered(lambda x: x.state in ('cancel', 'done')):
+    raise Warning('Las pedidos de abastecimientos no deben estar cancelados y realizados')
 
-if moves.filtered('requisition_id'):
-    raise Warning('aaa')
+if recs.filtered('manual_requisition_id'):
+    raise Warning('Algunos pedidos de abastecimientos ya tienen una solicitud de compra asociada')
 
 lines = []
-for move in moves:
-    lines.append((0, 0, {'product_id': move.product_id.id, 'product_uom_id': move.product_uom.id, 'product_qty': move.product_qty,  'name': move.name}))
-requisition = env['purchase.requisition'].create({'line_ids': lines})
-moves.write({'requisition_id': requisition.id})
+for rec in recs:
+    lines.append((0, 0, {'product_id': rec.product_id.id, 'product_uom_id': rec.product_uom.id, 'product_qty': rec.product_qty,  'name': rec.name}))
+requisition = env['purchase.requisition'].sudo().create({'line_ids': lines})
+recs.write({'manual_requisition_id': requisition.id})
         </field>
     </record>
 
     <record model="ir.values" id="ir_values_create_purchase_requisition">
-        <field name="model_id" ref="account.model_account_move_line" />
+        <field name="model_id" ref="procurement.model_procurement_order" />
         <field name="name">Create Purchase Requisition</field>
         <field name="key2">client_action_multi</field>
         <field name="value" eval="'ir.actions.server,' +str(ref('action_create_purchase_requisition'))" />
         <field name="key">action</field>
-        <field name="model">stock.move</field>
+        <field name="model">procurement.order</field>
     </record>
 
 </odoo>

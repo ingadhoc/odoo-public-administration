@@ -6,6 +6,11 @@
         <field name="model">stock.procurement.request</field>
         <field name="inherit_id" ref="stock_procurement_request.view_procurement_request_form"/>
         <field name="arch" type="xml">
+
+            <field name="name" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+
             <field name="name" position="after">
                 <field name="partner_id"/>
             </field>

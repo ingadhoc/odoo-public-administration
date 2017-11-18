@@ -52,7 +52,8 @@
             </button>
 
             <tree>
-                <field name="requisition_id"/>
+                <!-- ahora usamos procurements -->
+                <!-- <field name="requisition_id"/> -->
                 <!-- ahora se instala stock_usability que ya lo agrega -->
                 <!-- <field name="picking_partner_id" context="{'contact_display':'partner'}"/> -->
             </tree>
@@ -69,7 +70,8 @@
             <field name="picking_partner_id" position="replace"/>
 
             <field name="picking_type_id" position="after">
-                <field name="requisition_id"/>
+                <!-- ahora usamos procurements -->
+                <!-- <field name="requisition_id"/> -->
                 <field name="picking_partner_id" context="{'contact_display':'partner'}"/>
             </field>
 
@@ -100,21 +102,20 @@
         </field>
     </record>
 
-
-    <record id="view_move_search" model="ir.ui.view">
+<!-- ahora usamos procurements -->
+<!--     <record id="view_move_search" model="ir.ui.view">
         <field name="name">stock.move.search.inherit</field>
         <field name="model">stock.move</field>
         <field name="inherit_id" ref="stock.view_move_search"/>
         <field name="arch" type="xml">
             <field name="partner_id" position="after">
                 <field name="requisition_id"/>
-                <!-- <field name="picking_type_id"/> -->
             </field>
         </field>
     </record>
-
+ -->
     <!-- desde kanban no podemos pasar por contexto entonces la creamos (podria ir por python tmb) -->
-    <record id="action_pending_supply_requirements" model="ir.actions.act_window">
+    <!-- <record id="action_pending_supply_requirements" model="ir.actions.act_window">
         <field name="name">Pending Supply Requirements</field>
         <field name="res_model">stock.move</field>
         <field name="type">ir.actions.act_window</field>
@@ -122,17 +123,6 @@
         <field name="view_id" ref="stock.view_move_tree"/>
         <field name="view_mode">tree,form</field>
         <field name="domain">[('picking_type_id', '=', active_id)]</field>
-        <field name="context">{'search_default_future': 1}
-        </field>
-    </record>
-
-<!--     <record id="action_requisition_supply_requirements" model="ir.actions.act_window">
-        <field name="name">Purchase Requisition Supply Requirements</field>
-        <field name="res_model">stock.move</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
-        <field name="domain">[('requisition_id', '=', active_id)]</field>
         <field name="context">{'search_default_future': 1}
         </field>
     </record> -->

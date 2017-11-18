@@ -7,6 +7,8 @@ Sipreco Purchase Management
 ===========================
 
 TODO:
+* datos demo y simplificar grupos y vistas
+* llevar descripción de abastecimientos
 * hacer que se puedan sacar agregar moves desde una purchse requisition
 * que si se cancela un PR se cancelen los stock.moves
 * Permisos

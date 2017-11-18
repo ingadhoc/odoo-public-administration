@@ -7,17 +7,18 @@
         <field name="inherit_id" ref="stock.stock_picking_type_kanban"/>
         <field name="arch" type="xml">
             <templates position="before">
-                <field name="count_pending_moves"/>
+                <field name="count_pending_procurements"/>
             </templates>
             <div class="col-xs-6 o_kanban_primary_right">
-                <div t-if="record.count_pending_moves.raw_value > 0" class="row">
+                <div t-if="record.count_pending_procurements.raw_value > 0" class="row">
                     <div class="col-xs-9">
-                        <a name="%(sipreco_purchase.action_pending_supply_requirements)d" type="action">
-                            Lines
+                        <a name="action_type_procurement_orders" type="object">
+                            Pending Procurements
                         </a>
                     </div>
                     <div class="col-xs-3">
-                        <field name="count_pending_moves"/>
+                        <field name="count_pending_procurements"/>
+                        <!-- <field name="count_pending_moves"/> -->
                     </div>
                 </div>
             </div>

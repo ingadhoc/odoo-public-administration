@@ -10,12 +10,15 @@
         'views/stock_picking_view.xml',
         'views/purchase_requisition_view.xml',
         'views/stock_procurement_request_view.xml',
+        'views/procurement_order_view.xml',
         'security/sipreco_purchase_security.xml',
         'security/hide_groups.xml',
+        'data/sequence_data.xml',
     ],
     'demo': [
         'demo/stock_demo.xml',
         'demo/res_users_demo.xml',
+        'demo/product_demo.xml',
     ],
     'depends': [
         'public_budget',
