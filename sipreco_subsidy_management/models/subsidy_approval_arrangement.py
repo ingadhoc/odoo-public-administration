@@ -65,6 +65,17 @@ class ApprovalArrangement(models.Model):
         for rec in self:
             rec.currency_id = currency
 
+    @api.multi
+    def action_view_subsidy(self):
+        subsidies = self.mapped('rendition_ids.subsidy_id')
+        action = self.env.ref(
+            'sipreco_subsidy_management.action_public_budget_subsidy')
+        if not action:
+            return True
+        action_read = action.read()[0]
+        action_read['domain'] = [('id', 'in', subsidies.ids)]
+        return action_read
+
     _sql_constraints = [
         ('number_unique', 'unique(number)',
             ('El número debe ser único en las disposiciones de aprobación'))]

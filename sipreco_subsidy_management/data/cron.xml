@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="ir_cron_subsidy_report_week_template" model="mail.template">
+            <field name="name">Subsidy Report Week Reminder</field>
+            <field name="email_from">${(object.email or '')|safe}</field>
+            <field name="subject">Informe semanal de Subsidios</field>
+            <field name="email_to">nmr@adhoc.com.ar</field>
+            <field name="lang">${object.lang}</field>
+            <field name="model_id" ref="base.model_res_users"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html"><![CDATA[
+
+Hola ${object.name},
+
+<table cellspacing="1" border="1" cellpadding="4">
+    <tr>
+        <th>Numero Interno</th>
+        <th>Receptor</th>
+    </tr>
+    % for sub in ctx['data'].get('subsidys'):
+        <tr>
+            <td>${sub.internal_number}</td>
+            <td>${sub.partner_id.name}</td>
+        </tr>
+    % endfor
+</table>
+
+
+<p>
+    Thanks,
+</p>
+
+<pre>
+</pre>
+
+            ]]></field>
+        </record>
+
+
+        <record  id="ir_cron_subsidy_report_week" model="ir.cron">
+            <field name="name">Subsidy Report Week</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">weeks</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field eval="'public_budget.subsidy'" name="model"/>
+            <field eval="'_cron_recurring_subsidy_report'" name="function"/>
+            <field eval="'()'" name="args"/>
+        </record>
+                
+      
+    </data>
+</odoo>        

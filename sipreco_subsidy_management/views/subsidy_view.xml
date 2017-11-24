@@ -26,13 +26,14 @@
                             <field name="accountability_administrative_expedient_id"/>
                             <field name="other_accountability_expedient_ids" widget="many2many_tags"/>
                             <!-- fields from transaction -->
-                            <field name="partner_id"/>
+                            <field name="partner_id" required="1"/>
                             <field name="rendiciones_pendientes_otros_subsidios"/>
                             <field name="user_id"/>
                             <field name="budget_id"/>
                             <field name="issue_date" invisible="1"/>
                             <field name="destination"/>
                             <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="observations"/>
                         </group>
                         <group>
                             <field name="cargo_amount"/>
@@ -144,7 +145,8 @@
         <field name="arch" type="xml">
             <search string="Subsidios">
                 <field name="name"/>
-                <field name="amount"/>
+                <field name="internal_number"/>
+                <field name="amount" string="Importe s/Res"/>
                 <field name="partner_id" string="Beneficiary"/>
                 <field name="budget_id"/>
                 <field name="destination"/>
@@ -182,6 +184,10 @@
                 <filter
                     string="Reclamados"
                     domain="[('reclaimed', '=', True)]"
+                    />
+                <filter
+                    string="Observations"
+                    domain="[('observations', '!=', False)]"
                     />
                 <group expand="1" string="Group By">
                     <filter string="Estado de la Transacción" name="state" context="{'group_by':'state'}"/>
