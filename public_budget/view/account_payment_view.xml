@@ -17,13 +17,6 @@
                 <attribute name="invisible">1</attribute>
             </field>
 
-        <!-- modificamos para que el numero de cheque no sea requerido, se hace requerido al pasar a estado de firma -->
-            <field name="check_number" position="attributes">
-                <attribute name="attrs">{'invisible': ['|', ('checkbook_block_manual_number', '=', True), ('payment_method_code', 'not in', ['received_third_check', 'issue_check'])], 'readonly': [('state', '!=', 'draft')]}</attribute>
-            </field>
-            <field name="check_name" position="attributes">
-                <attribute name="attrs">{'invisible': ['|', ('checkbook_block_manual_number', '=', True), ('payment_method_code', 'not in',['received_third_check','issue_check'])]}</attribute>
-            </field>
         </field>
     </record>
 
