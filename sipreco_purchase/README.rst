@@ -6,11 +6,22 @@
 Sipreco Purchase Management
 ===========================
 
+Datos demo:
+  * Usuarios:
+    * requirente / requirente
+    * solicitante_economato / solicitante_economato
+    * solicitante_informatica / solicitante_informatica
+    * comprador / comprador
+  * Productos:
+    * Informatica
+    * Economato 1
+    * Economato 2
+
 TODO:
-* datos demo y simplificar grupos y vistas
-* llevar descripción de abastecimientos
-* hacer que se puedan sacar agregar moves desde una purchse requisition
-* que si se cancela un PR se cancelen los stock.moves
+* hacer que se puedan sacar agregar proc.order desde una purchse requisition
+* que si se cancela un purchase.req se cancelen los proc.order
+* unir purc req
+* renombrar licitaciones de compra a solicitudes de compra
 * Permisos
   Compras y Abastecimientos:
       Requirente
