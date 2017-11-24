@@ -9,6 +9,7 @@
             <field name="parliamentary_expedient">Expediente</field>
             <field name="request_expedient_id" ref="public_budget.budget_exp_caso_5"/>
             <field name="destination">None</field>
+            <field name="parliamentary_resolution_date" eval="time.strftime('%Y-%m-%d')"/>
         </record>
 
     </data>
