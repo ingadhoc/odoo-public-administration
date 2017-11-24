@@ -6,6 +6,9 @@
         <record id="budg_subsidy_trans_caso_9" model="public_budget.subsidy">
             <field name="transaction_id" ref="public_budget.budg_trans_caso_9"/>
             <field name="amount" eval="10000"/>
+            <field name="parliamentary_expedient" eval="Expediente"/>
+            <field name="request_expedient_id" ref="public_budget.budget_exp_caso_5"/>
+            <field name="destination" eval="None"/>
         </record>
 
     </data>
