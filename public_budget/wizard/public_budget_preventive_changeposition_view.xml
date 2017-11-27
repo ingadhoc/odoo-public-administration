@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_preventive_change_position" model="ir.ui.view">
+        <field name="name">Preventive Change Position</field>
+        <field name="model">public_budget.preventive.change_position</field>
+        <field name="arch" type="xml">
+            <form string="Change Position">
+                <group>
+                    <field name="new_budget_position_id" options="{'no_create': True}"/> 
+                </group>
+                <footer>
+                    <button name="confirm" string="Confirm" type="object" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+           </form>
+        </field>
+    </record>
+
+    <record id="action_preventive_change_position" model="ir.actions.act_window">
+        <field name="name">Preventive Change Position</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">public_budget.preventive.change_position</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_preventive_change_position"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

@@ -3,14 +3,16 @@
 # * sipreco_subsidy_management
 # 
 # Translators:
+# Gonzalo Ruzafa <gr@ingadhoc.com>, 2017
 # Juan José Scarafía <scarafia.juanjose@gmail.com>, 2017
+# Nicolas Mac Rouillon <nmr@ingadhoc.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-09 16:15+0000\n"
-"PO-Revision-Date: 2017-11-09 16:15+0000\n"
-"Last-Translator: Juan José Scarafía <scarafia.juanjose@gmail.com>, 2017\n"
+"POT-Creation-Date: 2017-11-15 00:18+0000\n"
+"PO-Revision-Date: 2017-11-15 00:18+0000\n"
+"Last-Translator: Nicolas Mac Rouillon <nmr@ingadhoc.com>, 2017\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -330,7 +332,7 @@ msgstr "Agrupar por"
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_approval_arrangement_id
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_id
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_note_id
-#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_note_type_id_6101
+#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_note_type_id_6111
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_rendition_id
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_resolution_id
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_resolution_line_id

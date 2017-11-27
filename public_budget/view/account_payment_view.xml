@@ -7,6 +7,11 @@
         <field name="priority">20</field>
         <field name="inherit_id" ref="account.view_account_payment_form"/>
         <field name="arch" type="xml">
+
+            <field name="payment_date" position="after">
+                <field name="assignee_id" readonly="1"/>
+            </field>
+
             <!-- hacemos invisible la fecha de pago para no confundir, viene seteada desde el payment group y en sipreco no interesa permitir distintas fechas para un pago -->
             <field name="payment_date" position="attributes">
                 <attribute name="invisible">1</attribute>
@@ -21,6 +26,20 @@
             </field>
         </field>
     </record>
+
+    <record id="view_account_payment_edit_assignee_form" model="ir.ui.view">
+        <field name="name">account.payment.form</field>
+        <field name="model">account.payment</field>
+        <field name="priority">20</field>
+        <field name="inherit_id" ref="public_budget.view_account_payment_form"/>
+        <field name="groups_id" eval="[(4, ref('public_budget.group_change_payment_assignee'))]"/>
+        <field name="arch" type="xml">
+            <field name="assignee_id" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </field>
+        </field>
+    </record>
+
 
     <record id="view_account_payment_change_check_form" model="ir.ui.view">
         <field name="name">account.payment.form</field>
