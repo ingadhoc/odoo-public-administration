@@ -28,9 +28,10 @@ Algunas observaciones de uso/desarrollo
 =======================================
 
 #. Cheques:
-  * Los cheques se generan cuando se valida el pago, en ese momento queda como entregado y afecta la cuenta de "cheques diferidos". (ESTO NO VA MAS ASI) cuando lo entregan físicamente marcan el débito, en ese momento registramos la salida del banco.
 
-                HOY:                    V9
+Los cheques se generan cuando se valida el pago, en ese momento queda como entregado y afecta la cuenta de "cheques diferidos". (ESTO NO VA MAS ASI) cuando lo entregan físicamente marcan el débito, en ese momento registramos la salida del banco.
+
+                HOY                     V9
 Validar Pago
                 Cheque a entregar       entregado               Entregado
                 Salió de Banco          Valores diferidos     
@@ -49,6 +50,7 @@ Desventajas/observaciones:
 Si llegan a necesitar si o si hacer el débito directo, podemos automatizar que al validar el pago se debiten los cheques.
 
 #. Subsidios:
+
   * La fecha del cargo se calcula en función a todos los pagos vinculados en los cuales se agrego un campo fecha del cargo.
   * la fecha del cargo en los pagos se calcula como siemrpe que el pago este validado (posted) y según:
     * si no tiene cheques: se usa la fecha de pago

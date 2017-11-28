@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'author': 'ADHOC SA, Odoo Community Association (OCA)',
+    'author': 'ADHOC SA,Odoo Community Association (OCA)',
     'website': 'www.adhoc.com.ar',
     'category': 'Accounting & Finance',
     'license': 'AGPL-3',
