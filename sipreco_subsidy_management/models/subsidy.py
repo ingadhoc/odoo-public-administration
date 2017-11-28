@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import fields, models, api, SUPERUSER_ID
+from openerp import fields, models, api
 from openerp.exceptions import ValidationError
 from dateutil.relativedelta import relativedelta
 from datetime import date
