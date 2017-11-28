@@ -182,6 +182,13 @@ class AccountPaymentGroup(models.Model):
     #         rec.payment_ids.write({'payment_date': rec.payment_date})
 
     @api.multi
+    def unlink(self):
+        if self.filtered('document_number'):
+            raise ValidationError(_(
+                'No puede borrar una orden de pago que ya fue numerada'))
+        return super(AccountPaymentGroup, self).unlink()
+
+    @api.multi
     def confirm(self):
         for rec in self:
             if not rec.to_pay_amount:

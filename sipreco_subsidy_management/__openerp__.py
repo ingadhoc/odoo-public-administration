@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'author': 'ADHOC SA, Odoo Community Association (OCA)',
+    'author': 'ADHOC SA,Odoo Community Association (OCA)',
     'website': 'www.adhoc.com.ar',
     'category': 'Accounting & Finance',
     'license': 'AGPL-3',
@@ -19,6 +19,7 @@
         'security/ir.model.access.csv',
         'data/sequence_data.xml',
         'data/subsidy_note_type_data.xml',
+        'data/cron.xml',
     ],
     'demo': [
         'demo/public_budget.transaction_type.csv',
@@ -30,5 +31,5 @@
     'installable': True,
     'name': 'Public Budget Subsidy Management',
     'test': [],
-    'version': '9.0.1.1.0',
+    'version': '9.0.1.2.0',
 }

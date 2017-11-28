@@ -8,6 +8,11 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
+                    <field name="rendition_ids" invisible="1"/>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_subsidy" type="object" class="oe_stat_button" icon="fa-pencil-square-o" attrs="{'invisible': [('rendition_ids', '=', False)]}" string="Subsidies">
+                        </button>
+                    </div>
                     <group>
                         <field name="number" required="False"/>
                         <!-- <field name="rendition_id"/> -->

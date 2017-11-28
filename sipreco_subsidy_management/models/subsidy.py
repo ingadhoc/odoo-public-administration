@@ -2,7 +2,7 @@
 from openerp import fields, models, api
 from openerp.exceptions import ValidationError
 from dateutil.relativedelta import relativedelta
-# from datetime import date
+from datetime import date
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -50,9 +50,11 @@ class PublicBudgetSubsidy(models.Model):
     )
     parliamentary_resolution_date = fields.Date(
         'Fecha de Resolución Parlamentaria',
+        required=True,
     )
     parliamentary_expedient = fields.Char(
         'Expediente Parlamentario',
+        required=True,
     )
     cargo_date = fields.Date(
         compute='get_cargo_data',
@@ -88,6 +90,7 @@ class PublicBudgetSubsidy(models.Model):
     request_expedient_id = fields.Many2one(
         'public_budget.expedient',
         'Expediente de Solicitud',
+        required=True,
         # help='Expediente Administrativo de Rendición de Subsidio',
     )
     accountability_administrative_expedient_id = fields.Many2one(
@@ -111,6 +114,7 @@ class PublicBudgetSubsidy(models.Model):
         'Notes',
     )
     destination = fields.Char(
+        required=True,
     )
     amount = fields.Monetary(
         string='Amount',
@@ -154,6 +158,8 @@ class PublicBudgetSubsidy(models.Model):
         store=True,
     )
     reclaimed = fields.Boolean(string='Reclamado?')
+
+    observations = fields.Text('Observaciones')
 
     @api.one
     @api.depends(
@@ -224,7 +230,9 @@ class PublicBudgetSubsidy(models.Model):
     )
     def get_cargo_data(self):
         payments = self.payment_group_ids + self.advance_payment_group_ids
-        cargo_amount = sum(payments.mapped('payments_amount'))
+        cargo_amount = sum(
+            payments.filtered(
+                lambda x: x.state != 'cancel').mapped('payments_amount'))
         cargo_date = payments.search([
             ('id', 'in', payments.ids),
             ('payment_date', '!=', False),
@@ -265,3 +273,23 @@ class PublicBudgetSubsidy(models.Model):
     def set_expedient_id(self):
         self.parliamentary_expedient = self.\
             expedient_id.parliamentary_expedient
+
+    @api.multi
+    @api.constrains('amount')
+    def check_amount(self):
+        for rec in self:
+            if not rec.amount > 0:
+                raise ValidationError(
+                    'El monto debe ser mayor a cero')
+
+    @api.model
+    def _cron_recurring_subsidy_report(self, partner_ids):
+        last_week = fields.Date.to_string(date.today() - relativedelta(days=7))
+        domain = [('cargo_date', '>=', last_week),
+                  ('cargo_date', '<', fields.Date.today())]
+        values = {'subsidys': self.search(domain)}
+        template = self.env.ref(
+            'sipreco_subsidy_management.ir_cron_subsidy_report_week_template')
+
+        template.with_context(
+            data=values).send_mail(partner_ids, force_send=True)
