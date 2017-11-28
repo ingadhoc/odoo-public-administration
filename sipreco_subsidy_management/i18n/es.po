@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-15 00:18+0000\n"
-"PO-Revision-Date: 2017-11-15 00:18+0000\n"
+"POT-Creation-Date: 2017-11-28 15:36+0000\n"
+"PO-Revision-Date: 2017-11-28 15:36+0000\n"
 "Last-Translator: Nicolas Mac Rouillon <nmr@ingadhoc.com>, 2017\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
 "MIME-Version: 1.0\n"
@@ -19,6 +19,37 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: sipreco_subsidy_management
+#: model:mail.template,body_html:sipreco_subsidy_management.ir_cron_subsidy_report_week_template
+msgid ""
+"\n"
+"\n"
+"Hola ${object.name},\n"
+"\n"
+"<table cellspacing=\"1\" border=\"1\" cellpadding=\"4\">\n"
+"    <tr>\n"
+"        <th>Numero Interno</th>\n"
+"        <th>Receptor</th>\n"
+"    </tr>\n"
+"    % for sub in ctx['data'].get('subsidys'):\n"
+"        <tr>\n"
+"            <td>${sub.internal_number}</td>\n"
+"            <td>${sub.partner_id.name}</td>\n"
+"        </tr>\n"
+"    % endfor\n"
+"</table>\n"
+"\n"
+"\n"
+"<p>\n"
+"    Thanks,\n"
+"</p>\n"
+"\n"
+"<pre>\n"
+"</pre>\n"
+"\n"
+"            "
+msgstr ""
 
 #. module: sipreco_subsidy_management
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_advance_payment_group_ids
@@ -332,7 +363,7 @@ msgstr "Agrupar por"
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_approval_arrangement_id
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_id
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_note_id
-#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_note_type_id_6111
+#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_note_type_id_6112
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_rendition_id
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_resolution_id
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_resolution_line_id
@@ -356,9 +387,15 @@ msgstr "Importe Rendido"
 
 #. module: sipreco_subsidy_management
 #: model:ir.ui.view,arch_db:sipreco_subsidy_management.view_public_budget_subsidy_form
+#: model:ir.ui.view,arch_db:sipreco_subsidy_management.view_public_budget_subsidy_search
 #: model:ir.ui.view,arch_db:sipreco_subsidy_management.view_public_budget_subsidy_tree
 msgid "Importe s/Res"
 msgstr "Importe s/Res"
+
+#. module: sipreco_subsidy_management
+#: model:mail.template,subject:sipreco_subsidy_management.ir_cron_subsidy_report_week_template
+msgid "Informe semanal de Subsidios"
+msgstr ""
 
 #. module: sipreco_subsidy_management
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_internal_number
@@ -511,6 +548,16 @@ msgstr "Número"
 #: model:ir.ui.view,arch_db:sipreco_subsidy_management.view_public_budget_subsidy_resolution_search
 msgid "N° Exp. Resolucion"
 msgstr "N° Exp. Resolucion"
+
+#. module: sipreco_subsidy_management
+#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_observations
+msgid "Observaciones"
+msgstr ""
+
+#. module: sipreco_subsidy_management
+#: model:ir.ui.view,arch_db:sipreco_subsidy_management.view_public_budget_subsidy_search
+msgid "Observations"
+msgstr ""
 
 #. module: sipreco_subsidy_management
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_dispositional_order
@@ -708,6 +755,11 @@ msgstr "Secuencia"
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_state
 msgid "State"
 msgstr "Estado"
+
+#. module: sipreco_subsidy_management
+#: model:ir.ui.view,arch_db:sipreco_subsidy_management.view_public_budget_subsidy_approval_arrangement_form
+msgid "Subsidies"
+msgstr "Subsidios"
 
 #. module: sipreco_subsidy_management
 #: model:ir.actions.act_window,name:sipreco_subsidy_management.action_public_budget_subsidy
