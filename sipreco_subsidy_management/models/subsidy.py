@@ -283,7 +283,9 @@ class PublicBudgetSubsidy(models.Model):
                     'El monto debe ser mayor a cero')
 
     @api.model
-    def _cron_recurring_subsidy_report(self):
+    def _cron_recurring_subsidy_report(self, partner_ids=[]):
+        if not partner_ids:
+            return True
         last_week = fields.Date.to_string(date.today() - relativedelta(days=7))
         domain = [('cargo_date', '>=', last_week),
                   ('cargo_date', '<', fields.Date.today())]
@@ -292,4 +294,4 @@ class PublicBudgetSubsidy(models.Model):
             'sipreco_subsidy_management.ir_cron_subsidy_report_week_template')
 
         template.with_context(
-            data=values).send_mail(SUPERUSER_ID, force_send=True)
+            data=values).send_mail(partner_ids, force_send=True)

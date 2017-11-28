@@ -6,9 +6,9 @@
             <field name="name">Subsidy Report Week Reminder</field>
             <field name="email_from">${(object.email or '')|safe}</field>
             <field name="subject">Informe semanal de Subsidios</field>
-            <field name="email_to">nmr@adhoc.com.ar</field>
+            <field name="partner_to">${object.id}</field>
             <field name="lang">${object.lang}</field>
-            <field name="model_id" ref="base.model_res_users"/>
+            <field name="model_id" ref="base.model_res_partner"/>
             <field name="auto_delete" eval="True"/>
             <field name="body_html"><![CDATA[
 
@@ -48,7 +48,7 @@ Hola ${object.name},
             <field eval="False" name="doall"/>
             <field eval="'public_budget.subsidy'" name="model"/>
             <field eval="'_cron_recurring_subsidy_report'" name="function"/>
-            <field eval="'()'" name="args"/>
+            <field eval="'([1])'" name="args"/>
         </record>
                 
       
