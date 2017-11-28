@@ -283,9 +283,7 @@ class PublicBudgetSubsidy(models.Model):
                     'El monto debe ser mayor a cero')
 
     @api.model
-    def _cron_recurring_subsidy_report(self, partner_ids=[]):
-        if not partner_ids:
-            return True
+    def _cron_recurring_subsidy_report(self, partner_ids):
         last_week = fields.Date.to_string(date.today() - relativedelta(days=7))
         domain = [('cargo_date', '>=', last_week),
                   ('cargo_date', '<', fields.Date.today())]
