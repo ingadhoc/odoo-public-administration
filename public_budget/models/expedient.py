@@ -241,7 +241,7 @@ class PublicBudgetExpedient(models.Model):
                     'No puede anular este expediente ya que es utilizado en '
                     'las siguientes transacciones %s' % transactions.ids)
             # no se puede si esta en payment_groups no cancelados
-            payment_groups = self.env['account.payment_group'].search([
+            payment_groups = self.env['account.payment.group'].search([
                 ('expedient_id', '=', expedient.id),
                 ('state', '!=', 'cancel'),
             ])

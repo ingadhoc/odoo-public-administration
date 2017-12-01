@@ -61,7 +61,7 @@
                     </header>
                     <sheet string="Expedient">
                         <div class="oe_button_box" name="button_box">
-                            <button class="oe_stat_button" name="%(public_budget.action_public_budget_transaction_transactions)d" string="Transactions" type="action" groups="account.group_account_manager" context="{'search_default_expedient_id': active_id}" icon="fa-bars"/>
+                            <button class="oe_stat_button" name="%(public_budget.action_public_budget_transaction_transactions)d" string="Transactions" type="action" groups="public_budget.group_portal_transaction,public_budget.group_secretary_director,account.group_account_user" context="{'search_default_expedient_id': active_id}" icon="fa-bars"/>
                         </div>
                         <field name="user_location_ids" invisible="1"/>
                         <field name="id" invisible="1"/>

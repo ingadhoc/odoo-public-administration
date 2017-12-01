@@ -2,8 +2,8 @@
 {
     'name': 'Public Budget',
     'license': 'AGPL-3',
-    'version': '9.0.1.11.0',
-    'author': 'ADHOC SA',
+    'version': '9.0.1.14.0',
+    'author': 'ADHOC SA,Odoo Community Association (OCA)',
     'website': 'www.adhoc.com.ar',
     'category': 'Accounting & Finance',
     'depends': [
