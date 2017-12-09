@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+    <record id="purchase_requisition.menu_purchase_requisition_pro_mgt" model="ir.ui.menu">
+        <field name="name">Solicitudes de Compra</field>
+    </record>
+
+    <!-- no filtrar por usuario -->
+    <record model="ir.actions.act_window" id="purchase_requisition.action_purchase_requisition">
+        <field name="context">{}</field>
+    </record>
+
     <record model="ir.ui.view" id="view_purchase_requisition_form">
         <field name="name">purchase.requisition.form</field>
         <field name="model">purchase.requisition</field>
@@ -9,14 +18,48 @@
             <form>
                 <field name="id"/>
             </form>
+
+            <button name="cancel_requisition" position="attributes">
+                <attribute name="groups">sipreco_purchase.group_approve_purhcase_req</attribute>
+            </button>
+            
+            <button name="sent_suppliers" position="attributes">
+                <attribute name="groups">sipreco_purchase.group_approve_purhcase_req</attribute>
+            </button>
+
+            <!-- <button name="open_bid"/>
+            <button name="tender_reset"/>
+            <button name="generate_po"/> -->
+
             <div name="button_box">
                 <button class="oe_stat_button" name="%(procurement.procurement_action)d" string="Procurements" type="action" context="{'search_default_manual_requisition_id': id}" icon="fa-bars"/>
                 <!-- viejo cuando ibamos a los moves -->
                 <!-- <button class="oe_stat_button" name="%(stock.action_move_form2)d" string="Supply Requirements" type="action" context="{'search_default_requisition_id': id}" icon="fa-bars"/> -->
+                <button class="oe_stat_button" name="%(public_budget.action_public_budget_transaction_transactions)d" string="Transactions" type="action" groups="public_budget.group_portal_transaction,public_budget.group_secretary_director,account.group_account_user,stock.group_stock_user" context="{'search_default_expedient_id': expedient_id}" icon="fa-bars"/>
             </div>
             <field name="product_id">
                 <field name="name"/>
             </field>
+
+        <!-- limpiamos vista -->
+        
+            <field name="multiple_rfq_per_supplier" position="after">
+                <field name="type_id"/>
+                <field name="expedient_id"/>
+            </field>
+
+            <field name="exclusive" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+            <field name="multiple_rfq_per_supplier" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+            <field name="picking_type_id" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
         </field>
     </record>
 

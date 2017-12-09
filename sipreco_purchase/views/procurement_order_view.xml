@@ -39,6 +39,7 @@
                 <separator/>
             </filter>
             <field name="product_id" position="after">
+                <field name="procurement_request_id"/>
                 <field name="manual_requisition_id"/>
             </field>
         </field>
@@ -50,6 +51,20 @@
         <!-- <field name="inherit_id" ref="procurement.procurement_tree_view"/> -->
         <field name="inherit_id" ref="stock.view_procurement_tree_stock_inherit"/>
         <field name="arch" type="xml">
+
+            <!-- para no confunidr con fechas planeadas la sacamos y usamos de creacion -->
+            <field name="date_planned" position="after">
+                <field name="procurement_request_id"/>
+                <field name="create_date" widget="date"/>
+            </field>
+            <field name="date_planned" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+            <field name="product_qty" position="after">
+                <field name="price_unit"/>
+            </field>
+
             <tree>
                 <field name="manual_requisition_id"/>
             </tree>

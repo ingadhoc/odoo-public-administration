@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import models, fields
+from openerp import models, fields, api
 # from openerp.exceptions import ValidationError
 # from dateutil.relativedelta import relativedelta
 import logging
@@ -9,7 +9,7 @@ _logger = logging.getLogger(__name__)
 class PurchaseRequisition(models.Model):
     _inherit = 'purchase.requisition'
 
-    move_ids = fields.One2many(
+    manual_procurement_ids = fields.One2many(
         'procurement.order',
         'manual_requisition_id',
         'Procurements',
@@ -17,3 +17,19 @@ class PurchaseRequisition(models.Model):
         # 'requisition_id',
         # 'Supply Requirements',
     )
+    expedient_id = fields.Many2one(
+        'public_budget.expedient',
+        'Tramite Administrativo',
+    )
+    type_id = fields.Many2one(
+        'public_budget.transaction_type',
+        string='Type',
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+        domain="[('company_id', '=', company_id)]",
+    )
+
+    @api.multi
+    def tender_cancel(self):
+        self.mapped('manual_procurement_ids').button_cancel_remaining()
+        return super(PurchaseRequisition, self).tender_cancel()

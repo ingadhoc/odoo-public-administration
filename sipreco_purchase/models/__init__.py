@@ -7,3 +7,4 @@ from . import purchase_requisition
 from . import purchase_requisition_line
 from . import stock_procurement_request
 from . import res_users
+from . import stock_location_route

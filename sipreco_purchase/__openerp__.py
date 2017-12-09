@@ -13,6 +13,9 @@
         'views/stock_procurement_request_view.xml',
         'views/procurement_order_view.xml',
         'views/res_users_view.xml',
+        'views/stock_location_route_view.xml',
+        'views/product_template_view.xml',
+        'views/purchase_order_view.xml',
         'security/sipreco_purchase_security.xml',
         'security/hide_groups.xml',
         'security/ir.model.access.csv',
@@ -21,6 +24,7 @@
         'demo/stock_demo.xml',
         'demo/res_users_demo.xml',
         'demo/product_demo.xml',
+        'demo/sequence_demo.xml',
     ],
     'depends': [
         'public_budget',

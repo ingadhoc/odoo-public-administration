@@ -9,6 +9,10 @@
             <templates position="before">
                 <field name="count_pending_procurements"/>
             </templates>
+
+            <!-- por ahora ocultamos los picking lates -->
+            <div t-if="record.count_picking_late.raw_value &gt; 0" position="replace"/>
+
             <div class="col-xs-6 o_kanban_primary_right">
                 <div t-if="record.count_pending_procurements.raw_value > 0" class="row">
                     <div class="col-xs-9">
