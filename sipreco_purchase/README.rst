@@ -43,21 +43,27 @@ LISTO:
 * En el Requerimiento de abastecimiento, llevar el costo del producto, para los productos que usualmente se piden, sirve como valor ya fijado, en los productos varios o esporadicos, el requirente, lo puede setear (no modifica el costo del producto en el maestro), para dar valor estimado
 * Geerar tipos de solitud de compra demo "Compra directa, concurso de precios.." (al final me confundí, no existía un tipo de solicitud de compra en odoo, creo que está en v11 recién, asi que por ahora use los tipo de transacción como me habías dicho)
 * Que sel requerimiento esta likeado a solicitud de compra, mostrar el link (nomas que se sepa que está, no lo puede ver) 
-
-
-* arreglar que no se lleva partner al proc order
-* Agregar campo notas en Pedido de Abastecimiento, para poner Motivacion de compra (no obligatorio) (y que viaje a líneas de compra)
 * Sacar boton de facturas en ordenes de compra
+* Agregar campo notas en Pedido de Abastecimiento, para poner Motivacion de compra (no obligatorio) (y que viaje a líneas de compra)
+* A comprador no le permite confirmar orden de compra
 
-PREGUNTAS:
-* hay que limitar expediente en ubicación usuario? Idem para subisdios?
-* cuando es obligatorio el tramite administrativo en presupuesto? (o no es obligatorio?). Cuando es readonly? (idem para el tipo)
 
 TODO:
-* A comprador no le permite confirmar orden de compra
 * Compras tiene que poder unir las solicitudes de compra en una sola solicitud, con los numeros de solicitud concatenados
 * agregar campo tramite administrativo pero solo si ya se aprobó la solicitud. (No permite cargar Tramite Administrativo en solicitud, hasta que no este aprobado por la secretaria.)
 * Reporte de Solicitud de compras imprimible (por ahora vacio)
+* arvertencia al cancelar solicitud de que no puede des hacerse
+* control de cantidades
+
+PREGUNTAS:
+* hay que limitar expediente en ubicación usuario? Idem para subisdios?
+* cuando es obligatorio el tramite administrativo en solicitud de presupuesto? (o no es obligatorio?). Cuando es readonly? (idem para el tipo)
+* hasta cuando puede modificar una solicitud de compra el area compras o la unidad de compras? Un estado distinto cuando ya está lista para aprobación por secretario? Un bloqueo
+* algún control o filtro de solicitudes de compra? Cuales puede ver/modificar cada usuario?
+* un menú para ver todos las solicitudes?
+* por ahora el comprador (y solicitante) no puede ver las transacciones. Esta bien? o tenemos que darle permiso? Si no le damos permiso entonces no hay que mostrar botón
+* Control de agregado de líneas a los requerimientos. Hasta cuando?
+* tenemos que llevar precio unitario a la solicitud de compra? Y totales? Se puede editar? Tenemos que calcular el total? (si lo vez con nico habria que llevar el price_unit que agregamos a procurement.order)
 
 
 Detalles:

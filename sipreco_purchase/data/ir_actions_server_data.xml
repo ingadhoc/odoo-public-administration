@@ -16,11 +16,17 @@ if recs.filtered(lambda x: x.state in ('cancel', 'done')):
 if recs.filtered('manual_requisition_id'):
     raise Warning('Algunos pedidos de abastecimientos ya tienen una solicitud de compra asociada')
 
+picking_type = env['stock.picking.type'].search([('code', '=', 'incoming'), ('warehouse_id.company_id', '=', False), ('warehouse_id.company_id', '=', env.user.company_id.id)], limit=1)
+
 lines = []
 for rec in recs:
     lines.append((0, 0, {'product_id': rec.product_id.id, 'product_uom_id': rec.product_uom.id, 'product_qty': rec.product_qty,  'name': rec.name}))
-# usamos sudo para no tener que darle permiso a secuencias y cosas de compras
-requisition = env['purchase.requisition'].sudo().create({'line_ids': lines, 'company_id': env.user.company_id.id})
+requisition = env['purchase.requisition'].create({
+    'line_ids': lines,
+    'company_id': env.user.company_id.id,
+    # permitimos varias a la vez por defecto, total controlamos cantidades por afuera.
+    'multiple_rfq_per_supplier': True,
+})
 recs.write({'manual_requisition_id': requisition.id})
         </field>
     </record>

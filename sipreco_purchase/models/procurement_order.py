@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-from openerp import models, fields, api
+from openerp import models, fields, api, _
 import openerp.addons.decimal_precision as dp
-# from openerp.exceptions import ValidationError
+from openerp.exceptions import ValidationError
 # from dateutil.relativedelta import relativedelta
 import logging
 _logger = logging.getLogger(__name__)
@@ -34,6 +34,14 @@ class ProcurementOrder(models.Model):
         readonly=True,
         states={'confirmed': [('readonly', False)]},
     )
+
+    @api.model
+    def create(self, vals):
+        # controlamos que haya definido cantidad
+        if not vals.get('product_qty'):
+            raise ValidationError(_(
+                'You can not create a request without quantity!'))
+        return super(ProcurementOrder, self).create(vals)
 
     @api.multi
     def onchange_product_id(self, product_id):
