@@ -80,6 +80,10 @@
                 <attribute name="groups">base.group_no_one</attribute>
             </field>
 
+            <field name="dest_address_id" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
         </field>
     </record>
 

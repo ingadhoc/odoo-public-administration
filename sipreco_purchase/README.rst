@@ -46,16 +46,13 @@ LISTO:
 * Sacar boton de facturas en ordenes de compra
 * Agregar campo notas en Pedido de Abastecimiento, para poner Motivacion de compra (no obligatorio) (y que viaje a líneas de compra)
 * A comprador no le permite confirmar orden de compra
-
-
-TODO:
-* Compras tiene que poder unir las solicitudes de compra en una sola solicitud, con los numeros de solicitud concatenados
-* agregar campo tramite administrativo pero solo si ya se aprobó la solicitud. (No permite cargar Tramite Administrativo en solicitud, hasta que no este aprobado por la secretaria.)
+* Limitar acceso de requirente a SOLO Pedidos de abastecimiento y que vea solo los suyos (en realidad por ahora limitado para todos en el menú 'mis requerimientos')
 * Reporte de Solicitud de compras imprimible (por ahora vacio)
-* arvertencia al cancelar solicitud de que no puede des hacerse
-* control de cantidades
 
-PREGUNTAS:
+
+PREGUNTAS / pendientes:
+* hacemos el control de cantidades al confirmar pedidos de compras? Controlamos sumando por productos?
+* Compras tiene que poder unir las solicitudes de compra en una sola solicitud, con los numeros de solicitud concatenados. Ver bien que numeros unimos.
 * hay que limitar expediente en ubicación usuario? Idem para subisdios?
 * cuando es obligatorio el tramite administrativo en solicitud de presupuesto? (o no es obligatorio?). Cuando es readonly? (idem para el tipo)
 * hasta cuando puede modificar una solicitud de compra el area compras o la unidad de compras? Un estado distinto cuando ya está lista para aprobación por secretario? Un bloqueo
@@ -71,8 +68,7 @@ Detalles:
   - a los picking
   - a las lineas de abastecimiento
 - partner/usuario que pidio
-- Limitar acceso de requirente a SOLO Pedidos de abastecimiento y que vea solo los suyos
-- Dar posibilidad de edicion de Purchase Requisition a solicitante, ver de agregar opcion de menu para que no tenga que navegar hasta ahi
+- Dar posibilidad de edicion de Purchase Requisition a solicitante, ver de agregar opcion de menu para que no tenga que navegar hasta ahi. Mmm no estoy seguro que sería..
 
 
 Si lo piden..

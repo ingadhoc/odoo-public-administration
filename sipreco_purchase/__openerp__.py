@@ -19,6 +19,7 @@
         'security/sipreco_purchase_security.xml',
         'security/hide_groups.xml',
         'security/ir.model.access.csv',
+        'reports/purchase_requisition_report.xml',
     ],
     'demo': [
         'demo/stock_demo.xml',
