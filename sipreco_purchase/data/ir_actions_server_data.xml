@@ -16,16 +16,18 @@ if recs.filtered(lambda x: x.state in ('cancel', 'done')):
 if recs.filtered('manual_requisition_id'):
     raise Warning('Algunos pedidos de abastecimientos ya tienen una solicitud de compra asociada')
 
-picking_type = env['stock.picking.type'].search([('code', '=', 'incoming'), ('warehouse_id.company_id', '=', False), ('warehouse_id.company_id', '=', env.user.company_id.id)], limit=1)
+picking_type = env['stock.picking.type'].search([('code', '=', 'incoming'), '|', ('warehouse_id.company_id', '=', False), ('warehouse_id.company_id', '=', env.user.company_id.id)], limit=1)
 
 lines = []
 for rec in recs:
-    lines.append((0, 0, {'product_id': rec.product_id.id, 'product_uom_id': rec.product_uom.id, 'product_qty': rec.product_qty,  'name': rec.name}))
+    lines.append((0, 0, {'product_id': rec.product_id.id, 'product_uom_id': rec.product_uom.id, 'product_qty': rec.product_qty,  'name': rec.name, 'price_unit': rec.price_unit}))
+
 requisition = env['purchase.requisition'].create({
     'line_ids': lines,
     'company_id': env.user.company_id.id,
     # permitimos varias a la vez por defecto, total controlamos cantidades por afuera.
     'multiple_rfq_per_supplier': True,
+    'picking_type_id': picking_type.id,
 })
 recs.write({'manual_requisition_id': requisition.id})
         </field>
@@ -54,7 +56,7 @@ if not recs or recs == 1:
     raise Warning('Debe selccionar más de una solicitud de compra')
 
 pr = recs[0]
-
+pr.write({'name': ','.join(recs.mapped('name'))})
 (recs - pr).mapped('line_ids').write({'requisition_id': pr.id})
 (recs - pr).mapped('manual_procurement_ids').write({'manual_requisition_id': pr.id})
 (recs - pr).mapped('purchase_ids').write({'requisition_id': pr.id})

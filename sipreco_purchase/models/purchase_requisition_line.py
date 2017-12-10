@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields
+import openerp.addons.decimal_precision as dp
 # from openerp.exceptions import ValidationError
 # from dateutil.relativedelta import relativedelta
 import logging
@@ -11,4 +12,8 @@ class PurchaseRequisitionLine(models.Model):
 
     name = fields.Text(
         string='Description',
+    )
+    price_unit = fields.Float(
+        string='Unit Price',
+        digits=dp.get_precision('Product Price'),
     )

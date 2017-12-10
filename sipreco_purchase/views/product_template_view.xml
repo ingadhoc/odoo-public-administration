@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+    <record id="product_template_kanban_stock_view" model="ir.ui.view">
+        <field name="name">product.template.form.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock.product_template_kanban_stock_view"/>
+        <field name="arch" type="xml">
+            <!-- hacemos visible el stock si son consumibles o product 
+            TODO habria que mejorar esta herencia -->
+            <li t-if="record.type.raw_value == 'product'" position="replace"/>
+            <li t-if="record.type.raw_value == 'product'" position="replace">
+                <li t-if="record.type.raw_value == 'product' or record.type.raw_value == 'consu'">On hand: <field name="qty_available"/> <field name="uom_id"/></li>
+                <li t-if="record.type.raw_value == 'product' or record.type.raw_value == 'consu'">Forecasted: <field name="virtual_available"/> <field name="uom_id"/></li>
+            </li>
+        </field>
+    </record>
+
     <record id="product_template_form_view" model="ir.ui.view">
         <field name="name">product.template.form.inherit</field>
         <field name="model">product.template</field>

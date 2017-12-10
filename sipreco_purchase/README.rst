@@ -11,6 +11,8 @@ Datos demo:
     * requirente / requirente (Compras / Requirente: group_requester)
     * solicitante_economato / solicitante_economato (Compras / Solicitante: stock.group_stock_user)
     * solicitante_informatica / solicitante_informatica (idem anterior)
+    * sec_administrativa / sec_administrativa (idem anterior)
+    * sec_parlamentaria / sec_parlamentaria (idem anterior)
     * comprador / comprador (Compras / Comprador: purchase.group_purchase_user)
     * secretario / secretario (Aprobar Solicitudes de Compra (hereda solicitante): group_approve_purhcase_req)
   * Productos:
@@ -48,32 +50,34 @@ LISTO:
 * A comprador no le permite confirmar orden de compra
 * Limitar acceso de requirente a SOLO Pedidos de abastecimiento y que vea solo los suyos (en realidad por ahora limitado para todos en el menú 'mis requerimientos')
 * Reporte de Solicitud de compras imprimible (por ahora vacio)
+NUEVAS
+- Comprador no puede confirmar Orden de Compra: No se ha podido completar la operación por restricciones de seguridad. Contacte con su administrador del sistema. (era problema de multicompanía)
+- Posibilidad de elegir tipos de transacciones a solicitante (se soluciona dando permiso de portal expedientes o secretaria usuario)
+- Solicitante ni comprador pueden recibir productos: (Tipo de documento: stock.picking.type, Operación: read) (IDEM)
+- Posibilidad de ver con usuario comprador todas los requerimientos, o que cada unidad de compra pueda ver los requerimientos que les hicieron a su unidad, no los puede ver ahora.  (quedamos que comprador no los ve pero los otros sí lo ven en su tarjeta del tablero de inventario)
+- Con solicitante no puedo ver de manera sencilla el stock del producto: caso de uso, compre producto economato por 100 unidades, les di ingreso con usuario administrador, verifico stock en vista lista de productos con usuario solicitante y veo que el stock no cambio (estara en otra ubicacion?)
+-generar usuario de pruebas secreataria administrativa (agregado usuarios para las dos secretarias)
+* Compras tiene que poder unir las solicitudes de compra en una sola solicitud, con los numeros de solicitud concatenados. Ver bien que numeros unimos. (quedamos probar confcatenar)
+* por ahora el comprador (y solicitante) no puede ver las transacciones. Esta bien? o tenemos que darle permiso? Si no le damos permiso entonces no hay que mostrar botón (se lo damos a compras)
+* llevar precio a solicitudes de compra
 
 
-PREGUNTAS / pendientes:
-* hacemos el control de cantidades al confirmar pedidos de compras? Controlamos sumando por productos?
-* Compras tiene que poder unir las solicitudes de compra en una sola solicitud, con los numeros de solicitud concatenados. Ver bien que numeros unimos.
-* hay que limitar expediente en ubicación usuario? Idem para subisdios?
-* cuando es obligatorio el tramite administrativo en solicitud de presupuesto? (o no es obligatorio?). Cuando es readonly? (idem para el tipo)
-* hasta cuando puede modificar una solicitud de compra el area compras o la unidad de compras? Un estado distinto cuando ya está lista para aprobación por secretario? Un bloqueo
-* algún control o filtro de solicitudes de compra? Cuales puede ver/modificar cada usuario?
-* un menú para ver todos las solicitudes?
-* por ahora el comprador (y solicitante) no puede ver las transacciones. Esta bien? o tenemos que darle permiso? Si no le damos permiso entonces no hay que mostrar botón
-* Control de agregado de líneas a los requerimientos. Hasta cuando?
-* tenemos que llevar precio unitario a la solicitud de compra? Y totales? Se puede editar? Tenemos que calcular el total? (si lo vez con nico habria que llevar el price_unit que agregamos a procurement.order)
 
-
-Detalles:
+Detalles para más adelante (y si los piden..)
+----------------------------
+- Ver tema traducciones, sobre todo para Licitaciones de Compra (Solicitudes) y Confirmar Licitacion (Aprobar Solicitud)
 - Llevar numero de requerimiento de abastecimiento:
   - a los picking
   - a las lineas de abastecimiento
 - partner/usuario que pidio
 - Dar posibilidad de edicion de Purchase Requisition a solicitante, ver de agregar opcion de menu para que no tenga que navegar hasta ahi. Mmm no estoy seguro que sería..
-
-
-Si lo piden..
+* algún control o filtro de solicitudes de compra? Cuales puede ver/modificar cada usuario?
+* cuando es obligatorio el tramite administrativo en solicitud de presupuesto? (o no es obligatorio?). Cuando es readonly? (idem para el tipo)
+* hay que limitar expediente en ubicación usuario? Idem para subisdios?
 * hacer que se puedan sacar agregar proc.order desde una purchse requisition
-
+* hacemos el control de cantidades al confirmar pedidos de compras? Controlamos sumando por productos?
+* hasta cuando puede modificar una solicitud de compra el area compras o la unidad de compras? Un estado distinto cuando ya está lista para aprobación por secretario? Un bloqueo
+* Control de agregado de líneas a los requerimientos. Hasta cuando? (por ahí la dejamos para la 11 o vemos de bloquear con alguna lógica)
 
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas

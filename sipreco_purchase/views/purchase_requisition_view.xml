@@ -2,7 +2,8 @@
 <odoo>
 
     <record id="purchase_requisition.menu_purchase_requisition_pro_mgt" model="ir.ui.menu">
-        <field name="name">Solicitudes de Compra</field>
+        <!-- Solicitudes de Compra -->
+        <field name="name">Purchase Requisitions</field>
     </record>
 
     <!-- no filtrar por usuario -->
@@ -22,10 +23,12 @@
             <button name="cancel_requisition" position="attributes">
                 <attribute name="groups">sipreco_purchase.group_approve_purhcase_req</attribute>
                 <attribute name="confirm">ATENCIÓN: Se van la solicitud de compra y todos los requerimientos asociados. Esto no puede deshacerse. Seguro desea continuar?</attribute>
+                <attribute name="string">Cancel</attribute>
             </button>
             
             <button name="sent_suppliers" position="attributes">
                 <attribute name="groups">sipreco_purchase.group_approve_purhcase_req</attribute>
+                <attribute name="string">Confirm</attribute>
             </button>
 
             <!-- como al cancelar se cancelan los request, no dejamos re-abrir ya que es engañoso, lo dejamos son para nosotros -->
@@ -44,17 +47,21 @@
                 <attribute name="confirm">ATENCIÓN: Se va a proceder a la selección de las ordenes de compra. No se podrán generar nuevas ordenes de compra. Esto no puede deshacerse. Seguro desea continuar?</attribute>
             </button>
 
-            <button name="generate_po"/> 
+            <!-- <button name="generate_po"/>  -->
 
             <div name="button_box">
                 <button class="oe_stat_button" name="%(procurement.procurement_action)d" string="Procurements" type="action" context="{'search_default_manual_requisition_id': id}" icon="fa-bars"/>
                 <!-- viejo cuando ibamos a los moves -->
                 <!-- <button class="oe_stat_button" name="%(stock.action_move_form2)d" string="Supply Requirements" type="action" context="{'search_default_requisition_id': id}" icon="fa-bars"/> -->
-                <button class="oe_stat_button" name="%(public_budget.action_public_budget_transaction_transactions)d" string="Transactions" type="action" groups="public_budget.group_portal_transaction,public_budget.group_secretary_director,account.group_account_user,stock.group_stock_user" context="{'search_default_expedient_id': expedient_id}" icon="fa-bars"/>
+                <button class="oe_stat_button" name="%(public_budget.action_public_budget_transaction_transactions)d" string="Transactions" type="action" groups="public_budget.group_portal_transaction,public_budget.group_secretary_director,account.group_account_user,purchase.group_purchase_user" context="{'search_default_expedient_id': expedient_id}" icon="fa-bars"/>
             </div>
 
             <field name="product_id" position="after">
                 <field name="name"/>
+            </field>
+
+            <field name="product_qty" position="after">
+                <field name="price_unit"/>
             </field>
 
         <!-- limpiamos vista -->
@@ -73,6 +80,14 @@
             </field>
 
             <field name="picking_type_id" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+            <field name="ordering_date" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+            <field name="date_end" position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
             </field>
 
