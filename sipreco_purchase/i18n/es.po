@@ -1,19 +1,21 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* sipreco_purchase
+# 	* sipreco_purchase
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-10 22:54+0000\n"
-"PO-Revision-Date: 2017-12-10 22:54+0000\n"
+"PO-Revision-Date: 2017-12-11 14:06-0300\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
+"Language: es\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_form
@@ -28,7 +30,7 @@ msgstr "ATENCIÓN: Se van la solicitud de compra y todos los requerimientos asoc
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_stock_location_route_stock_request_selectable
 msgid "Applicable on Stock Requests"
-msgstr "Applicable on Stock Requests"
+msgstr "Aplicable en Requerimientos de Compra"
 
 #. module: sipreco_purchase
 #: model:res.groups,name:sipreco_purchase.group_approve_purhcase_req
@@ -48,7 +50,7 @@ msgstr "Confirmar"
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_stock_picking_type_count_pending_procurements
 msgid "Count pending procurements"
-msgstr "Count pending procurements"
+msgstr "Cuenta de Requirimientos Pendientes"
 
 #. module: sipreco_purchase
 #: model:ir.actions.server,name:sipreco_purchase.action_create_purchase_requisition
@@ -79,7 +81,7 @@ msgstr "Rutas de inventario"
 #: model:ir.actions.act_window,name:sipreco_purchase.action_my_procurement_request
 #: model:ir.ui.menu,name:sipreco_purchase.menu_my_procurement_request
 msgid "My Procurement Requests"
-msgstr "My Procurement Requests"
+msgstr "Mis Requerimientos"
 
 #. module: sipreco_purchase
 #: code:addons/sipreco_purchase/models/purchase_requisition.py:45
@@ -96,12 +98,12 @@ msgstr "Empresa"
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_procurement_filter
 msgid "Pending"
-msgstr "Pending"
+msgstr "Pendiente"
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.stock_picking_type_kanban
 msgid "Pending Procurements"
-msgstr "Pending Procurements"
+msgstr "Requerimientos Pendientes"
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_public_budget_users_form
@@ -166,7 +168,7 @@ msgstr "Requirente"
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_res_users_picking_type_ids
 msgid "Restricted Picking Types"
-msgstr "Restricted Picking Types"
+msgstr "Tipos de albarán "
 
 #. module: sipreco_purchase
 #: model:procurement.rule,name:sipreco_purchase.procurement_rule_economato
@@ -237,7 +239,7 @@ msgstr "Solicitud de Adquisición de Acciones"
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.stock_location_route_form_view_inherit
 msgid "Stock Requests"
-msgstr "Stock Requests"
+msgstr "Requerimientos de Stock"
 
 #. module: sipreco_purchase
 #: model:ir.model,name:sipreco_purchase.model_stock_picking_type
@@ -290,5 +292,4 @@ msgstr "Usuarios"
 #: code:addons/sipreco_purchase/models/procurement_order.py:42
 #, python-format
 msgid "You can not create a request without quantity!"
-msgstr "You can not create a request without quantity!"
-
+msgstr "No puede crear un requerimiento sin cantidad!"
