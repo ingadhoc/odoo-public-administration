@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="product_template_kanban_stock_view" model="ir.ui.view">
+        <field name="name">product.template.form.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock.product_template_kanban_stock_view"/>
+        <field name="arch" type="xml">
+            <!-- hacemos visible el stock si son consumibles o product 
+            TODO habria que mejorar esta herencia -->
+            <li t-if="record.type.raw_value == 'product'" position="replace"/>
+            <li t-if="record.type.raw_value == 'product'" position="replace">
+                <li t-if="record.type.raw_value == 'product' or record.type.raw_value == 'consu'">On hand: <field name="qty_available"/> <field name="uom_id"/></li>
+                <li t-if="record.type.raw_value == 'product' or record.type.raw_value == 'consu'">Forecasted: <field name="virtual_available"/> <field name="uom_id"/></li>
+            </li>
+        </field>
+    </record>
+
+    <record id="product_template_form_view" model="ir.ui.view">
+        <field name="name">product.template.form.inherit</field>
+        <field name="model">product.template</field>
+        <field name="priority">20</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+
+            <field name="type" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+            <field name="list_price" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+            <field name="invoice_policy" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+            <field name="purchase_requisition" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+            <!-- ocultamos opciones de ser vendido/comprado -->
+            <div name="options" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </div>
+
+            <page name="notes" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </page>
+
+        </field>
+    </record>
+
+</odoo>

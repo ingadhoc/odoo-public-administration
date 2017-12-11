@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- crear solicitud de compra -->
+    
+    <record model="ir.actions.server" id="action_create_purchase_requisition">
+        <!-- <field name="name">Create Purchase Requisition</field> -->
+        <field name="name">Crear Solicitud de Compra</field>
+        <field name="model_id" ref="procurement.model_procurement_order"/>
+        <field name="code">
+active_ids = context.get('active_ids')
+recs = env['procurement.order'].browse(active_ids)
+if recs.filtered(lambda x: x.state in ('cancel', 'done')):
+    raise Warning('Las pedidos de abastecimientos no deben estar cancelados y realizados')
+
+if recs.filtered('manual_requisition_id'):
+    raise Warning('Algunos pedidos de abastecimientos ya tienen una solicitud de compra asociada')
+
+picking_type = env['stock.picking.type'].search([('code', '=', 'incoming'), '|', ('warehouse_id.company_id', '=', False), ('warehouse_id.company_id', '=', env.user.company_id.id)], limit=1)
+
+lines = []
+for rec in recs:
+    lines.append((0, 0, {'product_id': rec.product_id.id, 'product_uom_id': rec.product_uom.id, 'product_qty': rec.product_qty,  'name': rec.name, 'price_unit': rec.price_unit}))
+
+requisition = env['purchase.requisition'].create({
+    'line_ids': lines,
+    'company_id': env.user.company_id.id,
+    # permitimos varias a la vez por defecto, total controlamos cantidades por afuera.
+    'multiple_rfq_per_supplier': True,
+    'picking_type_id': picking_type.id,
+})
+recs.write({'manual_requisition_id': requisition.id})
+        </field>
+    </record>
+
+    <record model="ir.values" id="ir_values_create_purchase_requisition">
+        <field name="model_id" ref="procurement.model_procurement_order" />
+        <field name="name">Crear Solicitud de Compra</field>
+        <field name="key2">client_action_multi</field>
+        <field name="value" eval="'ir.actions.server,' +str(ref('action_create_purchase_requisition'))" />
+        <field name="key">action</field>
+        <field name="model">procurement.order</field>
+    </record>
+
+<!-- Unir solicitudes de compra -->
+    <record model="ir.actions.server" id="action_merge_purchase_requisition">
+        <field name="name">Unir Solicitudes de compra</field>
+        <field name="model_id" ref="procurement.model_procurement_order"/>
+        <field name="code">
+active_ids = context.get('active_ids')
+recs = env['purchase.requisition'].browse(active_ids)
+if recs.filtered(lambda x: x.state not in ('in_progress')):
+    raise Warning('Las solicitudes de compra deben estar en estado "Confirmado" para poder unirse')
+
+if not recs or recs == 1:
+    raise Warning('Debe selccionar más de una solicitud de compra')
+
+pr = recs[0]
+pr.write({'name': ','.join(recs.mapped('name'))})
+(recs - pr).mapped('line_ids').write({'requisition_id': pr.id})
+(recs - pr).mapped('manual_procurement_ids').write({'manual_requisition_id': pr.id})
+(recs - pr).mapped('purchase_ids').write({'requisition_id': pr.id})
+(recs - pr).unlink()
+        </field>
+    </record>
+
+    <record model="ir.values" id="ir_values_merge_purchase_requisition">
+        <field name="model_id" ref="purchase_requisition.model_purchase_requisition" />
+        <field name="name">Unir Solicitudes de Compra Purchase Requisition</field>
+        <field name="key2">client_action_multi</field>
+        <field name="value" eval="'ir.actions.server,' +str(ref('action_merge_purchase_requisition'))" />
+        <field name="key">action</field>
+        <field name="model">purchase.requisition</field>
+    </record>
+
+</odoo>

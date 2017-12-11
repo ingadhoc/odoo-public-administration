@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="procurement_form_view" model="ir.ui.view">
+        <field name="name">procurement.order.form</field>
+        <field name="model">procurement.order</field>
+        <!-- <field name="inherit_id" ref="procurement.procurement_form_view"/> -->
+        <field name="inherit_id" ref="stock.view_procurement_form_stock_inherit"/>
+        <field name="arch" type="xml">
+            <group>
+                <group>
+                    <field name="partner_id"/>
+                    <field name="procurement_request_id"/>
+                    <field name="manual_requisition_id"/>
+                </group>
+            </group>
+            <xpath expr="//group//group[2]" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </xpath>
+            <xpath expr="//group[@name='scheduling']" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </xpath>
+            <button name="do_view_procurements" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </button>
+            <xpath expr="//page[2]" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_procurement_filter" model="ir.ui.view">
+        <field name="name">procurement.order.filter</field>
+        <field name="model">procurement.order</field>
+        <field name="inherit_id" ref="procurement.view_procurement_filter"/>
+        <field name="arch" type="xml">
+            <filter name="exceptions" position="before">
+                <filter string="Pending" name="pending" domain="[('state', 'not in', ['done', 'cancel'])]"/>
+                <separator/>
+            </filter>
+            <field name="product_id" position="after">
+                <field name="procurement_request_id"/>
+                <field name="manual_requisition_id"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="procurement_tree_view" model="ir.ui.view">
+        <field name="name">procurement.order.tree</field>
+        <field name="model">procurement.order</field>
+        <!-- <field name="inherit_id" ref="procurement.procurement_tree_view"/> -->
+        <field name="inherit_id" ref="stock.view_procurement_tree_stock_inherit"/>
+        <field name="arch" type="xml">
+
+            <!-- para no confunidr con fechas planeadas la sacamos y usamos de creacion -->
+            <field name="date_planned" position="after">
+                <field name="procurement_request_id"/>
+                <field name="create_date" widget="date"/>
+            </field>
+            <field name="date_planned" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+            <field name="product_qty" position="after">
+                <field name="price_unit"/>
+            </field>
+
+            <tree>
+                <field name="manual_requisition_id"/>
+            </tree>
+            <field name="origin" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+            <field name="location_id" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+            <field name="product_uom" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+            <field name="product_id" position="after">
+                <field name="name"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,22 @@
+<odoo>
+
+    <record id="sequence_proc_group" model="ir.sequence">
+        <field name="name">Procurement Group Sipreco</field>
+        <field name="code">procurement.group</field>
+        <field name="prefix">PG/</field>
+        <field name="padding">6</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+        <field name="company_id" ref="public_budget.company_sipreco"/>
+    </record>
+
+    <!-- Sequences for purchase.order.requisition --> 
+    <record id="seq_purchase_requisition" model="ir.sequence">
+        <field name="name">Purchase Requisition Order</field>
+        <field name="code">purchase.order.requisition</field>
+        <field name="prefix">TE</field>
+        <field name="padding">5</field>
+        <field name="company_id" ref="public_budget.company_sipreco"/>
+    </record>
+
+</odoo>

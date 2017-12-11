@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- mostramos fecha en vez de fecha planeada para no confundir con eso -->
+    <!-- limpiamos vistas, menos es mas -->
+    <record id="stock.stock_picking_type_action" model="ir.actions.act_window">
+        <field name="domain">[('user_ids', '=', uid)]</field>
+    </record>
+
+    <record id="vpicktree" model="ir.ui.view">
+        <field name="name">stock.picking.tree</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree"/>
+        <field name="arch" type="xml">
+
+            <!-- para dejarlo mas simple desactivamos create -->
+            <tree position="attributes">
+                <attribute name="create">false</attribute>
+            </tree>
+
+            <field name="min_date" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+
+            <field name="origin" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+
+            <field name="backorder_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+
+            <field name="date" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </field>
+
+            <field name="location_dest_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+
+        </field>
+    </record>
+
+    <record id="view_stock_picking_form" model="ir.ui.view">
+        <field name="name">stock.picking.supply_requirement.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+
+            <!-- para dejarlo mas simple desactivamos create -->
+            <form position="attributes">
+                <attribute name="create">false</attribute>
+            </form>
+
+            <field name="origin" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+
+            <field name="location_id" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+            <field name="location_dest_id" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+            <field name="min_date" position="after">
+                <field name="date"/>
+            </field>
+
+            <field name="min_date" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+
+            <page name="extra" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </page>
+
+        </field>
+    </record>
+
+</odoo>

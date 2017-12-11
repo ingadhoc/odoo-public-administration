@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="purchase_requisition.menu_purchase_requisition_pro_mgt" model="ir.ui.menu">
+        <!-- Solicitudes de Compra -->
+        <field name="name">Purchase Requisitions</field>
+    </record>
+
+    <!-- no filtrar por usuario -->
+    <record model="ir.actions.act_window" id="purchase_requisition.action_purchase_requisition">
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.view" id="view_purchase_requisition_form">
+        <field name="name">purchase.requisition.form</field>
+        <field name="model">purchase.requisition</field>
+        <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_form"/>
+        <field name="arch" type="xml">
+            <form>
+                <field name="id"/>
+            </form>
+
+            <button name="cancel_requisition" position="attributes">
+                <attribute name="groups">sipreco_purchase.group_approve_purhcase_req</attribute>
+                <attribute name="confirm">ATENCIÓN: Se van la solicitud de compra y todos los requerimientos asociados. Esto no puede deshacerse. Seguro desea continuar?</attribute>
+                <attribute name="string">Cancel</attribute>
+            </button>
+            
+            <button name="sent_suppliers" position="attributes">
+                <attribute name="groups">sipreco_purchase.group_approve_purhcase_req</attribute>
+                <attribute name="string">Confirm</attribute>
+            </button>
+
+            <!-- como al cancelar se cancelan los request, no dejamos re-abrir ya que es engañoso, lo dejamos son para nosotros -->
+            <button name="tender_reset" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </button>
+
+            <!-- al final no lo agregamos porque hay workflow vinculado y la complica -->
+            <!-- agregamos este boton para nosotros para poder re abrir si se confunden, solo para nosotros ya que podrian haber confirmado algun presupuesto. -->
+            <!-- <button name="open_bid" position="after">
+                <button name="back_to_confirm" states="open" string="Back To Confirm" type="object" groups="base.group_no_one"/>
+            </button> -->
+
+            <!-- es cerrar proceso de licitación y pasar a elegir -->
+            <button name="open_bid" position="attributes">
+                <attribute name="confirm">ATENCIÓN: Se va a proceder a la selección de las ordenes de compra. No se podrán generar nuevas ordenes de compra. Esto no puede deshacerse. Seguro desea continuar?</attribute>
+            </button>
+
+            <!-- <button name="generate_po"/>  -->
+
+            <div name="button_box">
+                <button class="oe_stat_button" name="%(procurement.procurement_action)d" string="Procurements" type="action" context="{'search_default_manual_requisition_id': id}" icon="fa-bars"/>
+                <!-- viejo cuando ibamos a los moves -->
+                <!-- <button class="oe_stat_button" name="%(stock.action_move_form2)d" string="Supply Requirements" type="action" context="{'search_default_requisition_id': id}" icon="fa-bars"/> -->
+                <button class="oe_stat_button" name="%(public_budget.action_public_budget_transaction_transactions)d" string="Transactions" type="action" groups="public_budget.group_portal_transaction,public_budget.group_secretary_director,account.group_account_user,purchase.group_purchase_user" context="{'search_default_expedient_id': expedient_id}" icon="fa-bars"/>
+            </div>
+
+            <field name="product_id" position="after">
+                <field name="name"/>
+            </field>
+
+            <field name="product_qty" position="after">
+                <field name="price_unit"/>
+            </field>
+
+        <!-- limpiamos vista -->
+        
+            <field name="multiple_rfq_per_supplier" position="after">
+                <field name="type_id"/>
+                <field name="expedient_id"/>
+            </field>
+
+            <field name="exclusive" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+            <field name="multiple_rfq_per_supplier" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+            <field name="picking_type_id" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+            <field name="ordering_date" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+            <field name="date_end" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+            <field name="schedule_date" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+            <field name="dest_address_id" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+        </field>
+    </record>
+
+</odoo>

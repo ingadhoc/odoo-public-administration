@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.module.category" id="base.module_category_purchase_management">
+        <field name="name">Compras y Abastecimientos</field>
+    </record>
+    
+    <record id="group_approve_purhcase_req" model="res.groups">
+        <field name="name">Aprobar Solicitudes de Compra</field>
+        <field name="category_id" ref="base.module_category_usability"/>
+        <!-- o debería ser base.module_category_extra?-->
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        <field name="implied_ids" eval="[(4, ref('stock.group_stock_user'))]"/>
+    </record>
+    
+    <record id="group_requester" model="res.groups">
+        <field name="name">Requirente</field>
+        <field name="category_id" ref="base.module_category_purchase_management"/>
+    </record>
+
+    <!-- usamos grupo existente de inventarios / user  para solicitante-->
+    <!-- <record id="group_applicant" model="res.groups"> -->
+    <record id="stock.group_stock_user" model="res.groups">
+        <field name="name">Solictante</field>
+        <field name="implied_ids" eval="[(4, ref('group_requester')), (4, ref('base.group_user'))]"/>
+        <field name="category_id" ref="base.module_category_purchase_management"/>
+    </record>
+
+    <!-- <record id="group_purchaser" model="res.groups"> -->
+    <!-- usamos grupo existente de compras / user -->
+    <record id="purchase.group_purchase_user" model="res.groups">
+        <field name="name">Purchaser</field>
+        <!-- <field name="implied_ids" eval="[(4, ref('group_applicant'))]"/> -->
+        <field name="implied_ids" eval="[(4, ref('stock.group_stock_user'))]"/>
+        <field name="category_id" ref="base.module_category_purchase_management"/>
+    </record>
+
+    <!-- damos permiso a solicitante para compras -->
+    <record model="ir.ui.menu" id="base.menu_purchase_root">
+        <field name="groups_id" eval="[(4, ref('stock.group_stock_user'))]"/>
+    </record>
+
+    <!-- ocultamos menu de reglas de reabastecimeinto (Solo para warehosue manager) -->
+    <record id="stock.menu_reordering_rules_config" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4, ref('stock.group_stock_manager'))]"/>
+    </record>
+
+    <!-- menu reportes de compra -->
+    <record id="base.purchase_report" model="ir.ui.menu">
+        <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
+    </record>
+
+    <!-- menu presupuestos de compra -->
+    <record id="purchase.menu_purchase_rfq" model="ir.ui.menu">
+        <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
+    </record>
+
+    <!-- menu pedidos de compra -->
+    <record id="purchase.menu_purchase_form_action" model="ir.ui.menu">
+        <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
+    </record>
+
+    <!-- menu configuración de compra -->
+    <record id="purchase.menu_purchase_config" model="ir.ui.menu">
+        <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
+    </record>
+
+    <!-- menu control en compras -->
+    <record id="purchase.menu_purchase_control" model="ir.ui.menu">
+        <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
+    </record>
+
+</odoo>
