@@ -99,6 +99,11 @@
                 <attribute name="groups">base.group_no_one</attribute>
             </field>
 
+
+            <xpath expr="//notebook//page[1]//separator[2]" position="attributes">
+                <attribute name="string">Motivacion de la solicitud</attribute>
+            </xpath>
+
         </field>
     </record>
 
