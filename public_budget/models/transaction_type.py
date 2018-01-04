@@ -23,7 +23,7 @@ class TransactionType(models.Model):
         'account.account',
         string='Advance Account',
         domain="[('company_id', '=', company_id), "
-        "('type', '=', 'liquidity'), ('deprecated', '=', False)]",
+        "('internal_type', '=', 'liquidity'), ('deprecated', '=', False)]",
         help='This account will be used on advance payments. Must be a payable'
         ' account.',
     )
