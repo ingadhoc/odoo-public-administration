@@ -315,5 +315,7 @@ class PublicBudgetExpedient(models.Model):
     @api.model
     def create(self, vals):
         vals['number'] = self.env[
-            'ir.sequence'].next_by_code('public_budget.expedient') or '/'
+            'ir.sequence'].with_context(
+                ir_sequence_date=vals.get('issue_date')).next_by_code(
+                'public_budget.expedient') or '/'
         return super(PublicBudgetExpedient, self).create(vals)

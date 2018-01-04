@@ -172,5 +172,7 @@ class Remit(models.Model):
     def create(self, vals):
         # con sudo para usuarios portal
         vals['number'] = self.sudo().env[
-            'ir.sequence'].next_by_code('public_budget.remit') or '/'
+            'ir.sequence'].with_context(
+                ir_sequence_date=vals.get('date')).next_by_code(
+                    'public_budget.remit') or '/'
         return super(Remit, self).create(vals)
