@@ -343,7 +343,7 @@ class AccountPaymentGroup(models.Model):
                 lambda x: x.state != 'cancel').mapped('to_pay_move_line_ids')
             domain.extend([
                 ('invoice_id.transaction_id', '=', self.transaction_id.id),
-                ('id', '!=', already_paying.ids)])
+                ('id', 'not in', already_paying.ids)])
         return domain
 
     # modificamos estas funciones para que si esta en borrador no setee ningun
