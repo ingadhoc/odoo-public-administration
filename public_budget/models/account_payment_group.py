@@ -280,6 +280,10 @@ class AccountPaymentGroup(models.Model):
         self.write({'state': 'signed'})
 
     @api.multi
+    def back_to_confirmed(self):
+        self.write({'state': 'confirmed'})
+
+    @api.multi
     # dummy depends to compute values on create
     @api.depends('transaction_id')
     def get_user_locations(self):

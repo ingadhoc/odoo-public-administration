@@ -162,9 +162,10 @@
             </button>
 
             <!-- Add signe buttons -->
-            <button name="post" position="before">
+            <button name="post" position="after">
                 <button name="to_signature_process" class="oe_highlight" string="To Signature Process" type="object" groups="public_budget.group_habilitacion_usuario" states="confirmed"/>
                 <button name="to_signed" type="object" class="oe_highlight" string="Signed" groups="public_budget.group_habilitacion_director" states="signature_process"/>
+                <button name="back_to_confirmed" type="object" string="Volver a Confirmado" groups="public_budget.group_habilitacion_usuario" states="signature_process,signed"/>
             </button>
 
             <!-- cancel button only to account user -->
