@@ -117,3 +117,25 @@ class AccountPayment(models.Model):
             # 'res_id': self.id,
             'context': context,
         }
+
+    @api.multi
+    @api.onchange('check_number')
+    @api.constrains('check_number')
+    def unique_check_number(self):
+        """
+        Lo agregamos acá y no en el módulo por defecto de cheques ya que
+        solo es critico por defecto que tiene varios estados intermedios antes
+        de postear. De está manera lo implementamos de manera más sencilla y
+        menos crítica a otros clientes
+        """
+        if (
+                (self.search([
+                    ('check_number', '=', self.check_number),
+                    ('journal_id', '=', self.journal_id.id)]) - self) or
+                self.env['account.check'].search([
+                    ('number', '=', self.check_number),
+                    ('journal_id', '=', self.journal_id.id),
+                ])):
+            raise ValidationError(_(
+                'El número de cheque %s ya se ha utilizado') % (
+                self.check_number))
