@@ -337,8 +337,13 @@ class AccountPaymentGroup(models.Model):
         domain = super(
             AccountPaymentGroup, self)._get_to_pay_move_lines_domain()
         if self.transaction_id:
-            domain.append(
-                ('invoice_id.transaction_id', '=', self.transaction_id.id))
+            # con esto validamos que no se haya mandado a pagar en otra
+            # orden de pago (si dejamos si está cancelada)
+            already_paying = self.transaction_id.payment_group_ids.filtered(
+                lambda x: x.state != 'cancel').mapped('to_pay_move_line_ids')
+            domain.extend([
+                ('invoice_id.transaction_id', '=', self.transaction_id.id),
+                ('id', '!=', already_paying.ids)])
         return domain
 
     # modificamos estas funciones para que si esta en borrador no setee ningun
