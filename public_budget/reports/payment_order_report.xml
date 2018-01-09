@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    
+<data noupdate="1">
+
     <record id="action_aeroo_report_payment" model="ir.actions.report.xml">
         <field name="name">Orden de Pago</field>
         <field name="type">ir.actions.report.xml</field>
@@ -29,4 +30,5 @@
         <field eval="True" name="replace"/>
     </ir_set>
 
+</data>
 </odoo>

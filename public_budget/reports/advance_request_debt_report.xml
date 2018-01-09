@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data>
+    <data noupdate="1">
 
 <!-- Printed Invoice -->
 <record id="action_aeroo_advance_request_debt_report" model="ir.actions.report.xml">
