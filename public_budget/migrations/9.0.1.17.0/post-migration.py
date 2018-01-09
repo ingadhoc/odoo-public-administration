@@ -11,5 +11,6 @@ def migrate(env, version):
 
     cr.execute("""
         UPDATE ir_model_data set noupdate=True
-        WHERE name = 'action_aeroo_report_expedient' and module = 'public_budget'
+        WHERE name = 'action_aeroo_report_expedient' and
+            module = 'public_budget'
     """)
