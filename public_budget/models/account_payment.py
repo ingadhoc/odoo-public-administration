@@ -128,7 +128,7 @@ class AccountPayment(models.Model):
         de postear. De está manera lo implementamos de manera más sencilla y
         menos crítica a otros clientes
         """
-        if (
+        if (self.check_type and
                 (self.search([
                     ('check_number', '=', self.check_number),
                     ('journal_id', '=', self.journal_id.id)]) - self) or

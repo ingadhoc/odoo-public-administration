@@ -7,6 +7,10 @@ from openupgradelib import openupgrade
 
 @openupgrade.migrate(use_env=True)
 def migrate(env, version):
+    """
+    NOTA en realidad esto debería haber sido en un pre-upgrade para que
+    odoo no los actualice en esta misma actualización
+    """
     cr = env.cr
 
     cr.execute("""
