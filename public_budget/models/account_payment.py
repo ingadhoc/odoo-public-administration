@@ -126,9 +126,11 @@ class AccountPayment(models.Model):
         Lo agregamos acá y no en el módulo por defecto de cheques ya que
         solo es critico por defecto que tiene varios estados intermedios antes
         de postear. De está manera lo implementamos de manera más sencilla y
-        menos crítica a otros clientes
+        menos crítica a otros clientes.
+        Solo chequeamos si hay check_number (para el caso donde se numera
+        después)
         """
-        if (self.check_type and
+        if (self.check_type and self.check_number and
                 (self.search([
                     ('check_number', '=', self.check_number),
                     ('journal_id', '=', self.journal_id.id)]) - self) or
