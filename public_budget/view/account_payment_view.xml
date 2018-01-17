@@ -14,7 +14,9 @@
 
             <!-- hacemos invisible la fecha de pago para no confundir, viene seteada desde el payment group y en sipreco no interesa permitir distintas fechas para un pago -->
             <field name="payment_date" position="attributes">
-                <attribute name="invisible">1</attribute>
+                <!-- <attribute name="invisible">1</attribute> -->
+                <!-- al final lo hacemos invisible así porque en transferencias lo queremos visible -->
+                <attribute name="attrs">{'readonly': [('state', '!=', 'draft')], 'invisible': [('payment_type', '!=', 'transfer')], 'required': [('payment_type', '=', 'transfer')]}</attribute>
             </field>
 
         </field>
@@ -48,7 +50,9 @@
                 <attribute name="invisible">1</attribute>
             </field>
             <field name="payment_date" position="attributes">
-                <attribute name="invisible">0</attribute>
+                <!-- <attribute name="invisible">0</attribute> -->
+                <!-- lo hacemos visible para cambio de cheques -->
+                <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
                 <attribute name="required">1</attribute>
             </field>
             <button position="after">

@@ -22,7 +22,7 @@
             id="menu_configuration"
             sequence="100"
             parent="menu_budget_main"
-            groups="base.group_system"
+            groups="base.group_system,account.group_account_manager"
             />
 
         <menuitem
