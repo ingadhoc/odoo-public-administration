@@ -197,6 +197,18 @@ class AccountPaymentGroup(models.Model):
                 )
             if not rec.confirmation_date:
                 rec.confirmation_date = fields.Date.today()
+            # si bien este control lo podría hacer el mimso invoice cuando
+            # se calcula el to_pay_amount (ya que se estaría mandando a pagar)
+            # más de lo permitodo, en realidad el método de mandado a pagar,
+            # si la factura está paga, considera el monto de factura para
+            # por temas de performance y para ser más robusto por si se
+            # pierde el link de to pay lines del pago
+            already_paying = self.transaction_id.payment_group_ids.filtered(
+                lambda x: x.state not in ['cancel', 'draft'] and x != self
+                ).mapped('to_pay_move_line_ids')
+            if rec.to_pay_move_line_ids & already_paying:
+                raise ValidationError(_(
+                    'No puede mandar a pagar líneas que ya se mandaron a pagar'))
         return super(AccountPaymentGroup, self).confirm()
 
     @api.multi
