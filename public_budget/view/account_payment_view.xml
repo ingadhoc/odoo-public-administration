@@ -71,7 +71,7 @@
         <field name="arch" type="xml">
             <tree>
                 <button name="print_checks" icon="fa-print" help="Print check" type="object" attrs="{'invisible': ['|', ('payment_method_code', '!=', 'issue_check')]}"/>
-                <button name="change_check" icon="fa-undo" type="object" attrs="{'invisible': ['|', ('payment_method_code', '!=', 'issue_check')]}"/>
+                <button name="change_check" icon="fa-undo" type="object" attrs="{'invisible': ['|', ('payment_method_code', '!=', 'issue_check')]}" confirm="Seguro que desea cancelar/cambiar el cheque?"/>
             </tree>
 
             <!-- reemplazmos campo name por orden de pago -->
@@ -92,7 +92,7 @@
         <field name="arch" type="xml"> 
             <tree>
                 <button name="print_checks" icon="fa-print " help="Print check" type="object" attrs="{'invisible': ['|', ('payment_method_code', '!=', 'issue_check')]}"/>
-                <button name="change_check" icon="fa-undo" type="object" attrs="{'invisible': ['|', ('payment_method_code', '!=', 'issue_check')]}"/>
+                <button name="change_check" icon="fa-undo" type="object" attrs="{'invisible': ['|', ('payment_method_code', '!=', 'issue_check')]}" confirm="Seguro que desea cancelar/cambiar el cheque?"/>
             </tree>
         </field>
     </record>   

@@ -86,7 +86,24 @@ class AccountPayment(models.Model):
     def change_check(self):
         self.ensure_one()
         # context = self._context.copy()
-        if self.check_id.state != 'handed':
+        if self.state == 'draft':
+            check = self.create_check(
+                'issue_check', 'cancel', self.check_bank_id)
+            self.payment_group_id.message_post(
+                body='Se anuló el cheque %s' % check.name)
+            # por ahora borramos
+            self.unlink()
+            # borramos numero de cheque y link a cheques que se genero en paso
+            # anterio
+            # self.write({
+            #     'check_number': False,
+            #     'check_name': False,
+            #     'check_ids': [(3, check.id, False)]})
+            return {
+                'type': 'ir.actions.client',
+                'tag': 'reload',
+            }
+        elif self.check_id.state != 'handed':
             raise ValidationError(_(
                 "Can't change check!. Check not found or check not in handed"
                 " state"))
