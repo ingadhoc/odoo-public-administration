@@ -67,13 +67,13 @@
             <field name="implied_ids" eval="[(4,ref('group_habilitacion_usuario'))]"/>
         </record>
     <!-- menus -->
-        <!-- transferencia para habi. director -->
+        <!-- transferencia para habi. usuario -->
         <record id="account_payment_group.menu_action_account_payments_transfer" model="ir.ui.menu">
-            <field name="groups_id" eval="[(4, ref('public_budget.group_habilitacion_director'))]"/>
+            <field name="groups_id" eval="[(4, ref('public_budget.group_habilitacion_usuario'))]"/>
         </record>
-        <!-- asientos para habi. director -->
+        <!-- asientos para habi. usuario -->
         <record id="account.menu_action_move_journal_line_form" model="ir.ui.menu">
-            <field name="groups_id" eval="[(4, ref('public_budget.group_habilitacion_director'))]"/>
+            <field name="groups_id" eval="[(4, ref('public_budget.group_habilitacion_usuario'))]"/>
         </record>
         <record id="account.menu_finance" model="ir.ui.menu">
             <field name="groups_id" eval="[(4, ref('group_secretary_usuario')), (4, ref('group_habilitacion_usuario'))]"/>
@@ -92,18 +92,18 @@
             <field name="groups_id" eval="[(4, ref('group_habilitacion_director'))]"/>
         </record> -->
 
-        <!-- dashboard contable solo para contaduria (y agregamos habilitaciones para poder hacer conciliaciones bancarias)-->
+        <!-- dashboard contable solo para contaduria (y agregamos habilitaciones para poder hacer conciliaciones bancarias y emitir cheques)-->
         <record id="account.menu_board_journal_1" model="ir.ui.menu">
-            <field name="groups_id" eval="[(4, ref('account.group_account_user')), (4, ref('public_budget.group_habilitacion_director'))]"/>
+            <field name="groups_id" eval="[(4, ref('account.group_account_user')), (4, ref('public_budget.group_habilitacion_usuario'))]"/>
         </record>
 
         <!-- agregamos secretaria y habilitaciones para que puedan ver pagos -->
         <record id="account_payment_group.menu_action_account_payments_group_payable" model="ir.ui.menu">
             <field name="groups_id" eval="[(4, ref('group_secretary_usuario')), (4, ref('group_habilitacion_usuario'))]"/>
         </record>
-        <!-- share menu asesor (chart account, entries, etc) with hab manager-->
+        <!-- share menu asesor (chart account, entries, etc) with hab user-->
         <record id="account.menu_finance_entries" model="ir.ui.menu">
-            <field name="groups_id" eval="[(4, ref('group_habilitacion_director'))]"/>
+            <field name="groups_id" eval="[(4, ref('group_habilitacion_usuario'))]"/>
         </record>
     </data>
 </openerp>
