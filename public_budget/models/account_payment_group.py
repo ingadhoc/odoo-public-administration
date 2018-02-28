@@ -171,8 +171,17 @@ class AccountPaymentGroup(models.Model):
             if not rec.payment_date:
                 rec.payment_date = fields.Date.today()
             # idem para los payments
-            rec.payment_ids.filtered(lambda x: not x.payment_date).write(
-                {'payment_date': rec.payment_date})
+            # como ellos no ven el campo payment date tiene mas sentido
+            # pisarlo (por ejemplo por si validaron y luego cancelaron para
+            # corregir fecha o si setearon fecha antes de crear las lineas
+            # en cuyo caso se completa con esa fecha y luego la pudieron
+            # cambiar) TODO faltaria contemplar el caso de cheques cambiados
+            # porque por ahí sobre-escribimos una fecha (si se canceló el pago)
+            # y se re-abrió (igualmente es dificil porque no se pueden cancelar
+            # así nomas pagos con cheques cambiados
+            rec.payment_ids.write({'payment_date': rec.payment_date})
+            # rec.payment_ids.filtered(lambda x: not x.payment_date).write(
+            #     {'payment_date': rec.payment_date})
             if (
                     rec.expedient_id and rec.expedient_id.current_location_id
                     not in rec.user_location_ids):
@@ -403,6 +412,9 @@ class AccountPaymentGroup(models.Model):
                         rec.id, rec.confirmation_date))
             if not rec.payment_date:
                 continue
+            if rec.payment_date > fields.Date.context_today(rec):
+                raise Warning(_(
+                    'No puede usar una fecha de pago superior a hoy'))
             if rec.payment_date < rec.confirmation_date:
                 raise Warning(_(
                     'La fecha de validacion del pago no puede ser menor a la '
