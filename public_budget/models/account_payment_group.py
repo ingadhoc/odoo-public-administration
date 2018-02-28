@@ -215,7 +215,8 @@ class AccountPaymentGroup(models.Model):
                 ).mapped('to_pay_move_line_ids')
             if rec.to_pay_move_line_ids & already_paying:
                 raise ValidationError(_(
-                    'No puede mandar a pagar líneas que ya se mandaron a pagar'))
+                    'No puede mandar a pagar líneas que ya se mandaron a '
+                    'pagar'))
         return super(AccountPaymentGroup, self).confirm()
 
     @api.multi

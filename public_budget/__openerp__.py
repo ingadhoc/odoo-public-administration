@@ -62,6 +62,7 @@
         'reports/check_report.xml',
         'reports/payment_order_list.xml',
         'reports/public_budget_budget_report_view_3.xml',
+        'view/account_move_view.xml',
         'view/inventory_rule_view.xml',
         'view/account_invoice_view.xml',
         'view/advance_request_type_view.xml',
