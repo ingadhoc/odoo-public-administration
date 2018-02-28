@@ -115,6 +115,13 @@ class AccountPaymentGroup(models.Model):
     payment_date = fields.Date(
         required=False,
         default=False,
+        # Lo dejamos editable salvo si posted on canceled
+        states={
+            'draft': [('readonly', False)],
+            'confirmed': [('readonly', False)],
+            'signature_process': [('readonly', False)],
+            'signed': [('readonly', False)],
+        },
     )
     # TODO implementar
     # paid_withholding_ids = fields.Many2many(

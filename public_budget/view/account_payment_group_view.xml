@@ -113,10 +113,11 @@
                 <field name="confirmation_date" readonly="1"/>
             </field>
 
+            <!-- al final lo dejamos editable -->
             <!-- lo hacemos editable con tec features -->
-            <field name="payment_date" position="attributes">
+            <!-- <field name="payment_date" position="attributes">
                 <attribute name="readonly">1</attribute>
-            </field>
+            </field> -->
 
             <field name="partner_id" position="after">
                 <field name="transaction_id" attrs="{'invisible': [('transaction_id', '=', False)]}"/>
@@ -188,9 +189,9 @@
         <!-- <field name="groups_id" eval="[(4, ref('base.group_no_one'))]"/> -->
         <!-- no pude hacer que ande como esperaba con el grupo tc features, aún sin modo desarrollador se lo hacía visible, se ve que se comporta distinto que en menus -->
         <field name="arch" type="xml">
-            <field name="payment_date" position="attributes">
+            <!-- <field name="payment_date" position="attributes">
                 <attribute name="readonly">0</attribute>
-            </field>
+            </field> -->
             <field name="confirmation_date" position="attributes">
                 <attribute name="readonly">0</attribute>
             </field>
