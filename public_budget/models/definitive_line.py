@@ -78,10 +78,8 @@ class DefinitiveLine(models.Model):
         auto_join=True,
     )
     state = fields.Selection(
-        selection=[('draft', _('Draft')), ('invoiced', _('Invoiced'))],
+        selection=[('draft', 'Draft'), ('invoiced', 'Invoiced')],
         string='State',
-        states={'draft': [('readonly', False)]},
-        default='draft',
         compute='_get_state',
         store=True,
     )
