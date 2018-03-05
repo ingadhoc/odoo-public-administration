@@ -80,6 +80,8 @@ class DefinitiveLine(models.Model):
     state = fields.Selection(
         selection=[('draft', 'Draft'), ('invoiced', 'Invoiced')],
         string='State',
+        # default necesario para que deje crear ni bien se genera la linea
+        default='draft',
         compute='_get_state',
         store=True,
     )
