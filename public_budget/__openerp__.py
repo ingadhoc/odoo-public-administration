@@ -2,7 +2,7 @@
 {
     'name': 'Public Budget',
     'license': 'AGPL-3',
-    'version': '9.0.1.21.0',
+    'version': '9.0.1.22.0',
     'author': 'ADHOC SA,Odoo Community Association (OCA)',
     'website': 'www.adhoc.com.ar',
     'category': 'Accounting & Finance',
@@ -62,6 +62,7 @@
         'reports/check_report.xml',
         'reports/payment_order_list.xml',
         'reports/public_budget_budget_report_view_3.xml',
+        'reports/budget_modification_report.xml',
         'view/account_move_view.xml',
         'view/inventory_rule_view.xml',
         'view/account_invoice_view.xml',
