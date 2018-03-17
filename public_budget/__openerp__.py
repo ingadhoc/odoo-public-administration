@@ -102,6 +102,7 @@
         'view/expedient_view.xml',
         'view/public_budget_actions.xml',
         'view/account_checkbook_view.xml',
+        'view/account_journal_view.xml',
         'data/sequence.xml',
         'data/expedient_category.xml',
         'data/expedient_founder.xml',
