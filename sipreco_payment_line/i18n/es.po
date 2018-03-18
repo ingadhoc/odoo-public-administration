@@ -3,16 +3,16 @@
 # * sipreco_payment_line
 # 
 # Translators:
-# Juan José Scarafía <scarafia.juanjose@gmail.com>, 2017
-# Gonzalo Ruzafa <gr@ingadhoc.com>, 2017
-# Nicolas Mac Rouillon <nmr@ingadhoc.com>, 2017
+# Juan José Scarafía <scarafia.juanjose@gmail.com>, 2018
+# Nicolas Mac Rouillon <nmr@ingadhoc.com>, 2018
+# Gonzalo Ruzafa <gr@ingadhoc.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-14 16:53+0000\n"
-"PO-Revision-Date: 2017-11-14 16:53+0000\n"
-"Last-Translator: Nicolas Mac Rouillon <nmr@ingadhoc.com>, 2017\n"
+"POT-Creation-Date: 2018-03-17 20:59+0000\n"
+"PO-Revision-Date: 2018-03-17 20:59+0000\n"
+"Last-Translator: Gonzalo Ruzafa <gr@ingadhoc.com>, 2018\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -68,7 +68,7 @@ msgstr "Cuentas Bancarias"
 #. module: sipreco_payment_line
 #: model:ir.ui.view,arch_db:sipreco_payment_line.account_payment_line_import_view
 msgid "Cancel"
-msgstr "Cancelado"
+msgstr "Cancelar"
 
 #. module: sipreco_payment_line
 #: model:ir.model.fields,field_description:sipreco_payment_line.field_account_payment_group_cantidad
@@ -227,7 +227,7 @@ msgstr ""
 #. module: sipreco_payment_line
 #: model:ir.model.fields,field_description:sipreco_payment_line.field_account_payment_group_line_partner_id
 msgid "Partner"
-msgstr "Cliente/Proveedor"
+msgstr "Empresa"
 
 #. module: sipreco_payment_line
 #: model:ir.model,name:sipreco_payment_line.model_account_payment_group
