@@ -4,7 +4,8 @@
     'website': 'www.adhoc.com.ar',
     'category': 'Accounting & Finance',
     'data': [
-        './views/account_journal_dashboard_view.xml',
+        'views/account_journal_dashboard_view.xml',
+        'views/account_move_view.xml',
     ],
     'demo': [
     ],
@@ -17,4 +18,5 @@
     'name': 'Public Budget integration with Tax settlement',
     'test': [],
     'version': '9.0.1.0.0',
+    'license': 'AGPL-3',
 }
