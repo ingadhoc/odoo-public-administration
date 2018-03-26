@@ -1,0 +1,12 @@
+<odoo>
+
+    <record id="account_journal_dashboard_kanban_view_inherited" model="ir.ui.view">
+        <field name="name">account.journal.dashboard.kanban.inherited</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account_tax_settlement.account_journal_dashboard_kanban_view_inherited"/>
+        <field name="arch" type="xml">
+            <button name="action_create_payment" position="replace"/>
+        </field>
+    </record>
+
+</odoo>
