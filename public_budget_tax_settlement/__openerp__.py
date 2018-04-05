@@ -6,6 +6,7 @@
     'data': [
         'views/account_journal_dashboard_view.xml',
         'views/account_move_view.xml',
+        'views/account_move_line_view.xml',
     ],
     'demo': [
     ],
@@ -17,6 +18,6 @@
     'auto_install': True,
     'name': 'Public Budget integration with Tax settlement',
     'test': [],
-    'version': '9.0.1.1.0',
+    'version': '9.0.1.2.0',
     'license': 'AGPL-3',
 }
