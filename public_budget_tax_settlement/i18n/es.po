@@ -1,0 +1,43 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* public_budget_tax_settlement
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-04-05 17:24+0000\n"
+"PO-Revision-Date: 2018-04-05 17:24+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: public_budget_tax_settlement
+#: model:ir.model,name:public_budget_tax_settlement.model_account_move
+msgid "Account Entry"
+msgstr "Entrada contable"
+
+#. module: public_budget_tax_settlement
+#: model:ir.model,name:public_budget_tax_settlement.model_account_move_line
+msgid "Journal Item"
+msgstr "Apunte contable"
+
+#. module: public_budget_tax_settlement
+#: model:ir.ui.view,arch_db:public_budget_tax_settlement.view_move_form
+msgid "Pay"
+msgstr "Pagar"
+
+#. module: public_budget_tax_settlement
+#: code:addons/public_budget_tax_settlement/models/account_move.py:15
+#, python-format
+msgid "Register Payment"
+msgstr "Register Payment"
+
+#. module: public_budget_tax_settlement
+#: model:ir.model.fields,field_description:public_budget_tax_settlement.field_account_move_line_payment_methods
+msgid "Payment Methods"
+msgstr "Métodos de pago"
+

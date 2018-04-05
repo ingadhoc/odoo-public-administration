@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+   
+    <record id="view_account_move_line_filter" model="ir.ui.view">
+        <field name="name">Journal Items</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_account_move_line_filter"/>
+        <field name="arch" type="xml">
+            <field name="tax_ids" position="after">
+                <field name="payment_methods"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_account_move_line_tree" model="ir.ui.view">
+        <field name="name">Journal Items Tree</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account_tax_settlement.view_account_move_line_tree"/>
+        <field name="arch" type="xml">
+            <field name="tax_line_id" position="after">
+                <field name="payment_methods"/>
+            </field>
+        </field>
+    </record>
+</odoo>
