@@ -89,8 +89,16 @@
                                         <field name="definitive_amount" class="oe_inline"/> / 
                                         <field name="definitive_balance" class="oe_inline"/>
                                     </div>
-                                    <field name="invoiced_amount"/>
-                                    <field name="to_pay_amount"/>
+                                    <label for="invoiced_amount"/>
+                                    <div>
+                                        <field name="invoiced_amount" class="oe_inline"/> / 
+                                        <field name="invoiced_balance" class="oe_inline"/>
+                                    </div>
+                                    <label for="to_pay_amount"/>
+                                    <div>
+                                        <field name="to_pay_amount" class="oe_inline"/> / 
+                                        <field name="to_pay_balance" class="oe_inline"/>
+                                    </div>
                                     <field name="paid_amount"/>
                                 </group>
                                 <group attrs="{'invisible':[('type_with_advance_payment','=',False)]}" name="advance_amounts">

@@ -143,9 +143,19 @@ class BudgetTransaction(models.Model):
         compute='_get_invoiced_amount',
         store=True,
     )
+    invoiced_balance = fields.Monetary(
+        string='Saldo Devengado',
+        compute='_get_invoiced_balance',
+        store=True,
+    )
     to_pay_amount = fields.Monetary(
         string='Monto A Pagar',
         compute='_get_to_pay_amount',
+        store=True,
+    )
+    to_pay_balance = fields.Monetary(
+        string='Saldo A Pagar',
+        compute='_get_to_pay_balance',
         store=True,
     )
     paid_amount = fields.Monetary(
@@ -428,6 +438,30 @@ class BudgetTransaction(models.Model):
                 'Getting definitive balance for transaction_id %s' % rec.id)
             rec.definitive_balance = (
                 rec.definitive_amount - rec.invoiced_amount)
+
+    @api.multi
+    @api.depends(
+        'to_pay_amount',
+        'invoiced_amount',
+    )
+    def _get_invoiced_balance(self):
+        for rec in self:
+            _logger.info(
+                'Getting definitive balance for transaction_id %s' % rec.id)
+            rec.invoiced_balance = (
+                rec.invoiced_amount - rec.to_pay_amount)
+
+    @api.multi
+    @api.depends(
+        'paid_amount',
+        'to_pay_amount',
+    )
+    def _get_to_pay_balance(self):
+        for rec in self:
+            _logger.info(
+                'Getting definitive balance for transaction_id %s' % rec.id)
+            rec.to_pay_balance = (
+                rec.to_pay_amount - rec.paid_amount)
 
     @api.multi
     @api.depends(
