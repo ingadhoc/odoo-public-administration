@@ -232,7 +232,7 @@ class PublicBudgetSubsidy(models.Model):
         payments = self.payment_group_ids + self.advance_payment_group_ids
         cargo_amount = sum(
             payments.filtered(
-                lambda x: x.state != 'cancel').mapped('payments_amount'))
+                lambda x: x.state == 'posted').mapped('payments_amount'))
         cargo_date = payments.search([
             ('id', 'in', payments.ids),
             ('payment_date', '!=', False),
