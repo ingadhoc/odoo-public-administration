@@ -16,6 +16,7 @@
         'report_aeroo',
         'account_statement_aeroo_report',
         'report_custom_filename',
+        'account_clean_cancelled_invoice_number',
         # estrictamente solo requerido por algunos campos en vista de partner
         'l10n_ar_account',
         # solo para el reporte de ordenes de pago que imprime el dato de la

@@ -57,5 +57,16 @@
             </field>
         </record>
 
+        <record id="invoice_supplier_form" model="ir.ui.view">
+            <field name="name">account.invoice.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account_clean_cancelled_invoice_number.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <button name="clean_internal_number" position="attributes">
+                    <attribute name="groups">account.group_account_user</attribute>
+                </button>
+            </field>
+        </record>
+
     </data>
 </openerp>
