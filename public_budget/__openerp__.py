@@ -2,7 +2,7 @@
 {
     'name': 'Public Budget',
     'license': 'AGPL-3',
-    'version': '9.0.1.23.0',
+    'version': '9.0.1.24.0',
     'author': 'ADHOC SA,Odoo Community Association (OCA)',
     'website': 'www.adhoc.com.ar',
     'category': 'Accounting & Finance',
@@ -16,6 +16,7 @@
         'report_aeroo',
         'account_statement_aeroo_report',
         'report_custom_filename',
+        'account_clean_cancelled_invoice_number',
         # estrictamente solo requerido por algunos campos en vista de partner
         'l10n_ar_account',
         # solo para el reporte de ordenes de pago que imprime el dato de la
