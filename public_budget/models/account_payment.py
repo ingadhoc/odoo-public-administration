@@ -43,6 +43,18 @@ class AccountPayment(models.Model):
             return super(
                 AccountPayment, self)._compute_destination_account_id()
 
+    def _get_liquidity_move_line_vals(self, amount):
+        """
+        Si es cambio de cheques recibimos clave en el contexto y hacemos
+        asiento con cuenta de cheques (si no tomaria la de banco)
+        """
+        vals = super(AccountPayment, self)._get_liquidity_move_line_vals(
+            amount)
+        if self._context.get('replaced_payment_id'):
+            vals['account_id'] = self.company_id._get_check_account(
+                'deferred').id
+        return vals
+
     @api.multi
     def confirm_check_change(self):
         self.ensure_one()
