@@ -27,13 +27,13 @@
         # solo requerido para establecer datos demo en cia y hacer que las ret
         # no sean obligatorias en borrador
         'l10n_ar_account_withholding',
+        # si no agrego esta dependencia y tengo la anterior, al actualizar
+        # account_payment_group no se termina actualizando public_budget y nos
+        # trae problemas al re escribir y hacer no obligatorio al payment_date
+        # forzando esta depedencia se arregla
+        'report_extended_payment_group',
         # usado por algunos reportes como el de cheques y retenciones
         'l10n_ar_aeroo_base',
-        # agregamos este porque se auto instala y termina instalando
-        # date range y entonces tenemos que agregar regla de portal de date
-        # range para que no de error. Si en un futuro evitamos que este modulo
-        # se auto instale en producción, entonces podemos sacarlo como dep
-        'l10n_ar_account_vat_ledger',
     ],
     'data': [
         'security/public_budget_group.xml',
