@@ -12,8 +12,9 @@ def migrate(env, version):
     cr.execute("""
         UPDATE ir_model_data set noupdate=True
         WHERE name in (
+            'action_aeroo_subsidy_resolution_report',
             'action_aeroo_subsidy_resolution_INSTIT',
             'action_aeroo_subsidy_resolution_ITRANS_report',
-            'action_aeroo_subsidy_resolution_COMUN_report'
+            'action_aeroo_subsidy_resolution_COMUN_report',
             ) and module = 'sipreco_subsidy_management'
     """)
