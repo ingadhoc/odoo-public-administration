@@ -26,9 +26,35 @@ class BudgetModificationDetail(models.Model):
             'default_type': 'normal', 'default_budget_assignment_allowed': 1},
         domain=[('budget_assignment_allowed', '=', True)]
     )
-    currency_id = fields.Many2one(
-        related='budget_modification_id.budget_id.currency_id',
+    budget_id = fields.Many2one(
+        related='budget_modification_id.budget_id',
         readonly=True,
+        store=True,
+    )
+    currency_id = fields.Many2one(
+        related='budget_id.currency_id',
+        readonly=True,
+    )
+    date = fields.Date(
+        'Budget Modification Date',
+        related='budget_modification_id.date',
+        readonly=True,
+        store=True
+    )
+    reference = fields.Char(
+        'Budget Modification Reference',
+        related='budget_modification_id.reference',
+        readonly=True,
+    )
+    name = fields.Char(
+        'Budget Modification Name',
+        related='budget_modification_id.name',
+        readonly=True,
+    )
+    type = fields.Selection(
+        related='budget_modification_id.type',
+        readonly=True,
+        store=True,
     )
 
     @api.multi

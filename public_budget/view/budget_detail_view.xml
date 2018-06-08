@@ -40,11 +40,12 @@
             <field name="name">public_budget.budget_detail.tree</field>
             <field name="model">public_budget.budget_detail</field>
             <field name="arch" type="xml">
-                <tree string="budget_detail"
-                    >
+                <tree string="budget_detail">
                     <field name="budget_position_id"/>
                     <field name="initial_amount" sum="Total"/>
                     <field name="currency_id" invisible="1"/>
+                    <field name="modifications" sum="Total"/>
+                    <field name="amount" sum="Total"/>
                 </tree>
             </field>
         </record>

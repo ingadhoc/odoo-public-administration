@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import models, fields, api
+from openerp import models, fields, api, _
 from openerp.exceptions import ValidationError
 import time
 import datetime
@@ -307,3 +307,22 @@ class Budget(models.Model):
                 }
                 rec.budget_prec_detail_ids.create(vals)
         self.write({'state': 'pre_closed'})
+
+    @api.multi
+    def action_to_open_modification(self):
+        self.ensure_one()
+        view_id = self.env['ir.model.data'].xmlid_to_res_id(
+            'public_budget.view_budget_modification_detail_tree_inherit')
+        view_search_id = self.env['ir.model.data'].xmlid_to_res_id(
+            'public_budget.view_public_budget_modification_detail_filter')
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _('Budget Modification Detail'),
+            'res_model': 'public_budget.budget_modification_detail',
+            'view_mode': 'tree',
+            'view_id': view_id,
+            'search_view_id': view_search_id,
+            'target': 'current',
+            'context': {'search_default_budget_id': self.id},
+
+        }
