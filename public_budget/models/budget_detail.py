@@ -35,10 +35,10 @@ class BudgetDetail(models.Model):
         readonly=True,
     )
     amount = fields.Monetary(
-        compute='_compute_amount'
+        compute='_compute_amount',
     )
     modifications = fields.Monetary(
-        compute='_compute_amount'
+        compute='_compute_amount',
     )
 
     _sql_constraints = [

@@ -22,7 +22,6 @@ class BudgetModificationDetail(models.Model):
         'public_budget.budget_position',
         string='Budget Position',
         required=True,
-        store=True,
         context={
             'default_type': 'normal', 'default_budget_assignment_allowed': 1},
         domain=[('budget_assignment_allowed', '=', True)]
