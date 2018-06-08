@@ -47,18 +47,13 @@ class BudgetDetail(models.Model):
 
     @api.multi
     def _compute_amount(self):
-        for rec in self.filtered('budget_id'):
-            modifications = 0.0
-            budget_modifications = rec.\
-                budget_id.budget_modification_ids.mapped(
+        for rec in self:
+            modifications = sum(
+                rec.budget_id.budget_modification_ids.mapped(
                     'budget_modification_detail_ids').filtered(
-                    lambda x: x.budget_position_id == rec.budget_position_id)
-            if budget_modifications:
-                modifications = sum([x.amount for x in budget_modifications])
-                amount = rec.initial_amount + modifications
-            else:
-                amount = rec.initial_amount
+                    lambda x: x.budget_position_id == rec.
+                    budget_position_id).mapped('amount'))
             rec.update({
-                'amount': amount,
+                'amount': rec.initial_amount + modifications,
                 'modifications': modifications,
             })
