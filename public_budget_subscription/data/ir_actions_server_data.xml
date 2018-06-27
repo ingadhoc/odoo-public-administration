@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.cron" id="purchase_contract.subscription_cron_for_invoice_supplier">
+           <field eval="0" name="active"/>
+        </record>
+
+        <record id="purchase_contract.purchase_account_analytic_cron_email_template" model="mail.template">
+                    <field name="name">Purchase Contract expiration reminder Budget</field>
+                    <field name="email_from">${(object.email or '')|safe}</field>
+                    <field name="subject">Purchase contract expiration reminder ${user.company_id.name}</field>
+                    <field name="email_to">${object.email|safe}</field>
+                    <field name="lang">${object.lang}</field>
+                    <field name="model_id" ref="base.model_res_users"/>
+                    <field name="auto_delete" eval="True"/>
+                    <field name="body_html"><![CDATA[
+        Hello ${object.name},
+
+        % macro account_table(values):
+        <table cellspacing="1" border="1" cellpadding="4">
+            <tr>
+                <th>Supplier</th>
+                <th>Code</th>
+                <th>Contract</th>
+                <th>Dates</th>
+                <th>Prepaid Units</th>
+                <th>Contact</th>
+                <th>Expedient</th>
+            </tr>
+            % for partner, accounts in values:
+                % for account in accounts:
+                <tr>
+                    <td>${partner.name}</td>
+                    <td>${account.code or ''}</td>
+                    <td><a href="${ctx.get('base_url')}/web#action=${ctx.get('action_id')}&id=${account.id}&view_type=form">${account.name}</a></td>
+                    <td>${account.date_start} to ${account.date and account.date or '???'}</td>
+                    <td>
+                    % if account.quantity_max != 0.0:
+                        ${account.remaining_hours}/${account.quantity_max} units
+                    % endif
+                    </td>
+                    <td>${account.partner_id.phone or ''}, ${account.partner_id.email or ''}</td>
+                    <td>${account.expedient_id.number or ''}</td>
+                </tr>
+                % endfor
+            % endfor
+        </table>
+        % endmacro
+
+        % if 'new' in ctx.get('data', {}):
+            <h2>The following subscription just expired: </h2>
+            ${account_table(ctx.get('data')['new'].iteritems())}
+        % endif
+
+        % if 'old' in ctx.get('data', {}):
+            <h2>The following expired subscription are still not processed: </h2>
+            ${account_table(ctx.get('data')['old'].iteritems())}
+        % endif
+
+        % if '30days' in ctx.get('data', {}):
+            <h2>The following subscription will expire in less than one month: </h2>
+            ${account_table(ctx.get('data')['30days'].iteritems())}
+        % endif
+
+        % if '60days' in ctx.get('data', {}):
+            <h2>The following subscription will expire in less than two month: </h2>
+            ${account_table(ctx.get('data')['60days'].iteritems())}
+        % endif
+
+        % if '90days' in ctx.get('data', {}):
+            <h2>The following subscription will expire in less than three month: </h2>
+            ${account_table(ctx.get('data')['90days'].iteritems())}
+        % endif
+
+        <p>
+            You can check all contracts to be renewed using the menu:
+        </p>
+        <ul>
+            <li>Purchase / Contracts / Contracts</li>
+        </ul>
+        <p>
+            Thanks,
+        </p>
+
+        <pre>
+        --
+        Odoo Automatic Email
+        </pre>
+
+                    ]]></field>
+                </record>
+
+
+    
+
+    </data>
+</odoo>
