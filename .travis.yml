@@ -43,7 +43,8 @@ addons:
 env:
   global:
   - VERSION="9.0" TESTS="0" LINT_CHECK="0" TRANSIFEX="0"
-  # - EXCLUDE='sipreco_project'
+  # TODO enable in 11.0
+  - EXCLUDE='public_budget_subscription'
   - TRANSIFEX_USER='jjscarafia'
   # exclude sipreco_project as it is only a dependencies module
   # to get secure, run 'travis encrypt TRANSIFEX_PASSWORD=[transifex_password] -r [github_repo]'
