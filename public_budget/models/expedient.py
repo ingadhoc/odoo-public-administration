@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api
-from openerp.exceptions import ValidationError
+from openerp.exceptions import ValidationError, UserError
 
 
 class PublicBudgetExpedient(models.Model):
@@ -219,6 +219,15 @@ class PublicBudgetExpedient(models.Model):
             if rec.pages > 10000:
                 raise ValidationError(
                     'No puede poner número de páginas mayor a 10.000')
+
+    @api.onchange('subsidy_recipient_doc')
+    def check_subsidy_recipient_doc(self):
+        expedients_with_dni = self.search(
+            [('subsidy_recipient_doc', '=', self.subsidy_recipient_doc)])
+        if len(expedients_with_dni) > 0:
+            raise UserError(
+                'El DNI ya existe en estos TA: \n * %s ' % ' \n * '.join(
+                    expedients_with_dni.mapped('number')))
 
     @api.multi
     def write(self, vals):
