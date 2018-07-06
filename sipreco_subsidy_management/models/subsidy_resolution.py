@@ -118,6 +118,8 @@ class PublicBudgetSubsidyResolutionLines(models.Model):
         'public_budget.expedient',
         string='Expedient',
         required=True,
+        domain="['|',('state', 'not in' , ['cancel', 'annulled'])"
+        ",('defeated' ,'!=', True)]"
     )
     partner_id = fields.Many2one(
         'res.partner',

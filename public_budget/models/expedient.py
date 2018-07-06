@@ -153,6 +153,9 @@ class PublicBudgetExpedient(models.Model):
     parliamentary_expedient = fields.Char(
         string='Expediente Parlamentario'
     )
+    defeated = fields.Boolean(
+        string='Defeated?',
+    )
 
     @api.multi
     def onchange(self, values, field_name, field_onchange):
