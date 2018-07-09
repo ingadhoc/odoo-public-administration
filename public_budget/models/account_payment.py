@@ -170,3 +170,11 @@ class AccountPayment(models.Model):
             raise ValidationError(_(
                 'El número de cheque %s ya se ha utilizado') % (
                 self.check_number))
+
+    @api.multi
+    def change_withholding(self):
+        """ Arrojamos este error para recordarnos que este metodo se implementa
+        en realidad en public_budget_tax_settlement porque necesitamos del
+        liquidador para marcar liquidada la devolución
+        """
+        raise ValidationError(_('No implementado todavía'))

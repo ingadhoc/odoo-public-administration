@@ -70,8 +70,11 @@
         <field name="inherit_id" ref="account.view_account_payment_tree"/>
         <field name="arch" type="xml">
             <tree>
-                <button name="print_checks" icon="fa-print" help="Print check" type="object" attrs="{'invisible': ['|', ('payment_method_code', '!=', 'issue_check')]}"/>
-                <button name="change_check" icon="fa-undo" type="object" attrs="{'invisible': ['|', ('payment_method_code', '!=', 'issue_check')]}" confirm="Seguro que desea cancelar/cambiar el cheque?"/>
+                <button name="print_checks" icon="fa-print" help="Print check" type="object" attrs="{'invisible': [('payment_method_code', '!=', 'issue_check')]}"/>
+                <!-- por ahora usamos metodo distinto para cambio de retenciones y de cheque, pero la idea sería implementar el mismo metodos -->
+                <button name="change_check" icon="fa-undo" type="object" attrs="{'invisible': [('payment_method_code', '!=', 'issue_check')]}" confirm="Seguro que desea cancelar/cambiar el cheque?"/>
+                <button name="change_withholding" icon="fa-undo" type="object" attrs="{'invisible': ['|', '|', ('payment_type', '!=', 'outbound'), ('state', '!=', 'posted'), ('payment_method_code', '!=', 'withholding')]}" confirm="Seguro que desea devolver esta retención?"/>
+                <field name="payment_type" invisible="1"/>
             </tree>
 
             <!-- reemplazmos campo name por orden de pago -->
@@ -92,9 +95,12 @@
         <field name="arch" type="xml"> 
             <tree>
                 <button name="print_checks" icon="fa-print " help="Print check" type="object" attrs="{'invisible': ['|', ('payment_method_code', '!=', 'issue_check')]}"/>
-                <button name="change_check" icon="fa-undo" type="object" attrs="{'invisible': ['|', ('payment_method_code', '!=', 'issue_check')]}" confirm="Seguro que desea cancelar/cambiar el cheque?"/>
+                <!-- por ahora usamos metodo distinto para cambio de retenciones y de cheque, pero la idea sería implementar el mismo metodos -->
+                <button name="change_check" icon="fa-undo" type="object" attrs="{'invisible': [('payment_method_code', '!=', 'issue_check')]}" confirm="Seguro que desea cancelar/cambiar el cheque?"/>
+                <button name="change_withholding" icon="fa-undo" type="object" attrs="{'invisible': ['|', '|', ('payment_type', '!=', 'outbound'), ('state', '!=', 'posted'), ('payment_method_code', '!=', 'withholding')]}" confirm="Seguro que desea devolver esta retención?"/>
+                <field name="payment_type" invisible="1"/>
             </tree>
         </field>
-    </record>   
+    </record>
 
 </odoo>
