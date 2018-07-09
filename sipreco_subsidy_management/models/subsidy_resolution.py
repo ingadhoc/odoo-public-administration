@@ -118,6 +118,8 @@ class PublicBudgetSubsidyResolutionLines(models.Model):
         'public_budget.expedient',
         string='Expedient',
         required=True,
+        domain="['|',('state', 'not in' , ['cancel', 'annulled'])"
+        ",('overdue' ,'!=', True)]"
     )
     partner_id = fields.Many2one(
         'res.partner',
@@ -144,3 +146,15 @@ class PublicBudgetSubsidyResolutionLines(models.Model):
         self.partner_id = self.expedient_id.employee_subsidy_requestor
         self.name = self.expedient_id.cover
         self.dni = self.expedient_id.subsidy_recipient_doc
+        resolutions_with_expedient = self.search(
+            [('expedient_id', '=', self.expedient_id.id)])
+        if len(resolutions_with_expedient) > 0:
+            return {
+                'warning': {
+                    'title': "El TA ya existe en estas resoluciones",
+                    'message': " * " + "\n * ".join(
+                        resolutions_with_expedient.mapped(lambda x: " - ".join(
+                            [x.subsidy_resolution_id.date,
+                             x.subsidy_resolution_id.name]))),
+                }
+            }

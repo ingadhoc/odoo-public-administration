@@ -18,6 +18,7 @@
                     <field name="type"/>
                     <field name="current_location_id"/>
                     <filter name="in_transit" string="In Transit" domain="[('in_transit','=','True')]"/>
+                    <filter name="overdue" string="Overdue?" domain="[('overdue','=','True')]"/>
                     <field name="user_id"/>
                     <field name="supplier_ids"/>
                     <field name="subsidy_recipient_doc"/>
@@ -96,6 +97,7 @@
                                 <field name="subsidy_amount" attrs="{'invisible': [('subsidy_expedient', '!=', True)]}" />
                                 <field name="subsidy_approved" attrs="{'invisible': [('subsidy_expedient', '!=', True)]}" />
                                 <field name="employee_subsidy_requestor" attrs="{'invisible': [('subsidy_expedient', '!=', True)]}" />
+                                <field name="overdue" attrs="{'invisible': ['|',('subsidy_expedient', '!=', True),('subsidy_approved', '!=', True)]}"/>
                             </group>
                         </group>
                         <notebook>
@@ -139,6 +141,7 @@
                     <field name="pages"/>
                     <field name="user_id"/>
                     <field name="subsidy_approved"/>
+                    <field name="overdue"/>
                     <field name="state"/>
                 </tree>
             </field>
