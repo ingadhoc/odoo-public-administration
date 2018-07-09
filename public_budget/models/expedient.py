@@ -153,8 +153,8 @@ class PublicBudgetExpedient(models.Model):
     parliamentary_expedient = fields.Char(
         string='Expediente Parlamentario'
     )
-    defeated = fields.Boolean(
-        string='Defeated?',
+    overdue = fields.Boolean(
+        string='Overdue?',
     )
 
     @api.multi

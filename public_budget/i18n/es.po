@@ -932,9 +932,9 @@ msgid "Default Income Account"
 msgstr "Default Income Account"
 
 #. module: public_budget
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_defeated
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_overdue
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_expedient_filter
-msgid "Defeated?"
+msgid "Overdue?"
 msgstr "Vencido?"
 
 #. module: public_budget
