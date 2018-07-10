@@ -31,7 +31,7 @@
                         <page string="Lineas de Resoluciones">
                             <field name="subsidy_resolution_line_ids" context="{'current_location_id':current_location_id}">
                                 <tree editable="bottom">
-                                    <field name="expedient_id" domain="[('subsidy_expedient', '=', True),('current_location_id','=', current_location_id)]"/>
+                                    <field name="expedient_id" domain="[('state', 'not in' , ['cancel', 'annulled']) ,('overdue' ,'!=', True), ('subsidy_expedient', '=', True),('current_location_id','=', current_location_id)]"/>
                                     <field name="name"/>
                                     <field name="dni"/>
                                     <field name="partner_id"/>
@@ -84,11 +84,5 @@
         <field name="res_model">public_budget.subsidy.resolution</field>
     </record>
 
-    <menuitem
-        id="menu_public_budget_subsidy_resolution"
-        sequence="15"
-        action="action_public_budget_subsidy_resolution"
-        parent="public_budget.menu_expedient_main"
-        groups="public_budget.group_secretary_usuario"
-        />
+    <menuitem id="menu_public_budget_subsidy_resolution" sequence="15" action="action_public_budget_subsidy_resolution" parent="public_budget.menu_expedient_main" groups="public_budget.group_secretary_usuario" />
 </odoo>
