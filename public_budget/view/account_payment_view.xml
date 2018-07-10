@@ -10,6 +10,7 @@
 
             <field name="payment_date" position="after">
                 <field name="assignee_id" readonly="1"/>
+                <field name="return_payment_id" attrs="{'invisible': [('return_payment_id', '=', False)]}"/>
             </field>
 
             <!-- hacemos invisible la fecha de pago para no confundir, viene seteada desde el payment group y en sipreco no interesa permitir distintas fechas para un pago -->
@@ -93,7 +94,11 @@
         <field name="model">account.payment</field>
         <field name="inherit_id" ref="account_payment_group.view_account_payment_from_group_tree"/>
         <field name="arch" type="xml"> 
+            <tree position="attributes">
+                <attribute name="decoration-muted">return_payment_id</attribute>
+            </tree>
             <tree>
+                <field name="return_payment_id" invisible="1"/>
                 <button name="print_checks" icon="fa-print " help="Print check" type="object" attrs="{'invisible': ['|', ('payment_method_code', '!=', 'issue_check')]}"/>
                 <!-- por ahora usamos metodo distinto para cambio de retenciones y de cheque, pero la idea sería implementar el mismo metodos -->
                 <button name="change_check" icon="fa-undo" type="object" attrs="{'invisible': [('payment_method_code', '!=', 'issue_check')]}" confirm="Seguro que desea cancelar/cambiar el cheque?"/>

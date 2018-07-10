@@ -207,7 +207,9 @@ class AccountPaymentGroup(models.Model):
     @api.multi
     def confirm(self):
         for rec in self:
-            if not rec.to_pay_amount:
+            # si hay devoluciones entonces si se puede confirmar sin importe
+            if not rec.to_pay_amount and not rec.payment_ids.mapped(
+                    'returned_payment_ids'):
                 raise ValidationError(_(
                     'No puede confirmar una orden de pago sin importe a pagar')
                 )
@@ -236,15 +238,16 @@ class AccountPaymentGroup(models.Model):
     @api.multi
     @api.depends('payment_ids.check_ids.state', 'state')
     def get_show_print_receipt_button(self):
-        show_print_receipt_button = False
+        for rec in self:
+            show_print_receipt_button = False
 
-        not_handed_checks = self.payment_ids.mapped('check_ids').filtered(
-            lambda r: r.state in (
-                'holding', 'to_be_handed'))
+            not_handed_checks = rec.payment_ids.mapped('check_ids').filtered(
+                lambda r: r.state in (
+                    'holding', 'to_be_handed'))
 
-        if self.state == 'posted' and not not_handed_checks:
-            show_print_receipt_button = True
-        self.show_print_receipt_button = show_print_receipt_button
+            if rec.state == 'posted' and not not_handed_checks:
+                show_print_receipt_button = True
+            rec.show_print_receipt_button = show_print_receipt_button
 
     @api.one
     @api.depends('payment_base_date', 'payment_days', 'days_interval_type')

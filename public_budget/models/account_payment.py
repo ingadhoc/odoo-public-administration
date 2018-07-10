@@ -23,6 +23,32 @@ class AccountPayment(models.Model):
         readonly=True,
         states={'draft': [('readonly', False)]},
     )
+    return_payment_id = fields.Many2one(
+        'account.payment',
+        string='Línea de devolución',
+        readonly=True,
+        help='Pago con el que este pago fue devuelto',
+    )
+    # En realidad la relación es o2o pero no existe en odoo
+    returned_payment_ids = fields.One2many(
+        'account.payment',
+        'return_payment_id',
+        help='Pago al que devuelve',
+    )
+
+    @api.multi
+    def write(self, vals):
+        """ para pagos que son devolución no dejamos cambiar nada salvo algunos
+        campos que se setean a mano
+        """
+        ok_fields = [
+            'document_number', 'receiptbook_id', 'state', 'payment_date',
+            'name']
+        if not set(ok_fields).intersection(vals.keys()) and self.filtered(
+                'returned_payment_ids'):
+            raise ValidationError(_(
+                'No puede modificar una devolución de retención'))
+        return super(AccountPayment, self).write(vals)
 
     @api.one
     @api.depends('invoice_ids', 'payment_type', 'partner_type', 'partner_id')
