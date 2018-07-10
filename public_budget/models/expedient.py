@@ -223,7 +223,8 @@ class PublicBudgetExpedient(models.Model):
     @api.onchange('subsidy_recipient_doc')
     def check_subsidy_recipient_doc(self):
         expedients_with_dni = self.search(
-            [('subsidy_recipient_doc', '=', self.subsidy_recipient_doc)])
+            [('subsidy_recipient_doc', '!=', 0),
+                ('subsidy_recipient_doc', '=', self.subsidy_recipient_doc)])
         if len(expedients_with_dni) > 0:
             raise UserError(
                 'El DNI ya existe en estos TA: \n * %s ' % ' \n * '.join(
