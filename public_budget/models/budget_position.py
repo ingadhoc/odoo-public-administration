@@ -136,7 +136,7 @@ class BudgetPosition(models.Model):
         help='Default Account on preventive lines of this position'
     )
 
-    @api.one
+    @api.multi
     # @api.depends(
     #     'preventive_line_ids.affects_budget',
     #     'preventive_line_ids.transaction_id.state',
@@ -156,20 +156,6 @@ class BudgetPosition(models.Model):
         -balance_amount: diffference between budget position and preventive
         amount
         """
-        _logger.info('Getting amounts for budget position %s' % self.name)
-        if self.type == 'view':
-            operator = 'child_of'
-        if self.type == 'normal':
-            operator = '='
-
-        domain = [
-            ('budget_position_id', operator, self.id),
-            # esto podria no ir porque el affects_budget ya tiene en cuetna
-            # el estado de la transaccion
-            ('transaction_id.state', 'in', ('open', 'closed')),
-            ('affects_budget', '=', True),
-        ]
-
         budget_id = self._context.get('budget_id', False)
         to_date = self._context.get('analysis_to_date', False)
 
@@ -178,102 +164,7 @@ class BudgetPosition(models.Model):
         if not budget_id and 'aeroo_docs' in self._context:
             budget_id = self._context.get('active_id', False)
 
-        if budget_id:
-            domain.append(('budget_id', '=', budget_id))
-        if to_date:
-            _logger.info('Getting budget amounts with to_date %s' % (
-                to_date))
-            domain += [('transaction_id.issue_date', '<=', to_date)]
-
-        # we add budget_assignment_allowed condition to optimize
-        _logger.info('Getting budget amounts')
-        # if budget_id and self.budget_assignment_allowed:
-        if budget_id and (self.budget_assignment_allowed or self.child_ids):
-            modification_domain = [
-                ('budget_modification_id.budget_id', '=', budget_id),
-                ('budget_position_id', operator, self.id)]
-            if to_date:
-                modification_domain += [
-                    ('budget_modification_id.date', '<=', to_date)]
-            modification_lines = self.env[
-                'public_budget.budget_modification_detail'].search(
-                    modification_domain)
-            modification_amounts = [line.amount for line in modification_lines]
-            initial_lines = self.env['public_budget.budget_detail'].search([
-                ('budget_id', '=', budget_id),
-                ('budget_position_id', operator, self.id)])
-            initial_amounts = [line.initial_amount for line in initial_lines]
-            amount = sum(initial_amounts) + sum(modification_amounts)
-        else:
-            amount = False
-
-        # we exclude lines from preventive lines because constraints sometimes
-        # consider the line you are checking and sometimes not, so better we
-        # exclude that line and compare to that line amount
         excluded_line_id = self._context.get('excluded_line_id', False)
-        if excluded_line_id:
-            domain.append(('id', '!=', excluded_line_id))
-
-        # we use sql instead of orm becuase as this computed fields are not
-        # stored, the computation use methods and not stored values
-        _logger.info('Getting budget general amounts')
-
-        draft_preventive_lines = self.env[
-            'public_budget.preventive_line'].search(
-            domain
-        )
-
-        if draft_preventive_lines:
-            self._cr.execute(
-                'SELECT preventive_amount '
-                'FROM public_budget_preventive_line '
-                'WHERE id IN %s', (tuple(draft_preventive_lines.ids),))
-            self.draft_amount = sum([x[0] for x in self._cr.fetchall()])
-
-        _logger.info('Getting budget general amounts')
-
-        active_preventive_lines = self.env[
-            'public_budget.preventive_line'].search(
-            domain
-        )
-
-        preventive_amount = definitive_amount = to_pay_amount = paid_amount = 0
-        if active_preventive_lines:
-            # if from_date or to_date we can not use stored value, we should
-            # get method value (using computed fields)
-            # if from_date or to_date:
-            if to_date:
-                _logger.info('Getting values from computed fields methods')
-                # TODO, ver si hay una mejor forma de hacer esto. lo que
-                # estamos haciendo es forzar el modo onchange para que odoo
-                # no use los valores almacenadados que los calcule. Tratamos
-                # de usar "do_in_onchange" pero como el mode es True no termina
-                # cambiando nada el metodo _do_in_mode
-                env_all_mode = active_preventive_lines.env.all.mode
-                active_preventive_lines.env.all.mode = 'onchange'
-                for pl in active_preventive_lines:
-                    preventive_amount += pl.preventive_amount
-                    definitive_amount += pl.definitive_amount
-                    to_pay_amount += pl.to_pay_amount
-                    paid_amount += pl.paid_amount
-                active_preventive_lines.env.all.mode = env_all_mode
-            else:
-                _logger.info('Getting values from stored fields')
-                self._cr.execute(
-                    'SELECT preventive_amount, definitive_amount, '
-                    'to_pay_amount, paid_amount '
-                    'FROM public_budget_preventive_line '
-                    'WHERE id IN %s', (tuple(active_preventive_lines.ids),))
-                for r in self._cr.fetchall():
-                    preventive_amount += r[0]
-                    definitive_amount += r[1]
-                    to_pay_amount += r[2]
-                    paid_amount += r[3]
-
-        self.preventive_amount = preventive_amount
-        self.definitive_amount = definitive_amount
-        self.to_pay_amount = to_pay_amount
-        self.paid_amount = paid_amount
 
         # if to_date use it, if not, then use now
         if to_date:
@@ -281,25 +172,138 @@ class BudgetPosition(models.Model):
                 to_date).timetuple().tm_yday
         else:
             day_of_year = datetime.now().timetuple().tm_yday
-        projected_amount = preventive_amount / day_of_year * 365
-        self.projected_amount = projected_amount
 
-        # if self.budget_assignment_allowed:
-        # if self.budget_assignment_allowed or self.child_ids:
-        if amount:
-            _logger.info('Getting budget assignment amounts')
-            # projected_avg = amount and \
-            #     projected_amount / amount * 100.0 or 0.0
-            # self.projected_avg = projected_avg
-            self.projected_avg = projected_amount / amount * 100.0
-            self.amount = amount
-            # preventive_avg = amount and \
-            #     preventive_amount / amount * 100.0 or 0.0
-            # self.preventive_avg = preventive_avg
-            self.preventive_avg = preventive_amount / amount * 100.0
-            self.balance_amount = self.amount - preventive_amount
-        _logger.info(
-            'Finish getting amounts for budget position %s' % self.name)
+        for rec in self:
+            _logger.info('Getting amounts for budget position %s' % rec.name)
+            if rec.type == 'view':
+                operator = 'child_of'
+            if rec.type == 'normal':
+                operator = '='
+
+            domain = [
+                ('budget_position_id', operator, rec.id),
+                # esto podria no ir porque el affects_budget ya tiene en cuetna
+                # el estado de la transaccion
+                ('transaction_id.state', 'in', ('open', 'closed')),
+                ('affects_budget', '=', True),
+            ]
+
+            if budget_id:
+                domain.append(('budget_id', '=', budget_id))
+            if to_date:
+                _logger.info('Getting budget amounts with to_date %s' % (
+                    to_date))
+                domain += [('transaction_id.issue_date', '<=', to_date)]
+
+            # we add budget_assignment_allowed condition to optimize
+            _logger.info('Getting budget amounts')
+            # if budget_id and self.budget_assignment_allowed:
+            if budget_id and (rec.budget_assignment_allowed or rec.child_ids):
+                modification_domain = [
+                    ('budget_modification_id.budget_id', '=', budget_id),
+                    ('budget_position_id', operator, rec.id)]
+                if to_date:
+                    modification_domain += [
+                        ('budget_modification_id.date', '<=', to_date)]
+                modification_lines = self.env[
+                    'public_budget.budget_modification_detail'].search(
+                        modification_domain)
+                modification_amounts = [line.amount for line in modification_lines]
+                initial_lines = self.env['public_budget.budget_detail'].search([
+                    ('budget_id', '=', budget_id),
+                    ('budget_position_id', operator, rec.id)])
+                initial_amounts = [line.initial_amount for line in initial_lines]
+                amount = sum(initial_amounts) + sum(modification_amounts)
+            else:
+                amount = False
+
+            # we exclude lines from preventive lines because constraints sometimes
+            # consider the line you are checking and sometimes not, so better we
+            # exclude that line and compare to that line amount
+            if excluded_line_id:
+                domain.append(('id', '!=', excluded_line_id))
+
+            # we use sql instead of orm becuase as this computed fields are not
+            # stored, the computation use methods and not stored values
+            _logger.info('Getting budget general amounts')
+
+            draft_preventive_lines = self.env[
+                'public_budget.preventive_line'].search(
+                domain
+            )
+
+            if draft_preventive_lines:
+                self._cr.execute(
+                    'SELECT preventive_amount '
+                    'FROM public_budget_preventive_line '
+                    'WHERE id IN %s', (tuple(draft_preventive_lines.ids),))
+                rec.draft_amount = sum([x[0] for x in self._cr.fetchall()])
+
+            _logger.info('Getting budget general amounts')
+
+            active_preventive_lines = self.env[
+                'public_budget.preventive_line'].search(
+                domain
+            )
+
+            preventive_amount = definitive_amount = to_pay_amount = paid_amount = 0
+            if active_preventive_lines:
+                # if from_date or to_date we can not use stored value, we should
+                # get method value (using computed fields)
+                # if from_date or to_date:
+                if to_date:
+                    _logger.info('Getting values from computed fields methods')
+                    # TODO, ver si hay una mejor forma de hacer esto. lo que
+                    # estamos haciendo es forzar el modo onchange para que odoo
+                    # no use los valores almacenadados que los calcule. Tratamos
+                    # de usar "do_in_onchange" pero como el mode es True no termina
+                    # cambiando nada el metodo _do_in_mode
+                    env_all_mode = active_preventive_lines.env.all.mode
+                    active_preventive_lines.env.all.mode = 'onchange'
+                    for pl in active_preventive_lines:
+                        preventive_amount += pl.preventive_amount
+                        definitive_amount += pl.definitive_amount
+                        to_pay_amount += pl.to_pay_amount
+                        paid_amount += pl.paid_amount
+                    # restore env mode
+                    active_preventive_lines.env.all.mode = env_all_mode
+                else:
+                    _logger.info('Getting values from stored fields')
+                    self._cr.execute(
+                        'SELECT preventive_amount, definitive_amount, '
+                        'to_pay_amount, paid_amount '
+                        'FROM public_budget_preventive_line '
+                        'WHERE id IN %s', (tuple(active_preventive_lines.ids),))
+                    for r in self._cr.fetchall():
+                        preventive_amount += r[0]
+                        definitive_amount += r[1]
+                        to_pay_amount += r[2]
+                        paid_amount += r[3]
+
+            rec.preventive_amount = preventive_amount
+            rec.definitive_amount = definitive_amount
+            rec.to_pay_amount = to_pay_amount
+            rec.paid_amount = paid_amount
+
+            projected_amount = preventive_amount / day_of_year * 365
+            rec.projected_amount = projected_amount
+
+            # if self.budget_assignment_allowed:
+            # if self.budget_assignment_allowed or self.child_ids:
+            if amount:
+                _logger.info('Getting budget assignment amounts')
+                # projected_avg = amount and \
+                #     projected_amount / amount * 100.0 or 0.0
+                # self.projected_avg = projected_avg
+                rec.projected_avg = projected_amount / amount * 100.0
+                rec.amount = amount
+                # preventive_avg = amount and \
+                #     preventive_amount / amount * 100.0 or 0.0
+                # self.preventive_avg = preventive_avg
+                rec.preventive_avg = preventive_amount / amount * 100.0
+                rec.balance_amount = rec.amount - preventive_amount
+            _logger.info(
+                'Finish getting amounts for budget position %s' % rec.name)
 
     @api.multi
     def name_get(self):
