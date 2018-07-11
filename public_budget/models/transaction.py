@@ -358,26 +358,27 @@ class BudgetTransaction(models.Model):
     )
     def _get_advance_amounts(self):
         _logger.info('Getting Transaction Advance Amounts')
-        if not self.advance_payment_group_ids:
-            return False
-
-        domain = [('id', 'in', self.advance_payment_group_ids.ids)]
-        to_pay_domain = domain + [('state', 'not in', ('cancel', 'draft'))]
-        paid_domain = domain + [('state', '=', 'posted')]
-
         to_date = self._context.get('analysis_to_date', False)
-        if to_date:
-            to_pay_domain += [('confirmation_date', '<=', to_date)]
-            paid_domain += [('payment_date', '<=', to_date)]
+        for rec in self:
+            if not rec.advance_payment_group_ids:
+                return False
 
-        advance_to_pay_amount = sum(
-            self.advance_payment_group_ids.search(to_pay_domain).mapped(
-                'to_pay_amount'))
-        advance_paid_amount = sum(
-            self.advance_payment_group_ids.search(paid_domain).mapped(
-                'payments_amount'))
-        self.advance_to_pay_amount = advance_to_pay_amount
-        self.advance_paid_amount = advance_paid_amount
+            domain = [('id', 'in', rec.advance_payment_group_ids.ids)]
+            to_pay_domain = domain + [('state', 'not in', ('cancel', 'draft'))]
+            paid_domain = domain + [('state', '=', 'posted')]
+
+            if to_date:
+                to_pay_domain += [('confirmation_date', '<=', to_date)]
+                paid_domain += [('payment_date', '<=', to_date)]
+
+            advance_to_pay_amount = sum(
+                rec.advance_payment_group_ids.search(to_pay_domain).mapped(
+                    'to_pay_amount'))
+            advance_paid_amount = sum(
+                rec.advance_payment_group_ids.search(paid_domain).mapped(
+                    'payments_amount'))
+            rec.advance_to_pay_amount = advance_to_pay_amount
+            rec.advance_paid_amount = advance_paid_amount
 
     @api.multi
     def mass_payment_group_create(self):
