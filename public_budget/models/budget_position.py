@@ -244,11 +244,19 @@ class BudgetPosition(models.Model):
             # if from_date or to_date:
             if to_date:
                 _logger.info('Getting values from computed fields methods')
+                # TODO, ver si hay una mejor forma de hacer esto. lo que
+                # estamos haciendo es forzar el modo onchange para que odoo
+                # no use los valores almacenadados que los calcule. Tratamos
+                # de usar "do_in_onchange" pero como el mode es True no termina
+                # cambiando nada el metodo _do_in_mode
+                env_all_mode = active_preventive_lines.env.all.mode
+                active_preventive_lines.env.all.mode = 'onchange'
                 for pl in active_preventive_lines:
                     preventive_amount += pl.preventive_amount
                     definitive_amount += pl.definitive_amount
                     to_pay_amount += pl.to_pay_amount
                     paid_amount += pl.paid_amount
+                active_preventive_lines.env.all.mode = env_all_mode
             else:
                 _logger.info('Getting values from stored fields')
                 self._cr.execute(
