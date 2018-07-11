@@ -68,7 +68,7 @@ class AccountInvoice(models.Model):
         if self.state == 'paid' and not self.payment_ids:
             return self.amount_total
         domain = [
-            ('payment_group_ids.state', '!=', 'draft'),
+            ('payment_group_ids.state', 'not in', ['draft', 'cancel']),
             ('id', 'in', self.open_move_line_ids.ids),
         ]
         # Add this to allow analysis from date
