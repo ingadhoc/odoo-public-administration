@@ -69,6 +69,12 @@ class PublicBudgetExpedient(models.Model):
         compute_sudo=True,
         compute='_get_current_location'
     )
+    last_location_id = fields.Many2one(
+        'public_budget.location',
+        store=True,
+        compute_sudo=True,
+        compute='_get_current_location'
+    )
     note = fields.Text(
     )
     pages = fields.Integer(
@@ -192,6 +198,7 @@ class PublicBudgetExpedient(models.Model):
         for rec in self:
             last_move_date = False
             current_location_id = False
+            last_location_id = False
             in_transit = False
 
             if rec.remit_ids:
@@ -199,6 +206,7 @@ class PublicBudgetExpedient(models.Model):
                     ('expedient_ids', '=', rec.id), ('state', '!=', 'cancel')],
                     order='date desc')
                 if remits:
+                    last_location_id = remits[0].location_id.id
                     current_location_id = remits[0].location_dest_id.id
                     last_move_date = remits[0].date
                     if remits[0].state == 'in_transit':
@@ -208,6 +216,7 @@ class PublicBudgetExpedient(models.Model):
             else:
                 current_location_id = rec.first_location_id.id
 
+            rec.last_location_id = last_location_id
             rec.current_location_id = current_location_id
             rec.last_move_date = last_move_date
             rec.in_transit = in_transit

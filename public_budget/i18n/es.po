@@ -181,6 +181,11 @@ msgid "Alicuotas de ARBA"
 msgstr "Alicuotas de ARBA"
 
 #. module: public_budget
+#: model:ir.model.fields,field_description:public_budget.field_res_users_category_ids
+#: model:ir.ui.view,arch_db:public_budget.view_public_budget_users_form
+msgid "Allowed Expedient Categories"
+msgstr "Categorias de Expedientes Permitidas"
+#. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_user_location_ids
 #: model:ir.model.fields,field_description:public_budget.field_res_users_location_ids
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_users_form
