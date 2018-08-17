@@ -11,6 +11,9 @@
                 <group string="Allowed Locations">
                     <field name="location_ids" nolabel="1" widget="many2many_tags"/>
                 </group>
+                <group string="Allowed Expedient Categories">
+                    <field name="category_ids" nolabel="1" widget="many2many_tags"/>
+                </group>
             </xpath>
         </field>
     </record>
