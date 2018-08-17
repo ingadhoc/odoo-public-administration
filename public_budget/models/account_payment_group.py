@@ -115,10 +115,12 @@ class AccountPaymentGroup(models.Model):
     payment_date = fields.Date(
         required=False,
         default=False,
-        # Lo dejamos editable salvo si posted on canceled
+        track_visibility='onchange',
+        # al final, para evitar que la seteen equivocadamente, la dejamos
+        # editable solo en isgnature y signed
         states={
-            'draft': [('readonly', False)],
-            'confirmed': [('readonly', False)],
+            # 'draft': [('readonly', False)],
+            # 'confirmed': [('readonly', False)],
             'signature_process': [('readonly', False)],
             'signed': [('readonly', False)],
         },
