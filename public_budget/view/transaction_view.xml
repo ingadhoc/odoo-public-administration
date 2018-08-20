@@ -124,9 +124,11 @@
                                 <field name="advance_payment_group_ids" context="{'default_transaction_id':id, 'default_partner_id': partner_id, 'default_partner_type': 'supplier'}"/>
                             </page>
                             <page string="Invoices">
-                                <button class="oe_link" string="Create Invoice" states="open" type="action" name="%(public_budget.action_definitive_make_invoice)d"/>
-                                or 
-                                <button class="oe_link" string="Mass Invoice Create" states="open" type="action" name="%(public_budget.action_definitive_mass_invoice_create)d"/>
+                                <div class="oe_read_only">
+                                    <button class="oe_link" string="Create Invoice" states="open" type="action" name="%(public_budget.action_definitive_make_invoice)d"/>
+                                    or 
+                                    <button class="oe_link" string="Mass Invoice Create" states="open" type="action" name="%(public_budget.action_definitive_mass_invoice_create)d"/>
+                                </div>
                                 <field name="invoice_ids" nolabel="1"/>
                             </page>
                             <page string="Payment Orders" attrs="{'invisible':[('type_with_advance_payment','=',True)]}">
