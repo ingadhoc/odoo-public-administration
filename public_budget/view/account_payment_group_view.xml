@@ -91,7 +91,7 @@
             <field name="partner_id" position="attributes">
                 <attribute name="domain">[('id', 'in', partner_ids and partner_ids[0][2] or [])]</attribute>
             </field>
-            
+
             <!-- confirm only for account manager -->
             <button name="confirm" position="attributes">
                 <attribute name="groups">account.group_account_manager</attribute>
@@ -134,8 +134,11 @@
                 <button name="%(action_aeroo_report_payment)d" string="Print Payment Order" class="oe_highlight" groups="base.group_user" type="action" />
                 <button name="%(action_aeroo_report_payment_receipt)d" class="oe_highlight" string="Print Receipt" attrs="{'invisible': [('show_print_receipt_button', '=', False)]}" type="action"/>
             </button>
+            <button name="cancel" position="before">
+                <button name="action_aeroo_certificado_de_retencion_report" string="Print withholding voucher" type="object" class="oe_read_only"/>
+            </button>
 
-        <!-- como ellos pagan con adelanto o conciliando, y no el mix, excondemos deuda seleccionada y importe de ajuste y solo mostramos el a pagar que lo hacemos editable o no segun sea de adelanto o no -->
+            <!-- como ellos pagan con adelanto o conciliando, y no el mix, excondemos deuda seleccionada y importe de ajuste y solo mostramos el a pagar que lo hacemos editable o no segun sea de adelanto o no -->
             <!-- hide unreconciled_amount on not advance transactions  -->
             <field name="selected_debt" position="attributes">
                 <attribute name="invisible">1</attribute>
@@ -147,7 +150,7 @@
                 <attribute name="attrs">{'invisible': ['|', ('payment_subtype', '!=', 'double_validation'), ('state', '=', 'posted')], 'readonly': ['|', ('transaction_with_advance_payment', '=', False), ('state', '!=', 'draft')]}</attribute>
             </field>
 
-        <!-- modifications for signature states -->
+            <!-- modifications for signature states -->
             <!-- add states -->
             <!-- al final no agreguamos estos porque la idea es que no esten siempre -->
             <!-- <field name="state" position="attributes">

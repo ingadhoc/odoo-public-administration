@@ -225,7 +225,7 @@ class AccountPaymentGroup(models.Model):
             # pierde el link de to pay lines del pago
             already_paying = self.transaction_id.payment_group_ids.filtered(
                 lambda x: x.state not in ['cancel', 'draft'] and x != self
-                ).mapped('to_pay_move_line_ids')
+            ).mapped('to_pay_move_line_ids')
             if rec.to_pay_move_line_ids & already_paying:
                 raise ValidationError(_(
                     'No puede mandar a pagar líneas que ya se mandaron a '
@@ -480,3 +480,15 @@ class AccountPaymentGroup(models.Model):
                     rec.document_type_id.doc_code_prefix or '',
                     rec.document_number))
         return res
+
+    @api.multi
+    def action_aeroo_certificado_de_retencion_report(self):
+        self.ensure_one()
+        payments = self.payment_ids.filtered(
+            lambda x:
+            x.payment_method_code == 'withholding' and x.partner_type ==
+            'supplier')
+        if not payments:
+            return False
+        return self.env['report'].get_action(
+            payments, 'certificado_de_retencion_reportreport')
