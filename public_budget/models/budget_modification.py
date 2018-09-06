@@ -78,3 +78,18 @@ class BudgetModification(models.Model):
                 rest_type = restrictions.type
             rec.rest_message = rest_message
             rec.rest_type = rest_type
+
+    @api.multi
+    def unlink(self):
+        """Si borramos una modification como se borran por cascade no se llama
+        el unlink de los detail
+        """
+        to_check = []
+        for rec in self.mapped('budget_modification_detail_ids'):
+            to_check.append((
+                rec.budget_position_id, rec.budget_modification_id.budget_id))
+        res = super(BudgetModification, self).unlink()
+        for position, budget in to_check:
+            self.env['public_budget.budget_modification_detail'].\
+                _check_modification(position, budget)
+        return res

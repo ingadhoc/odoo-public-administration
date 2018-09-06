@@ -58,14 +58,29 @@ class BudgetModificationDetail(models.Model):
     )
 
     @api.multi
-    @api.constrains('budget_position_id', 'amount')
-    def _check_modification(self):
+    def unlink(self):
+        to_check = []
         for rec in self:
-            budget_id = rec.budget_modification_id.budget_id.id
-            if rec.budget_position_id.budget_assignment_allowed and (
-                    rec.with_context(
-                        budget_id=budget_id
-                    ).budget_position_id.balance_amount < 0.0):
-                raise ValidationError(
-                    _("You can not make this modification as '%s' will have a "
-                        "negative balance") % (rec.budget_position_id.name))
+            to_check.append((
+                rec.budget_position_id, rec.budget_modification_id.budget_id))
+        res = super(BudgetModificationDetail, self).unlink()
+        for position, budget in to_check:
+            self._check_modification(position, budget)
+        return res
+
+    @api.multi
+    @api.constrains('budget_position_id', 'amount')
+    def check_modification(self):
+        for rec in self:
+            self._check_modification(
+                rec.budget_position_id,
+                rec.budget_modification_id.budget_id)
+
+    @api.model
+    def _check_modification(self, position, budget):
+        if position.budget_assignment_allowed and (
+                position.with_context(
+                    budget_id=budget.id).balance_amount < 0.0):
+            raise ValidationError(
+                _("You can not make this modification as '%s' will have a "
+                    "negative balance") % (position.name))
