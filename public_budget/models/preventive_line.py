@@ -270,7 +270,11 @@ class PreventiveLine(models.Model):
         'budget_position_id',
         'preventive_amount')
     def _check_position_balance_amount(self):
-        for rec in self:
+        # filtamos por affects_budget porque cuando estamos cargando las
+        # definitivas de una transacción de adelanto, como hasta que se cierre
+        # todo se suman las de adelanto, no queremos que se calcule para las
+        # definitivas
+        for rec in self.filtered('affects_budget'):
             rec = rec.with_context(
                 budget_id=rec.transaction_id.budget_id.id,
                 excluded_line_id=rec.id,
