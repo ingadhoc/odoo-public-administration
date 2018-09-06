@@ -110,6 +110,16 @@ class AccountPaymentGroup(models.Model):
         states={'draft': [('readonly', False)]},
         copy=False,
     )
+    to_signature_date = fields.Date(
+        'Fecha a Proceso de Firma',
+        help='Fecha en la que fue pasado a proceso de firma. Utilizada para '
+        'acumular retenciones.',
+        states={
+            'draft': [('readonly', False)],
+            'confirmed': [('readonly', False)]},
+        readonly=True,
+        copy=False,
+    )
     # hacemos que la fecha de pago no sea obligatoria ya que seteamos fecha
     # de validacion si no estaba seteada
     payment_date = fields.Date(
@@ -307,7 +317,9 @@ class AccountPaymentGroup(models.Model):
                 raise ValidationError((
                     'No puede mandar a pagar una orden de pago que tiene '
                     'Importe a pagar distinto a Importe de los Pagos'))
-        self.write({'state': 'signature_process'})
+            rec.state = 'signature_process'
+            if not rec.to_signature_date:
+                rec.to_signature_date = fields.Date.today()
 
     @api.multi
     def to_signed(self):

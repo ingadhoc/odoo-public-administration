@@ -34,3 +34,4 @@ from . import advance_request_line
 from . import expedient_founder
 from . import account_bank_statement
 from . import account_journal
+from . import account_tax

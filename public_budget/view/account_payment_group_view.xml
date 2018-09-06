@@ -111,6 +111,7 @@
                 <field name="payment_min_date"/>
                 <!-- lo hacemos editable con tec features -->
                 <field name="confirmation_date" readonly="1"/>
+                <field name="to_signature_date" readonly="1"/>
             </field>
 
             <!-- al final lo dejamos editable -->
@@ -193,6 +194,9 @@
                 <attribute name="readonly">0</attribute>
             </field> -->
             <field name="confirmation_date" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </field>
+            <field name="to_signature_date" position="attributes">
                 <attribute name="readonly">0</attribute>
             </field>
         </field>

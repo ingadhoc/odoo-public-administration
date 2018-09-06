@@ -17,6 +17,11 @@ class AccountPayment(models.Model):
         required=False,
         default=False,
     )
+    # para no tener que cambiar tanto el metodo get_period_payments_domain
+    # agregamos este campo related
+    to_signature_date = fields.Date(
+        related='payment_group_id.to_signature_date',
+    )
     assignee_id = fields.Many2one(
         'res.partner',
         'Cesionario',
