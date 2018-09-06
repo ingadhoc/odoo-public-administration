@@ -219,6 +219,10 @@ class AccountPaymentGroup(models.Model):
     @api.multi
     def confirm(self):
         for rec in self:
+            if not rec.payment_base_date:
+                raise ValidationError(_(
+                    'No puede confirmar una orden de pago sin fecha base de '
+                    'pago'))
             # si hay devoluciones entonces si se puede confirmar sin importe
             if not rec.to_pay_amount and not rec.payment_ids.mapped(
                     'returned_payment_ids'):
