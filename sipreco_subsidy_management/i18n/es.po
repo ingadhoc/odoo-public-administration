@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-05 15:31+0000\n"
-"PO-Revision-Date: 2018-05-05 15:31+0000\n"
+"POT-Creation-Date: 2018-06-11 14:07+0000\n"
+"PO-Revision-Date: 2018-06-11 14:07+0000\n"
 "Last-Translator: Gonzalo Ruzafa <gr@ingadhoc.com>, 2018\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
 "MIME-Version: 1.0\n"
@@ -363,7 +363,7 @@ msgstr "Agrupar por"
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_approval_arrangement_id
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_id
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_note_id
-#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_note_type_id_7320
+#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_note_type_id_7327
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_rendition_id
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_resolution_id
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_resolution_line_id
@@ -736,7 +736,7 @@ msgstr "Resoluciones de Subsidios"
 #. module: sipreco_subsidy_management
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_to_pay_balance
 msgid "Saldo A Pagar"
-msgstr ""
+msgstr "Saldo A Pagar"
 
 #. module: sipreco_subsidy_management
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_definitive_balance
@@ -747,7 +747,7 @@ msgstr "Saldo Definitivo"
 #. module: sipreco_subsidy_management
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_invoiced_balance
 msgid "Saldo Devengado"
-msgstr ""
+msgstr "Saldo Devengado"
 
 #. module: sipreco_subsidy_management
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_preventive_balance
