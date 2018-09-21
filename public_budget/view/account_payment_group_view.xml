@@ -20,6 +20,9 @@
                 <field name="expedient_id"/>
                 <field name="budget_position_ids"/>
             </field>
+            <filter context="{'group_by': 'state'}" position="after">
+                <filter string="Fecha Min. de Pago" domain="[]" context="{'group_by': 'payment_min_date'}"/>
+            </filter>
         </field>
     </record>
 
@@ -34,6 +37,9 @@
             <tree position="attributes">
                 <attribute name="create">false</attribute>
             </tree>
+            <field name="payment_date" position="after">
+                <field name="payment_min_date"/>
+            </field>
 
             <!-- para poder ver lo que se manda a pagar antes de que se carguen los pagos -->
             <field name="payments_amount" position="before">
