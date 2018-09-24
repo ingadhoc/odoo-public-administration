@@ -1995,9 +1995,6 @@ msgid "Last Update Padron"
 msgstr "Ultima Actualizacion de Padron"
 
 #. module: public_budget
-msgstr "Última actualización de Padrón"
-
-#. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_account_check_to_date_report_wizard_write_uid
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_request_line_write_uid
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_request_report_wizard_write_uid
