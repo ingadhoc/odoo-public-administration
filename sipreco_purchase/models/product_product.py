@@ -11,4 +11,4 @@ class ProductProduct(models.Model):
 
     standard_price = fields.Float(
         groups='base.group_user,\
-        public_budget.group_portal_expedient')
+        sipreco_purchase.group_portal_requester')
