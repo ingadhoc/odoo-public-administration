@@ -31,16 +31,11 @@
         <field name="category_id" ref="base.module_category_extra"/>
     </record>
 
-    <record id="public_budget.group_portal_expedient" model="res.groups">
-        <field name="implied_ids" eval="[(6, 0, [ref('group_portal_requester')])]"/>
-    </record>
-
-
     <!-- usamos grupo existente de inventarios / user  para solicitante-->
     <!-- <record id="group_applicant" model="res.groups"> -->
     <record id="stock.group_stock_user" model="res.groups">
         <field name="name">Solictante</field>
-        <field name="implied_ids" eval="[(4, ref('group_requester')), (4, ref('base.group_user'))]"/>
+        <field name="implied_ids" eval="[(3, ref('group_requester'), 0),(4, ref('group_requester_employee')), (4, ref('base.group_user'))]"/>
         <field name="category_id" ref="base.module_category_purchase_management"/>
     </record>
 

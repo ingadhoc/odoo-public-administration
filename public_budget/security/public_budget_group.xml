@@ -18,14 +18,14 @@
     <record id="group_portal_expedient" model="res.groups">
         <field name="name">Portal - Expedientes</field>
         <field name="is_portal" eval="True"/>
-        <field name="implied_ids" eval="[(4, ref('base.group_portal'))]"/>
+        <field name="implied_ids" eval="[(6, 0, [ref('base.group_portal')])]"/>
         <field name="category_id" ref="base.module_category_extra"/>
     </record>
 
     <record id="group_portal_transaction" model="res.groups">
-        <field name="name">Portal - Expedientes y Transacciones</field>
+        <field name="name">Portal - Transacciones</field>
         <field name="is_portal" eval="True"/>
-        <field name="implied_ids" eval="[(4, ref('group_portal_expedient'))]"/>
+        <field name="implied_ids" eval="[(6, 0, [ref('base.group_portal')])]"/>
         <field name="category_id" ref="base.module_category_extra"/>
     </record>
 
