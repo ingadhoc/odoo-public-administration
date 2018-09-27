@@ -2685,8 +2685,8 @@ msgstr "Portal - Expedientes"
 
 #. module: public_budget
 #: model:res.groups,name:public_budget.group_portal_transaction
-msgid "Portal - Expedientes y Transacciones"
-msgstr "Portal - Expedientes y Transacciones"
+msgid "Portal - Transacciones"
+msgstr "Portal - Transacciones"
 
 #. module: public_budget
 #: model:ir.actions.act_window,name:public_budget.action_public_budget_budget_pos_exc_rest_position_exc__rest_
