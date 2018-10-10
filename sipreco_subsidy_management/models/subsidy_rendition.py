@@ -54,6 +54,7 @@ class PublicBudgetSubsidyRendition(models.Model):
         'public_budget.expedient',
         'Expediente',
         help='Expediente Administrativo de Rendición de Subsidio',
+        ondelete='restrict',
     )
     editable_line = fields.Boolean(
         'Block editing line',
