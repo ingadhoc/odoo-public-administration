@@ -24,6 +24,7 @@ class PurchaseRequisition(models.Model):
     expedient_id = fields.Many2one(
         'public_budget.expedient',
         'Tramite Administrativo',
+        ondelete='restrict',
     )
     type_id = fields.Many2one(
         'public_budget.transaction_type',

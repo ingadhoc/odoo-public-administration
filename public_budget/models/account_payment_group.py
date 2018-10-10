@@ -36,7 +36,8 @@ class AccountPaymentGroup(models.Model):
         string='Expedient',
         readonly=True,
         context={'default_type': 'payment'},
-        states={'draft': [('readonly', False)]}
+        states={'draft': [('readonly', False)]},
+        ondelete='restrict',
     )
     transaction_id = fields.Many2one(
         'public_budget.transaction',
