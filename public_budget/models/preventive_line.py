@@ -267,6 +267,7 @@ class PreventiveLine(models.Model):
     @api.multi
     @api.constrains(
         'transaction_id',
+        'affects_budget',
         'budget_position_id',
         'preventive_amount')
     def _check_position_balance_amount(self):
@@ -289,10 +290,12 @@ class PreventiveLine(models.Model):
             if position_balance < preventive_amount:
                 raise ValidationError(_(
                     "There is not enough Balance Amount to assign (%s) to "
-                    "Budget Position '%s'.\n"
-                    "* Balance available for '%s': %s") % (
+                    "Budget Position '%s' (%s).\n"
+                    "* Balance available for '%s' (%s): %s") % (
                     preventive_amount, rec.budget_position_id.name,
-                    assignment_position.name, position_balance))
+                    rec.budget_position_id.code,
+                    assignment_position.name,
+                    assignment_position.code, position_balance))
 
     @api.multi
     def unlink(self):
