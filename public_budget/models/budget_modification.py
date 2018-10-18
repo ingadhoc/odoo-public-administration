@@ -38,7 +38,6 @@ class BudgetModification(models.Model):
     )
     budget_id = fields.Many2one(
         'public_budget.budget',
-        ondelete='cascade',
         string='Budget',
         required=True
     )
