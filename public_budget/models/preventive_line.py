@@ -78,7 +78,6 @@ class PreventiveLine(models.Model):
     )
     transaction_id = fields.Many2one(
         'public_budget.transaction',
-        ondelete='cascade',
         string='Transaction',
         required=True,
         auto_join=True,
