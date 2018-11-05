@@ -18,6 +18,7 @@ class PublicBudgetBudgetReport(models.Model):
         readonly=True,
     )
     currency_id = fields.Many2one(
+        'res.currency',
         readonly=True,
     )
     transaction_expedient_id = fields.Many2one(
