@@ -523,6 +523,11 @@ class BudgetTransaction(models.Model):
         return True
 
     @api.multi
+    @api.constrains('state')
+    def _check_position_balance_amount(self):
+        self.mapped('preventive_line_ids')._check_position_balance_amount()
+
+    @api.multi
     def check_closure(self):
         """
         Check preventive lines

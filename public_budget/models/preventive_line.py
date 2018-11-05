@@ -266,7 +266,13 @@ class PreventiveLine(models.Model):
     @api.multi
     @api.constrains(
         'transaction_id',
-        'affects_budget',
+        # no agregamos affects_budget sobre este campo ya que algunas veces,
+        # de manera aleatoria, termina dando un error que tal vez tenga que
+        # ver en el ordne en que se computan las cosas.
+        # verificamos esto desde una constraint sobre state de las
+        # transacciones. El error era:
+        # unsupported operand type(s) for +=: 'float' and 'NoneType'
+        # 'affects_budget',
         'budget_position_id',
         'preventive_amount')
     def _check_position_balance_amount(self):
