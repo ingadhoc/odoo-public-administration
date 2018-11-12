@@ -41,10 +41,10 @@
     </record>
 
     <!-- INHERITED FORM -->
-    <record id="view_partner_property_form" model="ir.ui.view">
+    <record id="base_view_partner_form" model="ir.ui.view">
         <field name="name">partner.ar_account.form</field>
         <field name="model">res.partner</field>
-        <field name="inherit_id" ref="l10n_ar_account.view_partner_property_form"/>
+        <field name="inherit_id" ref="l10n_ar_account.base_view_partner_form"/>
         <field name="arch" type="xml">
             <field name="afip_responsability_type_id" position="attributes">
                 <!-- only required if is company or not parent -->
