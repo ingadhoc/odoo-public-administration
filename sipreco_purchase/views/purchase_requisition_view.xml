@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
     <record id="purchase_requisition.menu_purchase_requisition_pro_mgt" model="ir.ui.menu">
         <!-- Solicitudes de Compra -->
         <field name="name">Purchase Requisitions</field>
@@ -19,16 +18,17 @@
             <form>
                 <field name="id"/>
             </form>
-
             <button name="cancel_requisition" position="attributes">
                 <attribute name="groups">sipreco_purchase.group_approve_purhcase_req</attribute>
-                <attribute name="confirm">ATENCIÓN: Se van la solicitud de compra y todos los requerimientos asociados. Esto no puede deshacerse. Seguro desea continuar?</attribute>
+                <attribute name="confirm">ATENCIÓN: Se van a cancelar las solicitudes de compra y todos los requerimientos asociados. Esto no puede deshacerse. Seguro desea continuar?</attribute>
                 <attribute name="string">Cancel</attribute>
             </button>
-            
+
             <button name="sent_suppliers" position="attributes">
                 <attribute name="groups">sipreco_purchase.group_approve_purhcase_req</attribute>
                 <attribute name="string">Confirm</attribute>
+                <attribute name="states"></attribute>
+                <attribute name="attrs">{'invisible': ['|',('state', 'not in', ['draft']),('inspected', '=', False)]}</attribute>
             </button>
 
             <!-- como al cancelar se cancelan los request, no dejamos re-abrir ya que es engañoso, lo dejamos son para nosotros -->
@@ -55,6 +55,10 @@
                 <!-- <button class="oe_stat_button" name="%(stock.action_move_form2)d" string="Supply Requirements" type="action" context="{'search_default_requisition_id': id}" icon="fa-bars"/> -->
                 <button class="oe_stat_button" name="%(public_budget.action_public_budget_transaction_transactions)d" string="Transactions" type="action" groups="public_budget.group_portal_transaction,public_budget.group_secretary_director,account.group_account_user,purchase.group_purchase_user" context="{'search_default_expedient_id': expedient_id}" icon="fa-bars"/>
             </div>
+            <button name="generate_po" position="after">
+                <button name="to_inspected" string="To Inspected" type="object" groups="purchase.group_purchase_user" attrs="{'invisible':['|', ('state', '!=', 'draft'),('inspected','=', True)]}"/>
+                <button name="to_draft" string="To Draft" type="object" groups="purchase.group_purchase_user" attrs="{'invisible':['|', ('state', 'not in ', ['draft', 'in_progress']),('inspected','!=', True)]}"/>
+            </button>
 
             <field name="product_id" position="after">
                 <field name="name"/>
@@ -63,42 +67,70 @@
             <field name="product_qty" position="after">
                 <field name="price_unit"/>
             </field>
+            <xpath expr="//field[@name='line_ids']/tree//field[@name='schedule_date']" position="replace">
+                <field name="subtotal" sum="Total"/>
+            </xpath>
 
-        <!-- limpiamos vista -->
-        
+            <!-- limpiamos vista -->
+
             <field name="multiple_rfq_per_supplier" position="after">
-                <field name="type_id"/>
-                <field name="expedient_id"/>
+                <field name="type_id" readonly="1"/>
+                <field name="expedient_id" attrs="{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}"/>
+                <field name="inspected" readonly="1"/>
             </field>
 
             <field name="exclusive" position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
+                <attribute name="attrs">{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
             </field>
 
             <field name="multiple_rfq_per_supplier" position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
+                <attribute name="attrs">{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
             </field>
 
             <field name="picking_type_id" position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
+                <attribute name="attrs">{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
             </field>
 
             <field name="ordering_date" position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
+                <attribute name="attrs">{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
             </field>
 
             <field name="date_end" position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
+                <attribute name="attrs">{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
             </field>
 
             <field name="schedule_date" position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
+                <attribute name="attrs">{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
             </field>
 
             <field name="dest_address_id" position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
+                <attribute name="attrs">{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
             </field>
-
+            <field name="line_ids" position="attributes">
+                <attribute name="attrs">{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
+            </field>
+            <field name="user_id" position="attributes">
+                <attribute name="attrs">{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
+            </field>
+            <field name="name" position="attributes">
+                <attribute name="attrs">{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
+            </field>
+            <field name="company_id" position="attributes">
+                <attribute name="attrs">{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
+            </field>
+            <field name="origin" position="attributes">
+                <attribute name="attrs">{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
+            </field>
+            <field name="description" position="attributes">
+                <attribute name="attrs">{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
+            </field>
 
             <xpath expr="//notebook//page[1]//separator[2]" position="attributes">
                 <attribute name="string">Motivacion de la solicitud</attribute>
@@ -107,4 +139,57 @@
         </field>
     </record>
 
+    <record model="ir.ui.view" id="view_purchase_requisition_form2">
+        <field name="name">purchase.requisition.form</field>
+        <field name="model">purchase.requisition</field>
+        <field name="inherit_id" ref="view_purchase_requisition_form"/>
+        <field name="groups_id" eval="[(4, ref('purchase.group_purchase_user'))]"/>
+        <field name="arch" type="xml">
+            <field name="type_id" position="attributes">
+                <attribute name="readonly">False</attribute>
+                <attribute name="attrs">{'readonly': ['|', ('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_purchase_requisition_filter">
+        <field name="name">purchase.requisition.filtered</field>
+        <field name="model">purchase.requisition</field>
+        <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_filter"/>
+        <field name="arch" type="xml">
+            <filter name="draft" position="after">
+                <filter name="inspected" string="Inspected" domain="[('inspected', '=', True)]"/>
+            </filter>
+            <field name="name" position="attributes">
+                <attribute name="string">Numero de Solicitud</attribute>
+            </field>
+            <field name="exclusive" position="after">
+                <field name="description" string="Motivacion de la solicitud"/>
+                <field string="Product" name="purchase_ids" filter_domain="[('line_ids.product_id', 'ilike', self)]"/>
+                <field string="Product Description" name="purchase_ids" filter_domain="[('line_ids.name', 'ilike', self)]"/>
+            </field>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="view_purchase_requisition_tree">
+        <field name="name">purchase.requisition.tree</field>
+        <field name="model">purchase.requisition</field>
+        <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_tree"/>
+        <field name="arch" type="xml">
+            <field name="date_end" position="after">
+                <field name="type_id"/>
+            </field>
+            <field name="state" position="after">
+                <field name="inspected"/>
+                <field name="amount_total"/>
+            </field>
+            <field name="name" position="attributes">
+                <attribute name="string">Numero de Solicitud</attribute>
+            </field>
+            <field name="date_end" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+        </field>
+    </record>
 </odoo>
