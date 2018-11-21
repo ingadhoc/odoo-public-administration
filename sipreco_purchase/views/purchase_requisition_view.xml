@@ -111,7 +111,6 @@
 
             <field name="dest_address_id" position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
-                <attribute name="attrs">{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
             </field>
             <field name="line_ids" position="attributes">
                 <attribute name="attrs">{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
