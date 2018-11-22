@@ -65,11 +65,17 @@ class AccountInvoice(models.Model):
         _logger.info('Getting to pay amount for invoice %s' % self.id)
         # if invoice is paid and not payments, then it is autopaid and after
         # validation we consider it as send to paid and paid
-        if self.state == 'paid' and not self.payment_ids:
+        # TODO tal vez deberíamos mejorar porque si estamos sacando
+        # analysis_to_date no se estáría teniendo en cuenta
+        if self.state == 'paid' and not self.payment_move_line_ids:
             return self.amount_total
+
+        lines = self.move_id.line_ids.filtered(
+                lambda r: r.account_id.internal_type in (
+                    'payable', 'receivable'))
         domain = [
             ('payment_group_ids.state', 'not in', ['draft', 'cancel']),
-            ('id', 'in', self.open_move_line_ids.ids),
+            ('id', 'in', lines.ids),
         ]
         # Add this to allow analysis from date
         to_date = self._context.get('analysis_to_date', False)
@@ -77,13 +83,20 @@ class AccountInvoice(models.Model):
             domain += [('payment_group_ids.confirmation_date', '<=', to_date)]
 
         lines = self.env['account.move.line'].search(domain)
-        amount = -sum(lines.mapped('amount_residual'))
+        # en v9+ solo admitimos pago total de facturas por lo cual directamente
+        # podemos tomar el importe de la linea (si no habria que ver que parte
+        # está vinculada a la orden de pago en la que estamos)
+        amount = -sum(lines.mapped('balance'))
         if self.type in ('in_refund', 'out_refund'):
             amount = -amount
         return amount
 
     @api.multi
     def _get_paid_amount_to_date(self):
+        """ Calculo de importe pagado solamente para análisis a fecha ya que
+        si no se calcula directamente en las invoiec lines usando el residual
+        de las facturas
+        """
         self.ensure_one()
         _logger.info('Get paid amount to_date for invoice %s' % self.id)
         to_date = self._context.get('analysis_to_date', False)
@@ -92,12 +105,15 @@ class AccountInvoice(models.Model):
 
         # if invoice is paid and not payments, then it is autopaid and after
         # validation we consider it as send to paid and paid
-        if self.state == 'paid' and not self.payment_ids:
+        if self.state == 'paid' and not self.payment_move_line_ids:
             return self.amount_total
 
+        lines = self.move_id.line_ids.filtered(
+                lambda r: r.account_id.internal_type in (
+                    'payable', 'receivable'))
         domain = [
             ('payment_group_ids.state', '=', 'posted'),
-            ('id', 'in', self.open_move_line_ids.ids),
+            ('id', 'in', lines.ids),
         ]
         # Add this to allow analysis from date
         to_date = self._context.get('analysis_to_date', False)
@@ -105,7 +121,10 @@ class AccountInvoice(models.Model):
             domain += [('payment_group_ids.payment_date', '<=', to_date)]
 
         lines = self.env['account.move.line'].search(domain)
-        amount = -sum(lines.mapped('amount_residual'))
+        # en v9+ solo admitimos pago total de facturas por lo cual directamente
+        # podemos tomar el importe de la linea (si no habria que ver que parte
+        # está vinculada a la orden de pago en la que estamos)
+        amount = -sum(lines.mapped('balance'))
         if self.type in ('in_refund', 'out_refund'):
             amount = -amount
         return amount
