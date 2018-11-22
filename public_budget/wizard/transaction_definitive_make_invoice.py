@@ -175,7 +175,7 @@ class public_budget_definitive_make_invoice(models.TransientModel):
     def get_available_journal_document_types(self):
         for rec in self:
             if not rec.journal_id or not rec.supplier_id:
-                return True
+                continue
             # desde el wizard se pueden crear facturas o reembolsos
             if rec.to_invoice_amount < 0.0:
                 invoice_type = 'in_refund'

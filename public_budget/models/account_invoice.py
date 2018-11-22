@@ -133,9 +133,7 @@ class AccountInvoice(models.Model):
     @api.constrains('date_invoice', 'invoice_line_ids')
     def check_dates(self):
         _logger.info('Checking invoice dates')
-        for rec in self:
-            if not rec.date_invoice:
-                return True
+        for rec in self.filtered('date_invoice'):
             for definitive_line in rec.mapped(
                     'invoice_line_ids.definitive_line_id'):
                 if rec.date_invoice < definitive_line.issue_date:

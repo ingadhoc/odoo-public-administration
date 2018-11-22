@@ -166,7 +166,7 @@ class Remit(models.Model):
             if rec.state != 'cancel':
                 raise ValidationError(_(
                     "You can not delete a Remit that is not in Cancel State"))
-            return super(Remit, rec).unlink()
+        return super(Remit, self).unlink()
 
     @api.model
     def create(self, vals):

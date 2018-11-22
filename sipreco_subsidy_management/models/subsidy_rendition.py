@@ -79,8 +79,7 @@ class PublicBudgetSubsidyRendition(models.Model):
                 raise Warning(
                     'No es posible borrar una rendición'
                     ' que presente montos Aprobados')
-            else:
-                return super(PublicBudgetSubsidyRendition, self).unlink()
+        return super(PublicBudgetSubsidyRendition, self).unlink()
 
     @api.one
     @api.constrains('approval_arrangement_id')
