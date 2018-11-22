@@ -152,7 +152,7 @@ class PreventiveLine(models.Model):
                     affects_budget = True
             rec.affects_budget = affects_budget
 
-    @api.one
+    @api.multi
     @api.depends(
         'advance_line',
         'preventive_amount',
@@ -179,57 +179,58 @@ class PreventiveLine(models.Model):
         -balance_amount: diffference between budget position and preventive
         amount
         """
-        _logger.info('Getting amounts for preventive line %s' % self.id)
+        _logger.info('Getting amounts for preventive lines %s' % self.ids)
         # TODO this should be improoved and dependency to payment_groups_ids
         # or to advance amounst must be removed
-        if self.advance_line:
-            _logger.info('Getting advance line values')
-            transaction = self.transaction_id
-            advance_preventive_amount = transaction.advance_preventive_amount
-            if advance_preventive_amount:
-                preventive_perc = (
-                    self.preventive_amount /
-                    advance_preventive_amount)
+        to_date = self._context.get('analysis_to_date', False)
+        for rec in self:
+            if rec.advance_line:
+                _logger.info('Getting advance line values')
+                transaction = rec.transaction_id
+                advance_preventive_amount = transaction.advance_preventive_amount
+                if advance_preventive_amount:
+                    preventive_perc = (
+                        rec.preventive_amount /
+                        advance_preventive_amount)
+                else:
+                    preventive_perc = 0.0
+                definitive_amount = to_pay_amount = (
+                    transaction.advance_to_pay_amount * preventive_perc)
+                paid_amount = (transaction.advance_paid_amount * preventive_perc)
+                invoiced_amount = 0.0
             else:
-                preventive_perc = 0.0
-            definitive_amount = to_pay_amount = (
-                transaction.advance_to_pay_amount * preventive_perc)
-            paid_amount = (transaction.advance_paid_amount * preventive_perc)
-            invoiced_amount = 0.0
-        else:
-            _logger.info('Getting none advance line values')
-            definitive_lines = self.definitive_line_ids
-            if not definitive_lines:
-                return False
+                _logger.info('Getting none advance line values')
+                definitive_lines = rec.definitive_line_ids
+                if not definitive_lines:
+                    continue
 
-            invoiced_amount_field = 'invoiced_amount'
-            to_pay_amount_field = 'to_pay_amount'
-            paid_amount_field = 'paid_amount'
+                invoiced_amount_field = 'invoiced_amount'
+                to_pay_amount_field = 'to_pay_amount'
+                paid_amount_field = 'paid_amount'
 
-            # Add this to allow analysis between dates, we used computed fields
-            # in this case instead of normal fields
-            to_date = self._context.get('analysis_to_date', False)
-            if to_date:
-                filter_domain = [
-                    ('issue_date', '<=', to_date),
-                    ('id', 'in', definitive_lines.ids)]
-                definitive_lines = definitive_lines.search(filter_domain)
-                invoiced_amount_field = 'computed_invoiced_amount'
-                to_pay_amount_field = 'computed_to_pay_amount'
-                paid_amount_field = 'computed_paid_amount'
-            definitive_amount = invoiced_amount = \
-                to_pay_amount = paid_amount = 0
-            for dl in definitive_lines:
-                definitive_amount += dl.amount
-                invoiced_amount += getattr(dl, invoiced_amount_field)
-                to_pay_amount += getattr(dl, to_pay_amount_field)
-                paid_amount += getattr(dl, paid_amount_field)
-        self.remaining_amount = self.preventive_amount - definitive_amount
-        self.definitive_amount = definitive_amount
-        self.invoiced_amount = invoiced_amount
-        self.to_pay_amount = to_pay_amount
-        self.paid_amount = paid_amount
-        _logger.info('Finish getting amounts for preventive line %s' % self.id)
+                # Add this to allow analysis between dates, we used computed fields
+                # in this case instead of normal fields
+                if to_date:
+                    filter_domain = [
+                        ('issue_date', '<=', to_date),
+                        ('id', 'in', definitive_lines.ids)]
+                    definitive_lines = definitive_lines.search(filter_domain)
+                    invoiced_amount_field = 'computed_invoiced_amount'
+                    to_pay_amount_field = 'computed_to_pay_amount'
+                    paid_amount_field = 'computed_paid_amount'
+                definitive_amount = invoiced_amount = \
+                    to_pay_amount = paid_amount = 0
+                for dl in definitive_lines:
+                    definitive_amount += dl.amount
+                    invoiced_amount += getattr(dl, invoiced_amount_field)
+                    to_pay_amount += getattr(dl, to_pay_amount_field)
+                    paid_amount += getattr(dl, paid_amount_field)
+            rec.remaining_amount = rec.preventive_amount - definitive_amount
+            rec.definitive_amount = definitive_amount
+            rec.invoiced_amount = invoiced_amount
+            rec.to_pay_amount = to_pay_amount
+            rec.paid_amount = paid_amount
+            _logger.info('Finish getting amounts for preventive line %s' % rec.id)
 
     @api.multi
     @api.constrains('account_id', 'transaction_id')

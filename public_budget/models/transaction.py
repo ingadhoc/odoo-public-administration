@@ -361,7 +361,7 @@ class BudgetTransaction(models.Model):
         to_date = self._context.get('analysis_to_date', False)
         for rec in self:
             if not rec.advance_payment_group_ids:
-                return False
+                continue
 
             domain = [('id', 'in', rec.advance_payment_group_ids.ids)]
             to_pay_domain = domain + [('state', 'not in', ('cancel', 'draft'))]
