@@ -14,7 +14,7 @@
                     <field name="expedient_id"/>
                     <field name="type_id"/>
                     <field name="supplier_ids"/>
-                    <field name="budget_position_ids"/>
+                    <field name="budget_position_ids" filter_domain="['|', ('budget_position_ids', 'ilike', self), ('advance_preventive_line_ids', 'ilike', self)]"/>
                     <filter name="with_advance_payment" string="With Advance Payment" domain="[('type_id.with_advance_payment','ilike',True)]"/>
                     <group expand="0" string="Group By">
                         <field name="supplier_ids" string="Suppliers" context="{'group_by':'supplier_ids'}"/>
