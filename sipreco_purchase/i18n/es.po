@@ -4,14 +4,15 @@
 # 
 # Translators:
 # Juan José Scarafía <scarafia.juanjose@gmail.com>, 2018
+# Nicolas Mac Rouillon <nmr@ingadhoc.com>, 2018
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-11 14:07+0000\n"
+"POT-Creation-Date: 2018-11-23 14:09+0000\n"
 "PO-Revision-Date: 2017-12-11 00:32+0000\n"
-"Last-Translator: Juan José Scarafía <scarafia.juanjose@gmail.com>, 2018\n"
+"Last-Translator: Nicolas Mac Rouillon <nmr@ingadhoc.com>, 2018\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,11 +34,20 @@ msgstr ""
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_form
 msgid ""
-"ATENCIÓN: Se van la solicitud de compra y todos los requerimientos "
-"asociados. Esto no puede deshacerse. Seguro desea continuar?"
+"ATENCIÓN: Se van a cancelar las solicitudes de compra y todos los "
+"requerimientos asociados. Esto no puede deshacerse. Seguro desea continuar?"
 msgstr ""
-"ATENCIÓN: Se van la solicitud de compra y todos los requerimientos "
-"asociados. Esto no puede deshacerse. Seguro desea continuar?"
+
+#. module: sipreco_purchase
+#: model:ir.model.fields,field_description:sipreco_purchase.field_purchase_requisition_amount_total
+msgid "Amount total"
+msgstr "Monto Total"
+
+#. module: sipreco_purchase
+#: code:addons/sipreco_purchase/models/purchase_requisition.py:56
+#, python-format
+msgid "Antes de revisar debe tener establecido un\"Tipo\""
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_stock_location_route_stock_request_selectable
@@ -50,9 +60,14 @@ msgid "Aprobar Solicitudes de Compra"
 msgstr "Aprobar Solicitudes de Compra"
 
 #. module: sipreco_purchase
+#: model:res.groups,name:sipreco_purchase.group_requester
+msgid "Base Requirente"
+msgstr ""
+
+#. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_form
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr "Cancelado"
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_form
@@ -90,11 +105,22 @@ msgid "Informática"
 msgstr "Informática"
 
 #. module: sipreco_purchase
+#: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_filter
+msgid "Inspected"
+msgstr "Revisado"
+
+#. module: sipreco_purchase
+#: model:ir.model.fields,field_description:sipreco_purchase.field_purchase_requisition_inspected
+msgid "Inspected?"
+msgstr "¿Revisado?"
+
+#. module: sipreco_purchase
 #: model:ir.model,name:sipreco_purchase.model_stock_location_route
 msgid "Inventory Routes"
 msgstr "Rutas de inventario"
 
 #. module: sipreco_purchase
+#: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_filter
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_form
 msgid "Motivacion de la solicitud"
 msgstr ""
@@ -106,10 +132,16 @@ msgid "My Procurement Requests"
 msgstr "Mis Requerimientos"
 
 #. module: sipreco_purchase
-#: code:addons/sipreco_purchase/models/purchase_requisition.py:45
+#: code:addons/sipreco_purchase/models/purchase_requisition.py:79
 #, python-format
 msgid "No se puede cerrar la licitación si no se solicitaron presupuestos"
 msgstr "No se puede cerrar la licitación si no se solicitaron presupuestos"
+
+#. module: sipreco_purchase
+#: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_filter
+#: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_tree
+msgid "Numero de Solicitud"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.product_template_kanban_stock_view
@@ -138,6 +170,11 @@ msgid "Picking Types"
 msgstr "Tipos de albarán"
 
 #. module: sipreco_purchase
+#: model:res.groups,name:sipreco_purchase.group_portal_requester
+msgid "Portal - Requirente"
+msgstr ""
+
+#. module: sipreco_purchase
 #: model:ir.model,name:sipreco_purchase.model_procurement_order
 msgid "Procurement"
 msgstr "Abastecimiento"
@@ -155,7 +192,13 @@ msgstr "Abastecimientos"
 
 #. module: sipreco_purchase
 #: model:ir.model,name:sipreco_purchase.model_product_product
+#: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_filter
 msgid "Product"
+msgstr ""
+
+#. module: sipreco_purchase
+#: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_filter
+msgid "Product Description"
 msgstr ""
 
 #. module: sipreco_purchase
@@ -193,7 +236,7 @@ msgid "Purchase Requisition Line"
 msgstr "Línea solicitud de compra"
 
 #. module: sipreco_purchase
-#: model:res.groups,name:sipreco_purchase.group_requester
+#: model:res.groups,name:sipreco_purchase.group_requester_employee
 msgid "Requirente"
 msgstr "Requirente"
 
@@ -274,9 +317,29 @@ msgid "Stock Requests"
 msgstr "Requerimientos de Stock"
 
 #. module: sipreco_purchase
+#: model:ir.model.fields,field_description:sipreco_purchase.field_purchase_requisition_line_subtotal
+msgid "Subtotal"
+msgstr ""
+
+#. module: sipreco_purchase
 #: model:ir.model,name:sipreco_purchase.model_stock_picking_type
 msgid "The picking type determines the picking view"
 msgstr "El tipo de albarán determina la vista de albarán"
+
+#. module: sipreco_purchase
+#: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_form
+msgid "To Draft"
+msgstr "A Borrador"
+
+#. module: sipreco_purchase
+#: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_form
+msgid "To Inspected"
+msgstr "Marcar Revisado"
+
+#. module: sipreco_purchase
+#: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_form
+msgid "Total"
+msgstr "Total"
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_purchase_requisition_expedient_id
