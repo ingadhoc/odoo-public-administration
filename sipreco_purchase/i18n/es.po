@@ -152,7 +152,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:sipreco_purchase.field_procurement_order_partner_id
 #: model:ir.model.fields,field_description:sipreco_purchase.field_stock_procurement_request_partner_id
 msgid "Partner"
-msgstr "Empresa"
+msgstr "Solicitante"
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_procurement_filter

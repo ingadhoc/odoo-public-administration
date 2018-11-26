@@ -11,7 +11,7 @@ class StockProcurementRequest(models.Model):
 
     partner_id = fields.Many2one(
         'res.partner',
-        'Partner',
+        'Requirent',
         required=True,
         default=lambda self: self.env.user.partner_id
     )
@@ -25,6 +25,10 @@ class StockProcurementRequest(models.Model):
         string='Unidad de Compra',
         # TODO este domain podria ir en el modulo de requests
         domain=[('stock_request_selectable', '=', True)],
+    )
+    description = fields.Text(
+        'Motivacion',
+        required=True,
     )
 
     @api.multi

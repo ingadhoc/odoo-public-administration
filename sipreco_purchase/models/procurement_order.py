@@ -34,6 +34,11 @@ class ProcurementOrder(models.Model):
         readonly=True,
         states={'confirmed': [('readonly', False)]},
     )
+    requirement_id = fields.Many2one(
+        related='procurement_request_id.partner_id',
+        readonly=True,
+        string='Requirent'
+    )
 
     @api.model
     def create(self, vals):

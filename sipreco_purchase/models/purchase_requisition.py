@@ -45,6 +45,17 @@ class PurchaseRequisition(models.Model):
         compute='_compute_amount_total',
     )
 
+    date = fields.Date(
+        'Start Date',
+        readonly=True,
+    )
+    user_inspected = fields.Char(
+        track_visibility='onchange',
+    )
+    user_confirmed = fields.Char(
+        track_visibility='onchange',
+    )
+
     @api.depends('line_ids')
     def _compute_amount_total(self):
         for rec in self.filtered('line_ids'):
@@ -56,6 +67,7 @@ class PurchaseRequisition(models.Model):
             raise UserError(_('Antes de revisar debe tener establecido un'
                               '"Tipo"'))
         self.inspected = True
+        self.user_inspected = self.env.user.name
 
     @api.multi
     def to_draft(self):
@@ -70,6 +82,8 @@ class PurchaseRequisition(models.Model):
         if self._context.get('cancel_procurement', True):
             self.mapped('manual_procurement_ids').button_cancel_remaining()
         self.inspected = False
+        self.user_inspected = False
+        self.user_confirmed = False
         return super(PurchaseRequisition, self).tender_cancel()
 
     @api.multi
@@ -80,3 +94,13 @@ class PurchaseRequisition(models.Model):
                     'No se puede cerrar la licitación si no se solicitaron '
                     'presupuestos'))
         return super(PurchaseRequisition, self).tender_open()
+
+    @api.model
+    def create(self, vals):
+        vals['date'] = fields.Date.today()
+        return super(PurchaseRequisition, self).create(vals)
+
+    @api.multi
+    def tender_in_progress(self):
+        self.user_confirmed = self.env.user.name
+        super(PurchaseRequisition, self).tender_in_progress()
