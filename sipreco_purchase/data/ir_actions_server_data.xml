@@ -28,6 +28,7 @@ requisition = env['purchase.requisition'].create({
     # permitimos varias a la vez por defecto, total controlamos cantidades por afuera.
     'multiple_rfq_per_supplier': True,
     'picking_type_id': picking_type.id,
+    'description': ', '.join(recs.mapped('procurement_request_id.description'))
 })
 recs.write({'manual_requisition_id': requisition.id})
         </field>

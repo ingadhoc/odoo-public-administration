@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="view_procurement_request_search" model="ir.ui.view">
+        <field name="name">stock.procurement.request.filter</field>
+        <field name="model">stock.procurement.request</field>
+        <field name="inherit_id" ref="stock_procurement_request.view_procurement_request_search"/>
+        <field name="arch" type="xml">
+            <field name="name" position="before">
+                <field name="partner_id"/>
+            </field>
+        </field>
+    </record>
 
     <record id="view_procurement_request_tree" model="ir.ui.view">
         <field name="name">stock.procurement.request.tree</field>
@@ -8,6 +18,7 @@
         <field name="arch" type="xml">
             <field name="name" position="before">
                 <field name="create_date" widget="date"/>
+                <field name="partner_id"/>
             </field>
             <field name="warehouse_id" position="replace"/>
             <field name="location_id" position="replace">
@@ -89,6 +100,10 @@
             <!-- permitimos consumibles y filtramos por ruta del request -->
             <field name="product_id" position="attributes">
                 <attribute name="domain">[('type', 'in', ['product', 'consu']), ('route_ids', 'in', route_ids and route_ids[0][2] or [])]</attribute>
+            </field>
+            <field name="procurement_ids" position="after">
+                <separator string="Motivacion del Requerimiento"/>
+                <field name="description"/>
             </field>
         </field>
     </record>

@@ -35,6 +35,6 @@
     'installable': True,
     'name': 'Sipreco Purchase Management',
     'test': [],
-    'version': '9.0.1.8.0',
+    'version': '9.0.1.9.0',
     'license': 'AGPL-3',
 }

@@ -70,6 +70,12 @@
             <xpath expr="//field[@name='line_ids']/tree//field[@name='schedule_date']" position="replace">
                 <field name="subtotal" sum="Total"/>
             </xpath>
+            <xpath expr="//field[@name='line_ids']/tree//field[@name='product_id']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <field name="date_end" position="before">
+                <field name="date"/>
+            </field>
 
             <!-- limpiamos vista -->
 
@@ -77,6 +83,8 @@
                 <field name="type_id" readonly="1"/>
                 <field name="expedient_id" attrs="{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}"/>
                 <field name="inspected" readonly="1"/>
+                <field name="user_inspected" readonly="1"/>
+                <field name="user_confirmed" readonly="1"/>
             </field>
 
             <field name="exclusive" position="attributes">
@@ -128,6 +136,7 @@
                 <attribute name="attrs">{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
             </field>
             <field name="description" position="attributes">
+                <attribute name="required">True</attribute>
                 <attribute name="attrs">{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
             </field>
 
@@ -164,6 +173,7 @@
             </field>
             <field name="exclusive" position="after">
                 <field name="description" string="Motivacion de la solicitud"/>
+                <field name="expedient_id"/>
                 <field string="Product" name="purchase_ids" filter_domain="[('line_ids.product_id', 'ilike', self)]"/>
                 <field string="Product Description" name="purchase_ids" filter_domain="[('line_ids.name', 'ilike', self)]"/>
             </field>
@@ -178,6 +188,7 @@
         <field name="arch" type="xml">
             <field name="date_end" position="after">
                 <field name="type_id"/>
+                <field name="date"/>
             </field>
             <field name="state" position="after">
                 <field name="inspected"/>
@@ -188,6 +199,9 @@
             </field>
             <field name="date_end" position="attributes">
                 <attribute name="invisible">1</attribute>
+            </field>
+            <field name="ordering_date" position="replace">
+                <field name="expedient_id"/>
             </field>
         </field>
     </record>

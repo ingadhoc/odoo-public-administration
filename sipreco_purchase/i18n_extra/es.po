@@ -27,3 +27,17 @@ msgstr "Solicitante"
 msgid "User"
 msgstr "Comprador"
 
+#. module: stock
+#: model:ir.model,name:stock.model_res_partner
+#: model:ir.model.fields,field_description:stock.field_procurement_group_partner_id
+#: model:ir.model.fields,field_description:stock.field_stock_picking_partner_id
+#: model:ir.ui.view,arch_db:stock.view_move_search
+msgid "Partner"
+msgstr "Solicitante"
+
+#. module: stock_procurement_request
+#: model:ir.model.fields,field_description:stock_procurement_request.field_procurement_order_procurement_request_id
+#: model:ir.model.fields,field_description:stock_procurement_request.field_stock_move_procurement_request_id
+msgid "Procurement Request"
+msgstr "Solicitud de Requierimiento"
+
