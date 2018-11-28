@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-27 14:14+0000\n"
+"POT-Creation-Date: 2018-11-27 20:23+0000\n"
 "PO-Revision-Date: 2017-12-11 00:32+0000\n"
 "Last-Translator: Nicolas Mac Rouillon <nmr@ingadhoc.com>, 2018\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
@@ -319,7 +319,7 @@ msgstr "Solicitud de Compra"
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_purchase_requisition_date
 msgid "Start Date"
-msgstr ""
+msgstr "Fecha de creación"
 
 #. module: sipreco_purchase
 #: model:ir.model,name:sipreco_purchase.model_stock_move
