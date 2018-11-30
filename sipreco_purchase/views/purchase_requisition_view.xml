@@ -81,7 +81,7 @@
 
             <field name="multiple_rfq_per_supplier" position="after">
                 <field name="type_id" readonly="1"/>
-                <field name="expedient_id" attrs="{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}"/>
+                <field name="expedient_id" attrs="{'readonly': [('state', '=', 'done')]}"/>
                 <field name="inspected" readonly="1"/>
                 <field name="user_inspected" readonly="1"/>
                 <field name="user_confirmed" readonly="1"/>
