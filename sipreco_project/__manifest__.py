@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 {
     'name': 'Sipreco Project',
     'version': '9.0.1.0.0',

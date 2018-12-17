@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from . import subsidy
 from . import subsidy_approval_arrangement
 from . import subsidy_rendition

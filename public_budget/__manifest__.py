@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 {
     'name': 'Public Budget',
     'license': 'AGPL-3',

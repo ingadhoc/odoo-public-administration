@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from odoo import tools
 from odoo import models, fields, api, _
 from odoo.addons.public_budget.models.transaction import BudgetTransaction
