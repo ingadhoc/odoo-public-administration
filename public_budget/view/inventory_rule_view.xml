@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
     <data>
         <!-- SEARCH VIEW -->
         <record id="view_public_budget_inventory_rule_filter" model="ir.ui.view">
@@ -48,4 +48,4 @@
         </record>
 
     </data>
-</openerp>
+</odoo>

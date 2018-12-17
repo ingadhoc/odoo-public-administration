@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<openerp>
+<odoo>
     <data>
 
         <record id="account_payment_line_import_view" model="ir.ui.view">
@@ -33,4 +33,4 @@
         <!-- <menuitem id="menu_account_payment_line_import" parent="account.menu_finance_bank_and_cash" action="action_account_payment_line_import" sequence="8"/> -->
 
     </data>
-</openerp>
+</odoo>

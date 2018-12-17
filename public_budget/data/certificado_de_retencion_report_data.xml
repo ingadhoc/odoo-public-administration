@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
 
 <record id="l10n_ar_account_withholding.action_aeroo_certificado_de_retencion_report" model="ir.actions.report.xml">
     <field name="process_sep" eval="True"/>
 </record>
 
-</openerp>
+</odoo>
