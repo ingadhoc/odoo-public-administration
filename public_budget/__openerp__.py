@@ -141,5 +141,5 @@
         'demo/advance_request.xml',
     ],
     'test': [],
-    'installable': True,
+    'installable': False,
 }

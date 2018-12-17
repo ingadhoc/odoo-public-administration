@@ -14,7 +14,7 @@
         'public_budget',
         'account_tax_settlement',
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': True,
     'name': 'Public Budget integration with Tax settlement',
     'test': [],

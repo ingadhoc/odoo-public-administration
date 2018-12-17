@@ -32,7 +32,7 @@
         'purchase_requisition',
         'stock_procurement_request',
     ],
-    'installable': True,
+    'installable': False,
     'name': 'Sipreco Purchase Management',
     'test': [],
     'version': '9.0.1.10.0',

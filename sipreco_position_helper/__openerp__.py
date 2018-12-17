@@ -12,7 +12,7 @@
     'depends': [
         'public_budget',
     ],
-    'installable': True,
+    'installable': False,
     'name': 'Sipreco Position Helper',
     'test': [],
     'version': '9.0.1.0.0',
