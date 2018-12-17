@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 {
     'name': 'Public Budget',
     'license': 'AGPL-3',
@@ -140,6 +139,5 @@
         'demo/advance_request_type.xml',
         'demo/advance_request.xml',
     ],
-    'test': [],
     'installable': False,
 }

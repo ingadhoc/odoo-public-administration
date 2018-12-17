@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
-from openerp import api, models, fields, _
-from openerp.exceptions import ValidationError as UserError
+from odoo import api, models, fields, _
+from odoo.exceptions import ValidationError as UserError
 import logging
 
 _logger = logging.getLogger(__name__)  # pylint: disable=invalid-name

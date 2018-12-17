@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
     <data noupdate="1">
         <record id="action_budget_modification_report" model="ir.actions.report.xml">
             <field name="name">Budget Modification Report</field>
@@ -18,4 +18,4 @@
         </record>
 
     </data>
-</openerp>
+</odoo>

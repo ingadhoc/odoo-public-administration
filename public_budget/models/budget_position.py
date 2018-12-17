@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
-from openerp import models, fields, api, _
-from openerp.exceptions import ValidationError
+from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 from datetime import datetime
 import logging
 _logger = logging.getLogger(__name__)
@@ -77,11 +76,11 @@ class BudgetPosition(models.Model):
     )
     parent_left = fields.Integer(
         string='Parent Left',
-        select=True
+        index=True,
     )
     parent_right = fields.Integer(
         string='Parent Right',
-        select=True
+        index=True,
     )
     child_ids = fields.One2many(
         'public_budget.budget_position',

@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
-from openerp import models, fields, api, _
-from openerp.exceptions import ValidationError, UserError
-import openerp.addons.decimal_precision as dp
+from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError, UserError
+import odoo.addons.decimal_precision as dp
 # from dateutil.relativedelta import relativedelta
 import logging
 _logger = logging.getLogger(__name__)

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 {
     'name': 'Sipreco Project',
     'version': '9.0.1.0.0',
@@ -32,8 +31,6 @@
     'demo': [
         'demo/config_data.xml',
         'demo/load_es_lang.yml',
-    ],
-    'test': [
     ],
     'installable': False,
     'auto_install': False,

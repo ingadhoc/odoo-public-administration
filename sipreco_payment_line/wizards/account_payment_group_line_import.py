@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
 import logging
 import base64
 from StringIO import StringIO
-from openerp import api, models, fields, _
-from openerp.exceptions import ValidationError as UserError
+from odoo import api, models, fields, _
+from odoo.exceptions import ValidationError as UserError
 
 _logger = logging.getLogger(__name__)  # pylint: disable=invalid-name
 
@@ -87,7 +86,7 @@ class AccountPaymentGroupLineImport(models.TransientModel):
                     'cuit': line_vals[1],
                     'amount': float(line_vals[4]),
                 })
-        except Exception, e:
+        except Exception as e:
             raise UserError(_(
                 "Ocurrió un error al importar. "
                 "El archivo puede no ser valido.\n\n %s" % e.message

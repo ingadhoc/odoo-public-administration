@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
     <data noupdate="1">
 
         <!-- Printed Invoice -->
@@ -31,4 +31,4 @@
             <field eval="True" name="replace"/>
         </ir_set>
     </data>
-</openerp>
+</odoo>

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 {
     'author': 'ADHOC SA,Odoo Community Association (OCA)',
     'website': 'www.adhoc.com.ar',
@@ -14,6 +13,5 @@
     ],
     'installable': False,
     'name': 'Sipreco Position Helper',
-    'test': [],
     'version': '9.0.1.0.0',
 }

@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
-from openerp import tools
-from openerp import models, fields, api, _
-from openerp.addons.public_budget.models.transaction import BudgetTransaction
+from odoo import tools
+from odoo import models, fields, api, _
+from odoo.addons.public_budget.models.transaction import BudgetTransaction
 
 
 class PublicBudgetBudgetReport(models.Model):

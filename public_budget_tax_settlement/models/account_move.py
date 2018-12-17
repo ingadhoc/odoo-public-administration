@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-from openerp import api, models, _
+from odoo import api, models, _
 
 
 class AccoutMove(models.Model):

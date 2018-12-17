@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
-from openerp import fields, models, api
-from openerp.exceptions import ValidationError
+from odoo import fields, models, api
+from odoo.exceptions import ValidationError
 from dateutil.relativedelta import relativedelta
 from datetime import date
 import logging

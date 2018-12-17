@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 {
     'author': 'ADHOC SA,Odoo Community Association (OCA)',
     'website': 'www.adhoc.com.ar',
@@ -17,7 +16,6 @@
     'installable': False,
     'auto_install': True,
     'name': 'Public Budget integration with Tax settlement',
-    'test': [],
     'version': '9.0.1.2.0',
     'license': 'AGPL-3',
 }

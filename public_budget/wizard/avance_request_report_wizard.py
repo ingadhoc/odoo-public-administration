@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
-from openerp import models, fields, api
-# from openerp.exceptions import ValidationError
+from odoo import models, fields, api
+# from odoo.exceptions import ValidationError
 
 
 class public_budget_avance_request_report_wizard(models.TransientModel):
