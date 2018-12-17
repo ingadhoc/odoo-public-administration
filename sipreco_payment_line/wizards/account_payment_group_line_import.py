@@ -2,8 +2,8 @@
 import logging
 import base64
 from StringIO import StringIO
-from openerp import api, models, fields, _
-from openerp.exceptions import ValidationError as UserError
+from odoo import api, models, fields, _
+from odoo.exceptions import ValidationError as UserError
 
 _logger = logging.getLogger(__name__)  # pylint: disable=invalid-name
 

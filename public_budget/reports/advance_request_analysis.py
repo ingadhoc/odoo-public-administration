@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from openerp import tools
-from openerp import models, fields
+from odoo import tools
+from odoo import models, fields
 
 
 class AdvanceRequestAnalysis(models.Model):

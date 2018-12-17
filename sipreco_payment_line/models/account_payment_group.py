@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-from openerp import models, fields, api, _
-from openerp.exceptions import ValidationError as UserError
-from openerp.tools import float_is_zero
+from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError as UserError
+from odoo.tools import float_is_zero
 import base64
 
 

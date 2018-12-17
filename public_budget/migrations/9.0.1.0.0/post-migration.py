@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 # Copyright <YEAR(S)> <AUTHOR(S)>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-# from openerp.api import Environment
+# from odoo.api import Environment
 try:
     from openupgradelib.openupgrade_tools import table_exists
     from openupgradelib import openupgrade
 except ImportError:
     table_exists = None
 import logging
-from openerp.exceptions import ValidationError
+from odoo.exceptions import ValidationError
 _logger = logging.getLogger(__name__)
 
 

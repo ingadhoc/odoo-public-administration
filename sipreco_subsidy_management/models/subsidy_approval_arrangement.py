@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import fields, models, api
+from odoo import fields, models, api
 import logging
 _logger = logging.getLogger(__name__)
 
