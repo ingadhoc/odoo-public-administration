@@ -87,7 +87,7 @@ class AccountPaymentGroupLineImport(models.TransientModel):
                     'cuit': line_vals[1],
                     'amount': float(line_vals[4]),
                 })
-        except Exception, e:
+        except Exception as e:
             raise UserError(_(
                 "Ocurrió un error al importar. "
                 "El archivo puede no ser valido.\n\n %s" % e.message
