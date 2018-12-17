@@ -6,6 +6,8 @@
         <record id="action_print_checks_from_pay_group" model="ir.actions.server">
             <field name="name">Imprimir Cheques</field>
             <field name="model_id" ref="account_payment_group.model_account_payment_group"/>
+            <field name="binding_model_id" ref="account_payment_group.model_account_payment_group"/>
+            <field name="binding_type">report</field>
             <field name="state">code</field>
             <field name="code">
 ids = context['active_ids']
@@ -15,15 +17,6 @@ if not payments:
 payments = payments.with_context(active_model=payments._name, active_ids=payments.ids)
 action = payments.env['report'].get_action(payments, 'check_report')
             </field>
-        </record>
-
-        <record model="ir.values" id="ir_action_print_checks_from_pay_group">
-            <field name="model_id" ref="account_payment_group.model_account_payment_group" />
-            <field name="name">Imprimir Cheques</field>
-            <field name="key2">client_print_multi</field>
-            <field eval="'ir.actions.server,%d'%action_print_checks_from_pay_group" name="value"/>
-            <field name="key">action</field>
-            <field name="model">account.payment.group</field>
         </record>
 
     </data>

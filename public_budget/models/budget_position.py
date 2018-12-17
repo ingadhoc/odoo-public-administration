@@ -76,11 +76,11 @@ class BudgetPosition(models.Model):
     )
     parent_left = fields.Integer(
         string='Parent Left',
-        select=True
+        index=True,
     )
     parent_right = fields.Integer(
         string='Parent Right',
-        select=True
+        index=True,
     )
     child_ids = fields.One2many(
         'public_budget.budget_position',
