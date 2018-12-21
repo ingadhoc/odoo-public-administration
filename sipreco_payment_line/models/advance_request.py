@@ -1,14 +1,13 @@
 from odoo import models, api
 
 
-class advance_request(models.Model):
-    """"""
+class AdvanceRequest(models.Model):
 
     _inherit = 'public_budget.advance_request'
 
     @api.multi
     def create_payment_group(self):
-        payment_group = super(advance_request, self).create_payment_group()
+        payment_group = super(AdvanceRequest, self).create_payment_group()
         for line in self.advance_request_line_ids:
             partner = line.employee_id
             payment_group.line_ids.create({
