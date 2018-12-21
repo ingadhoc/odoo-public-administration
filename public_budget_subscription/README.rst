@@ -14,7 +14,7 @@
 Public Budget Subscription
 ==========================
 
-This module of purchase contracts and adds some specific changes in views.
+This module of purchase Subscription and adds some specific changes in views.
 
 Installation
 ============
@@ -35,7 +35,7 @@ Usage
 
 To use this module, you need to:
 
-#. Go to Purchase / Contracts
+#. Go to Purchase / Subscription
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
@@ -45,7 +45,7 @@ Bug Tracker
 ===========
 
 Bugs are tracked on `GitHub Issues
-<https://github.com/ingadhoc/odoo-public-administrator/issues>`_. In case of trouble, please
+<https://github.com/ingadhoc/{project_repo}/issues>`_. In case of trouble, please
 check there if your issue has already been reported. If you spotted it first,
 help us smashing it by providing a detailed and welcomed feedback.
 

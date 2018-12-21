@@ -15,7 +15,6 @@ class PurchaseSubscription(models.Model):
 
     expedient_id = fields.Many2one(
         'public_budget.expedient',
-        string='Expedient',
         required=True,
     )
 
@@ -25,7 +24,6 @@ class PurchaseSubscription(models.Model):
 
         def fill_remind(key, domain, write_pending=False):
             base_domain = [
-                ('type', '=', 'contract'),
                 ('partner_id', '!=', False),
                 ('manager_id', '!=', False),
                 ('manager_id.email', '!=', False),
