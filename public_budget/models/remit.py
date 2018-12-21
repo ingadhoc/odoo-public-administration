@@ -59,7 +59,7 @@ class Remit(models.Model):
         readonly=False
     )
     user_location_ids = fields.Many2many(
-        compute='get_user_locations',
+        compute='_compute_user_locations',
         comodel_name='public_budget.location',
         string='User Locations',
     )
@@ -94,28 +94,24 @@ class Remit(models.Model):
         return super(Remit, self).onchange(
             values, field_name, field_onchange)
 
-    @api.multi
     # dummy depends to compute values on create
     @api.depends('state')
-    def get_user_locations(self):
+    def _compute_user_locations(self):
         for rec in self:
             rec.user_location_ids = rec.env.user.location_ids
 
-    @api.multi
     @api.constrains('state')
     def check_state(self):
-        for rec in self:
-            if rec.state == 'cancel':
-                for expedient in rec.expedient_ids:
-                    remits = rec.search([
-                        ('expedient_ids', '=', expedient.id)],
-                        order='date desc')
-                    if remits[0] != rec:
-                        raise ValidationError(_(
-                            'You can Not cancel a remit that is not the last '
-                            'one for all the expedients'))
+        for rec in self.filtered(lambda x: x.state == 'cancel'):
+            for expedient in rec.expedient_ids:
+                remits = rec.search([
+                    ('expedient_ids', '=', expedient.id)],
+                    order='date desc')
+                if remits[0] != rec:
+                    raise ValidationError(_(
+                        'You can Not cancel a remit that is not the last '
+                        'one for all the expedients'))
 
-    @api.multi
     @api.constrains('date', 'expedient_ids')
     def check_dates(self):
         for rec in self:
@@ -124,11 +120,11 @@ class Remit(models.Model):
                 ('id', 'in', rec.expedient_ids.ids),
             ])
             if future_expedients:
-                raise ValidationError(
+                raise ValidationError(_(
                     'No puede mover expedientes que hayan sido movidos en un '
                     'remito con fecha mayor a la de este remito!\n'
                     '* Expedientes: %s' % (', '.join(
-                        future_expedients.mapped('number'))))
+                        future_expedients.mapped('number')))))
 
     @api.multi
     def check_user_location(self):

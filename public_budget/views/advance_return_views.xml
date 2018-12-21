@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- SEARCH VIEW -->
+    <record id="view_public_budget_advance_return_filter" model="ir.ui.view">
+        <field name="name">public_budget.advance_return.select</field>
+        <field name="model">public_budget.advance_return</field>
+        <field name="arch" type="xml">
+            <search string="Advance Return">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="user_id"/>
+                <field name="type_id"/>
+                <field name="state"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_by_type_id" string="Type" context="{'group_by':'type_id'}"/>
+                    <filter name="group_by_state" string="State" context="{'group_by':'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- FORMVIEW -->
+    <record id="view_public_budget_advance_return_form" model="ir.ui.view">
+        <field name="name">public_budget.advance_return.form</field>
+        <field name="model">public_budget.advance_return</field>
+        <field name="arch" type="xml">
+            <form string="Advance Return">
+                <header>
+                    <button name="%(action_aeroo_report_advance_return)d" class="oe_highlight" string="Print" type="action"/>
+                    <button name="action_confirm" states="draft" string="Confirm" type="object" class="oe_highlight" groups="account.group_account_user"/>
+                    <button name="action_cancel_draft" states="cancel" type="object" string="To Draft"/>
+                    <button name="action_cancel" states="confirmed,draft" string="Cancel" type="object" groups="account.group_account_user"/>
+                    <field name="state" widget="statusbar" statusbar_colors='{}'/>
+                </header>
+                <sheet string="advance_return">
+                    <div class="oe_button_box" name="buttons">
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="type_id"/>
+                            <field name="date"/>
+                        </group>
+                        <group>
+                            <field name="user_id"/>
+                            <field name="confirmation_date" attrs="{'invisible': [('confirmation_date', '=', False)]}"/>
+                            <field name="move_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <button name="compute_debtors" type="object" string="Fill with Debtors" states="draft"/>
+                    <field name="return_line_ids">
+                        <tree string="Advance Return Line" editable="top">
+                            <field name="employee_id"/>
+                            <field name="debt_amount" states="draft" sum="Total"/>
+                            <field name="returned_amount" sum="Total"/>
+                            <field name="state" invisible="1"/>
+                            <field name="currency_id" invisible="1"/>
+                        </tree>
+                    </field>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+    <!-- TREEVIEW -->
+    <record id="view_public_budget_advance_return_tree" model="ir.ui.view">
+        <field name="name">public_budget.advance_return.tree</field>
+        <field name="model">public_budget.advance_return</field>
+        <field name="arch" type="xml">
+            <tree string="Advance Return" colors="grey:state=='cancelled';blue:state in (u'draft',);black:state in (u'confirmed',);red:state in ()">
+                <field name="name"/>
+                <field name="type_id"/>
+                <field name="date"/>
+                <field name="user_id"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

@@ -8,18 +8,15 @@ class BudgetModificationDetail(models.Model):
     _description = 'Budget Modification Detail'
 
     amount = fields.Monetary(
-        string='Amount',
         required=True,
     )
     budget_modification_id = fields.Many2one(
         'public_budget.budget_modification',
         ondelete='cascade',
-        string='Modification',
         required=True
     )
     budget_position_id = fields.Many2one(
         'public_budget.budget_position',
-        string='Budget Position',
         required=True,
         context={
             'default_type': 'normal', 'default_budget_assignment_allowed': 1},
@@ -67,7 +64,6 @@ class BudgetModificationDetail(models.Model):
             self._check_modification(position, budget)
         return res
 
-    @api.multi
     @api.constrains('budget_position_id', 'amount')
     def check_modification(self):
         for rec in self:

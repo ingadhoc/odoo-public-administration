@@ -6,7 +6,6 @@ _logger = logging.getLogger(__name__)
 
 
 class AccountPayment(models.Model):
-    """"""
 
     _inherit = 'account.payment'
 
@@ -54,7 +53,6 @@ class AccountPayment(models.Model):
                 'No puede modificar una devolución de retención'))
         return super(AccountPayment, self).write(vals)
 
-    @api.one
     @api.depends('invoice_ids', 'payment_type', 'partner_type', 'partner_id')
     def _compute_destination_account_id(self):
         """
@@ -177,7 +175,6 @@ class AccountPayment(models.Model):
             'context': context,
         }
 
-    @api.multi
     @api.onchange('check_number')
     @api.constrains('check_number')
     def unique_check_number(self):

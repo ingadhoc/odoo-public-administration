@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <data noupdate="1">
+<odoo noupdate="1">
 
-        <!-- Sequences for expedient -->
-        <record id="seq_expedient" model="ir.sequence">
-            <field name="name">Expedient</field>
-            <field name="code">public_budget.expedient</field>
-            <field name="prefix">TA-%(year)s-</field>
-            <field name="padding">6</field>
-            <field name="company_id" eval="False"/>
-            <field name="implementation">no_gap</field>
-        </record>
+    <!-- Sequences for expedient -->
+    <record id="seq_expedient" model="ir.sequence">
+        <field name="name">Expedient</field>
+        <field name="code">public_budget.expedient</field>
+        <field name="prefix">TA-%(year)s-</field>
+        <field name="padding">6</field>
+        <field name="company_id" eval="False"/>
+        <field name="implementation">no_gap</field>
+    </record>
 
-        <!-- Sequences for remit -->
+    <!-- Sequences for remit -->
 
-        <record id="seq_remit" model="ir.sequence">
-            <field name="name">Remit</field>
-            <field name="code">public_budget.remit</field>
-            <field name="prefix">RE-%(year)s-</field>
-            <field name="padding">6</field>
-            <field name="company_id" eval="False"/>
-        </record>
+    <record id="seq_remit" model="ir.sequence">
+        <field name="name">Remit</field>
+        <field name="code">public_budget.remit</field>
+        <field name="prefix">RE-%(year)s-</field>
+        <field name="padding">6</field>
+        <field name="company_id" eval="False"/>
+    </record>
 
-    </data>
 </odoo>

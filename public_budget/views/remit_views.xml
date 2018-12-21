@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- SEARCH VIEW -->
+    <record id="view_public_budget_remit_filter" model="ir.ui.view">
+        <field name="name">public_budget.remit.select</field>
+        <field name="model">public_budget.remit</field>
+        <field name="arch" type="xml">
+            <search string="Remit">
+                <field name="number"/>
+                <field name="date"/>
+                <field name="user_id"/>
+                <field name="location_id"/>
+                <field name="location_dest_id"/>
+                <group expand="0" string="Group By">
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- FORMVIEW -->
+    <record id="view_public_budget_remit_form" model="ir.ui.view">
+        <field name="name">public_budget.remit.form</field>
+        <field name="model">public_budget.remit</field>
+        <field name="arch" type="xml">
+            <form string="Remit">
+                <header>
+                    <button name="%(action_aeroo_report_remit)d" class="oe_highlight" string="Print" type="action"/>
+                    <button name="action_confirm"
+                        type="object"
+                        states="in_transit"
+                        string="Confirm"
+                        class="oe_highlight"/>
+                    <button name="action_cancel_in_transit"
+                        type="object"
+                        states="cancel"
+                        string="To In Transit"/>
+                    <button name="action_cancel"
+                        type="object"
+                        states="confirmed,in_transit"
+                        string="Cancel"
+                        groups="base.group_no_one"/>
+                    <field name="state" widget="statusbar"
+                        statusbar_colors='{}'/>
+                </header>
+                <sheet string="Remit">
+                    <field name="user_location_ids" invisible="True"/>
+                    <h1>
+                        <label for="number"/>
+                        <field name="number" class="oe_inline" readonly="1"/>
+                    </h1>
+                   <div class="oe_button_box" name="buttons">
+                   </div>
+                 <group>
+                    <group>
+                        <field name="date"/> 
+                        <field name="location_id"
+                            domain="[('id', 'in', user_location_ids)]"
+                            options="{'no_create': True}"
+                            atts="{'readonly': [('expedient_ids', '!=', [(6, False, [])])]}"/>
+                        <field name="location_dest_id"
+                            domain="[('id','!=',location_id)]" options="{'no_create': True}"/> 
+                        <field name="reference"/> 
+                    </group>
+                    <group>
+                        <field name="user_id"/> 
+                        <field name="confirmation_user_id"/> 
+                        <field name="confirmation_date"/> 
+                    </group>
+                 </group>
+                <field name="expedient_ids"
+                    domain="[('current_location_id','=',location_id),('in_transit','=',False)]" options="{'no_create': True}"
+                /> 
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+    <!-- TREEVIEW -->
+    <record id="view_public_budget_remit_tree" model="ir.ui.view">
+        <field name="name">public_budget.remit.tree</field>
+        <field name="model">public_budget.remit</field>
+        <field name="arch" type="xml">
+            <tree string="Remit"
+                colors="grey:state=='cancelled';blue:state in (u'in_transit',);black:state in (u'confirmed',);red:state in ()"
+                >
+                <field name="number"/>
+                <field name="date"/>
+                <field name="user_id"/>
+                <field name="location_id"/>
+                <field name="location_dest_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- SEARCH VIEW -->
+    <record id="view_public_budget_invoice_line_filter" model="ir.ui.view">
+        <field name="name">public_budget.invoice_line.select</field>
+        <field name="model">account.invoice.line</field>
+        <field name="arch" type="xml">
+            <search string="invoice_line">
+                <group expand="0" string="Group By">
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- FORMVIEW -->
+    <record id="view_public_budget_invoice_line_form" model="ir.ui.view">
+        <field name="name">public_budget.invoice_line.form</field>
+        <field name="model">account.invoice.line</field>
+        <field name="arch" type="xml">
+            <form string="invoice_line">
+                <header>
+                </header>
+                <sheet string="invoice_line">
+                    <div class="oe_button_box" name="buttons">
+                    </div>
+                    <group>
+                    </group>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+    <!-- TREEVIEW -->
+    <record id="view_public_budget_invoice_line_tree" model="ir.ui.view">
+        <field name="name">public_budget.invoice_line.tree</field>
+        <field name="model">account.invoice.line</field>
+        <field name="arch" type="xml">
+            <tree string="invoice_line">
+            </tree>
+        </field>
+    </record>
+
+</odoo>

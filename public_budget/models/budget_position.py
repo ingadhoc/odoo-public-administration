@@ -30,56 +30,53 @@ class BudgetPosition(models.Model):
     )
     category_id = fields.Many2one(
         'public_budget.budget_position_category',
-        string='Category'
     )
     inventariable = fields.Boolean(
         string='Inventariable?'
     )
     draft_amount = fields.Monetary(
-        compute='_get_amounts',
+        compute='_compute_amounts',
     )
     preventive_amount = fields.Monetary(
         string='Monto Preventivo',
-        compute='_get_amounts',
+        compute='_compute_amounts',
     )
     definitive_amount = fields.Monetary(
         string='Monto Definitivo',
-        compute='_get_amounts',
+        compute='_compute_amounts',
     )
     to_pay_amount = fields.Monetary(
         string='Monto A Pagar',
-        compute='_get_amounts',
+        compute='_compute_amounts',
     )
     paid_amount = fields.Monetary(
         string='Monto Pagado',
-        compute='_get_amounts'
+        compute='_compute_amounts'
     )
     balance_amount = fields.Monetary(
         string='Saldo',
-        compute='_get_amounts',
+        compute='_compute_amounts',
     )
     projected_amount = fields.Monetary(
         string='Monto Proyectado',
-        compute='_get_amounts',
+        compute='_compute_amounts',
     )
     projected_avg = fields.Monetary(
         string='Projected Avg',
-        compute='_get_amounts',
+        compute='_compute_amounts',
     )
     preventive_avg = fields.Monetary(
         string='Porc. Preventivo',
-        compute='_get_amounts',
+        compute='_compute_amounts',
     )
     amount = fields.Monetary(
         string='Monto',
-        compute='_get_amounts',
+        compute='_compute_amounts',
     )
     parent_left = fields.Integer(
-        string='Parent Left',
         index=True,
     )
     parent_right = fields.Integer(
-        string='Parent Right',
         index=True,
     )
     child_ids = fields.One2many(
@@ -97,27 +94,22 @@ class BudgetPosition(models.Model):
     budget_detail_ids = fields.One2many(
         'public_budget.budget_detail',
         'budget_position_id',
-        string='budget_detail_ids'
     )
     budget_modification_detail_ids = fields.One2many(
         'public_budget.budget_modification_detail',
         'budget_position_id',
-        string='budget_modification_detail_ids'
     )
     preventive_line_ids = fields.One2many(
         'public_budget.preventive_line',
         'budget_position_id',
-        string='Preventive Lines'
     )
     assignment_position_id = fields.Many2one(
         'public_budget.budget_position',
-        string='Assignment Position',
-        compute='_get_assignment_position',
+        compute='_compute_assignment_position',
         store=True,
     )
     company_id = fields.Many2one(
         'res.company',
-        string='Company',
         required=True,
         default=lambda self: self.env.user.company_id,
     )
@@ -131,7 +123,6 @@ class BudgetPosition(models.Model):
         "('internal_type', '=', 'other'), "
         "('company_id', '=', company_id), "
         "('deprecated', '=', False)]",
-        string='Default Account',
         help='Default Account on preventive lines of this position'
     )
 
@@ -142,7 +133,7 @@ class BudgetPosition(models.Model):
     #     'preventive_line_ids.preventive_amount',
     #     'preventive_line_ids.definitive_line_ids.amount',
     #     )
-    def _get_amounts(self):
+    def _compute_amounts(self):
         """Update the following fields with the related values to the budget
         and the budget position:
         -draft_amount: amount sum on preventive lines in draft state
@@ -207,18 +198,22 @@ class BudgetPosition(models.Model):
                 modification_lines = self.env[
                     'public_budget.budget_modification_detail'].search(
                         modification_domain)
-                modification_amounts = [line.amount for line in modification_lines]
-                initial_lines = self.env['public_budget.budget_detail'].search([
-                    ('budget_id', '=', budget_id),
-                    ('budget_position_id', operator, rec.id)])
-                initial_amounts = [line.initial_amount for line in initial_lines]
+                modification_amounts = [
+                    line.amount for line in modification_lines]
+                initial_lines = self.env[
+                    'public_budget.budget_detail'].search([
+                        ('budget_id', '=', budget_id),
+                        ('budget_position_id', operator, rec.id)])
+                initial_amounts = [
+                    line.initial_amount for line in initial_lines]
                 amount = sum(initial_amounts) + sum(modification_amounts)
             else:
                 amount = False
 
-            # we exclude lines from preventive lines because constraints sometimes
-            # consider the line you are checking and sometimes not, so better we
-            # exclude that line and compare to that line amount
+            # we exclude lines from preventive lines because constraints
+            # sometimes consider the line you are checking and sometimes
+            #  not, so better we exclude that line and compare
+            # to that line amount
             if excluded_line_id:
                 domain.append(('id', '!=', excluded_line_id))
 
@@ -245,18 +240,19 @@ class BudgetPosition(models.Model):
                 domain
             )
 
-            preventive_amount = definitive_amount = to_pay_amount = paid_amount = 0
+            preventive_amount = definitive_amount =\
+                to_pay_amount = paid_amount = 0
             if active_preventive_lines:
-                # if from_date or to_date we can not use stored value, we should
-                # get method value (using computed fields)
+                # if from_date or to_date we can not use stored value,
+                # we should get method value (using computed fields)
                 # if from_date or to_date:
                 if to_date:
                     _logger.info('Getting values from computed fields methods')
                     # TODO, ver si hay una mejor forma de hacer esto. lo que
                     # estamos haciendo es forzar el modo onchange para que odoo
-                    # no use los valores almacenadados que los calcule. Tratamos
-                    # de usar "do_in_onchange" pero como el mode es True no termina
-                    # cambiando nada el metodo _do_in_mode
+                    # no use los valores almacenadados que los calcule.
+                    #  Tratamos de usar "do_in_onchange" pero como el mode es
+                    # True no termina cambiando nada el metodo _do_in_mode
                     env_all_mode = active_preventive_lines.env.all.mode
                     active_preventive_lines.env.all.mode = 'onchange'
                     for pl in active_preventive_lines:
@@ -272,7 +268,8 @@ class BudgetPosition(models.Model):
                         'SELECT preventive_amount, definitive_amount, '
                         'to_pay_amount, paid_amount '
                         'FROM public_budget_preventive_line '
-                        'WHERE id IN %s', (tuple(active_preventive_lines.ids),))
+                        'WHERE id IN %s', (
+                            tuple(active_preventive_lines.ids),))
                     for r in self._cr.fetchall():
                         preventive_amount += r[0]
                         definitive_amount += r[1]
@@ -322,7 +319,6 @@ class BudgetPosition(models.Model):
             recs = self.search([('name', operator, name)] + args, limit=limit)
         return recs.name_get()
 
-    @api.multi
     @api.constrains('child_ids', 'type', 'parent_id')
     def _check_type(self):
         for rec in self:
@@ -331,7 +327,6 @@ class BudgetPosition(models.Model):
                     'You cannot define children to an account with '
                     'internal type different of "View".'))
 
-    @api.multi
     @api.constrains(
         'budget_modification_detail_ids',
         'budget_detail_ids',
@@ -380,13 +375,12 @@ class BudgetPosition(models.Model):
             parent = parent.parent_id
         return assignment_allowed
 
-    @api.multi
     @api.depends(
         'parent_id',
         'child_ids',
         'budget_assignment_allowed',
     )
-    def _get_assignment_position(self):
+    def _compute_assignment_position(self):
         for rec in self:
             if rec.budget_assignment_allowed:
                 assignment_position = rec

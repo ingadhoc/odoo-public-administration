@@ -135,25 +135,22 @@ class AdvanceReturn(models.Model):
         self.write({'state': 'cancel'})
         return True
 
-    @api.multi
     @api.constrains('type_id', 'company_id')
     def check_type_company(self):
-        for rec in self:
-            if rec.type_id.company_id != rec.company_id:
-                raise ValidationError(_(
-                    'Company must be the same as Type Company!'))
+        for rec in self.filtered(
+                lambda x: x.type_id.company_id != x.company_id):
+            raise ValidationError(_(
+                'Company must be the same as Type Company!'))
 
-    @api.multi
     @api.constrains('state', 'return_line_ids')
     def check_amounts(self):
-        for rec in self:
-            if rec.state == 'approved':
-                cero_lines = rec.return_line_ids.filtered(
-                    lambda x: not x.returned_amount)
-                if cero_lines:
-                    raise ValidationError(_(
-                        'You can not approve a return with lines without '
-                        'returned amount.'))
+        for rec in self.filtered(lambda x: x.state == 'approved'):
+            cero_lines = rec.return_line_ids.filtered(
+                lambda x: not x.returned_amount)
+            if cero_lines:
+                raise ValidationError(_(
+                    'You can not approve a return with lines without '
+                    'returned amount.'))
 
     @api.multi
     def action_cancel_draft(self):

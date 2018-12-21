@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- SEARCH VIEW -->
+    <record id="view_public_budget_expedient_founder_filter" model="ir.ui.view">
+        <field name="name">public_budget.expedient_founder.select</field>
+        <field name="model">public_budget.expedient_founder</field>
+        <field name="arch" type="xml">
+            <search string="Expedient Founder">
+                <field name="name"/>
+                <group expand="0" string="Group By">
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- FORMVIEW -->
+    <record id="view_public_budget_expedient_founder_form" model="ir.ui.view">
+        <field name="name">public_budget.expedient_founder.form</field>
+        <field name="model">public_budget.expedient_founder</field>
+        <field name="arch" type="xml">
+            <form string="Expedient Founder">
+                <header>
+                </header>
+                <sheet string="Expedient Founder">
+                    <div class="oe_button_box" name="buttons">
+                    </div>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- TREEVIEW -->
+    <record id="view_public_budget_expedient_founder_tree" model="ir.ui.view">
+        <field name="name">public_budget.expedient_founder.tree</field>
+        <field name="model">public_budget.expedient_founder</field>
+        <field name="arch" type="xml">
+            <tree string="Expedient Founder">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

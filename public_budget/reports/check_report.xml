@@ -1,34 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <data noupdate="1">
+<odoo noupdate="1">
 
-<!-- Printed Invoice -->
-<record id="action_aeroo_report_check" model="ir.actions.report.xml">
-    <field name="name">Cheques</field>
-    <field name="type">ir.actions.report.xml</field>
-    <field name="model">account.payment</field>
-    <field name="report_name">check_report</field>
-    <field name="report_type">aeroo</field>
-    <field name="in_format">oo-odt</field>
-    <field name="parser_loc">l10n_ar_aeroo_base/parser.py</field>
-    <field name="process_sep" eval="True"/>
-    <field name="parser_state">loc</field>
-    <!-- <field name="parser_state">default</field> -->
-    <field name="report_rml">public_budget/reports/check_report.odt</field>
-    <field name="tml_source">file</field>
-    <field name="out_format" ref="report_aeroo.report_mimetypes_pdf_odt"/>
-    <!-- <field name="styles_mode">specified</field> -->
-    <!-- <field name="stylesheet_id" ref="public_budget.sipreco_stylesheet"/> -->
-</record>
-<ir_set>
-    <field eval="'action'" name="key"/>
-    <field eval="'client_print_multi'" name="key2"/>
-    <field eval="['account.payment']" name="models"/>
-    <field name="name">Cheques</field>
-    <field eval="'ir.actions.report.xml,'+str(action_aeroo_report_check)" name="value"/>
-    <field eval="True" name="isobject"/>
-    <field eval="True" name="replace"/>
-</ir_set>
+    <!-- Printed Invoice -->
+    <record id="action_aeroo_report_check" model="ir.actions.report">
+        <field name="name">Cheques</field>
+        <field name="model">account.payment</field>
+        <field name="report_name">check_report</field>
+        <field name="report_type">aeroo</field>
+        <field name="in_format">oo-odt</field>
+        <field name="parser_loc">l10n_ar_aeroo_base/parser.py</field>
+        <field name="process_sep" eval="True"/>
+        <field name="parser_state">loc</field>
+        <!-- <field name="parser_state">default</field> -->
+        <field name="report_file">public_budget/reports/check_report.odt</field>
+        <field name="tml_source">file</field>
+        <field name="out_format" ref="report_aeroo.report_mimetypes_pdf_odt"/>
+        <field name="binding_model_id" ref="account.model_account_payment"/>
+        <field name="binding_type">report</field>
+    </record>
 
-    </data>
 </odoo>

@@ -46,7 +46,6 @@ class TransactionType(models.Model):
         required=True,
     )
 
-    @api.multi
     @api.constrains('advance_account_id', 'company_id')
     def check_account_company(self):
         for rec in self:

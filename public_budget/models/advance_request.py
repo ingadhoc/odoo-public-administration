@@ -51,7 +51,6 @@ class AdvanceRequest(models.Model):
     )
     user_id = fields.Many2one(
         'res.users',
-        string='User',
         required=True,
         readonly=True,
         default=lambda self: self.env.user,
@@ -59,7 +58,6 @@ class AdvanceRequest(models.Model):
     )
     type_id = fields.Many2one(
         'public_budget.advance_request_type',
-        string='Type',
         required=True,
         readonly=True,
         domain="[('company_id', '=', company_id)]",
@@ -67,7 +65,6 @@ class AdvanceRequest(models.Model):
     )
     state = fields.Selection(
         _states_,
-        'State',
         default='draft',
         readonly=True,
     )
@@ -113,25 +110,22 @@ class AdvanceRequest(models.Model):
             'partner_type': 'supplier',
         })
 
-    @api.multi
     @api.constrains('state', 'advance_request_line_ids')
     def check_amounts(self):
-        for rec in self:
-            if rec.state == 'approved':
-                cero_lines = rec.advance_request_line_ids.filtered(
-                    lambda x: not x.approved_amount)
-                if cero_lines:
-                    raise ValidationError(_(
-                        'You can not approve a request with lines without '
-                        'approved amount.'))
+        for rec in self.filtered(lambda x: x.state == 'approved'):
+            cero_lines = rec.advance_request_line_ids.filtered(
+                lambda x: not x.approved_amount)
+            if cero_lines:
+                raise ValidationError(_(
+                    'You can not approve a request with lines without '
+                    'approved amount.'))
 
-    @api.multi
     @api.constrains('type_id', 'company_id')
     def check_type_company(self):
-        for rec in self:
-            if rec.type_id.company_id != rec.company_id:
-                raise ValidationError(_(
-                    'Company must be the same as Type Company!'))
+        for rec in self.filtered(
+                lambda x: x.type_id.company_id != x.company_id):
+            raise ValidationError(_(
+                'Company must be the same as Type Company!'))
 
     @api.multi
     def action_cancel(self):

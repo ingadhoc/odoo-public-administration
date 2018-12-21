@@ -19,7 +19,6 @@ class DefinitiveLine(models.Model):
     )
     supplier_id = fields.Many2one(
         'res.partner',
-        string='Supplier',
         readonly=True,
         required=True,
         states={'draft': [('readonly', False)]},
@@ -32,7 +31,7 @@ class DefinitiveLine(models.Model):
         states={'draft': [('readonly', False)]},
     )
     residual_amount = fields.Monetary(
-        compute='_get_residual_amount',
+        compute='_compute_residual_amount',
         store=True,
     )
     to_pay_amount = fields.Monetary(
@@ -43,20 +42,19 @@ class DefinitiveLine(models.Model):
     )
     computed_to_pay_amount = fields.Monetary(
         string='To Pay Amount',
-        compute='_get_computed_amounts',
+        compute='_compute_computed_amounts',
     )
     computed_paid_amount = fields.Monetary(
         string='Paid Amount',
-        compute='_get_computed_amounts',
+        compute='_compute_computed_amounts',
     )
     computed_invoiced_amount = fields.Monetary(
         string='Invoiced Amount',
-        compute='_get_computed_amounts',
+        compute='_compute_computed_amounts',
     )
     preventive_line_id = fields.Many2one(
         'public_budget.preventive_line',
         ondelete='cascade',
-        string='Preventive Line',
         required=True,
         auto_join=True,
     )
@@ -81,13 +79,12 @@ class DefinitiveLine(models.Model):
         string='State',
         # default necesario para que deje crear ni bien se genera la linea
         default='draft',
-        compute='_get_state',
+        compute='_compute_state',
         store=True,
     )
     invoice_line_ids = fields.One2many(
         'account.invoice.line',
         'definitive_line_id',
-        string='Invoice Lines',
         readonly=True,
         auto_join=True,
     )
@@ -103,7 +100,7 @@ class DefinitiveLine(models.Model):
 
     @api.multi
     @api.depends('invoice_line_ids')
-    def _get_state(self):
+    def _compute_state(self):
         for rec in self:
             _logger.info('Getting state for definitive line %s' % rec.id)
             if rec.invoice_line_ids:
@@ -132,12 +129,12 @@ class DefinitiveLine(models.Model):
 
     @api.multi
     @api.depends('amount', 'invoiced_amount')
-    def _get_residual_amount(self):
+    def _compute_residual_amount(self):
         for rec in self:
             rec.residual_amount = rec.amount - rec.invoiced_amount
 
     @api.multi
-    def _get_computed_amounts(self):
+    def _compute_computed_amounts(self):
         # computed fields for to date anlysis
         for rec in self:
             invoiced_amount, to_pay_amount, paid_amount = (
@@ -235,9 +232,9 @@ class DefinitiveLine(models.Model):
     def check_budget_state_open(self):
         for rec in self:
             if rec.budget_id and rec.budget_id.state not in 'open':
-                raise ValidationError(
+                raise ValidationError(_(
                     'Solo puede cambiar afectaciones definitivas si '
-                    'el presupuesto está abierto')
+                    'el presupuesto está abierto'))
 
     @api.model
     def fields_view_get(

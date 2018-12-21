@@ -44,11 +44,11 @@ class AdvanceRequestAnalysis(models.Model):
         ],
     }
 
-    def init(self, cr):
-        # self._table = account_invoice_report
-        tools.drop_view_if_exists(cr, self._table)
+    def init(self):
+        # pylint: disable=E8103
+        tools.drop_view_if_exists(self._cr, self._table)
         common_fields = 'date, employee_id, type_id, confirmation_date'
-        cr.execute("""CREATE or REPLACE VIEW %s as (
+        self._cr.execute("""CREATE or REPLACE VIEW %s as (
             SELECT %s, rql.id, approved_amount AS amount, state,
             'request' AS direction, approval_date
             FROM public_budget_advance_request_line rql

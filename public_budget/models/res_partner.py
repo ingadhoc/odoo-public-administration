@@ -7,18 +7,15 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     advance_request_debt = fields.Monetary(
-        compute='get_advance_request_debt',
+        compute='_compute_advance_request_debt',
     )
     # TODO ver si en v10 convertimos esto a un document id del partner
     numero_legajo = fields.Char(
-        'Numero de Legajo',
     )
     subsidy_recipient = fields.Boolean(
-        'Subsidy Recipient',
     )
     gender = fields.Selection(
         [('male', 'Male'), ('female', 'Female'), ('other', 'Other')],
-        'Gender'
     )
     drei_number = fields.Char(
     )
@@ -35,7 +32,7 @@ class ResPartner(models.Model):
         return super(ResPartner, self.sudo()).mark_as_reconciled()
 
     @api.multi
-    def get_advance_request_debt(self):
+    def _compute_advance_request_debt(self):
         advance_return_type = self.env[
             'public_budget.advance_request_type'].browse(self._context.get(
                 'advance_return_type_id', False))

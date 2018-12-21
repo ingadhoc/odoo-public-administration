@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- SEARCH VIEW -->
+    <record id="view_public_budget_budget_prec_detail_filter" model="ir.ui.view">
+        <field name="name">public_budget.budget_prec_detail.select</field>
+        <field name="model">public_budget.budget_prec_detail</field>
+        <field name="arch" type="xml">
+            <search string="budget_prec_detail">
+                <field name="budget_position_id"/>
+                <group expand="0" string="Group By">
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- FORMVIEW -->
+    <record id="view_public_budget_budget_prec_detail_form" model="ir.ui.view">
+        <field name="name">public_budget.budget_prec_detail.form</field>
+        <field name="model">public_budget.budget_prec_detail</field>
+        <field name="arch" type="xml">
+            <form string="budget_prec_detail">
+                <header>
+                </header>
+                <sheet string="budget_prec_detail">
+                    <div class="oe_button_box" name="buttons">
+                    </div>
+                    <group>
+                        <field name="budget_position_id"/>
+                        <field name="amount"/>
+                        <!--                         <field name="draft_amount"/>  -->
+                        <field name="preventive_amount"/>
+                        <field name="definitive_amount"/>
+                        <field name="to_pay_amount"/>
+                        <field name="paid_amount"/>
+                        <field name="balance_amount"/>
+                    </group>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+    <!-- TREEVIEW -->
+    <record id="view_public_budget_budget_prec_detail_tree" model="ir.ui.view">
+        <field name="name">public_budget.budget_prec_detail.tree</field>
+        <field name="model">public_budget.budget_prec_detail</field>
+        <field name="arch" type="xml">
+            <tree string="budget_prec_detail" colors="blue:account_type=='view'">
+                <field name="budget_position_id" />
+                <field name="amount" sum="Total" />
+                <!--                     <field name="draft_amount" sum="Total" /> -->
+                <field name="preventive_amount" sum="Total" />
+                <field name="definitive_amount" sum="Total" />
+                <field name="to_pay_amount" sum="Total" />
+                <field name="paid_amount" sum="Total" />
+                <field name="balance_amount" sum="Total" />
+                <field name="account_type" invisible="True" />
+            </tree>
+        </field>
+    </record>
+
+</odoo>
