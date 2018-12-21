@@ -4,7 +4,6 @@ from odoo.exceptions import ValidationError
 
 
 class AccountPayment(models.Model):
-    """"""
 
     _inherit = 'account.payment'
 
