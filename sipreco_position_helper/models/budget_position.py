@@ -18,7 +18,6 @@ class BudgetPosition(models.Model):
         required=False,
     )
 
-    @api.multi
     @api.depends(
         'individual_code',
         'parent_id.individual_code',
