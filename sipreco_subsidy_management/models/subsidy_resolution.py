@@ -48,25 +48,6 @@ class PublicBudgetSubsidyResolution(models.Model):
     )
 
     @api.multi
-    def onchange(self, values, field_name, field_onchange):
-        """
-        Idea obtenida de aca
-        https://github.com/odoo/odoo/issues/16072#issuecomment-289833419
-        por el cambio que se introdujo en esa mimsa conversación, TODO en v11
-        no haría mas falta, simplemente domain="[('id', 'in', x2m_field)]"
-        Otras posibilidades que probamos pero no resultaron del todo fue:
-        * agregar onchange sobre campos calculados y que devuelvan un dict con
-        domain. El tema es que si se entra a un registro guardado el onchange
-        no se ejecuta
-        * usae el modulo de web_domain_field que esta en un pr a la oca
-        """
-        for field in field_onchange.keys():
-            if field.startswith('user_location_ids.'):
-                del field_onchange[field]
-        return super(PublicBudgetSubsidyResolution, self).onchange(
-            values, field_name, field_onchange)
-
-    @api.multi
     def action_change_state(self):
         for rec in self:
             if rec.state == 'not_presented':
@@ -76,10 +57,9 @@ class PublicBudgetSubsidyResolution(models.Model):
 
     @api.constrains('state')
     def _validate_state_presented(self):
-        for rec in self:
-            if rec.state == 'presented':
-                rec.mapped('subsidy_resolution_line_ids.expedient_id').write(
-                    {'subsidy_approved': True})
+        for rec in self.filtered(lambda x: x.state == 'presented'):
+            rec.mapped('subsidy_resolution_line_ids.expedient_id').write(
+                {'subsidy_approved': True})
 
     @api.multi
     def generate_remit(self):
@@ -99,59 +79,3 @@ class PublicBudgetSubsidyResolution(models.Model):
             action_read['name'] = 'Remitos'
             action_read['domain'] = [('id', '=', remit.id)]
         return action_read
-
-
-class PublicBudgetSubsidyResolutionLines(models.Model):
-
-    _name = 'public_budget.subsidy.resolution.line'
-
-    name = fields.Char(
-        'Name of Receiver',
-        required=True
-    )
-    dni = fields.Integer(
-        'DNI of Receiver',
-        required=True
-    )
-    expedient_id = fields.Many2one(
-        'public_budget.expedient',
-        string='Expedient',
-        required=True,
-    )
-    partner_id = fields.Many2one(
-        'res.partner',
-        'Councilor',
-        domain=[('employee', '=', True)],
-        required=True,
-    )
-    amount = fields.Integer(
-        'Amount',
-        required=True,
-    )
-    subsidy_resolution_id = fields.Many2one(
-        'public_budget.subsidy.resolution'
-    )
-
-    _sql_constraints = [
-        ('dni', 'unique(dni, subsidy_resolution_id)',
-         '¡DNI duplicado en las lineas! Revisar'),
-        ('expedient_id', 'unique(expedient_id, subsidy_resolution_id)',
-                         '¡Expediente Duplicado! Revisar')]
-
-    @api.onchange('expedient_id')
-    def _onchange_expedient_id(self):
-        self.partner_id = self.expedient_id.employee_subsidy_requestor
-        self.name = self.expedient_id.cover
-        self.dni = self.expedient_id.subsidy_recipient_doc
-        resolutions_with_expedient = self.search(
-            [('expedient_id', '=', self.expedient_id.id)])
-        if len(resolutions_with_expedient) > 0:
-            return {
-                'warning': {
-                    'title': "El TA ya existe en estas resoluciones",
-                    'message': " * " + "\n * ".join(
-                        resolutions_with_expedient.mapped(lambda x: " - ".join(
-                            [x.subsidy_resolution_id.date,
-                             x.subsidy_resolution_id.name]))),
-                }
-            }

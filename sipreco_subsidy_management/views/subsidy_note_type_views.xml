@@ -34,11 +34,6 @@
         <field name="res_model">public_budget.subsidy.note.type</field>
     </record>
 
-    <menuitem
-        id="menu_budget_subsidy_note_type"
-        sequence="10"
-        action="action_budget_subsidy_note_type"
-        parent="public_budget.menu_configuration"
-        />
+    <menuitem id="menu_budget_subsidy_note_type" sequence="10" action="action_budget_subsidy_note_type" parent="public_budget.menu_configuration" />
 
 </odoo>

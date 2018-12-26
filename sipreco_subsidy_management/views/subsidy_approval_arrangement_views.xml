@@ -44,11 +44,6 @@
         <field name="res_model">public_budget.subsidy.approval_arrangement</field>
     </record>
 
-    <menuitem
-        id="menu_public_budget_subsidy_approval_arrangement"
-        sequence="20"
-        action="action_public_budget_subsidy_approval_arrangement"
-        parent="menu_responsible_accounting"
-        />
+    <menuitem id="menu_public_budget_subsidy_approval_arrangement" sequence="20" action="action_public_budget_subsidy_approval_arrangement" parent="menu_responsible_accounting" />
 
 </odoo>

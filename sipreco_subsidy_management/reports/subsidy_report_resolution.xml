@@ -1,110 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <data noupdate="1">
+<odoo noupdate="1">
 
-<!-- Printed Invoice -->
-<record id="action_aeroo_subsidy_resolution_report" model="ir.actions.report.xml">
-    <field name="name">Reporte Tabla Resoluciones de Subsidios</field>
-    <field name="type">ir.actions.report.xml</field>
-    <field name="model">public_budget.subsidy.resolution</field>
-    <field name="report_name">subsidy_resolution_report</field>
-    <field name="report_type">aeroo</field>
-    <field name="in_format">oo-ods</field>
-    <field name="parser_loc">l10n_ar_aeroo_base/parser.py</field>
-    <field name="parser_state">loc</field>
-    <field name="report_rml">sipreco_subsidy_management/reports/report_subsidy_resolution.ods</field>
-    <field name="tml_source">file</field>
-    <field name="out_format" ref="report_aeroo.report_mimetypes_xls_odt"/>
-    <field name="styles_mode">specified</field>
-    <field name="stylesheet_id" ref="public_budget.sipreco_stylesheet"/>
-</record>
-
-<ir_set>
-    <field eval="'action'" name="key"/>
-    <field eval="'client_print_multi'" name="key2"/>
-    <field eval="['public_budget.subsidy.resolution']" name="models"/>
-    <field name="name">Report Tabla Resoluciones de Subsidios</field>
-    <field eval="'ir.actions.report.xml,'+str(action_aeroo_subsidy_resolution_report)" name="value"/>
-    <field eval="True" name="isobject"/>
-    <field eval="True" name="replace"/>
-</ir_set>
+    <!-- Printed Invoice -->
+    <record id="action_aeroo_subsidy_resolution_report" model="ir.actions.report">
+        <field name="name">Reporte Tabla Resoluciones de Subsidios</field>
+        <field name="model">public_budget.subsidy.resolution</field>
+        <field name="report_name">subsidy_resolution_report</field>
+        <field name="report_type">aeroo</field>
+        <field name="in_format">oo-ods</field>
+        <field name="parser_loc">l10n_ar_aeroo_base/parser.py</field>
+        <field name="parser_state">loc</field>
+        <field name="report_file">sipreco_subsidy_management/reports/report_subsidy_resolution.ods</field>
+        <field name="tml_source">file</field>
+        <field name="out_format" ref="report_aeroo.report_mimetypes_xls_odt"/>
+        <field name="styles_mode">specified</field>
+        <field name="stylesheet_id" ref="public_budget.sipreco_stylesheet"/>
+        <field name="binding_model_id" ref="sipreco_subsidy_management.model_public_budget_subsidy_resolution"/>
+        <field name="binding_type">report</field>
+    </record>
 
 
-<record id="action_aeroo_subsidy_resolution_INSTIT" model="ir.actions.report.xml">
-    <field name="name">Resolucion INSTIT</field>
-    <field name="type">ir.actions.report.xml</field>
-    <field name="model">public_budget.subsidy.resolution</field>
-    <field name="report_name">subsidy_resolution_INSTIT</field>
-    <field name="report_type">aeroo</field>
-    <field name="in_format">oo-odt</field>
-    <field name="parser_loc">l10n_ar_aeroo_base/parser.py</field>
-    <field name="parser_state">loc</field>
-    <field name="report_rml">sipreco_subsidy_management/reports/subsidy_resolution_INSTIT.odt</field>
-    <field name="tml_source">file</field>
-    <field name="out_format" ref="report_aeroo.report_mimetypes_doc_odt"/>
-    <field name="styles_mode">specified</field>
-    <field name="stylesheet_id" ref="public_budget.sipreco_stylesheet"/>
-</record>
+    <record id="action_aeroo_subsidy_resolution_INSTIT" model="ir.actions.report">
+        <field name="name">Resolucion INSTIT</field>
+        <field name="model">public_budget.subsidy.resolution</field>
+        <field name="report_name">subsidy_resolution_INSTIT</field>
+        <field name="report_type">aeroo</field>
+        <field name="in_format">oo-odt</field>
+        <field name="parser_loc">l10n_ar_aeroo_base/parser.py</field>
+        <field name="parser_state">loc</field>
+        <field name="report_file">sipreco_subsidy_management/reports/subsidy_resolution_INSTIT.odt</field>
+        <field name="tml_source">file</field>
+        <field name="out_format" ref="report_aeroo.report_mimetypes_doc_odt"/>
+        <field name="styles_mode">specified</field>
+        <field name="stylesheet_id" ref="public_budget.sipreco_stylesheet"/>
+        <field name="binding_model_id" ref="sipreco_subsidy_management.model_public_budget_subsidy_resolution"/>
+        <field name="binding_type">report</field>
+    </record>
 
-<ir_set>
-    <field eval="'action'" name="key"/>
-    <field eval="'client_print_multi'" name="key2"/>
-    <field eval="['public_budget.subsidy.resolution']" name="models"/>
-    <field name="name">Resolucion INSTIT</field>
-    <field eval="'ir.actions.report.xml,'+str(action_aeroo_subsidy_resolution_INSTIT)" name="value"/>
-    <field eval="True" name="isobject"/>
-    <field eval="True" name="replace"/>
-</ir_set>
-<record id="action_aeroo_subsidy_resolution_ITRANS_report" model="ir.actions.report.xml">
-    <field name="name">Resolucion TRANS</field>
-    <field name="type">ir.actions.report.xml</field>
-    <field name="model">public_budget.subsidy.resolution</field>
-    <field name="report_name">subsidy_resolution_report_ITRANS</field>
-    <field name="report_type">aeroo</field>
-    <field name="in_format">oo-odt</field>
-    <field name="parser_loc">l10n_ar_aeroo_base/parser.py</field>
-    <field name="parser_state">loc</field>
-    <field name="report_rml">sipreco_subsidy_management/reports/subsidy_resolution_ITRANS.odt</field>
-    <field name="tml_source">file</field>
-    <field name="out_format" ref="report_aeroo.report_mimetypes_doc_odt"/>
-    <field name="styles_mode">specified</field>
-    <field name="stylesheet_id" ref="public_budget.sipreco_stylesheet"/>
-</record>
+    <record id="action_aeroo_subsidy_resolution_ITRANS_report" model="ir.actions.report">
+        <field name="name">Resolucion TRANS</field>
+        <field name="model">public_budget.subsidy.resolution</field>
+        <field name="report_name">subsidy_resolution_report_ITRANS</field>
+        <field name="report_type">aeroo</field>
+        <field name="in_format">oo-odt</field>
+        <field name="parser_loc">l10n_ar_aeroo_base/parser.py</field>
+        <field name="parser_state">loc</field>
+        <field name="report_file">sipreco_subsidy_management/reports/subsidy_resolution_ITRANS.odt</field>
+        <field name="tml_source">file</field>
+        <field name="out_format" ref="report_aeroo.report_mimetypes_doc_odt"/>
+        <field name="styles_mode">specified</field>
+        <field name="stylesheet_id" ref="public_budget.sipreco_stylesheet"/>
+        <field name="binding_model_id" ref="sipreco_subsidy_management.model_public_budget_subsidy_resolution"/>
+        <field name="binding_type">report</field>
+    </record>
 
-<ir_set>
-    <field eval="'action'" name="key"/>
-    <field eval="'client_print_multi'" name="key2"/>
-    <field eval="['public_budget.subsidy.resolution']" name="models"/>
-    <field name="name">Resolucion TRANS</field>
-    <field eval="'ir.actions.report.xml,'+str(action_aeroo_subsidy_resolution_ITRANS_report)" name="value"/>
-    <field eval="True" name="isobject"/>
-    <field eval="True" name="replace"/>
-</ir_set>
+    <record id="action_aeroo_subsidy_resolution_COMUN_report" model="ir.actions.report">
+        <field name="name">Resolucion COMUN</field>
+        <field name="model">public_budget.subsidy.resolution</field>
+        <field name="report_name">subsidy_resolution_report_COMUN</field>
+        <field name="report_type">aeroo</field>
+        <field name="in_format">oo-odt</field>
+        <field name="parser_loc">l10n_ar_aeroo_base/parser.py</field>
+        <field name="parser_state">loc</field>
+        <field name="report_file">sipreco_subsidy_management/reports/subsidy_resolution_COMUN.odt</field>
+        <field name="tml_source">file</field>
+        <field name="out_format" ref="report_aeroo.report_mimetypes_doc_odt"/>
+        <field name="styles_mode">specified</field>
+        <field name="stylesheet_id" ref="public_budget.sipreco_stylesheet"/>
+        <field name="binding_model_id" ref="sipreco_subsidy_management.model_public_budget_subsidy_resolution"/>
+        <field name="binding_type">report</field>
+    </record>
 
-<record id="action_aeroo_subsidy_resolution_COMUN_report" model="ir.actions.report.xml">
-    <field name="name">Resolucion COMUN</field>
-    <field name="type">ir.actions.report.xml</field>
-    <field name="model">public_budget.subsidy.resolution</field>
-    <field name="report_name">subsidy_resolution_report_COMUN</field>
-    <field name="report_type">aeroo</field>
-    <field name="in_format">oo-odt</field>
-    <field name="parser_loc">l10n_ar_aeroo_base/parser.py</field>
-    <field name="parser_state">loc</field>
-    <field name="report_rml">sipreco_subsidy_management/reports/subsidy_resolution_COMUN.odt</field>
-    <field name="tml_source">file</field>
-    <field name="out_format" ref="report_aeroo.report_mimetypes_doc_odt"/>
-    <field name="styles_mode">specified</field>
-    <field name="stylesheet_id" ref="public_budget.sipreco_stylesheet"/>
-</record>
-
-<ir_set>
-    <field eval="'action'" name="key"/>
-    <field eval="'client_print_multi'" name="key2"/>
-    <field eval="['public_budget.subsidy.resolution']" name="models"/>
-    <field name="name">Resolucion COMUN</field>
-    <field eval="'ir.actions.report.xml,'+str(action_aeroo_subsidy_resolution_COMUN_report)" name="value"/>
-    <field eval="True" name="isobject"/>
-    <field eval="True" name="replace"/>
-</ir_set>
-    </data>
 </odoo>

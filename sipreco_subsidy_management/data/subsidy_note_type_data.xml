@@ -1,55 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <data noupdate="1">
+<odoo noupdate="1">
 
-        <record id="note_type_1" model="public_budget.subsidy.note.type">
-            <field name="name">NOTA A PRESIDENCIA - Cambio de destino del subsidio</field>
-            <field name="code">1</field>
-            <field name="sequence" eval="10"/>
-        </record>
-        <record id="note_type_2" model="public_budget.subsidy.note.type">
-            <field name="name">NOTA A PRESIDENCIA- Omisión presentación de rendición de cuentas</field>
-            <field name="code">2</field>
-            <field name="sequence" eval="20"/>
-        </record>
+    <record id="note_type_1" model="public_budget.subsidy.note.type">
+        <field name="name">NOTA A PRESIDENCIA - Cambio de destino del subsidio</field>
+        <field name="code">1</field>
+        <field name="sequence" eval="10"/>
+    </record>
+    <record id="note_type_2" model="public_budget.subsidy.note.type">
+        <field name="name">NOTA A PRESIDENCIA- Omisión presentación de rendición de cuentas</field>
+        <field name="code">2</field>
+        <field name="sequence" eval="20"/>
+    </record>
 
 
-        <record id="note_type_3" model="public_budget.subsidy.note.type">
-            <field name="name">NOTA A PRESIDENCIA- Novedad por rendición presentada</field>
-            <field name="code">3</field>
-            <field name="sequence" eval="30"/>
-        </record>
+    <record id="note_type_3" model="public_budget.subsidy.note.type">
+        <field name="name">NOTA A PRESIDENCIA- Novedad por rendición presentada</field>
+        <field name="code">3</field>
+        <field name="sequence" eval="30"/>
+    </record>
 
-        <record id="note_type_4" model="public_budget.subsidy.note.type">
-            <field name="name">NOTA CON OBSERVACIONES AL RESPONSABLE</field>
-            <field name="code">4</field>
-            <field name="sequence" eval="40"/>
-        </record>
+    <record id="note_type_4" model="public_budget.subsidy.note.type">
+        <field name="name">NOTA CON OBSERVACIONES AL RESPONSABLE</field>
+        <field name="code">4</field>
+        <field name="sequence" eval="40"/>
+    </record>
 
-        <record id="note_type_5" model="public_budget.subsidy.note.type">
-            <field name="name">NOTA A RESPONSABLE- Intimación presentación en 5 días</field>
-            <field name="code">5</field>
-            <field name="sequence" eval="50"/>
-        </record>
+    <record id="note_type_5" model="public_budget.subsidy.note.type">
+        <field name="name">NOTA A RESPONSABLE- Intimación presentación en 5 días</field>
+        <field name="code">5</field>
+        <field name="sequence" eval="50"/>
+    </record>
 
-        <record id="note_type_6" model="public_budget.subsidy.note.type">
-            <field name="name">NOTA A RESPONSABLE- Intimación presentación ultimo aviso</field>
-            <field name="code">6</field>
-            <field name="sequence" eval="60"/>
-        </record>
+    <record id="note_type_6" model="public_budget.subsidy.note.type">
+        <field name="name">NOTA A RESPONSABLE- Intimación presentación ultimo aviso</field>
+        <field name="code">6</field>
+        <field name="sequence" eval="60"/>
+    </record>
 
-        <record id="note_type_7" model="public_budget.subsidy.note.type">
-            <field name="name">OTRAS NOTAS- Presentación de la rendición</field>
-            <field name="code">7</field>
-            <field name="sequence" eval="70"/>
-        </record>
+    <record id="note_type_7" model="public_budget.subsidy.note.type">
+        <field name="name">OTRAS NOTAS- Presentación de la rendición</field>
+        <field name="code">7</field>
+        <field name="sequence" eval="70"/>
+    </record>
 
-        <record id="seq_approval_arrangement" model="ir.sequence">
-            <field name="name">Disposición de aprobacion</field>
-            <field name="code">approval_arrangement</field>
-            <field name="suffix">/%(y)s</field>
-            <field name="padding">4</field>
-            <field name="company_id" eval="False"/>
-        </record>
-    </data>
 </odoo>

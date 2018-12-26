@@ -4,4 +4,5 @@ from . import subsidy_rendition
 from . import subsidy_note
 from . import subsidy_note_type
 from . import subsidy_resolution
+from . import subsidy_resolution_line
 from . import transaction_type

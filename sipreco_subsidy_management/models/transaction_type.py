@@ -1,6 +1,4 @@
 from odoo import fields, models
-import logging
-_logger = logging.getLogger(__name__)
 
 
 class PublicBudgetTransactionType(models.Model):

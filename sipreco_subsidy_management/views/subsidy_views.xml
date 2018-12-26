@@ -11,7 +11,7 @@
                 <field name="state" string="Transaction State" invisible="1"/>
                 <header>
                     <field name="accountability_state" widget="statusbar"/>
-                     <!-- clickable="true" -->
+                    <!-- clickable="true" -->
                 </header>
                 <sheet string="Subsidios">
                     <group>
@@ -105,11 +105,11 @@
         <field name="name">public_budget.subsidy.form.inherit</field>
         <field name="model">public_budget.subsidy</field>
         <field name="inherit_id" ref="view_public_budget_subsidy_form"/>
-        <field name="groups_id" eval="[(6, 0, [ref('account.group_account_manager')])]" />                
-        <field name="arch" type="xml">                                   
+        <field name="groups_id" eval="[(6, 0, [ref('account.group_account_manager')])]" />
+        <field name="arch" type="xml">
             <field name="editable_line" position="attributes">
-               <attribute name="readonly">0</attribute>                   
-            </field>                              
+                <attribute name="readonly">0</attribute>
+            </field>
         </field>
     </record>
 
@@ -155,40 +155,15 @@
                 <field name="parliamentary_resolution_date"/>
                 <field name="parliamentary_expedient"/>
                 <field name="accountability_administrative_expedient_id"/>
-                <filter
-                    string="Vencida"
-                    domain="[('accountability_state', '!=', 'approved') , ('accountability_expiry_date', '!=', False), ('accountability_expiry_date', '&lt;=', time.strftime('%%Y-%%m-%%d'))]"
-                    />
-                <filter
-                    string="Próxima a vencer"
-                    domain="[('accountability_state', '!=', 'approved'), ('accountability_expiry_date', '!=', False), ('accountability_expiry_date', '&gt;', time.strftime('%%Y-%%m-%%d')), ('accountability_expiry_date', '&lt;=', (context_today() + datetime.timedelta(15)).strftime('%%Y-%%m-%%d'))]"
-                    help="Rendición que vencerá en los próximos 15 días"
-                    />
-                <filter
-                    string="Entregados no rendidos"
-                    domain="[('pendientes_rendicion_amount', '&gt;', 0.0), ('cargo_amount', '&gt;', 0.0)]"
-                    />
-                <filter
-                    string="Pendientes de revisión"
-                    domain="[('revision_amount', '&gt;', 0.0)]"
-                    />
-                    <!-- no lo neceistan, pidieron pendiente de revision -->
-                <!-- <filter
-                    string="Pendientes aprobación"
-                    domain="[('pendientes_aprobacion_amount', '&gt;', 0.0), ('cargo_amount', '&gt;', 0.0)]"
-                    /> -->
-                <filter
-                    string="Aprobados"
-                    domain="[('accountability_state', '=', 'approved'), ('cargo_amount', '&gt;', 0.0)]"
-                    />
-                <filter
-                    string="Reclamados"
-                    domain="[('reclaimed', '=', True)]"
-                    />
-                <filter
-                    string="Observations"
-                    domain="[('observations', '!=', False)]"
-                    />
+                <filter string="Vencida" domain="[('accountability_state', '!=', 'approved') , ('accountability_expiry_date', '!=', False), ('accountability_expiry_date', '&lt;=', time.strftime('%%Y-%%m-%%d'))]" />
+                <filter string="Próxima a vencer" domain="[('accountability_state', '!=', 'approved'), ('accountability_expiry_date', '!=', False), ('accountability_expiry_date', '&gt;', time.strftime('%%Y-%%m-%%d')), ('accountability_expiry_date', '&lt;=', (context_today() + datetime.timedelta(15)).strftime('%%Y-%%m-%%d'))]" help="Rendición que vencerá en los próximos 15 días" />
+                <filter string="Entregados no rendidos" domain="[('pendientes_rendicion_amount', '&gt;', 0.0), ('cargo_amount', '&gt;', 0.0)]" />
+                <filter string="Pendientes de revisión" domain="[('revision_amount', '&gt;', 0.0)]" />
+                <!-- no lo neceistan, pidieron pendiente de revision -->
+                <!-- <filter string="Pendientes aprobación" domain="[('pendientes_aprobacion_amount', '&gt;', 0.0), ('cargo_amount', '&gt;', 0.0)]" /> -->
+                <filter string="Aprobados" domain="[('accountability_state', '=', 'approved'), ('cargo_amount', '&gt;', 0.0)]" />
+                <filter string="Reclamados" domain="[('reclaimed', '=', True)]" />
+                <filter string="Observations" domain="[('observations', '!=', False)]" />
                 <group expand="1" string="Group By">
                     <filter string="Estado de la Transacción" name="state" context="{'group_by':'state'}"/>
                     <filter string="Estado" name="accountability_state" context="{'group_by':'accountability_state'}"/>
@@ -198,12 +173,7 @@
         </field>
     </record>
 
-    <menuitem
-        name="Contabilidad Responsable"
-        id="menu_responsible_accounting"
-        sequence="50"
-        parent="public_budget.menu_budget_main"
-        />
+    <menuitem name="Contabilidad Responsable" id="menu_responsible_accounting" sequence="50" parent="public_budget.menu_budget_main" />
 
 
     <record id="action_public_budget_subsidy" model="ir.actions.act_window">
@@ -211,10 +181,5 @@
         <field name="res_model">public_budget.subsidy</field>
     </record>
 
-    <menuitem
-        id="menu_public_budget_subsidy"
-        sequence="10"
-        action="action_public_budget_subsidy"
-        parent="menu_responsible_accounting"
-        />
+    <menuitem id="menu_public_budget_subsidy" sequence="10" action="action_public_budget_subsidy" parent="menu_responsible_accounting" />
 </odoo>

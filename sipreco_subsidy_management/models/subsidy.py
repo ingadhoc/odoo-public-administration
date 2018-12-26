@@ -1,7 +1,6 @@
-from odoo import fields, models, api
+from odoo import fields, models, api, _
 from odoo.exceptions import ValidationError
 from dateutil.relativedelta import relativedelta
-from datetime import date
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -18,16 +17,9 @@ class PublicBudgetSubsidy(models.Model):
         transaction_type = self.env['public_budget.transaction_type'].search(
             [('subsidy', '=', True)], limit=1)
         if not transaction_type:
-            raise ValidationError(
-                'No Se encontró ningún tipo de transacción del tipo subsidio')
+            raise ValidationError(_(
+                'No Se encontró ningún tipo de transacción del tipo subsidio'))
         return transaction_type
-
-    @api.model
-    def create(self, vals):
-        vals['internal_number'] = self.env[
-            'ir.sequence'].next_by_code('subsidy_internal_number') or '/'
-        return super(PublicBudgetSubsidy, self.with_context(
-            default_type_id=self.get_type().id)).create(vals)
 
     internal_number = fields.Char(
         required=True,
@@ -45,7 +37,7 @@ class PublicBudgetSubsidy(models.Model):
     rendiciones_pendientes_otros_subsidios = fields.Monetary(
         'Rend. Pendientes Otros Subsidios',
         help='Rendiciones Pendientes de Otros Subsidios',
-        compute='get_rendiciones_pendientes_otros_subsidios',
+        compute='_compute_rendiciones_pendientes_otros_subsidios',
     )
     parliamentary_resolution_date = fields.Date(
         'Fecha de Resolución Parlamentaria',
@@ -56,7 +48,7 @@ class PublicBudgetSubsidy(models.Model):
         required=True,
     )
     cargo_date = fields.Date(
-        compute='get_cargo_data',
+        compute='_compute_cargo_data',
         string='Fecha del Cargo',
         store=True,
     )
@@ -70,7 +62,7 @@ class PublicBudgetSubsidy(models.Model):
     ],
         'Estado',
         # 'Estado de la Rendición',
-        compute='get_state',
+        compute='_compute_state',
         store=True,
     )
     # accountability_state = fields.Selection([
@@ -81,7 +73,7 @@ class PublicBudgetSubsidy(models.Model):
     #     'Estado de la Rendición',
     # )
     accountability_expiry_date = fields.Date(
-        compute='get_cargo_data',
+        compute='_compute_cargo_data',
         string='Vencimiento de Rendición ',
         help='Fecha de vencimiento de presentación de rendición',
         store=True,
@@ -105,67 +97,70 @@ class PublicBudgetSubsidy(models.Model):
     rendition_ids = fields.One2many(
         'public_budget.subsidy.rendition',
         'subsidy_id',
-        'Renditions',
     )
     note_ids = fields.One2many(
         'public_budget.subsidy.note',
         'subsidy_id',
-        'Notes',
     )
     destination = fields.Char(
         required=True,
     )
     amount = fields.Monetary(
-        string='Amount',
         required=True,
         # states={'closed': [('readonly', True)]},
     )
     cargo_amount = fields.Monetary(
         'Cargos',
         help='Cargos Efectuados',
-        compute='get_cargo_data',
+        compute='_compute_cargo_data',
         store=True,
     )
     pendientes_rendicion_amount = fields.Monetary(
         'Pendiente Rendición',
         help='Cargos Pendientes de Rendición',
-        compute='get_cargo_data',
+        compute='_compute_cargo_data',
         store=True,
     )
     pendientes_aprobacion_amount = fields.Monetary(
         'Pendiente Aprobación',
         help='Cargos Pendientes de Aprobación',
-        compute='get_cargo_data',
+        compute='_compute_cargo_data',
         store=True,
     )
     rendido_amount = fields.Monetary(
         'Rendido',
         help='Rendiciones Presentadas',
-        compute='get_amounts',
+        compute='_compute_amounts',
         store=True,
     )
     aprobado_amount = fields.Monetary(
         'Aprobado',
         help='Rendiciones Aprobadas',
-        compute='get_amounts',
+        compute='_compute_amounts',
         store=True,
     )
     revision_amount = fields.Monetary(
         'En Revisión',
         help='Rendiciones presentadas en Revisión',
-        compute='get_amounts',
+        compute='_compute_amounts',
         store=True,
     )
     reclaimed = fields.Boolean(string='Reclamado?')
 
     observations = fields.Text('Observaciones')
 
-    @api.one
+    @api.model
+    def create(self, vals):
+        vals['internal_number'] = self.env[
+            'ir.sequence'].next_by_code('subsidy_internal_number') or '/'
+        return super(PublicBudgetSubsidy, self.with_context(
+            default_type_id=self.get_type().id)).create(vals)
+
     @api.depends(
         'rendition_ids.rendition_amount',
         'rendition_ids.approved_amount',
     )
-    def get_amounts(self):
+    def _compute_amounts(self):
         rendido_amount = sum(
             self.rendition_ids.mapped('rendition_amount'))
         aprobado_amount = sum(
@@ -179,11 +174,10 @@ class PublicBudgetSubsidy(models.Model):
         self.name = '%s - %s' % (
             self.expedient_id.number or '', self.partner_id.name or '')
 
-    @api.one
     @api.depends(
         'partner_id',
     )
-    def get_rendiciones_pendientes_otros_subsidios(self):
+    def _compute_rendiciones_pendientes_otros_subsidios(self):
         if not self.partner_id:
             amount = False
         else:
@@ -194,13 +188,12 @@ class PublicBudgetSubsidy(models.Model):
             amount = sum(others.mapped('pendientes_rendicion_amount'))
         self.rendiciones_pendientes_otros_subsidios = amount
 
-    @api.one
     @api.depends(
         'amount',
         'aprobado_amount',
         'cargo_amount',
     )
-    def get_state(self):
+    def _compute_state(self):
         # consideramos aprobada solo si hay monto y es igual al cargo y a
         # aprobado
         if (
@@ -211,7 +204,6 @@ class PublicBudgetSubsidy(models.Model):
             accountability_state = 'pending'
         self.accountability_state = accountability_state
 
-    @api.one
     @api.depends(
         'rendido_amount',
         'aprobado_amount',
@@ -227,7 +219,7 @@ class PublicBudgetSubsidy(models.Model):
         # 'advance_payment_group_ids.cargo_date',
         # 'advance_payment_group_ids.cargo_amount',
     )
-    def get_cargo_data(self):
+    def _compute_cargo_data(self):
         payments = self.payment_group_ids + self.advance_payment_group_ids
         cargo_amount = sum(
             payments.filtered(
@@ -261,29 +253,27 @@ class PublicBudgetSubsidy(models.Model):
         self.pendientes_aprobacion_amount = (
             cargo_amount - self.aprobado_amount)
 
-    @api.one
     @api.constrains('cargo_amount', 'rendido_amount')
     def check_renditions(self):
-        if self.rendido_amount > self.cargo_amount:
-            raise ValidationError(
-                'El importe rendido no puede ser mayor al importe de cargo')
+        for rec in self.filtered(lambda x: x.rendido_amount > x.cargo_amount):
+            raise ValidationError(_(
+                'El importe rendido no puede ser mayor al importe de cargo'))
 
     @api.onchange('expedient_id')
     def set_expedient_id(self):
         self.parliamentary_expedient = self.\
             expedient_id.parliamentary_expedient
 
-    @api.multi
     @api.constrains('amount')
     def check_amount(self):
-        for rec in self:
-            if not rec.amount > 0:
-                raise ValidationError(
-                    'El monto debe ser mayor a cero')
+        for rec in self.filtered(lambda x: not x.amount > 0):
+            raise ValidationError(_(
+                'El monto debe ser mayor a cero'))
 
     @api.model
     def _cron_recurring_subsidy_report(self, partner_ids):
-        last_week = fields.Date.to_string(date.today() - relativedelta(days=7))
+        last_week = fields.Date.to_string(
+            fields.Date.today() - relativedelta(days=7))
         domain = [('cargo_date', '>=', last_week),
                   ('cargo_date', '<', fields.Date.today())]
         values = {'subsidys': self.search(domain)}

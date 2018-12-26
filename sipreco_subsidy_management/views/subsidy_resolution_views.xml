@@ -22,7 +22,7 @@
                         <group>
                             <field name="user_location_ids" invisible="1"/>
                             <field name="user_id" invisible="1"/>
-                            <field name="current_location_id" domain="[('id', 'in', user_location_ids and user_location_ids[0][2] or [])]"/>
+                            <field name="current_location_id" domain="[('id', 'in', user_location_ids)]"/>
                             <field name="location_dest_id"/>
                             <field name="reference"/>
                         </group>
@@ -31,7 +31,7 @@
                         <page string="Lineas de Resoluciones">
                             <field name="subsidy_resolution_line_ids" context="{'current_location_id':current_location_id}">
                                 <tree editable="bottom">
-                                    <field name="expedient_id" domain="[('state', 'not in' , ['cancel', 'annulled']) ,('overdue' ,'!=', True), ('subsidy_expedient', '=', True),('current_location_id','=', current_location_id)]"/>
+                                    <field name="expedient_id" domain="[('state', 'not in' , ['cancel', 'annulled']) ,('overdue' ,'!=', True), ('subsidy_expedient', '=', True),('current_location_id','=', parent.current_location_id)]"/>
                                     <field name="name"/>
                                     <field name="dni"/>
                                     <field name="partner_id"/>

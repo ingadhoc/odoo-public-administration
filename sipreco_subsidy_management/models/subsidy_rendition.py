@@ -1,7 +1,5 @@
-from odoo import fields, models, api
-from odoo.exceptions import ValidationError
-import logging
-_logger = logging.getLogger(__name__)
+from odoo import fields, models, api, _
+from odoo.exceptions import ValidationError, UserError
 
 
 class PublicBudgetSubsidyRendition(models.Model):
@@ -10,7 +8,6 @@ class PublicBudgetSubsidyRendition(models.Model):
 
     subsidy_id = fields.Many2one(
         'public_budget.subsidy',
-        'Subsidy',
         required=True,
         ondelete='cascade',
     )
@@ -47,7 +44,7 @@ class PublicBudgetSubsidyRendition(models.Model):
     )
     pending_amount = fields.Monetary(
         'Importe Pendiente',
-        compute='get_pending_amount',
+        compute='_compute_pending_amount',
     )
     expedient_id = fields.Many2one(
         'public_budget.expedient',
@@ -59,29 +56,26 @@ class PublicBudgetSubsidyRendition(models.Model):
         'Block editing line',
         default=False)
 
-    @api.one
     @api.constrains('rendition_amount', 'approved_amount')
     def check_amounts(self):
-        if self.approved_amount > self.rendition_amount:
-            raise ValidationError(
-                'Importe Aprobado no puede ser mayor al importe rendido')
+        for rec in self.filtered(
+                lambda x: x.approved_amount > x.rendition_amount):
+            raise ValidationError(_(
+                'Importe Aprobado no puede ser mayor al importe rendido'))
 
-    @api.one
     @api.depends('rendition_amount', 'approved_amount')
-    def get_pending_amount(self):
+    def _compute_pending_amount(self):
         self.pending_amount = self.rendition_amount - self.approved_amount
 
     @api.multi
     def unlink(self):
         for record in self:
             if record.approval_arrangement_id and record.editable_line:
-                raise Warning(
+                raise UserError(_(
                     'No es posible borrar una rendición'
-                    ' que presente montos Aprobados')
+                    ' que presente montos Aprobados'))
         return super(PublicBudgetSubsidyRendition, self).unlink()
 
-    @api.one
     @api.constrains('approval_arrangement_id')
     def on_change_approval_arrangement_id(self):
-        if self.approval_arrangement_id:
-            self.editable_line = True
+        self.filtered('approval_arrangement_id').write({'editable_line': True})
