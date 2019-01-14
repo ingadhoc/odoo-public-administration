@@ -51,7 +51,7 @@ class AccountInvoice(models.Model):
         for rec in self:
             rec.to_pay_amount = rec._get_to_pay_amount_to_date()
             # we force an update of invoice line computed fields
-            rec.invoice_line_ids._get_amounts()
+            rec.invoice_line_ids._compute_amounts()
             rec.mapped('invoice_line_ids.definitive_line_id')._get_amounts()
 
     @api.multi

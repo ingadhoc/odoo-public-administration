@@ -51,32 +51,32 @@ class PurchaseSubscription(models.Model):
         fill_remind("30days", [
             ('state', 'in', ['draft', 'open']),
             ('date', '!=', False),
-            ('date', '<', (datetime.datetime.now() + datetime
+            ('date', '<', (fields.Datetime.now() + datetime
                            .timedelta(30)).strftime("%Y-%m-%d"))])
 
         # Expires in less than 60 days
         fill_remind("60days", [
             ('state', 'in', ['draft', 'open']),
             ('date', '!=', False),
-            ('date', '>=', (datetime.datetime.now() + datetime
+            ('date', '>=', (fields.Datetime.now() + datetime
                             .timedelta(30)).strftime("%Y-%m-%d")),
-            ('date', '<', (datetime.datetime.now() + datetime
+            ('date', '<', (fields.Datetime.now() + datetime
                            .timedelta(60)).strftime("%Y-%m-%d"))])
         # Expires in less than 90 days
         fill_remind("90days", [
             ('state', 'in', ['draft', 'open']),
             ('date', '!=', False),
-            ('date', '>=', (datetime.datetime.now() + datetime
+            ('date', '>=', (fields.Datetime.now() + datetime
                             .timedelta(60)).strftime("%Y-%m-%d")),
-            ('date', '<', (datetime.datetime.now() + datetime
+            ('date', '<', (fields.Datetime.now() + datetime
                            .timedelta(90)).strftime("%Y-%m-%d"))])
         base_url = self.env['ir.config_parameter'].get_param(
             'web.base.url')
-        action_id = self.env['ir.model.data'].get_object_reference(
-            'purchase_contract', 'purchase_subscription_action')[1]
-        template_id = self.env['ir.model.data'].get_object_reference(
-            'purchase_contract',
-            'purchase_account_analytic_cron_email_template')[1]
+        action_id = self.env.ref(
+            'purchase_subscription.purchase_subscription_action').id
+        template_id = self.env.ref(
+            'purchase_subscription.'
+            'purchase_account_analytic_cron_email_template').id
         for user_id, data in remind.items():
             _logger.debug("Sending reminder to uid %s", user_id)
             self.env['mail.template'].browse(template_id).with_context(

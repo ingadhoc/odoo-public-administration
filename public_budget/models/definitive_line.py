@@ -89,7 +89,6 @@ class DefinitiveLine(models.Model):
         auto_join=True,
     )
 
-    @api.multi
     @api.constrains('issue_date')
     def check_dates(self):
         for rec in self:
@@ -98,7 +97,6 @@ class DefinitiveLine(models.Model):
                     'La fecha de la línea definitiva debe ser mayor a la fecha'
                     ' de la transacción'))
 
-    @api.multi
     @api.depends('invoice_line_ids')
     def _compute_state(self):
         for rec in self:
@@ -127,7 +125,6 @@ class DefinitiveLine(models.Model):
                     "invoiced"))
         return super(DefinitiveLine, self).unlink()
 
-    @api.multi
     @api.depends('amount', 'invoiced_amount')
     def _compute_residual_amount(self):
         for rec in self:
@@ -226,15 +223,13 @@ class DefinitiveLine(models.Model):
         }
         return line_vals
 
-    @api.multi
-    @api.constrains(
-        'amount')
+    @api.constrains('amount')
     def check_budget_state_open(self):
-        for rec in self:
-            if rec.budget_id and rec.budget_id.state not in 'open':
-                raise ValidationError(_(
-                    'Solo puede cambiar afectaciones definitivas si '
-                    'el presupuesto está abierto'))
+        for rec in self.filtered(
+                lambda x: x.budget_id and x.budget_id.state != 'open'):
+            raise ValidationError(_(
+                'Solo puede cambiar afectaciones definitivas si '
+                'el presupuesto está abierto'))
 
     @api.model
     def fields_view_get(

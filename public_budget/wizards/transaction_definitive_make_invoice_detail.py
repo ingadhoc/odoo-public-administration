@@ -1,5 +1,6 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
+from odoo.tools import float_compare
 
 
 class PublicBudgetDefinitiveMakeInvoiceDetail(models.TransientModel):
@@ -16,6 +17,7 @@ class PublicBudgetDefinitiveMakeInvoiceDetail(models.TransientModel):
     )
     residual_amount = fields.Monetary(
         related='definitive_line_id.residual_amount',
+        readonly=True,
     )
     to_invoice_amount = fields.Monetary(
         'Amount',
@@ -36,6 +38,9 @@ class PublicBudgetDefinitiveMakeInvoiceDetail(models.TransientModel):
         'to_invoice_amount'
     )
     def _check_amounts(self):
-        if self.residual_amount < self.to_invoice_amount:
+        for rec in self.filtered(
+            lambda x: float_compare(
+                x.residual_amount, x.to_invoice_amount,
+                precision_rounding=x.currency_id.rounding) < 0):
             raise ValidationError(
                 _("To Invoice Amount can't be greater than Residual Amount"))
