@@ -2,10 +2,10 @@
   !python {model: base.language.install}: |
     lang_code = 'es_AR'
     vals = {'lang': lang_code}
-    wizard_id = self.create(cr, uid, vals)
-    self.lang_install(cr, uid, [wizard_id], {'active_ids': [wizard_id]})
-    partner_ids = self.pool['res.partner'].search(cr, uid, [])
-    self.pool['res.partner'].write(cr, uid, partner_ids, vals)
+    wizard = self.create(vals)
+    wizard.lang_install()
+    partners = self.env['res.partner'].search([])
+    partners.write(vals)
 # otra alternativa es usar este gist
 # https://gist.github.com/moylop260/d3bad1e96e46cae0cd99bb6db224ed60
 # -

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- SEARCH VIEW -->
+    <record id="view_public_budget_budget_filter" model="ir.ui.view">
+        <field name="name">public_budget.budget.select</field>
+        <field name="model">public_budget.budget</field>
+        <field name="arch" type="xml">
+            <search string="Budget">
+                <field name="name"/>
+                <!-- <field name="fiscalyear_id"/> -->
+                <field name="income_account_id"/>
+                <field name="expedient_id"/>
+                <group expand="0" string="Group By">
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- FORMVIEW -->
+    <record id="view_public_budget_budget_form" model="ir.ui.view">
+        <field name="name">public_budget.budget.form</field>
+        <field name="model">public_budget.budget</field>
+        <field name="arch" type="xml">
+            <form string="Budget">
+                <field name="currency_id" invisible="1"/>
+                <header>
+                    <button name="%(action_aeroo_report_budget)d" class="oe_highlight" string="Print" type="action"/>
+                    <button name="action_open" type="object" states="draft" string="Open" class="oe_highlight"/>
+                    <button name="action_cancel_draft" type="object" states="cancel" string="To Draft"/>
+                    <button name="action_pre_close" states="open" type="object" string="Pre Close" class="oe_highlight"/>
+                    <button name="action_close" states="pre_closed" type="object" string="Close" class="oe_highlight"/>
+                    <button name="action_cancel" states="closed,draft,open,pre_closed" type="object" string="Cancel" groups="base.group_no_one"/>
+                    <field name="state" widget="statusbar" statusbar_colors='{}'/>
+                </header>
+                <sheet string="Budget">
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_to_open_modification" icon="fa-list-alt" type="object" class="oe_stat_button" groups="account.group_account_user">
+                            <span class="o_stat_text">Budget Modification Detail</span>
+                        </button>
+                        <button class="oe_stat_button" icon="fa-bars" name="%(action_position_analysis_tree)d" string="Position analysis" type="action" widget="statinfo" context="{'budget_id':active_id}"/>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="fiscalyear"/>
+                            <field name="receiptbook_id"/>
+                            <field name="expedient_id"/>
+                            <field name="income_account_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group name="totals">
+                            <field name="total_authorized"/>
+                            <field name="total_preventive"/>
+                            <field name="total_requested"/>
+                            <field name="passive_residue" attrs="{'invisible':[('state', 'not in', ['pre_closed','closed'])]}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Analysis">
+                            <field name="parent_budget_position_ids" context="{'budget_id':active_id, 'tree_view_ref': 'public_budget.view_budget_position_budget_tree'}"/>
+                        </page>
+                        <page string="Detail">
+                            <field name="budget_detail_ids"/>
+                        </page>
+                        <page string="Moves">
+                            <field name="budget_modification_ids"/>
+                        </page>
+                        <page string="Funding Moves">
+                            <field name="funding_move_ids"/>
+                        </page>
+                        <page string="Pre Close Detail" attrs="{'invisible':[('state', 'not in', ['pre_closed','closed'])]}">
+                            <group col="4">
+                                <field name="prec_passive_residue"/>
+                                <field name="prec_total_requested"/>
+                            </group>
+                            <field name="budget_prec_detail_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Delete header for to_date analisis -->
+    <record id="view_public_budget_budget_to_date_form" model="ir.ui.view">
+        <field name="name">public_budget.budget.to_date.form</field>
+        <field name="model">public_budget.budget</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="public_budget.view_public_budget_budget_form"/>
+        <field eval="99" name="priority"/>
+        <field name="arch" type="xml">
+            <header position="replace">
+                <header>
+                    <button name="%(action_aeroo_report_budget)d" class="oe_highlight" string="Print" type="action"/>
+                    <field name="state" widget="statusbar" invisible="1"/>
+                </header>
+            </header>
+            <!-- agregamos analysis_to_date acá para que no de error desde otros lugares -->
+            <!-- <field name="parent_budget_position_ids" position="attributes">
+                <attribute name="context">{'budget_id':active_id, 'analysis_to_date': analysis_to_date, 'tree_view_ref': 'public_budget.view_budget_position_budget_tree'}</attribute>
+            </field> -->
+        </field>
+    </record>
+
+    <!-- TREEVIEW -->
+    <record id="view_public_budget_budget_tree" model="ir.ui.view">
+        <field name="name">public_budget.budget.tree</field>
+        <field name="model">public_budget.budget</field>
+        <field name="arch" type="xml">
+            <tree string="Budget" colors="grey:state=='cancelled';blue:state in (u'draft',);black:state in (u'pre_closed', u'open', u'closed');red:state in ()">
+                <field name="name"/>
+                <!-- <field name="fiscalyear_id"/> -->
+                <field name="income_account_id"/>
+                <field name="expedient_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

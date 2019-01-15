@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <data noupdate="1">
+<odoo noupdate="1">
 
-            <!-- 
+    <!--
             Enable Light Multi Company
             Contabilidad analítica
             Manage Multiple Locations and Warehouses
@@ -11,7 +10,7 @@
             Analytic Accounting for Purchases
             Discount on lines
              -->
-        <!-- <record id="base.group_user" model="res.groups">
+    <!-- <record id="base.group_user" model="res.groups">
             <field eval="[
                 (4, ref('base.group_light_multi_company')),
                 (4, ref('base.group_multi_company')),
@@ -25,6 +24,5 @@
             ]" name="implied_ids"/>
         </record> -->
 
-    </data>
 </odoo>
 

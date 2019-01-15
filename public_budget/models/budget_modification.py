@@ -14,8 +14,8 @@ class BudgetModification(models.Model):
         string='Is Initial Approval?'
     )
     type = fields.Selection([
-        (u'increase_decrease', u'Increase / Decrease'),
-        (u'exchange', u'Exchange')],
+        ('increase_decrease', 'Increase / Decrease'),
+        ('exchange', 'Exchange')],
         string='Budget Modification Type',
         required=True,
         default='increase_decrease'
@@ -28,16 +28,15 @@ class BudgetModification(models.Model):
     )
     rest_message = fields.Char(
         string='Message',
-        compute='_get_restriction_data'
+        compute='_compute_restriction_data'
     )
     rest_type = fields.Many2one(
         'public_budget.rest_type',
         string='Restriction Type',
-        compute='_get_restriction_data'
+        compute='_compute_restriction_data'
     )
     budget_id = fields.Many2one(
         'public_budget.budget',
-        string='Budget',
         required=True
     )
     budget_modification_detail_ids = fields.One2many(
@@ -46,12 +45,11 @@ class BudgetModification(models.Model):
         string='Details'
     )
 
-    @api.multi
     @api.depends(
         'budget_modification_detail_ids.budget_position_id',
         'budget_modification_detail_ids.amount',
     )
-    def _get_restriction_data(self):
+    def _compute_restriction_data(self):
         for rec in self:
             rest_message = False
             rest_type = False

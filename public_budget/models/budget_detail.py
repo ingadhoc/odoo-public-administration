@@ -9,7 +9,6 @@ class BudgetDetail(models.Model):
     _order = "budget_position_id"
 
     initial_amount = fields.Monetary(
-        string='Initial Amount',
         required=True,
     )
     state = fields.Selection(
@@ -17,12 +16,10 @@ class BudgetDetail(models.Model):
     )
     budget_id = fields.Many2one(
         'public_budget.budget',
-        string='budget_id',
         required=True
     )
     budget_position_id = fields.Many2one(
         'public_budget.budget_position',
-        string='Budget Position',
         required=True,
         context={
             'default_type': 'normal', 'default_budget_assignment_allowed': 1},

@@ -1,38 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<data>
     <record id="view_advance_request_analysis_graph" model="ir.ui.view">
-         <field name="name">advance.request.analysis.graph</field>
-         <field name="model">advance.request.analysis</field>
-         <field name="arch" type="xml">
-             <graph string="Advance Request Analysis">
-                 <!-- <field name="type_id"/> -->
-                 <field name="type_id" type="row"/>
-                 <field name="employee_id" type="row"/>
-                 <field name="direction" type="row"/>
-                 <!-- <field name="date" type="col"/> -->
-                 <field name="amount" type="measure"/>
-             </graph>
-         </field>
+        <field name="name">advance.request.analysis.graph</field>
+        <field name="model">advance.request.analysis</field>
+        <field name="arch" type="xml">
+            <graph string="Advance Request Analysis">
+                <!-- <field name="type_id"/> -->
+                <field name="type_id" type="row"/>
+                <field name="employee_id" type="row"/>
+                <field name="direction" type="row"/>
+                <!-- <field name="date" type="col"/> -->
+                <field name="amount" type="measure"/>
+            </graph>
+        </field>
     </record>
 
     <record id="view_advance_request_analysis_pivot" model="ir.ui.view">
-         <field name="name">advance.request.analysis.pivot</field>
-         <field name="model">advance.request.analysis</field>
-         <field name="arch" type="xml">
-             <pivot string="Advance Request Analysis">
-                 <!-- <field name="type_id"/> -->
-                 <field name="type_id" type="row"/>
-                 <field name="employee_id" type="row"/>
-                 <field name="direction" type="row"/>
-                 <!-- <field name="date" type="col"/> -->
-                 <field name="amount" type="measure"/>
-             </pivot>
-         </field>
+        <field name="name">advance.request.analysis.pivot</field>
+        <field name="model">advance.request.analysis</field>
+        <field name="arch" type="xml">
+            <pivot string="Advance Request Analysis">
+                <!-- <field name="type_id"/> -->
+                <field name="type_id" type="row"/>
+                <field name="employee_id" type="row"/>
+                <field name="direction" type="row"/>
+                <!-- <field name="date" type="col"/> -->
+                <field name="amount" type="measure"/>
+            </pivot>
+        </field>
     </record>
 
     <!-- Custom reports (aka filters) -->
-<!--     <record id="filter_request_analysis_type" model="ir.filters">
+    <!--     <record id="filter_request_analysis_type" model="ir.filters">
         <field name="name">By Type</field>
         <field name="model_id">advance.request.analysis</field>
         <field name="domain">[]</field>
@@ -53,7 +52,7 @@
                 <field name="type_id"/>
                 <field name="state"/>
                 <filter string="Activas" name="active_lines" domain="[('state','not in',['draft', 'cancel'])]"/>
-<!--                 <filter string="This Year" name="thisyear" domain="['|', ('date', '=', False), '&amp;',('date','&lt;=', time.strftime('%%Y-12-31')),('date','&gt;=',time.strftime('%%Y-01-01'))]" help="Journal Advance Request with period in current year"/>
+                <!--                 <filter string="This Year" name="thisyear" domain="['|', ('date', '=', False), '&amp;',('date','&lt;=', time.strftime('%%Y-12-31')),('date','&gt;=',time.strftime('%%Y-01-01'))]" help="Journal Advance Request with period in current year"/>
                 <separator/>
                 <filter string="To Invoice" domain="[('state','=','draft')]" help = "Draft Invoices"/>
                 <filter string="Invoiced" name="current" domain="[('state','not in', ('draft','cancel','proforma','proforma2'))]"/>
@@ -88,5 +87,4 @@
         <field name="search_view_id" ref="view_advance_request_analysis_search"/>
     </record>
 
-</data>
 </odoo>

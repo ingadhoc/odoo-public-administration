@@ -41,10 +41,10 @@ class AccountPaymentGroup(models.Model):
         states={'posted': [('readonly', True)]},
     )
     importe_total = fields.Monetary(
-        compute='compute_importe_total'
+        compute='_compute_importe_total',
     )
     cantidad = fields.Monetary(
-        compute='compute_importe_total'
+        compute='_compute_importe_total',
     )
     archivo_banco = fields.Binary(
         readonly=True
@@ -53,17 +53,18 @@ class AccountPaymentGroup(models.Model):
         readonly=True,
     )
 
-    @api.one
     @api.depends('line_ids.amount')
-    def compute_importe_total(self):
-        self.importe_total = sum(self.line_ids.mapped('amount'))
-        self.cantidad = len(self.line_ids)
+    def _compute_importe_total(self):
+        for rec in self:
+            rec.update({
+                'importe_total': sum(rec.line_ids.mapped('amount')),
+                'cantidad': len(rec.line_ids),
+            })
 
     @api.multi
     def generar_linea(self,):
         self.ensure_one()
 
-    @api.one
     def check_generar_archivo_banco_data(self):
         campos = [
             'fecha_de_acreditacion', 'grupo_asingado_por_bmr',
@@ -74,7 +75,6 @@ class AccountPaymentGroup(models.Model):
                 raise UserError(_('Debe definir un valor para el campo %s') % (
                     field))
 
-    @api.one
     def check_payment_lines_total(self):
         if not float_is_zero(
                 self.importe_total - self.to_pay_amount,
@@ -83,11 +83,8 @@ class AccountPaymentGroup(models.Model):
                 'Si existen líneas de transferencia, el importe a pagar debe '
                 'ser igual a la suma de los importes de las líneas de pago'))
 
-    @api.one
     @api.constrains('state')
     def check_confirm_with_payment_lines(self):
-        """
-        """
         if (
                 self.state == 'confirmed' and
                 self.partner_type == 'supplier' and
@@ -95,7 +92,6 @@ class AccountPaymentGroup(models.Model):
         ):
             self.check_payment_lines_total()
 
-    @api.one
     def generar_archivo_banco(self):
         self.check_generar_archivo_banco_data()
         lines_data = []

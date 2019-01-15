@@ -4,7 +4,7 @@
     <record id="purchase_subscription_view_search" model="ir.ui.view">
         <field name="name">purchase.subscription.search</field>
         <field name="model">purchase.subscription</field>
-        <field name="inherit_id" ref="purchase_contract.purchase_subscription_view_search"/>
+        <field name="inherit_id" ref="purchase_subscription.purchase_subscription_view_search"/>
         <field name="arch" type="xml">
             <field name="manager_id" position="after">
                 <field name="expedient_id"/>
@@ -17,7 +17,7 @@
     <record id="view_purchase_subscription_tree" model="ir.ui.view">
         <field name="name">purchase.subscription.list</field>
         <field name="model">purchase.subscription</field>
-        <field name="inherit_id" ref="purchase_contract.view_purchase_subscription_tree"/>
+        <field name="inherit_id" ref="purchase_subscription.view_purchase_subscription_tree"/>
         <field name="arch" type="xml">
             <field name="code" position="replace"/>
             <field name="display_name" position="after">
@@ -33,16 +33,18 @@
     <record id="view_purchase_subscription_form" model="ir.ui.view">
         <field name="name">purchase.subscription.form</field>
         <field name="model">purchase.subscription</field>
-        <field name="inherit_id" ref="purchase_contract.view_purchase_subscription_form"/>
+        <field name="priority">99</field>
+        <field name="inherit_id" ref="purchase_subscription.view_purchase_subscription_form"/>
         <field name="arch" type="xml">
             <field name="code" position="attributes">
                 <attribute name="string">Reference/Resolution</attribute>
             </field>
             <label for="recurring_next_date" position="replace"/>
-            <div attrs="{'invisible': ['|',('type','=','template')]}" position="replace"/>
+            <xpath expr="//group[@name='main']//group[1]/div" position="replace"/>
+            <xpath expr="//group[@name='main']//group[2]/div" position="replace"/>
+            <label for="recurring_interval" position="replace"/>
             <page id="settings" position="replace"/>
-            <button name="action_subscription_invoice" position="replace"/>
-            <field name="template_id" position="replace"/>
+            <div name="button_box" position="replace"/>
             <field name="currency_id" position="after">
                 <field name="expedient_id"/>
             </field>

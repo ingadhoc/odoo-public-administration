@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
 
-<record id="account_statement_aeroo_report.action_aeroo_statement_report" model="ir.actions.report.xml">
-    <field name="styles_mode">specified</field>
-    <field name="stylesheet_id" ref="sipreco_stylesheet"/>
-</record>
+    <record id="account_statement_aeroo_report.action_aeroo_statement_report" model="ir.actions.report">
+        <field name="styles_mode">specified</field>
+        <field name="stylesheet_id" ref="sipreco_stylesheet"/>
+    </record>
 
-    </data>
 </odoo>

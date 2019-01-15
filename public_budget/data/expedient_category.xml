@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <data noupdate="1">
-    <!-- <data noupdate="1"> -->
-        <record id="budget_exp_category_1" model="public_budget.expedient_category">
-            <field name="name">Administrativo</field>
-        </record>
+<odoo noupdate="1">
+    <record id="budget_exp_category_1" model="public_budget.expedient_category">
+        <field name="name">Administrativo</field>
+    </record>
 
-        <record id="budget_exp_category_2" model="public_budget.expedient_category">
-            <field name="name">Contable</field>
-        </record>
-        <record id="budget_exp_category_3" model="public_budget.expedient_category">
-            <field name="name">Personal</field>
-        </record>
-        <record id="budget_exp_category_4" model="public_budget.expedient_category">
-            <field name="name">Subsidios</field>
-        </record>
-    </data>
+    <record id="budget_exp_category_2" model="public_budget.expedient_category">
+        <field name="name">Contable</field>
+    </record>
+    <record id="budget_exp_category_3" model="public_budget.expedient_category">
+        <field name="name">Personal</field>
+    </record>
+    <record id="budget_exp_category_4" model="public_budget.expedient_category">
+        <field name="name">Subsidios</field>
+    </record>
 </odoo>

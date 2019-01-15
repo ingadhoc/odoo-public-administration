@@ -19,10 +19,10 @@
 ##############################################################################
 {
     "name": "Public Budget Subscription",
-    'version': '9.0.1.0.0',
+    'version': '11.0.1.0.0',
     'category': 'Accounting',
     'sequence': 14,
-    'summary': 'Contract Purchase, Invoicing',
+    'summary': 'Subscription Purchase, Invoicing',
     'author': 'ADHOC SA',
     'website': 'www.adhoc.com.ar',
     'license': 'AGPL-3',
@@ -30,7 +30,7 @@
     ],
     'depends': [
         'public_budget',
-        'purchase_contract',
+        'purchase_subscription',
     ],
     'data': [
         'views/purchase_subscription_views.xml',
@@ -39,7 +39,7 @@
     ],
     'demo': [
     ],
-    'installable': False,
+    'installable': True,
     'auto_install': False,
     'application': False,
 }

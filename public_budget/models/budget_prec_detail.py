@@ -10,7 +10,6 @@ class BudgetPrecloseDetail(models.Model):
 
     budget_position_id = fields.Many2one(
         'public_budget.budget_position',
-        string='Budget Position',
         required=True
     )
     amount = fields.Monetary(
@@ -51,7 +50,6 @@ class BudgetPrecloseDetail(models.Model):
     )
     budget_id = fields.Many2one(
         'public_budget.budget',
-        string='budget_id',
         required=True
     )
     currency_id = fields.Many2one(

@@ -18,7 +18,7 @@ class PublicBudgetBudgetReport(models.Model):
             ('public_budget.preventive_line', 'Preventive Line'),
         ]
 
-# campos que obtenemos en todas las consultas
+    # campos que obtenemos en todas las consultas
     resource = fields.Reference(
         selection='_reference_models',
         string='Recurso',
@@ -130,7 +130,7 @@ class PublicBudgetBudgetReport(models.Model):
         readonly=True,
     )
 
-    def init(self, cr):
+    def init(self):
         """
         hacemos una sucesión de consultas que devuelvan:
         * type:
@@ -149,8 +149,8 @@ class PublicBudgetBudgetReport(models.Model):
         * budget position
         * etc..
         """
-
-        tools.drop_view_if_exists(cr, self._table)
+        # pylint: disable=E8103
+        tools.drop_view_if_exists(self._cr, self._table)
 
         # consulta que agrega a la de payments el preventive_line_id y ademas
         # reparte el amount
@@ -273,5 +273,5 @@ class PublicBudgetBudgetReport(models.Model):
                 preventive_query,
                 # advance_query,
         )
-        cr.execute("""CREATE or REPLACE VIEW %s as (%s
+        self._cr.execute("""CREATE or REPLACE VIEW %s as (%s
         )""" % (self._table, query))

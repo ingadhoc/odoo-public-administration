@@ -1,4 +1,6 @@
 {
+    'name': 'Public Budget Subsidy Management',
+    'version': '11.0.1.0.0',
     'author': 'ADHOC SA,Odoo Community Association (OCA)',
     'website': 'www.adhoc.com.ar',
     'category': 'Accounting & Finance',
@@ -10,11 +12,11 @@
         'reports/subsidy_form_report.xml',
         'reports/subsidy_report.xml',
         'reports/subsidy_report_resolution.xml',
-        'views/subsidy_view.xml',
-        'views/transaction_type_view.xml',
-        'views/subsidy_approval_arrangement_view.xml',
-        'views/subsidy_note_type_view.xml',
-        'views/subsidy_resolution_view.xml',
+        'views/subsidy_views.xml',
+        'views/transaction_type_views.xml',
+        'views/subsidy_approval_arrangement_views.xml',
+        'views/subsidy_note_type_views.xml',
+        'views/subsidy_resolution_views.xml',
         'security/ir.model.access.csv',
         'data/sequence_data.xml',
         'data/subsidy_note_type_data.xml',
@@ -27,7 +29,5 @@
     'depends': [
         'public_budget',
     ],
-    'installable': False,
-    'name': 'Public Budget Subsidy Management',
-    'version': '9.0.1.5.0',
+    'installable': True,
 }

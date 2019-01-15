@@ -14,9 +14,9 @@ from . import budget_modification_detail
 from . import funding_move
 from . import account_invoice_line
 from . import rest_type
-from . import users
+from . import res_users
 from . import budget_position
-from . import company
+from . import res_company
 from . import budget_detail
 from . import budget_prec_detail
 from . import preventive_line

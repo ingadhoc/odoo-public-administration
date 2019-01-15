@@ -10,7 +10,8 @@
         <field name="street">Calle Falsa 456</field>
         <field name="city">Rosario</field>
         <field name="country_id" ref="base.ar"/>
-        <field name="state_id" ref="l10n_ar_states.S"/>
+        <!-- <field name="state_id" ref="l10n_ar_states.S"/> -->
+        <field model="res.country.state" name="state_id" search="[('code','=','S')]"/>
         <field name="zip">2000</field>
         <field name="phone">+1 555 123 8069</field>
         <field name="email">info@yourcompany.example.com</field>

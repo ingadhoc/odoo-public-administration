@@ -1,5 +1,13 @@
-.. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
-   :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+.. |company| replace:: ADHOC SA
+
+.. |company_logo| image:: https://raw.githubusercontent.com/ingadhoc/maintainer-tools/master/resources/adhoc-logo.png
+   :alt: ADHOC SA
+   :target: https://www.adhoc.com.ar
+
+.. |icon| image:: https://raw.githubusercontent.com/ingadhoc/maintainer-tools/master/resources/adhoc-icon.png
+
+.. image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+   :target: https://www.gnu.org/licenses/agpl
    :alt: License: AGPL-3
 
 =============
@@ -9,6 +17,7 @@ Public Budget
 Modulo generico para gestion publica presupuestaria/contable.
 
 Datos demo:
+
 * Compañía a utilizar: SIPRECO
 * Usuarios disponibles (clave igual a usuario):
 
@@ -31,18 +40,11 @@ Algunas observaciones de uso/desarrollo
 
 Los cheques se generan cuando se valida el pago, en ese momento queda como entregado y afecta la cuenta de "cheques diferidos". (ESTO NO VA MAS ASI) cuando lo entregan físicamente marcan el débito, en ese momento registramos la salida del banco.
 
-                HOY                     V9
-Validar Pago
-                Cheque a entregar       entregado               Entregado
-                Salió de Banco          Valores diferidos     
-
-Entrega física
-                cheque entregado        Debitado
-                Banco a Banco           Dif a banco
 
 
-La altenetiva que elegimos es hacer que la validación del pago se haga con la entrega física, luego cuando se identifica el débito, se registra como debitado. 
+La altenetiva que elegimos es hacer que la validación del pago se haga con la entrega física, luego cuando se identifica el débito, se registra como debitado.
 Desventajas/observaciones:
+
 * hasta que no se entregue el cheque no existe
 * si hay más de un cheque en un pago, no se pueden "entregar" individualmente (tendrán que hacer muchos pagos)
 * haŕía que hacer un poka joke para que no se olviden de validar el pago al entregar
@@ -61,14 +63,14 @@ Installation
 
 To install this module, you need to:
 
-#. Do this ...
+#. Only need to install the module
 
 Configuration
 =============
 
 To configure this module, you need to:
 
-#. Go to ...
+#. Nothing to configure
 
 Usage
 =====
@@ -79,13 +81,7 @@ To use this module, you need to:
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.adhoc.com.ar/
-
-.. repo_id is available in https://github.com/OCA/maintainer-tools/blob/master/tools/repos_with_ids.txt
-.. branch is "8.0" for example
-
-Known issues / Roadmap
-======================
+   :target: http://runbot.adhoc.com.ar/
 
 Bug Tracker
 ===========
@@ -101,19 +97,16 @@ Credits
 Images
 ------
 
-* ADHOC SA: `Icon <http://fotos.subefotos.com/83fed853c1e15a8023b86b2b22d6145bo.png>`_.
+* |company| |icon|
 
 Contributors
 ------------
 
-
 Maintainer
 ----------
 
-.. image:: http://fotos.subefotos.com/83fed853c1e15a8023b86b2b22d6145bo.png
-   :alt: Odoo Community Association
-   :target: https://www.adhoc.com.ar
+|company_logo|
 
-This module is maintained by the ADHOC SA.
+This module is maintained by the |company|.
 
 To contribute to this module, please visit https://www.adhoc.com.ar.

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- INHERITED TREE -->
+    <record id="view_public_budget_invoice_tree" model="ir.ui.view">
+        <field name="name">public_budget.invoice.tree</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_tree"/>
+        <field name="arch" type="xml">
+            <tree position="attributes">
+                <attribute name="create">false</attribute>
+            </tree>
+            <tree position="inside">
+                <button name="invoice_open" states="draft,proforma2" string="Validate" class="oe_highlight" groups="account.group_account_invoice" icon="gtk-go-forward"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- FORMVIEW -->
+    <record id="invoice_supplier_form" model="ir.ui.view">
+        <field name="name">account.invoice.supplier.form</field>
+        <field name="model">account.invoice</field>
+        <field name="priority">20</field>
+        <field name="inherit_id" ref="account.invoice_supplier_form"/>
+        <field name="arch" type="xml">
+            <button name="action_invoice_cancel" position="before">
+                <button name="%(action_aeroo_report_liquidation)d" class="oe_highlight" string="Imprimir Liquidación" type="action"/>
+            </button>
+
+            <!-- ocultamos boton de pago (agregado por payment_group para que se pague desde tansaccion -->
+            <button name="action_account_invoice_payment_group" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </button>
+
+            <!-- we hide refund button -->
+            <button name="%(account.action_account_invoice_refund)d" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </button>
+
+            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='account_id']" position="after">
+                <field name="definitive_line_id"/>
+            </xpath>
+            <!-- TODO ver si queremos sacar el botón o no hace falta -->
+            <!-- <button name="invoice_pay_customer" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </button> -->
+
+            <!-- TODO tal vez mover -->
+            <field name="journal_id" position="after">
+                <field name="transaction_id"/>
+                <field name="budget_id"/>
+            </field>
+            <field name="residual" position="after">
+                <field name="to_pay_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="invoice_supplier_clean_internal_number_form" model="ir.ui.view">
+        <field name="name">account.invoice.form</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account_clean_cancelled_invoice_number.invoice_supplier_form"/>
+        <field name="arch" type="xml">
+            <button name="clean_internal_number" position="attributes">
+                <attribute name="groups">account.group_account_user</attribute>
+            </button>
+        </field>
+    </record>
+
+</odoo>

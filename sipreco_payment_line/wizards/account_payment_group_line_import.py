@@ -1,6 +1,6 @@
 import logging
 import base64
-from StringIO import StringIO
+import io
 from odoo import api, models, fields, _
 from odoo.exceptions import ValidationError as UserError
 
@@ -74,7 +74,7 @@ class AccountPaymentGroupLineImport(models.TransientModel):
         res = []
         try:
             # skip first line
-            for line in StringIO(data_file).readlines()[1:]:
+            for line in io.StringIO(data_file).readlines()[1:]:
                 _logger.info('Parsing line "%s"' % line)
                 line_vals = line.strip().split()
                 try:

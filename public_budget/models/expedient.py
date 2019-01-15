@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError, UserError
 
 
@@ -26,8 +26,8 @@ class PublicBudgetExpedient(models.Model):
         default=fields.Datetime.now
     )
     cover = fields.Char(
-        store=True,
-        compute='_get_cover'
+        compute='_compute_cover'
+        # store=True,
     )
     description = fields.Char(
         required=True,
@@ -41,20 +41,18 @@ class PublicBudgetExpedient(models.Model):
         string='Last Move',
         store=True,
         compute_sudo=True,
-        compute='_get_current_location'
+        compute='_compute_current_location'
     )
     founder_id = fields.Many2one(
         'public_budget.expedient_founder',
-        string='Founder',
         required=True
     )
     category_id = fields.Many2one(
         'public_budget.expedient_category',
-        string='Category',
         required=True
     )
     type = fields.Selection(
-        [(u'payment', u'Payment'), (u'authorizing', u'Authorizing')],
+        [('payment', 'Payment'), ('authorizing', 'Authorizing')],
     )
     first_location_id = fields.Many2one(
         'public_budget.location',
@@ -63,16 +61,15 @@ class PublicBudgetExpedient(models.Model):
     )
     current_location_id = fields.Many2one(
         'public_budget.location',
-        string='Current Location',
         store=True,
         compute_sudo=True,
-        compute='_get_current_location'
+        compute='_compute_current_location'
     )
     last_location_id = fields.Many2one(
         'public_budget.location',
         store=True,
         compute_sudo=True,
-        compute='_get_current_location'
+        compute='_compute_current_location'
     )
     note = fields.Text(
     )
@@ -104,12 +101,12 @@ class PublicBudgetExpedient(models.Model):
     final_location = fields.Char(
     )
     year = fields.Integer(
-        compute='_get_year'
+        compute='_compute_year'
     )
     in_transit = fields.Boolean(
         string='In Transit?',
         store=True,
-        compute='_get_current_location',
+        compute='_compute_current_location',
         compute_sudo=True,
     )
     user_location_ids = fields.Many2many(
@@ -118,7 +115,6 @@ class PublicBudgetExpedient(models.Model):
     )
     user_id = fields.Many2one(
         'res.users',
-        string='User',
         readonly=True,
         required=True,
         default=lambda self: self.env.user
@@ -142,7 +138,6 @@ class PublicBudgetExpedient(models.Model):
         'public_budget_expedient_ids_supplier_ids_rel',
         'expedient_id',
         'partner_id',
-        string='Suppliers',
         context={'default_supplier': 1},
         domain=[('supplier', '=', True)]
     )
@@ -151,7 +146,6 @@ class PublicBudgetExpedient(models.Model):
         'public_budget_remit_ids_expedient_ids_rel',
         'expedient_id',
         'remit_id',
-        string='Remits',
         readonly=True,
         states={'in_transit': [('readonly', False)]}
     )
@@ -162,26 +156,6 @@ class PublicBudgetExpedient(models.Model):
         string='Overdue?',
     )
 
-    @api.multi
-    def onchange(self, values, field_name, field_onchange):
-        """
-        Idea obtenida de aca
-        https://github.com/odoo/odoo/issues/16072#issuecomment-289833419
-        por el cambio que se introdujo en esa mimsa conversación, TODO en v11
-        no haría mas falta, simplemente domain="[('id', 'in', x2m_field)]"
-        Otras posibilidades que probamos pero no resultaron del todo fue:
-        * agregar onchange sobre campos calculados y que devuelvan un dict con
-        domain. El tema es que si se entra a un registro guardado el onchange
-        no se ejecuta
-        * usae el modulo de web_domain_field que esta en un pr a la oca
-        """
-        for field in field_onchange.keys():
-            if field.startswith('user_location_ids.'):
-                del field_onchange[field]
-        return super(PublicBudgetExpedient, self).onchange(
-            values, field_name, field_onchange)
-
-    @api.multi
     @api.depends(
         'first_location_id',
         'remit_ids',
@@ -189,7 +163,7 @@ class PublicBudgetExpedient(models.Model):
         'remit_ids.location_dest_id',
         'remit_ids.state',
     )
-    def _get_current_location(self):
+    def _compute_current_location(self):
         """
         current_location_id no es computed
         los otros dos si
@@ -220,13 +194,12 @@ class PublicBudgetExpedient(models.Model):
             rec.last_move_date = last_move_date
             rec.in_transit = in_transit
 
-    @api.multi
     @api.constrains('pages')
     def check_pages_not_dni(self):
         for rec in self:
             if rec.pages > 10000:
-                raise ValidationError(
-                    'No puede poner número de páginas mayor a 10.000')
+                raise ValidationError(_(
+                    'No puede poner número de páginas mayor a 10.000'))
 
     @api.onchange('subsidy_recipient_doc')
     def check_subsidy_recipient_doc(self):
@@ -234,9 +207,9 @@ class PublicBudgetExpedient(models.Model):
             [('subsidy_recipient_doc', '!=', 0),
                 ('subsidy_recipient_doc', '=', self.subsidy_recipient_doc)])
         if len(expedients_with_dni) > 0:
-            raise UserError(
+            raise UserError(_(
                 'El DNI ya existe en estos TA: \n * %s ' % ' \n * '.join(
-                    expedients_with_dni.mapped('number')))
+                    expedients_with_dni.mapped('number'))))
 
     @api.multi
     def write(self, vals):
@@ -244,9 +217,9 @@ class PublicBudgetExpedient(models.Model):
             new_pages = vals.get('pages')
             for record in self:
                 if new_pages < record.pages:
-                    raise ValidationError(
-                        'No puede disminuir la cantidad de páginas de un '
-                        'expediente')
+                    raise ValidationError(_('No puede disminuir la cantidad '
+                                            'de páginas de un '
+                                            'expediente'))
         return super(PublicBudgetExpedient, self).write(vals)
 
     @api.multi
@@ -258,23 +231,22 @@ class PublicBudgetExpedient(models.Model):
                 ('state', '!=', 'cancel'),
             ])
             if transactions:
-                raise ValidationError(
+                raise ValidationError(_(
                     'No puede anular este expediente ya que es utilizado en '
-                    'las siguientes transacciones %s' % transactions.ids)
+                    'las siguientes transacciones %s' % transactions.ids))
             # no se puede si esta en payment_groups no cancelados
             payment_groups = self.env['account.payment.group'].search([
                 ('expedient_id', '=', expedient.id),
                 ('state', '!=', 'cancel'),
             ])
             if payment_groups:
-                raise ValidationError(
+                raise ValidationError(_(
                     'No puede anular este expediente ya que es utilizado en '
-                    'las siguientes ordenes de pago %s' % payment_groups.ids)
+                    'las siguientes ordenes de pago %s' % payment_groups.ids))
         return True
 
-    @api.multi
     @api.depends('issue_date')
-    def _get_year(self):
+    def _compute_year(self):
         for rec in self:
             year = False
             if rec.issue_date:
@@ -282,9 +254,8 @@ class PublicBudgetExpedient(models.Model):
                 year = issue_date.year
             rec.year = year
 
-    @api.multi
     @api.depends('supplier_ids', 'description')
-    def _get_cover(self):
+    def _compute_cover(self):
         for rec in self:
             supplier_names = [x.name for x in rec.supplier_ids]
             cover = rec.description

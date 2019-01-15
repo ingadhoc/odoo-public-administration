@@ -40,23 +40,23 @@ class PreventiveLine(models.Model):
         string='Advance Line?',
     )
     remaining_amount = fields.Monetary(
-        compute='_get_amounts',
+        compute='_compute_amounts',
         store=True,
     )
     definitive_amount = fields.Monetary(
-        compute='_get_amounts',
+        compute='_compute_amounts',
         store=True,
     )
     invoiced_amount = fields.Monetary(
-        compute='_get_amounts',
+        compute='_compute_amounts',
         store=True,
     )
     to_pay_amount = fields.Monetary(
-        compute='_get_amounts',
+        compute='_compute_amounts',
         store=True,
     )
     paid_amount = fields.Monetary(
-        compute='_get_amounts',
+        compute='_compute_amounts',
         store=True,
     )
     state = fields.Selection(
@@ -67,13 +67,13 @@ class PreventiveLine(models.Model):
             ('invoiced', _('Invoiced')),
             ('closed', _('Closed')),
             ('cancel', _('Cancel'))],
-        compute='_get_state',
+        compute='_compute_state',
         store=True,
     )
     affects_budget = fields.Boolean(
         'Affects Budget?',
         store=True,
-        compute='_get_affects_budget',
+        compute='_compute_affects_budget',
     )
     transaction_id = fields.Many2one(
         'public_budget.transaction',
@@ -110,11 +110,10 @@ class PreventiveLine(models.Model):
     def change_budget_position(self):
         self.account_id = self.budget_position_id.default_account_id
 
-    @api.multi
     @api.depends(
         'invoiced_amount',
     )
-    def _get_state(self):
+    def _compute_state(self):
         """Por ahora solo implementamos los estados invoiced y draft
         """
         for rec in self:
@@ -124,13 +123,12 @@ class PreventiveLine(models.Model):
                 state = 'invoiced'
             rec.state = state
 
-    @api.multi
     @api.depends(
         'transaction_id.state',
         'transaction_id.type_id.with_advance_payment',
         'advance_line',
     )
-    def _get_affects_budget(self):
+    def _compute_affects_budget(self):
         """Marcamos las lineas preventivas que deben ser tenidas en cuenta en
         el budget de acuerdo a el estado de la transaccion y a sí son lineas
         de adelanto o no.
@@ -151,7 +149,6 @@ class PreventiveLine(models.Model):
                     affects_budget = True
             rec.affects_budget = affects_budget
 
-    @api.multi
     @api.depends(
         'advance_line',
         'preventive_amount',
@@ -165,7 +162,7 @@ class PreventiveLine(models.Model):
         'definitive_line_ids.to_pay_amount',
         'definitive_line_ids.paid_amount',
     )
-    def _get_amounts(self):
+    def _compute_amounts(self):
         """Update the following fields with the related values to the budget
         and the budget position:
         -definitive_amount: amount sum of definitive lines
@@ -186,7 +183,8 @@ class PreventiveLine(models.Model):
             if rec.advance_line:
                 _logger.info('Getting advance line values')
                 transaction = rec.transaction_id
-                advance_preventive_amount = transaction.advance_preventive_amount
+                advance_preventive_amount = transaction.\
+                    advance_preventive_amount
                 if advance_preventive_amount:
                     preventive_perc = (
                         rec.preventive_amount /
@@ -195,7 +193,8 @@ class PreventiveLine(models.Model):
                     preventive_perc = 0.0
                 definitive_amount = to_pay_amount = (
                     transaction.advance_to_pay_amount * preventive_perc)
-                paid_amount = (transaction.advance_paid_amount * preventive_perc)
+                paid_amount = (transaction.advance_paid_amount *
+                               preventive_perc)
                 invoiced_amount = 0.0
             else:
                 _logger.info('Getting none advance line values')
@@ -207,8 +206,8 @@ class PreventiveLine(models.Model):
                 to_pay_amount_field = 'to_pay_amount'
                 paid_amount_field = 'paid_amount'
 
-                # Add this to allow analysis between dates, we used computed fields
-                # in this case instead of normal fields
+                # Add this to allow analysis between dates, we used computed
+                # fields in this case instead of normal fields
                 if to_date:
                     filter_domain = [
                         ('issue_date', '<=', to_date),
@@ -229,9 +228,9 @@ class PreventiveLine(models.Model):
             rec.invoiced_amount = invoiced_amount
             rec.to_pay_amount = to_pay_amount
             rec.paid_amount = paid_amount
-            _logger.info('Finish getting amounts for preventive line %s' % rec.id)
+            _logger.info(
+                'Finish getting amounts for preventive line %s' % rec.id)
 
-    @api.multi
     @api.constrains('account_id', 'transaction_id')
     def check_type_company(self):
         for rec in self:
@@ -243,7 +242,6 @@ class PreventiveLine(models.Model):
                     'Transaction Company and Account Company must be the '
                     'same!'))
 
-    @api.multi
     @api.constrains('definitive_line_ids', 'preventive_amount')
     def _check_number(self):
         for rec in self:
@@ -253,17 +251,15 @@ class PreventiveLine(models.Model):
                     "Definitive Amount can't be greater than Preventive "
                     "Amount"))
 
-    @api.multi
     @api.constrains(
         'preventive_amount')
     def check_budget_state_open(self):
         for rec in self:
             if rec.budget_id and rec.budget_id.state not in 'open':
-                raise ValidationError(
+                raise ValidationError(_(
                     'Solo puede cambiar afectaciones preventivas si '
-                    'el presupuesto está abierto')
+                    'el presupuesto está abierto'))
 
-    @api.multi
     @api.constrains(
         'transaction_id',
         # no agregamos affects_budget sobre este campo ya que algunas veces,

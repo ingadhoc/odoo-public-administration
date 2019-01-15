@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- SEARCH VIEW -->
+    <record id="view_public_budget_transaction_filter" model="ir.ui.view">
+        <field name="name">public_budget.transaction.select</field>
+        <field name="model">public_budget.transaction</field>
+        <field name="arch" type="xml">
+            <search string="Budget Transaction">
+                <field name="issue_date"/>
+                <field name="budget_id"/>
+                <field name="name"/>
+                <field name="user_id"/>
+                <field name="expedient_id"/>
+                <field name="type_id"/>
+                <field name="supplier_ids"/>
+                <field name="budget_position_ids" filter_domain="['|', ('budget_position_ids', 'ilike', self), ('advance_preventive_line_ids', 'ilike', self)]"/>
+                <filter name="with_advance_payment" string="With Advance Payment" domain="[('type_id.with_advance_payment','ilike',True)]"/>
+                <group expand="0" string="Group By">
+                    <field name="supplier_ids" string="Suppliers" context="{'group_by':'supplier_ids'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- FORMVIEW -->
+    <record id="view_public_budget_transaction_form" model="ir.ui.view">
+        <field name="name">public_budget.transaction.form</field>
+        <field name="model">public_budget.transaction</field>
+        <field name="arch" type="xml">
+            <form string="Budget Transaction">
+                <header>
+                    <button name="%(action_aeroo_report_transaction)d" class="oe_highlight" string="Print" type="action"/>
+                    <button name="action_cancel_draft" type="object" states="cancel" string="To Draft"/>
+                    <button name="action_open" type="object" states="draft" string="Open" class="oe_highlight"/>
+                    <button name="action_close" type="object" states="open" string="Close" class="oe_highlight"/>
+                    <button name="action_cancel" type="object" states="closed,draft,open" string="Cancel" groups="account.group_account_user"/>
+                    <field name="state" widget="statusbar" statusbar_colors='{}'/>
+                </header>
+                <sheet string="Budget Transaction">
+                    <div class="oe_button_box" name="buttons">
+                    </div>
+                    <field name="id" invisible="True"/>
+                    <field name="user_location_ids" invisible="True"/>
+                    <field name="type_with_advance_payment" invisible="1"/>
+                    <!-- si no lo agregamos aca no refresca en voucher, raro... -->
+                    <field name="supplier_ids" invisible="1"/>
+                    <field name="definitive_partner_type" invisible="1"/>
+                    <group>
+                        <group>
+                            <field name="issue_date"/>
+                            <field name="budget_id"/>
+                            <field name="name"/>
+                            <field name="expedient_id" domain="[('current_location_id', 'in', user_location_ids),('in_transit','=',False),('state','=','open')]" options="{'no_create': True}" />
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="type_id"/>
+                            <field name="partner_id" attrs="{'invisible':[('type_with_advance_payment','=',False)],'required':[('type_with_advance_payment','=',True)]}"/>
+                            <field name="user_id"/>
+                        </group>
+                        <!-- <group col="1"> -->
+                        <!-- asi quedó en 3 columnas y gustó mas -->
+                        <group>
+                            <group name="amounts">
+                                <label for="preventive_amount"/>
+                                <div>
+                                    <field name="preventive_amount" class="oe_inline"/>
+ / 
+                                    <field name="preventive_balance" class="oe_inline"/>
+                                </div>
+                                <label for="definitive_amount"/>
+                                <div>
+                                    <field name="definitive_amount" class="oe_inline"/>
+ / 
+                                    <field name="definitive_balance" class="oe_inline"/>
+                                </div>
+                                <label for="invoiced_amount"/>
+                                <div>
+                                    <field name="invoiced_amount" class="oe_inline"/>
+ / 
+                                    <field name="invoiced_balance" class="oe_inline"/>
+                                </div>
+                                <label for="to_pay_amount"/>
+                                <div>
+                                    <field name="to_pay_amount" class="oe_inline"/>
+ / 
+                                    <field name="to_pay_balance" class="oe_inline"/>
+                                </div>
+                                <field name="paid_amount"/>
+                            </group>
+                            <group attrs="{'invisible':[('type_with_advance_payment','=',False)]}" name="advance_amounts">
+                                <field name="advance_preventive_amount"/>
+                                <field name="advance_to_pay_amount"/>
+                                <field name="advance_paid_amount"/>
+                                <field name="advance_remaining_amount"/>
+                                <field name="advance_to_return_amount"/>
+                            </group>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Affectations">
+                            <!-- because it wont update till we save it we add definitive partner_type in context -->
+                            <label for="advance_preventive_line_ids" string="Advance Lines" attrs="{'invisible':[('type_with_advance_payment','=',False)]}"/>
+                            <field name="advance_preventive_line_ids" attrs="{'invisible':[('type_with_advance_payment','=',False)]}" context="{'default_definitive_partner_type': definitive_partner_type, 'default_advance_line': 1, 'default_preventive_status': 'confirmed', 'advance_line': 1}"/>
+                            <label for="preventive_line_ids" string="Settlement Lines" attrs="{'invisible':[('type_with_advance_payment','=',False)]}"/>
+                            <!-- send transaction to force onchange -->
+                            <field name="preventive_line_ids" context="{'default_transaction_id': id, 'default_definitive_partner_type': definitive_partner_type,}"/>
+                        </page>
+                        <page string="Payment Orders and Refunds" attrs="{'invisible':[('type_with_advance_payment','=',False)]}">
+                            <button class="oe_link" string="Create Payment Order" states="open" type="object" name="action_new_payment_group"/>
+                            <field name="advance_payment_group_ids" context="{'default_transaction_id':id, 'default_partner_id': partner_id, 'default_partner_type': 'supplier'}"/>
+                        </page>
+                        <page string="Invoices">
+                            <div class="oe_read_only">
+                                <button class="oe_link" string="Create Invoice" states="open" type="action" name="%(public_budget.action_definitive_make_invoice)d"/>
+                                    or 
+                                <button class="oe_link" string="Mass Invoice Create" states="open" type="action" name="%(public_budget.action_definitive_mass_invoice_create)d"/>
+                            </div>
+                            <field name="invoice_ids" nolabel="1"/>
+                        </page>
+                        <page string="Payment Orders" attrs="{'invisible':[('type_with_advance_payment','=',True)]}">
+                            <button class="oe_link" string="Create Payment Order" states="open" type="object" name="action_new_payment_group"/>
+                                or 
+                            <button class="oe_link" string="Mass Payment Order Create" states="open" type="object" name="mass_payment_group_create" confirm="Se van a generar ordenes de pago para todos los comprobantes que no se encuentren en ordenes de pago, seguro que quiere continuar?"/>
+                            <field name="payment_group_ids" context="{'default_partner_type': 'supplier', 'default_transaction_id':id}"/>
+                        </page>
+                        <page string="Notes">
+                            <field name="note"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- TREEVIEW -->
+    <record id="view_public_budget_transaction_tree" model="ir.ui.view">
+        <field name="name">public_budget.transaction.tree</field>
+        <field name="model">public_budget.transaction</field>
+        <field name="arch" type="xml">
+            <tree string="Budget Transaction" colors="grey:state=='cancelled';blue:state in (u'draft',);black:state in (u'open', u'closed');red:state in ()">
+                <field name="issue_date"/>
+                <field name="budget_id"/>
+                <field name="name"/>
+                <field name="user_id"/>
+                <field name="expedient_id"/>
+                <field name="type_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

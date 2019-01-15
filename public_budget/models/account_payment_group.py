@@ -6,7 +6,6 @@ _logger = logging.getLogger(__name__)
 
 
 class AccountPaymentGroup(models.Model):
-    """"""
 
     _inherit = 'account.payment.group'
 
@@ -32,7 +31,6 @@ class AccountPaymentGroup(models.Model):
     )
     expedient_id = fields.Many2one(
         'public_budget.expedient',
-        string='Expedient',
         readonly=True,
         context={'default_type': 'payment'},
         states={'draft': [('readonly', False)]},
@@ -40,7 +38,6 @@ class AccountPaymentGroup(models.Model):
     )
     transaction_id = fields.Many2one(
         'public_budget.transaction',
-        string='Transaction',
         readonly=True,
     )
     budget_position_ids = fields.Many2many(
@@ -48,23 +45,21 @@ class AccountPaymentGroup(models.Model):
         comodel_name='public_budget.budget_position',
         string='Partidas Relacionadas',
         help='Partidas Presupuestarias Relacionadas',
-        compute='_get_budget_positions_and_invoices',
+        compute='_compute_budget_positions_and_invoices',
         search='_search_budget_positions',
     )
     # lo agregamos por compatiblidad hacia atras y tmb porque es mas facil
     invoice_ids = fields.Many2many(
         comodel_name='account.invoice',
         string='Facturas Relacionadas',
-        compute='_get_budget_positions_and_invoices'
+        compute='_compute_budget_positions_and_invoices'
     )
     partner_ids = fields.Many2many(
         comodel_name='res.partner',
-        string='Partners',
-        compute='_get_partners'
+        compute='_compute_partners'
     )
     advance_request_id = fields.Many2one(
         'public_budget.advance_request',
-        'Advance Request',
         readonly=True,
     )
     transaction_with_advance_payment = fields.Boolean(
@@ -73,7 +68,7 @@ class AccountPaymentGroup(models.Model):
         related='transaction_id.type_id.with_advance_payment',
     )
     user_location_ids = fields.Many2many(
-        compute='get_user_locations',
+        compute='_compute_user_locations',
         comodel_name='public_budget.location',
         string='User Locations',
     )
@@ -86,7 +81,6 @@ class AccountPaymentGroup(models.Model):
         help='Date used to calculate payment date',
     )
     payment_days = fields.Integer(
-        string='Payment Days',
         readonly=True,
         states={'draft': [('readonly', False)]},
         help='Days added to payment base date to get the payment date',
@@ -144,7 +138,7 @@ class AccountPaymentGroup(models.Model):
     # )
     show_print_receipt_button = fields.Boolean(
         _('Show Print Receipt Button'),
-        compute='get_show_print_receipt_button',
+        compute='_compute_show_print_receipt_button',
     )
     withholding_line_ids = fields.Many2many(
         'account.move.line',
@@ -156,25 +150,6 @@ class AccountPaymentGroup(models.Model):
         for rec in self:
             rec.withholding_line_ids = rec.move_line_ids.filtered(
                 'tax_line_id')
-
-    @api.multi
-    def onchange(self, values, field_name, field_onchange):
-        """
-        Idea obtenida de aca
-        https://github.com/odoo/odoo/issues/16072#issuecomment-289833419
-        por el cambio que se introdujo en esa mimsa conversación, TODO en v11
-        no haría mas falta, simplemente domain="[('id', 'in', x2m_field)]"
-        Otras posibilidades que probamos pero no resultaron del todo fue:
-        * agregar onchange sobre campos calculados y que devuelvan un dict con
-        domain. El tema es que si se entra a un registro guardado el onchange
-        no se ejecuta
-        * usae el modulo de web_domain_field que esta en un pr a la oca
-        """
-        for field in field_onchange.keys():
-            if field.startswith(('partner_ids.', 'user_location_ids')):
-                del field_onchange[field]
-        return super(AccountPaymentGroup, self).onchange(
-            values, field_name, field_onchange)
 
     @api.multi
     def post(self):
@@ -197,9 +172,9 @@ class AccountPaymentGroup(models.Model):
             if (
                     rec.expedient_id and rec.expedient_id.current_location_id
                     not in rec.user_location_ids):
-                raise ValidationError(
+                raise ValidationError(_(
                     'No puede validar un pago si el expediente no está en '
-                    'una ubicación autorizada para ústed')
+                    'una ubicación autorizada para ústed'))
         return super(AccountPaymentGroup, self).post()
 
     # las seteamos directamente al postear total antes no se usan
@@ -251,9 +226,8 @@ class AccountPaymentGroup(models.Model):
         # we dont want any receiptbook as default
         return False
 
-    @api.multi
     @api.depends('payment_ids.check_ids.state', 'state')
-    def get_show_print_receipt_button(self):
+    def _compute_show_print_receipt_button(self):
         for rec in self:
             show_print_receipt_button = False
 
@@ -265,7 +239,6 @@ class AccountPaymentGroup(models.Model):
                 show_print_receipt_button = True
             rec.show_print_receipt_button = show_print_receipt_button
 
-    @api.one
     @api.depends('payment_base_date', 'payment_days', 'days_interval_type')
     def get_payment_min_date(self):
         current_date = False
@@ -312,13 +285,13 @@ class AccountPaymentGroup(models.Model):
             for payment in rec.payment_ids.filtered(
                     lambda x: x.payment_method_code == 'issue_check'):
                 if not payment.check_number or not payment.check_name:
-                    raise ValidationError(
+                    raise ValidationError(_(
                         'Para mandar a proceso de firma debe definir número '
                         'de cheque en cada línea de pago.\n'
-                        '* ID de orden de pago: %s' % rec.id)
+                        '* ID de orden de pago: %s' % rec.id))
 
             if rec.currency_id.round(rec.payments_amount - rec.to_pay_amount):
-                raise ValidationError((
+                raise ValidationError(_(
                     'No puede mandar a pagar una orden de pago que tiene '
                     'Importe a pagar distinto a Importe de los Pagos'))
             rec.state = 'signature_process'
@@ -336,7 +309,7 @@ class AccountPaymentGroup(models.Model):
     @api.multi
     # dummy depends to compute values on create
     @api.depends('transaction_id')
-    def get_user_locations(self):
+    def _compute_user_locations(self):
         for rec in self:
             rec.user_location_ids = rec.env.user.location_ids
 
@@ -348,7 +321,7 @@ class AccountPaymentGroup(models.Model):
                 operator, value)]
 
     @api.multi
-    def _get_budget_positions_and_invoices(self):
+    def _compute_budget_positions_and_invoices(self):
         for rec in self:
             # si esta validado entonces las facturas son las macheadas, si no
             # las seleccionadas
@@ -358,11 +331,10 @@ class AccountPaymentGroup(models.Model):
                 'invoice_line_ids.definitive_line_id.preventive_line_id.'
                 'budget_position_id')
 
-    @api.multi
     @api.depends(
         'transaction_id',
     )
-    def _get_partners(self):
+    def _compute_partners(self):
         _logger.info('Get partners from transaction')
         for rec in self:
             transaction = rec.transaction_id
@@ -406,7 +378,6 @@ class AccountPaymentGroup(models.Model):
                 self.partner_type == 'supplier'):
             self.retencion_ganancias = 'nro_regimen'
 
-    @api.multi
     @api.constrains('state')
     def update_invoice_amounts(self):
         _logger.info('Updating invoice amounts from payment group')
@@ -415,7 +386,6 @@ class AccountPaymentGroup(models.Model):
         for rec in self:
             rec.invoice_ids.sudo()._compute_to_pay_amount()
 
-    @api.multi
     @api.constrains('confirmation_date', 'payment_min_date', 'payment_date')
     def check_dates(self):
         _logger.info('Checking dates')
@@ -434,10 +404,10 @@ class AccountPaymentGroup(models.Model):
             if not rec.payment_date:
                 continue
             if rec.payment_date > fields.Date.context_today(rec):
-                raise Warning(_(
+                raise ValidationError(_(
                     'No puede usar una fecha de pago superior a hoy'))
             if rec.payment_date < rec.confirmation_date:
-                raise Warning(_(
+                raise ValidationError(_(
                     'La fecha de validacion del pago no puede ser menor a la '
                     'fecha de confirmación.\n'
                     '* Id de Pago: %s\n'
@@ -445,7 +415,7 @@ class AccountPaymentGroup(models.Model):
                     '* Fecha de confirmación: %s\n' % (
                         rec.id, rec.payment_date, rec.confirmation_date)))
             if rec.payment_date < rec.payment_min_date:
-                raise Warning(_(
+                raise ValidationError(_(
                     'La fecha de validacion del pago no puede ser menor a la '
                     'fecha mínima de pago\n'
                     '* Id de Pago: %s\n'
@@ -453,36 +423,34 @@ class AccountPaymentGroup(models.Model):
                     '* Fecha mínima de pago: %s\n' % (
                         rec.id, rec.payment_date, rec.payment_min_date)))
 
-    @api.multi
     @api.constrains('unreconciled_amount', 'transaction_id', 'state')
     def check_avance_transaction_amount(self):
         """
         """
-        for rec in self:
+        for rec in self.filtered('transaction_with_advance_payment'):
             _logger.info('Checking transaction amount on voucher %s' % rec.id)
-            if rec.transaction_with_advance_payment:
-                # forzamos el recalculo porque al ser store no lo recalculaba
-                rec.transaction_id._compute_advance_remaining_amount()
-                advance_remaining_amount = rec.currency_id.round(
-                    rec.transaction_id.advance_remaining_amount)
-                if advance_remaining_amount < 0.0:
-                    raise ValidationError(_(
-                        'In advance transactions, payment orders amount (%s) '
-                        'can not be greater than transaction advance remaining'
-                        ' amount (%s)') % (
-                        rec.unreconciled_amount,
-                        advance_remaining_amount + rec.unreconciled_amount))
+            # forzamos el recalculo porque al ser store no lo recalculaba
+            rec.transaction_id._compute_advance_remaining_amount()
+            advance_remaining_amount = rec.currency_id.round(
+                rec.transaction_id.advance_remaining_amount)
+            if advance_remaining_amount < 0.0:
+                raise ValidationError(_(
+                    'In advance transactions, payment orders amount (%s) '
+                    'can not be greater than transaction advance remaining'
+                    ' amount (%s)') % (
+                    rec.unreconciled_amount,
+                    advance_remaining_amount + rec.unreconciled_amount))
 
-    @api.multi
     @api.constrains('receiptbook_id')
     def set_document_number(self):
         """
         Quieren que en caunto se cree, si tiene talonario, se asigne número
         """
-        for rec in self:
-            if rec.receiptbook_id.sequence_id and not rec.document_number:
-                rec.document_number = (
-                    rec.receiptbook_id.sequence_id.next_by_id())
+        for rec in self.filtered(
+            lambda x: x.receiptbook_id.sequence_id and
+                not x.document_number):
+            rec.document_number = (
+                rec.receiptbook_id.sequence_id.next_by_id())
 
     @api.multi
     def _compute_name(self):

@@ -46,7 +46,6 @@ class Budget(models.Model):
     )
     expedient_id = fields.Many2one(
         'public_budget.expedient',
-        string='Expedient',
         readonly=True,
         required=True,
         states={'draft': [('readonly', False)]}
@@ -81,13 +80,11 @@ class Budget(models.Model):
     )
     parent_budget_position_ids = fields.Many2many(
         comodel_name='public_budget.budget_position',
-        string='Budget Positions',
         compute='_compute_budget_positions'
     )
     budget_position_ids = fields.Many2many(
         relation='public_budget_budget_position_rel',
         comodel_name='public_budget.budget_position',
-        string='Budget Positions',
         # store=True, #TODO ver si agregamos el store
         compute='_compute_budget_positions'
     )
@@ -110,7 +107,6 @@ class Budget(models.Model):
     budget_modification_ids = fields.One2many(
         'public_budget.budget_modification',
         'budget_id',
-        string='Modifications',
         readonly=True,
         states={'draft': [('readonly', False)], 'open': [('readonly', False)]},
         domain=[('initial_approval', '=', False)]
@@ -118,20 +114,17 @@ class Budget(models.Model):
     budget_detail_ids = fields.One2many(
         'public_budget.budget_detail',
         'budget_id',
-        string='Details',
         readonly=True,
         states={'draft': [('readonly', False)]}
     )
     budget_prec_detail_ids = fields.One2many(
         'public_budget.budget_prec_detail',
         'budget_id',
-        string='Pre Close Detail',
         readonly=True
     )
     funding_move_ids = fields.One2many(
         'public_budget.funding_move',
         'budget_id',
-        string='Funding Moves',
         readonly=True,
         states={
             'open': [('readonly', False)],
@@ -141,11 +134,9 @@ class Budget(models.Model):
     transaction_ids = fields.One2many(
         'public_budget.transaction',
         'budget_id',
-        string='Transactions'
     )
     receiptbook_id = fields.Many2one(
         'account.payment.receiptbook',
-        'ReceiptBook',
         required=True,
         readonly=True,
         states={'draft': [('readonly', False)]},
@@ -153,7 +144,6 @@ class Budget(models.Model):
         "('company_id', '=', company_id)]",
     )
 
-    @api.multi
     @api.onchange('fiscalyear')
     @api.constrains('fiscalyear')
     def validate_fiscalyear(self):
@@ -190,7 +180,6 @@ class Budget(models.Model):
         date_from = date_from.replace(year=date_from.year - 1)
         return {'date_from': date_from, 'date_to': date_to}
 
-    @api.one
     @api.depends(
         'budget_detail_ids.budget_position_id',
         'transaction_ids.preventive_line_ids.budget_position_id',
@@ -226,7 +215,6 @@ class Budget(models.Model):
         self.parent_budget_position_ids = self.budget_position_ids.filtered(
             lambda x: not x.parent_id)
 
-    @api.one
     def _compute_totals(self):
         total_authorized = sum([x.amount for x in self.with_context(
             budget_id=self.id).budget_position_ids

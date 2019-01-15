@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <record id="account_payment_line_import_view" model="ir.ui.view">
+        <field name="name">Import Payment Lines</field>
+        <field name="model">account.payment.group.line.import</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <form string="Import Payment Lines">
+                <field name="data_file"/>
+                <br/>
+                <label string= "Seleccionar el archivo y hacer click en 'Importar'."/>
+                <br/>
+                <label string= "Si al importar se encuentra una línea con mismo cuit se sobre escribirá la línea."/>
+                <footer>
+                    <button name="import_file" string="Importar" type="object" class="oe_highlight"/>
+                        or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_account_payment_line_import" model="ir.actions.act_window">
+        <field name="name">Import Payment Lines</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.payment.group.line.import</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="account_payment_line_import_view"/>
+    </record>
+
+    <!-- <menuitem id="menu_account_payment_line_import" parent="account.menu_finance_bank_and_cash" action="action_account_payment_line_import" sequence="8"/> -->
+
+</odoo>

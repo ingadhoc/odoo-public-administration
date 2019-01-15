@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- SEARCH VIEW -->
+    <record id="view_public_budget_definitive_line_filter" model="ir.ui.view">
+        <field name="name">public_budget.definitive_line.select</field>
+        <field name="model">public_budget.definitive_line</field>
+        <field name="arch" type="xml">
+            <search string="Definitive Line">
+                <field name="issue_date"/>
+                <field name="supplier_id"/>
+                <field name="amount"/>
+                <group expand="0" string="Group By">
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- FORMVIEW -->
+    <record id="view_public_budget_definitive_line_form" model="ir.ui.view">
+        <field name="name">public_budget.definitive_line.form</field>
+        <field name="model">public_budget.definitive_line</field>
+        <field name="arch" type="xml">
+            <form string="Definitive Line">
+                <field name="currency_id" invisible="1"/>
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet string="Definitive Line">
+                    <div class="oe_button_box" name="buttons">
+                    </div>
+                    <group>
+                        <field name="issue_date"/>
+                        <field name="supplier_id"/>
+                        <field name="amount"/>
+                        <field name="to_pay_amount" invisible="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- TREEVIEW -->
+    <record id="view_public_budget_definitive_line_tree" model="ir.ui.view">
+        <field name="name">public_budget.definitive_line.tree</field>
+        <field name="model">public_budget.definitive_line</field>
+        <field name="arch" type="xml">
+            <tree string="Definitive Line" editable="bottom">
+                <!-- sacamos el editable porque nos da un error por sua tree editable en un pop up -->
+                <field name="issue_date"/>
+                <field name="supplier_id"/>
+                <field name="amount"/>
+                <field name="state" invisible="True"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="to_pay_amount" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

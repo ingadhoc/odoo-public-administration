@@ -9,7 +9,6 @@ class AdvanceRequestLine(models.Model):
 
     employee_id = fields.Many2one(
         'res.partner',
-        string='Employee',
         required=True,
         context={'default_employee': 1},
         domain=[('employee', '=', True)]
@@ -20,19 +19,18 @@ class AdvanceRequestLine(models.Model):
     description = fields.Char(
     )
     debt_amount = fields.Monetary(
-        compute='_get_amounts',
+        compute='_compute_amounts',
     )
     pending_return_amount = fields.Monetary(
         help='Monto de Devolucion Pendiente de Confirmación en devolución '
         'de adelanto',
-        compute='_get_amounts',
+        compute='_compute_amounts',
     )
     approved_amount = fields.Monetary(
     )
     advance_request_id = fields.Many2one(
         'public_budget.advance_request',
         ondelete='cascade',
-        string='advance_request_id',
         required=True,
         auto_join=True
     )
@@ -44,21 +42,20 @@ class AdvanceRequestLine(models.Model):
         readonly=True,
     )
 
-    @api.one
     @api.depends(
         'employee_id',
     )
-    def _get_amounts(self):
-        if self.employee_id:
-            request_type = self.advance_request_id.type_id
-            self.debt_amount = self.employee_id.get_debt_amount(
+    def _compute_amounts(self):
+        for rec in self.filtered('employee_id'):
+            request_type = rec.advance_request_id.type_id
+            rec.debt_amount = rec.employee_id.get_debt_amount(
                 request_type)
             pending_return_domain = [
-                ('employee_id', '=', self.employee_id.id),
+                ('employee_id', '=', rec.employee_id.id),
                 ('advance_return_id.state', 'in', ['draft']),
                 ('advance_return_id.type_id', '=', request_type.id),
             ]
-            self.pending_return_amount = sum(
+            rec.pending_return_amount = sum(
                 self.env['public_budget.advance_return_line'].search(
                     pending_return_domain).mapped('returned_amount'))
 
@@ -66,9 +63,9 @@ class AdvanceRequestLine(models.Model):
     def change_(self):
         self.approved_amount = self.requested_amount
 
-    @api.one
     @api.constrains('requested_amount', 'approved_amount')
     def check_amounts(self):
-        if self.approved_amount > self.requested_amount:
+        for rec in self.filtered(
+                lambda x: x.approved_amount > x.requested_amount):
             raise ValidationError(_(
                 'Approved Amount can not be greater than Requested Amount'))

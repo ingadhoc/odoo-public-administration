@@ -8,16 +8,14 @@ class BudgetPositionExchangeRestriction(models.Model):
 
     origin_category_id = fields.Many2one(
         'public_budget.budget_position_category',
-        string='Origin Category',
         required=True
     )
     destiny_category_id = fields.Many2one(
         'public_budget.budget_position_category',
-        string='Destiny Category',
         required=True
     )
     type = fields.Selection(
-        [(u'alert', u'Alert'), (u'block', u'Block')],
+        [('alert', 'Alert'), ('block', 'Block')],
         required=True
     )
     message = fields.Char(

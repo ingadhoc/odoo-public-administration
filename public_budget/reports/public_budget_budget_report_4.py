@@ -1,5 +1,5 @@
 from odoo import tools
-from odoo import models, fields, api, _
+from odoo import models, fields, _
 from odoo.addons.public_budget.models.transaction import BudgetTransaction
 
 
@@ -114,8 +114,9 @@ class PublicBudgetBudgetReport(models.Model):
         readonly=True,
     )
 
-    def init(self, cr):
-        tools.drop_view_if_exists(cr, self._table)
+    def init(self):
+        # pylint: disable=E8103
+        tools.drop_view_if_exists(self._cr, self._table)
 
         query = """
             SELECT
@@ -155,5 +156,5 @@ class PublicBudgetBudgetReport(models.Model):
                 res_company as rc on (
                     rc.id = tr.company_id)
             """
-        cr.execute("""CREATE or REPLACE VIEW %s as (%s)""" % (
+        self._cr.execute("""CREATE or REPLACE VIEW %s as (%s)""" % (
             self._table, query))

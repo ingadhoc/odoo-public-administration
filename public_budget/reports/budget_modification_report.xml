@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <data noupdate="1">
-        <record id="action_budget_modification_report" model="ir.actions.report.xml">
-            <field name="name">Budget Modification Report</field>
-            <field name="type">ir.actions.report.xml</field>
-            <field name="model">public_budget.budget_modification</field>
-            <field name="report_name">budget_modification_report</field>
-            <field name="report_type">aeroo</field>
-            <field name="in_format">oo-odt</field>
-            <field name="parser_loc">l10n_ar_aeroo_base/parser.py</field>
-            <field name="parser_state">loc</field>
-            <field name="report_rml">public_budget/reports/budget_modification_report.odt</field>
-            <field name="tml_source">file</field>
-            <field name="out_format" ref="report_aeroo.report_mimetypes_doc_odt"/>
-            <field name="styles_mode">specified</field>
-            <field name="stylesheet_id" ref="sipreco_stylesheet"/>
-        </record>
+<odoo noupdate="1">
+    <record id="action_budget_modification_report" model="ir.actions.report">
+        <field name="name">Budget Modification Report</field>
+        <field name="model">public_budget.budget_modification</field>
+        <field name="report_name">budget_modification_report</field>
+        <field name="report_type">aeroo</field>
+        <field name="in_format">oo-odt</field>
+        <field name="parser_loc">l10n_ar_aeroo_base/parser.py</field>
+        <field name="parser_state">loc</field>
+        <field name="report_file">public_budget/reports/budget_modification_report.odt</field>
+        <field name="tml_source">file</field>
+        <field name="out_format" ref="report_aeroo.report_mimetypes_doc_odt"/>
+        <field name="styles_mode">specified</field>
+        <field name="stylesheet_id" ref="sipreco_stylesheet"/>
+    </record>
 
-    </data>
 </odoo>

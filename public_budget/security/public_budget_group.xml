@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
 
-<record id="group_change_payment_assignee" model="res.groups">
-    <field name="name">Cambiar Cesionario en Pagos</field>
-    <field name="category_id" ref="base.module_category_usability"/>
-    <!-- o debería ser base.module_category_extra?-->
-    <field name="users" eval="[(4, ref('base.user_root'))]"/>
-</record>
+    <record id="group_change_payment_assignee" model="res.groups">
+        <field name="name">Cambiar Cesionario en Pagos</field>
+        <field name="category_id" ref="base.module_category_usability"/>
+        <!-- o debería ser base.module_category_extra?-->
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+    </record>
 
-<record model="ir.module.category" id="module_category_public_budget">
-    <field name="name">Public Budget</field>
-    <field name="description">Public Budget</field>
-    <field name="sequence">1</field>
-</record>
+    <record model="ir.module.category" id="module_category_public_budget">
+        <field name="name">Public Budget</field>
+        <field name="description">Public Budget</field>
+        <field name="sequence">1</field>
+    </record>
 
     <record id="group_portal_expedient" model="res.groups">
         <field name="name">Portal - Expedientes</field>
@@ -35,18 +34,18 @@
         <field name="sequence">1</field>
         <field name="parent_id" ref="module_category_public_budget"/>
     </record>
-        <record id="group_secretary_usuario" model="res.groups">
-            <field name="name">Usuario</field>
-            <field name="users" eval="[(4, ref('base.user_root'))]"/>
-            <field name="category_id" ref="category_secretaria"/>
-            <field name="implied_ids" eval="[(4,ref('base.group_user'))]"/>
-        </record>
-        <record id="group_secretary_director" model="res.groups">
-            <field name="name">Director</field>
-            <field name="users" eval="[(4, ref('base.user_root'))]"/>
-            <field name="category_id" ref="category_secretaria"/>
-            <field name="implied_ids" eval="[(4,ref('group_secretary_usuario'))]"/>
-        </record>
+    <record id="group_secretary_usuario" model="res.groups">
+        <field name="name">Usuario</field>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        <field name="category_id" ref="category_secretaria"/>
+        <field name="implied_ids" eval="[(4,ref('base.group_user'))]"/>
+    </record>
+    <record id="group_secretary_director" model="res.groups">
+        <field name="name">Director</field>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        <field name="category_id" ref="category_secretaria"/>
+        <field name="implied_ids" eval="[(4,ref('group_secretary_usuario'))]"/>
+    </record>
 
     <record model="ir.module.category" id="category_habilitacion">
         <field name="name">Habilitación</field>
@@ -54,60 +53,55 @@
         <field name="sequence">2</field>
         <field name="parent_id" ref="module_category_public_budget"/>
     </record>
-        <record id="group_habilitacion_usuario" model="res.groups">
-            <field name="name">Usuario</field>
-            <field name="users" eval="[(4, ref('base.user_root'))]"/>
-            <field name="category_id" ref="category_habilitacion"/>
-            <field name="implied_ids" eval="[(4,ref('base.group_user'))]"/>
-        </record>
-        <record id="group_habilitacion_director" model="res.groups">
-            <field name="name">Director</field>
-            <field name="users" eval="[(4, ref('base.user_root'))]"/>
-            <field name="category_id" ref="category_habilitacion"/>
-            <field name="implied_ids" eval="[(4,ref('group_habilitacion_usuario'))]"/>
-        </record>
+    <record id="group_habilitacion_usuario" model="res.groups">
+        <field name="name">Usuario</field>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        <field name="category_id" ref="category_habilitacion"/>
+        <field name="implied_ids" eval="[(4,ref('base.group_user'))]"/>
+    </record>
+    <record id="group_habilitacion_director" model="res.groups">
+        <field name="name">Director</field>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        <field name="category_id" ref="category_habilitacion"/>
+        <field name="implied_ids" eval="[(4,ref('group_habilitacion_usuario'))]"/>
+    </record>
 
-        <record id="group_expedient_by_locations_allow" model="res.groups">
-            <field name="name">Solo visualizar expedientes de ubicaciones permitidas.</field>
-        </record>
+    <record id="group_expedient_by_locations_allow" model="res.groups">
+        <field name="name">Solo visualizar expedientes de ubicaciones permitidas.</field>
+    </record>
     <!-- menus -->
-        <!-- transferencia para habi. usuario -->
-        <record id="account_payment_group.menu_action_account_payments_transfer" model="ir.ui.menu">
-            <field name="groups_id" eval="[(4, ref('public_budget.group_habilitacion_usuario'))]"/>
-        </record>
-        <!-- asientos para habi. usuario -->
-        <record id="account.menu_action_move_journal_line_form" model="ir.ui.menu">
-            <field name="groups_id" eval="[(4, ref('public_budget.group_habilitacion_usuario'))]"/>
-        </record>
-        <record id="account.menu_finance" model="ir.ui.menu">
-            <field name="groups_id" eval="[(4, ref('group_secretary_usuario')), (4, ref('group_habilitacion_usuario'))]"/>
-        </record>
-        <record id="account.menu_finance_bank_and_cash" model="ir.ui.menu">
-            <field name="groups_id" eval="[(4, ref('group_habilitacion_usuario'))]"/>
-        </record>
-        <record id="account.menu_finance_reports" model="ir.ui.menu">
-            <field name="groups_id" eval="[(4, ref('group_habilitacion_director'))]"/>
-        </record>
-        <record id="account.account_reports_management_menu" model="ir.ui.menu">
-            <field name="groups_id" eval="[(4, ref('group_habilitacion_director'))]"/>
-        </record>
-        <!-- lo hacemos por interfaz para no requerir repo enterprise -->
-<!--         <record id="account_reports.account_reports_legal_statements_menu" model="ir.ui.menu">
+    <!-- transferencia para habi. usuario -->
+    <record id="account_payment_group.menu_action_account_payments_transfer" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4, ref('public_budget.group_habilitacion_usuario'))]"/>
+    </record>
+    <!-- asientos para habi. usuario -->
+    <record id="account.menu_action_move_journal_line_form" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4, ref('public_budget.group_habilitacion_usuario'))]"/>
+    </record>
+    <record id="account.menu_finance" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4, ref('group_secretary_usuario')), (4, ref('group_habilitacion_usuario'))]"/>
+    </record>
+    <record id="account_payment_fix.menu_finance_bank_and_cash" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4, ref('group_habilitacion_usuario'))]"/>
+    </record>
+    <record id="account.menu_finance_reports" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4, ref('group_habilitacion_director'))]"/>
+    </record>
+    <record id="account.account_reports_management_menu" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4, ref('group_habilitacion_director'))]"/>
+    </record>
+    <!-- lo hacemos por interfaz para no requerir repo enterprise -->
+    <!--         <record id="account_reports.account_reports_legal_statements_menu" model="ir.ui.menu">
             <field name="groups_id" eval="[(4, ref('group_habilitacion_director'))]"/>
         </record> -->
 
-        <!-- dashboard contable solo para contaduria (y agregamos habilitaciones para poder hacer conciliaciones bancarias y emitir cheques)-->
-        <record id="account.menu_board_journal_1" model="ir.ui.menu">
-            <field name="groups_id" eval="[(4, ref('account.group_account_user')), (4, ref('public_budget.group_habilitacion_usuario'))]"/>
-        </record>
+    <!-- dashboard contable solo para contaduria (y agregamos habilitaciones para poder hacer conciliaciones bancarias y emitir cheques)-->
+    <record id="account.menu_board_journal_1" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4, ref('account.group_account_user')), (4, ref('public_budget.group_habilitacion_usuario'))]"/>
+    </record>
 
-        <!-- agregamos secretaria y habilitaciones para que puedan ver pagos -->
-        <record id="account_payment_group.menu_action_account_payments_group_payable" model="ir.ui.menu">
-            <field name="groups_id" eval="[(4, ref('group_secretary_usuario')), (4, ref('group_habilitacion_usuario')), (4, ref('account.group_account_user'))]"/>
-        </record>
-        <!-- share menu asesor (chart account, entries, etc) with hab user-->
-        <record id="account.menu_finance_entries" model="ir.ui.menu">
-            <field name="groups_id" eval="[(4, ref('group_habilitacion_usuario'))]"/>
-        </record>
-    </data>
+    <!-- share menu asesor (chart account, entries, etc) with hab user-->
+    <record id="account.menu_finance_entries" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4, ref('group_habilitacion_usuario'))]"/>
+    </record>
 </odoo>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- SEARCH VIEW -->
+    <record id="view_public_budget_inventory_rule_filter" model="ir.ui.view">
+        <field name="name">public_budget.inventory_rule.select</field>
+        <field name="model">public_budget.inventory_rule</field>
+        <field name="arch" type="xml">
+            <search string="Inventory Rule">
+                <group expand="0" string="Group By">
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- FORMVIEW -->
+    <record id="view_public_budget_inventory_rule_form" model="ir.ui.view">
+        <field name="name">public_budget.inventory_rule.form</field>
+        <field name="model">public_budget.inventory_rule</field>
+        <field name="arch" type="xml">
+            <form string="Inventory Rule">
+                <header>
+                </header>
+                <sheet string="Inventory Rule">
+                    <div class="oe_button_box" name="buttons">
+                    </div>
+                    <group>
+                    </group>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+    <!-- TREEVIEW -->
+    <record id="view_public_budget_inventory_rule_tree" model="ir.ui.view">
+        <field name="name">public_budget.inventory_rule.tree</field>
+        <field name="model">public_budget.inventory_rule</field>
+        <field name="arch" type="xml">
+            <tree string="Inventory Rule" editable="top">
+                <field name="date"/>
+                <field name="min_amount"/>
+                <field name="currency_id" readonly="1"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

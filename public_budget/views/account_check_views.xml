@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- TODO enable?? -->
+<!--        <record model="ir.ui.view" id="view_account_check_form">
+            <field name="name">account.check.form</field>
+            <field name="model">account.check</field>
+            <field name="inherit_id" ref="account_check.view_account_check_form"/>
+            <field name="arch" type="xml">
+                <button context="{'default_action_type': 'change'}" name="%(action_account_check_action_wizard)d" type="action" string="Change Check" states="handed,holding" confirm="On confirmation take into account that the journal entries won't change. If you wish to update the journal items dates, please do it manually "/>
+            </field>
+        </record> -->
+</odoo>

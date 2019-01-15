@@ -8,22 +8,6 @@ class ApprovalArrangement(models.Model):
     _name = 'public_budget.subsidy.approval_arrangement'
     _rec_name = 'number'
 
-    # @api.model
-    # def _get_approved_amount(self):
-    #     # lo hacemos asi porque mandando por vista nos daba error
-    #     rendition_id = self._context.get('default_rendition_id')
-    #     if rendition_id:
-    #         return self.env['public_budget.subsidy.rendition'].browse(
-    #             rendition_id).rendition_amount
-    #     return False
-
-    @api.model
-    def create(self, vals):
-        if not vals.get('number'):
-            vals['number'] = self.env['ir.sequence'].next_by_code(
-                'approval_arrangement')
-        return super(ApprovalArrangement, self).create(vals)
-
     number = fields.Char(
         required=True,
         readonly=True,
@@ -35,7 +19,6 @@ class ApprovalArrangement(models.Model):
     rendition_ids = fields.One2many(
         'public_budget.subsidy.rendition',
         'approval_arrangement_id',
-        'Rendición',
         # required=True,
     )
     # rendition_id = fields.Many2one(
@@ -58,6 +41,26 @@ class ApprovalArrangement(models.Model):
         # default=_get_approved_amount,
     )
 
+    _sql_constraints = [
+        ('number_unique', 'unique(number)',
+            ('El número debe ser único en las disposiciones de aprobación'))]
+
+    # @api.model
+    # def _get_approved_amount(self):
+    #     # lo hacemos asi porque mandando por vista nos daba error
+    #     rendition_id = self._context.get('default_rendition_id')
+    #     if rendition_id:
+    #         return self.env['public_budget.subsidy.rendition'].browse(
+    #             rendition_id).rendition_amount
+    #     return False
+
+    @api.model
+    def create(self, vals):
+        if not vals.get('number'):
+            vals['number'] = self.env['ir.sequence'].next_by_code(
+                'approval_arrangement')
+        return super(ApprovalArrangement, self).create(vals)
+
     @api.multi
     def _compute_currency(self):
         currency = self.env.user.company_id.currency_id
@@ -74,7 +77,3 @@ class ApprovalArrangement(models.Model):
         action_read = action.read()[0]
         action_read['domain'] = [('id', 'in', subsidies.ids)]
         return action_read
-
-    _sql_constraints = [
-        ('number_unique', 'unique(number)',
-            ('El número debe ser único en las disposiciones de aprobación'))]

@@ -12,26 +12,24 @@ class AccountPaymentGroupLine(models.Model):
 
     payment_group_id = fields.Many2one(
         'account.payment.group',
-        'Payment Group',
         required=True,
-        ondelete='cascade'
+        ondelete='cascade',
     )
     partner_id = fields.Many2one(
         'res.partner',
-        'Partner',
         required=True,
     )
     cuit = fields.Char(
     )
     bank_account_id = fields.Many2one(
         'res.partner.bank',
-        string='Bank Account',
         domain="[('partner_id', '=', partner_id)]",
     )
     amount = fields.Monetary(
     )
     currency_id = fields.Many2one(
-        related='payment_group_id.currency_id'
+        related='payment_group_id.currency_id',
+        readonly=True,
     )
 
     @api.multi
@@ -39,9 +37,9 @@ class AccountPaymentGroupLine(models.Model):
         for rec in self:
             banks = self.partner_id.bank_ids
             if rec.payment_group_id.state == 'posted':
-                raise UserError(
+                raise UserError(_(
                     'No se puede cambiar la cuenta de una orden de pago '
-                    'validada')
+                    'validada'))
             rec.bank_account_id = banks and banks[0].id or False
 
     @api.multi

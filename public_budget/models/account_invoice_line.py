@@ -9,28 +9,26 @@ class AccountInvoiceLine(models.Model):
     _inherit = 'account.invoice.line'
 
     to_pay_amount = fields.Monetary(
-        compute='_get_amounts',
+        compute='_compute_amounts',
         # store=True,
     )
     paid_amount = fields.Monetary(
-        compute='_get_amounts',
+        compute='_compute_amounts',
         # store=True,
     )
     definitive_line_id = fields.Many2one(
         'public_budget.definitive_line',
-        string='Definitive Line',
         readonly=True,
         auto_join=True,
     )
 
-    @api.one
     @api.depends(
         # 'price_subtotal',
         # 'invoice_id.amount_total',
         'invoice_id.residual',
         'invoice_id.to_pay_amount',
     )
-    def _get_amounts(self):
+    def _compute_amounts(self):
         """Update the following fields:
         -to_pay_amount: is the amount of this invoice that is in draft vouchers
         so we consider that is has been sent to be paid. Dividimos
@@ -62,13 +60,13 @@ class AccountInvoiceLine(models.Model):
             self.to_pay_amount = self.price_subtotal * invoice_to_pay_perc
             self.paid_amount = self.price_subtotal * invoice_paid_perc
 
-    @api.one
     @api.constrains(
         'definitive_line_id',
     )
     def check_budget_state_open_pre_closed(self):
-        budget = self.definitive_line_id.budget_id
-        if budget and budget.state not in ['open', 'pre_closed']:
-            raise ValidationError(_(
-                'Solo puede cambiar o registrar comprobantes si '
-                'el presupuesto está abierto o en pre-cierre'))
+        for rec in self:
+            budget = rec.definitive_line_id.budget_id
+            if budget and budget.state not in ['open', 'pre_closed']:
+                raise ValidationError(_(
+                    'Solo puede cambiar o registrar comprobantes si '
+                    'el presupuesto está abierto o en pre-cierre'))

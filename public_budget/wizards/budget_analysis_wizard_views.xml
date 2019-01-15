@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_budget_analysis_form" model="ir.ui.view">
+        <field name="name">Budget Analysis Wizard</field>
+        <field name="model">public_budget.budget.analysis.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Budget Analysis">
+                <group>
+                    <field name="budget_id"/>
+                    <!-- <field name="from_date"/> -->
+                    <field name="to_date"/>
+                </group>
+                <footer>
+                    <button name="confirm" string="Confirm" type="object" class="oe_highlight"/>
+                        or
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_budget_analysis" model="ir.actions.act_window">
+        <field name="name">Budget Analysis Wizard</field>
+        <field name="res_model">public_budget.budget.analysis.wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>
