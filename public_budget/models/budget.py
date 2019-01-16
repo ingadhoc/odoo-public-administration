@@ -238,8 +238,17 @@ class Budget(models.Model):
         # we use sql instead of orm becuase as this computed fields are not
         # stored, the computation use methods and not stored values
         # Get passive residue
-        definitive_lines = self.env['public_budget.definitive_line'].search(
-            [('budget_id', '=', self.id)])
+        definitive_lines = self.env['public_budget.definitive_line'].search([
+            ('budget_id', '=', self.id),
+            ('preventive_line_id.transaction_id.state',
+                'in', ('open', 'closed'))])
+        # another way to do de same by SQL query
+        # 'SELECT residual_amount '
+        # 'FROM public_budget_definitive_line dl '
+        # 'JOIN public_budget_transaction t '
+        # 'ON dl.transaction_id = t.id '
+        # 'WHERE dl.id IN %s AND t.state in [%s,%s]',
+        # (tuple(definitive_lines.ids), 'open', 'closed'))
         if definitive_lines:
             self._cr.execute(
                 'SELECT residual_amount '
