@@ -9,12 +9,11 @@
         <field name="binding_type">report</field>
         <field name="state">code</field>
         <field name="code">
-ids = context['active_ids']
-payments = object.browse(ids).mapped('payment_ids').filtered(lambda x: x.payment_method_code == 'issue_check')
+payments = records.mapped('payment_ids').filtered(lambda x: x.payment_method_code == 'issue_check')
 if not payments:
     raise Warning('No se encontraron cheques en las ordenes de pago seleccionadas')
 payments = payments.with_context(active_model=payments._name, active_ids=payments.ids)
-action = payments.env['report'].get_action(payments, 'check_report')
+action = env['ir.actions.report'].search([('report_name', '=', 'check_report')], limit=1).report_action(payments)
         </field>
     </record>
 
