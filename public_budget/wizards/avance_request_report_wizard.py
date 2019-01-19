@@ -17,10 +17,10 @@ class PublicBudgetAvanceRequestReportWizard(models.TransientModel):
     @api.multi
     def confirm(self):
         self.ensure_one()
-        return self.env['report'].with_context(
-            to_date=self.to_date,
-            # type_id=self.type_id.id,
-        ).get_action(self.type_id, 'advance_request_debt_report')
+        return self.env['ir.actions.report'].search(
+            [('report_name', '=', 'advance_request_debt_report')],
+            limit=1).with_context(
+                to_date=self.to_date).report_action(self.type_id)
 
         # actions = self.env.ref(
         #     'public_budget.action_position_analysis_tree')
