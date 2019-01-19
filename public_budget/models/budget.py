@@ -240,8 +240,9 @@ class Budget(models.Model):
         # Get passive residue
         definitive_lines = self.env['public_budget.definitive_line'].search([
             ('budget_id', '=', self.id),
-            ('preventive_line_id.transaction_id.state',
-                'in', ('open', 'closed'))])
+            ('transaction_id.state', 'in', ('open', 'closed'))])
+        # definitive_lines = self.env['public_budget.definitive_line'].search(
+        #     [('budget_id', '=', self.id)])
         # another way to do de same by SQL query
         # 'SELECT residual_amount '
         # 'FROM public_budget_definitive_line dl '
