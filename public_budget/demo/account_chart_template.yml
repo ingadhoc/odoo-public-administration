@@ -8,9 +8,9 @@
     self[0].company_id = ref('company_sipreco')
 -
   # !python {model: account.chart.template, id: l10n_ar_chart.l10nar_ex_chart_template}: |
-  !python {model: account.chart.template}: |
     try:
-        self.try_loading_for_current_company(cr, uid, [ref('l10n_ar_chart.l10nar_ex_chart_template')], {'with_bank_journal': True, 'create_point_of_sale_type': True})
+        !python {model: account.chart.template}: |
+        self.with_context(with_bank_journal=True, create_point_of_sale_type=True).browse(ref('l10n_ar_chart.l10nar_ex_chart_template')).try_loading_for_current_company()
     except:
         pass
 -

@@ -15,7 +15,7 @@
         <field name="process_sep" eval="True"/>
         <field name="stylesheet_id" ref="sipreco_stylesheet"/>
         <field name="out_format" ref="report_aeroo.report_mimetypes_pdf_odt"/>
-        <field name="download_filename">${o.partner_type == 'supplier' and 'Órden de pago' or 'Recibo'} ${o.document_number}.pdf</field>
+        <field name="print_report_name">(object.partner_type == 'supplier' and 'Orden de pago' or 'Recibo') + ' ' + object.document_number</field>
         <field name="binding_model_id" ref="account_payment_group.model_account_payment_group"/>
         <field name="binding_type">report</field>
     </record>

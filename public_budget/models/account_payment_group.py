@@ -474,5 +474,6 @@ class AccountPaymentGroup(models.Model):
             'supplier')
         if not payments:
             return False
-        return self.env['report'].get_action(
-            payments, 'certificado_de_retencion_reportreport')
+        return self.env['ir.actions.report'].search(
+            [('report_name', '=', 'certificado_de_retencion_reportreport')],
+            limit=1).report_action(payments)
