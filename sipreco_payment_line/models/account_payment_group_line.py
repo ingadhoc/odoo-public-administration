@@ -45,7 +45,7 @@ class AccountPaymentGroupLine(models.Model):
     @api.multi
     def _get_linea_archivo_banco(self):
         def only_digits(string):
-            return filter(lambda x: x.isdigit(), string)
+            return ''.join(filter(lambda x: x.isdigit(), string))
 
         self.ensure_one()
         # if not self.partner_id.numero_legajo:
