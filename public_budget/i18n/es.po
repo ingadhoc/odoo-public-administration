@@ -3220,12 +3220,10 @@ msgstr ""
 #. module: public_budget
 #: code:addons/public_budget/models/preventive_line.py:286
 #, python-format
-msgid ""
-"There is not enough Balance Amount to assign (%s) to Budget Position '%s'.\n"
-"* Balance available for '%s': %s"
-msgstr ""
-"No hay suficiente Saldo Presupuestario para asignar (%s) a la Partida Presupuestari '%s'\n"
-"* Saldo disponible para  '%s': %s"
+msgid "There is not enough Balance Amount to assign (%s) to Budget Position '%s' (%s).\n"
+"* Balance available for '%s' (%s): %s"
+msgstr "No hay suficiente Saldo Presupuestario para asignar (%s) a la Partida Presupuestaria '%' (%s).\n"
+"* Saldo disponible para  '%s' (%s): %s"
 
 #. module: public_budget
 #: model:ir.model.fields,help:public_budget.field_res_users_property_account_payable_id
