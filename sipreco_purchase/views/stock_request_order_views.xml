@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="stock_request_order_filter" model="ir.ui.view">
+        <field name="name">stock.request.order.filter</field>
+        <field name="model">stock.request.order</field>
+        <field name="arch" type="xml">
+            <search string="Stock Requests Order Search">
+                <field name="name" string="Stock Requests"/>
+                <field name="partner_id"/>
+                <field name="location_id" groups="stock.group_stock_multi_locations"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="stock_request_order_tree" model="ir.ui.view">
+        <field name="name">stock.request.order.tree</field>
+        <field name="model">stock.request.order</field>
+        <field name="inherit_id" ref="stock_request.stock_request_order_tree"/>
+        <field name="arch" type="xml">
+            <field name="name" position="before">
+                <field name="create_date" widget="date"/>
+                <field name="partner_id"/>
+            </field>
+            <field name="warehouse_id" position="replace"/>
+            <field name="location_id" position="replace">
+                <field name="route_id"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="stock_request_order_form" model="ir.ui.view">
+        <field name="name">stock.request.order.form</field>
+        <field name="model">stock.request.order</field>
+        <field name="inherit_id" ref="stock_request.stock_request_order_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='stock_request_ids']//field[@name='name']" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='stock_request_ids']//field[@name='product_uom_qty']" position="after">
+                <field name="price_unit"/>
+            </xpath>
+
+            <xpath expr="//field[@name='stock_request_ids']//field[@name='state']" position="after">
+                <field name="manual_requisition_id"/>
+            </xpath>
+
+            <field name="name" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+
+            <field name="expected_date" position="before">
+                <field name="partner_id" readonly="True"/>
+            </field>
+
+            <field name="warehouse_id" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+            <field name="location_id" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+            <field name="picking_policy" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+            <!-- reemplazamos y usamos m2o porque queremos que seleccionen uno sol -->
+            <field name="route_id" position="attributes">
+                <attribute name="attrs">{'readonly': [('stock_request_ids', '!=', [])]}</attribute>
+            </field>
+
+            <field name="procurement_group_id" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
+
+            <!-- permitimos consumibles y filtramos por ruta del request -->
+            <field name="product_id" position="attributes">
+                <attribute name="domain">[('type', 'in', ['product', 'consu']), ('route_ids', '=', parent.route_id)]</attribute>
+            </field>
+            <field name="stock_request_ids" position="after">
+                <separator string="Motivacion del Requerimiento"/>
+                <field name="description"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- <record id="action_procurement_request" model="ir.actions.act_window">
+        <field name="name">Procurement Requests</field>
+        <field name="res_model">stock.request.order</field>
+        <field name="view_mode">tree,form</field>
+    </record> -->
+
+    <record id="stock_request.stock_request_order_action" model="ir.actions.act_window">
+        <field name="name">My Procurement Requests</field>
+        <field name="res_model">stock.request.order</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('partner_id.user_ids', '=', uid)]</field>
+    </record>
+
+    <!-- <menuitem action="action_my_procurement_request" id="menu_my_procurement_request" web_icon="sipreco_purchase,static/description/procurement_order.png" sequence="20"/> -->
+
+</odoo>

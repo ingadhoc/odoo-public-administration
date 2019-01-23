@@ -17,7 +17,7 @@
                 <attribute name="create">false</attribute>
             </tree>
 
-            <field name="min_date" position="attributes">
+            <field name="scheduled_date" position="attributes">
                 <attribute name="invisible">1</attribute>
             </field>
 
@@ -63,11 +63,11 @@
                 <attribute name="groups">base.group_no_one</attribute>
             </field>
 
-            <field name="min_date" position="after">
+            <field name="scheduled_date" position="after">
                 <field name="date"/>
             </field>
 
-            <field name="min_date" position="attributes">
+            <field name="scheduled_date" position="attributes">
                 <attribute name="invisible">1</attribute>
             </field>
 

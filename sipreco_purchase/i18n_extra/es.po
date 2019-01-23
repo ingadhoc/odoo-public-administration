@@ -41,3 +41,8 @@ msgstr "Solicitante"
 msgid "Procurement Request"
 msgstr "Solicitud de Requierimiento"
 
+#. module: stock_request_ux
+#: model:ir.model.fields,field_description:stock_request_ux.field_stock_request_order_route_id
+#: model:ir.model.fields,field_description:stock_request_ux.field_stock_request_order_route_ids
+msgid "Route"
+msgstr "Unidad de Compra"
