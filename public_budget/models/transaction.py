@@ -484,6 +484,11 @@ class BudgetTransaction(models.Model):
 
     @api.constrains('state')
     def _check_position_balance_amount(self):
+        # forzamos el recomputo de affects_budget porque si no algunas veces
+        # da error si la linea de adelanto habia consumido toda la partida
+        # y se pasa a consolidada en misma partida (el metodo
+        # budget_position._get_amounts devolvia las dos en el search)
+        self.mapped('preventive_line_ids')._compute_affects_budget()
         self.mapped('preventive_line_ids')._check_position_balance_amount()
 
     @api.multi
