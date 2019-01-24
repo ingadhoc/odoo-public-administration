@@ -9,7 +9,7 @@ class BudgetTransaction(models.Model):
 
     _name = 'public_budget.transaction'
     _description = 'Budget Transaction'
-
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = "id desc"
 
     _states_ = [
