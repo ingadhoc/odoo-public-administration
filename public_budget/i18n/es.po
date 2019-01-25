@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-18 20:37+0000\n"
+"POT-Creation-Date: 2019-01-24 16:28+0000\n"
 "PO-Revision-Date: 2019-01-18 20:37+0000\n"
 "Last-Translator: Juan José Scarafía <scarafia.juanjose@gmail.com>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
@@ -362,7 +362,7 @@ msgid "Budget Modification Date"
 msgstr ""
 
 #. module: public_budget
-#: code:addons/public_budget/models/budget.py:316
+#: code:addons/public_budget/models/budget.py:317
 #: model:ir.model,name:public_budget.model_public_budget_budget_modification_detail
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_budget_modification_detail_ids
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_budget_modification_detail_form
@@ -531,7 +531,7 @@ msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_category_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_category_id_5961
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_category_id_5980
 msgid "Category"
 msgstr ""
 
@@ -1497,7 +1497,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_modification_detail_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_modification_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_pos_exc_rest_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_category_id_5850
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_category_id_5869
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_prec_detail_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_report_4_id
@@ -1506,7 +1506,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_make_invoice_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_mass_invoice_create_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_category_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_founder_id_6009
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_founder_id_6028
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_funding_move_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_inventory_rule_id
@@ -2489,7 +2489,7 @@ msgid "Preventive Line"
 msgstr ""
 
 #. module: public_budget
-#: code:addons/public_budget/models/transaction.py:547
+#: code:addons/public_budget/models/transaction.py:552
 #, python-format
 msgid ""
 "Preventive Total, Type and Date are not compatible with Transaction Amount "
@@ -2759,7 +2759,7 @@ msgstr ""
 
 #. module: public_budget
 #: code:addons/public_budget/models/account_invoice.py:181
-#: code:addons/public_budget/models/account_invoice_line.py:70
+#: code:addons/public_budget/models/account_invoice_line.py:73
 #, python-format
 msgid ""
 "Solo puede cambiar o registrar comprobantes si el presupuesto estÃ¡ abierto "
@@ -2954,13 +2954,13 @@ msgid "To Signature Process"
 msgstr ""
 
 #. module: public_budget
-#: code:addons/public_budget/models/transaction.py:496
+#: code:addons/public_budget/models/transaction.py:501
 #, python-format
 msgid "To close a transaction there must be at least one preventive line"
 msgstr ""
 
 #. module: public_budget
-#: code:addons/public_budget/models/transaction.py:522
+#: code:addons/public_budget/models/transaction.py:527
 #, python-format
 msgid ""
 "To close a transaction to return amount must be 0!\n"
@@ -2969,7 +2969,7 @@ msgid ""
 msgstr ""
 
 #. module: public_budget
-#: code:addons/public_budget/models/transaction.py:508
+#: code:addons/public_budget/models/transaction.py:513
 #, python-format
 msgid ""
 "To close a transaction, Preventive, Definitive, Invoiced, To Pay and Paid "
@@ -3073,14 +3073,14 @@ msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_advance_request_analysis_type_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_request_type_id_5569
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_request_type_id_5571
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_return_type_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_pos_exc_rest_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_prec_detail_account_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_funding_move_type
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_id_5811
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_id_5826
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_request_filter
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_return_filter
 msgid "Type"
@@ -3151,7 +3151,7 @@ msgstr ""
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_account_payment_group_transaction_with_advance_payment
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment_5814
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment_5829
 msgid "With advance payment?"
 msgstr "Con Pago Anticipado?"
 

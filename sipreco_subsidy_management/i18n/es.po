@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-18 20:37+0000\n"
+"POT-Creation-Date: 2019-01-24 16:28+0000\n"
 "PO-Revision-Date: 2019-01-18 20:37+0000\n"
 "Last-Translator: Juan José Scarafía <scarafia.juanjose@gmail.com>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
@@ -48,6 +48,16 @@ msgid ""
 "</pre>\n"
 "\n"
 "                    "
+msgstr ""
+
+#. module: sipreco_subsidy_management
+#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: sipreco_subsidy_management
+#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_activity_ids
+msgid "Activities"
 msgstr ""
 
 #. module: sipreco_subsidy_management
@@ -208,6 +218,11 @@ msgid "Date of resolution"
 msgstr "Fecha de la Resolucion"
 
 #. module: sipreco_subsidy_management
+#: model:ir.model.fields,help:sipreco_subsidy_management.field_public_budget_subsidy_message_last_post
+msgid "Date of the last message posted on the record."
+msgstr ""
+
+#. module: sipreco_subsidy_management
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_definitive_line_ids
 msgid "Definitive Lines"
 msgstr "Afectaciones Definitivas"
@@ -357,6 +372,21 @@ msgid "Fojas"
 msgstr "Fojas"
 
 #. module: sipreco_subsidy_management
+#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: sipreco_subsidy_management
+#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_message_channel_ids
+msgid "Followers (Channels)"
+msgstr ""
+
+#. module: sipreco_subsidy_management
+#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: sipreco_subsidy_management
 #: model:ir.ui.view,arch_db:sipreco_subsidy_management.view_public_budget_subsidy_resolution_form
 msgid "Generar Remito"
 msgstr "Generar Remito"
@@ -370,12 +400,22 @@ msgstr "Agrupar por"
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_approval_arrangement_id
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_id
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_note_id
-#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_note_type_id_6265
+#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_note_type_id_6301
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_rendition_id
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_resolution_id
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_resolution_line_id
 msgid "ID"
 msgstr "ID"
+
+#. module: sipreco_subsidy_management
+#: model:ir.model.fields,help:sipreco_subsidy_management.field_public_budget_subsidy_message_unread
+msgid "If checked new messages require your attention."
+msgstr ""
+
+#. module: sipreco_subsidy_management
+#: model:ir.model.fields,help:sipreco_subsidy_management.field_public_budget_subsidy_message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
 
 #. module: sipreco_subsidy_management
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_rendition_approved_amount
@@ -421,8 +461,18 @@ msgid "Invoice"
 msgstr ""
 
 #. module: sipreco_subsidy_management
+#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: sipreco_subsidy_management
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_issue_date
 msgid "Issue Date"
+msgstr ""
+
+#. module: sipreco_subsidy_management
+#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_message_last_post
+msgid "Last Message Date"
 msgstr ""
 
 #. module: sipreco_subsidy_management
@@ -462,6 +512,11 @@ msgstr "Última actualización en"
 #: model:ir.ui.view,arch_db:sipreco_subsidy_management.view_public_budget_subsidy_resolution_form
 msgid "Lineas de Resoluciones"
 msgstr "Lineas de Resoluciones"
+
+#. module: sipreco_subsidy_management
+#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_message_ids
+msgid "Messages"
+msgstr ""
 
 #. module: sipreco_subsidy_management
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_to_pay_amount
@@ -532,6 +587,21 @@ msgid "Name of Receiver"
 msgstr "Nombre de Receptor"
 
 #. module: sipreco_subsidy_management
+#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: sipreco_subsidy_management
+#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: sipreco_subsidy_management
+#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: sipreco_subsidy_management
 #: code:addons/sipreco_subsidy_management/models/subsidy.py:20
 #, python-format
 msgid "No Se encontrÃ³ ningÃºn tipo de transacciÃ³n del tipo subsidio"
@@ -568,6 +638,21 @@ msgstr "Notas"
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_approval_arrangement_number
 msgid "Number"
 msgstr "Número"
+
+#. module: sipreco_subsidy_management
+#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: sipreco_subsidy_management
+#: model:ir.model.fields,help:sipreco_subsidy_management.field_public_budget_subsidy_message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr ""
+
+#. module: sipreco_subsidy_management
+#: model:ir.model.fields,help:sipreco_subsidy_management.field_public_budget_subsidy_message_unread_counter
+msgid "Number of unread messages"
+msgstr ""
 
 #. module: sipreco_subsidy_management
 #: model:ir.ui.view,arch_db:sipreco_subsidy_management.view_public_budget_subsidy_resolution_search
@@ -759,6 +844,11 @@ msgid "Resoluciones de Subsidios"
 msgstr "Resoluciones de Subsidios"
 
 #. module: sipreco_subsidy_management
+#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_activity_user_id
+msgid "Responsible"
+msgstr ""
+
+#. module: sipreco_subsidy_management
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_to_pay_balance
 msgid "Saldo A Pagar"
 msgstr "Saldo A Pagar"
@@ -786,10 +876,20 @@ msgid "Sequence"
 msgstr "Secuencia"
 
 #. module: sipreco_subsidy_management
+#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_activity_state
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_resolution_state
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_state
 msgid "State"
 msgstr "Estado"
+
+#. module: sipreco_subsidy_management
+#: model:ir.model.fields,help:sipreco_subsidy_management.field_public_budget_subsidy_activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
 
 #. module: sipreco_subsidy_management
 #: model:ir.ui.view,arch_db:sipreco_subsidy_management.view_public_budget_subsidy_approval_arrangement_form
@@ -888,6 +988,16 @@ msgid "Type"
 msgstr "Tipo"
 
 #. module: sipreco_subsidy_management
+#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_message_unread
+msgid "Unread Messages"
+msgstr ""
+
+#. module: sipreco_subsidy_management
+#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_message_unread_counter
+msgid "Unread Messages Counter"
+msgstr ""
+
+#. module: sipreco_subsidy_management
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_resolution_user_id
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_user_id
 msgid "User"
@@ -907,6 +1017,16 @@ msgstr "Vencida"
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_accountability_expiry_date
 msgid "Vencimiento de Rendición "
 msgstr "Vencimiento de Rendición "
+
+#. module: sipreco_subsidy_management
+#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: sipreco_subsidy_management
+#: model:ir.model.fields,help:sipreco_subsidy_management.field_public_budget_subsidy_website_message_ids
+msgid "Website communication history"
+msgstr ""
 
 #. module: sipreco_subsidy_management
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_type_with_advance_payment
