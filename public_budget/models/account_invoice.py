@@ -63,11 +63,12 @@ class AccountInvoice(models.Model):
     def _get_to_pay_amount_to_date(self):
         self.ensure_one()
         _logger.info('Getting to pay amount for invoice %s' % self.id)
-        # if invoice is paid and not payments, then it is autopaid and after
+        # if invoice is paid and not payment group, then it is autopaid or
+        # conciliation between account.move.line without a payment group, after
         # validation we consider it as send to paid and paid
         # TODO tal vez deberíamos mejorar porque si estamos sacando
         # analysis_to_date no se estáría teniendo en cuenta
-        if self.state == 'paid' and not self.payment_move_line_ids:
+        if self.state == 'paid' and not self.payment_group_ids:
             return self.amount_total
 
         lines = self.move_id.line_ids.filtered(
@@ -103,9 +104,12 @@ class AccountInvoice(models.Model):
         if not to_date:
             return 0.0
 
-        # if invoice is paid and not payments, then it is autopaid and after
+        # if invoice is paid and not payment group, then it is autopaid or
+        # conciliation between account.move.line without a payment group, after
         # validation we consider it as send to paid and paid
-        if self.state == 'paid' and not self.payment_move_line_ids:
+        # TODO tal vez deberíamos mejorar porque si estamos sacando
+        # analysis_to_date no se estáría teniendo en cuenta
+        if self.state == 'paid' and not self.payment_group_ids:
             return self.amount_total
 
         lines = self.move_id.line_ids.filtered(
