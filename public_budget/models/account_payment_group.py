@@ -93,7 +93,7 @@ class AccountPaymentGroup(models.Model):
         default='business_days',
     )
     payment_min_date = fields.Date(
-        compute='get_payment_min_date',
+        compute='_compute_payment_min_date',
         string='Fecha Min. de Pago',
         help='El pago no puede ser validado antes de esta fecha',
         store=True,
@@ -240,35 +240,39 @@ class AccountPaymentGroup(models.Model):
             rec.show_print_receipt_button = show_print_receipt_button
 
     @api.depends('payment_base_date', 'payment_days', 'days_interval_type')
-    def get_payment_min_date(self):
-        current_date = False
-        business_days_to_add = self.payment_days
-        if self.payment_base_date:
-            if self.days_interval_type == 'business_days':
-                current_date = fields.Date.from_string(self.payment_base_date)
-                while business_days_to_add > 0:
-                    current_date = current_date + relativedelta(days=1)
-                    weekday = current_date.weekday()
-                    # sunday = 6
-                    if weekday >= 5 or self.env[
-                            'hr.holidays.public'].is_public_holiday(
-                                current_date):
-                        continue
-                    # if current_date in holidays:
-                    #     continue
-                    business_days_to_add -= 1
-            else:
-                current_date = fields.Date.from_string(self.payment_base_date)
-                current_date = current_date + relativedelta(
-                    days=self.payment_days)
+    def _compute_payment_min_date(self):
+        for rec in self:
+            current_date = False
+            business_days_to_add = rec.payment_days
+            if rec.payment_base_date:
+                if rec.days_interval_type == 'business_days':
+                    current_date = fields.Date.from_string(
+                        rec.payment_base_date)
+                    while business_days_to_add > 0:
+                        current_date = current_date + relativedelta(days=1)
+                        weekday = current_date.weekday()
+                        # sunday = 6
+                        if weekday >= 5 or self.env[
+                                'hr.holidays.public'].is_public_holiday(
+                                    current_date):
+                            continue
+                        # if current_date in holidays:
+                        #     continue
+                        business_days_to_add -= 1
+                else:
+                    current_date = fields.Date.from_string(
+                        rec.payment_base_date)
+                    current_date = current_date + relativedelta(
+                        days=rec.payment_days)
 
-            # además hacemos que la fecha mínima no pueda ser día no habil sin
-            # Importar si el intervalo debe considerar días habiles o no
-            while current_date.weekday() >= 5 or self.env[
-                    'hr.holidays.public'].is_public_holiday(
-                        current_date):
-                current_date = current_date + relativedelta(days=1)
-        self.payment_min_date = fields.Date.to_string(current_date)
+                # además hacemos que la fecha mínima no pueda ser día no habil
+                # sin Importar si el intervalo debe
+                #  considerar días habiles o no
+                while current_date.weekday() >= 5 or self.env[
+                        'hr.holidays.public'].is_public_holiday(
+                            current_date):
+                    current_date = current_date + relativedelta(days=1)
+            rec.payment_min_date = fields.Date.to_string(current_date)
 
     # TODO enable
     # @api.one

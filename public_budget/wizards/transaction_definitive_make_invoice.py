@@ -228,6 +228,6 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
         res['res_id'] = invoice.id
         res['target'] = 'new'
         if tran_type.with_advance_payment:
-            invoice.signal_workflow('invoice_open')
+            invoice.action_invoice_open()
             return True
         return res
