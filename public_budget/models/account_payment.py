@@ -70,6 +70,9 @@ class AccountPayment(models.Model):
                     'In payment of advance transaction type, you need to '
                     'set an advance account in transaction type!'))
             self.destination_account_id = account
+        elif payment_group.advance_request_id:
+            self.destination_account_id = payment_group.\
+                advance_request_id.type_id.account_id
         else:
             return super(
                 AccountPayment, self)._compute_destination_account_id()
