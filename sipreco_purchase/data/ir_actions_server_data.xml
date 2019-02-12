@@ -1,60 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-<!-- crear solicitud de compra -->
-    
+    <!-- crear solicitud de compra -->
     <record model="ir.actions.server" id="action_create_purchase_requisition">
         <!-- <field name="name">Create Purchase Requisition</field> -->
         <field name="name">Crear Solicitud de Compra</field>
-        <field name="model_id" ref="procurement.model_procurement_order"/>
-        <field name="binding_model_id" ref="procurement.model_procurement_order"/>
+        <field name="model_id" ref="stock_request.model_stock_request"/>
+        <field name="binding_model_id" ref="stock_request.model_stock_request"/>
+        <field name="state">code</field>
         <field name="code">
-active_ids = context.get('active_ids')
-recs = env['procurement.order'].browse(active_ids)
-if recs.filtered(lambda x: x.state in ('cancel', 'done')):
+if records.filtered(lambda x: x.state in ('cancel', 'done')):
     raise Warning('Las pedidos de abastecimientos no deben estar cancelados y realizados')
 
-if recs.filtered('manual_requisition_id'):
+if records.filtered('manual_requisition_id'):
     raise Warning('Algunos pedidos de abastecimientos ya tienen una solicitud de compra asociada')
 
 picking_type = env['stock.picking.type'].search([('code', '=', 'incoming'), '|', ('warehouse_id.company_id', '=', False), ('warehouse_id.company_id', '=', env.user.company_id.id)], limit=1)
 
 lines = []
-for rec in recs:
-    lines.append((0, 0, {'product_id': rec.product_id.id, 'product_uom_id': rec.product_uom.id, 'product_qty': rec.product_qty,  'name': rec.name, 'price_unit': rec.price_unit}))
+for rec in records:
+    lines.append((0, 0, {'product_id': rec.product_id.id, 'product_uom_id': rec.product_uom_id.id, 'product_qty': rec.product_uom_qty,  'name': rec.name, 'price_unit': rec.price_unit}))
 
 requisition = env['purchase.requisition'].create({
     'line_ids': lines,
     'company_id': env.user.company_id.id,
     # permitimos varias a la vez por defecto, total controlamos cantidades por afuera.
-    'multiple_rfq_per_supplier': True,
     'picking_type_id': picking_type.id,
-    'description': ', '.join(recs.mapped('procurement_request_id.description'))
+    'description': ', '.join(records.mapped('name'))
 })
-recs.write({'manual_requisition_id': requisition.id})
+records.write({'manual_requisition_id': requisition.id})
         </field>
     </record>
 
-<!-- Unir solicitudes de compra -->
+    <!-- Unir solicitudes de compra -->
     <record model="ir.actions.server" id="action_merge_purchase_requisition">
         <field name="name">Unir Solicitudes de compra</field>
-        <field name="model_id" ref="procurement.model_procurement_order"/>
-        <field name="binding_model_id" ref="procurement.model_procurement_order"/>
+        <field name="model_id" ref="stock_request.model_stock_request"/>
+        <field name="binding_model_id" ref="stock_request.model_stock_request"/>
+        <field name="state">code</field>
         <field name="code">
-active_ids = context.get('active_ids')
-recs = env['purchase.requisition'].browse(active_ids)
-if recs.filtered(lambda x: x.state not in ('in_progress')):
+if records.filtered(lambda x: x.state not in ('in_progress')):
     raise Warning('Las solicitudes de compra deben estar en estado "Confirmado" para poder unirse')
 
-if not recs or recs == 1:
-    raise Warning('Debe selccionar más de una solicitud de compra')
+if not records or records == 1:
+    raise Warning('Debe seleccionar más de una solicitud de compra')
 
-pr = recs[0]
-pr.write({'name': ','.join(recs.mapped('name'))})
-(recs - pr).mapped('line_ids').write({'requisition_id': pr.id})
-(recs - pr).mapped('manual_procurement_ids').write({'manual_requisition_id': pr.id})
-(recs - pr).mapped('purchase_ids').write({'requisition_id': pr.id})
-(recs - pr).unlink()
+pr = records[0]
+pr.write({'name': ','.join(records.mapped('name'))})
+(records - pr).mapped('line_ids').write({'requisition_id': pr.id})
+(records - pr).mapped('manual_request_ids').write({'manual_requisition_id': pr.id})
+(records - pr).mapped('purchase_ids').write({'requisition_id': pr.id})
+(records - pr).unlink()
         </field>
     </record>
 

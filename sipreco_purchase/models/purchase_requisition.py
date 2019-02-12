@@ -1,9 +1,10 @@
+##############################################################################
+# For copyright and license notices, see __manifest__.py file in module root
+# directory
+##############################################################################
 from odoo import models, fields, api, _
-from odoo.exceptions import ValidationError, UserError
+from odoo.exceptions import UserError
 import odoo.addons.decimal_precision as dp
-# from dateutil.relativedelta import relativedelta
-import logging
-_logger = logging.getLogger(__name__)
 
 
 class PurchaseRequisition(models.Model):
@@ -13,10 +14,10 @@ class PurchaseRequisition(models.Model):
         # cambiamos string
         'Reference',
     )
-    manual_procurement_ids = fields.One2many(
-        'procurement.order',
+    manual_request_ids = fields.One2many(
+        'stock.request',
         'manual_requisition_id',
-        'Procurements',
+        'Request',
         # 'stock.move',
         # 'requisition_id',
         # 'Supply Requirements',
@@ -26,7 +27,7 @@ class PurchaseRequisition(models.Model):
         'Tramite Administrativo',
         ondelete='restrict',
     )
-    type_id = fields.Many2one(
+    transaction_type_id = fields.Many2one(
         'public_budget.transaction_type',
         string='Type',
         # readonly=True,
@@ -48,10 +49,12 @@ class PurchaseRequisition(models.Model):
         'Start Date',
         readonly=True,
     )
-    user_inspected = fields.Char(
+    user_inspected = fields.Many2one(
+        'res.users',
         track_visibility='onchange',
     )
-    user_confirmed = fields.Char(
+    user_confirmed = fields.Many2one(
+        'res.users',
         track_visibility='onchange',
     )
 
@@ -66,33 +69,33 @@ class PurchaseRequisition(models.Model):
             raise UserError(_('Antes de revisar debe tener establecido un'
                               '"Tipo"'))
         self.inspected = True
-        self.user_inspected = self.env.user.name
+        self.user_inspected = self.env.user
 
     @api.multi
-    def to_draft(self):
+    def action_draft(self):
         if self.state == 'draft' and self.inspected:
             self.inspected = False
         elif self.state == 'in_progress':
-            self.with_context(cancel_procurement=False).tender_cancel()
-            self.tender_reset()
+            self.with_context(cancel_procurement=False).action_cancel()
+        super(PurchaseRequisition, self).action_draft()
 
     @api.multi
-    def tender_cancel(self):
+    def action_cancel(self):
         if self._context.get('cancel_procurement', True):
             self.mapped('manual_procurement_ids').button_cancel_remaining()
         self.inspected = False
         self.user_inspected = False
         self.user_confirmed = False
-        return super(PurchaseRequisition, self).tender_cancel()
+        return super(PurchaseRequisition, self).action_cancel()
 
     @api.multi
-    def tender_open(self):
+    def action_open(self):
         for rec in self:
             if not rec.purchase_ids:
-                raise ValidationError(_(
+                raise UserError(_(
                     'No se puede cerrar la licitación si no se solicitaron '
                     'presupuestos'))
-        return super(PurchaseRequisition, self).tender_open()
+        return super(PurchaseRequisition, self).action_open()
 
     @api.model
     def create(self, vals):
@@ -100,6 +103,6 @@ class PurchaseRequisition(models.Model):
         return super(PurchaseRequisition, self).create(vals)
 
     @api.multi
-    def tender_in_progress(self):
-        self.user_confirmed = self.env.user.name
-        super(PurchaseRequisition, self).tender_in_progress()
+    def action_in_progress(self):
+        self.user_confirmed = self.env.user
+        super(PurchaseRequisition, self).action_in_progress()

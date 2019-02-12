@@ -49,7 +49,7 @@
     </record>
 
     <!-- damos permiso a solicitante para compras -->
-    <record model="ir.ui.menu" id="base.menu_purchase_root">
+    <record model="ir.ui.menu" id="purchase.menu_purchase_root">
         <field name="groups_id" eval="[(4, ref('stock.group_stock_user'))]"/>
     </record>
 
@@ -59,7 +59,7 @@
     </record>
 
     <!-- menu reportes de compra -->
-    <record id="base.purchase_report" model="ir.ui.menu">
+    <record id="purchase.purchase_report" model="ir.ui.menu">
         <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
     </record>
 

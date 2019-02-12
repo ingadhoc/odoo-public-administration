@@ -1,34 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <data noupdate="1">
+<odoo noupdate="1">
 
-        <record id="product_of_informatica_1" model="product.product">
-            <field name="name">Producto de Informática 1</field>
-            <field name="type">consu</field>
-            <field name="standard_price" eval="100.0"/>
-            <field name="route_ids" eval="[(4, ref('stock_location_rute_informatica'))]"/>
-        </record>
+    <record id="product_of_informatica_1" model="product.product">
+        <field name="name">Producto de Informática 1</field>
+        <field name="type">consu</field>
+        <field name="standard_price" eval="100.0"/>
+        <field name="route_ids" eval="[(4, ref('stock_location_rute_informatica'))]"/>
+    </record>
 
-        <record id="product_of_economato_1" model="product.product">
-            <field name="name">Producto de Economato 1</field>
-            <field name="type">consu</field>
-            <field name="standard_price" eval="150.0"/>
-            <field name="route_ids" eval="[(4, ref('stock_location_rute_economato'))]"/>
-        </record>
+    <record id="product_of_economato_1" model="product.product">
+        <field name="name">Producto de Economato 1</field>
+        <field name="type">consu</field>
+        <field name="standard_price" eval="150.0"/>
+        <field name="route_ids" eval="[(4, ref('stock_location_rute_economato'))]"/>
+    </record>
 
-        <record id="product_of_economato_2" model="product.product">
-            <field name="name">Producto de Economato 2</field>
-            <field name="type">consu</field>
-            <field name="standard_price" eval="130.0"/>
-            <field name="route_ids" eval="[(4, ref('stock_location_rute_economato'))]"/>
-        </record>
+    <record id="product_of_economato_2" model="product.product">
+        <field name="name">Producto de Economato 2</field>
+        <field name="type">consu</field>
+        <field name="standard_price" eval="130.0"/>
+        <field name="route_ids" eval="[(4, ref('stock_location_rute_economato'))]"/>
+    </record>
 
-        <record id="product_of_secretarias" model="product.product">
-            <field name="name">Producto de Secretarías</field>
-            <field name="type">consu</field>
-            <field name="standard_price" eval="1.0"/>
-            <field name="route_ids" eval="[(6, False, [ref('stock_location_rute_sec_parlamentaria'), ref( 'stock_location_rute_sec_administrativa')])]"/>
-        </record>
+    <record id="product_of_secretarias" model="product.product">
+        <field name="name">Producto de Secretarías</field>
+        <field name="type">consu</field>
+        <field name="standard_price" eval="1.0"/>
+        <field name="route_ids" eval="[(6, False, [ref('stock_location_rute_sec_parlamentaria'), ref( 'stock_location_rute_sec_administrativa')])]"/>
+    </record>
 
-    </data>
 </odoo>

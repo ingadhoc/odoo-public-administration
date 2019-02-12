@@ -1,9 +1,9 @@
+##############################################################################
+# For copyright and license notices, see __manifest__.py file in module root
+# directory
+##############################################################################
 from odoo import models, fields, api
 import odoo.addons.decimal_precision as dp
-# from odoo.exceptions import ValidationError
-# from dateutil.relativedelta import relativedelta
-import logging
-_logger = logging.getLogger(__name__)
 
 
 class PurchaseRequisitionLine(models.Model):

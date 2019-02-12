@@ -1,8 +1,8 @@
+##############################################################################
+# For copyright and license notices, see __manifest__.py file in module root
+# directory
+# ##############################################################################
 from odoo import models, fields, api
-# from odoo.exceptions import ValidationError
-# from dateutil.relativedelta import relativedelta
-import logging
-_logger = logging.getLogger(__name__)
 
 
 class StockPickingType(models.Model):
@@ -10,8 +10,8 @@ class StockPickingType(models.Model):
 
     # count_pending_moves = fields.Integer(
     # compute='_compute_moves_count',
-    count_pending_procurements = fields.Integer(
-        compute='_compute_procurements_count',
+    count_pending_requests = fields.Integer(
+        compute='_compute_requests_count',
     )
     user_ids = fields.Many2many(
         'res.users',
@@ -23,7 +23,7 @@ class StockPickingType(models.Model):
     )
 
     @api.multi
-    def _compute_procurements_count(self):
+    def _compute_requests_count(self):
         # reads = self.env['stock.move'].read_group(
         #     [('state', 'in', ['waiting', 'confirmed', 'assigned'])],
         #     ['picking_type_id'], ['picking_type_id'])
@@ -31,20 +31,18 @@ class StockPickingType(models.Model):
         #   self.browse(read['picking_type_id'][0]).count_pending_moves = read[
         #         'picking_type_id_count']
         for rec in self:
-            rec.count_pending_procurements = self.env[
-                'procurement.order'].search_count([
+            rec.count_pending_requests = self.env[
+                'stock.request'].search_count([
                     ('state', 'not in', ['done', 'cancel']),
                     ('rule_id.picking_type_id', '=', rec.id)])
 
     @api.multi
-    def action_type_procurement_orders(self):
+    def action_type_stock_request(self):
         self.ensure_one()
-        action = self.env.ref('procurement.procurement_action')
+        action = self.env.ref('stock_request.action_stock_request_form')
         if not action:
             return False
-
         res = action.read()[0]
-
         res['domain'] = [('rule_id.picking_type_id', '=', self.id)]
         res['context'] = {'search_default_pending': 1}
         return res

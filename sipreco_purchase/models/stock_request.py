@@ -1,13 +1,14 @@
+##############################################################################
+# For copyright and license notices, see __manifest__.py file in module root
+# directory
+##############################################################################
 from odoo import models, fields, api, _
 import odoo.addons.decimal_precision as dp
 from odoo.exceptions import ValidationError
-# from dateutil.relativedelta import relativedelta
-import logging
-_logger = logging.getLogger(__name__)
 
 
-class ProcurementOrder(models.Model):
-    _inherit = 'procurement.order'
+class StockRequest(models.Model):
+    _inherit = 'stock.request'
 
     # odoo ya tiene un requisition_id que es cuando se correr el "buy", en este
     # caso es un link independiente a eso lo que queremos, un link manual y sin
@@ -19,7 +20,7 @@ class ProcurementOrder(models.Model):
         readonly=True,
     )
     partner_id = fields.Many2one(
-        related='group_id.partner_id',
+        related='procurement_group_id.partner_id',
         readonly=True,
     )
     price_unit = fields.Float(
@@ -34,41 +35,46 @@ class ProcurementOrder(models.Model):
         states={'confirmed': [('readonly', False)]},
     )
     requirement_id = fields.Many2one(
-        related='procurement_request_id.partner_id',
+        related='order_id.partner_id',
         readonly=True,
-        string='Requirent'
+    )
+    rule_id = fields.Many2one(
+        'procurement.rule',
+        track_visibility='onchange',
+        help="Chosen rule for the procurement resolution."
+        " Usually chosen by the system but can be manually set by the"
+        " procurement manager to force an unusual behavior.",
     )
 
     @api.model
     def create(self, vals):
         # controlamos que haya definido cantidad
-        if not vals.get('product_qty'):
+        if not vals.get('product_uom_qty'):
             raise ValidationError(_(
                 'You can not create a request without quantity!'))
-        return super(ProcurementOrder, self).create(vals)
+        return super(StockRequest, self).create(vals)
 
-    @api.multi
-    def onchange_product_id(self, product_id):
-        res = super(ProcurementOrder, self).onchange_product_id(product_id)
-        if 'value' not in res:
-            res['value'] = {}
-        product = self.env['product.product'].browse(
-            product_id)
-        res['value']['name'] = product.partner_ref
-        res['value']['price_unit'] = product.standard_price
+    @api.onchange('product_id')
+    def onchange_product_id(self):
+        res = super(StockRequest, self).onchange_product_id()
+        self.update({
+            'name': self.product_id.partner_ref,
+            'price_unit': self.product_id.standard_price,
+        })
         return res
 
     @api.multi
-    def run(self, autocommit=False):
+    def _action_launch_procurement_rule(self):
         """
         Después de ejecutar procurement intentar reservar automáticamente
         los pikcings
         """
-        res = super(ProcurementOrder, self).run(autocommit=autocommit)
+        res = super(StockRequest, self)._action_launch_procurement_rule()
         # hacemos jit en los pickings vinculados
-        if self.mapped('group_id').ids:
+        if self.mapped('procurement_group_id').ids:
             reassign_pickinkgs = self.env['stock.picking'].search([
-                ('group_id', 'in', self.mapped('group_id').ids),
+                ('group_id', 'in', self.mapped(
+                    'procurement_group_id').ids),
                 ('state', 'in', [
                     'confirmed', 'partially_available', 'waiting'])])
             if reassign_pickinkgs:

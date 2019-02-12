@@ -1,35 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
 
-<!-- sacamos imprimir de reporte por defecto -->
-<function model="ir.actions.report.xml" name="unlink_action" eval="[ ref('purchase_requisition.action_report_purchase_requisitions')]"/>
+    <!-- sacamos imprimir de reporte por defecto -->
+    <function model="ir.actions.report" name="unlink_action" eval="[ ref('purchase_requisition.action_report_purchase_requisitions')]"/>
 
-<record id="action_aeroo_purchase_requisition_report" model="ir.actions.report.xml">
-    <field name="name">Solicitud de Compra</field>
-    <field name="type">ir.actions.report.xml</field>
-    <field name="model">purchase.requisition</field>
-    <field name="report_name">purchase_requisition_report</field>
-    <field name="report_type">aeroo</field>
-    <field name="in_format">oo-odt</field>
-    <!-- <field name="parser_loc">l10n_ar_aeroo_base/parser.py</field> -->
-    <!-- <field name="parser_state">loc</field> -->
-    <field name="parser_state">default</field>
-    <field name="report_rml">sipreco_purchase/reports/purchase_requisition_report.odt</field>
-    <field name="tml_source">file</field>
-    <field name="out_format" ref="report_aeroo.report_mimetypes_doc_odt"/>
-    <field name="styles_mode">specified</field>
-    <field name="stylesheet_id" ref="public_budget.sipreco_stylesheet"/>
-</record>
-<ir_set>
-    <field eval="'action'" name="key"/>
-    <field eval="'client_print_multi'" name="key2"/>
-    <field eval="['purchase.requisition']" name="models"/>
-    <field name="name">Solicitud de Compra</field>
-    <field eval="'ir.actions.report.xml,'+str(action_aeroo_purchase_requisition_report)" name="value"/>
-    <field eval="True" name="isobject"/>
-    <field eval="True" name="replace"/>
-</ir_set>
-
-    </data>
+    <record id="action_aeroo_purchase_requisition_report" model="ir.actions.report">
+        <field name="name">Solicitud de Compra</field>
+        <field name="model">purchase.requisition</field>
+        <field name="report_name">purchase_requisition_report</field>
+        <field name="report_type">aeroo</field>
+        <field name="in_format">oo-odt</field>
+        <!-- <field name="parser_loc">l10n_ar_aeroo_base/parser.py</field> -->
+        <!-- <field name="parser_state">loc</field> -->
+        <field name="parser_state">default</field>
+        <field name="report_file">sipreco_purchase/reports/purchase_requisition_report.odt</field>
+        <field name="tml_source">file</field>
+        <field name="out_format" ref="report_aeroo.report_mimetypes_doc_odt"/>
+        <field name="styles_mode">specified</field>
+        <field name="stylesheet_id" ref="public_budget.sipreco_stylesheet"/>
+        <field name="binding_model_id" ref="purchase_requisition.model_purchase_requisition"/>
+        <field name="binding_type">report</field>
+    </record>
 </odoo>
