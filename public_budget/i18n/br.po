@@ -3,7 +3,7 @@
 # * public_budget
 # 
 # Translators:
-# Juan José Scarafía <scarafia.juanjose@gmail.com>, 2019
+# Irriep Nala Novram <allannkorh@yahoo.fr>, 2019
 # 
 msgid ""
 msgstr ""
@@ -11,13 +11,13 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-12 12:14+0000\n"
 "PO-Revision-Date: 2019-01-18 20:37+0000\n"
-"Last-Translator: Juan José Scarafía <scarafia.juanjose@gmail.com>, 2019\n"
-"Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
+"Last-Translator: Irriep Nala Novram <allannkorh@yahoo.fr>, 2019\n"
+"Language-Team: Breton (https://www.transifex.com/adhoc/teams/46451/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: br\n"
+"Plural-Forms: nplurals=5; plural=((n%10 == 1) && (n%100 != 11) && (n%100 !=71) && (n%100 !=91) ? 0 :(n%10 == 2) && (n%100 != 12) && (n%100 !=72) && (n%100 !=92) ? 1 :(n%10 ==3 || n%10==4 || n%10==9) && (n%100 < 10 || n% 100 > 19) && (n%100 < 70 || n%100 > 79) && (n%100 < 90 || n%100 > 99) ? 2 :(n != 0 && n % 1000000 == 0) ? 3 : 4);\n"
 
 #. module: public_budget
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_budget_form
@@ -64,12 +64,12 @@ msgstr ""
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_advance_payment_group_ids
 msgid "Advance Payment Orders"
-msgstr "Órdenes de Pago Adelantado"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_advance_preventive_line_ids
 msgid "Advance Preventive Lines"
-msgstr "Lineas Preventivas Adelanto"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_account_payment_group_advance_request_id
@@ -123,7 +123,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:public_budget.action_public_budget_advance_request_advance_requests
 #: model:ir.model,name:public_budget.model_public_budget_advance_request
 msgid "Advance Requests"
-msgstr "Requerimientos de Adelanto"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_return_line_advance_return_id
@@ -190,7 +190,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:public_budget.field_res_users_location_ids
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_users_form
 msgid "Allowed Locations"
-msgstr "Ubicaciones Permitidas"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_detail_amount
@@ -200,7 +200,7 @@ msgstr "Ubicaciones Permitidas"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_make_invoice_detail_to_invoice_amount
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_funding_move_amount
 msgid "Amount"
-msgstr "Importe Final"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_amount_restriction_ids
@@ -321,7 +321,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_budget_tree
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_modification_detail_filter
 msgid "Budget"
-msgstr "Presupuesto"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.ui.view,arch_db:public_budget.view_budget_analysis_form
@@ -408,7 +408,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_budget_position_tree
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_modification_detail_filter
 msgid "Budget Position"
-msgstr "Partida Presupuestaria"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model,name:public_budget.model_public_budget_budget_position_category
@@ -516,7 +516,7 @@ msgstr ""
 #: selection:public_budget.transaction,state:0
 #, python-format
 msgid "Cancel"
-msgstr "Cancelado"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.ui.view,arch_db:public_budget.view_advance_request_report_wizard_form
@@ -666,7 +666,7 @@ msgstr ""
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_code
 msgid "Code"
-msgstr "Código"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model,name:public_budget.model_res_company
@@ -686,7 +686,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_company_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_company_id
 msgid "Company"
-msgstr "Compañía"
+msgstr ""
 
 #. module: public_budget
 #: code:addons/public_budget/models/advance_request_type.py:56
@@ -738,7 +738,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_funding_move_form
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_remit_form
 msgid "Confirm"
-msgstr "Confirmar"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.ui.view,arch_db:public_budget.view_account_payment_change_check_form
@@ -831,7 +831,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_amo_rest_create_uid
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_create_uid
 msgid "Created by"
-msgstr "Creado por"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_request_create_date
@@ -867,7 +867,7 @@ msgstr "Creado por"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_amo_rest_create_date
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_create_date
 msgid "Created on"
-msgstr "Creado en"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_report_4_account_id
@@ -891,12 +891,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_currency_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_amo_rest_currency_id
 msgid "Currency"
-msgstr "Moneda"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_current_location_id
 msgid "Current Location"
-msgstr "Ubicación Actual"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_subsidy_recipient_doc
@@ -912,7 +912,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_remit_date
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_amo_rest_date
 msgid "Date"
-msgstr "Fecha"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,help:public_budget.field_account_payment_group_payment_base_date
@@ -1004,14 +1004,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_definitive_line_ids
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_preventive_line_form
 msgid "Definitive Lines"
-msgstr "Afectaciones Definitivas"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_preventive_line_definitive_partner_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_definitive_partner_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_definitive_partner_type
 msgid "Definitive Partner Type"
-msgstr "Tipo de Empresa Definitiva"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_report_4_definitive_amount
@@ -1022,12 +1022,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_request_line_description
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_description
 msgid "Description"
-msgstr "Descripción"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_remit_location_dest_id
 msgid "Destination Location"
-msgstr "Ubicación Destino"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_pos_exc_rest_destiny_category_id
@@ -1114,7 +1114,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_amo_rest_display_name
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_display_name
 msgid "Display Name"
-msgstr "Nombre mostrado"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_make_invoice_document_number
@@ -1225,7 +1225,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_report_4_state
 #: model:ir.ui.view,arch_db:public_budget.view_advance_request_analysis_search
 msgid "Estado"
-msgstr "Estado"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_report_4_transaction_state
@@ -1248,7 +1248,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_expedient_form
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_expedient_tree
 msgid "Expedient"
-msgstr "Expediente"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model,name:public_budget.model_public_budget_expedient_category
@@ -1274,7 +1274,7 @@ msgstr ""
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_parliamentary_expedient
 msgid "Expediente Parlamentario"
-msgstr "Expediente Parlamentario"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_subsidy_expedient
@@ -1309,7 +1309,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:public_budget.field_advance_request_analysis_date
 #: model:ir.ui.view,arch_db:public_budget.view_advance_request_analysis_search
 msgid "Fecha"
-msgstr "Fecha"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_account_payment_group_payment_min_date
@@ -1469,7 +1469,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_transaction_type_amo_rest_filter
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_transaction_type_filter
 msgid "Group By"
-msgstr "Agrupar por"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.module.category,description:public_budget.category_habilitacion
@@ -1767,7 +1767,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type___last_update
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_amo_rest___last_update
 msgid "Last Modified on"
-msgstr "Última Modifiación en"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_last_move_date
@@ -1809,7 +1809,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_write_uid
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_write_uid
 msgid "Last Updated by"
-msgstr "Última actualización de"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_request_line_write_date
@@ -1845,7 +1845,7 @@ msgstr "Última actualización de"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_write_date
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_write_date
 msgid "Last Updated on"
-msgstr "Última actualización en"
+msgstr ""
 
 #. module: public_budget
 #: model:public_budget.transaction_type,name:public_budget.purchase_type_lprivada_demo
@@ -1943,35 +1943,35 @@ msgstr ""
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_to_pay_amount
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_to_pay_amount
 msgid "Monto A Pagar"
-msgstr "Monto A Pagar"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_definitive_amount
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_definitive_amount
 msgid "Monto Definitivo"
-msgstr "Monto Definitivo"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_invoiced_amount
 msgid "Monto Devengado"
-msgstr "Monto Devengado"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_paid_amount
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_paid_amount
 msgid "Monto Pagado"
-msgstr "Pagado"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_preventive_amount
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_preventive_amount
 msgid "Monto Preventivo"
-msgstr "Monto Preventivo"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_advance_preventive_amount
 msgid "Monto Preventivo de Adelanto"
-msgstr "Monto Preventivo de Adelanto"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_projected_amount
@@ -1981,22 +1981,22 @@ msgstr ""
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_advance_remaining_amount
 msgid "Monto Remanente de Adelanto"
-msgstr "Monto Remanente de Adelanto"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_advance_to_return_amount
 msgid "Monto a Devolver"
-msgstr "Monto a Devolver"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_advance_paid_amount
 msgid "Monto de Adelanto Pagado"
-msgstr "Monto de Adelanto Pagado"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_advance_to_pay_amount
 msgid "Monto de Adelanto a Pagar"
-msgstr "Monto de Adelanto a Pagar"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,help:public_budget.field_public_budget_advance_request_line_pending_return_amount
@@ -2031,7 +2031,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_name
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_location_filter
 msgid "Name"
-msgstr "Nombre"
+msgstr ""
 
 #. module: public_budget
 #: code:addons/public_budget/models/funding_move.py:112
@@ -2160,19 +2160,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_note
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_note
 msgid "Note"
-msgstr "Nota"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_expedient_form
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_transaction_form
 msgid "Notes"
-msgstr "Notas"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_number
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_remit_number
 msgid "Number"
-msgstr "Número"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_res_partner_numero_legajo
@@ -2319,7 +2319,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:public_budget.field_account_payment_group_partner_ids
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_partner_id
 msgid "Partner"
-msgstr "Empresa"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_report_4_transaction_partner_id
@@ -2345,7 +2345,7 @@ msgstr ""
 #. module: public_budget
 #: model:ir.model,name:public_budget.model_account_payment_group
 msgid "Payment Group"
-msgstr "Grupo de Pago"
+msgstr ""
 
 #. module: public_budget
 #: code:addons/public_budget/models/account_payment.py:169
@@ -2364,12 +2364,12 @@ msgstr ""
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_request_form
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_transaction_form
 msgid "Payment Orders"
-msgstr "Ordenes de Pago"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_transaction_form
 msgid "Payment Orders and Refunds"
-msgstr "Órdenes de Pago y Devoluciones"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.actions.report,name:public_budget.action_aeroo_report_payment_receipt
@@ -2511,7 +2511,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_remit_form
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_transaction_form
 msgid "Print"
-msgstr "Imprimir"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.ui.view,arch_db:public_budget.view_account_payment_group_form
@@ -2565,7 +2565,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_modification_reference
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_reference
 msgid "Reference"
-msgstr "Referencia"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_remit_reference
@@ -2580,7 +2580,7 @@ msgstr ""
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_budget_position_ids
 msgid "Related Budget Positions"
-msgstr "Partidas Presupuestarias Relacionadas"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_preventive_line_remaining_amount
@@ -2671,24 +2671,24 @@ msgstr ""
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_to_pay_balance
 msgid "Saldo A Pagar"
-msgstr "Saldo A Pagar"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_definitive_balance
 #: model:ir.model.fields,help:public_budget.field_public_budget_transaction_definitive_balance
 msgid "Saldo Definitivo"
-msgstr "Saldo Definitivo"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_invoiced_balance
 msgid "Saldo Devengado"
-msgstr "Saldo Devengado"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_preventive_balance
 #: model:ir.model.fields,help:public_budget.field_public_budget_transaction_preventive_balance
 msgid "Saldo Preventivo"
-msgstr "Saldo Preventivo"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_transaction_form
@@ -2792,7 +2792,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_request_filter
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_return_filter
 msgid "State"
-msgstr "Estado"
+msgstr ""
 
 #. module: public_budget
 #: model:public_budget.transaction_type,name:public_budget.purchase_type_subsidio_sin_cargo_demo
@@ -2840,7 +2840,7 @@ msgstr ""
 #: selection:public_budget.budget.report_4,definitive_partner_type:0
 #: selection:public_budget.transaction_type,definitive_partner_type:0
 msgid "Suppliers"
-msgstr "Proveedores"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model,name:public_budget.model_account_tax
@@ -2885,7 +2885,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_request_report_wizard_type_id
 #: model:ir.ui.view,arch_db:public_budget.view_advance_request_analysis_search
 msgid "Tipo"
-msgstr "Tipo"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_report_4_definitive_partner_type
@@ -2921,7 +2921,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_funding_move_form
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_transaction_form
 msgid "To Draft"
-msgstr "A Borrador"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_remit_form
@@ -2987,7 +2987,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_preventive_line_analysis_tree
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_preventive_line_tree
 msgid "Total"
-msgstr "Total"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_total_authorized
@@ -3048,7 +3048,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_transaction_type_form
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_transaction_type_tree
 msgid "Transaction Type"
-msgstr "Tipo de Transacción"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model,name:public_budget.model_public_budget_transaction_type_amo_rest
@@ -3069,7 +3069,7 @@ msgstr ""
 #: model:ir.ui.menu,name:public_budget.menu_transactions
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_expedient_form
 msgid "Transactions"
-msgstr "Transacciones"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_advance_request_analysis_type_id
@@ -3084,7 +3084,7 @@ msgstr "Transacciones"
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_request_filter
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_return_filter
 msgid "Type"
-msgstr "Tipo"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_make_invoice_use_documents
@@ -3098,7 +3098,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_remit_user_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_user_id
 msgid "User"
-msgstr "Usuario"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_user_location_ids
@@ -3115,7 +3115,7 @@ msgstr ""
 #: model:ir.model,name:public_budget.model_res_users
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_location_user_ids
 msgid "Users"
-msgstr "Usuarios"
+msgstr ""
 
 #. module: public_budget
 #: model:res.groups,name:public_budget.group_habilitacion_usuario
@@ -3153,7 +3153,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment_7337
 msgid "With advance payment?"
-msgstr "Con Pago Anticipado?"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_account_payment_group_withholding_line_ids
@@ -3163,7 +3163,7 @@ msgstr ""
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_year
 msgid "Year"
-msgstr ""
+msgstr "Bloavezh"
 
 #. module: public_budget
 #: code:addons/public_budget/models/remit.py:135
@@ -3341,7 +3341,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:public_budget.view_preventive_change_position
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_transaction_form
 msgid "or"
-msgstr "o"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model,name:public_budget.model_public_budget_advance_request_report_wizard
