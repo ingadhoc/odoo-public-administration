@@ -16,6 +16,7 @@
     <record id="group_requester" model="res.groups">
         <field name="name">Base Requirente</field>
         <field name="category_id" ref="base.module_category_hidden"/>
+        <field name="implied_ids" eval="[(4, ref('stock_request.group_stock_request_order'))]"/>
     </record>
 
     <record id="group_requester_employee" model="res.groups">
