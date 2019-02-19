@@ -68,4 +68,7 @@
         </field>
     </record>
 
+    <record id="stock_request.menu_stock_request" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4, ref('base.group_no_one'))]"/>
+    </record>
 </odoo>

@@ -46,3 +46,12 @@ msgstr "Solicitud de Requierimiento"
 #: model:ir.model.fields,field_description:stock_request_ux.field_stock_request_order_route_ids
 msgid "Route"
 msgstr "Unidad de Compra"
+
+#. module: purchase_requisition
+#: model:ir.actions.act_window, name:purchase_requisition.action_purchase_requisition
+#: model:ir.ui.menu,name:purchase_requisition.menu_purchase_requisition_pro_mgt
+#: model:ir.ui.view,arch_db:purchase_requisition.view_purchase_requisition_filter
+#: model:ir.ui.view,arch_db:purchase_requisition.view_purchase_requisition_form
+#: model:ir.ui.view,arch_db:purchase_requisition.view_purchase_requisition_tree
+msgid "Purchase Agreements"
+msgstr "Solicitud de Compras"

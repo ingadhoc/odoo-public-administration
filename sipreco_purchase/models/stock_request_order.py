@@ -14,9 +14,6 @@ class StockRequestOrder(models.Model):
         required=True,
         default=lambda self: self.env.user.partner_id
     )
-    name = fields.Char(
-        default='/',
-    )
     description = fields.Text(
         'Motivacion',
         required=True,
@@ -42,7 +39,4 @@ class StockRequestOrder(models.Model):
         rec = super(StockRequestOrder, self).create(vals)
         if rec.procurement_group_id:
             rec.procurement_group_id.partner_id = rec.partner_id
-        if rec.name == '/':
-            rec.name = self.env[
-                'ir.sequence'].next_by_code('stock.request')
         return rec

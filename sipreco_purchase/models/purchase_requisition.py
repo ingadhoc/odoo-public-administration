@@ -65,7 +65,7 @@ class PurchaseRequisition(models.Model):
 
     @api.multi
     def to_inspected(self):
-        if not self.type_id:
+        if not self.transaction_type_id:
             raise UserError(_('Antes de revisar debe tener establecido un'
                               '"Tipo"'))
         self.inspected = True
