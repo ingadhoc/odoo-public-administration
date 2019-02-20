@@ -49,11 +49,11 @@ class PurchaseRequisition(models.Model):
         'Start Date',
         readonly=True,
     )
-    user_inspected = fields.Many2one(
+    user_inspected_id = fields.Many2one(
         'res.users',
         track_visibility='onchange',
     )
-    user_confirmed = fields.Many2one(
+    user_confirmed_id = fields.Many2one(
         'res.users',
         track_visibility='onchange',
     )
@@ -69,7 +69,7 @@ class PurchaseRequisition(models.Model):
             raise UserError(_('Antes de revisar debe tener establecido un'
                               '"Tipo"'))
         self.inspected = True
-        self.user_inspected = self.env.user
+        self.user_inspected_id = self.env.user
 
     @api.multi
     def action_draft(self):
@@ -84,8 +84,8 @@ class PurchaseRequisition(models.Model):
         if self._context.get('cancel_procurement', True):
             self.mapped('manual_procurement_ids').button_cancel_remaining()
         self.inspected = False
-        self.user_inspected = False
-        self.user_confirmed = False
+        self.user_inspected_id = False
+        self.user_confirmed_id = False
         return super(PurchaseRequisition, self).action_cancel()
 
     @api.multi
@@ -104,5 +104,5 @@ class PurchaseRequisition(models.Model):
 
     @api.multi
     def action_in_progress(self):
-        self.user_confirmed = self.env.user
+        self.user_confirmed_id = self.env.user
         super(PurchaseRequisition, self).action_in_progress()
