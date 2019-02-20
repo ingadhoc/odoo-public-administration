@@ -80,8 +80,8 @@
                 <field name="expedient_id" attrs="{'readonly': [('state', '=', 'done')]}"/>
                 <field name="transaction_type_id" readonly="1"/>
                 <field name="inspected" readonly="1"/>
-                <field name="user_inspected" readonly="1"/>
-                <field name="user_confirmed" readonly="1"/>
+                <field name="user_inspected_id" readonly="1"/>
+                <field name="user_confirmed_id" readonly="1"/>
             </field>
 
             <!-- <field name="exclusive" position="attributes">
