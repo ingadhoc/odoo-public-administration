@@ -16,7 +16,7 @@
         <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_form"/>
         <field name="arch" type="xml">
             <form>
-                <field name="id"/>
+                <field name="id" invisible="1"/>
             </form>
             <button name="action_cancel" position="attributes">
                 <attribute name="groups">sipreco_purchase.group_approve_purhcase_req</attribute>
