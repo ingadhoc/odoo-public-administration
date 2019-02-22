@@ -11,7 +11,7 @@
                 <attribute name="create">false</attribute>
             </tree>
             <tree position="inside">
-                <button name="invoice_open" states="draft,proforma2" string="Validate" class="oe_highlight" groups="account.group_account_invoice" icon="gtk-go-forward"/>
+                <button name="invoice_validate" type="object" states="draft" string="Validate" groups="account.group_account_invoice" icon="fa-arrow-right"/>
             </tree>
         </field>
     </record>
