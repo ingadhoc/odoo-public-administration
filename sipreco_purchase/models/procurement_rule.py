@@ -15,5 +15,10 @@ class ProcurementRule(models.Model):
             values, group_id)
         stock_request_id = values.get('stock_request_id', False)
         if stock_request_id:
-            self.env['stock.request'].browse(stock_request_id).rule_id = self
+            stock_request = self.env['stock.request'].browse(stock_request_id)
+            stock_request.rule_id = self
+            # Esto es por que sino al generar los move les pone por defecto el
+            # origin con el name del SR y al ser distintos me termina sacando
+            # el solicitante, dejamos el SRO que es  mismo para los 2 SR.
+            result['origin'] = stock_request.order_id.name
         return result
