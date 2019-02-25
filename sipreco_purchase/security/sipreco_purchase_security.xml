@@ -35,8 +35,8 @@
     <!-- usamos grupo existente de inventarios / user  para solicitante-->
     <!-- <record id="group_applicant" model="res.groups"> -->
     <record id="stock.group_stock_user" model="res.groups">
-        <field name="name">Solictante</field>
-        <field name="implied_ids" eval="[(3, ref('group_requester'), 0),(4, ref('group_requester_employee')), (4, ref('base.group_user'))]"/>
+        <field name="name">Solicitante</field>
+        <field name="implied_ids" eval="[(3, ref('group_requester'), 0),(4, ref('group_requester_employee')), (4, ref('base.group_user')), (4, ref('stock_request.group_stock_request_manager'))]"/>
         <field name="category_id" ref="base.module_category_purchase_management"/>
     </record>
 
