@@ -78,6 +78,7 @@
             <!-- reemplazamos y usamos m2o porque queremos que seleccionen uno sol -->
             <field name="route_id" position="attributes">
                 <attribute name="attrs">{'readonly': [('stock_request_ids', '!=', [])]}</attribute>
+                <attribute name="force_save">1</attribute>
             </field>
 
             <field name="procurement_group_id" position="attributes">
