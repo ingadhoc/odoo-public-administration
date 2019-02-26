@@ -15,5 +15,7 @@ class ProcurementRule(models.Model):
             values, group_id)
         stock_request_id = values.get('stock_request_id', False)
         if stock_request_id:
-            self.env['stock.request'].browse(stock_request_id).rule_id = self
+            stock_request = self.env['stock.request'].browse(stock_request_id)
+            stock_request.rule_id = self
+            result['name'] = stock_request.description
         return result

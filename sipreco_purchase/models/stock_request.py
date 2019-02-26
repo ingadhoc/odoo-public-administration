@@ -30,7 +30,7 @@ class StockRequest(models.Model):
         digits=dp.get_precision('Product Price'),
     )
     # hacemos readonly para no confundir porque se generó el picking
-    name = fields.Text(
+    description = fields.Text(
         readonly=True,
         states={'confirmed': [('readonly', False)]},
     )
@@ -58,7 +58,7 @@ class StockRequest(models.Model):
     def onchange_product_id(self):
         res = super(StockRequest, self).onchange_product_id()
         self.update({
-            'name': self.product_id.partner_ref,
+            'description': self.product_id.partner_ref,
             'price_unit': self.product_id.standard_price,
         })
         return res
