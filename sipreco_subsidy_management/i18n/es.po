@@ -4,14 +4,15 @@
 # 
 # Translators:
 # Juan José Scarafía <scarafia.juanjose@gmail.com>, 2019
+# Katherine Zaoral <katherine.zaoral@gmail.com>, 2019
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-22 20:03+0000\n"
+"POT-Creation-Date: 2019-02-25 16:15+0000\n"
 "PO-Revision-Date: 2019-01-18 20:37+0000\n"
-"Last-Translator: Juan José Scarafía <scarafia.juanjose@gmail.com>, 2019\n"
+"Last-Translator: Katherine Zaoral <katherine.zaoral@gmail.com>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -458,7 +459,7 @@ msgstr ""
 #. module: sipreco_subsidy_management
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_invoice_ids
 msgid "Invoice"
-msgstr ""
+msgstr "Factura"
 
 #. module: sipreco_subsidy_management
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_message_is_follower
@@ -468,7 +469,7 @@ msgstr ""
 #. module: sipreco_subsidy_management
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_issue_date
 msgid "Issue Date"
-msgstr ""
+msgstr "Fecha de Emisión"
 
 #. module: sipreco_subsidy_management
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_message_last_post
@@ -712,7 +713,7 @@ msgstr "Presentado"
 #. module: sipreco_subsidy_management
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_preventive_line_ids
 msgid "Preventive Line"
-msgstr ""
+msgstr "Afectación Preventiva"
 
 #. module: sipreco_subsidy_management
 #: model:ir.ui.view,arch_db:sipreco_subsidy_management.view_public_budget_subsidy_form
