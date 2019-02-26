@@ -134,10 +134,11 @@
                 <attribute name="attrs">{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
             </field>
             <field name="type_id" position="attributes">
-                <attribute name="invisible">1</attribute>
+                <attribute name="groups">base.group_no_one</attribute>
             </field>
-
-
+            <field name="vendor_id" position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </field>
         </field>
     </record>
 
@@ -181,7 +182,7 @@
         <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_tree"/>
         <field name="arch" type="xml">
             <field name="date_end" position="after">
-                <field name="type_id"/>
+                <field name="transaction_type_id"/>
                 <field name="date"/>
             </field>
             <field name="state" position="after">
