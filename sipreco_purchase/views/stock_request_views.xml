@@ -63,7 +63,7 @@
                 <attribute name="groups">base.group_no_one</attribute>
             </field>
             <field name="product_id" position="after">
-                <field name="name"/>
+                <field name="description"/>
             </field>
         </field>
     </record>

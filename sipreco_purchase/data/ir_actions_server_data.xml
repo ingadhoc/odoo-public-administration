@@ -19,7 +19,7 @@ picking_type = env['stock.picking.type'].search([('code', '=', 'incoming'), '|',
 
 lines = []
 for rec in records:
-    lines.append((0, 0, {'product_id': rec.product_id.id, 'product_uom_id': rec.product_uom_id.id, 'product_qty': rec.product_uom_qty, 'price_unit': rec.price_unit}))
+    lines.append((0, 0, {'product_id': rec.product_id.id, 'product_uom_id': rec.product_uom_id.id, 'product_qty': rec.product_uom_qty, 'price_unit': rec.price_unit, 'name': rec.description}))
 
 requisition = env['purchase.requisition'].create({
     'line_ids': lines,
