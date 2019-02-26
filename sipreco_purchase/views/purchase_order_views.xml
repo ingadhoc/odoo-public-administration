@@ -19,7 +19,7 @@
         <field name="inherit_id" ref="purchase.purchase_order_form"/>
         <field name="arch" type="xml">
             <!-- simplificamos vista para no confundir -->
-            <xpath expr="//page[1]" position="attributes">
+            <xpath expr="//page[2]" position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
             </xpath>
             <button name="action_view_invoice" position="attributes">
