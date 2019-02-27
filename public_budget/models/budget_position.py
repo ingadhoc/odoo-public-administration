@@ -387,3 +387,26 @@ class BudgetPosition(models.Model):
             else:
                 assignment_position = rec.get_parent_assignment_position()
             rec.assignment_position_id = assignment_position.id
+
+    @api.multi
+    def action_position_analysis_tree(self):
+        self.ensure_one()
+        res = {}
+        display_name = '%s %s' % (self.code, self.name)
+        if self.child_ids:
+            action = self.env.ref(
+                'public_budget.action_position_analysis_tree')
+            res = action.read()[0]
+            res['domain'] = [('id', 'in', self.child_ids.ids)]
+            res['target'] = 'current'
+            res['display_name'] = display_name
+        elif self.preventive_line_ids:
+            action = self.env.ref('public_budget.action_budget_position_items')
+            res = action.read()[0]
+            res['display_name'] = display_name
+            res['context'] = {
+                'search_default_budget_position_id': [self.id],
+                'search_default_budget_id': self._context.get(
+                    'budget_id', False)}
+            res['target'] = 'current'
+        return res

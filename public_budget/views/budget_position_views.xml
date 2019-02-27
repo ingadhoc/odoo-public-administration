@@ -96,9 +96,8 @@
     <record id="view_budget_position_analysis_tree" model="ir.ui.view">
         <field name="name">public_budget.budget_position.analysis.tree</field>
         <field name="model">public_budget.budget_position</field>
-        <field name="field_parent">child_ids</field>
         <field name="arch" type="xml">
-            <tree colors="blue:type=='view'; green:budget_assignment_allowed; red: budget_assignment_allowed and projected_amount > amount;">
+            <tree decoration-info="type=='view'" decoration-success="budget_assignment_allowed" decoration-danger="budget_assignment_allowed and projected_amount > amount" create="false" delete="false">
                 <field name="parent_left" invisible="1"/>
                 <field name="code"/>
                 <field name="name"/>
@@ -113,6 +112,7 @@
                 <field name="balance_amount"/>
                 <field name="budget_assignment_allowed" invisible="1"/>
                 <field name="currency_id" invisible="1"/>
+                <button name="action_position_analysis_tree" string="Open Childs" icon="fa-bars" type="object"/>
             </tree>
         </field>
     </record>
@@ -120,7 +120,7 @@
     <record id="action_position_analysis_tree" model="ir.actions.act_window">
         <field name="name">Budget Position analysis</field>
         <field name="res_model">public_budget.budget_position</field>
-        <field name="view_type">tree</field>
+        <field name="view_type">form</field>
         <field name="view_mode">tree</field>
         <field name="view_id" ref="view_budget_position_analysis_tree"/>
         <field name="domain">[('parent_id','=',False)]</field>
