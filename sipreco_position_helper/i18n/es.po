@@ -3,14 +3,15 @@
 # * sipreco_position_helper
 # 
 # Translators:
-# Juan José Scarafía <scarafia.juanjose@gmail.com>, 2017
+# Juan José Scarafía <scarafia.juanjose@gmail.com>, 2019
+# 
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-15 00:18+0000\n"
-"PO-Revision-Date: 2017-11-15 00:18+0000\n"
-"Last-Translator: Juan José Scarafía <scarafia.juanjose@gmail.com>, 2017\n"
+"POT-Creation-Date: 2019-02-26 17:52+0000\n"
+"PO-Revision-Date: 2019-01-18 20:37+0000\n"
+"Last-Translator: Juan José Scarafía <scarafia.juanjose@gmail.com>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,5 +26,5 @@ msgstr "Partida Presupuestaria"
 
 #. module: sipreco_position_helper
 #: model:ir.model.fields,field_description:sipreco_position_helper.field_public_budget_budget_position_individual_code
-msgid "Individual code"
-msgstr ""
+msgid "Individual Code"
+msgstr "Código Individual"
