@@ -60,7 +60,7 @@
         <field name="name">public_budget.preventive_line.tree</field>
         <field name="model">public_budget.preventive_line</field>
         <field name="arch" type="xml">
-            <tree string="Preventive Line" colors="green:preventive_amount==definitive_amount==to_pay_amount==paid_amount;">
+            <tree string="Preventive Line" decoration-success="preventive_amount==definitive_amount==to_pay_amount==paid_amount">
                 <field name="budget_position_id"/>
                 <field name="preventive_amount" sum="Total"/>
                 <field name="definitive_amount" sum="Total"/>
