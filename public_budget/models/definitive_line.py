@@ -88,6 +88,16 @@ class DefinitiveLine(models.Model):
         readonly=True,
         auto_join=True,
     )
+    expedient_id = fields.Many2one(
+        'public_budget.expedient',
+        related='transaction_id.expedient_id',
+        readonly=True,
+    )
+    budget_position_id = fields.Many2one(
+        'public_budget.budget_position',
+        related='preventive_line_id.budget_position_id',
+        readonly=True,
+    )
 
     @api.constrains('issue_date')
     def check_dates(self):
