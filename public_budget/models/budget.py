@@ -323,3 +323,23 @@ class Budget(models.Model):
             'context': {'search_default_budget_id': self.id},
 
         }
+
+    @api.multi
+    def action_to_open_definitive_lines(self):
+        self.ensure_one()
+        view_id = self.env.ref(
+            'public_budget.view_public_budget_definitive_line_tree2').id
+        view_search_id = self.env.ref(
+            'public_budget.view_public_budget_definitive_line_filter').id
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _('Definitive Lines'),
+            'res_model': 'public_budget.definitive_line',
+            'view_mode': 'tree',
+            'view_id': view_id,
+            'search_view_id': view_search_id,
+            'target': 'current',
+            'domain': [('transaction_id.state', 'in', ['open', 'closed'])],
+            'context': {'search_default_budget_id': self.id},
+
+        }

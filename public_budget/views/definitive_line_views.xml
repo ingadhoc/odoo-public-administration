@@ -6,11 +6,10 @@
         <field name="model">public_budget.definitive_line</field>
         <field name="arch" type="xml">
             <search string="Definitive Line">
-                <field name="issue_date"/>
                 <field name="supplier_id"/>
+                <field name="budget_id"/>
+                <field name="issue_date"/>
                 <field name="amount"/>
-                <group expand="0" string="Group By">
-                </group>
             </search>
         </field>
     </record>
@@ -52,6 +51,24 @@
                 <field name="state" invisible="True"/>
                 <field name="currency_id" invisible="1"/>
                 <field name="to_pay_amount" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- TREEVIEW -->
+    <record id="view_public_budget_definitive_line_tree2" model="ir.ui.view">
+        <field name="name">public_budget.definitive_line.tree2</field>
+        <field name="model">public_budget.definitive_line</field>
+        <field name="mode">primary</field>
+        <field name="priority">50</field>
+        <field name="arch" type="xml">
+            <tree string="Definitive Line">
+                <field name="expedient_id"/>
+                <field name="transaction_id"/>
+                <field name="budget_position_id"/>
+                <field name="supplier_id"/>
+                <field name="residual_amount"/>
+                <field name="state" invisible="1"/>
             </tree>
         </field>
     </record>
