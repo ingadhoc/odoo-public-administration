@@ -11,7 +11,7 @@
                 <attribute name="create">false</attribute>
             </tree>
             <tree position="inside">
-                <button name="invoice_validate" type="object" states="draft" string="Validate" groups="account.group_account_invoice" icon="fa-arrow-right"/>
+                <button name="action_invoice_open" type="object" states="draft" string="Validate" groups="account.group_account_invoice" icon="fa-arrow-right"/>
             </tree>
         </field>
     </record>
