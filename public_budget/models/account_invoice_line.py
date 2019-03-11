@@ -35,33 +35,30 @@ class AccountInvoiceLine(models.Model):
         proporcionalmente por linea, porque sabemos el total a nivel factura
         -paid_amount: vemos el porcentaje que se pago de la factura y,
         al total de cada linea lo multiplicamos por ese porcentaje"""
-        for rec in self:
+        for rec in self.filtered(
+                lambda x: x.invoice_id.state not in ['draft', 'cancel']):
             _logger.info('Getting amounts for invoice line %s' % rec.id)
             invoice_total = rec.invoice_id.amount_total
-            if invoice_total and rec.invoice_id.state not in (
-                    'draft', 'cancel'):
-                to_date = rec._context.get('analysis_to_date', False)
-                # if to_date, then we dont get residual from invoice,
-                # we get from helper function
-                if to_date:
-                    invoice_paid_perc = (
-                        rec.invoice_id._get_paid_amount_to_date() /
-                        invoice_total)
-                    invoice_to_pay_perc = (
-                        rec.invoice_id._get_to_pay_amount_to_date() /
-                        invoice_total)
-                else:
-                    # odoo compute residual always positive, no matter invoice
-                    # is negative
-                    residual = rec.invoice_id.residual
-                    if invoice_total < 0:
-                        residual = -residual
-                    invoice_paid_perc = (
-                        invoice_total - residual) / invoice_total
-                    invoice_to_pay_perc = (
-                        rec.invoice_id.to_pay_amount) / invoice_total
-                rec.to_pay_amount = rec.price_subtotal * invoice_to_pay_perc
-                rec.paid_amount = rec.price_subtotal * invoice_paid_perc
+            to_date = rec._context.get('analysis_to_date', False)
+            # if to_date, then we dont get residual from invoice,
+            # we get from helper function
+            if to_date:
+                invoice_paid_perc = (
+                    rec.invoice_id._get_paid_amount_to_date() / invoice_total)
+                invoice_to_pay_perc = (
+                    rec.invoice_id.to_pay_amount / invoice_total)
+            else:
+                # odoo compute residual always positive, no matter invoice
+                # is negative
+                residual = rec.invoice_id.residual
+                if invoice_total < 0:
+                    residual = -residual
+                invoice_paid_perc = (
+                    invoice_total - residual) / invoice_total
+                invoice_to_pay_perc = (
+                    rec.invoice_id.to_pay_amount) / invoice_total
+            rec.to_pay_amount = rec.price_subtotal * invoice_to_pay_perc
+            rec.paid_amount = rec.price_subtotal * invoice_paid_perc
 
     @api.constrains(
         'definitive_line_id',

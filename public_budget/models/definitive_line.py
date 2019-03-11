@@ -35,22 +35,16 @@ class DefinitiveLine(models.Model):
         store=True,
     )
     to_pay_amount = fields.Monetary(
+        compute='_compute_amounts',
+        store=True,
     )
     paid_amount = fields.Monetary(
+        compute='_compute_amounts',
+        store=True,
     )
     invoiced_amount = fields.Monetary(
-    )
-    computed_to_pay_amount = fields.Monetary(
-        string='To Pay Amount',
-        compute='_compute_computed_amounts',
-    )
-    computed_paid_amount = fields.Monetary(
-        string='Paid Amount',
-        compute='_compute_computed_amounts',
-    )
-    computed_invoiced_amount = fields.Monetary(
-        string='Invoiced Amount',
-        compute='_compute_computed_amounts',
+        compute='_compute_amounts',
+        store=True,
     )
     preventive_line_id = fields.Many2one(
         'public_budget.preventive_line',
@@ -140,28 +134,12 @@ class DefinitiveLine(models.Model):
         for rec in self:
             rec.residual_amount = rec.amount - rec.invoiced_amount
 
-    @api.multi
-    def _compute_computed_amounts(self):
-        # computed fields for to date anlysis
-        for rec in self:
-            invoiced_amount, to_pay_amount, paid_amount = (
-                rec._get_amounts_to_date())
-            rec.computed_invoiced_amount = invoiced_amount
-            rec.computed_to_pay_amount = to_pay_amount
-            rec.computed_paid_amount = paid_amount
-
-    @api.multi
-    def _get_amounts(self):
-        # normal fields for good performance
-        for rec in self:
-            invoiced_amount, to_pay_amount, paid_amount = (
-                rec._get_amounts_to_date())
-            rec.invoiced_amount = invoiced_amount
-            rec.to_pay_amount = to_pay_amount
-            rec.paid_amount = paid_amount
-
-    @api.multi
-    def _get_amounts_to_date(self):
+    @api.depends(
+        'invoice_line_ids.invoice_id.state',
+        'invoice_line_ids.invoice_id.to_pay_amount',
+        'invoice_line_ids.paid_amount',
+    )
+    def _compute_amounts(self):
         """Update the following fields with the related values to the budget
         and the budget position:
         -invoiced_amount: amount sum of lines with a related invoice line
@@ -171,47 +149,44 @@ class DefinitiveLine(models.Model):
         -paid_amount: amount sum of lines that has a related payment in open
         state
         """
-        self.ensure_one()
-        _logger.info('Getting amounts for definitive line %s' % self.id)
-
-        filter_domain = [
-            ('id', 'in', self.invoice_line_ids.ids),
-            ('invoice_id.state', 'not in', ('cancel', 'draft'))
-        ]
-
+        _logger.info('Getting amounts for definitive lines %s' % self.ids)
         # Add this to allow analysis between dates
         to_date = self._context.get('analysis_to_date', False)
 
-        if to_date:
-            filter_domain += [('invoice_id.date_invoice', '<=', to_date)]
-        # TODO borrar esto que no seria necesario porque forzamos recalculo
-        # en invoice.py con self.invoice_line._get_amounts()
-        # else:
-        #     # we invalidate cache because of invoice line computed fields
-        #     self.invalidate_cache()
+        for rec in self:
 
-        debit_filter_domain = filter_domain + [
-            ('invoice_id.type', 'in', ('out_refund', 'in_invoice'))]
-        credit_filter_domain = filter_domain + [
-            ('invoice_id.type', 'in', ('out_invoice', 'in_refund'))]
-        debit_invoice_lines = self.invoice_line_ids.search(
-            debit_filter_domain)
-        credit_invoice_lines = self.invoice_line_ids.search(
-            credit_filter_domain)
+            filter_domain = [
+                ('id', 'in', rec.invoice_line_ids.ids),
+                ('invoice_id.state', 'not in', ('cancel', 'draft'))
+            ]
 
-        # all computed fields, no problem for analysis to date
-        invoiced_amount = to_pay_amount = paid_amount = 0
-        for dil in debit_invoice_lines:
-            invoiced_amount += dil.price_subtotal
-            to_pay_amount += dil.to_pay_amount
-            paid_amount += dil.paid_amount
-        for cil in credit_invoice_lines:
-            invoiced_amount -= cil.price_subtotal
-            to_pay_amount -= cil.to_pay_amount
-            paid_amount -= cil.paid_amount
+            if to_date:
+                filter_domain += [('invoice_id.date_invoice', '<=', to_date)]
 
-        _logger.info('Finish getting amounts for definitive line %s' % self.id)
-        return (invoiced_amount, to_pay_amount, paid_amount)
+            debit_filter_domain = filter_domain + [
+                ('invoice_id.type', 'in', ('out_refund', 'in_invoice'))]
+            credit_filter_domain = filter_domain + [
+                ('invoice_id.type', 'in', ('out_invoice', 'in_refund'))]
+            debit_invoice_lines = rec.invoice_line_ids.search(
+                debit_filter_domain)
+            credit_invoice_lines = rec.invoice_line_ids.search(
+                credit_filter_domain)
+
+            # all computed fields, no problem for analysis to date
+            invoiced_amount = sum(debit_invoice_lines.mapped('price_subtotal'))
+            to_pay_amount = sum(debit_invoice_lines.mapped('to_pay_amount'))
+            paid_amount = sum(debit_invoice_lines.mapped('paid_amount'))
+
+            invoiced_amount -= sum(
+                credit_invoice_lines.mapped('price_subtotal'))
+            to_pay_amount -= sum(credit_invoice_lines.mapped('to_pay_amount'))
+            paid_amount -= sum(credit_invoice_lines.mapped('paid_amount'))
+
+            rec.invoiced_amount = invoiced_amount
+            rec.to_pay_amount = to_pay_amount
+            rec.paid_amount = paid_amount
+        _logger.info(
+            'Finish getting amounts for definitive lines %s' % self.ids)
 
     @api.multi
     def get_invoice_line_vals(

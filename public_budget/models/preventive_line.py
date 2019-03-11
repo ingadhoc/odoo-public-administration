@@ -202,34 +202,23 @@ class PreventiveLine(models.Model):
                 if not definitive_lines:
                     continue
 
-                invoiced_amount_field = 'invoiced_amount'
-                to_pay_amount_field = 'to_pay_amount'
-                paid_amount_field = 'paid_amount'
-
                 # Add this to allow analysis between dates, we used computed
                 # fields in this case instead of normal fields
                 if to_date:
-                    filter_domain = [
-                        ('issue_date', '<=', to_date),
-                        ('id', 'in', definitive_lines.ids)]
-                    definitive_lines = definitive_lines.search(filter_domain)
-                    invoiced_amount_field = 'computed_invoiced_amount'
-                    to_pay_amount_field = 'computed_to_pay_amount'
-                    paid_amount_field = 'computed_paid_amount'
-                definitive_amount = invoiced_amount = \
-                    to_pay_amount = paid_amount = 0
-                for dl in definitive_lines:
-                    definitive_amount += dl.amount
-                    invoiced_amount += getattr(dl, invoiced_amount_field)
-                    to_pay_amount += getattr(dl, to_pay_amount_field)
-                    paid_amount += getattr(dl, paid_amount_field)
+                    definitive_lines = definitive_lines.filtered(
+                        lambda x: x.issue_date <= to_date)
+                definitive_amount = sum(definitive_lines.mapped('amount'))
+                invoiced_amount = sum(
+                    definitive_lines.mapped('invoiced_amount'))
+                to_pay_amount = sum(definitive_lines.mapped('to_pay_amount'))
+                paid_amount = sum(definitive_lines.mapped('paid_amount'))
             rec.remaining_amount = rec.preventive_amount - definitive_amount
             rec.definitive_amount = definitive_amount
             rec.invoiced_amount = invoiced_amount
             rec.to_pay_amount = to_pay_amount
             rec.paid_amount = paid_amount
-            _logger.info(
-                'Finish getting amounts for preventive line %s' % rec.id)
+        _logger.info(
+            'Finish getting amounts for preventive lines %s' % rec.ids)
 
     @api.constrains('account_id', 'transaction_id')
     def check_type_company(self):
