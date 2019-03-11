@@ -221,60 +221,59 @@ class BudgetPosition(models.Model):
             # stored, the computation use methods and not stored values
             _logger.info('Getting budget general amounts')
 
-            draft_preventive_lines = self.env[
-                'public_budget.preventive_line'].search(
-                domain
-            )
-
-            if draft_preventive_lines:
-                self._cr.execute(
-                    'SELECT preventive_amount '
-                    'FROM public_budget_preventive_line '
-                    'WHERE id IN %s', (tuple(draft_preventive_lines.ids),))
-                rec.draft_amount = sum([x[0] for x in self._cr.fetchall()])
+            rec.draft_amount = sum([x['preventive_amount'] for x in self.env[
+                'public_budget.preventive_line'].read_group(
+                domain=domain,
+                fields=['budget_position_id', 'preventive_amount'],
+                groupby=['budget_position_id'],
+            )])
 
             _logger.info('Getting budget general amounts')
 
-            active_preventive_lines = self.env[
-                'public_budget.preventive_line'].search(
-                domain
-            )
+            # if from_date or to_date we can not use stored value,
+            # we should get method value (using computed fields)
+            # if from_date or to_date:
+            if to_date:
+                active_preventive_lines = self.env[
+                    'public_budget.preventive_line'].search(
+                    domain
+                )
+                _logger.info('Getting values from computed fields methods')
+                # TODO, ver si hay una mejor forma de hacer esto. lo que
+                # estamos haciendo es forzar el modo onchange para que odoo
+                # no use los valores almacenadados que los calcule.
+                #  Tratamos de usar "do_in_onchange" pero como el mode es
+                # True no termina cambiando nada el metodo _do_in_mode
+                env_all_mode = active_preventive_lines.env.all.mode
+                active_preventive_lines.env.all.mode = 'onchange'
 
-            preventive_amount = definitive_amount =\
-                to_pay_amount = paid_amount = 0
-            if active_preventive_lines:
-                # if from_date or to_date we can not use stored value,
-                # we should get method value (using computed fields)
-                # if from_date or to_date:
-                if to_date:
-                    _logger.info('Getting values from computed fields methods')
-                    # TODO, ver si hay una mejor forma de hacer esto. lo que
-                    # estamos haciendo es forzar el modo onchange para que odoo
-                    # no use los valores almacenadados que los calcule.
-                    #  Tratamos de usar "do_in_onchange" pero como el mode es
-                    # True no termina cambiando nada el metodo _do_in_mode
-                    env_all_mode = active_preventive_lines.env.all.mode
-                    active_preventive_lines.env.all.mode = 'onchange'
-                    for pl in active_preventive_lines:
-                        preventive_amount += pl.preventive_amount
-                        definitive_amount += pl.definitive_amount
-                        to_pay_amount += pl.to_pay_amount
-                        paid_amount += pl.paid_amount
-                    # restore env mode
-                    active_preventive_lines.env.all.mode = env_all_mode
-                else:
-                    _logger.info('Getting values from stored fields')
-                    self._cr.execute(
-                        'SELECT preventive_amount, definitive_amount, '
-                        'to_pay_amount, paid_amount '
-                        'FROM public_budget_preventive_line '
-                        'WHERE id IN %s', (
-                            tuple(active_preventive_lines.ids),))
-                    for r in self._cr.fetchall():
-                        preventive_amount += r[0]
-                        definitive_amount += r[1]
-                        to_pay_amount += r[2]
-                        paid_amount += r[3]
+                preventive_amount = sum(
+                    active_preventive_lines.mapped('preventive_amount'))
+                definitive_amount = sum(
+                    active_preventive_lines.mapped('definitive_amount'))
+                to_pay_amount = sum(
+                    active_preventive_lines.mapped('to_pay_amount'))
+                paid_amount = sum(
+                    active_preventive_lines.mapped('paid_amount'))
+                # restore env mode
+                active_preventive_lines.env.all.mode = env_all_mode
+            else:
+                amounts_read = self.env[
+                    'public_budget.preventive_line'].read_group(
+                    domain=domain,
+                    fields=[
+                        'budget_position_id', 'preventive_amount',
+                        'definitive_amount', 'to_pay_amount', 'paid_amount'],
+                    groupby=['budget_position_id'],
+                )
+                preventive_amount = sum([
+                    x['preventive_amount'] for x in amounts_read])
+                definitive_amount = sum([
+                    x['definitive_amount'] for x in amounts_read])
+                to_pay_amount = sum([
+                    x['to_pay_amount'] for x in amounts_read])
+                paid_amount = sum([
+                    x['paid_amount'] for x in amounts_read])
 
             rec.preventive_amount = preventive_amount
             rec.definitive_amount = definitive_amount
@@ -284,18 +283,10 @@ class BudgetPosition(models.Model):
             projected_amount = preventive_amount / day_of_year * 365
             rec.projected_amount = projected_amount
 
-            # if self.budget_assignment_allowed:
-            # if self.budget_assignment_allowed or self.child_ids:
             if amount:
                 _logger.info('Getting budget assignment amounts')
-                # projected_avg = amount and \
-                #     projected_amount / amount * 100.0 or 0.0
-                # self.projected_avg = projected_avg
                 rec.projected_avg = projected_amount / amount * 100.0
                 rec.amount = amount
-                # preventive_avg = amount and \
-                #     preventive_amount / amount * 100.0 or 0.0
-                # self.preventive_avg = preventive_avg
                 rec.preventive_avg = preventive_amount / amount * 100.0
                 rec.balance_amount = rec.amount - preventive_amount
             _logger.info(

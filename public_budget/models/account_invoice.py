@@ -22,20 +22,14 @@ class AccountInvoice(models.Model):
     )
     to_pay_amount = fields.Monetary(
         string='Monto A Pagar',
+        compute='_compute_to_pay_amount',
+        store=True,
     )
 
     @api.multi
     def verify_on_afip(self):
         super(AccountInvoice, self).verify_on_afip()
         return {'type': 'ir.actions.act_window.none'}
-
-    @api.constrains('state')
-    def update_definitive_invoiced_amount(self):
-        # this method update all amounts on the upstream
-        _logger.info('Updating invoice line amounts from invoice')
-        for rec in self:
-            # if invoice state changes, we recompute to_pay_amount
-            rec.sudo()._compute_to_pay_amount()
 
     @api.constrains('to_pay_amount')
     def check_to_pay_amount(self):
@@ -46,46 +40,44 @@ class AccountInvoice(models.Model):
                 'El importe mandado a pagar no puede ser mayor al importe '
                 'de la factura'))
 
-    @api.multi
+    @api.depends(
+        # This do it by a contrains in account payment group
+        # 'payment_group_ids.state',
+        'state',
+    )
     def _compute_to_pay_amount(self):
+        _logger.info('Getting to pay amount for invoice %s' % self.ids)
         for rec in self:
-            rec.to_pay_amount = rec._get_to_pay_amount_to_date()
-            # we force an update of invoice line computed fields
-            rec.invoice_line_ids._compute_amounts()
-            rec.mapped('invoice_line_ids.definitive_line_id')._get_amounts()
+            # if invoice is paid and not payment group, then it is autopaid or
+            # conciliation between account.move.line without a payment group,
+            # after validation we consider it as send to paid and paid
+            # TODO tal vez deberíamos mejorar porque si estamos sacando
+            # analysis_to_date no se estáría teniendo en cuenta
+            if rec.state == 'paid' and not rec.payment_group_ids:
+                rec.to_pay_amount = rec.amount_total
+                continue
 
-    @api.multi
-    def _get_to_pay_amount_to_date(self):
-        self.ensure_one()
-        _logger.info('Getting to pay amount for invoice %s' % self.id)
-        # if invoice is paid and not payment group, then it is autopaid or
-        # conciliation between account.move.line without a payment group, after
-        # validation we consider it as send to paid and paid
-        # TODO tal vez deberíamos mejorar porque si estamos sacando
-        # analysis_to_date no se estáría teniendo en cuenta
-        if self.state == 'paid' and not self.payment_group_ids:
-            return self.amount_total
+            domain = [
+                ('move_id', '=', rec.move_id.id),
+                ('account_id.internal_type', 'in', ['payable', 'receivable']),
+                ('payment_group_ids.state', 'not in', ['draft', 'cancel']),
+            ]
+            # Add this to allow analysis from date
+            to_date = rec._context.get('analysis_to_date', False)
+            if to_date:
+                domain += [
+                    ('payment_group_ids.confirmation_date', '<=', to_date)]
 
-        lines = self.move_id.line_ids.filtered(
-            lambda r: r.account_id.internal_type in (
-                'payable', 'receivable'))
-        domain = [
-            ('payment_group_ids.state', 'not in', ['draft', 'cancel']),
-            ('id', 'in', lines.ids),
-        ]
-        # Add this to allow analysis from date
-        to_date = self._context.get('analysis_to_date', False)
-        if to_date:
-            domain += [('payment_group_ids.confirmation_date', '<=', to_date)]
-
-        lines = self.env['account.move.line'].search(domain)
-        # en v9+ solo admitimos pago total de facturas por lo cual directamente
-        # podemos tomar el importe de la linea (si no habria que ver que parte
-        # está vinculada a la orden de pago en la que estamos)
-        amount = -sum(lines.mapped('balance'))
-        if self.type in ('in_refund', 'out_refund'):
-            amount = -amount
-        return amount
+            lines = rec.env['account.move.line'].search(domain)
+            # en v9+ solo admitimos pago total de facturas por lo cual
+            # directamente podemos tomar el importe de la linea (si no habria
+            # que ver que parte está vinculada a la orden de pago en la que
+            # estamos)
+            amount = -sum(lines.with_context(prefetch_fields=False).mapped(
+                'balance'))
+            if rec.type in ('in_refund', 'out_refund'):
+                amount = -amount
+            rec.to_pay_amount = amount
 
     @api.multi
     def _get_paid_amount_to_date(self):
@@ -107,13 +99,12 @@ class AccountInvoice(models.Model):
         if self.state == 'paid' and not self.payment_group_ids:
             return self.amount_total
 
-        lines = self.move_id.line_ids.filtered(
-            lambda r: r.account_id.internal_type in (
-                'payable', 'receivable'))
         domain = [
+            ('move_id', '=', self.move_id.id),
+            ('account_id.internal_type', 'in', ['payable', 'receivable']),
             ('payment_group_ids.state', '=', 'posted'),
-            ('id', 'in', lines.ids),
         ]
+
         # Add this to allow analysis from date
         to_date = self._context.get('analysis_to_date', False)
         if to_date:
@@ -123,7 +114,8 @@ class AccountInvoice(models.Model):
         # en v9+ solo admitimos pago total de facturas por lo cual directamente
         # podemos tomar el importe de la linea (si no habria que ver que parte
         # está vinculada a la orden de pago en la que estamos)
-        amount = -sum(lines.mapped('balance'))
+        amount = -sum(lines.with_context(prefetch_fields=False).mapped(
+            'balance'))
         if self.type in ('in_refund', 'out_refund'):
             amount = -amount
         return amount
