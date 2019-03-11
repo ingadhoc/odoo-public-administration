@@ -152,7 +152,7 @@ class BudgetPosition(models.Model):
         # we check it is a report because if not it will get wrong budget
         # on positions
         if not budget_id and 'aeroo_docs' in self._context:
-            budget_id = self._context.get('active_id', False)
+            budget_id = self._context.get('budget_id', False)
 
         excluded_line_id = self._context.get('excluded_line_id', False)
 

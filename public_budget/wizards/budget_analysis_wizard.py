@@ -44,7 +44,7 @@ class PublicBudgetBudgetAnalysisWizard(models.TransientModel):
         action_read['view_mode'] = 'form'
         action_read['view_id'] = form_view.id,
         action_read['context'] = {
-            # 'analysis_from_date': self.from_date,
+            'budget_id': self.budget_id.id,
             'analysis_to_date': self.to_date,
         }
         return action_read

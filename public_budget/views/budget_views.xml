@@ -97,9 +97,9 @@
                 </header>
             </header>
             <!-- agregamos analysis_to_date acá para que no de error desde otros lugares -->
-            <!-- <field name="parent_budget_position_ids" position="attributes">
-                <attribute name="context">{'budget_id':active_id, 'analysis_to_date': analysis_to_date, 'tree_view_ref': 'public_budget.view_budget_position_budget_tree'}</attribute>
-            </field> -->
+            <field name="parent_budget_position_ids" position="attributes">
+                <attribute name="context">{'budget_id':context.get('budget_id'), 'analysis_to_date': context.get('analysis_to_date'), 'tree_view_ref': 'public_budget.view_budget_position_budget_tree'}</attribute>
+            </field>
         </field>
     </record>
 
