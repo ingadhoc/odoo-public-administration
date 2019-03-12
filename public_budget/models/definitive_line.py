@@ -137,7 +137,7 @@ class DefinitiveLine(models.Model):
     @api.depends(
         'invoice_line_ids.invoice_id.state',
         'invoice_line_ids.invoice_id.to_pay_amount',
-        'invoice_line_ids.paid_amount',
+        'invoice_line_ids.invoice_id.residual',
     )
     def _compute_amounts(self):
         """Update the following fields with the related values to the budget
