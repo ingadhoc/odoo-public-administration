@@ -58,6 +58,10 @@ class PurchaseRequisition(models.Model):
         track_visibility='onchange',
     )
 
+    printed = fields.Boolean(
+        'printed?',
+    )
+
     @api.depends('line_ids')
     def _compute_amount_total(self):
         for rec in self.filtered('line_ids'):
@@ -106,3 +110,15 @@ class PurchaseRequisition(models.Model):
     def action_in_progress(self):
         self.user_confirmed_id = self.env.user
         super(PurchaseRequisition, self).action_in_progress()
+
+    @api.multi
+    def print_report_requisition(self):
+        self.ensure_one()
+        action = self.env.ref(
+            'sipreco_purchase.action_aeroo_purchase_requisition_report')
+        body = _("User: %s printed the report: %s" %
+                 (self.env.user.name, action.name))
+        self.message_post(body=body)
+        if not self.printed:
+            self.printed = True
+        return action.read()[0]

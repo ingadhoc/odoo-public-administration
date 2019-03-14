@@ -23,6 +23,9 @@
                 <attribute name="confirm">ATENCIÓN: Se van a cancelar las solicitudes de compra y todos los requerimientos asociados. Esto no puede deshacerse. Seguro desea continuar?</attribute>
                 <attribute name="string">Cancel</attribute>
             </button>
+            <button name="action_cancel" position="after">
+                <button name="print_report_requisition" string="Print" type="object"/>
+            </button>
 
             <button name="action_in_progress" position="attributes">
                 <attribute name="groups">sipreco_purchase.group_approve_purhcase_req</attribute>
@@ -82,6 +85,7 @@
                 <field name="inspected" readonly="1"/>
                 <field name="user_inspected_id" readonly="1"/>
                 <field name="user_confirmed_id" readonly="1"/>
+                <field name="printed" readonly="1"/>
             </field>
 
             <!-- <field name="exclusive" position="attributes">
