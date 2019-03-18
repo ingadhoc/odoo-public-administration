@@ -26,10 +26,6 @@
         <field name="inherit_id" ref="product.product_template_form_view"/>
         <field name="arch" type="xml">
 
-            <field name="type" position="attributes">
-                <attribute name="groups">base.group_no_one</attribute>
-            </field>
-
             <field name="list_price" position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
             </field>
