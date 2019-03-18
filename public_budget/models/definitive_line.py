@@ -86,11 +86,13 @@ class DefinitiveLine(models.Model):
         'public_budget.expedient',
         related='transaction_id.expedient_id',
         readonly=True,
+        store=True,
     )
     budget_position_id = fields.Many2one(
         'public_budget.budget_position',
         related='preventive_line_id.budget_position_id',
         readonly=True,
+        store=True,
     )
 
     @api.constrains('issue_date')

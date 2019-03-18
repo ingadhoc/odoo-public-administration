@@ -6,10 +6,21 @@
         <field name="model">public_budget.definitive_line</field>
         <field name="arch" type="xml">
             <search string="Definitive Line">
+                <field name="expedient_id"/>
+                <field name="transaction_id"/>
+                <field name="budget_position_id"/>
                 <field name="supplier_id"/>
                 <field name="budget_id"/>
                 <field name="issue_date"/>
                 <field name="amount"/>
+                <group expand="0" string="Group By">
+                    <filter string="Expedient" domain="[]" context="{'group_by':'expedient_id'}"/>
+                    <filter string="Transaction" domain="[]" context="{'group_by':'transaction_id'}"/>
+                    <filter string="Budget Position" domain="[]" context="{'group_by':'budget_position_id'}"/>
+                    <filter string="Budget" domain="[]" context="{'group_by':'budget_id'}"/>
+                    <filter string="Issue Date" domain="[]" context="{'group_by':'issue_date'}"/>
+                    <filter string="Supplier" domain="[]" context="{'group_by':'supplier_id'}"/>
+                </group>
             </search>
         </field>
     </record>
@@ -72,5 +83,39 @@
             </tree>
         </field>
     </record>
+
+    <!-- PIVOTVIEW -->
+    <record id="view_definitive_line_pivot" model="ir.ui.view">
+        <field name="name">public_budget.definitive_line.pivot</field>
+        <field name="model">public_budget.definitive_line</field>
+        <field name="arch" type="xml">
+            <pivot string="Definitive Lines">
+                <field name="expedient_id"/>
+                <field name="transaction_id"/>
+                <field name="budget_id"/>
+                <field name="amount" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+
+    <record id="action_definitive_lines" model="ir.actions.act_window">
+        <field name="name">Definitive Lines Analisys</field>
+        <field name="res_model">public_budget.definitive_line</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">pivot</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+    </record>
+
+    <menuitem
+            name="Definitive Lines Analisys"
+            id="menu_budget_definetive_lines"
+            action="action_definitive_lines"
+            sequence="20"
+            parent="menu_reports"
+            groups="public_budget.group_secretary_director,account.group_account_user"
+            />
+
 
 </odoo>
