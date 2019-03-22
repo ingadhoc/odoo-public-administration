@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-18 17:11+0000\n"
+"POT-Creation-Date: 2019-03-21 22:06+0000\n"
 "PO-Revision-Date: 2019-01-18 20:37+0000\n"
 "Last-Translator: Nicolas Mac Rouillon <nmr@ingadhoc.com>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
@@ -321,6 +321,7 @@ msgstr "Bloque"
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_budget_filter
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_budget_form
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_budget_tree
+#: model:ir.ui.view,arch_db:public_budget.view_public_budget_definitive_line_filter
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_modification_detail_filter
 msgid "Budget"
 msgstr "Presupuesto"
@@ -414,6 +415,7 @@ msgstr "Tipo de Modificación de Presupuesto"
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_budget_position_filter
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_budget_position_form
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_budget_position_tree
+#: model:ir.ui.view,arch_db:public_budget.view_public_budget_definitive_line_filter
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_modification_detail_filter
 msgid "Budget Position"
 msgstr "Partida Presupuestaria"
@@ -1022,10 +1024,17 @@ msgstr "Afectación Definitiva"
 #: code:addons/public_budget/models/budget.py:336
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_preventive_line_definitive_line_ids
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_definitive_line_ids
+#: model:ir.ui.view,arch_db:public_budget.view_definitive_line_pivot
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_preventive_line_form
 #, python-format
 msgid "Definitive Lines"
 msgstr "Afectaciones Definitivas"
+
+#. module: public_budget
+#: model:ir.actions.act_window,name:public_budget.action_definitive_lines
+#: model:ir.ui.menu,name:public_budget.menu_budget_definetive_lines
+msgid "Definitive Lines Analisys"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_preventive_line_definitive_partner_type
@@ -1270,6 +1279,7 @@ msgstr "Reasignación"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_line_expedient_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_preventive_line_expedient_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_expedient_id
+#: model:ir.ui.view,arch_db:public_budget.view_public_budget_definitive_line_filter
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_expedient_filter
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_expedient_form
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_expedient_tree
@@ -1481,6 +1491,7 @@ msgstr "Gestionar Chequeras"
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_budget_position_filter
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_budget_prec_detail_filter
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_budget_report_4_search
+#: model:ir.ui.view,arch_db:public_budget.view_public_budget_definitive_line_filter
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_expedient_category_filter
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_expedient_filter
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_expedient_founder_filter
@@ -1694,6 +1705,7 @@ msgstr "Es Aprobación Inicial?"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_line_issue_date
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_issue_date
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_issue_date
+#: model:ir.ui.view,arch_db:public_budget.view_public_budget_definitive_line_filter
 msgid "Issue Date"
 msgstr "Fecha de Emisión"
 
@@ -1738,7 +1750,7 @@ msgstr ""
 "relacionada"
 
 #. module: public_budget
-#: code:addons/public_budget/models/definitive_line.py:100
+#: code:addons/public_budget/models/definitive_line.py:102
 #, python-format
 msgid ""
 "La fecha de la lÃ­nea definitiva debe ser mayor a la fecha de la "
@@ -2818,7 +2830,7 @@ msgid "Solicitud / Devolución"
 msgstr "Solicitud / Devolución"
 
 #. module: public_budget
-#: code:addons/public_budget/models/definitive_line.py:215
+#: code:addons/public_budget/models/definitive_line.py:217
 #, python-format
 msgid ""
 "Solo puede cambiar afectaciones definitivas si el presupuesto estÃ¡ abierto"
@@ -2907,6 +2919,7 @@ msgstr "Sueldos"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_make_invoice_supplier_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_make_invoice_supplier_ids
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_supplier_ids
+#: model:ir.ui.view,arch_db:public_budget.view_public_budget_definitive_line_filter
 msgid "Supplier"
 msgstr "Proveedor"
 
@@ -3116,6 +3129,7 @@ msgstr "Transacción"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_make_invoice_transaction_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_mass_invoice_create_transaction_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_preventive_line_transaction_id
+#: model:ir.ui.view,arch_db:public_budget.view_public_budget_definitive_line_filter
 msgid "Transaction"
 msgstr "Transacción"
 
@@ -3174,7 +3188,7 @@ msgstr "Transacciones"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_prec_detail_account_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_funding_move_type
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_id_7336
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_id_7332
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_request_filter
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_return_filter
 msgid "Type"
@@ -3245,7 +3259,7 @@ msgstr "Con Pago Anticipado?"
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_account_payment_group_transaction_with_advance_payment
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment_7339
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment_7335
 msgid "With advance payment?"
 msgstr "Con Pago Anticipado?"
 
@@ -3315,7 +3329,7 @@ msgid "You can not delete a Remit that is not in Cancel State"
 msgstr "No puedes borrar un remito que no se encuentre en Estado Cancelado"
 
 #. module: public_budget
-#: code:addons/public_budget/models/definitive_line.py:127
+#: code:addons/public_budget/models/definitive_line.py:129
 #, python-format
 msgid "You can not delete a definitive line that has been invoiced"
 msgstr "No es posible borrar una línea definitiva que ya fue devengada."
