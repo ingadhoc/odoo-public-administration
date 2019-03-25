@@ -61,4 +61,16 @@ msgstr "Solicitud de Compras"
 msgid "Purchase Agreements"
 msgstr "Solicitud de Compras"
 
-
+#. module: stock_request
+#: model:ir.actions.act_window,name:stock_request.action_stock_request_form
+#: model:ir.model.fields,field_description:stock_request.field_stock_move_stock_request_ids
+#: model:ir.model.fields,field_description:stock_request.field_stock_picking_stock_request_ids
+#: model:ir.ui.menu,name:stock_request.menu_stock_request
+#: model:ir.ui.menu,name:stock_request.menu_stock_request_root
+#: model:ir.ui.view,arch_db:stock_request.stock_request_order_form
+#: model:ir.ui.view,arch_db:stock_request.stock_request_search
+#: model:ir.ui.view,arch_db:stock_request.view_picking_form
+#: model:ir.ui.view,arch_db:stock_request.view_stock_request_form
+#: model:ir.ui.view,arch_db:stock_request.view_stock_request_tree
+msgid "Stock Requests"
+msgstr "Requerimientos"
