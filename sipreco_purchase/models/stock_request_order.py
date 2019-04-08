@@ -18,6 +18,10 @@ class StockRequestOrder(models.Model):
         'Motivacion',
         required=True,
     )
+    activity_date_deadline = fields.Date(
+        related_sudo=True,
+        compute_sudo=True,
+    )
 
     @api.onchange('company_id')
     def change_company_id(self):

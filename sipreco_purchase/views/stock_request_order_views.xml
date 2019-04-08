@@ -112,6 +112,8 @@
         <field name="domain">[('partner_id.user_ids', '=', uid)]</field>
     </record>
 
-    <!-- <menuitem action="action_my_procurement_request" id="menu_my_procurement_request" web_icon="sipreco_purchase,static/description/procurement_order.png" sequence="20"/> -->
+    <record id="stock_request.menu_stock_request_root" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4, ref('group_portal_requester'))]"/>
+    </record>
 
 </odoo>
