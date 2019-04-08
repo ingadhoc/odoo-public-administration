@@ -22,7 +22,7 @@
     <record id="group_requester_employee" model="res.groups">
         <field name="name">Requirente</field>
         <field name="category_id" ref="base.module_category_purchase_management"/>
-        <field name="implied_ids" eval="[(4, ref('base.group_user')),(4, ref('group_requester'))]"/>
+        <field name="implied_ids" eval="[(4, ref('stock_request.group_stock_request_user')),(4, ref('group_requester'))]"/>
     </record>
 
     <record id="group_portal_requester" model="res.groups">
@@ -82,6 +82,16 @@
     <!-- menu control en compras -->
     <record id="purchase.menu_purchase_control" model="ir.ui.menu">
         <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
+    </record>
+
+
+    <!-- Ocultamos estos grupos del menu por que ya los establecemos desde los otros permisos-->
+    <record id="stock_request.group_stock_request_user" model="res.groups">
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+
+    <record id="stock_request.group_stock_request_manager" model="res.groups">
+        <field name="category_id" ref="base.module_category_hidden"/>
     </record>
 
 </odoo>

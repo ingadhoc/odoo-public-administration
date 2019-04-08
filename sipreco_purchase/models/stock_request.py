@@ -46,6 +46,11 @@ class StockRequest(models.Model):
         " procurement manager to force an unusual behavior.",
     )
 
+    activity_date_deadline = fields.Date(
+        related_sudo=True,
+        compute_sudo=True,
+    )
+
     @api.model
     def create(self, vals):
         # controlamos que haya definido cantidad
