@@ -228,7 +228,8 @@ class DefinitiveLine(models.Model):
         """
         result = super(DefinitiveLine, self).fields_view_get(
             view_id, view_type, toolbar=toolbar, submenu=submenu)
-        definitive_partner_type = self._context.get('definitive_partner_type')
+        definitive_partner_type = self._context.get(
+            'default_definitive_partner_type')
         if definitive_partner_type == 'subsidy_recipient':
             doc = etree.XML(result['arch'])
             node = doc.xpath("//field[@name='supplier_id']")[0]
