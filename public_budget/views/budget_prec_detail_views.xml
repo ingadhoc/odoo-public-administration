@@ -45,7 +45,7 @@
         <field name="name">public_budget.budget_prec_detail.tree</field>
         <field name="model">public_budget.budget_prec_detail</field>
         <field name="arch" type="xml">
-            <tree string="budget_prec_detail" colors="blue:account_type=='view'">
+            <tree string="budget_prec_detail" decoration-info="account_type=='view'">
                 <field name="budget_position_id" />
                 <field name="amount" sum="Total" />
                 <!--                     <field name="draft_amount" sum="Total" /> -->
