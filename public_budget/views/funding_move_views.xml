@@ -54,7 +54,7 @@
         <field name="name">public_budget.funding_move.tree</field>
         <field name="model">public_budget.funding_move</field>
         <field name="arch" type="xml">
-            <tree string="Funding Move" colors="grey:state=='cancelled';blue:state in (u'draft',);black:state in (u'confirmed',);red:state in ()">
+            <tree string="Funding Move" decoration-muted="state=='cancelled'" decoration-info="state == 'draft'" decoration-bf="state == 'confirmed'" decoration-danger="state in ()">
                 <field name="date"/>
                 <field name="name"/>
                 <field name="type"/>

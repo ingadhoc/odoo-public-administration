@@ -118,7 +118,7 @@
         <field name="name">public_budget.subsidy.tree</field>
         <field name="model">public_budget.subsidy</field>
         <field name="arch" type="xml">
-            <tree string="Subsidios" colors="blue:(reclaimed)">
+            <tree string="Subsidios" decoration-info="reclaimed">
                 <field name="internal_number"/>
                 <field name="reclaimed"/>
                 <field name="parliamentary_resolution_date"/>

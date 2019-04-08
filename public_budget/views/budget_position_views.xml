@@ -54,7 +54,7 @@
         <field name="name">public_budget.budget_position.tree</field>
         <field name="model">public_budget.budget_position</field>
         <field name="arch" type="xml">
-            <tree string="Budget Position" colors="blue:type=='view'">
+            <tree string="Budget Position" decoration-info="type=='view'">
                 <field name="code"/>
                 <field name="name"/>
                 <field name="type" invisible="True"/>
@@ -70,7 +70,7 @@
         <field name="priority" eval="99"/>
         <field name="field_parent">child_ids</field>
         <field name="arch" type="xml">
-            <tree colors="blue:type=='view'; green:budget_assignment_allowed; red: budget_assignment_allowed and projected_amount &gt; amount;">
+            <tree decoration-info="type=='view'" decoration-success="budget_assignment_allowed" decoration-danger="budget_assignment_allowed and projected_amount > amount">
                 <field name="parent_left" invisible="1"/>
                 <field name="code"/>
                 <field name="name"/>

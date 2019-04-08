@@ -108,7 +108,7 @@
         <field name="name">public_budget.budget.tree</field>
         <field name="model">public_budget.budget</field>
         <field name="arch" type="xml">
-            <tree string="Budget" colors="grey:state=='cancelled';blue:state in (u'draft',);black:state in (u'pre_closed', u'open', u'closed');red:state in ()">
+            <tree string="Budget" decoration-muted="state=='cancelled'" decoration-info="state =='draft'" decoration-bf="state in ['pre_closed', 'open', 'closed']" decoration-danger="state in ()">
                 <field name="name"/>
                 <!-- <field name="fiscalyear_id"/> -->
                 <field name="income_account_id"/>
