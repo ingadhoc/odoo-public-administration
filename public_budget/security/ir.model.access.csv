@@ -171,3 +171,4 @@ access_ir_ui_menu_portal,ir.ui.menu.portal,base.model_ir_ui_menu,base.group_port
 access_ir_model_portal,ir.model.portal,base.model_ir_model,base.group_portal,1,0,0,0
 access_ir_fields_portal,ir.model.fields.portal,base.model_ir_model_fields,base.group_portal,1,0,0,0
 access_ir_model_data_portal,ir.model.model.data.portal,base.model_ir_model_data,base.group_portal,1,0,1,0
+access_report_mimetypes_portal_transaction,access_report_mimetypes_portal,report_aeroo.model_report_mimetypes,base.group_portal,1,0,0,0
