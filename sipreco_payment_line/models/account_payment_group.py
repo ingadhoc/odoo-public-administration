@@ -100,5 +100,5 @@ class AccountPaymentGroup(models.Model):
         # FOR windows \r\n is required
         # we also add one new line at the end as xls does
         self.archivo_banco = base64.encodestring(
-            '\r\n'.join(lines_data) + '\r\n')
+            ('\r\n'.join(lines_data) + '\r\n').encode())
         self.archivo_banco_name = 'Archivo banco %s.txt' % fields.Date.today()
