@@ -143,6 +143,10 @@
             <field name="vendor_id" position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
             </field>
+
+            <field name="message_ids" position="before">
+                <field name="activity_ids" widget="mail_activity"/>
+            </field>
         </field>
     </record>
 
