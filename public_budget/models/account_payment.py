@@ -59,20 +59,22 @@ class AccountPayment(models.Model):
         Cambiamos la cuenta que usa el adelanto para utilizar aquella que
         viene de la transaccion de adelanto o del request
         """
-        payment_group = self.payment_group_id
-        if payment_group.transaction_with_advance_payment:
-            account = payment_group.transaction_id.type_id.advance_account_id
-            if not account:
-                raise ValidationError(_(
-                    'In payment of advance transaction type, you need to '
-                    'set an advance account in transaction type!'))
-            self.destination_account_id = account
-        elif payment_group.advance_request_id:
-            self.destination_account_id = payment_group.\
-                advance_request_id.type_id.account_id
-        else:
-            return super(
-                AccountPayment, self)._compute_destination_account_id()
+        for rec in self:
+            payment_group = rec.payment_group_id
+            if payment_group.transaction_with_advance_payment:
+                account = payment_group.\
+                    transaction_id.type_id.advance_account_id
+                if not account:
+                    raise ValidationError(_(
+                        'In payment of advance transaction type, you need to '
+                        'set an advance account in transaction type!'))
+                rec.destination_account_id = account
+            elif payment_group.advance_request_id:
+                rec.destination_account_id = payment_group.\
+                    advance_request_id.type_id.account_id
+            else:
+                return super(
+                    AccountPayment, rec)._compute_destination_account_id()
 
     def _get_liquidity_move_line_vals(self, amount):
         """
