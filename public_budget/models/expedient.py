@@ -26,8 +26,8 @@ class PublicBudgetExpedient(models.Model):
         default=fields.Datetime.now
     )
     cover = fields.Char(
-        compute='_compute_cover'
-        # store=True,
+        compute='_compute_cover',
+        store=True,
     )
     description = fields.Char(
         required=True,
