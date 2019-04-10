@@ -1,5 +1,5 @@
 from odoo import models, fields, api, _
-from odoo.exceptions import ValidationError, UserError
+from odoo.exceptions import ValidationError
 
 
 class PublicBudgetExpedient(models.Model):
@@ -207,9 +207,13 @@ class PublicBudgetExpedient(models.Model):
             [('subsidy_recipient_doc', '!=', 0),
                 ('subsidy_recipient_doc', '=', self.subsidy_recipient_doc)])
         if len(expedients_with_dni) > 0:
-            raise UserError(_(
-                'El DNI ya existe en estos TA: \n * %s ' % ' \n * '.join(
-                    expedients_with_dni.mapped('number'))))
+            warning = {
+                'title': _('Warning!'),
+                'message': _(
+                    'El DNI ya existe en estos TA: \n * %s ' % ' \n * '.join(
+                        expedients_with_dni.mapped('number'))),
+            }
+            return {'warning': warning}
 
     @api.multi
     def write(self, vals):
