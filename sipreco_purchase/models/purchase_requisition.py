@@ -8,7 +8,8 @@ import odoo.addons.decimal_precision as dp
 
 
 class PurchaseRequisition(models.Model):
-    _inherit = 'purchase.requisition'
+    _name = 'purchase.requisition'
+    _inherit = ['purchase.requisition', 'mail.activity.mixin']
 
     name = fields.Char(
         # cambiamos string
