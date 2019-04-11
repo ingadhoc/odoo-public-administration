@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-08 19:17+0000\n"
+"POT-Creation-Date: 2019-04-10 18:31+0000\n"
 "PO-Revision-Date: 2019-01-18 20:37+0000\n"
 "Last-Translator: Irriep Nala Novram <allannkorh@yahoo.fr>, 2019\n"
 "Language-Team: Breton (https://www.transifex.com/adhoc/teams/46451/br/)\n"
@@ -492,8 +492,8 @@ msgid "Cambiar Cesionario en Pagos"
 msgstr ""
 
 #. module: public_budget
-#: code:addons/public_budget/models/account_payment.py:98
-#: code:addons/public_budget/models/account_payment.py:150
+#: code:addons/public_budget/models/account_payment.py:100
+#: code:addons/public_budget/models/account_payment.py:152
 #, python-format
 msgid "Can't change check!. Check not found or check not in handed state"
 msgstr ""
@@ -539,7 +539,7 @@ msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_category_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_category_id_7504
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_category_id_7505
 msgid "Category"
 msgstr ""
 
@@ -559,7 +559,7 @@ msgid "Check Debit"
 msgstr ""
 
 #. module: public_budget
-#: code:addons/public_budget/models/account_payment.py:104
+#: code:addons/public_budget/models/account_payment.py:106
 #, python-format
 msgid "Check Return"
 msgstr ""
@@ -1173,7 +1173,7 @@ msgid "Drei Number"
 msgstr ""
 
 #. module: public_budget
-#: code:addons/public_budget/models/expedient.py:212
+#: code:addons/public_budget/models/expedient.py:214
 #, python-format
 msgid ""
 "El DNI ya existe en estos TA: \n"
@@ -1188,7 +1188,7 @@ msgid "El importe mandado a pagar no puede ser mayor al importe de la factura"
 msgstr ""
 
 #. module: public_budget
-#: code:addons/public_budget/models/account_payment.py:200
+#: code:addons/public_budget/models/account_payment.py:202
 #, python-format
 msgid "El nÃºmero de cheque %s ya se ha utilizado"
 msgstr ""
@@ -1517,7 +1517,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_modification_detail_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_modification_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_pos_exc_rest_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_category_id_7393
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_category_id_7394
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_prec_detail_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_report_4_id
@@ -1526,7 +1526,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_make_invoice_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_mass_invoice_create_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_category_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_founder_id_7552
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_founder_id_7553
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_funding_move_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_inventory_rule_id
@@ -1585,7 +1585,7 @@ msgid ""
 msgstr ""
 
 #. module: public_budget
-#: code:addons/public_budget/models/account_payment.py:66
+#: code:addons/public_budget/models/account_payment.py:68
 #, python-format
 msgid ""
 "In payment of advance transaction type, you need to set an advance account "
@@ -2060,13 +2060,13 @@ msgid "No Income account defined on the funding move or the budget"
 msgstr ""
 
 #. module: public_budget
-#: code:addons/public_budget/models/account_payment.py:210
+#: code:addons/public_budget/models/account_payment.py:212
 #, python-format
 msgid "No implementado todavÃ­a"
 msgstr ""
 
 #. module: public_budget
-#: code:addons/public_budget/models/expedient.py:243
+#: code:addons/public_budget/models/expedient.py:247
 #, python-format
 msgid ""
 "No puede anular este expediente ya que es utilizado en las siguientes "
@@ -2074,7 +2074,7 @@ msgid ""
 msgstr ""
 
 #. module: public_budget
-#: code:addons/public_budget/models/expedient.py:234
+#: code:addons/public_budget/models/expedient.py:238
 #, python-format
 msgid ""
 "No puede anular este expediente ya que es utilizado en las siguientes "
@@ -2100,7 +2100,7 @@ msgid "No puede confirmar una orden de pago sin importe a pagar"
 msgstr ""
 
 #. module: public_budget
-#: code:addons/public_budget/models/expedient.py:220
+#: code:addons/public_budget/models/expedient.py:224
 #, python-format
 msgid "No puede disminuir la cantidad de pÃ¡ginas de un expediente"
 msgstr ""
@@ -2160,7 +2160,7 @@ msgid ""
 msgstr ""
 
 #. module: public_budget
-#: code:addons/public_budget/models/account_payment.py:94
+#: code:addons/public_budget/models/account_payment.py:96
 #, python-format
 msgid "No replaced_payment_id on context"
 msgstr ""
@@ -2372,7 +2372,7 @@ msgid "Payment Group"
 msgstr ""
 
 #. module: public_budget
-#: code:addons/public_budget/models/account_payment.py:169
+#: code:addons/public_budget/models/account_payment.py:171
 #, python-format
 msgid "Payment Lines"
 msgstr ""
@@ -3098,14 +3098,14 @@ msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_advance_request_analysis_type_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_request_type_id_7096
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_request_type_id_7097
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_return_type_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_pos_exc_rest_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_prec_detail_account_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_funding_move_type
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_id_7350
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_id_7355
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_request_filter
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_return_filter
 msgid "Type"
@@ -3164,6 +3164,12 @@ msgid "Volver a Confirmado"
 msgstr ""
 
 #. module: public_budget
+#: code:addons/public_budget/models/expedient.py:211
+#, python-format
+msgid "Warning!"
+msgstr ""
+
+#. module: public_budget
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_transaction_filter
 msgid "With Advance Payment"
 msgstr ""
@@ -3176,7 +3182,7 @@ msgstr ""
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_account_payment_group_transaction_with_advance_payment
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment_7353
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment_7358
 msgid "With advance payment?"
 msgstr ""
 
