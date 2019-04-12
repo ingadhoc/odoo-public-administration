@@ -484,12 +484,37 @@ class BudgetTransaction(models.Model):
 
     @api.constrains('state')
     def _check_position_balance_amount(self):
+        """ Verificamos los saldos al cambiar el estado, agrupamos por
+        assignment_position para hacer mas claro el mensaje.
+        TODO tal vez podriamos integrar esta logica en
+        _check_position_balance_amount
+        """
         # forzamos el recomputo de affects_budget porque si no algunas veces
         # da error si la linea de adelanto habia consumido toda la partida
         # y se pasa a consolidada en misma partida (el metodo
         # budget_position._get_amounts devolvia las dos en el search)
-        self.mapped('preventive_line_ids')._compute_affects_budget()
-        self.mapped('preventive_line_ids')._check_position_balance_amount()
+        for rec in self:
+            rec = rec.with_context(budget_id=rec.budget_id.id)
+            rec.preventive_line_ids._compute_affects_budget()
+            assignment_positions = rec.preventive_line_ids.filtered(
+                'affects_budget').mapped(
+                    'budget_position_id.assignment_position_id')
+            for assignment_position in assignment_positions:
+                position_balance = (assignment_position.balance_amount)
+                if position_balance < 0.0:
+                    affecting_positions = rec.preventive_line_ids.filtered(
+                        lambda x: x.budget_position_id.
+                        assignment_position_id == assignment_position)
+                    raise ValidationError(_(
+                        "There is not enough Balance on Position '%s' (%s). "
+                        "Remaining balance would be %s.\n"
+                        "Affecting positions: \n * %s") % (
+                            assignment_position.name,
+                            assignment_position.code,
+                            position_balance,
+                            "\n * ".join(affecting_positions.mapped(
+                                'display_name'))
+                    ))
 
     @api.multi
     def check_closure(self):
