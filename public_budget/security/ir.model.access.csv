@@ -172,3 +172,4 @@ access_ir_model_portal,ir.model.portal,base.model_ir_model,base.group_portal,1,0
 access_ir_fields_portal,ir.model.fields.portal,base.model_ir_model_fields,base.group_portal,1,0,0,0
 access_ir_model_data_portal,ir.model.model.data.portal,base.model_ir_model_data,base.group_portal,1,0,1,0
 access_report_mimetypes_portal_transaction,access_report_mimetypes_portal,report_aeroo.model_report_mimetypes,base.group_portal,1,0,0,0
+access_account_asset_depreciation_line,access_account_asset_depreciation_line,account_asset.model_account_asset_depreciation_line,group_habilitacion_usuario,1,0,0,0
