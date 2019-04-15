@@ -495,14 +495,16 @@ class BudgetTransaction(models.Model):
         # budget_position._get_amounts devolvia las dos en el search)
         for rec in self:
             rec = rec.with_context(budget_id=rec.budget_id.id)
-            rec.preventive_line_ids._compute_affects_budget()
-            assignment_positions = rec.preventive_line_ids.filtered(
-                'affects_budget').mapped(
-                    'budget_position_id.assignment_position_id')
+            preventive_lines = (
+                rec.preventive_line_ids + rec.advance_preventive_line_ids
+            ).filtered('affects_budget')
+            preventive_lines._compute_affects_budget()
+            assignment_positions = preventive_lines.mapped(
+                'budget_position_id.assignment_position_id')
             for assignment_position in assignment_positions:
                 position_balance = (assignment_position.balance_amount)
                 if position_balance < 0.0:
-                    affecting_positions = rec.preventive_line_ids.filtered(
+                    affecting_positions = preventive_lines.filtered(
                         lambda x: x.budget_position_id.
                         assignment_position_id == assignment_position)
                     raise ValidationError(_(

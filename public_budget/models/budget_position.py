@@ -286,9 +286,9 @@ class BudgetPosition(models.Model):
             if amount:
                 _logger.info('Getting budget assignment amounts')
                 rec.projected_avg = projected_amount / amount * 100.0
-                rec.amount = amount
                 rec.preventive_avg = preventive_amount / amount * 100.0
-                rec.balance_amount = rec.amount - preventive_amount
+            rec.amount = amount
+            rec.balance_amount = rec.amount - preventive_amount
             _logger.info(
                 'Finish getting amounts for budget position %s' % rec.name)
 
