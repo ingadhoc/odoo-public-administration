@@ -1,4 +1,3 @@
-# from . import stock_picking
 from . import procurement_rule
 from . import stock_picking_type
 from . import stock_request

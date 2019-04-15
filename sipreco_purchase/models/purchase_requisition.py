@@ -87,7 +87,7 @@ class PurchaseRequisition(models.Model):
     @api.multi
     def action_cancel(self):
         if self._context.get('cancel_procurement', True):
-            self.mapped('manual_procurement_ids').button_cancel_remaining()
+            self.mapped('manual_request_ids').button_cancel_remaining()
         self.inspected = False
         self.user_inspected_id = False
         self.user_confirmed_id = False
