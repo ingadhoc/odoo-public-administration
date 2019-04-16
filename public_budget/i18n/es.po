@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-14 09:16+0000\n"
+"POT-Creation-Date: 2019-04-15 18:23+0000\n"
 "PO-Revision-Date: 2019-01-18 20:37+0000\n"
 "Last-Translator: Nicolas Mac Rouillon <nmr@ingadhoc.com>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
@@ -2571,7 +2571,7 @@ msgid "Preventive Line"
 msgstr "Afectación Preventiva"
 
 #. module: public_budget
-#: code:addons/public_budget/models/transaction.py:577
+#: code:addons/public_budget/models/transaction.py:579
 #, python-format
 msgid ""
 "Preventive Total, Type and Date are not compatible with Transaction Amount "
@@ -2964,13 +2964,16 @@ msgstr ""
 "* Saldo disponible para '%s' (%s): %s"
 
 #. module: public_budget
-#: code:addons/public_budget/models/transaction.py:508
+#: code:addons/public_budget/models/transaction.py:510
 #, python-format
 msgid ""
 "There is not enough Balance on Position '%s' (%s). Remaining balance would be %s.\n"
 "Affecting positions: \n"
 " * %s"
 msgstr ""
+"No hay suficiente saldo en la posición '%s' (%s). El saldo restante sería %s.\n"
+"Posiciones afectadas: \n"
+" * %s"
 
 #. module: public_budget
 #: model:ir.model.fields,help:public_budget.field_public_budget_transaction_type_advance_account_id
@@ -3063,14 +3066,14 @@ msgid "To Signature Process"
 msgstr "A proceso de firma"
 
 #. module: public_budget
-#: code:addons/public_budget/models/transaction.py:526
+#: code:addons/public_budget/models/transaction.py:528
 #, python-format
 msgid "To close a transaction there must be at least one preventive line"
 msgstr ""
 "Para cerrar una Transacción tiene que haber al menos una línea Preventiva."
 
 #. module: public_budget
-#: code:addons/public_budget/models/transaction.py:552
+#: code:addons/public_budget/models/transaction.py:554
 #, python-format
 msgid ""
 "To close a transaction to return amount must be 0!\n"
@@ -3082,7 +3085,7 @@ msgstr ""
 "(%s = %s - %s)"
 
 #. module: public_budget
-#: code:addons/public_budget/models/transaction.py:538
+#: code:addons/public_budget/models/transaction.py:540
 #, python-format
 msgid ""
 "To close a transaction, Preventive, Definitive, Invoiced, To Pay and Paid "
@@ -3259,7 +3262,7 @@ msgstr "Volver a Confirmado"
 #: code:addons/public_budget/models/expedient.py:211
 #, python-format
 msgid "Warning!"
-msgstr ""
+msgstr "¡Advertencia!"
 
 #. module: public_budget
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_transaction_filter
