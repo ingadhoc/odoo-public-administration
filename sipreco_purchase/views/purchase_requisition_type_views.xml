@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record model="ir.ui.view" id="view_purchase_requisition_type_form">
+        <field name="name">purchase.requisition.type.form</field>
+        <field name="model">purchase.requisition.type</field>
+        <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_type_form"/>
+        <field name="arch" type="xml">
+            <field name="quantity_copy" widget="radio" position="after">
+                <field name="price_unit_copy" widget="radio"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
