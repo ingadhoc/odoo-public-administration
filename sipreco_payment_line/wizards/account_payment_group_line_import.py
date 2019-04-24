@@ -76,17 +76,15 @@ class AccountPaymentGroupLineImport(models.TransientModel):
             # skip first line
             for line in io.BytesIO(data_file).readlines()[1:]:
                 _logger.info('Parsing line "%s"' % line)
-                line_vals = line.decode().split(",")
+                line_vals = line.decode('utf-8').split(",")
                 try:
-                    float(line_vals[4].strip().strip('"'))
-                    # float(line_vals[4])
+                    float(line_vals[4].strip())
                 except ValueError:
                     _logger.warning(
                         "Could not get value from line %s" % line_vals)
                 res.append({
                     'cuit': line_vals[1],
-                    'amount': float(line_vals[4].strip().strip('"'))
-                    # 'amount': float(line_vals[4]),
+                    'amount': float(line_vals[4].strip())
                 })
         except Exception as e:
             raise UserError(_(
