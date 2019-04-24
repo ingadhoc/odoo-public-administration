@@ -74,23 +74,24 @@ class AccountPaymentGroupLineImport(models.TransientModel):
         res = []
         try:
             # skip first line
-            for line in io.StringIO(data_file).readlines()[1:]:
+            for line in io.BytesIO(data_file).readlines()[1:]:
                 _logger.info('Parsing line "%s"' % line)
-                line_vals = line.strip().split()
+                line_vals = line.decode().split(",")
                 try:
-                    float(line_vals[4])
+                    float(line_vals[4].strip().strip('"'))
+                    # float(line_vals[4])
                 except ValueError:
                     _logger.warning(
                         "Could not get value from line %s" % line_vals)
                 res.append({
                     'cuit': line_vals[1],
-                    'amount': float(line_vals[4]),
+                    'amount': float(line_vals[4].strip().strip('"'))
+                    # 'amount': float(line_vals[4]),
                 })
         except Exception as e:
             raise UserError(_(
                 "Ocurrió un error al importar. "
-                "El archivo puede no ser valido.\n\n %s" % e.message
-            ))
+                "El archivo puede no ser valido.\n\n %s" % e))
         return res
 
     @api.model
