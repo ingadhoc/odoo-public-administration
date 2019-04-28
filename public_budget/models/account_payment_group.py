@@ -115,10 +115,10 @@ class AccountPaymentGroup(models.Model):
         copy=False,
     )
     # hacemos que la fecha de pago no sea obligatoria ya que seteamos fecha
-    # de validacion si no estaba seteada
+    # de validacion si no estaba seteada (al final en archivo a parte
+    # _monkey_patch)
     payment_date = fields.Date(
         required=False,
-        default=False,
         track_visibility='onchange',
         # al final, para evitar que la seteen equivocadamente, la dejamos
         # editable solo en isgnature y signed
