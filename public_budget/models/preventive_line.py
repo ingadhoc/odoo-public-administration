@@ -198,7 +198,7 @@ class PreventiveLine(models.Model):
                 invoiced_amount = 0.0
             else:
                 _logger.info('Getting none advance line values')
-                definitive_lines = rec.definitive_line_ids
+                definitive_lines = rec.definitive_line_ids.sudo()
                 if not definitive_lines:
                     continue
 
