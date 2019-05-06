@@ -165,14 +165,11 @@ class DefinitiveLine(models.Model):
             if to_date:
                 filter_domain += [('invoice_id.date_invoice', '<=', to_date)]
 
-            debit_filter_domain = filter_domain + [
-                ('invoice_id.type', 'in', ('out_refund', 'in_invoice'))]
-            credit_filter_domain = filter_domain + [
-                ('invoice_id.type', 'in', ('out_invoice', 'in_refund'))]
-            debit_invoice_lines = rec.invoice_line_ids.search(
-                debit_filter_domain)
-            credit_invoice_lines = rec.invoice_line_ids.search(
-                credit_filter_domain)
+            invoice_lines = rec.invoice_line_ids.search(filter_domain)
+            debit_invoice_lines = invoice_lines.filtered(
+                lambda x: x.invoice_id.type in ['out_refund', 'in_invoice'])
+            credit_invoice_lines = invoice_lines.filtered(
+                lambda x: x.invoice_id.type in ['out_invoice', 'in_refund'])
 
             # all computed fields, no problem for analysis to date
             invoiced_amount = sum(debit_invoice_lines.mapped('price_subtotal'))
