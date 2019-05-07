@@ -40,6 +40,17 @@ class AccountInvoice(models.Model):
                 'El importe mandado a pagar no puede ser mayor al importe '
                 'de la factura'))
 
+    @api.constrains('state')
+    def _recompute_to_pay_amount_when_with_advance_payment(self):
+        """ Cuando se usan transacciones de tipo con pago de adelanto, por
+        alguna razon el metodo _compute_to_pay_amount no se llama cuando se
+        pasa la factura a estado pagado, solo se llama cuando pasa a estado
+        open, de esta manera reforzamos el re-calculo cuando pasa a pagado
+        """
+        for rec in self:
+            if rec.state == 'paid' and not rec.payment_group_ids:
+                rec._compute_to_pay_amount()
+
     @api.depends(
         # This do it by a contrains in account payment group
         # 'payment_group_ids.state',
