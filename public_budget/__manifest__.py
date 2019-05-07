@@ -142,5 +142,5 @@
         'demo/advance_request.xml',
     ],
     'installable': True,
-     "post_load": 'payment_date_default',
+    'post_load': 'payment_date_default',
 }
