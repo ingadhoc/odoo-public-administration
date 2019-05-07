@@ -1,7 +1,6 @@
 from . import inventory_rule
 from . import res_partner
 from . import account_payment_group
-from . import account_payment_group_monkey_patch
 from . import account_payment
 from . import account_invoice
 from . import advance_request_type
