@@ -258,6 +258,17 @@ class BudgetTransaction(models.Model):
         states={'open': [('readonly', False)]},
     )
 
+    asset_ids = fields.One2many(
+        'account.asset.asset',
+        compute='_compute_asset_ids',
+    )
+
+    @api.multi
+    def _compute_asset_ids(self):
+        for rec in self.filtered('invoice_ids'):
+            domain = [('invoice_id', 'in', rec.invoice_ids.ids)]
+            rec.asset_ids = self.env['account.asset.asset'].search(domain)
+
     # dummy depends to compute values on create
     @api.depends('company_id')
     def _compute_user_locations(self):
@@ -621,3 +632,13 @@ class BudgetTransaction(models.Model):
                 'name': att.name,
             })
         return res
+
+    @api.multi
+    def action_view_account_asset(self):
+        self.ensure_one()
+        action = self.env.ref(
+            'account_asset.action_account_asset_asset_form')
+        action = action.read()[0]
+        action['context'] = {'search_default_invoice': 1}
+        action['domain'] = [('id', 'in', self.asset_ids.ids)]
+        return action
