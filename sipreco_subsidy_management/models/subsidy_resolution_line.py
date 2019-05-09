@@ -27,7 +27,8 @@ class PublicBudgetSubsidyResolutionLines(models.Model):
         required=True,
     )
     subsidy_resolution_id = fields.Many2one(
-        'public_budget.subsidy.resolution'
+        'public_budget.subsidy.resolution',
+        ondelete='cascade',
     )
 
     _sql_constraints = [
