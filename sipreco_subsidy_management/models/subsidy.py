@@ -161,13 +161,14 @@ class PublicBudgetSubsidy(models.Model):
         'rendition_ids.approved_amount',
     )
     def _compute_amounts(self):
-        rendido_amount = sum(
-            self.rendition_ids.mapped('rendition_amount'))
-        aprobado_amount = sum(
-            self.rendition_ids.mapped('approved_amount'))
-        self.aprobado_amount = aprobado_amount
-        self.rendido_amount = rendido_amount
-        self.revision_amount = rendido_amount - aprobado_amount
+        for rec in self:
+            rendido_amount = sum(
+                rec.rendition_ids.mapped('rendition_amount'))
+            aprobado_amount = sum(
+                rec.rendition_ids.mapped('approved_amount'))
+            rec.aprobado_amount = aprobado_amount
+            rec.rendido_amount = rendido_amount
+            rec.revision_amount = rendido_amount - aprobado_amount
 
     @api.onchange('expedient_id', 'partner_id')
     def set_subsidy_name(self):
@@ -178,15 +179,16 @@ class PublicBudgetSubsidy(models.Model):
         'partner_id',
     )
     def _compute_rendiciones_pendientes_otros_subsidios(self):
-        if not self.partner_id:
-            amount = False
-        else:
-            others = self.search([
-                ('partner_id', '=', self.partner_id.id),
-            ])
-            others -= self
-            amount = sum(others.mapped('pendientes_rendicion_amount'))
-        self.rendiciones_pendientes_otros_subsidios = amount
+        for rec in self:
+            if not rec.partner_id:
+                amount = False
+            else:
+                others = self.search([
+                    ('partner_id', '=', rec.partner_id.id),
+                ])
+                others -= rec
+                amount = sum(others.mapped('pendientes_rendicion_amount'))
+            rec.rendiciones_pendientes_otros_subsidios = amount
 
     @api.depends(
         'amount',
@@ -196,13 +198,14 @@ class PublicBudgetSubsidy(models.Model):
     def _compute_state(self):
         # consideramos aprobada solo si hay monto y es igual al cargo y a
         # aprobado
-        if (
-                self.amount and
-                self.amount == self.cargo_amount == self.aprobado_amount):
-            accountability_state = 'approved'
-        else:
-            accountability_state = 'pending'
-        self.accountability_state = accountability_state
+        for rec in self:
+            if (
+                    rec.amount and
+                    rec.amount == rec.cargo_amount == rec.aprobado_amount):
+                accountability_state = 'approved'
+            else:
+                accountability_state = 'pending'
+            rec.accountability_state = accountability_state
 
     @api.depends(
         'rendido_amount',
@@ -220,38 +223,40 @@ class PublicBudgetSubsidy(models.Model):
         # 'advance_payment_group_ids.cargo_amount',
     )
     def _compute_cargo_data(self):
-        payments = self.payment_group_ids + self.advance_payment_group_ids
-        cargo_amount = sum(
-            payments.filtered(
-                lambda x: x.state == 'posted').mapped('payments_amount'))
-        cargo_date = payments.search([
-            ('id', 'in', payments.ids),
-            ('payment_date', '!=', False),
-            # cargo only if payment validated
-            ('state', '=', 'posted'),
-        ], order='payment_date desc', limit=1).payment_date
+        for rec in self:
+            payments = rec.payment_group_ids + rec.advance_payment_group_ids
+            cargo_amount = sum(
+                payments.filtered(
+                    lambda x: x.state == 'posted').mapped('payments_amount'))
+            cargo_date = payments.search([
+                ('id', 'in', payments.ids),
+                ('payment_date', '!=', False),
+                # cargo only if payment validated
+                ('state', '=', 'posted'),
+            ], order='payment_date desc', limit=1).payment_date
 
-        expiry_date = False
-        if cargo_date:
-            expiry_date = fields.Date.from_string(cargo_date)
-            # TODO, parametrizable?
-            business_days_to_add = 30
-            while business_days_to_add > 0:
-                expiry_date = expiry_date + relativedelta(days=+1)
-                weekday = expiry_date.weekday()
-                # sunday = 6
-                if weekday >= 5 or self.env[
-                        'hr.holidays.public'].is_public_holiday(expiry_date):
-                    continue
-                business_days_to_add -= 1
-        self.cargo_date = cargo_date
-        self.accountability_expiry_date = fields.Date.to_string(
-            expiry_date)
-        self.cargo_amount = cargo_amount
-        self.pendientes_rendicion_amount = (
-            cargo_amount - self.rendido_amount)
-        self.pendientes_aprobacion_amount = (
-            cargo_amount - self.aprobado_amount)
+            expiry_date = False
+            if cargo_date:
+                expiry_date = fields.Date.from_string(cargo_date)
+                # TODO, parametrizable?
+                business_days_to_add = 30
+                while business_days_to_add > 0:
+                    expiry_date = expiry_date + relativedelta(days=+1)
+                    weekday = expiry_date.weekday()
+                    # sunday = 6
+                    if weekday >= 5 or self.env[
+                            'hr.holidays.public'].is_public_holiday(
+                                expiry_date):
+                        continue
+                    business_days_to_add -= 1
+            rec.cargo_date = cargo_date
+            rec.accountability_expiry_date = fields.Date.to_string(
+                expiry_date)
+            rec.cargo_amount = cargo_amount
+            rec.pendientes_rendicion_amount = (
+                cargo_amount - rec.rendido_amount)
+            rec.pendientes_aprobacion_amount = (
+                cargo_amount - rec.aprobado_amount)
 
     @api.constrains('cargo_amount', 'rendido_amount')
     def check_renditions(self):
