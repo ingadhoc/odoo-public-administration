@@ -21,4 +21,11 @@
         <field name="company_id" eval="False"/>
     </record>
 
+    <record id="seq_asset_ref" model="ir.sequence">
+        <field name="name">Asset Reference</field>
+        <field name="code">public_budget.asset</field>
+        <field name="prefix">A</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
 </odoo>

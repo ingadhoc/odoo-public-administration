@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_transfer_asset_wizard_form" model="ir.ui.view">
+        <field name="name">Transfer Asset Wizard</field>
+        <field name="model">public_budget.transfer.asset.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Asistente de Transferencia de Activos">
+                <group>
+                    <field name="location_id"/>
+                </group>
+                <footer>
+                    <button name="confirm" string="Confirmar" type="object" class="oe_highlight"/>
+                        o
+                    <button string="Cancelar" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_transfer_asset_wizard" model="ir.actions.act_window">
+        <field name="name">Asistente de Transferencia de Activos</field>
+        <field name="res_model">public_budget.transfer.asset.wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

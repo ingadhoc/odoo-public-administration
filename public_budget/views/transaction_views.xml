@@ -38,6 +38,8 @@
                 </header>
                 <sheet string="Budget Transaction">
                     <div class="oe_button_box" name="buttons">
+                        <field name="asset_ids" invisible="1"/>
+                        <button type="object" name="action_view_account_asset" class="oe_stat_button" string="Assets" icon="fa-list-alt" attrs="{'invisible': [('asset_ids', '=', [])]}"/>
                     </div>
                     <field name="id" invisible="True"/>
                     <field name="user_location_ids" invisible="True"/>

@@ -50,4 +50,18 @@
         <field name="groups" eval="[(4, ref('group_portal_transaction'))]"/>
         <field name="domain_force">[(1 ,'=', 1)]</field>
     </record>
+
+    <record id="asset_in_user_locations" model="ir.rule">
+        <field name="name">Assets in user locations</field>
+        <field name="model_id" ref="public_budget.model_account_asset_asset"/>
+        <field name="groups" eval="[(4, ref('group_asset_responsable_ubicacion'))]"/>
+        <field name="domain_force">[('location_id.user_id', '=', user.id)]</field>
+    </record>
+
+    <record id="expedient_in_user_locations_rule_only_read" model="ir.rule">
+        <field name="name">Expedient only read in user locations</field>
+        <field name="model_id" ref="public_budget.model_account_asset_asset"/>
+        <field name="groups" eval="[(4, ref('group_asset_responsable'))]"/>
+        <field name="domain_force">[(1 ,'=', 1)]</field>
+    </record>
 </odoo>
