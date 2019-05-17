@@ -76,7 +76,7 @@ class AccountPayment(models.Model):
         self.payment_group_id.message_post(
             body=_('Se devolvió la retención %s con la órden de pago %s') % (
                 self.withholding_number, self.display_name))
-        return payment_group.get_formview_action()[0]
+        return payment_group.get_formview_action()
 
     @api.multi
     def post(self):
