@@ -25,6 +25,9 @@
             <button name="action_view_invoice" position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
             </button>
+            <xpath expr="//field[@name='order_line']/tree//field[@name='name']" position="after">
+                <field name="brand"/>
+            </xpath>
         </field>
     </record>
 
