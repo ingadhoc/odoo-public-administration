@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
+<odoo noupdate="1">
 
     <!-- sacamos imprimir de reporte por defecto -->
     <function model="ir.actions.report" name="unlink_action" eval="[ ref('purchase_requisition.action_report_purchase_requisitions')]"/>
