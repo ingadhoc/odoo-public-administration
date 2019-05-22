@@ -315,3 +315,17 @@ class PublicBudgetExpedient(models.Model):
                 ir_sequence_date=vals.get('issue_date')).next_by_code(
                 'public_budget.expedient') or '/'
         return super(PublicBudgetExpedient, self).create(vals)
+
+    @api.multi
+    def check_location_allowed_for_current_user(self):
+        """This method Validate if the current user it's belongs
+         to the users allowed in the current location of this expedient
+        """
+        self.ensure_one()
+        if not self.current_location_id or\
+                not self.current_location_id.user_ids:
+            return True
+        if self.env.user.id not in self.current_location_id.user_ids.ids:
+            return False
+        else:
+            return True

@@ -1,5 +1,5 @@
 from odoo import models, fields, api, _
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, UserError
 from dateutil.relativedelta import relativedelta
 import logging
 _logger = logging.getLogger(__name__)
@@ -194,6 +194,13 @@ class AccountPaymentGroup(models.Model):
     @api.multi
     def confirm(self):
         for rec in self:
+            if rec.expedient_id and not rec.expedient_id.\
+                    check_location_allowed_for_current_user():
+                raise UserError(_('It is not possible'
+                                  ' to confirm a payment if the payment'
+                                  ' expedient is not in a users'
+                                  ' allowed location'))
+
             if not rec.payment_base_date:
                 raise ValidationError(_(
                     'No puede confirmar una orden de pago sin fecha base de '
