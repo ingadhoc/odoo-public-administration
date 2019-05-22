@@ -1,5 +1,5 @@
 from odoo import models, fields, api, _
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, UserError
 from odoo.tools import float_is_zero
 import logging
 _logger = logging.getLogger(__name__)
@@ -363,6 +363,10 @@ class BudgetTransaction(models.Model):
     @api.multi
     def mass_payment_group_create(self):
         self.ensure_one()
+        if not self.expedient_id.check_location_allowed_for_current_user():
+            raise UserError(_(
+                "It is not possible to generate a payment order if the "
+                "expedient of the transaction is not in a permitted location"))
         self = self.with_context(transaction_id=self.id)
         for invoice in self.invoice_ids.filtered(
                 lambda r: r.state == 'open'):
@@ -598,6 +602,10 @@ class BudgetTransaction(models.Model):
         We dont use action on view because it will open on tree view
         '''
         self.ensure_one()
+        if not self.expedient_id.check_location_allowed_for_current_user():
+            raise UserError(_(
+                "It is not possible to generate a payment order if the "
+                "expedient of the transaction is not in a permitted location"))
         action = self.env['ir.model.data'].xmlid_to_object(
             'account_payment_group.action_account_payments_group_payable')
 

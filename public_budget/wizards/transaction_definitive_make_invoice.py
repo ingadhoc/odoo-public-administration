@@ -1,5 +1,5 @@
 from odoo import models, fields, api, _
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, UserError
 
 
 class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
@@ -161,7 +161,11 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
     @api.multi
     def make_invoices(self):
         self.ensure_one()
-
+        if not self.transaction_id.expedient_id\
+                .check_location_allowed_for_current_user():
+            raise UserError(_('It is not possible to generate an invoice if '
+                              'the expedient of the transaction is not in a'
+                              ' permitted location of its user'))
         tran_type = self.transaction_id.type_id
         advance_account = False
         if self.to_invoice_amount < 0.0:
