@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 
 
 class AccountAssetAsset(models.Model):
@@ -78,7 +78,10 @@ class AccountAssetAsset(models.Model):
     def confirm_tranfer(self):
         self.ensure_one()
         self.transit = False
-        body = 'User %s confirm this transfer' % self.env.user.name
+        body = _(
+            'The User "%s" confirm transfer asset'
+            ' to the location "%s"') % (
+            self.env.user.name, self.location_id.name)
         self.message_post(body)
         return True
 
