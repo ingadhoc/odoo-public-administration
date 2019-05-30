@@ -397,6 +397,7 @@ class BudgetPosition(models.Model):
             res['display_name'] = display_name
             res['context'] = {
                 'search_default_budget_position_id': [self.id],
+                'search_default_affects_budget': 1,
                 'search_default_budget_id': self._context.get(
                     'budget_id', False)}
             res['target'] = 'current'

@@ -102,6 +102,7 @@
                 <button name="action_position_analysis_tree" string="Open Childs" icon="fa-bars" type="object"/>
                 <field name="code"/>
                 <field name="name"/>
+                <field name="budget_assignment_allowed"/>
                 <field name="type" invisible="1"/>
                 <field name="amount"/>
                 <field name="preventive_amount"/>
@@ -111,7 +112,6 @@
                 <field name="projected_amount"/>
                 <field name="preventive_avg" widget="integer" string="%"/>
                 <field name="balance_amount"/>
-                <field name="budget_assignment_allowed" invisible="1"/>
                 <field name="currency_id" invisible="1"/>
             </tree>
         </field>
