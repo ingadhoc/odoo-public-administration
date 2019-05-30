@@ -10,6 +10,7 @@
                 <field name="preventive_amount"/>
                 <field name="budget_id"/>
                 <field name="budget_position_id" string="Child Of Budget Position" operator="child_of"/>
+                <filter string="Affects Budget" name="affects_budget" domain="[('affects_budget', '=', True)]"/>
                 <group expand="0" string="Group By">
                 </group>
             </search>
