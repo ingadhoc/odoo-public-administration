@@ -2,11 +2,14 @@
 # For copyright and license notices, see __manifest__.py file in module root
 # directory
 ##############################################################################
-from odoo import models, api
+from odoo import models, api, fields
 
 
 class PurchaseOrderLine(models.Model):
     _inherit = "purchase.order.line"
+
+    brand = fields.Char(
+    )
 
     @api.onchange('product_qty', 'product_uom')
     def _onchange_quantity(self):
