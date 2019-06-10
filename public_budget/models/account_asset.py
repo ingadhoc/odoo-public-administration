@@ -2,7 +2,8 @@ from odoo import api, fields, models, _
 
 
 class AccountAssetAsset(models.Model):
-    _inherit = 'account.asset.asset'
+    _name = 'account.asset.asset'
+    _inherit = ['account.asset.asset', 'mail.activity.mixin']
 
     enrollment = fields.Char(
     )
@@ -45,6 +46,8 @@ class AccountAssetAsset(models.Model):
         'public_budget.transaction',
         compute='_compute_transaction_ids',
     )
+    level = fields.Char()
+    number = fields.Char()
 
     _sql_constraints = [
         ('reference', 'unique(reference)',

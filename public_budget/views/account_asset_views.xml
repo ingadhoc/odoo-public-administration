@@ -36,6 +36,8 @@
                 <field name="serial_number"/>
                 <field name="asset_state"/>
                 <field name="observations"/>
+                <field name="level"/>
+                <field name="number"/>
                 <field name="location_id" required="1" attrs="{'readonly':[('location_id', '!=', False), ('state', 'in', ['open', 'paid'])]}" force_save="1"/>
                 <field name="expedient_id" required="1"/>
                 <field name="user_id"/>
@@ -64,6 +66,9 @@
                 <button name="transfer_asset" type="object" attrs="{'invisible':['|',('visible_button_transfer_asset', '=', False), ('transit', '=', True)]}" string="Transfer Asset"/>
                 <button name="confirm_tranfer" type="object" attrs="{'invisible':['|',('visible_button_transfer_asset', '=', False),('transit', '!=', True)]}" string="Confirm Transfer Asset"/>
             </button>
+            <field name="message_follower_ids" position="after">
+                <field name="activity_ids" widget="mail_activity"/>
+            </field>
         </field>
     </record>
 
