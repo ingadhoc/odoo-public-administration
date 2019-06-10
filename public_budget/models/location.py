@@ -4,7 +4,7 @@ from odoo import models, fields
 class Location(models.Model):
 
     _name = 'public_budget.location'
-    _inherit = ['mail.thread']
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Location'
 
     _order = "name"

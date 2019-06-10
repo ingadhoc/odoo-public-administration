@@ -5,7 +5,7 @@ from odoo.exceptions import ValidationError
 class PublicBudgetExpedient(models.Model):
 
     _name = 'public_budget.expedient'
-    _inherit = ['mail.thread']
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Expedient'
 
     _order = "id desc"
