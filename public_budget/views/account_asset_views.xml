@@ -10,6 +10,9 @@
             <field name="name" position="after">
                 <field name="expedient_id"/>
                 <field name="invoice_id"/>
+                <field name="reference"/>
+                <field name="enrollment"/>
+                <field name="serial_number"/>
             </field>
             <group>
                 <filter string="Invoice" name="invoice" domain="[]" context="{'group_by':'invoice_id'}"/>
