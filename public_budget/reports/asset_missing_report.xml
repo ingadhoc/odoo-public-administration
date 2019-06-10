@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="action_aeroo_report_asset_missing" model="ir.actions.report">
+        <field name="name">Reporte de Faltante de Activos</field>
+        <field name="model">account.asset.asset</field>
+        <field name="report_name">asset_missing_report</field>
+        <field name="report_type">aeroo</field>
+        <field name="in_format">oo-odt</field>
+        <!-- <field name="parser_loc">l10n_ar_aeroo_base/parser.py</field> -->
+        <!-- <field name="parser_state">loc</field> -->
+        <field name="parser_state">default</field>
+        <field name="report_file">public_budget/reports/asset_missing_report.odt</field>
+        <field name="tml_source">file</field>
+        <field name="out_format" ref="report_aeroo.report_mimetypes_pdf_odt"/>
+        <field name="styles_mode">specified</field>
+        <field name="stylesheet_id" ref="sipreco_stylesheet"/>
+        <field name="binding_model_id" ref="account_asset.model_account_asset_asset"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>
