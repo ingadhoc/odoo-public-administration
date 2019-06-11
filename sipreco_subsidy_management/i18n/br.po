@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-17 18:15+0000\n"
+"POT-Creation-Date: 2019-06-10 17:49+0000\n"
 "PO-Revision-Date: 2019-01-18 20:37+0000\n"
 "Last-Translator: Irriep Nala Novram <allannkorh@yahoo.fr>, 2019\n"
 "Language-Team: Breton (https://www.transifex.com/adhoc/teams/46451/br/)\n"
@@ -405,7 +405,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_approval_arrangement_id
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_id
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_note_id
-#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_note_type_id_7905
+#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_note_type_id_7925
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_rendition_id
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_resolution_id
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_resolution_line_id
@@ -609,13 +609,13 @@ msgstr ""
 #. module: sipreco_subsidy_management
 #: code:addons/sipreco_subsidy_management/models/subsidy.py:20
 #, python-format
-msgid "No Se encontrÃ³ ningÃºn tipo de transacciÃ³n del tipo subsidio"
+msgid "No Se encontró ningún tipo de transacción del tipo subsidio"
 msgstr ""
 
 #. module: sipreco_subsidy_management
 #: code:addons/sipreco_subsidy_management/models/subsidy_rendition.py:74
 #, python-format
-msgid "No es posible borrar una rendiciÃ³n que presente montos Aprobados"
+msgid "No es posible borrar una rendición que presente montos Aprobados"
 msgstr ""
 
 #. module: sipreco_subsidy_management

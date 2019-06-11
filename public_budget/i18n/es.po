@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-07 14:02+0000\n"
+"POT-Creation-Date: 2019-06-10 17:49+0000\n"
 "PO-Revision-Date: 2019-01-18 20:37+0000\n"
 "Last-Translator: Nicolas Mac Rouillon <nmr@ingadhoc.com>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
@@ -595,7 +595,7 @@ msgstr "Categorías"
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_category_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_category_id_7506
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_category_id_7514
 msgid "Category"
 msgstr "Categoría"
 
@@ -1602,7 +1602,7 @@ msgstr "Hasta Fecha"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_modification_detail_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_modification_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_pos_exc_rest_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_category_id_7395
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_category_id_7401
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_prec_detail_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_report_4_id
@@ -1611,7 +1611,7 @@ msgstr "Hasta Fecha"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_make_invoice_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_mass_invoice_create_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_category_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_founder_id_7554
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_founder_id_7566
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_funding_move_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_inventory_rule_id
@@ -2011,6 +2011,11 @@ msgid "Last Updated on"
 msgstr "Última actualización en"
 
 #. module: public_budget
+#: model:ir.model.fields,field_description:public_budget.field_account_asset_asset_level
+msgid "Level"
+msgstr "Nivel"
+
+#. module: public_budget
 #: model:public_budget.transaction_type,name:public_budget.purchase_type_lprivada_demo
 msgid "Licitación Privada"
 msgstr "Licitación Privada"
@@ -2351,6 +2356,7 @@ msgid "Notes"
 msgstr "Notas"
 
 #. module: public_budget
+#: model:ir.model.fields,field_description:public_budget.field_account_asset_asset_number
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_number
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_remit_number
 msgid "Number"
@@ -2831,6 +2837,21 @@ msgid "Reporte de Activos Excel"
 msgstr "Reporte de Activos Excel"
 
 #. module: public_budget
+#: model:ir.actions.report,name:public_budget.action_aeroo_report_asset_amend
+msgid "Reporte de Activos a Corregir"
+msgstr "Reporte de Activos a Corregir"
+
+#. module: public_budget
+#: model:ir.actions.report,name:public_budget.action_aeroo_report_asset_missing
+msgid "Reporte de Faltante de Activos"
+msgstr "Reporte de Faltante de Activos"
+
+#. module: public_budget
+#: model:ir.actions.report,name:public_budget.action_aeroo_report_asset_printing
+msgid "Reporte de Impresion de Etiquetas"
+msgstr "Reporte de Impresión de Etiquetas"
+
+#. module: public_budget
 #: model:ir.ui.menu,name:public_budget.menu_reports
 msgid "Reportes"
 msgstr "Reportes"
@@ -3086,7 +3107,7 @@ msgid "Tax"
 msgstr "Impuesto"
 
 #. module: public_budget
-#: code:addons/public_budget/models/account_asset.py:81
+#: code:addons/public_budget/models/account_asset.py:84
 #, python-format
 msgid "The User \"%s\" confirm transfer asset to the location \"%s\""
 msgstr ""
@@ -3367,7 +3388,7 @@ msgstr "En transito"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_prec_detail_account_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_funding_move_type
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_id_7355
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_id_7361
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_request_filter
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_return_filter
 msgid "Type"
@@ -3450,7 +3471,7 @@ msgstr "¿Con restricción de cantidad?"
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_account_payment_group_transaction_with_advance_payment
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment_7358
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment_7364
 msgid "With advance payment?"
 msgstr "Con Pago Anticipado?"
 
