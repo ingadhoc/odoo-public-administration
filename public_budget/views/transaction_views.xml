@@ -138,6 +138,16 @@
         </field>
     </record>
 
+    <record id="view_public_budget_transaction_form_portal" model="ir.ui.view">
+        <field name="name">public_budget.transaction.portal.form</field>
+        <field name="model">public_budget.transaction</field>
+        <field name="inherit_id" ref="view_public_budget_transaction_form"/>
+        <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+        <field name="arch" type="xml">
+            <field name="activity_ids" position="replace"/>
+        </field>
+    </record>
+
     <!-- TREEVIEW -->
     <record id="view_public_budget_transaction_tree" model="ir.ui.view">
         <field name="name">public_budget.transaction.tree</field>
