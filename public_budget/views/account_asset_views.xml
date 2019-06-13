@@ -75,7 +75,7 @@
         </field>
     </record>
 
-    <menuitem name="Asset" id="menu_asset" groups="group_asset_usuario" web_icon="public_budget,static/description/asset-icon.png" sequence="40"/>
+    <menuitem name="Asset" id="menu_asset" groups="group_asset_usuario,public_budget.group_portal_asset" web_icon="public_budget,static/description/asset-icon.png" sequence="40"/>
 
     <menuitem id="menu_account_asset" name="Assets" parent="menu_asset" sequence="2" action="account_asset.action_account_asset_asset_form"/>
     <menuitem id="menu_account_type_asset" name="Assets Types" parent="menu_asset" sequence="3" action="account_asset.action_account_asset_asset_list_normal_purchase"/>

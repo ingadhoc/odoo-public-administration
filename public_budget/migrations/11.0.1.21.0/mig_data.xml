@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="group_asset_usuario" model="res.groups">
+        <field name="implied_ids" eval="[(6, 0, [ref('base.group_user')])]"/>
+    </record>
+
+    <record id="group_asset_responsable_ubicacion" model="res.groups">
+        <field name="implied_ids" eval="[(6, 0, [ref('group_asset_usuario')])]"/>
+    </record>
+
+    <record id="expedient_in_user_locations_rule_only_read" model="ir.rule">
+        <field name="groups" eval="[(6, 0, [ref('group_expedient_by_locations_allow')])]"/>
+    </record>
+
+</odoo>
