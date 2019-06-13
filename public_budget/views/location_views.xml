@@ -42,6 +42,17 @@
         </field>
     </record>
 
+
+    <record id="view_public_budget_location_form_portal" model="ir.ui.view">
+        <field name="name">public_budget.location.portal.form</field>
+        <field name="model">public_budget.location</field>
+        <field name="inherit_id" ref="view_public_budget_location_form"/>
+        <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+        <field name="arch" type="xml">
+            <field name="activity_ids" position="replace"/>
+        </field>
+    </record>
+
     <!-- TREEVIEW -->
     <record id="view_public_budget_location_tree" model="ir.ui.view">
         <field name="name">public_budget.location.tree</field>
