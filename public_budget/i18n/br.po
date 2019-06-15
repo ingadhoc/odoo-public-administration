@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-10 17:49+0000\n"
+"POT-Creation-Date: 2019-06-14 15:02+0000\n"
 "PO-Revision-Date: 2019-01-18 20:37+0000\n"
 "Last-Translator: Irriep Nala Novram <allannkorh@yahoo.fr>, 2019\n"
 "Language-Team: Breton (https://www.transifex.com/adhoc/teams/46451/br/)\n"
@@ -38,6 +38,20 @@ msgstr ""
 #. module: public_budget
 #: model:ir.ui.view,arch_db:public_budget.view_advance_request_analysis_search
 msgid "Activas"
+msgstr ""
+
+#. module: public_budget
+#: model:ir.model.fields,field_description:public_budget.field_account_asset_asset_activity_ids
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_activity_ids
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_location_activity_ids
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_activity_ids
+#: model:ir.model.fields,field_description:public_budget.field_purchase_requisition_activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: public_budget
+#: model:ir.model,name:public_budget.model_mail_activity_mixin
+msgid "Activity Mixin"
 msgstr ""
 
 #. module: public_budget
@@ -591,7 +605,7 @@ msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_category_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_category_id_7514
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_category_id_7513
 msgid "Category"
 msgstr ""
 
@@ -1584,7 +1598,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_modification_detail_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_modification_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_pos_exc_rest_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_category_id_7401
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_category_id_7402
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_prec_detail_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_report_4_id
@@ -1593,7 +1607,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_make_invoice_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_mass_invoice_create_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_category_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_founder_id_7566
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_founder_id_7567
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_funding_move_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_inventory_rule_id
@@ -2162,6 +2176,33 @@ msgid "Name"
 msgstr ""
 
 #. module: public_budget
+#: model:ir.model.fields,field_description:public_budget.field_account_asset_asset_activity_date_deadline
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_activity_date_deadline
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_location_activity_date_deadline
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_activity_date_deadline
+#: model:ir.model.fields,field_description:public_budget.field_purchase_requisition_activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: public_budget
+#: model:ir.model.fields,field_description:public_budget.field_account_asset_asset_activity_summary
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_activity_summary
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_location_activity_summary
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_activity_summary
+#: model:ir.model.fields,field_description:public_budget.field_purchase_requisition_activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: public_budget
+#: model:ir.model.fields,field_description:public_budget.field_account_asset_asset_activity_type_id
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_activity_type_id
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_location_activity_type_id
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_activity_type_id
+#: model:ir.model.fields,field_description:public_budget.field_purchase_requisition_activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: public_budget
 #: code:addons/public_budget/models/funding_move.py:112
 #, python-format
 msgid "No Income account defined on the funding move or the budget"
@@ -2369,6 +2410,15 @@ msgid "Other"
 msgstr ""
 
 #. module: public_budget
+#: selection:account.asset.asset,activity_state:0
+#: selection:public_budget.expedient,activity_state:0
+#: selection:public_budget.location,activity_state:0
+#: selection:public_budget.transaction,activity_state:0
+#: selection:purchase.requisition,activity_state:0
+msgid "Overdue"
+msgstr ""
+
+#. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_overdue
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_expedient_filter
 msgid "Overdue?"
@@ -2525,8 +2575,22 @@ msgid "Pending Return Amount"
 msgstr ""
 
 #. module: public_budget
+#: selection:account.asset.asset,activity_state:0
+#: selection:public_budget.expedient,activity_state:0
+#: selection:public_budget.location,activity_state:0
+#: selection:public_budget.transaction,activity_state:0
+#: selection:purchase.requisition,activity_state:0
+msgid "Planned"
+msgstr ""
+
+#. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_preventive_avg
 msgid "Porc. Preventivo"
+msgstr ""
+
+#. module: public_budget
+#: model:res.groups,name:public_budget.group_portal_asset
+msgid "Portal - Activos"
 msgstr ""
 
 #. module: public_budget
@@ -2826,6 +2890,15 @@ msgid "Responsable Por Ubicacion"
 msgstr ""
 
 #. module: public_budget
+#: model:ir.model.fields,field_description:public_budget.field_account_asset_asset_activity_user_id
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_activity_user_id
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_location_activity_user_id
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_activity_user_id
+#: model:ir.model.fields,field_description:public_budget.field_purchase_requisition_activity_user_id
+msgid "Responsible"
+msgstr ""
+
+#. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_modification_rest_type
 msgid "Restriction Type"
 msgstr ""
@@ -2964,6 +3037,7 @@ msgid "Source Location"
 msgstr ""
 
 #. module: public_budget
+#: model:ir.model.fields,field_description:public_budget.field_account_asset_asset_activity_state
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_request_line_state
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_request_state
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_return_line_state
@@ -2971,14 +3045,31 @@ msgstr ""
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_detail_state
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_state
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_line_state
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_activity_state
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_state
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_funding_move_state
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_location_activity_state
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_preventive_line_state
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_remit_state
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_activity_state
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_state
+#: model:ir.model.fields,field_description:public_budget.field_purchase_requisition_activity_state
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_request_filter
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_return_filter
 msgid "State"
+msgstr ""
+
+#. module: public_budget
+#: model:ir.model.fields,help:public_budget.field_account_asset_asset_activity_state
+#: model:ir.model.fields,help:public_budget.field_public_budget_expedient_activity_state
+#: model:ir.model.fields,help:public_budget.field_public_budget_location_activity_state
+#: model:ir.model.fields,help:public_budget.field_public_budget_transaction_activity_state
+#: model:ir.model.fields,help:public_budget.field_purchase_requisition_activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
 msgstr ""
 
 #. module: public_budget
@@ -3179,6 +3270,15 @@ msgid ""
 msgstr ""
 
 #. module: public_budget
+#: selection:account.asset.asset,activity_state:0
+#: selection:public_budget.expedient,activity_state:0
+#: selection:public_budget.location,activity_state:0
+#: selection:public_budget.transaction,activity_state:0
+#: selection:purchase.requisition,activity_state:0
+msgid "Today"
+msgstr ""
+
+#. module: public_budget
 #: model:ir.ui.view,arch_db:public_budget.view_account_payment_group_tree
 #: model:ir.ui.view,arch_db:public_budget.view_budget_position_budget_tree
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_request_form
@@ -3288,14 +3388,14 @@ msgstr ""
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_advance_request_analysis_type_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_request_type_id_7085
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_request_type_id_7086
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_return_type_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_pos_exc_rest_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_prec_detail_account_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_funding_move_type
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_id_7361
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_id_7356
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_request_filter
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_return_filter
 msgid "Type"
@@ -3378,7 +3478,7 @@ msgstr ""
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_account_payment_group_transaction_with_advance_payment
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment_7364
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment_7359
 msgid "With advance payment?"
 msgstr ""
 
