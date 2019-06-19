@@ -128,13 +128,16 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
     @api.depends('transaction_id')
     def _compute_supplier_ids(self):
         for rec in self:
-            suppliers = rec.transaction_id.mapped(
-                'preventive_line_ids.definitive_line_ids').filtered(
-                lambda r: r.residual_amount != 0).mapped(
-                'supplier_id')
+            definitive_lines = rec.transaction_id.mapped(
+                'preventive_line_ids.definitive_line_ids')
+            env_all_mode = definitive_lines.env.all.mode
+            definitive_lines.env.all.mode = True
+            suppliers = definitive_lines.filtered(
+                lambda r: r.residual_amount != 0).mapped('supplier_id')
             rec.supplier_ids = suppliers
             if len(suppliers) == 1:
                 rec.supplier_id = suppliers.id
+            definitive_lines.env.all.mode = env_all_mode
 
     @api.onchange('supplier_id')
     def _compute_lines(self):
@@ -146,16 +149,15 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
                 'public_budget.definitive_line'].search([
                     ('transaction_id', '=', transaction_id),
                     ('supplier_id', '=', self.supplier_id.id),
+                    ('residual_amount', '!=', 0.0),
                 ])
             lines = []
             for line in definitive_lines:
-                # No lo buscamos arriba porque no es un campo stored
-                if line.residual_amount:
-                    values = {
-                        'definitive_line_id': line.id,
-                        'definitive_make_invoice_id': self.id,
-                    }
-                    lines.append((0, _, values))
+                values = {
+                    'definitive_line_id': line.id,
+                    'definitive_make_invoice_id': self.id,
+                }
+                lines.append((0, _, values))
             self.line_ids = lines
 
     @api.multi
