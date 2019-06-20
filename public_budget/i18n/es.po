@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-18 09:17+0000\n"
+"POT-Creation-Date: 2019-06-19 16:45+0000\n"
 "PO-Revision-Date: 2019-01-18 20:37+0000\n"
 "Last-Translator: Juan José Scarafía <scarafia.juanjose@gmail.com>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
@@ -609,7 +609,7 @@ msgstr "Categorías"
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_category_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_category_id_7513
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_category_id_7514
 msgid "Category"
 msgstr "Categoría"
 
@@ -1079,7 +1079,7 @@ msgid "Definitive Amount"
 msgstr "Definitivo"
 
 #. module: public_budget
-#: code:addons/public_budget/models/preventive_line.py:239
+#: code:addons/public_budget/models/preventive_line.py:241
 #, python-format
 msgid "Definitive Amount can't be greater than Preventive Amount"
 msgstr "El Monto Definitivo no puede superar el Monto Preventivo"
@@ -1616,7 +1616,7 @@ msgstr "Hasta Fecha"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_modification_detail_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_modification_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_pos_exc_rest_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_category_id_7402
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_category_id_7403
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_prec_detail_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_report_4_id
@@ -1625,7 +1625,7 @@ msgstr "Hasta Fecha"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_make_invoice_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_mass_invoice_create_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_category_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_founder_id_7567
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_founder_id_7568
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_funding_move_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_inventory_rule_id
@@ -1814,7 +1814,7 @@ msgstr ""
 "no se encuentra en una ubicación permitida de su usuario"
 
 #. module: public_budget
-#: code:addons/public_budget/wizards/transaction_definitive_make_invoice.py:166
+#: code:addons/public_budget/wizards/transaction_definitive_make_invoice.py:168
 #: code:addons/public_budget/wizards/transaction_definitive_mass_invoice_create.py:52
 #, python-format
 msgid ""
@@ -2415,7 +2415,7 @@ msgid "Observations"
 msgstr "Observaciones"
 
 #. module: public_budget
-#: code:addons/public_budget/wizards/transaction_definitive_make_invoice.py:177
+#: code:addons/public_budget/wizards/transaction_definitive_make_invoice.py:179
 #: code:addons/public_budget/wizards/transaction_definitive_mass_invoice_create.py:59
 #, python-format
 msgid ""
@@ -3079,7 +3079,7 @@ msgstr ""
 "Solo puede cambiar afectaciones definitivas si el presupuesto está abierto"
 
 #. module: public_budget
-#: code:addons/public_budget/models/preventive_line.py:248
+#: code:addons/public_budget/models/preventive_line.py:250
 #, python-format
 msgid ""
 "Solo puede cambiar afectaciones preventivas si el presupuesto está abierto"
@@ -3216,7 +3216,7 @@ msgid "The funding move must be in draft state for unlink !"
 msgstr "El movimiento de fondo debe estar en borrador para desvincular!"
 
 #. module: public_budget
-#: code:addons/public_budget/models/preventive_line.py:275
+#: code:addons/public_budget/models/preventive_line.py:277
 #, python-format
 msgid ""
 "The selected budget position (%s) has not a related assigment position!"
@@ -3225,7 +3225,7 @@ msgstr ""
 "Asignación Relacionada!"
 
 #. module: public_budget
-#: code:addons/public_budget/models/preventive_line.py:281
+#: code:addons/public_budget/models/preventive_line.py:283
 #, python-format
 msgid ""
 "There is not enough Balance Amount to assign (%s) to Budget Position '%s' (%s).\n"
@@ -3427,7 +3427,7 @@ msgid "Transaction"
 msgstr "Transacción"
 
 #. module: public_budget
-#: code:addons/public_budget/models/preventive_line.py:230
+#: code:addons/public_budget/models/preventive_line.py:232
 #, python-format
 msgid "Transaction Company and Account Company must be the same!"
 msgstr ""
@@ -3485,14 +3485,14 @@ msgstr "En transito"
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_advance_request_analysis_type_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_request_type_id_7086
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_request_type_id_7087
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_return_type_id
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_pos_exc_rest_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_prec_detail_account_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_funding_move_type
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_id_7362
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_id_7357
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_request_filter
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_return_filter
 msgid "Type"
@@ -3575,7 +3575,7 @@ msgstr "¿Con restricción de cantidad?"
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_account_payment_group_transaction_with_advance_payment
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment_7365
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment_7360
 msgid "With advance payment?"
 msgstr "Con Pago Anticipado?"
 
@@ -3651,7 +3651,7 @@ msgid "You can not delete a definitive line that has been invoiced"
 msgstr "No es posible borrar una línea definitiva que ya fue devengada."
 
 #. module: public_budget
-#: code:addons/public_budget/models/preventive_line.py:294
+#: code:addons/public_budget/models/preventive_line.py:296
 #, python-format
 msgid "You can not delete a preventive line that has definitive lines"
 msgstr "No puede borrar una línea preventiva que tiene líneas definitivas"
@@ -3666,7 +3666,7 @@ msgstr ""
 "\"Cancelado\"!"
 
 #. module: public_budget
-#: code:addons/public_budget/wizards/transaction_definitive_make_invoice.py:185
+#: code:addons/public_budget/wizards/transaction_definitive_make_invoice.py:187
 #, python-format
 msgid ""
 "You can not invoice more than Advance Remaining Amount!\n"
@@ -3745,7 +3745,7 @@ msgstr ""
 "\"Vistas\"."
 
 #. module: public_budget
-#: code:addons/public_budget/wizards/transaction_definitive_make_invoice.py:200
+#: code:addons/public_budget/wizards/transaction_definitive_make_invoice.py:202
 #, python-format
 msgid "You should set at least one line with amount greater than 0"
 msgstr "Debes completar al menos una línea con un monto mayor a 0"
