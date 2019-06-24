@@ -1,5 +1,6 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
+from odoo.tools import float_is_zero
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -39,6 +40,10 @@ class AccountInvoiceLine(models.Model):
                 lambda x: x.invoice_id.state not in ['draft', 'cancel']):
             _logger.info('Getting amounts for invoice line %s' % rec.id)
             invoice_total = rec.invoice_id.amount_total
+            if float_is_zero(
+                invoice_total,
+                    precision_rounding=rec.currency_id.rounding):
+                continue
             to_date = rec._context.get('analysis_to_date', False)
             # if to_date, then we dont get residual from invoice,
             # we get from helper function
