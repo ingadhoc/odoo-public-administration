@@ -4,6 +4,7 @@ from odoo import fields, models, api
 class PublicBudgetSubsidyResolution(models.Model):
 
     _name = 'public_budget.subsidy.resolution'
+    _order = 'date desc'
 
     name = fields.Char(
         'Name',
