@@ -39,3 +39,15 @@ class PurchaseRequisitionLine(models.Model):
                 'name': self.name,
             })
         return res
+
+    @api.onchange('product_id')
+    def _onchange_product_id(self):
+        super()._onchange_product_id()
+        if self.product_id:
+            product_lang = self.product_id.with_context(
+                lang=self.requisition_id.vendor_id.lang,
+                partner_id=self.requisition_id.vendor_id.id,
+            )
+            self.name = product_lang.display_name
+            if product_lang.description_purchase:
+                self.name += '\n' + product_lang.description_purchase
