@@ -5,14 +5,6 @@
         <field eval="False" name="perm_unlink"/>
     </record>
 
-    <record id="expedient_in_user_locations_rule" model="ir.rule">
-        <field name="name">Expedient only in user locations</field>
-        <field name="model_id" ref="public_budget.model_public_budget_expedient"/>
-        <field eval="True" name="global"/>
-        <field eval="False" name="perm_read"/>
-        <field name="domain_force">['|' ,('current_location_id', 'in', user.location_ids.ids), ('current_location_id', '=', False)]</field>
-    </record>
-
     <!-- portal expedient users can access all partners, we revert original portal group rule -->
     <record model="ir.rule" id="res_partner_portal_expedient_rule">
         <field name="name">res_partner: portal expedient</field>

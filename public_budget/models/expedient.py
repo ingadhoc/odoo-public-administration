@@ -23,7 +23,8 @@ class PublicBudgetExpedient(models.Model):
     issue_date = fields.Datetime(
         readonly=True,
         required=True,
-        default=fields.Datetime.now
+        default=fields.Datetime.now,
+        copy=False,
     )
     cover = fields.Char(
         compute='_compute_cover',
@@ -217,6 +218,8 @@ class PublicBudgetExpedient(models.Model):
 
     @api.multi
     def write(self, vals):
+        if 'message_follower_ids' not in vals:
+            self.check_location_allowed_for_current_user()
         if 'pages' in vals:
             new_pages = vals.get('pages')
             for record in self:
@@ -224,7 +227,7 @@ class PublicBudgetExpedient(models.Model):
                     raise ValidationError(_('No puede disminuir la cantidad '
                                             'de páginas de un '
                                             'expediente'))
-        return super(PublicBudgetExpedient, self).write(vals)
+        return super().write(vals)
 
     @api.multi
     def check_expedients_exist(self):
@@ -314,18 +317,25 @@ class PublicBudgetExpedient(models.Model):
             'ir.sequence'].with_context(
                 ir_sequence_date=vals.get('issue_date')).next_by_code(
                 'public_budget.expedient') or '/'
-        return super(PublicBudgetExpedient, self).create(vals)
+        rec = super(PublicBudgetExpedient, self).create(vals)
+        rec.check_location_allowed_for_current_user()
+        return rec
 
     @api.multi
-    def check_location_allowed_for_current_user(self):
+    def check_location_allowed_for_current_user(self, msg=None):
         """This method Validate if the current user it's belongs
          to the users allowed in the current location of this expedient
         """
-        self.ensure_one()
-        if not self.current_location_id or\
-                not self.current_location_id.user_ids:
-            return True
-        if self.env.user.id not in self.current_location_id.user_ids.ids:
-            return False
-        else:
-            return True
+        for rec in self.filtered(
+                lambda x: x.current_location_id
+                and x.current_location_id.user_ids and
+                x.env.user not in x.current_location_id.user_ids):
+            raise ValidationError(msg or _(
+                'Can not complete this operation because the location the '
+                'expedient is not on your assigned locations'))
+        return True
+
+    @api.multi
+    def unlink(self):
+        self.check_location_allowed_for_current_user()
+        return super().unlink()
