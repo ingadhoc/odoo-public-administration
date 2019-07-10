@@ -2,11 +2,17 @@
 # For copyright and license notices, see __manifest__.py file in module root
 # directory
 ##############################################################################
-from odoo import models, api
+from odoo import models, fields, api, _
+from odoo.exceptions import UserError
 
 
 class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
+
+    expedient_id = fields.Many2one(
+        'public_budget.expedient',
+        copy=False,
+    )
 
     @api.onchange('requisition_id')
     def _onchange_requisition_id(self):
@@ -14,3 +20,14 @@ class PurchaseOrder(models.Model):
         if self.requisition_id.type_id.line_copy == 'copy'\
                 and self.requisition_id.type_id.price_unit_copy != 'copy':
             self.order_line.update({'price_unit': 0.0})
+
+    def check_if_expedients_exist(self):
+        purchase_orders_expedient = self.filtered('expedient_id')
+        if purchase_orders_expedient:
+            raise UserError(
+                _("This Purchase orders has expedient generated:\n * %s \n\n"
+                    "Only one expedient for Purchase Order are allowed,"
+                    " place select other Purchase orders.") %
+                ("\n* ".join(
+                    [p.name + '(%s)' % (p.expedient_id.number)
+                     for p in purchase_orders_expedient])))

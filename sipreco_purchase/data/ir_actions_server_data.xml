@@ -24,6 +24,7 @@ for rec in records:
 requisition = env['purchase.requisition'].create({
     'line_ids': lines,
     'company_id': env.user.company_id.id,
+    'route_id': records.mapped('route_id') and records.mapped('route_id')[0].id or False,
     # permitimos varias a la vez por defecto, total controlamos cantidades por afuera.
     'picking_type_id': picking_type.id,
     'description': ', '.join(records.mapped('order_id.description'))
@@ -51,6 +52,33 @@ pr.write({'name': ','.join(records.mapped('name'))})
 (records - pr).mapped('manual_request_ids').write({'manual_requisition_id': pr.id})
 (records - pr).mapped('purchase_ids').write({'requisition_id': pr.id})
 (records - pr).unlink()
+        </field>
+    </record>
+
+    <!-- Confirmar ordenes de compra -->
+    <record model="ir.actions.server" id="action_confirm_purchase_orders">
+        <field name="name">Confirmar Ordenes</field>
+        <field name="model_id" ref="purchase.model_purchase_order"/>
+        <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+        <field name="groups_id" eval="[(4, ref('purchase.group_purchase_user'))]"/>
+        <field name="state">code</field>
+        <field name="code">
+records.button_confirm()
+        </field>
+    </record>
+
+    <!-- Generar expédientes -->
+    <record model="ir.actions.server" id="action_generate_expedient">
+        <field name="name">Generar Expedientes</field>
+        <field name="model_id" ref="purchase.model_purchase_order"/>
+        <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+        <field name="state">code</field>
+        <field name="code">
+action = env.ref('sipreco_purchase.action_create_expedients_wizard')
+action = action.read()[0]
+purchase_orders = records.filtered(lambda x: x.state in ['purchase',  'done'])
+purchase_orders.check_if_expedients_exist()
+action['context'] = {'active_ids': purchase_orders.ids}
         </field>
     </record>
 
