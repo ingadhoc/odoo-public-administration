@@ -28,6 +28,15 @@
             <xpath expr="//field[@name='order_line']/tree//field[@name='name']" position="after">
                 <field name="brand"/>
             </xpath>
+            <button id="draft_confirm" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user</attribute>
+            </button>
+            <button id="bid_confirm" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user</attribute>
+            </button>
+            <field name="requisition_id" position="after">
+                <field name="expedient_id" readonly="1" attrs="{'invisible':[('expedient_id', '=', False)]}"/>
+            </field>
         </field>
     </record>
 

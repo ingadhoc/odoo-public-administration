@@ -63,6 +63,11 @@ class PurchaseRequisition(models.Model):
         'printed?',
     )
 
+    route_id = fields.Many2one(
+        'stock.location.route',
+        ondelete='restrict',
+    )
+
     @api.depends('line_ids')
     def _compute_amount_total(self):
         for rec in self.filtered('line_ids'):

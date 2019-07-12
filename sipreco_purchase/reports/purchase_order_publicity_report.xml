@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="action_aeroo_purchase_order_report" model="ir.actions.report">
+        <field name="name">Pedido de Compra Publicidad</field>
+        <field name="model">purchase.order</field>
+        <field name="report_name">purchase_order_report</field>
+        <field name="report_type">aeroo</field>
+        <field name="in_format">oo-odt</field>
+        <!-- <field name="parser_loc">l10n_ar_aeroo_base/parser.py</field> -->
+        <!-- <field name="parser_state">loc</field> -->
+        <field name="parser_state">default</field>
+        <field name="report_file">sipreco_purchase/reports/purchase_order_publicity_report.odt</field>
+        <field name="tml_source">file</field>
+        <field name="out_format" ref="report_aeroo.report_mimetypes_doc_odt"/>
+        <field name="styles_mode">specified</field>
+        <field name="stylesheet_id" ref="public_budget.sipreco_stylesheet"/>
+        <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>
