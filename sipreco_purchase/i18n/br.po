@@ -3,9 +3,7 @@
 # * sipreco_purchase
 # 
 # Translators:
-# Nicolas Mac Rouillon <nmr@ingadhoc.com>, 2019
-# Juan José Scarafía <scarafia.juanjose@gmail.com>, 2019
-# Katherine Zaoral <katherine.zaoral@gmail.com>, 2019
+# Irriep Nala Novram <allannkorh@yahoo.fr>, 2019
 # 
 msgid ""
 msgstr ""
@@ -13,13 +11,13 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-07-12 19:21+0000\n"
 "PO-Revision-Date: 2019-02-12 12:14+0000\n"
-"Last-Translator: Katherine Zaoral <katherine.zaoral@gmail.com>, 2019\n"
-"Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
+"Last-Translator: Irriep Nala Novram <allannkorh@yahoo.fr>, 2019\n"
+"Language-Team: Breton (https://www.transifex.com/adhoc/teams/46451/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: br\n"
+"Plural-Forms: nplurals=5; plural=((n%10 == 1) && (n%100 != 11) && (n%100 !=71) && (n%100 !=91) ? 0 :(n%10 == 2) && (n%100 != 12) && (n%100 !=72) && (n%100 !=92) ? 1 :(n%10 ==3 || n%10==4 || n%10==9) && (n%100 < 10 || n% 100 > 19) && (n%100 < 70 || n%100 > 79) && (n%100 < 90 || n%100 > 99) ? 2 :(n != 0 && n % 1000000 == 0) ? 3 : 4);\n"
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_form
@@ -28,9 +26,6 @@ msgid ""
 "podrán generar nuevas ordenes de compra. Esto no puede deshacerse. Seguro "
 "desea continuar?"
 msgstr ""
-"ATENCIÓN: Se va a proceder a la selección de las ordenes de compra. No se "
-"podrán generar nuevas ordenes de compra. Esto no puede deshacerse. Seguro "
-"desea continuar?"
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_form
@@ -38,29 +33,27 @@ msgid ""
 "ATENCIÓN: Se van a cancelar las solicitudes de compra y todos los "
 "requerimientos asociados. Esto no puede deshacerse. Seguro desea continuar?"
 msgstr ""
-"ATENCIÓN: Se van a cancelar las solicitudes de compra y todos los "
-"requerimientos asociados. Esto no puede deshacerse. Seguro desea continuar?"
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_purchase_requisition_amount_total
 msgid "Amount Total"
-msgstr "Monto Total"
+msgstr ""
 
 #. module: sipreco_purchase
 #: code:addons/sipreco_purchase/models/purchase_requisition.py:79
 #, python-format
 msgid "Antes de revisar debe tener establecido un\"Tipo\""
-msgstr "Antes de revisar debe tener establecido un\"Tipo\""
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_stock_location_route_stock_request_selectable
 msgid "Applicable on Stock Requests"
-msgstr "Aplicable en Requerimientos de Compra"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:res.groups,name:sipreco_purchase.group_approve_purhcase_req
 msgid "Aprobar Solicitudes de Compra"
-msgstr "Aprobar Solicitudes de Compra"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_create_expedients_wizard_form
@@ -75,32 +68,32 @@ msgstr ""
 #. module: sipreco_purchase
 #: model:res.groups,name:sipreco_purchase.group_requester
 msgid "Base Requirente"
-msgstr "Base Requirente"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_purchase_order_line_brand
 msgid "Brand"
-msgstr "Marca"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model,name:sipreco_purchase.model_public_budget_transaction
 msgid "Budget Transaction"
-msgstr "Transacción Presupuestaria"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_form
 msgid "Cancel"
-msgstr "Cancelado"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_create_expedients_wizard_form
 msgid "Cancelar"
-msgstr "Cancelar"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_public_budget_create_expedients_wizard_category_id
 msgid "Category"
-msgstr "Categoría"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,help:sipreco_purchase.field_stock_request_rule_id
@@ -109,19 +102,16 @@ msgid ""
 " can be manually set by the procurement manager to force an unusual "
 "behavior."
 msgstr ""
-"Regla elegida para la resolución de procuramiento. Usualmente elegida por el"
-" sistema pero puede ser manualmente seteada por el responsable de "
-"procuramientos para forzar un comportamiento inusual."
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_form
 msgid "Confirm"
-msgstr "Confirmar"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_create_expedients_wizard_form
 msgid "Confirmar"
-msgstr "Confirmar"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.actions.server,name:sipreco_purchase.action_confirm_purchase_orders
@@ -131,58 +121,58 @@ msgstr ""
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_stock_picking_type_count_pending_requests
 msgid "Count Pending Requests"
-msgstr "Cuenta de Requerimientos Pendientes"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.actions.server,name:sipreco_purchase.action_create_purchase_requisition
 msgid "Crear Solicitud de Compra"
-msgstr "Crear Solicitud de Compra"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_public_budget_create_expedients_wizard_create_uid
 msgid "Created by"
-msgstr "Creado por"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_public_budget_create_expedients_wizard_create_date
 msgid "Created on"
-msgstr "Creado en"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_purchase_requisition_line_name
 #: model:ir.model.fields,field_description:sipreco_purchase.field_stock_request_description
 msgid "Description"
-msgstr "Descripción"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_public_budget_create_expedients_wizard_display_name
 msgid "Display Name"
-msgstr "Nombre mostrado"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:stock.picking.type,name:sipreco_purchase.stock_picking_type_economato
 msgid "Economáto"
-msgstr "Economáto"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_purchase_order_expedient_id
 msgid "Expedient"
-msgstr "Expediente"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_public_budget_create_expedients_wizard_first_location_id
 msgid "First Location"
-msgstr "Primer Ubicación"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.product_template_kanban_stock_view
 msgid "Forecasted:"
-msgstr "Pronosticado:"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_public_budget_create_expedients_wizard_founder_id
 msgid "Founder"
-msgstr "Causante"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.actions.server,name:sipreco_purchase.action_generate_expedient
@@ -197,22 +187,22 @@ msgstr "ID"
 #. module: sipreco_purchase
 #: model:stock.picking.type,name:sipreco_purchase.stock_picking_type_informatica
 msgid "Informática"
-msgstr "Informática"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_filter
 msgid "Inspected"
-msgstr "Revisado"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_purchase_requisition_inspected
 msgid "Inspected?"
-msgstr "¿Revisado?"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model,name:sipreco_purchase.model_stock_location_route
 msgid "Inventory Routes"
-msgstr "Rutas de inventario"
+msgstr ""
 
 #. module: sipreco_purchase
 #: code:addons/sipreco_purchase/wizards/create_expedients_wizard.py:45
@@ -223,59 +213,59 @@ msgstr ""
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_public_budget_create_expedients_wizard___last_update
 msgid "Last Modified on"
-msgstr "Última Modifiación en"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_public_budget_create_expedients_wizard_write_uid
 msgid "Last Updated by"
-msgstr "Última actualización de"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_public_budget_create_expedients_wizard_write_date
 msgid "Last Updated on"
-msgstr "Última actualización en"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_stock_request_order_description
 msgid "Motivacion"
-msgstr "Motivación"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_filter
 msgid "Motivacion de la solicitud"
-msgstr "Motivación de la solicitud"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.stock_request_order_form
 msgid "Motivacion del Requerimiento"
-msgstr "Motivación del Requerimiento"
+msgstr ""
 
 #. module: sipreco_purchase
 #: code:addons/sipreco_purchase/models/purchase_requisition.py:105
 #, python-format
 msgid "No se puede cerrar la licitación si no se solicitaron presupuestos"
-msgstr "No se puede cerrar la licitación si no se solicitaron presupuestos"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_filter
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_tree
 msgid "Numero de Solicitud"
-msgstr "Numero de Solicitud"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.product_template_kanban_stock_view
 msgid "On hand:"
-msgstr "En mano:"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_public_budget_create_expedients_wizard_pages
 msgid "Pages"
-msgstr "Folios"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_stock_request_partner_id
 msgid "Partner"
-msgstr "Solicitante"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.actions.report,name:sipreco_purchase.action_aeroo_purchase_order_report
@@ -285,130 +275,130 @@ msgstr ""
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.stock_request_search
 msgid "Pending"
-msgstr "Pendiente"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.stock_picking_type_kanban
 msgid "Pending Procurements"
-msgstr "Requerimientos Pendientes"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_public_budget_users_form
 msgid "Picking Types"
-msgstr "Tipos de albarán"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:res.groups,name:sipreco_purchase.group_portal_requester
 msgid "Portal - Requirente"
-msgstr "Portal - Requirente"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_purchase_requisition_type_price_unit_copy
 msgid "Price Unit"
-msgstr "Precio Unitario"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_form
 msgid "Print"
-msgstr "Imprimir"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model,name:sipreco_purchase.model_procurement_rule
 msgid "Procurement Rule"
-msgstr "Regla de Abastecimiento"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_form
 msgid "Procurements"
-msgstr "Abastecimientos"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model,name:sipreco_purchase.model_product_product
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_filter
 msgid "Product"
-msgstr "Producto"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_filter
 msgid "Product Description"
-msgstr "Descripción del Producto"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:product.product,name:sipreco_purchase.product_of_economato_1
 #: model:product.template,name:sipreco_purchase.product_of_economato_1_product_template
 msgid "Producto de Economato 1"
-msgstr "Producto de Economato 1"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:product.product,name:sipreco_purchase.product_of_economato_2
 #: model:product.template,name:sipreco_purchase.product_of_economato_2_product_template
 msgid "Producto de Economato 2"
-msgstr "Producto de Economato 2"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:product.product,name:sipreco_purchase.product_of_informatica_1
 #: model:product.template,name:sipreco_purchase.product_of_informatica_1_product_template
 msgid "Producto de Informática 1"
-msgstr "Producto de Informática 1"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:product.product,name:sipreco_purchase.product_of_secretarias
 #: model:product.template,name:sipreco_purchase.product_of_secretarias_product_template
 msgid "Producto de Secretarías"
-msgstr "Producto de Secretarías"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model,name:sipreco_purchase.model_purchase_requisition_type
 msgid "Purchase Agreement Type"
-msgstr "Tipo de acuerdo de compra"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_public_budget_transaction_form
 msgid "Purchase Agreements"
-msgstr "Solicitudes de Compras"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model,name:sipreco_purchase.model_purchase_order
 #: model:ir.model.fields,field_description:sipreco_purchase.field_public_budget_create_expedients_wizard_purchase_order_ids
 msgid "Purchase Order"
-msgstr "Pedido de Compra"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model,name:sipreco_purchase.model_purchase_order_line
 msgid "Purchase Order Line"
-msgstr "Linea de Pedido de Compra"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model,name:sipreco_purchase.model_purchase_requisition
 msgid "Purchase Requisition"
-msgstr "Solicitud de compra"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model,name:sipreco_purchase.model_purchase_requisition_line
 msgid "Purchase Requisition Line"
-msgstr "Línea solicitud de compra"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_public_budget_create_expedients_wizard_reference
 msgid "Reference"
-msgstr "Referencia"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_purchase_requisition_manual_request_ids
 msgid "Request"
-msgstr "Requerimiento"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_stock_request_order_partner_id
 #: model:ir.model.fields,field_description:sipreco_purchase.field_stock_request_requirement_id
 #: model:res.groups,name:sipreco_purchase.group_requester_employee
 msgid "Requirente"
-msgstr "Requirente"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_res_users_picking_type_ids
 msgid "Restricted Picking Types"
-msgstr "Tipos de albarán "
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_purchase_requisition_route_id
@@ -418,104 +408,104 @@ msgstr ""
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_stock_request_rule_id
 msgid "Rule"
-msgstr "Regla"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:procurement.rule,name:sipreco_purchase.procurement_rule_economato
 msgid "SIPRECO: Stock (Economato) -> Customers"
-msgstr "SIPRECO: Stock (Economato) -> Customers"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:procurement.rule,name:sipreco_purchase.procurement_rule_informatica
 msgid "SIPRECO: Stock (Informática) -> Customers"
-msgstr "SIPRECO: Stock (Informática) -> Customers"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:procurement.rule,name:sipreco_purchase.procurement_rule_sec_administrativa
 msgid "SIPRECO: Stock (Sec. Administrativa) -> Customers"
-msgstr "SIPRECO: Stock (Sec. Administrativa) -> Customers"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:procurement.rule,name:sipreco_purchase.procurement_rule_sec_parlamentaria
 msgid "SIPRECO: Stock (Sec. Parlamentaria) -> Customers"
-msgstr "SIPRECO: Stock (Sec. Parlamentaria) -> Customers"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:stock.location.route,name:sipreco_purchase.stock_location_rute_economato
 msgid "SIPRECO: Sólo enviar (Economato)"
-msgstr "SIPRECO: Sólo enviar (Economato)"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:stock.location.route,name:sipreco_purchase.stock_location_rute_informatica
 msgid "SIPRECO: Sólo enviar (Informática)"
-msgstr "SIPRECO: Sólo enviar (Informática)"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:stock.location.route,name:sipreco_purchase.stock_location_rute_sec_administrativa
 msgid "SIPRECO: Sólo enviar (Secretaría Administrativa)"
-msgstr "SIPRECO: Sólo enviar (Secretaría Administrativa)"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:stock.location.route,name:sipreco_purchase.stock_location_rute_sec_parlamentaria
 msgid "SIPRECO: Sólo enviar (Secretaría Parlamentaria)"
-msgstr "SIPRECO: Sólo enviar (Secretaría Parlamentaria)"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:stock.picking.type,name:sipreco_purchase.stock_picking_type_sec_administrativa
 msgid "Secretaría Administrativa"
-msgstr "Secretaría Administrativa"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:stock.picking.type,name:sipreco_purchase.stock_picking_type_sec_parlamentaria
 msgid "Secretaría Parlamentaria"
-msgstr "Secretaría Parlamentaria"
+msgstr ""
 
 #. module: sipreco_purchase
 #: selection:purchase.requisition.type,price_unit_copy:0
 msgid "Set price manually"
-msgstr "Establecer el precio manualmente"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.actions.report,name:sipreco_purchase.action_aeroo_purchase_requisition_report
 #: model:ir.model.fields,field_description:sipreco_purchase.field_stock_request_manual_requisition_id
 msgid "Solicitud de Compra"
-msgstr "Solicitud de Compra"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_purchase_requisition_date
 msgid "Start Date"
-msgstr "Fecha de creación"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model,name:sipreco_purchase.model_stock_request
 msgid "Stock Request"
-msgstr "Requerimiento de Stock"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model,name:sipreco_purchase.model_stock_request_order
 msgid "Stock Request Order"
-msgstr "Orden de Requerimiento de Stock"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.stock_location_route_form_view_inherit
 #: model:ir.ui.view,arch_db:sipreco_purchase.stock_request_order_filter
 msgid "Stock Requests"
-msgstr "Requerimientos de Stock"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.stock_request_order_filter
 msgid "Stock Requests Order Search"
-msgstr "Búsqueda de Órdenes de Requerimiento de Stock"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_purchase_requisition_line_subtotal
 msgid "Subtotal"
-msgstr "Subtotal"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model,name:sipreco_purchase.model_stock_picking_type
 msgid "The operation type determines the picking view"
-msgstr "El tipo de Operación determina la vista de picking"
+msgstr ""
 
 #. module: sipreco_purchase
 #: code:addons/sipreco_purchase/models/purchase_order.py:28
@@ -530,85 +520,85 @@ msgstr ""
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_form
 msgid "To Draft"
-msgstr "A Borrador"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_form
 msgid "To Inspected"
-msgstr "Marcar Revisado"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_form
 msgid "Total"
-msgstr "Total"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_purchase_requisition_expedient_id
 msgid "Tramite Administrativo"
-msgstr "Tramite Administrativo"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_form
 msgid "Transactions"
-msgstr "Transacciones"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_purchase_requisition_transaction_type_id
 msgid "Type"
-msgstr "Tipo"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.actions.server,name:sipreco_purchase.action_merge_purchase_requisition
 msgid "Unir Solicitudes de compra"
-msgstr "Unir Solicitudes de compra"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_stock_request_price_unit
 msgid "Unit Price"
-msgstr "Precio unidad"
+msgstr ""
 
 #. module: sipreco_purchase
 #: selection:purchase.requisition.type,price_unit_copy:0
 msgid "Use price of agreement"
-msgstr "Usar precio del acuerdo"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_purchase_requisition_user_confirmed_id
 msgid "User Confirmed"
-msgstr "Confirmado por"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_purchase_requisition_user_inspected_id
 msgid "User Inspected"
-msgstr "Revisado por"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_public_budget_create_expedients_wizard_user_location_ids
 msgid "User Location"
-msgstr "Ubicación de usuario"
+msgstr ""
 
 #. module: sipreco_purchase
 #: code:addons/sipreco_purchase/models/purchase_requisition.py:126
 #, python-format
 msgid "User: %s printed the report: %s"
-msgstr "Usuario: %s Imprimió el reporte: %s"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model,name:sipreco_purchase.model_res_users
 #: model:ir.model.fields,field_description:sipreco_purchase.field_stock_picking_type_user_ids
 msgid "Users"
-msgstr "Usuarios"
+msgstr ""
 
 #. module: sipreco_purchase
 #: code:addons/sipreco_purchase/models/stock_request.py:59
 #, python-format
 msgid "You can not create a request without quantity!"
-msgstr "No puede crear un requerimiento sin cantidad!"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_purchase_requisition_printed
 msgid "printed?"
-msgstr "¿Reporte Impreso?"
+msgstr ""
 
 #. module: sipreco_purchase
 #: model:ir.model,name:sipreco_purchase.model_public_budget_create_expedients_wizard
