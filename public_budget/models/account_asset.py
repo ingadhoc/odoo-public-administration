@@ -41,7 +41,15 @@ class AccountAssetAsset(models.Model):
     transit = fields.Boolean(
         readonly=True,
     )
-
+    comodato = fields.Boolean(
+        'Comodato?'
+    )
+    patrimonial = fields.Boolean(
+        'Patrimonial?'
+    )
+    reportable = fields.Boolean(
+        'Reportable?'
+    )
     transaction_ids = fields.One2many(
         'public_budget.transaction',
         compute='_compute_transaction_ids',
