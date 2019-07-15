@@ -72,6 +72,11 @@
             <field name="message_follower_ids" position="after">
                 <field name="activity_ids" widget="mail_activity"/>
             </field>
+            <field name="invoice_id" position="after">
+                <field name="comodato"/>
+                <field name="patrimonial"/>
+                <field name="reportable"/>
+            </field>
         </field>
     </record>
 
