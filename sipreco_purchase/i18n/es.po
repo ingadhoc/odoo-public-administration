@@ -3,17 +3,17 @@
 # * sipreco_purchase
 # 
 # Translators:
-# Nicolas Mac Rouillon <nmr@ingadhoc.com>, 2019
 # Juan José Scarafía <scarafia.juanjose@gmail.com>, 2019
 # Katherine Zaoral <katherine.zaoral@gmail.com>, 2019
+# Nicolas Mac Rouillon <nmr@ingadhoc.com>, 2019
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-12 19:21+0000\n"
+"POT-Creation-Date: 2019-07-15 15:01+0000\n"
 "PO-Revision-Date: 2019-02-12 12:14+0000\n"
-"Last-Translator: Katherine Zaoral <katherine.zaoral@gmail.com>, 2019\n"
+"Last-Translator: Nicolas Mac Rouillon <nmr@ingadhoc.com>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -65,12 +65,12 @@ msgstr "Aprobar Solicitudes de Compra"
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_create_expedients_wizard_form
 msgid "Asistente de Generacion de Expedientes"
-msgstr ""
+msgstr "Asistente de Generación de Expedientes"
 
 #. module: sipreco_purchase
 #: model:ir.actions.act_window,name:sipreco_purchase.action_create_expedients_wizard
 msgid "Asistente de creacion de Expedientes"
-msgstr ""
+msgstr "Asistente de creacion de Expedientes"
 
 #. module: sipreco_purchase
 #: model:res.groups,name:sipreco_purchase.group_requester
@@ -126,7 +126,7 @@ msgstr "Confirmar"
 #. module: sipreco_purchase
 #: model:ir.actions.server,name:sipreco_purchase.action_confirm_purchase_orders
 msgid "Confirmar Ordenes"
-msgstr ""
+msgstr "Confirmar Ordenes"
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_stock_picking_type_count_pending_requests
@@ -187,7 +187,7 @@ msgstr "Causante"
 #. module: sipreco_purchase
 #: model:ir.actions.server,name:sipreco_purchase.action_generate_expedient
 msgid "Generar Expedientes"
-msgstr ""
+msgstr "Generar Expedientes"
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_public_budget_create_expedients_wizard_id
@@ -218,7 +218,7 @@ msgstr "Rutas de inventario"
 #: code:addons/sipreco_purchase/wizards/create_expedients_wizard.py:45
 #, python-format
 msgid "It has no confirmed OC to generate an expedient"
-msgstr ""
+msgstr "No tiene OC confirmada para generar un expediente."
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_public_budget_create_expedients_wizard___last_update
@@ -280,7 +280,7 @@ msgstr "Solicitante"
 #. module: sipreco_purchase
 #: model:ir.actions.report,name:sipreco_purchase.action_aeroo_purchase_order_report
 msgid "Pedido de Compra Publicidad"
-msgstr ""
+msgstr "Pedido de Compra Publicidad"
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.stock_request_search
@@ -413,7 +413,7 @@ msgstr "Tipos de albarán "
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_purchase_requisition_route_id
 msgid "Route"
-msgstr ""
+msgstr "Unidad de compra"
 
 #. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_stock_request_rule_id
@@ -526,6 +526,10 @@ msgid ""
 "\n"
 "Only one expedient for Purchase Order are allowed, place select other Purchase orders."
 msgstr ""
+"Estas Órdenes ya tienen un expediente generado:\n"
+" * %s \n"
+"\n"
+"Solo se permite un expediente para la orden de compra, seleccione otras órdenes de compra."
 
 #. module: sipreco_purchase
 #: model:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_form
@@ -613,4 +617,4 @@ msgstr "¿Reporte Impreso?"
 #. module: sipreco_purchase
 #: model:ir.model,name:sipreco_purchase.model_public_budget_create_expedients_wizard
 msgid "public_budget.create.expedients.wizard"
-msgstr ""
+msgstr "public_budget.create.expedients.wizard"
