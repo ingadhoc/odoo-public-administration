@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-12 19:21+0000\n"
+"POT-Creation-Date: 2019-07-16 09:16+0000\n"
 "PO-Revision-Date: 2019-01-18 20:37+0000\n"
 "Last-Translator: Nicolas Mac Rouillon <nmr@ingadhoc.com>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
@@ -619,7 +619,7 @@ msgstr "Categorías"
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_category_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_category_id_7531
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_category_id_7537
 msgid "Category"
 msgstr "Categoría"
 
@@ -755,6 +755,11 @@ msgstr "Cerrado"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_code
 msgid "Code"
 msgstr "Código"
+
+#. module: public_budget
+#: model:ir.model.fields,field_description:public_budget.field_account_asset_asset_comodato
+msgid "Comodato?"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.model,name:public_budget.model_res_company
@@ -2589,6 +2594,11 @@ msgid "Partner de Transacción"
 msgstr "Partner de Transacción"
 
 #. module: public_budget
+#: model:ir.model.fields,field_description:public_budget.field_account_asset_asset_patrimonial
+msgid "Patrimonial?"
+msgstr ""
+
+#. module: public_budget
 #: selection:public_budget.expedient,type:0
 msgid "Payment"
 msgstr "Pago"
@@ -2889,6 +2899,11 @@ msgstr "Reporte de Remito"
 #: model:ir.ui.menu,name:public_budget.menu_remits
 msgid "Remits"
 msgstr "Remitos"
+
+#. module: public_budget
+#: model:ir.model.fields,field_description:public_budget.field_account_asset_asset_reportable
+msgid "Reportable?"
+msgstr ""
 
 #. module: public_budget
 #: model:ir.actions.report,name:public_budget.action_aeroo_report_asset
@@ -3212,7 +3227,7 @@ msgid "Tax"
 msgstr "Impuesto"
 
 #. module: public_budget
-#: code:addons/public_budget/models/account_asset.py:84
+#: code:addons/public_budget/models/account_asset.py:92
 #, python-format
 msgid "The User \"%s\" confirm transfer asset to the location \"%s\""
 msgstr ""
