@@ -47,3 +47,4 @@ access_procurement_group_portal,public_budget_procurement_group_portal,stock.mod
 access_stock_picking_type_portal,public_budget_stock_picking_type.portal,stock.model_stock_picking_type,group_portal_requester,1,0,0,0
 purchase.access_purchase_order_stock_worker,purchase.order,model_purchase_order,stock.group_stock_user,1,1,1,1
 purchase.access_purchase_order_line_stock_worker,purchase.order.line,purchase.model_purchase_order_line,stock.group_stock_user,1,1,1,1
+access_product_category_purchase,public_budget_product_category.comprador,product.model_product_category,purchase.group_purchase_user,1,1,1,1
