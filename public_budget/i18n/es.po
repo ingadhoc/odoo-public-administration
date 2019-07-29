@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-27 09:17+0000\n"
+"POT-Creation-Date: 2019-07-28 09:17+0000\n"
 "PO-Revision-Date: 2019-01-18 20:37+0000\n"
 "Last-Translator: Nicolas Mac Rouillon <nmr@ingadhoc.com>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
@@ -3517,7 +3517,7 @@ msgstr "En transito"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_prec_detail_account_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_funding_move_type
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_id_7377
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_id_7383
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_request_filter
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_return_filter
 msgid "Type"
@@ -3600,7 +3600,7 @@ msgstr "¿Con restricción de cantidad?"
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_account_payment_group_transaction_with_advance_payment
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment_7380
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment_7386
 msgid "With advance payment?"
 msgstr "Con Pago Anticipado?"
 
