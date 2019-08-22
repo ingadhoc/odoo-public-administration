@@ -87,8 +87,12 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
     # is_refund = fields.Boolean(
     #     'Is Refund?',
     # )
-    to_invoice_amount = fields.Float(
+    to_invoice_amount = fields.Monetary(
         compute='_compute_to_invoice_amount',
+    )
+    currency_id = fields.Many2one(
+        related='line_ids.currency_id',
+        readonly=True,
     )
 
     @api.onchange('document_number', 'journal_document_type_id')
