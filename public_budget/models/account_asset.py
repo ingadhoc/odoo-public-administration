@@ -4,6 +4,7 @@ from odoo import api, fields, models, _
 class AccountAssetAsset(models.Model):
     _name = 'account.asset.asset'
     _inherit = ['account.asset.asset', 'mail.activity.mixin']
+    _order = 'reference'
 
     enrollment = fields.Char(
     )
