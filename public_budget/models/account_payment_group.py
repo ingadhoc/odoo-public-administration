@@ -226,6 +226,8 @@ class AccountPaymentGroup(models.Model):
                 raise ValidationError(_(
                     'No puede mandar a pagar líneas que ya se mandaron a '
                     'pagar'))
+            # In this case remove all followers when confirm a payment
+            rec.message_unsubscribe(partner_ids=rec.message_partner_ids.ids)
         return super(AccountPaymentGroup, self).confirm()
 
     @api.multi
