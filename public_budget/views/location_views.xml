@@ -8,6 +8,11 @@
             <search string="Location">
                 <field name="name" string="Name"/>
                 <field name="user_id" string="Responsable"/>
+                <field name="level"/>
+                <field name="number"/>
+                <field name="building"/>
+                <filter name="asset_management" string="For asset management" domain="[('asset_management','=','True')]"/>
+                <filter name="expedient_management" string="For expedient management" domain="[('expedient_management','=','True')]"/>
                 <group expand="0" string="Group By">
                     <field name="user_id" string="Responsable" context="{'group_by':'user_id'}"/>
                 </group>
@@ -26,8 +31,15 @@
                 <sheet string="Location">
                     <div class="oe_button_box" name="buttons">
                     </div>
-                    <group>
+                    <group col="4">
                         <field name="name"/>
+                        <field name="level" required="1"/>
+                        <field name="asset_management"/>
+                        <field name="number" required="1"/>
+                        <field name="expedient_management"/>
+                        <field name="building" required="1"/>
+                    </group>
+                    <group>
                         <field name="user_id" required="1"/>
                         <field name="user_ids"/>
                     </group>
@@ -61,6 +73,11 @@
             <tree string="Location">
                 <field name="name"/>
                 <field name="user_id"/>
+                <field name="level"/>
+                <field name="number"/>
+                <field name="building"/>
+                <field name="asset_management"/>
+                <field name="expedient_management"/>
             </tree>
         </field>
     </record>

@@ -98,7 +98,8 @@ class Remit(models.Model):
     @api.depends('state')
     def _compute_user_locations(self):
         for rec in self:
-            rec.user_location_ids = rec.env.user.location_ids
+            rec.user_location_ids = rec.env.user.location_ids.filtered(
+                'expedient_management')
 
     @api.constrains('state')
     def check_state(self):

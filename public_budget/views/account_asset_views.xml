@@ -13,6 +13,8 @@
                 <field name="reference"/>
                 <field name="enrollment"/>
                 <field name="serial_number"/>
+                <filter name="active" string="Active" domain="[('active', '=', True)]"/>
+                <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
             </field>
             <group>
                 <filter string="Invoice" name="invoice" domain="[]" context="{'group_by':'invoice_id'}"/>
@@ -41,6 +43,9 @@
                 <attribute name="groups">base.group_no_one</attribute>
             </notebook>
             <div name="button_box">
+                <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive" groups="public_budget.group_asset_responsable">
+                    <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                </button>
                 <field name="transaction_ids" invisible="1"/>
                 <button type="object" name="action_view_transaction" class="oe_stat_button" string="Transactions" icon="fa-list-alt" attrs="{'invisible': [('transaction_ids', '=', [])]}"/>
             </div>
@@ -52,6 +57,7 @@
                 <field name="observations"/>
                 <field name="level"/>
                 <field name="number"/>
+                <field name="building"/>
                 <field name="location_id" required="1" attrs="{'readonly':[('location_id', '!=', False), ('state', 'in', ['open', 'paid'])]}" force_save="1"/>
                 <field name="expedient_id" required="1"/>
                 <field name="user_id"/>

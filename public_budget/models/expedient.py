@@ -58,7 +58,8 @@ class PublicBudgetExpedient(models.Model):
     first_location_id = fields.Many2one(
         'public_budget.location',
         string='First Location',
-        required=True
+        domain="[('expedient_management', '=', True)]",
+        required=True,
     )
     current_location_id = fields.Many2one(
         'public_budget.location',

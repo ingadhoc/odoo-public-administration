@@ -8,6 +8,7 @@ class PublicBudgetTransferAssetWizard(models.TransientModel):
         'public_budget.location',
         required=True,
         string='Location Destiny',
+        domain="[('asset_management', '=', True)]",
     )
 
     @api.multi
