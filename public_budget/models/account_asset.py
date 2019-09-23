@@ -6,6 +6,10 @@ class AccountAssetAsset(models.Model):
     _inherit = ['account.asset.asset', 'mail.activity.mixin']
     _order = 'reference'
 
+    active = fields.Boolean(
+        track_visibility='onchange',
+        default=True,
+    )
     enrollment = fields.Char(
     )
     reference = fields.Char(
@@ -27,6 +31,7 @@ class AccountAssetAsset(models.Model):
     location_id = fields.Many2one(
         'public_budget.location',
         track_visibility='onchange',
+        domain="[('asset_management', '=', True)]",
     )
     expedient_id = fields.Many2one(
         'public_budget.expedient',
@@ -55,8 +60,18 @@ class AccountAssetAsset(models.Model):
         'public_budget.transaction',
         compute='_compute_transaction_ids',
     )
-    level = fields.Char()
-    number = fields.Char()
+    level = fields.Char(
+        related='location_id.level',
+        readonly=True,
+    )
+    number = fields.Char(
+        related='location_id.number',
+        readonly=True,
+    )
+    building = fields.Char(
+        related='location_id.building',
+        readonly=True,
+    )
 
     _sql_constraints = [
         ('reference', 'unique(reference)',

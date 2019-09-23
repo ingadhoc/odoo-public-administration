@@ -58,7 +58,7 @@
                             options="{'no_create': True}"
                             atts="{'readonly': [('expedient_ids', '!=', [(6, False, [])])]}"/>
                         <field name="location_dest_id"
-                            domain="[('id','!=',location_id)]" options="{'no_create': True}"/> 
+                            domain="[('id','!=',location_id),('expedient_management', '=', True)]" options="{'no_create': True}"/> 
                         <field name="reference"/> 
                     </group>
                     <group>

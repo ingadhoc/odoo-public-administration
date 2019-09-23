@@ -70,7 +70,7 @@
                             <field name="category_id"/>
                             <field name="type"/>
                             <field name="parent_id"/>
-                            <field name="first_location_id" options="{'no_create': True}" domain="[('id', 'in', user_location_ids)]"/>
+                            <field name="first_location_id" options="{'no_create': True}" domain="[('id', 'in', user_location_ids),('expedient_management', '=', True)]"/>
                             <field name="current_location_id"/>
                             <field name="final_location" states="closed,annulled"/>
                             <field name="pages"/>
