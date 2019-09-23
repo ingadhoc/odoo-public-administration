@@ -115,13 +115,13 @@ class AccountPayment(models.Model):
             'changed', return_payment,
             partner=return_payment.partner_id, date=return_payment.create_date)
 
-        self.post()
+        self.with_context(replaced_payment_id=False).post()
         # solo reconciliamos si la cuenta es conciliable, por ej.
         # por ahora en transacciones de adelanto son no conciliables
         if self.destination_account_id.reconcile:
             (self.move_line_ids + return_payment.move_line_ids).filtered(
                 lambda r: r.account_id == self.destination_account_id
-            ).reconcile()
+            ).force_full_reconcile()
         return {
             'type': 'ir.actions.client',
             'tag': 'reload',
