@@ -6,11 +6,16 @@ class Location(models.Model):
     _name = 'public_budget.location'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Location'
+    _rec_name = 'complete_name'
 
     _order = "name"
 
     name = fields.Char(
         required=True,
+    )
+    complete_name = fields.Char(
+        compute='_compute_complete_name',
+        store=True,
     )
     user_ids = fields.Many2many(
         'res.users',
@@ -30,27 +35,14 @@ class Location(models.Model):
     number = fields.Char()
     building = fields.Char()
 
-    @api.depends('name', 'level', 'number')
-    def name_get(self):
-        result = []
+    @api.depends('name', 'level', 'number', 'building')
+    def _compute_complete_name(self):
         for location in self:
             name = location.name
             if location.level:
                 name += '-' + location.level
             if location.number:
                 name += '-' + location.number
-            result.append((location.id, name))
-        return result
-
-    @api.model
-    def name_search(self, name, args=None, operator='ilike', limit=100):
-        args = args or []
-        domain = []
-        if name:
-            domain = [
-                '|', '|', '|', ('name', operator, name),
-                ('level', operator, name),
-                ('number', operator, name),
-                ('building', operator, name), ]
-        recs = self.search(domain + args, limit=limit)
-        return recs.name_get()
+            if location.building:
+                name += '-' + location.building
+            location.complete_name = name
