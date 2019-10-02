@@ -1,7 +1,7 @@
 {
     'name': 'Public Budget',
     'license': 'AGPL-3',
-    'version': '11.0.1.25.0',
+    'version': '11.0.1.26.0',
     'author': 'ADHOC SA,Odoo Community Association (OCA)',
     'website': 'www.adhoc.com.ar',
     'category': 'Accounting & Finance',
@@ -34,6 +34,9 @@
         'report_extended_payment_group',
         # usado por algunos reportes como el de cheques y retenciones
         'l10n_ar_aeroo_base',
+        # Para poder habilitar el cancel_invoice en estado hecho para todos los
+        # users sin modo desarrollador
+        'account_ux',
     ],
     'data': [
         'security/public_budget_group.xml',
