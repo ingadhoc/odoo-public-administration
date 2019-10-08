@@ -137,6 +137,10 @@ class BudgetTransaction(models.Model):
         compute='_compute_definitive_amount',
         store=True,
     )
+    definitive_amount_dynamic = fields.Monetary(
+        string='Monto Definitivo',
+        compute='_compute_definitive_amount_dynamic',
+    )
     invoiced_amount = fields.Monetary(
         string='Monto Devengado',
         compute='_compute_invoiced_amount',
@@ -152,6 +156,10 @@ class BudgetTransaction(models.Model):
         compute='_compute_to_pay_amount',
         store=True,
     )
+    to_pay_amount_dynamic = fields.Monetary(
+        string='Monto A Pagar',
+        compute='_compute_to_pay_amount_dynamic',
+    )
     to_pay_balance = fields.Monetary(
         string='Saldo A Pagar',
         compute='_compute_to_pay_balance',
@@ -161,6 +169,10 @@ class BudgetTransaction(models.Model):
         string='Monto Pagado',
         compute='_compute_paid_amount',
         store=True,
+    )
+    paid_amount_dynamic = fields.Monetary(
+        string='Monto Pagado',
+        compute='_compute_paid_amount_dynamic',
     )
     advance_preventive_amount = fields.Monetary(
         string='Monto Preventivo de Adelanto',
@@ -172,10 +184,18 @@ class BudgetTransaction(models.Model):
         compute='_compute_advance_amounts',
         store=True,
     )
+    advance_to_pay_amount_dynamic = fields.Monetary(
+        string='Monto de Adelanto a Pagar',
+        compute='_compute_advance_dynamic_amounts',
+    )
     advance_paid_amount = fields.Monetary(
         string='Monto de Adelanto Pagado',
         compute='_compute_advance_amounts',
         store=True,
+    )
+    advance_paid_amount_dynamic = fields.Monetary(
+        string='Monto de Adelanto a Pagar',
+        compute='_compute_advance_dynamic_amounts',
     )
     advance_remaining_amount = fields.Monetary(
         string='Monto Remanente de Adelanto',
@@ -333,32 +353,51 @@ class BudgetTransaction(models.Model):
             rec.advance_remaining_amount = (
                 rec.advance_preventive_amount - rec.advance_to_pay_amount)
 
+    def _get_advance_amounts(self):
+        self.ensure_one()
+        to_date = self._context.get('analysis_to_date', False)
+        if not self.advance_payment_group_ids:
+            return {
+                'advance_to_pay_amount': 0.0,
+                'advance_paid_amount': 0.0,
+            }
+
+        domain = [('id', 'in', self.advance_payment_group_ids.ids)]
+        to_pay_domain = domain + [('state', 'not in', ('cancel', 'draft'))]
+        paid_domain = domain + [('state', '=', 'posted')]
+
+        if to_date:
+            to_pay_domain += [('confirmation_date', '<=', to_date)]
+            paid_domain += [('payment_date', '<=', to_date)]
+
+        advance_to_pay_amount = sum(self.advance_payment_group_ids.search(to_pay_domain).mapped('to_pay_amount'))
+        advance_paid_amount = sum(self.advance_payment_group_ids.search(paid_domain).mapped('payments_amount'))
+        return {
+            'advance_to_pay_amount': advance_to_pay_amount,
+            'advance_paid_amount': advance_paid_amount,
+        }
+
     @api.depends(
         'advance_payment_group_ids.state',
     )
     def _compute_advance_amounts(self):
         _logger.info('Getting Transaction Advance Amounts')
-        to_date = self._context.get('analysis_to_date', False)
         for rec in self:
-            if not rec.advance_payment_group_ids:
-                continue
+            amounts = rec._get_advance_amounts()
+            rec.advance_to_pay_amount_dynamic = amounts['advance_to_pay_amount']
+            rec.advance_paid_amount_dynamic = amounts['advance_paid_amount']
 
-            domain = [('id', 'in', rec.advance_payment_group_ids.ids)]
-            to_pay_domain = domain + [('state', 'not in', ('cancel', 'draft'))]
-            paid_domain = domain + [('state', '=', 'posted')]
-
-            if to_date:
-                to_pay_domain += [('confirmation_date', '<=', to_date)]
-                paid_domain += [('payment_date', '<=', to_date)]
-
-            advance_to_pay_amount = sum(
-                rec.advance_payment_group_ids.search(to_pay_domain).mapped(
-                    'to_pay_amount'))
-            advance_paid_amount = sum(
-                rec.advance_payment_group_ids.search(paid_domain).mapped(
-                    'payments_amount'))
-            rec.advance_to_pay_amount = advance_to_pay_amount
-            rec.advance_paid_amount = advance_paid_amount
+    def _compute_advance_dynamic_amounts(self):
+        _logger.info('Getting Transaction Advance Dynamic Amounts')
+        if not self._context.get('analysis_to_date', False):
+            for rec in self:
+                rec.advance_to_pay_amount_dynamic = rec.advance_to_pay_amount
+                rec.advance_paid_amount_dynamic = rec.advance_paid_amount
+        else:
+            for rec in self:
+                amounts = rec._get_advance_amounts()
+                rec.advance_to_pay_amount_dynamic = amounts['advance_to_pay_amount']
+                rec.advance_paid_amount_dynamic = amounts['advance_paid_amount']
 
     @api.multi
     def mass_payment_group_create(self):
@@ -452,6 +491,18 @@ class BudgetTransaction(models.Model):
                 'preventive_line_ids.definitive_amount'))
 
     @api.depends(
+        'preventive_line_ids.definitive_amount',
+    )
+    def _compute_definitive_amount_dynamic(self):
+        if not self._context.get('analysis_to_date', False):
+            for rec in self:
+                rec.definitive_amount_dynamic = rec.definitive_amount
+        else:
+            for rec in self:
+                rec.definitive_amount_dynamic = sum(rec.mapped(
+                    'preventive_line_ids.definitive_amount_dynamic'))
+
+    @api.depends(
         'preventive_line_ids.invoiced_amount',
     )
     def _compute_invoiced_amount(self):
@@ -468,12 +519,36 @@ class BudgetTransaction(models.Model):
                 'preventive_line_ids.to_pay_amount'))
 
     @api.depends(
+        'preventive_line_ids.to_pay_amount',
+    )
+    def _compute_to_pay_amount_dynamic(self):
+        if not self._context.get('analysis_to_date', False):
+            for rec in self:
+                rec.to_pay_amount_dynamic = rec.to_pay_amount
+        else:
+            for rec in self:
+                rec.to_pay_amount_dynamic = sum(rec.mapped(
+                    'preventive_line_ids.to_pay_amount_dynamic'))
+
+    @api.depends(
         'preventive_line_ids.paid_amount',
     )
     def _compute_paid_amount(self):
         for rec in self:
             rec.paid_amount = sum(rec.mapped(
                 'preventive_line_ids.paid_amount'))
+
+    @api.depends(
+        'preventive_line_ids.paid_amount',
+    )
+    def _compute_paid_amount_dynamic(self):
+        if not self._context.get('analysis_to_date', False):
+            for rec in self:
+                rec.paid_amount_dynamic = rec.paid_amount
+        else:
+            for rec in self:
+                rec.paid_amount_dynamic = sum(rec.mapped(
+                    'preventive_line_ids.paid_amount_dynamic'))
 
     @api.multi
     def action_cancel_draft(self):

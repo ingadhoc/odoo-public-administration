@@ -129,19 +129,21 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
             rec.journal_document_type_id = res[
                 'journal_document_type']
 
+    @api.onchange('supplier_ids')
+    def _onchange_suppliers(self):
+        # TODO en v13 podemos hacer como en documents types y convertir esto a
+        # computed para que se setee en create/write
+        if not self.supplier_id and len(self.supplier_ids) == 1:
+            self.supplier_id = self.supplier_ids.id
+
     @api.depends('transaction_id')
     def _compute_supplier_ids(self):
         for rec in self:
             definitive_lines = rec.transaction_id.mapped(
                 'preventive_line_ids.definitive_line_ids')
-            env_all_mode = definitive_lines.env.all.mode
-            definitive_lines.env.all.mode = True
             suppliers = definitive_lines.filtered(
                 lambda r: r.residual_amount != 0).mapped('supplier_id')
             rec.supplier_ids = suppliers
-            if len(suppliers) == 1:
-                rec.supplier_id = suppliers.id
-            definitive_lines.env.all.mode = env_all_mode
 
     @api.onchange('supplier_id')
     def _compute_lines(self):

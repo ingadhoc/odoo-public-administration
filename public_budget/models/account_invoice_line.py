@@ -36,34 +36,37 @@ class AccountInvoiceLine(models.Model):
         proporcionalmente por linea, porque sabemos el total a nivel factura
         -paid_amount: vemos el porcentaje que se pago de la factura y,
         al total de cada linea lo multiplicamos por ese porcentaje"""
-        for rec in self.filtered(
-                lambda x: x.invoice_id.state not in ['draft', 'cancel']):
-            _logger.info('Getting amounts for invoice line %s' % rec.id)
-            invoice_total = rec.invoice_id.amount_total
-            if float_is_zero(
-                invoice_total,
-                    precision_rounding=rec.currency_id.rounding):
-                continue
-            to_date = rec._context.get('analysis_to_date', False)
+        _logger.info('Getting amounts for invoice lines %s' % self.ids)
+        to_date = self._context.get('analysis_to_date', False)
+
+        lines = self.filtered(lambda x: x.invoice_id.state not in ['draft', 'cancel'])
+
+        invoice_vals = {}
+        for invoice in lines.mapped('invoice_id'):
+            invoice_total = invoice.amount_total
             # if to_date, then we dont get residual from invoice,
             # we get from helper function
             if to_date:
-                invoice_paid_perc = (
-                    rec.invoice_id._get_paid_amount_to_date() / invoice_total)
-                invoice_to_pay_perc = (
-                    rec.invoice_id.to_pay_amount / invoice_total)
+                invoice_paid_perc = invoice._get_paid_amount_to_date() / invoice_total
+                invoice_to_pay_perc = invoice._get_to_pay_amount_to_date() / invoice_total
             else:
-                # odoo compute residual always positive, no matter invoice
-                # is negative
-                residual = rec.invoice_id.residual
+                # odoo compute residual always positive, no matter invoice is negative
+                residual = invoice.residual
                 if invoice_total < 0:
                     residual = -residual
-                invoice_paid_perc = (
-                    invoice_total - residual) / invoice_total
-                invoice_to_pay_perc = (
-                    rec.invoice_id.to_pay_amount) / invoice_total
-            rec.to_pay_amount = rec.price_subtotal * invoice_to_pay_perc
-            rec.paid_amount = rec.price_subtotal * invoice_paid_perc
+                invoice_paid_perc = (invoice_total - residual) / invoice_total
+                invoice_to_pay_perc = invoice.to_pay_amount / invoice_total
+            invoice_vals[invoice] = {
+                'amount_total': invoice_total,
+                'invoice_paid_perc': invoice_paid_perc,
+                'invoice_to_pay_perc': invoice_to_pay_perc,
+            }
+        for rec in lines:
+            invoice_total = invoice_vals[rec.invoice_id]['amount_total']
+            if float_is_zero(invoice_total, precision_rounding=rec.currency_id.rounding):
+                continue
+            rec.to_pay_amount = rec.price_subtotal * invoice_vals[rec.invoice_id]['invoice_to_pay_perc']
+            rec.paid_amount = rec.price_subtotal * invoice_vals[rec.invoice_id]['invoice_paid_perc']
 
     @api.constrains(
         'definitive_line_id',
