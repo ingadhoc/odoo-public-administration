@@ -36,42 +36,52 @@ class BudgetPosition(models.Model):
     )
     draft_amount = fields.Monetary(
         compute='_compute_amounts',
+        compute_sudo=True,
     )
     preventive_amount = fields.Monetary(
         string='Monto Preventivo',
         compute='_compute_amounts',
+        compute_sudo=True,
     )
     definitive_amount = fields.Monetary(
         string='Monto Definitivo',
         compute='_compute_amounts',
+        compute_sudo=True,
     )
     to_pay_amount = fields.Monetary(
         string='Monto A Pagar',
         compute='_compute_amounts',
+        compute_sudo=True,
     )
     paid_amount = fields.Monetary(
         string='Monto Pagado',
-        compute='_compute_amounts'
+        compute='_compute_amounts',
+        compute_sudo=True,
     )
     balance_amount = fields.Monetary(
         string='Saldo',
         compute='_compute_amounts',
+        compute_sudo=True,
     )
     projected_amount = fields.Monetary(
         string='Monto Proyectado',
         compute='_compute_amounts',
+        compute_sudo=True,
     )
     projected_avg = fields.Monetary(
         string='Projected Avg',
         compute='_compute_amounts',
+        compute_sudo=True,
     )
     preventive_avg = fields.Monetary(
         string='Porc. Preventivo',
         compute='_compute_amounts',
+        compute_sudo=True,
     )
     amount = fields.Monetary(
         string='Monto',
         compute='_compute_amounts',
+        compute_sudo=True,
     )
     parent_left = fields.Integer(
         index=True,
@@ -163,8 +173,8 @@ class BudgetPosition(models.Model):
         else:
             day_of_year = datetime.now().timetuple().tm_yday
 
+        _logger.info('Getting amounts for budget positions %s' % self.ids)
         for rec in self:
-            _logger.info('Getting amounts for budget position %s' % rec.name)
             if rec.type == 'view':
                 operator = 'child_of'
             if rec.type == 'normal':
@@ -181,12 +191,10 @@ class BudgetPosition(models.Model):
             if budget_id:
                 domain.append(('budget_id', '=', budget_id))
             if to_date:
-                _logger.info('Getting budget amounts with to_date %s' % (
-                    to_date))
+                _logger.debug('Getting budget amounts with to_date %s' % (to_date))
                 domain += [('transaction_id.issue_date', '<=', to_date)]
 
             # we add budget_assignment_allowed condition to optimize
-            _logger.info('Getting budget amounts')
             # if budget_id and self.budget_assignment_allowed:
             if budget_id and (rec.budget_assignment_allowed or rec.child_ids):
                 modification_domain = [
@@ -217,10 +225,6 @@ class BudgetPosition(models.Model):
             if excluded_line_id:
                 domain.append(('id', '!=', excluded_line_id))
 
-            # we use sql instead of orm becuase as this computed fields are not
-            # stored, the computation use methods and not stored values
-            _logger.info('Getting budget general amounts')
-
             rec.draft_amount = sum([x['preventive_amount'] for x in self.env[
                 'public_budget.preventive_line'].read_group(
                 domain=domain,
@@ -228,69 +232,26 @@ class BudgetPosition(models.Model):
                 groupby=['budget_position_id'],
             )])
 
-            _logger.info('Getting budget general amounts')
+            # self.
+            active_preventive_lines = self.env['public_budget.preventive_line'].with_context(
+                prefetch_fields=False).search(domain)
 
-            # if from_date or to_date we can not use stored value,
-            # we should get method value (using computed fields)
-            # if from_date or to_date:
-            if to_date:
-                active_preventive_lines = self.env[
-                    'public_budget.preventive_line'].search(
-                    domain
-                )
-                _logger.info('Getting values from computed fields methods')
-                # TODO, ver si hay una mejor forma de hacer esto. lo que
-                # estamos haciendo es forzar el modo onchange para que odoo
-                # no use los valores almacenadados que los calcule.
-                #  Tratamos de usar "do_in_onchange" pero como el mode es
-                # True no termina cambiando nada el metodo _do_in_mode
-                env_all_mode = active_preventive_lines.env.all.mode
-                active_preventive_lines.env.all.mode = 'onchange'
-
-                preventive_amount = sum(
-                    active_preventive_lines.mapped('preventive_amount'))
-                definitive_amount = sum(
-                    active_preventive_lines.mapped('definitive_amount'))
-                to_pay_amount = sum(
-                    active_preventive_lines.mapped('to_pay_amount'))
-                paid_amount = sum(
-                    active_preventive_lines.mapped('paid_amount'))
-                # restore env mode
-                active_preventive_lines.env.all.mode = env_all_mode
-            else:
-                amounts_read = self.env[
-                    'public_budget.preventive_line'].read_group(
-                    domain=domain,
-                    fields=[
-                        'budget_position_id', 'preventive_amount',
-                        'definitive_amount', 'to_pay_amount', 'paid_amount'],
-                    groupby=['budget_position_id'],
-                )
-                preventive_amount = sum([
-                    x['preventive_amount'] for x in amounts_read])
-                definitive_amount = sum([
-                    x['definitive_amount'] for x in amounts_read])
-                to_pay_amount = sum([
-                    x['to_pay_amount'] for x in amounts_read])
-                paid_amount = sum([
-                    x['paid_amount'] for x in amounts_read])
-
+            # TODO check if better performance by iterating once
+            preventive_amount = sum(active_preventive_lines.mapped('preventive_amount'))
             rec.preventive_amount = preventive_amount
-            rec.definitive_amount = definitive_amount
-            rec.to_pay_amount = to_pay_amount
-            rec.paid_amount = paid_amount
+            rec.definitive_amount = sum(active_preventive_lines.mapped('definitive_amount_dynamic'))
+            rec.to_pay_amount = sum(active_preventive_lines.mapped('to_pay_amount_dynamic'))
+            rec.paid_amount = sum(active_preventive_lines.mapped('paid_amount_dynamic'))
 
             projected_amount = preventive_amount / day_of_year * 365
             rec.projected_amount = projected_amount
 
             if amount:
-                _logger.info('Getting budget assignment amounts')
                 rec.projected_avg = projected_amount / amount * 100.0
                 rec.preventive_avg = preventive_amount / amount * 100.0
             rec.amount = amount
             rec.balance_amount = rec.amount - preventive_amount
-            _logger.info(
-                'Finish getting amounts for budget position %s' % rec.name)
+            _logger.debug('Finish getting amounts for budget position %s' % rec.name)
 
     @api.multi
     def name_get(self):
