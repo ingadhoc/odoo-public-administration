@@ -18,19 +18,13 @@ class PublicBudgetBudgetAnalysisWizard(models.TransientModel):
     )
 
     @api.multi
-    def confirm(self):
+    def open(self):
         self.ensure_one()
         actions = self.env.ref(
             'public_budget.action_position_analysis_tree')
         if not actions:
             return False
         action_read = actions.read()[0]
-        # action_read['context'] = {
-        #     'budget_id': self.budget_id.id,
-        #     # 'analysis_from_date': self.from_date,
-        #     'analysis_to_date': self.to_date,
-        # }
-        # return action_read
         actions = self.env.ref(
             'public_budget.action_public_budget_budget_budgets')
         if not actions:
@@ -48,3 +42,17 @@ class PublicBudgetBudgetAnalysisWizard(models.TransientModel):
             'analysis_to_date': self.to_date,
         }
         return action_read
+
+    @api.multi
+    def print_report(self):
+        self.ensure_one()
+        action = self.env.ref('public_budget.action_aeroo_report_budget')
+        return {
+            'actions': [
+                {'type': 'ir.actions.act_window_close'},
+                action.with_context(
+                    analysis_to_date=self.to_date
+                ).report_action(self.budget_id),
+            ],
+            'type': 'ir.actions.act_multi',
+        }
