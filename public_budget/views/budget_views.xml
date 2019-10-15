@@ -37,7 +37,7 @@
                         <button name="action_to_open_modification" icon="fa-list-alt" type="object" class="oe_stat_button" groups="account.group_account_user">
                             <span class="o_stat_text">Budget Modification Detail</span>
                         </button>
-                        <button class="oe_stat_button" icon="fa-bars" name="%(action_position_analysis_tree)d" string="Position analysis" type="action" widget="statinfo" context="{'budget_id':active_id}"/>
+                        <button class="oe_stat_button" icon="fa-bars" name="%(action_position_analysis_tree)d" string="Position analysis" type="action" widget="statinfo" context="{'budget_id':id}"/>
                         <button name="action_to_open_definitive_lines" icon="fa-bars" type="object" class="oe_stat_button" attrs="{'invisible': [('state', '!=', 'pre_closed')]}" string="Budget Definitive Lines"/>
                     </div>
                     <group>
