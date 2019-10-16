@@ -86,10 +86,14 @@
                 <field name="expedient_id"/>
                 <field name="budget_position_id"/>
                 <field name="preventive_amount" sum="Total"/>
-                <field name="definitive_amount" sum="Total"/>
-                <field name="invoiced_amount" sum="Total"/>
-                <field name="to_pay_amount" sum="Total"/>
-                <field name="paid_amount" sum="Total"/>
+                <field name="definitive_amount" sum="Total" invisible="'analysis_to_date' in context"/>
+                <field name="invoiced_amount" sum="Total" invisible="'analysis_to_date' in context"/>
+                <field name="to_pay_amount" sum="Total" invisible="'analysis_to_date' in context"/>
+                <field name="paid_amount" sum="Total" invisible="'analysis_to_date' in context"/>
+                <field name="definitive_amount_dynamic" sum="Total" invisible="'analysis_to_date' not in context"/>
+                <field name="invoiced_amount_dynamic" sum="Total" invisible="'analysis_to_date' not in context"/>
+                <field name="to_pay_amount_dynamic" sum="Total" invisible="'analysis_to_date' not in context"/>
+                <field name="paid_amount_dynamic" sum="Total" invisible="'analysis_to_date' not in context"/>
                 <field name="state" invisible="True"/>
             </tree>
         </field>
