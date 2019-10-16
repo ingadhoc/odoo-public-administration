@@ -62,6 +62,13 @@ class AccountInvoice(models.Model):
             rec.to_pay_amount = rec._get_to_pay_amount_to_date()
 
     def _get_to_pay_amount_to_date(self):
+        """ Para el calculo del mandado a pagar no Podemos usar payment_move_line_ids (campo nativo de odoo que indica
+        con que aml se esta pagando la factura) porque solo se setee una vez que exiten los macheos. Nosotros lo
+        necesitamos antes, ni bien el payment group esta confirmado
+        Por otro lado, en v9+ solo admitimos pago total de facturas y por eso podemos filtrar payment_groups_ids con
+        any y ademas podemos directamente  tomar el importe de la linea (si no habria que ver que parte está
+        vinculada a la orden de pago en la que estamos)
+        """
         self.ensure_one()
         _logger.debug('Get to pay amount to_date for invoice %s' % self.id)
         # if invoice is paid and not payment group, then it is autopaid or
@@ -72,19 +79,16 @@ class AccountInvoice(models.Model):
         if self.state == 'paid' and not self.payment_group_ids:
             return self.amount_total
 
-        lines = self.payment_move_line_ids.filtered(lambda x: x.payment_id.payment_group_id.state not in ['draft', 'cancel'])
+        lines = self._get_aml_for_amount_residual()
+
+        lines = lines.filtered(lambda x: any(pg.state not in ['draft', 'cancel'] for pg in x.payment_group_ids))
 
         # Add this to allow analysis from date
         to_date = self._context.get('analysis_to_date', False)
         if to_date:
-            lines = lines.filtered(lambda x: x.payment_id.payment_group_id.confirmation_date and \
-                x.payment_id.payment_group_id.confirmation_date <= to_date)
+            lines = lines.filtered(lambda x: any(pg.confirmation_date and pg.confirmation_date <= to_date for pg in x.payment_group_ids))
 
-        # en v9+ solo admitimos pago total de facturas por lo cual
-        # directamente podemos tomar el importe de la linea (si no habria
-        # que ver que parte está vinculada a la orden de pago en la que
-        # estamos)
-        amount = sum(lines.mapped('balance'))
+        amount = -sum(lines.mapped('balance'))
         if self.type in ('in_refund', 'out_refund'):
             amount = -amount
         return amount
@@ -93,7 +97,9 @@ class AccountInvoice(models.Model):
     def _get_paid_amount_to_date(self):
         """ Calculo de importe pagado solamente para análisis a fecha ya que
         si no se calcula directamente en las invoiec lines usando el residual
-        de las facturas
+        de las facturas.
+        Lo hacemos parecido a to_pay pero en relaidad en paid ya tenemos macheo
+        y podriamos usar directamente payment_move_line_ids
         """
         self.ensure_one()
         _logger.debug('Get paid amount to_date for invoice %s' % self.id)
@@ -105,17 +111,16 @@ class AccountInvoice(models.Model):
         if self.state == 'paid' and not self.payment_group_ids:
             return self.amount_total
 
-        lines = self.payment_move_line_ids.filtered(lambda x: x.payment_id.payment_group_id.state == 'posted')
+        lines = self._get_aml_for_amount_residual()
+
+        lines = lines.filtered(lambda x: any(pg.state == 'posted' for pg in x.payment_group_ids))
 
         # Add this to allow analysis from date
         to_date = self._context.get('analysis_to_date', False)
         if to_date:
-            lines = lines.filtered(lambda x: x.payment_id.payment_group_id.payment_date <= to_date)
+            lines = lines.filtered(lambda x: any(pg.payment_date <= to_date for pg in x.payment_group_ids))
 
-        # en v9+ solo admitimos pago total de facturas por lo cual directamente
-        # podemos tomar el importe de la linea (si no habria que ver que parte
-        # está vinculada a la orden de pago en la que estamos)
-        amount = sum(lines.mapped('balance'))
+        amount = -sum(lines.mapped('balance'))
         if self.type in ('in_refund', 'out_refund'):
             amount = -amount
         return amount
