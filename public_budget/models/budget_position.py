@@ -361,5 +361,8 @@ class BudgetPosition(models.Model):
                 'search_default_affects_budget': 1,
                 'search_default_budget_id': self._context.get(
                     'budget_id', False)}
+            if self._context.get('analysis_to_date', False):
+                res['domain'] = [('transaction_id.issue_date', '<=', self._context.get(
+                        'analysis_to_date', False))]
             res['target'] = 'current'
         return res
