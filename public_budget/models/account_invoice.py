@@ -81,12 +81,14 @@ class AccountInvoice(models.Model):
 
         lines = self._get_aml_for_amount_residual()
 
-        lines = lines.filtered(lambda x: any(pg.state not in ['draft', 'cancel'] for pg in x.payment_group_ids))
-
         # Add this to allow analysis from date
         to_date = self._context.get('analysis_to_date', False)
         if to_date:
-            lines = lines.filtered(lambda x: any(pg.confirmation_date and pg.confirmation_date <= to_date for pg in x.payment_group_ids))
+            lines = lines.filtered(lambda x: any(pg.state not in ['draft', 'cancel'] and pg.confirmation_date
+                                                 and pg.confirmation_date <= to_date for pg in x.payment_group_ids))
+        else:
+            lines = lines.filtered(lambda x: any(
+                pg.state not in ['draft', 'cancel'] for pg in x.payment_group_ids))
 
         amount = -sum(lines.mapped('balance'))
         if self.type in ('in_refund', 'out_refund'):
@@ -113,12 +115,14 @@ class AccountInvoice(models.Model):
 
         lines = self._get_aml_for_amount_residual()
 
-        lines = lines.filtered(lambda x: any(pg.state == 'posted' for pg in x.payment_group_ids))
-
         # Add this to allow analysis from date
         to_date = self._context.get('analysis_to_date', False)
         if to_date:
-            lines = lines.filtered(lambda x: any(pg.payment_date <= to_date for pg in x.payment_group_ids))
+            lines = lines.filtered(lambda x: any(
+                pg.state == 'posted' and pg.payment_date <= to_date for pg in x.payment_group_ids))
+        else:
+            lines = lines.filtered(lambda x: any(
+                pg.state == 'posted' for pg in x.payment_group_ids))
 
         amount = -sum(lines.mapped('balance'))
         if self.type in ('in_refund', 'out_refund'):
