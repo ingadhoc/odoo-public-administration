@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-17 01:01+0000\n"
+"POT-Creation-Date: 2019-10-17 09:16+0000\n"
 "PO-Revision-Date: 2019-01-18 20:37+0000\n"
 "Last-Translator: Nicolas Mac Rouillon <nmr@ingadhoc.com>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
@@ -1117,7 +1117,7 @@ msgstr "Definitivo"
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_preventive_line_definitive_amount_dynamic
 msgid "Definitive Amount Dynamic"
-msgstr ""
+msgstr "Monto Definitivo"
 
 #. module: public_budget
 #: code:addons/public_budget/models/preventive_line.py:281
@@ -1831,7 +1831,7 @@ msgstr "Monto Devengado"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_line_invoiced_amount_dynamic
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_preventive_line_invoiced_amount_dynamic
 msgid "Invoiced Amount Dynamic"
-msgstr ""
+msgstr "Monto Devengado"
 
 #. module: public_budget
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_transaction_form
@@ -2584,7 +2584,7 @@ msgstr "Pagado"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_line_paid_amount_dynamic
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_preventive_line_paid_amount_dynamic
 msgid "Paid Amount Dynamic"
-msgstr ""
+msgstr "Pagado"
 
 #. module: public_budget
 #: code:addons/public_budget/models/account_payment_group.py:301
@@ -3419,7 +3419,7 @@ msgstr "A pagar"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_line_to_pay_amount_dynamic
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_preventive_line_to_pay_amount_dynamic
 msgid "To Pay Amount Dynamic"
-msgstr ""
+msgstr "A pagar"
 
 #. module: public_budget
 #: model:ir.ui.view,arch_db:public_budget.view_account_payment_group_form
@@ -3582,7 +3582,7 @@ msgstr "En transito"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_prec_detail_account_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_funding_move_type
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_id_7430
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_id_7436
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_request_filter
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_return_filter
 msgid "Type"
@@ -3665,7 +3665,7 @@ msgstr "¿Con restricción de cantidad?"
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_account_payment_group_transaction_with_advance_payment
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment_7433
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment_7439
 msgid "With advance payment?"
 msgstr "Con Pago Anticipado?"
 
