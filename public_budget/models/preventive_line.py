@@ -198,7 +198,7 @@ class PreventiveLine(models.Model):
             paid_amount = transaction.advance_paid_amount_dynamic * preventive_perc
             invoiced_amount = 0.0
         else:
-            definitive_lines = self.definitive_line_ids
+            definitive_lines = self.definitive_line_ids.sudo()
             if not definitive_lines:
                 return {
                     'remaining_amount': 0.0,
