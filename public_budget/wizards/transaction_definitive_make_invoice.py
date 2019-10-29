@@ -141,9 +141,14 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
         for rec in self:
             definitive_lines = rec.transaction_id.mapped(
                 'preventive_line_ids.definitive_line_ids')
+            # TODO analice if are necessary in future version
+            env_all_mode = definitive_lines.env.all.mode
+            definitive_lines.env.all.mode = True
             suppliers = definitive_lines.filtered(
                 lambda r: r.residual_amount != 0).mapped('supplier_id')
             rec.supplier_ids = suppliers
+            definitive_lines.env.all.mode = env_all_mode
+
 
     @api.onchange('supplier_id')
     def _compute_lines(self):
