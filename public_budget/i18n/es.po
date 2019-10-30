@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-19 09:16+0000\n"
+"POT-Creation-Date: 2019-10-29 14:49+0000\n"
 "PO-Revision-Date: 2019-01-18 20:37+0000\n"
 "Last-Translator: Nicolas Mac Rouillon <nmr@ingadhoc.com>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
@@ -635,7 +635,7 @@ msgstr "Categorías"
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_position_category_id
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_category_id_7598
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_category_id_7592
 msgid "Category"
 msgstr "Categoría"
 
@@ -1873,7 +1873,7 @@ msgstr ""
 "no se encuentra en una ubicación permitida de su usuario"
 
 #. module: public_budget
-#: code:addons/public_budget/wizards/transaction_definitive_make_invoice.py:172
+#: code:addons/public_budget/wizards/transaction_definitive_make_invoice.py:177
 #: code:addons/public_budget/wizards/transaction_definitive_mass_invoice_create.py:50
 #, python-format
 msgid ""
@@ -2481,7 +2481,7 @@ msgid "Observations"
 msgstr "Observaciones"
 
 #. module: public_budget
-#: code:addons/public_budget/wizards/transaction_definitive_make_invoice.py:185
+#: code:addons/public_budget/wizards/transaction_definitive_make_invoice.py:190
 #: code:addons/public_budget/wizards/transaction_definitive_mass_invoice_create.py:59
 #, python-format
 msgid ""
@@ -3582,7 +3582,7 @@ msgstr "En transito"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_prec_detail_account_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_funding_move_type
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_id_7436
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_id_7430
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_request_filter
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_return_filter
 msgid "Type"
@@ -3665,7 +3665,7 @@ msgstr "¿Con restricción de cantidad?"
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_account_payment_group_transaction_with_advance_payment
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment_7439
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment_7433
 msgid "With advance payment?"
 msgstr "Con Pago Anticipado?"
 
@@ -3756,7 +3756,7 @@ msgstr ""
 "\"Cancelado\"!"
 
 #. module: public_budget
-#: code:addons/public_budget/wizards/transaction_definitive_make_invoice.py:193
+#: code:addons/public_budget/wizards/transaction_definitive_make_invoice.py:198
 #, python-format
 msgid ""
 "You can not invoice more than Advance Remaining Amount!\n"
@@ -3835,7 +3835,7 @@ msgstr ""
 "\"Vistas\"."
 
 #. module: public_budget
-#: code:addons/public_budget/wizards/transaction_definitive_make_invoice.py:208
+#: code:addons/public_budget/wizards/transaction_definitive_make_invoice.py:213
 #, python-format
 msgid "You should set at least one line with amount greater than 0"
 msgstr "Debes completar al menos una línea con un monto mayor a 0"
