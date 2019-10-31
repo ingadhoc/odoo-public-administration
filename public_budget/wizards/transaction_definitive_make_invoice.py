@@ -149,7 +149,6 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
             rec.supplier_ids = suppliers
             definitive_lines.env.all.mode = env_all_mode
 
-
     @api.onchange('supplier_id')
     def _compute_lines(self):
         self.line_ids = self.env[
