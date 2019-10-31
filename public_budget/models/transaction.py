@@ -384,8 +384,8 @@ class BudgetTransaction(models.Model):
         _logger.info('Getting Transaction Advance Amounts')
         for rec in self:
             amounts = rec._get_advance_amounts()
-            rec.advance_to_pay_amount_dynamic = amounts['advance_to_pay_amount']
-            rec.advance_paid_amount_dynamic = amounts['advance_paid_amount']
+            rec.advance_to_pay_amount = amounts['advance_to_pay_amount']
+            rec.advance_paid_amount = amounts['advance_paid_amount']
 
     def _compute_advance_dynamic_amounts(self):
         _logger.info('Getting Transaction Advance Dynamic Amounts')
