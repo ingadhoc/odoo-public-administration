@@ -193,7 +193,8 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
             # Check advance remaining amount
             advance_to_return_amount = (
                 self.transaction_id.advance_to_return_amount)
-            if self.to_invoice_amount > advance_to_return_amount:
+            if self.currency_id.compare_amounts(
+                    self.to_invoice_amount, advance_to_return_amount) == 1:
                 raise ValidationError(_(
                     "You can not invoice more than Advance Remaining Amount!\n"
                     "* Amount to invoice: %s\n"
