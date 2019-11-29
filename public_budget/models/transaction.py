@@ -253,7 +253,6 @@ class BudgetTransaction(models.Model):
         readonly=True,
         context={'default_partner_type': 'supplier'},
         states={'open': [('readonly', False)]},
-        auto_join=True,
         domain=[
             ('partner_type', '=', 'supplier'),
             ('transaction_with_advance_payment', '=', False)
@@ -274,7 +273,6 @@ class BudgetTransaction(models.Model):
             ('transaction_with_advance_payment', '=', True)
         ],
         context={'default_partner_type': 'supplier'},
-        auto_join=True,
         states={'open': [('readonly', False)]},
     )
 
