@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-21 10:17+0000\n"
+"POT-Creation-Date: 2019-12-12 14:24+0000\n"
 "PO-Revision-Date: 2019-01-18 20:37+0000\n"
 "Last-Translator: Nicolas Mac Rouillon <nmr@ingadhoc.com>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
@@ -813,7 +813,7 @@ msgstr "La compañía debe ser la misma que la Compañía del Diario!"
 #. module: public_budget
 #: code:addons/public_budget/models/advance_request.py:127
 #: code:addons/public_budget/models/advance_return.py:142
-#: code:addons/public_budget/models/transaction.py:302
+#: code:addons/public_budget/models/transaction.py:300
 #, python-format
 msgid "Company must be the same as Type Company!"
 msgstr "La Compañía debe ser la misma que la Compañía del Tipo especificado!"
@@ -1862,8 +1862,8 @@ msgstr ""
 "una ubicación permitida de su usuario"
 
 #. module: public_budget
-#: code:addons/public_budget/models/transaction.py:405
-#: code:addons/public_budget/models/transaction.py:680
+#: code:addons/public_budget/models/transaction.py:403
+#: code:addons/public_budget/models/transaction.py:678
 #, python-format
 msgid ""
 "It is not possible to generate a payment order if the expedient of the "
@@ -2832,7 +2832,7 @@ msgid "Preventive Line"
 msgstr "Afectación Preventiva"
 
 #. module: public_budget
-#: code:addons/public_budget/models/transaction.py:669
+#: code:addons/public_budget/models/transaction.py:667
 #, python-format
 msgid ""
 "Preventive Total, Type and Date are not compatible with Transaction Amount "
@@ -3319,7 +3319,7 @@ msgstr ""
 "* Saldo disponible para '%s' (%s): %s"
 
 #. module: public_budget
-#: code:addons/public_budget/models/transaction.py:600
+#: code:addons/public_budget/models/transaction.py:598
 #, python-format
 msgid ""
 "There is not enough Balance on Position '%s' (%s). Remaining balance would be %s.\n"
@@ -3427,14 +3427,14 @@ msgid "To Signature Process"
 msgstr "A proceso de firma"
 
 #. module: public_budget
-#: code:addons/public_budget/models/transaction.py:618
+#: code:addons/public_budget/models/transaction.py:616
 #, python-format
 msgid "To close a transaction there must be at least one preventive line"
 msgstr ""
 "Para cerrar una Transacción tiene que haber al menos una línea Preventiva."
 
 #. module: public_budget
-#: code:addons/public_budget/models/transaction.py:644
+#: code:addons/public_budget/models/transaction.py:642
 #, python-format
 msgid ""
 "To close a transaction to return amount must be 0!\n"
@@ -3446,7 +3446,7 @@ msgstr ""
 "(%s = %s - %s)"
 
 #. module: public_budget
-#: code:addons/public_budget/models/transaction.py:630
+#: code:addons/public_budget/models/transaction.py:628
 #, python-format
 msgid ""
 "To close a transaction, Preventive, Definitive, Invoiced, To Pay and Paid "
@@ -3582,7 +3582,7 @@ msgstr "En transito"
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_prec_detail_account_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_expedient_type
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_funding_move_type
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_id_7437
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_id_7431
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_request_filter
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_advance_return_filter
 msgid "Type"
@@ -3665,7 +3665,7 @@ msgstr "¿Con restricción de cantidad?"
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_account_payment_group_transaction_with_advance_payment
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment_7440
+#: model:ir.model.fields,field_description:public_budget.field_public_budget_transaction_type_with_advance_payment_7434
 msgid "With advance payment?"
 msgstr "Con Pago Anticipado?"
 
