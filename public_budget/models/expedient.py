@@ -140,8 +140,9 @@ class PublicBudgetExpedient(models.Model):
         'public_budget_expedient_ids_supplier_ids_rel',
         'expedient_id',
         'partner_id',
+        string="Supplier/Employee",
         context={'default_supplier': 1},
-        domain=[('supplier', '=', True)]
+        domain=['|', ('supplier', '=', True), ('employee', '=', True)]
     )
     remit_ids = fields.Many2many(
         'public_budget.remit',
