@@ -34,6 +34,10 @@ class Location(models.Model):
     level = fields.Char()
     number = fields.Char()
     building = fields.Char()
+    active = fields.Boolean(
+        track_visibility='onchange',
+        default=True,
+    )
 
     @api.depends('name', 'level', 'number', 'building')
     def _compute_complete_name(self):
