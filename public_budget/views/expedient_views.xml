@@ -33,7 +33,7 @@
         <field name="name">public_budget.expedient.form</field>
         <field name="model">public_budget.expedient</field>
         <field name="arch" type="xml">
-            <form string="Expedient">
+            <form string="Expedient" create="false" edit="false">
                 <header>
                     <button name="%(action_aeroo_report_expedient)d" class="oe_highlight" string="Print" type="action"/>
                     <button name="action_cancel_open" type="object" states="cancel" string="To Draft"/>
@@ -114,12 +114,26 @@
         </field>
     </record>
 
+
+    <record id="view_public_budget_expedient_form2" model="ir.ui.view">
+        <field name="name">public_budget.expedient.form.inherit</field>
+        <field name="model">public_budget.expedient</field>
+        <field name="inherit_id" ref="view_public_budget_expedient_form"/>
+        <field name="groups_id" eval="[(4, ref('group_portal_expedient')),(4, ref('group_secretary_usuario')),(4, ref('account.group_account_user')),(4, ref('group_habilitacion_usuario'))]"/>
+        <field name="arch" type="xml">
+            <form position="attributes">
+                <attribute name="create">true</attribute>
+                <attribute name="edit">true</attribute>
+            </form>
+        </field>
+    </record>
+
     <!-- TREEVIEW -->
     <record id="view_public_budget_expedient_tree" model="ir.ui.view">
         <field name="name">public_budget.expedient.tree</field>
         <field name="model">public_budget.expedient</field>
         <field name="arch" type="xml">
-            <tree string="Expedient" decoration-muted="state=='cancelled'" decoration-info="state == 'open'" decoration-bf="state in ['annulled', 'closed']" decoration-danger="state in ()">
+            <tree string="Expedient" decoration-muted="state=='cancelled'" decoration-info="state == 'open'" decoration-bf="state in ['annulled', 'closed']" decoration-danger="state in ()" create="false" edit="false">
                 <field name="number"/>
                 <field name="issue_date"/>
                 <field name="cover"/>
@@ -135,6 +149,19 @@
                 <field name="subsidy_approved"/>
                 <field name="overdue"/>
                 <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_public_budget_expedient_tree2" model="ir.ui.view">
+        <field name="name">public_budget.expedient.tree.inherit</field>
+        <field name="model">public_budget.expedient</field>
+        <field name="inherit_id" ref="view_public_budget_expedient_tree"/>
+        <field name="groups_id" eval="[(4, ref('group_portal_expedient')),(4, ref('group_secretary_usuario')),(4, ref('account.group_account_user')),(4, ref('group_habilitacion_usuario'))]"/>
+        <field name="arch" type="xml">
+            <tree position="attributes">
+                <attribute name="create">true</attribute>
+                <attribute name="edit">true</attribute>
             </tree>
         </field>
     </record>
