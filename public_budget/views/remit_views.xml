@@ -67,9 +67,26 @@
                         <field name="confirmation_date"/> 
                     </group>
                  </group>
-                <field name="expedient_ids"
-                    domain="[('current_location_id','=',location_id),('in_transit','=',False)]" options="{'no_create': True}"
-                /> 
+                    <field name="expedient_ids"
+                        domain="[('current_location_id','=',location_id),('in_transit','=',False)]" options="{'no_create': True}">
+                        <tree string="Expedient" decoration-muted="state=='cancelled'" decoration-info="state == 'open'" decoration-bf="state in ['annulled', 'closed']" decoration-danger="state in ()">
+                            <field name="number"/>
+                            <field name="issue_date"/>
+                            <field name="cover"/>
+                            <field name="reference"/>
+                            <field name="last_move_date"/>
+                            <field name="founder_id"/>
+                            <field name="category_id"/>
+                            <field name="type"/>
+                            <field name="current_location_id"/>
+                            <field name="in_transit"/>
+                            <field name="pages"/>
+                            <field name="user_id"/>
+                            <field name="subsidy_approved"/>
+                            <field name="overdue"/>
+                            <field name="state"/>
+                        </tree>
+                    </field>
                 </sheet>
 
             </form>
