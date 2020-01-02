@@ -61,10 +61,10 @@
                             <field name="parent_budget_position_ids" context="{'budget_id':active_id, 'tree_view_ref': 'public_budget.view_budget_position_budget_tree'}"/>
                         </page>
                         <page string="Detail">
-                            <field name="budget_detail_ids"/>
+                            <field name="budget_detail_ids" context="{'budget_id':active_id}"/>
                         </page>
                         <page string="Moves">
-                            <field name="budget_modification_ids"/>
+                            <field name="budget_modification_ids" context="{'budget_id':active_id}"/>
                         </page>
                         <page string="Funding Moves">
                             <field name="funding_move_ids"/>
