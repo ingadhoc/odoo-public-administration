@@ -157,11 +157,6 @@
                 <attribute name="attrs">{'invisible': ['|', ('payment_subtype', '!=', 'double_validation'), ('state', '=', 'posted')], 'readonly': ['|', ('transaction_with_advance_payment', '=', False), ('state', '!=', 'draft')]}</attribute>
             </field>
 
-            <xpath expr="//notebook//field[@name='payment_ids']/.." position="attributes">
-                <attribute name="groups">account.group_account_manager,public_budget.group_habilitacion_director</attribute>
-            </xpath>
-
-
             <!-- modifications for signature states -->
             <!-- add states -->
             <!-- al final no agreguamos estos porque la idea es que no esten siempre -->
