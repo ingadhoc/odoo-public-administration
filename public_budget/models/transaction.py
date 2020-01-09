@@ -402,7 +402,7 @@ class BudgetTransaction(models.Model):
         self.ensure_one()
         msg = _(
             "It is not possible to generate a payment order if the "
-            "expedient of the transaction is not in a permitted location")
+            "expedient of the transaction is not in a permitted location or is in transit")
         self.expedient_id.check_location_allowed_for_current_user(msg)
         self = self.with_context(transaction_id=self.id)
         for invoice in self.invoice_ids.filtered(
@@ -677,7 +677,7 @@ class BudgetTransaction(models.Model):
         self.ensure_one()
         msg = _(
             "It is not possible to generate a payment order if the "
-            "expedient of the transaction is not in a permitted location")
+            "expedient of the transaction is not in a permitted location or is in transit")
         self.expedient_id.check_location_allowed_for_current_user(msg)
         action = self.env['ir.model.data'].xmlid_to_object(
             'account_payment_group.action_account_payments_group_payable')

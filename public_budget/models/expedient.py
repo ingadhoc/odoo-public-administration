@@ -328,13 +328,12 @@ class PublicBudgetExpedient(models.Model):
         """This method Validate if the current user it's belongs
          to the users allowed in the current location of this expedient
         """
-        for rec in self.filtered(
-                lambda x: x.current_location_id
-                and x.current_location_id.user_ids and
-                x.env.user not in x.current_location_id.user_ids):
+        if any(self.filtered(lambda x: x.in_transit or x.current_location_id
+                             and x.current_location_id.user_ids and
+                             x.env.user not in x.current_location_id.user_ids)):
             raise ValidationError(msg or _(
-                'Can not complete this operation because the location the '
-                'expedient is not on your assigned locations'))
+                'Can not complete this operation because the location of the '
+                'expedient is not on your assigned locations or the expedient is in transit'))
         return True
 
     @api.multi
