@@ -197,7 +197,7 @@ class AccountPaymentGroup(models.Model):
             msg = _('It is not possible'
                     ' to confirm a payment if the payment'
                     ' expedient is not in a users'
-                    ' allowed location')
+                    ' allowed location or is in transit')
             rec.expedient_id and rec.expedient_id.\
                 check_location_allowed_for_current_user(msg)
 

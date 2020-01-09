@@ -49,7 +49,7 @@ class PublicBudgetDefinitiveMassInvoiceCreate(models.TransientModel):
         self.ensure_one()
         msg = _('It is not possible to generate an invoice if '
                 'the expedient of the transaction is not in a'
-                ' permitted location of its user')
+                ' permitted location of its user or is in transit')
         self.transaction_id.expedient_id\
             .check_location_allowed_for_current_user(msg)
         tran_type = self.transaction_id.type_id
