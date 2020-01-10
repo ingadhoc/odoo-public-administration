@@ -158,14 +158,10 @@ class BudgetPosition(models.Model):
         """
         budget_id = self._context.get('budget_id', False)
         to_date = self._context.get('analysis_to_date', False)
-
-        # we check it is a report because if not it will get wrong budget
-        # on positions
-        if not budget_id and 'aeroo_docs' in self._context:
-            budget_id = self._context.get('budget_id', False)
-
         excluded_line_id = self._context.get('excluded_line_id', False)
 
+        if not budget_id:
+            return True
         # if to_date use it, if not, then use now
         if to_date:
             day_of_year = fields.Datetime.from_string(
@@ -186,17 +182,16 @@ class BudgetPosition(models.Model):
                 # el estado de la transaccion
                 ('transaction_id.state', 'in', ('open', 'closed')),
                 ('affects_budget', '=', True),
+                ('budget_id', '=', budget_id),
             ]
 
-            if budget_id:
-                domain.append(('budget_id', '=', budget_id))
             if to_date:
                 _logger.debug('Getting budget amounts with to_date %s' % (to_date))
                 domain += [('transaction_id.issue_date', '<=', to_date)]
 
             # we add budget_assignment_allowed condition to optimize
             # if budget_id and self.budget_assignment_allowed:
-            if budget_id and (rec.budget_assignment_allowed or rec.child_ids):
+            if (rec.budget_assignment_allowed or rec.child_ids):
                 modification_domain = [
                     ('budget_modification_id.budget_id', '=', budget_id),
                     ('budget_position_id', operator, rec.id)]
@@ -232,7 +227,6 @@ class BudgetPosition(models.Model):
                 groupby=['budget_position_id'],
             )])
 
-            # self.
             active_preventive_lines = self.env['public_budget.preventive_line'].with_context(
                 prefetch_fields=False).search(domain)
 
