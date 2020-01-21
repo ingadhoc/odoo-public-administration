@@ -56,7 +56,9 @@ class PublicBudgetCreateExepedientsWizard(models.TransientModel):
                 'pages': self.pages,
             }
             expedient = expedients.create(vals)
-            order.expedient_id = expedient.id
+            # we do with sudo because in case that an user to only allow to read PO try to create an expedient
+            # if came from an requisition.
+            order.sudo().expedient_id = expedient.id
             expedients |= expedient
         action = self.env.ref(
             'public_budget.action_public_budget_expedient_expedients')

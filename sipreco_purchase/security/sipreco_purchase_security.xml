@@ -13,6 +13,13 @@
         <field name="implied_ids" eval="[(4, ref('stock.group_stock_user'))]"/>
     </record>
 
+    <record id="group_only_read_purchase_order_requisition" model="res.groups">
+        <field name="name">Visualizar Solicitudes de compra y Ordenes de compra</field>
+        <field name="category_id" ref="base.module_category_usability"/>
+        <!-- o debería ser base.module_category_extra?-->
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+    </record>
+
     <record id="group_requester" model="res.groups">
         <field name="name">Base Requirente</field>
         <field name="category_id" ref="base.module_category_hidden"/>
@@ -51,7 +58,7 @@
 
     <!-- damos permiso a solicitante para compras -->
     <record model="ir.ui.menu" id="purchase.menu_purchase_root">
-        <field name="groups_id" eval="[(4, ref('stock.group_stock_user'))]"/>
+        <field name="groups_id" eval="[(4, ref('stock.group_stock_user')),(4, ref('group_only_read_purchase_order_requisition'))]"/>
     </record>
 
     <!-- ocultamos menu de reglas de reabastecimeinto (Solo para warehosue manager) -->
@@ -97,7 +104,7 @@
     <record model="ir.rule" id="requisition_only_read_rule">
         <field name="name">Requisition only see if are in route allowed to user</field>
         <field name="model_id" ref="purchase_requisition.model_purchase_requisition"/>
-        <field name="groups" eval="[(4, ref('stock.group_stock_user'))]"/>
+        <field name="groups" eval="[(4, ref('stock.group_stock_user')),(4, ref('group_only_read_purchase_order_requisition'))]"/>
         <field name="domain_force">['|', ('route_id', '=', False),('route_id.pull_ids.picking_type_id', 'in', user.picking_type_ids.ids)]</field>
     </record>
 
