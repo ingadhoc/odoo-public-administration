@@ -11,3 +11,4 @@ from . import res_users
 from . import stock_location_route
 from . import product_product
 from . import transaction
+from . import expedient
