@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_public_budget_expedient_form" model="ir.ui.view">
+        <field name="name">sipreco_purchase.expedient.form</field>
+        <field name="model">public_budget.expedient</field>
+        <field name="inherit_id" ref="public_budget.view_public_budget_expedient_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box">
+                <field name="purchase_order_ids" invisible="1"/>
+                <button class="oe_stat_button" name="%(purchase.purchase_form_action)d" type="action" string="Purchase Orders" groups="sipreco_purchase.group_only_read_purchase_order_requisition,sipreco_purchase.group_requester_employee" context="{'search_default_expedient_id': active_id}" icon="fa-credit-card" attrs="{'invisible':[('purchase_order_ids', '=', False)]}"/>
+            </div>
+        </field>
+    </record>
+</odoo>
