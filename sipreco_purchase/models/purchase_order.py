@@ -14,6 +14,11 @@ class PurchaseOrder(models.Model):
         copy=False,
     )
 
+    user_confirmed_id = fields.Many2one(
+        'res.users',
+        readonly=True,
+    )
+
     @api.onchange('requisition_id')
     def _onchange_requisition_id(self):
         super(PurchaseOrder, self)._onchange_requisition_id()
@@ -31,3 +36,9 @@ class PurchaseOrder(models.Model):
                 ("\n* ".join(
                     [p.name + '(%s)' % (p.expedient_id.number)
                      for p in purchase_orders_expedient])))
+
+    @api.multi
+    def button_confirm(self):
+        super(PurchaseOrder, self).button_confirm()
+        for rec in self.filtered(lambda x: x.state in ['to_approve', 'purchase']):
+            rec.user_confirmed_id = self.env.user
