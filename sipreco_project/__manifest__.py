@@ -34,7 +34,7 @@
         'demo/config_data.xml',
         'demo/load_es_lang.yml',
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
     'application': True,
 }
