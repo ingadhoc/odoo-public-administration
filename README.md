@@ -1,6 +1,6 @@
-[![Runbot Status](http://runbot2.adhoc.com.ar/runbot/badge/flat/7/11.0.svg)](http://runbot2.adhoc.com.ar/runbot/repo/github-com-ingadhoc-odoo-public-administration-7)
-[![Build Status](https://travis-ci.org/ingadhoc/odoo-public-administration.svg?branch=11.0)](https://travis-ci.org/ingadhoc/odoo-public-administration)
-[![Coverage Status](https://coveralls.io/repos/ingadhoc/odoo-public-administration/badge.png?branch=11.0)](https://coveralls.io/r/ingadhoc/odoo-public-administration?branch=11.0)
+[![Runbot Status](http://runbot2.adhoc.com.ar/runbot/badge/flat/7/13.0.svg)](http://runbot2.adhoc.com.ar/runbot/repo/github-com-ingadhoc-odoo-public-administration-7)
+[![Build Status](https://travis-ci.org/ingadhoc/odoo-public-administration.svg?branch=13.0)](https://travis-ci.org/ingadhoc/odoo-public-administration)
+[![Coverage Status](https://coveralls.io/repos/ingadhoc/odoo-public-administration/badge.png?branch=13.0)](https://coveralls.io/r/ingadhoc/odoo-public-administration?branch=13.0)
 [![Code Climate](https://codeclimate.com/github/ingadhoc/odoo-public-administration/badges/gpa.svg)](https://codeclimate.com/github/ingadhoc/odoo-public-administration)
 
 # ADHOC odoo-public-administration
@@ -12,7 +12,7 @@ ADHOC Odoo odoo-public-administration related Addons
 
 Translation Status
 ------------------
-[![Transifex Status](https://www.transifex.com/projects/p/ingadhoc-odoo-public-administration-11-0/chart/image_png)](https://www.transifex.com/projects/p/ingadhoc-odoo-public-administration-11-0)
+[![Transifex Status](https://www.transifex.com/projects/p/ingadhoc-odoo-public-administration-13-0/chart/image_png)](https://www.transifex.com/projects/p/ingadhoc-odoo-public-administration-13-0)
 
 ----
 
