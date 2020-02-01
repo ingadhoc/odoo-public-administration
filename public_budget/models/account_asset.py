@@ -12,9 +12,7 @@ class AccountAssetAsset(models.Model):
     )
     enrollment = fields.Char(
     )
-    reference = fields.Char(
-        default=lambda self: self._get_default_code(),
-    )
+    reference = fields.Char()
     serial_number = fields.Char(
     )
     asset_state = fields.Selection(
@@ -77,10 +75,6 @@ class AccountAssetAsset(models.Model):
         ('reference', 'unique(reference)',
          '¡La referencia debe ser unica!')]
 
-    @api.model
-    def _get_default_code(self):
-        return self.env['ir.sequence'].next_by_code('public_budget.asset')
-
     @api.multi
     def _compute_transaction_ids(self):
         for rec in self.filtered('invoice_id'):
@@ -126,3 +120,9 @@ class AccountAssetAsset(models.Model):
         action = action.read()[0]
         action['domain'] = [('id', 'in', self.transaction_ids.ids)]
         return action
+
+    @api.model
+    def create(self, values):
+        if not values.get('reference', False):
+            values['reference'] = self.env['ir.sequence'].next_by_code('public_budget.asset')
+        return super(AccountAssetAsset, self).create(values)
