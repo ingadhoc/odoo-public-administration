@@ -97,6 +97,16 @@
         </field>
     </record>
 
+    <record id="view_account_asset_asset_form_portal" model="ir.ui.view">
+        <field name="name">account.asset.asset.form</field>
+        <field name="model">account.asset.asset</field>
+        <field name="inherit_id" ref="view_account_asset_asset_form"/>
+        <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+        <field name="arch" type="xml">
+            <field name="activity_ids" position="replace"/>
+        </field>
+    </record>
+
     <menuitem name="Asset" id="menu_asset" groups="group_asset_usuario,public_budget.group_portal_asset" web_icon="public_budget,static/description/asset-icon.png" sequence="40"/>
 
     <menuitem id="menu_account_asset" name="Assets" parent="menu_asset" sequence="2" action="account_asset.action_account_asset_asset_form"/>
