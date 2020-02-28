@@ -11,7 +11,6 @@ class PublicBudgetTransferAssetWizard(models.TransientModel):
         domain="[('asset_management', '=', True)]",
     )
 
-    @api.multi
     def confirm(self):
         self.ensure_one()
         active_id = self._context.get('active_id', False)

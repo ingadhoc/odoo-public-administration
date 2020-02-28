@@ -39,7 +39,6 @@ class AccountPayment(models.Model):
         help='Pago al que devuelve',
     )
 
-    @api.multi
     def write(self, vals):
         """ para pagos que son devolución no dejamos cambiar nada salvo algunos
         campos que se setean a mano
@@ -88,7 +87,6 @@ class AccountPayment(models.Model):
                 'deferred').id
         return vals
 
-    @api.multi
     def confirm_check_change(self):
         self.ensure_one()
         replaced_payment_id = self._context.get('replaced_payment_id')
@@ -127,7 +125,6 @@ class AccountPayment(models.Model):
             'tag': 'reload',
         }
 
-    @api.multi
     def change_check(self):
         self.ensure_one()
         # context = self._context.copy()
@@ -203,7 +200,6 @@ class AccountPayment(models.Model):
                 'El número de cheque %s ya se ha utilizado') % (
                 self.check_number))
 
-    @api.multi
     def change_withholding(self):
         """ Arrojamos este error para recordarnos que este metodo se implementa
         en realidad en public_budget_tax_settlement porque necesitamos del

@@ -14,7 +14,6 @@ class PublicBudgetPreventiveChangePosition(models.TransientModel):
         domain=[('type', '=', 'normal')],
     )
 
-    @api.multi
     def confirm(self):
         self.ensure_one()
         active_id = self._context.get('active_id')

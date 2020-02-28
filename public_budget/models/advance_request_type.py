@@ -41,7 +41,6 @@ class AdvanceRequestType(models.Model):
         context="{'advance_return_type_id': id}",
     )
 
-    @api.multi
     def _compute_employee_ids(self):
         for rec in self:
             employees = self.env['res.partner'].search([

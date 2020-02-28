@@ -329,7 +329,6 @@ class PreventiveLine(models.Model):
                     assignment_position.name,
                     assignment_position.code, position_balance))
 
-    @api.multi
     def unlink(self):
         for rec in self:
             if rec.definitive_line_ids:

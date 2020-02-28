@@ -149,7 +149,6 @@
         <record id="action_public_budget_budget_budgets" model="ir.actions.act_window">
             <field name="name">Budgets</field>
             <field name="res_model">public_budget.budget</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="view_public_budget_budget_tree"/>
             <field name="search_view_id" ref="view_public_budget_budget_filter"/>
@@ -170,7 +169,6 @@
         <record id="action_res_partner_employees" model="ir.actions.act_window">
             <field name="name">Employees</field>
             <field name="res_model">res.partner</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create"> Click to create a Employees.</p>
@@ -189,7 +187,6 @@
         <record id="action_public_budget_expedient_expedients" model="ir.actions.act_window">
             <field name="name">Expedients</field>
             <field name="res_model">public_budget.expedient</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <!-- no hace falta especificar y nos complica con el orden de carga de los xml -->
             <!-- <field name="view_id" ref="view_public_budget_expedient_tree"/> -->
@@ -209,7 +206,6 @@
         <record id="action_public_budget_location_locations" model="ir.actions.act_window">
             <field name="name">Locations</field>
             <field name="res_model">public_budget.location</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="view_public_budget_location_tree"/>
             <field name="search_view_id" ref="view_public_budget_location_filter"/>
@@ -228,7 +224,6 @@
         <record id="action_public_budget_remit_remits" model="ir.actions.act_window">
             <field name="name">Remits</field>
             <field name="res_model">public_budget.remit</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="view_public_budget_remit_tree"/>
             <field name="search_view_id" ref="view_public_budget_remit_filter"/>
@@ -248,7 +243,6 @@
         <record id="action_res_partner_suppliers" model="ir.actions.act_window">
             <field name="name">Suppliers</field>
             <field name="res_model">res.partner</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create"> Click to create a Suppliers.</p>
@@ -259,7 +253,6 @@
         <record id="action_res_partner_subsidy_recipients" model="ir.actions.act_window">
             <field name="name">Subsidy Recipients</field>
             <field name="res_model">res.partner</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create"> Click to create a Subsidy Recipient.</p>
@@ -284,7 +277,6 @@
         <record id="action_public_budget_transaction_type_transaction_types" model="ir.actions.act_window">
             <field name="name">Transaction Types</field>
             <field name="res_model">public_budget.transaction_type</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="view_public_budget_transaction_type_tree"/>
             <field name="search_view_id" ref="view_public_budget_transaction_type_filter"/>
@@ -303,7 +295,6 @@
         <record id="action_public_budget_transaction_transactions" model="ir.actions.act_window">
             <field name="name">Transactions</field>
             <field name="res_model">public_budget.transaction</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="view_public_budget_transaction_tree"/>
             <field name="search_view_id" ref="view_public_budget_transaction_filter"/>
@@ -330,7 +321,6 @@
         <record id="action_public_budget_budget_pos_exc_rest_position_exc__rest_" model="ir.actions.act_window">
             <field name="name">Position Exc. Rest.</field>
             <field name="res_model">public_budget.budget_pos_exc_rest</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="view_public_budget_budget_pos_exc_rest_tree"/>
             <field name="search_view_id" ref="view_public_budget_budget_pos_exc_rest_filter"/>
@@ -349,7 +339,6 @@
         <record id="action_public_budget_budget_position_category_position_types" model="ir.actions.act_window">
             <field name="name">Position Types</field>
             <field name="res_model">public_budget.budget_position_category</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="view_public_budget_budget_position_category_tree"/>
             <field name="search_view_id" ref="view_public_budget_budget_position_category_filter"/>
@@ -368,7 +357,6 @@
         <record id="action_public_budget_budget_position_positions" model="ir.actions.act_window">
             <field name="name">Positions</field>
             <field name="res_model">public_budget.budget_position</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="view_public_budget_budget_position_tree"/>
             <field name="search_view_id" ref="view_public_budget_budget_position_filter"/>
@@ -387,7 +375,6 @@
         <record id="action_public_budget_expedient_category_categories" model="ir.actions.act_window">
             <field name="name">Categories</field>
             <field name="res_model">public_budget.expedient_category</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="view_public_budget_expedient_category_tree"/>
             <field name="search_view_id" ref="view_public_budget_expedient_category_filter"/>
@@ -406,7 +393,6 @@
         <record id="action_public_budget_expedient_founder_founders" model="ir.actions.act_window">
             <field name="name">Founders</field>
             <field name="res_model">public_budget.expedient_founder</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="view_public_budget_expedient_founder_tree"/>
             <field name="search_view_id" ref="view_public_budget_expedient_founder_filter"/>
@@ -427,7 +413,6 @@
         <record id="action_public_budget_funding_move" model="ir.actions.act_window">
             <field name="name">Funding Moves</field>
             <field name="res_model">public_budget.funding_move</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="public_budget.view_public_budget_funding_move_tree"/>
             <field name="search_view_id" ref="public_budget.view_public_budget_funding_move_filter"/>

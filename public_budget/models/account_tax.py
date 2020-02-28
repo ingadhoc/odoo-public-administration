@@ -6,7 +6,6 @@ import datetime
 class AccountTax(models.Model):
     _inherit = "account.tax"
 
-    @api.multi
     def get_period_payments_domain(self, payment_group):
         """ en sipreco usamos to_signature_date en vez de payment_date
         """

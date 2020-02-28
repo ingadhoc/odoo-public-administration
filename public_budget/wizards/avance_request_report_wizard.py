@@ -14,7 +14,6 @@ class PublicBudgetAvanceRequestReportWizard(models.TransientModel):
         'Hasta Fecha',
     )
 
-    @api.multi
     def confirm(self):
         self.ensure_one()
         return self.env['ir.actions.report'].search(

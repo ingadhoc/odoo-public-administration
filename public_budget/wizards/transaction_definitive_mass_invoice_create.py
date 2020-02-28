@@ -44,7 +44,6 @@ class PublicBudgetDefinitiveMassInvoiceCreate(models.TransientModel):
         required=True
     )
 
-    @api.multi
     def confirm(self):
         self.ensure_one()
         msg = _('It is not possible to generate an invoice if '

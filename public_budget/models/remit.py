@@ -75,7 +75,6 @@ class Remit(models.Model):
         string='Expedients'
     )
 
-    @api.multi
     def onchange(self, values, field_name, field_onchange):
         """
         Idea obtenida de aca
@@ -127,7 +126,6 @@ class Remit(models.Model):
                     '* Expedientes: %s' % (', '.join(
                         future_expedients.mapped('number')))))
 
-    @api.multi
     def check_user_location(self):
         for rec in self:
             rec.confirmation_user_id = rec.env.user
@@ -137,26 +135,22 @@ class Remit(models.Model):
                     'You can Not Confirme a Remit of a Location where your '
                     'are not authorized!'))
 
-    @api.multi
     def action_cancel_in_transit(self):
         """ go from canceled state to draft state"""
         self.write({'state': 'in_transit'})
         return True
 
-    @api.multi
     def action_cancel(self):
         """ go from canceled state to draft state"""
         self.write({'state': 'cancel'})
         return True
 
-    @api.multi
     def action_confirm(self):
         """ go from canceled state to draft state"""
         self.check_user_location()
         self.write({'state': 'confirmed'})
         return True
 
-    @api.multi
     def unlink(self):
         for rec in self:
             if rec.state != 'cancel':

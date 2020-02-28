@@ -75,7 +75,6 @@ class BudgetModification(models.Model):
             rec.rest_message = rest_message
             rec.rest_type = rest_type
 
-    @api.multi
     def unlink(self):
         """Si borramos una modification como se borran por cascade no se llama
         el unlink de los detail

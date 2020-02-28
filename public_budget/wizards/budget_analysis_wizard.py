@@ -17,7 +17,6 @@ class PublicBudgetBudgetAnalysisWizard(models.TransientModel):
         'Hasta Fecha',
     )
 
-    @api.multi
     def open(self):
         self.ensure_one()
         actions = self.env.ref(
@@ -43,7 +42,6 @@ class PublicBudgetBudgetAnalysisWizard(models.TransientModel):
         }
         return action_read
 
-    @api.multi
     def print_report(self):
         self.ensure_one()
         action = self.env.ref('public_budget.action_aeroo_report_budget')

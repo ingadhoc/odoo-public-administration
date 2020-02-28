@@ -153,7 +153,6 @@ class Budget(models.Model):
                 continue
             raise ValidationError('%s no es un año valido!' % year)
 
-    @api.multi
     def check_date_in_budget_dates(self, date):
         """
         Verifica si una fecha esta dentro de las fechas del presupuesto
@@ -166,7 +165,6 @@ class Budget(models.Model):
             return True
         return False
 
-    @api.multi
     def get_budget_fiscalyear_dates(self):
         """
         Devolvemos para este budget primer y ultimo día del presupuesto
@@ -257,28 +255,23 @@ class Budget(models.Model):
                 'WHERE id IN %s', (tuple(definitive_lines.ids),))
             self.passive_residue = sum([x[0] for x in self._cr.fetchall()])
 
-    @api.multi
     def action_cancel_draft(self):
         """ go from canceled state to draft state"""
         self.write({'state': 'draft'})
         return True
 
-    @api.multi
     def action_open(self):
         self.write({'state': 'open'})
         return True
 
-    @api.multi
     def action_close(self):
         self.write({'state': 'closed'})
         return True
 
-    @api.multi
     def action_cancel(self):
         self.write({'state': 'cancel'})
         return True
 
-    @api.multi
     def action_pre_close(self):
         # Unlink any previous pre close detail
         for rec in self:
@@ -305,7 +298,6 @@ class Budget(models.Model):
                 rec.budget_prec_detail_ids.create(vals)
         self.write({'state': 'pre_closed'})
 
-    @api.multi
     def action_to_open_modification(self):
         self.ensure_one()
         view_id = self.env['ir.model.data'].xmlid_to_res_id(
@@ -324,7 +316,6 @@ class Budget(models.Model):
 
         }
 
-    @api.multi
     def action_to_open_definitive_lines(self):
         self.ensure_one()
         view_id = self.env.ref(

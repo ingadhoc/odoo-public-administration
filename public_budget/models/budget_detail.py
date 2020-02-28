@@ -40,7 +40,6 @@ class BudgetDetail(models.Model):
         ('position_unique', 'unique(budget_position_id, budget_id)',
             _('Budget Position must be unique per Budget.'))]
 
-    @api.multi
     def _compute_amount(self):
         for rec in self:
             modifications = sum(

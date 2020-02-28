@@ -170,7 +170,6 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
                 lines.append((0, _, values))
             self.line_ids = lines
 
-    @api.multi
     def make_invoices(self):
         self.ensure_one()
         msg = _('It is not possible to generate an invoice if '

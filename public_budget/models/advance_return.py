@@ -77,7 +77,6 @@ class AdvanceReturn(models.Model):
         states={'draft': [('readonly', False)]},
     )
 
-    @api.multi
     def get_move_vals(self):
         self.ensure_one()
         return_partner = self.type_id.general_return_partner_id
@@ -111,7 +110,6 @@ class AdvanceReturn(models.Model):
             'journal_id': journal.id,
         }
 
-    @api.multi
     def action_confirm(self):
         for record in self:
             move_vals = record.get_move_vals()
@@ -125,7 +123,6 @@ class AdvanceReturn(models.Model):
                 record.confirmation_date = fields.Datetime.now()
         return True
 
-    @api.multi
     def action_cancel(self):
         for record in self:
             if record.move_id:
@@ -152,7 +149,6 @@ class AdvanceReturn(models.Model):
                     'You can not approve a return with lines without '
                     'returned amount.'))
 
-    @api.multi
     def action_cancel_draft(self):
         """ go from canceled state to draft state"""
         self.write({'state': 'draft'})
@@ -160,7 +156,6 @@ class AdvanceReturn(models.Model):
         self.create_workflow()
         return True
 
-    @api.multi
     def unlink(self):
         for rec in self:
             if rec.state not in ['draft', 'cancel']:
@@ -173,7 +168,6 @@ class AdvanceReturn(models.Model):
     def change_type(self):
         self.return_line_ids = False
 
-    @api.multi
     def compute_debtors(self):
         self.ensure_one()
         actual_employees = self.return_line_ids.mapped('employee_id')

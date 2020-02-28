@@ -53,7 +53,6 @@ class BudgetModificationDetail(models.Model):
         store=True,
     )
 
-    @api.multi
     def unlink(self):
         to_check = []
         for rec in self:

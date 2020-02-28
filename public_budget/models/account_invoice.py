@@ -26,7 +26,6 @@ class AccountInvoice(models.Model):
         store=True,
     )
 
-    @api.multi
     def verify_on_afip(self):
         super(AccountInvoice, self).verify_on_afip()
         return {'type': 'ir.actions.act_window.none'}
@@ -95,7 +94,6 @@ class AccountInvoice(models.Model):
             amount = -amount
         return amount
 
-    @api.multi
     def _get_paid_amount_to_date(self):
         """ Calculo de importe pagado solamente para análisis a fecha ya que
         si no se calcula directamente en las invoiec lines usando el residual
@@ -140,7 +138,6 @@ class AccountInvoice(models.Model):
                         'La fecha de la factura no puede ser menor a la fecha '
                         'de la linea definitiva relacionada'))
 
-    @api.multi
     def action_cancel(self):
         for inv in self.filtered(
                 lambda x: x.to_pay_amount and
@@ -153,7 +150,6 @@ class AccountInvoice(models.Model):
                 'pay. You need to cancel related payments first.'))
         return super(AccountInvoice, self).action_cancel()
 
-    @api.multi
     def invoice_validate(self):
         res = super(AccountInvoice, self).invoice_validate()
         for inv in self.filtered(

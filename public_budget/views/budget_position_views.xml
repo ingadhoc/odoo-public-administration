@@ -120,7 +120,6 @@
     <record id="action_position_analysis_tree" model="ir.actions.act_window">
         <field name="name">Budget Position analysis</field>
         <field name="res_model">public_budget.budget_position</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree</field>
         <field name="view_id" ref="view_budget_position_analysis_tree"/>
         <field name="domain">[('parent_id','=',False)]</field>

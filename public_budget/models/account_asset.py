@@ -75,19 +75,16 @@ class AccountAssetAsset(models.Model):
         ('reference', 'unique(reference)',
          '¡La referencia debe ser unica!')]
 
-    @api.multi
     def _compute_transaction_ids(self):
         for rec in self.filtered('invoice_id'):
             domain = [('invoice_ids', 'in', [rec.invoice_id.id])]
             rec.transaction_ids = self.env['public_budget.transaction'].search(
                 domain)
 
-    @api.multi
     def _compute_visible_button_transfer_asset(self):
         for rec in self.filtered(lambda x: x.user_id == self.env.user):
             rec.visible_button_transfer_asset = True
 
-    @api.multi
     def transfer_asset(self):
         self.ensure_one()
         action = self.env.ref(
@@ -95,7 +92,6 @@ class AccountAssetAsset(models.Model):
         action_read = action.read()[0]
         return action_read
 
-    @api.multi
     def confirm_tranfer(self):
         self.ensure_one()
         self.transit = False
@@ -108,11 +104,9 @@ class AccountAssetAsset(models.Model):
 
     # We overwrite this method to block the odoo funcionality to send a
     # message whit the fields that not interested to show
-    @api.multi
     def validate(self):
         self.write({'state': 'open'})
 
-    @api.multi
     def action_view_transaction(self):
         self.ensure_one()
         action = self.env.ref(

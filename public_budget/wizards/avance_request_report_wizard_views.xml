@@ -21,7 +21,6 @@
     <record id="action_advance_request_debt_report_wizard" model="ir.actions.act_window">
         <field name="name">Deudas de Adelantos a Fecha</field>
         <field name="res_model">public_budget.advance.request.report.wizard</field>
-        <field name="view_type">form</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>

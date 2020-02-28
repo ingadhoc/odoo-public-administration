@@ -218,7 +218,6 @@ class PublicBudgetExpedient(models.Model):
             }
             return {'warning': warning}
 
-    @api.multi
     def write(self, vals):
         if 'message_follower_ids' not in vals:
             self.check_location_allowed_for_current_user()
@@ -231,7 +230,6 @@ class PublicBudgetExpedient(models.Model):
                                             'expediente'))
         return super().write(vals)
 
-    @api.multi
     def check_expedients_exist(self):
         for expedient in self:
             # no se puede si esta en transacciones no canceladas
@@ -272,29 +270,24 @@ class PublicBudgetExpedient(models.Model):
                 cover += ' - ' + ', '.join(supplier_names)
             rec.cover = cover
 
-    @api.multi
     def action_cancel_open(self):
         """ go from canceled state to draft state"""
         self.write({'state': 'open'})
         return True
 
-    @api.multi
     def action_close(self):
         self.write({'state': 'closed'})
         return True
 
-    @api.multi
     def action_annulled(self):
         self.check_expedients_exist()
         self.write({'state': 'annulled'})
         return True
 
-    @api.multi
     def action_cancel(self):
         self.write({'state': 'cancel'})
         return True
 
-    @api.multi
     def name_get(self):
         result = []
         for rec in self:
@@ -323,7 +316,6 @@ class PublicBudgetExpedient(models.Model):
         rec.check_location_allowed_for_current_user()
         return rec
 
-    @api.multi
     def check_location_allowed_for_current_user(self, msg=None):
         """This method Validate if the current user it's belongs
          to the users allowed in the current location of this expedient
@@ -336,7 +328,6 @@ class PublicBudgetExpedient(models.Model):
                 'expedient is not on your assigned locations or the expedient is in transit'))
         return True
 
-    @api.multi
     def unlink(self):
         self.check_location_allowed_for_current_user()
         return super().unlink()

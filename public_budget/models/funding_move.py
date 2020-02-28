@@ -75,18 +75,15 @@ class FundingMove(models.Model):
         domain=[('budget_assignment_allowed', '=', True)]
     )
 
-    @api.multi
     def action_cancel_draft(self):
         """ go from canceled state to draft state"""
         self.write({'state': 'draft'})
         return True
 
-    @api.multi
     def action_cancel(self):
         self.write({'state': 'cancel'})
         return True
 
-    @api.multi
     def unlink(self):
         for rec in self:
             if rec.state not in ('draft'):
@@ -94,7 +91,6 @@ class FundingMove(models.Model):
                     _('The funding move must be in draft state for unlink !'))
         return super(FundingMove, self).unlink()
 
-    @api.multi
     @api.constrains('state')
     def _check_cancel(self):
         for rec in self:
@@ -103,7 +99,6 @@ class FundingMove(models.Model):
                     "You can not cancel a Funding Move that has a related "
                     "Account Move. Delete it first"))
 
-    @api.multi
     def action_confirm(self):
         for rec in self:
             income_account = rec.income_account_id or \

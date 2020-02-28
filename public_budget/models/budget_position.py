@@ -136,7 +136,6 @@ class BudgetPosition(models.Model):
         help='Default Account on preventive lines of this position'
     )
 
-    @api.multi
     # @api.depends(
     #     'preventive_line_ids.affects_budget',
     #     'preventive_line_ids.transaction_id.state',
@@ -253,7 +252,6 @@ class BudgetPosition(models.Model):
             rec.balance_amount = rec.amount - preventive_amount
             _logger.debug('Finish getting amounts for budget position %s' % rec.name)
 
-    @api.multi
     def name_get(self):
         result = []
         for rec in self:
@@ -316,7 +314,6 @@ class BudgetPosition(models.Model):
                             'Allowed as the child position %s has Allowed.'
                         ) % (rec.name, children_allowed[0].name))
 
-    @api.multi
     def get_parent_assignment_position(self):
         self.ensure_one()
         assignment_allowed = self.env['public_budget.budget_position']
@@ -340,7 +337,6 @@ class BudgetPosition(models.Model):
                 assignment_position = rec.get_parent_assignment_position()
             rec.assignment_position_id = assignment_position.id
 
-    @api.multi
     def action_position_analysis_tree(self):
         self.ensure_one()
         res = {}

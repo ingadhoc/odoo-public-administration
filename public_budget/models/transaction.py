@@ -281,7 +281,6 @@ class BudgetTransaction(models.Model):
         compute='_compute_asset_ids',
     )
 
-    @api.multi
     def _compute_asset_ids(self):
         for rec in self.filtered('invoice_ids'):
             domain = [('invoice_id', 'in', rec.invoice_ids.ids)]
@@ -397,7 +396,6 @@ class BudgetTransaction(models.Model):
                 rec.advance_to_pay_amount_dynamic = amounts['advance_to_pay_amount']
                 rec.advance_paid_amount_dynamic = amounts['advance_paid_amount']
 
-    @api.multi
     def mass_payment_group_create(self):
         self.ensure_one()
         msg = _(
@@ -548,23 +546,19 @@ class BudgetTransaction(models.Model):
                 rec.paid_amount_dynamic = sum(rec.mapped(
                     'preventive_line_ids.paid_amount_dynamic'))
 
-    @api.multi
     def action_cancel_draft(self):
         """ go from canceled state to draft state"""
         self.write({'state': 'draft'})
         return True
 
-    @api.multi
     def action_cancel(self):
         self.write({'state': 'cancel'})
         return True
 
-    @api.multi
     def action_open(self):
         self.write({'state': 'open'})
         return True
 
-    @api.multi
     def action_close(self):
         self.check_closure()
         self.write({'state': 'closed'})
@@ -606,7 +600,6 @@ class BudgetTransaction(models.Model):
                                 'display_name'))
                     ))
 
-    @api.multi
     def check_closure(self):
         """
         Check preventive lines
@@ -668,7 +661,6 @@ class BudgetTransaction(models.Model):
                             "Preventive Total, Type and Date are not "
                             "compatible with Transaction Amount Restrictions"))
 
-    @api.multi
     def action_new_payment_group(self):
         '''
         This function returns an action that display a new payment group.
@@ -701,7 +693,6 @@ class BudgetTransaction(models.Model):
         }
         return res
 
-    @api.multi
     def copy(self, default=None):
         res = super(BudgetTransaction, self).copy(default)
         attachments = self.env['ir.attachment'].search(
@@ -714,7 +705,6 @@ class BudgetTransaction(models.Model):
             })
         return res
 
-    @api.multi
     def action_view_account_asset(self):
         self.ensure_one()
         action = self.env.ref(

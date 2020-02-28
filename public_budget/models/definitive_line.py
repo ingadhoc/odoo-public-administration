@@ -121,7 +121,6 @@ class DefinitiveLine(models.Model):
             else:
                 rec.state = 'draft'
 
-    @api.multi
     def write(self, vals):
         # TODO ver si se puede sacar esto.
         # No le pude encontrar la vuelta de porque algunas veces al guardar las
@@ -131,7 +130,6 @@ class DefinitiveLine(models.Model):
             vals.pop('invoice_line_ids')
         return super(DefinitiveLine, self).write(vals)
 
-    @api.multi
     def unlink(self):
         for rec in self:
             if rec.invoice_line_ids:
@@ -215,7 +213,6 @@ class DefinitiveLine(models.Model):
             'paid_amount': paid_amount,
         }
 
-    @api.multi
     def get_invoice_line_vals(
             self, to_invoice_amount, invoice_type=False):
         self.ensure_one()
