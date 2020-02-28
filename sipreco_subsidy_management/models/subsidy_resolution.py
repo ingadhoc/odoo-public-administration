@@ -1,4 +1,6 @@
-from odoo import fields, models, api
+from odoo import fields, models, api, _
+from odoo.exceptions import ValidationError
+from dateutil.relativedelta import relativedelta
 
 
 class PublicBudgetSubsidyResolution(models.Model):
@@ -80,3 +82,24 @@ class PublicBudgetSubsidyResolution(models.Model):
             action_read['name'] = 'Remitos'
             action_read['domain'] = [('id', '=', remit.id)]
         return action_read
+
+    @api.constrains('state')
+    def check_state(self):
+        for rec in self.filtered(lambda x: x.state == 'presented'):
+            six_months_ago = fields.Date.to_string(fields.Date.from_string(
+                rec.date) + relativedelta(days=-180))
+            for sub_res in rec.subsidy_resolution_line_ids:
+                domain = [
+                    ('dni', '=', sub_res.dni),
+                    ('subsidy_resolution_id.date', '>', six_months_ago),
+                    ('subsidy_resolution_id.state', '=', 'presented')]
+                resolutions_with_expedient = rec.subsidy_resolution_line_ids.search(
+                    domain)
+                resolutions_with_expedient -= sub_res
+                if len(resolutions_with_expedient) > 0:
+                    raise ValidationError(_("There is the same beneficiary '{}' DNI: {}"
+                                            " in resolutions within 180 days prior to this resolution.:\n {}".format(
+                                                sub_res.name, sub_res.dni, " * " + "\n * ".join(
+                                                    resolutions_with_expedient.mapped(lambda x: " - ".join(
+                                                        [x.subsidy_resolution_id.date,
+                                                         x.subsidy_resolution_id.name]))))))
