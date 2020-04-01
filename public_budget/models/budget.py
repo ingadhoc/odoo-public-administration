@@ -94,7 +94,7 @@ class Budget(models.Model):
         required=True,
         readonly=True,
         states={'draft': [('readonly', False)]},
-        default=lambda self: self.env.user.company_id.id
+        default=lambda self: self.env.company.id
     )
     currency_id = fields.Many2one(
         related='company_id.currency_id',

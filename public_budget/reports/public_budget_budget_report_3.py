@@ -13,7 +13,7 @@ class PublicBudgetBudgetReport(models.Model):
     def _reference_models(self):
         return [
             ('account.payment.group', 'Pagos'),
-            ('account.invoice', 'Invoice'),
+            ('account.move', 'Invoice'),
             ('public_budget.definitive_line', 'Definitive Line'),
             ('public_budget.preventive_line', 'Preventive Line'),
         ]
@@ -159,7 +159,7 @@ class PublicBudgetBudgetReport(models.Model):
                 '3_invoiced' as type,
                 'account.move.line' as model,
                 il.id as res_id,
-                CONCAT('account.invoice', ',', CAST(iv.id AS VARCHAR))
+                CONCAT('account.move', ',', CAST(iv.id AS VARCHAR))
                     as resource,
                 -- TODO tal vez un join para sacar de document_number de move o
                 -- o un or para sacar number si no seteado

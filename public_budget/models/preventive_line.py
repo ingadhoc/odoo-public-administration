@@ -162,6 +162,7 @@ class PreventiveLine(models.Model):
         'transaction_id.type_id.with_advance_payment',
         'advance_line',
     )
+    @api.depends_context('analysis_to_date')
     def _compute_amounts_dynamic(self):
         _logger.info('Getting dynamic for preventive lines %s' % self.ids)
         if not self._context.get('analysis_to_date', False):
@@ -257,7 +258,8 @@ class PreventiveLine(models.Model):
             rec.invoiced_amount = amounts['invoiced_amount']
             rec.to_pay_amount = amounts['to_pay_amount']
             rec.paid_amount = amounts['paid_amount']
-        _logger.debug('Finish getting amounts for preventive lines %s' % rec.ids)
+        _logger.debug(
+            'Finish getting amounts for preventive lines %s' % rec.ids)
 
     @api.constrains('account_id', 'transaction_id')
     def check_type_company(self):
@@ -327,9 +329,8 @@ class PreventiveLine(models.Model):
                     assignment_position.code, position_balance))
 
     def unlink(self):
-        for rec in self:
-            if rec.definitive_line_ids:
-                raise ValidationError(_(
-                    "You can not delete a preventive line that has definitive "
-                    "lines"))
+        if self.filtered('definitive_line_ids'):
+            raise ValidationError(_(
+                "You can not delete a preventive line that has definitive "
+                "lines"))
         return super().unlink()

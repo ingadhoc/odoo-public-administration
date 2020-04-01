@@ -5,7 +5,7 @@
         <record id="action_aeroo_report_liquidation" model="ir.actions.report">
             <field name="name">Liquidation Report</field>
             <field name="type">ir.actions.report</field>
-            <field name="model">account.invoice</field>
+            <field name="model">account.move</field>
             <field name="report_name">liquidation_report</field>
             <field name="report_type">aeroo</field>
             <field name="in_format">oo-odt</field>

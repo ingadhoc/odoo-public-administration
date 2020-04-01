@@ -28,6 +28,7 @@ class AccountMoveLine(models.Model):
         'move_id.amount_residual',
         'move_id.to_pay_amount',
     )
+    @api.depends_context('analysis_to_date')
     def _compute_amounts(self):
         """Update the following fields:
         -to_pay_amount: is the amount of this invoice that is in draft vouchers
