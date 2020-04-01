@@ -6,7 +6,7 @@ class AccountAsset(models.Model):
     _order = 'reference'
 
     active = fields.Boolean(
-        track_visibility='onchange',
+        tracking=True,
         default=True,
     )
     enrollment = fields.Char()
@@ -17,13 +17,12 @@ class AccountAsset(models.Model):
             ('b', 'B'),
             ('r', 'R'),
             ('m', 'M')],
-        required=True,
         default='n',
     )
     observations = fields.Text()
     location_id = fields.Many2one(
         'public_budget.location',
-        track_visibility='onchange',
+        tracking=True,
         domain="[('asset_management', '=', True)]",
     )
     expedient_id = fields.Many2one(
@@ -69,9 +68,9 @@ class AccountAsset(models.Model):
     )
     partner_id = fields.Many2one(
         'res.partner',
-         string='Partner',
-          readonly=True,
-           states={'draft': [('readonly', False)]})
+        string='Partner',
+        readonly=True,
+        states={'draft': [('readonly', False)]})
 
     _sql_constraints = [
         ('reference', 'unique(reference)',
@@ -82,7 +81,7 @@ class AccountAsset(models.Model):
         assets = self.filtered('invoice_id')
         (self - assets).update({'transaction_ids': PublicBudgetTransaction})
         for rec in assets:
-            domain = [('invoice_ids', 'in', [rec.move_id.id])]
+            domain = [('invoice_ids', 'in', [rec.invoice_id.id])]
             rec.transaction_ids = PublicBudgetTransaction.search(domain)
 
     def _compute_visible_button_transfer_asset(self):

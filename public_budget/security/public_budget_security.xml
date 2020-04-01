@@ -45,14 +45,14 @@
 
     <record id="asset_in_user_locations" model="ir.rule">
         <field name="name">Assets in user locations</field>
-        <field name="model_id" ref="public_budget.model_account_asset_asset"/>
+        <field name="model_id" ref="public_budget.model_account_asset"/>
         <field name="groups" eval="[(4, ref('group_asset_responsable_ubicacion')),(4, ref('group_portal_asset'))]"/>
         <field name="domain_force">[('location_id.user_id', '=', user.id)]</field>
     </record>
 
     <record id="all_assets" model="ir.rule">
         <field name="name">All Assets</field>
-        <field name="model_id" ref="public_budget.model_account_asset_asset"/>
+        <field name="model_id" ref="public_budget.model_account_asset"/>
         <field name="groups" eval="[(4, ref('group_asset_responsable'))]"/>
         <field name="domain_force">[(1 ,'=', 1)]</field>
     </record>

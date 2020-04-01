@@ -3,8 +3,8 @@
 
 
     <record id="view_account_asset_search" model="ir.ui.view">
-        <field name="name">account.asset.asset.search</field>
-        <field name="model">account.asset.asset</field>
+        <field name="name">account.asset.search</field>
+        <field name="model">account.asset</field>
         <field name="inherit_id" ref="account_asset.view_account_asset_search"/>
         <field name="arch" type="xml">
             <field name="name" position="after">
@@ -14,7 +14,6 @@
                 <field name="enrollment"/>
                 <field name="serial_number"/>
                 <filter name="active" string="Active" domain="[('active', '=', True)]"/>
-                <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
             </field>
             <group>
                 <filter string="Invoice" name="invoice" domain="[]" context="{'group_by':'invoice_id'}"/>
@@ -23,9 +22,9 @@
     </record>
 
     <record id="view_account_asset_asset_purchase_tree" model="ir.ui.view">
-        <field name="name">account.asset.asset.tree</field>
-        <field name="model">account.asset.asset</field>
-        <field name="inherit_id" ref="account_asset.view_account_asset_asset_purchase_tree"/>
+        <field name="name">account.asset.tree</field>
+        <field name="model">account.asset</field>
+        <field name="inherit_id" ref="account_asset.view_account_asset_purchase_tree"/>
         <field name="arch" type="xml">
             <field name="name" position="before">
                 <field name="reference"/>
@@ -35,44 +34,48 @@
 
     <!-- FORMVIEW -->
     <record id="view_account_asset_asset_form" model="ir.ui.view">
-        <field name="name">account.asset.asset.form</field>
-        <field name="model">account.asset.asset</field>
-        <field name="inherit_id" ref="account_asset.view_account_asset_asset_form"/>
+        <field name="name">account.asset.form</field>
+        <field name="model">account.asset</field>
+        <field name="inherit_id" ref="account_asset.view_account_asset_form"/>
         <field name="arch" type="xml">
             <notebook position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
             </notebook>
             <div name="button_box">
-                <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive" groups="public_budget.group_asset_responsable">
-                    <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
-                </button>
                 <field name="transaction_ids" invisible="1"/>
-                <button type="object" name="action_view_transaction" class="oe_stat_button" string="Transactions" icon="fa-list-alt" attrs="{'invisible': [('transaction_ids', '=', [])]}"/>
+                <button type="object" name="action_view_transaction" class="oe_stat_button" string="Transactions" icon="fa-list-alt" attrs="{'invisible': ['|',('state', '=', 'model'), ('transaction_ids', '=', [])]}"/>
             </div>
-            <field name="date" position="after">
-                <field name="enrollment"/>
-                <field name="reference"/>
-                <field name="serial_number"/>
-                <field name="asset_state"/>
-                <field name="observations"/>
-                <field name="level"/>
-                <field name="number"/>
-                <field name="building"/>
-                <field name="location_id" required="1" attrs="{'readonly':[('location_id', '!=', False), ('state', 'in', ['open', 'paid'])]}" force_save="1"/>
-                <field name="expedient_id" required="1"/>
-                <field name="user_id"/>
-                <field name="transit"/>
-            </field>
-            <field name="invoice_id" position="attributes">
-                <attribute name="domain">[('partner_id', '=', partner_id)]</attribute>
-            </field>
+            <div name="model_box" position="replace"/>
+            <xpath expr="//group/group[1]//field[@name='acquisition_date']//.." position="before">
+                <group attrs="{'invisible': [('state', '=', 'model')]}">
+                    <field name="model_id" help="Category of asset" options="{'horizontal': true}" domain="[('state', '=', 'model'), ('user_type_id', '=?', user_type_id), ('asset_type', '=', asset_type)]"/>
+                    <field name="enrollment"/>
+                    <field name="reference"/>
+                    <field name="serial_number"/>
+                    <field name="asset_state" attrs="{'required': [('state', '!=', 'model')]}"/>
+                    <field name="observations"/>
+                </group>
+            </xpath>
+            <xpath expr="//group/group[1]" position="after">
+                <group string="Extra Options" attrs="{'invisible': [('state', '=', 'model')]}">
+                    <field name="level"/>
+                    <field name="number"/>
+                    <field name="building"/>
+                    <field name="location_id" attrs="{'required':[('state', '!=', 'model')], 'readonly':[('location_id', '!=', False), ('state', 'in', ['open', 'paid'])]}" force_save="1" options="{'no_create': True}"/>
+                    <field name="expedient_id" attrs="{'required':[('state', '!=', 'model')]}" options="{'no_create': True}"/>
+                    <field name="user_id"/>
+                    <field name="transit"/>
+                    <field name="partner_id" context="{'res_partner_search_mode': 'supplier'}"/>
+                    <field name="invoice_id" domain="[('partner_id', '=', partner_id)]" options="{'no_create': True}"/>
+                </group>
+            </xpath>
             <button name="compute_depreciation_board" position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
             </button>
-            <button name="%(account_asset.action_asset_modify)d" position="attributes">
+            <button name="action_asset_modify" position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
             </button>
-            <button name="set_to_close" position="attributes">
+            <button name="action_set_to_close" position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
             </button>
             <notebook position="attributes">
@@ -81,25 +84,28 @@
             <button name="open_entries" position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
             </button>
+            <xpath expr="//field[@name='method']//.." position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </xpath>
+            <xpath expr="//field[@name='salvage_value']//.." position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </xpath>
             <button name="compute_depreciation_board" position="after">
                 <field name="visible_button_transfer_asset" invisible="1"/>
-                <button name="transfer_asset" type="object" attrs="{'invisible':['|',('visible_button_transfer_asset', '=', False), ('transit', '=', True)]}" string="Transfer Asset"/>
-                <button name="confirm_tranfer" type="object" attrs="{'invisible':['|',('visible_button_transfer_asset', '=', False),('transit', '!=', True)]}" string="Confirm Transfer Asset"/>
+                <button name="transfer_asset" type="object" attrs="{'invisible':['|', '|',('visible_button_transfer_asset', '=', False), ('transit', '=', True), ('state', '=', 'model')]}" string="Transfer Asset" />
+                <button name="confirm_tranfer" type="object" attrs="{'invisible':['|', '|',('visible_button_transfer_asset', '=', False),('transit', '!=', True), ('state', '=', 'model')]}" string="Confirm Transfer Asset"/>
             </button>
-            <field name="message_follower_ids" position="after">
-                <field name="activity_ids" widget="mail_activity"/>
-            </field>
-            <field name="invoice_id" position="after">
-                <field name="comodato"/>
-                <field name="patrimonial"/>
-                <field name="reportable"/>
+            <field name="journal_id" position="after">
+                <field name="comodato" attrs="{'invisible': [('state', '=', 'model')]}"/>
+                <field name="patrimonial" attrs="{'invisible': [('state', '=', 'model')]}"/>
+                <field name="reportable" attrs="{'invisible': [('state', '=', 'model')]}"/>
             </field>
         </field>
     </record>
 
     <record id="view_account_asset_asset_form_portal" model="ir.ui.view">
         <field name="name">account.asset.asset.form</field>
-        <field name="model">account.asset.asset</field>
+        <field name="model">account.asset</field>
         <field name="inherit_id" ref="view_account_asset_asset_form"/>
         <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
         <field name="arch" type="xml">
@@ -109,7 +115,7 @@
 
     <menuitem name="Asset" id="menu_asset" groups="group_asset_usuario,public_budget.group_portal_asset" web_icon="public_budget,static/description/asset-icon.png" sequence="40"/>
 
-    <menuitem id="menu_account_asset" name="Assets" parent="menu_asset" sequence="2" action="account_asset.action_account_asset_asset_form"/>
-    <menuitem id="menu_account_type_asset" name="Assets Types" parent="menu_asset" sequence="3" action="account_asset.action_account_asset_asset_list_normal_purchase"/>
+    <menuitem id="menu_account_asset" name="Assets" parent="menu_asset" sequence="2" action="account_asset.action_account_asset_form"/>
+    <menuitem parent="menu_asset" id="menu_account_asset_model" action="account_asset.action_account_asset_model_form" groups="group_asset_usuario,public_budget.group_portal_asset"/>
 
 </odoo>

@@ -3,7 +3,7 @@
 
     <record id="action_aeroo_report_asset_excel" model="ir.actions.report">
         <field name="name">Reporte de Activos Excel</field>
-        <field name="model">account.asset.asset</field>
+        <field name="model">account.asset</field>
         <field name="report_name">asset_report_excel</field>
         <field name="report_type">aeroo</field>
         <field name="in_format">oo-ods</field>
@@ -15,7 +15,7 @@
         <field name="out_format" ref="report_aeroo.report_mimetypes_xls_odt"/>
         <field name="styles_mode">specified</field>
         <field name="stylesheet_id" ref="sipreco_stylesheet"/>
-        <field name="binding_model_id" ref="account_asset.model_account_asset_asset"/>
+        <field name="binding_model_id" ref="account_asset.model_account_asset"/>
         <field name="binding_type">report</field>
     </record>
 
