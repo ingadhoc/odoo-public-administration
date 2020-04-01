@@ -23,10 +23,6 @@
         <field name="category_id" ref="base.module_category_hidden"/>
     </record>
 
-    <record id="base.group_portal" model="res.groups">
-        <field name="category_id" ref="base.module_category_hidden"/>
-    </record>
-
     <record id="base.group_multi_company" model="res.groups">
         <field name="category_id" ref="base.module_category_hidden"/>
     </record>

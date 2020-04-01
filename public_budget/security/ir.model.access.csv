@@ -170,10 +170,11 @@ access_account_account_portal_transaction,access_account_account_portal_transact
 access_ir_ui_menu_portal,ir.ui.menu.portal,base.model_ir_ui_menu,base.group_portal,1,0,0,0
 access_ir_model_portal,ir.model.portal,base.model_ir_model,base.group_portal,1,0,0,0
 access_ir_fields_portal,ir.model.fields.portal,base.model_ir_model_fields,base.group_portal,1,0,0,0
+access_ir_groups,ir.model.groups.portal,base.model_res_groups,base.group_portal,1,0,0,0
 access_ir_model_data_portal,ir.model.model.data.portal,base.model_ir_model_data,base.group_portal,1,0,1,0
+access_ir_attachment_portal,ir_attachment.portal,base.model_ir_attachment,base.group_portal,1,0,0,0
 access_report_mimetypes_portal_transaction,access_report_mimetypes_portal,report_aeroo.model_report_mimetypes,base.group_portal,1,0,0,0
-access_account_asset_depreciation_line,access_account_asset_depreciation_line,account_asset.model_account_asset_depreciation_line,group_habilitacion_usuario,1,0,0,0
-access_portal_asset,access_portal_asset,account_asset.model_account_asset_asset,base.group_portal,1,0,0,0
+access_portal_asset,access_portal_asset,account_asset.model_account_asset,base.group_portal,1,0,0,0
 access_res_partner_arba_alicuot_manager,access_res_partner_arba_alicuot_manager,l10n_ar_account_withholding.model_res_partner_arba_alicuot,group_habilitacion_usuario,1,1,1,1
 access_account_asset_category_user,access_account_asset_category.user,account_asset.model_account_asset_category,group_asset_usuario,1,0,0,0
 access_account_asset_depreciation_line_user,access_account_asset_depreciation_line.user,account_asset.model_account_asset_depreciation_line,group_asset_usuario,1,0,1,0

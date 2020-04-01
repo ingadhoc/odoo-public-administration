@@ -12,7 +12,11 @@
                     <field name="location_ids" nolabel="1" widget="many2many_tags"/>
                 </group>
                 <group string="Allowed Expedient Categories">
-                    <field name="category_ids" nolabel="1" widget="many2many_tags"/>
+                    <field name="expedient_category_ids" nolabel="1" widget="many2many_tags"/>
+                </group>
+                <field name="is_portal_user" invisible="1"/>
+                <group string="Sipreco Portal Users" groups="base.group_no_one" attrs="{'invisible': [('is_portal_user', '=', False)]}">
+                    <field name="public_portal_groups_ids" nolabel="1" widget="many2many_tags" options="{'no_create': True}"/>
                 </group>
             </xpath>
         </field>
