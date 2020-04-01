@@ -68,10 +68,8 @@
         <field name="name">public_budget.budget_position.budget.tree</field>
         <field name="model">public_budget.budget_position</field>
         <field name="priority" eval="99"/>
-        <field name="field_parent">child_ids</field>
         <field name="arch" type="xml">
             <tree decoration-info="type=='view'" decoration-success="budget_assignment_allowed" decoration-danger="budget_assignment_allowed and projected_amount > amount">
-                <field name="parent_left" invisible="1"/>
                 <field name="code"/>
                 <field name="name"/>
                 <field name="type" invisible="1"/>
@@ -98,7 +96,6 @@
         <field name="model">public_budget.budget_position</field>
         <field name="arch" type="xml">
             <tree decoration-info="type=='view'" decoration-success="budget_assignment_allowed" decoration-danger="budget_assignment_allowed and projected_amount > amount" create="false" delete="false">
-                <field name="parent_left" invisible="1"/>
                 <button name="action_position_analysis_tree" string="Open Childs" icon="fa-bars" type="object"/>
                 <field name="code"/>
                 <field name="name"/>
@@ -126,5 +123,5 @@
     </record>
 
     <!-- Enable drill-down from Chart Of Accounts tree view -->
-    <act_window id="action_budget_position_items" name="Items" context="{'search_default_budget_position_id': [active_id], 'search_default_budget_id': context.get('budget_id')}" res_model="public_budget.preventive_line" src_model="public_budget.budget_position" view_id="view_public_budget_preventive_line_analysis_tree" view_mode="tree" key2="tree_but_open"/>
+    <act_window id="action_budget_position_items" name="Items" context="{'search_default_budget_position_id': [active_id]}" res_model="public_budget.preventive_line" binding_model="public_budget.budget_position" view_id="view_public_budget_preventive_line_analysis_tree" view_mode="tree"/>
 </odoo>

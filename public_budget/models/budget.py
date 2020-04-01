@@ -202,13 +202,9 @@ class Budget(models.Model):
         # eliminate duplicated
         position_ids = list(set(position_ids))
         # parents positions
-        for position in budget_positions.browse(position_ids):
-            parents = budget_positions.search(
-                [('parent_left', '<', position.parent_left),
-                 ('parent_right', '>', position.parent_right)])
-            position_ids += parents.ids
+        position_ids += budget_positions.search([('id', 'parent_of', position_ids)]).ids
         self.budget_position_ids = budget_positions.browse(
-            list(set(position_ids))).sorted(key=lambda r: r.parent_left)
+            list(set(position_ids))).sorted(key=lambda r: r.code)
         self.parent_budget_position_ids = self.budget_position_ids.filtered(
             lambda x: not x.parent_id)
 
@@ -290,8 +286,8 @@ class Budget(models.Model):
                     'to_pay_amount': line.to_pay_amount,
                     'paid_amount': line.paid_amount,
                     'balance_amount': line.balance_amount,
-                    'parent_left': line.parent_left,
-                    'order_int': line.parent_left,
+                    # 'parent_left': line.parent_left,
+                    # 'order_int': line.parent_path,
                     'budget_id': rec.id,
                 }
                 rec.budget_prec_detail_ids.create(vals)
