@@ -6,24 +6,6 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
     _name = "public_budget.definitive.make.invoice"
     _description = "Transaction Definitive Make Invoice"
 
-    @api.model
-    def _get_default_journal(self):
-        journal = self.env['account.journal'].search(
-            [('type', '=', 'purchase'),
-             ('company_id', '=', self._get_transaction_id().company_id.id)],
-            limit=1)
-        return journal
-
-    @api.model
-    @api.returns('public_budget.transaction')
-    def _get_transaction_id(self):
-        return self.env['public_budget.transaction'].browse(
-            self._context.get('active_id', False))
-
-    @api.model
-    def _get_default_company(self):
-        return self._get_transaction_id().company_id
-
     invoice_date = fields.Date(
         'Invoice Date',
         required=True
@@ -31,17 +13,18 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
     company_id = fields.Many2one(
         'res.company',
         string='Company',
-        default=_get_default_company
+        default=lambda self: self._get_default_company()
     )
     supplier_ids = fields.Many2many(
         'res.partner',
-        compute="_compute_supplier_ids"
+        string='Suppliers',
+        compute="_compute_supplier_ids",
     )
     supplier_id = fields.Many2one(
         'res.partner',
         string='Supplier',
         required=True,
-        # context={'default_supplier': True}
+        domain=[('supplier_rank', '>', 0)],
     )
     line_ids = fields.One2many(
         'public_budget.definitive.make.invoice.detail',
@@ -54,12 +37,12 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
         required=True,
         domain="[('type', 'in', ('purchase','purchase_refund')),"
         "('company_id','=',company_id)]",
-        default=_get_default_journal
+        default=lambda self: self._get_default_journal()
     )
     transaction_id = fields.Many2one(
         'public_budget.transaction',
         'Transaction',
-        default=_get_transaction_id,
+        default=lambda self: self._get_transaction_id(),
         required=True
     )
     use_documents = fields.Boolean(
@@ -89,8 +72,25 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
     )
     currency_id = fields.Many2one(
         related='line_ids.currency_id',
-        readonly=True,
     )
+
+    @api.model
+    def _get_default_journal(self):
+        journal = self.env['account.journal'].search(
+            [('type', '=', 'purchase'),
+             ('company_id', '=', self._get_transaction_id().company_id.id)],
+            limit=1)
+        return journal
+
+    @api.model
+    @api.returns('public_budget.transaction')
+    def _get_transaction_id(self):
+        return self.env['public_budget.transaction'].browse(
+            self._context.get('active_id', False))
+
+    @api.model
+    def _get_default_company(self):
+        return self._get_transaction_id().company_id
 
     @api.onchange('document_number', 'journal_document_type_id')
     def onchange_document_number(self):
@@ -142,12 +142,12 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
             definitive_lines = rec.transaction_id.mapped(
                 'preventive_line_ids.definitive_line_ids')
             # TODO analice if are necessary in future version
-            env_all_mode = definitive_lines.env.all.mode
-            definitive_lines.env.all.mode = True
+            # env_all_mode = definitive_lines.env.all.mode
+            # definitive_lines.env.all.mode = True
             suppliers = definitive_lines.filtered(
                 lambda r: r.residual_amount != 0).mapped('supplier_id')
             rec.supplier_ids = suppliers
-            definitive_lines.env.all.mode = env_all_mode
+            # definitive_lines.env.all.mode = env_all_mode
 
     @api.onchange('supplier_id')
     def _compute_lines(self):

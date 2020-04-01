@@ -21,7 +21,7 @@ class FundingMove(models.Model):
         required=True
     )
     type = fields.Selection(
-        [(u'request', u'Request'), (u'refund', u'Refund')],
+        [('request', 'Request'), ('refund', 'Refund')],
         required=True,
         default='request'
     )
@@ -88,7 +88,7 @@ class FundingMove(models.Model):
             if rec.state not in ('draft'):
                 raise ValidationError(
                     _('The funding move must be in draft state for unlink !'))
-        return super(FundingMove, self).unlink()
+        return super().unlink()
 
     @api.constrains('state')
     def _check_cancel(self):

@@ -193,7 +193,7 @@ class BudgetTransaction(models.Model):
         store=True,
     )
     advance_paid_amount_dynamic = fields.Monetary(
-        string='Monto de Adelanto a Pagar',
+        string='Monto de Adelanto Pagado',
         compute='_compute_advance_dynamic_amounts',
     )
     advance_remaining_amount = fields.Monetary(

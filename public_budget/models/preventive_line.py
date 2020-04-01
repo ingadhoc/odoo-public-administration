@@ -207,6 +207,7 @@ class PreventiveLine(models.Model):
             # Add this to allow analysis between dates, we used computed
             # fields in this case instead of normal fields
             if to_date:
+                to_date = fields.Date.from_string(to_date)
                 definitive_lines = definitive_lines.filtered(lambda x: x.issue_date <= to_date)
             definitive_amount = invoiced_amount = to_pay_amount = paid_amount = 0.0
             for rec in definitive_lines:

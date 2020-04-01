@@ -17,10 +17,8 @@ class InventoryRule(models.Model):
     )
     company_id = fields.Many2one(
         'res.company',
-        string='Company',
         required=True,
-        default=lambda self: self.env['res.company']._company_default_get(
-            'public_budget.inventory_rule')
+        default=lambda self: self.env.company
     )
     currency_id = fields.Many2one(
         related='company_id.currency_id',

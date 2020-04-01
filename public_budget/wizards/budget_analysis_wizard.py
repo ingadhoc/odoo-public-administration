@@ -1,18 +1,15 @@
 from odoo import models, fields, api
-# from odoo.exceptions import ValidationError
 
 
 class PublicBudgetBudgetAnalysisWizard(models.TransientModel):
     _name = "public_budget.budget.analysis.wizard"
+    _description = "public_budget.budget.analysis.wizard"
 
     budget_id = fields.Many2one(
         'public_budget.budget',
         'Presupuesto',
         required=True,
     )
-    # from_date = fields.Date(
-    #     'From Date',
-    # )
     to_date = fields.Date(
         'Hasta Fecha',
     )

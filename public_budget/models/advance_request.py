@@ -119,8 +119,7 @@ class AdvanceRequest(models.Model):
 
     @api.constrains('type_id', 'company_id')
     def check_type_company(self):
-        for rec in self.filtered(
-                lambda x: x.type_id.company_id != x.company_id):
+        if self.filtered(lambda x: x.type_id.company_id != x.company_id):
             raise ValidationError(_(
                 'Company must be the same as Type Company!'))
 

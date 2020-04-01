@@ -1,5 +1,4 @@
-from odoo import models, api, fields
-# from odoo.exceptions import ValidationError
+from odoo import models, fields
 
 
 class ResPartner(models.Model):

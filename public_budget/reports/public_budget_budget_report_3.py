@@ -114,10 +114,6 @@ class PublicBudgetBudgetReport(models.Model):
         readonly=True,
         string='Línea Preventiva',
     )
-    # preventive_amount = fields.Monetary(
-    #     digits=dp.get_precision('Account'),
-    #     readonly=True,
-    # )
     budget_position_id = fields.Many2one(
         'public_budget.budget_position',
         string='Partida Presupuestaria',

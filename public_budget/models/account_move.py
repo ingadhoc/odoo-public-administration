@@ -81,6 +81,7 @@ class AccountMove(models.Model):
         # Add this to allow analysis from date
         to_date = self._context.get('analysis_to_date', False)
         if to_date:
+            to_date = fields.Date.from_string(to_date)
             lines = lines.filtered(lambda x: any(pg.state not in ['draft', 'cancel'] and pg.confirmation_date
                                                  and pg.confirmation_date <= to_date for pg in x.payment_group_ids))
         else:
@@ -112,6 +113,7 @@ class AccountMove(models.Model):
         # Add this to allow analysis from date
         to_date = self._context.get('analysis_to_date', False)
         if to_date:
+            to_date = fields.Date.from_string(to_date)
             lines = lines.filtered(lambda x: any(
                 pg.state == 'posted' and pg.payment_date <= to_date for pg in x.payment_group_ids))
         else:
@@ -135,9 +137,9 @@ class AccountMove(models.Model):
                         'de la linea definitiva relacionada'))
 
     def action_cancel(self):
-        if any(self.filtered(
+        if self.filtered(
                 lambda x: x.to_pay_amount and
-                not x.transaction_id.type_id.with_advance_payment)):
+                not x.transaction_id.type_id.with_advance_payment):
             # if invoice has been send to pay but it is not and advance
             # transaction where they are not actuallly sent to paid, then
             # first you should cancel payment
@@ -168,9 +170,9 @@ class AccountMove(models.Model):
         'budget_id',
     )
     def check_budget_state_open_pre_closed(self):
-        if any(self.filtered(
+        if self.filtered(
                 lambda x: x.budget_id and x.budget_id.state
-                not in ['open', 'pre_closed'])):
+                not in ['open', 'pre_closed']):
             raise ValidationError(_(
                 'Solo puede cambiar o registrar comprobantes si '
                 'el presupuesto está abierto o en pre-cierre'))

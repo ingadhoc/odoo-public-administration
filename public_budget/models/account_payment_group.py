@@ -11,7 +11,7 @@ class AccountPaymentGroup(models.Model):
 
     # We add signature states
     state = fields.Selection(
-        selection=[
+        selection_add=[
             ('draft', 'Borrador'),
             ('confirmed', 'Confirmado'),
             ('signature_process', 'En Proceso de Firma'),
@@ -53,7 +53,8 @@ class AccountPaymentGroup(models.Model):
     )
     partner_ids = fields.Many2many(
         comodel_name='res.partner',
-        compute='_compute_partners'
+        compute='_compute_partners',
+        string='Partners'
     )
     advance_request_id = fields.Many2one(
         'public_budget.advance_request',

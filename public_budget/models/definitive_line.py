@@ -186,6 +186,7 @@ class DefinitiveLine(models.Model):
 
         to_date = self._context.get('analysis_to_date', False)
         if to_date:
+            to_date = fields.Date.from_string(to_date)
             invoice_lines.filtered(lambda x: x.move_id.invoice_date <= to_date)
 
         debit_invoice_lines = invoice_lines.filtered(

@@ -46,6 +46,6 @@
         <field name="view_mode">form</field>
         <field name="view_id" ref="view_definitive_make_invoice"/>
         <field name="target">new</field>
-        <field name="multi">True</field>
+        <!-- <field name="multi">True</field> -->
     </record>
 </odoo>
