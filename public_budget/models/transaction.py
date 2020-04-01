@@ -137,7 +137,6 @@ class BudgetTransaction(models.Model):
         store=True,
     )
     definitive_amount_dynamic = fields.Monetary(
-        string='Monto Definitivo',
         compute='_compute_definitive_amount_dynamic',
     )
     invoiced_amount = fields.Monetary(
@@ -156,7 +155,6 @@ class BudgetTransaction(models.Model):
         store=True,
     )
     to_pay_amount_dynamic = fields.Monetary(
-        string='Monto A Pagar',
         compute='_compute_to_pay_amount_dynamic',
     )
     to_pay_balance = fields.Monetary(
@@ -170,7 +168,6 @@ class BudgetTransaction(models.Model):
         store=True,
     )
     paid_amount_dynamic = fields.Monetary(
-        string='Monto Pagado',
         compute='_compute_paid_amount_dynamic',
     )
     advance_preventive_amount = fields.Monetary(
@@ -184,7 +181,6 @@ class BudgetTransaction(models.Model):
         store=True,
     )
     advance_to_pay_amount_dynamic = fields.Monetary(
-        string='Monto de Adelanto a Pagar',
         compute='_compute_advance_dynamic_amounts',
     )
     advance_paid_amount = fields.Monetary(
@@ -193,7 +189,6 @@ class BudgetTransaction(models.Model):
         store=True,
     )
     advance_paid_amount_dynamic = fields.Monetary(
-        string='Monto de Adelanto Pagado',
         compute='_compute_advance_dynamic_amounts',
     )
     advance_remaining_amount = fields.Monetary(

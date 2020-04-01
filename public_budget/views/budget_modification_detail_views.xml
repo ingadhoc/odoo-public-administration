@@ -11,10 +11,10 @@
                 <field name="date"/>
                 <field name="type"/>
                 <group expand="0" string="Group By">
-                    <filter string="Budget Position" context="{'group_by': 'budget_position_id'}"/>
-                    <filter string="Budget" context="{'group_by': 'budget_id'}"/>
-                    <filter string="Budget Modification Date" context="{'group_by': 'date'}"/>
-                    <filter string="Budget Modification Type" context="{'group_by': 'type'}"/>
+                    <filter name="position" string="Budget Position" context="{'group_by': 'budget_position_id'}"/>
+                    <filter name="Budget" string="Budget" context="{'group_by': 'budget_id'}"/>
+                    <filter name="Modification_date" string="Budget Modification Date" context="{'group_by': 'date'}"/>
+                    <filter name="Modification_type" string="Budget Modification Type" context="{'group_by': 'type'}"/>
                 </group>
             </search>
         </field>

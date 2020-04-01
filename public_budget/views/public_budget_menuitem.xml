@@ -51,7 +51,7 @@
             name="Adelantos"
             id="menu_advance_requests_main"
             sequence="3"
-            parent="account.menu_finance"
+            parent="account_accountant.menu_accounting"
             />
 
         <menuitem
@@ -298,6 +298,7 @@
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="view_public_budget_transaction_tree"/>
             <field name="search_view_id" ref="view_public_budget_transaction_filter"/>
+            <field name="context">{'default_type': 'in_invoice'}</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create"> Click to create a Transactions.</p>
             </field>

@@ -243,12 +243,14 @@ class Budget(models.Model):
         # 'ON dl.transaction_id = t.id '
         # 'WHERE dl.id IN %s AND t.state in [%s,%s]',
         # (tuple(definitive_lines.ids), 'open', 'closed'))
+        passive_residue = 0.0
         if definitive_lines:
             self._cr.execute(
                 'SELECT residual_amount '
                 'FROM public_budget_definitive_line '
                 'WHERE id IN %s', (tuple(definitive_lines.ids),))
-            self.passive_residue = sum([x[0] for x in self._cr.fetchall()])
+            passive_residue = sum([x[0] for x in self._cr.fetchall()])
+        self.passive_residue = passive_residue
 
     def action_cancel_draft(self):
         """ go from canceled state to draft state"""
