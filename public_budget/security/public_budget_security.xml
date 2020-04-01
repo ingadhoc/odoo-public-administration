@@ -38,7 +38,7 @@
 
     <record id="transaction_account_invoice_rule_only_read" model="ir.rule">
         <field name="name">Transaction Account Invoices</field>
-        <field name="model_id" ref="account.model_account_invoice"/>
+        <field name="model_id" ref="account.model_account_move"/>
         <field name="groups" eval="[(4, ref('group_portal_transaction'))]"/>
         <field name="domain_force">[(1 ,'=', 1)]</field>
     </record>

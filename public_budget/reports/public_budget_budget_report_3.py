@@ -161,7 +161,7 @@ class PublicBudgetBudgetReport(models.Model):
         invoice_query = """
             SELECT
                 '3_invoiced' as type,
-                'account.invoice.line' as model,
+                'account.move.line' as model,
                 il.id as res_id,
                 CONCAT('account.invoice', ',', CAST(iv.id AS VARCHAR))
                     as resource,
@@ -175,7 +175,7 @@ class PublicBudgetBudgetReport(models.Model):
                 dl.preventive_line_id as preventive_line_id,
                 (il.price_subtotal * iv.sign) as amount
             FROM
-                account_invoice_line il
+                account_move_line il
             LEFT JOIN
                 public_budget_definitive_line as dl on (
                 dl.id = il.definitive_line_id)
@@ -188,7 +188,7 @@ class PublicBudgetBudgetReport(models.Model):
                         ELSE 1
                     END AS sign
                 FROM
-                    account_invoice) iv on (iv.id = il.invoice_id)
+                    account_invoice) iv on (iv.id = il.move_id)
             WHERE
                 iv.state not in ('cancel', 'draft')
             """

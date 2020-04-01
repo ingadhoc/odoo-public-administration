@@ -4,9 +4,9 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class AccountInvoice(models.Model):
+class AccountMove(models.Model):
 
-    _inherit = 'account.invoice'
+    _inherit = 'account.move'
 
     transaction_id = fields.Many2one(
         'public_budget.transaction',
@@ -16,7 +16,6 @@ class AccountInvoice(models.Model):
     )
     budget_id = fields.Many2one(
         related='transaction_id.budget_id',
-        readonly=True,
         store=True,
         auto_join=True,
     )
@@ -26,15 +25,15 @@ class AccountInvoice(models.Model):
         store=True,
     )
 
-    def verify_on_afip(self):
-        super(AccountInvoice, self).verify_on_afip()
+    def l10n_ar_verify_on_afip(self):
+        super().l10n_ar_verify_on_afip()
         return {'type': 'ir.actions.act_window.none'}
 
     @api.constrains('to_pay_amount')
     def check_to_pay_amount(self):
-        for rec in self.filtered(lambda x: x.transaction_id and(
+        if any(self.filtered(lambda x: x.transaction_id and(
             x.to_pay_amount and x.currency_id.round(
-                x.to_pay_amount - x.amount_total) > 0.0)):
+                x.to_pay_amount - x.amount_total) > 0.0))):
             raise ValidationError(_(
                 'El importe mandado a pagar no puede ser mayor al importe '
                 'de la factura'))
@@ -47,7 +46,7 @@ class AccountInvoice(models.Model):
         open, de esta manera reforzamos el re-calculo cuando pasa a pagado
         """
         for rec in self:
-            if rec.state == 'paid' and not rec.payment_group_ids:
+            if rec.invoice_payment_state == 'paid' and not rec.payment_group_ids:
                 rec._compute_to_pay_amount()
 
     @api.depends(
@@ -75,11 +74,10 @@ class AccountInvoice(models.Model):
         # after validation we consider it as send to paid and paid
         # TODO tal vez deberíamos mejorar porque si estamos sacando
         # analysis_to_date no se estáría teniendo en cuenta
-        if self.state == 'paid' and not self.payment_group_ids:
+        if self.invoice_payment_state == 'paid' and not self.payment_group_ids:
             return self.amount_total
 
-        lines = self._get_aml_for_amount_residual()
-
+        lines = self.line_ids.filtered(lambda line: line.account_id.user_type_id.type in ('receivable', 'payable'))
         # Add this to allow analysis from date
         to_date = self._context.get('analysis_to_date', False)
         if to_date:
@@ -88,7 +86,6 @@ class AccountInvoice(models.Model):
         else:
             lines = lines.filtered(lambda x: any(
                 pg.state not in ['draft', 'cancel'] for pg in x.payment_group_ids))
-
         amount = -sum(lines.mapped('balance'))
         if self.type in ('in_refund', 'out_refund'):
             amount = -amount
@@ -108,11 +105,10 @@ class AccountInvoice(models.Model):
         # validation we consider it as send to paid and paid
         # TODO tal vez deberíamos mejorar porque si estamos sacando
         # analysis_to_date no se estáría teniendo en cuenta
-        if self.state == 'paid' and not self.payment_group_ids:
+        if self.invoice_payment_state == 'paid' and not self.payment_group_ids:
             return self.amount_total
 
-        lines = self._get_aml_for_amount_residual()
-
+        lines = self.line_ids
         # Add this to allow analysis from date
         to_date = self._context.get('analysis_to_date', False)
         if to_date:
@@ -127,31 +123,31 @@ class AccountInvoice(models.Model):
             amount = -amount
         return amount
 
-    @api.constrains('date_invoice', 'invoice_line_ids')
+    @api.constrains('invoice_date', 'invoice_line_ids')
     def check_dates(self):
         _logger.info('Checking invoice dates')
-        for rec in self.filtered('date_invoice'):
+        for rec in self.filtered('invoice_date'):
             for definitive_line in rec.mapped(
                     'invoice_line_ids.definitive_line_id'):
-                if rec.date_invoice < definitive_line.issue_date:
+                if rec.invoice_date < definitive_line.issue_date:
                     raise ValidationError(_(
                         'La fecha de la factura no puede ser menor a la fecha '
                         'de la linea definitiva relacionada'))
 
     def action_cancel(self):
-        for inv in self.filtered(
+        if any(self.filtered(
                 lambda x: x.to_pay_amount and
-                not x.transaction_id.type_id.with_advance_payment):
+                not x.transaction_id.type_id.with_advance_payment)):
             # if invoice has been send to pay but it is not and advance
             # transaction where they are not actuallly sent to paid, then
             # first you should cancel payment
             raise ValidationError(_(
                 'You cannot cancel an invoice which has been sent to '
                 'pay. You need to cancel related payments first.'))
-        return super(AccountInvoice, self).action_cancel()
+        return super().action_cancel()
 
-    def invoice_validate(self):
-        res = super(AccountInvoice, self).invoice_validate()
+    def post(self):
+        res = super().post()
         for inv in self.filtered(
                 lambda x: x.transaction_id.type_id.with_advance_payment):
             # TODO ver si lo borramos, no seria obligatorio que una factura
@@ -162,13 +158,9 @@ class AccountInvoice(models.Model):
             #     raise ValidationError((
             #         'La fecha de la factura tiene que estar dentro del año '
             #         'fiscal del presupuesto!'))
-            domain = [
-                ('move_id', '=', inv.move_id.id),
-                ('account_id', '=', inv.account_id.id),
-            ]
-            move_lines = self.env['account.move.line'].search(domain)
-            move_lines.write(
-                {'partner_id': self.transaction_id.partner_id.id})
+            move_lines = inv.line_ids.filtered(
+                lambda line: line.account_id == inv.transaction_id.type_id.advance_account_id)
+            move_lines.write({'partner_id': self.transaction_id.partner_id.id})
         return res
 
     @api.constrains(
@@ -176,9 +168,9 @@ class AccountInvoice(models.Model):
         'budget_id',
     )
     def check_budget_state_open_pre_closed(self):
-        for rec in self.filtered(
+        if any(self.filtered(
                 lambda x: x.budget_id and x.budget_id.state
-                not in ['open', 'pre_closed']):
+                not in ['open', 'pre_closed'])):
             raise ValidationError(_(
                 'Solo puede cambiar o registrar comprobantes si '
                 'el presupuesto está abierto o en pre-cierre'))

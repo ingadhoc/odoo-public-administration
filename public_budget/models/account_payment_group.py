@@ -50,7 +50,7 @@ class AccountPaymentGroup(models.Model):
     )
     # lo agregamos por compatiblidad hacia atras y tmb porque es mas facil
     invoice_ids = fields.Many2many(
-        comodel_name='account.invoice',
+        comodel_name='account.move',
         string='Facturas Relacionadas',
         compute='_compute_budget_positions_and_invoices'
     )
@@ -318,7 +318,7 @@ class AccountPaymentGroup(models.Model):
     @api.model
     def _search_budget_positions(self, operator, value):
         return [
-            ('to_pay_move_line_ids.invoice_id.invoice_line_ids.'
+            ('to_pay_move_line_ids.move_id.invoice_move_ids.'
                 'definitive_line_id.preventive_line_id.budget_position_id',
                 operator, value)]
 
@@ -327,7 +327,7 @@ class AccountPaymentGroup(models.Model):
             # si esta validado entonces las facturas son las macheadas, si no
             # las seleccionadas
             move_lines = rec.matched_move_line_ids or rec.to_pay_move_line_ids
-            rec.invoice_ids = move_lines.mapped('invoice_id')
+            rec.invoice_ids = move_lines.mapped('move_id')
             rec.budget_position_ids = rec.invoice_ids.mapped(
                 'invoice_line_ids.definitive_line_id.preventive_line_id.'
                 'budget_position_id')
@@ -364,7 +364,7 @@ class AccountPaymentGroup(models.Model):
             already_paying = self.transaction_id.payment_group_ids.filtered(
                 lambda x: x.state != 'cancel').mapped('to_pay_move_line_ids')
             domain.extend([
-                ('invoice_id.transaction_id', '=', self.transaction_id.id),
+                ('move_id.transaction_id', '=', self.transaction_id.id),
                 ('id', 'not in', already_paying.ids)])
         return domain
 
@@ -393,13 +393,13 @@ class AccountPaymentGroup(models.Model):
             if not rec.confirmation_date:
                 continue
             for invoice in rec.invoice_ids:
-                if rec.confirmation_date < invoice.date_invoice:
+                if rec.confirmation_date < invoice.invoice_date:
                     raise ValidationError(_(
                         'La fecha de confirmación no puede ser menor a la '
                         'fecha de la factura que se esta pagando.\n'
                         '* Id Factura / Fecha: %s - %s\n'
                         '* Id Pago / Fecha Confirmación: %s - %s') % (
-                        invoice.id, invoice.date_invoice,
+                        invoice.id, invoice.invoice_date,
                         rec.id, rec.confirmation_date))
             if not rec.payment_date:
                 continue

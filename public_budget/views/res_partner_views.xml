@@ -50,39 +50,40 @@
     <record id="base_view_partner_form" model="ir.ui.view">
         <field name="name">partner.ar_account.form</field>
         <field name="model">res.partner</field>
-        <field name="inherit_id" ref="l10n_ar_account.base_view_partner_form"/>
+        <field name="inherit_id" ref="l10n_ar.base_view_partner_form"/>
         <field name="arch" type="xml">
-            <field name="afip_responsability_type_id" position="attributes">
+            <field name="l10n_ar_afip_responsibility_type_id" position="attributes">
                 <!-- only required if is company or not parent -->
                 <attribute name="attrs">{'invisible': [('is_company','=',False), ('parent_id','!=',False)], 'required': ['|', ('is_company','=',True), ('parent_id','=',False)]}</attribute>
             </field>
         </field>
     </record>
-    
+
     <record id="view_partner_form" model="ir.ui.view">
         <field name="name">partner.ar.form</field>
         <field name="model">res.partner</field>
-        <field name="inherit_id" ref="l10n_ar_partner.view_partner_form"/>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="priority">150</field>
         <field name="arch" type="xml">
-            <xpath expr="//page[@name='sales_purchases']//field[@name='customer']" position="attributes">
+            <!-- <xpath expr="//page[@name='sales_purchases']//field[@name='customer']" position="attributes">
                 <attribute name="invisible">1</attribute>
-            </xpath>
+            </xpath> -->
             <field name="user_id" position="attributes">
                 <attribute name="invisible">1</attribute>
             </field>
             <!-- TODO ENABLE!! -->
-            <label for="main_id_number" position="before">
+            <field name="vat" position="before">
                 <field name="gender" attrs="{'invisible': [('company_type', '!=', 'person')]}"/>
                 <field name="numero_legajo" attrs="{'invisible': [('employee', '=', False)]}"/>
-            </label>
-            <field name="main_id_category_id" position="attributes">
+            </field>
+            <field name="l10n_latam_identification_type_id" position="attributes">
                 <attribute name="required">True</attribute>
             </field>
-            <field name="main_id_number" position="attributes">
+            <field name="vat" position="attributes">
                 <attribute name="required">True</attribute>
             </field>
 
-            <xpath expr="//page[@name='sales_purchases']//field[@name='supplier']" position="before">
+            <xpath expr="//page[@name='sales_purchases']//group[@name='purchase']" position="before">
                 <field name="subsidy_recipient"/>
                 <field name="employee"/>
             </xpath>

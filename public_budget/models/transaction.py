@@ -237,11 +237,12 @@ class BudgetTransaction(models.Model):
         domain=[('advance_line', '=', False)]
     )
     invoice_ids = fields.One2many(
-        'account.invoice',
+        'account.move',
         'transaction_id',
         readonly=True,
         auto_join=True,
-        states={'open': [('readonly', False)]}
+        states={'open': [('readonly', False)]},
+        domain=[('type', 'in', ['in_invoice', 'in_refund'])]
     )
     definitive_partner_type = fields.Selection(
         related='type_id.definitive_partner_type'

@@ -2,7 +2,7 @@ from . import inventory_rule
 from . import res_partner
 from . import account_payment_group
 from . import account_payment
-from . import account_invoice
+from . import account_move
 from . import advance_request_type
 from . import advance_request
 from . import transaction_type
@@ -12,7 +12,7 @@ from . import expedient_category
 from . import location
 from . import budget_modification_detail
 from . import funding_move
-from . import account_invoice_line
+from . import account_move_line
 from . import rest_type
 from . import res_users
 from . import budget_position
@@ -36,3 +36,5 @@ from . import account_journal
 from . import account_tax
 from . import account_asset
 from . import mail_activity_mixin
+from . import ir_http
+from . import mail_thread

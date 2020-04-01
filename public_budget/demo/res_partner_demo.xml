@@ -4,25 +4,22 @@
 <!-- Partners de sueldos -->
     <record id="personal_permanente" model="res.partner">
         <field name="name">Personal Permanente</field>
-        <field name="supplier" eval="True"/>
-        <field name="afip_responsability_type_id" ref="l10n_ar_account.res_IVAE"/>
-        <field name="main_id_category_id" ref="l10n_ar_partner.dt_DNI"/>
-        <field name="main_id_number">30000001</field>
+        <field name="afip_responsability_type_id" ref="l10n_ar.res_IVAE"/>
+        <field name="l10n_latam_identification_type_id" ref="l10n_ar.it_dni"/>
+        <field name="vat">30000001</field>
     </record>
 
     <record id="personal_no_permanente" model="res.partner">
         <field name="name">Personal No Permanente</field>
-        <field name="supplier" eval="True"/>
-        <field name="afip_responsability_type_id" ref="l10n_ar_account.res_IVAE"/>
-        <field name="main_id_category_id" ref="l10n_ar_partner.dt_DNI"/>
-        <field name="main_id_number">30000002</field>
+        <field name="afip_responsability_type_id" ref="l10n_ar.res_IVAE"/>
+        <field name="l10n_latam_identification_type_id" ref="l10n_ar.it_dni"/>
+        <field name="vat">30000002</field>
     </record>
 
     <record id="personal_transitorio" model="res.partner">
         <field name="name">Personal Transitorio</field>
-        <field name="supplier" eval="True"/>
-        <field name="afip_responsability_type_id" ref="l10n_ar_account.res_IVAE"/>
-        <field name="main_id_category_id" ref="l10n_ar_partner.dt_DNI"/>
-        <field name="main_id_number">30000003</field>
+        <field name="afip_responsability_type_id" ref="l10n_ar.res_IVAE"/>
+        <field name="l10n_latam_identification_type_id" ref="l10n_ar.it_dni"/>
+        <field name="vat">30000003</field>
     </record>
 </odoo>

@@ -4,8 +4,8 @@
 <!-- Partners for companies -->
     <record id="partner_sipreco" model="res.partner">
         <field name='afip_responsability_type_id' ref='l10n_ar_account.res_IVAE'/>
-        <field name='main_id_category_id' ref="l10n_ar_partner.dt_CUIT"/>
-        <field name='main_id_number'>30666666662</field>
+        <field name='l10n_latam_identification_type_id' ref="l10n_ar.it_cuit"/>
+        <field name='vat'>30666666662</field>
         <field name="name">SIPRECO</field>
         <field name="street">Calle Falsa 456</field>
         <field name="city">Rosario</field>
@@ -16,7 +16,6 @@
         <field name="phone">+1 555 123 8069</field>
         <field name="email">info@yourcompany.example.com</field>
         <field name="website">www.example.com</field>
-        <field name="supplier" eval="True"/>
         <field name="start_date" eval="time.strftime('%Y-%m')+'-1'"/>
     </record>
 

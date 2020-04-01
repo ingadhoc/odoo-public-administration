@@ -63,24 +63,21 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
         required=True
     )
     use_documents = fields.Boolean(
-        related='journal_id.use_documents',
+        related='journal_id.l10n_latam_use_documents',
         string='Use Documents?',
-        readonly=True,
     )
     journal_document_type_id = fields.Many2one(
-        'account.journal.document.type',
+        'l10n_latam.document.type',
         'Document Type',
         ondelete='cascade',
     )
-    document_sequence_id = fields.Many2one(
-        related='journal_document_type_id.sequence_id',
-        readonly=True,
+    document_sequence = fields.Integer(
+        related='journal_document_type_id.sequence',
     )
     document_number = fields.Char(
-        string='Document Number',
     )
     available_journal_document_type_ids = fields.Many2many(
-        'account.journal.document.type',
+        'l10n_latam.document.type',
         compute='_compute_available_journal_document_types',
         string='Available Journal Document Types',
     )
@@ -98,10 +95,10 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
     @api.onchange('document_number', 'journal_document_type_id')
     def onchange_document_number(self):
         # if we have a sequence, number is set by sequence and we dont check
-        sequence = self.journal_document_type_id.sequence_id
-        document_type = self.journal_document_type_id.document_type_id
+        sequence = self.journal_document_type_id.sequence
+        document_type = self.journal_document_type_id
         if not sequence and document_type:
-            res = document_type.validate_document_number(self.document_number)
+            res = document_type._format_document_number(self.document_number)
             if res and res != self.document_number:
                 self.document_number = res
 
@@ -114,6 +111,8 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
     @api.depends('journal_id', 'supplier_id', 'to_invoice_amount')
     def _compute_available_journal_document_types(self):
         for rec in self:
+            rec.available_journal_document_type_ids = self.env['l10n_latam.document.type']
+            rec.journal_document_type_id = self.env['l10n_latam.document.type']
             if not rec.journal_id or not rec.supplier_id:
                 continue
             # desde el wizard se pueden crear facturas o reembolsos
@@ -121,13 +120,14 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
                 invoice_type = 'in_refund'
             else:
                 invoice_type = 'in_invoice'
-            res = rec.env[
-                'account.invoice']._get_available_journal_document_types(
-                rec.journal_id, invoice_type, rec.supplier_id)
-            rec.available_journal_document_type_ids = res[
-                'available_journal_document_types']
-            rec.journal_document_type_id = res[
-                'journal_document_type']
+            move = rec.env['account.move'].new({
+                'journal_id': rec.journal_id.id,
+                'type': invoice_type,
+                'l10n_latam_use_documents': rec.use_documents,
+                'partner_id': rec.supplier_id.id,
+            })
+            rec.available_journal_document_type_ids = move.l10n_latam_available_document_type_ids
+            rec.journal_document_type_id = move.l10n_latam_document_type_id
 
     @api.onchange('supplier_ids')
     def _onchange_suppliers(self):
@@ -200,50 +200,49 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
                     "* Advance Remaining Amount: %s") % (
                     self.to_invoice_amount, advance_to_return_amount))
 
-        inv_lines = self.env['account.invoice.line']
+        list_inv_lines = []
         for line in self.line_ids.filtered(lambda r: r.to_invoice_amount):
             definitive_line = line.definitive_line_id
-            line_vals = definitive_line.get_invoice_line_vals(
-                line.to_invoice_amount, invoice_type=invoice_type)
-            inv_lines += inv_lines.create(line_vals)
+            list_inv_lines.append((0, 0, definitive_line.get_invoice_line_vals(
+                line.to_invoice_amount, invoice_type=invoice_type)))
 
         # Si no hay se creo alguna linea es porque todas tienen amount 0
-        if not inv_lines:
+        if not list_inv_lines:
             raise ValidationError(_(
                 "You should set at least one line with amount greater than 0"))
 
         invoice_vals = {
             'partner_id': self.supplier_id.id,
-            'date_invoice': self.invoice_date,
-            'document_number': self.document_number,
-            'journal_document_type_id': self.journal_document_type_id.id,
-            'invoice_line_ids': [(6, 0, inv_lines.ids)],
+            'invoice_date': self.invoice_date,
+            'l10n_latam_document_number': self.document_number,
+            'l10n_latam_document_type_id': self.journal_document_type_id.id,
+            'invoice_line_ids': list_inv_lines,
             'type': invoice_type,
-            'account_id': (
-                advance_account and advance_account.id or
-                self.supplier_id.property_account_payable_id.id),
             'journal_id': self.journal_id.id,
-            'company_id': self.journal_id.company_id.id,
             'transaction_id': self.transaction_id.id,
         }
 
-        invoice = self.env['account.invoice'].with_context(
-            type='in_invoice').create(invoice_vals)
-
+        invoice = self.env['account.move'].create(invoice_vals)
+        if invoice:
+            invoice.line_ids.filtered(
+                lambda line: line.account_id.user_type_id.type
+                in ('receivable', 'payable'))._write(
+                {'account_id': (
+                    advance_account and advance_account.id or
+                    self.supplier_id.property_account_payable_id.id)
+                 })
         # Buscamos la vista de supplier invoices
-        action = self.env['ir.model.data'].xmlid_to_object(
-            'account.action_invoice_tree2')
+        action = self.env.ref('account.action_move_in_invoice_type')
 
         if not action:
             return False
         res = action.read()[0]
 
-        form_view_id = self.env['ir.model.data'].xmlid_to_res_id(
-            'account.invoice_supplier_form')
+        form_view_id = self.env.ref('account.view_move_form').id
         res['views'] = [(form_view_id, 'form')]
         res['res_id'] = invoice.id
         res['target'] = 'new'
         if tran_type.with_advance_payment:
-            invoice.action_invoice_open()
+            invoice.post()
             return True
         return res
