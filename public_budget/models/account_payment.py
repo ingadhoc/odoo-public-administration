@@ -19,6 +19,7 @@ class AccountPayment(models.Model):
     # agregamos este campo related
     to_signature_date = fields.Date(
         related='payment_group_id.to_signature_date',
+        readonly=False,
     )
     assignee_id = fields.Many2one(
         'res.partner',
@@ -80,8 +81,7 @@ class AccountPayment(models.Model):
         Si es cambio de cheques recibimos clave en el contexto y hacemos
         asiento con cuenta de cheques (si no tomaria la de banco)
         """
-        vals = super(AccountPayment, self)._get_liquidity_move_line_vals(
-            amount)
+        vals = super()._get_liquidity_move_line_vals(amount)
         if self._context.get('replaced_payment_id'):
             vals['account_id'] = self.company_id._get_check_account(
                 'deferred').id

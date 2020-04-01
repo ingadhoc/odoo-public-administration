@@ -27,7 +27,6 @@ class BudgetDetail(models.Model):
     )
     currency_id = fields.Many2one(
         related='budget_id.currency_id',
-        readonly=True,
     )
     amount = fields.Monetary(
         compute='_compute_amount',

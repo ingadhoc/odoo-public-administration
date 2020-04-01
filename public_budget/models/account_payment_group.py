@@ -26,19 +26,16 @@ class AccountPaymentGroup(models.Model):
     )
     budget_id = fields.Many2one(
         related='transaction_id.budget_id',
-        readonly=True,
         store=True,
     )
     expedient_id = fields.Many2one(
         'public_budget.expedient',
-        readonly=True,
         context={'default_type': 'payment'},
         states={'draft': [('readonly', False)]},
         ondelete='restrict',
     )
     transaction_id = fields.Many2one(
         'public_budget.transaction',
-        readonly=True,
     )
     budget_position_ids = fields.Many2many(
         relation='voucher_position_rel',
@@ -63,7 +60,6 @@ class AccountPaymentGroup(models.Model):
         readonly=True,
     )
     transaction_with_advance_payment = fields.Boolean(
-        readonly=True,
         store=True,
         related='transaction_id.type_id.with_advance_payment',
     )
@@ -173,7 +169,7 @@ class AccountPaymentGroup(models.Model):
                 raise ValidationError(_(
                     'No puede validar un pago si el expediente no está en '
                     'una ubicación autorizada para ústed'))
-        return super(AccountPaymentGroup, self).post()
+        return super().post()
 
     # las seteamos directamente al postear total antes no se usan
     # @api.constrains('payment_date')
@@ -185,7 +181,7 @@ class AccountPaymentGroup(models.Model):
         if self.filtered('document_number'):
             raise ValidationError(_(
                 'No puede borrar una orden de pago que ya fue numerada'))
-        return super(AccountPaymentGroup, self).unlink()
+        return super().unlink()
 
     def confirm(self):
         for rec in self:
@@ -223,7 +219,7 @@ class AccountPaymentGroup(models.Model):
                     'pagar'))
             # In this case remove all followers when confirm a payment
             rec.message_unsubscribe(partner_ids=rec.message_partner_ids.ids)
-        return super(AccountPaymentGroup, self).confirm()
+        return super().confirm()
 
     def _get_receiptbook(self):
         # we dont want any receiptbook as default
@@ -356,8 +352,7 @@ class AccountPaymentGroup(models.Model):
         """
         We add transaction to get_move_lines function
         """
-        domain = super(
-            AccountPaymentGroup, self)._get_to_pay_move_lines_domain()
+        domain = super()._get_to_pay_move_lines_domain()
         if self.transaction_id:
             # con esto validamos que no se haya mandado a pagar en otra
             # orden de pago (si dejamos si está cancelada)
@@ -456,7 +451,7 @@ class AccountPaymentGroup(models.Model):
         """
         Agregamos numero de documento en todos los estados (no solo posteado)
         """
-        res = super(AccountPaymentGroup, self)._compute_name()
+        res = super()._compute_name()
         for rec in self.filtered(lambda x: x.state != 'posted'):
             if rec.document_number and rec.document_type_id:
                 rec.name = ("%s%s" % (

@@ -27,5 +27,4 @@ class TransactionTypeAmountRestriction(models.Model):
     )
     currency_id = fields.Many2one(
         related='transaction_type_id.company_id.currency_id',
-        readonly=True,
     )

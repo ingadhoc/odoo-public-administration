@@ -36,10 +36,10 @@ class AdvanceRequestLine(models.Model):
     )
     state = fields.Selection(
         related='advance_request_id.state',
+        readonly=False,
     )
     currency_id = fields.Many2one(
         related='advance_request_id.company_id.currency_id',
-        readonly=True,
     )
 
     @api.depends(

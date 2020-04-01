@@ -21,15 +21,12 @@ class PreventiveLine(models.Model):
     )
     company_id = fields.Many2one(
         related='transaction_id.company_id',
-        readonly=True,
     )
     currency_id = fields.Many2one(
         related='transaction_id.currency_id',
-        readonly=True,
     )
     expedient_id = fields.Many2one(
         related='transaction_id.expedient_id',
-        readonly=True,
     )
     preventive_amount = fields.Monetary(
         string='Preventive',
@@ -100,7 +97,6 @@ class PreventiveLine(models.Model):
         auto_join=True,
     )
     budget_id = fields.Many2one(
-        readonly=True,
         store=True,
         related='transaction_id.budget_id',
         auto_join=True,
@@ -335,4 +331,4 @@ class PreventiveLine(models.Model):
                 raise ValidationError(_(
                     "You can not delete a preventive line that has definitive "
                     "lines"))
-        return super(PreventiveLine, self).unlink()
+        return super().unlink()

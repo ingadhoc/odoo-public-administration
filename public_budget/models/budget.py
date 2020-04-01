@@ -98,7 +98,6 @@ class Budget(models.Model):
     )
     currency_id = fields.Many2one(
         related='company_id.currency_id',
-        readonly=True,
     )
     state = fields.Selection(
         _states_,

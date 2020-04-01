@@ -146,4 +146,4 @@ class AdvanceRequest(models.Model):
                 raise ValidationError(_(
                     'You can not delete if record is not on "draft" or '
                     '"cancel" state!'))
-        return super(AdvanceRequest, self).unlink()
+        return super().unlink()

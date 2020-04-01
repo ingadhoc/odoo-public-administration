@@ -156,7 +156,7 @@ class Remit(models.Model):
             if rec.state != 'cancel':
                 raise ValidationError(_(
                     "You can not delete a Remit that is not in Cancel State"))
-        return super(Remit, self).unlink()
+        return super().unlink()
 
     @api.model
     def create(self, vals):
@@ -165,4 +165,4 @@ class Remit(models.Model):
             'ir.sequence'].with_context(
                 ir_sequence_date=vals.get('date')).next_by_code(
                     'public_budget.remit') or '/'
-        return super(Remit, self).create(vals)
+        return super().create(vals)

@@ -52,7 +52,6 @@ class FundingMove(models.Model):
     )
     currency_id = fields.Many2one(
         related='budget_id.currency_id',
-        readonly=True,
     )
     income_account_id = fields.Many2one(
         'account.account',

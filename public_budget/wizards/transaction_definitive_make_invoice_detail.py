@@ -17,7 +17,6 @@ class PublicBudgetDefinitiveMakeInvoiceDetail(models.TransientModel):
     )
     residual_amount = fields.Monetary(
         related='definitive_line_id.residual_amount',
-        readonly=True,
     )
     to_invoice_amount = fields.Monetary(
         'Amount',
@@ -27,7 +26,6 @@ class PublicBudgetDefinitiveMakeInvoiceDetail(models.TransientModel):
     )
     currency_id = fields.Many2one(
         related='definitive_line_id.currency_id',
-        readonly=True,
     )
 
     @api.onchange('full_imputation')

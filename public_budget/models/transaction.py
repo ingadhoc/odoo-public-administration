@@ -77,7 +77,6 @@ class BudgetTransaction(models.Model):
     note = fields.Html(
     )
     type_with_advance_payment = fields.Boolean(
-        readonly=True,
         related='type_id.with_advance_payment'
     )
     definitive_line_ids = fields.One2many(
@@ -217,7 +216,6 @@ class BudgetTransaction(models.Model):
     )
     currency_id = fields.Many2one(
         related='company_id.currency_id',
-        readonly=True,
     )
     user_location_ids = fields.Many2many(
         'public_budget.location',
@@ -695,7 +693,7 @@ class BudgetTransaction(models.Model):
         return res
 
     def copy(self, default=None):
-        res = super(BudgetTransaction, self).copy(default)
+        res = super().copy(default)
         attachments = self.env['ir.attachment'].search(
             [('res_model', '=', 'public_budget.transaction'),
              ('res_id', '=', self.id)])
