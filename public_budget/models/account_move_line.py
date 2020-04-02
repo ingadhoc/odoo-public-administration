@@ -76,8 +76,11 @@ class AccountMoveLine(models.Model):
         'definitive_line_id',
     )
     def check_budget_state_open_pre_closed(self):
-        if self.filtered(lambda x: x.definitive_line_id.budget_id and x.definitive_line_id.budget_id.state
-                             not in ['open', 'pre_closed']):
+        if self.filtered(
+                lambda
+                x: x.definitive_line_id.
+                budget_id and x.definitive_line_id.budget_id.state
+                not in ['open', 'pre_closed']):
             raise ValidationError(_(
                 'Solo puede cambiar o registrar comprobantes si '
                 'el presupuesto está abierto o en pre-cierre'))

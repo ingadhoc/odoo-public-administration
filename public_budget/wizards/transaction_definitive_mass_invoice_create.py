@@ -88,6 +88,6 @@ class PublicBudgetDefinitiveMassInvoiceCreate(models.TransientModel):
                     in ('receivable', 'payable'))._write(
                     {'account_id': (
                         advance_account and advance_account.id or
-                        supplier_id.property_account_payable_id.id)})
+                        supplier.property_account_payable_id.id)})
 
         return True

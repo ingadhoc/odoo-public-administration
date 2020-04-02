@@ -131,7 +131,7 @@ class BudgetPosition(models.Model):
         help='Default Account on preventive lines of this position'
     )
 
-    @api.depends_context('analysis_to_date', 'budget_id','excluded_line_id')
+    @api.depends_context('analysis_to_date', 'budget_id', 'excluded_line_id')
     def _compute_amounts(self):
         """Update the following fields with the related values to the budget
         and the budget position:

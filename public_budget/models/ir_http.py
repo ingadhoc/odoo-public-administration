@@ -1,6 +1,6 @@
 import hashlib
 import json
-from odoo import api, models
+from odoo import models
 from odoo.http import request
 from odoo.tools import ustr
 

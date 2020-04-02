@@ -1,7 +1,7 @@
 ingadhoc-aeroo_reports https://github.com/ingadhoc/aeroo_reports.git
 server-tools https://github.com/OCA/server-tools.git
 oca-web https://github.com/OCA/web.git
-oca-hr https://github.com/OCA/hr.git
+oca-hr https://github.com/OCA/hr-holidays.git
 ingadhoc-account-payment https://github.com/ingadhoc/account-payment.git
 ingadhoc-odoo-argentina https://github.com/ingadhoc/odoo-argentina.git
 ingadhoc-account-financial-tools https://github.com/ingadhoc/account-financial-tools.git
@@ -10,4 +10,4 @@ ingadhoc-miscellaneous https://github.com/ingadhoc/miscellaneous.git
 ingadhoc-partner https://github.com/ingadhoc/partner.git
 ingadhoc-reporting-engine https://github.com/ingadhoc/reporting-engine.git
 ingadhoc-argentina-reporting https://github.com/ingadhoc/argentina-reporting.git
-ingadhoc-patches https://github.com/ingadhoc/patches.git
+# ingadhoc-patches https://github.com/ingadhoc/patches.git
