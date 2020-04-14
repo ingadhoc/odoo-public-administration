@@ -1,7 +1,7 @@
-id,name
-public_location_secretaria,Secretaria
-public_location_contaduria,Contaduría
-public_location_habilitaciones,Habilitaciones
-public_location_mesa_de_entrada,Mesa de Entrada
-public_location_compras,Compras
-public_location_tmc,Tribunal de Cuentas
+id,name,expedient_management,level,number,building
+public_location_secretaria,Secretaria,True,1,3,10
+public_location_contaduria,Contaduría,True,1,3,10
+public_location_habilitaciones,Habilitaciones,True,1,3,10
+public_location_mesa_de_entrada,Mesa de Entrada,True,1,3,10
+public_location_compras,Compras,True,1,3,10
+public_location_tmc,Tribunal de Cuentas,True,1,3,10

@@ -3,7 +3,7 @@
 
 <!-- Partners for companies -->
     <record id="partner_sipreco" model="res.partner">
-        <field name='afip_responsability_type_id' ref='l10n_ar_account.res_IVAE'/>
+        <field name='l10n_ar_afip_responsibility_type_id' ref='l10n_ar.res_IVAE'/>
         <field name='l10n_latam_identification_type_id' ref="l10n_ar.it_cuit"/>
         <field name='vat'>30666666662</field>
         <field name="name">SIPRECO</field>
@@ -22,7 +22,7 @@
 <!-- Companies -->
     <record id="company_sipreco" model="res.company">
         <field name="logo" type="base64" file="public_budget/demo/SIPRECO_Logo.png"/>
-        <field name='gross_income_type'>no_liquida</field>
+        <field name='l10n_ar_gross_income_type'>exempt</field>
         <field name='parent_id' ref='base.main_company'/>
         <field name='currency_id' ref='base.ARS'/>
         <field name='partner_id' ref='partner_sipreco'/>

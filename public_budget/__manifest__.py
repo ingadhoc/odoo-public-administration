@@ -123,7 +123,7 @@
         'demo/public_budget.location.csv',
         'demo/res_users_demo.xml',
         # once admin is in sipreco company, we load chart of account
-        'demo/account_chart_template.yml',
+        'demo/account_chart_template.xml',
         'demo/res_partner_demo.xml',
         'demo/res.partner.csv',
         'demo/account_account_demo.xml',

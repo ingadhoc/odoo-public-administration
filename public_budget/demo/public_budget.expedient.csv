@@ -1,13 +1,13 @@
-id,description,number,type,founder_id/id,category_id/id,first_location_id/id,pages
-budget_exp_caso_1,Adquisición de sistema de software (bien/servicio por licitacion/concurso),Caso 1,authorizing,expedient_founder_1,budget_exp_category_1,public_location_secretaria,5
-budget_exp_caso_2,Adquisición de bienes inventariables que afectan a más de un presupuesto,Caso 2,authorizing,expedient_founder_2,budget_exp_category_2,public_location_secretaria,4
-budget_exp_caso_3,Compra directa (bien o servicio),Caso 3,authorizing,expedient_founder_3,budget_exp_category_2,public_location_secretaria,2
-budget_exp_caso_4,"Pago de servicios (luz,agua,etc)",Caso 4,authorizing,expedient_founder_4,budget_exp_category_2,public_location_secretaria,55
-budget_exp_caso_5,Caja chica,Caso 5,authorizing,expedient_founder_1,budget_exp_category_1,public_location_secretaria,3
-budget_exp_caso_6,Anticipo con cargo de rendición,Caso 6,authorizing,expedient_founder_2,budget_exp_category_2,public_location_secretaria,2
-budget_exp_caso_7,Pago de alquiler,Caso 7,payment,expedient_founder_3,budget_exp_category_2,public_location_secretaria,5
-budget_exp_caso_8,Pago de sueldos,Caso 8,payment,expedient_founder_4,budget_exp_category_2,public_location_secretaria,6
-budget_exp_caso_9,Subsidio con cargo,Caso 9,authorizing,expedient_founder_3,budget_exp_category_1,public_location_secretaria,3
-budget_exp_caso_10,Subsidio sin cargo,Caso 10,authorizing,expedient_founder_4,budget_exp_category_2,public_location_secretaria,1
-budget_exp_caso_11,Presupuesto 2014,Caso 11,authorizing,expedient_founder_4,budget_exp_category_2,public_location_secretaria,5
-budget_exp_caso_12,Presupuesto 2015,Caso 12,authorizing,expedient_founder_4,budget_exp_category_2,public_location_secretaria,2
+id,description,number,type,founder_id/id,category_id/id,first_location_id/id,pages,user_id/id
+budget_exp_caso_1,Adquisición de sistema de software (bien/servicio por licitacion/concurso),Caso 1,authorizing,expedient_founder_1,budget_exp_category_1,public_location_secretaria,5,contaduria_manager_user
+budget_exp_caso_2,Adquisición de bienes inventariables que afectan a más de un presupuesto,Caso 2,authorizing,expedient_founder_2,budget_exp_category_2,public_location_secretaria,4,contaduria_manager_user
+budget_exp_caso_3,Compra directa (bien o servicio),Caso 3,authorizing,expedient_founder_3,budget_exp_category_2,public_location_secretaria,2,contaduria_manager_user
+budget_exp_caso_4,"Pago de servicios (luz,agua,etc)",Caso 4,authorizing,expedient_founder_4,budget_exp_category_2,public_location_secretaria,55,contaduria_manager_user
+budget_exp_caso_5,Caja chica,Caso 5,authorizing,expedient_founder_1,budget_exp_category_1,public_location_secretaria,3,contaduria_manager_user
+budget_exp_caso_6,Anticipo con cargo de rendición,Caso 6,authorizing,expedient_founder_2,budget_exp_category_2,public_location_secretaria,2,contaduria_manager_user
+budget_exp_caso_7,Pago de alquiler,Caso 7,payment,expedient_founder_3,budget_exp_category_2,public_location_secretaria,5,contaduria_manager_user
+budget_exp_caso_8,Pago de sueldos,Caso 8,payment,expedient_founder_4,budget_exp_category_2,public_location_secretaria,6,contaduria_manager_user
+budget_exp_caso_9,Subsidio con cargo,Caso 9,authorizing,expedient_founder_3,budget_exp_category_1,public_location_secretaria,3,contaduria_manager_user
+budget_exp_caso_10,Subsidio sin cargo,Caso 10,authorizing,expedient_founder_4,budget_exp_category_2,public_location_secretaria,1,contaduria_manager_user
+budget_exp_caso_11,Presupuesto 2014,Caso 11,authorizing,expedient_founder_4,budget_exp_category_2,public_location_secretaria,5,contaduria_manager_user
+budget_exp_caso_12,Presupuesto 2015,Caso 12,authorizing,expedient_founder_4,budget_exp_category_2,public_location_secretaria,2,contaduria_manager_user
