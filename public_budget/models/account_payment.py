@@ -19,6 +19,7 @@ class AccountPayment(models.Model):
     # agregamos este campo related
     to_signature_date = fields.Date(
         related='payment_group_id.to_signature_date',
+        readonly=False,
     )
     assignee_id = fields.Many2one(
         'res.partner',
@@ -39,7 +40,6 @@ class AccountPayment(models.Model):
         help='Pago al que devuelve',
     )
 
-    @api.multi
     def write(self, vals):
         """ para pagos que son devolución no dejamos cambiar nada salvo algunos
         campos que se setean a mano
@@ -81,14 +81,12 @@ class AccountPayment(models.Model):
         Si es cambio de cheques recibimos clave en el contexto y hacemos
         asiento con cuenta de cheques (si no tomaria la de banco)
         """
-        vals = super(AccountPayment, self)._get_liquidity_move_line_vals(
-            amount)
+        vals = super()._get_liquidity_move_line_vals(amount)
         if self._context.get('replaced_payment_id'):
             vals['account_id'] = self.company_id._get_check_account(
                 'deferred').id
         return vals
 
-    @api.multi
     def confirm_check_change(self):
         self.ensure_one()
         replaced_payment_id = self._context.get('replaced_payment_id')
@@ -127,7 +125,6 @@ class AccountPayment(models.Model):
             'tag': 'reload',
         }
 
-    @api.multi
     def change_check(self):
         self.ensure_one()
         # context = self._context.copy()
@@ -203,7 +200,6 @@ class AccountPayment(models.Model):
                 'El número de cheque %s ya se ha utilizado') % (
                 self.check_number))
 
-    @api.multi
     def change_withholding(self):
         """ Arrojamos este error para recordarnos que este metodo se implementa
         en realidad en public_budget_tax_settlement porque necesitamos del

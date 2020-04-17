@@ -33,7 +33,7 @@ class AdvanceRequestType(models.Model):
     company_id = fields.Many2one(
         'res.company',
         required=True,
-        default=lambda self: self.env.user.company_id,
+        default=lambda self: self.env.company,
     )
     employee_ids = fields.Many2many(
         'res.partner',
@@ -41,7 +41,6 @@ class AdvanceRequestType(models.Model):
         context="{'advance_return_type_id': id}",
     )
 
-    @api.multi
     def _compute_employee_ids(self):
         for rec in self:
             employees = self.env['res.partner'].search([

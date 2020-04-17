@@ -1,32 +1,32 @@
-id,name,supplier,afip_responsability_type_id/id,main_id_category_id/id,main_id_number,employee
-res_partner_adhoc,ADHOC SA,True,l10n_ar_account.res_IVARI,l10n_ar_partner.dt_CUIT,20111111120,
-res_partner_sueldos,Sueldos Varios,True,l10n_ar_account.res_CF,l10n_ar_partner.dt_DNI,1231252,
-res_partner_airoldi,Airoldi,True,l10n_ar_account.res_IVARI,l10n_ar_partner.dt_CUIT,20111111112,
-res_partner_gabe,Gabe,True,l10n_ar_account.res_IVARI,l10n_ar_partner.dt_CUIT,20111111139,
-res_partner_propietario,Propietario Casa,,l10n_ar_account.res_IVARI,l10n_ar_partner.dt_DNI,1231253,
-res_partner_shell,Shell,,l10n_ar_account.res_IVARI,l10n_ar_partner.dt_CUIT,20111111147,
-res_partner_comercios_varios,Comercios Varios,,l10n_ar_account.res_RM,l10n_ar_partner.dt_CUIT,20111111155,
-res_partner_pepito,Pepito Rodriguez,,l10n_ar_account.res_RM,l10n_ar_partner.dt_DNI,1231254,
-res_partner_roberto,Roberto Perez,,l10n_ar_account.res_RM,l10n_ar_partner.dt_DNI,1231255,
-res_partner_epe,EPE,,l10n_ar_account.res_IVARI,l10n_ar_partner.dt_CUIT,20111111163,
-res_partner_api,API,True,l10n_ar_account.res_IVAE,l10n_ar_partner.dt_DNI,1231231,
-res_partner_muni_rosario,Municipalidad de Rosario,True,l10n_ar_account.res_IVAE,l10n_ar_partner.dt_DNI,1231232,
-res_partner_1,Acreedores Judiciales,True,l10n_ar_account.res_IVAE,l10n_ar_partner.dt_DNI,1231233,
-res_partner_2,Aportes Voluntarios,True,l10n_ar_account.res_IVAE,l10n_ar_partner.dt_DNI,1231234,
-res_partner_4,AAESAM,True,l10n_ar_account.res_IVAE,l10n_ar_partner.dt_DNI,1231235,
-res_partner_5,AMEMA,True,l10n_ar_account.res_IVAE,l10n_ar_partner.dt_DNI,1231236,
-res_partner_6,AMTRAM,True,l10n_ar_account.res_IVAE,l10n_ar_partner.dt_DNI,1231237,
-res_partner_7,Asociación mutual entre empleados y ex empleados municipales,True,l10n_ar_account.res_IVAE,l10n_ar_partner.dt_DNI,1231238,
-res_partner_8,Asociación Personal HCM,True,l10n_ar_account.res_IVAE,l10n_ar_partner.dt_DNI,1231239,
-res_partner_9,Asociación Personal Jerarquizado,True,l10n_ar_account.res_IVAE,l10n_ar_partner.dt_DNI,1231240,
-res_partner_10,Banco Municipal,True,l10n_ar_account.res_IVAE,l10n_ar_partner.dt_DNI,1231241,
-res_partner_11,Caja de Seguros de Vida SA,True,l10n_ar_account.res_IVAE,l10n_ar_partner.dt_DNI,1231242,
-res_partner_12,Dirección Provincial de Viviendas y Urbanismo,True,l10n_ar_account.res_IVAE,l10n_ar_partner.dt_DNI,1231243,
-res_partner_13,FESTRAM,True,l10n_ar_account.res_IVAE,l10n_ar_partner.dt_DNI,1231244,
-res_partner_14,IAPOS,True,l10n_ar_account.res_IVAE,l10n_ar_partner.dt_DNI,1231245,
-res_partner_15,IMPS,True,l10n_ar_account.res_IVAE,l10n_ar_partner.dt_DNI,1231246,
-res_partner_16,Mutual Segunda Circunscripcion,True,l10n_ar_account.res_IVAE,l10n_ar_partner.dt_DNI,1231247,
-res_partner_17,Sindicato de Trabajadores Municipales de Rosario,True,l10n_ar_account.res_IVAE,l10n_ar_partner.dt_DNI,1231248,
-res_partner_19,Sistemas de Urgencias del Rosafe SA,True,l10n_ar_account.res_IVAE,l10n_ar_partner.dt_DNI,1231249,
-res_partner_20,Empleado 1,False,l10n_ar_account.res_IVAE,l10n_ar_partner.dt_DNI,1231250,True
-res_partner_21,Empleado 2,False,l10n_ar_account.res_IVAE,l10n_ar_partner.dt_DNI,1231251,True
+id,name,l10n_ar_afip_responsibility_type_id/id,l10n_latam_identification_type_id/id,vat,employee
+res_partner_adhoc,ADHOC SA,l10n_ar.res_IVARI,l10n_ar.it_cuit,20111111120,False
+res_partner_sueldos,Sueldos Varios,l10n_ar.res_CF,l10n_ar.it_dni,1231252,False
+res_partner_airoldi,Airoldi,l10n_ar.res_IVARI,l10n_ar.it_cuit,20111111112,False
+res_partner_gabe,Gabe,l10n_ar.res_IVARI,l10n_ar.it_cuit,20111111139,False
+res_partner_propietario,Propietario Casa,l10n_ar.res_IVARI,l10n_ar.it_dni,1231253,False
+res_partner_shell,Shell,l10n_ar.res_IVARI,l10n_ar.it_cuit,20111111147,False
+res_partner_comercios_varios,Comercios Varios,l10n_ar.res_RM,l10n_ar.it_cuit,20111111155,False
+res_partner_pepito,Pepito Rodriguez,l10n_ar.res_RM,l10n_ar.it_dni,1231254,False
+res_partner_roberto,Roberto Perez,l10n_ar.res_RM,l10n_ar.it_dni,1231255,False
+res_partner_epe,EPE,l10n_ar.res_IVARI,l10n_ar.it_cuit,20111111163,False
+res_partner_api,API,l10n_ar.res_IVAE,l10n_ar.it_dni,1231231,False
+res_partner_muni_rosario,Municipalidad de Rosario,l10n_ar.res_IVAE,l10n_ar.it_dni,1231232,False
+res_partner_1,Acreedores Judiciales,l10n_ar.res_IVAE,l10n_ar.it_dni,1231233,False
+res_partner_2,Aportes Voluntarios,l10n_ar.res_IVAE,l10n_ar.it_dni,1231234,False
+res_partner_4,AAESAM,l10n_ar.res_IVAE,l10n_ar.it_dni,1231235,False
+res_partner_5,AMEMA,l10n_ar.res_IVAE,l10n_ar.it_dni,1231236,False
+res_partner_6,AMTRAM,l10n_ar.res_IVAE,l10n_ar.it_dni,1231237,False
+res_partner_7,Asociación mutual entre empleados y ex empleados municipales,l10n_ar.res_IVAE,l10n_ar.it_dni,1231238,False
+res_partner_8,Asociación Personal HCM,l10n_ar.res_IVAE,l10n_ar.it_dni,1231239,False
+res_partner_9,Asociación Personal Jerarquizado,l10n_ar.res_IVAE,l10n_ar.it_dni,1231240,False
+res_partner_10,Banco Municipal,l10n_ar.res_IVAE,l10n_ar.it_dni,1231241,False
+res_partner_11,Caja de Seguros de Vida SA,l10n_ar.res_IVAE,l10n_ar.it_dni,1231242,False
+res_partner_12,Dirección Provincial de Viviendas y Urbanismo,l10n_ar.res_IVAE,l10n_ar.it_dni,1231243,False
+res_partner_13,FESTRAM,l10n_ar.res_IVAE,l10n_ar.it_dni,1231244,False
+res_partner_14,IAPOS,l10n_ar.res_IVAE,l10n_ar.it_dni,1231245,False
+res_partner_15,IMPS,l10n_ar.res_IVAE,l10n_ar.it_dni,1231246,False
+res_partner_16,Mutual Segunda Circunscripcion,l10n_ar.res_IVAE,l10n_ar.it_dni,1231247,False
+res_partner_17,Sindicato de Trabajadores Municipales de Rosario,l10n_ar.res_IVAE,l10n_ar.it_dni,1231248,False
+res_partner_19,Sistemas de Urgencias del Rosafe SA,l10n_ar.res_IVAE,l10n_ar.it_dni,1231249,False
+res_partner_20,Empleado 1,l10n_ar.res_IVAE,l10n_ar.it_dni,1231250,True
+res_partner_21,Empleado 2,l10n_ar.res_IVAE,l10n_ar.it_dni,1231251,True

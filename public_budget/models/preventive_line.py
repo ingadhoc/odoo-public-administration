@@ -21,15 +21,12 @@ class PreventiveLine(models.Model):
     )
     company_id = fields.Many2one(
         related='transaction_id.company_id',
-        readonly=True,
     )
     currency_id = fields.Many2one(
         related='transaction_id.currency_id',
-        readonly=True,
     )
     expedient_id = fields.Many2one(
         related='transaction_id.expedient_id',
-        readonly=True,
     )
     preventive_amount = fields.Monetary(
         string='Preventive',
@@ -100,7 +97,6 @@ class PreventiveLine(models.Model):
         auto_join=True,
     )
     budget_id = fields.Many2one(
-        readonly=True,
         store=True,
         related='transaction_id.budget_id',
         auto_join=True,
@@ -166,6 +162,7 @@ class PreventiveLine(models.Model):
         'transaction_id.type_id.with_advance_payment',
         'advance_line',
     )
+    @api.depends_context('analysis_to_date')
     def _compute_amounts_dynamic(self):
         _logger.info('Getting dynamic for preventive lines %s' % self.ids)
         if not self._context.get('analysis_to_date', False):
@@ -211,6 +208,7 @@ class PreventiveLine(models.Model):
             # Add this to allow analysis between dates, we used computed
             # fields in this case instead of normal fields
             if to_date:
+                to_date = fields.Date.from_string(to_date)
                 definitive_lines = definitive_lines.filtered(lambda x: x.issue_date <= to_date)
             definitive_amount = invoiced_amount = to_pay_amount = paid_amount = 0.0
             for rec in definitive_lines:
@@ -260,7 +258,8 @@ class PreventiveLine(models.Model):
             rec.invoiced_amount = amounts['invoiced_amount']
             rec.to_pay_amount = amounts['to_pay_amount']
             rec.paid_amount = amounts['paid_amount']
-        _logger.debug('Finish getting amounts for preventive lines %s' % rec.ids)
+        _logger.debug(
+            'Finish getting amounts for preventive lines %s' % rec.ids)
 
     @api.constrains('account_id', 'transaction_id')
     def check_type_company(self):
@@ -329,11 +328,9 @@ class PreventiveLine(models.Model):
                     assignment_position.name,
                     assignment_position.code, position_balance))
 
-    @api.multi
     def unlink(self):
-        for rec in self:
-            if rec.definitive_line_ids:
-                raise ValidationError(_(
-                    "You can not delete a preventive line that has definitive "
-                    "lines"))
-        return super(PreventiveLine, self).unlink()
+        if self.filtered('definitive_line_ids'):
+            raise ValidationError(_(
+                "You can not delete a preventive line that has definitive "
+                "lines"))
+        return super().unlink()

@@ -27,10 +27,10 @@ class AdvanceReturnLine(models.Model):
     )
     state = fields.Selection(
         related='advance_return_id.state',
+        readonly=False,
     )
     currency_id = fields.Many2one(
         related='advance_return_id.company_id.currency_id',
-        readonly=True,
     )
 
     @api.depends(

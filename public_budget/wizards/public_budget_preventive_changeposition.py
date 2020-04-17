@@ -1,9 +1,10 @@
-from odoo import models, fields, api, _
+from odoo import models, fields,  _
 from odoo.exceptions import ValidationError
 
 
 class PublicBudgetPreventiveChangePosition(models.TransientModel):
     _name = "public_budget.preventive.change_position"
+    _description = "public_budget.preventive.change_position"
 
     new_budget_position_id = fields.Many2one(
         'public_budget.budget_position',
@@ -14,7 +15,6 @@ class PublicBudgetPreventiveChangePosition(models.TransientModel):
         domain=[('type', '=', 'normal')],
     )
 
-    @api.multi
     def confirm(self):
         self.ensure_one()
         active_id = self._context.get('active_id')

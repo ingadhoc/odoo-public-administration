@@ -34,9 +34,8 @@ class TransactionType(models.Model):
     )
     company_id = fields.Many2one(
         'res.company',
-        string='Company',
         required=True,
-        default=lambda self: self.env.user.company_id,
+        default=lambda self: self.env.company,
     )
     definitive_partner_type = fields.Selection([
         ('supplier', 'Suppliers'),

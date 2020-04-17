@@ -81,7 +81,6 @@ class AdvanceRequest(models.Model):
         string='Payment Orders',
     )
 
-    @api.multi
     def action_approve(self):
         for record in self:
             record.state = 'approved'
@@ -89,7 +88,6 @@ class AdvanceRequest(models.Model):
                 record.approval_date = fields.Datetime.now()
         return True
 
-    @api.multi
     def action_confirm(self):
         for record in self:
             record.create_payment_group()
@@ -98,7 +96,6 @@ class AdvanceRequest(models.Model):
                 record.confirmation_date = fields.Datetime.now()
         return True
 
-    @api.multi
     def create_payment_group(self):
         self.ensure_one()
         partner = self.type_id.general_return_partner_id
@@ -122,12 +119,10 @@ class AdvanceRequest(models.Model):
 
     @api.constrains('type_id', 'company_id')
     def check_type_company(self):
-        for rec in self.filtered(
-                lambda x: x.type_id.company_id != x.company_id):
+        if self.filtered(lambda x: x.type_id.company_id != x.company_id):
             raise ValidationError(_(
                 'Company must be the same as Type Company!'))
 
-    @api.multi
     def action_cancel(self):
         for rec in self:
             open_payments = rec.payment_group_ids.filtered(
@@ -139,17 +134,15 @@ class AdvanceRequest(models.Model):
         self.write({'state': 'cancel'})
         return True
 
-    @api.multi
     def action_cancel_draft(self):
         """ go from canceled state to draft state"""
         self.write({'state': 'draft'})
         return True
 
-    @api.multi
     def unlink(self):
         for rec in self:
             if rec.state not in ['draft', 'cancel']:
                 raise ValidationError(_(
                     'You can not delete if record is not on "draft" or '
                     '"cancel" state!'))
-        return super(AdvanceRequest, self).unlink()
+        return super().unlink()

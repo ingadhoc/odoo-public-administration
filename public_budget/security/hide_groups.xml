@@ -9,7 +9,7 @@
     <!-- Grupo compartiendo -->
 
     <!-- Menu messaging a techincal features -->
-    <record id="base.group_sale_salesman" model="res.groups">
+    <record id="sales_team.group_sale_salesman" model="res.groups">
         <field name="category_id" ref="base.module_category_hidden"/>
         <!-- tengo que cambiarle nombre porque el nombre debe ser unico por aplicación -->
         <field name="name">Sale / User</field>
@@ -20,10 +20,6 @@
     </record>
 
     <record id="base.group_public" model="res.groups">
-        <field name="category_id" ref="base.module_category_hidden"/>
-    </record>
-
-    <record id="base.group_portal" model="res.groups">
         <field name="category_id" ref="base.module_category_hidden"/>
     </record>
 

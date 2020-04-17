@@ -21,7 +21,7 @@
                 <field name="budget_position_ids"/>
             </field>
             <filter context="{'group_by': 'state'}" position="after">
-                <filter string="Fecha Min. de Pago" domain="[]" context="{'group_by': 'payment_min_date'}"/>
+                <filter name="fecha_pago" string="Fecha Min. de Pago" domain="[]" context="{'group_by': 'payment_min_date'}"/>
             </filter>
         </field>
     </record>

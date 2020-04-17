@@ -27,7 +27,7 @@ class AccountBankStatementLine(models.Model):
                     'No puede hacer un registro en extractos mayor a %s'
                     ) % (max_operation))
 
-        return super(AccountBankStatementLine, self).process_reconciliation(
+        return super().process_reconciliation(
             counterpart_aml_dicts=counterpart_aml_dicts,
             payment_aml_rec=payment_aml_rec,
             new_aml_dicts=new_aml_dicts,

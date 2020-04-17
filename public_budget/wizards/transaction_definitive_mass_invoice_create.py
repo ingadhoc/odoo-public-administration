@@ -44,7 +44,6 @@ class PublicBudgetDefinitiveMassInvoiceCreate(models.TransientModel):
         required=True
     )
 
-    @api.multi
     def confirm(self):
         self.ensure_one()
         msg = _('It is not possible to generate an invoice if '
@@ -61,7 +60,7 @@ class PublicBudgetDefinitiveMassInvoiceCreate(models.TransientModel):
                     "must have and advance account configured!"))
             advance_account = tran_type.advance_account_id
 
-        invoices = self.env['account.invoice']
+        invoices = self.env['account.move']
         for definitive_line in self.transaction_id.mapped(
                 'preventive_line_ids.definitive_line_ids').filtered(
                 lambda r: r.residual_amount):
@@ -70,24 +69,25 @@ class PublicBudgetDefinitiveMassInvoiceCreate(models.TransientModel):
                 invoice_type = 'in_refund'
             else:
                 invoice_type = 'in_invoice'
-            line_vals = definitive_line.get_invoice_line_vals(
+            vals = definitive_line.get_invoice_line_vals(
                 residual_amount, invoice_type=invoice_type)
-            inv_lines = self.env['account.invoice.line'].create(line_vals)
 
             supplier = definitive_line.supplier_id
             invoice_vals = {
                 'partner_id': supplier.id,
-                'date_invoice': self.invoice_date,
-                'invoice_line_ids': [(6, 0, inv_lines.ids)],
+                'invoice_date': self.invoice_date,
+                'invoice_line_ids': [(0, 0, vals)],
                 'type': invoice_type,
-                'account_id': (
-                    advance_account and advance_account.id or
-                    supplier.property_account_payable_id.id),
                 'journal_id': self.journal_id.id,
-                'company_id': self.journal_id.company_id.id,
                 'transaction_id': self.transaction_id.id,
             }
-
-            invoices.with_context(type='in_invoice').create(invoice_vals)
+            invoices = invoices.create(invoice_vals)
+            if invoices:
+                invoices.line_ids.filtered(
+                    lambda line: line.account_id.user_type_id.type
+                    in ('receivable', 'payable'))._write(
+                    {'account_id': (
+                        advance_account and advance_account.id or
+                        supplier.property_account_payable_id.id)})
 
         return True

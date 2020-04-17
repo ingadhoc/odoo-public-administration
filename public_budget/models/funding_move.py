@@ -21,7 +21,7 @@ class FundingMove(models.Model):
         required=True
     )
     type = fields.Selection(
-        [(u'request', u'Request'), (u'refund', u'Refund')],
+        [('request', 'Request'), ('refund', 'Refund')],
         required=True,
         default='request'
     )
@@ -52,7 +52,6 @@ class FundingMove(models.Model):
     )
     currency_id = fields.Many2one(
         related='budget_id.currency_id',
-        readonly=True,
     )
     income_account_id = fields.Many2one(
         'account.account',
@@ -75,26 +74,22 @@ class FundingMove(models.Model):
         domain=[('budget_assignment_allowed', '=', True)]
     )
 
-    @api.multi
     def action_cancel_draft(self):
         """ go from canceled state to draft state"""
         self.write({'state': 'draft'})
         return True
 
-    @api.multi
     def action_cancel(self):
         self.write({'state': 'cancel'})
         return True
 
-    @api.multi
     def unlink(self):
         for rec in self:
             if rec.state not in ('draft'):
                 raise ValidationError(
                     _('The funding move must be in draft state for unlink !'))
-        return super(FundingMove, self).unlink()
+        return super().unlink()
 
-    @api.multi
     @api.constrains('state')
     def _check_cancel(self):
         for rec in self:
@@ -103,7 +98,6 @@ class FundingMove(models.Model):
                     "You can not cancel a Funding Move that has a related "
                     "Account Move. Delete it first"))
 
-    @api.multi
     def action_confirm(self):
         for rec in self:
             income_account = rec.income_account_id or \

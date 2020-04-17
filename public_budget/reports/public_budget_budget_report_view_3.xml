@@ -118,7 +118,6 @@
     <record id="action_public_budget_budget_report_3_all" model="ir.actions.act_window">
         <field name="name">Analisis de Presupuesto</field>
         <field name="res_model">public_budget.budget.report_3</field>
-        <field name="view_type">form</field>
         <field name="view_mode">graph,pivot,tree,form</field>
         <field name="context">{'search_default_affects_budget': 1}</field>
         <!-- <field name="domain">[('affects_budget', '=', True)]</field> -->

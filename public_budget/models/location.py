@@ -27,7 +27,7 @@ class Location(models.Model):
     user_id = fields.Many2one(
         'res.users',
         'Responsable',
-        track_visibility='onchange',
+        tracking=True,
     )
     asset_management = fields.Boolean('For asset management')
     expedient_management = fields.Boolean('For expedient management')
@@ -35,7 +35,7 @@ class Location(models.Model):
     number = fields.Char()
     building = fields.Char()
     active = fields.Boolean(
-        track_visibility='onchange',
+        tracking=True,
         default=True,
     )
 

@@ -1,5 +1,4 @@
-from odoo import models, api, fields
-# from odoo.exceptions import ValidationError
+from odoo import models, fields
 
 
 class ResPartner(models.Model):
@@ -25,13 +24,11 @@ class ResPartner(models.Model):
         default='other',
     )
 
-    @api.multi
     def mark_as_reconciled(self):
         # run with sudo because it gives error if you dont have rights to write
         # on partner
         return super(ResPartner, self.sudo()).mark_as_reconciled()
 
-    @api.multi
     def _compute_advance_request_debt(self):
         advance_return_type = self.env[
             'public_budget.advance_request_type'].browse(self._context.get(
@@ -40,7 +37,6 @@ class ResPartner(models.Model):
             rec.advance_request_debt = rec.get_debt_amount(
                 advance_return_type)
 
-    @api.multi
     def get_debt_amount(self, advance_return_type=False, to_date=False):
         self.ensure_one()
         requested_domain = [

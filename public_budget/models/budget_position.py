@@ -9,10 +9,9 @@ class BudgetPosition(models.Model):
 
     _name = 'public_budget.budget_position'
     _description = 'Budget Position'
-    _parent_order = 'code'
     _parent_store = True
 
-    _order = "parent_left"
+    _order = "code"
 
     code = fields.Char(
         required=True
@@ -83,10 +82,7 @@ class BudgetPosition(models.Model):
         compute='_compute_amounts',
         compute_sudo=True,
     )
-    parent_left = fields.Integer(
-        index=True,
-    )
-    parent_right = fields.Integer(
+    parent_path = fields.Char(
         index=True,
     )
     child_ids = fields.One2many(
@@ -121,11 +117,10 @@ class BudgetPosition(models.Model):
     company_id = fields.Many2one(
         'res.company',
         required=True,
-        default=lambda self: self.env.user.company_id,
+        default=lambda self: self.env.company,
     )
     currency_id = fields.Many2one(
         related='company_id.currency_id',
-        readonly=True,
     )
     default_account_id = fields.Many2one(
         'account.account',
@@ -136,13 +131,7 @@ class BudgetPosition(models.Model):
         help='Default Account on preventive lines of this position'
     )
 
-    @api.multi
-    # @api.depends(
-    #     'preventive_line_ids.affects_budget',
-    #     'preventive_line_ids.transaction_id.state',
-    #     'preventive_line_ids.preventive_amount',
-    #     'preventive_line_ids.definitive_line_ids.amount',
-    #     )
+    @api.depends_context('analysis_to_date', 'budget_id', 'excluded_line_id')
     def _compute_amounts(self):
         """Update the following fields with the related values to the budget
         and the budget position:
@@ -158,11 +147,18 @@ class BudgetPosition(models.Model):
         """
         budget_id = self._context.get('budget_id', False)
         to_date = self._context.get('analysis_to_date', False)
+        self.preventive_amount = 0.0
+        self.definitive_amount = 0.0
+        self.to_pay_amount = 0.0
+        self.paid_amount = 0.0
+        self.projected_amount = 0.0
+        self.amount = 0.0
+        self.balance_amount = 0.0
+        self.projected_avg = 0.0
+        self.preventive_avg = 0.0
 
-        # we check it is a report because if not it will get wrong budget
-        # on positions
-        if not budget_id and 'aeroo_docs' in self._context:
-            budget_id = self._context.get('budget_id', False)
+        if not budget_id or not isinstance(self[0].id, int):
+            return
 
         excluded_line_id = self._context.get('excluded_line_id', False)
 
@@ -186,17 +182,15 @@ class BudgetPosition(models.Model):
                 # el estado de la transaccion
                 ('transaction_id.state', 'in', ('open', 'closed')),
                 ('affects_budget', '=', True),
+                ('budget_id', '=', budget_id),
             ]
-
-            if budget_id:
-                domain.append(('budget_id', '=', budget_id))
             if to_date:
                 _logger.debug('Getting budget amounts with to_date %s' % (to_date))
                 domain += [('transaction_id.issue_date', '<=', to_date)]
 
             # we add budget_assignment_allowed condition to optimize
             # if budget_id and self.budget_assignment_allowed:
-            if budget_id and (rec.budget_assignment_allowed or rec.child_ids):
+            if (rec.budget_assignment_allowed or rec.child_ids):
                 modification_domain = [
                     ('budget_modification_id.budget_id', '=', budget_id),
                     ('budget_position_id', operator, rec.id)]
@@ -232,7 +226,6 @@ class BudgetPosition(models.Model):
                 groupby=['budget_position_id'],
             )])
 
-            # self.
             active_preventive_lines = self.env['public_budget.preventive_line'].with_context(
                 prefetch_fields=False).search(domain)
 
@@ -253,7 +246,6 @@ class BudgetPosition(models.Model):
             rec.balance_amount = rec.amount - preventive_amount
             _logger.debug('Finish getting amounts for budget position %s' % rec.name)
 
-    @api.multi
     def name_get(self):
         result = []
         for rec in self:
@@ -316,7 +308,6 @@ class BudgetPosition(models.Model):
                             'Allowed as the child position %s has Allowed.'
                         ) % (rec.name, children_allowed[0].name))
 
-    @api.multi
     def get_parent_assignment_position(self):
         self.ensure_one()
         assignment_allowed = self.env['public_budget.budget_position']
@@ -340,7 +331,6 @@ class BudgetPosition(models.Model):
                 assignment_position = rec.get_parent_assignment_position()
             rec.assignment_position_id = assignment_position.id
 
-    @api.multi
     def action_position_analysis_tree(self):
         self.ensure_one()
         res = {}

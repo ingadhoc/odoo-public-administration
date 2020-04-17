@@ -7,7 +7,7 @@
         <field name="model">account.journal</field>
         <field name="inherit_id" ref="account.view_account_journal_form"/>
         <field name="arch" type="xml">
-            <field name="show_on_dashboard" position="after">
+            <field name="restrict_mode_hash_table" position="after">
                 <field name="max_statement_operation"/>
             </field>
         </field>

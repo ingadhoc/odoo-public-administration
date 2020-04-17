@@ -1,14 +1,14 @@
 {
     'name': 'Public Budget',
     'license': 'AGPL-3',
-    'version': '11.0.1.37.0',
+    'version': "13.0.1.0.0",
     'author': 'ADHOC SA,Odoo Community Association (OCA)',
     'website': 'www.adhoc.com.ar',
     'category': 'Accounting & Finance',
     'depends': [
         'portal',
         'sales_team',
-        'account',
+        'account_accountant_ux',
         'account_check',
         'account_payment_group_document',
         'account_asset',
@@ -16,14 +16,7 @@
         'report_aeroo',
         'partner_identification',
         'account_statement_aeroo_report',
-        'account_clean_cancelled_invoice_number',
         # estrictamente solo requerido por algunos campos en vista de partner
-        'l10n_ar_account',
-        # solo para el reporte de ordenes de pago que imprime el dato de la
-        # validacion
-        'l10n_ar_afipws_fe',
-        # mas que nada para datos demo y porque lo queremos
-        # 'l10n_ar_states',
         # solo requerido para establecer datos demo en cia y hacer que las ret
         # no sean obligatorias en borrador
         'l10n_ar_account_withholding',
@@ -79,7 +72,6 @@
         'reports/payment_list_report.xml',
         'views/account_move_views.xml',
         'views/inventory_rule_views.xml',
-        'views/account_invoice_views.xml',
         'views/advance_request_type_views.xml',
         'views/advance_request_views.xml',
         'views/transaction_type_views.xml',
@@ -89,7 +81,7 @@
         'views/location_views.xml',
         'views/budget_modification_detail_views.xml',
         'views/funding_move_views.xml',
-        'views/account_invoice_line_views.xml',
+        'views/account_move_line_views.xml',
         'views/rest_type_views.xml',
         'views/res_users_views.xml',
         'views/preventive_line_views.xml',
@@ -131,7 +123,7 @@
         'demo/public_budget.location.csv',
         'demo/res_users_demo.xml',
         # once admin is in sipreco company, we load chart of account
-        'demo/account_chart_template.yml',
+        'demo/account_chart_template.xml',
         'demo/res_partner_demo.xml',
         'demo/res.partner.csv',
         'demo/account_account_demo.xml',
@@ -151,6 +143,6 @@
         'demo/advance_request_type.xml',
         'demo/advance_request.xml',
     ],
-    'installable': False,
+    'installable': True,
     'post_load': 'payment_date_default',
 }

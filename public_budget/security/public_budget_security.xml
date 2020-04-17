@@ -20,7 +20,7 @@
         <field name="name">categories only in user categories</field>
         <field name="model_id" ref="public_budget.model_public_budget_expedient_category"/>
         <field eval="True" name="global"/>
-        <field name="domain_force">[('id', 'in', user.category_ids.ids)]</field>
+        <field name="domain_force">[('id', 'in', user.expedient_category_ids.ids)]</field>
         <field name="perm_create" eval="False"/>
         <field name="perm_unlink" eval="False"/>
         <field name="perm_write" eval="False"/>
@@ -38,21 +38,21 @@
 
     <record id="transaction_account_invoice_rule_only_read" model="ir.rule">
         <field name="name">Transaction Account Invoices</field>
-        <field name="model_id" ref="account.model_account_invoice"/>
+        <field name="model_id" ref="account.model_account_move"/>
         <field name="groups" eval="[(4, ref('group_portal_transaction'))]"/>
         <field name="domain_force">[(1 ,'=', 1)]</field>
     </record>
 
     <record id="asset_in_user_locations" model="ir.rule">
         <field name="name">Assets in user locations</field>
-        <field name="model_id" ref="public_budget.model_account_asset_asset"/>
+        <field name="model_id" ref="public_budget.model_account_asset"/>
         <field name="groups" eval="[(4, ref('group_asset_responsable_ubicacion')),(4, ref('group_portal_asset'))]"/>
         <field name="domain_force">[('location_id.user_id', '=', user.id)]</field>
     </record>
 
     <record id="all_assets" model="ir.rule">
         <field name="name">All Assets</field>
-        <field name="model_id" ref="public_budget.model_account_asset_asset"/>
+        <field name="model_id" ref="public_budget.model_account_asset"/>
         <field name="groups" eval="[(4, ref('group_asset_responsable'))]"/>
         <field name="domain_force">[(1 ,'=', 1)]</field>
     </record>

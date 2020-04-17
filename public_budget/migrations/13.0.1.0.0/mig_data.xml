@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="action_aeroo_report_budget" model="ir.actions.report">
+        <field name="binding_model_id" ref="public_budget.model_public_budget_budget"/>
+    </record>
+
+</odoo>

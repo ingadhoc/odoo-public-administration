@@ -1,34 +1,28 @@
 from odoo import api, fields, models, _
 
 
-class AccountAssetAsset(models.Model):
-    _name = 'account.asset.asset'
-    _inherit = ['account.asset.asset', 'mail.activity.mixin']
+class AccountAsset(models.Model):
+    _inherit = 'account.asset'
     _order = 'reference'
 
     active = fields.Boolean(
-        track_visibility='onchange',
+        tracking=True,
         default=True,
     )
-    enrollment = fields.Char(
-    )
+    enrollment = fields.Char()
     reference = fields.Char()
-    serial_number = fields.Char(
-    )
+    serial_number = fields.Char()
     asset_state = fields.Selection(
         [('n', 'N'),
             ('b', 'B'),
             ('r', 'R'),
             ('m', 'M')],
-        required=True,
         default='n',
     )
-    observations = fields.Text(
-
-    )
+    observations = fields.Text()
     location_id = fields.Many2one(
         'public_budget.location',
-        track_visibility='onchange',
+        tracking=True,
         domain="[('asset_management', '=', True)]",
     )
     expedient_id = fields.Many2one(
@@ -37,7 +31,6 @@ class AccountAssetAsset(models.Model):
     user_id = fields.Many2one(
         'res.users',
         related='location_id.user_id',
-        readonly=True,
     )
     visible_button_transfer_asset = fields.Boolean(
         compute='_compute_visible_button_transfer_asset')
@@ -60,34 +53,43 @@ class AccountAssetAsset(models.Model):
     )
     level = fields.Char(
         related='location_id.level',
-        readonly=True,
     )
     number = fields.Char(
         related='location_id.number',
-        readonly=True,
     )
     building = fields.Char(
         related='location_id.building',
-        readonly=True,
     )
+    invoice_id = fields.Many2one(
+        'account.move',
+        string='Invoice',
+        states={'draft': [('readonly', False)]},
+        copy=False,
+    )
+    partner_id = fields.Many2one(
+        'res.partner',
+        string='Partner',
+        readonly=True,
+        states={'draft': [('readonly', False)]})
 
     _sql_constraints = [
         ('reference', 'unique(reference)',
          '¡La referencia debe ser unica!')]
 
-    @api.multi
     def _compute_transaction_ids(self):
-        for rec in self.filtered('invoice_id'):
+        PublicBudgetTransaction = self.env['public_budget.transaction']
+        assets = self.filtered('invoice_id')
+        (self - assets).update({'transaction_ids': PublicBudgetTransaction})
+        for rec in assets:
             domain = [('invoice_ids', 'in', [rec.invoice_id.id])]
-            rec.transaction_ids = self.env['public_budget.transaction'].search(
-                domain)
+            rec.transaction_ids = PublicBudgetTransaction.search(domain)
 
-    @api.multi
     def _compute_visible_button_transfer_asset(self):
-        for rec in self.filtered(lambda x: x.user_id == self.env.user):
+        assets = self.filtered(lambda x: x.user_id == self.env.user)
+        (self - assets).update({'visible_button_transfer_asset': False})
+        for rec in assets:
             rec.visible_button_transfer_asset = True
 
-    @api.multi
     def transfer_asset(self):
         self.ensure_one()
         action = self.env.ref(
@@ -95,7 +97,6 @@ class AccountAssetAsset(models.Model):
         action_read = action.read()[0]
         return action_read
 
-    @api.multi
     def confirm_tranfer(self):
         self.ensure_one()
         self.transit = False
@@ -103,16 +104,14 @@ class AccountAssetAsset(models.Model):
             'The User "%s" confirm transfer asset'
             ' to the location "%s"') % (
             self.env.user.name, self.location_id.name)
-        self.message_post(body)
+        self.message_post(body=body)
         return True
 
     # We overwrite this method to block the odoo funcionality to send a
     # message whit the fields that not interested to show
-    @api.multi
     def validate(self):
         self.write({'state': 'open'})
 
-    @api.multi
     def action_view_transaction(self):
         self.ensure_one()
         action = self.env.ref(
@@ -124,5 +123,6 @@ class AccountAssetAsset(models.Model):
     @api.model
     def create(self, values):
         if not values.get('reference', False):
-            values['reference'] = self.env['ir.sequence'].next_by_code('public_budget.asset')
-        return super(AccountAssetAsset, self).create(values)
+            values['reference'] = self.env['ir.sequence'].next_by_code(
+                'public_budget.asset')
+        return super().create(values)

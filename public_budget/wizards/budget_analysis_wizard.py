@@ -1,23 +1,19 @@
-from odoo import models, fields, api
-# from odoo.exceptions import ValidationError
+from odoo import models, fields
 
 
 class PublicBudgetBudgetAnalysisWizard(models.TransientModel):
     _name = "public_budget.budget.analysis.wizard"
+    _description = "public_budget.budget.analysis.wizard"
 
     budget_id = fields.Many2one(
         'public_budget.budget',
         'Presupuesto',
         required=True,
     )
-    # from_date = fields.Date(
-    #     'From Date',
-    # )
     to_date = fields.Date(
         'Hasta Fecha',
     )
 
-    @api.multi
     def open(self):
         self.ensure_one()
         actions = self.env.ref(
@@ -43,7 +39,6 @@ class PublicBudgetBudgetAnalysisWizard(models.TransientModel):
         }
         return action_read
 
-    @api.multi
     def print_report(self):
         self.ensure_one()
         action = self.env.ref('public_budget.action_aeroo_report_budget')

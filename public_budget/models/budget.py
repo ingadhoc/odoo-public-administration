@@ -94,11 +94,10 @@ class Budget(models.Model):
         required=True,
         readonly=True,
         states={'draft': [('readonly', False)]},
-        default=lambda self: self.env.user.company_id.id
+        default=lambda self: self.env.company.id
     )
     currency_id = fields.Many2one(
         related='company_id.currency_id',
-        readonly=True,
     )
     state = fields.Selection(
         _states_,
@@ -153,7 +152,6 @@ class Budget(models.Model):
                 continue
             raise ValidationError('%s no es un año valido!' % year)
 
-    @api.multi
     def check_date_in_budget_dates(self, date):
         """
         Verifica si una fecha esta dentro de las fechas del presupuesto
@@ -166,7 +164,6 @@ class Budget(models.Model):
             return True
         return False
 
-    @api.multi
     def get_budget_fiscalyear_dates(self):
         """
         Devolvemos para este budget primer y ultimo día del presupuesto
@@ -205,13 +202,9 @@ class Budget(models.Model):
         # eliminate duplicated
         position_ids = list(set(position_ids))
         # parents positions
-        for position in budget_positions.browse(position_ids):
-            parents = budget_positions.search(
-                [('parent_left', '<', position.parent_left),
-                 ('parent_right', '>', position.parent_right)])
-            position_ids += parents.ids
+        position_ids += budget_positions.search([('id', 'parent_of', position_ids)]).ids
         self.budget_position_ids = budget_positions.browse(
-            list(set(position_ids))).sorted(key=lambda r: r.parent_left)
+            list(set(position_ids))).sorted(key=lambda r: r.code)
         self.parent_budget_position_ids = self.budget_position_ids.filtered(
             lambda x: not x.parent_id)
 
@@ -250,35 +243,32 @@ class Budget(models.Model):
         # 'ON dl.transaction_id = t.id '
         # 'WHERE dl.id IN %s AND t.state in [%s,%s]',
         # (tuple(definitive_lines.ids), 'open', 'closed'))
+        passive_residue = 0.0
         if definitive_lines:
             self._cr.execute(
                 'SELECT residual_amount '
                 'FROM public_budget_definitive_line '
                 'WHERE id IN %s', (tuple(definitive_lines.ids),))
-            self.passive_residue = sum([x[0] for x in self._cr.fetchall()])
+            passive_residue = sum([x[0] for x in self._cr.fetchall()])
+        self.passive_residue = passive_residue
 
-    @api.multi
     def action_cancel_draft(self):
         """ go from canceled state to draft state"""
         self.write({'state': 'draft'})
         return True
 
-    @api.multi
     def action_open(self):
         self.write({'state': 'open'})
         return True
 
-    @api.multi
     def action_close(self):
         self.write({'state': 'closed'})
         return True
 
-    @api.multi
     def action_cancel(self):
         self.write({'state': 'cancel'})
         return True
 
-    @api.multi
     def action_pre_close(self):
         # Unlink any previous pre close detail
         for rec in self:
@@ -298,14 +288,13 @@ class Budget(models.Model):
                     'to_pay_amount': line.to_pay_amount,
                     'paid_amount': line.paid_amount,
                     'balance_amount': line.balance_amount,
-                    'parent_left': line.parent_left,
-                    'order_int': line.parent_left,
+                    # 'parent_left': line.parent_left,
+                    # 'order_int': line.parent_path,
                     'budget_id': rec.id,
                 }
                 rec.budget_prec_detail_ids.create(vals)
         self.write({'state': 'pre_closed'})
 
-    @api.multi
     def action_to_open_modification(self):
         self.ensure_one()
         view_id = self.env['ir.model.data'].xmlid_to_res_id(
@@ -324,7 +313,6 @@ class Budget(models.Model):
 
         }
 
-    @api.multi
     def action_to_open_definitive_lines(self):
         self.ensure_one()
         view_id = self.env.ref(

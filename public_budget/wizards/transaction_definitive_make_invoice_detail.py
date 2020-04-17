@@ -5,6 +5,7 @@ from odoo.tools import float_compare
 
 class PublicBudgetDefinitiveMakeInvoiceDetail(models.TransientModel):
     _name = "public_budget.definitive.make.invoice.detail"
+    _description = "public_budget.definitive.make.invoice.detail"
 
     definitive_make_invoice_id = fields.Many2one(
         'public_budget.definitive.make.invoice',
@@ -12,12 +13,11 @@ class PublicBudgetDefinitiveMakeInvoiceDetail(models.TransientModel):
     )
     definitive_line_id = fields.Many2one(
         'public_budget.definitive_line',
-        'Def Make Invoice',
+        'Definitive Line',
         readonly=True,
     )
     residual_amount = fields.Monetary(
         related='definitive_line_id.residual_amount',
-        readonly=True,
     )
     to_invoice_amount = fields.Monetary(
         'Amount',
@@ -27,7 +27,6 @@ class PublicBudgetDefinitiveMakeInvoiceDetail(models.TransientModel):
     )
     currency_id = fields.Many2one(
         related='definitive_line_id.currency_id',
-        readonly=True,
     )
 
     @api.onchange('full_imputation')
@@ -38,7 +37,7 @@ class PublicBudgetDefinitiveMakeInvoiceDetail(models.TransientModel):
         'to_invoice_amount'
     )
     def _check_amounts(self):
-        for rec in self.filtered(
+        if self.filtered(
             lambda x: float_compare(
                 x.residual_amount, x.to_invoice_amount,
                 precision_rounding=x.currency_id.rounding) < 0):

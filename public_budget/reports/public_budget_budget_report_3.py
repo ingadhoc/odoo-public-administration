@@ -13,7 +13,7 @@ class PublicBudgetBudgetReport(models.Model):
     def _reference_models(self):
         return [
             ('account.payment.group', 'Pagos'),
-            ('account.invoice', 'Invoice'),
+            ('account.move', 'Invoice'),
             ('public_budget.definitive_line', 'Definitive Line'),
             ('public_budget.preventive_line', 'Preventive Line'),
         ]
@@ -114,10 +114,6 @@ class PublicBudgetBudgetReport(models.Model):
         readonly=True,
         string='Línea Preventiva',
     )
-    # preventive_amount = fields.Monetary(
-    #     digits=dp.get_precision('Account'),
-    #     readonly=True,
-    # )
     budget_position_id = fields.Many2one(
         'public_budget.budget_position',
         string='Partida Presupuestaria',
@@ -161,9 +157,9 @@ class PublicBudgetBudgetReport(models.Model):
         invoice_query = """
             SELECT
                 '3_invoiced' as type,
-                'account.invoice.line' as model,
+                'account.move.line' as model,
                 il.id as res_id,
-                CONCAT('account.invoice', ',', CAST(iv.id AS VARCHAR))
+                CONCAT('account.move', ',', CAST(iv.id AS VARCHAR))
                     as resource,
                 -- TODO tal vez un join para sacar de document_number de move o
                 -- o un or para sacar number si no seteado
@@ -175,7 +171,7 @@ class PublicBudgetBudgetReport(models.Model):
                 dl.preventive_line_id as preventive_line_id,
                 (il.price_subtotal * iv.sign) as amount
             FROM
-                account_invoice_line il
+                account_move_line il
             LEFT JOIN
                 public_budget_definitive_line as dl on (
                 dl.id = il.definitive_line_id)
@@ -188,7 +184,7 @@ class PublicBudgetBudgetReport(models.Model):
                         ELSE 1
                     END AS sign
                 FROM
-                    account_invoice) iv on (iv.id = il.invoice_id)
+                    account_invoice) iv on (iv.id = il.move_id)
             WHERE
                 iv.state not in ('cancel', 'draft')
             """

@@ -80,7 +80,7 @@
         <field name="model">public_budget.preventive_line</field>
         <field name="priority" eval="99"/>
         <field name="arch" type="xml">
-            <tree string="Preventive Line" colors="green:preventive_amount==definitive_amount==to_pay_amount==paid_amount;" create="false" edit="false" delete="false">
+            <tree string="Preventive Line" decoration-success="preventive_amount==definitive_amount==to_pay_amount==paid_amount" create="false" edit="false" delete="false">
                 <field name="currency_id" invisible="1"/>
                 <field name="transaction_id"/>
                 <field name="expedient_id"/>

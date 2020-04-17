@@ -43,7 +43,6 @@ class BudgetPrecloseDetail(models.Model):
     account_type = fields.Selection(
         string='Type',
         related='budget_position_id.type',
-        readonly=True,
     )
     order_int = fields.Integer(
         string='Parent Left'
@@ -54,5 +53,4 @@ class BudgetPrecloseDetail(models.Model):
     )
     currency_id = fields.Many2one(
         related='budget_id.company_id.currency_id',
-        readonly=True,
     )

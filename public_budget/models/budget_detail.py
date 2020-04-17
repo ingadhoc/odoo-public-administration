@@ -1,4 +1,4 @@
-from odoo import models, fields, api, _
+from odoo import models, fields, _
 
 
 class BudgetDetail(models.Model):
@@ -27,7 +27,6 @@ class BudgetDetail(models.Model):
     )
     currency_id = fields.Many2one(
         related='budget_id.currency_id',
-        readonly=True,
     )
     amount = fields.Monetary(
         compute='_compute_amount',
@@ -40,7 +39,6 @@ class BudgetDetail(models.Model):
         ('position_unique', 'unique(budget_position_id, budget_id)',
             _('Budget Position must be unique per Budget.'))]
 
-    @api.multi
     def _compute_amount(self):
         for rec in self:
             modifications = sum(

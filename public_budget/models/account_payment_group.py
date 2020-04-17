@@ -11,7 +11,7 @@ class AccountPaymentGroup(models.Model):
 
     # We add signature states
     state = fields.Selection(
-        selection=[
+        selection_add=[
             ('draft', 'Borrador'),
             ('confirmed', 'Confirmado'),
             ('signature_process', 'En Proceso de Firma'),
@@ -26,19 +26,16 @@ class AccountPaymentGroup(models.Model):
     )
     budget_id = fields.Many2one(
         related='transaction_id.budget_id',
-        readonly=True,
         store=True,
     )
     expedient_id = fields.Many2one(
         'public_budget.expedient',
-        readonly=True,
         context={'default_type': 'payment'},
         states={'draft': [('readonly', False)]},
         ondelete='restrict',
     )
     transaction_id = fields.Many2one(
         'public_budget.transaction',
-        readonly=True,
     )
     budget_position_ids = fields.Many2many(
         relation='voucher_position_rel',
@@ -50,20 +47,20 @@ class AccountPaymentGroup(models.Model):
     )
     # lo agregamos por compatiblidad hacia atras y tmb porque es mas facil
     invoice_ids = fields.Many2many(
-        comodel_name='account.invoice',
+        comodel_name='account.move',
         string='Facturas Relacionadas',
         compute='_compute_budget_positions_and_invoices'
     )
     partner_ids = fields.Many2many(
         comodel_name='res.partner',
-        compute='_compute_partners'
+        compute='_compute_partners',
+        string='Partners'
     )
     advance_request_id = fields.Many2one(
         'public_budget.advance_request',
         readonly=True,
     )
     transaction_with_advance_payment = fields.Boolean(
-        readonly=True,
         store=True,
         related='transaction_id.type_id.with_advance_payment',
     )
@@ -145,13 +142,11 @@ class AccountPaymentGroup(models.Model):
         compute='_compute_withholding_lines'
     )
 
-    @api.multi
     def _compute_withholding_lines(self):
         for rec in self:
             rec.withholding_line_ids = rec.move_line_ids.filtered(
                 'tax_line_id')
 
-    @api.multi
     def post(self):
         for rec in self:
             # si no estaba seteada la setamos
@@ -175,23 +170,20 @@ class AccountPaymentGroup(models.Model):
                 raise ValidationError(_(
                     'No puede validar un pago si el expediente no está en '
                     'una ubicación autorizada para ústed'))
-        return super(AccountPaymentGroup, self).post()
+        return super().post()
 
     # las seteamos directamente al postear total antes no se usan
-    # @api.multi
     # @api.constrains('payment_date')
     # def update_payment_date(self):
     #     for rec in self:
     #         rec.payment_ids.write({'payment_date': rec.payment_date})
 
-    @api.multi
     def unlink(self):
         if self.filtered('document_number'):
             raise ValidationError(_(
                 'No puede borrar una orden de pago que ya fue numerada'))
-        return super(AccountPaymentGroup, self).unlink()
+        return super().unlink()
 
-    @api.multi
     def confirm(self):
         for rec in self:
             msg = _('It is not possible'
@@ -228,9 +220,8 @@ class AccountPaymentGroup(models.Model):
                     'pagar'))
             # In this case remove all followers when confirm a payment
             rec.message_unsubscribe(partner_ids=rec.message_partner_ids.ids)
-        return super(AccountPaymentGroup, self).confirm()
+        return super().confirm()
 
-    @api.multi
     def _get_receiptbook(self):
         # we dont want any receiptbook as default
         return False
@@ -284,7 +275,6 @@ class AccountPaymentGroup(models.Model):
             rec.payment_min_date = fields.Date.to_string(current_date)
 
     # TODO enable
-    # @api.one
     # def _get_paid_withholding(self):
     #     paid_move_ids = [
     #         x.move_line_id.move_id.id for x in self.line_ids if x.amount]
@@ -292,7 +282,6 @@ class AccountPaymentGroup(models.Model):
     #         'move_line_id.tax_settlement_move_id', 'in', paid_move_ids)])
     #     self.paid_withholding_ids = paid_withholdings
 
-    @api.multi
     def to_signature_process(self):
         for rec in self:
             for payment in rec.payment_ids.filtered(
@@ -311,15 +300,12 @@ class AccountPaymentGroup(models.Model):
             if not rec.to_signature_date:
                 rec.to_signature_date = fields.Date.today()
 
-    @api.multi
     def to_signed(self):
         self.write({'state': 'signed'})
 
-    @api.multi
     def back_to_confirmed(self):
         self.write({'state': 'confirmed'})
 
-    @api.multi
     # dummy depends to compute values on create
     @api.depends('transaction_id')
     def _compute_user_locations(self):
@@ -329,17 +315,16 @@ class AccountPaymentGroup(models.Model):
     @api.model
     def _search_budget_positions(self, operator, value):
         return [
-            ('to_pay_move_line_ids.invoice_id.invoice_line_ids.'
+            ('to_pay_move_line_ids.move_id.invoice_move_ids.'
                 'definitive_line_id.preventive_line_id.budget_position_id',
                 operator, value)]
 
-    @api.multi
     def _compute_budget_positions_and_invoices(self):
         for rec in self:
             # si esta validado entonces las facturas son las macheadas, si no
             # las seleccionadas
             move_lines = rec.matched_move_line_ids or rec.to_pay_move_line_ids
-            rec.invoice_ids = move_lines.mapped('invoice_id')
+            rec.invoice_ids = move_lines.mapped('move_id')
             rec.budget_position_ids = rec.invoice_ids.mapped(
                 'invoice_line_ids.definitive_line_id.preventive_line_id.'
                 'budget_position_id')
@@ -364,20 +349,18 @@ class AccountPaymentGroup(models.Model):
                         'supplier_ids')
                 rec.partner_ids = partners
 
-    @api.multi
     def _get_to_pay_move_lines_domain(self):
         """
         We add transaction to get_move_lines function
         """
-        domain = super(
-            AccountPaymentGroup, self)._get_to_pay_move_lines_domain()
+        domain = super()._get_to_pay_move_lines_domain()
         if self.transaction_id:
             # con esto validamos que no se haya mandado a pagar en otra
             # orden de pago (si dejamos si está cancelada)
             already_paying = self.transaction_id.payment_group_ids.filtered(
                 lambda x: x.state != 'cancel').mapped('to_pay_move_line_ids')
             domain.extend([
-                ('invoice_id.transaction_id', '=', self.transaction_id.id),
+                ('move_id.transaction_id', '=', self.transaction_id.id),
                 ('id', 'not in', already_paying.ids)])
         return domain
 
@@ -406,13 +389,13 @@ class AccountPaymentGroup(models.Model):
             if not rec.confirmation_date:
                 continue
             for invoice in rec.invoice_ids:
-                if rec.confirmation_date < invoice.date_invoice:
+                if rec.confirmation_date < invoice.invoice_date:
                     raise ValidationError(_(
                         'La fecha de confirmación no puede ser menor a la '
                         'fecha de la factura que se esta pagando.\n'
                         '* Id Factura / Fecha: %s - %s\n'
                         '* Id Pago / Fecha Confirmación: %s - %s') % (
-                        invoice.id, invoice.date_invoice,
+                        invoice.id, invoice.invoice_date,
                         rec.id, rec.confirmation_date))
             if not rec.payment_date:
                 continue
@@ -465,12 +448,11 @@ class AccountPaymentGroup(models.Model):
             rec.document_number = (
                 rec.receiptbook_id.sequence_id.next_by_id())
 
-    @api.multi
     def _compute_name(self):
         """
         Agregamos numero de documento en todos los estados (no solo posteado)
         """
-        res = super(AccountPaymentGroup, self)._compute_name()
+        res = super()._compute_name()
         for rec in self.filtered(lambda x: x.state != 'posted'):
             if rec.document_number and rec.document_type_id:
                 rec.name = ("%s%s" % (
@@ -478,7 +460,6 @@ class AccountPaymentGroup(models.Model):
                     rec.document_number))
         return res
 
-    @api.multi
     def action_aeroo_certificado_de_retencion_report(self):
         self.ensure_one()
         payments = self.payment_ids.filtered(

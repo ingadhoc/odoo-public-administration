@@ -9,7 +9,7 @@
                 <field name="supplier_ids" invisible="1"/>
                 <field name="available_journal_document_type_ids" invisible="1"/>
                 <field name="use_documents" invisible="1"/>
-                <field name="document_sequence_id" invisible="1"/>
+                <field name="document_sequence" invisible="1"/>
                 <field name="company_id" invisible="1"/>
                 <group>
                     <field name="supplier_id" options="{'no_create': True}" domain="[('id', 'in', supplier_ids)]"/>
@@ -28,7 +28,7 @@
                     <!-- <field name="document_type_id"/> -->
                     <!-- <field name="document_number"/> -->
                     <field name="journal_document_type_id" attrs="{'invisible': [('use_documents', '=', False)], 'required': [('use_documents', '=', True)]}" domain="[('id', 'in', available_journal_document_type_ids)]"/>
-                    <field name="document_number" attrs="{'invisible': ['|', ('document_sequence_id', '!=', False), ('use_documents', '=', False)], 'required': [('document_sequence_id', '=', False), ('use_documents', '=', True)]}"/>
+                    <field name="document_number" attrs="{'invisible': ['|', ('document_sequence', '!=', False), ('use_documents', '=', False)], 'required': [('document_sequence', '=', False), ('use_documents', '=', True)]}"/>
                 </group>
                 <footer>
                     <button name="make_invoices" string="Create Invoice" type="object" class="oe_highlight"/>
@@ -43,10 +43,9 @@
         <field name="name">Make Invoice</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">public_budget.definitive.make.invoice</field>
-        <field name="view_type">form</field>
         <field name="view_mode">form</field>
         <field name="view_id" ref="view_definitive_make_invoice"/>
         <field name="target">new</field>
-        <field name="multi">True</field>
+        <!-- <field name="multi">True</field> -->
     </record>
 </odoo>

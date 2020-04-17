@@ -77,7 +77,6 @@ class BudgetTransaction(models.Model):
     note = fields.Html(
     )
     type_with_advance_payment = fields.Boolean(
-        readonly=True,
         related='type_id.with_advance_payment'
     )
     definitive_line_ids = fields.One2many(
@@ -138,7 +137,6 @@ class BudgetTransaction(models.Model):
         store=True,
     )
     definitive_amount_dynamic = fields.Monetary(
-        string='Monto Definitivo',
         compute='_compute_definitive_amount_dynamic',
     )
     invoiced_amount = fields.Monetary(
@@ -157,7 +155,6 @@ class BudgetTransaction(models.Model):
         store=True,
     )
     to_pay_amount_dynamic = fields.Monetary(
-        string='Monto A Pagar',
         compute='_compute_to_pay_amount_dynamic',
     )
     to_pay_balance = fields.Monetary(
@@ -171,7 +168,6 @@ class BudgetTransaction(models.Model):
         store=True,
     )
     paid_amount_dynamic = fields.Monetary(
-        string='Monto Pagado',
         compute='_compute_paid_amount_dynamic',
     )
     advance_preventive_amount = fields.Monetary(
@@ -185,7 +181,6 @@ class BudgetTransaction(models.Model):
         store=True,
     )
     advance_to_pay_amount_dynamic = fields.Monetary(
-        string='Monto de Adelanto a Pagar',
         compute='_compute_advance_dynamic_amounts',
     )
     advance_paid_amount = fields.Monetary(
@@ -194,7 +189,6 @@ class BudgetTransaction(models.Model):
         store=True,
     )
     advance_paid_amount_dynamic = fields.Monetary(
-        string='Monto de Adelanto a Pagar',
         compute='_compute_advance_dynamic_amounts',
     )
     advance_remaining_amount = fields.Monetary(
@@ -217,7 +211,6 @@ class BudgetTransaction(models.Model):
     )
     currency_id = fields.Many2one(
         related='company_id.currency_id',
-        readonly=True,
     )
     user_location_ids = fields.Many2many(
         'public_budget.location',
@@ -237,11 +230,12 @@ class BudgetTransaction(models.Model):
         domain=[('advance_line', '=', False)]
     )
     invoice_ids = fields.One2many(
-        'account.invoice',
+        'account.move',
         'transaction_id',
         readonly=True,
         auto_join=True,
-        states={'open': [('readonly', False)]}
+        states={'open': [('readonly', False)]},
+        domain=[('type', 'in', ['in_invoice', 'in_refund'])]
     )
     definitive_partner_type = fields.Selection(
         related='type_id.definitive_partner_type'
@@ -277,15 +271,15 @@ class BudgetTransaction(models.Model):
     )
 
     asset_ids = fields.One2many(
-        'account.asset.asset',
+        'account.asset',
         compute='_compute_asset_ids',
     )
 
-    @api.multi
     def _compute_asset_ids(self):
+        self.asset_ids = self.env['account.asset']
         for rec in self.filtered('invoice_ids'):
             domain = [('invoice_id', 'in', rec.invoice_ids.ids)]
-            rec.asset_ids = self.env['account.asset.asset'].search(domain)
+            rec.asset_ids = self.env['account.asset'].search(domain)
 
     # dummy depends to compute values on create
     @api.depends('company_id')
@@ -368,8 +362,12 @@ class BudgetTransaction(models.Model):
             to_pay_domain += [('confirmation_date', '<=', to_date)]
             paid_domain += [('payment_date', '<=', to_date)]
 
-        advance_to_pay_amount = sum(self.advance_payment_group_ids.search(to_pay_domain).mapped('to_pay_amount'))
-        advance_paid_amount = sum(self.advance_payment_group_ids.search(paid_domain).mapped('payments_amount'))
+        advance_to_pay_amount = sum(
+            self.advance_payment_group_ids.search(to_pay_domain).mapped(
+                'to_pay_amount'))
+        advance_paid_amount = sum(
+            self.advance_payment_group_ids.search(paid_domain).mapped(
+                'payments_amount'))
         return {
             'advance_to_pay_amount': advance_to_pay_amount,
             'advance_paid_amount': advance_paid_amount,
@@ -385,6 +383,7 @@ class BudgetTransaction(models.Model):
             rec.advance_to_pay_amount = amounts['advance_to_pay_amount']
             rec.advance_paid_amount = amounts['advance_paid_amount']
 
+    @api.depends_context('analysis_to_date')
     def _compute_advance_dynamic_amounts(self):
         _logger.info('Getting Transaction Advance Dynamic Amounts')
         if not self._context.get('analysis_to_date', False):
@@ -397,7 +396,6 @@ class BudgetTransaction(models.Model):
                 rec.advance_to_pay_amount_dynamic = amounts['advance_to_pay_amount']
                 rec.advance_paid_amount_dynamic = amounts['advance_paid_amount']
 
-    @api.multi
     def mass_payment_group_create(self):
         self.ensure_one()
         msg = _(
@@ -406,11 +404,11 @@ class BudgetTransaction(models.Model):
         self.expedient_id.check_location_allowed_for_current_user(msg)
         self = self.with_context(transaction_id=self.id)
         for invoice in self.invoice_ids.filtered(
-                lambda r: r.state == 'open'):
+                lambda r: r.state == 'posted'):
             partner = invoice.partner_id
             already_paying = self.payment_group_ids.filtered(
                 lambda x: x.state != 'cancel').mapped('to_pay_move_line_ids')
-            to_pay_move_lines = (invoice.open_move_line_ids - already_paying)
+            to_pay_move_lines = (invoice.line_ids - already_paying)
             # si ya se mandaron a pagar no creamo
             if not to_pay_move_lines:
                 continue
@@ -516,9 +514,8 @@ class BudgetTransaction(models.Model):
             rec.to_pay_amount = sum(rec.mapped(
                 'preventive_line_ids.to_pay_amount'))
 
-    @api.depends(
-        'preventive_line_ids.to_pay_amount',
-    )
+    @api.depends('preventive_line_ids.to_pay_amount')
+    @api.depends_context('analysis_to_date')
     def _compute_to_pay_amount_dynamic(self):
         if not self._context.get('analysis_to_date', False):
             for rec in self:
@@ -536,9 +533,8 @@ class BudgetTransaction(models.Model):
             rec.paid_amount = sum(rec.mapped(
                 'preventive_line_ids.paid_amount'))
 
-    @api.depends(
-        'preventive_line_ids.paid_amount',
-    )
+    @api.depends('preventive_line_ids.paid_amount')
+    @api.depends_context('analysis_to_date')
     def _compute_paid_amount_dynamic(self):
         if not self._context.get('analysis_to_date', False):
             for rec in self:
@@ -548,23 +544,19 @@ class BudgetTransaction(models.Model):
                 rec.paid_amount_dynamic = sum(rec.mapped(
                     'preventive_line_ids.paid_amount_dynamic'))
 
-    @api.multi
     def action_cancel_draft(self):
         """ go from canceled state to draft state"""
         self.write({'state': 'draft'})
         return True
 
-    @api.multi
     def action_cancel(self):
         self.write({'state': 'cancel'})
         return True
 
-    @api.multi
     def action_open(self):
         self.write({'state': 'open'})
         return True
 
-    @api.multi
     def action_close(self):
         self.check_closure()
         self.write({'state': 'closed'})
@@ -606,7 +598,6 @@ class BudgetTransaction(models.Model):
                                 'display_name'))
                     ))
 
-    @api.multi
     def check_closure(self):
         """
         Check preventive lines
@@ -668,7 +659,6 @@ class BudgetTransaction(models.Model):
                             "Preventive Total, Type and Date are not "
                             "compatible with Transaction Amount Restrictions"))
 
-    @api.multi
     def action_new_payment_group(self):
         '''
         This function returns an action that display a new payment group.
@@ -679,7 +669,7 @@ class BudgetTransaction(models.Model):
             "It is not possible to generate a payment order if the "
             "expedient of the transaction is not in a permitted location or is in transit")
         self.expedient_id.check_location_allowed_for_current_user(msg)
-        action = self.env['ir.model.data'].xmlid_to_object(
+        action = self.env.ref(
             'account_payment_group.action_account_payments_group_payable')
 
         if not action:
@@ -687,9 +677,8 @@ class BudgetTransaction(models.Model):
 
         res = action.read()[0]
 
-        form_view_id = self.env['ir.model.data'].xmlid_to_res_id(
-            'action_account_payments_group_payable.'
-            'view_account_payment_group_form')
+        form_view_id = self.env.ref(
+            'account_payment_group.view_account_payment_group_form').id
         res['views'] = [(form_view_id, 'form')]
 
         partner_id = self.partner_id
@@ -701,9 +690,8 @@ class BudgetTransaction(models.Model):
         }
         return res
 
-    @api.multi
     def copy(self, default=None):
-        res = super(BudgetTransaction, self).copy(default)
+        res = super().copy(default)
         attachments = self.env['ir.attachment'].search(
             [('res_model', '=', 'public_budget.transaction'),
              ('res_id', '=', self.id)])
@@ -714,11 +702,10 @@ class BudgetTransaction(models.Model):
             })
         return res
 
-    @api.multi
     def action_view_account_asset(self):
         self.ensure_one()
         action = self.env.ref(
-            'account_asset.action_account_asset_asset_form')
+            'account_asset.action_account_asset_form')
         action = action.read()[0]
         action['context'] = {'search_default_invoice': 1}
         action['domain'] = [('id', 'in', self.asset_ids.ids)]

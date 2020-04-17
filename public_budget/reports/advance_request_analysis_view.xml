@@ -81,7 +81,6 @@
     <record id="action_advance_request_analysis_all" model="ir.actions.act_window">
         <field name="name">Analisis de Requerimientos de Adelanto</field>
         <field name="res_model">advance.request.analysis</field>
-        <field name="view_type">form</field>
         <field name="view_mode">graph,pivot</field>
         <field name="context">{'search_default_active_lines':1}</field>
         <field name="search_view_id" ref="view_advance_request_analysis_search"/>

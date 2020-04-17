@@ -60,7 +60,7 @@
                             <field name="issue_date"/>
                             <field name="year"/>
                             <field name="description" attrs="{'readonly': [('id', '!=', False)]}"/>
-                            <field name="supplier_ids" widget="many2many_tags"/>
+                            <field name="supplier_ids" widget="many2many_tags" context="{'res_partner_search_mode': 'supplier'}"/>
                             <field name="cover"/>
                             <field name="user_id"/>
                             <field name="reference"/>

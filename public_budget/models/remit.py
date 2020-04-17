@@ -75,25 +75,6 @@ class Remit(models.Model):
         string='Expedients'
     )
 
-    @api.multi
-    def onchange(self, values, field_name, field_onchange):
-        """
-        Idea obtenida de aca
-        https://github.com/odoo/odoo/issues/16072#issuecomment-289833419
-        por el cambio que se introdujo en esa mimsa conversación, TODO en v11
-        no haría mas falta, simplemente domain="[('id', 'in', x2m_field)]"
-        Otras posibilidades que probamos pero no resultaron del todo fue:
-        * agregar onchange sobre campos calculados y que devuelvan un dict con
-        domain. El tema es que si se entra a un registro guardado el onchange
-        no se ejecuta
-        * usae el modulo de web_domain_field que esta en un pr a la oca
-        """
-        for field in field_onchange.keys():
-            if field.startswith('user_location_ids.'):
-                del field_onchange[field]
-        return super(Remit, self).onchange(
-            values, field_name, field_onchange)
-
     # dummy depends to compute values on create
     @api.depends('state')
     def _compute_user_locations(self):
@@ -127,7 +108,6 @@ class Remit(models.Model):
                     '* Expedientes: %s' % (', '.join(
                         future_expedients.mapped('number')))))
 
-    @api.multi
     def check_user_location(self):
         for rec in self:
             rec.confirmation_user_id = rec.env.user
@@ -137,32 +117,28 @@ class Remit(models.Model):
                     'You can Not Confirme a Remit of a Location where your '
                     'are not authorized!'))
 
-    @api.multi
     def action_cancel_in_transit(self):
         """ go from canceled state to draft state"""
         self.write({'state': 'in_transit'})
         return True
 
-    @api.multi
     def action_cancel(self):
         """ go from canceled state to draft state"""
         self.write({'state': 'cancel'})
         return True
 
-    @api.multi
     def action_confirm(self):
         """ go from canceled state to draft state"""
         self.check_user_location()
         self.write({'state': 'confirmed'})
         return True
 
-    @api.multi
     def unlink(self):
         for rec in self:
             if rec.state != 'cancel':
                 raise ValidationError(_(
                     "You can not delete a Remit that is not in Cancel State"))
-        return super(Remit, self).unlink()
+        return super().unlink()
 
     @api.model
     def create(self, vals):
@@ -171,4 +147,4 @@ class Remit(models.Model):
             'ir.sequence'].with_context(
                 ir_sequence_date=vals.get('date')).next_by_code(
                     'public_budget.remit') or '/'
-        return super(Remit, self).create(vals)
+        return super().create(vals)

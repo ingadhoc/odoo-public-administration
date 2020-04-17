@@ -18,55 +18,46 @@
     <record id="portal_expedientes" model="res.partner">
         <field name="name">Portal Expedientes</field>
         <field name="company_id" ref="company_sipreco"/>
-        <field name="customer" eval="False"/>
         <field name="email">portal_expedientes@yourcompany.example.com</field>
     </record>
     <record id="portal_transacciones" model="res.partner">
         <field name="name">Portal Transacciones</field>
         <field name="company_id" ref="company_sipreco"/>
-        <field name="customer" eval="False"/>
         <field name="email">portal_transacciones@yourcompany.example.com</field>
     </record>
     <record id="general_user_partner" model="res.partner">
         <field name="name">General User</field>
         <field name="company_id" ref="company_sipreco"/>
-        <field name="customer" eval="False"/>
         <field name="email">general_user@yourcompany.example.com</field>
     </record>
     <record id="secretaria_user_partner" model="res.partner">
         <field name="name">Secretaria User</field>
         <field name="company_id" ref="company_sipreco"/>
-        <field name="customer" eval="False"/>
         <field name="email">secretaria_user@yourcompany.example.com</field>
     </record>
     <record id="secretaria_manager_partner" model="res.partner">
         <field name="name">Secretaria Manager</field>
         <field name="company_id" ref="company_sipreco"/>
-        <field name="customer" eval="False"/>
         <field name="email">secretaria_manager@yourcompany.example.com</field>
     </record>
     <record id="contaduria_user_partner" model="res.partner">
         <field name="name">Contaduria User</field>
         <field name="company_id" ref="company_sipreco"/>
-        <field name="customer" eval="False"/>
         <field name="email">contaduria_user@yourcompany.example.com</field>
     </record>
     <record id="contaduria_manager_partner" model="res.partner">
         <field name="name">Contaduria Manager</field>
         <field name="company_id" ref="company_sipreco"/>
-        <field name="customer" eval="False"/>
         <field name="email">contaduria_manager@yourcompany.example.com</field>
     </record>
     <record id="habilitaciones_user_partner" model="res.partner">
         <field name="name">Habilitaciones User</field>
         <field name="company_id" ref="company_sipreco"/>
-        <field name="customer" eval="False"/>
         <field name="email">habilitaciones_user@yourcompany.example.com</field>
     </record>
     <record id="habilitaciones_manager_partner" model="res.partner">
         <field name="name">Habilitaciones Manager</field>
         <field name="company_id" ref="company_sipreco"/>
-        <field name="customer" eval="False"/>
         <field name="email">habilitaciones_manager@yourcompany.example.com</field>
     </record>
 
@@ -80,7 +71,7 @@
         <field name="company_ids" eval="[(4,ref('company_sipreco'))]"/>
         <field name="groups_id" eval="[(6,0,[ref('group_portal_expedient')])]"/>
         <field name="location_ids" eval="[(6,0,[ref('public_location_secretaria'), ref('public_location_habilitaciones'), ref('public_location_contaduria'),  ref('public_location_mesa_de_entrada'), ref('public_location_compras'), ref('public_location_tmc')])]"/>
-        <field name="image" type="base64" file="base/static/img/user_demo-image.jpg"/>
+        <field name="image_1920" type="base64" file="base/static/img/user_demo-image.jpg"/>
     </record>
     <record id="portal_transacciones_user" model="res.users">
         <field name="partner_id" ref="portal_transacciones"/>
@@ -90,7 +81,7 @@
         <field name="company_ids" eval="[(4,ref('company_sipreco'))]"/>
         <field name="groups_id" eval="[(6,0,[ref('group_portal_transaction')])]"/>
         <field name="location_ids" eval="[(6,0,[ref('public_location_secretaria'), ref('public_location_habilitaciones'), ref('public_location_contaduria'),  ref('public_location_mesa_de_entrada'), ref('public_location_compras'), ref('public_location_tmc')])]"/>
-        <field name="image" type="base64" file="base/static/img/user_demo-image.jpg"/>
+        <field name="image_1920" type="base64" file="base/static/img/user_demo-image.jpg"/>
     </record>
     <record id="general_user_user" model="res.users">
         <field name="partner_id" ref="general_user_partner"/>
@@ -100,7 +91,7 @@
         <field name="company_ids" eval="[(4,ref('company_sipreco'))]"/>
         <field name="groups_id" eval="[(6,0,[ref('base.group_user')])]"/>
         <field name="location_ids" eval="[(6,0,[ref('public_location_secretaria'), ref('public_location_habilitaciones'), ref('public_location_contaduria'),  ref('public_location_mesa_de_entrada'), ref('public_location_compras'), ref('public_location_tmc')])]"/>
-        <field name="image" type="base64" file="base/static/img/user_demo-image.jpg"/>
+        <field name="image_1920" type="base64" file="base/static/img/user_demo-image.jpg"/>
     </record>
     <record id="secretaria_user_user" model="res.users">
         <field name="partner_id" ref="secretaria_user_partner"/>
@@ -110,7 +101,7 @@
         <field name="company_ids" eval="[(4,ref('company_sipreco'))]"/>
         <field name="groups_id" eval="[(6,0,[ref('public_budget.group_secretary_usuario')])]"/>
         <field name="location_ids" eval="[(6,0,[ref('public_location_secretaria'), ref('public_location_habilitaciones'), ref('public_location_contaduria'),  ref('public_location_mesa_de_entrada'), ref('public_location_compras'), ref('public_location_tmc')])]"/>
-        <field name="image" type="base64" file="base/static/img/user_demo-image.jpg"/>
+        <field name="image_1920" type="base64" file="base/static/img/user_demo-image.jpg"/>
     </record>
     <record id="secretaria_manager_user" model="res.users">
         <field name="partner_id" ref="secretaria_manager_partner"/>
@@ -120,7 +111,7 @@
         <field name="company_ids" eval="[(4,ref('company_sipreco'))]"/>
         <field name="groups_id" eval="[(6,0,[ref('public_budget.group_secretary_director')])]"/>
         <field name="location_ids" eval="[(6,0,[ref('public_location_secretaria'), ref('public_location_habilitaciones'), ref('public_location_contaduria'),  ref('public_location_mesa_de_entrada'), ref('public_location_compras'), ref('public_location_tmc')])]"/>
-        <field name="image" type="base64" file="base/static/img/user_demo-image.jpg"/>
+        <field name="image_1920" type="base64" file="base/static/img/user_demo-image.jpg"/>
     </record>
 
     <record id="contaduria_user_user" model="res.users">
@@ -131,7 +122,7 @@
         <field name="company_ids" eval="[(4,ref('company_sipreco'))]"/>
         <field name="groups_id" eval="[(6,0,[ref('account.group_account_user'), ref('base.group_partner_manager')])]"/>
         <field name="location_ids" eval="[(6,0,[ref('public_location_secretaria'), ref('public_location_habilitaciones'), ref('public_location_contaduria'),  ref('public_location_mesa_de_entrada'), ref('public_location_compras'), ref('public_location_tmc')])]"/>
-        <field name="image" type="base64" file="base/static/img/user_demo-image.jpg"/>
+        <field name="image_1920" type="base64" file="base/static/img/user_demo-image.jpg"/>
     </record>
     <record id="contaduria_manager_user" model="res.users">
         <field name="partner_id" ref="contaduria_manager_partner"/>
@@ -141,7 +132,7 @@
         <field name="company_ids" eval="[(4,ref('company_sipreco'))]"/>
         <field name="groups_id" eval="[(6,0,[ref('account.group_account_manager'), ref('base.group_partner_manager')])]"/>
         <field name="location_ids" eval="[(6,0,[ref('public_location_secretaria'), ref('public_location_habilitaciones'), ref('public_location_contaduria'),  ref('public_location_mesa_de_entrada'), ref('public_location_compras'), ref('public_location_tmc')])]"/>
-        <field name="image" type="base64" file="base/static/img/user_demo-image.jpg"/>
+        <field name="image_1920" type="base64" file="base/static/img/user_demo-image.jpg"/>
     </record>
 
     <record id="habilitaciones_user_user" model="res.users">
@@ -152,7 +143,7 @@
         <field name="company_ids" eval="[(4,ref('company_sipreco'))]"/>
         <field name="groups_id" eval="[(6,0,[ref('public_budget.group_habilitacion_usuario')])]"/>
         <field name="location_ids" eval="[(6,0,[ref('public_location_secretaria'), ref('public_location_habilitaciones'), ref('public_location_contaduria'),  ref('public_location_mesa_de_entrada'), ref('public_location_compras'), ref('public_location_tmc')])]"/>
-        <field name="image" type="base64" file="base/static/img/user_demo-image.jpg"/>
+        <field name="image_1920" type="base64" file="base/static/img/user_demo-image.jpg"/>
     </record>
     <record id="habilitaciones_manager_user" model="res.users">
         <field name="partner_id" ref="habilitaciones_manager_partner"/>
@@ -162,7 +153,7 @@
         <field name="company_ids" eval="[(4,ref('company_sipreco'))]"/>
         <field name="groups_id" eval="[(6,0,[ref('public_budget.group_habilitacion_director')])]"/>
         <field name="location_ids" eval="[(6,0,[ref('public_location_secretaria'), ref('public_location_habilitaciones'), ref('public_location_contaduria'),  ref('public_location_mesa_de_entrada'), ref('public_location_compras'), ref('public_location_tmc')])]"/>
-        <field name="image" type="base64" file="base/static/img/user_demo-image.jpg"/>
+        <field name="image_1920" type="base64" file="base/static/img/user_demo-image.jpg"/>
     </record>
 
 </odoo>

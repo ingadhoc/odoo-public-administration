@@ -36,10 +36,10 @@ class AdvanceRequestLine(models.Model):
     )
     state = fields.Selection(
         related='advance_request_id.state',
+        readonly=False,
     )
     currency_id = fields.Many2one(
         related='advance_request_id.company_id.currency_id',
-        readonly=True,
     )
 
     @api.depends(
@@ -65,7 +65,7 @@ class AdvanceRequestLine(models.Model):
 
     @api.constrains('requested_amount', 'approved_amount')
     def check_amounts(self):
-        for rec in self.filtered(
+        if self.filtered(
                 lambda x: x.approved_amount > x.requested_amount):
             raise ValidationError(_(
                 'Approved Amount can not be greater than Requested Amount'))

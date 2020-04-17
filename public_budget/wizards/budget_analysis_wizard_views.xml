@@ -24,7 +24,6 @@
     <record id="action_budget_analysis" model="ir.actions.act_window">
         <field name="name">Budget Analysis Wizard</field>
         <field name="res_model">public_budget.budget.analysis.wizard</field>
-        <field name="view_type">form</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>

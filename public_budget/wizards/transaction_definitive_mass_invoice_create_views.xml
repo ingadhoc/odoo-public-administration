@@ -23,7 +23,6 @@
     <record id="action_definitive_mass_invoice_create" model="ir.actions.act_window">
         <field name="name">Mass Invoice Create</field>
         <field name="res_model">public_budget.definitive.mass.invoice.create</field>
-        <field name="view_type">form</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>

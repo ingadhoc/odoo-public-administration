@@ -22,8 +22,6 @@ class DefinitiveLine(models.Model):
         readonly=True,
         required=True,
         states={'draft': [('readonly', False)]},
-        context={'default_supplier': True},
-        domain=[('supplier', '=', True)]
     )
     amount = fields.Monetary(
         readonly=True,
@@ -62,17 +60,14 @@ class DefinitiveLine(models.Model):
         auto_join=True,
     )
     transaction_id = fields.Many2one(
-        readonly=True,
         store=True,
         related='preventive_line_id.transaction_id',
         auto_join=True,
     )
     currency_id = fields.Many2one(
         related='transaction_id.currency_id',
-        readonly=True,
     )
     budget_id = fields.Many2one(
-        readonly=True,
         store=True,
         related='preventive_line_id.budget_id',
         auto_join=True,
@@ -86,7 +81,7 @@ class DefinitiveLine(models.Model):
         store=True,
     )
     invoice_line_ids = fields.One2many(
-        'account.invoice.line',
+        'account.move.line',
         'definitive_line_id',
         readonly=True,
         auto_join=True,
@@ -94,13 +89,11 @@ class DefinitiveLine(models.Model):
     expedient_id = fields.Many2one(
         'public_budget.expedient',
         related='transaction_id.expedient_id',
-        readonly=True,
         store=True,
     )
     budget_position_id = fields.Many2one(
         'public_budget.budget_position',
         related='preventive_line_id.budget_position_id',
-        readonly=True,
         store=True,
     )
 
@@ -121,7 +114,6 @@ class DefinitiveLine(models.Model):
             else:
                 rec.state = 'draft'
 
-    @api.multi
     def write(self, vals):
         # TODO ver si se puede sacar esto.
         # No le pude encontrar la vuelta de porque algunas veces al guardar las
@@ -129,16 +121,14 @@ class DefinitiveLine(models.Model):
         # vinculos desde las invoice lines a las definitives
         if 'invoice_line_ids' in vals:
             vals.pop('invoice_line_ids')
-        return super(DefinitiveLine, self).write(vals)
+        return super().write(vals)
 
-    @api.multi
     def unlink(self):
-        for rec in self:
-            if rec.invoice_line_ids:
-                raise ValidationError(_(
-                    "You can not delete a definitive line that has been "
-                    "invoiced"))
-        return super(DefinitiveLine, self).unlink()
+        if self.filtered('invoice_line_ids'):
+            raise ValidationError(_(
+                "You can not delete a definitive line that has been "
+                "invoiced"))
+        return super().unlink()
 
     @api.depends('amount', 'invoiced_amount')
     def _compute_residual_amount(self):
@@ -146,12 +136,13 @@ class DefinitiveLine(models.Model):
             rec.residual_amount = rec.amount - rec.invoiced_amount
 
     @api.depends(
-        'invoice_line_ids.invoice_id.state',
-        'invoice_line_ids.invoice_id.to_pay_amount',
-        'invoice_line_ids.invoice_id.residual',
+        'invoice_line_ids.move_id.state',
+        'invoice_line_ids.move_id.to_pay_amount',
+        'invoice_line_ids.move_id.amount_residual',
     )
     def _compute_amounts_dynamic(self):
-        _logger.info('Getting dynamic amounts for definitive lines %s' % self.ids)
+        _logger.info(
+            'Getting dynamic amounts for definitive lines %s' % self.ids)
         if not self._context.get('analysis_to_date', False):
             for rec in self:
                 rec.invoiced_amount_dynamic = rec.invoiced_amount
@@ -165,9 +156,9 @@ class DefinitiveLine(models.Model):
                 rec.paid_amount_dynamic = amounts['paid_amount']
 
     @api.depends(
-        'invoice_line_ids.invoice_id.state',
-        'invoice_line_ids.invoice_id.to_pay_amount',
-        'invoice_line_ids.invoice_id.residual',
+        'invoice_line_ids.move_id.state',
+        'invoice_line_ids.move_id.to_pay_amount',
+        'invoice_line_ids.move_id.amount_residual',
     )
     def _compute_amounts(self):
         """Update the following fields with the related values to the budget
@@ -185,20 +176,23 @@ class DefinitiveLine(models.Model):
             rec.invoiced_amount = amounts['invoiced_amount']
             rec.to_pay_amount = amounts['to_pay_amount']
             rec.paid_amount = amounts['paid_amount']
-        _logger.debug('Finish getting amounts for definitive lines %s' % self.ids)
+        _logger.debug(
+            'Finish getting amounts for definitive lines %s' % self.ids)
 
     def _get_amounts(self):
         self.ensure_one()
-        invoice_lines = self.invoice_line_ids.filtered(lambda x: x.invoice_id.state not in ('cancel', 'draft'))
+        invoice_lines = self.invoice_line_ids.filtered(
+            lambda x: x.move_id.state not in ('cancel', 'draft'))
 
         to_date = self._context.get('analysis_to_date', False)
         if to_date:
-            invoice_lines.filtered(lambda x: x.invoice_id.date_invoice <= to_date)
+            to_date = fields.Date.from_string(to_date)
+            invoice_lines.filtered(lambda x: x.move_id.invoice_date <= to_date)
 
         debit_invoice_lines = invoice_lines.filtered(
-            lambda x: x.invoice_id.type in ['out_refund', 'in_invoice'])
+            lambda x: x.move_id.type in ['out_refund', 'in_invoice'])
         credit_invoice_lines = invoice_lines.filtered(
-            lambda x: x.invoice_id.type in ['out_invoice', 'in_refund'])
+            lambda x: x.move_id.type in ['out_invoice', 'in_refund'])
 
         # all computed fields, no problem for analysis to date
         invoiced_amount = sum(debit_invoice_lines.mapped('price_subtotal'))
@@ -215,7 +209,6 @@ class DefinitiveLine(models.Model):
             'paid_amount': paid_amount,
         }
 
-    @api.multi
     def get_invoice_line_vals(
             self, to_invoice_amount, invoice_type=False):
         self.ensure_one()
@@ -237,8 +230,7 @@ class DefinitiveLine(models.Model):
 
     @api.constrains('amount')
     def check_budget_state_open(self):
-        for rec in self.filtered(
-                lambda x: x.budget_id and x.budget_id.state != 'open'):
+        if any(self.filtered(lambda x: x.budget_id and x.budget_id.state != 'open')):
             raise ValidationError(_(
                 'Solo puede cambiar afectaciones definitivas si '
                 'el presupuesto está abierto'))
@@ -251,7 +243,7 @@ class DefinitiveLine(models.Model):
         Modificamos vista de definitive lines para que segun el partner type
         cambie el dominio del partner
         """
-        result = super(DefinitiveLine, self).fields_view_get(
+        result = super().fields_view_get(
             view_id, view_type, toolbar=toolbar, submenu=submenu)
         definitive_partner_type = self._context.get(
             'default_definitive_partner_type')
