@@ -8,18 +8,10 @@ _logger = logging.getLogger(__name__)
 class PublicBudgetSubsidy(models.Model):
 
     _name = 'public_budget.subsidy'
+    _description = 'public_budget.subsidy'
     _inherits = {
         'public_budget.transaction': 'transaction_id',
     }
-
-    @api.model
-    def get_type(self):
-        transaction_type = self.env['public_budget.transaction_type'].search(
-            [('subsidy', '=', True)], limit=1)
-        if not transaction_type:
-            raise ValidationError(_(
-                'No Se encontró ningún tipo de transacción del tipo subsidio'))
-        return transaction_type
 
     internal_number = fields.Char(
         required=True,
@@ -101,6 +93,7 @@ class PublicBudgetSubsidy(models.Model):
     note_ids = fields.One2many(
         'public_budget.subsidy.note',
         'subsidy_id',
+        string='Notes',
     )
     destination = fields.Char(
         required=True,
@@ -155,6 +148,15 @@ class PublicBudgetSubsidy(models.Model):
             'ir.sequence'].next_by_code('subsidy_internal_number') or '/'
         return super(PublicBudgetSubsidy, self.with_context(
             default_type_id=self.get_type().id)).create(vals)
+
+    @api.model
+    def get_type(self):
+        transaction_type = self.env['public_budget.transaction_type'].search(
+            [('subsidy', '=', True)], limit=1)
+        if not transaction_type:
+            raise ValidationError(_(
+                'No Se encontró ningún tipo de transacción del tipo subsidio'))
+        return transaction_type
 
     @api.depends(
         'rendition_ids.rendition_amount',
@@ -237,7 +239,7 @@ class PublicBudgetSubsidy(models.Model):
 
             expiry_date = False
             if cargo_date:
-                expiry_date = fields.Date.from_string(cargo_date)
+                expiry_date = cargo_date
                 # TODO, parametrizable?
                 business_days_to_add = 30
                 while business_days_to_add > 0:
@@ -250,8 +252,7 @@ class PublicBudgetSubsidy(models.Model):
                         continue
                     business_days_to_add -= 1
             rec.cargo_date = cargo_date
-            rec.accountability_expiry_date = fields.Date.to_string(
-                expiry_date)
+            rec.accountability_expiry_date = expiry_date
             rec.cargo_amount = cargo_amount
             rec.pendientes_rendicion_amount = (
                 cargo_amount - rec.rendido_amount)
@@ -260,7 +261,7 @@ class PublicBudgetSubsidy(models.Model):
 
     @api.constrains('cargo_amount', 'rendido_amount')
     def check_renditions(self):
-        for rec in self.filtered(lambda x: x.rendido_amount > x.cargo_amount):
+        if self.filtered(lambda x: x.rendido_amount > x.cargo_amount):
             raise ValidationError(_(
                 'El importe rendido no puede ser mayor al importe de cargo'))
 
@@ -271,14 +272,13 @@ class PublicBudgetSubsidy(models.Model):
 
     @api.constrains('amount')
     def check_amount(self):
-        for rec in self.filtered(lambda x: not x.amount > 0):
+        if self.filtered(lambda x: not x.amount > 0):
             raise ValidationError(_(
                 'El monto debe ser mayor a cero'))
 
     @api.model
     def _cron_recurring_subsidy_report(self, partner_ids):
-        last_week = fields.Date.to_string(
-            fields.Date.today() - relativedelta(days=7))
+        last_week = fields.Date.subtract(fields.Date.today(), weeks=1)
         domain = [('cargo_date', '>=', last_week),
                   ('cargo_date', '<', fields.Date.today())]
         values = {'subsidys': self.search(domain)}

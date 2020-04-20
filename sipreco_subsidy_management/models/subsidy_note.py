@@ -4,6 +4,7 @@ from odoo import fields, models
 class PublicBudgetSubsidyNote(models.Model):
 
     _name = 'public_budget.subsidy.note'
+    _description = 'public_budget.subsidy.note'
 
     subsidy_id = fields.Many2one(
         'public_budget.subsidy',

@@ -6,6 +6,7 @@ _logger = logging.getLogger(__name__)
 class ApprovalArrangement(models.Model):
 
     _name = 'public_budget.subsidy.approval_arrangement'
+    _description = 'public_budget.subsidy.approval_arrangement'
     _rec_name = 'number'
 
     number = fields.Char(
@@ -59,15 +60,13 @@ class ApprovalArrangement(models.Model):
         if not vals.get('number'):
             vals['number'] = self.env['ir.sequence'].next_by_code(
                 'approval_arrangement')
-        return super(ApprovalArrangement, self).create(vals)
+        return super().create(vals)
 
-    @api.multi
     def _compute_currency(self):
         currency = self.env.user.company_id.currency_id
         for rec in self:
             rec.currency_id = currency
 
-    @api.multi
     def action_view_subsidy(self):
         subsidies = self.mapped('rendition_ids.subsidy_id')
         action = self.env.ref(

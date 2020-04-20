@@ -82,6 +82,7 @@
     <record id="action_public_budget_subsidy_resolution" model="ir.actions.act_window">
         <field name="name">Resoluciones de Subsidios</field>
         <field name="res_model">public_budget.subsidy.resolution</field>
+        <field name="view_mode">tree,form</field>
     </record>
 
     <menuitem id="menu_public_budget_subsidy_resolution" sequence="15" action="action_public_budget_subsidy_resolution" parent="public_budget.menu_expedient_main" groups="public_budget.group_secretary_usuario" />

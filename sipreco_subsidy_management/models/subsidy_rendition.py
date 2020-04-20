@@ -5,6 +5,7 @@ from odoo.exceptions import ValidationError, UserError
 class PublicBudgetSubsidyRendition(models.Model):
 
     _name = 'public_budget.subsidy.rendition'
+    _description = 'public_budget.subsidy.rendition'
 
     subsidy_id = fields.Many2one(
         'public_budget.subsidy',
@@ -38,9 +39,7 @@ class PublicBudgetSubsidyRendition(models.Model):
     approved_amount = fields.Monetary(
         'Importe Aprobado',
         related='approval_arrangement_id.approved_amount',
-        readonly=True,
         store=True,
-        # digits=dp.get_precision('Account'),
     )
     pending_amount = fields.Monetary(
         'Importe Pendiente',
@@ -58,7 +57,7 @@ class PublicBudgetSubsidyRendition(models.Model):
 
     @api.constrains('rendition_amount', 'approved_amount')
     def check_amounts(self):
-        for rec in self.filtered(
+        if self.filtered(
                 lambda x: x.approved_amount > x.rendition_amount):
             raise ValidationError(_(
                 'Importe Aprobado no puede ser mayor al importe rendido'))
@@ -67,14 +66,12 @@ class PublicBudgetSubsidyRendition(models.Model):
     def _compute_pending_amount(self):
         self.pending_amount = self.rendition_amount - self.approved_amount
 
-    @api.multi
     def unlink(self):
-        for record in self:
-            if record.approval_arrangement_id and record.editable_line:
-                raise UserError(_(
+        if self.filtered(lambda x: x.approval_arrangement_id and x.editable_line):
+            raise UserError(_(
                     'No es posible borrar una rendición'
                     ' que presente montos Aprobados'))
-        return super(PublicBudgetSubsidyRendition, self).unlink()
+        return super().unlink()
 
     @api.constrains('approval_arrangement_id')
     def on_change_approval_arrangement_id(self):

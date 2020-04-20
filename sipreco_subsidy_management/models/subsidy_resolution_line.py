@@ -4,6 +4,7 @@ from odoo import fields, models, api
 class PublicBudgetSubsidyResolutionLines(models.Model):
 
     _name = 'public_budget.subsidy.resolution.line'
+    _description = 'public_budget.subsidy.resolution.line'
 
     name = fields.Char(
         'Name of Receiver',
@@ -50,7 +51,7 @@ class PublicBudgetSubsidyResolutionLines(models.Model):
                     'title': "El TA ya existe en estas resoluciones",
                     'message': " * " + "\n * ".join(
                         resolutions_with_expedient.mapped(lambda x: " - ".join(
-                            [x.subsidy_resolution_id.date,
+                            [str(x.subsidy_resolution_id.date),
                              x.subsidy_resolution_id.name]))),
                 }
             }
