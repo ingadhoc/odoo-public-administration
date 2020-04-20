@@ -1,4 +1,4 @@
-from odoo import models, fields, api, _
+from odoo import models, fields,  _
 from odoo.exceptions import ValidationError
 # from dateutil.relativedelta import relativedelta
 
@@ -7,7 +7,6 @@ class AccountPayment(models.Model):
 
     _inherit = 'account.payment'
 
-    @api.multi
     def change_withholding(self):
         """ Este metodo se llama desde un account.payment del tipo retención
         y genera un payment group con un payment revirtiendo esa retención.
@@ -78,12 +77,11 @@ class AccountPayment(models.Model):
                 self.withholding_number, self.display_name))
         return payment_group.get_formview_action()
 
-    @api.multi
     def post(self):
         """ Si se postea un pago que es devolución entonces marcamos
         el apunte original como liquidado
         """
-        res = super(AccountPayment, self).post()
+        res = super().post()
         for rec in self.filtered('returned_payment_ids'):
             return_aml = rec.move_line_ids.filtered(
                 lambda x: x.account_id ==
@@ -102,7 +100,6 @@ class AccountPayment(models.Model):
             withholding_aml.tax_settlement_move_id = return_aml.move_id.id
         return res
 
-    @api.multi
     def get_wihholding_aml(self):
         """ Devuelve el apunte de retencion para el pago y exige que no este
         liquidado

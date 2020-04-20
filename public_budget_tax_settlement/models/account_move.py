@@ -1,10 +1,13 @@
-from odoo import api, models, _
+from odoo import fields, models, _
 
 
 class AccoutMove(models.Model):
     _inherit = 'account.move'
 
-    @api.multi
+    enable_to_pay = fields.Boolean(
+        compute="_compute_matched_to_pay",
+    )
+
     def action_pay_tax_settlement(self):
         self.ensure_one()
         open_move_line_ids = self.line_ids.filtered(
@@ -27,3 +30,7 @@ class AccoutMove(models.Model):
                 'force_simple': True,
             },
         }
+
+    def _compute_matched_to_pay(self):
+        for rec in self:
+            rec.enable_to_pay = True if rec._get_cash_basis_matched_percentage() != 1.0 else False
