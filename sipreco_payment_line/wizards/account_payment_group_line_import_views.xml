@@ -9,9 +9,9 @@
             <form string="Import Payment Lines">
                 <field name="data_file"/>
                 <br/>
-                <label string= "Seleccionar el archivo y hacer click en 'Importar'."/>
+                Seleccionar el archivo y hacer click en 'Importar'
                 <br/>
-                <label string= "Si al importar se encuentra una línea con mismo cuit se sobre escribirá la línea."/>
+                Si al importar se encuentra una línea con mismo cuit se sobre escribirá la línea.
                 <footer>
                     <button name="import_file" string="Importar" type="object" class="oe_highlight"/>
                         or
@@ -25,7 +25,6 @@
         <field name="name">Import Payment Lines</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">account.payment.group.line.import</field>
-        <field name="view_type">form</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
         <field name="view_id" ref="account_payment_line_import_view"/>

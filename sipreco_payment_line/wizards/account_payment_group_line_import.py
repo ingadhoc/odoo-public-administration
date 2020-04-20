@@ -16,7 +16,6 @@ class AccountPaymentGroupLineImport(models.TransientModel):
         required=True,
     )
 
-    @api.multi
     def import_file(self):
         self.ensure_one()
         data_file = base64.b64decode(self.data_file)
@@ -102,6 +101,6 @@ class AccountPaymentGroupLineImport(models.TransientModel):
     @api.model
     def _find_partner(self, cuit):
         return self.env['res.partner'].search([
-            ('main_id_category_id.afip_code', '=', 80),
-            ('main_id_number', '=', cuit),
+            ('l10n_latam_identification_type_id.code', '=', 80),
+            ('vat', '=', cuit),
         ], limit=1)

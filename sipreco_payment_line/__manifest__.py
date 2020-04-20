@@ -1,6 +1,6 @@
 {
     'name': 'Sipreco Payment Lines',
-    'version': '11.0.1.1.0',
+    'version': '13.0.1.0.0',
     'license': 'AGPL-3',
     'author': 'ADHOC SA,Odoo Community Association (OCA)',
     'website': 'www.adhoc.com.ar',
@@ -16,5 +16,5 @@
     ],
     'demo': [
     ],
-    'installable': False,
+    'installable': True,
 }

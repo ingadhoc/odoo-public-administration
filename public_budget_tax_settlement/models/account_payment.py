@@ -1,6 +1,5 @@
 from odoo import models, fields,  _
 from odoo.exceptions import ValidationError
-# from dateutil.relativedelta import relativedelta
 
 
 class AccountPayment(models.Model):
