@@ -1,6 +1,6 @@
 {
     'name': 'Public Budget Subsidy Management',
-    'version': '11.0.1.2.0',
+    'version': '13.0.1.0.0',
     'author': 'ADHOC SA,Odoo Community Association (OCA)',
     'website': 'www.adhoc.com.ar',
     'category': 'Accounting & Finance',
@@ -29,5 +29,5 @@
     'depends': [
         'public_budget',
     ],
-    'installable': False,
+    'installable': True,
 }

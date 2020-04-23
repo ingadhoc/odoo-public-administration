@@ -131,9 +131,9 @@
                 <field name="revision_amount" sum="Total"/>
                 <field name="pendientes_aprobacion_amount" sum="Total"/>
                 <field name="accountability_state" string="Estado" />
-                <field name="cargo_date" invisible="0"/>
-                <field name="accountability_expiry_date" invisible="0"/>
-                <field name="state" invisible="1"/>
+                <field name="cargo_date"/>
+                <field name="accountability_expiry_date"/>
+                <field name="state" optional="hide"/>
             </tree>
         </field>
     </record>
@@ -155,19 +155,18 @@
                 <field name="parliamentary_resolution_date"/>
                 <field name="parliamentary_expedient"/>
                 <field name="accountability_administrative_expedient_id"/>
-                <filter string="Vencida" domain="[('accountability_state', '!=', 'approved') , ('accountability_expiry_date', '!=', False), ('accountability_expiry_date', '&lt;=', time.strftime('%%Y-%%m-%%d'))]" />
-                <filter string="Próxima a vencer" domain="[('accountability_state', '!=', 'approved'), ('accountability_expiry_date', '!=', False), ('accountability_expiry_date', '&gt;', time.strftime('%%Y-%%m-%%d')), ('accountability_expiry_date', '&lt;=', (context_today() + datetime.timedelta(15)).strftime('%%Y-%%m-%%d'))]" help="Rendición que vencerá en los próximos 15 días" />
-                <filter string="Entregados no rendidos" domain="[('pendientes_rendicion_amount', '&gt;', 0.0), ('cargo_amount', '&gt;', 0.0)]" />
-                <filter string="Pendientes de revisión" domain="[('revision_amount', '&gt;', 0.0)]" />
+                <filter name="accountability_state" string="Vencida" domain="[('accountability_state', '!=', 'approved') , ('accountability_expiry_date', '!=', False), ('accountability_expiry_date', '&lt;=', time.strftime('%%Y-%%m-%%d'))]" />
+                <filter name="accountability_state" string="Próxima a vencer" domain="[('accountability_state', '!=', 'approved'), ('accountability_expiry_date', '!=', False), ('accountability_expiry_date', '&gt;', time.strftime('%%Y-%%m-%%d')), ('accountability_expiry_date', '&lt;=', (context_today() + datetime.timedelta(15)).strftime('%%Y-%%m-%%d'))]" help="Rendición que vencerá en los próximos 15 días" />
+                <filter name="pendientes_rendicion_amount" string="Entregados no rendidos" domain="[('pendientes_rendicion_amount', '&gt;', 0.0), ('cargo_amount', '&gt;', 0.0)]" />
+                <filter name="revision_amount" string="Pendientes de revisión" domain="[('revision_amount', '&gt;', 0.0)]" />
                 <!-- no lo neceistan, pidieron pendiente de revision -->
                 <!-- <filter string="Pendientes aprobación" domain="[('pendientes_aprobacion_amount', '&gt;', 0.0), ('cargo_amount', '&gt;', 0.0)]" /> -->
-                <filter string="Aprobados" domain="[('accountability_state', '=', 'approved'), ('cargo_amount', '&gt;', 0.0)]" />
-                <filter string="Reclamados" domain="[('reclaimed', '=', True)]" />
-                <filter string="Observations" domain="[('observations', '!=', False)]" />
+                <filter name="accountability_state" string="Aprobados" domain="[('accountability_state', '=', 'approved'), ('cargo_amount', '&gt;', 0.0)]" />
+                <filter name="reclaimed" string="Reclamados" domain="[('reclaimed', '=', True)]" />
+                <filter name="observations" string="Observations" domain="[('observations', '!=', False)]" />
                 <group expand="1" string="Group By">
                     <filter string="Estado de la Transacción" name="state" context="{'group_by':'state'}"/>
                     <filter string="Estado" name="accountability_state" context="{'group_by':'accountability_state'}"/>
-                    <filter string="Fecha" name="date" context="{'group_by':'date'}"/>
                 </group>
             </search>
         </field>

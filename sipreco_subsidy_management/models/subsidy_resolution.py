@@ -1,11 +1,11 @@
 from odoo import fields, models, api, _
 from odoo.exceptions import ValidationError
-from dateutil.relativedelta import relativedelta
 
 
 class PublicBudgetSubsidyResolution(models.Model):
 
     _name = 'public_budget.subsidy.resolution'
+    _description = 'public_budget.subsidy.resolution'
     _order = 'date desc'
 
     name = fields.Char(
@@ -47,10 +47,8 @@ class PublicBudgetSubsidyResolution(models.Model):
     )
     user_location_ids = fields.Many2many(
         related='user_id.location_ids',
-        readonly=True,
     )
 
-    @api.multi
     def action_change_state(self):
         for rec in self:
             if rec.state == 'not_presented':
@@ -64,7 +62,6 @@ class PublicBudgetSubsidyResolution(models.Model):
             rec.mapped('subsidy_resolution_line_ids.expedient_id').write(
                 {'subsidy_approved': True})
 
-    @api.multi
     def generate_remit(self):
         vals = {
             'location_id': self.current_location_id.id,
@@ -86,8 +83,8 @@ class PublicBudgetSubsidyResolution(models.Model):
     @api.constrains('state')
     def check_state(self):
         for rec in self.filtered(lambda x: x.state == 'presented'):
-            six_months_ago = fields.Date.to_string(fields.Date.from_string(
-                rec.date) + relativedelta(days=-180))
+            six_months_ago = fields.Date.subtract(rec.date, months=6)
+            msj = ""
             for sub_res in rec.subsidy_resolution_line_ids:
                 domain = [
                     ('dni', '=', sub_res.dni),
@@ -97,9 +94,12 @@ class PublicBudgetSubsidyResolution(models.Model):
                     domain)
                 resolutions_with_expedient -= sub_res
                 if len(resolutions_with_expedient) > 0:
-                    raise ValidationError(_("There is the same beneficiary '{}' DNI: {}"
-                                            " in resolutions within 180 days prior to this resolution.:\n {}".format(
-                                                sub_res.name, sub_res.dni, " * " + "\n * ".join(
-                                                    resolutions_with_expedient.mapped(lambda x: " - ".join(
-                                                        [x.subsidy_resolution_id.date,
-                                                         x.subsidy_resolution_id.name]))))))
+                    msj += "- {} \n".format("Name: {}  DNI: {} \n {}".format(
+                        sub_res.name, sub_res.dni, " * " + "\n * ".join(
+                            resolutions_with_expedient.mapped(lambda x: " - ".join(
+                                [str(x.subsidy_resolution_id.date),
+                                 x.subsidy_resolution_id.name])))))
+            if msj:
+                raise ValidationError(
+                    _('There is the same beneficiary in resolutions within 180 days'
+                      ' prior to this resolution.\n' + msj))

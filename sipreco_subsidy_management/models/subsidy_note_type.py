@@ -4,6 +4,7 @@ from odoo import fields, models
 class PublicBudgetSubsidyNoteType(models.Model):
 
     _name = 'public_budget.subsidy.note.type'
+    _description = 'public_budget.subsidy.note.type'
     _order = 'sequence'
 
     sequence = fields.Integer(
