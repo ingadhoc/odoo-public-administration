@@ -5,7 +5,6 @@ class BudgetTransaction(models.Model):
 
     _inherit = 'public_budget.transaction'
 
-    @api.multi
     def action_view_purchase_requisitions(self):
         self.ensure_one()
         action = self.env.ref(

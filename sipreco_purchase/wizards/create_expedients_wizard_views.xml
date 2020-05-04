@@ -27,7 +27,6 @@
     <record id="action_create_expedients_wizard" model="ir.actions.act_window">
         <field name="name">Asistente de creacion de Expedientes</field>
         <field name="res_model">public_budget.create.expedients.wizard</field>
-        <field name="view_type">form</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>

@@ -22,7 +22,6 @@ class StockPickingType(models.Model):
         copy=False
     )
 
-    @api.multi
     def _compute_requests_count(self):
         # reads = self.env['stock.move'].read_group(
         #     [('state', 'in', ['waiting', 'confirmed', 'assigned'])],
@@ -36,7 +35,6 @@ class StockPickingType(models.Model):
                     ('state', 'not in', ['done', 'cancel']),
                     ('rule_id.picking_type_id', '=', rec.id)])
 
-    @api.multi
     def action_type_stock_request(self):
         self.ensure_one()
         action = self.env.ref('stock_request.action_stock_request_form')

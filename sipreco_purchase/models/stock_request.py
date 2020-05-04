@@ -69,7 +69,6 @@ class StockRequest(models.Model):
         })
         return res
 
-    @api.multi
     def _action_launch_procurement_rule(self):
         """
         Después de ejecutar procurement intentar reservar automáticamente

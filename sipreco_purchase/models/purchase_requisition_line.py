@@ -27,7 +27,6 @@ class PurchaseRequisitionLine(models.Model):
         for rec in self:
             rec.subtotal = rec.price_unit * rec.product_qty
 
-    @api.multi
     def _prepare_purchase_order_line(
             self, name, product_qty=0.0, price_unit=0.0, taxes_ids=False):
         res = super(

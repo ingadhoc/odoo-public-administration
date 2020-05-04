@@ -39,7 +39,6 @@ class PublicBudgetCreateExepedientsWizard(models.TransientModel):
             purchase_order_ids)
         return purchase_orders.ids
 
-    @api.multi
     def confirm(self):
         if not self.purchase_order_ids:
             raise UserError(_('It has no confirmed OC to generate '
