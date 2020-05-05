@@ -78,7 +78,7 @@ class PurchaseRequisition(models.Model):
         for rec in self:
             user_picking_type_ids = self.env.user.picking_type_ids.ids
             rec.route_ids = self.env['stock.location.route'].search(
-                [('pull_ids.picking_type_id', 'in', user_picking_type_ids)])
+                [('rule_ids.picking_type_id', 'in', user_picking_type_ids)])
 
     @api.depends('line_ids')
     def _compute_amount_total(self):

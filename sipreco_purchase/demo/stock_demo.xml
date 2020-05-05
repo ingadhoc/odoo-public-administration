@@ -62,7 +62,7 @@
         <field name="stock_request_selectable" eval="True"/>
     </record>
 
-    <record id="procurement_rule_informatica" model="procurement.rule">
+    <record id="procurement_rule_informatica" model="stock.rule">
         <field name="name">SIPRECO: Stock (Informática) -> Customers</field>
         <field name="action">move</field>
         <field name="route_id" ref="stock_location_rute_informatica"/>
@@ -72,7 +72,7 @@
         <field name="picking_type_id" ref="stock_picking_type_informatica"/>
     </record>
 
-    <record id="procurement_rule_economato" model="procurement.rule">
+    <record id="stock_rule_economato" model="stock.rule">
         <field name="name">SIPRECO: Stock (Economato) -> Customers</field>
         <field name="action">move</field>
         <field name="route_id" ref="stock_location_rute_economato"/>
@@ -82,7 +82,7 @@
         <field name="picking_type_id" ref="stock_picking_type_economato"/>
     </record>
 
-    <record id="procurement_rule_sec_administrativa" model="procurement.rule">
+    <record id="stock_rule_sec_administrativa" model="stock.rule">
         <field name="name">SIPRECO: Stock (Sec. Administrativa) -> Customers</field>
         <field name="action">move</field>
         <field name="route_id" ref="stock_location_rute_sec_administrativa"/>
@@ -92,7 +92,7 @@
         <field name="picking_type_id" ref="stock_picking_type_sec_administrativa"/>
     </record>
 
-    <record id="procurement_rule_sec_parlamentaria" model="procurement.rule">
+    <record id="stock_rule_sec_parlamentaria" model="stock.rule">
         <field name="name">SIPRECO: Stock (Sec. Parlamentaria) -> Customers</field>
         <field name="action">move</field>
         <field name="route_id" ref="stock_location_rute_sec_parlamentaria"/>

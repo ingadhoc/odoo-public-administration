@@ -40,8 +40,8 @@ class StockRequest(models.Model):
         readonly=True,
     )
     rule_id = fields.Many2one(
-        'procurement.rule',
-        track_visibility='onchange',
+        'stock.rule',
+        tracking=True,
         help="Chosen rule for the procurement resolution."
         " Usually chosen by the system but can be manually set by the"
         " procurement manager to force an unusual behavior.",
@@ -74,7 +74,7 @@ class StockRequest(models.Model):
         Después de ejecutar procurement intentar reservar automáticamente
         los pikcings
         """
-        res = super(StockRequest, self)._action_launch_procurement_rule()
+        res = super()._action_launch_procurement_rule()
         # hacemos jit en los pickings vinculados
         if self.mapped('procurement_group_id').ids:
             reassign_pickinkgs = self.env['stock.picking'].search([
