@@ -13,15 +13,15 @@
             <!-- por ahora ocultamos los picking lates -->
             <div t-if="record.count_picking_late.raw_value &gt; 0" position="replace"/>
 
-            <div class="col-xs-6 o_kanban_primary_right">
+            <div class="col-6 o_kanban_primary_right">
                 <!-- por ahora visible siempre -->
                 <div class="row">
-                    <div class="col-xs-9">
+                    <div class="col-9">
                         <a name="action_type_stock_request" type="object">
                             Pending Procurements
                         </a>
                     </div>
-                    <div class="col-xs-3">
+                    <div class="col-3">
                         <field name="count_pending_requests"/>
                     </div>
                 </div>

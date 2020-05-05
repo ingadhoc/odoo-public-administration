@@ -25,7 +25,7 @@
         <field name="model">stock.request</field>
         <field name="inherit_id" ref="stock_request.stock_request_search"/>
         <field name="arch" type="xml">
-            <filter name="inactive" position="before">
+            <filter name="done" position="before">
                 <filter string="Pending" name="pending" domain="[('state', 'not in', ['done', 'cancel'])]"/>
                 <separator/>
             </filter>

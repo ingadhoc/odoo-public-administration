@@ -43,10 +43,6 @@
                 <attribute name="groups">base.group_no_one</attribute>
             </div>
 
-            <page name="notes" position="attributes">
-                <attribute name="groups">base.group_no_one</attribute>
-            </page>
-
         </field>
     </record>
 
