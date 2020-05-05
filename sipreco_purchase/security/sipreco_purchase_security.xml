@@ -34,9 +34,9 @@
 
     <record id="group_portal_requester" model="res.groups">
         <field name="name">Portal - Requirente</field>
-        <field name="is_portal" eval="True"/>
+        <field name="share" eval="True"/>
         <field name="implied_ids" eval="[(4, ref('base.group_portal')),(4, ref('group_requester'))]"/>
-        <field name="category_id" ref="base.module_category_extra"/>
+        <field name="category_id" ref="public_budget.category_public_budget_portal"/>
     </record>
 
     <!-- usamos grupo existente de inventarios / user  para solicitante-->
@@ -87,9 +87,9 @@
     </record>
 
     <!-- menu control en compras -->
-    <record id="purchase.menu_purchase_control" model="ir.ui.menu">
+    <!-- <record id="purchase.menu_purchase_control" model="ir.ui.menu">
         <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
-    </record>
+    </record> -->
 
 
     <!-- Ocultamos estos grupos del menu por que ya los establecemos desde los otros permisos-->
