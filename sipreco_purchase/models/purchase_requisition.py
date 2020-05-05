@@ -4,12 +4,10 @@
 ##############################################################################
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
-import odoo.addons.decimal_precision as dp
 
 
 class PurchaseRequisition(models.Model):
-    _name = 'purchase.requisition'
-    _inherit = ['purchase.requisition', 'mail.activity.mixin']
+    _inherit = 'purchase.requisition'
 
     name = fields.Char(
         # cambiamos string
@@ -19,9 +17,6 @@ class PurchaseRequisition(models.Model):
         'stock.request',
         'manual_requisition_id',
         'Request',
-        # 'stock.move',
-        # 'requisition_id',
-        # 'Supply Requirements',
     )
     expedient_id = fields.Many2one(
         'public_budget.expedient',
@@ -31,10 +26,8 @@ class PurchaseRequisition(models.Model):
     transaction_type_id = fields.Many2one(
         'public_budget.transaction_type',
         string='Type',
-        # readonly=True,
-        # states={'draft': [('readonly', False)]},
         domain="[('company_id', '=', company_id)]",
-        track_visibility='onchange',
+        tracking=True,
     )
 
     inspected = fields.Boolean(
@@ -42,7 +35,7 @@ class PurchaseRequisition(models.Model):
     )
 
     amount_total = fields.Float(
-        digits=dp.get_precision('Product Price'),
+        digits='Product Price',
         compute='_compute_amount_total',
     )
 
@@ -52,11 +45,11 @@ class PurchaseRequisition(models.Model):
     )
     user_inspected_id = fields.Many2one(
         'res.users',
-        track_visibility='onchange',
+        tracking=True,
     )
     user_confirmed_id = fields.Many2one(
         'res.users',
-        track_visibility='onchange',
+        tracking=True,
     )
 
     printed = fields.Boolean(
@@ -82,6 +75,7 @@ class PurchaseRequisition(models.Model):
 
     @api.depends('line_ids')
     def _compute_amount_total(self):
+        self.update({'amount_total': 0.0})
         for rec in self.filtered('line_ids'):
             rec.amount_total = sum([x.subtotal for x in rec.line_ids])
 
@@ -105,7 +99,7 @@ class PurchaseRequisition(models.Model):
         self.inspected = False
         self.user_inspected_id = False
         self.user_confirmed_id = False
-        return super(PurchaseRequisition, self).action_cancel()
+        return super().action_cancel()
 
     def action_open(self):
         for rec in self:
@@ -113,16 +107,16 @@ class PurchaseRequisition(models.Model):
                 raise UserError(_(
                     'No se puede cerrar la licitación si no se solicitaron '
                     'presupuestos'))
-        return super(PurchaseRequisition, self).action_open()
+        return super().action_open()
 
     @api.model
     def create(self, vals):
         vals['date'] = fields.Date.today()
-        return super(PurchaseRequisition, self).create(vals)
+        return super().create(vals)
 
     def action_in_progress(self):
         self.user_confirmed_id = self.env.user
-        super(PurchaseRequisition, self).action_in_progress()
+        super().action_in_progress()
 
     def print_report_requisition(self):
         self.ensure_one()

@@ -3,7 +3,6 @@
 # directory
 ##############################################################################
 from odoo import models, fields, api
-import odoo.addons.decimal_precision as dp
 
 
 class PurchaseRequisitionLine(models.Model):
@@ -14,10 +13,10 @@ class PurchaseRequisitionLine(models.Model):
     )
     price_unit = fields.Float(
         string='Unit Price',
-        digits=dp.get_precision('Product Price'),
+        digits='Product Price',
     )
     subtotal = fields.Float(
-        digits=dp.get_precision('Product Price'),
+        digits='Product Price',
         compute='_compute_subtotal',
         store=True,
     )
@@ -29,8 +28,7 @@ class PurchaseRequisitionLine(models.Model):
 
     def _prepare_purchase_order_line(
             self, name, product_qty=0.0, price_unit=0.0, taxes_ids=False):
-        res = super(
-            PurchaseRequisitionLine, self)._prepare_purchase_order_line(
+        res = super()._prepare_purchase_order_line(
             name, product_qty=product_qty, price_unit=price_unit,
             taxes_ids=taxes_ids)
         if self.name:
