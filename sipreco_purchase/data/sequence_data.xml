@@ -4,7 +4,6 @@
     <!-- Sequences for requests -->
     <record id="stock_request.seq_stock_request_order" model="ir.sequence">
         <field name="name">Procurement Request</field>
-        <field name="code">stock.procurement.request</field>
         <field name="prefix">PR-%(year)s-</field>
         <field name="padding">6</field>
         <field name="company_id" eval="False"/>

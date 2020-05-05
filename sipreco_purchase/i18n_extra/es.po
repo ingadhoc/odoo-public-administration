@@ -4,18 +4,17 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0e\n"
+"Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-10 22:54+0000\n"
-"PO-Revision-Date: 2017-12-11 14:06-0300\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2020-01-27 14:01+0000\n"
+"PO-Revision-Date: 2020-01-27 14:01+0000\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: nl_BE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-"Language: es\n"
-"X-Generator: Poedit 1.8.7.1\n"
 
 #. module: stock
 #: model:res.groups,name:stock.group_stock_user
@@ -27,55 +26,47 @@ msgstr "Solicitante"
 msgid "User"
 msgstr "Comprador"
 
+
 #. module: stock
 #: model:ir.model,name:stock.model_res_partner
-#: model:ir.model.fields,field_description:stock.field_procurement_group_partner_id
-#: model:ir.model.fields,field_description:stock.field_stock_picking_partner_id
-#: model:ir.ui.view,arch_db:stock.view_move_search
+#: model:ir.model.fields,field_description:stock.field_stock_picking__partner_id
+#: model_terms:ir.ui.view,arch_db:stock.view_picking_form
 msgid "Partner"
 msgstr "Solicitante"
 
-#. module: stock_procurement_request
-#: model:ir.model.fields,field_description:stock_procurement_request.field_procurement_order_procurement_request_id
-#: model:ir.model.fields,field_description:stock_procurement_request.field_stock_move_procurement_request_id
-msgid "Procurement Request"
-msgstr "Solicitud de Requierimiento"
-
 #. module: stock_request_ux
 #: model:ir.model.fields,field_description:stock_request_ux.field_stock_request_order_route_id
-#: model:ir.model.fields,field_description:stock_request_ux.field_stock_request_order_route_ids
 msgid "Route"
 msgstr "Unidad de Compra"
 
 #. module: purchase_requisition
 #: model:ir.actions.act_window,name:purchase_requisition.action_purchase_requisition
 #: model:ir.ui.menu,name:purchase_requisition.menu_purchase_requisition_pro_mgt
-#: model:ir.ui.view,arch_db:purchase_requisition.view_purchase_requisition_filter
-#: model:ir.ui.view,arch_db:purchase_requisition.view_purchase_requisition_form
-#: model:ir.ui.view,arch_db:purchase_requisition.view_purchase_requisition_tree
+#: model_terms:ir.ui.view,arch_db:purchase_requisition.view_purchase_requisition_form
+#: model_terms:ir.ui.view,arch_db:purchase_requisition.view_purchase_requisition_tree
 msgid "Purchase Agreements"
 msgstr "Solicitud de Compras"
 
 #. module: purchase
-#: model:ir.model.fields,field_description:purchase.field_res_config_settings_module_purchase_requisition
+#: model:ir.model.fields,field_description:purchase.field_res_config_settings__module_purchase_requisition
 msgid "Purchase Agreements"
 msgstr "Solicitud de Compras"
 
 #. module: stock_request
 #: model:ir.actions.act_window,name:stock_request.action_stock_request_form
-#: model:ir.model.fields,field_description:stock_request.field_stock_move_stock_request_ids
-#: model:ir.model.fields,field_description:stock_request.field_stock_picking_stock_request_ids
+#: model:ir.model.fields,field_description:stock_request.field_stock_move__stock_request_ids
+#: model:ir.model.fields,field_description:stock_request.field_stock_picking__stock_request_ids
 #: model:ir.ui.menu,name:stock_request.menu_stock_request
 #: model:ir.ui.menu,name:stock_request.menu_stock_request_root
-#: model:ir.ui.view,arch_db:stock_request.stock_request_order_form
-#: model:ir.ui.view,arch_db:stock_request.stock_request_search
-#: model:ir.ui.view,arch_db:stock_request.view_picking_form
-#: model:ir.ui.view,arch_db:stock_request.view_stock_request_form
-#: model:ir.ui.view,arch_db:stock_request.view_stock_request_tree
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_form
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
+#: model_terms:ir.ui.view,arch_db:stock_request.view_picking_form
+#: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_form
+#: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_tree
 msgid "Stock Requests"
 msgstr "Requerimientos"
 
 #. module: purchase_requisition
-#: model:ir.ui.view,arch_db:purchase_requisition.view_purchase_requisition_form
+#: model_terms:ir.ui.view,arch_db:purchase_requisition.view_purchase_requisition_form
 msgid "Terms and Conditions"
 msgstr "Motivación"

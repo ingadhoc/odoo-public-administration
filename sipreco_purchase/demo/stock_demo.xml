@@ -9,32 +9,36 @@
     <record id="stock_picking_type_informatica" model="stock.picking.type">
         <field name="name">Informática</field>
         <field name="code">outgoing</field>
+        <field name="sequence_code">Info</field>
         <field name="sequence_id" search="[('prefix', 'ilike', 'OUT'), ('company_id.name', 'ilike', 'SIPRECO')]"/>
-        <field name="default_location_src_id" ref="stock.stock_location_stock"/>
+        <field name="default_location_src_id" search="[('name', 'ilike', 'Stock'), ('company_id.name', 'ilike', 'SIPRECO')]"/>
         <field name="default_location_dest_id" ref="stock.stock_location_customers"/>
     </record>
 
     <record id="stock_picking_type_economato" model="stock.picking.type">
         <field name="name">Economáto</field>
         <field name="code">outgoing</field>
+        <field name="sequence_code">Econ</field>
         <field name="sequence_id" search="[('prefix', 'ilike', 'OUT'), ('company_id.name', 'ilike', 'SIPRECO')]"/>
-        <field name="default_location_src_id" ref="stock.stock_location_stock"/>
+        <field name="default_location_src_id" search="[('name', 'ilike', 'Stock'), ('company_id.name', 'ilike', 'SIPRECO')]"/>
         <field name="default_location_dest_id" ref="stock.stock_location_customers"/>
     </record>
 
     <record id="stock_picking_type_sec_administrativa" model="stock.picking.type">
         <field name="name">Secretaría Administrativa</field>
         <field name="code">outgoing</field>
+        <field name="sequence_code">SecAdm</field>
         <field name="sequence_id" search="[('prefix', 'ilike', 'OUT'), ('company_id.name', 'ilike', 'SIPRECO')]"/>
-        <field name="default_location_src_id" ref="stock.stock_location_stock"/>
+        <field name="default_location_src_id" search="[('name', 'ilike', 'Stock'), ('company_id.name', 'ilike', 'SIPRECO')]"/>
         <field name="default_location_dest_id" ref="stock.stock_location_customers"/>
     </record>
 
     <record id="stock_picking_type_sec_parlamentaria" model="stock.picking.type">
         <field name="name">Secretaría Parlamentaria</field>
         <field name="code">outgoing</field>
+        <field name="sequence_code">SecPar</field>
         <field name="sequence_id" search="[('prefix', 'ilike', 'OUT'), ('company_id.name', 'ilike', 'SIPRECO')]"/>
-        <field name="default_location_src_id" ref="stock.stock_location_stock"/>
+        <field name="default_location_src_id" search="[('name', 'ilike', 'Stock'), ('company_id.name', 'ilike', 'SIPRECO')]"/>
         <field name="default_location_dest_id" ref="stock.stock_location_customers"/>
     </record>
 
@@ -64,7 +68,7 @@
 
     <record id="procurement_rule_informatica" model="stock.rule">
         <field name="name">SIPRECO: Stock (Informática) -> Customers</field>
-        <field name="action">move</field>
+        <field name="action">pull</field>
         <field name="route_id" ref="stock_location_rute_informatica"/>
         <field name="warehouse_id" search="[('name', '=', 'SIPRECO'), ('code', 'ilike', 'SIPRE')]"/>
         <field name="location_id" ref="stock.stock_location_customers"/>
@@ -74,7 +78,7 @@
 
     <record id="stock_rule_economato" model="stock.rule">
         <field name="name">SIPRECO: Stock (Economato) -> Customers</field>
-        <field name="action">move</field>
+        <field name="action">pull</field>
         <field name="route_id" ref="stock_location_rute_economato"/>
         <field name="warehouse_id" search="[('name', '=', 'SIPRECO'), ('code', 'ilike', 'SIPRE')]"/>
         <field name="location_id" ref="stock.stock_location_customers"/>
@@ -84,7 +88,7 @@
 
     <record id="stock_rule_sec_administrativa" model="stock.rule">
         <field name="name">SIPRECO: Stock (Sec. Administrativa) -> Customers</field>
-        <field name="action">move</field>
+        <field name="action">pull</field>
         <field name="route_id" ref="stock_location_rute_sec_administrativa"/>
         <field name="warehouse_id" search="[('name', '=', 'SIPRECO'), ('code', 'ilike', 'SIPRE')]"/>
         <field name="location_id" ref="stock.stock_location_customers"/>
@@ -94,7 +98,7 @@
 
     <record id="stock_rule_sec_parlamentaria" model="stock.rule">
         <field name="name">SIPRECO: Stock (Sec. Parlamentaria) -> Customers</field>
-        <field name="action">move</field>
+        <field name="action">pull</field>
         <field name="route_id" ref="stock_location_rute_sec_parlamentaria"/>
         <field name="warehouse_id" search="[('name', '=', 'SIPRECO'), ('code', 'ilike', 'SIPRE')]"/>
         <field name="location_id" ref="stock.stock_location_customers"/>
