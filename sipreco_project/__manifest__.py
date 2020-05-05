@@ -29,6 +29,7 @@
     ],
     'demo': [
         'demo/config_data.xml',
+        'demo/load_es_lang.xml',
     ],
     'installable': True,
     'auto_install': False,
