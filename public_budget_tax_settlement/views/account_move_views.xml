@@ -5,9 +5,9 @@
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_move_form"/>
         <field name="arch" type="xml">
-            <button name="post" position="after">
-                <field name="matched_percentage" invisible="1"/>
-                <button name="action_pay_tax_settlement" attrs="{'invisible': ['|', ('state', '!=', 'posted'), ('matched_percentage', '=', 1.0)]}" string="Pay" type="object" class="oe_highlight"/>
+            <button name="action_post" position="after">
+                <field name="enable_to_pay" invisible="1"/>
+                <button name="action_pay_tax_settlement" attrs="{'invisible': ['|',('enable_to_pay', '=', False),('state', '!=', 'posted')]}" string="Pay" type="object" class="oe_highlight"/>
             </button>
         </field>
     </record>

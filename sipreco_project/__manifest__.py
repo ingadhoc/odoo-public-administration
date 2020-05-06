@@ -1,6 +1,6 @@
 {
     'name': 'Sipreco Project',
-    'version': '11.0.1.0.0',
+    'version': '13.0.1.0.0',
     'category': 'Accounting',
     'sequence': 14,
     'summary': '',
@@ -10,10 +10,7 @@
     ],
     'depends': [
         'web_m2x_options',
-        'web_export_view',
         'public_budget',
-        'account_clean_cancelled_invoice_number',
-        'web_sheet_full_width',
         'account_accountant',
         'l10n_ar_bank',
         # 'web_pdf_preview',
@@ -32,9 +29,9 @@
     ],
     'demo': [
         'demo/config_data.xml',
-        'demo/load_es_lang.yml',
+        'demo/load_es_lang.xml',
     ],
-    'installable': False,
+    'installable': True,
     'auto_install': False,
     'application': True,
 }

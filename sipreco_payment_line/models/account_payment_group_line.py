@@ -32,7 +32,6 @@ class AccountPaymentGroupLine(models.Model):
         readonly=True,
     )
 
-    @api.multi
     def refresh_bank_account(self):
         for rec in self:
             banks = self.partner_id.bank_ids
@@ -42,7 +41,6 @@ class AccountPaymentGroupLine(models.Model):
                     'validada'))
             rec.bank_account_id = banks and banks[0].id or False
 
-    @api.multi
     def _get_linea_archivo_banco(self):
         def only_digits(string):
             return ''.join(filter(lambda x: x.isdigit(), string))

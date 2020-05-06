@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <function model="base.language.install" name="create">
+        <value model="base.language.install" eval="{'lang': 'es_AR'}"/>
+    </function>
+    <function model="base.language.install" name="lang_install">
+        <value model="base.language.install" eval="obj().search([('lang','=', 'es_AR')], limit=1).id"/>
+    </function>
+    <function model="res.partner" name="write">
+        <value model="res.users" search="[]"/>
+        <value eval="{'lang': 'es_AR'}"/>
+    </function>
+</odoo>

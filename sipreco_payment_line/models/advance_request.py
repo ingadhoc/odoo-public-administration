@@ -5,7 +5,6 @@ class AdvanceRequest(models.Model):
 
     _inherit = 'public_budget.advance_request'
 
-    @api.multi
     def create_payment_group(self):
         payment_group = super(AdvanceRequest, self).create_payment_group()
         for line in self.advance_request_line_ids:

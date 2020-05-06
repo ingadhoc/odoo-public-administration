@@ -23,7 +23,3 @@ msgstr ""
 msgid "Model"
 msgstr "Rubro"
 
-#. module: account_asset
-#: model:ir.model.fields,field_description:account_asset.field_account_asset_asset_code
-msgid "Reference"
-msgstr "Código"

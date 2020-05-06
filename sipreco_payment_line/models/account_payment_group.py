@@ -61,7 +61,6 @@ class AccountPaymentGroup(models.Model):
                 'cantidad': len(rec.line_ids),
             })
 
-    @api.multi
     def generar_linea(self,):
         self.ensure_one()
 

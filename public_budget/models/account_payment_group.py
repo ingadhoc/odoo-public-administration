@@ -335,6 +335,7 @@ class AccountPaymentGroup(models.Model):
     def _compute_partners(self):
         _logger.info('Get partners from transaction')
         for rec in self:
+            rec.partner_ids = self.env['res.partner']
             transaction = rec.transaction_id
             if transaction:
                 if transaction.type_id.with_advance_payment and (
