@@ -64,6 +64,7 @@ class PurchaseRequisition(models.Model):
         'stock.location.route',
         compute='_compute_route_ids',
         readonly=True,
+        string="Routes"
     )
 
     @api.depends('user_id')

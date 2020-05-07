@@ -4,6 +4,7 @@ from odoo.exceptions import UserError
 
 class PublicBudgetCreateExepedientsWizard(models.TransientModel):
     _name = "public_budget.create.expedients.wizard"
+    _description = "public_budget.create.expedients.wizard"
 
     reference = fields.Char(
         required=False
