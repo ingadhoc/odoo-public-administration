@@ -49,6 +49,7 @@
 
             <field name="name" position="attributes">
                 <attribute name="readonly">1</attribute>
+                <attribute name="force_save">1</attribute>
             </field>
 
             <xpath expr="//field[@name='stock_request_ids']//field[@name='name']" position="attributes">

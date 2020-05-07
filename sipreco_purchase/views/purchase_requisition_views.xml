@@ -145,10 +145,6 @@
             <field name="vendor_id" position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
             </field>
-
-            <field name="message_ids" position="before">
-                <field name="activity_ids" widget="mail_activity"/>
-            </field>
         </field>
     </record>
 
@@ -176,7 +172,7 @@
             <field name="name" position="attributes">
                 <attribute name="string">Numero de Solicitud</attribute>
             </field>
-            <field name="type_id" position="after">
+            <field name="product_id" position="after">
                 <field name="description" string="Motivacion de la solicitud"/>
                 <field name="expedient_id"/>
                 <field string="Product" name="purchase_ids" filter_domain="[('line_ids.product_id', 'ilike', self)]"/>

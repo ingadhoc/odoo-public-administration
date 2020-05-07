@@ -4,12 +4,10 @@
 ##############################################################################
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
-import odoo.addons.decimal_precision as dp
 
 
 class PurchaseRequisition(models.Model):
-    _name = 'purchase.requisition'
-    _inherit = ['purchase.requisition', 'mail.activity.mixin']
+    _inherit = 'purchase.requisition'
 
     name = fields.Char(
         # cambiamos string
@@ -19,9 +17,6 @@ class PurchaseRequisition(models.Model):
         'stock.request',
         'manual_requisition_id',
         'Request',
-        # 'stock.move',
-        # 'requisition_id',
-        # 'Supply Requirements',
     )
     expedient_id = fields.Many2one(
         'public_budget.expedient',
@@ -31,10 +26,8 @@ class PurchaseRequisition(models.Model):
     transaction_type_id = fields.Many2one(
         'public_budget.transaction_type',
         string='Type',
-        # readonly=True,
-        # states={'draft': [('readonly', False)]},
         domain="[('company_id', '=', company_id)]",
-        track_visibility='onchange',
+        tracking=True,
     )
 
     inspected = fields.Boolean(
@@ -42,7 +35,7 @@ class PurchaseRequisition(models.Model):
     )
 
     amount_total = fields.Float(
-        digits=dp.get_precision('Product Price'),
+        digits='Product Price',
         compute='_compute_amount_total',
     )
 
@@ -52,11 +45,11 @@ class PurchaseRequisition(models.Model):
     )
     user_inspected_id = fields.Many2one(
         'res.users',
-        track_visibility='onchange',
+        tracking=True,
     )
     user_confirmed_id = fields.Many2one(
         'res.users',
-        track_visibility='onchange',
+        tracking=True,
     )
 
     printed = fields.Boolean(
@@ -71,6 +64,7 @@ class PurchaseRequisition(models.Model):
         'stock.location.route',
         compute='_compute_route_ids',
         readonly=True,
+        string="Routes"
     )
 
     @api.depends('user_id')
@@ -78,14 +72,14 @@ class PurchaseRequisition(models.Model):
         for rec in self:
             user_picking_type_ids = self.env.user.picking_type_ids.ids
             rec.route_ids = self.env['stock.location.route'].search(
-                [('pull_ids.picking_type_id', 'in', user_picking_type_ids)])
+                [('rule_ids.picking_type_id', 'in', user_picking_type_ids)])
 
     @api.depends('line_ids')
     def _compute_amount_total(self):
+        self.update({'amount_total': 0.0})
         for rec in self.filtered('line_ids'):
             rec.amount_total = sum([x.subtotal for x in rec.line_ids])
 
-    @api.multi
     def to_inspected(self):
         if not self.transaction_type_id:
             raise UserError(_('Antes de revisar debe tener establecido un'
@@ -93,7 +87,6 @@ class PurchaseRequisition(models.Model):
         self.inspected = True
         self.user_inspected_id = self.env.user
 
-    @api.multi
     def action_draft(self):
         if self.state == 'draft' and self.inspected:
             self.inspected = False
@@ -101,35 +94,31 @@ class PurchaseRequisition(models.Model):
             self.with_context(cancel_procurement=False).action_cancel()
         super(PurchaseRequisition, self).action_draft()
 
-    @api.multi
     def action_cancel(self):
         if self._context.get('cancel_procurement', True):
             self.mapped('manual_request_ids').button_cancel_remaining()
         self.inspected = False
         self.user_inspected_id = False
         self.user_confirmed_id = False
-        return super(PurchaseRequisition, self).action_cancel()
+        return super().action_cancel()
 
-    @api.multi
     def action_open(self):
         for rec in self:
             if not rec.purchase_ids:
                 raise UserError(_(
                     'No se puede cerrar la licitación si no se solicitaron '
                     'presupuestos'))
-        return super(PurchaseRequisition, self).action_open()
+        return super().action_open()
 
     @api.model
     def create(self, vals):
         vals['date'] = fields.Date.today()
-        return super(PurchaseRequisition, self).create(vals)
+        return super().create(vals)
 
-    @api.multi
     def action_in_progress(self):
         self.user_confirmed_id = self.env.user
-        super(PurchaseRequisition, self).action_in_progress()
+        super().action_in_progress()
 
-    @api.multi
     def print_report_requisition(self):
         self.ensure_one()
         action = self.env.ref(

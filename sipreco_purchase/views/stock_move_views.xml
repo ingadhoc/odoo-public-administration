@@ -94,7 +94,6 @@
         <field name="name">Pending Supply Requirements</field>
         <field name="res_model">stock.move</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="view_type">form</field>
         <field name="view_id" ref="stock.view_move_tree"/>
         <field name="view_mode">tree,form</field>
         <field name="domain">[('picking_type_id', '=', active_id)]</field>

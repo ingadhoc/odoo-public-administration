@@ -4,6 +4,7 @@ from odoo.exceptions import UserError
 
 class PublicBudgetCreateExepedientsWizard(models.TransientModel):
     _name = "public_budget.create.expedients.wizard"
+    _description = "public_budget.create.expedients.wizard"
 
     reference = fields.Char(
         required=False
@@ -39,7 +40,6 @@ class PublicBudgetCreateExepedientsWizard(models.TransientModel):
             purchase_order_ids)
         return purchase_orders.ids
 
-    @api.multi
     def confirm(self):
         if not self.purchase_order_ids:
             raise UserError(_('It has no confirmed OC to generate '

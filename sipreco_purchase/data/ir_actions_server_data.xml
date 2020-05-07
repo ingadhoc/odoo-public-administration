@@ -15,7 +15,7 @@ if records.filtered(lambda x: x.state in ('cancel', 'done')):
 if records.filtered('manual_requisition_id'):
     raise Warning('Algunos pedidos de abastecimientos ya tienen una solicitud de compra asociada')
 
-picking_type = env['stock.picking.type'].search([('code', '=', 'incoming'), '|', ('warehouse_id.company_id', '=', False), ('warehouse_id.company_id', '=', env.user.company_id.id)], limit=1)
+picking_type = env['stock.picking.type'].search([('code', '=', 'incoming'), '|', ('warehouse_id.company_id', '=', False), ('warehouse_id.company_id', '=', env.company.id)], limit=1)
 
 lines = []
 for rec in records:

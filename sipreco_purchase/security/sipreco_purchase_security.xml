@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record model="ir.module.category" id="base.module_category_purchase_management">
+    <record model="ir.module.category" id="base.module_category_operations_purchase">
         <field name="name">Compras y Abastecimientos</field>
     </record>
 
@@ -28,15 +28,15 @@
 
     <record id="group_requester_employee" model="res.groups">
         <field name="name">Requirente</field>
-        <field name="category_id" ref="base.module_category_purchase_management"/>
+        <field name="category_id" ref="base.module_category_operations_purchase"/>
         <field name="implied_ids" eval="[(4, ref('stock_request.group_stock_request_user')),(4, ref('group_requester'))]"/>
     </record>
 
     <record id="group_portal_requester" model="res.groups">
         <field name="name">Portal - Requirente</field>
-        <field name="is_portal" eval="True"/>
+        <field name="share" eval="True"/>
         <field name="implied_ids" eval="[(4, ref('base.group_portal')),(4, ref('group_requester'))]"/>
-        <field name="category_id" ref="base.module_category_extra"/>
+        <field name="category_id" ref="public_budget.category_public_budget_portal"/>
     </record>
 
     <!-- usamos grupo existente de inventarios / user  para solicitante-->
@@ -44,7 +44,7 @@
     <record id="stock.group_stock_user" model="res.groups">
         <field name="name">Solicitante</field>
         <field name="implied_ids" eval="[(3, ref('group_requester'), 0),(4, ref('group_requester_employee')), (4, ref('base.group_user')), (4, ref('stock_request.group_stock_request_manager'))]"/>
-        <field name="category_id" ref="base.module_category_purchase_management"/>
+        <field name="category_id" ref="base.module_category_operations_purchase"/>
     </record>
 
     <!-- <record id="group_purchaser" model="res.groups"> -->
@@ -53,7 +53,7 @@
         <field name="name">Purchaser</field>
         <!-- <field name="implied_ids" eval="[(4, ref('group_applicant'))]"/> -->
         <field name="implied_ids" eval="[(4, ref('stock.group_stock_user'))]"/>
-        <field name="category_id" ref="base.module_category_purchase_management"/>
+        <field name="category_id" ref="base.module_category_operations_purchase"/>
     </record>
 
     <!-- damos permiso a solicitante para compras -->
@@ -87,9 +87,9 @@
     </record>
 
     <!-- menu control en compras -->
-    <record id="purchase.menu_purchase_control" model="ir.ui.menu">
+    <!-- <record id="purchase.menu_purchase_control" model="ir.ui.menu">
         <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
-    </record>
+    </record> -->
 
 
     <!-- Ocultamos estos grupos del menu por que ya los establecemos desde los otros permisos-->
@@ -105,7 +105,7 @@
         <field name="name">Requisition only see if are in route allowed to user</field>
         <field name="model_id" ref="purchase_requisition.model_purchase_requisition"/>
         <field name="groups" eval="[(4, ref('stock.group_stock_user')),(4, ref('group_only_read_purchase_order_requisition'))]"/>
-        <field name="domain_force">['|', ('route_id', '=', False),('route_id.pull_ids.picking_type_id', 'in', user.picking_type_ids.ids)]</field>
+        <field name="domain_force">['|', ('route_id', '=', False),('route_id.rule_ids.picking_type_id', 'in', user.picking_type_ids.ids)]</field>
     </record>
 
     <record model="ir.rule" id="requisition_all_rule">
