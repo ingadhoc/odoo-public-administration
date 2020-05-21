@@ -11,7 +11,8 @@
                 <header>
                     <button type="object" string="Cambiar Estado" name="action_change_state"/>
                     <button type="object" string="Generar Remito" name="generate_remit"/>
-                    <field name="state" widget="statusbar" clickable="true"/>
+                    <button type="object" string="Cancelar" name="cancel" states="not_presented,presented" groups="base.group_no_one"/>
+                    <field name="state" widget="statusbar"/>
                 </header>
                 <sheet string="Resolucion Subsidios">
                     <group>
