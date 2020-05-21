@@ -22,9 +22,10 @@ class PublicBudgetSubsidyResolution(models.Model):
     )
     state = fields.Selection([
         ('not_presented', 'Not Presented'),
-        ('presented', 'Presented')],
+        ('presented', 'Presented'),
+        ('canceled', 'Canceled')],
         'State',
-        default='not_presented'
+        default='not_presented',
     )
     subsidy_resolution_line_ids = fields.One2many(
         'public_budget.subsidy.resolution.line',
@@ -57,6 +58,11 @@ class PublicBudgetSubsidyResolution(models.Model):
                 rec.state = 'presented'
             elif rec.state == 'presented':
                 rec.state = 'not_presented'
+
+    @api.multi
+    def cancel(self):
+        for rec in self:
+            rec.state = 'canceled'
 
     @api.constrains('state')
     def _validate_state_presented(self):
