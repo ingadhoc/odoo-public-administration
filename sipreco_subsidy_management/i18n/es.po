@@ -152,6 +152,11 @@ msgid "Cambiar Estado"
 msgstr "Cambiar Estado"
 
 #. module: sipreco_subsidy_management
+#: selection:public_budget.subsidy.resolution,state:0
+msgid "Canceled"
+msgstr "Cancelado"
+
+#. module: sipreco_subsidy_management
 #: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_subsidy_cargo_amount
 msgid "Cargos"
 msgstr "Cargos"
