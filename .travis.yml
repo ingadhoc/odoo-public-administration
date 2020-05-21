@@ -22,6 +22,9 @@ addons:
       - python-simplejson
       - python-serial
       - python-yaml
+      # para pycurl
+      - libcurl4-openssl-dev
+      # - wkhtmltopdf # for odoo pdf reports (tested on sale for eg.)
       # for aeroo
       - cups
       - libcups2-dev
@@ -30,8 +33,6 @@ addons:
       - swig
       - libffi-dev
       - libssl-dev
-      - python-m2crypto
-      - python-httplib2
 #     Search your packages here:
 #       https://github.com/travis-ci/apt-package-whitelist/blob/master/ubuntu-precise
 #      - wkhtmltopdf  # only add if needed and check the before_install section below
@@ -57,7 +58,7 @@ env:
   matrix:
   # excluimos public_budget_tax_settlement para no depender de repo privado
   - LINT_CHECK="1"
-  - TRANSIFEX="1"
+  # - TRANSIFEX="1"
   - TESTS="1" ODOO_REPO="odoo/odoo"
 # either use the two lines above or the two below. Don't change the default if
 # it's not necessary (it is only necessary if modules in your repository can't
@@ -70,11 +71,8 @@ install:
   - if [[ "${OCA_RUNBOT}" == "1" ]]; then locale-gen es_AR.UTF-8 && locale-gen es_ES.UTF-8; fi
   # checkout para evitar error de dominios
   # - if [[ "${OCA_RUNBOT}" == "1" ]]; then git clone -b 11.0 git@github.com:odoo/enterprise.git ${HOME}/odoo-enterprise; fi
-  - if [[ "${OCA_RUNBOT}" == "1" ]]; then git clone -b 11.0 git@github.com:odoo/enterprise.git ${HOME}/dependencies/odoo-enterprise && cd ${HOME}/dependencies/odoo-enterprise && cd /; fi
   # agregamos este repo para que en runbot se cree otros comprobante sy sea mas parecido a lo que va a ser en produccion
-  - if [[ "${OCA_RUNBOT}" == "1" ]]; then git clone -b 11.0 git@bitbucket.org:ingadhoc/adhoc-saas.git ${HOME}/dependencies/ingadhoc-adhoc-saas; fi
   # agregamos este repor por account_usability
-  - if [[ "${OCA_RUNBOT}" == "1" ]]; then git clone -b 11.0 https://github.com/ingadhoc/enterprise-extensions.git ${HOME}/dependencies/ingadhoc-enterprise-extensions; fi
   # desactivar sipreco en travis
   - if [[ "${OCA_RUNBOT}" != "1" ]]; then sed  -i "s/'installable':.*/'installable':\ False,/" ${HOME}/build/ingadhoc/odoo-public-administration/sipreco_project/__manifest__.py; fi
   - git clone --depth=1 https://github.com/ingadhoc/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
