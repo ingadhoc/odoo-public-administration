@@ -60,7 +60,6 @@ pr.write({'name': ','.join(records.mapped('name'))})
         <field name="name">Confirmar Ordenes</field>
         <field name="model_id" ref="purchase.model_purchase_order"/>
         <field name="binding_model_id" ref="purchase.model_purchase_order"/>
-        <field name="groups_id" eval="[(4, ref('purchase.group_purchase_user'))]"/>
         <field name="state">code</field>
         <field name="code">
 records.button_confirm()
