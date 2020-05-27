@@ -106,7 +106,7 @@
                 <button name="change_withholding" icon="fa-undo" type="object" attrs="{'invisible': ['|', '|', ('payment_type', '!=', 'outbound'), ('state', '!=', 'posted'), ('payment_method_code', '!=', 'withholding')]}" confirm="Seguro que desea devolver esta retención?"/>
                 <field name="payment_type" invisible="1"/>
             </tree>
-            <button name="%(l10n_ar_account_withholding.action_aeroo_certificado_de_retencion_report)d" position="attributes">
+            <button name="%(l10n_ar_account_withholding.action_report_withholding_certificate)d" position="attributes">
                 <attribute name="invisible">1</attribute>
             </button>
         </field>

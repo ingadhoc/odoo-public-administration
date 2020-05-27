@@ -470,5 +470,5 @@ class AccountPaymentGroup(models.Model):
         if not payments:
             return False
         return self.env['ir.actions.report'].search(
-            [('report_name', '=', 'certificado_de_retencion_report')],
+            [('report_name', '=', 'l10n_ar_account_withholding.report_withholding_certificate')],
             limit=1).report_action(payments)
