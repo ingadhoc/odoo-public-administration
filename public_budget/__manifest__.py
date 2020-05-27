@@ -116,7 +116,6 @@
         'data/position_exc_restrictions.xml',
         'data/ir_config_parameter_data.xml',
         'data/server_actions_data.xml',
-        'data/certificado_de_retencion_report_data.xml',
     ],
     'demo': [
         'demo/res_company_demo.xml',

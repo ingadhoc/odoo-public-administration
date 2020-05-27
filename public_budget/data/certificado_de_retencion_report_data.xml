@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-
-<record id="l10n_ar_account_withholding.action_aeroo_certificado_de_retencion_report" model="ir.actions.report">
-    <field name="process_sep" eval="True"/>
-</record>
-
-</odoo>
