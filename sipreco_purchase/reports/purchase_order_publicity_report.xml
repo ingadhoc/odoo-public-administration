@@ -8,8 +8,6 @@
         <field name="report_name">purchase_order_report</field>
         <field name="report_type">aeroo</field>
         <field name="in_format">oo-odt</field>
-        <!-- <field name="parser_loc">l10n_ar_aeroo_base/parser.py</field> -->
-        <!-- <field name="parser_state">loc</field> -->
         <field name="parser_state">default</field>
         <field name="report_file">sipreco_purchase/reports/purchase_order_publicity_report.odt</field>
         <field name="tml_source">file</field>
