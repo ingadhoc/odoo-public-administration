@@ -42,6 +42,8 @@ class PublicBudgetSubsidyResolutionLines(models.Model):
         self.partner_id = self.expedient_id.employee_subsidy_requestor
         self.name = self.expedient_id.cover
         self.dni = self.expedient_id.subsidy_recipient_doc
+        if self.expedient_id.subsidy_amount:
+            self.amount = self.expedient_id.subsidy_amount
         resolutions_with_expedient = self.search(
             [('expedient_id', '=', self.expedient_id.id)])
         if len(resolutions_with_expedient) > 0:
