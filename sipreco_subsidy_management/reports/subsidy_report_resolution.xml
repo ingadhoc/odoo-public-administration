@@ -8,8 +8,6 @@
         <field name="report_name">subsidy_resolution_report</field>
         <field name="report_type">aeroo</field>
         <field name="in_format">oo-ods</field>
-        <field name="parser_loc">l10n_ar_aeroo_base/parser.py</field>
-        <field name="parser_state">loc</field>
         <field name="report_file">sipreco_subsidy_management/reports/report_subsidy_resolution.ods</field>
         <field name="tml_source">file</field>
         <field name="out_format" ref="report_aeroo.report_mimetypes_xls_odt"/>
@@ -26,8 +24,6 @@
         <field name="report_name">subsidy_resolution_INSTIT</field>
         <field name="report_type">aeroo</field>
         <field name="in_format">oo-odt</field>
-        <field name="parser_loc">l10n_ar_aeroo_base/parser.py</field>
-        <field name="parser_state">loc</field>
         <field name="report_file">sipreco_subsidy_management/reports/subsidy_resolution_INSTIT.odt</field>
         <field name="tml_source">file</field>
         <field name="out_format" ref="report_aeroo.report_mimetypes_doc_odt"/>
@@ -43,8 +39,6 @@
         <field name="report_name">subsidy_resolution_report_ITRANS</field>
         <field name="report_type">aeroo</field>
         <field name="in_format">oo-odt</field>
-        <field name="parser_loc">l10n_ar_aeroo_base/parser.py</field>
-        <field name="parser_state">loc</field>
         <field name="report_file">sipreco_subsidy_management/reports/subsidy_resolution_ITRANS.odt</field>
         <field name="tml_source">file</field>
         <field name="out_format" ref="report_aeroo.report_mimetypes_doc_odt"/>
@@ -60,8 +54,6 @@
         <field name="report_name">subsidy_resolution_report_COMUN</field>
         <field name="report_type">aeroo</field>
         <field name="in_format">oo-odt</field>
-        <field name="parser_loc">l10n_ar_aeroo_base/parser.py</field>
-        <field name="parser_state">loc</field>
         <field name="report_file">sipreco_subsidy_management/reports/subsidy_resolution_COMUN.odt</field>
         <field name="tml_source">file</field>
         <field name="out_format" ref="report_aeroo.report_mimetypes_doc_odt"/>

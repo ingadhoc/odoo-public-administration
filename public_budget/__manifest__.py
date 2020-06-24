@@ -1,7 +1,7 @@
 {
     'name': 'Public Budget',
     'license': 'AGPL-3',
-    'version': "13.0.1.1.0",
+    'version': "13.0.1.2.0",
     'author': 'ADHOC SA,Odoo Community Association (OCA)',
     'website': 'www.adhoc.com.ar',
     'category': 'Accounting & Finance',
@@ -14,19 +14,13 @@
         'account_asset',
         'hr_holidays_public',
         'report_aeroo',
-        'partner_identification',
         'account_statement_aeroo_report',
         # estrictamente solo requerido por algunos campos en vista de partner
         # solo requerido para establecer datos demo en cia y hacer que las ret
         # no sean obligatorias en borrador
         'l10n_ar_account_withholding',
-        # si no agrego esta dependencia y tengo la anterior, al actualizar
-        # account_payment_group no se termina actualizando public_budget y nos
-        # trae problemas al re escribir y hacer no obligatorio al payment_date
-        # forzando esta depedencia se arregla
-        'report_extended_payment_group',
         # usado por algunos reportes como el de cheques y retenciones
-        'l10n_ar_aeroo_base',
+        'l10n_ar_ux',
         # Para poder habilitar el cancel_invoice en estado hecho para todos los
         # users sin modo desarrollador
         'account_ux',
