@@ -170,7 +170,7 @@ class AccountPaymentGroup(models.Model):
                 raise ValidationError(_(
                     'No puede validar un pago si el expediente no está en '
                     'una ubicación autorizada para ústed'))
-        return super().post()
+        return super(AccountPaymentGroup, self.with_context(is_recipt=True)).post()
 
     # las seteamos directamente al postear total antes no se usan
     # @api.constrains('payment_date')
@@ -445,7 +445,7 @@ class AccountPaymentGroup(models.Model):
         """
         for rec in self.filtered(
             lambda x: x.receiptbook_id.sequence_id and
-                not x.document_number):
+                not x.document_number).with_context(is_recipt=True):
             rec.document_number = (
                 rec.receiptbook_id.sequence_id.next_by_id())
 
