@@ -51,3 +51,13 @@ class ResUsers(models.Model):
             groups = rec.groups_id.filtered(
                 lambda g: g.category_id == portal_group)
             rec.public_portal_groups_ids = groups
+
+    @api.model
+    def systray_get_activities(self):
+        """ We did this to avoid errors when use portal user when the module "Note" is not a depends of this module.
+        Only apply this change if the user is portal.
+        """
+        if self.env.user.has_group('base.group_portal') and self.env['ir.module.module'].sudo().search(
+                [('name', '=', 'note')]).state == 'installed':
+            self = self.sudo()
+        return super().systray_get_activities()
