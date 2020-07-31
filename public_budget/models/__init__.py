@@ -38,3 +38,4 @@ from . import account_asset
 from . import mail_activity_mixin
 from . import ir_http
 from . import mail_thread
+from . import l10n_latam_document_type
