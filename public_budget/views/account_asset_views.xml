@@ -106,10 +106,20 @@
     <record id="view_account_asset_asset_form_portal" model="ir.ui.view">
         <field name="name">account.asset.asset.form</field>
         <field name="model">account.asset</field>
-        <field name="inherit_id" ref="view_account_asset_asset_form"/>
+        <field name="inherit_id" ref="account_asset.view_account_asset_form"/>
         <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
         <field name="arch" type="xml">
             <field name="activity_ids" position="replace"/>
+        </field>
+    </record>
+
+    <record id="view_account_asset_asset_purchase_tree_portal" model="ir.ui.view">
+        <field name="name">account.asset.tree.portal</field>
+        <field name="model">account.asset</field>
+        <field name="inherit_id" ref="account_asset.view_account_asset_purchase_tree"/>
+        <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+        <field name="arch" type="xml">
+            <field name="activity_exception_decoration" position="replace"/>
         </field>
     </record>
 
