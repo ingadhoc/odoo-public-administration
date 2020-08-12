@@ -2834,7 +2834,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:public_budget.view_public_budget_transaction_form
 #, python-format
 msgid "Open"
-msgstr "Abierto"
+msgstr "Abrir"
 
 #. module: public_budget
 #: model_terms:ir.ui.view,arch_db:public_budget.view_budget_position_analysis_tree
