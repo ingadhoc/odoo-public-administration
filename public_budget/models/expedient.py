@@ -306,10 +306,9 @@ class PublicBudgetExpedient(models.Model):
 
     @api.model
     def create(self, vals):
-        vals['number'] = self.env[
-            'ir.sequence'].with_context(
-                ir_sequence_date=vals.get('issue_date')).next_by_code(
-                'public_budget.expedient') or '/'
+        vals['number'] = self.env['ir.sequence'].with_context(
+            ir_sequence_date=vals.get('issue_date', fields.Date.today())).next_by_code(
+            'public_budget.expedient') or '/'
         rec = super(PublicBudgetExpedient, self).create(vals)
         rec.check_location_allowed_for_current_user()
         return rec
