@@ -84,8 +84,10 @@
             </field>
 
             <xpath expr="//page[@name='sales_purchases']//group[@name='purchase']" position="before">
-                <field name="subsidy_recipient"/>
-                <field name="employee"/>
+                <group name="budget">
+                    <field name="subsidy_recipient"/>
+                    <field name="employee"/>
+                </group>
             </xpath>
         </field>
     </record>
