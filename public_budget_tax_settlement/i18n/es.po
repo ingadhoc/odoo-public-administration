@@ -1,14 +1,14 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* public_budget_tax_settlement
+# 	* public_budget_tax_settlement
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0e\n"
+"Project-Id-Version: Odoo Server 13.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-05 17:24+0000\n"
-"PO-Revision-Date: 2018-04-05 17:24+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2020-08-19 13:44+0000\n"
+"PO-Revision-Date: 2020-08-19 13:44+0000\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,9 +16,40 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: public_budget_tax_settlement
+#: code:addons/public_budget_tax_settlement/models/account_payment.py:0
+#, python-format
+msgid "Dev. Ret. %s"
+msgstr "Dev. Ret. %s"
+
+#. module: public_budget_tax_settlement
+#: code:addons/public_budget_tax_settlement/models/account_payment.py:0
+#, python-format
+msgid "Devolución de retención %s"
+msgstr "Devolución de retención %s"
+
+#. module: public_budget_tax_settlement
+#: code:addons/public_budget_tax_settlement/models/account_payment.py:0
+#, python-format
+msgid "El pago a cambiar debe ser una retención entregada"
+msgstr "El pago a cambiar debe ser una retención entregada"
+
+#. module: public_budget_tax_settlement
+#: model:ir.model.fields,field_description:public_budget_tax_settlement.field_account_move__enable_to_pay
+msgid "Enable To Pay"
+msgstr "Habilitado para pagar."
+
+#. module: public_budget_tax_settlement
+#: code:addons/public_budget_tax_settlement/models/account_payment.py:0
+#, python-format
+msgid ""
+"Este pago ya tiene vinculada una devolución. Orden de pago dedevolución "
+"\"%s\""
+msgstr ""
+
+#. module: public_budget_tax_settlement
 #: model:ir.model,name:public_budget_tax_settlement.model_account_move
-msgid "Account Entry"
-msgstr "Entrada contable"
+msgid "Journal Entries"
+msgstr "Asientos contables"
 
 #. module: public_budget_tax_settlement
 #: model:ir.model,name:public_budget_tax_settlement.model_account_move_line
@@ -26,18 +57,56 @@ msgid "Journal Item"
 msgstr "Apunte contable"
 
 #. module: public_budget_tax_settlement
-#: model:ir.ui.view,arch_db:public_budget_tax_settlement.view_move_form
+#: code:addons/public_budget_tax_settlement/models/account_payment.py:0
+#, python-format
+msgid ""
+"No puede devolver una retención que ya fue liquidada.\n"
+"* Id Apunte de retención: %s\n"
+"* Id Asiento de liquidación: %s"
+msgstr ""
+
+#. module: public_budget_tax_settlement
+#: code:addons/public_budget_tax_settlement/models/account_payment.py:0
+#, python-format
+msgid "No se encontró un único apunte de retención vinculado a la devolución"
+msgstr "No se encontró un único apunte de retención vinculado a la devolución"
+
+#. module: public_budget_tax_settlement
+#: code:addons/public_budget_tax_settlement/models/account_payment.py:0
+#, python-format
+msgid "No se encontró un único apunte de retención vinculado al pago"
+msgstr "No se encontró un único apunte de retención vinculado al pago"
+
+#. module: public_budget_tax_settlement
+#: model_terms:ir.ui.view,arch_db:public_budget_tax_settlement.view_move_form
 msgid "Pay"
 msgstr "Pagar"
 
 #. module: public_budget_tax_settlement
-#: code:addons/public_budget_tax_settlement/models/account_move.py:15
-#, python-format
-msgid "Register Payment"
-msgstr "Register Payment"
-
-#. module: public_budget_tax_settlement
-#: model:ir.model.fields,field_description:public_budget_tax_settlement.field_account_move_line_payment_methods
+#: model:ir.model.fields,field_description:public_budget_tax_settlement.field_account_move_line__payment_methods
 msgid "Payment Methods"
 msgstr "Métodos de pago"
 
+#. module: public_budget_tax_settlement
+#: model:ir.model,name:public_budget_tax_settlement.model_account_payment
+msgid "Payments"
+msgstr "Pagos"
+
+#. module: public_budget_tax_settlement
+#: code:addons/public_budget_tax_settlement/models/account_move.py:0
+#: code:addons/public_budget_tax_settlement/models/account_move.py:0
+#, python-format
+msgid "Register Payment"
+msgstr "Registrar Pago"
+
+#. module: public_budget_tax_settlement
+#: code:addons/public_budget_tax_settlement/models/account_payment.py:0
+#, python-format
+msgid "Se devolvió la retención %s con la órden de pago %s"
+msgstr "Se devolvió la retención %s con la órden de pago %s"
+
+#. module: public_budget_tax_settlement
+#: code:addons/public_budget_tax_settlement/models/account_payment.py:0
+#, python-format
+msgid "Se espera que el pago devuelva una y solo una retención"
+msgstr "Se espera que el pago devuelva una y solo una retención"
