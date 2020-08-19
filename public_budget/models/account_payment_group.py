@@ -438,27 +438,15 @@ class AccountPaymentGroup(models.Model):
                     rec.unreconciled_amount,
                     advance_remaining_amount + rec.unreconciled_amount))
 
-    @api.constrains('receiptbook_id')
-    def set_document_number(self):
+    @api.model
+    def create(self, vals):
         """
-        Quieren que en caunto se cree, si tiene talonario, se asigne número
+        When the payment group is created, assing document number.
         """
-        for rec in self.filtered(
-            lambda x: x.receiptbook_id.sequence_id and
-                not x.document_number).with_context(is_recipt=True):
-            rec.document_number = (
-                rec.receiptbook_id.sequence_id.next_by_id())
-
-    def _compute_name(self):
-        """
-        Agregamos numero de documento en todos los estados (no solo posteado)
-        """
-        res = super()._compute_name()
-        for rec in self.filtered(lambda x: x.state != 'posted'):
-            if rec.document_number and rec.document_type_id:
-                rec.name = ("%s%s" % (
-                    rec.document_type_id.doc_code_prefix or '',
-                    rec.document_number))
+        res = super().create(vals)
+        if res.receiptbook_id.sequence_id and not res.document_number:
+            res = res.with_context(is_recipt=True)
+            res.document_number = res.receiptbook_id.sequence_id.next_by_id()
         return res
 
     def action_aeroo_certificado_de_retencion_report(self):
