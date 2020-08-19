@@ -54,10 +54,6 @@
                     <field name="serial_number"/>
                     <field name="asset_state" attrs="{'required': [('state', '!=', 'model')]}"/>
                     <field name="observations"/>
-                </group>
-            </xpath>
-            <xpath expr="//group/group[1]" position="after">
-                <group string="Extra Options" attrs="{'invisible': [('state', '=', 'model')]}">
                     <field name="level"/>
                     <field name="number"/>
                     <field name="building"/>
@@ -65,11 +61,22 @@
                     <field name="expedient_id" attrs="{'required':[('state', '!=', 'model')]}" options="{'no_create': True}"/>
                     <field name="user_id"/>
                     <field name="transit"/>
+                </group>
+            </xpath>
+            <xpath expr="//group/group[1]" position="after">
+                <group string="Extra Options" attrs="{'invisible': [('state', '=', 'model')]}">
+                    <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                    <field name="original_value" attrs="{'invisible': [('state', '=', 'model')], 'readonly': ['|', ('state','!=','draft'), ('original_move_line_ids', '!=', [])]}"/>
+                    <field name="acquisition_date" attrs="{'invisible': [('state', '=', 'model')], 'readonly': ['|', ('state','!=','draft'), ('original_move_line_ids', '!=', [])]}"/>
                     <field name="partner_id" context="{'res_partner_search_mode': 'supplier'}"/>
                     <field name="invoice_id" domain="[('partner_id', '=', partner_id)]" options="{'no_create': True}"/>
+                    <field name="comodato" attrs="{'invisible': [('state', '=', 'model')]}"/>
+                    <field name="patrimonial" attrs="{'invisible': [('state', '=', 'model')]}"/>
+                    <field name="reportable" attrs="{'invisible': [('state', '=', 'model')]}"/>
                 </group>
             </xpath>
             <button name="compute_depreciation_board" position="attributes">
+                <attribute name="states"></attribute>
                 <attribute name="groups">base.group_no_one</attribute>
             </button>
             <button name="action_asset_modify" position="attributes">
@@ -95,11 +102,16 @@
                 <button name="transfer_asset" type="object" attrs="{'invisible':['|', '|',('visible_button_transfer_asset', '=', False), ('transit', '=', True), ('state', '=', 'model')]}" string="Transfer Asset" />
                 <button name="confirm_tranfer" type="object" attrs="{'invisible':['|', '|',('visible_button_transfer_asset', '=', False),('transit', '!=', True), ('state', '=', 'model')]}" string="Confirm Transfer Asset"/>
             </button>
-            <field name="journal_id" position="after">
-                <field name="comodato" attrs="{'invisible': [('state', '=', 'model')]}"/>
-                <field name="patrimonial" attrs="{'invisible': [('state', '=', 'model')]}"/>
-                <field name="reportable" attrs="{'invisible': [('state', '=', 'model')]}"/>
-            </field>
+
+            <xpath expr="//field[@name='journal_id']//.." position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </xpath>
+            <xpath expr="//group/group//field[@name='gross_increase_value']//.." position="attributes">
+                <attribute name="groups">base.group_no_one</attribute>
+            </xpath>
+            <xpath expr="//group//group[6]//field[@name='company_id']"  position="replace"/>
+            <xpath expr="//group/group[3]//field[@name='original_value']" position="replace"/>
+            <xpath expr="//group/group[3]//field[@name='acquisition_date']"  position="replace"/>
         </field>
     </record>
 
