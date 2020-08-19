@@ -38,15 +38,16 @@ class AdvanceRequestType(models.Model):
     employee_ids = fields.Many2many(
         'res.partner',
         compute='_compute_employee_ids',
-        context="{'advance_return_type_id': id}",
     )
 
     def _compute_employee_ids(self):
+        self.employee_ids = False
         for rec in self:
-            employees = self.env['res.partner'].search([
-                ('employee', '=', True)]).filtered(
+            employees = self.env['res.partner'].search(
+                [('employee', '=', True)]).filtered(
                 lambda x: x.get_debt_amount(rec))
-            rec.employee_ids = employees
+            for employee in employees:
+                rec.employee_ids = [(4, employee.id, False)]
 
     @api.constrains('account_id', 'company_id', 'return_journal_id')
     def check_company(self):
