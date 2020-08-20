@@ -581,7 +581,7 @@ msgstr "Fecha de Modificación de Presupuesto"
 #: model_terms:ir.ui.view,arch_db:public_budget.view_public_budget_modification_detail_filter
 #, python-format
 msgid "Budget Modification Detail"
-msgstr "Detalle de Modificación de Presupuesto"
+msgstr "Detalle de Modificación"
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_budget_modification_detail__name
@@ -1757,7 +1757,7 @@ msgstr "Movimientos de Fondos"
 #: model:ir.model.fields,field_description:public_budget.field_res_partner__gender
 #: model_terms:ir.ui.view,arch_db:public_budget.view_res_partner_filter
 msgid "Gender"
-msgstr "Sexo"
+msgstr "Género"
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_public_budget_advance_request_type__general_return_partner_id
