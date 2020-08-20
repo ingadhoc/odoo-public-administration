@@ -243,6 +243,8 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
         res['res_id'] = invoice.id
         res['target'] = 'new'
         if tran_type.with_advance_payment:
-            invoice.post()
-            return True
+            # we force commit because the transaction isn't finish yet and the account
+            #  isn't change when the invoice need to validate, because of that the invoice isn't take paid.
+            self.env.cr.commit()
+            return invoice.action_post()
         return res
