@@ -37,7 +37,6 @@ msgstr "Monto Total"
 
 #. module: sipreco_purchase
 #: code:addons/sipreco_purchase/models/purchase_requisition.py:0
-#: code:addons/sipreco_purchase/models/purchase_requisition.py:0
 #, python-format
 msgid "Antes de revisar debe tener establecido un\"Tipo\""
 msgstr "Antes de revisar debe tener establecido un\"Tipo\""
@@ -225,7 +224,6 @@ msgstr "Rutas de inventarios"
 
 #. module: sipreco_purchase
 #: code:addons/sipreco_purchase/wizards/create_expedients_wizard.py:0
-#: code:addons/sipreco_purchase/wizards/create_expedients_wizard.py:0
 #, python-format
 msgid "It has no confirmed OC to generate an expedient"
 msgstr "No tiene OC confirmada para generar un expediente."
@@ -267,7 +265,6 @@ msgid "Next Activity Deadline"
 msgstr "Fecha Límite de Actividad Siguiente"
 
 #. module: sipreco_purchase
-#: code:addons/sipreco_purchase/models/purchase_requisition.py:0
 #: code:addons/sipreco_purchase/models/purchase_requisition.py:0
 #, python-format
 msgid "No se puede cerrar la licitación si no se solicitaron presupuestos"
@@ -341,7 +338,6 @@ msgstr "Abastecimientos"
 
 #. module: sipreco_purchase
 #: model:ir.model,name:sipreco_purchase.model_product_product
-#: model_terms:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_filter
 msgid "Product"
 msgstr "Producto"
 
@@ -481,7 +477,6 @@ msgstr "Pedido de existencias"
 
 #. module: sipreco_purchase
 #: model_terms:ir.ui.view,arch_db:sipreco_purchase.stock_location_route_form_view_inherit
-#: model_terms:ir.ui.view,arch_db:sipreco_purchase.stock_request_order_filter
 msgid "Stock Requests"
 msgstr "Requerimiento de Stock"
 
@@ -585,7 +580,6 @@ msgstr "Ubicación de usuario"
 
 #. module: sipreco_purchase
 #: code:addons/sipreco_purchase/models/purchase_requisition.py:0
-#: code:addons/sipreco_purchase/models/purchase_requisition.py:0
 #, python-format
 msgid "User: %s printed the report: %s"
 msgstr "Usuario: %s Imprimió el reporte: %s"
@@ -602,7 +596,6 @@ msgid "Visualizar Solicitudes de compra y Ordenes de compra"
 msgstr "Visualizar Solicitudes de compra y Ordenes de compra"
 
 #. module: sipreco_purchase
-#: code:addons/sipreco_purchase/models/stock_request.py:0
 #: code:addons/sipreco_purchase/models/stock_request.py:0
 #, python-format
 msgid "You can not create a request without quantity!"
