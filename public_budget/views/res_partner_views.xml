@@ -87,6 +87,7 @@
                 <group name="budget">
                     <field name="subsidy_recipient"/>
                     <field name="employee"/>
+                    <field name="supplier"/>
                 </group>
             </xpath>
         </field>

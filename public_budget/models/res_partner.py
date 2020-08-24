@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import api, models, fields
 
 
 class ResPartner(models.Model):
@@ -22,6 +22,10 @@ class ResPartner(models.Model):
     # domicilios
     type = fields.Selection(
         default='other',
+    )
+    supplier = fields.Boolean(
+        compute="_compute_supplier",
+        inverse="_set_supplier",
     )
 
     def mark_as_reconciled(self):
@@ -67,3 +71,12 @@ class ResPartner(models.Model):
             self.env['public_budget.advance_return_line'].search(
                 returned_domain).mapped('returned_amount'))
         return requested_amount - returned_amount
+
+    @api.depends('supplier_rank')
+    def _compute_supplier(self):
+        for rec in self:
+            rec.supplier = True if rec.supplier_rank > 0 else False
+
+    def _set_supplier(self):
+        for rec in self:
+            rec.supplier_rank = 1 if rec.supplier else 0
