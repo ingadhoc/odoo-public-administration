@@ -13,6 +13,7 @@
     <record model="ir.ui.view" id="view_purchase_requisition_form">
         <field name="name">purchase.requisition.form</field>
         <field name="model">purchase.requisition</field>
+        <field name="priority">60</field>
         <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_form"/>
         <field name="arch" type="xml">
             <form>
