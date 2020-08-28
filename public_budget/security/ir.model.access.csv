@@ -166,12 +166,6 @@ access_hr_holidays_public_line_account_manager,access_hr_holidays_public_line_ac
 access_hr_holidays_public_account_manager,access_hr_holidays_public_account_manager,hr_holidays_public.model_hr_holidays_public,account.group_account_manager,1,1,1,1
 access_public_budget_location_portal_transaction,public_budget_location.portal_transaction,model_public_budget_location,group_portal_transaction,1,0,0,0
 access_account_account_portal_transaction,access_account_account_portal_transaction,account.model_account_account,group_portal_transaction,1,0,0,0
-access_ir_ui_menu_portal,ir.ui.menu.portal,base.model_ir_ui_menu,base.group_portal,1,0,0,0
-access_ir_model_portal,ir.model.portal,base.model_ir_model,base.group_portal,1,0,0,0
-access_ir_fields_portal,ir.model.fields.portal,base.model_ir_model_fields,base.group_portal,1,0,0,0
-access_ir_groups,ir.model.groups.portal,base.model_res_groups,base.group_portal,1,0,0,0
-access_ir_model_data_portal,ir.model.model.data.portal,base.model_ir_model_data,base.group_portal,1,0,1,0
-access_ir_attachment_portal,ir_attachment.portal,base.model_ir_attachment,base.group_portal,1,0,0,0
 access_report_mimetypes_portal_transaction,access_report_mimetypes_portal,report_aeroo.model_report_mimetypes,base.group_portal,1,0,0,0
 access_portal_asset,access_portal_asset,account_asset.model_account_asset,base.group_portal,1,0,0,0
 access_res_partner_arba_alicuot_manager,access_res_partner_arba_alicuot_manager,l10n_ar_account_withholding.model_res_partner_arba_alicuot,group_habilitacion_usuario,1,1,1,1

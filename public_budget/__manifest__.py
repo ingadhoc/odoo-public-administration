@@ -6,7 +6,7 @@
     'website': 'www.adhoc.com.ar',
     'category': 'Accounting & Finance',
     'depends': [
-        'portal',
+        'portal_backend',
         'sales_team',
         'account_accountant_ux',
         'account_check',
