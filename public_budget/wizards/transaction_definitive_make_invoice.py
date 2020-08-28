@@ -167,7 +167,7 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
                     'definitive_line_id': line.id,
                     'definitive_make_invoice_id': self.id,
                 }
-                lines.append((0, _, values))
+                lines.append((0, 0, values))
             self.line_ids = lines
 
     def make_invoices(self):
