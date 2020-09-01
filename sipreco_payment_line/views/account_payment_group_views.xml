@@ -35,7 +35,7 @@
                             <field name="partner_id"/>
                             <field name="cuit"/>
                             <field name="bank_account_id"/>
-                            <button type="object" icon="gtk-refresh" name="refresh_bank_account"/>
+                            <button type="object" icon="fa-refresh" name="refresh_bank_account"/>
                             <field name="amount" sum="Total"/>
                         </tree>
                     </field>
