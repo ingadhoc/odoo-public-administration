@@ -449,6 +449,17 @@ class AccountPaymentGroup(models.Model):
             res.document_number = res.receiptbook_id.sequence_id.next_by_id()
         return res
 
+    def write(self, vals):
+        """
+        When the payment group is updated and without document number, assing document number.
+        """
+        res = super().write(vals)
+        if vals.get('receiptbook_id', False):
+            for rec in self.filtered(
+                    lambda p: p.receiptbook_id.sequence_id and not p.document_number).with_context(is_recipt=True):
+                rec.document_number = rec.receiptbook_id.sequence_id.next_by_id()
+        return res
+
     def action_aeroo_certificado_de_retencion_report(self):
         self.ensure_one()
         payments = self.payment_ids.filtered(
