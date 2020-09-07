@@ -37,6 +37,7 @@ class AdvanceReturnLine(models.Model):
         'employee_id',
     )
     def _compute_amounts(self):
+        self.debt_amount = 0.0
         for rec in self.filtered('employee_id'):
             rec.debt_amount = rec.employee_id.get_debt_amount(
                 rec.advance_return_id.type_id)

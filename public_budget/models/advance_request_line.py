@@ -46,6 +46,8 @@ class AdvanceRequestLine(models.Model):
         'employee_id',
     )
     def _compute_amounts(self):
+        self.debt_amount = 0.0
+        self.pending_return_amount = 0.0
         for rec in self.filtered('employee_id'):
             request_type = rec.advance_request_id.type_id
             rec.debt_amount = rec.employee_id.get_debt_amount(
