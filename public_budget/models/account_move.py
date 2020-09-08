@@ -25,10 +25,6 @@ class AccountMove(models.Model):
         store=True,
     )
 
-    def l10n_ar_verify_on_afip(self):
-        super().l10n_ar_verify_on_afip()
-        return {'type': 'ir.actions.act_window.none'}
-
     @api.constrains('to_pay_amount')
     def check_to_pay_amount(self):
         if any(self.filtered(lambda x: x.transaction_id and(
