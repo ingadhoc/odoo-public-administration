@@ -11,6 +11,7 @@
                 <attribute name="groups"></attribute>
             </field>
             <tree position="attributes">
+                <attribute name="limit">300</attribute>
                 <attribute name="create">false</attribute>
             </tree>
             <tree position="inside">
