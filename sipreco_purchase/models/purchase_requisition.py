@@ -12,6 +12,7 @@ class PurchaseRequisition(models.Model):
     name = fields.Char(
         # cambiamos string
         'Reference',
+        default = lambda x: x.env['ir.sequence'].next_by_code('purchase.requisition.purchase.tender') or 'New'
     )
     manual_request_ids = fields.One2many(
         'stock.request',
