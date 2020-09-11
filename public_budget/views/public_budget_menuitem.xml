@@ -298,7 +298,7 @@
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="view_public_budget_transaction_tree"/>
             <field name="search_view_id" ref="view_public_budget_transaction_filter"/>
-            <field name="context">{'default_type': 'in_invoice'}</field>
+            <field name="context">{'default_type': 'in_invoice', 'from_transaction': 1}</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create"> Click to create a Transactions.</p>
             </field>
