@@ -48,8 +48,8 @@ class AccountMoveLine(models.Model):
             # if to_date, then we dont get residual from invoice,
             # we get from helper function
             if to_date:
-                invoice_paid_perc = invoice._get_paid_amount_to_date() / invoice_total
-                invoice_to_pay_perc = invoice._get_to_pay_amount_to_date() / invoice_total
+                invoice_paid_perc = (invoice._get_paid_amount_to_date() / invoice_total) if invoice_total else 0.0
+                invoice_to_pay_perc = (invoice._get_to_pay_amount_to_date() / invoice_total) if invoice_total else 0.0
             else:
                 # odoo compute residual always positive, no matter invoice is negative
                 residual = invoice.amount_residual

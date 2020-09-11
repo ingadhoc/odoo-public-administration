@@ -1,7 +1,7 @@
 {
     'name': 'Public Budget',
     'license': 'AGPL-3',
-    'version': "13.0.1.3.0",
+    'version': "13.0.1.4.0",
     'author': 'ADHOC SA,Odoo Community Association (OCA)',
     'website': 'www.adhoc.com.ar',
     'category': 'Accounting & Finance',
@@ -24,6 +24,7 @@
         # Para poder habilitar el cancel_invoice en estado hecho para todos los
         # users sin modo desarrollador
         'account_ux',
+        'web_ir_actions_act_multi',
     ],
     'data': [
         'security/public_budget_group.xml',
