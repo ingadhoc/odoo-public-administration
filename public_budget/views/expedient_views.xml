@@ -135,19 +135,19 @@
         <field name="arch" type="xml">
             <tree string="Expedient" decoration-muted="state=='cancelled'" decoration-info="state == 'open'" decoration-bf="state in ['annulled', 'closed']" decoration-danger="state in ()" create="false" edit="false">
                 <field name="number"/>
-                <field name="issue_date"/>
+                <field name="issue_date" optional="hide"/>
                 <field name="cover"/>
-                <field name="reference"/>
+                <field name="reference" optional="hide" />
                 <field name="last_move_date"/>
-                <field name="founder_id"/>
+                <field name="founder_id" optional="hide"/>
                 <field name="category_id"/>
-                <field name="type"/>
+                <field name="type" optional="hide"/>
                 <field name="current_location_id"/>
                 <field name="in_transit"/>
                 <field name="pages"/>
-                <field name="user_id"/>
-                <field name="subsidy_approved"/>
-                <field name="overdue"/>
+                <field name="user_id" optional="hide"/>
+                <field name="subsidy_approved" optional="hide"/>
+                <field name="overdue" optional="hide"/>
                 <field name="state"/>
             </tree>
         </field>
