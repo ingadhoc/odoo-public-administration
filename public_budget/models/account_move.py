@@ -34,7 +34,7 @@ class AccountMove(models.Model):
                 'El importe mandado a pagar no puede ser mayor al importe '
                 'de la factura'))
 
-    @api.constrains('state')
+    @api.constrains('invoice_payment_state')
     def _recompute_to_pay_amount_when_with_advance_payment(self):
         """ Cuando se usan transacciones de tipo con pago de adelanto, por
         alguna razon el metodo _compute_to_pay_amount no se llama cuando se
@@ -48,6 +48,7 @@ class AccountMove(models.Model):
     @api.depends(
         # This do it by a contrains in account payment group
         # 'payment_group_ids.state',
+        'invoice_payment_state',
         'state',
     )
     def _compute_to_pay_amount(self):
@@ -132,7 +133,7 @@ class AccountMove(models.Model):
                         'La fecha de la factura no puede ser menor a la fecha '
                         'de la linea definitiva relacionada'))
 
-    def action_cancel(self):
+    def button_cancel(self):
         if self.filtered(
                 lambda x: x.to_pay_amount and
                 not x.transaction_id.type_id.with_advance_payment):
@@ -142,7 +143,7 @@ class AccountMove(models.Model):
             raise ValidationError(_(
                 'You cannot cancel an invoice which has been sent to '
                 'pay. You need to cancel related payments first.'))
-        return super().action_cancel()
+        return super().button_cancel()
 
     def post(self):
         res = super().post()
@@ -172,3 +173,9 @@ class AccountMove(models.Model):
             raise ValidationError(_(
                 'Solo puede cambiar o registrar comprobantes si '
                 'el presupuesto está abierto o en pre-cierre'))
+
+    def unlink(self):
+        """ We need to force an unlink for vendor bill without documents """
+        self.filtered(lambda x: x.type in x.get_purchase_types() and x.state in (
+            'draft', 'cancel') and not x.l10n_latam_use_documents).write({'name': '/'})
+        return super().unlink()
