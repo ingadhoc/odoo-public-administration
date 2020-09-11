@@ -26,9 +26,6 @@
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account_ux.view_move_form"/>
         <field name="arch" type="xml">
-            <!-- <button name="button_cancel" position="attributes">
-                <attribute name="groups">account.group_account_user</attribute>
-            </button> -->
             <button name="delete_number" position="attributes">
                 <attribute name="groups">account.group_account_user</attribute>
             </button>
