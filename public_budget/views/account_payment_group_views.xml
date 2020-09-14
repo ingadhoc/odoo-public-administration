@@ -40,6 +40,12 @@
             <field name="payment_date" position="after">
                 <field name="payment_min_date"/>
             </field>
+            <field name="payment_methods" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </field>
+            <field name="payment_date" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </field>
 
             <!-- para poder ver lo que se manda a pagar antes de que se carguen los pagos -->
             <field name="payments_amount" position="before">
