@@ -408,7 +408,7 @@ class BudgetTransaction(models.Model):
             partner = invoice.partner_id
             already_paying = self.payment_group_ids.filtered(
                 lambda x: x.state != 'cancel').mapped('to_pay_move_line_ids')
-            to_pay_move_lines = (invoice.line_ids - already_paying)
+            to_pay_move_lines = (invoice.open_move_line_ids - already_paying)
             # si ya se mandaron a pagar no creamo
             if not to_pay_move_lines:
                 continue
