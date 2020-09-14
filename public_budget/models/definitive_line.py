@@ -137,6 +137,7 @@ class DefinitiveLine(models.Model):
 
     @api.depends(
         'invoice_line_ids.move_id.state',
+        'invoice_line_ids.move_id.invoice_payment_state',
         'invoice_line_ids.move_id.to_pay_amount',
         'invoice_line_ids.move_id.amount_residual',
     )
@@ -157,6 +158,7 @@ class DefinitiveLine(models.Model):
 
     @api.depends(
         'invoice_line_ids.move_id.state',
+        'invoice_line_ids.move_id.invoice_payment_state',
         'invoice_line_ids.move_id.to_pay_amount',
         'invoice_line_ids.move_id.amount_residual',
     )
