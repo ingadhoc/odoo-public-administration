@@ -34,6 +34,15 @@ class AccountMove(models.Model):
                 'El importe mandado a pagar no puede ser mayor al importe '
                 'de la factura'))
 
+    def l10n_ar_verify_on_afip(self):
+        super().l10n_ar_verify_on_afip()
+        if self._context.get('from_transaction', 0) == 1:
+            action = self.env.ref('account.action_move_in_invoice_type').read()[0]
+            action['res_id'] = self.id
+            action['views'] = [(self.env.ref('account.view_move_form').id, 'form')]
+            action['target'] = 'new'
+            return action
+
     @api.constrains('invoice_payment_state')
     def _recompute_to_pay_amount_when_with_advance_payment(self):
         """ Cuando se usan transacciones de tipo con pago de adelanto, por
