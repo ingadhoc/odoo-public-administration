@@ -3,6 +3,7 @@
     <record id="purchase_requisition.menu_purchase_requisition_pro_mgt" model="ir.ui.menu">
         <!-- Solicitudes de Compra -->
         <field name="name">Purchase Requisitions</field>
+        <field name="sequence">1</field>
     </record>
 
     <!-- no filtrar por usuario -->
