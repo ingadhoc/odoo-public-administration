@@ -3477,11 +3477,6 @@ msgid "Seguro que desea devolver esta retención?"
 msgstr ""
 
 #. module: public_budget
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_make_invoice__document_sequence
-msgid "Sequence"
-msgstr "Secuencia"
-
-#. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_account_asset__serial_number
 msgid "Serial Number"
 msgstr "Numero de serie"
