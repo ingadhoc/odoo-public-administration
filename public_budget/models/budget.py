@@ -7,6 +7,7 @@ import datetime
 class Budget(models.Model):
 
     _name = 'public_budget.budget'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Budget'
 
     # _order = "fiscalyear_id desc"
