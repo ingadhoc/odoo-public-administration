@@ -93,7 +93,6 @@ class AdvanceReturn(models.Model):
                 'name': self.name,
             }))
         journal = self.type_id.return_journal_id
-        ref = journal.sequence_id._next()
         lines_vals.append(
             (0, 0, {
                 'partner_id': return_partner.id,
@@ -105,8 +104,7 @@ class AdvanceReturn(models.Model):
 
         return {
             'line_ids': lines_vals,
-            'ref': ref,
-            'name': self.name,
+            'ref': self.name,
             'journal_id': journal.id,
         }
 
