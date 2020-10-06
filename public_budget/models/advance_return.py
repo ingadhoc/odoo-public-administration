@@ -150,8 +150,6 @@ class AdvanceReturn(models.Model):
     def action_cancel_draft(self):
         """ go from canceled state to draft state"""
         self.write({'state': 'draft'})
-        self.delete_workflow()
-        self.create_workflow()
         return True
 
     def unlink(self):
