@@ -22,6 +22,9 @@ class AccountMoveLine(models.Model):
         readonly=True,
         auto_join=True,
     )
+    l10n_ar_afip_verification_result = fields.Selection(
+        related='move_id.l10n_ar_afip_verification_result'
+        )
 
     @api.depends(
         # 'price_subtotal',
