@@ -126,3 +126,6 @@ class AccountAsset(models.Model):
             values['reference'] = self.env['ir.sequence'].next_by_code(
                 'public_budget.asset')
         return super().create(values)
+
+    def archive_and_close_asset(self):
+        self.write({'state': 'close', 'active': False})
