@@ -113,8 +113,7 @@ class PurchaseRequisition(models.Model):
     @api.model
     def create(self, vals):
         vals['date'] = fields.Date.today()
-        if 'name' in vals and vals['name'] == 'New':
-            vals['name'] = self.env['ir.sequence'].next_by_code(
+        vals['name'] = self.env['ir.sequence'].next_by_code(
                 'purchase.requisition.purchase.tender') or 'New'
         return super().create(vals)
 
