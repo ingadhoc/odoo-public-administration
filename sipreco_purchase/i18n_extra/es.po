@@ -70,3 +70,8 @@ msgstr "Requerimientos"
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.view_purchase_requisition_form
 msgid "Terms and Conditions"
 msgstr "Motivación"
+
+#. module: stock
+#: model:res.groups,name:stock.group_stock_manager
+msgid "Administrator"
+msgstr "Administrador de Inventario"
