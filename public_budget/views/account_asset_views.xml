@@ -79,11 +79,20 @@
                 <attribute name="states"></attribute>
                 <attribute name="groups">base.group_no_one</attribute>
             </button>
+            <button name="set_to_draft" position="attributes">
+                <attribute name="groups">public_budget.group_asset_responsable_ubicacion</attribute>
+            </button>
+            <button name="action_asset_pause" position="attributes">
+                <attribute name="groups">public_budget.group_asset_responsable_ubicacion</attribute>
+            </button>
+            <button name="action_save_model" position="attributes">
+                <attribute name="groups">public_budget.group_asset_responsable_ubicacion</attribute>
+            </button>
             <button name="action_asset_modify" position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
             </button>
             <button name="action_set_to_close" position="replace">
-                <button name="archive_and_close_asset" type="object" attrs="{'invisible':['|',('active', '=', False), ('state', '!=', 'open')]}" string="Close and Archive" />
+                <button name="archive_and_close_asset" type="object" attrs="{'invisible':['|',('active', '=', False), ('state', '!=', 'open')]}" string="Close and Archive" groups="public_budget.group_asset_responsable_ubicacion"/>
             </button>
             <notebook position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
