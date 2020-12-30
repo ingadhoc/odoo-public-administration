@@ -149,7 +149,7 @@ class Budget(models.Model):
     def validate_fiscalyear(self):
         for rec in self:
             year = rec.fiscalyear
-            if year.isdigit() and int(year) >= 1900 and int(year) <= 2020:
+            if year.isdigit() and int(year) >= 1900 and int(year) <= 2099:
                 continue
             raise ValidationError('%s no es un año valido!' % year)
 
