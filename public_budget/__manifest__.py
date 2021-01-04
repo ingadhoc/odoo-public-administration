@@ -10,6 +10,7 @@
         'sales_team',
         'account_accountant_ux',
         'account_check',
+        'account_payment_group',
         'account_payment_group_document',
         'account_asset',
         'hr_holidays_public',
@@ -137,5 +138,4 @@
         'demo/advance_request.xml',
     ],
     'installable': True,
-    'post_load': 'payment_date_default',
 }
