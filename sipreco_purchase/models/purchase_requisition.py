@@ -113,6 +113,8 @@ class PurchaseRequisition(models.Model):
     @api.model
     def create(self, vals):
         vals['date'] = fields.Date.today()
+        vals['name'] = self.env['ir.sequence'].next_by_code(
+                'purchase.requisition.purchase.tender') or 'New'
         return super().create(vals)
 
     def action_in_progress(self):
@@ -129,3 +131,11 @@ class PurchaseRequisition(models.Model):
         if not self.printed:
             self.printed = True
         return action.read()[0]
+
+    def action_draft(self):
+        """ We need to keep the original number for the order regardless of change the state
+        """
+        self.ensure_one()
+        name = self.name
+        super().action_draft()
+        self.name = name

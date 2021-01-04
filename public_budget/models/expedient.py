@@ -18,7 +18,6 @@ class PublicBudgetExpedient(models.Model):
     ]
 
     number = fields.Char(
-        readonly=True
     )
     issue_date = fields.Datetime(
         readonly=True,

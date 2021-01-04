@@ -826,6 +826,11 @@ msgid "Childs"
 msgstr "Hijos"
 
 #. module: public_budget
+#: model_terms:ir.ui.view,arch_db:public_budget.view_account_asset_asset_form
+msgid "Close and Archive"
+msgstr "Cerrar y archivar"
+
+#. module: public_budget
 #: model_terms:ir.actions.act_window,help:public_budget.action_public_budget_budget_budgets
 msgid "Click to create a Budgets."
 msgstr "Click para crear Presupuesto."
@@ -3475,11 +3480,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:public_budget.view_account_payment_tree
 msgid "Seguro que desea devolver esta retención?"
 msgstr ""
-
-#. module: public_budget
-#: model:ir.model.fields,field_description:public_budget.field_public_budget_definitive_make_invoice__document_sequence
-msgid "Sequence"
-msgstr "Secuencia"
 
 #. module: public_budget
 #: model:ir.model.fields,field_description:public_budget.field_account_asset__serial_number

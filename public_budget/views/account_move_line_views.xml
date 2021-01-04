@@ -1,43 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- SEARCH VIEW -->
-    <record id="view_public_budget_move_line_filter" model="ir.ui.view">
-        <field name="name">public_budget.move_line.select</field>
-        <field name="model">account.move.line</field>
-        <field name="arch" type="xml">
-            <search string="move_line">
-                <group expand="0" string="Group By">
-                </group>
-            </search>
-        </field>
-    </record>
 
-    <!-- FORMVIEW -->
-    <record id="view_public_budget_move_line_form" model="ir.ui.view">
-        <field name="name">public_budget.move_line.form</field>
-        <field name="model">account.move.line</field>
-        <field name="arch" type="xml">
-            <form string="move_line">
-                <header>
-                </header>
-                <sheet string="move_line">
-                    <div class="oe_button_box" name="buttons">
-                    </div>
-                    <group>
-                    </group>
-                </sheet>
-
-            </form>
-        </field>
-    </record>
 
     <!-- TREEVIEW -->
-    <record id="view_public_budget_move_line_tree" model="ir.ui.view">
-        <field name="name">public_budget.move_line.tree</field>
+    <record id="view_move_line_tree" model="ir.ui.view">
+        <field name="name">account.move.line.tree.inherit</field>
         <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account_payment_group.view_move_line_tree"/>
         <field name="arch" type="xml">
-            <tree string="move_line">
-            </tree>
+            <field name="account_id" position="replace">
+                <field name="l10n_ar_afip_verification_result"/>
+            </field>
         </field>
     </record>
 

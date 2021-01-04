@@ -47,7 +47,7 @@
         <field name="name">Assets in user locations</field>
         <field name="model_id" ref="public_budget.model_account_asset"/>
         <field name="groups" eval="[(4, ref('group_asset_responsable_ubicacion')),(4, ref('group_portal_asset'))]"/>
-        <field name="domain_force">[('location_id.user_id', '=', user.id)]</field>
+        <field name="domain_force">['|',('location_id.user_id', '=', user.id),('location_id', 'in', user.location_ids.ids)]</field>
     </record>
 
     <record id="all_assets" model="ir.rule">
