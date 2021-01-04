@@ -54,9 +54,6 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
         'Document Type',
         ondelete='cascade',
     )
-    document_sequence = fields.Integer(
-        related='journal_document_type_id.sequence',
-    )
     document_number = fields.Char(
     )
     available_journal_document_type_ids = fields.Many2many(
@@ -95,9 +92,8 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
     @api.onchange('document_number', 'journal_document_type_id')
     def onchange_document_number(self):
         # if we have a sequence, number is set by sequence and we dont check
-        sequence = self.journal_document_type_id.sequence
         document_type = self.journal_document_type_id
-        if not sequence and document_type:
+        if document_type:
             res = document_type._format_document_number(self.document_number)
             if res and res != self.document_number:
                 self.document_number = res

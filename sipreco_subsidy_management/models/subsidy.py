@@ -8,6 +8,7 @@ _logger = logging.getLogger(__name__)
 class PublicBudgetSubsidy(models.Model):
 
     _name = 'public_budget.subsidy'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'public_budget.subsidy'
     _inherits = {
         'public_budget.transaction': 'transaction_id',

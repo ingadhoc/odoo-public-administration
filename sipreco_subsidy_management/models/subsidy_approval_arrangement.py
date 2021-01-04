@@ -63,7 +63,7 @@ class ApprovalArrangement(models.Model):
         return super().create(vals)
 
     def _compute_currency(self):
-        currency = self.env.user.company_id.currency_id
+        currency = self.env.company.currency_id
         for rec in self:
             rec.currency_id = currency
 

@@ -59,7 +59,10 @@
             </div>
             <button name="%(purchase_requisition.action_purchase_requisition_to_so)d" position="after">
                 <button name="to_inspected" string="To Inspected" type="object" groups="purchase.group_purchase_user" attrs="{'invisible':['|', ('state', '!=', 'draft'),('inspected','=', True)]}"/>
-                <button name="action_draft" string="To Draft" type="object" groups="purchase.group_purchase_user" attrs="{'invisible':['|', ('state', 'not in', ['draft', 'in_progress']),('inspected','!=', True)]}"/>
+            </button>
+            <button name="action_draft" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user</attribute>
+                <attribute name="attrs">{'invisible':['|', ('state', '!=', 'cancel'),('inspected','!=', True)]}</attribute>
             </button>
 
             <field name="product_id" position="after">
@@ -129,7 +132,7 @@
                 <attribute name="attrs">{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
             </field>
             <field name="name" position="attributes">
-                <attribute name="attrs">{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
+                <attribute name="attrs">{'readonly': ['|',('name', '!=', False),('inspected', '=', True)]}</attribute>
             </field>
             <field name="company_id" position="attributes">
                 <attribute name="attrs">{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>

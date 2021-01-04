@@ -111,9 +111,6 @@ class AccountPaymentGroup(models.Model):
         readonly=True,
         copy=False,
     )
-    # hacemos que la fecha de pago no sea obligatoria ya que seteamos fecha
-    # de validacion si no estaba seteada (al final en archivo a parte
-    # _monkey_patch)
     payment_date = fields.Date(
         required=False,
         track_visibility='onchange',
@@ -141,6 +138,13 @@ class AccountPaymentGroup(models.Model):
         'account.move.line',
         compute='_compute_withholding_lines'
     )
+
+    @api.model
+    def default_get(self, fields):
+        """ hacemos que la fecha de pago no sea required ya que seteamos fecha de validacion si no estaba seteada """
+        vals = super().default_get(fields)
+        vals['payment_date'] = False
+        return vals
 
     def _compute_withholding_lines(self):
         for rec in self:
