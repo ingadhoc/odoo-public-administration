@@ -29,7 +29,7 @@
     <record id="expedient_in_user_locations_rule_only_read" model="ir.rule">
         <field name="name">Expedient only read in user locations</field>
         <field name="model_id" ref="public_budget.model_public_budget_expedient"/>
-        <field name="groups" eval="[(4, ref('group_expedient_by_locations_allow'))]"/>
+        <field name="groups" eval="[(4, ref('group_expedient_by_locations_allow')),(4, ref('group_portal_expedient'))]"/>
         <field name="domain_force">['|','|', ('current_location_id', '=', False) , ('current_location_id', 'in', user.location_ids.ids), '&amp;', ('in_transit','=', True), ('last_location_id', 'in', user.location_ids.ids)]</field>
         <field name="perm_create" eval="False"/>
         <field name="perm_unlink" eval="False"/>
