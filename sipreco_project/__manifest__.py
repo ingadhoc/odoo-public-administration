@@ -16,7 +16,6 @@
         # 'web_pdf_preview',
         'account_tax_settlement',
         'account_reports',
-        'saas_client_account',
         # para que genere los diarios que queremos
         # 'portal',  # necesitamos portal por un error
         #  raro al crear un voucher
