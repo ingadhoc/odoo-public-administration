@@ -20,6 +20,7 @@
         # solo requerido para establecer datos demo en cia y hacer que las ret
         # no sean obligatorias en borrador
         'l10n_ar_account_withholding',
+        'l10n_ar_edi',
         # usado por algunos reportes como el de cheques y retenciones
         'l10n_ar_ux',
         # Para poder habilitar el cancel_invoice en estado hecho para todos los
