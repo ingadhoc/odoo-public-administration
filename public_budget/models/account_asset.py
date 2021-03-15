@@ -50,6 +50,7 @@ class AccountAsset(models.Model):
     transaction_ids = fields.One2many(
         'public_budget.transaction',
         compute='_compute_transaction_ids',
+        compute_sudo=True,
     )
     level = fields.Char(
         related='location_id.level',
