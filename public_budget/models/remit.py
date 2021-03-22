@@ -148,3 +148,9 @@ class Remit(models.Model):
                 ir_sequence_date=vals.get('date', fields.Date.today())).next_by_code(
                     'public_budget.remit') or '/'
         return super().create(vals)
+
+    @api.onchange('expedient_ids')
+    def _onchange_expedient_ids(self):
+        if self.expedient_ids and self.expedient_ids.mapped('child_ids'):
+            self.expedient_ids |= self.expedient_ids.mapped('child_ids').filtered(
+                lambda x: x.current_location_id == self.location_id)
