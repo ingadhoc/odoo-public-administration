@@ -153,4 +153,4 @@ class Remit(models.Model):
     def _onchange_expedient_ids(self):
         if self.expedient_ids and self.expedient_ids.mapped('child_ids'):
             self.expedient_ids |= self.expedient_ids.mapped('child_ids').filtered(
-                lambda x: x.current_location_id == self.location_id)
+                lambda x: x._origin.current_location_id == self.location_id)
