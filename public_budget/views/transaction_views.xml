@@ -101,10 +101,38 @@
                         <page string="Affectations">
                             <!-- because it wont update till we save it we add definitive partner_type in context -->
                             <label for="advance_preventive_line_ids" string="Advance Lines" attrs="{'invisible':[('type_with_advance_payment','=',False)]}"/>
-                            <field name="advance_preventive_line_ids" attrs="{'invisible':[('type_with_advance_payment','=',False)]}" context="{'default_definitive_partner_type': definitive_partner_type, 'default_advance_line': 1, 'default_preventive_status': 'confirmed', 'advance_line': 1}"/>
+                            <field name="advance_preventive_line_ids" attrs="{'invisible':[('type_with_advance_payment','=',False)]}" context="{'default_definitive_partner_type': definitive_partner_type, 'default_advance_line': 1, 'default_preventive_status': 'confirmed', 'advance_line': 1}" >
+                                <tree string="Preventive Line" decoration-success="preventive_amount==definitive_amount==to_pay_amount==paid_amount">
+                                    <field name="budget_position_id"/>
+                                    <field name="currency_id" invisible="1"/>
+                                    <field name="company_id" invisible="1"/>
+                                    <field name="preventive_amount" sum="Total"/>
+                                    <field name="definitive_amount" sum="Total"/>
+                                    <field name="invoiced_amount" sum="Total" />
+                                    <field name="to_pay_amount" sum="Total"/>
+                                    <field name="paid_amount" sum="Total"/>
+                                    <field name="state" invisible="True"/>
+                                    <field name="currency_id" invisible="True"/>
+                                </tree>
+                            </field>
                             <label for="preventive_line_ids" string="Settlement Lines" attrs="{'invisible':[('type_with_advance_payment','=',False)]}"/>
                             <!-- send transaction to force onchange -->
-                            <field name="preventive_line_ids" context="{'default_transaction_id': id, 'default_definitive_partner_type': definitive_partner_type,}"/>
+                            <field name="preventive_line_ids" context="{'default_transaction_id': id, 'default_definitive_partner_type': definitive_partner_type,'default_company_id': company_id}">
+                                <tree string="Preventive Line" decoration-success="preventive_amount==definitive_amount==to_pay_amount==paid_amount" create="false" editable="button">
+                                    <button name="open_preventive_line" type="object" icon="fa-pencil" string="Open" class="oe_edit_only"/>
+                                    <field name="budget_position_id" readonly="1"/>
+                                    <field name="currency_id" invisible="1"/>
+                                    <field name="company_id" invisible="1"/>
+                                    <field name="preventive_amount" readonly="1" sum="Total"/>
+                                    <field name="definitive_amount" sum="Total"/>
+                                    <field name="invoiced_amount" sum="Total" />
+                                    <field name="to_pay_amount" sum="Total"/>
+                                    <field name="paid_amount" sum="Total"/>
+                                    <field name="state" invisible="True"/>
+                                    <field name="currency_id" invisible="True"/>
+                                </tree>
+                            </field>
+                            <button name="create_preventive_line" type="object" icon="fa-list" string="Create Preventive Lines" class="oe_edit_only"/>
                         </page>
                         <page string="Payment Orders and Refunds" attrs="{'invisible':[('type_with_advance_payment','=',False)]}">
                             <button class="oe_link" string="Create Payment Order" states="open" type="object" name="action_new_payment_group"/>

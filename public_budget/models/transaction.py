@@ -710,3 +710,15 @@ class BudgetTransaction(models.Model):
         action['context'] = {'search_default_invoice': 1}
         action['domain'] = [('id', 'in', self.asset_ids.ids)]
         return action
+
+    def create_preventive_line(self):
+        return {
+            'name': _('Preventive Line'),
+            'target': 'new',
+            # 'res_id': self.id,
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'public_budget.preventive_line',
+            'type': 'ir.actions.act_window',
+            'context': {'default_transaction_id': self.id},
+        }

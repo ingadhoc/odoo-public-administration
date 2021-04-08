@@ -209,7 +209,8 @@ class PreventiveLine(models.Model):
             # fields in this case instead of normal fields
             if to_date:
                 to_date = fields.Date.from_string(to_date)
-                definitive_lines = definitive_lines.filtered(lambda x: x.issue_date <= to_date)
+                definitive_lines = definitive_lines.filtered(
+                    lambda x: x.issue_date <= to_date)
             definitive_amount = invoiced_amount = to_pay_amount = paid_amount = 0.0
             for rec in definitive_lines:
                 definitive_amount += rec.amount
@@ -334,3 +335,14 @@ class PreventiveLine(models.Model):
                 "You can not delete a preventive line that has definitive "
                 "lines"))
         return super().unlink()
+
+    def open_preventive_line(self):
+        return {
+            'name': _('Preventive Line'),
+            'target': 'new',
+            'res_id': self.id,
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': self._name,
+            'type': 'ir.actions.act_window',
+        }
