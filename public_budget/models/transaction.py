@@ -114,6 +114,8 @@ class BudgetTransaction(models.Model):
         domain=[('advance_line', '=', True)],
         auto_join=True,
     )
+    # TODO: remove advance_preventive_line_copy_ids in v14
+    advance_preventive_line_copy_ids = fields.One2many(related='advance_preventive_line_ids')
     preventive_amount = fields.Monetary(
         string='Monto Preventivo',
         compute='_compute_preventive_amount',
@@ -229,6 +231,8 @@ class BudgetTransaction(models.Model):
         states={'open': [('readonly', False)]},
         domain=[('advance_line', '=', False)]
     )
+    # TODO: remove preventive_line_copy_ids in v14
+    preventive_line_copy_ids = fields.One2many(related="preventive_line_ids")
     invoice_ids = fields.One2many(
         'account.move',
         'transaction_id',

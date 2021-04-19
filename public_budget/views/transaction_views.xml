@@ -101,10 +101,14 @@
                         <page string="Affectations">
                             <!-- because it wont update till we save it we add definitive partner_type in context -->
                             <label for="advance_preventive_line_ids" string="Advance Lines" attrs="{'invisible':[('type_with_advance_payment','=',False)]}"/>
-                            <field name="advance_preventive_line_ids" attrs="{'invisible':[('type_with_advance_payment','=',False)]}" context="{'default_definitive_partner_type': definitive_partner_type, 'default_advance_line': 1, 'default_preventive_status': 'confirmed', 'advance_line': 1}"/>
+                            <field name="advance_preventive_line_ids" attrs="{'invisible':[('type_with_advance_payment','=',False)]}" context="{'default_definitive_partner_type': definitive_partner_type, 'default_advance_line': 1, 'default_preventive_status': 'confirmed', 'advance_line': 1}" class="oe_edit_only"/>
+                             <!-- TODO: remove preventive_line_copy_ids in v14 -->
+                            <field name="advance_preventive_line_copy_ids" attrs="{'invisible':[('type_with_advance_payment','=',False)]}" context="{'default_definitive_partner_type': definitive_partner_type, 'default_advance_line': 1, 'default_preventive_status': 'confirmed', 'advance_line': 1}" class="oe_read_only"/>
                             <label for="preventive_line_ids" string="Settlement Lines" attrs="{'invisible':[('type_with_advance_payment','=',False)]}"/>
                             <!-- send transaction to force onchange -->
-                            <field name="preventive_line_ids" context="{'default_transaction_id': id, 'default_definitive_partner_type': definitive_partner_type,}"/>
+                            <!-- TODO: remove preventive_line_copy_ids in v14 -->
+                            <field name="preventive_line_copy_ids" context="{'default_transaction_id': id, 'default_definitive_partner_type': definitive_partner_type,}" class="oe_read_only"/>
+                            <field name="preventive_line_ids" context="{'default_transaction_id': id, 'default_definitive_partner_type': definitive_partner_type,}" class="oe_edit_only"/>
                         </page>
                         <page string="Payment Orders and Refunds" attrs="{'invisible':[('type_with_advance_payment','=',False)]}">
                             <button class="oe_link" string="Create Payment Order" states="open" type="object" name="action_new_payment_group"/>
