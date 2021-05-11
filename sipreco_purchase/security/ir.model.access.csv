@@ -54,3 +54,4 @@ access_stock_picking_read,"access_stock_picking_read",stock.model_stock_picking,
 access_purchase_requisition_type_read,public_budget_requisition_type.read,purchase_requisition.model_purchase_requisition_type,group_only_read_purchase_order_requisition,1,0,0,0
 access_stock_move_read,"access_stock_move_read",stock.model_stock_move,group_only_read_purchase_order_requisition,1,0,0,0
 purchase_requisition.access_purchase_requisition,purchase.requisition,model_purchase_requisition,purchase.group_purchase_user,1,1,1,0
+access_account_move_line,account.move.line,account.model_account_move_line,stock.group_stock_user,1,0,0,0
