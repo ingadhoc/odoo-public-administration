@@ -257,6 +257,8 @@ class BudgetTransaction(models.Model):
             ('transaction_with_advance_payment', '=', False)
         ],
     )
+    # TODO: remove payment_group_copy_ids in v14
+    payment_group_copy_ids = fields.One2many(related="payment_group_ids", string="Payment Orders copy")
     # Usamos otro campo por que si no el depends de advance_payment_group_ids
     # se toma en cuenta igual que si fuese el de payments y necesitamos que sea
     # distinto para que no recalcule tantas veces. Si no la idea sería que
@@ -273,6 +275,11 @@ class BudgetTransaction(models.Model):
         ],
         context={'default_partner_type': 'supplier'},
         states={'open': [('readonly', False)]},
+    )
+    # TODO: remove advance_payment_group_copy_ids in v14
+    advance_payment_group_copy_ids = fields.One2many(
+        related="advance_payment_group_ids",
+        string="Advance Payment Orders copy",
     )
 
     asset_ids = fields.One2many(
