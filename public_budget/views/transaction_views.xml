@@ -112,7 +112,9 @@
                         </page>
                         <page string="Payment Orders and Refunds" attrs="{'invisible':[('type_with_advance_payment','=',False)]}">
                             <button class="oe_link" string="Create Payment Order" states="open" type="object" name="action_new_payment_group"/>
-                            <field name="advance_payment_group_ids" context="{'default_transaction_id':id, 'default_partner_id': partner_id, 'default_partner_type': 'supplier'}"/>
+                            <field name="advance_payment_group_ids" context="{'default_transaction_id':id, 'default_partner_id': partner_id, 'default_partner_type': 'supplier'}" class="oe_edit_only"/>
+                            <!-- TODO: remove advance_payment_group_copy_ids in v14 -->
+                            <field name="advance_payment_group_copy_ids" context="{'default_transaction_id':id, 'default_partner_id': partner_id, 'default_partner_type': 'supplier'}" class="oe_read_only"/>
                         </page>
                         <page string="Invoices">
                             <div class="oe_read_only">
@@ -126,7 +128,9 @@
                             <button class="oe_link" string="Create Payment Order" states="open" type="object" name="action_new_payment_group"/>
                                 or 
                             <button class="oe_link" string="Mass Payment Order Create" states="open" type="object" name="mass_payment_group_create" confirm="Se van a generar ordenes de pago para todos los comprobantes que no se encuentren en ordenes de pago, seguro que quiere continuar?"/>
-                            <field name="payment_group_ids" context="{'default_partner_type': 'supplier', 'default_transaction_id':id}"/>
+                            <field name="payment_group_ids" context="{'default_partner_type': 'supplier', 'default_transaction_id':id}" class="oe_edit_only"/>
+                            <!-- TODO: remove payment_group_copy_ids in v14 -->
+                            <field name="payment_group_copy_ids" context="{'default_partner_type': 'supplier', 'default_transaction_id':id}" class="oe_read_only"/>
                         </page>
                         <page string="Notes">
                             <field name="note"/>
