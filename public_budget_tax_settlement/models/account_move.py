@@ -29,6 +29,8 @@ class AccoutMove(models.Model):
                 # por defecto, en pago de retenciones, no hacemos double
                 # validation
                 'force_simple': True,
+                # evitamos la restricion de que solo podes agregar pagos en facturas validadas
+                'active_model': 'account.payment',
             },
         }
 
