@@ -1,4 +1,4 @@
-from odoo import fields, models, _
+from odoo import api, fields, models, _
 from odoo.tools import float_compare
 
 
@@ -37,4 +37,11 @@ class AccoutMove(models.Model):
     def _compute_matched_to_pay(self):
         for rec in self:
             rec.enable_to_pay = True if not float_compare(rec._get_cash_basis_matched_percentage(),
-                1, precision_digits=5) != -1 else False
+                                                          1, precision_digits=5) != -1 else False
+
+    @api.model
+    def create(self, values):
+        res = super().create(values)
+        if res.type == 'entry' and not res.partner_id and len(res.line_ids.mapped('partner_id')) == 1:
+            res.partner_id = res.line_ids.mapped('partner_id')
+        return res
