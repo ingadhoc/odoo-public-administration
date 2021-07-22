@@ -46,7 +46,7 @@ class AccountPayment(models.Model):
         """
         ok_fields = [
             'document_number', 'receiptbook_id', 'state', 'payment_date',
-            'name']
+            'name', 'move_name']
         if not set(ok_fields).intersection(vals.keys()) and self.filtered(
                 'returned_payment_ids'):
             raise ValidationError(_(
