@@ -85,7 +85,7 @@
             <!-- agregamos este campo por compatibilidad con mig desde v8 y además para simplificar liquidación -->
             <field name="payment_ids" position="after">
                 <label for="withholding_line_ids" string="Detalle de Retenciones" states="posted"/>
-                <field name="withholding_line_ids" context="{'tree_view_ref':'account_tax_settlement.view_account_move_line_tree'}" states="posted"/>
+                <field name="withholding_line_ids" context="{'tree_view_ref':'account_tax_settlement.view_account_move_line_tree', 'default_type': 'entry'}" states="posted"/>
             </field>
 
             <form>
