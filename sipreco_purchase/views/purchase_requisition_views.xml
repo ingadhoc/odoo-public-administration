@@ -59,6 +59,7 @@
             </div>
             <button name="%(purchase_requisition.action_purchase_requisition_to_so)d" position="after">
                 <button name="to_inspected" string="To Inspected" type="object" groups="purchase.group_purchase_user" attrs="{'invisible':['|', ('state', '!=', 'draft'),('inspected','=', True)]}"/>
+                <button name="revert_inspection" string="Revert inspection" type="object" groups="purchase.group_purchase_user" attrs="{'invisible':['|', ('state', '!=', 'draft'),('inspected','!=', True)]}"/>
             </button>
             <button name="action_draft" position="attributes">
                 <attribute name="groups">purchase.group_purchase_user</attribute>
