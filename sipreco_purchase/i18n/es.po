@@ -610,3 +610,8 @@ msgstr "¿Reporte Impreso?"
 #: model:ir.model,name:sipreco_purchase.model_public_budget_create_expedients_wizard
 msgid "public_budget.create.expedients.wizard"
 msgstr ""
+
+#. module: sipreco_purchase
+#: model_terms:ir.ui.view,arch_db:sipreco_purchase.view_purchase_requisition_form
+msgid "Revert inspection"
+msgstr "Revetir Inspeccion"

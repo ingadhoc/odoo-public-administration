@@ -81,11 +81,17 @@ class PurchaseRequisition(models.Model):
             rec.amount_total = sum([x.subtotal for x in rec.line_ids])
 
     def to_inspected(self):
-        if not self.transaction_type_id:
-            raise UserError(_('Antes de revisar debe tener establecido un'
-                              '"Tipo"'))
-        self.inspected = True
-        self.user_inspected_id = self.env.user
+        for rec in self:
+            if not rec.transaction_type_id:
+                raise UserError(_('Antes de revisar debe tener establecido un'
+                                '"Tipo"'))
+            rec.inspected = True
+            rec.user_inspected_id = self.env.user
+
+    def revert_inspection(self):
+        for rec in self.filtered('inspected'):
+            rec.inspected = False
+            rec.user_inspected_id = False
 
     def action_draft(self):
         if self.state == 'draft' and self.inspected:
