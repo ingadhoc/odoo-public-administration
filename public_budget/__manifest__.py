@@ -139,5 +139,5 @@
         'demo/advance_request_type.xml',
         'demo/advance_request.xml',
     ],
-    'installable': True,
+    'installable': False,
 }
