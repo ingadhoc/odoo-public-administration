@@ -328,7 +328,7 @@ class AccountPaymentGroup(models.Model):
             # si esta validado entonces las facturas son las macheadas, si no
             # las seleccionadas
             move_lines = rec.matched_move_line_ids or rec.to_pay_move_line_ids
-            rec.invoice_ids = move_lines.mapped('move_id')
+            rec.invoice_ids = move_lines.mapped('move_id').filtered(lambda m: m.is_invoice())
             rec.budget_position_ids = rec.invoice_ids.mapped(
                 'invoice_line_ids.definitive_line_id.preventive_line_id.'
                 'budget_position_id')
