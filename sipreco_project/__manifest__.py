@@ -1,6 +1,6 @@
 {
     'name': 'Sipreco Project',
-    'license': ' LGPL-3',
+    'license': 'LGPL-3',
     'version': '13.0.1.0.0',
     'category': 'Accounting',
     'sequence': 14,
