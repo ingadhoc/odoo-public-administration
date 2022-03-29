@@ -118,7 +118,7 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
                 invoice_type = 'in_invoice'
             move = rec.env['account.move'].new({
                 'journal_id': rec.journal_id.id,
-                'type': invoice_type,
+                'move_type': invoice_type,
                 'l10n_latam_use_documents': rec.use_documents,
                 'partner_id': rec.supplier_id.id,
             })
@@ -213,7 +213,7 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
             'l10n_latam_document_number': self.document_number,
             'l10n_latam_document_type_id': self.journal_document_type_id.id,
             'invoice_line_ids': list_inv_lines,
-            'type': invoice_type,
+            'move_type': invoice_type,
             'journal_id': self.journal_id.id,
             'transaction_id': self.transaction_id.id,
         }

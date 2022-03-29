@@ -35,7 +35,6 @@
         <field name="arch" type="xml">
             <form string="Expedient" create="false" edit="false">
                 <header>
-                    <button name="%(action_aeroo_report_expedient)d" class="oe_highlight" string="Print" type="action"/>
                     <button name="action_cancel_open" type="object" states="cancel" string="To Draft"/>
                     <!-- por pedido de ellos solo desde secretaria se pueden anular -->
                     <button name="action_annulled" states="open" type="object" groups="public_budget.group_secretary_usuario" string="To Annulled"/>
@@ -45,7 +44,7 @@
                 </header>
                 <sheet string="Expedient">
                     <div class="oe_button_box" name="button_box">
-                        <button class="oe_stat_button" name="%(public_budget.action_public_budget_transaction_transactions)d" string="Transactions" type="action" groups="public_budget.group_portal_transaction,public_budget.group_secretary_director,account.group_account_user" context="{'search_default_expedient_id': active_id}" icon="fa-bars"/>
+                        <button class="oe_stat_button" name="%(action_public_budget_transaction_transactions)d" string="Transactions" type="action" groups="public_budget.group_portal_transaction,public_budget.group_secretary_director,account.group_account_user" context="{'search_default_expedient_id': active_id}" icon="fa-bars"/>
                     </div>
                     <field name="user_location_ids" invisible="1"/>
                     <field name="id" invisible="1"/>

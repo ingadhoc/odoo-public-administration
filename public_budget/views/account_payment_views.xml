@@ -8,13 +8,13 @@
         <field name="inherit_id" ref="account.view_account_payment_form"/>
         <field name="arch" type="xml">
 
-            <field name="payment_date" position="after">
+            <field name="date" position="after">
                 <field name="assignee_id" readonly="1"/>
                 <field name="return_payment_id" attrs="{'invisible': [('return_payment_id', '=', False)]}"/>
             </field>
 
             <!-- hacemos invisible la fecha de pago para no confundir, viene seteada desde el payment group y en sipreco no interesa permitir distintas fechas para un pago -->
-            <field name="payment_date" position="attributes">
+            <field name="date" position="attributes">
                 <!-- <attribute name="invisible">1</attribute> -->
                 <!-- al final lo hacemos invisible así porque en transferencias lo queremos visible -->
                 <attribute name="attrs">{'readonly': [('state', '!=', 'draft')], 'invisible': [('payment_type', '!=', 'transfer')], 'required': [('payment_type', '=', 'transfer')]}</attribute>
@@ -44,13 +44,13 @@
         <field name="mode">primary</field>
         <field name="inherit_id" ref="account.view_account_payment_form"/>
         <field name="arch" type="xml">
-            <field name="payment_type_copy" position="attributes">
+            <field name="payment_type" position="attributes">
                 <attribute name="invisible">1</attribute>
             </field>
             <field name="amount" position="attributes">
                 <attribute name="invisible">1</attribute>
             </field>
-            <field name="payment_date" position="attributes">
+            <field name="date" position="attributes">
                 <!-- <attribute name="invisible">0</attribute> -->
                 <!-- lo hacemos visible para cambio de cheques -->
                 <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>

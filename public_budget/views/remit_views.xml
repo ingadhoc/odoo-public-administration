@@ -24,7 +24,6 @@
         <field name="arch" type="xml">
             <form string="Remit">
                 <header>
-                    <button name="%(action_aeroo_report_remit)d" class="oe_highlight" string="Print" type="action"/>
                     <button name="action_confirm"
                         type="object"
                         states="in_transit"
