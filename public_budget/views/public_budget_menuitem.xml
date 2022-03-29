@@ -316,7 +316,7 @@
             name="Expedients"
             id="menu_expedients_conf"
             sequence="40"
-            parent="menu_budget_conf"
+            parent="menu_configuration"
             />
 
         <record id="action_public_budget_budget_pos_exc_rest_position_exc__rest_" model="ir.actions.act_window">
@@ -424,6 +424,6 @@
             id="menu_funding_moves"
             sequence="5"
             action="action_public_budget_funding_move"
-            parent="account_payment_fix.menu_finance_bank_and_cash"
+            parent="account_payment_group.menu_finance_bank_and_cash"
             />
 </odoo>

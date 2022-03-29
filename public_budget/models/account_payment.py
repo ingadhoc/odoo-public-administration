@@ -53,7 +53,7 @@ class AccountPayment(models.Model):
                 'No puede modificar una devolución de retención'))
         return super(AccountPayment, self).write(vals)
 
-    @api.depends('invoice_ids', 'payment_type', 'partner_type', 'partner_id')
+    @api.depends('move_id', 'payment_type', 'partner_type', 'partner_id')
     def _compute_destination_account_id(self):
         """
         Cambiamos la cuenta que usa el adelanto para utilizar aquella que
@@ -88,6 +88,7 @@ class AccountPayment(models.Model):
         return vals
 
     def confirm_check_change(self):
+        #ver con jjs
         self.ensure_one()
         replaced_payment_id = self._context.get('replaced_payment_id')
         if not replaced_payment_id:
@@ -126,6 +127,7 @@ class AccountPayment(models.Model):
         }
 
     def change_check(self):
+        #ver con jjs
         self.ensure_one()
         # context = self._context.copy()
         if self.state == 'draft':
@@ -188,17 +190,18 @@ class AccountPayment(models.Model):
         Solo chequeamos si hay check_number (para el caso donde se numera
         después)
         """
-        if (self.check_type and self.check_number and
-                (self.search([
-                    ('check_number', '=', self.check_number),
-                    ('journal_id', '=', self.journal_id.id)]) - self) or
-                self.env['account.check'].search([
-                    ('number', '=', self.check_number),
-                    ('journal_id', '=', self.journal_id.id),
-                ])):
-            raise ValidationError(_(
-                'El número de cheque %s ya se ha utilizado') % (
-                self.check_number))
+        # ver con jjs
+        #if (self.check_type and self.check_number and
+        #        (self.search([
+        #            ('check_number', '=', self.check_number),
+        #            ('journal_id', '=', self.journal_id.id)]) - self) or
+        #        self.env['account.check'].search([
+        #            ('number', '=', self.check_number),
+        #            ('journal_id', '=', self.journal_id.id),
+        #        ])):
+        #    raise ValidationError(_(
+        #        'El número de cheque %s ya se ha utilizado') % (
+        #        self.check_number))
 
     def change_withholding(self):
         """ Arrojamos este error para recordarnos que este metodo se implementa

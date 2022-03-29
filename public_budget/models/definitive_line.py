@@ -137,7 +137,7 @@ class DefinitiveLine(models.Model):
 
     @api.depends(
         'invoice_line_ids.move_id.state',
-        'invoice_line_ids.move_id.invoice_payment_state',
+        'invoice_line_ids.move_id.payment_state',
         'invoice_line_ids.move_id.to_pay_amount',
         'invoice_line_ids.move_id.amount_residual',
     )
@@ -158,7 +158,7 @@ class DefinitiveLine(models.Model):
 
     @api.depends(
         'invoice_line_ids.move_id.state',
-        'invoice_line_ids.move_id.invoice_payment_state',
+        'invoice_line_ids.move_id.payment_state',
         'invoice_line_ids.move_id.to_pay_amount',
         'invoice_line_ids.move_id.amount_residual',
     )
@@ -192,9 +192,9 @@ class DefinitiveLine(models.Model):
             invoice_lines.filtered(lambda x: x.move_id.invoice_date <= to_date)
 
         debit_invoice_lines = invoice_lines.filtered(
-            lambda x: x.move_id.type in ['out_refund', 'in_invoice'])
+            lambda x: x.move_id.move_type in ['out_refund', 'in_invoice'])
         credit_invoice_lines = invoice_lines.filtered(
-            lambda x: x.move_id.type in ['out_invoice', 'in_refund'])
+            lambda x: x.move_id.move_type in ['out_invoice', 'in_refund'])
 
         # all computed fields, no problem for analysis to date
         invoiced_amount = sum(debit_invoice_lines.mapped('price_subtotal'))

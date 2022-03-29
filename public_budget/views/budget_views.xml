@@ -24,7 +24,6 @@
             <form string="Budget">
                 <field name="currency_id" invisible="1"/>
                 <header>
-                    <button name="%(action_aeroo_report_budget)d" class="oe_highlight" string="Print" type="action"/>
                     <button name="action_open" type="object" states="draft" string="Open" class="oe_highlight"/>
                     <button name="action_cancel_draft" type="object" states="cancel" string="To Draft"/>
                     <button name="action_pre_close" states="open" type="object" string="Pre Close" class="oe_highlight"/>
@@ -97,7 +96,6 @@
         <field name="arch" type="xml">
             <header position="replace">
                 <header>
-                    <button name="%(action_aeroo_report_budget)d" class="oe_highlight" string="Print" type="action"/>
                     <field name="state" widget="statusbar" invisible="1"/>
                 </header>
             </header>

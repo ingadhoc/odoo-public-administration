@@ -27,7 +27,6 @@
         <field name="arch" type="xml">
             <form string="Advance Return">
                 <header>
-                    <button name="%(action_aeroo_report_advance_return)d" class="oe_highlight" string="Print" type="action"/>
                     <button name="action_confirm" states="draft" string="Confirm" type="object" class="oe_highlight" groups="account.group_account_user"/>
                     <button name="action_cancel_draft" states="cancel" type="object" string="To Draft"/>
                     <button name="action_cancel" states="confirmed,draft" string="Cancel" type="object" groups="account.group_account_user"/>

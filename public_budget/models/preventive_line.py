@@ -167,7 +167,7 @@ class PreventiveLine(models.Model):
         _logger.info('Getting dynamic for preventive lines %s' % self.ids)
         if not self._context.get('analysis_to_date', False):
             for rec in self:
-                rec.remaining_amount_dynamic = rec.remaining_amount
+                rec.remaining_amount = rec.remaining_amount
                 rec.definitive_amount_dynamic = rec.definitive_amount
                 rec.invoiced_amount_dynamic = rec.invoiced_amount
                 rec.to_pay_amount_dynamic = rec.to_pay_amount
@@ -175,7 +175,7 @@ class PreventiveLine(models.Model):
         else:
             for rec in self:
                 amounts = rec._get_amounts()
-                rec.remaining_amount_dynamic = amounts['remaining_amount']
+                rec.remaining_amount = amounts['remaining_amount']
                 rec.definitive_amount_dynamic = amounts['definitive_amount']
                 rec.invoiced_amount_dynamic = amounts['invoiced_amount']
                 rec.to_pay_amount_dynamic = amounts['to_pay_amount']

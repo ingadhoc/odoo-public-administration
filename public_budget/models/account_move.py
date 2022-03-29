@@ -43,7 +43,7 @@ class AccountMove(models.Model):
             action['target'] = 'new'
             return action
 
-    @api.constrains('invoice_payment_state')
+    @api.constrains('payment_state')
     def _recompute_to_pay_amount_when_with_advance_payment(self):
         """ Cuando se usan transacciones de tipo con pago de adelanto, por
         alguna razon el metodo _compute_to_pay_amount no se llama cuando se
@@ -51,13 +51,13 @@ class AccountMove(models.Model):
         open, de esta manera reforzamos el re-calculo cuando pasa a pagado
         """
         for rec in self:
-            if rec.invoice_payment_state == 'paid' and not rec.payment_group_ids:
+            if rec.payment_state == 'paid' and not rec.payment_group_ids:
                 rec._compute_to_pay_amount()
 
     @api.depends(
         # This do it by a contrains in account payment group
         # 'payment_group_ids.state',
-        'invoice_payment_state',
+        'payment_state',
         'state',
     )
     def _compute_to_pay_amount(self):
@@ -80,7 +80,7 @@ class AccountMove(models.Model):
         # after validation we consider it as send to paid and paid
         # TODO tal vez deberíamos mejorar porque si estamos sacando
         # analysis_to_date no se estáría teniendo en cuenta
-        if self.invoice_payment_state == 'paid' and not self.payment_group_ids:
+        if self.payment_state == 'paid' and not self.payment_group_ids:
             return self.amount_total
 
         lines = self.line_ids.filtered(lambda line: line.account_id.user_type_id.type in ('receivable', 'payable'))
@@ -94,7 +94,7 @@ class AccountMove(models.Model):
             lines = lines.filtered(lambda x: any(
                 pg.state not in ['draft', 'cancel'] for pg in x.payment_group_ids))
         amount = -sum(lines.mapped('balance'))
-        if self.type in ('in_refund', 'out_refund'):
+        if self.move_type in ('in_refund', 'out_refund'):
             amount = -amount
         return amount
 
@@ -112,7 +112,7 @@ class AccountMove(models.Model):
         # validation we consider it as send to paid and paid
         # TODO tal vez deberíamos mejorar porque si estamos sacando
         # analysis_to_date no se estáría teniendo en cuenta
-        if self.invoice_payment_state == 'paid' and not self.payment_group_ids:
+        if self.payment_state == 'paid' and not self.payment_group_ids:
             return self.amount_total
 
         lines = self.line_ids.filtered(lambda line: line.account_id.user_type_id.type in ('receivable', 'payable'))
@@ -127,7 +127,7 @@ class AccountMove(models.Model):
                 pg.state == 'posted' for pg in x.payment_group_ids))
 
         amount = -sum(lines.mapped('balance'))
-        if self.type in ('in_refund', 'out_refund'):
+        if self.move_type in ('in_refund', 'out_refund'):
             amount = -amount
         return amount
 
