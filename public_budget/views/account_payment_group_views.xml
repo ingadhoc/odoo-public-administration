@@ -56,7 +56,6 @@
                 <field name="communication" optional="hide"/>
             </field>
             <tree position="inside">
-                <button name="%(action_aeroo_report_payment)d" class="oe_highlight" string="Print Payment Order" type="action" icon="fa-print"/>
                 <button name="confirm" type="object" string="Confirm" states="draft" icon="fa-arrow-circle-right" groups="account.group_account_manager"/>
             </tree>
         </field>
@@ -145,8 +144,6 @@
 
             <!-- add payment order and print receipt button -->
             <button name="payment_print" position="replace">
-                <button name="%(action_aeroo_report_payment)d" string="Print Payment Order" class="oe_highlight" groups="base.group_user" type="action" />
-                <button name="%(action_aeroo_report_payment_receipt)d" class="oe_highlight" string="Print Receipt" attrs="{'invisible': [('show_print_receipt_button', '=', False)]}" type="action"/>
             </button>
             <button name="cancel" position="before">
                 <button name="action_aeroo_certificado_de_retencion_report" string="Print withholding voucher" type="object" class="oe_read_only"/>

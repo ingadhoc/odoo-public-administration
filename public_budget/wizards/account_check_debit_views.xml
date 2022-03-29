@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <act_window
-            name="Check Debit"
-            id="action_account_check_debit_multi"
-            res_model="account.check.action.wizard"
-            binding_model="account.check"
-            binding_views="list"
-            view_mode="form"
-            target="new"
-            context="{'default_action_type': 'bank_debit'}"/>
+    <record id="action_account_check_debit_multi" model="ir.actions.act_window">
+        <field name="name">Check Debit</field>
+        <field name="res_model">account.check.action.wizard</field>
+        <field name="binding_model">l10n_latam.checkbook</field>
+        <field name="binding_views">list</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_action_type': 'bank_debit'}</field>
+    </record>
 </odoo>

@@ -76,7 +76,6 @@ class PublicBudgetExpedient(models.Model):
     )
     pages = fields.Integer(
         required=True,
-        track_visibility='onchange',
     )
     subsidy_expedient = fields.Boolean(
         string='Expediente de Solicitud Subsidio?',
@@ -122,7 +121,6 @@ class PublicBudgetExpedient(models.Model):
     state = fields.Selection(
         _states_,
         default='open',
-        track_visibility='onchange',
     )
     child_ids = fields.One2many(
         'public_budget.expedient',

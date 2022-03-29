@@ -4,9 +4,6 @@
         <value model="res.users" search="[('id', '=', obj().env.ref('base.user_root').id)]"/>
         <value eval="{'company_id': ref('company_sipreco')}"/>
     </function>
-    <function model="account.chart.template" name="try_loading_for_current_company" context="{'with_bank_journal':True, 'create_point_of_sale_type': True}">
-        <value model="account.chart.template" eval="ref('l10n_ar.l10nar_ex_chart_template')"/>
-    </function>
     <function model="res.users" name="write">
         <value model="res.users" search="[('id', '=', obj().env.ref('base.user_root').id)]"/>
         <value eval="{'company_id': ref('base.main_company')}"/>

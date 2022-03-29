@@ -29,7 +29,6 @@
         <field name="arch" type="xml">
             <form string="Budget Transaction">
                 <header>
-                    <button name="%(action_aeroo_report_transaction)d" class="oe_highlight" string="Print" type="action"/>
                     <button name="action_cancel_draft" type="object" states="cancel" string="To Draft"/>
                     <button name="action_open" type="object" states="draft" string="Open" class="oe_highlight"/>
                     <button name="action_close" type="object" states="open" string="Close" class="oe_highlight"/>

@@ -240,7 +240,7 @@ class BudgetTransaction(models.Model):
         readonly=True,
         auto_join=True,
         states={'open': [('readonly', False)]},
-        domain=[('type', 'in', ['in_invoice', 'in_refund'])]
+        domain=[('move_type', 'in', ['in_invoice', 'in_refund'])]
     )
     definitive_partner_type = fields.Selection(
         related='type_id.definitive_partner_type'

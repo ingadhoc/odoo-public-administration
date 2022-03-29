@@ -127,9 +127,6 @@
     <record id="account_accountant.menu_accounting" model="ir.ui.menu">
         <field name="groups_id" eval="[(4, ref('group_secretary_usuario')), (4, ref('group_habilitacion_usuario'))]"/>
     </record>
-    <record id="account_payment_fix.menu_finance_bank_and_cash" model="ir.ui.menu">
-        <field name="groups_id" eval="[(4, ref('group_habilitacion_usuario'))]"/>
-    </record>
     <record id="account.menu_finance_reports" model="ir.ui.menu">
         <field name="groups_id" eval="[(4, ref('group_habilitacion_director'))]"/>
     </record>

@@ -7,7 +7,6 @@
         <field name="report_name">asset_missing_report</field>
         <field name="report_type">aeroo</field>
         <field name="in_format">oo-odt</field>
-        <field name="parser_state">default</field>
         <field name="report_file">public_budget/reports/asset_missing_report.odt</field>
         <field name="tml_source">file</field>
         <field name="out_format" ref="report_aeroo.report_mimetypes_pdf_odt"/>
