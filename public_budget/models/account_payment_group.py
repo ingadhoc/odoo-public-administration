@@ -319,7 +319,7 @@ class AccountPaymentGroup(models.Model):
     @api.model
     def _search_budget_positions(self, operator, value):
         return [
-            ('to_pay_move_line_ids.move_id.invoice_move_ids.'
+            ('to_pay_move_line_ids.move_id.invoice_line_ids.'
                 'definitive_line_id.preventive_line_id.budget_position_id',
                 operator, value)]
 
