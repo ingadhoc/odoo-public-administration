@@ -47,7 +47,7 @@ Hola ${object.name},
         <field eval="False" name="doall"/>
         <field name="state">code</field>
         <field name="model_id" ref="sipreco_subsidy_management.model_public_budget_subsidy"/>
-        <field name="code">model._cron_recurring_subsidy_report([1])</field>
+        <field name="code">model._cron_recurring_subsidy_report(1)</field>
     </record>
 
 </odoo>
