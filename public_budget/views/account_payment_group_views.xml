@@ -93,7 +93,6 @@
                 <field name="user_location_ids" invisible="1"/>
                 <field name="transaction_with_advance_payment" invisible="1"/>
                 <field name="partner_ids" invisible="1"/>
-                <field name="show_print_receipt_button" invisible="1"/>
             </form>
 
             <form position="attributes">
