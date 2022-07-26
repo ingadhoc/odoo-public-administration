@@ -112,7 +112,7 @@ class AdvanceReturn(models.Model):
         for record in self:
             move_vals = record.get_move_vals()
             move = self.move_id.create(move_vals)
-            move.post()
+            move._post()
             record.write({
                 'move_id': move.id,
                 'state': 'confirmed',

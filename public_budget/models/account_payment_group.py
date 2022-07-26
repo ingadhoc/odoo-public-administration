@@ -160,7 +160,7 @@ class AccountPaymentGroup(models.Model):
             # porque por ahí sobre-escribimos una fecha (si se canceló el pago)
             # y se re-abrió (igualmente es dificil porque no se pueden cancelar
             # así nomas pagos con cheques cambiados
-            rec.payment_ids.write({'payment_date': rec.payment_date})
+            rec.payment_ids.write({'date': rec.payment_date})
             # rec.payment_ids.filtered(lambda x: not x.payment_date).write(
             #     {'payment_date': rec.payment_date})
             if (

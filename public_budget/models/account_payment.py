@@ -11,7 +11,7 @@ class AccountPayment(models.Model):
 
     # hacemos que la fecha de pago no sea obligatoria ya que seteamos fecha
     # de validacion si no estaba seteada, la setea el payment group
-    payment_date = fields.Date(
+    date = fields.Date(
         required=False,
         default=False,
     )
@@ -45,7 +45,7 @@ class AccountPayment(models.Model):
         campos que se setean a mano
         """
         ok_fields = [
-            'document_number', 'receiptbook_id', 'state', 'payment_date',
+            'document_number', 'receiptbook_id', 'state', 'date',
             'name', 'move_name']
         if not set(ok_fields).intersection(vals.keys()) and self.filtered(
                 'returned_payment_ids'):

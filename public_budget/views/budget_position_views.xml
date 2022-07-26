@@ -96,7 +96,7 @@
         <field name="model">public_budget.budget_position</field>
         <field name="arch" type="xml">
             <tree decoration-info="type=='view'" decoration-success="budget_assignment_allowed" decoration-danger="budget_assignment_allowed and projected_amount > amount" create="false" delete="false">
-                <button name="action_position_analysis_tree" string="Open Childs" icon="fa-bars" type="object"/>
+                <button name="action_position_analysis_tree" title="Open Childs" icon="fa-bars" type="object"/>
                 <field name="code"/>
                 <field name="name"/>
                 <field name="budget_assignment_allowed"/>

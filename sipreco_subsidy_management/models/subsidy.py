@@ -233,10 +233,10 @@ class PublicBudgetSubsidy(models.Model):
                     lambda x: x.state == 'posted').mapped('payments_amount'))
             cargo_date = payments.search([
                 ('id', 'in', payments.ids),
-                ('payment_date', '!=', False),
+                ('date', '!=', False),
                 # cargo only if payment validated
                 ('state', '=', 'posted'),
-            ], order='payment_date desc', limit=1).payment_date
+            ], order='date desc', limit=1).date
 
             expiry_date = False
             if cargo_date:
