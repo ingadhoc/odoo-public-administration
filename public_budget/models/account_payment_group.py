@@ -129,10 +129,6 @@ class AccountPaymentGroup(models.Model):
     #     help='Retenciones pagadas con este voucher',
     #     compute='_get_paid_withholding'
     # )
-    show_print_receipt_button = fields.Boolean(
-        _('Show Print Receipt Button'),
-        compute='_compute_show_print_receipt_button',
-    )
     withholding_line_ids = fields.Many2many(
         'account.move.line',
         compute='_compute_withholding_lines'
@@ -229,20 +225,6 @@ class AccountPaymentGroup(models.Model):
         # we dont want any receiptbook as default
         return False
 
-    @api.depends('payment_ids.payment_method_line_id', 'state')
-    def _compute_show_print_receipt_button(self):
-        #ver con jjs
-        for rec in self:
-            show_print_receipt_button = False
-
-            #not_handed_checks = rec.payment_ids.mapped('check_ids').filtered(
-            #    lambda r: r.state in (
-            #        'holding', 'to_be_handed'))
-
-            #if rec.state == 'posted' and not not_handed_checks:
-            show_print_receipt_button = True
-            rec.show_print_receipt_button = show_print_receipt_button
-
     @api.depends('payment_base_date', 'payment_days', 'days_interval_type')
     def _compute_payment_min_date(self):
         for rec in self:
@@ -287,11 +269,10 @@ class AccountPaymentGroup(models.Model):
     #     self.paid_withholding_ids = paid_withholdings
 
     def to_signature_process(self):
-        # ver con jjs
         for rec in self:
             for payment in rec.payment_ids.filtered(
-                    lambda x: x.payment_method_code == 'issue_check'):
-                if not payment.check_number or not payment.check_name:
+                    lambda x: x.payment_method_code == 'check_printing'):
+                if not payment.check_number:
                     raise ValidationError(_(
                         'Para mandar a proceso de firma debe definir número '
                         'de cheque en cada línea de pago.\n'

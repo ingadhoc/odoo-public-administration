@@ -741,11 +741,6 @@ msgid "Confirm"
 msgstr ""
 
 #. module: public_budget
-#: model:ir.ui.view,arch_db:public_budget.view_account_payment_change_check_form
-msgid "Confirm Check Change"
-msgstr ""
-
-#. module: public_budget
 #: model:ir.ui.view,arch_db:public_budget.view_advance_request_report_wizard_form
 msgid "Confirmar"
 msgstr ""
@@ -2718,13 +2713,6 @@ msgstr ""
 #. module: public_budget
 #: model:ir.ui.view,arch_db:public_budget.view_public_budget_transaction_form
 msgid "Settlement Lines"
-msgstr ""
-
-#. module: public_budget
-#: code:addons/public_budget/models/account_payment_group.py:140
-#: model:ir.model.fields,field_description:public_budget.field_account_payment_group_show_print_receipt_button
-#, python-format
-msgid "Show Print Receipt Button"
 msgstr ""
 
 #. module: public_budget
