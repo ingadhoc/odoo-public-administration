@@ -51,7 +51,7 @@ class AccountMove(models.Model):
         open, de esta manera reforzamos el re-calculo cuando pasa a pagado
         """
         for rec in self:
-            if rec.payment_state == 'paid' and not rec.payment_group_ids:
+            if rec.payment_state in ['paid', 'in_payment'] and not rec.payment_group_ids:
                 rec._compute_to_pay_amount()
 
     @api.depends(
@@ -80,7 +80,7 @@ class AccountMove(models.Model):
         # after validation we consider it as send to paid and paid
         # TODO tal vez deberíamos mejorar porque si estamos sacando
         # analysis_to_date no se estáría teniendo en cuenta
-        if self.payment_state == 'paid' and not self.payment_group_ids:
+        if self.payment_state in ['paid', 'in_payment'] and not self.payment_group_ids:
             return self.amount_total
 
         lines = self.line_ids.filtered(lambda line: line.account_id.user_type_id.type in ('receivable', 'payable'))
@@ -112,7 +112,7 @@ class AccountMove(models.Model):
         # validation we consider it as send to paid and paid
         # TODO tal vez deberíamos mejorar porque si estamos sacando
         # analysis_to_date no se estáría teniendo en cuenta
-        if self.payment_state == 'paid' and not self.payment_group_ids:
+        if self.payment_state in ['paid', 'in_payment'] and not self.payment_group_ids:
             return self.amount_total
 
         lines = self.line_ids.filtered(lambda line: line.account_id.user_type_id.type in ('receivable', 'payable'))
@@ -154,8 +154,8 @@ class AccountMove(models.Model):
                 'pay. You need to cancel related payments first.'))
         return super().button_cancel()
 
-    def post(self):
-        res = super().post()
+    def _post(self, soft=True):
+        res = super()._post(soft=soft)
         for inv in self.filtered(
                 lambda x: x.transaction_id.type_id.with_advance_payment):
             # TODO ver si lo borramos, no seria obligatorio que una factura

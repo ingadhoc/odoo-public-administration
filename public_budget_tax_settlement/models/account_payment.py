@@ -50,7 +50,7 @@ class AccountPayment(models.Model):
             'account_withholding.account_payment_method_in_withholding')
         return_payment = self.copy({
             'payment_group_id': payment_group.id,
-            'payment_date': fields.Date.today(),
+            'date': fields.Date.today(),
             'payment_method_id': payment_method.id,
             'payment_type': 'inbound',
             'withholding_number': _("Dev. Ret. %s") % self.withholding_number,
@@ -59,7 +59,7 @@ class AccountPayment(models.Model):
         self.return_payment_id = return_payment.id
         # al final lo estamos haciendo despues al post ya que creamos nuevo
         # campo return_payment_id
-        # return_payment.post()
+        # return_payment.action_post()
         # return_aml = return_payment.move_line_ids.filtered(
         #     lambda x: x.account_id ==
         #     self.tax_withholding_id.refund_account_id)
@@ -76,11 +76,11 @@ class AccountPayment(models.Model):
                 self.withholding_number, self.display_name))
         return payment_group.get_formview_action()
 
-    def post(self):
+    def action_post(self):
         """ Si se postea un pago que es devolución entonces marcamos
         el apunte original como liquidado
         """
-        res = super().post()
+        res = super().action_post()
         for rec in self.filtered('returned_payment_ids'):
             return_aml = rec.move_line_ids.filtered(
                 lambda x: x.account_id ==

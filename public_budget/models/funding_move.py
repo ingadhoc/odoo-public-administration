@@ -138,4 +138,4 @@ class FundingMove(models.Model):
             }
             move = rec.env['account.move'].create(move_vals)
             rec.write({'move_id': move.id, 'state': 'confirmed'})
-            move.post()
+            move._post()
