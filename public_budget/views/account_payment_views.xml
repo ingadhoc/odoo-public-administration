@@ -36,33 +36,7 @@
         </field>
     </record>
 
-
-    <record id="view_account_payment_change_check_form" model="ir.ui.view">
-        <field name="name">account.payment.form</field>
-        <field name="model">account.payment</field>
-        <field name="priority">90</field>
-        <field name="mode">primary</field>
-        <field name="inherit_id" ref="account.view_account_payment_form"/>
-        <field name="arch" type="xml">
-            <field name="payment_type" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </field>
-            <field name="amount" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </field>
-            <field name="date" position="attributes">
-                <!-- <attribute name="invisible">0</attribute> -->
-                <!-- lo hacemos visible para cambio de cheques -->
-                <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
-                <attribute name="required">1</attribute>
-            </field>
-            <button position="after">
-                <button name="confirm_check_change" class="oe_highlight" states="draft" string="Confirm Check Change" type="object"/>
-            </button>
-        </field>
-    </record>
 <!-- because we generate checks on post, checks report is made from payments -->
-<!--  Checks printing from payments-->
     <!-- payments tree view -->
     <record model="ir.ui.view" id="view_account_payment_tree">
         <field name="name">account.payment.tree</field>
@@ -71,9 +45,7 @@
         <field name="inherit_id" ref="account.view_account_payment_tree"/>
         <field name="arch" type="xml">
             <tree>
-                <button name="print_checks" icon="fa-print" help="Print check" type="object" attrs="{'invisible': [('payment_method_code', '!=', 'issue_check')]}"/>
                 <!-- por ahora usamos metodo distinto para cambio de retenciones y de cheque, pero la idea sería implementar el mismo metodos -->
-                <button name="change_check" icon="fa-undo" type="object" attrs="{'invisible': [('payment_method_code', '!=', 'issue_check')]}" confirm="Seguro que desea cancelar/cambiar el cheque?"/>
                 <button name="change_withholding" icon="fa-undo" type="object" attrs="{'invisible': ['|', '|', ('payment_type', '!=', 'outbound'), ('state', '!=', 'posted'), ('payment_method_code', '!=', 'withholding')]}" confirm="Seguro que desea devolver esta retención?"/>
                 <field name="payment_type" invisible="1"/>
             </tree>
@@ -100,9 +72,7 @@
             </tree>
             <tree>
                 <field name="return_payment_id" invisible="1"/>
-                <button name="print_checks" icon="fa-print " help="Print check" type="object" attrs="{'invisible': ['|', ('payment_method_code', '!=', 'issue_check')]}"/>
                 <!-- por ahora usamos metodo distinto para cambio de retenciones y de cheque, pero la idea sería implementar el mismo metodos -->
-                <button name="change_check" icon="fa-undo" type="object" attrs="{'invisible': [('payment_method_code', '!=', 'issue_check')]}" confirm="Seguro que desea cancelar/cambiar el cheque?"/>
                 <button name="change_withholding" icon="fa-undo" type="object" attrs="{'invisible': ['|', '|', ('payment_type', '!=', 'outbound'), ('state', '!=', 'posted'), ('payment_method_code', '!=', 'withholding')]}" confirm="Seguro que desea devolver esta retención?"/>
                 <field name="payment_type" invisible="1"/>
             </tree>

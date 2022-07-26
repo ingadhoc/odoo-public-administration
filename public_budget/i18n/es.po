@@ -1005,11 +1005,6 @@ msgid "Confirm"
 msgstr "Confirmar"
 
 #. module: public_budget
-#: model_terms:ir.ui.view,arch_db:public_budget.view_account_payment_change_check_form
-msgid "Confirm Check Change"
-msgstr "Confirmar Cambio de Cheque"
-
-#. module: public_budget
 #: model_terms:ir.ui.view,arch_db:public_budget.view_account_asset_asset_form
 msgid "Confirm Transfer Asset"
 msgstr "Confirmar transferencia de activo"
@@ -2504,11 +2499,6 @@ msgstr ""
 #: model:ir.model.fields,help:public_budget.field_public_budget_advance_request_line__pending_return_amount
 msgid ""
 "Monto de Devolucion Pendiente de Confirmación en devolución de adelanto"
-msgstr ""
-
-#. module: public_budget
-#: model:ir.model.fields,field_description:public_budget.field_account_payment_group__show_print_receipt_button
-msgid "Mostrar botón de Imprimir Recibo"
 msgstr ""
 
 #. module: public_budget
