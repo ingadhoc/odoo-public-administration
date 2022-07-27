@@ -7,9 +7,7 @@ class BudgetTransaction(models.Model):
 
     def action_view_purchase_requisitions(self):
         self.ensure_one()
-        action = self.env.ref(
+        action = self.env["ir.actions.actions"]._for_xml_id(
             'purchase_requisition.action_purchase_requisition')
-        action = action.read()[0]
-        action['context'] = {
-            'search_default_expedient_id': self.expedient_id.id}
+        action['context'] = {'search_default_expedient_id': self.expedient_id.id}
         return action
