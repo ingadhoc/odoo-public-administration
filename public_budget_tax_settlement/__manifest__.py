@@ -1,6 +1,6 @@
 {
     'name': 'Public Budget integration with Tax settlement',
-    'version': '13.0.1.1.0',
+    'version': "15.0.1.0.0",
     'author': 'ADHOC SA,Odoo Community Association (OCA)',
     'license': 'AGPL-3',
     'website': 'www.adhoc.com.ar',
@@ -16,6 +16,6 @@
         'public_budget',
         'account_tax_settlement',
     ],
-    'installable': False,
+    'installable': True,
     'auto_install': True,
 }

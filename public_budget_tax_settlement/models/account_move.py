@@ -42,6 +42,6 @@ class AccoutMove(models.Model):
     @api.model
     def create(self, values):
         res = super().create(values)
-        if res.type == 'entry' and not res.partner_id and len(res.line_ids.mapped('partner_id')) == 1:
+        if res.move_type == 'entry' and not res.partner_id and len(res.line_ids.mapped('partner_id')) == 1:
             res.partner_id = res.line_ids.mapped('partner_id')
         return res
