@@ -1,6 +1,6 @@
 {
     'name': 'Sipreco Purchase Management',
-    'version': '13.0.1.8.0',
+    'version': "15.0.1.0.0",
     'license': 'AGPL-3',
     'author': 'ADHOC SA,Odoo Community Association (OCA)',
     'website': 'www.adhoc.com.ar',
@@ -42,5 +42,5 @@
         'demo/product_demo.xml',
         'demo/sequence_demo.xml',
     ],
-    'installable': False,
+    'installable': True,
 }

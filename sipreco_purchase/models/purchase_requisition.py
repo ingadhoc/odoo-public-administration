@@ -129,14 +129,19 @@ class PurchaseRequisition(models.Model):
 
     def print_report_requisition(self):
         self.ensure_one()
-        action = self.env.ref(
-            'sipreco_purchase.action_aeroo_purchase_requisition_report')
+        action = self.env.ref('sipreco_purchase.action_aeroo_purchase_requisition_report').report_action(self, config=False)
         body = _("User: %s printed the report: %s" %
-                 (self.env.user.name, action.name))
+                 (self.env.user.name, action.get('name')))
         self.message_post(body=body)
         if not self.printed:
             self.printed = True
-        return action.read()[0]
+        return  {
+            'actions': [
+                {'type': 'ir.actions.act_window_close'},
+                action,
+            ],
+            'type': 'ir.actions.act_multi',
+        }
 
     def action_draft(self):
         """ We need to keep the original number for the order regardless of change the state

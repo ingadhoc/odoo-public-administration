@@ -60,14 +60,13 @@ class PublicBudgetCreateExepedientsWizard(models.TransientModel):
             # if came from an requisition.
             order.sudo().expedient_id = expedient.id
             expedients |= expedient
-        action = self.env.ref(
+        action = self.env["ir.actions.actions"]._for_xml_id(
             'public_budget.action_public_budget_expedient_expedients')
-        action = action.read()[0]
         if not expedients or len(expedients) > 1:
             action['domain'] = "[('id','in',%s)]" % (expedients.ids)
         elif len(expedients) == 1:
-            res = self.env.ref(
-                'public_budget.view_public_budget_expedient_form', False)
+            res = self.env["ir.actions.actions"]._for_xml_id(
+                'public_budget.view_public_budget_expedient_form')
             action['views'] = [(res and res.id or False, 'form')]
             action['res_id'] = expedients.id
         return action
