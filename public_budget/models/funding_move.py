@@ -107,11 +107,11 @@ class FundingMove(models.Model):
                     'No Income account defined on the funding move or the '
                     'budget'))
             if rec.type == 'refund':
-                account_id = rec.journal_id.profit_account_id.id
+                account_id = rec.journal_id.default_account_id.id
                 debit = 0.0
                 credit = rec.amount
             else:
-                account_id = rec.journal_id.loss_account_id.id
+                account_id = rec.journal_id.default_account_id.id
                 credit = 0.0
                 debit = rec.amount
 
