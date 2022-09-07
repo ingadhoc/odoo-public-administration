@@ -36,8 +36,7 @@ class AccoutMove(models.Model):
 
     def _compute_matched_to_pay(self):
         for rec in self:
-            rec.enable_to_pay = True if not float_compare(rec._get_cash_basis_matched_percentage(),
-                                                          1, precision_digits=5) != -1 else False
+            rec.enable_to_pay = True if rec.amount_residual != 0 else False
 
     @api.model
     def create(self, values):
