@@ -185,6 +185,6 @@ class AccountMove(models.Model):
 
     def unlink(self):
         """ We need to force an unlink for vendor bill without documents """
-        self.filtered(lambda x: x.type in x.get_purchase_types() and x.state in (
+        self.filtered(lambda x: x.move_type in x.get_purchase_types() and x.state in (
             'draft', 'cancel') and not x.l10n_latam_use_documents).write({'name': '/'})
         return super().unlink()
