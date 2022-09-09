@@ -13,8 +13,10 @@ class AccountPayment(models.Model):
     # de validacion si no estaba seteada, la setea el payment group
     date = fields.Date(
         required=False,
+        store=False,
         default=False,
     )
+
     # para no tener que cambiar tanto el metodo get_period_payments_domain
     # agregamos este campo related
     to_signature_date = fields.Date(
