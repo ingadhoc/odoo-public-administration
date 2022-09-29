@@ -77,7 +77,7 @@ class PublicBudgetDefinitiveMassInvoiceCreate(models.TransientModel):
                 'partner_id': supplier.id,
                 'invoice_date': self.invoice_date,
                 'invoice_line_ids': [(0, 0, vals)],
-                'type': invoice_type,
+                'move_type': invoice_type,
                 'journal_id': self.journal_id.id,
                 'transaction_id': self.transaction_id.id,
             }
