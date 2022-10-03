@@ -48,12 +48,6 @@
         <field name="inherit_id" ref="stock.view_move_form"/>
         <field name="arch" type="xml">
 
-
-
-            <field name="date_expected" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </field>
-
             <!-- <field name="priority" position="attributes">
                 <attribute name="invisible">1</attribute>
             </field> -->

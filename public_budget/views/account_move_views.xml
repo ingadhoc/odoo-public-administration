@@ -7,8 +7,10 @@
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_invoice_tree"/>
         <field name="arch" type="xml">
+            <field name="name" position="after">
             <field name="invoice_partner_display_name" position="attributes">
                 <attribute name="groups"></attribute>
+            </field>
             </field>
             <tree position="attributes">
                 <attribute name="limit">300</attribute>
