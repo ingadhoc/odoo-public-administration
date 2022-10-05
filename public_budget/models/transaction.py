@@ -411,17 +411,14 @@ class BudgetTransaction(models.Model):
             # si ya se mandaron a pagar no creamo
             if not to_pay_move_lines:
                 continue
-            pay_context = {
-                'to_pay_move_line_ids': to_pay_move_lines.ids,
-                'default_company_id': invoice.company_id.id,
-            }
-            self.env['account.payment.group'].with_context(
-                pay_context).create({
+            rec = self.env['account.payment.group'].create({
                     'partner_type': 'supplier',
                     'receiptbook_id': self.budget_id.receiptbook_id.id,
                     'expedient_id': self.expedient_id.id,
                     'partner_id': partner.id,
                     'transaction_id': self.id,
+                    'company_id': invoice.company_id.id,
+                    'to_pay_move_line_ids': [(6, False, to_pay_move_lines.ids)],
                 })
         return True
 
