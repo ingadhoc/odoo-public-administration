@@ -100,12 +100,15 @@ class AdvanceRequest(models.Model):
         self.ensure_one()
         partner = self.type_id.general_return_partner_id
         amount = sum(self.advance_request_line_ids.mapped('approved_amount'))
-        return self.payment_group_ids.create({
+        res = self.payment_group_ids.create({
             'partner_id': partner.id,
             'unreconciled_amount': amount,
             'advance_request_id': self.id,
             'partner_type': 'supplier',
         })
+        res.remove_all()
+        res.to_pay_amount = amount
+        return res
 
     @api.constrains('state', 'advance_request_line_ids')
     def check_amounts(self):
