@@ -37,7 +37,7 @@ class AccountMove(models.Model):
     def l10n_ar_verify_on_afip(self):
         super().l10n_ar_verify_on_afip()
         if self._context.get('from_transaction', 0) == 1:
-            action = self.env.ref('account.action_move_in_invoice_type').read()[0]
+            action = self.env.ref('account.action_move_in_invoice_type').sudo().read()[0]
             action['res_id'] = self.id
             action['views'] = [(self.env.ref('account.view_move_form').id, 'form')]
             action['target'] = 'new'

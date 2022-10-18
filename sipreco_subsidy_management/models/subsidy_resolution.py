@@ -80,7 +80,7 @@ class PublicBudgetSubsidyResolution(models.Model):
         actions = self.env.ref(
             'public_budget.action_public_budget_remit_remits')
         if actions:
-            action_read = actions.read()[0]
+            action_read = actions.sudo().read()[0]
             action_read['name'] = 'Remitos'
             action_read['domain'] = [('id', '=', remit.id)]
         return action_read

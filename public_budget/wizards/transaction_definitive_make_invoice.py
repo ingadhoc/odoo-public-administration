@@ -232,7 +232,7 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
 
         if not action:
             return False
-        res = action.read()[0]
+        res = action.sudo().read()[0]
 
         form_view_id = self.env.ref('account.view_move_form').id
         res['views'] = [(form_view_id, 'form')]

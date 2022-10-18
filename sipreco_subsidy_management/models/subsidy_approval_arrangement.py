@@ -73,6 +73,6 @@ class ApprovalArrangement(models.Model):
             'sipreco_subsidy_management.action_public_budget_subsidy')
         if not action:
             return True
-        action_read = action.read()[0]
+        action_read = action.sudo().read()[0]
         action_read['domain'] = [('id', 'in', subsidies.ids)]
         return action_read

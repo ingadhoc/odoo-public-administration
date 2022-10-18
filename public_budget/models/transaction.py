@@ -671,7 +671,7 @@ class BudgetTransaction(models.Model):
         if not action:
             return False
 
-        res = action.read()[0]
+        res = action.sudo().read()[0]
 
         form_view_id = self.env.ref(
             'account_payment_group.view_account_payment_group_form').id
@@ -702,7 +702,7 @@ class BudgetTransaction(models.Model):
         self.ensure_one()
         action = self.env.ref(
             'account_asset.action_account_asset_form')
-        action = action.read()[0]
+        action = action.sudo().read()[0]
         action['context'] = {'search_default_invoice': 1}
         action['domain'] = [('id', 'in', self.asset_ids.ids)]
         return action

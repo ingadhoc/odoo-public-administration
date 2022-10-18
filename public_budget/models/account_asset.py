@@ -95,7 +95,7 @@ class AccountAsset(models.Model):
         self.ensure_one()
         action = self.env.ref(
             'public_budget.action_transfer_asset_wizard')
-        action_read = action.read()[0]
+        action_read = action.sudo().read()[0]
         return action_read
 
     def confirm_tranfer(self):
@@ -117,7 +117,7 @@ class AccountAsset(models.Model):
         self.ensure_one()
         action = self.env.ref(
             'public_budget.action_public_budget_transaction_transactions')
-        action = action.read()[0]
+        action = action.sudo().read()[0]
         action['domain'] = [('id', 'in', self.transaction_ids.ids)]
         return action
 

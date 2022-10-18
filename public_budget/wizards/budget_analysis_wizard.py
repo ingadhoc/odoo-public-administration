@@ -20,14 +20,14 @@ class PublicBudgetBudgetAnalysisWizard(models.TransientModel):
             'public_budget.action_position_analysis_tree')
         if not actions:
             return False
-        action_read = actions.read()[0]
+        action_read = actions.sudo().read()[0]
         actions = self.env.ref(
             'public_budget.action_public_budget_budget_budgets')
         if not actions:
             return False
         form_view = self.env.ref(
             'public_budget.view_public_budget_budget_to_date_form')
-        action_read = actions.read()[0]
+        action_read = actions.sudo().read()[0]
         action_read.pop('views')
         action_read['target'] = 'inlineview'
         action_read['res_id'] = self.budget_id.id
