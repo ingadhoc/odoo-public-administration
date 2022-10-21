@@ -76,11 +76,8 @@ class PublicBudgetSubsidyResolution(models.Model):
         remit = self.env['public_budget.remit'].create(vals)
         remit.expedient_ids = self.mapped(
             'subsidy_resolution_line_ids.expedient_id').ids
-        action_read = False
-        actions = self.env.ref(
-            'public_budget.action_public_budget_remit_remits')
-        if actions:
-            action_read = actions.read()[0]
+        action_read = self.env["ir.actions.act_window"]._for_xml_id('public_budget.action_public_budget_remit_remits')
+        if action_read:
             action_read['name'] = 'Remitos'
             action_read['domain'] = [('id', '=', remit.id)]
         return action_read

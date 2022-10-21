@@ -93,10 +93,9 @@ class AccountAsset(models.Model):
 
     def transfer_asset(self):
         self.ensure_one()
-        action = self.env.ref(
+        action = self.env["ir.actions.act_window"]._for_xml_id(
             'public_budget.action_transfer_asset_wizard')
-        action_read = action.read()[0]
-        return action_read
+        return action
 
     def confirm_tranfer(self):
         self.ensure_one()
@@ -115,9 +114,8 @@ class AccountAsset(models.Model):
 
     def action_view_transaction(self):
         self.ensure_one()
-        action = self.env.ref(
+        action =  self.env["ir.actions.act_window"]._for_xml_id(
             'public_budget.action_public_budget_transaction_transactions')
-        action = action.read()[0]
         action['domain'] = [('id', 'in', self.transaction_ids.ids)]
         return action
 

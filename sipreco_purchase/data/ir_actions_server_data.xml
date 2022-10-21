@@ -74,8 +74,7 @@ records.button_confirm()
         <field name="binding_model_id" ref="purchase.model_purchase_order"/>
         <field name="state">code</field>
         <field name="code">
-action = env.ref('sipreco_purchase.action_create_expedients_wizard')
-action = action.read()[0]
+action = self.env["ir.actions.act_window"]._for_xml_id('sipreco_purchase.action_create_expedients_wizard')
 purchase_orders = records.filtered(lambda x: x.state in ['purchase',  'done'])
 purchase_orders.check_if_expedients_exist()
 action['context'] = {'active_ids': purchase_orders.ids}
