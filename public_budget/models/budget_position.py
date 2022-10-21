@@ -333,25 +333,23 @@ class BudgetPosition(models.Model):
 
     def action_position_analysis_tree(self):
         self.ensure_one()
-        res = {}
+        action = {}
         display_name = '%s %s' % (self.code, self.name)
         if self.child_ids:
-            action = self.env.ref(
+            action =  self.env["ir.actions.act_window"]._for_xml_id(
                 'public_budget.action_position_analysis_tree')
-            res = action.read()[0]
-            res['domain'] = [('id', 'in', self.child_ids.ids)]
-            res['target'] = 'current'
-            res['display_name'] = display_name
+            action['domain'] = [('id', 'in', self.child_ids.ids)]
+            action['target'] = 'current'
+            action['display_name'] = display_name
         elif self.preventive_line_ids:
-            action = self.env.ref('public_budget.action_budget_position_items')
-            res = action.read()[0]
-            res['display_name'] = display_name
-            res['context'] = {
+            action = self.env["ir.actions.act_window"]._for_xml_id('public_budget.action_budget_position_items')
+            action['display_name'] = display_name
+            action['context'] = {
                 'search_default_budget_position_id': [self.id],
                 'search_default_affects_budget': 1,
                 'search_default_budget_id': self._context.get(
                     'budget_id', False)}
             if self._context.get('analysis_to_date', False):
-                res['domain'] = [('transaction_id.issue_date', '<=', self._context.get('analysis_to_date', False))]
-            res['target'] = 'current'
-        return res
+                action['domain'] = [('transaction_id.issue_date', '<=', self._context.get('analysis_to_date', False))]
+            action['target'] = 'current'
+        return action

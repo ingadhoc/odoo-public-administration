@@ -228,19 +228,17 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
                     self.supplier_id.property_account_payable_id.id)
                  })
         # Buscamos la vista de supplier invoices
-        action = self.env.ref('account.action_move_in_invoice_type')
+        action = self.env["ir.actions.act_window"]._for_xml_id('account.action_move_in_invoice_type')
 
         if not action:
             return False
-        res = action.read()[0]
-
         form_view_id = self.env.ref('account.view_move_form').id
-        res['views'] = [(form_view_id, 'form')]
-        res['res_id'] = invoice.id
-        res['target'] = 'new'
+        action['views'] = [(form_view_id, 'form')]
+        action['res_id'] = invoice.id
+        action['target'] = 'new'
         if tran_type.with_advance_payment:
             # we force commit because the transaction isn't finish yet and the account
             #  isn't change when the invoice need to validate, because of that the invoice isn't take paid.
             self.env.cr.commit()
             return invoice.action_post()
-        return res
+        return action
