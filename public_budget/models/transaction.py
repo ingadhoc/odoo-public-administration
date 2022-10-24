@@ -680,7 +680,7 @@ class BudgetTransaction(models.Model):
             'default_partner_id': partner_id and partner_id.id or False,
             'default_partner_type': 'supplier',
         }
-        return res
+        return action
 
     def copy(self, default=None):
         res = super().copy(default)
