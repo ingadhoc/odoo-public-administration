@@ -454,6 +454,10 @@ class AccountPaymentGroup(models.Model):
             'supplier')
         if not payments:
             return False
-        return self.env['ir.actions.report'].search(
-            [('report_name', '=', 'l10n_ar_account_withholding.report_withholding_certificate')],
-            limit=1).report_action(payments)
+        return {
+            'actions': [
+                {'type': 'ir.actions.act_window_close'},
+                self.env.ref('l10n_ar_account_withholding.action_report_withholding_certificate').report_action(payments.ids),
+            ],
+            'type': 'ir.actions.act_multi',
+        }
