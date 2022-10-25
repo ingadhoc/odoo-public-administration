@@ -69,10 +69,7 @@ class ApprovalArrangement(models.Model):
 
     def action_view_subsidy(self):
         subsidies = self.mapped('rendition_ids.subsidy_id')
-        action = self.env.ref(
+        action_read = self.env["ir.actions.actions"]._for_xml_id(
             'sipreco_subsidy_management.action_public_budget_subsidy')
-        if not action:
-            return True
-        action_read = action.sudo().read()[0]
         action_read['domain'] = [('id', 'in', subsidies.ids)]
         return action_read

@@ -665,13 +665,8 @@ class BudgetTransaction(models.Model):
             "It is not possible to generate a payment order if the "
             "expedient of the transaction is not in a permitted location or is in transit")
         self.expedient_id.check_location_allowed_for_current_user(msg)
-        action = self.env.ref(
+        res = self.env["ir.actions.actions"]._for_xml_id(
             'account_payment_group.action_account_payments_group_payable')
-
-        if not action:
-            return False
-
-        res = action.sudo().read()[0]
 
         form_view_id = self.env.ref(
             'account_payment_group.view_account_payment_group_form').id
@@ -700,9 +695,8 @@ class BudgetTransaction(models.Model):
 
     def action_view_account_asset(self):
         self.ensure_one()
-        action = self.env.ref(
+        action = self.env["ir.actions.actions"]._for_xml_id(
             'account_asset.action_account_asset_form')
-        action = action.sudo().read()[0]
         action['context'] = {'search_default_invoice': 1}
         action['domain'] = [('id', 'in', self.asset_ids.ids)]
         return action

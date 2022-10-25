@@ -228,11 +228,7 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
                     self.supplier_id.property_account_payable_id.id)
                  })
         # Buscamos la vista de supplier invoices
-        action = self.env.ref('account.action_move_in_invoice_type')
-
-        if not action:
-            return False
-        res = action.sudo().read()[0]
+        res = self.env["ir.actions.actions"]._for_xml_id('account.action_move_in_invoice_type')
 
         form_view_id = self.env.ref('account.view_move_form').id
         res['views'] = [(form_view_id, 'form')]

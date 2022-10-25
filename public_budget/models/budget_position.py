@@ -336,15 +336,12 @@ class BudgetPosition(models.Model):
         res = {}
         display_name = '%s %s' % (self.code, self.name)
         if self.child_ids:
-            action = self.env.ref(
-                'public_budget.action_position_analysis_tree')
-            res = action.sudo().read()[0]
+            res = self.env["ir.actions.actions"]._for_xml_id('public_budget.action_position_analysis_tree')
             res['domain'] = [('id', 'in', self.child_ids.ids)]
             res['target'] = 'current'
             res['display_name'] = display_name
         elif self.preventive_line_ids:
-            action = self.env.ref('public_budget.action_budget_position_items')
-            res = action.sudo().read()[0]
+            res = self.env["ir.actions.actions"]._for_xml_id('public_budget.action_budget_position_items')
             res['display_name'] = display_name
             res['context'] = {
                 'search_default_budget_position_id': [self.id],
