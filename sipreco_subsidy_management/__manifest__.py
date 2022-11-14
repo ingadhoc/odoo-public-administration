@@ -29,5 +29,5 @@
     'depends': [
         'public_budget',
     ],
-    'installable': True,
+    'installable': False,
 }
