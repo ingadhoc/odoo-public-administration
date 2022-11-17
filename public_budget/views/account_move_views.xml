@@ -46,6 +46,9 @@
             <!-- <button name="action_account_invoice_payment_group" position="attributes">
                 <attribute name="invisible">1</attribute>
             </button> -->
+            <button name="button_cancel" position="before">
+                <button name="%(action_aeroo_report_liquidation)d" class="oe_highlight" string="Imprimir Liquidación" type="action"/>
+            </button>
 
             <!-- we hide refund button -->
             <button name="action_reverse" position="attributes">
