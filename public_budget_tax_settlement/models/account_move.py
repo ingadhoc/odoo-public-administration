@@ -26,6 +26,8 @@ class AccoutMove(models.Model):
                 'to_pay_move_line_ids': open_move_line_ids.ids,
                 'pop_up': True,
                 'default_company_id': self.company_id.id,
+                'default_partner_id': self.partner_id.id,
+                'default_partner_type': 'supplier',
                 # por defecto, en pago de retenciones, no hacemos double
                 # validation
                 'force_simple': True,
