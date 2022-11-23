@@ -64,7 +64,8 @@ class PublicBudgetSubsidyRendition(models.Model):
 
     @api.depends('rendition_amount', 'approved_amount')
     def _compute_pending_amount(self):
-        self.pending_amount = self.rendition_amount - self.approved_amount
+        for rec in self:
+            rec.pending_amount = rec.rendition_amount - rec.approved_amount
 
     def unlink(self):
         if self.filtered(lambda x: x.approval_arrangement_id and x.editable_line):
