@@ -7,6 +7,7 @@ class PublicBudgetExpedient(models.Model):
     _name = 'public_budget.expedient'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Expedient'
+    _rec_name = 'number'
 
     _order = "id desc"
 
