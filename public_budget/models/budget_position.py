@@ -10,6 +10,7 @@ class BudgetPosition(models.Model):
     _name = 'public_budget.budget_position'
     _description = 'Budget Position'
     _parent_store = True
+    _rec_name = 'code'
 
     _order = "code"
 
