@@ -188,3 +188,10 @@ class AccountMove(models.Model):
         self.filtered(lambda x: x.move_type in x.get_purchase_types() and x.state in (
             'draft', 'cancel') and not x.l10n_latam_use_documents).write({'name': '/'})
         return super().unlink()
+
+    def _payment_state_matters(self):
+        # TODO KZ si no funciona podriamos intentar con open_move_line_ids si esta definido y viene seteado.
+        self.ensure_one()
+        if self.settled_line_ids:
+            return True
+        return super()._payment_state_matters()
