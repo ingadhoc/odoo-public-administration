@@ -159,8 +159,6 @@ class AccountPayment(models.Model):
             # 'tree_view_ref': (
             #     'account_payment_group.'
             #     'view_account_payment_from_group_tree'),
-            'default_receiptbook_id': self.receiptbook_id.id,
-            'default_document_number': self.document_number,
             'default_payment_group_id': self.payment_group_id.id,
             'replaced_payment_id': self.id,
         }
