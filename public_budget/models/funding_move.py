@@ -107,13 +107,15 @@ class FundingMove(models.Model):
                     'No Income account defined on the funding move or the '
                     'budget'))
             if rec.type == 'refund':
-                account_id = rec.journal_id.default_account_id.id
+                method_lines = rec.journal_id.outbound_payment_method_line_ids
                 debit = 0.0
                 credit = rec.amount
             else:
-                account_id = rec.journal_id.default_account_id.id
+                method_lines = rec.journal_id.inbound_payment_method_line_ids
                 credit = 0.0
                 debit = rec.amount
+
+            account_id = method_lines.filtered(lambda x: x.code == 'manual')[:1].payment_account_id.id or method_lines[:1].payment_account_id.id
 
             move_line1 = {
                 'name': rec.name[:64],
