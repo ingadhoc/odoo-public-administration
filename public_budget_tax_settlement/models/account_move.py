@@ -38,6 +38,10 @@ class AccoutMove(models.Model):
 
     def _compute_matched_to_pay(self):
         for rec in self:
+            if self.line_ids and not self.payment_state and self.state == 'posted' and self.open_move_line_ids:
+                amount_residual = sum(self.line_ids.mapped('amount_residual'))
+                if amount_residual != 0:
+                    self.amount_residual = amount_residual
             rec.enable_to_pay = True if rec.amount_residual != 0 else False
 
     @api.model
