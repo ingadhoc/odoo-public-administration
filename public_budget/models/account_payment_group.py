@@ -147,6 +147,7 @@ class AccountPaymentGroup(models.Model):
                 'tax_line_id')
 
     def post(self):
+        self = self.with_context(from_payment_group=True)
         for rec in self:
             # si no estaba seteada la setamos
             if not rec.payment_date:
