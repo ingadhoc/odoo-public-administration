@@ -298,9 +298,9 @@ class Budget(models.Model):
 
     def action_to_open_modification(self):
         self.ensure_one()
-        view_id = self.env['ir.model.data'].xmlid_to_res_id(
+        view_id = self.env['ir.model.data']._xmlid_to_res_id(
             'public_budget.view_budget_modification_detail_tree_inherit')
-        view_search_id = self.env['ir.model.data'].xmlid_to_res_id(
+        view_search_id = self.env['ir.model.data']._xmlid_to_res_id(
             'public_budget.view_public_budget_modification_detail_filter')
         return {
             'type': 'ir.actions.act_window',
@@ -332,3 +332,21 @@ class Budget(models.Model):
             'context': {'search_default_budget_id': self.id},
 
         }
+
+    def create_new_details_from_modif(self):
+        modification = self.mapped("budget_modification_ids.budget_modification_detail_ids.budget_position_id.id")
+        details = self.mapped("budget_detail_ids.budget_position_id.id")
+        new_detail_to_create = set(modification) - set(details)
+        if not new_detail_to_create:
+            return
+
+        self.write({'budget_detail_ids': [
+            (0, 0, {'budget_position_id': item, 'initial_amount': 0.0})
+            for item in new_detail_to_create
+        ]})
+
+    def write(self, values):
+        res = super().write(values)
+        if 'budget_modification_ids' in values:
+            self.create_new_details_from_modif()
+        return res
