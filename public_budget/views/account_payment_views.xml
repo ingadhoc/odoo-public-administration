@@ -66,7 +66,7 @@
         <field name="model">account.payment</field>
         <field name="priority">50</field>
         <field name="inherit_id" ref="account_payment_group.view_account_payment_from_group_tree"/>
-        <field name="arch" type="xml"> 
+        <field name="arch" type="xml">
             <tree position="attributes">
                 <attribute name="decoration-muted">return_payment_id</attribute>
             </tree>
