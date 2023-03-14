@@ -13,7 +13,7 @@ class AccountPayment(models.Model):
     # de validacion si no estaba seteada, la setea el payment group
     date = fields.Date(
         required=False,
-        store=False,
+        store=True,
         default=False,
     )
 
