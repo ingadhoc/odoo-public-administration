@@ -65,8 +65,8 @@ class PublicBudgetCreateExepedientsWizard(models.TransientModel):
         if not expedients or len(expedients) > 1:
             action['domain'] = "[('id','in',%s)]" % (expedients.ids)
         elif len(expedients) == 1:
-            res = self.env["ir.actions.actions"]._for_xml_id(
-                'public_budget.view_public_budget_expedient_form')
+            res = self.env.ref(
+                'public_budget.view_public_budget_expedient_form', False)
             action['views'] = [(res and res.id or False, 'form')]
             action['res_id'] = expedients.id
         return action
