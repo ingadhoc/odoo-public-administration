@@ -51,6 +51,7 @@
                 <field name="type"/>
                 <field name="name"/>
                 <field name="reference"/>
+                <button name="%(action_budget_modification_report)d" help="Print" type="action" icon="fa-print"/>
             </tree>
         </field>
     </record>
