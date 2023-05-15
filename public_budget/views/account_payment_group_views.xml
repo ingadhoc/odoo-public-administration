@@ -56,7 +56,7 @@
                 <field name="communication" optional="hide"/>
             </field>
             <tree position="inside">
-                <button name="confirm" type="object" string="Confirm" states="draft" icon="fa-arrow-circle-right" groups="account.group_account_manager"/>
+                <button name="confirm" type="object" string="Confirm" attrs="{'invisible': [('state','!=', 'draft')]}" icon="fa-arrow-circle-right" groups="account.group_account_manager"/>
             </tree>
         </field>
     </record>
