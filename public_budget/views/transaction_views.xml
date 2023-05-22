@@ -145,6 +145,7 @@
         <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
         <field name="arch" type="xml">
             <field name="activity_ids" position="replace"/>
+            <field name="message_ids" position="replace"/>
         </field>
     </record>
 
