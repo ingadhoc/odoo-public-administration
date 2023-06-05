@@ -23,13 +23,16 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
     supplier_id = fields.Many2one(
         'res.partner',
         string='Supplier',
+        readonly=False,
         required=True,
+        default=lambda self: self.env['res.partner'],
         domain=[('supplier_rank', '>', 0)],
     )
     line_ids = fields.One2many(
         'public_budget.definitive.make.invoice.detail',
         'definitive_make_invoice_id',
         string='Lines',
+        readonly=False,
     )
     journal_id = fields.Many2one(
         'account.journal',
@@ -126,11 +129,10 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
             rec.journal_document_type_id = move.l10n_latam_document_type_id
 
     @api.onchange('supplier_ids')
-    def _onchange_suppliers(self):
-        # TODO en v13 podemos hacer como en documents types y convertir esto a
-        # computed para que se setee en create/write
-        if not self.supplier_id and len(self.supplier_ids) == 1:
-            self.supplier_id = self.supplier_ids.id
+    def _onchange_supplier_id(self):
+        for rec in self:
+            if not rec.supplier_id and len(rec.supplier_ids) == 1:
+                rec.supplier_id = rec.supplier_ids.id
 
     @api.depends('transaction_id')
     def _compute_supplier_ids(self):
@@ -147,24 +149,25 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
 
     @api.onchange('supplier_id')
     def _compute_lines(self):
-        self.line_ids = self.env[
-            'public_budget.definitive.make.invoice.detail']
-        transaction_id = self.env.context.get('active_id', False)
-        if transaction_id:
-            definitive_lines = self.env[
-                'public_budget.definitive_line'].search([
-                    ('transaction_id', '=', transaction_id),
-                    ('supplier_id', '=', self.supplier_id.id),
-                    ('residual_amount', '!=', 0.0),
-                ])
-            lines = []
-            for line in definitive_lines:
-                values = {
-                    'definitive_line_id': line.id,
-                    'definitive_make_invoice_id': self.id,
-                }
-                lines.append((0, 0, values))
-            self.line_ids = lines
+        for rec in self:
+            rec.line_ids = self.env[
+                'public_budget.definitive.make.invoice.detail']
+            transaction_id = self.env.context.get('active_id', False)
+            if transaction_id:
+                definitive_lines = rec.env[
+                    'public_budget.definitive_line'].search([
+                        ('transaction_id', '=', transaction_id),
+                        ('supplier_id', '=', rec.supplier_id.id),
+                        ('residual_amount', '!=', 0.0),
+                    ])
+                lines = []
+                for line in definitive_lines:
+                    values = {
+                        'definitive_line_id': line.id,
+                        'definitive_make_invoice_id': rec.id,
+                    }
+                    lines.append((0, 0, values))
+                rec.line_ids = lines
 
     def make_invoices(self):
         self.ensure_one()
