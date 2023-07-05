@@ -54,6 +54,9 @@
             <field name="name" position="after">
                 <field name="payment_group_id"/>
             </field>
+            <field name="partner_id" position="after">
+                <field name="destination_journal_id"/>
+            </field>
         </field>
     </record>
 
