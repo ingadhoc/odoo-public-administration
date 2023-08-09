@@ -23,16 +23,15 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
     supplier_id = fields.Many2one(
         'res.partner',
         string='Supplier',
-        compute="_compute_supplier_id",
         readonly=False,
         required=True,
+        default=lambda self: self.env['res.partner'],
         domain=[('supplier_rank', '>', 0)],
     )
     line_ids = fields.One2many(
         'public_budget.definitive.make.invoice.detail',
         'definitive_make_invoice_id',
         string='Lines',
-        compute="_compute_lines",
         readonly=False,
     )
     journal_id = fields.Many2one(
@@ -129,13 +128,11 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
             rec.available_journal_document_type_ids = move.l10n_latam_available_document_type_ids
             rec.journal_document_type_id = move.l10n_latam_document_type_id
 
-    @api.depends('supplier_ids')
-    def _compute_supplier_id(self):
+    @api.onchange('supplier_ids')
+    def _onchange_supplier_id(self):
         for rec in self:
             if not rec.supplier_id and len(rec.supplier_ids) == 1:
                 rec.supplier_id = rec.supplier_ids.id
-            else:
-                rec.supplier_id=False
 
     @api.depends('transaction_id')
     def _compute_supplier_ids(self):
@@ -150,7 +147,7 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
             rec.supplier_ids = suppliers
             # definitive_lines.env.all.mode = env_all_mode
 
-    @api.depends('supplier_id')
+    @api.onchange('supplier_id')
     def _compute_lines(self):
         for rec in self:
             rec.line_ids = self.env[
@@ -160,7 +157,7 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
                 definitive_lines = rec.env[
                     'public_budget.definitive_line'].search([
                         ('transaction_id', '=', transaction_id),
-                        ('supplier_id', '=', rec.supplier_id._origin.id),
+                        ('supplier_id', '=', rec.supplier_id.id),
                         ('residual_amount', '!=', 0.0),
                     ])
                 lines = []
