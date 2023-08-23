@@ -220,13 +220,10 @@ class PublicBudgetExpedient(models.Model):
         if 'pages' in vals:
             new_pages = vals.get('pages')
             for record in self:
-                admin_users = self.env['res.users'].sudo().search([('groups_id', 'in', [self.env.ref('base.group_system').id])])
-                if new_pages and self.env.user in admin_users and self.user_has_groups('base.group_no_one'):
-                    message = _("Cantidad de páginas modificadas de %d a %d") % (
-                    self.pages, new_pages)
-                    self.message_post(body=message)
-                else:
-                    raise ValidationError(_('No tiene autorización para modificar la cantidad de páginas de un expediente'))
+                if new_pages < record.pages:
+                    raise ValidationError(_('No puede disminuir la cantidad '
+                                            'de páginas de un '
+                                            'expediente'))
         return super().write(vals)
 
     def check_expedients_exist(self):
