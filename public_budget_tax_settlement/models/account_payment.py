@@ -82,7 +82,7 @@ class AccountPayment(models.Model):
         """
         res = super().action_post()
         for rec in self.filtered('returned_payment_ids'):
-            return_aml = rec.move_line_ids.filtered(
+            return_aml = rec.line_ids.filtered(
                 lambda x: x.account_id ==
                 rec.tax_withholding_id.refund_repartition_line_ids.filtered(lambda x : x.repartition_type == 'tax').account_id)
             if len(return_aml) != 1:
@@ -104,7 +104,7 @@ class AccountPayment(models.Model):
         liquidado
         """
         self.ensure_one()
-        withholding_aml = self.move_line_ids.filtered(
+        withholding_aml = self.line_ids.filtered(
             lambda x: x.account_id == self.tax_withholding_id.invoice_repartition_line_ids.filtered(lambda x : x.repartition_type == 'tax').account_id)
         if len(withholding_aml) != 1:
             raise ValidationError(_(
