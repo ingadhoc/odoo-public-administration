@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <!-- Printed Invoice -->
+    <record id="action_aeroo_subsidy_tickets_resolution_report" model="ir.actions.report">
+        <field name="name">Reporte Tabla Resoluciones de Subsidios</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="report_name">subsidy_tickets_resolution_report</field>
+        <field name="report_type">aeroo</field>
+        <field name="in_format">oo-ods</field>
+        <field name="report_file">sipreco_subsidy_management/reports/report_subsidy_tickets_resolution.ods</field>
+        <field name="tml_source">file</field>
+        <field name="out_format" ref="report_aeroo.report_mimetypes_xls_odt"/>
+        <field name="styles_mode">specified</field>
+        <field name="stylesheet_id" ref="public_budget.sipreco_stylesheet"/>
+        <field name="binding_model_id" ref="model_helpdesk_ticket"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="action_aeroo_subsidy_tickets_resolution_INSTIT" model="ir.actions.report">
+        <field name="name">Resolucion INSTIT</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="report_name">subsidy_tickets_resolution_INSTIT</field>
+        <field name="report_type">aeroo</field>
+        <field name="in_format">oo-odt</field>
+        <field name="report_file">sipreco_subsidy_management/reports/subsidy_tickets_resolution_INSTIT.odt</field>
+        <field name="tml_source">file</field>
+        <field name="out_format" ref="report_aeroo.report_mimetypes_doc_odt"/>
+        <field name="styles_mode">specified</field>
+        <field name="stylesheet_id" ref="public_budget.sipreco_stylesheet"/>
+        <field name="binding_model_id" ref="model_helpdesk_ticket"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="action_aeroo_subsidy_tickets_resolution_COMUN_report" model="ir.actions.report">
+        <field name="name">Resolucion COMUN</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="report_name">subsidy_tickets_resolution_report_COMUN</field>
+        <field name="report_type">aeroo</field>
+        <field name="in_format">oo-odt</field>
+        <field name="report_file">sipreco_subsidy_management/reports/subsidy_tickets_resolution_COMUN.odt</field>
+        <field name="tml_source">file</field>
+        <field name="out_format" ref="report_aeroo.report_mimetypes_doc_odt"/>
+        <field name="styles_mode">specified</field>
+        <field name="stylesheet_id" ref="public_budget.sipreco_stylesheet"/>
+        <field name="binding_model_id" ref="model_helpdesk_ticket"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>
