@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+     <record id="subsidy_ticket_view_form" model="ir.ui.view">
+        <field name="name">subsidy.ticket.form</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                    <field name="dni"/>
+                    <field name="amount" string="Monto" widget="monetary"/>
+                    <field name="cbu"/>
+                    <field name="photo_dni" widget="image" style="margin-top: 25px; margin-bottom: 25px;"/>
+                    <label for="description" string="Motivo"></label>
+            </field>
+            <field name="email_cc" position="after">
+                    <field name="resolution_number"/>
+                    <field name="resolution_date"/>
+            </field>
+            <field name="ticket_type_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="tag_ids" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="priority" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="team_id" position="before">
+                <field name="expedient_id"/>
+                <field name="issue_date"/>
+            </field>
+            <field name="partner_id" position="after">
+                <field name="responsible_user"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="subsidy_ticket_view_tree" model="ir.ui.view">
+        <field name="name">subsidy.ticket.tree</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_tickets_view_tree"/>
+        <field name="arch" type="xml">
+            <field name="stage_id" position="after">
+                <field name="expedient_id"/>
+                <field name="issue_date"/>
+            </field>
+            <field name="partner_id" position="after">
+                <field name="dni"/>
+                <field name="amount" string="Monto"/>
+            </field>
+            <field name="team_id" position="before">
+                <field name="responsible_user"/>
+            </field>
+            <field name="activity_ids" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="team_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="priority" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="sla_deadline" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="subsidy_ticket_view_kanban" model="ir.ui.view">
+        <field name="name">subsidy.ticket.kanban</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//templates//field[@name='priority']" position="after">
+                <group>
+                    DNI:
+                    <field name="dni" string="DNI"/>
+                </group>
+                <group>
+                    $
+                    <field name="amount" string="Monto" widget="monetary"/>
+                </group>
+            </xpath>
+            <xpath expr="//templates//field[@name='ticket_type_id']" position="after">
+                <group>
+                    Expediente:
+                    <field name="expedient_id"/>
+                </group>
+            </xpath>
+            <xpath expr="//templates//field[@name='activity_ids']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//templates//field[@name='priority']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//templates//field[@name='sla_deadline']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//templates//field[@name='kanban_state']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//templates//field[@name='user_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="subsidy_tickets_view_search" model="ir.ui.view">
+        <field name="name">subsidy.ticket.search</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_tickets_view_search"/>
+        <field name="arch" type="xml">
+            <search>
+                <field name="dni" string="DNI"/>
+                <field name="cbu" string="CBU"/>
+                <field name="amount" string="Monto"/>
+                <field name="expedient_id"/>
+                <group expand="0" string="Group By">
+                    <filter string="Expediente" name="expedient_id" context="{'group_by': 'expedient_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

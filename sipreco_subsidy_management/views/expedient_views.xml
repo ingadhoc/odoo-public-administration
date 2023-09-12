@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <odoo>
+    <!-- Add contextual button on partner form view -->
+    <record id="view_expedients_form" model="ir.ui.view">
+        <field name="name">public_budget.expedient.form</field>
+        <field name="model">public_budget.expedient</field>
+        <field name="inherit_id" ref="public_budget.view_public_budget_expedient_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button class="oe_stat_button" type="object"
+                    name="action_open_subsidy_ticket" context="{'default_partner_id': active_id}" icon="fa-life-ring">
+                <div class="o_stat_info">
+                    <span class="o_stat_text"> Subsidies</span>
+                </div>
+                </button>
+            </div>
+        </field>
+    </record>
+</odoo>
