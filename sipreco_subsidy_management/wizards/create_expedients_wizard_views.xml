@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_create_expedients_wizard_form" model="ir.ui.view">
+        <field name="name">Create Expedients Wizard</field>
+        <field name="model">public_budget.create.expedients.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Asistente de Generacion de Expedientes">
+                <group>
+                    <field name="reference"/>
+                    <field name="founder_id"/>
+                </group>
+                <group>
+                    <field name="category_id"/>
+                    <field name="user_location_ids" invisible="1"/>
+                    <field name="first_location_id" domain="[('id', 'in',user_location_ids)]"/>
+                    <field name="pages"/>
+                </group>
+                <footer>
+                    <button name="confirm" string="Confirmar" type="object" class="oe_highlight"/>
+                        o
+                    <button string="Cancelar" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_create_expedients_wizard" model="ir.actions.act_window">
+        <field name="name">Asistente de creacion de Expedientes</field>
+        <field name="res_model">public_budget.create.expedients.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>
