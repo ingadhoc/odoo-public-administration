@@ -1,13 +1,7 @@
 {
     'name': 'Public Budget',
     'license': 'AGPL-3',
-<<<<<<< HEAD
-    'version': "15.0.1.10.0",
-||||||| parent of c4d5714 (temp)
-    'version': "15.0.1.11.0",
-=======
     'version': "15.0.1.12.0",
->>>>>>> c4d5714 (temp)
     'author': 'ADHOC SA,Odoo Community Association (OCA)',
     'website': 'www.adhoc.com.ar',
     'category': 'Accounting & Finance',
