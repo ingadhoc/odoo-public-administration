@@ -188,3 +188,9 @@ class AccountMove(models.Model):
         self.filtered(lambda x: x.move_type in x.get_purchase_types() and x.state in (
             'draft', 'cancel') and not x.l10n_latam_use_documents).write({'name': '/'})
         return super().unlink()
+
+    @api.model
+    def _deduce_sequence_number_reset(self, name):
+        if self.env.context.get("from_payment_group"):
+            return 'never'
+        return super()._deduce_sequence_number_reset(name)
