@@ -30,6 +30,7 @@
                     </group>
                     <button type="action" name="%(sipreco_payment_line.action_account_payment_line_import)d" string="Importar"/>
                     <button type="object" name="check_payment_lines_total" string="Verificar Total"/>
+                    <button name="remove_all_transfer_lines" string="Eliminar todo" states="draft" type="object"/>
                     <field name="line_ids">
                         <tree editable="bottom">
                             <field name="partner_id"/>
