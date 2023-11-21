@@ -101,3 +101,8 @@ class AccountPaymentGroup(models.Model):
         self.archivo_banco = base64.encodestring(
             ('\r\n'.join(lines_data) + '\r\n').encode())
         self.archivo_banco_name = 'Archivo banco %s.txt' % fields.Date.today()
+
+    def remove_all_transfer_lines(self):
+        """ Botón usado dentro de una orden de pago en una transacción para que en la solapa 'Líneas de Transferencia' se pueda borrar masivamente todas las trasferencias cuando la orden de pago se encuentra en estado 'Borrador'. """
+        if self.state == 'draft':
+            self.line_ids = False
