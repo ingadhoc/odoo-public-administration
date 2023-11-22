@@ -58,7 +58,10 @@
                 <!-- sacamos el editable porque nos da un error por sua tree editable en un pop up -->
                 <field name="issue_date"/>
                 <field name="supplier_id" context="{'res_partner_search_mode': 'supplier'}"/>
-                <field name="amount"/>
+                <field name="amount" string="Definitivo"/>
+                <field name="invoiced_amount"/>
+                <field name="to_pay_amount" optional="hide"/>
+                <field name="paid_amount" optional="hide"/>
                 <field name="state" invisible="True"/>
                 <field name="currency_id" invisible="1"/>
                 <field name="to_pay_amount" invisible="1"/>
