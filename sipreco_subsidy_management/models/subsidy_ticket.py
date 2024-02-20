@@ -8,7 +8,7 @@ class PublicBudgetSubsidyTicket(models.Model):
     _inherit = 'helpdesk.ticket'
 
     dni = fields.Char(
-        size=8,
+        size=11,
         string="DNI",
     )
     currency_id = fields.Many2one(
@@ -56,12 +56,6 @@ class PublicBudgetSubsidyTicket(models.Model):
         for partner in self:
             if partner.cbu and len(partner.cbu) != 22:
                 raise ValidationError("El CBU debe tener 22 caracteres.")
-
-    @api.constrains('dni')
-    def _check_dni_length(self):
-        for partner in self:
-            if partner.dni and len(partner.dni) != 8:
-                raise ValidationError("El DNI debe tener 8 caracteres.")
 
     @api.model
     def create(self, values):
