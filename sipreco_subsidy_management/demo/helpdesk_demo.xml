@@ -4,96 +4,96 @@
     <record id="helpdesk.helpdesk_ticket_1" model="helpdesk.ticket">
         <field name="dni">11111111</field>
         <field name="cbu">1111122222333334444455</field>
-        <field name="amount">1000.0</field>
+        <field name="amount">1000</field>
     </record>
     <record id="helpdesk.helpdesk_ticket_2" model="helpdesk.ticket">
         <field name="dni">22222222</field>
-        <field name="amount">1000.0</field>
+        <field name="amount">1000</field>
         <field name="cbu">1111122222333334444455</field>
     </record>
     <record id="helpdesk.helpdesk_ticket_3" model="helpdesk.ticket">
         <field name="dni">33333333</field>
-        <field name="amount">1000.0</field>
+        <field name="amount">1000</field>
         <field name="cbu">1111122222333334444455</field>
     </record>
     <record id="helpdesk.helpdesk_ticket_4" model="helpdesk.ticket">
         <field name="dni">44444444</field>
-        <field name="amount">1000.0</field>
+        <field name="amount">1000</field>
         <field name="cbu">1111122222333334444455</field>
     </record>
     <record id="helpdesk.helpdesk_ticket_5" model="helpdesk.ticket">
         <field name="dni">55555555</field>
-        <field name="amount">1000.0</field>
+        <field name="amount">1000</field>
         <field name="cbu">1111122222333334444455</field>
     </record>
     <record id="helpdesk.helpdesk_ticket_6" model="helpdesk.ticket">
         <field name="dni">66666666</field>
-        <field name="amount">1000.0</field>
+        <field name="amount">1000</field>
         <field name="cbu">1111122222333334444455</field>
     </record>
     <record id="helpdesk.helpdesk_ticket_7" model="helpdesk.ticket">
         <field name="dni">77777777</field>
-        <field name="amount">1000.0</field>
+        <field name="amount">1000</field>
         <field name="cbu">1111122222333334444455</field>
     </record>
     <record id="helpdesk.helpdesk_ticket_8" model="helpdesk.ticket">
         <field name="dni">88888888</field>
-        <field name="amount">1000.0</field>
+        <field name="amount">1000</field>
         <field name="cbu">1111122222333334444455</field>
     </record>
     <record id="helpdesk.helpdesk_ticket_9" model="helpdesk.ticket">
         <field name="dni">12345678</field>
-        <field name="amount">1000.0</field>
+        <field name="amount">1000</field>
         <field name="cbu">1111122222333334444455</field>
     </record>
     <record id="helpdesk.helpdesk_ticket_10" model="helpdesk.ticket">
         <field name="dni">11223344</field>
-        <field name="amount">1000.0</field>
+        <field name="amount">1000</field>
         <field name="cbu">1111122222333334444455</field>
     </record>
     <record id="helpdesk.helpdesk_ticket_11" model="helpdesk.ticket">
         <field name="dni">11112222</field>
-        <field name="amount">1000.0</field>
+        <field name="amount">1000</field>
         <field name="cbu">1111122222333334444455</field>
     </record>
     <record id="helpdesk.helpdesk_ticket_12" model="helpdesk.ticket">
         <field name="dni">33334444</field>
-        <field name="amount">1000.0</field>
+        <field name="amount">1000</field>
         <field name="cbu">1111122222333334444455</field>
     </record>
     <record id="helpdesk.helpdesk_ticket_13" model="helpdesk.ticket">
         <field name="dni">55556666</field>
-        <field name="amount">1000.0</field>
+        <field name="amount">1000</field>
         <field name="cbu">1111122222333334444455</field>
     </record>
     <record id="helpdesk.helpdesk_ticket_14" model="helpdesk.ticket">
         <field name="dni">77778888</field>
-        <field name="amount">1000.0</field>
+        <field name="amount">1000</field>
         <field name="cbu">1111122222333334444455</field>
     </record>
     <record id="helpdesk.helpdesk_ticket_15" model="helpdesk.ticket">
         <field name="dni">21436587</field>
-        <field name="amount">1000.0</field>
+        <field name="amount">1000</field>
         <field name="cbu">1111122222333334444455</field>
     </record>
     <record id="helpdesk.helpdesk_ticket_16" model="helpdesk.ticket">
         <field name="dni">36925814</field>
-        <field name="amount">1000.0</field>
+        <field name="amount">1000</field>
         <field name="cbu">1111122222333334444455</field>
     </record>
     <record id="helpdesk.helpdesk_ticket_17" model="helpdesk.ticket">
         <field name="dni">55882266</field>
-        <field name="amount">1000.0</field>
+        <field name="amount">1000</field>
         <field name="cbu">1111122222333334444455</field>
     </record>
     <record id="helpdesk.helpdesk_ticket_18" model="helpdesk.ticket">
         <field name="dni">77456258</field>
-        <field name="amount">1000.0</field>
+        <field name="amount">1000</field>
         <field name="cbu">1111122222333334444455</field>
     </record>
     <record id="helpdesk.helpdesk_ticket_19" model="helpdesk.ticket">
         <field name="dni">98965521</field>
-        <field name="amount">1000.0</field>
+        <field name="amount">1000</field>
         <field name="cbu">1111122222333334444455</field>
     </record>
 
