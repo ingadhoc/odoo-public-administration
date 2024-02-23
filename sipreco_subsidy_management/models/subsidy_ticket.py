@@ -16,8 +16,7 @@ class PublicBudgetSubsidyTicket(models.Model):
         related='company_id.currency_id',
         readonly=True,
     )
-    amount = fields.Monetary(
-        currency_field='currency_id',
+    amount = fields.Integer(
     )
     cbu = fields.Char(
         size=22,
@@ -42,7 +41,6 @@ class PublicBudgetSubsidyTicket(models.Model):
     responsible_user = fields.Many2one(
         'res.users',
         string="Usuario Responsable",
-        readonly=True,
     )
     resolution_number = fields.Char(
         string="Número de Resolución",
@@ -59,13 +57,21 @@ class PublicBudgetSubsidyTicket(models.Model):
 
     @api.model
     def create(self, values):
-        ticket = super(PublicBudgetSubsidyTicket, self).create(values)
+        dni = values.get('dni')
+        partner = self.env['res.partner'].search([('vat', '=', dni)], limit=1)
+        if partner:
+            values['partner_id'] = partner.id
+            values['partner_name'] = partner.name
+            values['partner_phone'] = partner.phone
+            values['partner_email'] = partner.email
 
+        ticket = super(PublicBudgetSubsidyTicket, self).create(values)
         user = http.request.env.user
         if user:
             ticket.responsible_user = user
         if ticket.dni and ticket.partner_id:
             partner = ticket.partner_id
+            partner.subsidy_recipient = True
             dni_identification_type = self.env['l10n_latam.identification.type'].search([('name', '=', 'DNI')], limit=1)
             if dni_identification_type:
                 partner.l10n_latam_identification_type_id = dni_identification_type.id
@@ -77,3 +83,12 @@ class PublicBudgetSubsidyTicket(models.Model):
             self.issue_date = self.expedient_id.issue_date
         else:
             self.issue_date = False
+
+    @api.model
+    def name_get(self):
+        result = []
+        for ticket in self:
+            year = ticket.create_date.year
+            name_with_year = "%s (#%d) - %d" % (ticket.name, ticket._origin.id, year)
+            result.append((ticket.id, name_with_year))
+        return result
