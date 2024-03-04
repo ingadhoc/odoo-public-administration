@@ -5,4 +5,6 @@ from . import subsidy_note
 from . import subsidy_note_type
 from . import subsidy_resolution
 from . import subsidy_resolution_line
+from . import subsidy_ticket
 from . import transaction_type
+from . import expedient
