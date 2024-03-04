@@ -263,10 +263,10 @@ class PublicBudgetExpedient(models.Model):
     @api.depends('supplier_ids', 'description')
     def _compute_cover(self):
         for rec in self:
-            # supplier_names = [x.name for x in rec.supplier_ids]
+            supplier_names = [x.name for x in rec.supplier_ids]
             cover = rec.description
-            # if supplier_names:
-            #     cover += ' - ' + ', '.join(supplier_names)
+            if supplier_names:
+                cover += ' - ' + ', '.join(supplier_names)
             rec.cover = cover
 
     def action_cancel_open(self):
