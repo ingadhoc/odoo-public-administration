@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <record id="subsidy_ticket_director_view_form" model="ir.ui.view">
+        <field name="name">subsidy.ticket.director.form</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="groups_id" eval="[(4, ref('public_budget.group_secretary_director'))]"/>
+        <field name="inherit_id" ref="subsidy_ticket_view_form"/>
+        <field name="arch" type="xml">
+            <field name="expedient_id" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>
