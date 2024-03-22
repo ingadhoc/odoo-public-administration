@@ -8,3 +8,4 @@ from . import subsidy_resolution_line
 from . import subsidy_ticket
 from . import transaction_type
 from . import expedient
+from . import ir_actions_report
