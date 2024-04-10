@@ -49,15 +49,14 @@ class PublicBudgetSubsidyTicket(models.Model):
         string="Fecha de Resolución",
     )
 
-    @api.constrains('cbu')
-    def _check_cbu_length(self):
-        for partner in self:
-            if partner.cbu and len(partner.cbu) != 22:
-                raise ValidationError("El CBU debe tener 22 caracteres.")
-
     @api.model
     def create(self, values):
         dni = values.get('dni')
+        if (dni and len(dni) != 8) and (dni and len(dni) != 11):
+                raise ValidationError("El DNI debe tener 8 caracteres y el CUIT 11 caracteres")
+        cbu = values.get('cbu')
+        if cbu and len(cbu) != 22:
+                raise ValidationError("El CBU debe tener 22 caracteres.")
         partner = self.env['res.partner'].search([('vat', '=', dni)], limit=1)
         if partner:
             values['partner_id'] = partner.id
