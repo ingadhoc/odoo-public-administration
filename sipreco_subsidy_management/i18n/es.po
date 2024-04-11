@@ -291,7 +291,6 @@ msgstr "Nombre mostrado"
 
 #. module: sipreco_subsidy_management
 #: model:ir.actions.act_window,name:sipreco_subsidy_management.action_public_budget_subsidy_approval_arrangement
-#: model:ir.ui.menu,name:sipreco_subsidy_management.menu_public_budget_subsidy_approval_arrangement
 msgid "Disposiciones de aprobación"
 msgstr ""
 
@@ -1156,4 +1155,39 @@ msgstr ""
 #. module: sipreco_subsidy_management
 #: model:ir.model.constraint,message:sipreco_subsidy_management.constraint_public_budget_subsidy_resolution_line_expedient_id
 msgid "¡Expediente Duplicado! Revisar"
+msgstr ""
+
+#. module: sipreco_subsidy_management
+#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_create_administrative_process_wizard__first_location_id
+msgid "First Location"
+msgstr "Primer Ubicación"
+
+#. module: sipreco_subsidy_management
+#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_create_administrative_process_wizard__founder_id
+msgid "Founder"
+msgstr "Causante"
+
+#. module: sipreco_subsidy_management
+#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_create_administrative_process_wizard__category_id
+msgid "Category"
+msgstr "Categoría"
+
+#. module: sipreco_subsidy_management
+#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_create_administrative_process_wizard__reference
+msgid "Reference"
+msgstr "Referencia"
+
+#. module: sipreco_subsidy_management
+#: model:ir.model.fields,field_description:sipreco_subsidy_management.field_public_budget_create_administrative_process_wizard__pages
+msgid "Pages"
+msgstr "Folios"
+
+#. module: sipreco_subsidy_management
+#: model_terms:ir.ui.view,arch_db:sipreco_subsidy_management.view_create_administrative_process_wizard_form
+msgid "Confirmar"
+msgstr "Confirmar"
+
+#. module: sipreco_subsidy_management
+#: model_terms:ir.ui.view,arch_db:sipreco_subsidy_management.view_create_administrative_process_wizard_form
+msgid "Cancelar"
 msgstr ""

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Generar expédientes -->
+    <record model="ir.actions.server" id="action_generate_expedient">
+        <field name="name">Generar Tramite Administrativo</field>
+        <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
+        <field name="binding_model_id" ref="helpdesk.model_helpdesk_ticket"/>
+        <field name="state">code</field>
+        <field name="code">
+action = env["ir.actions.act_window"]._for_xml_id('sipreco_subsidy_management.action_create_administrative_process_wizard')
+helpdesk_tickets = records.filtered(lambda x: x.stage_id.name in ['Ticket',  'Aprobado'])
+action['context'] = {'active_ids': helpdesk_tickets.ids}
+        </field>
+    </record>
+
+</odoo>

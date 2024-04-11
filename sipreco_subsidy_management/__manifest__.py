@@ -21,6 +21,16 @@
         'data/sequence_data.xml',
         'data/subsidy_note_type_data.xml',
         'data/cron.xml',
+<<<<<<< HEAD
+||||||| parent of bec37d4 (temp)
+        'data/ir_actions_server_data.xml',
+        'wizards/create_expedients_wizard_views.xml',
+        'views/expedient_views.xml'
+=======
+        'data/ir_actions_server_data.xml',
+        'wizards/create_administrative_process_wizard_views.xml',
+        'views/expedient_views.xml'
+>>>>>>> bec37d4 (temp)
     ],
     'demo': [
         'demo/public_budget.transaction_type.csv',
