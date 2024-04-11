@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_create_expedients_wizard_form" model="ir.ui.view">
-        <field name="name">Create Expedients Wizard</field>
-        <field name="model">public_budget.create.expedients.wizard</field>
+    <record id="view_create_administrative_processs_wizard_form" model="ir.ui.view">
+        <field name="name">Create Administrative Process Wizard</field>
+        <field name="model">public_budget.create.administrative.process.wizard</field>
         <field name="arch" type="xml">
-            <form string="Asistente de Generacion de Expedientes">
+            <form string="Asistente de Generacion de Tramites Administrativos">
                 <group>
                     <field name="reference"/>
                     <field name="founder_id"/>
@@ -23,9 +23,9 @@
         </field>
     </record>
 
-    <record id="action_create_expedients_wizard" model="ir.actions.act_window">
-        <field name="name">Asistente de creacion de Expedientes</field>
-        <field name="res_model">public_budget.create.expedients.wizard</field>
+    <record id="action_create_administrative_processs_wizard" model="ir.actions.act_window">
+        <field name="name">Asistente de creacion de Tramites Administrativos</field>
+        <field name="res_model">public_budget.create.administrative.process.wizard</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>

@@ -25,7 +25,7 @@
         'data/subsidy_note_type_data.xml',
         'data/cron.xml',
         'data/ir_actions_server_data.xml',
-        'wizards/create_expedients_wizard_views.xml',
+        'wizards/create_administrative_process_wizard_views.xml',
         'views/expedient_views.xml'
     ],
     'demo': [

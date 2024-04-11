@@ -1,1 +1,1 @@
-from . import create_expedients_wizard
+from . import create_administrative_process_wizard
