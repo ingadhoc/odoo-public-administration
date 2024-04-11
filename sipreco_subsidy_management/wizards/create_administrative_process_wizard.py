@@ -2,9 +2,9 @@ from odoo import models, fields, api, _, Command
 from odoo.exceptions import UserError
 
 
-class PublicBudgetCreateExepedientsWizard(models.TransientModel):
-    _name = "public_budget.create.expedients.wizard"
-    _description = "public_budget.create.expedients.wizard"
+class PublicBudgetCreateAdministrativeProcessWizard(models.TransientModel):
+    _name = "public_budget.create.administrative.process.wizard"
+    _description = "public_budget.create.administrative.process.wizard"
 
     reference = fields.Char(
         required=False
@@ -23,7 +23,7 @@ class PublicBudgetCreateExepedientsWizard(models.TransientModel):
     )
     user_location_ids = fields.Many2many(
         'public_budget.location',
-        'public_budget_create_expedients_location_rel',
+        'public_budget_create_administrative_process_location_rel',
         default=lambda self: self.env.user.location_ids.ids,
     )
     pages = fields.Integer(
@@ -36,7 +36,7 @@ class PublicBudgetCreateExepedientsWizard(models.TransientModel):
     def confirm(self):
         active_tickets_ids = self._context.get('active_ids') or []
         tickets = self.env['helpdesk.ticket'].browse(active_tickets_ids)
-        if tickets.expedient_id:
+        if tickets and tickets.expedient_id:
             raise UserError(_('Uno de los tickets ya tiene un expediente asociado'))
         if not tickets:
             raise UserError(_('Los tickets deben estar aprobados para poder generar un expediente'))
