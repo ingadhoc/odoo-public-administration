@@ -54,8 +54,9 @@ class PublicBudgetCreateAdministrativeProcessWizard(models.TransientModel):
 
         expedient = self.env['public_budget.expedient'].create(vals)
         tickets.write({'expedient_id': expedient.id})
-        stage = self.env['helpdesk.stage'].search([('name', '=', "Tramite Administrativo")], limit=1)
-        tickets.write({'stage_id': stage.id})
+        # El cambio de etapa queda como comentario por ahora por pedido del cmr
+        # stage = self.env['helpdesk.stage'].search([('name', '=', "Tramite Administrativo")], limit=1)
+        # tickets.write({'stage_id': stage.id})
 
         action = self.env["ir.actions.actions"]._for_xml_id(
             'public_budget.action_public_budget_expedient_expedients')
