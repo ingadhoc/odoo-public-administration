@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_create_administrative_processs_wizard_form" model="ir.ui.view">
+        <field name="name">Create Administrative Process Wizard</field>
+        <field name="model">public_budget.create.administrative.process.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Asistente de Generacion de Tramites Administrativos">
+                <group>
+                    <field name="reference"/>
+                    <field name="founder_id"/>
+                </group>
+                <group>
+                    <field name="category_id"/>
+                    <field name="user_location_ids" invisible="1"/>
+                    <field name="first_location_id" domain="[('id', 'in',user_location_ids)]"/>
+                    <field name="pages"/>
+                </group>
+                <footer>
+                    <button name="confirm" string="Confirmar" type="object" class="oe_highlight"/>
+                    <button string="Cancelar" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_create_administrative_process_wizard" model="ir.actions.act_window">
+        <field name="name">Asistente de creacion de Tramites Administrativos</field>
+        <field name="res_model">public_budget.create.administrative.process.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

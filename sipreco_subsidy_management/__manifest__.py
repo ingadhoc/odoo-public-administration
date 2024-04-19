@@ -1,6 +1,12 @@
 {
     'name': 'Public Budget Subsidy Management',
+<<<<<<< HEAD
     'version': "15.0.1.0.0",
+||||||| parent of 800a167 (temp)
+    'version': "15.0.1.1.0",
+=======
+    'version': "15.0.1.2.0",
+>>>>>>> 800a167 (temp)
     'author': 'ADHOC SA,Odoo Community Association (OCA)',
     'website': 'www.adhoc.com.ar',
     'category': 'Accounting & Finance',
