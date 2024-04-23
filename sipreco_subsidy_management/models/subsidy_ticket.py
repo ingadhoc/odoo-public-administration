@@ -1,6 +1,6 @@
 from odoo import fields, models, api, _
 import odoo.http as http
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, UserError
 import stdnum
 
 class PublicBudgetSubsidyTicket(models.Model):
@@ -94,3 +94,11 @@ class PublicBudgetSubsidyTicket(models.Model):
             name_with_year = "%s (#%d) - %d" % (ticket.name, ticket._origin.id, year)
             result.append((ticket.id, name_with_year))
         return result
+
+    @api.constrains('stage_id')
+    def _check_expedient(self):
+        ''' Check if tickets has an expedient associated in order to change to the expedient stage '''
+        if not self.expedient_id and self.stage_id.name == "Tramite Administrativo":
+            raise UserError(_('El ticket debe tener un tramite administrativo asociado para pasarlo a esta etapa'))
+        if self.expedient_id and self.stage_id.name != "Tramite Administrativo":
+            raise UserError(_('El ticket tiene un tramite administrativo asociado, por lo tanto no puede retroceder una etapa'))
