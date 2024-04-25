@@ -81,10 +81,11 @@ class PublicBudgetSubsidyTicket(models.Model):
         return ticket
 
     def _compute_issue_date(self):
-        if self.expedient_id:
-            self.issue_date = self.expedient_id.issue_date
-        else:
-            self.issue_date = False
+        for ticket in self:
+            if ticket.expedient_id:
+                ticket.issue_date = ticket.expedient_id.issue_date
+            else:
+                ticket.issue_date = False
 
     @api.model
     def name_get(self):
