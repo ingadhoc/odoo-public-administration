@@ -128,12 +128,6 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
             rec.available_journal_document_type_ids = move.l10n_latam_available_document_type_ids
             rec.journal_document_type_id = move.l10n_latam_document_type_id
 
-    @api.onchange('supplier_ids')
-    def _onchange_supplier_id(self):
-        for rec in self:
-            if not rec.supplier_id and len(rec.supplier_ids) == 1:
-                rec.supplier_id = rec.supplier_ids.id
-
     @api.depends('transaction_id')
     def _compute_supplier_ids(self):
         for rec in self:
