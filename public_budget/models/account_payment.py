@@ -75,8 +75,7 @@ class AccountPayment(models.Model):
                 rec.destination_account_id = payment_group.\
                     advance_request_id.type_id.account_id
             else:
-                return super(
-                    AccountPayment, rec)._compute_destination_account_id()
+                super(AccountPayment, rec)._compute_destination_account_id()
 
     def _seek_for_lines(self):
         """
