@@ -77,20 +77,6 @@ class AccountPayment(models.Model):
             else:
                 super(AccountPayment, rec)._compute_destination_account_id()
 
-    def _seek_for_lines(self):
-        """
-        Verificamos que si vienen con cuenta de adelanto la tome como ('receivable', 'payable')
-        """
-        liquidity_lines, counterpart_lines,  writeoff_lines = super()._seek_for_lines()
-        payment_group = self.payment_group_id
-        for line in self.move_id.line_ids:
-            if payment_group.transaction_with_advance_payment and \
-                    payment_group.transaction_id.type_id.advance_account_id == line.account_id:
-                counterpart_lines += line
-            elif payment_group.advance_request_id and payment_group.advance_request_id.type_id.account_id == line.account_id:
-                counterpart_lines += line
-        return liquidity_lines, counterpart_lines, writeoff_lines
-
     def change_withholding(self):
         """ Arrojamos este error para recordarnos que este metodo se implementa
         en realidad en public_budget_tax_settlement porque necesitamos del
