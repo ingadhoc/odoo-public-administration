@@ -78,6 +78,26 @@ class PublicBudgetSubsidyTicket(models.Model):
             if dni_identification_type:
                 partner.l10n_latam_identification_type_id = dni_identification_type.id
             partner.vat = ticket.dni
+        elif not ticket.partner_id and len(ticket.dni) == 8:
+            partner = self.env['res.partner'].create({
+                'name': ticket.partner_name,
+                'mobile': ticket.partner_phone,
+                'l10n_latam_identification_type_id': self.env['l10n_latam.identification.type'].search([('name', '=', 'DNI')], limit=1).id,
+                'l10n_ar_afip_responsibility_type_id': self.env['l10n_ar.afip.responsibility.type'].search([('name', '=', 'Consumidor Final')], limit=1).id,
+                'vat': ticket.dni,
+                'subsidy_recipient': True,
+            })
+            ticket.partner_id = partner.id
+        elif not ticket.partner_id and len(ticket.dni) == 11:
+            partner = self.env['res.partner'].create({
+                'name': ticket.partner_name,
+                'mobile': ticket.partner_phone,
+                'l10n_latam_identification_type_id': self.env['l10n_latam.identification.type'].search([('name', '=', 'CUIT')], limit=1).id,
+                'l10n_ar_afip_responsibility_type_id': self.env['l10n_ar.afip.responsibility.type'].search([('name', '=', 'Consumidor Final')], limit=1).id,
+                'vat': ticket.dni,
+                'subsidy_recipient': True,
+            })
+            ticket.partner_id = partner.id
         return ticket
 
     def _compute_issue_date(self):
