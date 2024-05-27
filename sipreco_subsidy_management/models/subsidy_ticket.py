@@ -123,3 +123,16 @@ class PublicBudgetSubsidyTicket(models.Model):
             raise UserError(_('El ticket debe tener un tramite administrativo asociado para pasarlo a esta etapa'))
         if self.expedient_id and self.stage_id.name != "Tramite Administrativo":
             raise UserError(_('El ticket tiene un tramite administrativo asociado, por lo tanto no puede retroceder una etapa'))
+
+    @api.constrains('stage_id')
+    def _check_stage_id(self):
+        tickets_duplicados = []
+        for rec in self: 
+            if rec.stage_id.is_verified:
+                duplicado = self.search([('stage_id', '=',rec.stage_id.id ),('id', '!=', rec.id),('dni', '=', rec.dni)],limit = 1)                
+                if duplicado:
+                    tickets_duplicados.append(duplicado.dni)
+        if tickets_duplicados:
+            dnis_unicos = set(tickets_duplicados)
+            string = ", ".join(dnis_unicos)
+            raise ValidationError('El/los Dni/s %s tienen solicitudes duplicadas' % string)
