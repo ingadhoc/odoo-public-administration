@@ -46,6 +46,7 @@
                         <group>
                             <field name="user_id"/>
                             <field name="approval_date" attrs="{'invisible': [('approval_date', '=', False)]}"/>
+                            <field name="approval_user" attrs="{'invisible': [('approval_user', '=', False)]}"/>
                             <field name="confirmation_date" attrs="{'invisible': [('confirmation_date', '=', False)]}"/>
                             <field name="company_id" groups="base.group_multi_company"/>
                         </group>

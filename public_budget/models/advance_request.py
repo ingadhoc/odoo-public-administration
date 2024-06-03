@@ -80,10 +80,12 @@ class AdvanceRequest(models.Model):
         'advance_request_id',
         string='Payment Orders',
     )
+    approval_user = fields.Many2one('res.users', string='Aprobado por')
 
     def action_approve(self):
         for record in self:
             record.state = 'approved'
+            record.approval_user = self.env.uid
             if not record.approval_date:
                 record.approval_date = fields.Datetime.now()
         return True
