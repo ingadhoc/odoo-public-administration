@@ -290,8 +290,11 @@ class PublicBudgetExpedient(models.Model):
     def name_get(self):
         result = []
         for rec in self:
-            result.append(
-                (rec.id, "%s - %s" % (rec.number, rec.cover)))
+            if len(rec.cover) > 200:
+                result.append((rec.id, "%s - %s..." % (rec.number, rec.cover[:200])))
+            else:
+                result.append(
+                    (rec.id, "%s - %s" % (rec.number, rec.cover)))
         return result
 
     @api.model
