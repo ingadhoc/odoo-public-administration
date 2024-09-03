@@ -49,6 +49,9 @@
                 <field name="dni"/>
                 <field name="amount" string="Monto"/>
             </field>
+            <field name="display_name" position="before">
+                <field name="create_date" string="Fecha De Creación"/>
+            </field>
             <field name="team_id" position="before">
                 <field name="responsible_user"/>
             </field>
