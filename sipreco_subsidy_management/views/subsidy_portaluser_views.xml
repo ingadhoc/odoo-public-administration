@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <record id="helpdesk_ticket_subsidy_portal" model="ir.actions.act_window">
+        <field name="name">Subsidios</field>
+        <field name="res_model">helpdesk.ticket</field>
+        <field name="view_mode">tree,kanban</field>
+        <field name="context">{'create': False}</field>
+        <field name="domain">[('responsible_user', '=', uid)]</field>
+    </record>
+
+
+    <menuitem name="Subsidios" groups="public_budget.group_portal_subsidy" id="menu_tickets_portal" web_icon="sipreco_subsidy_management,static/description/icon.png" sequence="41"/>
+    <menuitem id="menu_subsidy_portal" name="Subsidios" parent="menu_tickets_portal" action="sipreco_subsidy_management.helpdesk_ticket_subsidy_portal"/>
+
+</odoo>
