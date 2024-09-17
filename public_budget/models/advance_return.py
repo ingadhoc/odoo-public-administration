@@ -110,6 +110,9 @@ class AdvanceReturn(models.Model):
 
     def action_confirm(self):
         for record in self:
+            for line in record.return_line_ids:
+                if line.returned_amount > line.debt_amount:
+                    raise ValidationError('El monto a devolver no puede ser superior a la deuda, por favor revise los montos!')
             move_vals = record.get_move_vals()
             move = self.move_id.create(move_vals)
             move._post()
