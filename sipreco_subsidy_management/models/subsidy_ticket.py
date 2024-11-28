@@ -52,8 +52,8 @@ class PublicBudgetSubsidyTicket(models.Model):
     @api.model
     def create(self, values):
         dni = values.get('dni')
-        if (dni and len(dni) != 8) and (dni and len(dni) != 11):
-                raise ValidationError("El DNI debe tener 8 caracteres y el CUIT 11 caracteres")
+        if (dni and len(dni) not in [7,8]) and (dni and len(dni) != 11):
+                raise ValidationError("El DNI debe tener 7 u 8 caracteres y el CUIT 11 caracteres")
         cbu = values.get('cbu')
         if cbu and len(cbu) != 22:
                 raise ValidationError("El CBU debe tener 22 caracteres.")
