@@ -74,6 +74,11 @@ class Budget(models.Model):
         compute='_compute_totals',
         # store=True,
     )
+    total_fondos = fields.Monetary(
+        string='Total Mov. Fondos',
+        compute='_compute_totals',
+        # store=True,
+    )
     passive_residue = fields.Monetary(
         string='Total Residuo',
         compute='_compute_totals',
@@ -217,7 +222,7 @@ class Budget(models.Model):
             [x.preventive_amount for x in self.with_context(
                 budget_id=self.id).budget_position_ids
                 if x.budget_assignment_allowed])
-        total_requested = sum(
+        total_fondos = sum(
             [x.amount for x in self.with_context(
                 budget_id=self.id).funding_move_ids
                 if x.type == 'request']) - sum(
@@ -225,9 +230,15 @@ class Budget(models.Model):
                         budget_id=self.id).funding_move_ids
                         if x.type == 'refund'])
 
+        total_requested = sum(
+            [x.amount for x in self.with_context(
+                budget_id=self.id).funding_move_ids
+                if x.type == 'request'])
+
         self.total_authorized = total_authorized
         self.total_preventive = total_preventive
         self.total_requested = total_requested
+        self.total_fondos = total_fondos
 
         # we use sql instead of orm becuase as this computed fields are not
         # stored, the computation use methods and not stored values

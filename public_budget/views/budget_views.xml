@@ -53,6 +53,7 @@
                             <field name="total_authorized"/>
                             <field name="total_preventive"/>
                             <field name="total_requested"/>
+                            <field name="total_fondos"/>
                             <field name="passive_residue" attrs="{'invisible':[('state', 'not in', ['pre_closed','closed'])]}"/>
                         </group>
                     </group>
