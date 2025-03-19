@@ -1,6 +1,6 @@
 from . import inventory_rule
 from . import res_partner
-from . import account_payment_group
+from . import account_payment_group # por ahora lo dejamos con este nombre para que sea mas facil entender cambio vs 15
 from . import account_payment
 from . import account_move
 from . import advance_request_type

@@ -27,11 +27,11 @@
         <field name="arch" type="xml">
             <form string="advance_request">
                 <header>
-                    <button name="action_approve" states="draft" string="Approve" type="object" class="oe_highlight" groups="public_budget.group_secretary_director"/>
-                    <button name="action_confirm" states="approved" string="Confirm" type="object" class="oe_highlight" groups="account.group_account_user"/>
-                    <button name="action_cancel_draft" type="object" states="cancel" string="To Draft"/>
-                    <button name="action_cancel" states="confirmed" string="Cancel" type="object" groups="account.group_account_user"/>
-                    <button name="action_cancel" states="approved,draft" string="Cancel" type="object" groups="public_budget.group_secretary_director,account.group_account_user"/>
+                    <button name="action_approve" invisible="state != 'draft'" string="Approve" type="object" class="oe_highlight" groups="public_budget.group_secretary_director"/>
+                    <button name="action_confirm" invisible="state != 'approved'" string="Confirm" type="object" class="oe_highlight" groups="account.group_account_user"/>
+                    <button name="action_cancel_draft" type="object" invisible="state != 'cancel'" string="To Draft"/>
+                    <button name="action_cancel" invisible="state != 'confirmed'" string="Cancel" type="object" groups="account.group_account_user"/>
+                    <button name="action_cancel" invisible="state not in ('approved', 'draft')" string="Cancel" type="object" groups="public_budget.group_secretary_director,account.group_account_user"/>
                     <field name="state" widget="statusbar" statusbar_colors='{}'/>
                 </header>
                 <sheet string="advance_request">
@@ -39,35 +39,35 @@
                     </div>
                     <group>
                         <group>
-                            <field name="name"/>
-                            <field name="type_id"/>
-                            <field name="date"/>
+                            <field name="name" readonly="state != 'draft'"/>
+                            <field name="type_id" readonly="state != 'draft'"/>
+                            <field name="date" readonly="state != 'draft'"/>
                         </group>
                         <group>
-                            <field name="user_id"/>
-                            <field name="approval_date" attrs="{'invisible': [('approval_date', '=', False)]}"/>
-                            <field name="approval_user" attrs="{'invisible': [('approval_user', '=', False)]}"/>
-                            <field name="confirmation_date" attrs="{'invisible': [('confirmation_date', '=', False)]}"/>
-                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="user_id" readonly="state != 'draft'"/>
+                            <field name="approval_date" invisible="not approval_date" readonly="state != 'draft'"/>
+                            <field name="approval_user" invisible="not approval_user"/>
+                            <field name="confirmation_date" invisible="not confirmation_date" readonly="state != 'draft'"/>
+                            <field name="company_id" groups="base.group_multi_company" readonly="state != 'draft'"/>
                         </group>
                     </group>
                     <notebook>
                         <page string="Lines">
-                            <field name="advance_request_line_ids">
-                                <tree editable="top">
+                            <field name="advance_request_line_ids" readonly="state != 'draft'">
+                                <list editable="top">
                                     <field name="employee_id"/>
                                     <field name="description"/>
-                                    <field name="debt_amount" states="draft" sum="Total"/>
-                                    <field name="pending_return_amount" states="draft" sum="Total"/>
+                                    <field name="debt_amount" invisible="state != 'draft'" sum="Total"/>
+                                    <field name="pending_return_amount" invisible="state != 'draft'" sum="Total"/>
                                     <field name="requested_amount" sum="Total"/>
                                     <field name="approved_amount" sum="Total"/>
-                                    <field name="state" invisible="1"/>
-                                    <field name="currency_id" invisible="1"/>
-                                </tree>
+                                    <field name="state" column_invisible="True"/>
+                                    <field name="currency_id" column_invisible="True"/>
+                                </list>
                             </field>
                         </page>
                         <page string="Payment Orders">
-                            <field name="payment_group_ids" context="{'default_partner_type': 'supplier'}"/>
+                            <field name="payment_ids" context="{'default_partner_type': 'supplier'}"/>
                         </page>
                     </notebook>
                 </sheet>
@@ -77,17 +77,17 @@
 
     <!-- TREEVIEW -->
     <record id="view_public_budget_advance_request_tree" model="ir.ui.view">
-        <field name="name">public_budget.advance_request.tree</field>
+        <field name="name">public_budget.advance_request.list</field>
         <field name="model">public_budget.advance_request</field>
         <field name="arch" type="xml">
-            <tree string="advance_request" decoration-muted="state=='cancelled'" decoration-info="state == 'draft'" decoration-bf="state in ['approved', 'confirmed']" decoration-danger="state in ()">
-                <field name="name"/>
-                <field name="type_id"/>
-                <field name="date"/>
-                <field name="user_id"/>
-                <field name="company_id" groups="base.group_multi_company"/>
+            <list string="advance_request" decoration-muted="state=='cancelled'" decoration-info="state == 'draft'" decoration-bf="state in ['approved', 'confirmed']" decoration-danger="state in ()">
+                <field name="name" readonly="state != 'draft'"/>
+                <field name="type_id" readonly="state != 'draft'"/>
+                <field name="date" readonly="state != 'draft'"/>
+                <field name="user_id" readonly="state != 'draft'"/>
+                <field name="company_id" groups="base.group_multi_company" readonly="state != 'draft'"/>
                 <field name="state"/>
-            </tree>
+            </list>
         </field>
     </record>
 

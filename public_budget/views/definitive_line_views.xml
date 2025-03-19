@@ -9,10 +9,10 @@
                 <field name="expedient_id"/>
                 <field name="transaction_id"/>
                 <field name="budget_position_id"/>
-                <field name="supplier_id"/>
+                <field name="supplier_id" readonly="state != 'draft'"/>
                 <field name="budget_id"/>
-                <field name="issue_date"/>
-                <field name="amount"/>
+                <field name="issue_date" readonly="state != 'draft'"/>
+                <field name="amount" readonly="state != 'draft'"/>
                 <group expand="0" string="Group By">
                     <filter name="Expedient" string="Expedient" domain="[]" context="{'group_by':'expedient_id'}"/>
                     <filter name="Transaction" string="Transaction" domain="[]" context="{'group_by':'transaction_id'}"/>
@@ -39,9 +39,9 @@
                     <div class="oe_button_box" name="buttons">
                     </div>
                     <group>
-                        <field name="issue_date"/>
-                        <field name="supplier_id"/>
-                        <field name="amount"/>
+                        <field name="issue_date" readonly="state != 'draft'"/>
+                        <field name="supplier_id" readonly="state != 'draft'"/>
+                        <field name="amount" readonly="state != 'draft'"/>
                         <field name="to_pay_amount" invisible="1"/>
                     </group>
                 </sheet>
@@ -51,10 +51,10 @@
 
     <!-- TREEVIEW -->
     <record id="view_public_budget_definitive_line_tree" model="ir.ui.view">
-        <field name="name">public_budget.definitive_line.tree</field>
+        <field name="name">public_budget.definitive_line.list</field>
         <field name="model">public_budget.definitive_line</field>
         <field name="arch" type="xml">
-            <tree string="Definitive Line" editable="bottom">
+            <list string="Definitive Line" editable="bottom">
                 <!-- sacamos el editable porque nos da un error por sua tree editable en un pop up -->
                 <field name="issue_date"/>
                 <field name="supplier_id" context="{'res_partner_search_mode': 'supplier'}"/>
@@ -62,10 +62,10 @@
                 <field name="invoiced_amount"/>
                 <field name="to_pay_amount" optional="hide"/>
                 <field name="paid_amount" optional="hide"/>
-                <field name="state" invisible="True"/>
-                <field name="currency_id" invisible="1"/>
-                <field name="to_pay_amount" invisible="1"/>
-            </tree>
+                <field name="state" column_invisible="True"/>
+                <field name="currency_id" column_invisible="True"/>
+                <field name="to_pay_amount" column_invisible="True"/>
+            </list>
         </field>
     </record>
 
@@ -76,14 +76,14 @@
         <field name="mode">primary</field>
         <field name="priority">50</field>
         <field name="arch" type="xml">
-            <tree string="Definitive Line">
+            <list string="Definitive Line">
                 <field name="expedient_id"/>
                 <field name="transaction_id"/>
                 <field name="budget_position_id"/>
                 <field name="supplier_id" />
                 <field name="residual_amount"/>
-                <field name="state" invisible="1"/>
-            </tree>
+                <field name="state" column_invisible="True"/>
+            </list>
         </field>
     </record>
 

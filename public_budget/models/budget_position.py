@@ -10,7 +10,7 @@ class BudgetPosition(models.Model):
     _name = 'public_budget.budget_position'
     _description = 'Budget Position'
     _parent_store = True
-    _rec_name = 'code'
+    _rec_names_search = ['name', 'code']
 
     _order = "code"
 
@@ -125,9 +125,12 @@ class BudgetPosition(models.Model):
     )
     default_account_id = fields.Many2one(
         'account.account',
+        #TODO revisar dominio account
+        # domain="["
+        # "('internal_type', '=', 'other'), "
+        # "('company_id', '=', company_id), "
+        # "('deprecated', '=', False)]",
         domain="["
-        "('internal_type', '=', 'other'), "
-        "('company_id', '=', company_id), "
         "('deprecated', '=', False)]",
         help='Default Account on preventive lines of this position'
     )
@@ -221,10 +224,10 @@ class BudgetPosition(models.Model):
                 domain.append(('id', '!=', excluded_line_id))
 
             rec.draft_amount = sum([x['preventive_amount'] for x in self.env[
-                'public_budget.preventive_line'].read_group(
+                'public_budget.preventive_line']._read_group(
                 domain=domain,
-                fields=['budget_position_id', 'preventive_amount'],
                 groupby=['budget_position_id'],
+                aggregates=['preventive_amount:sum'],
             )])
 
             active_preventive_lines = self.env['public_budget.preventive_line'].with_context(
@@ -247,22 +250,9 @@ class BudgetPosition(models.Model):
             rec.balance_amount = rec.amount - preventive_amount
             _logger.debug('Finish getting amounts for budget position %s' % rec.name)
 
-    def name_get(self):
-        result = []
+    def _compute_display_name(self):
         for rec in self:
-            result.append(
-                (rec.id, "%s - %s" % (rec.code, rec.name)))
-        return result
-
-    @api.model
-    def name_search(self, name, args=None, operator='ilike', limit=100):
-        args = args or []
-        recs = self.browse()
-        if name:
-            recs = self.search([('code', operator, name)] + args, limit=limit)
-        if not recs:
-            recs = self.search([('name', operator, name)] + args, limit=limit)
-        return recs.name_get()
+            rec.display_name = "%s - %s" % (rec.code, rec.name)
 
     @api.constrains('child_ids', 'type', 'parent_id')
     def _check_type(self):

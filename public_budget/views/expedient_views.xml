@@ -35,16 +35,16 @@
         <field name="arch" type="xml">
             <form string="Expedient" create="false" edit="false">
                 <header>
-                    <button name="action_cancel_open" type="object" states="cancel" string="To Draft"/>
+                    <button name="action_cancel_open" type="object" invisible="state != 'cancel'" string="To Draft"/>
                     <!-- por pedido de ellos solo desde secretaria se pueden anular -->
-                    <button name="action_annulled" states="open" type="object" groups="public_budget.group_secretary_usuario" string="To Annulled"/>
-                    <button name="action_close" states="open" type="object" groups="public_budget.group_secretary_usuario" string="Close"/>
-                    <button name="action_cancel" states="annulled,closed,open" type="object" string="Cancel" groups="base.group_no_one"/>
+                    <button name="action_annulled" invisible="state != 'open'" type="object" groups="public_budget.group_secretary_usuario" string="To Annulled"/>
+                    <button name="action_close" invisible="state != 'open'" type="object" groups="public_budget.group_secretary_usuario" string="Close"/>
+                    <button name="action_cancel" invisible="state not in ('annulled', 'closed', 'open')" type="object" string="Cancel" groups="base.group_no_one"/>
                     <field name="state" widget="statusbar" statusbar_colors='{}'/>
                 </header>
                 <sheet string="Expedient">
                     <div class="oe_button_box" name="button_box">
-                        <button class="oe_stat_button" name="%(action_public_budget_transaction_transactions)d" string="Transactions" type="action" groups="public_budget.group_portal_transaction,public_budget.group_secretary_director,account.group_account_user" context="{'search_default_expedient_id': active_id}" icon="fa-bars"/>
+                        <button class="oe_stat_button" name="%(action_public_budget_transaction_transactions)d" string="Transactions" type="action" groups="public_budget.group_portal_transaction,public_budget.group_secretary_director,account.group_account_user" context="{'search_default_expedient_id': id}" icon="fa-bars"/>
                     </div>
                     <field name="user_location_ids" invisible="1"/>
                     <field name="id" invisible="1"/>
@@ -58,7 +58,7 @@
                         <group>
                             <field name="issue_date"/>
                             <field name="year"/>
-                            <field name="description" attrs="{'readonly': [('id', '!=', False)]}"/>
+                            <field name="description" readonly="state != 'cancel'" />
                             <field name="supplier_ids" widget="many2many_tags" context="{'res_partner_search_mode': 'supplier'}"/>
                             <field name="cover"/>
                             <field name="user_id"/>
@@ -71,20 +71,20 @@
                             <field name="parent_id"/>
                             <field name="first_location_id" options="{'no_create': True}" domain="[('id', 'in', user_location_ids),('expedient_management', '=', True)]"/>
                             <field name="current_location_id"/>
-                            <field name="final_location" states="closed,annulled"/>
+                            <field name="final_location" invisible="state not in ('closed', 'annulled')"/>
                             <field name="pages"/>
                             <field name="parliamentary_expedient"/>
                             <field name="subsidy_expedient" invisible="1"/>
-                            <field name="subsidy_recipient_doc" attrs="{'invisible': [('subsidy_expedient', '!=', True)]}" />
-                            <field name="subsidy_amount" attrs="{'invisible': [('subsidy_expedient', '!=', True)]}" />
-                            <field name="subsidy_approved" attrs="{'invisible': [('subsidy_expedient', '!=', True)]}" />
-                            <field name="employee_subsidy_requestor" attrs="{'invisible': [('subsidy_expedient', '!=', True)]}" />
-                            <field name="overdue" attrs="{'invisible': ['|',('subsidy_expedient', '!=', True),('subsidy_approved', '!=', True)]}"/>
+                            <field name="subsidy_recipient_doc" invisible="not subsidy_expedient" />
+                            <field name="subsidy_amount" invisible="not subsidy_expedient" />
+                            <field name="subsidy_approved" invisible="not subsidy_expedient" />
+                            <field name="employee_subsidy_requestor" invisible="not subsidy_expedient" />
+                            <field name="overdue" invisible="not subsidy_expedient or not subsidy_approved"/>
                         </group>
                     </group>
                     <notebook>
                         <page string="Moves">
-                            <field name="remit_ids"/>
+                            <field name="remit_ids" readonly="state != 'in_transit'"/>
                         </page>
                         <page string="Childs">
                             <field name="child_ids"/>
@@ -94,31 +94,27 @@
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers"/>
-                    <field name="activity_ids" widget="mail_activity"/>
-                    <field name="message_ids" widget="mail_thread"/>
-                </div>
+                <chatter/>
             </form>
         </field>
     </record>
 
-    <record id="view_public_budget_expedient_portal_form" model="ir.ui.view">
+    <!-- <record id="view_public_budget_expedient_portal_form" model="ir.ui.view">
         <field name="name">public_budget.expedient.portal.form</field>
         <field name="model">public_budget.expedient</field>
-        <field name="inherit_id" ref="view_public_budget_expedient_form"/>
-        <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
-        <field name="arch" type="xml">
+        <field name="inherit_id" ref="view_public_budget_expedient_form"/>-->
+        <!-- <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/> -->
+       <!-- <field name="arch" type="xml">
             <field name="activity_ids" position="replace"/>
         </field>
-    </record>
+    </record> -->
 
 
     <record id="view_public_budget_expedient_form2" model="ir.ui.view">
         <field name="name">public_budget.expedient.form.inherit</field>
         <field name="model">public_budget.expedient</field>
         <field name="inherit_id" ref="view_public_budget_expedient_form"/>
-        <field name="groups_id" eval="[(4, ref('group_portal_expedient')),(4, ref('group_secretary_usuario')),(4, ref('account.group_account_user')),(4, ref('group_habilitacion_usuario'))]"/>
+        <!-- <field name="groups_id" eval="[(4, ref('group_portal_expedient')),(4, ref('group_secretary_usuario')),(4, ref('account.group_account_user')),(4, ref('group_habilitacion_usuario'))]"/> -->
         <field name="arch" type="xml">
             <form position="attributes">
                 <attribute name="create">true</attribute>
@@ -129,10 +125,10 @@
 
     <!-- TREEVIEW -->
     <record id="view_public_budget_expedient_tree" model="ir.ui.view">
-        <field name="name">public_budget.expedient.tree</field>
+        <field name="name">public_budget.expedient.list</field>
         <field name="model">public_budget.expedient</field>
         <field name="arch" type="xml">
-            <tree string="Expedient" decoration-muted="state=='cancelled'" decoration-info="state == 'open'" decoration-bf="state in ['annulled', 'closed']" decoration-danger="state in ()" create="false" edit="false">
+            <list string="Expedient" decoration-muted="state=='cancelled'" decoration-info="state == 'open'" decoration-bf="state in ['annulled', 'closed']" decoration-danger="state in ()" create="false" edit="false">
                 <field name="number"/>
                 <field name="issue_date" optional="hide"/>
                 <field name="cover"/>
@@ -148,20 +144,20 @@
                 <field name="subsidy_approved" optional="hide"/>
                 <field name="overdue" optional="hide"/>
                 <field name="state"/>
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="view_public_budget_expedient_tree2" model="ir.ui.view">
-        <field name="name">public_budget.expedient.tree.inherit</field>
+        <field name="name">public_budget.expedient.list.inherit</field>
         <field name="model">public_budget.expedient</field>
         <field name="inherit_id" ref="view_public_budget_expedient_tree"/>
-        <field name="groups_id" eval="[(4, ref('group_portal_expedient')),(4, ref('group_secretary_usuario')),(4, ref('account.group_account_user')),(4, ref('group_habilitacion_usuario'))]"/>
+        <!-- <field name="groups_id" eval="[(4, ref('group_portal_expedient')),(4, ref('group_secretary_usuario')),(4, ref('account.group_account_user')),(4, ref('group_habilitacion_usuario'))]"/> -->
         <field name="arch" type="xml">
-            <tree position="attributes">
+            <list position="attributes">
                 <attribute name="create">true</attribute>
                 <attribute name="edit">true</attribute>
-            </tree>
+            </list>
         </field>
     </record>
 

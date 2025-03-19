@@ -21,8 +21,11 @@ class TransactionType(models.Model):
     advance_account_id = fields.Many2one(
         'account.account',
         string='Advance Account',
-        domain="[('company_id', '=', company_id), "
-        "('internal_type', '!=', 'liquidity'), ('deprecated', '=', False),"
+        #TODO revisar dominion compañu e internal type
+        # domain="[('company_id', '=', company_id), "
+        # "('internal_type', '!=', 'liquidity'), ('deprecated', '=', False),"
+        # " ('reconcile', '=', False)]",
+        domain="[('deprecated', '=', False),"
         " ('reconcile', '=', False)]",
         help='This account will be used on advance payments. Must be a payable'
         ' account.',

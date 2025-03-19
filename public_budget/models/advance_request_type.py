@@ -16,9 +16,9 @@ class AdvanceRequestType(models.Model):
     )
     account_id = fields.Many2one(
         'account.account',
-        domain="[('internal_type', '=', 'other'), "
-        "('company_id', '=', company_id), "
-        "('deprecated', '=', False)]",
+        #TODO fix domain internal type es ahora account_type == incomne_other ??
+        #domain="[('internal_type', '=', 'other'), ('company_id', '=', company_id), ('deprecated', '=', False)]",
+        domain="[('deprecated', '=', False)]",
         # ahora no queremos que sea payable porque no queremos que se lleve
         # a la deuda del partner generico, queremos que para que se lleve haga
         # falta hacer una devolucion

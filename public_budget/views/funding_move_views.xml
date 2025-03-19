@@ -24,9 +24,9 @@
             <form string="Funding Move">
                 <field name="currency_id" invisible="1"/>
                 <header>
-                    <button name="action_confirm" type="object" states="draft" string="Confirm"/>
-                    <button name="action_cancel_draft" type="object" states="cancel" string="To Draft"/>
-                    <button name="action_cancel" type="object" states="confirmed,draft" string="Cancel" groups="base.group_no_one"/>
+                    <button name="action_confirm" type="object" invisible="state != 'draft'" string="Confirm"/>
+                    <button name="action_cancel_draft" type="object" invisible="state != 'cancel'" string="To Draft"/>
+                    <button name="action_cancel" type="object" invisible="state not in ('confirmed', 'draft')" string="Cancel" groups="base.group_no_one"/>
                     <field name="state" widget="statusbar" statusbar_colors='{}'/>
                 </header>
                 <sheet string="Funding Move">
@@ -37,7 +37,7 @@
                         <field name="name"/>
                         <field name="type"/>
                         <field name="journal_id"/>
-                        <field name="income_account_id"/>
+                        <field name="income_account_id" readonly="state != 'draft'"/>
                         <field name="budget_position_id"/>
                         <field name="amount"/>
                         <field name="move_id"/>
@@ -51,20 +51,20 @@
 
     <!-- TREEVIEW -->
     <record id="view_public_budget_funding_move_tree" model="ir.ui.view">
-        <field name="name">public_budget.funding_move.tree</field>
+        <field name="name">public_budget.funding_move.list</field>
         <field name="model">public_budget.funding_move</field>
         <field name="arch" type="xml">
-            <tree string="Funding Move" decoration-muted="state=='cancelled'" decoration-info="state == 'draft'" decoration-bf="state == 'confirmed'" decoration-danger="state in ()">
+            <list string="Funding Move" decoration-muted="state=='cancelled'" decoration-info="state == 'draft'" decoration-bf="state == 'confirmed'" decoration-danger="state in ()">
                 <field name="date"/>
                 <field name="name"/>
                 <field name="type"/>
                 <field name="journal_id"/>
                 <field name="amount"/>
                 <field name="move_id"/>
-                <field name="budget_id" invisible="'from_budget' in context"/>
+                <field name="budget_id" column_invisible="'from_budget' in context"/>
                 <field name="state"/>
-                <field name="currency_id" invisible="1"/>
-            </tree>
+                <field name="currency_id" column_invisible="True"/>
+            </list>
         </field>
     </record>
 </odoo>

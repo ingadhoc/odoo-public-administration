@@ -43,12 +43,12 @@
                         <label for="budget_position_id"/>
                         <div>
                             <field name="budget_position_id" options="{'no_create': True}" class="oe_inline"/>
-                            <button name="%(action_preventive_change_position)d" type="action" icon="fa-pencil" class="oe_link oe_inline" groups="account.group_account_manager"/>
+                            <button name="%(action_preventive_change_position)d" type="action" icon="fa-pencil" class="oe_link oe_inline" title="View" groups="account.group_account_manager"/>
                         </div>
-                        <field name="account_id" attrs="{'required':[('advance_line','=',False)],'invisible':[('advance_line','=',True)]}" options="{'no_create': True}"/>
-                        <field name="preventive_amount"/>
+                        <field name="account_id" options="{'no_create': True}" invisible="advance_line" required="not advance_line" readonly="state == 'invoiced'"/>
+                        <field name="preventive_amount" readonly="state == 'closed'"/>
                     </group>
-                    <group string="Definitive Lines" attrs="{'invisible':[('advance_line','=',True)]}">
+                    <group string="Definitive Lines" invisible="advance_line">
                         <field name="definitive_line_ids" nolabel="1" context="{'from_preventive':True,'default_amount':remaining_amount, 'definitive_partner_type': definitive_partner_type}"/>
                     </group>
                 </sheet>
@@ -58,44 +58,44 @@
 
     <!-- TREEVIEW -->
     <record id="view_public_budget_preventive_line_tree" model="ir.ui.view">
-        <field name="name">public_budget.preventive_line.tree</field>
+        <field name="name">public_budget.preventive_line.list</field>
         <field name="model">public_budget.preventive_line</field>
         <field name="arch" type="xml">
-            <tree string="Preventive Line" decoration-success="preventive_amount==definitive_amount==to_pay_amount==paid_amount">
-                <field name="budget_position_id"/>
-                <field name="preventive_amount" sum="Total"/>
+            <list string="Preventive Line" decoration-success="preventive_amount==definitive_amount==to_pay_amount==paid_amount">
+                <field name="budget_position_id" readonly="state == 'invoiced'"/>
+                <field name="preventive_amount" sum="Total" readonly="state == 'closed'"/>
                 <field name="definitive_amount" sum="Total"/>
-                <field name="invoiced_amount" sum="Total" invisible="'advance_line' in context"/>
+                <field name="invoiced_amount" sum="Total" column_invisible="'advance_line' in context"/>
                 <field name="to_pay_amount" sum="Total"/>
                 <field name="paid_amount" sum="Total"/>
-                <field name="state" invisible="True"/>
-                <field name="currency_id" invisible="True"/>
-            </tree>
+                <field name="state" column_invisible="True"/>
+                <field name="currency_id" column_invisible="True"/>
+            </list>
         </field>
     </record>
 
     <!-- TREEVIEW -->
     <record id="view_public_budget_preventive_line_analysis_tree" model="ir.ui.view">
-        <field name="name">public_budget.preventive_line.analysis.tree</field>
+        <field name="name">public_budget.preventive_line.analysis.list</field>
         <field name="model">public_budget.preventive_line</field>
         <field name="priority" eval="99"/>
         <field name="arch" type="xml">
-            <tree string="Preventive Line" decoration-success="preventive_amount==definitive_amount==to_pay_amount==paid_amount" create="false" edit="false" delete="false">
-                <field name="currency_id" invisible="1"/>
+            <list string="Preventive Line" decoration-success="preventive_amount==definitive_amount==to_pay_amount==paid_amount" create="false" edit="false" delete="false">
+                <field name="currency_id" column_invisible="True"/>
                 <field name="transaction_id"/>
                 <field name="expedient_id"/>
-                <field name="budget_position_id"/>
-                <field name="preventive_amount" sum="Total"/>
-                <field name="definitive_amount" sum="Total" invisible="'analysis_to_date' in context"/>
-                <field name="invoiced_amount" sum="Total" invisible="'analysis_to_date' in context"/>
-                <field name="to_pay_amount" sum="Total" invisible="'analysis_to_date' in context"/>
-                <field name="paid_amount" sum="Total" invisible="'analysis_to_date' in context"/>
-                <field name="definitive_amount_dynamic" sum="Total" invisible="'analysis_to_date' not in context"/>
-                <field name="invoiced_amount_dynamic" sum="Total" invisible="'analysis_to_date' not in context"/>
-                <field name="to_pay_amount_dynamic" sum="Total" invisible="'analysis_to_date' not in context"/>
-                <field name="paid_amount_dynamic" sum="Total" invisible="'analysis_to_date' not in context"/>
-                <field name="state" invisible="True"/>
-            </tree>
+                <field name="budget_position_id" readonly="state == 'invoiced'"/>
+                <field name="preventive_amount" sum="Total" readonly="state == 'closed'"/>
+                <field name="definitive_amount" sum="Total" column_invisible="'analysis_to_date' in context"/>
+                <field name="invoiced_amount" sum="Total" column_invisible="'analysis_to_date' in context"/>
+                <field name="to_pay_amount" sum="Total" column_invisible="'analysis_to_date' in context"/>
+                <field name="paid_amount" sum="Total" column_invisible="'analysis_to_date' in context"/>
+                <field name="definitive_amount_dynamic" sum="Total" column_invisible="'analysis_to_date' not in context"/>
+                <field name="invoiced_amount_dynamic" sum="Total" column_invisible="'analysis_to_date' not in context"/>
+                <field name="to_pay_amount_dynamic" sum="Total" column_invisible="'analysis_to_date' not in context"/>
+                <field name="paid_amount_dynamic" sum="Total" column_invisible="'analysis_to_date' not in context"/>
+                <field name="state" column_invisible="True"/>
+            </list>
         </field>
     </record>
 

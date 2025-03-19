@@ -30,10 +30,10 @@
                     <group>
                         <field name="date"/>
                         <field name="initial_approval" invisible="True"/>
-                        <field name="type" attrs="{'invisible':[('initial_approval','=',True)]}"/>
+                        <field name="type" invisible="initial_approval"/>
                         <field name="name"/>
                         <field name="reference"/>
-                        <field name="rest_message" attrs="{'invisible':[('rest_message','=',False)]}"/>
+                        <field name="rest_message" invisible="not rest_message"/>
                         <field name="budget_modification_detail_ids"/>
                     </group>
                 </sheet>
@@ -43,16 +43,16 @@
 
     <!-- TREEVIEW -->
     <record id="view_public_budget_budget_modification_tree" model="ir.ui.view">
-        <field name="name">public_budget.budget_modification.tree</field>
+        <field name="name">public_budget.budget_modification.list</field>
         <field name="model">public_budget.budget_modification</field>
         <field name="arch" type="xml">
-            <tree string="Budget Modification">
+            <list string="Budget Modification">
                 <field name="date"/>
                 <field name="type"/>
                 <field name="name"/>
                 <field name="reference"/>
-                <button name="%(action_budget_modification_report)d" help="Print" type="action" icon="fa-print"/>
-            </tree>
+                <button name="%(action_budget_modification_report)d" title="Print" type="action" icon="fa-print"/>
+            </list>
         </field>
     </record>
 

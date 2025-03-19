@@ -28,12 +28,12 @@
 
     <!-- INHERITED TREE -->
     <record id="view_public_budget_company_tree" model="ir.ui.view">
-        <field name="name">public_budget.company.tree</field>
+        <field name="name">public_budget.company.list</field>
         <field name="model">res.company</field>
         <field name="inherit_id" ref="base.view_company_tree"/>
         <field name="arch" type="xml">
-            <tree position="inside">
-            </tree>
+            <list position="inside">
+            </list>
         </field>
     </record>
 

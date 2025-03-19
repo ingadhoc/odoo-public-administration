@@ -25,11 +25,11 @@
                 <field name="currency_id" invisible="1"/>
                 <header>
                     <button name="%(action_aeroo_report_budget)d" class="oe_highlight" string="Print" type="action"/>
-                    <button name="action_open" type="object" states="draft" string="Open" class="oe_highlight"/>
-                    <button name="action_cancel_draft" type="object" states="cancel" string="To Draft"/>
-                    <button name="action_pre_close" states="open" type="object" string="Pre Close" class="oe_highlight"/>
-                    <button name="action_close" states="pre_closed" type="object" string="Close" class="oe_highlight"/>
-                    <button name="action_cancel" states="closed,draft,open,pre_closed" type="object" string="Cancel" groups="base.group_no_one"/>
+                    <button name="action_open" type="object" invisible="state != 'draft'" string="Open" class="oe_highlight"/>
+                    <button name="action_cancel_draft" type="object" invisible="state != 'cancel'" string="To Draft"/>
+                    <button name="action_pre_close" invisible="state != 'open'" type="object" string="Pre Close" class="oe_highlight"/>
+                    <button name="action_close" invisible="state != 'pre_closed'" type="object" string="Close" class="oe_highlight"/>
+                    <button name="action_cancel" invisible="state not in ('closed', 'draft', 'open', 'pre_closed')" type="object" string="Cancel" groups="base.group_no_one"/>
                     <field name="state" widget="statusbar" statusbar_colors='{}'/>
                 </header>
                 <sheet string="Budget">
@@ -38,15 +38,15 @@
                             <span class="o_stat_text">Budget Modification Detail</span>
                         </button>
                         <button class="oe_stat_button" icon="fa-bars" name="%(action_position_analysis_tree)d" string="Position analysis" type="action" widget="statinfo" context="{'budget_id':id}"/>
-                        <button name="action_to_open_definitive_lines" icon="fa-bars" type="object" class="oe_stat_button" attrs="{'invisible': [('state', '!=', 'pre_closed')]}" string="Budget Definitive Lines"/>
+                        <button name="action_to_open_definitive_lines" icon="fa-bars" type="object" class="oe_stat_button" invisible="state != 'pre_closed'" string="Budget Definitive Lines"/>
                     </div>
                     <group>
                         <group>
-                            <field name="name"/>
-                            <field name="fiscalyear"/>
-                            <field name="receiptbook_id"/>
-                            <field name="expedient_id"/>
-                            <field name="income_account_id"/>
+                            <field name="name" readonly="state != 'draft'"/>
+                            <field name="fiscalyear" readonly="state != 'draft'"/>
+                            <field name="receiptbook_id" readonly="state != 'draft'"/>
+                            <field name="expedient_id" readonly="state != 'draft'"/>
+                            <field name="income_account_id" readonly="state != 'draft'"/>
                             <field name="company_id" groups="base.group_multi_company"/>
                         </group>
                         <group name="totals">
@@ -54,23 +54,23 @@
                             <field name="total_preventive"/>
                             <field name="total_requested"/>
                             <field name="total_fondos"/>
-                            <field name="passive_residue" attrs="{'invisible':[('state', 'not in', ['pre_closed','closed'])]}"/>
+                            <field name="passive_residue" invisible="state not in ['pre_closed', 'closed']"/>
                         </group>
                     </group>
                     <notebook>
                         <page string="Analysis">
-                            <field name="parent_budget_position_ids" context="{'budget_id':active_id, 'tree_view_ref': 'public_budget.view_budget_position_budget_tree'}"/>
+                            <field name="parent_budget_position_ids" context="{'budget_id':id, 'list_view_ref': 'public_budget.view_budget_position_budget_tree'}"  groups="account.group_account_user"/>
                         </page>
                         <page string="Detail">
-                            <field name="budget_detail_ids" context="{'budget_id':active_id}"/>
+                            <field name="budget_detail_ids" context="{'budget_id':id}" readonly="state != 'draft'"/>
                         </page>
                         <page string="Moves">
-                            <field name="budget_modification_ids" context="{'budget_id':active_id}"/>
+                            <field name="budget_modification_ids" context="{'budget_id':id}" readonly="state != 'draft'"/>
                         </page>
                         <page string="Funding Moves">
-                            <field name="funding_move_ids"/>
+                            <field name="funding_move_ids" readonly="state in ['open', 'pre_closed']"/>
                         </page>
-                        <page string="Pre Close Detail" attrs="{'invisible':[('state', 'not in', ['pre_closed','closed'])]}">
+                        <page string="Pre Close Detail" invisible="state not in ['pre_closed', 'closed']">
                             <group col="4">
                                 <field name="prec_passive_residue"/>
                                 <field name="prec_total_requested"/>
@@ -79,11 +79,7 @@
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers"/>
-                    <field name="activity_ids" widget="mail_activity"/>
-                    <field name="message_ids" widget="mail_thread"/>
-                </div>
+                <chatter/>
             </form>
         </field>
     </record>
@@ -104,23 +100,23 @@
             </header>
             <!-- agregamos analysis_to_date acá para que no de error desde otros lugares -->
             <field name="parent_budget_position_ids" position="attributes">
-                <attribute name="context">{'budget_id':context.get('budget_id'), 'analysis_to_date': context.get('analysis_to_date'), 'tree_view_ref': 'public_budget.view_budget_position_budget_tree'}</attribute>
+                <attribute name="context">{'budget_id':context.get('budget_id'), 'analysis_to_date': context.get('analysis_to_date'), 'list_view_ref': 'public_budget.view_budget_position_budget_tree'}</attribute>
             </field>
         </field>
     </record>
 
     <!-- TREEVIEW -->
     <record id="view_public_budget_budget_tree" model="ir.ui.view">
-        <field name="name">public_budget.budget.tree</field>
+        <field name="name">public_budget.budget.list</field>
         <field name="model">public_budget.budget</field>
         <field name="arch" type="xml">
-            <tree string="Budget" decoration-muted="state=='cancelled'" decoration-info="state =='draft'" decoration-bf="state in ['pre_closed', 'open', 'closed']" decoration-danger="state in ()">
-                <field name="name"/>
+            <list string="Budget" decoration-muted="state=='cancelled'" decoration-info="state =='draft'" decoration-bf="state in ['pre_closed', 'open', 'closed']" decoration-danger="state in ()">
+                <field name="name" readonly="state != 'draft'"/>
                 <!-- <field name="fiscalyear_id"/> -->
-                <field name="income_account_id"/>
-                <field name="expedient_id"/>
+                <field name="income_account_id" readonly="state != 'draft'"/>
+                <field name="expedient_id" readonly="state != 'draft'"/>
                 <field name="state"/>
-            </tree>
+            </list>
         </field>
     </record>
 

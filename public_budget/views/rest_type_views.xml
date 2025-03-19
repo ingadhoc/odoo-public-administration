@@ -33,11 +33,11 @@
 
     <!-- TREEVIEW -->
     <record id="view_public_budget_rest_type_tree" model="ir.ui.view">
-        <field name="name">public_budget.rest_type.tree</field>
+        <field name="name">public_budget.rest_type.list</field>
         <field name="model">public_budget.rest_type</field>
         <field name="arch" type="xml">
-            <tree string="rest_type">
-            </tree>
+            <list string="rest_type">
+            </list>
         </field>
     </record>
 

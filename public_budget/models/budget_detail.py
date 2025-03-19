@@ -37,7 +37,7 @@ class BudgetDetail(models.Model):
 
     _sql_constraints = [
         ('position_unique', 'unique(budget_position_id, budget_id)',
-            _('Budget Position must be unique per Budget.'))]
+            'Budget Position must be unique per Budget.')]
 
     def _compute_amount(self):
         for rec in self:

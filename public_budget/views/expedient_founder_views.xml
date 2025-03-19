@@ -34,12 +34,12 @@
 
     <!-- TREEVIEW -->
     <record id="view_public_budget_expedient_founder_tree" model="ir.ui.view">
-        <field name="name">public_budget.expedient_founder.tree</field>
+        <field name="name">public_budget.expedient_founder.list</field>
         <field name="model">public_budget.expedient_founder</field>
         <field name="arch" type="xml">
-            <tree string="Expedient Founder">
+            <list string="Expedient Founder">
                 <field name="name"/>
-            </tree>
+            </list>
         </field>
     </record>
 

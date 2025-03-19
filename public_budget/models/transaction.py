@@ -29,12 +29,12 @@ class BudgetTransaction(models.Model):
         readonly=True,
         required=True,
         default=fields.Date.context_today,
-        states={'draft': [('readonly', False)]},
+        # states={'draft': [('readonly', False)]},
     )
     name = fields.Char(
         readonly=True,
         required=True,
-        states={'draft': [('readonly', False)], 'open': [('readonly', False)]}
+        # states={'draft': [('readonly', False)], 'open': [('readonly', False)]}
     )
     user_id = fields.Many2one(
         'res.users',
@@ -48,7 +48,7 @@ class BudgetTransaction(models.Model):
         string='Expedient',
         readonly=True,
         required=True,
-        states={'draft': [('readonly', False)]}
+        # states={'draft': [('readonly', False)]}
     )
     budget_id = fields.Many2one(
         'public_budget.budget',
@@ -56,7 +56,7 @@ class BudgetTransaction(models.Model):
         required=True,
         default=_get_default_budget,
         readonly=True,
-        states={'draft': [('readonly', False)]},
+        # states={'draft': [('readonly', False)]},
         domain=[('state', '=', 'open')],
         auto_join=True,
     )
@@ -66,13 +66,13 @@ class BudgetTransaction(models.Model):
         readonly=True,
         required=True,
         domain="[('company_id', '=', company_id)]",
-        states={'draft': [('readonly', False)]}
+        # states={'draft': [('readonly', False)]}
     )
     partner_id = fields.Many2one(
         'res.partner',
         string='Partner',
         readonly=True,
-        states={'draft': [('readonly', False)]}
+        # states={'draft': [('readonly', False)]}
     )
     note = fields.Html(
     )
@@ -106,7 +106,7 @@ class BudgetTransaction(models.Model):
         inverse_name='transaction_id',
         string='Advance Preventive Lines',
         readonly=True,
-        states={'open': [('readonly', False)]},
+        # states={'open': [('readonly', False)]},
         context={
             'default_advance_line': 1,
             'default_preventive_status': 'confirmed',
@@ -205,7 +205,7 @@ class BudgetTransaction(models.Model):
         'res.company',
         readonly=True,
         required=True,
-        states={'draft': [('readonly', False)]},
+        # states={'draft': [('readonly', False)]},
         default=lambda self: self.env['res.company']._company_default_get(
             'public_budget.transaction')
     )
@@ -226,7 +226,7 @@ class BudgetTransaction(models.Model):
         'transaction_id',
         readonly=True,
         auto_join=True,
-        states={'open': [('readonly', False)]},
+        # states={'open': [('readonly', False)]},
         domain=[('advance_line', '=', False)]
     )
     invoice_ids = fields.One2many(
@@ -234,31 +234,31 @@ class BudgetTransaction(models.Model):
         'transaction_id',
         readonly=True,
         auto_join=True,
-        states={'open': [('readonly', False)]},
+        # states={'open': [('readonly', False)]},
         domain=[('move_type', 'in', ['in_invoice', 'in_refund'])]
     )
     definitive_partner_type = fields.Selection(
         related='type_id.definitive_partner_type'
     )
-    payment_group_ids = fields.One2many(
-        'account.payment.group',
+    payment_ids = fields.One2many(
+        'account.payment',
         'transaction_id',
         string='Payment Orders',
         readonly=True,
         context={'default_partner_type': 'supplier'},
-        states={'open': [('readonly', False)]},
+        # states={'open': [('readonly', False)]},
         domain=[
             ('partner_type', '=', 'supplier'),
             ('transaction_with_advance_payment', '=', False)
         ],
     )
-    # Usamos otro campo por que si no el depends de advance_payment_group_ids
+    # Usamos otro campo por que si no el depends de advance_payment_ids
     # se toma en cuenta igual que si fuese el de payments y necesitamos que sea
     # distinto para que no recalcule tantas veces. Si no la idea sería que
     # sea basicamente es el mismo campo de arriba pero lo separamos para poner
     # en otro lugar de la vista
-    advance_payment_group_ids = fields.One2many(
-        'account.payment.group',
+    advance_payment_ids = fields.One2many(
+        'account.payment',
         'transaction_id',
         string='Advance Payment Orders',
         readonly=True,
@@ -267,7 +267,7 @@ class BudgetTransaction(models.Model):
             ('transaction_with_advance_payment', '=', True)
         ],
         context={'default_partner_type': 'supplier'},
-        states={'open': [('readonly', False)]},
+        # states={'open': [('readonly', False)]},
     )
     asset_ids = fields.One2many(
         'account.asset',
@@ -347,13 +347,13 @@ class BudgetTransaction(models.Model):
     def _get_advance_amounts(self):
         self.ensure_one()
         to_date = self._context.get('analysis_to_date', False)
-        if not self.advance_payment_group_ids:
+        if not self.advance_payment_ids:
             return {
                 'advance_to_pay_amount': 0.0,
                 'advance_paid_amount': 0.0,
             }
 
-        domain = [('id', 'in', self.advance_payment_group_ids.ids)]
+        domain = [('id', 'in', self.advance_payment_ids.ids)]
         to_pay_domain = domain + [('state', 'not in', ('cancel', 'draft'))]
         paid_domain = domain + [('state', '=', 'posted')]
 
@@ -362,10 +362,10 @@ class BudgetTransaction(models.Model):
             paid_domain += [('payment_date', '<=', to_date)]
 
         advance_to_pay_amount = sum(
-            self.advance_payment_group_ids.search(to_pay_domain).mapped(
+            self.advance_payment_ids.search(to_pay_domain).mapped(
                 'to_pay_amount'))
         advance_paid_amount = sum(
-            self.advance_payment_group_ids.search(paid_domain).mapped(
+            self.advance_payment_ids.search(paid_domain).mapped(
                 'payments_amount'))
         return {
             'advance_to_pay_amount': advance_to_pay_amount,
@@ -373,7 +373,7 @@ class BudgetTransaction(models.Model):
         }
 
     @api.depends(
-        'advance_payment_group_ids.state',
+        'advance_payment_ids.state',
     )
     def _compute_advance_amounts(self):
         _logger.info('Getting Transaction Advance Amounts')
@@ -405,13 +405,13 @@ class BudgetTransaction(models.Model):
         for invoice in self.invoice_ids.filtered(
                 lambda r: r.state == 'posted'):
             partner = invoice.partner_id
-            already_paying = self.payment_group_ids.filtered(
+            already_paying = self.payment_ids.filtered(
                 lambda x: x.state != 'cancel').mapped('to_pay_move_line_ids')
             to_pay_move_lines = (invoice.open_move_line_ids - already_paying)
             # si ya se mandaron a pagar no creamo
             if not to_pay_move_lines:
                 continue
-            rec = self.env['account.payment.group'].create({
+            rec = self.env['account.payment'].create({
                     'partner_type': 'supplier',
                     'receiptbook_id': self.budget_id.receiptbook_id.id,
                     'expedient_id': self.expedient_id.id,
@@ -655,7 +655,7 @@ class BudgetTransaction(models.Model):
                             "Preventive Total, Type and Date are not "
                             "compatible with Transaction Amount Restrictions"))
 
-    def action_new_payment_group(self):
+    def action_new_payment(self):
         '''
         This function returns an action that display a new payment group.
         We dont use action on view because it will open on tree view
@@ -665,12 +665,12 @@ class BudgetTransaction(models.Model):
             "It is not possible to generate a payment order if the "
             "expedient of the transaction is not in a permitted location or is in transit")
         self.expedient_id.check_location_allowed_for_current_user(msg)
-        action = self.env["ir.actions.act_window"]._for_xml_id('account_payment_group.action_account_payments_group_payable')
+        action = self.env["ir.actions.act_window"]._for_xml_id('account.action_account_payments_group_payable')
         if not action:
             return False
 
         form_view_id = self.env.ref(
-            'account_payment_group.view_account_payment_group_form').id
+            'account.view_account_form').id
         action['views'] = [(form_view_id, 'form')]
 
         partner_id = self.partner_id

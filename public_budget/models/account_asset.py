@@ -64,14 +64,15 @@ class AccountAsset(models.Model):
     invoice_id = fields.Many2one(
         'account.move',
         string='Invoice',
-        states={'draft': [('readonly', False)]},
+        # states={'draft': [('readonly', False)]},
         copy=False,
     )
     partner_id = fields.Many2one(
         'res.partner',
         string='Partner',
         readonly=True,
-        states={'draft': [('readonly', False)]})
+        # states={'draft': [('readonly', False)]}
+        )
 
     _sql_constraints = [
         ('reference', 'unique(reference)',

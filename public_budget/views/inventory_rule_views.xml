@@ -33,14 +33,14 @@
 
     <!-- TREEVIEW -->
     <record id="view_public_budget_inventory_rule_tree" model="ir.ui.view">
-        <field name="name">public_budget.inventory_rule.tree</field>
+        <field name="name">public_budget.inventory_rule.list</field>
         <field name="model">public_budget.inventory_rule</field>
         <field name="arch" type="xml">
-            <tree string="Inventory Rule" editable="top">
+            <list string="Inventory Rule" editable="top">
                 <field name="date"/>
                 <field name="min_amount"/>
                 <field name="currency_id" readonly="1"/>
-            </tree>
+            </list>
         </field>
     </record>
 

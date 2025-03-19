@@ -59,7 +59,7 @@ class FundingMove(models.Model):
         help='If no income account is configured, then income default income '
         'account configured on budget is going to be used.',
         readonly=True,
-        states={'draft': [('readonly', False)]},
+        #states={'draft': [('readonly', False)]},
         domain="[('internal_type', '=', 'other'), "
         # no me gasto en este filtro porque no usan multicompany y deberia
         # llevarla
