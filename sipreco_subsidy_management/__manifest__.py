@@ -41,5 +41,5 @@
         'helpdesk',
         'mail',
     ],
-    'installable': True,
+    'installable': False,
 }
