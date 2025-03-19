@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- do not allow to unlink payment orders for anyone (Except admin) -->
-    <record id="account_payment_group.access_account_payment_group" model="ir.model.access">
+    <!-- TODO ver si hace falta, solo existe CRUD para  account.group_account_invoice en payments-->
+    <!-- <record id="account.access_account_payment" model="ir.model.access">
         <field eval="False" name="perm_unlink"/>
-    </record>
+    </record> -->
 
     <!-- portal expedient users can access all partners, we revert original portal group rule -->
     <record model="ir.rule" id="res_partner_portal_expedient_rule">

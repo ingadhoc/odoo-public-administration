@@ -65,10 +65,10 @@
     </record>
 
     <record id="view_public_budget_budget_report_4_tree" model="ir.ui.view">
-        <field name="name">public_budget.budget.report_4.tree</field>
+        <field name="name">public_budget.budget.report_4.list</field>
         <field name="model">public_budget.budget.report_4</field>
         <field name="arch" type="xml">
-            <tree string="Analisis de Presupuesto">
+            <list string="Analisis de Presupuesto">
                 <!-- <field name="preventive_line_id"/> -->
                 <field name="transaction_date"/>
                 <field name="transaction_id"/>
@@ -78,8 +78,8 @@
                 <field name="invoiced_amount" sum="Total"/>
                 <field name="to_pay_amount" sum="Total"/>
                 <field name="paid_amount" sum="Total"/>
-                <field name="currency_id" invisible="1"/>
-            </tree>
+                <field name="currency_id" column_invisible="True"/>
+            </list>
         </field>
     </record>
 
@@ -116,8 +116,8 @@
     <record id="action_public_budget_budget_report_4_all" model="ir.actions.act_window">
         <field name="name">Analisis de Presupuesto</field>
         <field name="res_model">public_budget.budget.report_4</field>
-        <!-- <field name="view_mode">graph,pivot,tree,form</field> -->
-        <field name="view_mode">pivot,tree,graph</field>
+        <!-- <field name="view_mode">graph,pivot,list,form</field> -->
+        <field name="view_mode">pivot,list,graph</field>
         <field name="context">{'search_default_affects_budget': 1, 'search_default_group_assignment_position_id': 1, 'search_default_group_budget_position_id': 1}</field>
         <!-- <field name="domain">[('affects_budget', '=', True)]</field> -->
         <field name="domain">[]</field>

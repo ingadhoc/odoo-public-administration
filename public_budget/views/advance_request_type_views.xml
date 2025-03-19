@@ -33,10 +33,10 @@
                         <field name="return_journal_id"/>
                         <field name="company_id" groups="base.group_multi_company"/>
                         <field name="employee_ids" context="{'advance_return_type_id': id}">
-                            <tree>
+                            <list>
                                 <field name="name"/>
                                 <field name="advance_request_debt"/>
-                            </tree>
+                            </list>
                         </field>
                     </group>
                 </sheet>
@@ -46,16 +46,16 @@
 
     <!-- TREEVIEW -->
     <record id="view_public_budget_advance_request_type_tree" model="ir.ui.view">
-        <field name="name">public_budget.advance_request_type.tree</field>
+        <field name="name">public_budget.advance_request_type.list</field>
         <field name="model">public_budget.advance_request_type</field>
         <field name="arch" type="xml">
-            <tree string="Advance Request Type">
+            <list string="Advance Request Type">
                 <field name="name"/>
                 <field name="general_return_partner_id"/>
                 <field name="account_id"/>
                 <field name="return_journal_id"/>
                 <field name="company_id" groups="base.group_multi_company"/>
-            </tree>
+            </list>
         </field>
     </record>
 

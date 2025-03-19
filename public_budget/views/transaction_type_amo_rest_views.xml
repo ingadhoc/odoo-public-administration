@@ -40,15 +40,15 @@
 
     <!-- TREEVIEW -->
     <record id="view_public_budget_transaction_type_amo_rest_tree" model="ir.ui.view">
-        <field name="name">public_budget.transaction_type_amo_rest.tree</field>
+        <field name="name">public_budget.transaction_type_amo_rest.list</field>
         <field name="model">public_budget.transaction_type_amo_rest</field>
         <field name="arch" type="xml">
-            <tree string="Transaction Type Amount Restriction">
+            <list string="Transaction Type Amount Restriction">
                 <field name="date"/>
                 <field name="from_amount"/>
                 <field name="to_amount"/>
-                <field name="currency_id" invisible="1"/>
-            </tree>
+                <field name="currency_id" column_invisible="True"/>
+            </list>
         </field>
     </record>
 

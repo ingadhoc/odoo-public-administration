@@ -20,27 +20,27 @@ class AdvanceReturn(models.Model):
     name = fields.Char(
         required=True,
         readonly=True,
-        states={'draft': [('readonly', False)]},
+        # states={'draft': [('readonly', False)]},
     )
     company_id = fields.Many2one(
         'res.company',
         string='Company',
         required=True,
         readonly=True,
-        states={'draft': [('readonly', False)]},
+        # states={'draft': [('readonly', False)]},
         default=lambda self: self.env['res.company']._company_default_get(
             'public_budget.advance_return')
     )
     date = fields.Date(
         required=True,
         readonly=True,
-        states={'draft': [('readonly', False)]},
+        # states={'draft': [('readonly', False)]},
         default=fields.Date.context_today,
         copy=False,
     )
     confirmation_date = fields.Date(
         readonly=True,
-        states={'draft': [('readonly', False)]},
+        # states={'draft': [('readonly', False)]},
         copy=False,
     )
     user_id = fields.Many2one(
@@ -49,7 +49,7 @@ class AdvanceReturn(models.Model):
         required=True,
         readonly=True,
         default=lambda self: self.env.user,
-        states={'draft': [('readonly', False)]},
+        # states={'draft': [('readonly', False)]},
     )
     type_id = fields.Many2one(
         'public_budget.advance_request_type',
@@ -57,7 +57,7 @@ class AdvanceReturn(models.Model):
         required=True,
         readonly=True,
         domain="[('company_id', '=', company_id)]",
-        states={'draft': [('readonly', False)]},
+        # states={'draft': [('readonly', False)]},
     )
     move_id = fields.Many2one(
         'account.move',
@@ -74,7 +74,7 @@ class AdvanceReturn(models.Model):
         'advance_return_id',
         string='Lines',
         readonly=True,
-        states={'draft': [('readonly', False)]},
+        # states={'draft': [('readonly', False)]},
     )
 
     def get_move_vals(self):

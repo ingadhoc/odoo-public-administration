@@ -56,12 +56,12 @@ class PublicBudgetBudgetReport(models.Model):
     state = fields.Selection(
         string='Estado',
         selection=[
-            ('draft', _('Draft')),
-            ('open', _('Open')),
-            ('definitive', _('Definitive')),
-            ('invoiced', _('Invoiced')),
-            ('closed', _('Closed')),
-            ('cancel', _('Cancel'))],
+            ('draft', 'Draft'),
+            ('open', 'Open'),
+            ('definitive', 'Definitive'),
+            ('invoiced', 'Invoiced'),
+            ('closed', 'Closed'),
+            ('cancel', 'Cancel')],
         readonly=True,
     )
     affects_budget = fields.Boolean(

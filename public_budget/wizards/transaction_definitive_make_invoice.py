@@ -218,8 +218,7 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
         invoice = self.env['account.move'].create(invoice_vals)
         if invoice:
             invoice.line_ids.filtered(
-                lambda line: line.account_id.user_type_id.type
-                in ('receivable', 'payable'))._write(
+                lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable'))._write(
                 {'account_id': (
                     advance_account and advance_account.id or
                     self.supplier_id.property_account_payable_id.id)

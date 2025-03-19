@@ -26,16 +26,16 @@
                 <header>
                     <button name="action_confirm"
                         type="object"
-                        states="in_transit"
+                        invisible="state != 'in_transit'"
                         string="Confirm"
                         class="oe_highlight"/>
                     <button name="action_cancel_in_transit"
                         type="object"
-                        states="cancel"
+                        invisible="state != 'cancel'"
                         string="To In Transit"/>
                     <button name="action_cancel"
                         type="object"
-                        states="confirmed,in_transit"
+                        invisible="state not in ('confirmed', 'in_transit')"
                         string="Cancel"
                         groups="base.group_no_one"/>
                     <field name="state" widget="statusbar"
@@ -51,24 +51,26 @@
                    </div>
                  <group>
                     <group>
-                        <field name="date"/> 
+                        <field name="date"/>
                         <field name="location_id"
                             domain="[('id', 'in', user_location_ids)]"
                             options="{'no_create': True}"
-                            atts="{'readonly': [('expedient_ids', '!=', [(6, False, [])])]}"/>
+                            readonly="[(6, False, [])] not in expedient_ids and state != 'in_transit'"/>
                         <field name="location_dest_id"
-                            domain="[('id','!=',location_id),('expedient_management', '=', True)]" options="{'no_create': True}"/> 
-                        <field name="reference"/> 
+                            domain="[('id','!=',location_id),('expedient_management', '=', True)]"
+                            options="{'no_create': True}"
+                            readonly="state == 'readonly'"/>
+                        <field name="reference"/>
                     </group>
                     <group>
-                        <field name="user_id"/> 
-                        <field name="confirmation_user_id"/> 
-                        <field name="confirmation_date"/> 
+                        <field name="user_id"/>
+                        <field name="confirmation_user_id"/>
+                        <field name="confirmation_date"/>
                     </group>
                  </group>
                     <field name="expedient_ids"
                         domain="[('current_location_id','=',location_id),('in_transit','=',False)]" options="{'no_create': True}">
-                        <tree string="Expedient" decoration-muted="state=='cancelled'" decoration-info="state == 'open'" decoration-bf="state in ['annulled', 'closed']" decoration-danger="state in ()">
+                        <list string="Expedient" decoration-muted="state=='cancelled'" decoration-info="state == 'open'" decoration-bf="state in ['annulled', 'closed']" decoration-danger="state in ()">
                             <field name="number"/>
                             <field name="issue_date"/>
                             <field name="cover"/>
@@ -84,7 +86,7 @@
                             <field name="subsidy_approved"/>
                             <field name="overdue"/>
                             <field name="state"/>
-                        </tree>
+                        </list>
                     </field>
                 </sheet>
 
@@ -94,17 +96,17 @@
 
     <!-- TREEVIEW -->
     <record id="view_public_budget_remit_tree" model="ir.ui.view">
-        <field name="name">public_budget.remit.tree</field>
+        <field name="name">public_budget.remit.list</field>
         <field name="model">public_budget.remit</field>
         <field name="arch" type="xml">
-            <tree string="Remit" decoration-muted="state=='cancelled'" decoration-info="state in ['in_transit']" decoration-bf="state in ['confirmed']" decoration-danger="state in ()">
+            <list string="Remit" decoration-muted="state=='cancelled'" decoration-info="state in ['in_transit']" decoration-bf="state in ['confirmed']" decoration-danger="state in ()">
                 <field name="number"/>
                 <field name="date"/>
                 <field name="user_id"/>
                 <field name="location_id"/>
                 <field name="location_dest_id"/>
                 <field name="state"/>
-            </tree>
+            </list>
         </field>
     </record>
 

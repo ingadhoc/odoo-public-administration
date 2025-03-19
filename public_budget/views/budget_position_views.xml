@@ -39,9 +39,9 @@
                         <field name="budget_assignment_allowed"/>
                         <field name="assignment_position_id"/>
                         <field name="company_id" groups="base.group_multi_company"/>
-                        <field name="inventariable" attrs="{'invisible': [('type', '=', 'view')]}"/>
-                        <field name="category_id" attrs="{'invisible': [('type', '=', 'view')], 'required':[('type', '=', 'normal')]}"/>
-                        <field name="child_ids" context="{'budget_id':context.get('budget_id')}" attrs="{'invisible':[('type','!=','view')]}"/>
+                        <field name="inventariable" invisible="type == 'view'"/>
+                        <field name="category_id" invisible="type == 'view'" required="type == 'normal'"/>
+                        <field name="child_ids" context="{'budget_id':context.get('budget_id')}" invisible="type != 'view'"/>
                     </group>
                 </sheet>
 
@@ -51,56 +51,56 @@
 
     <!-- TREEVIEW -->
     <record id="view_public_budget_budget_position_tree" model="ir.ui.view">
-        <field name="name">public_budget.budget_position.tree</field>
+        <field name="name">public_budget.budget_position.list</field>
         <field name="model">public_budget.budget_position</field>
         <field name="arch" type="xml">
-            <tree string="Budget Position" decoration-info="type=='view'">
+            <list string="Budget Position" decoration-info="type=='view'">
                 <field name="code"/>
                 <field name="name"/>
-                <field name="type" invisible="True"/>
+                <field name="type" column_invisible="True"/>
                 <field name="budget_assignment_allowed"/>
-            </tree>
+            </list>
         </field>
     </record>
 
     <!-- TREEVIEW for budget -->
     <record id="view_budget_position_budget_tree" model="ir.ui.view">
-        <field name="name">public_budget.budget_position.budget.tree</field>
+        <field name="name">public_budget.budget_position.budget.list</field>
         <field name="model">public_budget.budget_position</field>
         <field name="priority" eval="99"/>
         <field name="arch" type="xml">
-            <tree decoration-info="type=='view'" decoration-success="budget_assignment_allowed" decoration-danger="budget_assignment_allowed and projected_amount > amount">
+            <list decoration-info="type=='view'" decoration-success="budget_assignment_allowed" decoration-danger="budget_assignment_allowed and projected_amount > amount">
                 <field name="code"/>
                 <field name="name"/>
-                <field name="type" invisible="1"/>
-                <field name="child_ids" invisible="1"/>
+                <field name="type" column_invisible="True"/>
+                <field name="child_ids" column_invisible="True"/>
                 <field name="amount" sum="Total"/>
                 <field name="preventive_amount" sum="Total"/>
                 <field name="definitive_amount" sum="Total"/>
                 <field name="to_pay_amount" sum="Total"/>
                 <field name="paid_amount" sum="Total"/>
-                <field name="projected_amount" invisible="1"/>
+                <field name="projected_amount" column_invisible="True"/>
                 <!-- A este campo le dejamos el attrs porque lo renderiza igual al widget por mas que el campo tenga valor False -->
                 <!-- <field name="preventive_avg" widget="progressbar" attrs="{'invisible':[('budget_assignment_allowed','=',False)]}"/> -->
-                <field name="preventive_avg" widget="progressbar" attrs="{'invisible':[('budget_assignment_allowed','=',False), ('child_ids','=',[])]}"/>
+                <field name="preventive_avg" widget="progressbar" invisible="not budget_assignment_allowed and not child_ids"/>
                 <field name="balance_amount" sum="Total"/>
-                <field name="budget_assignment_allowed" invisible="1"/>
-                <field name="currency_id" invisible="1"/>
-            </tree>
+                <field name="budget_assignment_allowed" column_invisible="True"/>
+                <field name="currency_id" column_invisible="True"/>
+            </list>
         </field>
     </record>
 
     <!-- TREEVIEW for analysis -->
     <record id="view_budget_position_analysis_tree" model="ir.ui.view">
-        <field name="name">public_budget.budget_position.analysis.tree</field>
+        <field name="name">public_budget.budget_position.analysis.list</field>
         <field name="model">public_budget.budget_position</field>
         <field name="arch" type="xml">
-            <tree decoration-info="type=='view'" decoration-success="budget_assignment_allowed" decoration-danger="budget_assignment_allowed and projected_amount > amount" create="false" delete="false">
+            <list decoration-info="type=='view'" decoration-success="budget_assignment_allowed" decoration-danger="budget_assignment_allowed and projected_amount > amount" create="false" delete="false">
                 <button name="action_position_analysis_tree" title="Open Childs" icon="fa-bars" type="object"/>
                 <field name="code"/>
                 <field name="name"/>
                 <field name="budget_assignment_allowed"/>
-                <field name="type" invisible="1"/>
+                <field name="type" column_invisible="True"/>
                 <field name="amount"/>
                 <field name="preventive_amount"/>
                 <field name="definitive_amount"/>
@@ -109,19 +109,19 @@
                 <field name="projected_amount"/>
                 <field name="preventive_avg" widget="integer" string="%"/>
                 <field name="balance_amount"/>
-                <field name="currency_id" invisible="1"/>
-            </tree>
+                <field name="currency_id" column_invisible="True"/>
+            </list>
         </field>
     </record>
 
     <record id="action_position_analysis_tree" model="ir.actions.act_window">
         <field name="name">Budget Position analysis</field>
         <field name="res_model">public_budget.budget_position</field>
-        <field name="view_mode">tree</field>
+        <field name="view_mode">list</field>
         <field name="view_id" ref="view_budget_position_analysis_tree"/>
         <field name="domain">[('parent_id','=',False)]</field>
     </record>
 
-    <!-- Enable drill-down from Chart Of Accounts tree view -->
-    <act_window id="action_budget_position_items" name="Items" context="{'search_default_budget_position_id': [active_id]}" res_model="public_budget.preventive_line" binding_model="public_budget.budget_position" view_id="view_public_budget_preventive_line_analysis_tree" view_mode="tree"/>
+    <!-- Enable drill-down from Chart Of Accounts list view -->
+    <act_window id="action_budget_position_items" name="Items" context="{'search_default_budget_position_id': [active_id]}" res_model="public_budget.preventive_line" binding_model="public_budget.budget_position" view_id="view_public_budget_preventive_line_analysis_tree" view_mode="list"/>
 </odoo>

@@ -2,20 +2,20 @@
 <odoo>
 
     <!-- modificamos tree para que no sea editable y entonces pueda crear con form -->
-    <record id="view_account_checkbook_tree" model="ir.ui.view">
-        <field name="name">l10n_latam.checkbook.tree</field>
+    <!-- <record id="view_account_checkbook_tree" model="ir.ui.view">
+        <field name="name">l10n_latam.checkbook.list</field>
         <field name="model">l10n_latam.checkbook</field>
         <field name="inherit_id" ref="l10n_latam_check.view_account_checkbook_tree"/>
         <field name="arch" type="xml">
-            <tree position="attributes">
+            <list position="attributes">
                 <attribute name="editable"></attribute>
-            </tree>
+            </list>
         </field>
-    </record>
+    </record> -->
 
     <record id="action_manage_checkbooks" model="ir.actions.act_window">
         <field name="name">Gestionar Chequeras</field>
-        <field name="res_model">l10n_latam.checkbook</field>
+        <field name="res_model">l10n_latam.check</field>
     </record>
 
 

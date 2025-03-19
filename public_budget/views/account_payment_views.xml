@@ -9,13 +9,13 @@
         <field name="arch" type="xml">
 
             <field name="date" position="after">
-                <field name="assignee_id" readonly="1"/>
-                <field name="return_payment_id" attrs="{'invisible': [('return_payment_id', '=', False)]}"/>
+                <field name="assignee_id" readonly="state != 'draft'"/>
+                <field name="return_payment_id" invisible="not return_payment_id"/>
             </field>
             <field name="date" position="attributes">
                 <!-- <attribute name="invisible">1</attribute> -->
                 <!-- al final lo hacemos invisible así porque en transferencias lo queremos visible -->
-                <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
+                <attribute name="readonly">state != 'draft'</attribute>
             </field>
         </field>
     </record>
@@ -25,7 +25,7 @@
         <field name="model">account.payment</field>
         <field name="priority">20</field>
         <field name="inherit_id" ref="public_budget.view_account_payment_form"/>
-        <field name="groups_id" eval="[(4, ref('public_budget.group_change_payment_assignee'))]"/>
+        <!-- <field name="groups_id" eval="[(4, ref('public_budget.group_change_payment_assignee'))]"/> -->
         <field name="arch" type="xml">
             <field name="assignee_id" position="attributes">
                 <attribute name="readonly">0</attribute>
@@ -34,26 +34,26 @@
     </record>
 
 <!-- because we generate checks on post, checks report is made from payments -->
-    <!-- payments tree view -->
+    <!-- payments list view -->
     <record model="ir.ui.view" id="view_account_payment_tree">
-        <field name="name">account.payment.tree</field>
+        <field name="name">account.payment.list</field>
         <field name="model">account.payment</field>
         <field name="priority">20</field>
         <field name="inherit_id" ref="account.view_account_payment_tree"/>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <!-- por ahora usamos metodo distinto para cambio de retenciones y de cheque, pero la idea sería implementar el mismo metodos -->
-                <button name="change_withholding" icon="fa-undo" type="object" attrs="{'invisible': ['|', '|', ('payment_type', '!=', 'outbound'), ('state', '!=', 'posted'), ('payment_method_code', '!=', 'withholding')]}" confirm="Seguro que desea devolver esta retención?"/>
-                <field name="payment_type" invisible="1"/>
-            </tree>
+                <button name="change_withholding" icon="fa-undo" type="object" invisible="payment_type != 'outbound' or state != 'posted' or payment_method_code != 'withholding'" confirm="Seguro que desea devolver esta retención?" title="Change"/>
+                <field name="payment_type" column_invisible="True"/>
+            </list>
 
             <!-- reemplazmos campo name por orden de pago -->
             <field name="name" position="attributes">
                 <attribute name="invisible">1</attribute>
             </field>
-            <field name="name" position="after">
+            <!-- <field name="name" position="after"> sacamos por depreciacion de payment_group
                 <field name="payment_group_id"/>
-            </field>
+            </field> -->
             <field name="partner_id" position="after">
                 <field name="destination_journal_id"/>
             </field>
@@ -62,23 +62,25 @@
 
     <!-- tree of payments on payment groups -->
     <record id="view_account_payment_from_group_tree" model="ir.ui.view">
-        <field name="name">account.payment.tree</field>
+        <field name="name">account.payment.list</field>
         <field name="model">account.payment</field>
         <field name="priority">50</field>
-        <field name="inherit_id" ref="account_payment_group.view_account_payment_from_group_tree"/>
-        <field name="arch" type="xml"> 
-            <tree position="attributes">
+        <field name="inherit_id" ref="account_payment_pro.view_account_payment_tree"/>
+        <!-- <field name="inherit_id" ref="account_payment.view_account_payment_from_group_tree"/> -->
+        <field name="arch" type="xml">
+            <list position="attributes">
                 <attribute name="decoration-muted">return_payment_id</attribute>
-            </tree>
-            <tree>
-                <field name="return_payment_id" invisible="1"/>
+            </list>
+            <list>
+                <field name="return_payment_id" column_invisible="True"/>
                 <!-- por ahora usamos metodo distinto para cambio de retenciones y de cheque, pero la idea sería implementar el mismo metodos -->
-                <button name="change_withholding" icon="fa-undo" type="object" attrs="{'invisible': ['|', '|', ('payment_type', '!=', 'outbound'), ('state', '!=', 'posted'), ('payment_method_code', '!=', 'withholding')]}" confirm="Seguro que desea devolver esta retención?"/>
-                <field name="payment_type" invisible="1"/>
-            </tree>
-            <button name="%(l10n_ar_account_withholding.action_report_withholding_certificate)d" position="attributes">
+                <button name="change_withholding" icon="fa-undo" type="object" invisible="payment_type != 'outbound' or state != 'posted' or payment_method_code != 'withholding'" confirm="Seguro que desea devolver esta retención?" title="Change"/>
+                <field name="payment_type" column_invisible="True"/>
+            </list>
+            <!-- TODO No est mas el boton lo agregamos otr vez?
+            <button name="%(l10n_ar_tax.action_report_withholding_certificate)d" position="attributes">
                 <attribute name="invisible">1</attribute>
-            </button>
+            </button> -->
         </field>
     </record>
 

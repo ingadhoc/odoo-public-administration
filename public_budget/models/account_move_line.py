@@ -25,6 +25,16 @@ class AccountMoveLine(models.Model):
     l10n_ar_afip_verification_result = fields.Selection(
         related='move_id.l10n_ar_afip_verification_result'
         )
+    # TODO tal vez podriamos evitar este campo inverso
+    payment_ids = fields.Many2many(
+        'account.payment',
+        'account_move_line_payment_to_pay_rel',
+        'to_pay_line_id',
+        'payment_id',
+        string="Payments",
+        readonly=True,
+        copy=False,
+    )
 
     @api.depends(
         # 'price_subtotal',

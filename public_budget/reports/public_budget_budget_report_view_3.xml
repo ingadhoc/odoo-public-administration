@@ -67,10 +67,10 @@
     </record>
 
     <record id="view_public_budget_budget_report_3_tree" model="ir.ui.view">
-        <field name="name">public_budget.budget.report_3.tree</field>
+        <field name="name">public_budget.budget.report_3.list</field>
         <field name="model">public_budget.budget.report_3</field>
         <field name="arch" type="xml">
-            <tree string="Analisis de Presupuesto">
+            <list string="Analisis de Presupuesto">
                 <field name="type"/>
                 <field name="preventive_line_id"/>
                 <field name="transaction_id"/>
@@ -79,7 +79,7 @@
                 <field name="partner_id"/>
                 <field name="budget_position_id"/>
                 <field name="amount" sum="Total"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -118,7 +118,7 @@
     <record id="action_public_budget_budget_report_3_all" model="ir.actions.act_window">
         <field name="name">Analisis de Presupuesto</field>
         <field name="res_model">public_budget.budget.report_3</field>
-        <field name="view_mode">graph,pivot,tree,form</field>
+        <field name="view_mode">graph,pivot,list,form</field>
         <field name="context">{'search_default_affects_budget': 1}</field>
         <!-- <field name="domain">[('affects_budget', '=', True)]</field> -->
         <field name="domain">[]</field>

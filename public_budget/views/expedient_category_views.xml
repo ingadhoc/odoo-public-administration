@@ -35,13 +35,13 @@
 
         <!-- TREEVIEW -->
         <record id="view_public_budget_expedient_category_tree" model="ir.ui.view">
-            <field name="name">public_budget.expedient_category.tree</field>
+            <field name="name">public_budget.expedient_category.list</field>
             <field name="model">public_budget.expedient_category</field>
             <field name="arch" type="xml">
-                <tree string="Expedient Category"
+                <list string="Expedient Category"
                     >
                     <field name="name"/>
-                </tree>
+                </list>
             </field>
         </record>
 

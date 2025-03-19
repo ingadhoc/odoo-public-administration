@@ -12,7 +12,7 @@ class PublicBudgetBudgetReport(models.Model):
     @api.model
     def _reference_models(self):
         return [
-            ('account.payment.group', 'Pagos'),
+            ('account.payment', 'Pagos'),
             ('account.move', 'Invoice'),
             ('public_budget.definitive_line', 'Definitive Line'),
             ('public_budget.preventive_line', 'Preventive Line'),

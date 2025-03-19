@@ -26,17 +26,17 @@
         </field>
     </record>
 
-    <!-- tree view modification -->
+    <!-- list view modification -->
     <record id="view_account_payment_group_tree" model="ir.ui.view">
-        <field name="name">account.payment.group.pay.tree</field>
+        <field name="name">account.payment.group.pay.list</field>
         <field name="model">account.payment.group</field>
         <field name="inherit_id" ref="account_payment_group.view_account_payment_group_tree"/>
         <field name="priority">20</field>
         <field name="arch" type="xml">
             <!-- para que solo se puedan crear con el botón -->
-            <tree position="attributes">
+            <list position="attributes">
                 <attribute name="create">false</attribute>
-            </tree>
+            </list>
             <field name="payment_date" position="after">
                 <field name="payment_min_date"/>
             </field>
@@ -55,9 +55,9 @@
                 <field name="reference"/>
                 <field name="communication" optional="hide"/>
             </field>
-            <tree position="inside">
+            <list position="inside">
                 <button name="confirm" type="object" string="Confirm" attrs="{'invisible': [('state','!=', 'draft')]}" icon="fa-arrow-circle-right" groups="account.group_account_manager"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -84,7 +84,7 @@
             <!-- agregamos este campo por compatibilidad con mig desde v8 y además para simplificar liquidación -->
             <field name="payment_ids" position="after">
                 <label for="withholding_line_ids" string="Detalle de Retenciones" states="posted"/>
-                <field name="withholding_line_ids" context="{'tree_view_ref':'account_tax_settlement.view_account_move_line_tree', 'default_type': 'entry'}" states="posted"/>
+                <field name="withholding_line_ids" context="{'list_view_ref':'account_tax_settlement.view_account_move_line_tree', 'default_type': 'entry'}" states="posted"/>
             </field>
 
             <form>
