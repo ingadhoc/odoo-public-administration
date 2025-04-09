@@ -13,14 +13,14 @@
     </record>
 
     <record model="ir.ui.view" id="purchase_order_tree">
-        <field name="name">purchase.order.tree</field>
+        <field name="name">purchase.order.list</field>
         <field name="model">purchase.order</field>
         <field name="inherit_id" ref="purchase.purchase_order_tree"/>
         <field name="arch" type="xml">
             <!-- sacamos create porque las generamos con botón y además si se crean desde la vista tree no quedan asociadas a la requsition -->
-            <tree position="attributes">
+            <list position="attributes">
                 <attribute name="create">false</attribute>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -36,7 +36,7 @@
             <button name="action_view_invoice" position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
             </button>
-            <xpath expr="//field[@name='order_line']/tree//field[@name='name']" position="after">
+            <xpath expr="//field[@name='order_line']/list//field[@name='name']" position="after">
                 <field name="brand"/>
             </xpath>
             <button id="draft_confirm" position="attributes">
@@ -46,7 +46,7 @@
                 <attribute name="groups">purchase.group_purchase_user</attribute>
             </button>
             <field name="requisition_id" position="after">
-                <field name="expedient_id" readonly="1" attrs="{'invisible':[('expedient_id', '=', False)]}"/>
+                <field name="expedient_id" readonly="1" invisible="not expedient_id"/>
             </field>
         </field>
     </record>

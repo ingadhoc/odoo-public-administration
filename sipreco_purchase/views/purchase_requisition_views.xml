@@ -29,11 +29,10 @@
                 <button name="print_report_requisition" string="Print" type="object"/>
             </button>
 
-            <button name="action_in_progress" position="attributes">
+            <button name="action_confirm" position="attributes">
                 <attribute name="groups">sipreco_purchase.group_approve_purhcase_req</attribute>
                 <attribute name="string">Confirm</attribute>
-                <attribute name="states"></attribute>
-                <attribute name="attrs">{'invisible': ['|',('state', 'not in', ['draft']),('inspected', '=', False)]}</attribute>
+                <attribute name="invisible">state != 'draft' or not inspected</attribute>
             </button>
 
             <!-- como al cancelar se cancelan los request, no dejamos re-abrir ya que es engañoso, lo dejamos son para nosotros -->
@@ -48,22 +47,22 @@
             </button> -->
 
             <!-- es cerrar proceso de licitación y pasar a elegir -->
-            <button name="action_open" position="attributes">
+            <!-- <button name="action_open" position="attributes">
                 <attribute name="confirm">ATENCIÓN: Se va a proceder a la selección de las ordenes de compra. No se podrán generar nuevas ordenes de compra. Esto no puede deshacerse. Seguro desea continuar?</attribute>
-            </button>
+            </button> -->
 
 
             <div name="button_box">
                 <button class="oe_stat_button" name="%(stock_request.action_stock_request_form)d" string="Procurements" type="action" context="{'search_default_manual_requisition_id': id}" icon="fa-bars" groups="stock.group_stock_user"/>
-                <button class="oe_stat_button" name="%(public_budget.action_public_budget_transaction_transactions)d" string="Transactions" type="action" groups="public_budget.group_portal_transaction,public_budget.group_secretary_director,account.group_account_user,purchase.group_purchase_user" context="{'search_default_expedient_id': expedient_id}" icon="fa-bars" attrs="{'invisible': [('expedient_id', '=', False)]}"/>
+                <button class="oe_stat_button" name="%(public_budget.action_public_budget_transaction_transactions)d" string="Transactions" type="action" groups="public_budget.group_portal_transaction,public_budget.group_secretary_director,account.group_account_user,purchase.group_purchase_user" context="{'search_default_expedient_id': expedient_id}" icon="fa-bars" invisible="not expedient_id"/>
             </div>
             <button name="%(purchase_requisition.action_purchase_requisition_to_so)d" position="after">
-                <button name="to_inspected" string="To Inspected" type="object" groups="purchase.group_purchase_user" attrs="{'invisible':['|', ('state', '!=', 'draft'),('inspected','=', True)]}"/>
-                <button name="revert_inspection" string="Revert inspection" type="object" groups="purchase.group_purchase_user" attrs="{'invisible':['|', ('state', '!=', 'draft'),('inspected','!=', True)]}"/>
+                <button name="to_inspected" string="To Inspected" type="object" groups="purchase.group_purchase_user" invisible="state != 'draft' or inspected"/>
+                <button name="revert_inspection" string="Revert inspection" type="object" groups="purchase.group_purchase_user" invisible="state != 'draft' or not inspected"/>
             </button>
             <button name="action_draft" position="attributes">
                 <attribute name="groups">purchase.group_purchase_user</attribute>
-                <attribute name="attrs">{'invisible':['|', ('state', '!=', 'cancel'),('inspected','!=', True)]}</attribute>
+                <attribute name="invisible">state != 'cancel' or not inspected</attribute>
             </button>
 
             <field name="product_id" position="after">
@@ -73,10 +72,10 @@
             <field name="product_qty" position="after">
                 <field name="price_unit"/>
             </field>
-            <xpath expr="//field[@name='line_ids']/tree//field[@name='schedule_date']" position="replace">
+            <xpath expr="//field[@name='line_ids']/list//field[@name='price_unit']" position="after">
                 <field name="subtotal" sum="Total"/>
             </xpath>
-            <xpath expr="//field[@name='line_ids']/tree//field[@name='product_id']" position="attributes">
+            <xpath expr="//field[@name='line_ids']/list//field[@name='product_id']" position="attributes">
                 <attribute name="required">1</attribute>
             </xpath>
             <field name="date_end" position="before">
@@ -86,7 +85,7 @@
             <!-- limpiamos vista -->
 
             <field name="vendor_id" position="after">
-                <field name="expedient_id" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                <field name="expedient_id" readonly="state == 'done'"/>
                 <field name="transaction_type_id" readonly="1"/>
                 <field name="route_ids" invisible="1"/>
                 <field name="route_id" domain="[('id', 'in', route_ids)]"/>
@@ -108,46 +107,46 @@
 
             <field name="picking_type_id" position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
-                <attribute name="attrs">{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
+                <attribute name="readonly">state != 'draft' or inspected</attribute>
             </field>
 
-            <field name="ordering_date" position="attributes">
+            <field name="date_start" position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
-                <attribute name="attrs">{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
+                <attribute name="readonly">state != 'draft' or inspected</attribute>
             </field>
 
             <field name="date_end" position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
-                <attribute name="attrs">{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
+                <attribute name="readonly">state != 'draft' or inspected</attribute>
             </field>
 
-            <field name="schedule_date" position="attributes">
+            <field name="date_end" position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
-                <attribute name="attrs">{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
+                <attribute name="readonly">state != 'draft' or inspected</attribute>
             </field>
 
             <field name="line_ids" position="attributes">
-                <attribute name="attrs">{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
+                <attribute name="readonly">state != 'draft' or inspected</attribute>
             </field>
             <field name="user_id" position="attributes">
-                <attribute name="attrs">{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
+                <attribute name="readonly">state != 'draft' or inspected</attribute>
             </field>
             <field name="name" position="attributes">
-                <attribute name="attrs">{'readonly': ['|',('name', '!=', False),('inspected', '=', True)]}</attribute>
+                <attribute name="readonly">name or inspected</attribute>
             </field>
             <field name="company_id" position="attributes">
-                <attribute name="attrs">{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
+                <attribute name="readonly">state != 'draft' or inspected</attribute>
             </field>
-            <field name="origin" position="attributes">
-                <attribute name="attrs">{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
-            </field>
+            <!-- <field name="origin" position="attributes">
+                <attribute name="readonly">state != 'draft' or inspected</attribute>
+            </field> -->
             <field name="description" position="attributes">
+                <attribute name="readonly">state != 'draft' or inspected</attribute>
                 <attribute name="required">True</attribute>
-                <attribute name="attrs">{'readonly': ['|',('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
             </field>
-            <field name="type_id" position="attributes">
+            <!-- <field name="type_id" position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
-            </field>
+            </field> -->
             <field name="vendor_id" position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
             </field>
@@ -158,11 +157,11 @@
         <field name="name">purchase.requisition.form</field>
         <field name="model">purchase.requisition</field>
         <field name="inherit_id" ref="view_purchase_requisition_form"/>
-        <field name="groups_id" eval="[(4, ref('purchase.group_purchase_user'))]"/>
+        <!-- <field name="groups_id" eval="[(4, ref('purchase.group_purchase_user'))]"/> -->
         <field name="arch" type="xml">
             <field name="transaction_type_id" position="attributes">
                 <attribute name="readonly">False</attribute>
-                <attribute name="attrs">{'readonly': ['|', ('state', '!=', 'draft'),('inspected', '=', True)]}</attribute>
+                <!-- <attribute name="attrs">{'readonly': ['|', ('state', '!=', 'draft'),('inspected', '=', True)]}</attribute> -->
             </field>
         </field>
     </record>
@@ -189,7 +188,7 @@
 
 
     <record model="ir.ui.view" id="view_purchase_requisition_tree">
-        <field name="name">purchase.requisition.tree</field>
+        <field name="name">purchase.requisition.list</field>
         <field name="model">purchase.requisition</field>
         <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_tree"/>
         <field name="arch" type="xml">
@@ -207,7 +206,7 @@
             <field name="date_end" position="attributes">
                 <attribute name="invisible">1</attribute>
             </field>
-            <field name="ordering_date" position="replace">
+            <field name="date_start" position="replace">
                 <field name="expedient_id"/>
             </field>
         </field>

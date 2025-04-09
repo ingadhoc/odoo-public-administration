@@ -14,7 +14,7 @@
     </record>
 
     <record id="stock_request_order_tree" model="ir.ui.view">
-        <field name="name">stock.request.order.tree</field>
+        <field name="name">stock.request.order.list</field>
         <field name="model">stock.request.order</field>
         <field name="inherit_id" ref="stock_request.stock_request_order_tree"/>
         <field name="arch" type="xml">
@@ -81,7 +81,7 @@
 
             <!-- reemplazamos y usamos m2o porque queremos que seleccionen uno sol -->
             <field name="route_id" position="attributes">
-                <attribute name="attrs">{'readonly': [('stock_request_ids', '!=', [])]}</attribute>
+                <attribute name="readonly">stock_request_ids</attribute>
                 <attribute name="force_save">1</attribute>
             </field>
 
@@ -100,26 +100,16 @@
         </field>
     </record>
 
-    <record id="stock_request_order_portal_form" model="ir.ui.view">
-        <field name="name">stock.request.order.portal.form</field>
-        <field name="model">stock.request.order</field>
-        <field name="inherit_id" ref="stock_request_order_form"/>
-        <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
-        <field name="arch" type="xml">
-            <field name="activity_ids" position="replace"/>
-        </field>
-    </record>
-
     <!-- <record id="action_procurement_request" model="ir.actions.act_window">
         <field name="name">Procurement Requests</field>
         <field name="res_model">stock.request.order</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record> -->
 
     <record id="stock_request.stock_request_order_action" model="ir.actions.act_window">
         <field name="name">My Procurement Requests</field>
         <field name="res_model">stock.request.order</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="domain">[('partner_id.user_ids', '=', uid)]</field>
     </record>
 

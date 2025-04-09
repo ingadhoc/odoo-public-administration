@@ -6,7 +6,7 @@ from odoo import models, fields
 
 
 class StockLocationRoute(models.Model):
-    _inherit = 'stock.location.route'
+    _inherit = 'stock.route'
 
     stock_request_selectable = fields.Boolean(
         'Applicable on Stock Requests',
