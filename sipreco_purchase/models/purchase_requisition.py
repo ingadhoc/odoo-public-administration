@@ -57,11 +57,11 @@ class PurchaseRequisition(models.Model):
     )
 
     route_id = fields.Many2one(
-        'stock.location.route',
+        'stock.route',
     )
 
     route_ids = fields.Many2many(
-        'stock.location.route',
+        'stock.route',
         compute='_compute_route_ids',
         readonly=True,
         string="Routes"
@@ -71,7 +71,7 @@ class PurchaseRequisition(models.Model):
     def _compute_route_ids(self):
         for rec in self:
             user_picking_type_ids = self.env.user.picking_type_ids.ids
-            rec.route_ids = self.env['stock.location.route'].search(
+            rec.route_ids = self.env['stock.route'].search(
                 [('rule_ids.picking_type_id', 'in', user_picking_type_ids)])
 
     @api.depends('line_ids')

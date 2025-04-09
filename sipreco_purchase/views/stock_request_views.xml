@@ -38,7 +38,7 @@
     </record>
 
     <record id="view_stock_request_tree" model="ir.ui.view">
-        <field name="name">stock.request.tree</field>
+        <field name="name">stock.request.list</field>
         <field name="model">stock.request</field>
         <field name="inherit_id" ref="stock_request.view_stock_request_tree"/>
         <field name="arch" type="xml">
@@ -53,9 +53,9 @@
                 <field name="price_unit"/>
             </field>
 
-            <tree>
+            <list>
                 <field name="manual_requisition_id"/>
-            </tree>
+            </list>
             <field name="location_id" position="replace">
                 <field name="requirement_id"/>
             </field>

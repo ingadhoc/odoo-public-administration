@@ -11,9 +11,9 @@
             </templates>
 
             <!-- por ahora ocultamos los picking lates -->
-            <div t-if="record.count_picking_late.raw_value &gt; 0" position="replace"/>
+            <!-- <div t-if="record.count_picking_late.raw_value &gt; 0" position="replace"/> -->
 
-            <div class="col-6 o_kanban_primary_right">
+            <div class="col-6 stock-overview-links">
                 <!-- por ahora visible siempre -->
                 <div class="row">
                     <div class="col-9">

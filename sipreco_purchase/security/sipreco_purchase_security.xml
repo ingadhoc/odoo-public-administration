@@ -62,9 +62,9 @@
     </record>
 
     <!-- ocultamos menu de reglas de reabastecimeinto (Solo para warehosue manager) -->
-    <record id="stock.menu_reordering_rules_config" model="ir.ui.menu">
+    <!-- <record id="stock.menu_reordering_rules_config" model="ir.ui.menu">
         <field name="groups_id" eval="[(4, ref('stock.group_stock_manager'))]"/>
-    </record>
+    </record> -->
 
     <!-- menu reportes de compra -->
     <record id="purchase.purchase_report" model="ir.ui.menu">
