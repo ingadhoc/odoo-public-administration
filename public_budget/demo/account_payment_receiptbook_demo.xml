@@ -3,7 +3,6 @@
     <record id="payment_order_actual" model="account.payment.receiptbook">
         <field name="name" eval="'Ordenes de pago ' +time.strftime('%Y')"/>
         <field name="partner_type">supplier</field>
-        <field name="sequence_type">automatic</field>
         <field name="document_type_id" ref="l10n_ar.dc_a_r"/>
         <field name="prefix">OP/%(year)s</field>
         <field name="sequence" eval="10"/>

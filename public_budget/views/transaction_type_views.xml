@@ -35,6 +35,7 @@
                         <field name="advance_account_id" invisible="not with_advance_payment" required="with_advance_payment"/>
                         <field name="amount_restriction_ids" invisible="not with_amount_restriction"/>
                         <field name="company_id" groups="base.group_multi_company"/>
+                        <field name="company_id" invisible="1"/>
                     </group>
                 </sheet>
 

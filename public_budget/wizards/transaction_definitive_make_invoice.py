@@ -5,6 +5,7 @@ from odoo.exceptions import ValidationError
 class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
     _name = "public_budget.definitive.make.invoice"
     _description = "Transaction Definitive Make Invoice"
+    _check_company_auto = True
 
     invoice_date = fields.Date(
         'Invoice Date',
@@ -38,8 +39,8 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
         'account.journal',
         string='Journal',
         required=True,
-        domain="[('type', 'in', ('purchase','purchase_refund')),"
-        "('company_id','=',company_id)]",
+        domain=[('type', 'in', ('purchase','purchase_refund'))],
+        check_company=True,
         default=lambda self: self._get_default_journal()
     )
     transaction_id = fields.Many2one(

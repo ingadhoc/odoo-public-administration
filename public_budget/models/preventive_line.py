@@ -9,6 +9,7 @@ class PreventiveLine(models.Model):
     _name = 'public_budget.preventive_line'
     _description = 'Preventive Line'
     _rec_name = 'budget_position_id'
+    _check_company_auto = True
 
     account_id = fields.Many2one(
         'account.account',
@@ -16,11 +17,11 @@ class PreventiveLine(models.Model):
         # states={'invoiced': [('readonly', True)]},
         # TODO Revisar dominio de internal type y compnay_id
         # domain="["
-        # "('internal_type', '=', 'other'), "
+        # "('account_type', '=', 'income_other'), "
         # "('company_id', '=', company_id), "
         # "('deprecated', '=', False)]",
-        domain="["
-        "('deprecated', '=', False)]",
+        domain="[('deprecated', '=', False)]",
+        check_company=True,
     )
     company_id = fields.Many2one(
         related='transaction_id.company_id',
@@ -263,17 +264,6 @@ class PreventiveLine(models.Model):
             rec.paid_amount = amounts['paid_amount']
         _logger.debug(
             'Finish getting amounts for preventive lines %s' % rec.ids)
-
-    @api.constrains('account_id', 'transaction_id')
-    def check_type_company(self):
-        for rec in self:
-            if (
-                    rec.account_id and rec.transaction_id and
-                    rec.account_id.company_id != rec.transaction_id.company_id
-            ):
-                raise ValidationError(_(
-                    'Transaction Company and Account Company must be the '
-                    'same!'))
 
     @api.constrains('definitive_line_ids', 'preventive_amount')
     def _check_number(self):

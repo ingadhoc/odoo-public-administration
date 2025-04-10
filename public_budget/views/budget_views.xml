@@ -48,6 +48,7 @@
                             <field name="expedient_id" readonly="state != 'draft'"/>
                             <field name="income_account_id" readonly="state != 'draft'"/>
                             <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="company_id" invisible="1"/>
                         </group>
                         <group name="totals">
                             <field name="total_authorized"/>

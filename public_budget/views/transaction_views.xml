@@ -54,6 +54,7 @@
                             <field name="name" readonly="state != 'draft'"/>
                             <field name="expedient_id" domain="[('current_location_id', 'in', user_location_ids),('in_transit','=',False),('state','=','open')]" options="{'no_create': True}" readonly="state != 'draft'"/>
                             <field name="company_id" groups="base.group_multi_company" readonly="state != 'draft'"/>
+                            <field name="company_id" invisible="1"/>
                             <field name="type_id" readonly="state != 'draft'"/>
                             <field name="partner_id" invisible="not type_with_advance_payment" required="type_with_advance_payment" readonly="state != 'draft'"/>
                             <field name="user_id"/>

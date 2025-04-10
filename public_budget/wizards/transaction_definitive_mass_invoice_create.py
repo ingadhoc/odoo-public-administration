@@ -5,6 +5,7 @@ from odoo.exceptions import ValidationError
 class PublicBudgetDefinitiveMassInvoiceCreate(models.TransientModel):
     _name = "public_budget.definitive.mass.invoice.create"
     _description = "Transaction Definitive Mass Invoice Create"
+    _check_company_auto = True
 
     @api.model
     def _get_default_journal(self):
@@ -34,8 +35,8 @@ class PublicBudgetDefinitiveMassInvoiceCreate(models.TransientModel):
     journal_id = fields.Many2one(
         'account.journal',
         required=True,
-        domain="[('type', 'in', ('purchase','purchase_refund')),\
-        ('company_id','=',company_id)]",
+        domain=[('type', 'in', ('purchase','purchase_refund'))],
+        check_company=True,
         default=_get_default_journal
     )
     transaction_id = fields.Many2one(

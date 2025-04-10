@@ -180,7 +180,7 @@ class AccountPayment(models.Model):
     #         rec.payment_ids.write({'payment_date': rec.payment_date})
 
     def unlink(self):
-        if self.filtered('document_number'):
+        if self.filtered('name'):
             raise ValidationError(_(
                 'No puede borrar una orden de pago que ya fue numerada'))
         return super().unlink()
@@ -427,15 +427,19 @@ class AccountPayment(models.Model):
                     advance_remaining_amount + rec.unreconciled_amount))
 
     @api.model
-    def create(self, vals):
+    def create(self, vals_list):
         """
         When the payment group is created, assing document number.
         """
-        res = super().create(vals)
-        if res.receiptbook_id.sequence_id and not res.document_number:
-            res = res.with_context(is_recipt=True)
-            res.document_number = res.receiptbook_id.sequence_id.next_by_id()
-        return res
+        recs = super().create(vals_list)
+        for rec in recs:
+            if rec.receiptbook_id.sequence_id and not (rec.name or rec.name == "/"):
+                rec = rec.with_context(is_recipt=True)
+                rec.name = rec.receiptbook_id.with_context(ir_sequence_date=rec.date).sequence_id.next_by_id()
+                # TODO revisar si tenemos que agregar prefijo. de agregarlo tmb tenemos que hacerlo en el write de abajo
+                # rec.name = "%s %s" % (rec.receiptbook_id.document_type_id.doc_code_prefix, name)
+
+        return recs
 
     def write(self, vals):
         """
@@ -444,8 +448,8 @@ class AccountPayment(models.Model):
         res = super().write(vals)
         if vals.get('receiptbook_id', False):
             for rec in self.filtered(
-                    lambda p: p.receiptbook_id.sequence_id and not p.document_number).with_context(is_recipt=True):
-                rec.document_number = rec.receiptbook_id.sequence_id.next_by_id()
+                    lambda p: p.receiptbook_id.sequence_id and not (p.name or p.name == '/')).with_context(is_recipt=True):
+                rec.name = rec.receiptbook_id.with_context(ir_sequence_date=rec.date).sequence_id.next_by_id()
         return res
 
     def action_aeroo_certificado_de_retencion_report(self):

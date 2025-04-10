@@ -10,6 +10,7 @@ class AdvanceRequest(models.Model):
     _name = 'public_budget.advance_request'
     _description = 'Advance Requests'
     _order = 'date desc'
+    _check_company_auto = True
 
     _states_ = [
         ('draft', 'Draft'),
@@ -60,7 +61,7 @@ class AdvanceRequest(models.Model):
         'public_budget.advance_request_type',
         required=True,
         readonly=True,
-        domain="[('company_id', '=', company_id)]",
+        check_company=True,
         #states={'draft': [('readonly', False)]},
     )
     state = fields.Selection(
@@ -121,12 +122,6 @@ class AdvanceRequest(models.Model):
                 raise ValidationError(_(
                     'You can not approve a request with lines without '
                     'approved amount.'))
-
-    @api.constrains('type_id', 'company_id')
-    def check_type_company(self):
-        if self.filtered(lambda x: x.type_id.company_id != x.company_id):
-            raise ValidationError(_(
-                'Company must be the same as Type Company!'))
 
     def action_cancel(self):
         for rec in self:
