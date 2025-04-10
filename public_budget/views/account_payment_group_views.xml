@@ -113,9 +113,9 @@
             </field>
 
             <field name="payment_date" position="before">
-                <field name="payment_base_date" attrs="{'required':['|', ('transaction_id', '!=', False), ('advance_request_id', '!=', False)]}"/>
+                <field name="payment_base_date" attrs="{'required':['|', ('transaction_id', '!=', False), ('advance_request_id', '!=', False)]}" readonly="state != 'draft'"/>
                 <label for="payment_days"/>
-                <div class="oe_inline">
+                <div class="oe_inline" readonly="state != 'draft'">
                     <field name="payment_days" class="oe_inline"/>
                     <field name="days_interval_type" class="oe_inline"/>
                 </div>
@@ -134,7 +134,7 @@
             <field name="partner_id" position="after">
                 <field name="transaction_id" attrs="{'invisible': [('transaction_id', '=', False)]}"/>
                 <field name="budget_id" attrs="{'invisible': [('transaction_id', '=', False)]}"/>
-                <field name="expedient_id" attrs="{'required': [('transaction_id', '!=', False)], 'invisible': [('transaction_id', '=', False)]}" domain="[('type', '=','payment'), ('state', '=', 'open'), ('current_location_id', 'in', user_location_ids), ('in_transit', '=', False)]"/>
+                <field name="expedient_id" attrs="{'required': [('transaction_id', '!=', False)], 'invisible': [('transaction_id', '=', False)]}" domain="[('type', '=','payment'), ('state', '=', 'open'), ('current_location_id', 'in', user_location_ids), ('in_transit', '=', False)]" readonly="state != 'draft'"/>
                 <field name="budget_position_ids" widget="many2many_tags"/>
                 <!-- TODO enable -->
                 <!-- <field name="paid_withholding_ids" widget="many2many_tags"/> -->

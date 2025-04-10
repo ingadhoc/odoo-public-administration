@@ -9,6 +9,7 @@ class Budget(models.Model):
     _name = 'public_budget.budget'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Budget'
+    _check_company_auto = True
 
     # _order = "fiscalyear_id desc"
 
@@ -40,10 +41,9 @@ class Budget(models.Model):
         readonly=True,
         # required=True,
         # states={'draft': [('readonly', False)]},
-        domain="[('internal_type', '=', 'other'), "
-        "('company_id', '=', company_id), "
+        domain="[('account_type', '=', 'income_other'), "
         "('deprecated', '=', False)]",
-
+        check_company=True,
     )
     expedient_id = fields.Many2one(
         'public_budget.expedient',
@@ -112,14 +112,12 @@ class Budget(models.Model):
     budget_modification_ids = fields.One2many(
         'public_budget.budget_modification',
         'budget_id',
-        readonly=True,
         # states={'draft': [('readonly', False)], 'open': [('readonly', False)]},
         domain=[('initial_approval', '=', False)]
     )
     budget_detail_ids = fields.One2many(
         'public_budget.budget_detail',
         'budget_id',
-        readonly=True,
         # states={'draft': [('readonly', False)]}
     )
     budget_prec_detail_ids = fields.One2many(
@@ -130,7 +128,6 @@ class Budget(models.Model):
     funding_move_ids = fields.One2many(
         'public_budget.funding_move',
         'budget_id',
-        readonly=True,
         # states={
         #     'open': [('readonly', False)],
         #     'pre_closed': [('readonly', False)]},
@@ -143,10 +140,9 @@ class Budget(models.Model):
     receiptbook_id = fields.Many2one(
         'account.payment.receiptbook',
         required=True,
-        readonly=True,
         # states={'draft': [('readonly', False)]},
-        domain="[('partner_type', '=', 'supplier'), "
-        "('company_id', '=', company_id)]",
+        domain=[('partner_type', '=', 'supplier')],
+        check_company=True,
     )
 
     @api.onchange('fiscalyear')

@@ -38,16 +38,15 @@
         <field name="model">account.asset</field>
         <field name="inherit_id" ref="account_asset.view_account_asset_form"/>
         <field name="arch" type="xml">
-            <notebook position="attributes">
+            <!-- <notebook position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
-            </notebook>
+            </notebook> -->
             <div name="button_box">
                 <field name="transaction_ids" invisible="1"/>
                 <button type="object" name="action_view_transaction" class="oe_stat_button" string="Transactions" icon="fa-list-alt" invisible="state == 'model' or not transaction_ids"/>
             </div>
-            <group>
-                <group>
-                    <group invisible="state == 'model'">
+            <xpath expr="//div[hasclass('oe_title')]" position="after">
+                <group>               <group invisible="state == 'model'">
                         <field name="model_id" help="Category of asset" options="{'horizontal': true}" domain="[('state', '=', 'model'), ('account_type', '=?', account_type), ]"/> <!-- ('asset_type', '=', asset_type) Saco de dom no existe mas el campo, no tiene simil en 18-->
                         <field name="enrollment"/>
                         <field name="reference"/>
@@ -62,18 +61,18 @@
                         <field name="user_id"/>
                         <field name="transit"/>
                     </group>
+                    <group string="Extra Options" invisible="state == 'model'">
+                        <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                        <field name="original_value" invisible="state == 'model'" readonly="state != 'draft' or original_move_line_ids"/>
+                        <field name="acquisition_date" invisible="state == 'model'" readonly="state != 'draft' or original_move_line_ids"/>
+                        <field name="partner_id" context="{'res_partner_search_mode': 'supplier'}" readonly="state != 'draft'"/>
+                        <field name="invoice_id" domain="[('partner_id', '=', partner_id)]" readonly="state != 'draft'" options="{'no_create': True}"/>
+                        <field name="comodato" invisible="state == 'model'"/>
+                        <field name="patrimonial" invisible="state == 'model'"/>
+                        <field name="reportable" invisible="state == 'model'"/>
+                    </group>
                 </group>
-                <group string="Extra Options" invisible="state == 'model'">
-                    <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
-                    <field name="original_value" invisible="state == 'model'" readonly="state != 'draft' or original_move_line_ids"/>
-                    <field name="acquisition_date" invisible="state == 'model'" readonly="state != 'draft' or original_move_line_ids"/>
-                    <field name="partner_id" context="{'res_partner_search_mode': 'supplier'}" readonly="state != 'draft'"/>
-                    <field name="invoice_id" domain="[('partner_id', '=', partner_id)]" readonly="state != 'draft'" options="{'no_create': True}"/>
-                    <field name="comodato" invisible="state == 'model'"/>
-                    <field name="patrimonial" invisible="state == 'model'"/>
-                    <field name="reportable" invisible="state == 'model'"/>
-                </group>
-            </group>
+            </xpath>
             <button name="compute_depreciation_board" position="attributes">
                 <attribute name="states"></attribute>
                 <attribute name="groups">base.group_no_one</attribute>
@@ -93,7 +92,7 @@
             <!-- <button name="action_set_to_close" position="replace"> esto tambien esta desde asset_modify
                 <button name="archive_and_close_asset" type="object" invisible="not active or state != 'open'" string="Close and Archive" groups="public_budget.group_asset_responsable_ubicacion"/>
             </button>  -->
-            <notebook position="attributes">
+            <!-- <notebook position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
             </notebook>
             <button name="open_entries" position="attributes">
@@ -104,7 +103,7 @@
             </xpath>
             <xpath expr="//field[@name='salvage_value']//.." position="attributes">
                 <attribute name="groups">base.group_no_one</attribute>
-            </xpath>
+            </xpath> -->
             <button name="compute_depreciation_board" position="after">
                 <field name="visible_button_transfer_asset" invisible="1"/>
                 <button name="transfer_asset" type="object" invisible="not visible_button_transfer_asset or transit or state == 'model'" string="Transfer Asset" />
@@ -124,15 +123,6 @@
         </field>
     </record>
 
-    <!-- <record id="view_account_asset_asset_form_portal" model="ir.ui.view">
-        <field name="name">account.asset.asset.form</field>
-        <field name="model">account.asset</field>
-        <field name="inherit_id" ref="account_asset.view_account_asset_form"/> -->
-        <!-- <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/> -->
-        <!-- <field name="arch" type="xml">
-            <field name="activity_ids" position="replace"/>
-        </field>
-    </record> -->
 
     <record id="view_account_asset_asset_purchase_tree_portal" model="ir.ui.view">
         <field name="name">account.asset.list.portal</field>
@@ -144,10 +134,9 @@
         </field>
     </record>
 
-    <!-- TODO reactivar al repara los grupos -->
-    <!-- <menuitem name="Asset" id="menu_asset" groups="group_asset_usuario,public_budget.group_portal_asset" web_icon="public_budget,static/description/asset-icon.png" sequence="40"/> -->
+    <menuitem name="Asset" id="menu_asset" groups="group_asset_usuario,public_budget.group_portal_asset" web_icon="public_budget,static/description/asset-icon.png" sequence="40"/>
 
-    <!-- <menuitem id="menu_account_asset" name="Assets" parent="menu_asset" sequence="2" action="account_asset.action_account_asset_form"/>
-    <menuitem parent="menu_asset" id="menu_account_asset_model" action="account_asset.action_account_asset_model_form" groups="group_asset_usuario,public_budget.group_portal_asset"/> -->
+    <menuitem id="menu_account_asset" name="Assets" parent="menu_asset" sequence="2" action="account_asset.action_account_asset_form"/>
+    <menuitem parent="menu_asset" id="menu_account_asset_model" action="account_asset.action_account_asset_model_form" groups="group_asset_usuario,public_budget.group_portal_asset"/>
 
 </odoo>

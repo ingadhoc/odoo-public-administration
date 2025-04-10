@@ -39,6 +39,7 @@
                         <field name="budget_assignment_allowed"/>
                         <field name="assignment_position_id"/>
                         <field name="company_id" groups="base.group_multi_company"/>
+                        <field name="company_id" invisible="1"/>
                         <field name="inventariable" invisible="type == 'view'"/>
                         <field name="category_id" invisible="type == 'view'" required="type == 'normal'"/>
                         <field name="child_ids" context="{'budget_id':context.get('budget_id')}" invisible="type != 'view'"/>

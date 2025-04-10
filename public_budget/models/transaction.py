@@ -11,6 +11,7 @@ class BudgetTransaction(models.Model):
     _description = 'Budget Transaction'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = "id desc"
+    _check_company_auto = True
 
     _states_ = [
         ('draft', 'Draft'),
@@ -65,7 +66,7 @@ class BudgetTransaction(models.Model):
         string='Type',
         readonly=True,
         required=True,
-        domain="[('company_id', '=', company_id)]",
+        check_company=True,
         # states={'draft': [('readonly', False)]}
     )
     partner_id = fields.Many2one(
@@ -285,13 +286,6 @@ class BudgetTransaction(models.Model):
     def _compute_user_locations(self):
         for rec in self:
             rec.user_location_ids = rec.env.user.location_ids.ids
-
-    @api.constrains('type_id', 'company_id')
-    def check_type_company(self):
-        for rec in self:
-            if rec.type_id.company_id != rec.company_id:
-                raise ValidationError(_(
-                    'Company must be the same as Type Company!'))
 
     @api.depends(
         'partner_id',

@@ -23,14 +23,23 @@
     <record id="company_sipreco" model="res.company">
         <field name="logo" type="base64" file="public_budget/demo/SIPRECO_Logo.png"/>
         <field name='l10n_ar_gross_income_type'>exempt</field>
-        <field name='parent_id' ref='base.main_company'/>
         <field name='currency_id' ref='base.ARS'/>
         <field name='partner_id' ref='partner_sipreco'/>
         <!-- no lo requerimos en demo para que no joda -->
         <!-- <field name='afip_auth_verify_type'>required</field> -->
-        <field name='double_validation' eval='True'/>
-        <field name='regimenes_ganancias_ids'  eval="[(6, 0, [ref('l10n_ar_account_withholding.regimen_9'), ref('l10n_ar_account_withholding.regimen_12')])]"/>
         <field name="name">SIPRECO</field>
     </record>
+
+    <function model="res.users" name="write">
+        <value eval="[ref('base.user_root'), ref('base.user_admin'), ref('base.user_demo')]"/>
+        <value eval="{'company_ids': [(4, ref('company_sipreco'))]}"/>
+    </function>
+
+    <function model="account.chart.template" name="try_loading">
+        <value eval="[]"/>
+        <value>ar_ex</value>
+        <value model="res.company" eval="obj().env.ref('public_budget.company_sipreco')"/>
+        <value name="install_demo" eval="True"/>
+    </function>
 
 </odoo>

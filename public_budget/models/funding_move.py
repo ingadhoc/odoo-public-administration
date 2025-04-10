@@ -60,7 +60,7 @@ class FundingMove(models.Model):
         'account configured on budget is going to be used.',
         readonly=True,
         #states={'draft': [('readonly', False)]},
-        domain="[('internal_type', '=', 'other'), "
+        domain="[('account_type', '=', 'income_other'), "
         # no me gasto en este filtro porque no usan multicompany y deberia
         # llevarla
         # "('company_id', '=', company_id), "

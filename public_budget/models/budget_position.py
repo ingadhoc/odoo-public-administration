@@ -11,6 +11,7 @@ class BudgetPosition(models.Model):
     _description = 'Budget Position'
     _parent_store = True
     _rec_names_search = ['name', 'code']
+    _check_company_auto = True
 
     _order = "code"
 
@@ -127,11 +128,11 @@ class BudgetPosition(models.Model):
         'account.account',
         #TODO revisar dominio account
         # domain="["
-        # "('internal_type', '=', 'other'), "
+        # "('account_type', '=', 'income_other'), "
         # "('company_id', '=', company_id), "
         # "('deprecated', '=', False)]",
-        domain="["
-        "('deprecated', '=', False)]",
+        domain="[('deprecated', '=', False)]",
+        check_company=True,
         help='Default Account on preventive lines of this position'
     )
 
@@ -223,7 +224,7 @@ class BudgetPosition(models.Model):
             if excluded_line_id:
                 domain.append(('id', '!=', excluded_line_id))
 
-            rec.draft_amount = sum([x['preventive_amount'] for x in self.env[
+            rec.draft_amount = sum([x[1] for x in self.env[
                 'public_budget.preventive_line']._read_group(
                 domain=domain,
                 groupby=['budget_position_id'],

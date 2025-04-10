@@ -10,6 +10,7 @@ class AdvanceReturn(models.Model):
     _name = 'public_budget.advance_return'
     _description = 'Advance Returns'
     _order = 'date desc'
+    _check_company_auto = True
 
     _states_ = [
         ('draft', 'Draft'),
@@ -56,7 +57,7 @@ class AdvanceReturn(models.Model):
         string='Type',
         required=True,
         readonly=True,
-        domain="[('company_id', '=', company_id)]",
+        check_company=True,
         # states={'draft': [('readonly', False)]},
     )
     move_id = fields.Many2one(
@@ -132,13 +133,6 @@ class AdvanceReturn(models.Model):
                     'Please delete it first'))
         self.write({'state': 'cancel'})
         return True
-
-    @api.constrains('type_id', 'company_id')
-    def check_type_company(self):
-        for rec in self.filtered(
-                lambda x: x.type_id.company_id != x.company_id):
-            raise ValidationError(_(
-                'Company must be the same as Type Company!'))
 
     @api.constrains('state', 'return_line_ids')
     def check_amounts(self):

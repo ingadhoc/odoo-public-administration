@@ -7,6 +7,7 @@ class TransactionType(models.Model):
 
     _name = 'public_budget.transaction_type'
     _description = 'Transaction Type'
+    _check_company_auto = True
 
     name = fields.Char(
         required=True,
@@ -29,6 +30,7 @@ class TransactionType(models.Model):
         " ('reconcile', '=', False)]",
         help='This account will be used on advance payments. Must be a payable'
         ' account.',
+        check_company=True,
     )
     amount_restriction_ids = fields.One2many(
         'public_budget.transaction_type_amo_rest',
@@ -48,13 +50,3 @@ class TransactionType(models.Model):
         default='supplier',
         required=True,
     )
-
-    @api.constrains('advance_account_id', 'company_id')
-    def check_account_company(self):
-        for rec in self:
-            if (
-                    rec.advance_account_id and
-                    rec.advance_account_id.company_id != rec.company_id
-            ):
-                raise ValidationError(_(
-                    'Company must be the same as Account Company!'))

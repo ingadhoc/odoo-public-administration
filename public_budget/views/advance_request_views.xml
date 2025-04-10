@@ -49,6 +49,7 @@
                             <field name="approval_user" invisible="not approval_user"/>
                             <field name="confirmation_date" invisible="not confirmation_date" readonly="state != 'draft'"/>
                             <field name="company_id" groups="base.group_multi_company" readonly="state != 'draft'"/>
+                            <field name="company_id" invisible="1"/>
                         </group>
                     </group>
                     <notebook>

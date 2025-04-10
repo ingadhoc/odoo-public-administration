@@ -22,7 +22,6 @@
         'views/stock_picking_type_views.xml',
         'views/stock_picking_views.xml',
         'views/purchase_requisition_views.xml',
-        # 'views/purchase_requisition_type_views.xml',
         'views/stock_request_order_views.xml',
         'views/stock_request_views.xml',
         'views/res_users_views.xml',

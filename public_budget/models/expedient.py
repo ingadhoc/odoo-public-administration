@@ -290,7 +290,7 @@ class PublicBudgetExpedient(models.Model):
     @api.depends('number', 'cover')
     def _compute_display_name(self):
         for rec in self:
-            if len(rec.cover) > 200:
+            if rec.cover and len(rec.cover) > 200:
                 rec.display_name = "%s - %s..." % (rec.number, rec.cover[:200])
             else:
                 rec.display_name = "%s - %s" % (rec.number, rec.cover)

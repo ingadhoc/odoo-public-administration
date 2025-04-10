@@ -6,6 +6,7 @@ class AdvanceRequestType(models.Model):
 
     _name = 'public_budget.advance_request_type'
     _description = 'Advance Request Type'
+    _check_company_auto = True
 
     name = fields.Char(
         required=True,
@@ -17,18 +18,19 @@ class AdvanceRequestType(models.Model):
     account_id = fields.Many2one(
         'account.account',
         #TODO fix domain internal type es ahora account_type == incomne_other ??
-        #domain="[('internal_type', '=', 'other'), ('company_id', '=', company_id), ('deprecated', '=', False)]",
+        #domain="[('account_type', '=', 'income_other'), ('company_id', '=', company_id), ('deprecated', '=', False)]",
         domain="[('deprecated', '=', False)]",
         # ahora no queremos que sea payable porque no queremos que se lleve
         # a la deuda del partner generico, queremos que para que se lleve haga
         # falta hacer una devolucion
         # domain="[('type', '=', 'payable'), ('company_id', '=', company_id)]",
         required=True,
+        check_company=True,
     )
     return_journal_id = fields.Many2one(
         'account.journal',
-        domain="[('company_id', '=', company_id)]",
         required=True,
+        check_company=True,
     )
     company_id = fields.Many2one(
         'res.company',
@@ -48,13 +50,3 @@ class AdvanceRequestType(models.Model):
                 lambda x: x.get_debt_amount(rec))
             for employee in employees:
                 rec.employee_ids = [(4, employee.id, False)]
-
-    @api.constrains('account_id', 'company_id', 'return_journal_id')
-    def check_company(self):
-        for rec in self:
-            if rec.account_id.company_id != rec.company_id:
-                raise ValidationError(_(
-                    'Company must be the same as Account Company!'))
-            if rec.return_journal_id.company_id != rec.company_id:
-                raise ValidationError(_(
-                    'Company must be the same as Journal Company!'))
