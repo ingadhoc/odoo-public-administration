@@ -50,7 +50,7 @@
             </field>
 
             <field name="product_uom_qty" position="after">
-                <field name="price_unit"/>
+                <field name="price_unit" readonly="state != 'draft'"/>
             </field>
 
             <list>
@@ -63,7 +63,7 @@
                 <attribute name="groups">base.group_no_one</attribute>
             </field>
             <field name="product_id" position="after">
-                <field name="description"/>
+                <field name="description" readonly="state != 'draft'"/>
             </field>
         </field>
     </record>

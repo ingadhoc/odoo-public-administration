@@ -11,7 +11,7 @@ class PurchaseRequisition(models.Model):
 
     name = fields.Char(
         # cambiamos string
-        'Reference',
+        # 'Reference',
     )
     manual_request_ids = fields.One2many(
         'stock.request',
@@ -40,7 +40,7 @@ class PurchaseRequisition(models.Model):
     )
 
     date = fields.Date(
-        'Start Date',
+        'Date',
         readonly=True,
     )
     user_inspected_id = fields.Many2one(
