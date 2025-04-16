@@ -8,7 +8,7 @@
         <field name="arch" type="xml">
             <div name="button_box" position="inside">
                 <button class="oe_stat_button" type="object"
-                    name="action_open_subsidy_ticket" context="{'default_partner_id': active_id}" icon="fa-life-ring">
+                    name="action_open_subsidy_ticket" context="{'default_partner_id': id}" icon="fa-life-ring">
                 <div class="o_stat_info">
                     <span class="o_stat_text"> Subsidies</span>
                 </div>

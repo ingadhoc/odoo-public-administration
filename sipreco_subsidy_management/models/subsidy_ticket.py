@@ -108,13 +108,11 @@ class PublicBudgetSubsidyTicket(models.Model):
                 ticket.issue_date = False
 
     @api.model
-    def name_get(self):
-        result = []
+    def _compute_display_name(self):
         for ticket in self:
             year = ticket.create_date.year
             name_with_year = "%s (#%d) - %d" % (ticket.name, ticket._origin.id, year)
-            result.append((ticket.id, name_with_year))
-        return result
+            ticket.display_name = name_with_year
 
     @api.constrains('stage_id')
     def _check_expedient(self):
