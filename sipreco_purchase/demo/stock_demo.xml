@@ -42,25 +42,25 @@
         <field name="default_location_dest_id" ref="stock.stock_location_customers"/>
     </record>
 
-    <record id="stock_location_rute_informatica" model="stock.location.route">
+    <record id="stock_location_rute_informatica" model="stock.route">
         <field name="name">SIPRECO: Sólo enviar (Informática)</field>
         <field name="company_id" ref="public_budget.company_sipreco"/>
         <field name="stock_request_selectable" eval="True"/>
     </record>
 
-    <record id="stock_location_rute_economato" model="stock.location.route">
+    <record id="stock_location_rute_economato" model="stock.route">
         <field name="name">SIPRECO: Sólo enviar (Economato)</field>
         <field name="company_id" ref="public_budget.company_sipreco"/>
         <field name="stock_request_selectable" eval="True"/>
     </record>
 
-    <record id="stock_location_rute_sec_administrativa" model="stock.location.route">
+    <record id="stock_location_rute_sec_administrativa" model="stock.route">
         <field name="name">SIPRECO: Sólo enviar (Secretaría Administrativa)</field>
         <field name="company_id" ref="public_budget.company_sipreco"/>
         <field name="stock_request_selectable" eval="True"/>
     </record>
 
-    <record id="stock_location_rute_sec_parlamentaria" model="stock.location.route">
+    <record id="stock_location_rute_sec_parlamentaria" model="stock.route">
         <field name="name">SIPRECO: Sólo enviar (Secretaría Parlamentaria)</field>
         <field name="company_id" ref="public_budget.company_sipreco"/>
         <field name="stock_request_selectable" eval="True"/>
@@ -71,7 +71,7 @@
         <field name="action">pull</field>
         <field name="route_id" ref="stock_location_rute_informatica"/>
         <field name="warehouse_id" search="[('name', '=', 'SIPRECO'), ('code', 'ilike', 'SIPRE')]"/>
-        <field name="location_id" ref="stock.stock_location_customers"/>
+        <field name="location_dest_id" ref="stock.stock_location_customers"/>
         <field name="location_src_id" search="[('usage', '=', 'internal'), ('company_id.name', 'ilike', 'SIPRECO')]"/>
         <field name="picking_type_id" ref="stock_picking_type_informatica"/>
     </record>
@@ -81,7 +81,7 @@
         <field name="action">pull</field>
         <field name="route_id" ref="stock_location_rute_economato"/>
         <field name="warehouse_id" search="[('name', '=', 'SIPRECO'), ('code', 'ilike', 'SIPRE')]"/>
-        <field name="location_id" ref="stock.stock_location_customers"/>
+        <field name="location_dest_id" ref="stock.stock_location_customers"/>
         <field name="location_src_id" search="[('usage', '=', 'internal'), ('company_id.name', 'ilike', 'SIPRECO')]"/>
         <field name="picking_type_id" ref="stock_picking_type_economato"/>
     </record>
@@ -91,7 +91,7 @@
         <field name="action">pull</field>
         <field name="route_id" ref="stock_location_rute_sec_administrativa"/>
         <field name="warehouse_id" search="[('name', '=', 'SIPRECO'), ('code', 'ilike', 'SIPRE')]"/>
-        <field name="location_id" ref="stock.stock_location_customers"/>
+        <field name="location_dest_id" ref="stock.stock_location_customers"/>
         <field name="location_src_id" search="[('usage', '=', 'internal'), ('company_id.name', 'ilike', 'SIPRECO')]"/>
         <field name="picking_type_id" ref="stock_picking_type_sec_administrativa"/>
     </record>
@@ -101,7 +101,7 @@
         <field name="action">pull</field>
         <field name="route_id" ref="stock_location_rute_sec_parlamentaria"/>
         <field name="warehouse_id" search="[('name', '=', 'SIPRECO'), ('code', 'ilike', 'SIPRE')]"/>
-        <field name="location_id" ref="stock.stock_location_customers"/>
+        <field name="location_dest_id" ref="stock.stock_location_customers"/>
         <field name="location_src_id" search="[('usage', '=', 'internal'), ('company_id.name', 'ilike', 'SIPRECO')]"/>
         <field name="picking_type_id" ref="stock_picking_type_sec_parlamentaria"/>
     </record>
