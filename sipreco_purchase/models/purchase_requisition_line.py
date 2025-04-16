@@ -9,7 +9,6 @@ class PurchaseRequisitionLine(models.Model):
     _inherit = 'purchase.requisition.line'
 
     name = fields.Text(
-        string='Description',
     )
     price_unit = fields.Float(
         string='Unit Price',
