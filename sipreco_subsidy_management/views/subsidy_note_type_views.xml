@@ -18,14 +18,14 @@
 
     <!-- TREEVIEW -->
     <record id="view_public_budget_subsidy_note_type_tree" model="ir.ui.view">
-        <field name="name">public_budget.subsidy.note.type.tree</field>
+        <field name="name">public_budget.subsidy.note.type.list</field>
         <field name="model">public_budget.subsidy.note.type</field>
         <field name="arch" type="xml">
-            <tree string="Tipos de Reclamo de Subsidios">
+            <list string="Tipos de Reclamo de Subsidios">
                 <field name="sequence" widget="handle"/>
                 <field name="code"/>
                 <field name="name"/>
-            </tree>
+            </list>
         </field>
     </record>
 

@@ -6,20 +6,21 @@
         <field name="model">helpdesk.ticket</field>
         <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
         <field name="arch" type="xml">
-            <field name="company_id" position="after">
-                    <field name="dni"/>
-                    <field name="amount" string="Monto" widget="monetary"/>
-                    <field name="cbu"/>
-                    <field name="photo_dni" widget="image" style="margin-top: 25px; margin-bottom: 25px;"/>
-                    <label for="description" string="Motivo"></label>
-            </field>
+
+            <xpath expr="//group/group" position="inside">
+                <field name="dni"/>
+                <field name="amount" string="Monto" widget="monetary"/>
+                <field name="cbu"/>
+                <field name="photo_dni" widget="image" style="margin-top: 25px; margin-bottom: 25px;"/>
+                <label for="description" string="Motivo"></label>
+            </xpath>
             <field name="email_cc" position="after">
                     <field name="resolution_number"/>
                     <field name="resolution_date"/>
             </field>
-            <field name="ticket_type_id" position="attributes">
+            <!-- <field name="ticket_type_id" position="attributes">
                 <attribute name="invisible">1</attribute>
-            </field>
+            </field> -->
             <field name="tag_ids" position="attributes">
                 <attribute name="invisible">1</attribute>
             </field>
@@ -37,7 +38,7 @@
     </record>
 
     <record id="subsidy_ticket_view_tree" model="ir.ui.view">
-        <field name="name">subsidy.ticket.tree</field>
+        <field name="name">subsidy.ticket.list</field>
         <field name="model">helpdesk.ticket</field>
         <field name="inherit_id" ref="helpdesk.helpdesk_tickets_view_tree"/>
         <field name="arch" type="xml">
@@ -49,7 +50,7 @@
                 <field name="dni"/>
                 <field name="amount" string="Monto"/>
             </field>
-            <field name="display_name" position="before">
+            <field name="name" position="before">
                 <field name="create_date" string="Fecha De Creación"/>
             </field>
             <field name="team_id" position="before">
@@ -85,7 +86,7 @@
                     <field name="amount" string="Monto" widget="monetary"/>
                 </group>
             </xpath>
-            <xpath expr="//templates//field[@name='ticket_type_id']" position="after">
+            <xpath expr="//templates//field[@name='tag_ids']" position="after">
                 <group>
                     Expediente:
                     <field name="expedient_id"/>

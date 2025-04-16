@@ -11,7 +11,7 @@
                 <header>
                     <button type="object" string="Cambiar Estado" name="action_change_state"/>
                     <button type="object" string="Generar Remito" name="generate_remit"/>
-                    <button type="object" string="Cancelar" name="cancel" states="not_presented,presented" groups="base.group_no_one"/>
+                    <button type="object" string="Cancelar" name="cancel" invisible="state not in ('not_presented', 'presented')" groups="base.group_no_one"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet string="Resolucion Subsidios">
@@ -31,13 +31,13 @@
                     <notebook>
                         <page string="Lineas de Resoluciones">
                             <field name="subsidy_resolution_line_ids" context="{'current_location_id':current_location_id}">
-                                <tree editable="bottom">
+                                <list editable="bottom">
                                     <field name="expedient_id" domain="[('state', 'not in' , ['cancel', 'annulled']) ,('overdue' ,'!=', True), ('subsidy_expedient', '=', True),('current_location_id','=', parent.current_location_id)]"/>
                                     <field name="name"/>
                                     <field name="dni"/>
                                     <field name="partner_id"/>
                                     <field name="amount"/>
-                                </tree>
+                                </list>
                             </field>
                         </page>
                     </notebook>
@@ -49,15 +49,15 @@
 
     <!-- TREE VIEW -->
     <record id="view_public_budget_subsidy_resolution_tree" model="ir.ui.view">
-        <field name="name">public_budget.subsidy.resolution.tree</field>
+        <field name="name">public_budget.subsidy.resolution.list</field>
         <field name="model">public_budget.subsidy.resolution</field>
         <field name="arch" type="xml">
-            <tree string="Resoluciones de Subsidios">
+            <list string="Resoluciones de Subsidios">
                 <field name="name"/>
                 <field name="date"/>
                 <field name="reference"/>
                 <field name="state"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -83,7 +83,7 @@
     <record id="action_public_budget_subsidy_resolution" model="ir.actions.act_window">
         <field name="name">Resoluciones de Subsidios</field>
         <field name="res_model">public_budget.subsidy.resolution</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <menuitem id="menu_public_budget_subsidy_resolution" sequence="15" action="action_public_budget_subsidy_resolution" parent="public_budget.menu_expedient_main" groups="public_budget.group_secretary_usuario" />

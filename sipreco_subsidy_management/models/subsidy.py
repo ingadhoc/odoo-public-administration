@@ -213,24 +213,24 @@ class PublicBudgetSubsidy(models.Model):
     @api.depends(
         'rendido_amount',
         'aprobado_amount',
-        'payment_group_ids.state',
-        'payment_group_ids.payment_date',
-        'payment_group_ids.payments_amount',
+        'payment_ids.state',
+        'payment_ids.payment_date',
+        'payment_ids.amount',
         # 'payment_group_ids.cargo_date',
         # 'payment_group_ids.cargo_amount',
         # TODO chequear si hace falta esto o no
-        'advance_payment_group_ids.state',
-        'advance_payment_group_ids.payment_date',
-        'advance_payment_group_ids.payments_amount',
-        # 'advance_payment_group_ids.cargo_date',
-        # 'advance_payment_group_ids.cargo_amount',
+        'advance_payment_ids.state',
+        'advance_payment_ids.payment_date',
+        'advance_payment_ids.amount',
+        # 'advance_payment_ids.cargo_date',
+        # 'advance_payment_ids.cargo_amount',
     )
     def _compute_cargo_data(self):
         for rec in self:
-            payments = rec.payment_group_ids + rec.advance_payment_group_ids
+            payments = rec.payment_ids + rec.advance_payment_ids
             cargo_amount = sum(
                 payments.filtered(
-                    lambda x: x.state == 'posted').mapped('payments_amount'))
+                    lambda x: x.state == 'posted').mapped('amount'))
             cargo_date = payments.search([
                 ('id', 'in', payments.ids),
                 ('payment_date', '!=', False),

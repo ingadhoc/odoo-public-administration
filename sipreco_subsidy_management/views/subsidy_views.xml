@@ -49,10 +49,10 @@
                     <notebook>
                         <page string="Renditions">
                             <field name="rendition_ids" context="{'default_expedient_id': accountability_administrative_expedient_id, 'default_rendition_amount': pendientes_rendicion_amount}">
-                                <tree editable="bottom">
-                                    <field name="date" attrs="{'readonly': [('editable_line','=',True)]}"/>
-                                    <field name="expedient_id" attrs="{'readonly': [('editable_line','=',True)]}"/>
-                                    <field name="rendition_amount" sum="Total" attrs="{'readonly': [('editable_line','=',True)]}"/>
+                                <list editable="bottom">
+                                    <field name="date" readonly="editable_line"/>
+                                    <field name="expedient_id" readonly="editable_line"/>
+                                    <field name="rendition_amount" sum="Total" readonly="editable_line"/>
                                     <!-- nos da error al pasar este default por contexto -->
                                     <!-- context="{'default_approved_amount': rendition_amount} -->
                                     <!-- <field name="approval_arrangement_ids" widget="one2many_tags">
@@ -67,24 +67,24 @@
                                             </group>
                                         </form>
                                     </field> -->
-                                    <field name="approval_arrangement_id" options="{'create': True, 'create_edit': True}" context="{'default_approved_amount': rendition_amount}" attrs="{'readonly': [('editable_line','=',True)]}"/>
+                                    <field name="approval_arrangement_id" options="{'create': True, 'create_edit': True}" context="{'default_approved_amount': rendition_amount}" readonly="editable_line"/>
                                     <button name="%(action_aeroo_subsidy_approval_arrangement_report)d" title="Print" icon="fa-print" type="action"/>
                                     <field name="editable_line" readonly="1"/>
                                     <field name="approved_amount" sum="Total"/>
                                     <field name="pending_amount" sum="Total"/>
-                                    <field name="currency_id" invisible="1"/>
-                                </tree>
+                                    <field name="currency_id" column_invisible="True"/>
+                                </list>
                             </field>
                         </page>
                         <page string="Notes">
                             <field name="note_ids">
-                                <tree editable="bottom">
+                                <list editable="bottom">
                                     <field name="date"/>
                                     <field name="type_id"/>
                                     <!-- <field name="type"/> -->
                                     <field name="name"/>
                                     <button name="%(action_aeroo_subsidy_note_report)d" title="Print" icon="fa-print" type="action"/>
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="Payment Orders and Refunds">
@@ -94,15 +94,11 @@
                                 <field name="accountability_expiry_date"/>
                                 <!-- <field name="accountability_overcome"/> -->
                             </group>
-                            <field name="advance_payment_group_ids" context="{'default_transaction_id':id, 'default_partner_id': partner_id, 'default_partner_type': 'supplier'}"/>
+                            <field name="advance_payment_ids" context="{'default_transaction_id':id, 'default_partner_id': partner_id, 'default_partner_type': 'supplier'}"/>
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers"/>
-                    <field name="activity_ids" widget="mail_activity"/>
-                    <field name="message_ids" widget="mail_thread"/>
-                </div>
+                <chatter/>
             </form>
         </field>
     </record>
@@ -111,7 +107,7 @@
         <field name="name">public_budget.subsidy.form.inherit</field>
         <field name="model">public_budget.subsidy</field>
         <field name="inherit_id" ref="view_public_budget_subsidy_form"/>
-        <field name="groups_id" eval="[(6, 0, [ref('account.group_account_manager')])]" />
+        <!-- <field name="groups_id" eval="[(6, 0, [ref('account.group_account_manager')])]" /> -->
         <field name="arch" type="xml">
             <field name="editable_line" position="attributes">
                 <attribute name="readonly">0</attribute>
@@ -121,15 +117,15 @@
 
     <!-- TREE VIEW -->
     <record id="view_public_budget_subsidy_tree" model="ir.ui.view">
-        <field name="name">public_budget.subsidy.tree</field>
+        <field name="name">public_budget.subsidy.list</field>
         <field name="model">public_budget.subsidy</field>
         <field name="arch" type="xml">
-            <tree string="Subsidios" decoration-info="reclaimed">
+            <list string="Subsidios" decoration-info="reclaimed">
                 <field name="internal_number"/>
                 <field name="reclaimed"/>
                 <field name="parliamentary_resolution_date"/>
                 <field name="partner_id" string="Beneficiary"/>
-                <field name="amount" string="Importe s/Res"/>
+                <field name="amount" string="Importe s/Res" readonly="state == 'closed'"/>
                 <field name="cargo_amount" sum="Total"/>
                 <field name="rendido_amount" sum="Total"/>
                 <field name="aprobado_amount" sum="Total"/>
@@ -140,7 +136,7 @@
                 <field name="cargo_date"/>
                 <field name="accountability_expiry_date"/>
                 <field name="state" optional="hide"/>
-            </tree>
+            </list>
         </field>
     </record>
 
