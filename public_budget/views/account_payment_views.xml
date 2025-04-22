@@ -9,7 +9,8 @@
         <field name="arch" type="xml">
 
             <field name="date" position="after">
-                <field name="assignee_id" readonly="state != 'draft'"/>
+                <field name="assignee_id" groups="!public_budget.group_change_payment_assignee" readonly="state != 'draft'"/>
+                <field name="assignee_id" groups="public_budget.group_change_payment_assignee"/><!-- reemplaza vista view_account_payment_edit_assignee_form-->
                 <field name="return_payment_id" invisible="not return_payment_id"/>
             </field>
             <field name="date" position="attributes">
@@ -20,18 +21,18 @@
         </field>
     </record>
 
-    <record id="view_account_payment_edit_assignee_form" model="ir.ui.view">
+    <!-- <record id="view_account_payment_edit_assignee_form" model="ir.ui.view">
         <field name="name">account.payment.form</field>
         <field name="model">account.payment</field>
         <field name="priority">20</field>
         <field name="inherit_id" ref="public_budget.view_account_payment_form"/>
-        <!-- <field name="groups_id" eval="[(4, ref('public_budget.group_change_payment_assignee'))]"/> -->
+         <field name="groups_id" eval="[(4, ref('public_budget.group_change_payment_assignee'))]"/>
         <field name="arch" type="xml">
             <field name="assignee_id" position="attributes">
                 <attribute name="readonly">0</attribute>
             </field>
         </field>
-    </record>
+    </record> -->
 
 <!-- because we generate checks on post, checks report is made from payments -->
     <!-- payments list view -->
