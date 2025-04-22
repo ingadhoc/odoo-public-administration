@@ -6,6 +6,7 @@
     'website': 'www.adhoc.com.ar',
     'category': 'Accounting & Finance',
     'depends': [
+        #'web_m2x_options',
         'portal_backend',
         'sales_team',
         'account_accountant_ux',
@@ -109,6 +110,7 @@
         'data/position_exc_restrictions.xml',
         'data/ir_config_parameter_data.xml',
         'data/server_actions_data.xml',
+        'data/ir_parameters.xml',
     ],
     'demo': [
         'demo/res_company_demo.xml',
