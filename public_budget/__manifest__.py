@@ -93,7 +93,7 @@
         'views/expedient_founder_views.xml',
         'views/res_partner_views.xml',
         'views/account_asset_views.xml',
-        # 'views/account_payment_group_views.xml',
+        'views/account_payment_group_views.xml',
         'views/account_payment_views.xml',
         # 'views/hr_public_holidays_views.xml',
         'views/custom_views.xml',

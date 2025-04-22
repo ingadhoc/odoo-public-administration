@@ -360,7 +360,7 @@ class BudgetTransaction(models.Model):
                 'to_pay_amount'))
         advance_paid_amount = sum(
             self.advance_payment_ids.search(paid_domain).mapped(
-                'payments_amount'))
+                'payment_total'))
         return {
             'advance_to_pay_amount': advance_to_pay_amount,
             'advance_paid_amount': advance_paid_amount,
@@ -659,19 +659,16 @@ class BudgetTransaction(models.Model):
             "It is not possible to generate a payment order if the "
             "expedient of the transaction is not in a permitted location or is in transit")
         self.expedient_id.check_location_allowed_for_current_user(msg)
-        action = self.env["ir.actions.act_window"]._for_xml_id('account.action_account_payments_group_payable')
+        action = self.env["ir.actions.act_window"]._for_xml_id('account.action_account_payments_payable')
         if not action:
             return False
 
-        form_view_id = self.env.ref(
-            'account.view_account_form').id
+        form_view_id = self.env.ref('account.view_account_payment_form').id
         action['views'] = [(form_view_id, 'form')]
-
-        partner_id = self.partner_id
 
         action['context'] = {
             'default_transaction_id': self.id,
-            'default_partner_id': partner_id and partner_id.id or False,
+            'default_partner_id': self.partner_id.id,
             'default_partner_type': 'supplier',
         }
         return action
