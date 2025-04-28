@@ -7,10 +7,9 @@ class AccountTax(models.Model):
     _inherit = "account.tax"
 
     def get_period_payments_domain(self, payment_group):
-        """ en sipreco usamos to_signature_date en vez de payment_date
+        """ en sipreco usamos to_signature_date en vez de date
         """
-        to_date = fields.Date.from_string(
-            payment_group.to_signature_date) or datetime.date.today()
+        to_date = payment_group.to_signature_date or datetime.date.today()
         common_previous_domain = [
             ('partner_id.commercial_partner_id', '=',
                 payment_group.commercial_partner_id.id),

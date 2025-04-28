@@ -43,14 +43,12 @@ class Remit(models.Model):
     location_id = fields.Many2one(
         'public_budget.location',
         string='Source Location',
-        readonly=True,
         required=True,
         # states={'in_transit': [('readonly', False)]}
     )
     location_dest_id = fields.Many2one(
         'public_budget.location',
         string='Destination Location',
-        readonly=True,
         required=True,
         # states={'in_transit': [('readonly', False)]}
     )

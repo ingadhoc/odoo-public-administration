@@ -214,13 +214,13 @@ class PublicBudgetSubsidy(models.Model):
         'rendido_amount',
         'aprobado_amount',
         'payment_ids.state',
-        'payment_ids.payment_date',
+        'payment_ids.date',
         'payment_ids.amount',
         # 'payment_group_ids.cargo_date',
         # 'payment_group_ids.cargo_amount',
         # TODO chequear si hace falta esto o no
         'advance_payment_ids.state',
-        'advance_payment_ids.payment_date',
+        'advance_payment_ids.date',
         'advance_payment_ids.amount',
         # 'advance_payment_ids.cargo_date',
         # 'advance_payment_ids.cargo_amount',
@@ -233,10 +233,10 @@ class PublicBudgetSubsidy(models.Model):
                     lambda x: x.state == 'posted').mapped('amount'))
             cargo_date = payments.search([
                 ('id', 'in', payments.ids),
-                ('payment_date', '!=', False),
+                ('date', '!=', False),
                 # cargo only if payment validated
                 ('state', '=', 'posted'),
-            ], order='payment_date desc', limit=1).payment_date
+            ], order='date desc', limit=1).date
 
             expiry_date = False
             if cargo_date:

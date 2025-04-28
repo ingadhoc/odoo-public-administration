@@ -40,7 +40,6 @@ class AccountPayment(models.Model):
         'public_budget.transaction',
     )
     budget_position_ids = fields.Many2many(
-        relation='voucher_position_rel',
         comodel_name='public_budget.budget_position',
         string='Partidas Relacionadas',
         help='Partidas Presupuestarias Relacionadas',
@@ -73,21 +72,18 @@ class AccountPayment(models.Model):
     )
     payment_base_date = fields.Date(
         string='Payment Base Date',
-        readonly=True,
         # nos pidieron que no haya valor por defecto
         # default=fields.Date.context_today,
         # states={'draft': [('readonly', False)]},
         help='Date used to calculate payment date',
     )
     payment_days = fields.Integer(
-        readonly=True,
         # states={'draft': [('readonly', False)]},
         help='Days added to payment base date to get the payment date',
     )
     days_interval_type = fields.Selection([
         ('business_days', 'Business Days'),
         ('calendar_days', 'Calendar Days')],
-        readonly=True,
         # states={'draft': [('readonly', False)]},
         default='business_days',
     )
@@ -96,10 +92,10 @@ class AccountPayment(models.Model):
         string='Fecha Min. de Pago',
         help='El pago no puede ser validado antes de esta fecha',
         store=True,
+        readonly=False,
     )
     confirmation_date = fields.Date(
         'Fecha de Confirmación',
-        readonly=True,
         # states={'draft': [('readonly', False)]},
         copy=False,
     )
@@ -110,19 +106,11 @@ class AccountPayment(models.Model):
         # states={
         #     'draft': [('readonly', False)],
         #     'confirmed': [('readonly', False)]},
-        readonly=True,
         copy=False,
     )
-    payment_date = fields.Date(
+    date = fields.Date(
         required=False,
-        # al final, para evitar que la seteen equivocadamente, la dejamos
-        # editable solo en isgnature y signed
-        # states={
-        #     # 'draft': [('readonly', False)],
-        #     # 'confirmed': [('readonly', False)],
-        #     'signature_process': [('readonly', False)],
-        #     'signed': [('readonly', False)],
-        # },
+        string='Payment Date',
     )
     # TODO implementar
     # paid_withholding_ids = fields.Many2many(
@@ -131,28 +119,19 @@ class AccountPayment(models.Model):
     #     help='Retenciones pagadas con este voucher',
     #     compute='_get_paid_withholding'
     # )
-    withholding_line_ids = fields.Many2many(
-        'account.move.line',
-        compute='_compute_withholding_lines'
-    )
 
     @api.model
     def default_get(self, fields):
         """ hacemos que la fecha de pago no sea required ya que seteamos fecha de validacion si no estaba seteada """
         vals = super().default_get(fields)
-        vals['payment_date'] = False
+        vals['date'] = False
         return vals
-
-    def _compute_withholding_lines(self):
-        for rec in self:
-            rec.withholding_line_ids = rec.move_line_ids.filtered(
-                'tax_line_id')
 
     def post(self):
         for rec in self:
             # si no estaba seteada la setamos
-            if not rec.payment_date:
-                rec.payment_date = fields.Date.today()
+            if not rec.date:
+                rec.date = fields.Date.today()
             # idem para los payments
             # como ellos no ven el campo payment date tiene mas sentido
             # pisarlo (por ejemplo por si validaron y luego cancelaron para
@@ -164,9 +143,9 @@ class AccountPayment(models.Model):
             # así nomas pagos con cheques cambiados
             for pay in rec.payment_ids:
                 if not pay.date:
-                    pay.write({'date': rec.payment_date})
-            # rec.payment_ids.filtered(lambda x: not x.payment_date).write(
-            #     {'payment_date': rec.payment_date})
+                    pay.write({'date': rec.date})
+            # rec.payment_ids.filtered(lambda x: not x.date).write(
+            #     {'date': rec.date})
             if (
                     rec.expedient_id and rec.expedient_id.current_location_id
                     not in rec.user_location_ids):
@@ -174,12 +153,6 @@ class AccountPayment(models.Model):
                     'No puede validar un pago si el expediente no está en '
                     'una ubicación autorizada para ústed'))
         return super(AccountPayment, self.with_context(is_recipt=True)).post()
-
-    # las seteamos directamente al postear total antes no se usan
-    # @api.constrains('payment_date')
-    # def update_payment_date(self):
-    #     for rec in self:
-    #         rec.payment_ids.write({'payment_date': rec.payment_date})
 
     def unlink(self):
         if self.filtered('name'):
@@ -232,12 +205,12 @@ class AccountPayment(models.Model):
     @api.depends('payment_base_date', 'payment_days', 'days_interval_type')
     def _compute_payment_min_date(self):
         for rec in self:
+            return
             current_date = False
             business_days_to_add = rec.payment_days
             if rec.payment_base_date:
                 if rec.days_interval_type == 'business_days':
-                    current_date = fields.Date.from_string(
-                        rec.payment_base_date)
+                    current_date = rec.payment_base_date
                     while business_days_to_add > 0:
                         current_date = current_date + relativedelta(days=1)
                         weekday = current_date.weekday()
@@ -250,9 +223,7 @@ class AccountPayment(models.Model):
                         #     continue
                         business_days_to_add -= 1
                 else:
-                    current_date = fields.Date.from_string(
-                        rec.payment_base_date)
-                    current_date = current_date + relativedelta(
+                    current_date = rec.payment_base_date + relativedelta(
                         days=rec.payment_days)
 
                 # además hacemos que la fecha mínima no pueda ser día no habil
@@ -262,7 +233,7 @@ class AccountPayment(models.Model):
                         'hr.holidays.public'].is_public_holiday(
                             current_date):
                     current_date = current_date + relativedelta(days=1)
-            rec.payment_min_date = fields.Date.to_string(current_date)
+            rec.payment_min_date = current_date
 
     # TODO enable
     # def _get_paid_withholding(self):
@@ -355,16 +326,6 @@ class AccountPayment(models.Model):
                 ('id', 'not in', already_paying.ids)])
         return domain
 
-    # modificamos estas funciones para que si esta en borrador no setee ningun
-    # valor por defecto
-    @api.onchange('company_regimenes_ganancias_ids')
-    def change_company_regimenes_ganancias(self):
-        if (
-                self.state != 'draft' and
-                self.company_regimenes_ganancias_ids and
-                self.partner_type == 'supplier'):
-            self.retencion_ganancias = 'nro_regimen'
-
     @api.constrains('state')
     def update_invoice_amounts(self):
         _logger.info('Updating invoice amounts from payment group')
@@ -388,27 +349,27 @@ class AccountPayment(models.Model):
                         '* Id Pago / Fecha Confirmación: %s - %s') % (
                         invoice.id, invoice.invoice_date,
                         rec.id, rec.confirmation_date))
-            if not rec.payment_date:
+            if not rec.date:
                 continue
-            if rec.payment_date > fields.Date.context_today(rec):
+            if rec.date > fields.Date.context_today(rec):
                 raise ValidationError(_(
                     'No puede usar una fecha de pago superior a hoy'))
-            if rec.payment_date < rec.confirmation_date:
+            if rec.date < rec.confirmation_date:
                 raise ValidationError(_(
                     'La fecha de validacion del pago no puede ser menor a la '
                     'fecha de confirmación.\n'
                     '* Id de Pago: %s\n'
                     '* Fecha de pago: %s\n'
                     '* Fecha de confirmación: %s\n' % (
-                        rec.id, rec.payment_date, rec.confirmation_date)))
-            if rec.payment_date < rec.payment_min_date:
+                        rec.id, rec.date, rec.confirmation_date)))
+            if rec.date < rec.payment_min_date:
                 raise ValidationError(_(
                     'La fecha de validacion del pago no puede ser menor a la '
                     'fecha mínima de pago\n'
                     '* Id de Pago: %s\n'
                     '* Fecha de pago: %s\n'
                     '* Fecha mínima de pago: %s\n' % (
-                        rec.id, rec.payment_date, rec.payment_min_date)))
+                        rec.id, rec.date, rec.payment_min_date)))
 
     @api.constrains('unreconciled_amount', 'transaction_id', 'state')
     def check_avance_transaction_amount(self):
@@ -456,16 +417,4 @@ class AccountPayment(models.Model):
 
     def action_aeroo_certificado_de_retencion_report(self):
         self.ensure_one()
-        payments = self.payment_ids.filtered(
-            lambda x:
-            x.payment_method_code == 'withholding' and x.partner_type ==
-            'supplier')
-        if not payments:
-            return False
-        return {
-            'actions': [
-                {'type': 'ir.actions.act_window_close'},
-                self.env.ref('l10n_ar_account_withholding.action_report_withholding_certificate').report_action(payments.ids),
-            ],
-            'type': 'ir.actions.act_multi',
-        }
+        return self.env.ref('l10n_ar_tax.action_report_withholding_certificate').report_action(self.l10n_ar_withholding_line_ids.ids)

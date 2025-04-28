@@ -27,13 +27,11 @@ class BudgetTransaction(models.Model):
         return budgets and budgets[0] or False
 
     issue_date = fields.Date(
-        readonly=True,
         required=True,
         default=fields.Date.context_today,
         # states={'draft': [('readonly', False)]},
     )
     name = fields.Char(
-        readonly=True,
         required=True,
         # states={'draft': [('readonly', False)], 'open': [('readonly', False)]}
     )
@@ -47,7 +45,6 @@ class BudgetTransaction(models.Model):
     expedient_id = fields.Many2one(
         'public_budget.expedient',
         string='Expedient',
-        readonly=True,
         required=True,
         # states={'draft': [('readonly', False)]}
     )
@@ -56,7 +53,6 @@ class BudgetTransaction(models.Model):
         string='Budget',
         required=True,
         default=_get_default_budget,
-        readonly=True,
         # states={'draft': [('readonly', False)]},
         domain=[('state', '=', 'open')],
         auto_join=True,
@@ -64,7 +60,6 @@ class BudgetTransaction(models.Model):
     type_id = fields.Many2one(
         'public_budget.transaction_type',
         string='Type',
-        readonly=True,
         required=True,
         check_company=True,
         # states={'draft': [('readonly', False)]}
@@ -72,7 +67,6 @@ class BudgetTransaction(models.Model):
     partner_id = fields.Many2one(
         'res.partner',
         string='Partner',
-        readonly=True,
         # states={'draft': [('readonly', False)]}
     )
     note = fields.Html(
@@ -106,7 +100,6 @@ class BudgetTransaction(models.Model):
         comodel_name='public_budget.preventive_line',
         inverse_name='transaction_id',
         string='Advance Preventive Lines',
-        readonly=True,
         # states={'open': [('readonly', False)]},
         context={
             'default_advance_line': 1,
@@ -204,7 +197,6 @@ class BudgetTransaction(models.Model):
     )
     company_id = fields.Many2one(
         'res.company',
-        readonly=True,
         required=True,
         # states={'draft': [('readonly', False)]},
         default=lambda self: self.env['res.company']._company_default_get(
@@ -225,7 +217,6 @@ class BudgetTransaction(models.Model):
     preventive_line_ids = fields.One2many(
         'public_budget.preventive_line',
         'transaction_id',
-        readonly=True,
         auto_join=True,
         # states={'open': [('readonly', False)]},
         domain=[('advance_line', '=', False)]
@@ -233,7 +224,6 @@ class BudgetTransaction(models.Model):
     invoice_ids = fields.One2many(
         'account.move',
         'transaction_id',
-        readonly=True,
         auto_join=True,
         # states={'open': [('readonly', False)]},
         domain=[('move_type', 'in', ['in_invoice', 'in_refund'])]
@@ -245,7 +235,6 @@ class BudgetTransaction(models.Model):
         'account.payment',
         'transaction_id',
         string='Payment Orders',
-        readonly=True,
         context={'default_partner_type': 'supplier'},
         # states={'open': [('readonly', False)]},
         domain=[
@@ -262,7 +251,6 @@ class BudgetTransaction(models.Model):
         'account.payment',
         'transaction_id',
         string='Advance Payment Orders',
-        readonly=True,
         domain=[
             ('partner_type', '=', 'supplier'),
             ('transaction_with_advance_payment', '=', True)
@@ -353,7 +341,7 @@ class BudgetTransaction(models.Model):
 
         if to_date:
             to_pay_domain += [('confirmation_date', '<=', to_date)]
-            paid_domain += [('payment_date', '<=', to_date)]
+            paid_domain += [('date', '<=', to_date)]
 
         advance_to_pay_amount = sum(
             self.advance_payment_ids.search(to_pay_domain).mapped(

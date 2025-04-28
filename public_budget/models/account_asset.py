@@ -70,7 +70,6 @@ class AccountAsset(models.Model):
     partner_id = fields.Many2one(
         'res.partner',
         string='Partner',
-        readonly=True,
         # states={'draft': [('readonly', False)]}
         )
 

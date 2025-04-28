@@ -10,8 +10,8 @@ class AccountPaymentGroupLine(models.Model):
     _name = 'account.payment.group.line'
     _description = 'Account Vouchers Payment Lines'
 
-    payment_group_id = fields.Many2one(
-        'account.payment.group',
+    payment_id = fields.Many2one(
+        'account.payment',
         required=True,
         ondelete='cascade',
     )
@@ -28,14 +28,14 @@ class AccountPaymentGroupLine(models.Model):
     amount = fields.Monetary(
     )
     currency_id = fields.Many2one(
-        related='payment_group_id.currency_id',
+        related='payment_id.currency_id',
         readonly=True,
     )
 
     def refresh_bank_account(self):
         for rec in self:
             banks = self.partner_id.bank_ids
-            if rec.payment_group_id.state == 'posted':
+            if rec.payment_id.state == 'posted':
                 raise UserError(_(
                     'No se puede cambiar la cuenta de una orden de pago '
                     'validada'))
@@ -60,7 +60,7 @@ class AccountPaymentGroupLine(models.Model):
                 'Se requiere cuenta bancaria con número de sucursal.\n'
                 '* Partner: %s') % (self.partner_id.name))
 
-        payment_group = self.payment_group_id
+        payment_group = self.payment_id
 
         Registro = ""
 
@@ -90,8 +90,7 @@ class AccountPaymentGroupLine(models.Model):
         Registro += str(int(round(self.amount * 100))).rjust(14, '0')
 
         # Format(Range("E5").Text, "YYYYMMDD")
-        Registro += fields.Date.from_string(
-            payment_group.fecha_de_acreditacion).strftime('%Y%m%d')
+        Registro += payment_group.fecha_de_acreditacion.strftime('%Y%m%d')
 
         Registro += "00"
 

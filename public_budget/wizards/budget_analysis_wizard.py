@@ -32,12 +32,4 @@ class PublicBudgetBudgetAnalysisWizard(models.TransientModel):
     def print_report(self):
         self.ensure_one()
         action = self.env.ref('public_budget.action_aeroo_report_budget')
-        return {
-            'actions': [
-                {'type': 'ir.actions.act_window_close'},
-                action.with_context(
-                    analysis_to_date=self.to_date
-                ).report_action(self.budget_id),
-            ],
-            'type': 'ir.actions.act_multi',
-        }
+        return action.with_context(analysis_to_date=self.to_date).report_action(self.budget_id)

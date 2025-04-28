@@ -93,12 +93,6 @@ class PurchaseRequisition(models.Model):
             rec.inspected = False
             rec.user_inspected_id = False
 
-    def action_draft(self):
-        if self.state == 'draft' and self.inspected:
-            self.inspected = False
-        elif self.state == 'in_progress':
-            self.with_context(cancel_procurement=False).action_cancel()
-        super(PurchaseRequisition, self).action_draft()
 
     def action_cancel(self):
         if self._context.get('cancel_procurement', True):
@@ -135,13 +129,7 @@ class PurchaseRequisition(models.Model):
         self.message_post(body=body)
         if not self.printed:
             self.printed = True
-        return  {
-            'actions': [
-                {'type': 'ir.actions.act_window_close'},
-                action,
-            ],
-            'type': 'ir.actions.act_multi',
-        }
+        return action
 
     def action_draft(self):
         """ We need to keep the original number for the order regardless of change the state

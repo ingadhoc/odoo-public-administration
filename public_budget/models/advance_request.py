@@ -22,45 +22,38 @@ class AdvanceRequest(models.Model):
 
     name = fields.Char(
         required=True,
-        readonly=True,
         # states={'draft': [('readonly', False)]},
     )
     company_id = fields.Many2one(
         'res.company',
         required=True,
-        readonly=True,
         # states={'draft': [('readonly', False)]},
         default=lambda self: self.env['res.company']._company_default_get(
             'public_budget.advance_request')
     )
     date = fields.Date(
         required=True,
-        readonly=True,
         # states={'draft': [('readonly', False)]},
         default=fields.Date.context_today,
         copy=False,
     )
     approval_date = fields.Date(
-        readonly=True,
         # states={'draft': [('readonly', False)]},
         copy=False,
     )
     confirmation_date = fields.Date(
-        readonly=True,
         # states={'draft': [('readonly', False)]},
         copy=False,
     )
     user_id = fields.Many2one(
         'res.users',
         required=True,
-        readonly=True,
         default=lambda self: self.env.user,
         # states={'draft': [('readonly', False)]},
     )
     type_id = fields.Many2one(
         'public_budget.advance_request_type',
         required=True,
-        readonly=True,
         check_company=True,
         #states={'draft': [('readonly', False)]},
     )
@@ -73,7 +66,6 @@ class AdvanceRequest(models.Model):
         'public_budget.advance_request_line',
         'advance_request_id',
         string='Lines',
-        readonly=True,
         # states={'draft': [('readonly', False)]},
     )
     payment_ids = fields.One2many(
@@ -93,13 +85,13 @@ class AdvanceRequest(models.Model):
 
     def action_confirm(self):
         for record in self:
-            record.create_payment_group()
+            record.create_payment()
             record.state = 'confirmed'
             if not record.confirmation_date:
                 record.confirmation_date = fields.Datetime.now()
         return True
 
-    def create_payment_group(self):
+    def create_payment(self):
         self.ensure_one()
         partner = self.type_id.general_return_partner_id
         amount = sum(self.advance_request_line_ids.mapped('approved_amount'))
