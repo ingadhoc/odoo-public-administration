@@ -32,7 +32,6 @@ class PublicBudgetExpedient(models.Model):
     )
     description = fields.Char(
         required=True,
-        # readonly=True,
         # states={'cancel': [('readonly', False)]}
     )
     reference = fields.Char(
@@ -145,7 +144,6 @@ class PublicBudgetExpedient(models.Model):
         'public_budget_remit_ids_expedient_ids_rel',
         'expedient_id',
         'remit_id',
-        readonly=True,
         # states={'in_transit': [('readonly', False)]}
     )
     parliamentary_expedient = fields.Char(
@@ -256,8 +254,7 @@ class PublicBudgetExpedient(models.Model):
         for rec in self:
             year = False
             if rec.issue_date:
-                issue_date = fields.Datetime.from_string(rec.issue_date)
-                year = issue_date.year
+                year = rec.issue_date.year
             rec.year = year
 
     @api.depends('supplier_ids', 'description')

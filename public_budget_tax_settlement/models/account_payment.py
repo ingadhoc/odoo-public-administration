@@ -42,7 +42,7 @@ class AccountPayment(models.Model):
             'payment_base_date': fields.Date.today(),
             'confirmation_date': fields.Date.today(),
             'payment_days': False,
-            'payment_date': False,
+            'date': False,
             'reference': _(
                 'Devolución de retención %s') % self.withholding_number
         })

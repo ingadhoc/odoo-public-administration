@@ -188,6 +188,7 @@ class PreventiveLine(models.Model):
     def _get_amounts(self):
         self.ensure_one()
         to_date = self._context.get('analysis_to_date', False)
+        to_date = fields.Date.from_string(to_date) if to_date else False
         if self.advance_line:
             transaction = self.transaction_id
             advance_preventive_amount = transaction.advance_preventive_amount
@@ -212,7 +213,6 @@ class PreventiveLine(models.Model):
             # Add this to allow analysis between dates, we used computed
             # fields in this case instead of normal fields
             if to_date:
-                to_date = fields.Date.from_string(to_date)
                 definitive_lines = definitive_lines.filtered(lambda x: x.issue_date <= to_date)
             definitive_amount = invoiced_amount = to_pay_amount = paid_amount = 0.0
             for rec in definitive_lines:

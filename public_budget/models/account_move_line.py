@@ -51,6 +51,7 @@ class AccountMoveLine(models.Model):
         al total de cada linea lo multiplicamos por ese porcentaje"""
         _logger.info('Getting amounts for invoice lines %s' % self.ids)
         to_date = self._context.get('analysis_to_date', False)
+        to_date = fields.Date.from_string(to_date) if to_date else False
 
         lines = self.filtered(lambda x: x.move_id.state
                               not in ['draft', 'cancel'])

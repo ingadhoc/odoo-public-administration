@@ -23,14 +23,12 @@ class Budget(models.Model):
     ]
 
     name = fields.Char(
-        readonly=True,
         required=True,
         # states={'draft': [('readonly', False)]}
     )
     fiscalyear = fields.Char(
         required=True,
         default=time.strftime('%Y'),
-        readonly=True,
         # states={'draft': [('readonly', False)]},
     )
     # TODO rename a default_income_account_id?
@@ -38,7 +36,6 @@ class Budget(models.Model):
     income_account_id = fields.Many2one(
         'account.account',
         string='Default Income Account',
-        readonly=True,
         # required=True,
         # states={'draft': [('readonly', False)]},
         domain="[('account_type', '=', 'income_other'), "
@@ -47,7 +44,6 @@ class Budget(models.Model):
     )
     expedient_id = fields.Many2one(
         'public_budget.expedient',
-        readonly=True,
         required=True,
         # states={'draft': [('readonly', False)]}
     )
@@ -98,7 +94,6 @@ class Budget(models.Model):
         'res.company',
         string='Company',
         required=True,
-        readonly=True,
         # states={'draft': [('readonly', False)]},
         default=lambda self: self.env.company.id
     )

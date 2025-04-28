@@ -41,7 +41,7 @@ class AccountPaymentGroupLineImport(models.TransientModel):
 
         active_model = self._context.get('active_model')
         active_id = self._context.get('active_id')
-        if active_model != 'account.payment.group':
+        if active_model != 'account.payment':
             raise UserError(
                 _('No se está ejecutando el asistente desde un pago.')
             )
@@ -49,19 +49,19 @@ class AccountPaymentGroupLineImport(models.TransientModel):
             raise UserError(
                 _('No se encontró un pago activo en el contexto.')
             )
-        payment_group = self.env[active_model].browse(active_id)
+        payment = self.env[active_model].browse(active_id)
         # check if line already exist
         vals = {
             'cuit': cuit,
             'partner_id': partner.id,
             'bank_account_id': (
                 partner.bank_ids and partner.bank_ids[0].id or False),
-            'payment_group_id': payment_group.id,
+            'payment_id': payment.id,
             'amount': payment_line_vals.get('amount'),
         }
         payment_line = self.env['account.payment.group.line'].search([
             ('cuit', '=', cuit),
-            ('payment_group_id', '=', payment_group.id)], limit=1)
+            ('payment_id', '=', payment.id)], limit=1)
         if payment_line:
             payment_line.write(vals)
         else:

@@ -75,25 +75,12 @@
         </field>
     </record>
 
-    <record id="view_account_payment_form" model="ir.ui.view">
+    <record id="view_account_payment_form_ex_pay_group" model="ir.ui.view">
         <field name="name">account.payment.form</field>
         <field name="model">account.payment</field>
         <field name="priority">20</field>
         <field name="inherit_id" ref="account_payment_pro.view_account_payment_form"/>
         <field name="arch" type="xml">
-
-
-
-            <!-- <button name="action_payment_sent" position="attributes">
-                <attribute name="invisible">state not in ['posted', 'signed']</attribute>
-            </button> -->
-
-            <!-- agregamos este campo por compatibilidad con mig desde v8 y además para simplificar liquidación -->
-            <!-- <field name="payment_ids" position="after">
-                <label for="withholding_line_ids" string="Detalle de Retenciones" invisible="state != 'posted'"/>
-                <field name="withholding_line_ids" context="{'list_view_ref':'account_tax_settlement.view_account_move_line_tree', 'default_type': 'entry'}" invisible="state != 'posted'"/>
-            </field> -->
-
             <form>
                 <field name="advance_request_id" invisible="1"/>
                 <!-- used on expedient domain -->
@@ -101,10 +88,27 @@
                 <field name="transaction_with_advance_payment" invisible="1"/>
                 <field name="partner_ids" invisible="1"/>
             </form>
-
             <form position="attributes">
                 <attribute name="create">false</attribute>
             </form>
+
+            <!-- movemos todo lo relativo a pago a una pestaña para que quede mas parecido a con pay group y menos recargado arriba -->
+            <page name="paid" position="before">
+                <page string="Payment" name="payment">
+                </page>
+            </page>
+            <page name="payment" position="inside">
+                <group name="group2" position="move"/>
+            </page>
+
+            <!-- creamos nuevo grupo para todo lo de fechas asi queda como antes -->
+            <group name="group1" position="after">
+                <group name="group3">
+                </group>
+            </group>
+            <group name="group3" position="inside">
+                <field name="date" position="move"/>
+            </group>
 
             <field name="partner_id" position="attributes">
                 <attribute name="domain">[('id', 'in', partner_ids)]</attribute>
@@ -147,7 +151,7 @@
             </button>
 
             <button name="action_cancel" position="before">
-                <button name="action_aeroo_certificado_de_retencion_report" string="Print withholding voucher" type="object" class="oe_read_only"/>
+                <button name="action_aeroo_certificado_de_retencion_report" string="Print withholding voucher" type="object"/>
             </button>
 
             <!-- como ellos pagan con adelanto o conciliando, y no el mix, excondemos deuda seleccionada y importe de ajuste y solo mostramos el a pagar que lo hacemos editable o no segun sea de adelanto o no -->
@@ -164,7 +168,6 @@
                 <attribute name="invisible">payment_subtype != 'double_validation' or state == 'posted'</attribute>
                 <attribute name="readonly">not transaction_with_advance_payment or state != 'draft'</attribute>
             </field> -->
-
 
             <!-- Make post only visible from signed and available for hab director -->
             <button name="action_post" position="attributes">

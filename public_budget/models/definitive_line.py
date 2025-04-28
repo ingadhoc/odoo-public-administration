@@ -12,19 +12,16 @@ class DefinitiveLine(models.Model):
     _rec_name = 'preventive_line_id'
 
     issue_date = fields.Date(
-        readonly=True,
         required=True,
         # states={'draft': [('readonly', False)]},
         default=fields.Date.context_today
     )
     supplier_id = fields.Many2one(
         'res.partner',
-        readonly=True,
         required=True,
         # states={'draft': [('readonly', False)]},
     )
     amount = fields.Monetary(
-        readonly=True,
         required=True,
         # states={'draft': [('readonly', False)]},
     )

@@ -1,4 +1,4 @@
 from . import account_payment_group_line
-from . import account_payment_group
+from . import account_payment
 from . import res_partner_bank
 from . import advance_request

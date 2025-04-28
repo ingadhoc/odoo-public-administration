@@ -1,6 +1,6 @@
 {
     'name': 'Sipreco Payment Lines',
-    'version': "15.0.1.1.0",
+    'version': "18.0.1.0.0",
     'license': 'AGPL-3',
     'author': 'ADHOC SA,Odoo Community Association (OCA)',
     'website': 'www.adhoc.com.ar',
@@ -10,11 +10,11 @@
     ],
     'data': [
         'wizards/account_payment_group_line_import_views.xml',
-        'views/account_payment_group_views.xml',
+        'views/account_payment_views.xml',
         'views/res_partner_bank_views.xml',
         'security/ir.model.access.csv',
     ],
     'demo': [
     ],
-    'installable': False,
+    'installable': True,
 }
