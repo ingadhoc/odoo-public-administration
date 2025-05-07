@@ -70,7 +70,7 @@ class AccountPayment(models.Model):
         comodel_name='public_budget.location',
         string='User Locations',
     )
-    payment_base_date = fields.Date(
+    payment_base_date = fields.Datetime(
         string='Payment Base Date',
         # nos pidieron que no haya valor por defecto
         # default=fields.Date.context_today,
@@ -155,7 +155,7 @@ class AccountPayment(models.Model):
         return super(AccountPayment, self.with_context(is_recipt=True)).post()
 
     def unlink(self):
-        if self.filtered('name'):
+        if self.filtered('name') or not self.env.context.get('force_delete'):
             raise ValidationError(_(
                 'No puede borrar una orden de pago que ya fue numerada'))
         return super().unlink()
@@ -205,34 +205,21 @@ class AccountPayment(models.Model):
     @api.depends('payment_base_date', 'payment_days', 'days_interval_type')
     def _compute_payment_min_date(self):
         for rec in self:
-            return
+            #return
             current_date = False
-            business_days_to_add = rec.payment_days
             if rec.payment_base_date:
                 if rec.days_interval_type == 'business_days':
-                    current_date = rec.payment_base_date
-                    while business_days_to_add > 0:
-                        current_date = current_date + relativedelta(days=1)
-                        weekday = current_date.weekday()
-                        # sunday = 6
-                        if weekday >= 5 or self.env[
-                                'hr.holidays.public'].is_public_holiday(
-                                    current_date):
-                            continue
-                        # if current_date in holidays:
-                        #     continue
-                        business_days_to_add -= 1
+                    current_date = rec.company_id.resource_calendar_id.plan_days(rec.payment_days, rec.payment_base_date, compute_leaves=True)
                 else:
                     current_date = rec.payment_base_date + relativedelta(
                         days=rec.payment_days)
+                    # por mas que no sean business days, si la fecha no es laborable tomamos el proximo dia
+                    current_date = rec.company_id.resource_calendar_id.plan_hours(
+                        hours=1/3600.0,  # 1 segundo
+                        day_dt=current_date,
+                        compute_leaves=True,
+                    )
 
-                # además hacemos que la fecha mínima no pueda ser día no habil
-                # sin Importar si el intervalo debe
-                #  considerar días habiles o no
-                while current_date.weekday() >= 5 or self.env[
-                        'hr.holidays.public'].is_public_holiday(
-                            current_date):
-                    current_date = current_date + relativedelta(days=1)
             rec.payment_min_date = current_date
 
     # TODO enable

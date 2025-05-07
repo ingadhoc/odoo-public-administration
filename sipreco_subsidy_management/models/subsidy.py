@@ -238,22 +238,8 @@ class PublicBudgetSubsidy(models.Model):
                 ('state', '=', 'posted'),
             ], order='date desc', limit=1).date
 
-            expiry_date = False
-            if cargo_date:
-                expiry_date = cargo_date
-                # TODO, parametrizable?
-                business_days_to_add = 30
-                while business_days_to_add > 0:
-                    expiry_date = expiry_date + relativedelta(days=+1)
-                    weekday = expiry_date.weekday()
-                    # sunday = 6
-                    if weekday >= 5 or self.env[
-                            'hr.holidays.public'].is_public_holiday(
-                                expiry_date):
-                        continue
-                    business_days_to_add -= 1
             rec.cargo_date = cargo_date
-            rec.accountability_expiry_date = expiry_date
+            rec.expiry_date = self.company_id.resource_calendar_id.plan_days(30, cargo_date, compute_leaves=True)
             rec.cargo_amount = cargo_amount
             rec.pendientes_rendicion_amount = (
                 cargo_amount - rec.rendido_amount)
