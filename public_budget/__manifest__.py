@@ -47,7 +47,7 @@
         'reports/expedient_report.xml',
         'reports/transaction_report.xml',
         'reports/payment_receipt_report.xml',
-        #'reports/statement_report.xml',
+        'reports/statement_report.xml',
         'reports/budget_report_excel.xml',
         'reports/budget_report.xml',
         'reports/advance_request_report.xml',

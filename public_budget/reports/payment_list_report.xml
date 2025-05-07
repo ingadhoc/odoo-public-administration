@@ -3,7 +3,7 @@
 
     <record id="action_aeroo_report_payment_list" model="ir.actions.report">
         <field name="name">Payment List Report</field>
-        <field name="model">account.payment.group</field>
+        <field name="model">account.payment</field>
         <field name="report_name">payment_list_report</field>
         <field name="report_type">aeroo</field>
         <field name="in_format">oo-ods</field>
