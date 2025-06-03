@@ -1,5 +1,7 @@
 # Pre-migration script for adjusting account.payment.group.line linkage
 # See requirements in user prompt
+from openupgradelib import openupgrade
+
 
 def migrate(cr, version):
     """
@@ -31,6 +33,13 @@ def migrate(cr, version):
     #             SET payment_id = %s
     #             WHERE id = %s
     #         """, (payment_id, line_id))
+    openupgrade.logged_query(
+        cr,
+        """
+        ALTER TABLE account_payment_group_line
+        ADD COLUMN IF NOT EXISTS payment_id int4
+        """,
+    )
 
     cr.execute('''
         UPDATE account_payment_group_line l
