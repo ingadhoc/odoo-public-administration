@@ -239,7 +239,8 @@ class PublicBudgetSubsidy(models.Model):
             ], order='date desc', limit=1).date
 
             rec.cargo_date = cargo_date
-            rec.expiry_date = self.company_id.resource_calendar_id.plan_days(30, cargo_date, compute_leaves=True)
+            if cargo_date:
+                rec.expiry_date = self.company_id.resource_calendar_id.plan_days(30, cargo_date, compute_leaves=True)
             rec.cargo_amount = cargo_amount
             rec.pendientes_rendicion_amount = (
                 cargo_amount - rec.rendido_amount)
