@@ -35,9 +35,10 @@
         <value eval="{'company_ids': [(4, ref('company_sipreco'))]}"/>
     </function>
 
-
-
-
-
+    <function model="account.chart.template" name="try_loading">
+        <value eval="[]"/>
+        <value>ar_ex</value>
+        <value model="res.company" eval="obj().env.ref('public_budget.company_sipreco')"/>
+    </function>
 
 </odoo>
