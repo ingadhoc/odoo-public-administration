@@ -232,14 +232,6 @@ class AccountPayment(models.Model):
 
     def to_signature_process(self):
         for rec in self:
-            for payment in rec.payment_ids.filtered(
-                    lambda x: x.payment_method_code == 'own_checks'):
-                if not payment.check_number:
-                    raise ValidationError(_(
-                        'Para mandar a proceso de firma debe definir número '
-                        'de cheque en cada línea de pago.\n'
-                        '* ID de orden de pago: %s' % rec.id))
-
             if rec.currency_id.round(rec.payment_total - rec.to_pay_amount):
                 raise ValidationError(_(
                     'No puede mandar a pagar una orden de pago que tiene '
