@@ -39,6 +39,7 @@
         <value eval="[]"/>
         <value>ar_ex</value>
         <value model="res.company" eval="obj().env.ref('public_budget.company_sipreco')"/>
+        <value name="install_demo" eval="True"/>
     </function>
 
 </odoo>
