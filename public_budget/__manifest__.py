@@ -1,16 +1,14 @@
 {
     'name': 'Public Budget',
     'license': 'AGPL-3',
-    'version': "18.0.1.0.0",
+    'version': "18.0.1.1.0",
     'author': 'ADHOC SA,Odoo Community Association (OCA)',
     'website': 'www.adhoc.com.ar',
     'category': 'Accounting & Finance',
     'depends': [
-        #'web_m2x_options',
         'portal_backend',
         'sales_team',
         'account_accountant_ux',
-        # 'account_payment_group',
         'account_asset',
         'report_aeroo',
         # estrictamente solo requerido por algunos campos en vista de partner

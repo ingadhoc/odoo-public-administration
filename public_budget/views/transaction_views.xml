@@ -112,7 +112,7 @@
                             <field name="advance_payment_ids" context="{'default_transaction_id':id, 'default_partner_id': partner_id, 'default_partner_type': 'supplier'}" readonly="state == 'open'"/>
                         </page>
                         <page string="Invoices">
-                            <div class="oe_read_only">
+                            <div>
                                 <button class="oe_link" string="Create Invoice" invisible="state != 'open'" type="action" name="%(public_budget.action_definitive_make_invoice)d"/>
                                     or
                                 <button class="oe_link" string="Mass Invoice Create" invisible="state != 'open'" type="action" name="%(public_budget.action_definitive_mass_invoice_create)d"/>
