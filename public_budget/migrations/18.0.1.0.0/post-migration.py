@@ -3,12 +3,6 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-# def migrate_payment_grup_note(env):
-#     query = "select ap.id, notes from account_payment_group_bu apg join account_payment as ap on ap.payment_group_id_bu = apg.id where notes is not null"
-#     openupgrade.logged_query(env.cr, query)
-#     res = env.cr.fetchall()
-#     for payment_id, note in res:
-#         env['account.payment'].browse(payment_id).message_post(body='Nota migrada desde payment group version anterior: %s' % note)
 
 
 def migrate_payment_grup_data(env):
@@ -42,4 +36,3 @@ def migrate_payment_grup_data(env):
 def migrate(env, version):
     _logger.debug('Running migrate script for l10n_ar_withholding')
     migrate_payment_grup_data(env)
-    # migrate_payment_grup_note(env)

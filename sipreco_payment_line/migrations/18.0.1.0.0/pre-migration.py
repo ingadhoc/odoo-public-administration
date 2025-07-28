@@ -10,29 +10,6 @@ def migrate(cr, version):
     - Update account.payment.group.line to point to the payment (set payment_id)
     """
 
-    # cr.execute("""
-    #     SELECT id, payment_group_id
-    #     FROM account_payment_group_line
-    #     WHERE payment_group_id IS NOT NULL
-    # """)
-    # lines = cr.fetchall()
-    # for line_id, payment_group_id in lines:
-    #     # Find first payment for this group
-    #     cr.execute("""
-    #         SELECT id FROM account_payment
-    #         WHERE payment_group_id_bu = %s
-    #         ORDER BY id ASC
-    #         LIMIT 1
-    #     """, (payment_group_id,))
-    #     payment = cr.fetchone()
-    #     if payment:
-    #         payment_id = payment[0]
-    #         # Update line to point to payment
-    #         cr.execute("""
-    #             UPDATE account_payment_group_line
-    #             SET payment_id = %s
-    #             WHERE id = %s
-    #         """, (payment_id, line_id))
     openupgrade.logged_query(
         cr,
         """
