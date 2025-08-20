@@ -3,10 +3,15 @@
 # directory
 ##############################################################################
 from odoo import models, fields, api
+from odoo.tools.misc import unquote
 
 
 class StockRequestOrder(models.Model):
     _inherit = 'stock.request.order'
+
+    def _domain_stock_picking_type(self):
+        pickings = self.env.user.picking_type_ids.ids
+        return [('id', 'in', pickings)]
 
     partner_id = fields.Many2one(
         'res.partner',
@@ -22,6 +27,19 @@ class StockRequestOrder(models.Model):
         related_sudo=True,
         compute_sudo=True,
     )
+
+    user_id = fields.Many2one(
+        'res.users', string='Purchase Representative',
+        default=lambda self: self.env.user)
+
+    picking_type = fields.Many2one('stock.picking.type', string='Solicitar desde', domain=lambda self: str(self._domain_stock_picking_type()))
+
+    picking_type_ids = fields.Many2many('stock.picking.type', compute="_compute_picking_type",store=True)
+
+    @api.depends('user_id')
+    def _compute_picking_type(self):
+        for rec in self:
+            rec.picking_type_ids = self.env.user.picking_type_ids.ids
 
     @api.onchange('company_id')
     def change_company_id(self):

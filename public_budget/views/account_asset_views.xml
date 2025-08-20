@@ -38,9 +38,6 @@
         <field name="model">account.asset</field>
         <field name="inherit_id" ref="account_asset.view_account_asset_form"/>
         <field name="arch" type="xml">
-            <!-- <notebook position="attributes">
-                <attribute name="groups">base.group_no_one</attribute>
-            </notebook> -->
             <div name="button_box">
                 <field name="transaction_ids" invisible="1"/>
                 <button type="object" name="action_view_transaction" class="oe_stat_button" string="Transactions" icon="fa-list-alt" invisible="state == 'model' or not transaction_ids"/>
@@ -86,24 +83,6 @@
             <button name="action_save_model" position="attributes">
                 <attribute name="groups">public_budget.group_asset_responsable_ubicacion</attribute>
             </button>
-            <!-- <button name="action_asset_modify" position="attributes">  ahora para pauassar o hacer cualquier modiicaicon tenemos un solo widget
-                <attribute name="groups">base.group_no_one</attribute>      Modificamos oara que se limite la visuliacion en el widget
-            </button> -->
-            <!-- <button name="action_set_to_close" position="replace"> esto tambien esta desde asset_modify
-                <button name="archive_and_close_asset" type="object" invisible="not active or state != 'open'" string="Close and Archive" groups="public_budget.group_asset_responsable_ubicacion"/>
-            </button>  -->
-            <!-- <notebook position="attributes">
-                <attribute name="groups">base.group_no_one</attribute>
-            </notebook>
-            <button name="open_entries" position="attributes">
-                <attribute name="groups">base.group_no_one</attribute>
-            </button>
-            <xpath expr="//field[@name='method']//.." position="attributes">
-                <attribute name="groups">base.group_no_one</attribute>
-            </xpath>
-            <xpath expr="//field[@name='salvage_value']//.." position="attributes">
-                <attribute name="groups">base.group_no_one</attribute>
-            </xpath> -->
             <button name="compute_depreciation_board" position="after">
                 <field name="visible_button_transfer_asset" invisible="1"/>
                 <button name="transfer_asset" type="object" invisible="not visible_button_transfer_asset or transit or state == 'model'" string="Transfer Asset" />
@@ -128,7 +107,6 @@
         <field name="name">account.asset.list.portal</field>
         <field name="model">account.asset</field>
         <field name="inherit_id" ref="account_asset.view_account_asset_tree"/>
-        <!-- <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/> -->
         <field name="arch" type="xml">
             <field name="activity_exception_decoration" position="replace"/>
         </field>
