@@ -40,7 +40,7 @@ class PublicBudgetSubsidy(models.Model):
         'Expediente Parlamentario',
         required=True,
     )
-    cargo_date = fields.Date(
+    cargo_date = fields.Datetime(
         compute='_compute_cargo_data',
         string='Fecha del Cargo',
         store=True,
@@ -231,21 +231,22 @@ class PublicBudgetSubsidy(models.Model):
             cargo_amount = sum(
                 payments.filtered(
                     lambda x: x.state == 'posted').mapped('amount'))
-            cargo_date = payments.search([
+            cargo = payments.search([
                 ('id', 'in', payments.ids),
                 ('date', '!=', False),
                 # cargo only if payment validated
                 ('state', '=', 'posted'),
-            ], order='date desc', limit=1).date
-
-            rec.cargo_date = cargo_date
-            if cargo_date:
-                rec.expiry_date = self.company_id.resource_calendar_id.plan_days(30, cargo_date, compute_leaves=True)
-            rec.cargo_amount = cargo_amount
-            rec.pendientes_rendicion_amount = (
-                cargo_amount - rec.rendido_amount)
-            rec.pendientes_aprobacion_amount = (
-                cargo_amount - rec.aprobado_amount)
+            ], order='date desc', limit=1)
+            if cargo:
+                cargo_date = fields.Datetime.to_datetime(cargo.date)
+                rec.cargo_date = cargo_date
+                if cargo_date:
+                    rec.accountability_expiry_date = self.company_id.resource_calendar_id.plan_days(30, cargo_date, compute_leaves=True)
+                rec.cargo_amount = cargo_amount
+                rec.pendientes_rendicion_amount = (
+                    cargo_amount - rec.rendido_amount)
+                rec.pendientes_aprobacion_amount = (
+                    cargo_amount - rec.aprobado_amount)
 
     @api.constrains('cargo_amount', 'rendido_amount')
     def check_renditions(self):
