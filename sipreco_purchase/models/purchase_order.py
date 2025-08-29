@@ -14,12 +14,12 @@ class PurchaseOrder(models.Model):
         copy=False,
     )
 
-    @api.onchange('requisition_id')
-    def _onchange_requisition_id(self):
-        super(PurchaseOrder, self)._onchange_requisition_id()
-        if self.requisition_id.type_id.line_copy == 'copy'\
-                and self.requisition_id.type_id.price_unit_copy != 'copy':
-            self.order_line.update({'price_unit': 0.0})
+    # @api.onchange('requisition_id')
+    # def _onchange_requisition_id(self):
+    #     super(PurchaseOrder, self)._onchange_requisition_id()
+    #     if self.requisition_id.type_id.line_copy == 'copy'\
+    #             and self.requisition_id.type_id.price_unit_copy != 'copy':
+    #         self.order_line.update({'price_unit': 0.0})
 
     def check_if_expedients_exist(self):
         purchase_orders_expedient = self.filtered('expedient_id')

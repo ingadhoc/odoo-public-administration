@@ -38,7 +38,6 @@ class PurchaseRequisitionLine(models.Model):
 
     @api.onchange('product_id')
     def _onchange_product_id(self):
-        super()._onchange_product_id()
         if self.product_id:
             product_lang = self.product_id.with_context(
                 lang=self.requisition_id.vendor_id.lang,
