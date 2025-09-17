@@ -58,7 +58,7 @@
                         <group>
                             <field name="issue_date"/>
                             <field name="year"/>
-                            <field name="description" readonly="state != 'cancel'" />
+                            <field name="description" readonly="id != False" /><!-- Solo se puede completar al momento de la creación-->
                             <field name="supplier_ids" widget="many2many_tags" context="{'res_partner_search_mode': 'supplier'}"/>
                             <field name="cover"/>
                             <field name="user_id"/>
