@@ -6,6 +6,11 @@
         <field name="sequence">1</field>
     </record>
 
+    <record id="purchase.menu_purchase_rfq" model="ir.ui.menu">
+        <!-- Solicitudes de cotizacion -->
+        <field name="sequence">10</field>
+    </record>
+
     <!-- no filtrar por usuario -->
     <record model="ir.actions.act_window" id="purchase_requisition.action_purchase_requisition">
         <field name="context">{}</field>
