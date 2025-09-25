@@ -41,5 +41,5 @@
         'demo/product_demo.xml',
         'demo/sequence_demo.xml',
     ],
-    'installable': True,
+    'installable': False,
 }

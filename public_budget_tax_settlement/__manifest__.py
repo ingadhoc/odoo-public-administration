@@ -16,6 +16,6 @@
         'public_budget',
         'account_tax_settlement',
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': True,
 }
