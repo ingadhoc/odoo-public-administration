@@ -176,7 +176,7 @@ class AccountPayment(models.Model):
             # por temas de performance y para ser más robusto por si se
             # pierde el link de to pay lines del pago
             already_paying = self.transaction_id.payment_ids.filtered(
-                lambda x: x.state not in ["cancel", "draft"] and x != self
+                lambda x: x.state not in ["canceled", "draft"] and x != self
             ).mapped("to_pay_move_line_ids")
             if rec.to_pay_move_line_ids & already_paying:
                 raise ValidationError(_("No puede mandar a pagar líneas que ya se mandaron a pagar"))
