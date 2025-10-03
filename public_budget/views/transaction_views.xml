@@ -123,7 +123,7 @@
                             <button class="oe_link" string="Create Payment Order" invisible="state != 'open'" type="object" name="action_new_payment"/>
                                 or
                             <button class="oe_link" string="Mass Payment Order Create" invisible="state != 'open'" type="object" name="mass_payment_group_create" confirm="Se van a generar ordenes de pago para todos los comprobantes que no se encuentren en ordenes de pago, seguro que quiere continuar?"/>
-                            <field name="payment_ids" context="{'default_partner_type': 'supplier', 'default_transaction_id':id}" readonly="state != 'open'"/>
+                            <field name="payment_ids" context="{'default_partner_type': 'supplier', 'default_transaction_id':id, 'list_view_ref': 'account.view_account_supplier_payment_tree'}" readonly="state != 'open'"/>
                         </page>
                         <page string="Notes">
                             <field name="note"/>
