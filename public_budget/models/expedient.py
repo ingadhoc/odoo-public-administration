@@ -241,7 +241,7 @@ class PublicBudgetExpedient(models.Model):
             # no se puede si esta en payments no cancelados
             payments = self.env['account.payment'].search([
                 ('expedient_id', '=', expedient.id),
-                ('state', '!=', 'cancel'),
+                ('state', '!=', 'canceled'),
             ])
             if payments:
                 raise ValidationError(_(
