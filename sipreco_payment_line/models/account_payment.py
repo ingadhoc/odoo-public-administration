@@ -8,7 +8,7 @@ from odoo.tools import float_is_zero
 class AccountPayment(models.Model):
     _inherit = "account.payment"
 
-    line_ids = fields.One2many(
+    payment_line_ids = fields.One2many(
         "account.payment.group.line",
         "payment_id",
         "Transfer Lines",
@@ -42,13 +42,13 @@ class AccountPayment(models.Model):
         readonly=True,
     )
 
-    @api.depends("line_ids.amount")
+    @api.depends("payment_line_ids.amount")
     def _compute_importe_total(self):
         for rec in self:
             rec.update(
                 {
-                    "importe_total": sum(rec.line_ids.mapped("amount")),
-                    "cantidad": len(rec.line_ids),
+                    "importe_total": sum(rec.payment_line_ids.mapped("amount")),
+                    "cantidad": len(rec.payment_line_ids),
                 }
             )
 
@@ -81,13 +81,13 @@ class AccountPayment(models.Model):
     @api.constrains("state")
     def check_confirm_with_payment_lines(self):
         for rec in self:
-            if rec.state == "confirmed" and rec.partner_type == "supplier" and rec.line_ids:
+            if rec.state == "confirmed" and rec.partner_type == "supplier" and rec.payment_line_ids:
                 rec.check_payment_lines_total()
 
     def generar_archivo_banco(self):
         self.check_generar_archivo_banco_data()
         lines_data = []
-        for line in self.line_ids:
+        for line in self.payment_line_ids:
             lines_data.append(line._get_linea_archivo_banco())
         # FOR windows \r\n is required
         # we also add one new line at the end as xls does
@@ -97,4 +97,4 @@ class AccountPayment(models.Model):
     def remove_all_transfer_lines(self):
         """Botón usado dentro de una orden de pago en una transacción para que en la solapa 'Líneas de Transferencia' se pueda borrar masivamente todas las trasferencias cuando la orden de pago se encuentra en estado 'Borrador'."""
         if self.state == "draft":
-            self.line_ids = False
+            self.payment_line_ids = False

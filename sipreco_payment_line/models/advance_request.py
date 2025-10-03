@@ -9,7 +9,7 @@ class AdvanceRequest(models.Model):
         payment = super(AdvanceRequest, self).create_payment()
         for line in self.advance_request_line_ids:
             partner = line.employee_id
-            payment.line_ids.create({
+            payment.payment_line_ids.create({
                 'payment_id': payment.id,
                 'partner_id': partner.id,
                 'bank_account_id': (
