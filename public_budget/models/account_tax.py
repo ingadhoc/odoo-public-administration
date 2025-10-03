@@ -25,7 +25,7 @@ class AccountTax(models.Model):
         ]
 
         previous_payment_groups_domain = common_previous_domain + [
-            ('state', 'not in', ['draft', 'cancel', 'confirmed']),
+            ('state', 'not in', ['draft', 'canceled', 'confirmed']),
             ('id', '!=', payment_group.id),
         ]
         # for compatibility with public_budget we check state not in and not
@@ -34,8 +34,8 @@ class AccountTax(models.Model):
         # draft ones as they are also considered by public_budget)
         previous_payments_domain = common_previous_domain + [
             ('payment_group_id.state', 'not in',
-                ['draft', 'cancel', 'confirmed']),
-            ('state', '!=', 'cancel'),
+                ['draft', 'canceled', 'confirmed']),
+            ('state', '!=', 'canceled'),
             ('tax_withholding_id', '=', self.id),
             ('payment_group_id.id', '!=', payment_group.id),
         ]
