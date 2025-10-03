@@ -118,11 +118,11 @@ class AdvanceRequest(models.Model):
     def action_cancel(self):
         for rec in self:
             open_payments = rec.payment_ids.filtered(
-                lambda x: x.state != 'cancel')
+                lambda x: x.state != 'canceled')
             if open_payments:
                 raise ValidationError(_(
                     "You can't cancel an advance request with payment order "
-                    "in other state than 'cancel'."))
+                    "in other state than 'canceled'."))
         self.write({'state': 'cancel'})
         return True
 
