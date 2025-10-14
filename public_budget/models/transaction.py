@@ -235,7 +235,7 @@ class BudgetTransaction(models.Model):
         'account.payment',
         'transaction_id',
         string='Payment Orders',
-        context={'default_partner_type': 'supplier'},
+        context={'default_partner_type': 'supplier', 'default_payment_type': 'outbound' },
         # states={'open': [('readonly', False)]},
         domain=[
             ('partner_type', '=', 'supplier'),
@@ -255,7 +255,7 @@ class BudgetTransaction(models.Model):
             ('partner_type', '=', 'supplier'),
             ('transaction_with_advance_payment', '=', True)
         ],
-        context={'default_partner_type': 'supplier'},
+        context={'default_partner_type': 'supplier', 'default_payment_type': 'outbound'},
         # states={'open': [('readonly', False)]},
     )
     asset_ids = fields.One2many(
@@ -393,8 +393,9 @@ class BudgetTransaction(models.Model):
             # si ya se mandaron a pagar no creamo
             if not to_pay_move_lines:
                 continue
-            rec = self.env['account.payment'].create({
+            self.env['account.payment'].create({
                     'partner_type': 'supplier',
+                    'payment_type': 'outbound',
                     'receiptbook_id': self.budget_id.receiptbook_id.id,
                     'expedient_id': self.expedient_id.id,
                     'partner_id': partner.id,
@@ -658,6 +659,7 @@ class BudgetTransaction(models.Model):
             'default_transaction_id': self.id,
             'default_partner_id': self.partner_id.id,
             'default_partner_type': 'supplier',
+            'default_payment_type': 'outbound',
         }
         return action
 
