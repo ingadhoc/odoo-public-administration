@@ -19,7 +19,9 @@ def migrate_payment_grup_data(env):
     query = """
         update account_payment ap set
             advance_request_id = apg.advance_request_id,
-            state = apg.state,
+            -- el state del payment group no se traduce derecho al state del payment
+            -- además tenemos que contemplar los payment groups sin payment, lo hacemos todo con UL
+            -- state = apg.state,
             reference = apg.reference,
             budget_id = apg.budget_id,
             expedient_id = apg.expedient_id,
