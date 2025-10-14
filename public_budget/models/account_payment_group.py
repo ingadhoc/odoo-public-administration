@@ -122,30 +122,16 @@ class AccountPayment(models.Model):
         vals["date"] = False
         return vals
 
-    def post(self):
+    def action_post(self):
         for rec in self:
             # si no estaba seteada la setamos
             if not rec.date:
                 rec.date = fields.Date.today()
-            # idem para los payments
-            # como ellos no ven el campo payment date tiene mas sentido
-            # pisarlo (por ejemplo por si validaron y luego cancelaron para
-            # corregir fecha o si setearon fecha antes de crear las lineas
-            # en cuyo caso se completa con esa fecha y luego la pudieron
-            # cambiar) TODO faltaria contemplar el caso de cheques cambiados
-            # porque por ahí sobre-escribimos una fecha (si se canceló el pago)
-            # y se re-abrió (igualmente es dificil porque no se pueden cancelar
-            # así nomas pagos con cheques cambiados
-            for pay in rec.payment_ids:
-                if not pay.date:
-                    pay.write({"date": rec.date})
-            # rec.payment_ids.filtered(lambda x: not x.date).write(
-            #     {'date': rec.date})
             if rec.expedient_id and rec.expedient_id.current_location_id not in rec.user_location_ids:
                 raise ValidationError(
                     _("No puede validar un pago si el expediente no está en una ubicación autorizada para ústed")
                 )
-        return super(AccountPayment, self.with_context(is_recipt=True)).post()
+        return super(AccountPayment, self.with_context(is_recipt=True)).action_post()
 
     def unlink(self):
         if self.filtered("name") and not self.env.context.get("force_delete"):
@@ -165,7 +151,7 @@ class AccountPayment(models.Model):
             if not rec.payment_base_date:
                 raise ValidationError(_("No puede confirmar una orden de pago sin fecha base de pago"))
             # si hay devoluciones entonces si se puede confirmar sin importe
-            if not rec.to_pay_amount and not rec.payment_ids.mapped("returned_payment_ids"):
+            if not rec.to_pay_amount and not rec.mapped("returned_payment_ids"):
                 raise ValidationError(_("No puede confirmar una orden de pago sin importe a pagar"))
             if not rec.confirmation_date:
                 rec.confirmation_date = fields.Date.today()
@@ -292,7 +278,7 @@ class AccountPayment(models.Model):
         if self.transaction_id:
             # con esto validamos que no se haya mandado a pagar en otra
             # orden de pago (si dejamos si está cancelada)
-            already_paying = self.transaction_id.payment_ids.filtered(lambda x: x.state != "cancel").mapped(
+            already_paying = (self.transaction_id.payment_ids - self).filtered(lambda x: x.state != "canceled").mapped(
                 "to_pay_move_line_ids"
             )
             domain.extend(
