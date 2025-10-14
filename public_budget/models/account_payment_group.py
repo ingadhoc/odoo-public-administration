@@ -12,18 +12,42 @@ class AccountPayment(models.Model):
     _inherit = "account.payment"
 
     # We add signature states
-    state = fields.Selection(
-        selection_add=[
+    sipreco_state = fields.Selection(
+        selection=[
             ("draft", "Draft"),
-            ("in_process", "In Process"),
             ("confirmed", "Confirmado"),  # new
             ("signature_process", "En Proceso de Firma"),  # new
             ("signed", "Firmado"),  # new
+            ("in_process", "Paid (NR)"),
             ("paid", "Paid"),
             ("canceled", "Canceled"),
             ("rejected", "Rejected"),
         ],
-        ondelete={"confirmed": "set draft", "signature_process": "set draft", "signed": "set draft"},
+        compute='_compute_sipreco_state',
+        # ondelete={"confirmed": "set draft", "signature_process": "set draft", "signed": "set draft"},
+    )
+
+    @api.depends('approval_state', 'state')
+    def _compute_sipreco_state(self):
+        for rec in self:
+            if rec.state == 'draft':
+                rec.sipreco_state = rec.approval_state or 'draft'
+            else:
+                rec.sipreco_state = rec.state
+
+    # We add signature states
+    approval_state = fields.Selection(
+        selection=[
+            # ("draft", "Draft"),
+            ("confirmed", "Confirmado"),  # new
+            ("signature_process", "En Proceso de Firma"),  # new
+            ("signed", "Firmado"),  # new
+            # ("in_process", "Paid (NR)"),
+            # ("paid", "Paid"),
+            # ("canceled", "Canceled"),
+            # ("rejected", "Rejected"),
+        ],
+        # ondelete={"confirmed": "set draft", "signature_process": "set draft", "signed": "set draft"},
     )
     # agregamos reference que fue depreciado y estan acostumbrados a usar
     reference = fields.Char(
@@ -168,7 +192,7 @@ class AccountPayment(models.Model):
                 raise ValidationError(_("No puede mandar a pagar líneas que ya se mandaron a pagar"))
             # In this case remove all followers when confirm a payment
             rec.message_unsubscribe(partner_ids=rec.message_partner_ids.ids)
-        return super().confirm()
+            rec.approval_state = 'confirmed'
 
     def _get_receiptbook(self):
         # we dont want any receiptbook as default
@@ -212,15 +236,15 @@ class AccountPayment(models.Model):
                         "Importe a pagar distinto a Importe de los Pagos"
                     )
                 )
-            rec.state = "signature_process"
+            rec.approval_state = "signature_process"
             if not rec.to_signature_date:
                 rec.to_signature_date = fields.Date.today()
 
     def to_signed(self):
-        self.write({"state": "signed"})
+        self.write({"approval_state": "signed"})
 
     def back_to_confirmed(self):
-        self.write({"state": "confirmed"})
+        self.write({"approval_state": "confirmed"})
 
     # dummy depends to compute values on create
     @api.depends("transaction_id")

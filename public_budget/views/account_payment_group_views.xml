@@ -8,8 +8,8 @@
         <field name="priority">20</field>
         <field name="arch" type="xml">
             <filter name='state_draft' position="after">
-                <filter string="En Proceso de Firma" domain="[('state','=','signature_process')]" name='state_signature_process'/>
-                <filter string="Firmado" domain="[('state','=','signed')]" name='state_signed'/>
+                <filter string="En Proceso de Firma" domain="[('approval_state','=','signature_process')]" name='state_signature_process'/>
+                <filter string="Firmado" domain="[('approval_state','=','signed')]" name='state_signed'/>
             </filter>
             <field name="name" position="attributes">
                 <attribute name="filter_domain">['|', '|', '|', '|', '|', ('reference','ilike',self), ('name', 'ilike', self), ('partner_id', 'ilike', self), ('memo', 'ilike', self), ('amount_company_currency_signed' , 'ilike', self), ('amount', 'ilike', self)]</attribute>
@@ -33,6 +33,12 @@
         <field name="inherit_id" ref="account.view_account_supplier_payment_tree"/>
         <field name="priority">20</field>
         <field name="arch" type="xml">
+            <field name="state" position="attributes">
+                <attribute name="name">sipreco_state</attribute>
+                <!-- <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-warning="state == 'in_process'" decoration-success="state == 'paid'"/> -->
+            </field>
+
+
             <!-- para que solo se puedan crear con el botón -->
             <list position="attributes">
                 <attribute name="create">false</attribute>
@@ -56,7 +62,7 @@
                 <field name="memo" optional="hide"/>
             </field>
             <list position="inside">
-                <button name="confirm" type="object" string="Confirm" invisible="state != 'draft'" icon="fa-arrow-circle-right" groups="account.group_account_manager"/>
+                <button name="confirm" type="object" string="Confirm" invisible="sipreco_state != 'draft' or (not transaction_id and not advance_request_id)" icon="fa-arrow-circle-right" groups="account.group_account_manager"/>
             </list>
         </field>
     </record>
@@ -75,10 +81,15 @@
         </field>
     </record>
 
+    <!-- sobre condiciones de invisibilidad:
+    en payment pro solemos usar invisible="is_internal_transfer or not use_payment_pro"
+    en sipreco estamos viendo que por lo general los flujos avanzados tienen "transaction_id or advance_request_id" por lo cual estamos usando invisible="not transaction_id and not advance_request_id"
+    eventualmente si es necesario se puede combinar ambos criterios
+     -->
     <record id="view_account_payment_form_ex_pay_group" model="ir.ui.view">
         <field name="name">account.payment.form</field>
         <field name="model">account.payment</field>
-        <field name="priority">20</field>
+        <field name="priority">50</field>
         <field name="inherit_id" ref="account_payment_pro.view_account_payment_form"/>
         <field name="arch" type="xml">
             <form>
@@ -119,39 +130,45 @@
                 <attribute name="groups">account.group_account_manager</attribute>
             </button>
 
+            <!-- por ahora ocultamos para tener vista más limpia -->
+            <field name="memo" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+
             <field name="memo" position="before">
                 <field name="reference"/>
             </field>
 
             <field name="date" position="before">
-                <field name="payment_base_date" readonly="state != 'draft'" required="transaction_id or advance_request_id"/>
-                <label for="payment_days"/>
-                <div class="oe_inline" readonly="state != 'draft'">
+                <!-- is_internal_transfer or not use_payment_pro -->
+                <field name="payment_base_date" readonly="sipreco_state != 'draft'" required="transaction_id or advance_request_id" invisible="not transaction_id and not advance_request_id"/>
+                <label for="payment_days" invisible="not transaction_id and not advance_request_id"/>
+                <div class="oe_inline" readonly="state != 'draft'" invisible="not transaction_id and not advance_request_id">
                     <field name="payment_days" class="oe_inline"/>
                     <field name="days_interval_type" class="oe_inline"/>
                 </div>
-                <field name="payment_min_date"/>
+                <field name="payment_min_date" invisible="not transaction_id and not advance_request_id"/>
                 <!-- lo hacemos editable con tec features -->
-                <field name="confirmation_date" readonly="1"/>
-                <field name="to_signature_date" readonly="1"/>
+                <field name="confirmation_date" readonly="1" invisible="not transaction_id and not advance_request_id"/>
+                <field name="to_signature_date" readonly="1" invisible="not transaction_id and not advance_request_id"/>
             </field>
 
             <field name="partner_id" position="after">
-                <field name="transaction_id" invisible="not transaction_id"/>
+                <field name="transaction_id" invisible="not transaction_id" readonly="True" force_save="True"/>
                 <field name="budget_id" invisible="not transaction_id"/>
-                <field name="expedient_id" domain="[('type', '=','payment'), ('state', '=', 'open'), ('current_location_id', 'in', user_location_ids), ('in_transit', '=', False)]" readonly="state != 'draft'" invisible="not transaction_id" required="transaction_id"/>
-                <field name="budget_position_ids" widget="many2many_tags"/>
-                <field name="public_invoice_ids" widget="many2many_tags"/>
+                <field name="expedient_id" domain="[('type', '=','payment'), ('state', '=', 'open'), ('current_location_id', 'in', user_location_ids), ('in_transit', '=', False)]" readonly="sipreco_state != 'draft'" invisible="not transaction_id" required="transaction_id"/>
+                <field name="budget_position_ids" widget="many2many_tags" invisible="not transaction_id"/>
+                <field name="public_invoice_ids" widget="many2many_tags" invisible="not transaction_id"/>
             </field>
 
             <!-- add payment order and print receipt button -->
             <button name="unmark_as_sent" position="after">
-                <button name="%(action_aeroo_report_payment)d" string="Print Payment Order" class="oe_highlight" groups="base.group_user" type="action" />
-                <button name="%(action_aeroo_report_payment_receipt)d" class="oe_highlight" string="Print Receipt" type="action"/>
+                <button name="%(action_aeroo_report_payment)d" string="Print Payment Order" class="oe_highlight" groups="base.group_user" type="action" invisible="not transaction_id and not advance_request_id"/>
+                <button name="%(action_aeroo_report_payment_receipt)d" class="oe_highlight" string="Print Receipt" type="action" invisible="not transaction_id and not advance_request_id"/>
             </button>
 
             <button name="action_cancel" position="before">
-                <button name="action_aeroo_certificado_de_retencion_report" string="Print withholding voucher" type="object"/>
+                <button name="action_aeroo_certificado_de_retencion_report" string="Print withholding voucher" type="object" invisible="state not in ['in_process', 'paid'] or (not transaction_id and not advance_request_id)"/>
             </button>
 
             <!-- como ellos pagan con adelanto o conciliando, y no el mix, excondemos deuda seleccionada y importe de ajuste y solo mostramos el a pagar que lo hacemos editable o no segun sea de adelanto o no -->
@@ -164,23 +181,53 @@
                 <attribute name="invisible">1</attribute>
             </field>
 
-            <!-- <field name="to_pay_amount" position="attributes">
-                <attribute name="invisible">payment_subtype != 'double_validation' or state == 'posted'</attribute>
+            <field name="to_pay_amount" position="attributes">
+                <!-- <attribute name="invisible">payment_subtype != 'double_validation' or state == 'posted'</attribute> -->
                 <attribute name="readonly">not transaction_with_advance_payment or state != 'draft'</attribute>
+            </field>
+
+            <field name="state" position="attributes">
+                <attribute name="name">sipreco_state</attribute>
+            </field>
+            <!-- para algunos campos hacemos que se pueden editar solo en estado "confirmado" que es para que tesoreria prepare pago -->
+            <!-- <field name="journal_id" position="attributes">
+                <attribute name="readonly">state != 'confirmed'</attribute>
+            </field>
+            <field name="amount" position="attributes">
+                <attribute name="readonly">state != 'confirmed'</attribute>
+            </field>
+            <field name="currency_id" position="attributes">
+                <attribute name="readonly">state != 'confirmed'</attribute>
+            </field>
+            <field name="payment_method_line_id" position="attributes">
+                <attribute name="readonly">state != 'confirmed'</attribute>
+            </field> -->
+            <!-- de pay pro (por ahora no los pusimos ya que probablemente no los usen, si hace falta, además del de abajo se requiere write_off_amount y todo lo de Secondary Currency que por ahí no lo usan) -->
+            <!-- <field name="amount_company_currency" position="attributes">
+                <attribute name="readonly">state != 'confirmed'</attribute>
             </field> -->
 
-            <!-- Make post only visible from signed and available for hab director -->
+            <!-- este post and new no lo queremos para nada -->
+            <button name="action_post_and_new" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </button>
+
+            <!-- Post para pagos no vinculados a transacción / request -->
             <button name="action_post" position="attributes">
                 <!-- <attribute name="invisible">payment_subtype == 'simple' and state != 'draft' or payment_subtype == 'double_validation' and state != 'signed'</attribute> -->
-                <attribute name="invisible">state != 'draft' or state != 'signed'</attribute>
+                <attribute name="invisible">state != 'draft' or transaction_id or advance_request_id</attribute>
+                <!-- <attribute name="invisible">sipreco_state != 'signed'</attribute> -->
                 <attribute name="groups">public_budget.group_habilitacion_usuario</attribute>
             </button>
 
             <!-- Add signe buttons -->
             <button name="action_post" position="after">
-                <button name="to_signature_process" class="oe_highlight" string="To Signature Process" type="object" groups="public_budget.group_habilitacion_usuario" invisible="state != 'confirmed'"/>
-                <button name="to_signed" type="object" class="oe_highlight" string="Signed" groups="public_budget.group_habilitacion_director" invisible="state != 'signature_process'"/>
-                <button name="back_to_confirmed" type="object" string="Volver a Confirmado" groups="public_budget.group_habilitacion_usuario" invisible="state not in ('signature_process', 'signed')"/>
+                <!-- post para el flujo con transacciń / request -->
+                <button name="action_post" type="object" string="Validar" class="oe_highlight" invisible="sipreco_state != 'signed'" groups="public_budget.group_habilitacion_usuario"/>
+                <button name="confirm" type="object" string="Confirm" class="oe_highlight" invisible="sipreco_state != 'draft' or (not transaction_id and not advance_request_id)" groups="account.group_account_manager"/>
+                <button name="to_signature_process" class="oe_highlight" string="To Signature Process" type="object" groups="public_budget.group_habilitacion_usuario" invisible="sipreco_state != 'confirmed'"/>
+                <button name="to_signed" type="object" class="oe_highlight" string="Signed" groups="public_budget.group_habilitacion_director" invisible="sipreco_state != 'signature_process'"/>
+                <button name="back_to_confirmed" type="object" string="Volver a Confirmado" groups="public_budget.group_habilitacion_usuario" invisible="sipreco_state not in ('signature_process', 'signed')"/>
             </button>
 
             <!-- cancel button only to account user -->
@@ -192,6 +239,14 @@
             <!-- <field name="retencion_ganancias" position="attributes">
                 <attribute name="required">company_regimenes_ganancias_ids and state == 'confirmed'</attribute>
             </field> -->
+
+            <!-- ocultamos todo lo referente a moneda de contrapartida que no lo usan -->
+            <label for="counterpart_currency_amount" position="replace"/>
+            <field name="counterpart_currency_amount" position="replace"/>
+            <div name="counterpart_currency_amount" position="replace"/>
+            <xpath expr="//div[@name='amount_div']//field[@name='currency_id']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
         </field>
     </record>
 
