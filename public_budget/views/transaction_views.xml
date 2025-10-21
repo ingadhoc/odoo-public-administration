@@ -109,7 +109,7 @@
                         </page>
                         <page string="Payment Orders and Refunds" invisible="not type_with_advance_payment">
                             <button class="oe_link" string="Create Payment Order" invisible="state != 'open'" type="object" name="action_new_payment"/>
-                            <field name="advance_payment_ids" context="{'default_transaction_id':id, 'default_partner_id': partner_id, 'default_partner_type': 'supplier'}" readonly="state == 'open'"/>
+                            <field name="advance_payment_ids" context="{'default_transaction_id':id, 'default_partner_id': partner_id, 'default_partner_type': 'supplier','list_view_ref': 'public_budget.view_account_supplier_payment_tree'}" readonly="state == 'open'"/>
                         </page>
                         <page string="Invoices">
                             <div>
@@ -123,7 +123,7 @@
                             <button class="oe_link" string="Create Payment Order" invisible="state != 'open'" type="object" name="action_new_payment"/>
                                 or
                             <button class="oe_link" string="Mass Payment Order Create" invisible="state != 'open'" type="object" name="mass_payment_group_create" confirm="Se van a generar ordenes de pago para todos los comprobantes que no se encuentren en ordenes de pago, seguro que quiere continuar?"/>
-                            <field name="payment_ids" context="{'default_partner_type': 'supplier', 'default_transaction_id':id, 'list_view_ref': 'account.view_account_supplier_payment_tree'}" readonly="state != 'open'"/>
+                            <field name="payment_ids" context="{'default_partner_type': 'supplier', 'default_transaction_id':id, 'list_view_ref': 'public_budget.view_account_supplier_payment_tree'}" readonly="state != 'open'"/>
                         </page>
                         <page string="Notes">
                             <field name="note"/>

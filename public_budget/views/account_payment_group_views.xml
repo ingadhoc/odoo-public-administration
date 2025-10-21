@@ -33,10 +33,13 @@
         <field name="inherit_id" ref="account.view_account_supplier_payment_tree"/>
         <field name="priority">20</field>
         <field name="arch" type="xml">
-            <field name="state" position="attributes">
+            <!-- <field name="state" position="attributes">
                 <attribute name="name">sipreco_state</attribute>
-                <!-- <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-warning="state == 'in_process'" decoration-success="state == 'paid'"/> -->
-            </field>
+                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-warning="state == 'in_process'" decoration-success="state == 'paid'"/>
+            </field> -->
+            <xpath expr="//field[@name='state']" position="replace">
+                <field name="sipreco_state" widget="badge" decoration-info="sipreco_state == 'draft'" decoration-warning="sipreco_state in ['signature_process','signed']" decoration-success="sipreco_state == 'in_process'"/>
+            </xpath>
 
 
             <!-- para que solo se puedan crear con el botón -->
@@ -61,6 +64,7 @@
                 <field name="reference"/>
                 <field name="memo" optional="hide"/>
             </field>
+
             <list position="inside">
                 <button name="confirm" type="object" string="Confirm" invisible="sipreco_state != 'draft' or (not transaction_id and not advance_request_id)" icon="fa-arrow-circle-right" groups="account.group_account_manager"/>
             </list>

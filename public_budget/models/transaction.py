@@ -337,7 +337,7 @@ class BudgetTransaction(models.Model):
 
         domain = [('id', 'in', self.advance_payment_ids.ids)]
         to_pay_domain = domain + [('state', 'not in', ('canceled', 'draft'))]
-        paid_domain = domain + [('state', '=', 'posted')]
+        paid_domain = domain + [('sipreco_state', '=', 'in_process')]
 
         if to_date:
             to_pay_domain += [('confirmation_date', '<=', to_date)]
