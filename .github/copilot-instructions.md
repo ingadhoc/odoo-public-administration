@@ -252,3 +252,5 @@ def migrate(cr, registry):
 1. **Detecta cambios en modelos/vistas/seguridad/datos → exige bump de `version` en `__manifest__.py`.**
 2. **Si hay cambio estructural → propone y describe script(s) de migración en `migrations/` (pre/post/end),** con enfoque idempotente y en lotes.
 3. Mantén el feedback **concreto, breve y accionable**.
+es
+
