@@ -71,10 +71,3 @@ class AccountPayment(models.Model):
                 rec.destination_account_id = rec.advance_request_id.type_id.account_id
             else:
                 super(AccountPayment, rec)._compute_destination_account_id()
-
-    def change_withholding(self):
-        """ Arrojamos este error para recordarnos que este metodo se implementa
-        en realidad en public_budget_tax_settlement porque necesitamos del
-        liquidador para marcar liquidada la devolución
-        """
-        raise ValidationError(_('No implementado todavía'))

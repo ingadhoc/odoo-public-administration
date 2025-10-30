@@ -91,7 +91,6 @@
         'views/res_partner_views.xml',
         'views/account_asset_views.xml',
         'views/account_payment_group_views.xml',
-        'views/account_payment_views.xml',
         'views/custom_views.xml',
         'views/public_budget_menuitem.xml',
         'views/definitive_line_views.xml',
