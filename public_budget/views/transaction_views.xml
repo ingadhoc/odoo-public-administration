@@ -102,14 +102,14 @@
                         <page string="Affectations">
                             <!-- because it wont update till we save it we add definitive partner_type in context -->
                             <label for="advance_preventive_line_ids" string="Advance Lines" invisible="not type_with_advance_payment"/>
-                            <field name="advance_preventive_line_ids" invisible="not type_with_advance_payment" context="{'default_definitive_partner_type': definitive_partner_type, 'default_advance_line': 1, 'default_preventive_status': 'confirmed', 'advance_line': 1}"/>
+                            <field name="advance_preventive_line_ids" invisible="not type_with_advance_payment" context="{'default_definitive_partner_type': definitive_partner_type, 'default_advance_line': 1, 'default_preventive_status': 'confirmed', 'advance_line': 1}" readonly="state != 'open'"/>
                             <label for="preventive_line_ids" string="Settlement Lines" invisible="not type_with_advance_payment"/>
                             <!-- send transaction to force onchange -->
                             <field name="preventive_line_ids" context="{'default_transaction_id': id, 'default_definitive_partner_type': definitive_partner_type,}" readonly="state != 'open'"/>
                         </page>
                         <page string="Payment Orders and Refunds" invisible="not type_with_advance_payment">
                             <button class="oe_link" string="Create Payment Order" invisible="state != 'open'" type="object" name="action_new_payment"/>
-                            <field name="advance_payment_ids" context="{'default_transaction_id':id, 'default_partner_id': partner_id, 'default_partner_type': 'supplier'}" readonly="state == 'open'"/>
+                            <field name="advance_payment_ids" context="{'default_transaction_id':id, 'default_partner_id': partner_id, 'default_partner_type': 'supplier', 'list_view_ref': 'account.view_account_supplier_payment_tree'}" readonly="state == 'open'"/>
                         </page>
                         <page string="Invoices">
                             <div>
@@ -117,7 +117,7 @@
                                     or
                                 <button class="oe_link" string="Mass Invoice Create" invisible="state != 'open'" type="action" name="%(public_budget.action_definitive_mass_invoice_create)d"/>
                             </div>
-                            <field name="invoice_ids" nolabel="1" readonly="state == 'open'"/>
+                            <field name="invoice_ids" nolabel="1" readonly="state != 'open'"/>
                         </page>
                         <page string="Payment Orders" invisible="type_with_advance_payment">
                             <button class="oe_link" string="Create Payment Order" invisible="state != 'open'" type="object" name="action_new_payment"/>
