@@ -336,8 +336,8 @@ class BudgetTransaction(models.Model):
             }
 
         domain = [('id', 'in', self.advance_payment_ids.ids)]
-        to_pay_domain = domain + [('state', 'not in', ('canceled', 'draft'))]
-        paid_domain = domain + [('state', '=', 'posted')]
+        to_pay_domain = domain + [('sipreco_state', 'not in', ('canceled', 'draft'))]
+        paid_domain = domain + [('sipreco_state', 'in', ['in_process','paid'])]
 
         if to_date:
             to_pay_domain += [('confirmation_date', '<=', to_date)]
@@ -356,6 +356,7 @@ class BudgetTransaction(models.Model):
 
     @api.depends(
         'advance_payment_ids.state',
+        'advance_payment_ids.sipreco_state',
     )
     def _compute_advance_amounts(self):
         _logger.info('Getting Transaction Advance Amounts')
