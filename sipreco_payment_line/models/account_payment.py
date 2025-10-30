@@ -78,10 +78,10 @@ class AccountPayment(models.Model):
                 )
             )
 
-    @api.constrains("state")
+    @api.constrains("state", "approval_state")
     def check_confirm_with_payment_lines(self):
         for rec in self:
-            if rec.state == "confirmed" and rec.partner_type == "supplier" and rec.payment_line_ids:
+            if rec.sipreco_state == "confirmed" and rec.partner_type == "supplier" and rec.payment_line_ids:
                 rec.check_payment_lines_total()
 
     def generar_archivo_banco(self):
@@ -96,5 +96,5 @@ class AccountPayment(models.Model):
 
     def remove_all_transfer_lines(self):
         """Botón usado dentro de una orden de pago en una transacción para que en la solapa 'Líneas de Transferencia' se pueda borrar masivamente todas las trasferencias cuando la orden de pago se encuentra en estado 'Borrador'."""
-        if self.state == "draft":
+        if self.sipreco_state == "draft":
             self.payment_line_ids = False
