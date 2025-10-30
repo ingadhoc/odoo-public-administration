@@ -26,15 +26,6 @@ class AccountPayment(models.Model):
         compute='_compute_sipreco_state',
         # ondelete={"confirmed": "set draft", "signature_process": "set draft", "signed": "set draft"},
     )
-
-    @api.depends('approval_state', 'state')
-    def _compute_sipreco_state(self):
-        for rec in self:
-            if rec.state == 'draft':
-                rec.sipreco_state = rec.approval_state or 'draft'
-            else:
-                rec.sipreco_state = rec.state
-
     # We add signature states
     approval_state = fields.Selection(
         selection=[
@@ -138,6 +129,14 @@ class AccountPayment(models.Model):
     #     help='Retenciones pagadas con este voucher',
     #     compute='_get_paid_withholding'
     # )
+
+    @api.depends('approval_state', 'state')
+    def _compute_sipreco_state(self):
+        for rec in self:
+            if rec.state == 'draft':
+                rec.sipreco_state = rec.approval_state or 'draft'
+            else:
+                rec.sipreco_state = rec.state
 
     @api.model
     def default_get(self, fields):
@@ -245,6 +244,10 @@ class AccountPayment(models.Model):
 
     def back_to_confirmed(self):
         self.write({"approval_state": "confirmed"})
+
+    def action_draft(self):
+        self.write({"approval_state": False})
+        return super().action_draft()
 
     # dummy depends to compute values on create
     @api.depends("transaction_id")
@@ -360,7 +363,7 @@ class AccountPayment(models.Model):
                     )
                 )
 
-    @api.constrains("unreconciled_amount", "transaction_id", "state")
+    @api.constrains("unreconciled_amount", "transaction_id", "state", "approval_state")
     def check_avance_transaction_amount(self):
         """ """
         for rec in self.filtered("transaction_with_advance_payment"):

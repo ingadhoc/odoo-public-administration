@@ -30,8 +30,8 @@
                     </group>
                     <button type="action" name="%(sipreco_payment_line.action_account_payment_line_import)d" string="Importar"/>
                     <button type="object" name="check_payment_lines_total" string="Verificar Total"/>
-                    <button name="remove_all_transfer_lines" string="Eliminar todo" invisible="state != 'draft'" type="object"/>
-                    <field name="payment_line_ids" readonly="state != 'draft'">
+                    <button name="remove_all_transfer_lines" string="Eliminar todo" invisible="sipreco_state != 'draft'" type="object"/>
+                    <field name="payment_line_ids" readonly="sipreco_state != 'draft'">
                         <list editable="bottom">
                             <field name="partner_id"/>
                             <field name="cuit"/>

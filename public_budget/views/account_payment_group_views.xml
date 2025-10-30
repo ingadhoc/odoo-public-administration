@@ -31,8 +31,9 @@
         <field name="name">account.payment.pay.list</field>
         <field name="model">account.payment</field>
         <field name="inherit_id" ref="account.view_account_supplier_payment_tree"/>
-        <field name="priority">20</field>
+        <field name="priority">99</field>
         <field name="arch" type="xml">
+
             <field name="state" position="attributes">
                 <attribute name="name">sipreco_state</attribute>
                 <!-- <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-warning="state == 'in_process'" decoration-success="state == 'paid'"/> -->
@@ -59,27 +60,18 @@
             </field>
             <field name="partner_id" position="before">
                 <field name="reference"/>
-                <field name="memo" optional="hide"/>
             </field>
             <list position="inside">
                 <button name="confirm" type="object" string="Confirm" invisible="sipreco_state != 'draft' or (not transaction_id and not advance_request_id)" icon="fa-arrow-circle-right" groups="account.group_account_manager"/>
             </list>
+            <!-- ocultamos cosas que no usan para que no molesten en la vista -->
+            <!-- <field name="destination_journal_id" position="replace"/> -->
+            <field name="amount_signed" position="replace"/>
+            <field name="amount_signed" position="replace"/>
+            <field name="amount_company_currency_signed" position="replace"/>
         </field>
     </record>
 
-    <!-- account.payment inherit form view -->
-    <record id="account_payment_recieptbook_sipreco" model="ir.ui.view">
-        <field name="name">account.payment.inherit.view.form</field>
-        <field name="model">account.payment</field>
-        <field name="inherit_id" ref="account_payment_pro_receiptbook.view_account_payment_form"/>
-        <field name="arch" type="xml">
-            <!-- en sipreco, para el pago de retenciones no queremos pasar por todo el circuito de doble confirmación), ademas no queremos que usen talonario de ordenes de pago y es medio complicado generar otro talonario exclsuivo para esto y pasarlo por defecto, entonces hacemos que talonario y numero de docuemnto sean solo requeridos si es pago de transacción o de adelantos -->
-            <field name="receiptbook_id" position="attributes">
-                <attribute name="invisible">not transaction_id and not advance_request_id</attribute>
-                <attribute name="required">transaction_id or advance_request_id</attribute>
-            </field>
-        </field>
-    </record>
 
     <!-- sobre condiciones de invisibilidad:
     en payment pro solemos usar invisible="is_internal_transfer or not use_payment_pro"
@@ -90,8 +82,30 @@
         <field name="name">account.payment.form</field>
         <field name="model">account.payment</field>
         <field name="priority">50</field>
-        <field name="inherit_id" ref="account_payment_pro.view_account_payment_form"/>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
         <field name="arch" type="xml">
+
+            <button name="action_l10n_ar_payment_withholding_tree" position="after">
+                <button name="change_withholding" icon="fa-undo" type="object" invisible="parent.partner_type != 'supplier' or parent.state == 'draft' or amount == 0" confirm="Seguro que desea devolver esta retención?" title="Change"/>
+            </button>
+
+            <field name="date" position="after">
+                <field name="assignee_id" groups="!public_budget.group_change_payment_assignee" readonly="state != 'draft'"/>
+                <field name="assignee_id" groups="public_budget.group_change_payment_assignee"/>
+                <field name="return_payment_id" invisible="not return_payment_id"/>
+            </field>
+            <field name="date" position="attributes">
+                <!-- <attribute name="invisible">1</attribute> -->
+                <!-- al final lo hacemos invisible así porque en transferencias lo queremos visible -->
+                <attribute name="readonly">state != 'draft'</attribute>
+            </field>
+
+            <!-- en sipreco, para el pago de retenciones no queremos pasar por todo el circuito de doble confirmación), ademas no queremos que usen talonario de ordenes de pago y es medio complicado generar otro talonario exclsuivo para esto y pasarlo por defecto, entonces hacemos que talonario y numero de docuemnto sean solo requeridos si es pago de transacción o de adelantos -->
+            <field name="receiptbook_id" position="attributes">
+                <attribute name="invisible">not transaction_id and not advance_request_id</attribute>
+                <attribute name="required">transaction_id or advance_request_id</attribute>
+            </field>
+
             <form>
                 <field name="advance_request_id" invisible="1"/>
                 <!-- used on expedient domain -->
