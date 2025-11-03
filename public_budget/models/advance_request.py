@@ -78,7 +78,7 @@ class AdvanceRequest(models.Model):
     def action_approve(self):
         for record in self:
             record.state = 'approved'
-            record.approval_user = self.env.uid
+            record.approval_user = self.env.user
             if not record.approval_date:
                 record.approval_date = fields.Datetime.now()
         return True
@@ -100,6 +100,7 @@ class AdvanceRequest(models.Model):
             'unreconciled_amount': amount,
             'advance_request_id': self.id,
             'partner_type': 'supplier',
+            'payment_type': 'outbound',
         })
         res.remove_all()
         res.to_pay_amount = amount
