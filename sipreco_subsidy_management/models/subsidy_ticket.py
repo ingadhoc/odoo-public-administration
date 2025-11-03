@@ -48,6 +48,7 @@ class PublicBudgetSubsidyTicket(models.Model):
     resolution_date = fields.Date(
         string="Fecha de Resolución",
     )
+    partner_phone = fields.Char(compute=False, inverse=False, related="partner_id.phone")
 
     @api.model
     def create(self, values):
@@ -125,9 +126,9 @@ class PublicBudgetSubsidyTicket(models.Model):
     @api.constrains('stage_id')
     def _check_stage_id(self):
         tickets_duplicados = []
-        for rec in self: 
+        for rec in self:
             if rec.stage_id.is_verified:
-                duplicado = self.search([('stage_id', '=',rec.stage_id.id ),('id', '!=', rec.id),('dni', '=', rec.dni)],limit = 1)                
+                duplicado = self.search([('stage_id', '=',rec.stage_id.id ),('id', '!=', rec.id),('dni', '=', rec.dni)],limit = 1)
                 if duplicado:
                     tickets_duplicados.append(duplicado.dni)
         if tickets_duplicados:
