@@ -116,7 +116,7 @@ class PurchaseRequisition(models.Model):
         return super().create(vals)
 
     def action_in_progress(self):
-        self.user_confirmed_id = self.env.user
+        self.user_confirmed_id = self.env.uid
         super().action_in_progress()
 
     def print_report_requisition(self):

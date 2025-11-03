@@ -261,7 +261,7 @@ class PublicBudgetExpedient(models.Model):
     def _compute_cover(self):
         for rec in self:
             supplier_names = [x.name for x in rec.supplier_ids]
-            cover = rec.description
+            cover = rec.description if rec.description else ''
             if supplier_names:
                 cover += ' - ' + ', '.join(supplier_names)
             rec.cover = cover
