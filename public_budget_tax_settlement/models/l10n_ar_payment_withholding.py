@@ -35,7 +35,7 @@ class l10nArPaymentWithholding(models.Model):
         # verificamos que no esté liquidado
         self.get_wihholding_aml()
 
-        payment_group = self.payment_group_id.copy({
+        payment = self.payment_id.copy({
             'state': 'draft',
             'approval_state': 'confirmed',
             'retencion_ganancias': 'no_aplica',
@@ -71,7 +71,7 @@ class l10nArPaymentWithholding(models.Model):
         # # vinculamos apunte original para que quede liquidado
         # withholding_aml.tax_settlement_move_id = return_aml.move_id.id
 
-        self.payment_group_id.message_post(
+        self.payment_id.message_post(
             body=_('Se devolvió la retención %s con la órden de pago %s') % (
                 self.withholding_number, self.display_name))
-        return payment_group.get_formview_action()
+        return self.payment_id.get_formview_action()
