@@ -36,4 +36,3 @@ from . import account_journal
 # from . import account_tax
 from . import account_asset
 from . import l10n_latam_document_type
-from . import l10n_ar_payment_withholding
