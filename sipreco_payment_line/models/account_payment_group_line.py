@@ -35,7 +35,7 @@ class AccountPaymentGroupLine(models.Model):
     def refresh_bank_account(self):
         for rec in self:
             banks = self.partner_id.bank_ids
-            if rec.payment_id.state == 'posted':
+            if rec.payment_id.state in ['in_process', 'paid']:
                 raise UserError(_(
                     'No se puede cambiar la cuenta de una orden de pago '
                     'validada'))
