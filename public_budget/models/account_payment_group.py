@@ -313,7 +313,7 @@ class AccountPayment(models.Model):
             )
         return domain
 
-    @api.constrains("state")
+    @api.constrains("state", "approval_state")
     def update_invoice_amounts(self):
         _logger.info("Updating invoice amounts from payment group")
         # when payment state changes we recomputed related invoice values
