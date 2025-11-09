@@ -230,12 +230,12 @@ class PublicBudgetSubsidy(models.Model):
             payments = rec.payment_ids + rec.advance_payment_ids
             cargo_amount = sum(
                 payments.filtered(
-                    lambda x: x.state == 'posted').mapped('amount'))
+                    lambda x: x.state in ['in_process', 'paid']).mapped('amount'))
             cargo = payments.search([
                 ('id', 'in', payments.ids),
                 ('date', '!=', False),
                 # cargo only if payment validated
-                ('state', '=', 'posted'),
+                ('state', 'in', ['in_process', 'paid']),
             ], order='date desc', limit=1)
             if cargo:
                 cargo_date = fields.Datetime.to_datetime(cargo.date)

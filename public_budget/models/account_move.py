@@ -51,7 +51,7 @@ class AccountMove(models.Model):
         open, de esta manera reforzamos el re-calculo cuando pasa a pagado
         """
         for rec in self:
-            if rec.payment_state in ['paid', 'in_payment'] and not rec.payment_ids:
+            if rec.payment_state in ['paid', 'in_payment'] and not rec._get_reconciled_payments():
                 rec._compute_to_pay_amount()
 
     @api.depends(
@@ -80,7 +80,7 @@ class AccountMove(models.Model):
         # after validation we consider it as send to paid and paid
         # TODO tal vez deberíamos mejorar porque si estamos sacando
         # analysis_to_date no se estáría teniendo en cuenta
-        if self.payment_state in ['paid', 'in_payment'] and not self.payment_ids:
+        if self.payment_state in ['paid', 'in_payment'] and not self._get_reconciled_payments():
             return self.amount_total
 
         lines = self.line_ids.filtered(lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable'))
@@ -88,11 +88,10 @@ class AccountMove(models.Model):
         to_date = self._context.get('analysis_to_date', False)
         to_date = fields.Date.from_string(to_date) if to_date else False
         if to_date:
-            lines = lines.filtered(lambda x: any(pg.state not in ['draft', 'canceled'] and pg.confirmation_date
+            lines = lines.filtered(lambda x: any(pg.sipreco_state not in ['draft', 'canceled'] and pg.confirmation_date
                                                  and pg.confirmation_date <= to_date for pg in x.payment_ids))
         else:
-            lines = lines.filtered(lambda x: any(
-                pg.state not in ['draft', 'canceled'] for pg in x.payment_ids))
+            lines = lines.filtered(lambda x: any(pg.sipreco_state not in ['draft', 'canceled'] for pg in x.payment_ids))
         amount = -sum(lines.mapped('balance'))
         if self.move_type in ('in_refund', 'out_refund'):
             amount = -amount
@@ -112,7 +111,7 @@ class AccountMove(models.Model):
         # validation we consider it as send to paid and paid
         # TODO tal vez deberíamos mejorar porque si estamos sacando
         # analysis_to_date no se estáría teniendo en cuenta
-        if self.payment_state in ['paid', 'in_payment'] and not self.payment_ids:
+        if self.payment_state in ['paid', 'in_payment'] and not self._get_reconciled_payments():
             return self.amount_total
 
         lines = self.line_ids.filtered(lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable'))
@@ -121,10 +120,10 @@ class AccountMove(models.Model):
         if to_date:
             to_date = fields.Date.from_string(to_date)
             lines = lines.filtered(lambda x: any(
-                pg.state == 'posted' and pg.date <= to_date for pg in x.payment_ids))
+                pg.state in ['in_process', 'paid'] and pg.date <= to_date for pg in x.payment_ids))
         else:
             lines = lines.filtered(lambda x: any(
-                pg.state == 'posted' for pg in x.payment_ids))
+                pg.state in ['in_process', 'paid'] for pg in x.payment_ids))
 
         amount = -sum(lines.mapped('balance'))
         if self.move_type in ('in_refund', 'out_refund'):
