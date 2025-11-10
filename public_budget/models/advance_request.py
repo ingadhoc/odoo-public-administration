@@ -16,46 +16,38 @@ class AdvanceRequest(models.Model):
         ('draft', 'Draft'),
         ('approved', 'Approved'),
         ('confirmed', 'Confirmed'),
-        # ('done', 'Done'),
         ('cancel', 'Cancel'),
     ]
 
     name = fields.Char(
         required=True,
-        # states={'draft': [('readonly', False)]},
     )
     company_id = fields.Many2one(
         'res.company',
         required=True,
-        # states={'draft': [('readonly', False)]},
         default=lambda self: self.env['res.company']._company_default_get(
             'public_budget.advance_request')
     )
     date = fields.Date(
         required=True,
-        # states={'draft': [('readonly', False)]},
         default=fields.Date.context_today,
         copy=False,
     )
     approval_date = fields.Date(
-        # states={'draft': [('readonly', False)]},
         copy=False,
     )
     confirmation_date = fields.Date(
-        # states={'draft': [('readonly', False)]},
         copy=False,
     )
     user_id = fields.Many2one(
         'res.users',
         required=True,
         default=lambda self: self.env.user,
-        # states={'draft': [('readonly', False)]},
     )
     type_id = fields.Many2one(
         'public_budget.advance_request_type',
         required=True,
         check_company=True,
-        #states={'draft': [('readonly', False)]},
     )
     state = fields.Selection(
         _states_,
@@ -66,7 +58,6 @@ class AdvanceRequest(models.Model):
         'public_budget.advance_request_line',
         'advance_request_id',
         string='Lines',
-        # states={'draft': [('readonly', False)]},
     )
     payment_ids = fields.One2many(
         'account.payment',

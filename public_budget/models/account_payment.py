@@ -25,7 +25,6 @@ class AccountPayment(models.Model):
     assignee_id = fields.Many2one(
         'res.partner',
         'Cesionario',
-        # states={'draft': [('readonly', False)]},
     )
     return_payment_id = fields.Many2one(
         'account.payment',
@@ -39,19 +38,6 @@ class AccountPayment(models.Model):
         'return_payment_id',
         help='Pago al que devuelve',
     )
-
-    def write(self, vals):
-        """ para pagos que son devolución no dejamos cambiar nada salvo algunos
-        campos que se setean a mano
-        """
-        ok_fields = [
-            'receiptbook_id', 'state', 'date',
-            'name', 'move_name']
-        if not set(ok_fields).intersection(vals.keys()) and self.filtered(
-                'returned_payment_ids'):
-            raise ValidationError(_(
-                'No puede modificar una devolución de retención'))
-        return super(AccountPayment, self).write(vals)
 
     @api.depends('move_id', 'payment_type', 'partner_type', 'partner_id')
     def _compute_destination_account_id(self):

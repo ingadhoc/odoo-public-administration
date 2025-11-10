@@ -109,7 +109,7 @@
                         </page>
                         <page string="Payment Orders and Refunds" invisible="not type_with_advance_payment">
                             <button class="oe_link" string="Create Payment Order" invisible="state != 'open'" type="object" name="action_new_payment"/>
-                            <field name="advance_payment_ids" context="{'default_transaction_id':id, 'default_partner_id': partner_id, 'default_partner_type': 'supplier', 'list_view_ref': 'account.view_account_supplier_payment_tree'}" readonly="state == 'open'"/>
+                            <field name="advance_payment_ids" context="{'default_transaction_id':id, 'default_partner_id': partner_id, 'default_partner_type': 'supplier', 'list_view_ref': 'account.view_account_supplier_payment_tree'}" readonly="state != 'open'"/>
                         </page>
                         <page string="Invoices">
                             <div>

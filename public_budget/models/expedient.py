@@ -32,7 +32,6 @@ class PublicBudgetExpedient(models.Model):
     )
     description = fields.Char(
         required=True,
-        # states={'cancel': [('readonly', False)]}
     )
     reference = fields.Char(
         required=False
@@ -144,7 +143,6 @@ class PublicBudgetExpedient(models.Model):
         'public_budget_remit_ids_expedient_ids_rel',
         'expedient_id',
         'remit_id',
-        # states={'in_transit': [('readonly', False)]}
     )
     parliamentary_expedient = fields.Char(
         string='Expediente Parlamentario'

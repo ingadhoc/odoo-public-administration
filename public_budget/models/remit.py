@@ -44,13 +44,11 @@ class Remit(models.Model):
         'public_budget.location',
         string='Source Location',
         required=True,
-        # states={'in_transit': [('readonly', False)]}
     )
     location_dest_id = fields.Many2one(
         'public_budget.location',
         string='Destination Location',
         required=True,
-        # states={'in_transit': [('readonly', False)]}
     )
     reference = fields.Char(
         string='Referencia',
