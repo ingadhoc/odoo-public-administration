@@ -13,17 +13,14 @@ class DefinitiveLine(models.Model):
 
     issue_date = fields.Date(
         required=True,
-        # states={'draft': [('readonly', False)]},
         default=fields.Date.context_today
     )
     supplier_id = fields.Many2one(
         'res.partner',
         required=True,
-        # states={'draft': [('readonly', False)]},
     )
     amount = fields.Monetary(
         required=True,
-        # states={'draft': [('readonly', False)]},
     )
     residual_amount = fields.Monetary(
         compute='_compute_residual_amount',

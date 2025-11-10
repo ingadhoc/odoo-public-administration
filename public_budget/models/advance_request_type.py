@@ -17,13 +17,10 @@ class AdvanceRequestType(models.Model):
     )
     account_id = fields.Many2one(
         'account.account',
-        #TODO fix domain internal type es ahora account_type == incomne_other ??
-        #domain="[('account_type', '=', 'income_other'), ('company_id', '=', company_id), ('deprecated', '=', False)]",
-        domain="[('deprecated', '=', False)]",
+        domain=[('deprecated', '=', False), ('account_type', 'not in', ['asset_receivable', 'liability_payable', 'asset_cash', 'liability_credit_card'])],
         # ahora no queremos que sea payable porque no queremos que se lleve
         # a la deuda del partner generico, queremos que para que se lleve haga
         # falta hacer una devolucion
-        # domain="[('type', '=', 'payable'), ('company_id', '=', company_id)]",
         required=True,
         check_company=True,
     )

@@ -19,9 +19,6 @@ class AccountBankStatementLine(models.Model):
         elif new_aml_dicts and max_operation:
             debit = sum([x.get('debit', 0.0) for x in new_aml_dicts])
             credit = sum([x.get('credit', 0.0) for x in new_aml_dicts])
-            # for line in new_aml_dicts:
-            #     if line.get('debit') > max_statement_operation or\
-            #             line.get('credit') > max_statement_operation:
             if credit > max_operation or debit > max_operation:
                 raise ValidationError(_(
                     'No puede hacer un registro en extractos mayor a %s'
