@@ -126,12 +126,7 @@ class BudgetPosition(models.Model):
     )
     default_account_id = fields.Many2one(
         'account.account',
-        #TODO revisar dominio account
-        # domain="["
-        # "('account_type', '=', 'income_other'), "
-        # "('company_id', '=', company_id), "
-        # "('deprecated', '=', False)]",
-        domain="[('deprecated', '=', False)]",
+        domain=[('deprecated', '=', False), ('account_type', 'not in', ['asset_receivable', 'liability_payable', 'asset_cash', 'liability_credit_card'])],
         check_company=True,
         help='Default Account on preventive lines of this position'
     )

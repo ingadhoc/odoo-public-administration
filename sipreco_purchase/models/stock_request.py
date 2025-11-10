@@ -24,12 +24,10 @@ class StockRequest(models.Model):
     )
     price_unit = fields.Float(
         string='Unit Price',
-        # states={'draft': [('readonly', False)]},
         digits='Product Price',
     )
     # hacemos readonly para no confundir porque se generó el picking
     description = fields.Text(
-        # states={'draft': [('readonly', False)]},
     )
     requirement_id = fields.Many2one(
         related='order_id.partner_id',
