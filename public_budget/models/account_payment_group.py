@@ -24,6 +24,7 @@ class AccountPayment(models.Model):
             ("rejected", "Rejected"),
         ],
         compute='_compute_sipreco_state',
+        store=True,
         # ondelete={"confirmed": "set draft", "signature_process": "set draft", "signed": "set draft"},
     )
     # We add signature states

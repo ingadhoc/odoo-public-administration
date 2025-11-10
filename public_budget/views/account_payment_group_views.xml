@@ -30,6 +30,9 @@
                 <filter name="fecha_pago" string="Fecha Min. de Pago" domain="[]"
                     context="{'group_by': 'payment_min_date'}" />
             </filter>
+            <filter name="state" position="attributes">
+                <attribute name="context">{'group_by': 'sipreco_state'}</attribute>
+            </filter>
         </field>
     </record>
 
