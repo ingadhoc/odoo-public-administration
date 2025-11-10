@@ -12,6 +12,8 @@ class AccountPayment(models.Model):
     _inherit = "account.payment"
 
     # We add signature states
+    # ahora que el campo es almacenado podríamos unificar y en casi todos lados estandarizar y usar "sipreco_state"
+    # tmb podriamos re-evaluar volver a heredar "state" y erradicar estos dos campos
     sipreco_state = fields.Selection(
         selection=[
             ("draft", "Draft"),
@@ -25,21 +27,14 @@ class AccountPayment(models.Model):
         ],
         compute='_compute_sipreco_state',
         store=True,
-        # ondelete={"confirmed": "set draft", "signature_process": "set draft", "signed": "set draft"},
     )
     # We add signature states
     approval_state = fields.Selection(
         selection=[
-            # ("draft", "Draft"),
             ("confirmed", "Confirmado"),  # new
             ("signature_process", "En Proceso de Firma"),  # new
             ("signed", "Firmado"),  # new
-            # ("in_process", "Paid (NR)"),
-            # ("paid", "Paid"),
-            # ("canceled", "Canceled"),
-            # ("rejected", "Rejected"),
         ],
-        # ondelete={"confirmed": "set draft", "signature_process": "set draft", "signed": "set draft"},
     )
     # agregamos reference que fue depreciado y estan acostumbrados a usar
     reference = fields.Char(
@@ -52,7 +47,6 @@ class AccountPayment(models.Model):
     expedient_id = fields.Many2one(
         "public_budget.expedient",
         context={"default_type": "payment"},
-        # states={'draft': [('readonly', False)]},
         ondelete="restrict",
     )
     transaction_id = fields.Many2one(
@@ -85,18 +79,13 @@ class AccountPayment(models.Model):
     )
     payment_base_date = fields.Datetime(
         string="Payment Base Date",
-        # nos pidieron que no haya valor por defecto
-        # default=fields.Date.context_today,
-        # states={'draft': [('readonly', False)]},
         help="Date used to calculate payment date",
     )
     payment_days = fields.Integer(
-        # states={'draft': [('readonly', False)]},
         help="Days added to payment base date to get the payment date",
     )
     days_interval_type = fields.Selection(
         [("business_days", "Business Days"), ("calendar_days", "Calendar Days")],
-        # states={'draft': [('readonly', False)]},
         default="business_days",
     )
     payment_min_date = fields.Date(
@@ -108,28 +97,17 @@ class AccountPayment(models.Model):
     )
     confirmation_date = fields.Date(
         "Fecha de Confirmación",
-        # states={'draft': [('readonly', False)]},
         copy=False,
     )
     to_signature_date = fields.Date(
         "Fecha a Proceso de Firma",
         help="Fecha en la que fue pasado a proceso de firma. Utilizada para acumular retenciones.",
-        # states={
-        #     'draft': [('readonly', False)],
-        #     'confirmed': [('readonly', False)]},
         copy=False,
     )
     date = fields.Date(
         required=False,
         string="Payment Date",
     )
-    # TODO implementar
-    # paid_withholding_ids = fields.Many2many(
-    #     comodel_name='account.voucher.withholding',
-    #     string='Retenciones Pagadas',
-    #     help='Retenciones pagadas con este voucher',
-    #     compute='_get_paid_withholding'
-    # )
 
     @api.depends('approval_state', 'state')
     def _compute_sipreco_state(self):
@@ -201,7 +179,6 @@ class AccountPayment(models.Model):
     @api.depends("payment_base_date", "payment_days", "days_interval_type")
     def _compute_payment_min_date(self):
         for rec in self:
-            # return
             current_date = False
             if rec.payment_base_date:
                 if rec.days_interval_type == "business_days":
@@ -218,14 +195,6 @@ class AccountPayment(models.Model):
                     )
 
             rec.payment_min_date = current_date
-
-    # TODO enable
-    # def _get_paid_withholding(self):
-    #     paid_move_ids = [
-    #         x.move_line_id.move_id.id for x in self.line_ids if x.amount]
-    #     paid_withholdings = self.env['account.voucher.withholding'].search([(
-    #         'move_line_id.tax_settlement_move_id', 'in', paid_move_ids)])
-    #     self.paid_withholding_ids = paid_withholdings
 
     def to_signature_process(self):
         for rec in self:
@@ -289,11 +258,9 @@ class AccountPayment(models.Model):
                 if transaction.type_id.with_advance_payment and (transaction.partner_id):
                     # no hace falta que sea el comercial...
                     partners = transaction.partner_id
-                    # partners = transaction.partner_id.commercial_partner_id
                 else:
                     # no hace falta que sea el comercial...
                     partners = transaction.mapped(
-                        # 'supplier_ids.commercial_partner_id')
                         "supplier_ids"
                     )
                 rec.partner_ids = partners
@@ -392,9 +359,6 @@ class AccountPayment(models.Model):
             if rec.receiptbook_id.sequence_id and not (rec.name or rec.name == "/"):
                 rec = rec.with_context(is_recipt=True)
                 rec.name = rec.receiptbook_id.with_context(ir_sequence_date=rec.date).sequence_id.next_by_id()
-                # TODO revisar si tenemos que agregar prefijo. de agregarlo tmb tenemos que hacerlo en el write de abajo
-                # rec.name = "%s %s" % (rec.receiptbook_id.document_type_id.doc_code_prefix, name)
-
         return recs
 
     def write(self, vals):

@@ -101,7 +101,6 @@ class PublicBudgetSubsidy(models.Model):
     )
     amount = fields.Monetary(
         required=True,
-        # states={'closed': [('readonly', True)]},
     )
     cargo_amount = fields.Monetary(
         'Cargos',

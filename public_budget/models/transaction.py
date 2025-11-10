@@ -29,11 +29,9 @@ class BudgetTransaction(models.Model):
     issue_date = fields.Date(
         required=True,
         default=fields.Date.context_today,
-        # states={'draft': [('readonly', False)]},
     )
     name = fields.Char(
         required=True,
-        # states={'draft': [('readonly', False)], 'open': [('readonly', False)]}
     )
     user_id = fields.Many2one(
         'res.users',
@@ -46,14 +44,12 @@ class BudgetTransaction(models.Model):
         'public_budget.expedient',
         string='Expedient',
         required=True,
-        # states={'draft': [('readonly', False)]}
     )
     budget_id = fields.Many2one(
         'public_budget.budget',
         string='Budget',
         required=True,
         default=_get_default_budget,
-        # states={'draft': [('readonly', False)]},
         domain=[('state', '=', 'open')],
         auto_join=True,
     )
@@ -62,12 +58,10 @@ class BudgetTransaction(models.Model):
         string='Type',
         required=True,
         check_company=True,
-        # states={'draft': [('readonly', False)]}
     )
     partner_id = fields.Many2one(
         'res.partner',
         string='Partner',
-        # states={'draft': [('readonly', False)]}
     )
     note = fields.Html(
     )
@@ -100,7 +94,6 @@ class BudgetTransaction(models.Model):
         comodel_name='public_budget.preventive_line',
         inverse_name='transaction_id',
         string='Advance Preventive Lines',
-        # states={'open': [('readonly', False)]},
         context={
             'default_advance_line': 1,
             'default_preventive_status': 'confirmed',
@@ -198,7 +191,6 @@ class BudgetTransaction(models.Model):
     company_id = fields.Many2one(
         'res.company',
         required=True,
-        # states={'draft': [('readonly', False)]},
         default=lambda self: self.env['res.company']._company_default_get(
             'public_budget.transaction')
     )
@@ -218,14 +210,12 @@ class BudgetTransaction(models.Model):
         'public_budget.preventive_line',
         'transaction_id',
         auto_join=True,
-        # states={'open': [('readonly', False)]},
         domain=[('advance_line', '=', False)]
     )
     invoice_ids = fields.One2many(
         'account.move',
         'transaction_id',
         auto_join=True,
-        # states={'open': [('readonly', False)]},
         domain=[('move_type', 'in', ['in_invoice', 'in_refund'])]
     )
     definitive_partner_type = fields.Selection(
@@ -236,7 +226,6 @@ class BudgetTransaction(models.Model):
         'transaction_id',
         string='Payment Orders',
         context={'default_partner_type': 'supplier', 'default_payment_type': 'outbound' },
-        # states={'open': [('readonly', False)]},
         domain=[
             ('partner_type', '=', 'supplier'),
             ('transaction_with_advance_payment', '=', False)
@@ -256,7 +245,6 @@ class BudgetTransaction(models.Model):
             ('transaction_with_advance_payment', '=', True)
         ],
         context={'default_partner_type': 'supplier', 'default_payment_type': 'outbound'},
-        # states={'open': [('readonly', False)]},
     )
     asset_ids = fields.One2many(
         'account.asset',
