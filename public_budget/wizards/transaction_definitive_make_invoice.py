@@ -172,27 +172,10 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
         self.transaction_id.expedient_id\
             .check_location_allowed_for_current_user(msg)
         tran_type = self.transaction_id.type_id
-        advance_account = False
         if self.to_invoice_amount < 0.0:
             invoice_type = 'in_refund'
         else:
             invoice_type = 'in_invoice'
-        if tran_type.with_advance_payment:
-            if not tran_type.advance_account_id:
-                raise ValidationError(_(
-                    "On Advance Transactions, transaction advance type"
-                    "must have and advance account configured!"))
-            advance_account = tran_type.advance_account_id
-            # Check advance remaining amount
-            advance_to_return_amount = (
-                self.transaction_id.advance_to_return_amount)
-            if self.currency_id.compare_amounts(
-                    self.to_invoice_amount, advance_to_return_amount) == 1:
-                raise ValidationError(_(
-                    "You can not invoice more than Advance Remaining Amount!\n"
-                    "* Amount to invoice: %s\n"
-                    "* Advance Remaining Amount: %s") % (
-                    self.to_invoice_amount, advance_to_return_amount))
 
         list_inv_lines = []
         for line in self.line_ids.filtered(lambda r: r.to_invoice_amount):
@@ -217,13 +200,6 @@ class PublicBudgetDefinitiveMakeInvoice(models.TransientModel):
         }
 
         invoice = self.env['account.move'].create(invoice_vals)
-        if invoice:
-            invoice.line_ids.filtered(
-                lambda line: line.account_id.account_type in ('asset_receivable', 'liability_payable'))._write(
-                {'account_id': (
-                    advance_account and advance_account.id or
-                    self.supplier_id.property_account_payable_id.id)
-                 })
         # Buscamos la vista de supplier invoices
         action = self.env["ir.actions.act_window"]._for_xml_id('account.action_move_in_invoice_type')
 
