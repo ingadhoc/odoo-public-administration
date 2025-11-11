@@ -23,8 +23,7 @@ class TransactionType(models.Model):
         'account.account',
         string='Advance Account',
         domain=[('deprecated', '=', False), ('reconcile', '=', False), ('account_type', 'not in', ['asset_cash', 'liability_credit_card'])],
-        help='This account will be used on advance payments. Must be a payable'
-        ' account.',
+        help='This account will be used on advance payments',
         check_company=True,
     )
     amount_restriction_ids = fields.One2many(

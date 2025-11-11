@@ -154,6 +154,15 @@ class AccountMove(models.Model):
         return super().button_cancel()
 
     def _post(self, soft=True):
+        for inv in self.filtered(
+                lambda x: x.transaction_id.type_id.with_advance_payment):
+            if inv.currency_id.compare_amounts(inv.amount_total, inv.transaction_id.advance_to_return_amount) == 1:
+                raise ValidationError(_(
+                    "You can not invoice more than Advance Remaining Amount!\n"
+                    "* Amount to invoice: %s\n"
+                    "* Advance Remaining Amount: %s") % (
+                    inv.amount_total, inv.transaction_id.advance_to_return_amount))
+
         res = super()._post(soft=soft)
         for inv in self.filtered(
                 lambda x: x.transaction_id.type_id.with_advance_payment):
@@ -168,6 +177,10 @@ class AccountMove(models.Model):
             move_lines = inv.line_ids.filtered(
                 lambda line: line.account_id == inv.transaction_id.type_id.advance_account_id)
             move_lines.write({'partner_id': self.transaction_id.partner_id.id})
+
+            # re-computamos el amount residual porque por más que tiene "reconcile = False" al ser payment term line
+            # odoo le computa un amount, al recomputar pasa a estar en 0 y por ende la factura pasa a estar pagada
+            move_lines._compute_amount_residual()
         return res
 
     @api.constrains(
