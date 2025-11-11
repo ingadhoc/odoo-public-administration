@@ -98,3 +98,20 @@ class AccountMoveLine(models.Model):
             raise ValidationError(_(
                 'Solo puede cambiar o registrar comprobantes si '
                 'el presupuesto está abierto o en pre-cierre'))
+
+    def _compute_account_id(self):
+        term_lines = self.env["account.move.line"]
+        if self.move_id.transaction_id.type_id.with_advance_payment:
+            term_lines = self.filtered(lambda line: line.display_type == "payment_term")
+            advance_account = self.move_id.transaction_id.type_id.advance_account_id
+            if not advance_account:
+                raise ValidationError(_(
+                    "On Advance Transactions, transaction advance type"
+                    "must have and advance account configured!"))
+            term_lines.account_id = advance_account
+        super(AccountMoveLine, self - term_lines)._compute_account_id()
+
+    @api.constrains('account_id', 'display_type')
+    def _check_payable_receivable(self):
+        advance_lines = self.filtered("move_id.transaction_id.type_id.with_advance_payment")
+        return super(AccountMoveLine, self - advance_lines)._check_payable_receivable()
