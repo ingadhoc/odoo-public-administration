@@ -115,9 +115,9 @@ class PurchaseRequisition(models.Model):
                 'purchase.requisition.purchase.tender') or 'New'
         return super().create(vals)
 
-    def action_in_progress(self):
+    def action_confirm(self):
         self.user_confirmed_id = self.env.uid
-        super().action_in_progress()
+        super().action_confirm()
 
     def print_report_requisition(self):
         self.ensure_one()
