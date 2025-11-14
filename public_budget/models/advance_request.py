@@ -92,6 +92,7 @@ class AdvanceRequest(models.Model):
             'advance_request_id': self.id,
             'partner_type': 'supplier',
             'payment_type': 'outbound',
+            'amount': amount,
         })
         res.remove_all()
         res.to_pay_amount = amount

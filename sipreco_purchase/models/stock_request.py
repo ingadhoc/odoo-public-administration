@@ -44,6 +44,7 @@ class StockRequest(models.Model):
         related_sudo=True,
         compute_sudo=True,
     )
+    route_id = fields.Many2one(related="order_id.route_id")
 
     @api.model
     def create(self, vals):
@@ -52,6 +53,8 @@ class StockRequest(models.Model):
             raise ValidationError(_(
                 'You can not create a request without quantity!'))
         return super().create(vals)
+
+
 
     @api.onchange('product_id')
     def onchange_product_id(self):

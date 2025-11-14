@@ -16,14 +16,14 @@ class AccountPayment(models.Model):
     # tmb podriamos re-evaluar volver a heredar "state" y erradicar estos dos campos
     sipreco_state = fields.Selection(
         selection=[
-            ("draft", "Draft"),
+            ("draft", "Borrador"),
             ("confirmed", "Confirmado"),  # new
             ("signature_process", "En Proceso de Firma"),  # new
             ("signed", "Firmado"),  # new
-            ("in_process", "Paid (NR)"),
-            ("paid", "Paid"),
-            ("canceled", "Canceled"),
-            ("rejected", "Rejected"),
+            ("in_process", "Pagado (NR)"),
+            ("paid", "Pagado"),
+            ("canceled", "Cancelado"),
+            ("rejected", "Rechazado"),
         ],
         compute='_compute_sipreco_state',
         store=True,
@@ -129,7 +129,7 @@ class AccountPayment(models.Model):
             # si no estaba seteada la setamos
             if not rec.date:
                 rec.date = fields.Date.today()
-            if rec.expedient_id and rec.expedient_id.current_location_id not in rec.user_location_ids:
+            if not self.env.context.get('skip_location_validation', False) and rec.expedient_id and rec.expedient_id.current_location_id not in rec.user_location_ids:
                 raise ValidationError(
                     _("No puede validar un pago si el expediente no está en una ubicación autorizada para ústed")
                 )
