@@ -7,7 +7,7 @@
     'category': 'Accounting & Finance',
     'depends': [
         #'web_m2x_options',
-        'portal_backend',
+        'portal_holidays',
         'sales_team',
         'account_accountant_ux',
         # 'account_payment_group',

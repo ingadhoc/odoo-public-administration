@@ -67,7 +67,7 @@
             </button>
             <button name="action_draft" position="attributes">
                 <attribute name="groups">purchase.group_purchase_user</attribute>
-                <attribute name="invisible">state != 'cancel' or not inspected</attribute>
+                <attribute name="invisible">state != 'cancel' or inspected</attribute>
             </button>
 
             <field name="product_id" position="after">
@@ -162,11 +162,9 @@
         <field name="name">purchase.requisition.form</field>
         <field name="model">purchase.requisition</field>
         <field name="inherit_id" ref="view_purchase_requisition_form"/>
-        <!-- <field name="groups_id" eval="[(4, ref('purchase.group_purchase_user'))]"/> -->
         <field name="arch" type="xml">
             <field name="transaction_type_id" position="attributes">
-                <attribute name="readonly">False</attribute>
-                <!-- <attribute name="attrs">{'readonly': ['|', ('state', '!=', 'draft'),('inspected', '=', True)]}</attribute> -->
+                <attribute name="readonly">state != 'draft' or inspected</attribute>
             </field>
         </field>
     </record>
