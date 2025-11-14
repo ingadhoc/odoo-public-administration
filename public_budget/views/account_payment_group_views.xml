@@ -72,6 +72,7 @@
             </field>
             <field name="partner_id" position="before">
                 <field name="reference" />
+                <field name="memo" />
             </field>
             <list position="inside">
                 <button name="confirm" type="object" string="Confirm"
@@ -100,6 +101,14 @@
         <field name="priority">50</field>
         <field name="inherit_id" ref="account.view_account_payment_form" />
         <field name="arch" type="xml">
+
+
+            <xpath expr="//div[hasclass('oe_title')]/h1[1]" position="attributes">
+                <attribute name="invisible">name not in [False, '/']</attribute>
+            </xpath>
+            <xpath expr="//div[hasclass('oe_title')]/h1[2]" position="attributes">
+                <attribute name="invisible">name in [False, '/']</attribute>
+            </xpath>
 
             <field name="date" position="after">
                 <field name="assignee_id" groups="!public_budget.group_change_payment_assignee"
@@ -283,14 +292,14 @@
                 <button name="action_post" type="object" string="Validar" class="oe_highlight"
                     invisible="sipreco_state != 'signed'"
                     groups="public_budget.group_habilitacion_usuario" />
-                <button name="confirm" type="object" string="Confirm" class="oe_highlight"
+                <button name="confirm" type="object" string="Confirmar" class="oe_highlight"
                     invisible="sipreco_state != 'draft' or (not transaction_id and not advance_request_id)"
                     groups="account.group_account_manager" />
                 <button name="to_signature_process" class="oe_highlight"
-                    string="To Signature Process" type="object"
+                    string="A Proceso de Firma" type="object"
                     groups="public_budget.group_habilitacion_usuario"
                     invisible="sipreco_state != 'confirmed'" />
-                <button name="to_signed" type="object" class="oe_highlight" string="Signed"
+                <button name="to_signed" type="object" class="oe_highlight" string="Firmado"
                     groups="public_budget.group_habilitacion_director"
                     invisible="sipreco_state != 'signature_process'" />
                 <button name="back_to_confirmed" type="object" string="Volver a Confirmado"

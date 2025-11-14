@@ -12,45 +12,50 @@
         <field name="name">Public Budget</field>
         <field name="description">Public Budget</field>
         <field name="sequence">1</field>
+        <field name="parent_id" ref="portal_holidays.category_portal_holiday"/>
     </record>
 
     <record model="ir.module.category" id="category_public_budget_assets">
         <field name="name">Activos</field>
         <field name="description">Activos</field>
         <field name="sequence">1</field>
+        <field name="parent_id" ref="portal_holidays.category_portal_holiday"/>
     </record>
 
     <record model="ir.module.category" id="category_public_budget_portal">
         <field name="name">Portal Sipreco</field>
         <field name="description">Portal Sipreco</field>
         <field name="sequence">1</field>
+        <field name="parent_id" ref="portal_holidays.category_portal_holiday"/>
     </record>
+
+<!-- GRUPOS -->
 
     <record id="group_portal_expedient" model="res.groups">
         <field name="name">Portal - Expedientes</field>
         <field name="share" eval="True"/>
-        <field name="implied_ids" eval="[(6, 0, [ref('base.group_portal')])]"/>
+        <field name="implied_ids" eval="[(6, 0, [ref('base.group_portal'), ref('portal_backend.group_portal_backend'),ref('portal_holidays.group_portal_backend_holiday')])]"/>
         <field name="category_id" ref="category_public_budget_portal"/>
     </record>
 
     <record id="group_portal_transaction" model="res.groups">
         <field name="name">Portal - Transacciones</field>
         <field name="share" eval="True"/>
-        <field name="implied_ids" eval="[(6, 0, [ref('base.group_portal')])]"/>
+        <field name="implied_ids" eval="[(6, 0, [ref('base.group_portal'), ref('portal_backend.group_portal_backend'),ref('portal_holidays.group_portal_backend_holiday')])]"/>
         <field name="category_id" ref="category_public_budget_portal"/>
     </record>
 
     <record id="group_portal_asset" model="res.groups">
         <field name="name">Portal - Activos</field>
         <field name="share" eval="True"/>
-        <field name="implied_ids" eval="[(6, 0, [ref('base.group_portal')])]"/>
+        <field name="implied_ids" eval="[(6, 0, [ref('base.group_portal'), ref('portal_backend.group_portal_backend'),ref('portal_holidays.group_portal_backend_holiday')])]"/>
         <field name="category_id" ref="category_public_budget_portal"/>
     </record>
 
     <record id="group_portal_subsidy" model="res.groups">
         <field name="name">Portal - Subsidios</field>
         <field name="share" eval="True"/>
-        <field name="implied_ids" eval="[(6, 0, [ref('base.group_portal')])]"/>
+        <field name="implied_ids" eval="[(6, 0, [ref('base.group_portal'), ref('portal_backend.group_portal_backend'),ref('portal_holidays.group_portal_backend_holiday')])]"/>
         <field name="category_id" ref="category_public_budget_portal"/>
     </record>
 
