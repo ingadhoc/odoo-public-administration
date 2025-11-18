@@ -270,7 +270,7 @@ En estos casos **normalmente corresponde** proponer migración (salvo notas en c
 
 ---
 
-## Checklist rápida para el review
+## Checklist rápida para el review (general)
 
 | Categoría          | Qué comprobar Copilot                                                                                        |
 | ------------------ | ------------------------------------------------------------------------------------------------------------ |
@@ -284,7 +284,7 @@ En estos casos **normalmente corresponde** proponer migración (salvo notas en c
 
 ---
 
-## Heurística práctica para el bump de versión
+## Heurística práctica para el bump de versión (general)
 
 * **SI** el diff modifica la estructura de un modelo, una vista, o algún record .xml (ej. cambios en definición de campos, vistas XML, datos XML, seguridad)
   **Y** `__manifest__.py` no cambia `version` → **Sugerir bump**.
@@ -305,7 +305,7 @@ En estos casos **normalmente corresponde** proponer migración (salvo notas en c
 
 ---
 
-## Resumen operativo para Copilot
+## Resumen operativo para Copilot (v18)
 
 1. **Detecta cambios estructurales en modelos, vistas o records .xml → exige bump de `version` en `__manifest__.py` si no está incrementada.**
 2. **Si hay cambio estructural (según la lista actualizada) → propone y describe script(s) de migración en `migrations/` (pre/post/end)**, con enfoque idempotente y en lotes.
