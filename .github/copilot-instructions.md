@@ -253,6 +253,14 @@ En estos casos **normalmente corresponde** proponer migración (salvo notas en c
 
 ---
 
+## Cobertura de tests automatizados – reglas generales
+
+* Cuando el diff introduzca **funcionalidad nueva no trivial** (nuevos métodos con lógica compleja, nuevos flujos de negocio, refactors grandes, nuevas APIs, etc.), revisar si existe cobertura de tests razonable para esos cambios.
+* Si no se ve una cobertura clara, sugerir de forma **concreta y breve** qué tipo de test añadir (unitarios de modelo, tests de wizards, tours, pruebas sobre reportes, etc.), sin exigir una suite completa para cada cambio.
+* Para cambios pequeños o puramente cosméticos (ajustes en textos, vistas simples, pequeñas correcciones) **no hace falta** proponer la creación de tests nuevos.
+
+---
+
 ## Convenciones de scripts en `migrations/` (generales)
 
 * Ubicación: `migrations/<module_version>/`.
@@ -305,7 +313,7 @@ En estos casos **normalmente corresponde** proponer migración (salvo notas en c
 
 ---
 
-## Resumen operativo para Copilot (v18)
+## Resumen operativo para Copilot
 
 1. **Detecta cambios estructurales en modelos, vistas o records .xml → exige bump de `version` en `__manifest__.py` si no está incrementada.**
 2. **Si hay cambio estructural (según la lista actualizada) → propone y describe script(s) de migración en `migrations/` (pre/post/end)**, con enfoque idempotente y en lotes.
