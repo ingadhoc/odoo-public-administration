@@ -21,6 +21,9 @@ class DefinitiveLine(models.Model):
     )
     amount = fields.Monetary(
         required=True,
+        compute="_compute_amount",
+        store=True,
+        readonly=False,
     )
     residual_amount = fields.Monetary(
         compute='_compute_residual_amount',
@@ -90,6 +93,11 @@ class DefinitiveLine(models.Model):
         related='preventive_line_id.budget_position_id',
         store=True,
     )
+
+    @api.depends('preventive_line_id')
+    def _compute_amount(self):
+        for rec in self:
+            rec.amount = rec.preventive_line_id.remaining_amount
 
     @api.constrains('issue_date')
     def check_dates(self):
