@@ -1,6 +1,6 @@
 {
     'name': 'Sipreco Purchase Management',
-    'version': "18.0.1.2.0",
+    'version': "18.0.1.3.0",
     'license': 'AGPL-3',
     'author': 'ADHOC SA,Odoo Community Association (OCA)',
     'website': 'www.adhoc.com.ar',
@@ -10,6 +10,7 @@
         'purchase_requisition',
         'stock_ux',
         'stock_request_ux',
+        'sale_subscription',
     ],
     'data': [
         'data/ir_actions_server_data.xml',

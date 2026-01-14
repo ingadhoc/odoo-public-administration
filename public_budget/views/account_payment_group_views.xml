@@ -174,11 +174,6 @@
                 <attribute name="groups">account.group_account_manager</attribute>
             </button>
 
-            <!-- por ahora ocultamos para tener vista más limpia -->
-            <field name="memo" position="attributes">
-                <attribute name="invisible">True</attribute>
-            </field>
-
             <field name="memo" position="before">
                 <field name="reference" />
             </field>

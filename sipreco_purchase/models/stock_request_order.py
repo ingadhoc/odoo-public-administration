@@ -3,7 +3,6 @@
 # directory
 ##############################################################################
 from odoo import models, fields, api
-from odoo.tools.misc import unquote
 
 
 class StockRequestOrder(models.Model):
@@ -27,6 +26,12 @@ class StockRequestOrder(models.Model):
     user_id = fields.Many2one(
         'res.users', string='Purchase Representative',
         default=lambda self: self.env.user)
+
+    route_id = fields.Many2one(
+        "stock.route",
+        compute=False,
+        inverse=False,
+    )
 
     @api.depends('user_id')
     def _compute_picking_type(self):
