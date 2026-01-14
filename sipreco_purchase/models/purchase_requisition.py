@@ -83,6 +83,7 @@ class PurchaseRequisition(models.Model):
             if not rec.transaction_type_id:
                 raise UserError(_('Antes de revisar debe tener establecido un'
                                 '"Tipo"'))
+
             rec.inspected = True
             rec.user_inspected_id = self.env.user
 
@@ -116,6 +117,9 @@ class PurchaseRequisition(models.Model):
         return super().create(vals)
 
     def action_confirm(self):
+        if self.amount_total <= 0:
+            raise UserError(_('No se puede confirmar una requisición sin '
+                              'líneas o con importe total 0.'))
         self.user_confirmed_id = self.env.uid
         super().action_confirm()
 
@@ -136,3 +140,11 @@ class PurchaseRequisition(models.Model):
         name = self.name
         super().action_draft()
         self.name = name
+
+    @api.depends('vendor_id','user_id')
+    def _compute_currency_id(self):
+        for requisition in self:
+            if not requisition.vendor_id or not requisition.vendor_id.property_purchase_currency_id:
+                requisition.currency_id = requisition.company_id.currency_id.id
+            else:
+                requisition.currency_id = requisition.vendor_id.property_purchase_currency_id.id
