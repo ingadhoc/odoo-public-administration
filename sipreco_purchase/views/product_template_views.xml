@@ -40,4 +40,17 @@
         </field>
     </record>
 
+    <!-- prodcut.template inherit form view -->
+    <record id="product_template_view_form_recurring" model="ir.ui.view">
+        <field name="name">product.template.inherit.view.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="sale_subscription.product_template_view_form_recurring"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='subscription_pricing']" position="attributes">
+                <attribute name="groups">sales_team.group_sale_salesman</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
 </odoo>

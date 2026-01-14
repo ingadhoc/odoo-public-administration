@@ -11,11 +11,10 @@ class PurchaseOrderLine(models.Model):
     brand = fields.Char(
     )
 
-    @api.onchange('product_qty', 'product_uom')
-    def _onchange_quantity(self):
-        price_unit = self.price_unit
-        res = super()._onchange_quantity()
-        if self.order_id.requisition_id and self.order_id.\
-                requisition_id.type_id.price_unit_copy != 'copy':
-            self.price_unit = price_unit
+    @api.depends('product_qty', 'product_uom', 'company_id', 'order_id.partner_id')
+    def _compute_price_unit_and_date_planned_and_name(self):
+        price_no_update_lines = self.filtered(
+            lambda line: line.order_id.requisition_id
+        )
+        res = super(PurchaseOrderLine, self - price_no_update_lines)._compute_price_unit_and_date_planned_and_name()
         return res
