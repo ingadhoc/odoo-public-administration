@@ -86,6 +86,9 @@
             <field name="date_end" position="before">
                 <field name="date"/>
             </field>
+            <xpath expr="//field[@name='product_description_variants']" position="attributes">
+                <attribute name="column_invisible">True</attribute>
+            </xpath>
 
             <!-- limpiamos vista -->
 

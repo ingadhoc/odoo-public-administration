@@ -83,6 +83,7 @@ class PurchaseRequisition(models.Model):
             if not rec.transaction_type_id:
                 raise UserError(_('Antes de revisar debe tener establecido un'
                                 '"Tipo"'))
+
             rec.inspected = True
             rec.user_inspected_id = self.env.user
 
@@ -115,7 +116,16 @@ class PurchaseRequisition(models.Model):
                 'purchase.requisition.purchase.tender') or 'New'
         return super().create(vals)
 
+<<<<<<< 600556017fc8f4de3ccd1cd1fd4a702837ea0d10
     def action_in_progress(self):
+||||||| 8d7620f6849d7bab4e3cb75d76e0a7c492f9dbee
+    def action_confirm(self):
+=======
+    def action_confirm(self):
+        if self.amount_total <= 0:
+            raise UserError(_('No se puede confirmar una requisición sin '
+                              'líneas o con importe total 0.'))
+>>>>>>> b9541f2d3aa1e51a3b41a8574439e8baf7f2af1a
         self.user_confirmed_id = self.env.uid
         super().action_in_progress()
 
@@ -136,3 +146,11 @@ class PurchaseRequisition(models.Model):
         name = self.name
         super().action_draft()
         self.name = name
+
+    @api.depends('vendor_id','user_id')
+    def _compute_currency_id(self):
+        for requisition in self:
+            if not requisition.vendor_id or not requisition.vendor_id.property_purchase_currency_id:
+                requisition.currency_id = requisition.company_id.currency_id.id
+            else:
+                requisition.currency_id = requisition.vendor_id.property_purchase_currency_id.id
