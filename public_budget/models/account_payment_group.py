@@ -43,14 +43,17 @@ class AccountPayment(models.Model):
     budget_id = fields.Many2one(
         related="transaction_id.budget_id",
         store=True,
+        string="Presupuesto",
     )
     expedient_id = fields.Many2one(
         "public_budget.expedient",
         context={"default_type": "payment"},
         ondelete="restrict",
+        string="Expediente",
     )
     transaction_id = fields.Many2one(
         "public_budget.transaction",
+        string="Transacción",
     )
     budget_position_ids = fields.Many2many(
         comodel_name="public_budget.budget_position",
