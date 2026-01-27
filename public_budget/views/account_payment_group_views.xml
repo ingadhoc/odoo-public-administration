@@ -102,9 +102,7 @@
         <field name="arch" type="xml">
 
             <field name="date" position="after">
-                <field name="assignee_id" groups="!public_budget.group_change_payment_assignee"
-                    readonly="state != 'draft'" />
-                <field name="assignee_id" groups="public_budget.group_change_payment_assignee" />
+                <field name="assignee_id" groups="base.group_no_one" />
                 <field name="return_payment_id" invisible="not return_payment_id" />
             </field>
             <field name="date" position="attributes">
@@ -210,17 +208,17 @@
 
             <!-- add payment order and print receipt button -->
             <button name="unmark_as_sent" position="after">
-                <button name="%(action_aeroo_report_payment)d" string="Print Payment Order"
+                <button name="%(action_aeroo_report_payment)d" string="Imprimir Orden de Pago"
                     class="oe_highlight" groups="base.group_user" type="action"
                     invisible="not transaction_id and not advance_request_id" />
                 <button name="%(action_aeroo_report_payment_receipt)d" class="oe_highlight"
-                    string="Print Receipt" type="action"
+                    string="Imprimir Recibo" type="action"
                     invisible="not transaction_id and not advance_request_id" />
             </button>
 
             <button name="action_cancel" position="before">
                 <button name="action_aeroo_certificado_de_retencion_report"
-                    string="Print withholding voucher" type="object"
+                    string="Imprimir certificado de retención" type="object"
                     invisible="sipreco_state not in ['in_process', 'paid'] or (not transaction_id and not advance_request_id)" />
             </button>
 
