@@ -158,7 +158,12 @@
 
             <field name="partner_id" position="attributes">
                 <attribute name="domain">[('id', 'in', partner_ids)]</attribute>
+                <attribute name="readonly">sipreco_state not in ('draft')</attribute>
             </field>
+            <xpath expr="//field[@name='partner_id'][2]" position="attributes">
+                 <attribute name="domain">[('id', 'in', partner_ids)]</attribute>
+                <attribute name="readonly">sipreco_state not in ('draft')</attribute>
+            </xpath>
 
             <!-- confirm only for account manager -->
             <button name="action_post" position="attributes">
@@ -323,7 +328,8 @@
     <record id="latam_check_view_account_payment_form_inherited" model="ir.ui.view">
         <field name="name">latam_check_view_account_payment_form_inherited.inherit.view.form</field>
         <field name="model">account.payment</field>
-        <field name="inherit_id" ref="account_payment_pro.latam_check_view_account_payment_form_inherited"/>
+        <field name="inherit_id"
+            ref="account_payment_pro.latam_check_view_account_payment_form_inherited" />
         <field name="arch" type="xml">
             <button name="action_add_all" position="attributes">
                 <attribute name="invisible">sipreco_state != 'draft'</attribute>
@@ -334,11 +340,14 @@
             <xpath expr="//page[@name='debts']//button[3]" position="attributes">
                 <attribute name="invisible">sipreco_state != 'draft'</attribute>
             </xpath>
-             <xpath expr="//page[@name='debts']//button[4]" position="attributes">
+            <xpath expr="//page[@name='debts']//button[4]" position="attributes">
                 <attribute name="invisible">sipreco_state != 'draft'</attribute>
             </xpath>
             <xpath expr="//field[@name='to_pay_move_line_ids']" position="attributes">
                 <attribute name="readonly">sipreco_state != 'draft'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='to_pay_move_line_ids']" position="attributes">
+                <attribute name="context">{'list_view_ref': 'public_budget.view_move_line_tree'}</attribute>
             </xpath>
 
         </field>

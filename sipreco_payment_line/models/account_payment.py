@@ -91,7 +91,7 @@ class AccountPayment(models.Model):
             lines_data.append(line._get_linea_archivo_banco())
         # FOR windows \r\n is required
         # we also add one new line at the end as xls does
-        self.archivo_banco = base64.encodestring(("\r\n".join(lines_data) + "\r\n").encode())
+        self.archivo_banco = base64.encodebytes(("\r\n".join(lines_data) + "\r\n").encode())
         self.archivo_banco_name = "Archivo banco %s.txt" % fields.Date.today()
 
     def remove_all_transfer_lines(self):

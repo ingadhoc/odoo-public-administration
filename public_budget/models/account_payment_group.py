@@ -27,6 +27,7 @@ class AccountPayment(models.Model):
         ],
         compute='_compute_sipreco_state',
         store=True,
+        tracking=True,
     )
     # We add signature states
     approval_state = fields.Selection(
