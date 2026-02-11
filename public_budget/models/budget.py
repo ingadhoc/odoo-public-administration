@@ -77,13 +77,15 @@ class Budget(models.Model):
     )
     parent_budget_position_ids = fields.Many2many(
         comodel_name='public_budget.budget_position',
-        compute='_compute_budget_positions'
+        compute='_compute_budget_positions',
+        #store=True,
     )
     budget_position_ids = fields.Many2many(
         relation='public_budget_budget_position_rel',
         comodel_name='public_budget.budget_position',
-        # store=True, #TODO ver si agregamos el store
+        #store=True, #TODO ver si agregamos el store
         compute='_compute_budget_positions'
+
     )
     company_id = fields.Many2one(
         'res.company',
@@ -174,13 +176,13 @@ class Budget(models.Model):
         """ Definimos por ahora llevar solamente las posiciones que tienen
         admitida la asignacion de presupuesto.
         """
+
         budget_positions = self.env['public_budget.budget_position']
         self.budget_position_ids = budget_positions
 
         modifications = self.env[
             'public_budget.budget_modification_detail'].search(
             [('budget_modification_id.budget_id', '=', self.id)])
-
         # modifications
         position_ids = [x.budget_position_id.id for x in modifications]
         # initial positions
