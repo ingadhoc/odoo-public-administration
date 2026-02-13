@@ -361,8 +361,13 @@ class AccountPayment(models.Model):
         recs = super().create(vals_list)
         for rec in recs:
             if rec.receiptbook_id.sequence_id and not (rec.name or rec.name == "/"):
-                rec = rec.with_context(is_recipt=True)
-                rec.name = rec.receiptbook_id.with_context(ir_sequence_date=rec.date).sequence_id.next_by_id()
+                date = rec.date or fields.Date.today()
+                name = rec.receiptbook_id.with_context(ir_sequence_date=date).sequence_id.next_by_id()
+                document_type = rec.receiptbook_id.document_type_id
+                if document_type and document_type.doc_code_prefix:
+                    rec.name = "%s %s" % (document_type.doc_code_prefix, name)
+                else:
+                    rec.name = name
         return recs
 
     def write(self, vals):
@@ -373,8 +378,15 @@ class AccountPayment(models.Model):
         if vals.get("receiptbook_id", False):
             for rec in self.filtered(
                 lambda p: p.receiptbook_id.sequence_id and not (p.name or p.name == "/")
-            ).with_context(is_recipt=True):
-                rec.name = rec.receiptbook_id.with_context(ir_sequence_date=rec.date).sequence_id.next_by_id()
+            ):
+                name = rec.receiptbook_id.with_context(
+                    ir_sequence_date=rec.date
+                ).sequence_id.next_by_id()
+                document_type = rec.receiptbook_id.document_type_id
+                if document_type and document_type.doc_code_prefix:
+                    rec.name = "%s %s" % (document_type.doc_code_prefix, name)
+                else:
+                    rec.name = name
         return res
 
     def action_aeroo_certificado_de_retencion_report(self):
