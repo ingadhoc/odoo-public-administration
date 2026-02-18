@@ -35,7 +35,7 @@
     <record id="group_portal_requester" model="res.groups">
         <field name="name">Portal - Requirente</field>
         <field name="share" eval="True"/>
-        <field name="implied_ids" eval="[(4, ref('base.group_portal')),(4, ref('group_requester'))]"/>
+        <field name="implied_ids" eval="[(6, 0, [ref('base.group_portal'), ref('portal_backend.group_portal_backend'),ref('portal_holidays.group_portal_backend_holiday')])]"/>
         <field name="category_id" ref="public_budget.category_public_budget_portal"/>
     </record>
 
