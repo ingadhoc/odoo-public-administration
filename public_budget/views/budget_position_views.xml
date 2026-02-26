@@ -124,5 +124,13 @@
     </record>
 
     <!-- Enable drill-down from Chart Of Accounts list view -->
-    <act_window id="action_budget_position_items" name="Items" context="{'search_default_budget_position_id': [active_id]}" res_model="public_budget.preventive_line" binding_model="public_budget.budget_position" view_id="view_public_budget_preventive_line_analysis_tree" view_mode="list"/>
+    <record id="action_budget_position_items" model="ir.actions.act_window">
+        <field name="name">Items</field>
+        <field name="res_model">public_budget.preventive_line</field>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_public_budget_preventive_line_analysis_tree"/>
+        <field name="context">{'search_default_budget_position_id': [active_id]}</field>
+        <field name="binding_model_id" ref="model_public_budget_budget_position"/>
+    </record>
+
 </odoo>
