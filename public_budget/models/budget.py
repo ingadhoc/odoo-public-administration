@@ -35,7 +35,7 @@ class Budget(models.Model):
         'account.account',
         string='Default Income Account',
         # required=True,
-        domain=[('account_type', '=', 'income_other'), ('deprecated', '=', False)],
+        domain=[('account_type', '=', 'income'), ('deprecated', '=', False)],
         check_company=True,
     )
     expedient_id = fields.Many2one(

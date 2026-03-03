@@ -66,10 +66,10 @@
                             <field name="budget_detail_ids" context="{'budget_id':id}" readonly="state != 'draft'"/>
                         </page>
                         <page string="Moves">
-                            <field name="budget_modification_ids" context="{'budget_id':id}" readonly="state != 'draft'"/>
+                            <field name="budget_modification_ids" context="{'budget_id':id}" readonly="state not in  ['draft','open']"/>
                         </page>
                         <page string="Funding Moves">
-                            <field name="funding_move_ids" readonly="state in ['open', 'pre_closed']"/>
+                            <field name="funding_move_ids" readonly="state not in ['open', 'pre_closed']"/>
                         </page>
                         <page string="Pre Close Detail" invisible="state not in ['pre_closed', 'closed']">
                             <group col="4">

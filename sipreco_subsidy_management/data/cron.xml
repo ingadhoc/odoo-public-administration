@@ -3,15 +3,23 @@
 
     <record id="ir_cron_subsidy_report_week_template" model="mail.template">
         <field name="name">Subsidy Report Week Reminder</field>
-        <field name="email_from">${(object.email or '')|safe}</field>
+        <field name="email_from">{{ (object.email or '')}}</field>
         <field name="subject">Informe semanal de Subsidios</field>
+<<<<<<< 8da170e4291c677153ba7ad93221f7f4c93a3a65
         <field name="partner_to">${object.id}</field>
         <field name="lang">${object.lang}</field>
+||||||| 7453b8c4b324cac8e8c56a9705badc8e524dcbfa
+        <field name="partner_to">${object.id}</field>
+        <field name="lang">${object.lang}|safe</field>
+=======
+        <field name="partner_to">{{ object.id }}</field>
+        <field name="lang">{{ object.lang }}</field>
+>>>>>>> f522a8f10268cbe375bdf4e0fa7e3c1d689d2273
         <field name="model_id" ref="base.model_res_partner"/>
         <field name="auto_delete" eval="True"/>
         <field name="body_html"><![CDATA[
 
-Hola ${object.name},
+Hola {{ object.name }},
 
 <table cellspacing="1" border="1" cellpadding="4">
 <tr>
@@ -20,8 +28,8 @@ Hola ${object.name},
 </tr>
     % for sub in ctx['data'].get('subsidys'):
         <tr>
-<td>${sub.internal_number}</td>
-<td>${sub.partner_id.name}</td>
+<td>{{ sub.internal_number }}</td>
+<td>{{ sub.partner_id.name }}</td>
 </tr>
     % endfor
 </table>

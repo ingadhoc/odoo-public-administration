@@ -35,7 +35,13 @@
     <record id="group_portal_requester" model="res.groups">
         <field name="name">Portal - Requirente</field>
         <field name="share" eval="True"/>
+<<<<<<< 8da170e4291c677153ba7ad93221f7f4c93a3a65
         <field name="implied_ids" eval="[(4, ref('base.group_portal')),(4, ref('group_requester'))]"/>
+||||||| 7453b8c4b324cac8e8c56a9705badc8e524dcbfa
+        <field name="implied_ids" eval="[(6, 0, [ref('base.group_portal'), ref('portal_backend.group_portal_backend'),ref('portal_holidays.group_portal_backend_holiday')])]"/>
+=======
+        <field name="implied_ids" eval="[(6, 0, [ref('base.group_portal'), ref('portal_backend.group_portal_backend'),ref('portal_holidays.group_portal_backend_holiday'),ref('group_requester')])]"/>
+>>>>>>> f522a8f10268cbe375bdf4e0fa7e3c1d689d2273
         <field name="category_id" ref="public_budget.category_public_budget_portal"/>
     </record>
 

@@ -108,7 +108,6 @@
                 <field name="return_payment_id" invisible="not return_payment_id" />
             </field>
             <field name="date" position="attributes">
-                <!-- <attribute name="invisible">1</attribute> -->
                 <!-- al final lo hacemos invisible así porque en transferencias lo queremos visible -->
                 <attribute name="readonly">state != 'draft'</attribute>
             </field>
@@ -187,11 +186,14 @@
                 </div>
                 <field name="payment_min_date"
                     invisible="not transaction_id and not advance_request_id" />
-                <!-- lo hacemos editable con tec features -->
                 <field name="confirmation_date" readonly="1"
-                    invisible="not transaction_id and not advance_request_id" />
+                    invisible="not transaction_id and not advance_request_id" groups="!account.group_account_manager,!base.group_no_one" />
                 <field name="to_signature_date" readonly="1"
-                    invisible="not transaction_id and not advance_request_id" />
+                    invisible="not transaction_id and not advance_request_id" groups="!account.group_account_manager,!base.group_no_one" />
+                    <field name="confirmation_date" readonly="0"
+                    invisible="not transaction_id and not advance_request_id" groups="account.group_account_manager,base.group_no_one" />
+                <field name="to_signature_date" readonly="0"
+                    invisible="not transaction_id and not advance_request_id" groups="account.group_account_manager,base.group_no_one" />
             </field>
 
             <field name="partner_id" position="after">
@@ -224,7 +226,7 @@
                     invisible="sipreco_state not in ['in_process', 'paid'] or (not transaction_id and not advance_request_id)" />
             </button>
 
-            <!-- como ellos pagan con adelanto o conciliando, y no el mix, excondemos deuda
+            <!-- como ellos pagan con adelanto o conciliando, y no el mix, escondemos deuda
             seleccionada y importe de ajuste y solo mostramos el a pagar que lo hacemos editable o
             no segun sea de adelanto o no -->
             <!-- hide unreconciled_amount on not advance transactions  -->
@@ -237,8 +239,6 @@
             </field>
 
             <field name="to_pay_amount" position="attributes">
-                <!-- <attribute name="invisible">payment_subtype != 'double_validation' or state ==
-                'posted'</attribute> -->
                 <attribute name="readonly">not transaction_with_advance_payment or sipreco_state != 'draft'</attribute>
             </field>
 
@@ -270,10 +270,7 @@
 
             <!-- Post para pagos no vinculados a transacción / request -->
             <button name="action_post" position="attributes">
-                <!-- <attribute name="invisible">payment_subtype == 'simple' and state != 'draft' or
-                payment_subtype == 'double_validation' and state != 'signed'</attribute> -->
                 <attribute name="invisible">state != 'draft' or transaction_id or advance_request_id</attribute>
-                <!-- <attribute name="invisible">sipreco_state != 'signed'</attribute> -->
                 <attribute name="groups">public_budget.group_habilitacion_usuario</attribute>
             </button>
 
@@ -343,25 +340,4 @@
 
         </field>
     </record>
-
-    <!-- TODO 18 ver de implementar de otra manera (si es que realmente es necesario) -->
-    <!-- <field name="groups_id" eval="[(4, ref('base.group_no_one'))]"/> -->
-    <!-- no pude hacer que ande como esperaba con el grupo tc features, aún sin modo desarrollador
-    se lo hacía visible, se ve que se comporta distinto que en menus -->
-    <!-- <record id="view_account_payment_group_tec_features_form" model="ir.ui.view">
-        <field name="name">account.payment.form</field>
-        <field name="model">account.payment</field>
-        <field name="inherit_id" ref="view_account_payment_group_form"/>
-        <field name="groups_id" eval="[(4, ref('base.group_system')),(4,
-    ref('account.group_account_manager'))]"/>
-        <field name="arch" type="xml">
-            <field name="confirmation_date" position="attributes">
-                <attribute name="readonly">0</attribute>
-            </field>
-            <field name="to_signature_date" position="attributes">
-                <attribute name="readonly">0</attribute>
-            </field>
-        </field>
-    </record> -->
-
 </odoo>
