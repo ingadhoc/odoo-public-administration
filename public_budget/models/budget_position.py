@@ -15,6 +15,29 @@ class BudgetPosition(models.Model):
 
     _order = "code"
 
+    # Campos de montos que dependen del contexto budget_id
+    _amount_fields = [
+        'draft_amount', 'preventive_amount', 'definitive_amount',
+        'to_pay_amount', 'paid_amount', 'balance_amount',
+        'projected_amount', 'projected_avg', 'preventive_avg', 'amount'
+    ]
+
+    def web_read(self, specification):
+        """Invalidar caché de campos de montos antes de leer.
+
+        Los campos de montos dependen del contexto (budget_id), por lo que
+        necesitamos invalidar el caché para forzar el recálculo con el contexto
+        correcto cuando se cargan en la vista de lista.
+        """
+        budget_id = self._context.get('budget_id')
+        amount_fields_to_read = set(specification.keys()) & set(self._amount_fields)
+        _logger.info('web_read called with budget_id=%s, specification_keys=%s, amount_fields=%s, ids=%s',
+                     budget_id, list(specification.keys()), amount_fields_to_read, self._ids)
+        if budget_id and amount_fields_to_read:
+            _logger.info('Invalidating cache for amount fields: %s', amount_fields_to_read)
+            self.invalidate_recordset(fnames=list(amount_fields_to_read))
+        return super().web_read(specification)
+
     code = fields.Char(
         required=True
     )
@@ -244,7 +267,8 @@ class BudgetPosition(models.Model):
                 rec.preventive_avg = preventive_amount / amount * 100.0
             rec.amount = amount
             rec.balance_amount = rec.amount - preventive_amount
-            _logger.debug('Finish getting amounts for budget position %s' % rec.name)
+            _logger.info('Computed amounts for %s: amount=%s, preventive=%s, balance=%s, budget_id=%s',
+                         rec.name, rec.amount, rec.preventive_amount, rec.balance_amount, budget_id)
 
     def _compute_display_name(self):
         for rec in self:
