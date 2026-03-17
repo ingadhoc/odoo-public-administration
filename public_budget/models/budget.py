@@ -22,6 +22,28 @@ class Budget(models.Model):
         ('cancel', 'Cancel'),
     ]
 
+    def web_read(self, specification):
+        """Sobreescribimos web_read para propagar el budget_id al contexto de
+        los campos de budget_position.
+        """
+        result = super().web_read(specification)
+        # Campos que contienen budget_position y necesitan el contexto budget_id
+        position_fields = ['parent_budget_position_ids', 'budget_position_ids']
+        for record_data in result:
+            budget_id = record_data.get('id')
+            for field_name in position_fields:
+                if field_name in specification and field_name in record_data:
+                    field_spec = specification[field_name]
+                    if isinstance(field_spec, dict) and field_spec.get('fields'):
+                        # Re-leer los registros con el contexto correcto
+                        position_ids = [r['id'] for r in record_data[field_name] if isinstance(r, dict)]
+                        if position_ids:
+                            positions = self.env['public_budget.budget_position'].with_context(
+                                budget_id=budget_id
+                            ).browse(position_ids)
+                            record_data[field_name] = positions.web_read(field_spec.get('fields', {}))
+        return result
+
     name = fields.Char(
         required=True,
     )
