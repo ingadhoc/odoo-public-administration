@@ -643,12 +643,13 @@ class BudgetTransaction(models.Model):
 
         form_view_id = self.env.ref('account.view_account_payment_form').id
         action['views'] = [(form_view_id, 'form')]
-
+        partner = self.partner_id.id or self.invoice_ids.mapped('partner_id.id')[0] or False
         action['context'] = {
             'default_transaction_id': self.id,
-            'default_partner_id': self.partner_id.id,
+            'default_partner_id': partner,
             'default_partner_type': 'supplier',
             'default_payment_type': 'outbound',
+
         }
         return action
 
