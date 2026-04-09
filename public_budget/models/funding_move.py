@@ -62,7 +62,7 @@ class FundingMove(models.Model):
         # no me gasto en este filtro porque no usan multicompany y deberia
         # llevarla
         # "('company_id', '=', company_id), "
-        domain=[('account_type', '=', 'income_other'), ('deprecated', '=', False)],
+        domain=[('deprecated', '=', False)],
     )
     budget_position_id = fields.Many2one(
         'public_budget.budget_position',

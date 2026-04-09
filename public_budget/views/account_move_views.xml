@@ -47,6 +47,7 @@
                 <attribute name="invisible">1</attribute>
             </button> -->
             <button name="button_cancel" position="before">
+                <button name="%(action_aeroo_report_liquidation)d" string="Imprimir Liquidación" type="action"/>
             </button>
 
             <!-- we hide refund button -->
