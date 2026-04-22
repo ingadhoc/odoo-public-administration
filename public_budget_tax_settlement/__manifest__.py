@@ -9,6 +9,7 @@
         'views/account_journal_dashboard_views.xml',
         'views/account_move_views.xml',
         'views/account_move_line_views.xml',
+        'data/drei_report.xml',
     ],
     'demo': [
     ],
