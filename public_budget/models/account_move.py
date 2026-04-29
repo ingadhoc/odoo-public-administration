@@ -156,31 +156,30 @@ class AccountMove(models.Model):
     def _post(self, soft=True):
         for inv in self.filtered(
                 lambda x: x.transaction_id.type_id.with_advance_payment):
-            if inv.currency_id.compare_amounts(inv.amount_total, inv.transaction_id.advance_to_return_amount) == 1:
+            if inv.currency_id.compare_amounts(inv.amount_total, inv.transaction_id.advance_remaining_amount) == 1:
                 raise ValidationError(_(
                     "You can not invoice more than Advance Remaining Amount!\n"
                     "* Amount to invoice: %s\n"
                     "* Advance Remaining Amount: %s") % (
-                    inv.amount_total, inv.transaction_id.advance_to_return_amount))
+                    inv.amount_total, inv.transaction_id.advance_remaining_amount))
 
         res = super()._post(soft=soft)
         for inv in self.filtered(
                 lambda x: x.transaction_id.type_id.with_advance_payment):
-            # TODO ver si lo borramos, no seria obligatorio que una factura
-            # este en el año fiscal del presupuesto ya que puede ser factura
-            # de residuo pasivo
-            # date = fields.Date.from_string(inv.date)
-            # if not inv.budget_id.check_date_in_budget_dates(date):
-            #     raise ValidationError((
-            #         'La fecha de la factura tiene que estar dentro del año '
-            #         'fiscal del presupuesto!'))
+            advance_account = inv.transaction_id.type_id.advance_account_id
             move_lines = inv.line_ids.filtered(
-                lambda line: line.account_id == inv.transaction_id.type_id.advance_account_id)
-            move_lines.write({'partner_id': self.transaction_id.partner_id.id})
+                lambda line: line.account_id == advance_account)
+            if not move_lines:
+                continue
+            # fix: usar inv.transaction_id, no self.transaction_id
+            move_lines.write({'partner_id': inv.transaction_id.partner_id.id})
 
             # re-computamos el amount residual porque por más que tiene "reconcile = False" al ser payment term line
             # odoo le computa un amount, al recomputar pasa a estar en 0 y por ende la factura pasa a estar pagada
             move_lines._compute_amount_residual()
+            # Notificamos al ORM que amount_residual cambió para que dispare
+            # el recómputo de payment_state (campo stored) en la factura
+            move_lines.modified(['amount_residual', 'amount_residual_currency'])
         return res
 
     @api.constrains(

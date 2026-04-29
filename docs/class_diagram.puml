@@ -1,0 +1,622 @@
+@startuml Class Diagram - SIPRECO / Public Budget
+
+!theme plain
+skinparam classAttributeIconSize 0
+skinparam classFontSize 12
+skinparam packageStyle rectangle
+skinparam linetype ortho
+
+' ==================== PACKAGE: public_budget ====================
+package "public_budget" #DDEEFF {
+
+    class Budget {
+        _name = "public_budget.budget"
+        --
+        +name : Char
+        +fiscalyear : Char
+        +state : Selection
+        +income_account_id : Many2one
+        +expedient_id : Many2one
+        +prec_passive_residue : Monetary
+        +total_preventive : Monetary [computed]
+        +total_authorized : Monetary [computed]
+        +total_requested : Monetary [computed]
+        +passive_residue : Monetary [computed]
+        --
+        +action_open()
+        +action_pre_close()
+        +action_close()
+        +action_cancel()
+    }
+
+    class BudgetDetail {
+        _name = "public_budget.budget_detail"
+        --
+        +initial_amount : Monetary
+        +amount : Monetary [computed]
+        +modifications : Monetary [computed]
+        +budget_id : Many2one
+        +budget_position_id : Many2one
+        -- SQL --
+        UNIQUE(budget_position_id, budget_id)
+    }
+
+    class BudgetModification {
+        _name = "public_budget.budget_modification"
+        --
+        +date : Date
+        +name : Char
+        +reference : Char
+        +type : Selection
+        +initial_approval : Boolean
+        +budget_id : Many2one
+    }
+
+    class BudgetModificationDetail {
+        _name = "public_budget.budget_modification_detail"
+        --
+        +amount : Monetary
+        +budget_modification_id : Many2one
+        +budget_position_id : Many2one
+    }
+
+    class BudgetPosition {
+        _name = "public_budget.budget_position"
+        --
+        +code : Char
+        +name : Char
+        +type : Selection
+        +budget_assignment_allowed : Boolean
+        +category_id : Many2one
+        +inventariable : Boolean
+        +draft_amount : Monetary [computed]
+        +preventive_amount : Monetary [computed]
+        +definitive_amount : Monetary [computed]
+        +to_pay_amount : Monetary [computed]
+        +paid_amount : Monetary [computed]
+        +balance_amount : Monetary [computed]
+        +default_account_id : Many2one
+        +parent_id : Many2one
+        --
+        +web_read()
+    }
+
+    class BudgetPositionCategory {
+        _name = "public_budget.budget_position_category"
+        --
+        +name : Char
+    }
+
+    class BudgetTransaction {
+        _name = "public_budget.transaction"
+        --
+        +name : Char
+        +issue_date : Date
+        +state : Selection
+        +user_id : Many2one
+        +expedient_id : Many2one
+        +budget_id : Many2one
+        +type_id : Many2one
+        +partner_id : Many2one
+        +note : Html
+        +type_with_advance_payment : Boolean [related]
+        +definitive_line_ids : One2many
+        +preventive_line_ids : One2many
+        +advance_preventive_line_ids : One2many
+        +supplier_ids : Many2many [computed]
+        +budget_position_ids : Many2many [computed]
+        --
+        +action_open()
+        +action_close()
+        +action_cancel()
+    }
+
+    class TransactionType {
+        _name = "public_budget.transaction_type"
+        --
+        +name : Char
+        +with_amount_restriction : Boolean
+        +with_advance_payment : Boolean
+        +advance_account_id : Many2one
+        +definitive_partner_type : Selection
+        +company_id : Many2one
+    }
+
+    class PreventiveLine {
+        _name = "public_budget.preventive_line"
+        --
+        +preventive_amount : Monetary
+        +advance_line : Boolean
+        +remaining_amount : Monetary [computed]
+        +definitive_amount : Monetary [computed]
+        +invoiced_amount : Monetary [computed]
+        +to_pay_amount : Monetary [computed]
+        +paid_amount : Monetary [computed]
+        +state : Selection [computed]
+        +affects_budget : Boolean [computed]
+        +transaction_id : Many2one
+        +budget_position_id : Many2one
+        +account_id : Many2one
+        +definitive_line_ids : One2many
+        --
+        +change_budget_position()
+    }
+
+    class DefinitiveLine {
+        _name = "public_budget.definitive_line"
+        --
+        +issue_date : Date
+        +amount : Monetary
+        +residual_amount : Monetary [computed]
+        +to_pay_amount : Monetary [computed]
+        +paid_amount : Monetary [computed]
+        +invoiced_amount : Monetary [computed]
+        +state : Selection [computed]
+        +supplier_id : Many2one
+        +preventive_line_id : Many2one
+        +invoice_line_ids : One2many
+        +budget_position_id : Many2one [related]
+        --
+        +check_dates()
+    }
+
+    class Expedient {
+        _name = "public_budget.expedient"
+        --
+        +number : Char
+        +issue_date : Datetime
+        +description : Char
+        +reference : Char
+        +cover : Char [computed]
+        +state : Selection
+        +founder_id : Many2one
+        +category_id : Many2one
+        +type : Selection
+        +first_location_id : Many2one
+        +current_location_id : Many2one [computed]
+        +last_move_date : Date [computed]
+        +pages : Integer
+        +subsidy_expedient : Boolean
+        +employee_subsidy_requestor : Many2one
+        --
+        +action_annull()
+        +action_close()
+    }
+
+    class ExpedientCategory {
+        _name = "public_budget.expedient_category"
+        --
+        +name : Char
+        +code : Char
+    }
+
+    class ExpedientFounder {
+        _name = "public_budget.expedient_founder"
+        --
+        +name : Char
+    }
+
+    class Location {
+        _name = "public_budget.location"
+        --
+        +name : Char
+        +complete_name : Char [computed]
+        +user_ids : Many2many
+        +user_id : Many2one
+        +asset_management : Boolean
+        +expedient_management : Boolean
+        +level : Char
+        +number : Char
+        +building : Char
+        +active : Boolean
+    }
+
+    class Remit {
+        _name = "public_budget.remit"
+        --
+        +number : Char [readonly]
+        +date : Datetime
+        +state : Selection
+        +user_id : Many2one
+        +location_id : Many2one
+        +location_dest_id : Many2one
+        +expedient_ids : Many2many
+        --
+        +action_confirm()
+        +action_cancel()
+    }
+
+    class FundingMove {
+        _name = "public_budget.funding_move"
+        --
+        +date : Date
+        +name : Char
+        +type : Selection
+        +amount : Monetary
+        +state : Selection
+        +journal_id : Many2one
+        +budget_id : Many2one
+        +income_account_id : Many2one
+        +budget_position_id : Many2one
+        +move_id : Many2one
+        --
+        +action_confirm()
+        +action_cancel()
+    }
+
+    class AdvanceRequest {
+        _name = "public_budget.advance_request"
+        --
+        +name : Char
+        +date : Date
+        +approval_date : Date
+        +confirmation_date : Date
+        +state : Selection
+        +user_id : Many2one
+        +type_id : Many2one
+        +company_id : Many2one
+        +approval_user : Many2one
+        +advance_request_line_ids : One2many
+        +payment_ids : One2many
+        --
+        +action_approve()
+        +action_confirm()
+        +action_cancel()
+        +create_payment()
+    }
+
+    class AdvanceRequestLine {
+        _name = "public_budget.advance_request_line"
+        --
+        +requested_amount : Monetary
+        +approved_amount : Monetary
+        +description : Char
+        +debt_amount : Monetary [computed]
+        +pending_return_amount : Monetary [computed]
+        +employee_id : Many2one
+        +advance_request_id : Many2one
+    }
+
+    class AdvanceRequestType {
+        _name = "public_budget.advance_request_type"
+        --
+        +name : Char
+        +account_id : Many2one
+        +general_return_partner_id : Many2one
+    }
+
+    class AdvanceReturn {
+        _name = "public_budget.advance_return"
+        --
+        +name : Char
+        +date : Date
+        +state : Selection
+        +type_id : Many2one
+        +company_id : Many2one
+        +advance_return_line_ids : One2many
+        --
+        +action_confirm()
+        +action_cancel()
+    }
+
+    class AdvanceReturnLine {
+        _name = "public_budget.advance_return_line"
+        --
+        +returned_amount : Monetary
+        +employee_id : Many2one
+        +advance_return_id : Many2one
+    }
+
+    class InventoryRule {
+        _name = "public_budget.inventory_rule"
+        --
+        +name : Char
+        +budget_position_id : Many2one
+        +location_id : Many2one
+    }
+}
+
+' ==================== PACKAGE: sipreco_subsidy_management ====================
+package "sipreco_subsidy_management" #DDFFD0 {
+
+    class Subsidy {
+        _name = "public_budget.subsidy"
+        _inherits = BudgetTransaction
+        --
+        +internal_number : Char
+        +transaction_id : Many2one
+        +parliamentary_resolution_date : Date
+        +parliamentary_expedient : Char
+        +dispositional_order : Char
+        +accountability_state : Selection [computed]
+        +accountability_expiry_date : Date [computed]
+        +cargo_date : Datetime [computed]
+        +request_expedient_id : Many2one
+        +rendicion_ids : One2many
+        +note_ids : One2many
+        +stage_id : Many2one
+        --
+        +action_confirm()
+        +action_cancel()
+    }
+
+    class SubsidyRendition {
+        _name = "public_budget.subsidy.rendition"
+        --
+        +date : Date
+        +rendition_amount : Monetary
+        +approved_amount : Monetary [related]
+        +pending_amount : Monetary [computed]
+        +subsidy_id : Many2one
+        +approval_arrangement_id : Many2one
+        +expedient_id : Many2one
+        +editable_line : Boolean
+    }
+
+    class SubsidyApprovalArrangement {
+        _name = "public_budget.subsidy.approval_arrangement"
+        --
+        +date : Date
+        +approved_amount : Monetary
+        +number : Char
+        +subsidy_id : Many2one
+        -- SQL --
+        UNIQUE(number, subsidy_id)
+    }
+
+    class SubsidyNote {
+        _name = "public_budget.subsidy.note"
+        --
+        +date : Date
+        +description : Text
+        +subsidy_id : Many2one
+        +type_id : Many2one
+    }
+
+    class SubsidyNoteType {
+        _name = "public_budget.subsidy.note_type"
+        --
+        +name : Char
+    }
+
+    class SubsidyResolution {
+        _name = "public_budget.subsidy.resolution"
+        --
+        +name : Char
+        +date : Date
+        +subsidy_id : Many2one
+        +resolution_line_ids : One2many
+    }
+
+    class SubsidyResolutionLine {
+        _name = "public_budget.subsidy.resolution_line"
+        --
+        +amount : Monetary
+        +resolution_id : Many2one
+        +budget_position_id : Many2one
+    }
+
+    class SubsidyStage {
+        _name = "public_budget.subsidy.stage"
+        --
+        +name : Char
+        +sequence : Integer
+    }
+
+    class SubsidyTicket {
+        _name = "public_budget.subsidy.ticket"
+        --
+        +name : Char
+        +date : Date
+        +subsidy_id : Many2one
+    }
+}
+
+' ==================== PACKAGE: sipreco_purchase ====================
+package "sipreco_purchase" #FFF0CC {
+
+    class PurchaseOrder {
+        _name = "purchase.order" [inherit]
+        --
+        +expedient_id : Many2one
+        --
+        +check_if_expedients_exist()
+    }
+
+    class PurchaseRequisition {
+        _name = "purchase.requisition" [inherit]
+        --
+        +requisition_type : Selection
+    }
+
+    class StockRequest {
+        _name = "stock.request" [inherit]
+        --
+        +manual_requisition_id : Many2one
+        +price_unit : Float
+        +rule_id : Many2one
+        +route_id : Many2one [related]
+    }
+
+    class StockRequestOrder {
+        _name = "stock.request.order" [inherit]
+        --
+        +route_id : Many2one
+        +partner_id : Many2one
+    }
+}
+
+' ==================== PACKAGE: sipreco_payment_line ====================
+package "sipreco_payment_line" #FFE5E5 {
+
+    class AccountPaymentGroupLine {
+        _name = "account.payment.group.line"
+        --
+        +amount : Monetary
+        +cuit : Char
+        +payment_id : Many2one
+        +partner_id : Many2one
+        +bank_account_id : Many2one
+        --
+        +refresh_bank_account()
+        +_get_linea_archivo_banco()
+    }
+
+    class AccountPaymentExt {
+        _name = "account.payment" [inherit]
+        --
+        +payment_group_line_ids : One2many
+    }
+}
+
+' ==================== PACKAGE: sipreco_position_helper ====================
+package "sipreco_position_helper" #F5E5FF {
+
+    class BudgetPositionHelper {
+        _name = "public_budget.budget_position" [inherit]
+        --
+        +position_helper_enabled : Boolean
+    }
+}
+
+' ==================== PACKAGE: public_budget_tax_settlement ====================
+package "public_budget_tax_settlement" #FFFBD0 {
+
+    class AccountMoveExt {
+        _name = "account.move" [inherit]
+        --
+        +tax_settlement_ids : One2many
+    }
+
+    class AccountMoveLineExt {
+        _name = "account.move.line" [inherit]
+        --
+        +tax_settlement_id : Many2one
+    }
+}
+
+' ==================== Odoo Core Extensions ====================
+package "Odoo Core (extended)" #F0F0F0 {
+
+    class AccountMove {
+        _name = "account.move" [inherit]
+        --
+        +transaction_id : Many2one
+        +budget_id : Many2one [related]
+        +to_pay_amount : Monetary [computed]
+        --
+        +_compute_to_pay_amount()
+        +check_to_pay_amount()
+    }
+
+    class AccountPayment {
+        _name = "account.payment" [inherit]
+        --
+        +advance_request_id : Many2one
+        +assignee_id : Many2one
+        +return_payment_id : Many2one
+        +returned_payment_ids : One2many
+        --
+        +_compute_destination_account_id()
+    }
+
+    class ResUsers {
+        _name = "res.users" [inherit]
+        --
+        +location_ids : Many2many
+        +expedient_category_ids : Many2many
+        +public_portal_groups_ids : Many2many [computed]
+        +is_portal_user : Boolean [computed]
+    }
+
+    class ResPartner {
+        _name = "res.partner" [inherit]
+        --
+        +employee : Boolean
+        +numero_legajo : Char
+        --
+        +get_debt_amount()
+    }
+}
+
+' ==================== RELACIONES: public_budget ====================
+
+Budget "1" *-- "many" BudgetDetail : budget_id
+Budget "1" *-- "many" BudgetModification : budget_id
+Budget "1" *-- "many" FundingMove : budget_id
+Budget "1" o-- "1" Expedient : expedient_id
+
+BudgetDetail "many" --> "1" BudgetPosition : budget_position_id
+BudgetModification "1" *-- "many" BudgetModificationDetail : budget_modification_id
+BudgetModificationDetail "many" --> "1" BudgetPosition : budget_position_id
+BudgetPosition "many" --> "0..1" BudgetPosition : parent_id
+BudgetPosition "many" --> "1" BudgetPositionCategory : category_id
+
+BudgetTransaction "many" --> "1" Budget : budget_id
+BudgetTransaction "many" --> "1" Expedient : expedient_id
+BudgetTransaction "many" --> "1" TransactionType : type_id
+BudgetTransaction "1" *-- "many" PreventiveLine : transaction_id
+BudgetTransaction "1" --> "many" DefinitiveLine : via preventive_line
+
+PreventiveLine "many" --> "1" BudgetPosition : budget_position_id
+PreventiveLine "1" *-- "many" DefinitiveLine : preventive_line_id
+
+DefinitiveLine "many" --> "1" ResPartner : supplier_id
+DefinitiveLine "1" o-- "many" AccountMoveLine : invoice_line_ids
+
+Expedient "many" --> "1" ExpedientCategory : category_id
+Expedient "many" --> "1" ExpedientFounder : founder_id
+Expedient "many" --> "1" Location : first_location_id
+Expedient "many" --> "0..1" Location : current_location_id
+
+Remit "many" --> "1" Location : location_id (origin)
+Remit "many" --> "1" Location : location_dest_id
+Remit "many" o-- "many" Expedient : expedient_ids
+
+Location "many" o-- "many" ResUsers : user_ids
+
+FundingMove "many" --> "1" BudgetPosition : budget_position_id
+FundingMove "many" --> "1" AccountMove : move_id
+
+AdvanceRequest "many" --> "1" AdvanceRequestType : type_id
+AdvanceRequest "1" *-- "many" AdvanceRequestLine : advance_request_id
+AdvanceRequest "1" -- "many" AccountPayment : payment_ids
+
+AdvanceRequestLine "many" --> "1" ResPartner : employee_id
+AdvanceReturn "1" *-- "many" AdvanceReturnLine : advance_return_id
+
+' ==================== RELACIONES: subsidy ====================
+
+Subsidy "1" --> "1" BudgetTransaction : transaction_id (_inherits)
+Subsidy "1" *-- "many" SubsidyRendition : subsidy_id
+Subsidy "1" *-- "many" SubsidyNote : subsidy_id
+Subsidy "1" *-- "many" SubsidyApprovalArrangement : subsidy_id
+Subsidy "1" o-- "1" SubsidyResolution : subsidy_id
+Subsidy "many" --> "1" SubsidyStage : stage_id
+Subsidy "1" o-- "many" SubsidyTicket : subsidy_id
+Subsidy "many" --> "1" Expedient : request_expedient_id
+
+SubsidyRendition "many" --> "0..1" SubsidyApprovalArrangement : approval_arrangement_id
+SubsidyRendition "many" --> "0..1" Expedient : expedient_id
+SubsidyResolution "1" *-- "many" SubsidyResolutionLine : resolution_id
+SubsidyNote "many" --> "1" SubsidyNoteType : type_id
+
+' ==================== RELACIONES: purchase / stock ====================
+PurchaseOrder "many" --> "0..1" Expedient : expedient_id
+StockRequest "many" --> "0..1" PurchaseRequisition : manual_requisition_id
+
+' ==================== RELACIONES: Odoo Core Extensions ====================
+AccountMove "many" --> "0..1" BudgetTransaction : transaction_id
+AccountPayment "many" --> "0..1" AdvanceRequest : advance_request_id
+AccountPaymentGroupLine "many" --> "1" AccountPayment : payment_id
+ResUsers "many" o-- "many" Location : location_ids
+ResUsers "many" o-- "many" ExpedientCategory : expedient_category_ids
+
+class AccountMoveLine {
+    _name = "account.move.line" [inherit]
+    --
+    +definitive_line_id : Many2one
+}
+AccountMoveLine "many" --> "0..1" DefinitiveLine : definitive_line_id
+
+@enduml

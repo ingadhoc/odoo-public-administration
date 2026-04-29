@@ -1,0 +1,178 @@
+@startuml Sequence - Transaccion con Adelanto de Pago
+
+!theme plain
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam maxMessageSize 220
+skinparam noteBackgroundColor #FFFACD
+
+title Flujo: Transacción con Adelanto de Pago\n(TransactionType.with_advance_payment = True)
+
+actor "Usuario" as USER
+participant "TransactionType\n(public_budget.transaction_type)" as TTYPE
+participant "BudgetTransaction\n(public_budget.transaction)" as TXN
+participant "PreventiveLine [advance]\n(advance_line=True)" as APREV
+participant "PreventiveLine [normal]\n(advance_line=False)" as PREV
+participant "DefinitiveLine\n(public_budget.definitive_line)" as DEF
+participant "AccountPayment [adelanto]\n(transaction_with_advance_payment=True)" as APAY
+participant "AccountMove [factura]\n(account.move)" as INV
+participant "AccountMoveLine\n(advance_account_id line)" as AML
+
+note over TTYPE
+  advance_account_id = cuenta puente
+  (reconcile=False, no es cta. pagar normal)
+end note
+
+== 1. Configuracion del Tipo de Transaccion ==
+USER -> TTYPE : with_advance_payment = True\nadvance_account_id = <cuenta puente>
+
+== 2. Crear Transaccion ==
+USER -> TXN : create(type_id=TTYPE, budget_id, expedient_id, partner_id)
+activate TXN
+TXN -> TXN : type_with_advance_payment = True [related]
+TXN --> USER : transaccion en 'draft'
+deactivate TXN
+
+USER -> TXN : action_open()
+TXN -> TXN : state = 'open'
+
+== 3. Linea Preventiva de Adelanto (advance_line=True) ==
+note over USER, APREV
+  Esta linea representa el MONTO del adelanto
+  que se enviara al proveedor antes de la factura
+end note
+
+USER -> APREV : create(transaction_id, budget_position_id,\n preventive_amount, advance_line=True)
+activate APREV
+APREV -> APREV : affects_budget computed
+APREV -> TXN : _compute_advance_preventive_amount()\n → advance_preventive_amount += preventive_amount
+APREV --> USER : linea de adelanto creada
+deactivate APREV
+
+TXN -> TXN : _check_position_balance_amount() [constrains]\n valida saldo en partida presupuestaria
+
+== 4. Orden de Pago de Adelanto ==
+USER -> APAY : create(transaction_id, partner_id,\n payment_type='outbound', to_pay_amount)
+activate APAY
+APAY -> APAY : transaction_with_advance_payment = True [related]
+APAY -> APAY : _compute_destination_account_id()\n → destination_account = TTYPE.advance_account_id\n (NO usa cuenta a pagar normal)
+note right of APAY
+  Asiento contable del adelanto:
+  Dr. advance_account_id (cuenta puente)
+  Cr. Banco/Caja
+end note
+APAY --> USER : orden de pago creada (state='draft')
+deactivate APAY
+
+USER -> APAY : confirm()
+activate APAY
+APAY -> APAY : check_location_allowed()
+APAY -> APAY : payment_base_date required
+APAY -> APAY : to_pay_amount required
+APAY -> APAY : approval_state = 'confirmed'\n confirmation_date = today
+APAY --> USER : confirmado
+deactivate APAY
+
+USER -> APAY : to_signature_process()
+activate APAY
+APAY -> APAY : payment_total == to_pay_amount [check]
+APAY -> APAY : approval_state = 'signature_process'\n to_signature_date = today
+APAY --> USER : en proceso de firma
+deactivate APAY
+
+USER -> APAY : to_signed()
+APAY -> APAY : approval_state = 'signed'
+
+USER -> APAY : action_post()
+activate APAY
+APAY -> APAY : date = today [si no estaba seteada]
+APAY -> APAY : check expedient location vs user_location_ids
+APAY -> APAY : super().action_post()
+note right of APAY
+  Genera asiento:
+  Dr. advance_account_id  <monto>
+  Cr. Banco/Caja           <monto>
+end note
+APAY -> TXN : _compute_advance_amounts() [trigger]\n advance_to_pay_amount, advance_paid_amount
+TXN -> TXN : _compute_advance_remaining_amount()\n advance_remaining_amount =\n advance_preventive_amount - advance_to_pay_amount
+APAY --> USER : adelanto pagado (state='in_process'/'paid')
+deactivate APAY
+
+== 5. Linea Preventiva Normal + Definitiva (para facturacion) ==
+note over PREV, DEF
+  Las lineas normales representan el devengamiento
+  del gasto respaldado por el adelanto ya pagado
+end note
+
+USER -> PREV : create(transaction_id, budget_position_id,\n preventive_amount, advance_line=False)
+PREV --> USER : linea preventiva normal
+
+USER -> DEF : create(preventive_line_id, supplier_id, amount)
+activate DEF
+DEF -> PREV : _compute_amounts() [trigger]
+DEF --> USER : linea definitiva creada
+deactivate DEF
+
+== 6. Facturacion y Conciliacion con el Adelanto ==
+USER -> INV : create(move_type='in_invoice', transaction_id,\n partner_id, invoice_line_ids)
+INV --> USER : factura en 'draft'
+
+USER -> INV : action_post()
+activate INV
+INV -> INV : _post() override [with_advance_payment check]
+INV -> INV : compare amount_total vs advance_to_return_amount
+note right of INV
+  VALIDACION CRITICA:
+  amount_total <= advance_to_return_amount
+  (no se puede facturar mas que el adelanto disponible)
+end note
+alt amount_total > advance_to_return_amount
+    INV --> USER : ValidationError:\n "Cannot invoice more than Advance Remaining Amount"
+else OK
+    INV -> INV : super()._post()
+    note right of INV
+      Asiento de la factura:
+      Dr. Gasto/Costo         <monto>
+      Cr. advance_account_id  <monto>  ← cuenta puente, NO cta. a pagar
+    end note
+    INV -> AML : filter lines where account_id == advance_account_id
+    INV -> AML : write(partner_id = transaction_id.partner_id)
+    INV -> AML : _compute_amount_residual()
+    note right of AML
+      Como advance_account (reconcile=False),
+      al recomputar residual → amount_residual = 0
+      La factura queda en estado PAGADO automaticamente
+      sin necesidad de un pago tradicional
+    end note
+    AML --> INV : residual = 0
+    INV -> INV : payment_state = 'paid' [auto]
+    INV -> PREV : _compute_amounts() [trigger]\n invoiced_amount actualizado
+    PREV -> TXN : _compute_invoiced_amount()
+    TXN -> TXN : _compute_advance_to_return_amount()\n advance_to_return_amount =\n advance_paid_amount - invoiced_amount
+    INV --> USER : factura validada y AUTO-PAGADA
+end
+deactivate INV
+
+== 7. Control de Cierre ==
+note over TXN
+  Para cerrar la transaccion:
+  advance_to_return_amount debe ser 0
+  (todo el adelanto fue consumido por facturas)
+end note
+
+USER -> TXN : action_close()
+activate TXN
+TXN -> TXN : check_closure()
+activate TXN
+TXN -> TXN : verificar preventive_line_ids\n (preventive = definitive = invoiced = to_pay = paid)
+TXN -> TXN : [with_advance_payment check]\n advance_to_return_amount == 0 ?\n (= advance_paid - invoiced = 0)
+alt advance_to_return_amount != 0
+    TXN --> USER : ValidationError:\n "To close: advance_to_return_amount must be 0!\n (= advance_paid - invoiced)"
+else todo OK
+    TXN -> TXN : state = 'closed'
+    TXN --> USER : transaccion cerrada
+end
+deactivate TXN
+deactivate TXN
+
+@enduml
