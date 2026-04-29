@@ -1,0 +1,91 @@
+@startuml Sequence - Flujo Adelanto de Fondos
+
+!theme plain
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam maxMessageSize 160
+
+title Flujo: Solicitud de Adelanto → Aprobación → Pago → Devolución
+
+actor "Empleado" as EMP
+actor "Aprobador" as APP
+participant "AdvanceRequest\n(public_budget.advance_request)" as AR
+participant "AdvanceRequestLine\n(public_budget.advance_request_line)" as ARL
+participant "AdvanceRequestType\n(public_budget.advance_request_type)" as ART
+participant "AccountPayment\n(account.payment)" as PAY
+participant "AdvanceReturn\n(public_budget.advance_return)" as RET
+participant "AdvanceReturnLine\n(public_budget.advance_return_line)" as RETL
+
+== 1. Solicitud de Adelanto ==
+EMP -> AR : create(name, type_id, date)
+activate AR
+AR --> EMP : solicitud en estado 'draft'
+deactivate AR
+
+EMP -> ARL : create(advance_request_id, employee_id, requested_amount)
+activate ARL
+ARL -> ARL : _compute_amounts()\n → debt_amount, pending_return_amount
+ARL -> ARL : change_() [onchange]\n → approved_amount = requested_amount
+ARL --> EMP : línea creada
+deactivate ARL
+
+== 2. Aprobación ==
+APP -> AR : action_approve()
+activate AR
+AR -> AR : check_amounts() [constrains]\n → validate approved_amounts > 0
+AR -> AR : state = 'approved'
+AR -> AR : approval_user = env.user
+AR -> AR : approval_date = now()
+AR --> APP : solicitud aprobada
+deactivate AR
+
+== 3. Confirmación y Generación de Pago ==
+APP -> AR : action_confirm()
+activate AR
+AR -> AR : create_payment()
+activate AR
+AR -> ART : general_return_partner_id
+activate ART
+ART --> AR : partner
+deactivate ART
+AR -> ARL : sum(approved_amount)
+AR -> PAY : create(partner_id, amount, advance_request_id,\n payment_type='outbound', partner_type='supplier')
+activate PAY
+PAY -> PAY : _compute_destination_account_id()\n → destination = advance_request_type.account_id
+PAY --> AR : pago creado
+deactivate PAY
+AR -> PAY : to_pay_amount = amount
+AR -> AR : state = 'confirmed'
+AR -> AR : confirmation_date = now()
+AR --> APP : pago de adelanto generado
+deactivate AR
+deactivate AR
+
+== 4. Validar Pago ==
+APP -> PAY : action_post()
+activate PAY
+PAY -> PAY : reconcile_with_advance_account()
+PAY --> APP : pago en estado 'paid'
+deactivate PAY
+
+== 5. Devolución de Adelanto ==
+EMP -> RET : create(name, date, type_id)
+activate RET
+RET --> EMP : devolución en 'draft'
+deactivate RET
+
+EMP -> RETL : create(advance_return_id, employee_id, returned_amount)
+activate RETL
+RETL -> ARL : _compute_amounts() [trigger]\n → pending_return_amount actualizado en ARL
+RETL --> EMP : línea de devolución creada
+deactivate RETL
+
+EMP -> RET : action_confirm()
+activate RET
+RET -> RET : state = 'confirmed'
+RET -> PAY : create(return_payment)\n → payment linked to advance_return
+PAY --> RET : pago de devolución
+RET --> EMP : devolución confirmada
+deactivate RET
+
+@enduml

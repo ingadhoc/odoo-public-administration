@@ -1,0 +1,103 @@
+@startuml Sequence - Flujo Completo Transacción Presupuestaria
+
+!theme plain
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam maxMessageSize 200
+
+title Flujo Completo: Transacción Presupuestaria → Factura → Pago
+
+actor "Usuario" as USER
+participant "BudgetTransaction\n(public_budget.transaction)" as TXN
+participant "PreventiveLine\n(public_budget.preventive_line)" as PREV
+participant "DefinitiveLine\n(public_budget.definitive_line)" as DEF
+participant "Wizard: Make Invoice\n(transaction_definitive_make_invoice)" as WIZ
+participant "AccountMove\n(account.move)" as INV
+participant "AccountPaymentGroup\n(account.payment.group)" as PG
+participant "AccountPayment\n(account.payment)" as PAY
+participant "BudgetPosition\n(public_budget.budget_position)" as BPOS
+
+== 1. Creación de Transacción ==
+USER -> TXN : create(name, budget_id, expedient_id, type_id)
+activate TXN
+TXN -> TXN : _get_default_budget()
+TXN --> USER : transacción en estado 'draft'
+deactivate TXN
+
+USER -> TXN : action_open()
+activate TXN
+TXN -> TXN : write(state='open')
+TXN --> USER : estado 'open'
+deactivate TXN
+
+== 2. Líneas Preventivas ==
+USER -> PREV : create(transaction_id, budget_position_id, preventive_amount)
+activate PREV
+PREV -> PREV : change_budget_position() [onchange]\n → account_id = budget_position_id.default_account_id
+PREV -> BPOS : _compute_amounts() [budget_position]
+BPOS --> PREV : preventive_amount actualizado
+PREV --> USER : línea preventiva creada (state='open')
+deactivate PREV
+
+== 3. Líneas Definitivas ==
+USER -> DEF : create(preventive_line_id, supplier_id, amount)
+activate DEF
+DEF -> PREV : _compute_amount()\n → amount = remaining_amount
+DEF -> DEF : check_dates() [constrains]
+DEF --> USER : línea definitiva creada (state='draft')
+DEF -> PREV : _compute_amounts() [trigger]
+PREV -> BPOS : actualizar definitive_amount
+deactivate DEF
+
+== 4. Generación de Facturas ==
+USER -> WIZ : open wizard (desde BudgetTransaction)
+activate WIZ
+WIZ -> DEF : buscar definitivas sin factura
+DEF --> WIZ : list(definitive_lines)
+WIZ -> INV : create(move_type='in_invoice', transaction_id, partner_id)
+activate INV
+INV -> INV : _compute_to_pay_amount()
+INV --> WIZ : factura creada
+deactivate INV
+WIZ -> INV : action_post()
+INV --> WIZ : factura validada (state='posted')
+WIZ -> DEF : invoice_line_ids += new_lines
+DEF -> DEF : _compute_state() → state='invoiced'
+DEF -> PREV : _compute_amounts() [trigger]
+PREV -> PREV : _compute_state() → state='invoiced'
+WIZ --> USER : factura vinculada a transacción
+deactivate WIZ
+
+== 5. Pago de Factura ==
+USER -> PG : create(partner_id, invoiced_move_ids=[factura.id])
+activate PG
+PG -> PG : _compute_amounts()
+PG --> USER : payment group en 'draft'
+deactivate PG
+
+USER -> PG : action_confirm()
+activate PG
+PG -> PAY : create(amount, partner_id, payment_type='outbound')
+activate PAY
+PAY -> PAY : _compute_destination_account_id()
+note right of PAY : Si advance_payment → usa advance_account_id\nSi advance_request → usa request type account\nSi normal → super()
+PAY --> PG : pago creado
+deactivate PAY
+PG -> INV : _compute_to_pay_amount() [re-cálculo]
+INV --> PG : to_pay_amount actualizado
+PG --> USER : payment group confirmado
+deactivate PG
+
+USER -> PG : action_validate()
+activate PG
+PG -> PAY : action_post()
+PAY -> INV : reconcile payments
+INV -> INV : payment_state = 'in_payment' / 'paid'
+INV -> PREV : _compute_amounts() [via invoice_line_ids]
+PREV -> PREV : paid_amount actualizado
+PREV -> TXN : _compute_totals() [via preventive_line_ids]
+TXN -> TXN : state check
+PG --> USER : pago registrado
+deactivate PG
+
+@enduml
