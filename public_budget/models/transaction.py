@@ -382,7 +382,7 @@ class BudgetTransaction(models.Model):
             # si ya se mandaron a pagar no creamo
             if not to_pay_move_lines:
                 continue
-            self.env['account.payment'].create({
+            self.env['account.payment'].with_context(pay_now=True).create({
                     'partner_type': 'supplier',
                     'payment_type': 'outbound',
                     'receiptbook_id': self.budget_id.receiptbook_id.id,
@@ -391,6 +391,7 @@ class BudgetTransaction(models.Model):
                     'transaction_id': self.id,
                     'company_id': invoice.company_id.id,
                     'to_pay_move_line_ids': [(6, False, to_pay_move_lines.ids)],
+                    'amount': invoice.currency_id.round(sum(to_pay_move_lines.mapped('amount_residual'))),
                 })
         return True
 
