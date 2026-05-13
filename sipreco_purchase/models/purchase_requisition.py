@@ -137,6 +137,30 @@ class PurchaseRequisition(models.Model):
             self.printed = True
         return action
 
+    def action_send_imputation_notice(self):
+        self.ensure_one()
+        template = self.env.ref(
+            'sipreco_purchase.mail_template_purchase_requisition_imputada',
+            raise_if_not_found=False,
+        )
+        ctx = {
+            'default_model': 'purchase.requisition',
+            'default_res_ids': self.ids,
+            'default_use_template': bool(template),
+            'default_template_id': template.id if template else False,
+            'default_composition_mode': 'comment',
+            'force_email': True,
+        }
+        return {
+            'type': 'ir.actions.act_window',
+            'view_mode': 'form',
+            'res_model': 'mail.compose.message',
+            'views': [(False, 'form')],
+            'view_id': False,
+            'target': 'new',
+            'context': ctx,
+        }
+
     def action_draft(self):
         """ We need to keep the original number for the order regardless of change the state
         """

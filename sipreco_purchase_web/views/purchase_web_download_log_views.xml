@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_purchase_web_download_log_list">
+        <field name="name">purchase.web.download.log.list</field>
+        <field name="model">purchase.web.download.log</field>
+        <field name="arch" type="xml">
+            <list create="false" edit="false" delete="false">
+                <field name="download_date"/>
+                <field name="email"/>
+                <field name="attachment_line_id"/>
+                <field name="requisition_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_purchase_web_download_log">
+        <field name="name">Descargas</field>
+        <field name="res_model">purchase.web.download.log</field>
+        <field name="view_mode">list</field>
+        <field name="domain">[('attachment_line_id', '=', active_id)]</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,26 @@
+{
+    'name': 'Sipreco Purchase Web Publication',
+    'version': '18.0.1.0.0',
+    'license': 'AGPL-3',
+    'author': 'ADHOC SA',
+    'website': 'www.adhoc.com.ar',
+    'category': 'Purchase',
+    'summary': 'Publicación web de Solicitudes de Compra',
+    'depends': [
+        'sipreco_purchase',
+        'website',
+        'mail',
+    ],
+    'data': [
+        'security/ir.model.access.csv',
+        'security/sipreco_purchase_web_security.xml',
+        'views/purchase_web_download_log_views.xml',
+        'views/purchase_requisition_web_views.xml',
+        'views/purchase_web_attachment_views.xml',
+        'views/purchase_web_award_views.xml',
+        'views/website_templates.xml',
+        'views/website_menu.xml',
+    ],
+    'installable': True,
+    'application': False,
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="website_menu_compras" model="website.menu">
+        <field name="name">Compras y Contrataciones</field>
+        <field name="url">/compras</field>
+        <field name="sequence">50</field>
+        <field name="website_id" ref="website.default_website"/>
+        <field name="parent_id" ref="website.main_menu"/>
+    </record>
+
+</odoo>

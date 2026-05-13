@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_purchase_web_attachment_form">
+        <field name="name">purchase.web.attachment.form</field>
+        <field name="model">purchase.web.attachment</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button class="oe_stat_button"
+                                type="action"
+                                name="%(sipreco_purchase_web.action_purchase_web_download_log)d"
+                                icon="fa-download"
+                                groups="purchase.group_purchase_user">
+                            <field name="download_count" widget="statinfo" string="Descargas"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="requisition_id"/>
+                        <field name="name"/>
+                        <field name="attachment_type"/>
+                        <field name="attachment" filename="attachment_fname"/>
+                        <field name="attachment_fname" invisible="1"/>
+                        <field name="require_email"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>
