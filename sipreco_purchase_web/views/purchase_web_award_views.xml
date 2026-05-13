@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_purchase_web_award_form">
+        <field name="name">purchase.web.award.form</field>
+        <field name="model">purchase.web.award</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="requisition_id"/>
+                        <field name="partner_id"/>
+                        <field name="amount"/>
+                        <field name="notes"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

@@ -32,6 +32,11 @@
             </button>
             <button name="action_cancel" position="after">
                 <button name="print_report_requisition" string="Print" type="object"/>
+                <button name="action_send_imputation_notice"
+                        string="Enviar notificación imputación"
+                        type="object"
+                        groups="purchase.group_purchase_user"
+                        invisible="state not in ('in_purchase', 'open', 'done')"/>
             </button>
 
             <button name="action_confirm" position="attributes">

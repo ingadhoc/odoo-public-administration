@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_purchase_web_attachment_user,purchase.web.attachment.user,model_purchase_web_attachment,purchase.group_purchase_user,1,1,1,1
+access_purchase_web_attachment_public,purchase.web.attachment.public,model_purchase_web_attachment,base.group_public,1,0,0,0
+access_purchase_web_award_user,purchase.web.award.user,model_purchase_web_award,purchase.group_purchase_user,1,1,1,1
+access_purchase_web_award_public,purchase.web.award.public,model_purchase_web_award,base.group_public,1,0,0,0
+access_purchase_web_download_log_user,purchase.web.download.log.user,model_purchase_web_download_log,purchase.group_purchase_user,1,1,1,1

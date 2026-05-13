@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ================================================================
+         LAYOUT BASE (heredado del website de Odoo)
+    ================================================================ -->
+
+    <!-- Listado de compras publicadas -->
+    <template id="purchase_list_template" name="Compras - Listado público">
+        <t t-call="website.layout">
+            <t t-set="title">Compras y Contrataciones</t>
+            <div class="o_wcompras">
+                <div class="container mt-4 mb-5">
+                    <h1 class="mb-4">Compras y Contrataciones</h1>
+
+                    <!-- Filtros por estado -->
+                    <div class="mb-4 d-flex flex-wrap gap-2">
+                        <a href="/compras"
+                           t-attf-class="btn btn-sm #{not current_state and 'btn-dark' or 'btn-outline-secondary'}">
+                            Todos
+                        </a>
+                        <t t-foreach="web_states.items()" t-as="state_item">
+                            <a t-attf-href="/compras?state=#{state_item[0]}"
+                               t-attf-class="btn btn-sm #{current_state == state_item[0] and 'btn-dark' or 'btn-outline-secondary'}">
+                                <t t-esc="state_item[1]"/>
+                            </a>
+                        </t>
+                    </div>
+
+                    <t t-if="not purchases">
+                        <div class="alert alert-info">
+                            No hay compras publicadas actualmente.
+                        </div>
+                    </t>
+
+                    <t t-foreach="purchases" t-as="purchase">
+                        <div class="card mb-3 shadow-sm">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-md-8">
+                                        <h5 class="card-title mb-1">
+                                            <t t-if="purchase.web_number">
+                                                <span class="text-muted me-2">
+                                                    <t t-esc="purchase.web_number"/>
+                                                </span>
+                                            </t>
+                                            <t t-esc="purchase.web_object or purchase.name"/>
+                                        </h5>
+                                        <small class="text-muted">
+                                            Tipo:
+                                            <t t-esc="purchase.transaction_type_id.name or '-'"/>
+                                        </small>
+                                        <t t-if="purchase.web_opening_datetime">
+                                            <small class="d-block text-muted">
+                                                Apertura:
+                                                <span t-field="purchase.web_opening_datetime"/>
+                                            </small>
+                                        </t>
+                                    </div>
+                                    <div class="col-md-2 text-center">
+                                        <t t-set="state_label" t-value="web_states.get(purchase.web_state, purchase.web_state)"/>
+                                        <t t-set="state_css" t-value="'bg-primary' if purchase.web_state == 'open' else 'bg-warning text-dark' if purchase.web_state == 'evaluation' else 'bg-success' if purchase.web_state == 'awarded' else 'bg-secondary' if purchase.web_state == 'finished' else 'bg-danger'"/>
+                                        <span t-att-class="'badge ' + state_css">
+                                            <t t-esc="state_label"/>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-2 text-end">
+                                        <a t-attf-href="/compras/#{purchase.id}"
+                                           class="btn btn-sm btn-outline-primary">
+                                            Ver detalle
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Detalle de una compra publicada -->
+    <template id="purchase_detail_template" name="Compras - Detalle">
+        <t t-call="website.layout">
+            <t t-set="title" t-value="purchase.web_object or purchase.name"/>
+            <div class="o_wcompras_detail">
+                <div class="container mt-4 mb-5">
+
+                    <!-- Breadcrumb -->
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="/compras">Compras y Contrataciones</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                <t t-esc="purchase.web_number or purchase.name"/>
+                            </li>
+                        </ol>
+                    </nav>
+
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <h1 class="mb-1">
+                                <t t-esc="purchase.web_object or purchase.name"/>
+                            </h1>
+
+                            <!-- Estado público -->
+                            <t t-set="state_label" t-value="web_states.get(purchase.web_state, purchase.web_state)"/>
+                            <t t-set="state_css" t-value="'bg-primary' if purchase.web_state == 'open' else 'bg-warning text-dark' if purchase.web_state == 'evaluation' else 'bg-success' if purchase.web_state == 'awarded' else 'bg-secondary' if purchase.web_state == 'finished' else 'bg-danger'"/>
+                            <span t-att-class="'badge fs-6 mb-3 ' + state_css">
+                                <t t-esc="state_label"/>
+                            </span>
+
+                            <hr/>
+
+                            <!-- Datos básicos -->
+                            <dl class="row">
+                                <t t-if="purchase.web_number">
+                                    <dt class="col-sm-4">Número</dt>
+                                    <dd class="col-sm-8"><t t-esc="purchase.web_number"/></dd>
+                                </t>
+                                <t t-if="purchase.transaction_type_id">
+                                    <dt class="col-sm-4">Tipo de compra</dt>
+                                    <dd class="col-sm-8">
+                                        <t t-esc="purchase.transaction_type_id.name"/>
+                                    </dd>
+                                </t>
+                                <dt class="col-sm-4">Valor oficial</dt>
+                                <dd class="col-sm-8">
+                                    <t t-esc="purchase.currency_id.symbol"/>&#160;
+                                    <t t-esc="'{:,.2f}'.format(purchase.web_amount if purchase.web_amount_manual else purchase.amount_total)"/>
+                                </dd>
+                                <t t-if="purchase.web_opening_datetime">
+                                    <dt class="col-sm-4">Fecha y hora de Apertura</dt>
+                                    <dd class="col-sm-8">
+                                        <span t-field="purchase.web_opening_datetime"/>
+                                    </dd>
+                                </t>
+                                <t t-if="purchase.web_publication_date">
+                                    <dt class="col-sm-4">Fecha de publicación</dt>
+                                    <dd class="col-sm-8">
+                                        <span t-field="purchase.web_publication_date"/>
+                                    </dd>
+                                </t>
+                                <t t-if="purchase.web_last_update">
+                                    <dt class="col-sm-4">Última actualización</dt>
+                                    <dd class="col-sm-8">
+                                        <span t-field="purchase.web_last_update"/>
+                                    </dd>
+                                </t>
+                            </dl>
+
+                            <!-- Observaciones -->
+                            <t t-if="purchase.web_observations">
+                                <h4 class="mt-4">Observaciones</h4>
+                                <div t-field="purchase.web_observations"/>
+                            </t>
+
+                            <!-- Adjudicatarios (solo estado Finalizada) -->
+                            <t t-if="purchase.web_state in ['finished','awarded'] and purchase.web_award_ids">
+                                <h4 class="mt-4">Adjudicación</h4>
+                                <table class="table table-bordered">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Adjudicatario</th>
+                                            <th>Valor adjudicado</th>
+                                            <th>Detalle</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="purchase.web_award_ids" t-as="award">
+                                            <tr>
+                                                <td><t t-esc="award.partner_id.name"/></td>
+                                                <td>
+                                                    <t t-esc="award.currency_id.symbol"/>&#160;
+                                                    <t t-esc="'{:,.2f}'.format(award.amount)"/>
+                                                </td>
+                                                <td><t t-esc="award.notes or ''"/></td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="fw-bold">
+                                            <td>Total adjudicado</td>
+                                            <td>
+                                                <t t-esc="purchase.currency_id.symbol"/>&#160;
+                                                <t t-esc="'{:,.2f}'.format(purchase.web_total_awarded)"/>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </t>
+
+                        </div>
+
+                        <!-- Columna lateral: archivos descargables -->
+                        <div class="col-lg-4">
+                            <div class="card">
+                                <div class="card-header fw-bold">
+                                    Documentación
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <t t-if="not purchase.web_attachment_ids">
+                                        <li class="list-group-item text-muted">
+                                            Sin archivos disponibles.
+                                        </li>
+                                    </t>
+                                    <t t-foreach="purchase.web_attachment_ids" t-as="att">
+                                        <li class="list-group-item">
+                                            <a t-attf-href="/compras/#{purchase.id}/descargar/#{att.id}"
+                                               class="d-flex align-items-center gap-2">
+                                                <i class="fa fa-download text-primary"/>
+                                                <span>
+                                                    <t t-esc="att.name"/>
+                                                    <small class="d-block text-muted">
+                                                        <t t-esc="attachment_type_labels.get(att.attachment_type, '')"/>
+                                                    </small>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </t>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Listado embed (sin layout de website, para uso en iframe externo) -->
+    <template id="purchase_list_embed_template" name="Compras - Listado público (embed)">
+        <html>
+            <head>
+                <meta charset="utf-8"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <title>Compras y Contrataciones</title>
+                <link rel="stylesheet" href="/web/static/lib/bootstrap/dist/css/bootstrap.css"/>
+                <link rel="stylesheet" href="/web/static/src/libs/fontawesome/css/font-awesome.css"/>
+            </head>
+            <body>
+                <div class="o_wcompras">
+                    <div class="container mt-4 mb-5">
+                        <h1 class="mb-4">Compras y Contrataciones</h1>
+
+                        <!-- Filtros por estado -->
+                        <div class="mb-4 d-flex flex-wrap gap-2">
+                            <a href="/compras?embed=1"
+                               t-attf-class="btn btn-sm #{not current_state and 'btn-dark' or 'btn-outline-secondary'}">
+                                Todos
+                            </a>
+                            <t t-foreach="web_states.items()" t-as="state_item">
+                                <a t-attf-href="/compras?state=#{state_item[0]}&amp;embed=1"
+                                   t-attf-class="btn btn-sm #{current_state == state_item[0] and 'btn-dark' or 'btn-outline-secondary'}">
+                                    <t t-esc="state_item[1]"/>
+                                </a>
+                            </t>
+                        </div>
+
+                        <t t-if="not purchases">
+                            <div class="alert alert-info">
+                                No hay compras publicadas actualmente.
+                            </div>
+                        </t>
+
+                        <t t-foreach="purchases" t-as="purchase">
+                            <div class="card mb-3 shadow-sm">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-8">
+                                            <h5 class="card-title mb-1">
+                                                <t t-if="purchase.web_number">
+                                                    <span class="text-muted me-2">
+                                                        <t t-esc="purchase.web_number"/>
+                                                    </span>
+                                                </t>
+                                                <t t-esc="purchase.web_object or purchase.name"/>
+                                            </h5>
+                                            <small class="text-muted">
+                                                Tipo:
+                                                <t t-esc="purchase.transaction_type_id.name or '-'"/>
+                                            </small>
+                                            <t t-if="purchase.web_opening_datetime">
+                                                <small class="d-block text-muted">
+                                                    Apertura:
+                                                    <span t-field="purchase.web_opening_datetime"/>
+                                                </small>
+                                            </t>
+                                        </div>
+                                        <div class="col-md-2 text-center">
+                                            <t t-set="state_label" t-value="web_states.get(purchase.web_state, purchase.web_state)"/>
+                                            <t t-set="state_css" t-value="'bg-primary' if purchase.web_state == 'open' else 'bg-warning text-dark' if purchase.web_state == 'evaluation' else 'bg-success' if purchase.web_state == 'awarded' else 'bg-secondary' if purchase.web_state == 'finished' else 'bg-danger'"/>
+                                            <span t-att-class="'badge ' + state_css">
+                                                <t t-esc="state_label"/>
+                                            </span>
+                                        </div>
+                                        <div class="col-md-2 text-end">
+                                            <a t-attf-href="/compras/#{purchase.id}?embed=1"
+                                               class="btn btn-sm btn-outline-primary">
+                                                Ver detalle
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </body>
+        </html>
+    </template>
+
+    <!-- Detalle embed (sin layout de website, para uso en iframe externo) -->
+    <template id="purchase_detail_embed_template" name="Compras - Detalle (embed)">
+        <html>
+            <head>
+                <meta charset="utf-8"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <t t-set="page_title" t-value="purchase.web_object or purchase.name"/>
+                <title><t t-esc="page_title"/></title>
+                <link rel="stylesheet" href="/web/static/lib/bootstrap/dist/css/bootstrap.css"/>
+                <link rel="stylesheet" href="/web/static/src/libs/fontawesome/css/font-awesome.css"/>
+            </head>
+            <body>
+                <div class="o_wcompras_detail">
+                    <div class="container mt-4 mb-5">
+
+                        <!-- Breadcrumb -->
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="/compras?embed=1">Compras y Contrataciones</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">
+                                    <t t-esc="purchase.web_number or purchase.name"/>
+                                </li>
+                            </ol>
+                        </nav>
+
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <h1 class="mb-1">
+                                    <t t-esc="purchase.web_object or purchase.name"/>
+                                </h1>
+
+                                <!-- Estado público -->
+                                <t t-set="state_label" t-value="web_states.get(purchase.web_state, purchase.web_state)"/>
+                                <t t-set="state_css" t-value="'bg-primary' if purchase.web_state == 'open' else 'bg-warning text-dark' if purchase.web_state == 'evaluation' else 'bg-success' if purchase.web_state == 'awarded' else 'bg-secondary' if purchase.web_state == 'finished' else 'bg-danger'"/>
+                                <span t-att-class="'badge fs-6 mb-3 ' + state_css">
+                                    <t t-esc="state_label"/>
+                                </span>
+
+                                <hr/>
+
+                                <!-- Datos básicos -->
+                                <dl class="row">
+                                    <t t-if="purchase.web_number">
+                                        <dt class="col-sm-4">Número</dt>
+                                        <dd class="col-sm-8"><t t-esc="purchase.web_number"/></dd>
+                                    </t>
+                                    <t t-if="purchase.transaction_type_id">
+                                        <dt class="col-sm-4">Tipo de compra</dt>
+                                        <dd class="col-sm-8">
+                                            <t t-esc="purchase.transaction_type_id.name"/>
+                                        </dd>
+                                    </t>
+                                    <dt class="col-sm-4">Valor oficial</dt>
+                                    <dd class="col-sm-8">
+                                        <t t-esc="purchase.currency_id.symbol"/>&#160;
+                                        <t t-esc="'{:,.2f}'.format(purchase.web_amount if purchase.web_amount_manual else purchase.amount_total)"/>
+                                    </dd>
+                                    <t t-if="purchase.web_opening_datetime">
+                                        <dt class="col-sm-4">Fecha y hora de Apertura</dt>
+                                        <dd class="col-sm-8">
+                                            <span t-field="purchase.web_opening_datetime"/>
+                                        </dd>
+                                    </t>
+                                    <t t-if="purchase.web_publication_date">
+                                        <dt class="col-sm-4">Fecha de publicación</dt>
+                                        <dd class="col-sm-8">
+                                            <span t-field="purchase.web_publication_date"/>
+                                        </dd>
+                                    </t>
+                                    <t t-if="purchase.web_last_update">
+                                        <dt class="col-sm-4">Última actualización</dt>
+                                        <dd class="col-sm-8">
+                                            <span t-field="purchase.web_last_update"/>
+                                        </dd>
+                                    </t>
+                                </dl>
+
+                                <!-- Observaciones -->
+                                <t t-if="purchase.web_observations">
+                                    <h4 class="mt-4">Observaciones</h4>
+                                    <div t-field="purchase.web_observations"/>
+                                </t>
+
+                                <!-- Adjudicatarios (solo estado Finalizada/Adjudicada) -->
+                                <t t-if="purchase.web_state in ['finished','awarded'] and purchase.web_award_ids">
+                                    <h4 class="mt-4">Adjudicación</h4>
+                                    <table class="table table-bordered">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Adjudicatario</th>
+                                                <th>Valor adjudicado</th>
+                                                <th>Detalle</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach="purchase.web_award_ids" t-as="award">
+                                                <tr>
+                                                    <td><t t-esc="award.partner_id.name"/></td>
+                                                    <td>
+                                                        <t t-esc="award.currency_id.symbol"/>&#160;
+                                                        <t t-esc="'{:,.2f}'.format(award.amount)"/>
+                                                    </td>
+                                                    <td><t t-esc="award.notes or ''"/></td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr class="fw-bold">
+                                                <td>Total adjudicado</td>
+                                                <td>
+                                                    <t t-esc="purchase.currency_id.symbol"/>&#160;
+                                                    <t t-esc="'{:,.2f}'.format(purchase.web_total_awarded)"/>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </t>
+
+                            </div>
+
+                            <!-- Columna lateral: archivos descargables -->
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="card-header fw-bold">
+                                        Documentación
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <t t-if="not purchase.web_attachment_ids">
+                                            <li class="list-group-item text-muted">
+                                                Sin archivos disponibles.
+                                            </li>
+                                        </t>
+                                        <t t-foreach="purchase.web_attachment_ids" t-as="att">
+                                            <li class="list-group-item">
+                                                <a t-attf-href="/compras/#{purchase.id}/descargar/#{att.id}?embed=1"
+                                                   class="d-flex align-items-center gap-2">
+                                                    <i class="fa fa-download text-primary"/>
+                                                    <span>
+                                                        <t t-esc="att.name"/>
+                                                        <small class="d-block text-muted">
+                                                            <t t-esc="attachment_type_labels.get(att.attachment_type, '')"/>
+                                                        </small>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        </t>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </body>
+        </html>
+    </template>
+
+    <!-- Gate de email embed (sin layout de website, para uso en iframe externo) -->
+    <template id="purchase_email_gate_embed_template" name="Compras - Solicitud de email (embed)">
+        <html>
+            <head>
+                <meta charset="utf-8"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <title>Descarga de documento</title>
+                <link rel="stylesheet" href="/web/static/lib/bootstrap/dist/css/bootstrap.css"/>
+            </head>
+            <body>
+                <div class="container mt-5 mb-5">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="card shadow-sm">
+                                <div class="card-body">
+                                    <h4 class="card-title mb-3">Descarga de documento</h4>
+                                    <p>
+                                        Para descargar
+                                        <strong><t t-esc="attachment_line.name"/></strong>
+                                        de la licitación
+                                        <strong>
+                                            <t t-esc="purchase.web_object or purchase.name"/>
+                                        </strong>,
+                                        por favor ingrese su correo electrónico.
+                                    </p>
+                                    <form t-attf-action="/compras/#{purchase.id}/descargar/#{attachment_line.id}/email"
+                                          method="post">
+                                        <input type="hidden" name="csrf_token"
+                                               t-att-value="request.csrf_token()"/>
+                                        <input type="hidden" name="embed" value="1"/>
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">
+                                                Correo electrónico
+                                            </label>
+                                            <input type="email" class="form-control"
+                                                   id="email" name="email" required="required"/>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary w-100">
+                                            Descargar
+                                        </button>
+                                    </form>
+                                    <div class="mt-2 text-center">
+                                        <a t-attf-href="/compras/#{purchase.id}?embed=1">
+                                            ← Volver al detalle
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </body>
+        </html>
+    </template>
+
+    <!-- Formulario de email previo a la descarga del legajo -->
+    <template id="purchase_email_gate_template" name="Compras - Solicitud de email">
+        <t t-call="website.layout">
+            <t t-set="title">Descarga de documento</t>
+            <div class="container mt-5 mb-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h4 class="card-title mb-3">Descarga de documento</h4>
+                                <p>
+                                    Para descargar
+                                    <strong><t t-esc="attachment_line.name"/></strong>
+                                    de la licitación
+                                    <strong>
+                                        <t t-esc="purchase.web_object or purchase.name"/>
+                                    </strong>,
+                                    por favor ingrese su correo electrónico.
+                                </p>
+                                <form t-attf-action="/compras/#{purchase.id}/descargar/#{attachment_line.id}/email"
+                                      method="post">
+                                    <input type="hidden" name="csrf_token"
+                                           t-att-value="request.csrf_token()"/>
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">
+                                            Correo electrónico
+                                        </label>
+                                        <input type="email" class="form-control"
+                                               id="email" name="email" required="required"/>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100">
+                                        Descargar
+                                    </button>
+                                </form>
+                                <div class="mt-2 text-center">
+                                    <a t-attf-href="/compras/#{purchase.id}">
+                                        ← Volver al detalle
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>

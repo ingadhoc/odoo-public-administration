@@ -15,6 +15,7 @@
     'data': [
         'data/ir_actions_server_data.xml',
         'data/sequence_data.xml',
+        'data/mail_template_data.xml',
         'security/sipreco_purchase_security.xml',
         'security/hide_groups.xml',
         'security/ir.model.access.csv',

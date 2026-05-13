@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="mail_template_purchase_requisition_imputada" model="mail.template">
+        <field name="name">SC Imputada - Notificación de imputación</field>
+        <field name="model_id" ref="purchase_requisition.model_purchase_requisition"/>
+        <field name="subject">SC {{ object.name }}{% if object.expedient_id %}, {{ object.expedient_id.name }}{% endif %} imputada</field>
+        <field name="body_html"><![CDATA[
+<p>Hola, la SC <strong>{{ object.name }}</strong>{% if object.expedient_id %}, <strong>{{ object.expedient_id.name }}</strong>{% endif %}, que solicita <strong>{{ object.description or '' }}</strong> se encuentra imputada. Se solicita informe proveedor apto para contratar.</p>
+        ]]></field>
+        <field name="lang">{{ object.user_id.lang }}</field>
+        <field name="auto_delete" eval="True"/>
+    </record>
+
+</odoo>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_purchase_requisition_web_form">
+        <field name="name">purchase.requisition.web.form</field>
+        <field name="model">purchase.requisition</field>
+        <field name="priority">70</field>
+        <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_form" />
+        <field name="arch" type="xml">
+
+            <!-- Botón Publicar en web (visible solo si publicable y aún no publicado) -->
+            <button name="action_cancel" position="before">
+                <button name="action_web_publish"
+                    string="Publicar en web"
+                    type="object"
+                    class="btn-primary"
+                    invisible="not web_publishable or website_published"
+                    groups="sipreco_purchase_web.sipreco_web_publish" />
+                <button name="action_web_unpublish"
+                    string="Despublicar"
+                    type="object"
+                    class="btn-warning"
+                    invisible="not website_published"
+                    groups="sipreco_purchase_web.sipreco_web_publish" />
+            </button>
+
+            <!-- Indicador de publicación en button_box -->
+            <div name="button_box" position="inside">
+                <button class="oe_stat_button"
+                    type="object"
+                    name="action_view_website"
+                    icon="fa-globe"
+                    invisible="not website_published">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_text">Ver Sitio Web</span>
+                    </div>
+                </button>
+            </div>
+
+            <!-- Campo "Publicable en web" en la cabecera del formulario -->
+            <field name="vendor_id" position="before">
+                <field name="web_publishable" groups="sipreco_purchase_web.sipreco_web_publish" />
+            </field>
+
+            <!-- Solapa "Datos para página web" visible solo si web_publishable -->
+            <xpath expr="//notebook" position="inside">
+                <page string="Datos para página web"
+                    name="web_publication"
+                    invisible="not web_publishable"
+                    groups="sipreco_purchase_web.sipreco_web_publish">
+                    <div class="text-end">
+                        <field name="web_state" widget="statusbar" options="{'clickable': '1'}" />
+                    </div>
+
+                    <group string="Identificación pública">
+                        <group>
+                            <field name="web_number" />
+                            <field name="web_object" />
+                            <field name="transaction_type_id" readonly="1" />
+                        </group>
+                        <group>
+                            <field name="web_amount_manual" />
+                            <field name="web_amount"
+                                readonly="not web_amount_manual" />
+                        </group>
+                    </group>
+
+                    <group string="Fechas y estado">
+                        <group>
+                            <field name="web_opening_datetime" />
+                            <field name="web_publication_date" readonly="1" />
+                            <field name="web_last_update" readonly="1" />
+                        </group>
+                    </group>
+
+                    <group string="Observaciones">
+                        <field name="web_observations" nolabel="1" />
+                    </group>
+
+                    <notebook>
+                        <page string="Archivos públicos" name="web_attachments">
+                            <field name="web_attachment_ids"
+                                context="{'default_requisition_id': id}">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle" />
+                                    <field name="name" />
+                                    <field name="attachment_type" />
+                                    <field name="attachment" filename="attachment_fname" />
+                                    <field name="attachment_fname" column_invisible="1" />
+                                    <field name="require_email" />
+                                    <field name="download_count" readonly="1" />
+                                    <button name="action_view_download_logs"
+                                        type="object"
+                                        icon="fa-users"
+                                        title="Ver descargas"
+                                        groups="purchase.group_purchase_user" />
+                                </list>
+                            </field>
+                        </page>
+
+                        <page string="Adjudicatarios"
+                            name="web_awards"
+                            invisible="web_state not in ['finished','awarded']">
+                            <field name="web_award_ids" context="{'default_requisition_id': id}">
+                                <list editable="bottom">
+                                    <field name="partner_id" />
+                                    <field name="amount" />
+                                    <field name="notes" />
+                                </list>
+                            </field>
+                            <group>
+                                <field name="web_total_awarded" />
+                            </group>
+                        </page>
+                    </notebook>
+
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!-- Vista lista con indicador de publicación -->
+    <record model="ir.ui.view" id="view_purchase_requisition_web_list">
+        <field name="name">purchase.requisition.web.list</field>
+        <field name="model">purchase.requisition</field>
+        <field name="priority">70</field>
+        <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_tree" />
+        <field name="arch" type="xml">
+            <list>
+                <field name="web_publishable" optional="show" groups="sipreco_purchase_web.sipreco_web_publish"/>
+                <field name="website_published" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Filtros de búsqueda adicionales -->
+    <record model="ir.ui.view" id="view_purchase_requisition_web_search">
+        <field name="name">purchase.requisition.web.search</field>
+        <field name="model">purchase.requisition</field>
+        <field name="priority">70</field>
+        <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_filter" />
+        <field name="arch" type="xml">
+            <search>
+                <filter string="Publicables en web" name="web_publishable"
+                    domain="[('web_publishable', '=', True)]" />
+                <filter string="Publicadas en web" name="website_published"
+                    domain="[('website_published', '=', True)]" />
+            </search>
+        </field>
+    </record>
+
+</odoo>
