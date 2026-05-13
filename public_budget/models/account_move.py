@@ -156,12 +156,12 @@ class AccountMove(models.Model):
     def _post(self, soft=True):
         for inv in self.filtered(
                 lambda x: x.transaction_id.type_id.with_advance_payment):
-            if inv.currency_id.compare_amounts(inv.amount_total, inv.transaction_id.advance_remaining_amount) == 1:
+            if inv.currency_id.compare_amounts(inv.amount_total, inv.transaction_id.advance_paid_amount) == 1 and inv.move_type != 'entry':
                 raise ValidationError(_(
-                    "You can not invoice more than Advance Remaining Amount!\n"
+                    "You can not invoice more than Advance Paid Amount!\n"
                     "* Amount to invoice: %s\n"
-                    "* Advance Remaining Amount: %s") % (
-                    inv.amount_total, inv.transaction_id.advance_remaining_amount))
+                    "* Advance Paid Amount: %s") % (
+                    inv.amount_total, inv.transaction_id.advance_paid_amount))
 
         res = super()._post(soft=soft)
         for inv in self.filtered(

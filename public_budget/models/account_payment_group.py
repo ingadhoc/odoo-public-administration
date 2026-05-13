@@ -157,7 +157,7 @@ class AccountPayment(models.Model):
             if not rec.payment_base_date:
                 raise ValidationError(_("No puede confirmar una orden de pago sin fecha base de pago"))
             # si hay devoluciones entonces si se puede confirmar sin importe
-            if not rec.to_pay_amount and not rec.mapped("returned_payment_ids"):
+            if not rec.to_pay_amount and not rec.transaction_id.type_id.with_advance_payment and rec.type_id != 'inbound':
                 raise ValidationError(_("No puede confirmar una orden de pago sin importe a pagar"))
             if not rec.confirmation_date:
                 rec.confirmation_date = fields.Date.today()
@@ -202,7 +202,7 @@ class AccountPayment(models.Model):
 
     def to_signature_process(self):
         for rec in self:
-            if rec.currency_id.round(rec.payment_total - rec.to_pay_amount):
+            if rec.currency_id.round(rec.payment_total - rec.to_pay_amount) and rec.payment_type == 'outbound':
                 raise ValidationError(
                     _(
                         "No puede mandar a pagar una orden de pago que tiene "
