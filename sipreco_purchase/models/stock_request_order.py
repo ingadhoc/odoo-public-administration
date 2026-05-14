@@ -8,6 +8,10 @@ from odoo import models, fields, api
 class StockRequestOrder(models.Model):
     _inherit = 'stock.request.order'
 
+    state = fields.Selection(
+        tracking=True,
+    )
+
     partner_id = fields.Many2one(
         'res.partner',
         'Requirente',

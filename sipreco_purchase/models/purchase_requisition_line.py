@@ -28,7 +28,7 @@ class PurchaseRequisitionLine(models.Model):
     def _prepare_purchase_order_line(
             self, name, product_qty=0.0, price_unit=0.0, taxes_ids=False):
         res = super()._prepare_purchase_order_line(
-            name, product_qty=product_qty, price_unit=price_unit,
+            name, product_qty=product_qty, price_unit=0.0,
             taxes_ids=taxes_ids)
         if self.name:
             res.update({
