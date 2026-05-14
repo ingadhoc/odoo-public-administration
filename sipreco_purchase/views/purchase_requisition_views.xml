@@ -39,23 +39,9 @@
                 <attribute name="string">Confirm</attribute>
                 <attribute name="invisible">state != 'draft' or not inspected</attribute>
             </button>
-
-            <!-- como al cancelar se cancelan los request, no dejamos re-abrir ya que es engañoso, lo dejamos son para nosotros -->
-            <!-- <button name="tender_reset" position="attributes">
-                <attribute name="groups">base.group_no_one</attribute>
-            </button> -->
-
-            <!-- al final no lo agregamos porque hay workflow vinculado y la complica -->
-            <!-- agregamos este boton para nosotros para poder re abrir si se confunden, solo para nosotros ya que podrian haber confirmado algun presupuesto. -->
-            <!-- <button name="open_bid" position="after">
-                <button name="back_to_confirm" states="open" string="Back To Confirm" type="object" groups="base.group_no_one"/>
-            </button> -->
-
-            <!-- es cerrar proceso de licitación y pasar a elegir -->
-            <!-- <button name="action_open" position="attributes">
-                <attribute name="confirm">ATENCIÓN: Se va a proceder a la selección de las ordenes de compra. No se podrán generar nuevas ordenes de compra. Esto no puede deshacerse. Seguro desea continuar?</attribute>
-            </button> -->
-
+            <xpath expr="//field[@name='state']" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </xpath>
 
             <div name="button_box">
                 <button class="oe_stat_button" name="%(stock_request.action_stock_request_form)d" string="Solicitudes" type="action" context="{'search_default_manual_requisition_id': id}" icon="fa-bars" groups="stock.group_stock_user"/>

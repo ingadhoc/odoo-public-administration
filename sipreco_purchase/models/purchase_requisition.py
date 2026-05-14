@@ -9,6 +9,10 @@ from odoo.exceptions import UserError
 class PurchaseRequisition(models.Model):
     _inherit = 'purchase.requisition'
 
+    state = fields.Selection(
+        tracking=True,
+    )
+
    # Cambiamos el default para que no requira tener vendor por defecto
     requisition_type = fields.Selection(default='purchase_template')
     manual_request_ids = fields.One2many(
