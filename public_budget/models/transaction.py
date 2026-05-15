@@ -321,7 +321,7 @@ class BudgetTransaction(models.Model):
         _logger.info('Getting Transaction Advance To Return Amount')
         for rec in self:
             rec.advance_to_return_amount = (
-                rec.advance_preventive_amount - rec.advance_paid_amount - rec.advance_returned_amount)
+                rec.advance_paid_amount - rec.paid_amount - rec.advance_returned_amount)
 
     @api.depends(
         'advance_preventive_line_ids.preventive_amount',
@@ -342,7 +342,7 @@ class BudgetTransaction(models.Model):
         _logger.info('Getting Transaction Advance Remaining Amount')
         for rec in self:
             rec.advance_remaining_amount = (
-                rec.advance_preventive_amount - rec.advance_paid_amount)
+                rec.advance_preventive_amount - rec.paid_amount)
 
     def _get_advance_amounts(self):
         self.ensure_one()
@@ -354,7 +354,7 @@ class BudgetTransaction(models.Model):
             }
 
         domain = [('id', 'in', self.advance_payment_ids.ids)]
-        to_pay_domain = domain + [('sipreco_state', 'not in', ('canceled', 'draft'))]
+        to_pay_domain = domain + [('sipreco_state', 'not in', ['canceled']),('state', 'not in', ['in_process','paid'])]
         paid_domain = domain + [('state', 'in', ['in_process','paid'])]
 
         if to_date:
