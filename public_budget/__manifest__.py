@@ -24,6 +24,7 @@
         'account_payment_pro',
         'hr_holidays',
         'account_internal_transfer',
+        'l10n_ar_tax',
     ],
     'data': [
         'security/public_budget_group.xml',
@@ -101,6 +102,7 @@
         'data/position_category.xml',
         'data/position_exc_restrictions.xml',
         'data/ir_config_parameter_data.xml',
+        'views/account_fiscal_position_views.xml',
     ],
     'demo': [
         'demo/res_company_demo.xml',

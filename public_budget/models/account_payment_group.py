@@ -2,7 +2,7 @@ import logging
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import _, api, fields, models
+from odoo import Command, _, api, fields, models
 from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
@@ -129,6 +129,20 @@ class AccountPayment(models.Model):
         return vals
 
     def action_post(self):
+        original_withholdings_by_id = {}
+        if "l10n_ar_withholding_line_ids" in self._fields and self.l10n_ar_fiscal_position_id.dont_recompute_withholdings:
+            for rec in self:
+                original_withholdings_by_id[rec.id] = [
+                    {
+                        "tax_id": line.tax_id.id,
+                        "name": line.name,
+                        "base_amount": line.base_amount,
+                        "amount": line.amount,
+                        "ref": line.ref,
+                    }
+                    for line in rec.l10n_ar_withholding_line_ids
+                ]
+
         for rec in self:
             # si no estaba seteada la setamos
             if not rec.date:
@@ -137,7 +151,25 @@ class AccountPayment(models.Model):
                 raise ValidationError(
                     _("No puede validar un pago si el expediente no está en una ubicación autorizada para ústed")
                 )
-        return super(AccountPayment, self.with_context(is_recipt=True)).action_post()
+        result = super(AccountPayment, self.with_context(is_recipt=True)).action_post()
+
+        if "l10n_ar_withholding_line_ids" in self._fields and self.l10n_ar_fiscal_position_id.dont_recompute_withholdings:
+            for rec in self:
+                original_vals = original_withholdings_by_id.get(rec.id, [])
+                current_signature = [
+                    (line.tax_id.id, line.name, line.base_amount, line.amount, line.ref)
+                    for line in rec.l10n_ar_withholding_line_ids
+                ]
+                original_signature = [
+                    (v["tax_id"], v["name"], v["base_amount"], v["amount"], v["ref"])
+                    for v in original_vals
+                ]
+                if current_signature != original_signature:
+                    rec.l10n_ar_withholding_line_ids = [Command.clear()] + [
+                        Command.create(vals) for vals in original_vals
+                    ]
+
+        return result
 
     def unlink(self):
         if self.filtered("name") and not self.env.context.get("force_delete"):
@@ -312,8 +344,6 @@ class AccountPayment(models.Model):
                     )
             if not rec.date:
                 continue
-            if rec.date > fields.Date.context_today(rec):
-                raise ValidationError(_("No puede usar una fecha de pago superior a hoy"))
             if rec.date < rec.confirmation_date:
                 raise ValidationError(
                     _(
