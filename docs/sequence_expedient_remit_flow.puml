@@ -1,0 +1,78 @@
+@startuml Sequence - Expediente y Remito
+
+!theme plain
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam maxMessageSize 200
+
+title Flujo: Expediente → Tránsito por Remito → Cierre
+
+actor "Mesa de Entradas" as USER
+actor "Sector Destino" as DEST
+participant "Expedient\n(public_budget.expedient)" as EXP
+participant "Location\n(public_budget.location)" as LOC
+participant "Remit\n(public_budget.remit)" as REMIT
+participant "ResUsers\n(res.users)" as RUSR
+participant "Sequence\n(ir.sequence)" as SEQ
+
+== 1. Apertura de Expediente ==
+USER -> EXP : create(description, founder_id, category_id,\n first_location_id, pages)
+activate EXP
+EXP -> EXP : _compute_cover()
+EXP --> USER : expediente en estado 'open'\n current_location = first_location
+deactivate EXP
+
+== 2. Creación de Remito (Traslado) ==
+USER -> REMIT : create(location_id=origen, location_dest_id=destino)
+activate REMIT
+REMIT -> RUSR : env.user.location_ids [para validación]
+RUSR --> REMIT : user_location_ids
+REMIT -> REMIT : _compute_user_locations()
+REMIT --> USER : remito en estado 'in_transit'
+deactivate REMIT
+
+USER -> REMIT : expedient_ids += [expedient.id]
+activate REMIT
+REMIT -> EXP : _compute_current_location() [trigger]
+activate EXP
+EXP -> EXP : current_location = location_dest_id\nlast_move_date = today
+EXP --> REMIT : ubicación actualizada
+deactivate EXP
+REMIT --> USER : expediente asociado al remito
+deactivate REMIT
+
+== 3. Confirmación del Remito ==
+DEST -> REMIT : action_confirm()
+activate REMIT
+REMIT -> SEQ : next_by_code('public_budget.remit')
+SEQ --> REMIT : number
+REMIT -> REMIT : state = 'confirmed'\n confirmation_user_id = env.user\n confirmation_date = now()
+REMIT -> EXP : _compute_current_location() [recompute]
+activate EXP
+EXP -> LOC : verificar last_location_id
+EXP -> EXP : current_location_id = location_dest_id (confirmado)
+EXP --> REMIT : ubicación definitiva establecida
+deactivate EXP
+REMIT --> DEST : remito confirmado
+deactivate REMIT
+
+== 4. Cierre de Expediente (opcional) ==
+USER -> EXP : action_close()
+activate EXP
+EXP -> EXP : state = 'closed'
+EXP --> USER : expediente cerrado
+deactivate EXP
+
+== 5. Anulación de Expediente ==
+alt expediente sin dependencias activas
+    USER -> EXP : action_annull()
+    activate EXP
+    EXP -> EXP : check active transactions [constrains]
+    EXP -> EXP : state = 'annulled'
+    EXP --> USER : expediente anulado
+    deactivate EXP
+else expediente con transacciones abiertas
+    EXP --> USER : ValidationError: no se puede anular
+end
+
+@enduml

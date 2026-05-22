@@ -1,0 +1,93 @@
+@startuml Sequence - Flujo Solicitud de Subsidio
+
+!theme plain
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam maxMessageSize 200
+
+title Flujo: Solicitud de Subsidio → Rendición → Aprobación
+
+actor "Operador" as USER
+actor "Aprobador" as APPROVER
+participant "Expedient\n(public_budget.expedient)" as EXP
+participant "BudgetTransaction\n(public_budget.transaction)" as TXN
+participant "Subsidy\n(public_budget.subsidy)" as SUB
+participant "SubsidyResolution\n(public_budget.subsidy.resolution)" as RES
+participant "AccountPayment\n(account.payment)" as PAY
+participant "SubsidyRendition\n(public_budget.subsidy.rendition)" as REND
+participant "SubsidyApprovalArrangement\n(public_budget.subsidy.approval_arrangement)" as ARR
+
+== 1. Crear Expediente de Solicitud ==
+USER -> EXP : create(description, founder_id, category_id, first_location_id)
+activate EXP
+EXP -> EXP : _compute_cover()
+EXP --> USER : expediente creado (state='open')
+deactivate EXP
+
+== 2. Crear Subsidio (hereda de BudgetTransaction) ==
+USER -> SUB : create(transaction fields + parliamentary_resolution_date,\n parliamentary_expedient, request_expedient_id)
+activate SUB
+SUB -> TXN : create() via _inherits
+activate TXN
+TXN -> TXN : _get_default_budget()
+TXN --> SUB : transaction_id
+deactivate TXN
+SUB -> SUB : _compute_cargo_data()
+SUB --> USER : subsidio creado (state='draft')
+deactivate SUB
+
+USER -> SUB : action_open() [via TXN]
+activate SUB
+SUB -> TXN : write(state='open')
+SUB --> USER : subsidio en 'open'
+deactivate SUB
+
+== 3. Resolución Parlamentaria ==
+USER -> RES : create(name, date, subsidy_id)
+activate RES
+RES -> SUB : resolution_line_ids vinculadas a budget_position_ids
+RES --> USER : resolución creada
+deactivate RES
+
+== 4. Pago del Subsidio (via PreventiveLine + DefinitiveLine) ==
+note over USER, PAY : Igual al flujo TX normal,\nse generan preventiva → definitiva → factura → pago
+USER -> PAY : Pago emitido al beneficiario
+PAY --> USER : pago registrado
+
+== 5. Cargo y Vencimiento de Rendición ==
+PAY -> SUB : trigger _compute_cargo_data()
+activate SUB
+SUB -> SUB : cargo_date = payment date
+SUB -> SUB : accountability_expiry_date = cargo_date + plazo
+SUB -> SUB : accountability_state = 'pending'
+SUB --> USER : cargo efectuado, vencimiento calculado
+deactivate SUB
+
+== 6. Presentación de Rendición ==
+USER -> REND : create(subsidy_id, date, rendition_amount, expedient_id)
+activate REND
+REND -> REND : check_amounts() [constrains]
+REND --> USER : rendición registrada
+deactivate REND
+
+== 7. Aprobación de Rendición ==
+APPROVER -> ARR : create(subsidy_id, number, date, approved_amount)
+activate ARR
+ARR -> ARR : SQL UNIQUE(number, subsidy_id)
+ARR --> APPROVER : disposición creada
+deactivate ARR
+
+APPROVER -> REND : write(approval_arrangement_id = arr.id)
+activate REND
+REND -> REND : on_change_approval_arrangement_id()\n → editable_line = True
+REND -> REND : approved_amount = arrangement.approved_amount [related]
+REND -> REND : _compute_pending_amount()\n → pending = rendicion - aprobado
+REND -> SUB : _compute_state()
+activate SUB
+SUB -> SUB : accountability_state = 'approved'\n (si todos los cargos están aprobados)
+SUB --> REND : estado actualizado
+deactivate SUB
+REND --> APPROVER : rendición aprobada
+deactivate REND
+
+@enduml

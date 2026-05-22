@@ -188,6 +188,11 @@ class BudgetTransaction(models.Model):
         compute='_compute_advance_to_return_amount',
         store=True,
     )
+    advance_returned_amount = fields.Monetary(
+        string='Monto Devuelto de Adelanto',
+        compute='_compute_advance_returned_amount',
+        store=True,
+    )
     company_id = fields.Many2one(
         'res.company',
         required=True,
@@ -242,9 +247,21 @@ class BudgetTransaction(models.Model):
         string='Advance Payment Orders',
         domain=[
             ('partner_type', '=', 'supplier'),
-            ('transaction_with_advance_payment', '=', True)
+            ('transaction_with_advance_payment', '=', True),
+            ('payment_type', '=', 'outbound'),
         ],
         context={'default_partner_type': 'supplier', 'default_payment_type': 'outbound'},
+    )
+    advance_return_payment_ids = fields.One2many(
+        'account.payment',
+        'transaction_id',
+        string='Advance Return Payment Orders',
+        domain=[
+            ('partner_type', '=', 'supplier'),
+            ('transaction_with_advance_payment', '=', True),
+            ('payment_type', '=', 'inbound'),
+        ],
+        context={'default_partner_type': 'supplier', 'default_payment_type': 'inbound'},
     )
     asset_ids = fields.One2many(
         'account.asset',
@@ -282,16 +299,29 @@ class BudgetTransaction(models.Model):
                 'budget_position_id')
 
     @api.depends(
+        'advance_return_payment_ids.state',
+        'advance_return_payment_ids.approval_state',
+    )
+    def _compute_advance_returned_amount(self):
+        _logger.info('Getting Transaction Advance Returned Amount')
+        for rec in self:
+            rec.advance_returned_amount = sum(
+                rec.advance_return_payment_ids.filtered(
+                    lambda p: p.state in ('in_process', 'paid')
+                ).mapped('amount'))
+
+    @api.depends(
         # TODO este depends puede hacer que se recalcule todo al crear un
         # payment group
         'invoiced_amount',
         'advance_paid_amount',
+        'advance_returned_amount',
     )
     def _compute_advance_to_return_amount(self):
         _logger.info('Getting Transaction Advance To Return Amount')
         for rec in self:
             rec.advance_to_return_amount = (
-                rec.advance_paid_amount - rec.invoiced_amount)
+                rec.advance_paid_amount - rec.paid_amount - rec.advance_returned_amount)
 
     @api.depends(
         'advance_preventive_line_ids.preventive_amount',
@@ -312,7 +342,7 @@ class BudgetTransaction(models.Model):
         _logger.info('Getting Transaction Advance Remaining Amount')
         for rec in self:
             rec.advance_remaining_amount = (
-                rec.advance_preventive_amount - rec.advance_to_pay_amount)
+                rec.advance_preventive_amount - rec.paid_amount)
 
     def _get_advance_amounts(self):
         self.ensure_one()
@@ -324,7 +354,7 @@ class BudgetTransaction(models.Model):
             }
 
         domain = [('id', 'in', self.advance_payment_ids.ids)]
-        to_pay_domain = domain + [('sipreco_state', 'not in', ('canceled', 'draft'))]
+        to_pay_domain = domain + [('sipreco_state', 'not in', ['canceled']),('state', 'not in', ['in_process','paid'])]
         paid_domain = domain + [('state', 'in', ['in_process','paid'])]
 
         if to_date:
@@ -598,11 +628,12 @@ class BudgetTransaction(models.Model):
                     raise ValidationError(_(
                         'To close a transaction to return amount must be 0!\n'
                         '* To return amount = advance paid amount - '
-                        'invoiced amount\n'
-                        '(%s = %s - %s)' % (
+                        'invoiced amount - advance returned amount\n'
+                        '(%s = %s - %s - %s)' % (
                             rec.advance_to_return_amount,
                             rec.advance_paid_amount,
-                            rec.invoiced_amount)))
+                            rec.invoiced_amount,
+                            rec.advance_returned_amount)))
 
 # Constraints
     @api.constrains(
@@ -627,6 +658,30 @@ class BudgetTransaction(models.Model):
                         raise ValidationError(_(
                             "Preventive Total, Type and Date are not "
                             "compatible with Transaction Amount Restrictions"))
+
+    def action_new_advance_return_payment(self):
+        '''
+        Crea una nueva orden de pago de devolución de adelanto (inbound).
+        Permite devolver el remanente de adelanto sin necesidad de factura.
+        '''
+        self.ensure_one()
+        msg = _(
+            "It is not possible to generate a payment order if the "
+            "expedient of the transaction is not in a permitted location or is in transit")
+        self.expedient_id.check_location_allowed_for_current_user(msg)
+        action = self.env["ir.actions.act_window"]._for_xml_id('account.action_account_payments_payable')
+        if not action:
+            return False
+        form_view_id = self.env.ref('account.view_account_payment_form').id
+        action['views'] = [(form_view_id, 'form')]
+        action['context'] = {
+            'default_transaction_id': self.id,
+            'default_partner_id': self.partner_id.id,
+            'default_partner_type': 'supplier',
+            'default_payment_type': 'inbound',
+            'default_transaction_with_advance_payment': True,
+        }
+        return action
 
     def action_new_payment(self):
         '''

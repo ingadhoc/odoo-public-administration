@@ -1,0 +1,156 @@
+@startuml Sequence - Devolucion de Adelanto en Transaccion
+
+!theme plain
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam maxMessageSize 240
+skinparam noteBackgroundColor #FFFACD
+
+title Flujo: Devolución de Adelanto en Transacción con Adelanto de Pago\n(cuando el proveedor/empleado devuelve dinero no utilizado)
+
+actor "Usuario" as USER
+participant "BudgetTransaction\n(public_budget.transaction)" as TXN
+participant "AdvanceReturn\n(public_budget.advance_return)" as RET
+participant "AdvanceReturnLine\n(public_budget.advance_return_line)" as RETL
+participant "ResPartner [empleado]\n(res.partner)" as EMP
+participant "AdvanceRequestType\n(public_budget.advance_request_type)" as ATYPE
+participant "AccountMove [asiento]\n(account.move)" as MOVE
+
+note over TXN
+  Estado previo esperado:
+  advance_paid_amount > invoiced_amount
+  advance_to_return_amount = advance_paid_amount - invoiced_amount > 0
+  (hay saldo de adelanto sin rendir con facturas)
+end note
+
+== 1. Verificar Saldo a Devolver ==
+USER -> TXN : consultar advance_to_return_amount
+activate TXN
+TXN -> TXN : _compute_advance_to_return_amount()\n advance_to_return = advance_paid_amount - invoiced_amount
+TXN --> USER : advance_to_return_amount = <monto>
+deactivate TXN
+
+== 2. Crear Devolución ==
+USER -> RET : create(name, type_id, date)
+note right of RET
+  type_id (AdvanceRequestType) define:
+  - account_id: cuenta puente del adelanto
+  - return_journal_id: diario para el asiento
+  - general_return_partner_id: partner genérico de devolución
+end note
+activate RET
+RET --> USER : devolución en estado 'draft'
+deactivate RET
+
+== 3. Cargar Líneas de Devolución (automático o manual) ==
+alt Carga automática (compute_debtors)
+    USER -> RET : compute_debtors()
+    activate RET
+    RET -> EMP : search(employee=True)
+    loop por cada empleado
+        RET -> EMP : get_debt_amount(type_id)
+        activate EMP
+        EMP -> EMP : requested = sum(advance_request_lines.approved_amount)\n   [state NOT IN draft/cancel, type_id match]
+        EMP -> EMP : returned = sum(advance_return_lines.returned_amount)\n   [state NOT IN draft/cancel, type_id match]
+        EMP -> EMP : debt = requested - returned
+        EMP --> RET : debt_amount
+        deactivate EMP
+        alt debt_amount > 0
+            RET -> RETL : create(employee_id, returned_amount=debt_amount)
+        end
+    end
+    RET --> USER : líneas de devolución precargadas
+    deactivate RET
+else Carga manual
+    USER -> RETL : create(advance_return_id, employee_id, returned_amount)
+    activate RETL
+    RETL -> EMP : get_debt_amount(type_id) [compute]
+    EMP --> RETL : debt_amount
+    RETL --> USER : línea creada con debt_amount informativo
+    deactivate RETL
+end
+
+== 4. Confirmar Devolución y Generar Asiento ==
+USER -> RET : action_confirm()
+activate RET
+
+loop por cada línea de devolución
+    RET -> RETL : returned_amount <= debt_amount ?
+    activate RETL
+    RETL -> EMP : get_debt_amount(type_id)
+    EMP --> RETL : debt_amount
+    alt returned_amount > debt_amount
+        RETL --> RET : ValidationError:\n 'Monto a devolver no puede ser superior a la deuda'
+    else OK
+        RETL --> RET : validado
+    end
+    deactivate RETL
+end
+
+RET -> ATYPE : general_return_partner_id, account_id, return_journal_id
+ATYPE --> RET : datos del tipo
+
+RET -> RET : get_move_vals()\n total = sum(return_line_ids.returned_amount)
+note right of RET
+  Asiento generado:
+  ─────────────────────────────────────────
+  Dr. account_payable (general_return_partner)  <total>
+  Cr. advance_account_id (cuenta puente)         <total>
+  ─────────────────────────────────────────
+  Efecto: reduce la deuda en la cuenta puente
+  que fue acreditada al pagar el adelanto
+end note
+
+RET -> MOVE : create(line_ids, journal_id, ref)
+activate MOVE
+MOVE --> RET : asiento en 'draft'
+deactivate MOVE
+
+RET -> MOVE : _post()
+activate MOVE
+MOVE -> MOVE : validar y publicar asiento
+MOVE --> RET : asiento publicado (state='posted')
+deactivate MOVE
+
+RET -> RET : write(move_id, state='confirmed',\n confirmation_date=today)
+RET --> USER : devolución confirmada + asiento generado
+deactivate RET
+
+== 5. Impacto en la Transacción ==
+note over TXN
+  La devolución NO opera directamente sobre la transacción.
+  El impacto es INDIRECTO vía la deuda del empleado:
+
+  advance_to_return_amount = advance_paid_amount - invoiced_amount
+  (este cálculo NO cambia por la devolución)
+
+  La devolución reduce get_debt_amount() del empleado,
+  lo que impide crear nuevas solicitudes de adelanto
+  por montos superiores al saldo real de deuda.
+end note
+
+USER -> TXN : consultar advance_to_return_amount (después de devolución)
+TXN -> TXN : _compute_advance_to_return_amount()\n advance_paid_amount - invoiced_amount
+note right of TXN
+  advance_to_return_amount NO baja con la devolución
+  porque advance_paid_amount (pagos) no cambia.
+  Para que llegue a 0 se deben emitir facturas
+  hasta consumir todo el advance_paid_amount.
+  La devolución cancela la deuda contablemente
+  pero el cierre de la transacción requiere
+  igual las facturas correspondientes.
+end note
+TXN --> USER : advance_to_return_amount (sin cambio)
+
+== 6. Control de Cancelación ==
+USER -> RET : action_cancel()
+activate RET
+alt move_id existe (asiento ya generado)
+    RET --> USER : ValidationError:\n 'No se puede cancelar si hay asiento vinculado.\n Eliminar el asiento primero.'
+else sin asiento
+    RET -> RET : state = 'cancel'
+    RET --> USER : devolución cancelada
+end
+deactivate RET
+
+@enduml
