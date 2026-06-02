@@ -412,6 +412,16 @@ class BudgetTransaction(models.Model):
             # si ya se mandaron a pagar no creamo
             if not to_pay_move_lines:
                 continue
+            # El importe a pagar es el residual invertido: para un proveedor el saldo
+            # por pagar es acreedor, por lo que amount_residual es negativo (idéntico
+            # criterio que account_payment_pro._compute_selected_debt, que multiplica
+            # por -1 para supplier). Si el neto no es positivo (p. ej. una nota de
+            # crédito de proveedor / in_refund) no se genera OP: account.payment tiene
+            # la constraint CHECK(amount >= 0).
+            amount = invoice.currency_id.round(
+                -sum(to_pay_move_lines.mapped('amount_residual')))
+            if invoice.currency_id.compare_amounts(amount, 0.0) <= 0:
+                continue
             self.env['account.payment'].with_context(pay_now=True).create({
                     'partner_type': 'supplier',
                     'payment_type': 'outbound',
@@ -421,7 +431,7 @@ class BudgetTransaction(models.Model):
                     'transaction_id': self.id,
                     'company_id': invoice.company_id.id,
                     'to_pay_move_line_ids': [(6, False, to_pay_move_lines.ids)],
-                    'amount': invoice.currency_id.round(sum(to_pay_move_lines.mapped('amount_residual'))),
+                    'amount': amount,
                 })
         return True
 
