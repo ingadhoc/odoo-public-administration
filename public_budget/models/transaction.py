@@ -422,7 +422,7 @@ class BudgetTransaction(models.Model):
                 -sum(to_pay_move_lines.mapped('amount_residual')))
             if invoice.currency_id.compare_amounts(amount, 0.0) <= 0:
                 continue
-            self.env['account.payment'].with_context(pay_now=True).create({
+            payment = self.env['account.payment'].with_context(pay_now=True).create({
                     'partner_type': 'supplier',
                     'payment_type': 'outbound',
                     'receiptbook_id': self.budget_id.receiptbook_id.id,
@@ -433,6 +433,16 @@ class BudgetTransaction(models.Model):
                     'to_pay_move_line_ids': [(6, False, to_pay_move_lines.ids)],
                     'amount': amount,
                 })
+            # l10n_ar_tax suma las retenciones a payment_total (signo +1 para proveedor
+            # outbound), dejando payment_difference = -withholdings_amount. En el flujo
+            # manual _onchange_withholdings descuenta ese valor del amount, pero en la
+            # creación programática el onchange no dispara. Aplicamos el mismo ajuste
+            # para que amount quede en neto y payment_total == to_pay_amount.
+            if payment.payment_difference:
+                new_amount = payment.amount + payment.payment_difference
+                payment.with_context(
+                    skip_account_move_synchronization=True
+                ).amount = new_amount if new_amount > 0 else 0
         return True
 
     @api.depends(
