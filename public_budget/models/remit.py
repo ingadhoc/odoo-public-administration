@@ -145,8 +145,24 @@ class Remit(models.Model):
                     'public_budget.remit') or '/'
         return super().create(vals)
 
+    @api.constrains('expedient_ids')
+    def _check_child_without_parent(self):
+        for rec in self:
+            for expedient in rec.expedient_ids.filtered('parent_id'):
+                if expedient.parent_id not in rec.expedient_ids:
+                    raise ValidationError(_(
+                        'No puede trasladar el expediente hijo "%s" sin incluir '
+                        'su expediente padre "%s" en el remito.')
+                        % (expedient.display_name, expedient.parent_id.display_name))
+
     @api.onchange('expedient_ids')
     def _onchange_expedient_ids(self):
-        if self.expedient_ids and self.expedient_ids.mapped('child_ids'):
-            self.expedient_ids |= self.expedient_ids.mapped('child_ids').filtered(
+        if self.expedient_ids:
+            children = self.expedient_ids.mapped('child_ids').filtered(
                 lambda x: x._origin.current_location_id == self.location_id)
+            if children:
+                self.expedient_ids |= children
+            parents = self.expedient_ids.mapped('parent_id').filtered(
+                lambda x: x._origin.current_location_id == self.location_id)
+            if parents:
+                self.expedient_ids |= parents
