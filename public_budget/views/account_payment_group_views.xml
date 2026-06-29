@@ -313,9 +313,15 @@
             </field> -->
 
             <!-- ocultamos todo lo referente a moneda de contrapartida que no lo usan -->
-            <label for="counterpart_currency_amount" position="replace" />
-            <field name="counterpart_currency_amount" position="replace" />
-            <div name="counterpart_currency_amount" position="replace" />
+            <label for="counterpart_currency_amount" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </label>
+            <field name="counterpart_currency_amount" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+            <div name="counterpart_currency_amount" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </div>
             <xpath expr="//div[@name='amount_div']//field[@name='currency_id']"
                 position="attributes">
                 <attribute name="invisible">True</attribute>
