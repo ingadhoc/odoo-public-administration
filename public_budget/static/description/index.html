@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gestión Presupuestaria Pública</title>
+</head>
+<body>
+
+<div style="max-width: 820px; margin: 0 auto; padding: 40px 32px 64px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 15px; line-height: 1.7; color: #1C2333;">
+
+  <!-- Header -->
+  <div style="border-bottom: 3px solid #7C6CD8; padding-bottom: 20px; margin-bottom: 32px;">
+    <div style="font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #7C6CD8; margin-bottom: 6px;">Consultoría Técnica · Adhoc · OBA 18.0</div>
+    <h1 style="font-size: 1.65rem; font-weight: 700; color: #1C2333; margin: 0 0 6px;">Gestión Presupuestaria Pública</h1>
+    <p style="font-size: 0.92rem; color: #6B7691; margin: 0;">Módulo base del sistema SIPRECO: ejecución presupuestaria completa para organismos públicos.</p>
+  </div>
+
+  <!-- Qué hace -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 0 0 1rem;">¿Qué hace?</div>
+
+  <p style="color: #444444; margin-bottom: 1.2rem;">
+    Implementa el circuito completo de ejecución presupuestaria pública: desde la apertura del
+    <strong>Presupuesto</strong> anual hasta el registro de pagos, pasando por la gestión de
+    <strong>Expedientes Administrativos</strong>, <strong>Transacciones Presupuestarias</strong>
+    con sus compromisos (preventivo) y devengamientos (definitivo), y el circuito de
+    <strong>Adelantos de Fondos</strong> a empleados y proveedores.
+  </p>
+  <p style="color: #444444; margin-bottom: 1.2rem;">
+    Cada gasto del organismo queda trazado desde el rubro presupuestario (Posición Presupuestaria)
+    hasta el comprobante de pago, con control de saldos disponibles en tiempo real.
+    Los Expedientes se trasladan físicamente entre áreas mediante Remitos, dejando un historial
+    de circulación auditado.
+  </p>
+
+  <!-- Conceptos clave -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 2.5rem 0 1rem;">Conceptos clave</div>
+
+  <table style="border-collapse: collapse; width: 100%; font-size: 0.91rem; margin-bottom: 1rem;">
+    <thead>
+      <tr>
+        <th style="background: #7C6CD8; color: #fff; text-align: left; padding: 8px 12px; font-size: 0.82rem;">Concepto</th>
+        <th style="background: #7C6CD8; color: #fff; text-align: left; padding: 8px 12px; font-size: 0.82rem;">Qué es</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0; vertical-align: top;"><strong>Presupuesto</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0; vertical-align: top;">El presupuesto anual del organismo. Define los rubros y montos autorizados para el ejercicio.</td>
+      </tr>
+      <tr style="background: #F8F7FD;">
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0; vertical-align: top;"><strong>Posición Presupuestaria</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0; vertical-align: top;">Ítem jerárquico del clasificador presupuestario (rubro). Acumula compromisos, devengamientos y pagos. Controla el saldo disponible.</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0; vertical-align: top;"><strong>Expediente</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0; vertical-align: top;">Carpeta administrativa que agrupa transacciones. Circula físicamente entre áreas del organismo mediante remitos.</td>
+      </tr>
+      <tr style="background: #F8F7FD;">
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0; vertical-align: top;"><strong>Transacción</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0; vertical-align: top;">El corazón del circuito: representa un gasto o compromiso. Vincula expediente + presupuesto + proveedor + líneas preventivas/definitivas + órdenes de pago.</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0; vertical-align: top;"><strong>Preventivo</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0; vertical-align: top;">Compromiso del gasto (reserva el saldo de la posición). Es el primer registro contable de una erogación.</td>
+      </tr>
+      <tr style="background: #F8F7FD;">
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0; vertical-align: top;"><strong>Definitivo</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0; vertical-align: top;">Devengamiento: el gasto se reconoce contablemente. Habilita la generación de la factura y la orden de pago.</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0; vertical-align: top;"><strong>Remito</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0; vertical-align: top;">Constancia de traslado de un expediente entre áreas. Registra origen, destino, fecha y usuario.</td>
+      </tr>
+      <tr style="background: #F8F7FD;">
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0; vertical-align: top;"><strong>Adelanto</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0; vertical-align: top;">Entrega de fondos anticipada a un empleado o proveedor. Requiere devolución y rendición posterior.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Flujo principal -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 2.5rem 0 1rem;">Flujo principal de ejecución</div>
+
+  <div style="background: #F0EFF8; border: 1px solid #E4E2F0; border-radius: 6px; padding: 14px 18px; margin: 1rem 0; font-family: 'SF Mono', Consolas, monospace; font-size: 0.85rem; white-space: pre-wrap; line-height: 1.8; overflow-x: auto;">Apertura del Presupuesto anual (draft → open)
+  → Creación del Expediente (número + carátula + proveedores)
+      → Creación de la Transacción (expediente + tipo + proveedor)
+          → Líneas Preventivas (compromiso → reserva saldo posición)
+              → Líneas Definitivas (devengado → habilita factura)
+                  → Factura del proveedor
+                      → Orden de Pago → Pago registrado
+  → Pre-cierre / Cierre del Presupuesto al fin del ejercicio</div>
+
+  <!-- Perfiles -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 2.5rem 0 1rem;">Perfiles de usuario</div>
+
+  <table style="border-collapse: collapse; width: 100%; font-size: 0.91rem; margin-bottom: 1rem;">
+    <thead>
+      <tr>
+        <th style="background: #7C6CD8; color: #fff; text-align: left; padding: 8px 12px; font-size: 0.82rem;">Área</th>
+        <th style="background: #7C6CD8; color: #fff; text-align: left; padding: 8px 12px; font-size: 0.82rem;">Director</th>
+        <th style="background: #7C6CD8; color: #fff; text-align: left; padding: 8px 12px; font-size: 0.82rem;">Usuario</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;"><strong>Habilitaciones</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;">Acceso completo. Aprueba requerimientos de adelanto.</td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;">Opera expedientes y transacciones de su área.</td>
+      </tr>
+      <tr style="background: #F8F7FD;">
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;"><strong>Contaduría</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;">Acceso completo. Confirma adelantos.</td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;">Carga facturas y órdenes de pago.</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;"><strong>Secretaría</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;">Puede anular y cerrar expedientes.</td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;">Gestión de expedientes y remitos.</td>
+      </tr>
+      <tr style="background: #F8F7FD;">
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;"><strong>Portal Expedientes</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;" colspan="2">Solo lectura de expedientes y transacciones vinculadas.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Estados del presupuesto -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 2.5rem 0 1rem;">Ciclos de vida principales</div>
+
+  <p style="color: #444444; margin-bottom: 0.6rem;"><strong>Presupuesto:</strong></p>
+  <div style="background: #F0EFF8; border: 1px solid #E4E2F0; border-radius: 6px; padding: 10px 16px; margin: 0.4rem 0 1rem; font-family: 'SF Mono', Consolas, monospace; font-size: 0.85rem; overflow-x: auto;">Borrador → Abierto → Pre-cerrado → Cerrado &nbsp;(o Cancelado)</div>
+
+  <p style="color: #444444; margin-bottom: 0.6rem;"><strong>Transacción:</strong></p>
+  <div style="background: #F0EFF8; border: 1px solid #E4E2F0; border-radius: 6px; padding: 10px 16px; margin: 0.4rem 0 1rem; font-family: 'SF Mono', Consolas, monospace; font-size: 0.85rem; overflow-x: auto;">Borrador → Abierta → Cerrada &nbsp;(o Cancelada)</div>
+
+  <p style="color: #444444; margin-bottom: 0.6rem;"><strong>Solicitud de Adelanto:</strong></p>
+  <div style="background: #F0EFF8; border: 1px solid #E4E2F0; border-radius: 6px; padding: 10px 16px; margin: 0.4rem 0 1rem; font-family: 'SF Mono', Consolas, monospace; font-size: 0.85rem; overflow-x: auto;">Borrador → Aprobado (dir. habilitaciones) → Confirmado (contaduría) &nbsp;(o Cancelado)</div>
+
+  <!-- Reportes -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 2.5rem 0 1rem;">Reportes disponibles</div>
+
+  <ul style="padding-left: 1.5em; margin-bottom: 1.2rem;">
+    <li style="margin-bottom: 5px;"><strong>Presupuesto a Fecha</strong> — estado de ejecución presupuestaria al día consultado (en Excel).</li>
+    <li style="margin-bottom: 5px;"><strong>Reporte de Presupuesto</strong> — resumen ejecutivo por posición, con preventivo, definitivo, pagado y saldo.</li>
+    <li style="margin-bottom: 5px;"><strong>Expediente</strong> — imprime la carátula y el historial de movimientos del expediente.</li>
+    <li style="margin-bottom: 5px;"><strong>Remito</strong> — comprobante de traslado del expediente entre áreas.</li>
+    <li style="margin-bottom: 5px;"><strong>Transacción</strong> — detalle de compromisos y pagos de una transacción.</li>
+    <li style="margin-bottom: 5px;"><strong>Orden de Pago / Recibo de Pago</strong> — documentos de respaldo del pago.</li>
+    <li style="margin-bottom: 5px;"><strong>Lista de Pagos</strong> — listado consolidado de órdenes de pago.</li>
+    <li style="margin-bottom: 5px;"><strong>Análisis de Adelantos / Deuda de Adelantos</strong> — seguimiento de adelantos pendientes de rendición.</li>
+    <li style="margin-bottom: 5px;"><strong>Activos</strong> — altas, bajas, modificaciones y listado de bienes inventariables vinculados a transacciones.</li>
+    <li style="margin-bottom: 5px;"><strong>Modificaciones Presupuestarias</strong> — movimientos de fondos y ampliaciones entre posiciones.</li>
+  </ul>
+
+  <!-- Validaciones -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 2.5rem 0 1rem;">Validaciones principales</div>
+
+  <div style="background: #FFF8E6; border-left: 4px solid #D97706; border-radius: 6px; padding: 12px 16px; margin: 0.8rem 0; font-size: 0.93rem;">
+    ⚠️ Solo se pueden crear transacciones contra un presupuesto en estado <strong>Abierto</strong>. Las transacciones de un presupuesto cerrado quedan en solo lectura.
+  </div>
+  <div style="background: #FFF8E6; border-left: 4px solid #D97706; border-radius: 6px; padding: 12px 16px; margin: 0.8rem 0; font-size: 0.93rem;">
+    ⚠️ El expediente debe estar en la ubicación del usuario para poder vincularle transacciones nuevas. Un expediente en tránsito (remito emitido pero no recibido) no está disponible.
+  </div>
+  <div style="background: #FFF8E6; border-left: 4px solid #D97706; border-radius: 6px; padding: 12px 16px; margin: 0.8rem 0; font-size: 0.93rem;">
+    ⚠️ No se puede cancelar una Solicitud de Adelanto si ya tiene órdenes de pago activas. Hay que anular los pagos primero.
+  </div>
+  <div style="background: #EDE9FA; border-left: 4px solid #7C6CD8; border-radius: 6px; padding: 12px 16px; margin: 0.8rem 0; font-size: 0.93rem;">
+    ℹ️ El saldo de cada Posición Presupuestaria se calcula en tiempo real: <strong>Autorizado − Preventivo = Saldo disponible</strong>. Si el preventivo supera el autorizado, el sistema bloquea el alta de nuevas líneas.
+  </div>
+
+  <!-- Footer -->
+  <div style="margin-top: 2.5rem; padding-top: 20px; border-top: 1px solid #E4E2F0; font-size: 0.8rem; color: #6B7691; text-align: center;">
+    Desarrollado por Consultoría Técnica · <strong>Adhoc</strong>
+  </div>
+
+</div>
+</body>
+</html>

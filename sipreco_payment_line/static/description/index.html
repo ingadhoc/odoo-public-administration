@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Líneas de Transferencia en Pagos</title>
+</head>
+<body>
+
+<div style="max-width: 820px; margin: 0 auto; padding: 40px 32px 64px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 15px; line-height: 1.7; color: #1C2333;">
+
+  <!-- Header -->
+  <div style="border-bottom: 3px solid #7C6CD8; padding-bottom: 20px; margin-bottom: 32px;">
+    <div style="font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #7C6CD8; margin-bottom: 6px;">Consultoría Técnica · Adhoc · OBA 18.0</div>
+    <h1 style="font-size: 1.65rem; font-weight: 700; color: #1C2333; margin: 0 0 6px;">Líneas de Transferencia en Pagos</h1>
+    <p style="font-size: 0.92rem; color: #6B7691; margin: 0;">Desglose de pagos masivos por destinatario y generación de archivos para home banking.</p>
+  </div>
+
+  <!-- Qué hace -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 0 0 1rem;">¿Qué hace?</div>
+
+  <p style="color: #444444; margin-bottom: 1.2rem;">
+    Permite dividir una orden de pago en múltiples <strong>líneas de transferencia</strong>,
+    una por cada destinatario, y generar el archivo bancario listo para subir al home banking
+    del organismo.
+  </p>
+  <p style="color: #444444; margin-bottom: 1.2rem;">
+    El caso de uso típico es el <strong>pago masivo de sueldos</strong>: el área de habilitación
+    recibe un total consolidado y lo desglosa por empleado (CUIT y cuenta bancaria). Las líneas
+    pueden cargarse manualmente o importarse desde un archivo de texto, y el sistema genera
+    automáticamente el archivo en el formato del banco.
+  </p>
+
+  <!-- Flujos principales -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 2.5rem 0 1rem;">Cómo usarlo</div>
+
+  <h2 style="font-size: 1.05rem; font-weight: 700; color: #1C2333; margin: 1.5rem 0 0.5rem;">Cargar líneas de transferencia</h2>
+  <p style="color: #444444; margin-bottom: 0.8rem;">Desde la solapa <strong>Líneas de Transferencia</strong> de la orden de pago, agregar una línea por destinatario indicando partner, cuenta bancaria e importe. Al terminar, usar <strong>"Verificar Total"</strong> para confirmar que la suma coincide con el importe del pago.</p>
+
+  <h2 style="font-size: 1.05rem; font-weight: 700; color: #1C2333; margin: 1.5rem 0 0.5rem;">Importar desde archivo</h2>
+  <p style="color: #444444; margin-bottom: 0.8rem;">El botón <strong>"Importar"</strong> abre un wizard para cargar un archivo de texto (columnas: posición, CUIT, importes). El sistema busca cada CUIT en los partners registrados y crea o actualiza las líneas automáticamente.</p>
+
+  <div style="background: #FFF8E6; border-left: 4px solid #D97706; border-radius: 6px; padding: 12px 16px; margin: 1rem 0; font-size: 0.93rem;">
+    ⚠️ Si un CUIT del archivo no tiene partner registrado en el sistema, la importación muestra un error indicando cuál falta.
+  </div>
+
+  <h2 style="font-size: 1.05rem; font-weight: 700; color: #1C2333; margin: 1.5rem 0 0.5rem;">Generar el archivo bancario</h2>
+  <p style="color: #444444; margin-bottom: 0.8rem;">Con las líneas cargadas y el total verificado, completar los datos de la cuenta debitante (sucursal, número, tipo) y la <strong>Fecha de Acreditación</strong>. El botón <strong>"Generar Archivo"</strong> produce el archivo posicional listo para subir al home banking.</p>
+
+  <!-- Permisos -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 2.5rem 0 1rem;">Permisos</div>
+
+  <p style="color: #444444; margin-bottom: 0.8rem;">La solapa <strong>Líneas de Transferencia</strong> es visible solo para usuarios con perfil <strong>Contabilidad — Administrador</strong> o <strong>Habilitación — Director</strong>.</p>
+
+  <!-- Validaciones clave -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 2.5rem 0 1rem;">Validaciones principales</div>
+
+  <div style="background: #FFF8E6; border-left: 4px solid #D97706; border-radius: 6px; padding: 12px 16px; margin: 0.8rem 0; font-size: 0.93rem;">
+    ⚠️ <strong>"Si existen líneas de transferencia, el importe a pagar debe ser igual a la suma de los importes de las líneas de pago"</strong> — al confirmar el pago con diferencia en el total.
+  </div>
+  <div style="background: #FFF8E6; border-left: 4px solid #D97706; border-radius: 6px; padding: 12px 16px; margin: 0.8rem 0; font-size: 0.93rem;">
+    ⚠️ <strong>"Se requiere cuenta bancaria con número de sucursal. Partner: X"</strong> — al generar el archivo si falta el número de sucursal en la cuenta bancaria del destinatario.
+  </div>
+
+  <!-- Footer -->
+  <div style="margin-top: 2.5rem; padding-top: 20px; border-top: 1px solid #E4E2F0; font-size: 0.8rem; color: #6B7691; text-align: center;">
+    Desarrollado por Consultoría Técnica · <strong>Adhoc</strong>
+  </div>
+
+</div>
+</body>
+</html>
