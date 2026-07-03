@@ -32,12 +32,6 @@ _ATTACHMENT_TYPE_LABELS = {
 }
 
 
-def _set_embed_headers(response):
-    # X-Frame-Options: ALLOWALL no existe en el estándar; basta con CSP
-    response.headers.pop("X-Frame-Options", None)
-    response.headers["Content-Security-Policy"] = "frame-ancestors *"
-
-
 _WIDGET_JS = r"""
 (function () {
     var script = document.currentScript;
@@ -168,7 +162,7 @@ _WIDGET_JS = r"""
 
 class PurchaseWebController(http.Controller):
     @http.route("/compras", type="http", auth="public", website=True)
-    def purchase_list(self, state=None, embed=False, **kwargs):
+    def purchase_list(self, state=None, **kwargs):
         domain = [
             ("website_published", "=", True),
             ("web_publishable", "=", True),
@@ -179,27 +173,18 @@ class PurchaseWebController(http.Controller):
         purchases = Requisition.search(
             domain, order="web_publication_date desc, id desc"
         )
-        template = (
-            "sipreco_purchase_web.purchase_list_embed_template"
-            if embed
-            else "sipreco_purchase_web.purchase_list_template"
-        )
-        response = request.render(
-            template,
+        return request.render(
+            "sipreco_purchase_web.purchase_list_template",
             {
                 "purchases": purchases,
                 "web_states": _WEB_STATES,
                 "current_state": state,
                 "page_name": "purchase_list",
-                "embed": bool(embed),
             },
         )
-        if embed:
-            _set_embed_headers(response)
-        return response
 
     @http.route("/compras/<int:purchase_id>", type="http", auth="public", website=True)
-    def purchase_detail(self, purchase_id, embed=False, **kwargs):
+    def purchase_detail(self, purchase_id, **kwargs):
         Requisition = request.env["purchase.requisition"].sudo()
         purchase = Requisition.search(
             [
@@ -213,24 +198,15 @@ class PurchaseWebController(http.Controller):
         if not purchase:
             return request.not_found()
 
-        template = (
-            "sipreco_purchase_web.purchase_detail_embed_template"
-            if embed
-            else "sipreco_purchase_web.purchase_detail_template"
-        )
-        response = request.render(
-            template,
+        return request.render(
+            "sipreco_purchase_web.purchase_detail_template",
             {
                 "purchase": purchase,
                 "web_states": _WEB_STATES,
                 "attachment_type_labels": _ATTACHMENT_TYPE_LABELS,
                 "page_name": "purchase_detail",
-                "embed": bool(embed),
             },
         )
-        if embed:
-            _set_embed_headers(response)
-        return response
 
     @http.route(
         "/compras/<int:purchase_id>/descargar/<int:attachment_line_id>",
@@ -239,7 +215,7 @@ class PurchaseWebController(http.Controller):
         website=True,
     )
     def purchase_attachment_download(
-        self, purchase_id, attachment_line_id, embed=False, **kwargs
+        self, purchase_id, attachment_line_id, **kwargs
     ):
         attachment_line = (
             request.env["purchase.web.attachment"]
@@ -261,23 +237,14 @@ class PurchaseWebController(http.Controller):
         if attachment_line.require_email:
             email = kwargs.get("email", "").strip()
             if not email:
-                template = (
-                    "sipreco_purchase_web.purchase_email_gate_embed_template"
-                    if embed
-                    else "sipreco_purchase_web.purchase_email_gate_template"
-                )
-                response = request.render(
-                    template,
+                return request.render(
+                    "sipreco_purchase_web.purchase_email_gate_template",
                     {
                         "purchase": purchase,
                         "attachment_line": attachment_line,
                         "page_name": "purchase_email_gate",
-                        "embed": bool(embed),
                     },
                 )
-                if embed:
-                    _set_embed_headers(response)
-                return response
             _logger.info(
                 'Descarga de archivo "%s" (id=%s) por email: %s',
                 attachment_line.name,
@@ -312,25 +279,20 @@ class PurchaseWebController(http.Controller):
         csrf=True,
     )
     def purchase_attachment_email_submit(
-        self, purchase_id, attachment_line_id, email="", embed=False, **kwargs
+        self, purchase_id, attachment_line_id, email="", **kwargs
     ):
         # Validación básica del email recibido por POST
         email = email.strip()
         base_url = "/compras/%d/descargar/%d" % (purchase_id, attachment_line_id)
         if not email or "@" not in email:
-            params = {"embed": 1} if embed else {}
-            qs = "?" + urlencode(params) if params else ""
-            return request.redirect(base_url + qs)
+            return request.redirect(base_url)
         _logger.info(
             "Email registrado para descarga de archivo (requisition=%d, attachment=%d): %s",
             purchase_id,
             attachment_line_id,
             email,
         )
-        params = {"email": email}
-        if embed:
-            params["embed"] = 1
-        return request.redirect(base_url + "?" + urlencode(params))
+        return request.redirect(base_url + "?" + urlencode({"email": email}))
 
     @http.route("/compras/json", type="http", auth="public", methods=["GET"], csrf=False)
     def purchase_list_json(self, state=None, **kwargs):
