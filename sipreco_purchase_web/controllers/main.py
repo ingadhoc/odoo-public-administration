@@ -210,16 +210,23 @@ _WIDGET_JS = r"""
             html += '<h4 style="font-size:15px;margin:20px 0 8px">Documentación</h4>'
                 + '<ul style="list-style:none;padding:0;margin:0">';
             p.attachments.forEach(function (att) {
-                html += '<li style="padding:8px 0;border-bottom:1px solid #f0f0f0">'
-                    + '<a href="' + baseUrl + '/compras/' + p.id + '/descargar/' + att.id + '" '
-                    + 'target="_blank" rel="noopener" '
-                    + 'style="color:#0d6efd;text-decoration:none;font-size:14px">'
-                    + '↓ ' + esc(att.name);
+                html += '<li style="display:flex;justify-content:space-between;align-items:center;'
+                    + 'gap:12px;padding:10px 0;border-bottom:1px solid #f0f0f0">';
+                html += '<div style="min-width:0">'
+                    + '<div style="font-size:14px;color:#333;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'
+                    + esc(att.name) + '</div>';
                 if (att.type_label) {
-                    html += '<span style="color:#888;font-size:12px;margin-left:6px">'
-                        + esc(att.type_label) + '</span>';
+                    html += '<div style="font-size:12px;color:#888;margin-top:2px">'
+                        + esc(att.type_label) + '</div>';
                 }
-                html += '</a></li>';
+                html += '</div>';
+                html += '<a href="' + baseUrl + '/compras/' + p.id + '/descargar/' + att.id + '" '
+                    + 'target="_blank" rel="noopener" '
+                    + 'style="flex-shrink:0;display:inline-flex;align-items:center;gap:5px;'
+                    + 'padding:6px 14px;border-radius:4px;background:#0d6efd;color:#fff;'
+                    + 'text-decoration:none;font-size:13px;white-space:nowrap">'
+                    + '↓ Descargar</a>';
+                html += '</li>';
             });
             html += '</ul>';
         }
