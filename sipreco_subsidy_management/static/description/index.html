@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gestión de Subsidios</title>
+</head>
+<body>
+
+<div style="max-width: 820px; margin: 0 auto; padding: 40px 32px 64px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 15px; line-height: 1.7; color: #1C2333;">
+
+  <!-- Header -->
+  <div style="border-bottom: 3px solid #7C6CD8; padding-bottom: 20px; margin-bottom: 32px;">
+    <div style="font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #7C6CD8; margin-bottom: 6px;">Consultoría Técnica · Adhoc · OBA 18.0</div>
+    <h1 style="font-size: 1.65rem; font-weight: 700; color: #1C2333; margin: 0 0 6px;">Gestión de Subsidios</h1>
+    <p style="font-size: 0.92rem; color: #6B7691; margin: 0;">Ciclo completo de subsidios públicos: desde la solicitud ciudadana hasta la aprobación de la rendición de cuentas.</p>
+  </div>
+
+  <!-- Qué hace -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 0 0 1rem;">¿Qué hace?</div>
+
+  <p style="color: #444444; margin-bottom: 1.2rem;">
+    Gestiona el ciclo de vida completo de los subsidios que otorga el organismo: registro de
+    solicitudes ciudadanas (tickets con DNI, monto y CBU), agrupación en expedientes administrativos,
+    seguimiento del pago (cargo), rendición de cuentas por parte del beneficiario y aprobación
+    mediante Disposiciones de Aprobación.
+  </p>
+  <p style="color: #444444; margin-bottom: 1.2rem;">
+    El sistema calcula automáticamente el estado del subsidio (Cargos Pendientes / Aprobada) según
+    los montos cargados y rendidos, y controla el vencimiento del plazo de rendición (30 días hábiles
+    desde el cargo). También gestiona Resoluciones para grupos de expedientes y genera remitos para
+    la circulación física entre áreas.
+  </p>
+
+  <!-- Flujo principal -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 2.5rem 0 1rem;">Flujo principal</div>
+
+  <div style="background: #F0EFF8; border: 1px solid #E4E2F0; border-radius: 6px; padding: 14px 18px; margin: 1rem 0; font-family: 'SF Mono', Consolas, monospace; font-size: 0.85rem; white-space: pre-wrap; line-height: 1.8; overflow-x: auto;">Registrar tickets de solicitud (DNI + monto + CBU)
+  → Seleccionar tickets aprobados
+      → "Generar Trámite Administrativo" (wizard → expediente)
+          → Registro del cargo (pago al beneficiario)
+              → Beneficiario presenta Rendición
+                  → Crear Disposición de Aprobación
+                      → Monto aprobado = cargo → Estado: Aprobada</div>
+
+  <!-- Permisos -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 2.5rem 0 1rem;">Perfiles de usuario</div>
+
+  <table style="border-collapse: collapse; width: 100%; font-size: 0.91rem; margin-bottom: 1rem;">
+    <thead>
+      <tr>
+        <th style="background: #7C6CD8; color: #fff; text-align: left; padding: 8px 12px; font-size: 0.82rem;">Perfil</th>
+        <th style="background: #7C6CD8; color: #fff; text-align: left; padding: 8px 12px; font-size: 0.82rem;">Acceso</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;"><strong>Contabilidad — Usuario</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;">Acceso completo: crear y editar subsidios, rendiciones, disposiciones y notas.</td>
+      </tr>
+      <tr style="background: #F8F7FD;">
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;"><strong>Secretaría</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;">Lectura de subsidios; CRUD completo en Resoluciones.</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;"><strong>Habilitación — Usuario</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;">Solo lectura.</td>
+      </tr>
+      <tr style="background: #F8F7FD;">
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;"><strong>Portal Subsidio</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;">Acceso ciudadano: solo lectura de sus tickets.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Reportes -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 2.5rem 0 1rem;">Reportes disponibles</div>
+
+  <ul style="padding-left: 1.5em; margin-bottom: 1.2rem;">
+    <li style="margin-bottom: 5px;"><strong>Nota de Subsidio</strong> — imprime la nota adjunta al subsidio.</li>
+    <li style="margin-bottom: 5px;"><strong>Disposición de Aprobación</strong> — imprime la disposición de una rendición.</li>
+    <li style="margin-bottom: 5px;"><strong>Remito de Subsidio</strong> — remito de transferencia del expediente entre áreas.</li>
+    <li style="margin-bottom: 5px;"><strong>Formulario de Subsidio</strong> — documento completo para archivo administrativo.</li>
+    <li style="margin-bottom: 5px;"><strong>Reporte de Subsidios</strong> — listado en formato ODS.</li>
+    <li style="margin-bottom: 5px;"><strong>Reporte de Resolución</strong> — en variantes COMUN, INSTIT e ITRANS.</li>
+    <li style="margin-bottom: 5px;"><strong>Reporte de Tickets</strong> — listado de solicitudes registradas.</li>
+  </ul>
+
+  <!-- Validaciones -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 2.5rem 0 1rem;">Validaciones principales</div>
+
+  <div style="background: #FFF8E6; border-left: 4px solid #D97706; border-radius: 6px; padding: 12px 16px; margin: 0.8rem 0; font-size: 0.93rem;">
+    ⚠️ <strong>"El DNI debe tener 7 u 8 caracteres y el CUIT 11 caracteres"</strong> y <strong>"El CBU debe tener 22 caracteres"</strong> — al guardar un ticket con datos incorrectos.
+  </div>
+  <div style="background: #FFF8E6; border-left: 4px solid #D97706; border-radius: 6px; padding: 12px 16px; margin: 0.8rem 0; font-size: 0.93rem;">
+    ⚠️ <strong>"El importe rendido no puede ser mayor al importe de cargo"</strong> — al intentar rendir más de lo recibido.
+  </div>
+  <div style="background: #FFF8E6; border-left: 4px solid #D97706; border-radius: 6px; padding: 12px 16px; margin: 0.8rem 0; font-size: 0.93rem;">
+    ⚠️ <strong>"El/los Dni/s [lista] tienen solicitudes duplicadas"</strong> — al generar un Trámite Administrativo con tickets de mismo DNI.
+  </div>
+  <div style="background: #FFF8E6; border-left: 4px solid #D97706; border-radius: 6px; padding: 12px 16px; margin: 0.8rem 0; font-size: 0.93rem;">
+    ⚠️ <strong>"No es posible borrar una rendición que presente montos Aprobados"</strong> — anular la disposición antes de eliminar la rendición.
+  </div>
+
+  <!-- Footer -->
+  <div style="margin-top: 2.5rem; padding-top: 20px; border-top: 1px solid #E4E2F0; font-size: 0.8rem; color: #6B7691; text-align: center;">
+    Desarrollado por Consultoría Técnica · <strong>Adhoc</strong>
+  </div>
+
+</div>
+</body>
+</html>

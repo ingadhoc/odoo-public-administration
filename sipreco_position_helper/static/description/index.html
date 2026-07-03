@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Código de Posiciones Presupuestarias</title>
+</head>
+<body>
+
+<div style="max-width: 820px; margin: 0 auto; padding: 40px 32px 64px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 15px; line-height: 1.7; color: #1C2333;">
+
+  <!-- Header -->
+  <div style="border-bottom: 3px solid #7C6CD8; padding-bottom: 20px; margin-bottom: 32px;">
+    <div style="font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #7C6CD8; margin-bottom: 6px;">Consultoría Técnica · Adhoc · OBA 18.0</div>
+    <h1 style="font-size: 1.65rem; font-weight: 700; color: #1C2333; margin: 0 0 6px;">Código de Posiciones Presupuestarias</h1>
+    <p style="font-size: 0.92rem; color: #6B7691; margin: 0;">Codificación jerárquica automática para la estructura presupuestaria pública.</p>
+  </div>
+
+  <!-- Qué hace -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 0 0 1rem;">¿Qué hace?</div>
+
+  <p style="color: #444444; margin-bottom: 1.2rem;">
+    Este módulo amplía la gestión de posiciones presupuestarias incorporando un sistema de
+    <strong>codificación jerárquica automática</strong>: cada posición tiene un
+    <strong>Código Individual</strong> que se combina con el de su nodo padre para formar el
+    código completo de la cadena.
+  </p>
+  <p style="color: #444444; margin-bottom: 1.2rem;">
+    Cuando el usuario asigna un código individual a un nodo, el sistema concatena automáticamente
+    ese código con el de todos sus ancestros, generando el Código completo sin necesidad de
+    escribirlo a mano. Si se mueve el nodo a otra rama, el código se recalcula solo.
+  </p>
+
+  <!-- Cómo usarlo -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 2.5rem 0 1rem;">Cómo usarlo</div>
+
+  <ol style="padding-left: 1.5em; margin-bottom: 1.2rem;">
+    <li style="margin-bottom: 6px;">Abrir la Posición Presupuestaria desde el menú correspondiente.</li>
+    <li style="margin-bottom: 6px;">Completar el campo <strong>Código Individual</strong> con el tramo propio de ese nodo (ej: <code style="background: #F0EFF8; padding: 1px 5px; border-radius: 3px;">01</code>, <code style="background: #F0EFF8; padding: 1px 5px; border-radius: 3px;">07</code>).</li>
+    <li style="margin-bottom: 6px;">Guardar. El campo <strong>Código</strong> se actualiza automáticamente como concatenación del código del padre más el código individual.</li>
+  </ol>
+
+  <div style="background: #F0EFF8; border: 1px solid #E4E2F0; border-radius: 6px; padding: 14px 18px; margin: 1rem 0; font-family: 'SF Mono', Consolas, monospace; font-size: 0.85rem; white-space: pre-wrap; line-height: 1.8;">Padre "Gastos Corrientes" → Código: 1
+  Hijo "Personal"  → Código Individual: 01  →  Código: 101
+    Nieto "Planta Permanente" → Código Individual: 01  →  Código: 10101</div>
+
+  <!-- Campos -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 2.5rem 0 1rem;">Campos agregados</div>
+
+  <table style="border-collapse: collapse; width: 100%; font-size: 0.91rem; margin-bottom: 1rem;">
+    <thead>
+      <tr>
+        <th style="background: #7C6CD8; color: #fff; text-align: left; padding: 8px 12px; font-size: 0.82rem;">Campo</th>
+        <th style="background: #7C6CD8; color: #fff; text-align: left; padding: 8px 12px; font-size: 0.82rem;">Qué es</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0; vertical-align: top;"><strong>Código Individual</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0; vertical-align: top;">Tramo propio del nodo, asignado manualmente. El usuario lo edita.</td>
+      </tr>
+      <tr style="background: #F8F7FD;">
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0; vertical-align: top;"><strong>Código</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0; vertical-align: top;">Código completo calculado: padre + código individual. Solo lectura.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="border-radius: 6px; padding: 12px 16px; margin: 1rem 0; font-size: 0.93rem; background: #EDE9FA; border-left: 4px solid #7C6CD8;">
+    ℹ️ Si una posición no tiene padre (nodo raíz), su Código completo es igual a su Código Individual.
+  </div>
+
+  <!-- Footer -->
+  <div style="margin-top: 2.5rem; padding-top: 20px; border-top: 1px solid #E4E2F0; font-size: 0.8rem; color: #6B7691; text-align: center;">
+    Desarrollado por Consultoría Técnica · <strong>Adhoc</strong>
+  </div>
+
+</div>
+</body>
+</html>

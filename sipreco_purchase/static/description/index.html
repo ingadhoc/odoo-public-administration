@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gestión de Compras y Abastecimientos</title>
+</head>
+<body>
+
+<div style="max-width: 820px; margin: 0 auto; padding: 40px 32px 64px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 15px; line-height: 1.7; color: #1C2333;">
+
+  <!-- Header -->
+  <div style="border-bottom: 3px solid #7C6CD8; padding-bottom: 20px; margin-bottom: 32px;">
+    <div style="font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #7C6CD8; margin-bottom: 6px;">Consultoría Técnica · Adhoc · OBA 18.0</div>
+    <h1 style="font-size: 1.65rem; font-weight: 700; color: #1C2333; margin: 0 0 6px;">Gestión de Compras y Abastecimientos</h1>
+    <p style="font-size: 0.92rem; color: #6B7691; margin: 0;">Circuito completo de requerimientos, inspección y expediente administrativo para organismos públicos (SIPRECO).</p>
+  </div>
+
+  <!-- Qué hace -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 0 0 1rem;">¿Qué hace?</div>
+
+  <p style="color: #444444; margin-bottom: 1.2rem;">
+    Adapta el proceso de compras de Odoo para organismos públicos con presupuesto SIPRECO,
+    incorporando <strong>Pedidos de Requerimiento</strong>, <strong>inspección obligatoria</strong>
+    y vinculación con el <strong>Expediente Administrativo</strong> presupuestario.
+  </p>
+  <p style="color: #444444; margin-bottom: 1.2rem;">
+    Los empleados (Solicitantes) crean pedidos con el bien o servicio que necesitan y su justificación.
+    El área de Compras agrupa los requerimientos en una Solicitud de Compra formal, la inspecciona,
+    solicita cotizaciones y, al adjudicar, genera la Orden de Compra vinculada al expediente.
+    Los menúes de Odoo se adaptan al circuito SIPRECO: cada perfil ve solo lo que le corresponde.
+  </p>
+
+  <!-- Flujo principal -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 2.5rem 0 1rem;">Flujo principal</div>
+
+  <div style="background: #F0EFF8; border: 1px solid #E4E2F0; border-radius: 6px; padding: 14px 18px; margin: 1rem 0; font-family: 'SF Mono', Consolas, monospace; font-size: 0.85rem; white-space: pre-wrap; line-height: 1.8; overflow-x: auto;">Solicitante crea Pedido de Requerimiento (PR-YYYY-XXXXXX)
+  → Compras agrupa en Solicitud de Compra
+      → Define Tipo de Transacción
+          → "A inspección" (registra usuario y fecha)
+              → "Confirm" (perfil Aprobar SC)
+                  → Solicita cotizaciones a proveedores
+                      → Cierra licitación → Orden de Compra
+                          → "Crear Expediente Administrativo"</div>
+
+  <!-- Permisos -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 2.5rem 0 1rem;">Perfiles de usuario</div>
+
+  <table style="border-collapse: collapse; width: 100%; font-size: 0.91rem; margin-bottom: 1rem;">
+    <thead>
+      <tr>
+        <th style="background: #7C6CD8; color: #fff; text-align: left; padding: 8px 12px; font-size: 0.82rem;">Perfil</th>
+        <th style="background: #7C6CD8; color: #fff; text-align: left; padding: 8px 12px; font-size: 0.82rem;">Qué puede hacer</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;"><strong>Requirente</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;">Crear y gestionar sus propios Pedidos de Requerimiento.</td>
+      </tr>
+      <tr style="background: #F8F7FD;">
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;"><strong>Compras</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;">Acceso completo a todas las SC. Inspeccionar, enviar notificaciones.</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;"><strong>Aprobar SC</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;">Confirmar y cancelar Solicitudes de Compra.</td>
+      </tr>
+      <tr style="background: #F8F7FD;">
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;"><strong>Visualizar SC y OC</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;">Solo lectura sobre SC y OC.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Estados -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 2.5rem 0 1rem;">Estados de la Solicitud de Compra</div>
+
+  <table style="border-collapse: collapse; width: 100%; font-size: 0.91rem; margin-bottom: 1rem;">
+    <thead>
+      <tr>
+        <th style="background: #7C6CD8; color: #fff; text-align: left; padding: 8px 12px; font-size: 0.82rem;">Estado</th>
+        <th style="background: #7C6CD8; color: #fff; text-align: left; padding: 8px 12px; font-size: 0.82rem;">Descripción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;"><strong>Borrador</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;">En preparación. Debe inspeccionarse antes de confirmar.</td>
+      </tr>
+      <tr style="background: #F8F7FD;">
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;"><strong>Confirmada</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;">Aprobada. Se pueden solicitar cotizaciones.</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;"><strong>En licitación</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;">Cotizaciones enviadas. En espera de respuestas.</td>
+      </tr>
+      <tr style="background: #F8F7FD;">
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;"><strong>Cerrada</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;">Proveedor adjudicado. OC en ejecución.</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;"><strong>Cancelada</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;">Cancelada junto con todos los requerimientos asociados. Irreversible.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Validaciones -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 2.5rem 0 1rem;">Validaciones principales</div>
+
+  <div style="background: #FFF8E6; border-left: 4px solid #D97706; border-radius: 6px; padding: 12px 16px; margin: 0.8rem 0; font-size: 0.93rem;">
+    ⚠️ <strong>"Antes de revisar debe tener establecido un Tipo"</strong> — al intentar inspeccionar sin definir el Tipo de Transacción.
+  </div>
+  <div style="background: #FFF8E6; border-left: 4px solid #D97706; border-radius: 6px; padding: 12px 16px; margin: 0.8rem 0; font-size: 0.93rem;">
+    ⚠️ <strong>"No se puede confirmar una requisición sin líneas o con importe total 0"</strong> — al confirmar una SC vacía.
+  </div>
+  <div style="background: #FFF8E6; border-left: 4px solid #D97706; border-radius: 6px; padding: 12px 16px; margin: 0.8rem 0; font-size: 0.93rem;">
+    ⚠️ <strong>"No se puede cerrar la licitación si no se solicitaron presupuestos"</strong> — al cerrar sin OC vinculadas.
+  </div>
+
+  <!-- Footer -->
+  <div style="margin-top: 2.5rem; padding-top: 20px; border-top: 1px solid #E4E2F0; font-size: 0.8rem; color: #6B7691; text-align: center;">
+    Desarrollado por Consultoría Técnica · <strong>Adhoc</strong>
+  </div>
+
+</div>
+</body>
+</html>

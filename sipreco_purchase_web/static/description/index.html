@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Publicación Web de Compras y Contrataciones</title>
+</head>
+<body>
+
+<div style="max-width: 820px; margin: 0 auto; padding: 40px 32px 64px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 15px; line-height: 1.7; color: #1C2333;">
+
+  <!-- Header -->
+  <div style="border-bottom: 3px solid #7C6CD8; padding-bottom: 20px; margin-bottom: 32px;">
+    <div style="font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #7C6CD8; margin-bottom: 6px;">Consultoría Técnica · Adhoc · OBA 18.0</div>
+    <h1 style="font-size: 1.65rem; font-weight: 700; color: #1C2333; margin: 0 0 6px;">Publicación Web de Compras y Contrataciones</h1>
+    <p style="font-size: 0.92rem; color: #6B7691; margin: 0;">Portal público para que ciudadanos y proveedores consulten los procesos de compras del organismo.</p>
+  </div>
+
+  <!-- Qué hace -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 0 0 1rem;">¿Qué hace?</div>
+
+  <p style="color: #444444; margin-bottom: 1.2rem;">
+    Permite publicar Solicitudes de Compra del sistema SIPRECO en el sitio web público del organismo
+    (<strong>/compras</strong>), de modo que ciudadanos y proveedores puedan consultar los procesos
+    en curso, ver su estado y descargar documentación (pliegos, circulares, declaraciones juradas).
+  </p>
+  <p style="color: #444444; margin-bottom: 1.2rem;">
+    El responsable habilita la SC para publicación, completa los datos públicos, carga los archivos
+    y la publica con un botón. Cuando el proceso se adjudica, se registran los adjudicatarios con
+    sus montos para transparencia pública.
+  </p>
+
+  <!-- Flujo -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 2.5rem 0 1rem;">Cómo usarlo</div>
+
+  <div style="background: #F0EFF8; border: 1px solid #E4E2F0; border-radius: 6px; padding: 14px 18px; margin: 1rem 0; font-family: 'SF Mono', Consolas, monospace; font-size: 0.85rem; white-space: pre-wrap; line-height: 1.8; overflow-x: auto;">Marcar SC como "Publicable en web"
+  → Completar Número, Objeto, Valor oficial y Fecha de Apertura
+      → Cargar archivos en "Archivos públicos"
+          → "Publicar en web"
+              → SC visible en /compras
+                  → Avanzar Estado público según evolución del proceso
+                      → Al adjudicar: registrar adjudicatarios en pestaña "Adjudicatarios"</div>
+
+  <!-- Estados públicos -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 2.5rem 0 1rem;">Estados públicos</div>
+
+  <table style="border-collapse: collapse; width: 100%; font-size: 0.91rem; margin-bottom: 1rem;">
+    <thead>
+      <tr>
+        <th style="background: #7C6CD8; color: #fff; text-align: left; padding: 8px 12px; font-size: 0.82rem;">Estado</th>
+        <th style="background: #7C6CD8; color: #fff; text-align: left; padding: 8px 12px; font-size: 0.82rem;">Qué ve el ciudadano</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;"><strong>Para Apertura</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;">Proceso abierto, se esperan ofertas.</td>
+      </tr>
+      <tr style="background: #F8F7FD;">
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;"><strong>En evaluación</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;">Ofertas recibidas, en análisis.</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;"><strong>Adjudicada</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;">Proveedor ganador seleccionado. Muestra adjudicatarios.</td>
+      </tr>
+      <tr style="background: #F8F7FD;">
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;"><strong>Finalizada</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;">Proceso completado y cerrado.</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;"><strong>Desierta / Fracasada / Suspendida</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;">Proceso sin resultado positivo o temporalmente detenido.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Permisos -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 2.5rem 0 1rem;">Permisos</div>
+
+  <p style="color: #444444; margin-bottom: 0.8rem;">
+    El grupo <strong>"Publicar en la web"</strong> habilita ver y editar la solapa "Datos para página web",
+    publicar y despublicar SC. Los ciudadanos acceden al portal <strong>/compras</strong> sin necesidad
+    de cuenta de usuario.
+  </p>
+
+  <!-- Footer -->
+  <div style="margin-top: 2.5rem; padding-top: 20px; border-top: 1px solid #E4E2F0; font-size: 0.8rem; color: #6B7691; text-align: center;">
+    Desarrollado por Consultoría Técnica · <strong>Adhoc</strong>
+  </div>
+
+</div>
+</body>
+</html>
