@@ -35,7 +35,13 @@ _ATTACHMENT_TYPE_LABELS = {
 _WIDGET_JS = r"""
 (function () {
     var script = document.currentScript;
-    var baseUrl = new URL(script.src).origin;
+    if (!script || !script.src) {
+        var tags = document.querySelectorAll('script[src*="/compras/widget.js"]');
+        script = tags[tags.length - 1] || null;
+    }
+    var baseUrl = (script && script.src)
+        ? new URL(script.src).origin
+        : window.location.origin;
     var targetId = (script.dataset && script.dataset.target) || 'cmr-compras';
     var container = document.getElementById(targetId);
     if (!container) return;
