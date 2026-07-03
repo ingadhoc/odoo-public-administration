@@ -42,7 +42,7 @@ _WIDGET_JS = r"""
     var baseUrl = (script && script.src)
         ? new URL(script.src).origin
         : window.location.origin;
-    var targetId = (script.dataset && script.dataset.target) || 'cmr-compras';
+    var targetId = (script && script.dataset && script.dataset.target) || 'cmr-compras';
     var container = document.getElementById(targetId);
     if (!container) return;
 
@@ -65,6 +65,11 @@ _WIDGET_JS = r"""
             .replace(/</g, '&lt;')
             .replace(/>/g, '&gt;')
             .replace(/"/g, '&quot;');
+    }
+
+    function formatAmount(n, symbol) {
+        var s = Number(n).toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        return esc(symbol) + ' ' + s;
     }
 
     function badgeHtml(state) {
@@ -126,10 +131,9 @@ _WIDGET_JS = r"""
 
                 html += '<div style="display:flex;align-items:center;gap:8px;flex-shrink:0">';
                 html += badgeHtml(p.state);
-                html += '<a href="' + baseUrl + '/compras/' + p.id + '" target="_blank" '
-                    + 'rel="noopener" style="padding:5px 12px;border:1px solid #0d6efd;'
-                    + 'border-radius:4px;color:#0d6efd;text-decoration:none;'
-                    + 'font-size:13px;white-space:nowrap">Ver detalle</a>';
+                html += '<button data-cmr-id="' + p.id + '" style="cursor:pointer;padding:5px 12px;'
+                    + 'border:1px solid #0d6efd;border-radius:4px;background:#fff;'
+                    + 'color:#0d6efd;font-size:13px;white-space:nowrap">Ver detalle</button>';
                 html += '</div>';
 
                 html += '</div></div>';
@@ -140,11 +144,118 @@ _WIDGET_JS = r"""
         return html;
     }
 
+    function renderDetail(p) {
+        var html = '<div style="font-family:inherit">';
+
+        html += '<button data-cmr-back="" style="cursor:pointer;padding:4px 12px;border-radius:4px;'
+            + 'font-size:13px;margin-bottom:16px;border:1px solid #ccc;background:#fff;color:#555">'
+            + '← Volver al listado</button>';
+
+        html += '<h2 style="font-size:20px;margin:0 0 6px">';
+        if (p.number) {
+            html += '<span style="color:#999;font-size:15px;margin-right:8px">' + esc(p.number) + '</span>';
+        }
+        html += esc(p.object) + '</h2>';
+        html += badgeHtml(p.state);
+
+        html += '<hr style="margin:16px 0"/>';
+
+        html += '<dl style="display:grid;grid-template-columns:auto 1fr;gap:4px 16px;font-size:14px">';
+        if (p.type) {
+            html += '<dt style="color:#666;white-space:nowrap">Tipo de compra</dt>'
+                + '<dd style="margin:0">' + esc(p.type) + '</dd>';
+        }
+        if (p.amount && p.currency_symbol) {
+            html += '<dt style="color:#666;white-space:nowrap">Valor oficial</dt>'
+                + '<dd style="margin:0">' + formatAmount(p.amount, p.currency_symbol) + '</dd>';
+        }
+        if (p.opening_date) {
+            html += '<dt style="color:#666;white-space:nowrap">Apertura</dt>'
+                + '<dd style="margin:0">' + esc(p.opening_date) + '</dd>';
+        }
+        if (p.publication_date) {
+            html += '<dt style="color:#666;white-space:nowrap">Publicación</dt>'
+                + '<dd style="margin:0">' + esc(p.publication_date) + '</dd>';
+        }
+        if (p.last_update) {
+            html += '<dt style="color:#666;white-space:nowrap">Última actualización</dt>'
+                + '<dd style="margin:0">' + esc(p.last_update) + '</dd>';
+        }
+        html += '</dl>';
+
+        if (p.observations_html) {
+            html += '<h4 style="font-size:15px;margin:20px 0 8px">Observaciones</h4>'
+                + '<div style="font-size:14px">' + p.observations_html + '</div>';
+        }
+
+        if (p.awards && p.awards.length) {
+            html += '<h4 style="font-size:15px;margin:20px 0 8px">Adjudicación</h4>';
+            html += '<table style="width:100%;border-collapse:collapse;font-size:13px">'
+                + '<thead><tr style="background:#f8f9fa">'
+                + '<th style="padding:6px 10px;text-align:left;border:1px solid #dee2e6">Adjudicatario</th>'
+                + '<th style="padding:6px 10px;text-align:left;border:1px solid #dee2e6">Valor</th>'
+                + '<th style="padding:6px 10px;text-align:left;border:1px solid #dee2e6">Detalle</th>'
+                + '</tr></thead><tbody>';
+            p.awards.forEach(function (a) {
+                html += '<tr>'
+                    + '<td style="padding:6px 10px;border:1px solid #dee2e6">' + esc(a.partner) + '</td>'
+                    + '<td style="padding:6px 10px;border:1px solid #dee2e6">' + formatAmount(a.amount, a.currency_symbol) + '</td>'
+                    + '<td style="padding:6px 10px;border:1px solid #dee2e6">' + esc(a.notes) + '</td>'
+                    + '</tr>';
+            });
+            html += '</tbody></table>';
+        }
+
+        if (p.attachments && p.attachments.length) {
+            html += '<h4 style="font-size:15px;margin:20px 0 8px">Documentación</h4>'
+                + '<ul style="list-style:none;padding:0;margin:0">';
+            p.attachments.forEach(function (att) {
+                html += '<li style="padding:8px 0;border-bottom:1px solid #f0f0f0">'
+                    + '<a href="' + baseUrl + '/compras/' + p.id + '/descargar/' + att.id + '" '
+                    + 'target="_blank" rel="noopener" '
+                    + 'style="color:#0d6efd;text-decoration:none;font-size:14px">'
+                    + '↓ ' + esc(att.name);
+                if (att.type_label) {
+                    html += '<span style="color:#888;font-size:12px;margin-left:6px">'
+                        + esc(att.type_label) + '</span>';
+                }
+                html += '</a></li>';
+            });
+            html += '</ul>';
+        }
+
+        html += '</div>';
+        return html;
+    }
+
     container.addEventListener('click', function (e) {
-        var btn = e.target.closest('[data-cmr-state]');
-        if (!btn) return;
-        activeState = btn.dataset.cmrState || null;
-        container.innerHTML = renderList(allPurchases);
+        if (e.target.closest('[data-cmr-back]')) {
+            container.innerHTML = renderList(allPurchases);
+            return;
+        }
+        var stateBtn = e.target.closest('[data-cmr-state]');
+        if (stateBtn) {
+            activeState = stateBtn.dataset.cmrState || null;
+            container.innerHTML = renderList(allPurchases);
+            return;
+        }
+        var detailBtn = e.target.closest('[data-cmr-id]');
+        if (detailBtn) {
+            var id = detailBtn.dataset.cmrId;
+            container.innerHTML = '<p style="color:#aaa;font-size:13px;padding:8px 0">Cargando…</p>';
+            fetch(baseUrl + '/compras/' + id + '/json')
+                .then(function (r) {
+                    if (!r.ok) throw new Error('HTTP ' + r.status);
+                    return r.json();
+                })
+                .then(function (data) {
+                    container.innerHTML = renderDetail(data);
+                })
+                .catch(function () {
+                    container.innerHTML = '<p style="color:#c00;padding:8px 0">'
+                        + 'No se pudo cargar el detalle. Intentá más tarde.</p>';
+                });
+        }
     });
 
     container.innerHTML = '<p style="color:#aaa;font-size:13px;padding:8px 0">Cargando compras…</p>';
@@ -334,6 +445,82 @@ class PurchaseWebController(http.Controller):
             }
             for p in purchases
         ]
+        return request.make_response(
+            json.dumps(data, ensure_ascii=False),
+            headers=[
+                ("Content-Type", "application/json; charset=utf-8"),
+                ("Access-Control-Allow-Origin", "*"),
+                ("Access-Control-Allow-Methods", "GET, OPTIONS"),
+            ],
+        )
+
+    @http.route("/compras/<int:purchase_id>/json", type="http", auth="public", methods=["GET"], csrf=False)
+    def purchase_detail_json(self, purchase_id, **kwargs):
+        purchase = (
+            request.env["purchase.requisition"]
+            .sudo()
+            .search(
+                [
+                    ("id", "=", purchase_id),
+                    ("website_published", "=", True),
+                    ("web_publishable", "=", True),
+                ],
+                limit=1,
+            )
+        )
+        if not purchase:
+            return request.make_response(
+                json.dumps({"error": "not_found"}, ensure_ascii=False),
+                headers=[
+                    ("Content-Type", "application/json; charset=utf-8"),
+                    ("Access-Control-Allow-Origin", "*"),
+                ],
+            )
+        data = {
+            "id": purchase.id,
+            "number": purchase.web_number or "",
+            "object": purchase.web_object or purchase.name or "",
+            "type": purchase.transaction_type_id.name if purchase.transaction_type_id else "",
+            "state": purchase.web_state or "",
+            "state_label": _WEB_STATES.get(purchase.web_state, purchase.web_state or ""),
+            "opening_date": (
+                purchase.web_opening_datetime.strftime("%d/%m/%Y %H:%M")
+                if purchase.web_opening_datetime
+                else ""
+            ),
+            "publication_date": (
+                purchase.web_publication_date.strftime("%d/%m/%Y")
+                if purchase.web_publication_date
+                else ""
+            ),
+            "last_update": (
+                purchase.web_last_update.strftime("%d/%m/%Y")
+                if purchase.web_last_update
+                else ""
+            ),
+            "currency_symbol": purchase.currency_id.symbol if purchase.currency_id else "",
+            "amount": (
+                purchase.web_amount if purchase.web_amount_manual else purchase.amount_total
+            ),
+            "observations_html": purchase.web_observations or "",
+            "awards": [
+                {
+                    "partner": award.partner_id.name or "",
+                    "currency_symbol": award.currency_id.symbol if award.currency_id else "",
+                    "amount": award.amount,
+                    "notes": award.notes or "",
+                }
+                for award in purchase.web_award_ids
+            ],
+            "attachments": [
+                {
+                    "id": att.id,
+                    "name": att.name or "",
+                    "type_label": _ATTACHMENT_TYPE_LABELS.get(att.attachment_type, ""),
+                }
+                for att in purchase.web_attachment_ids
+            ],
+        }
         return request.make_response(
             json.dumps(data, ensure_ascii=False),
             headers=[
