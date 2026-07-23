@@ -49,8 +49,9 @@ class AccountPayment(models.Model):
         ok_fields = [
             'document_number', 'receiptbook_id', 'state', 'date',
             'name', 'move_name']
-        if not set(ok_fields).intersection(vals.keys()) and self.filtered(
+        if len(vals.keys()) and not set(ok_fields).intersection(vals.keys()) and self.filtered(
                 'returned_payment_ids'):
+            _logger.info('vals %s ' % vals)
             raise ValidationError(_(
                 'No puede modificar una devolución de retención'))
         return super(AccountPayment, self).write(vals)
