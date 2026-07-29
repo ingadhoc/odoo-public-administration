@@ -17,8 +17,3 @@ class PurchaseOrderLine(models.Model):
         super()._compute_price_unit_and_date_planned_and_name()
         for pol in lines_with_requisition:
             pol.price_unit = saved_prices.get(pol.id, 0.0)
-
-    def _get_product_purchase_description(self, product_lang):
-        if self.name:
-            return self.name
-        super()._get_product_purchase_description(product_lang)
