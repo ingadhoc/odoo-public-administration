@@ -87,11 +87,18 @@ class AccountMove(models.Model):
         # Add this to allow analysis from date
         to_date = self._context.get('analysis_to_date', False)
         to_date = fields.Date.from_string(to_date) if to_date else False
+        # "mandado a pagar": órdenes salientes (outbound) confirmadas o en ejecución.
+        # Pagos rejected y pagos inbound (ej. nota crédito del proveedor) no cuentan.
+        to_pay_states = {'confirmed', 'signature_process', 'signed', 'in_process', 'paid'}
         if to_date:
-            lines = lines.filtered(lambda x: any(pg.sipreco_state not in ['draft', 'canceled'] and pg.confirmation_date
-                                                 and pg.confirmation_date <= to_date for pg in x.payment_ids))
+            lines = lines.filtered(lambda x: any(
+                pg.sipreco_state in to_pay_states and pg.payment_type == 'outbound'
+                and pg.confirmation_date and pg.confirmation_date <= to_date
+                for pg in x.payment_ids))
         else:
-            lines = lines.filtered(lambda x: any(pg.sipreco_state not in ['draft', 'canceled'] for pg in x.payment_ids))
+            lines = lines.filtered(lambda x: any(
+                pg.sipreco_state in to_pay_states and pg.payment_type == 'outbound'
+                for pg in x.payment_ids))
         amount = -sum(lines.mapped('balance'))
         if self.move_type in ('in_refund', 'out_refund'):
             amount = -amount
