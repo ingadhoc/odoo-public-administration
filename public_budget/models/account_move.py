@@ -84,6 +84,10 @@ class AccountMove(models.Model):
             return self.amount_total
 
         lines = self.line_ids.filtered(lambda line: line.account_id.user_type_id.type in ('receivable', 'payable'))
+        # Only count outbound payable lines (balance < 0 means company owes money to vendor).
+        # Inbound lines (e.g. vendor credit notes collected via inbound payment group) must not
+        # reduce to_pay_amount.
+        lines = lines.filtered(lambda line: line.balance < 0)
         # Add this to allow analysis from date
         to_date = self._context.get('analysis_to_date', False)
         if to_date:
