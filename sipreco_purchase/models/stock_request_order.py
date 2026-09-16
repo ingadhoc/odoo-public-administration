@@ -52,13 +52,11 @@ class StockRequestOrder(models.Model):
         # clientes esta seteada en el partner
         super().onchange_warehouse_id()
         self.location_id = self.partner_id.property_stock_customer
-        # # use customer location by default instead of stock location
-        # self.location_id = self.warehouse_id.wh_output_stock_loc_id
 
     @api.model
     def create(self, vals):
         # mandamos el partner en el group ya que es este el que va hasta el
-        # # picking
+        # picking
         rec = super().create(vals)
         if rec.procurement_group_id:
             rec.procurement_group_id.partner_id = rec.partner_id
