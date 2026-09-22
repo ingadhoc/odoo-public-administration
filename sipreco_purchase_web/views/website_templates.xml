@@ -127,8 +127,8 @@
                                 </t>
                                 <dt class="col-sm-4">Valor oficial</dt>
                                 <dd class="col-sm-8">
-                                    <t t-esc="purchase.currency_id.symbol"/>&#160;
-                                    <t t-esc="'{:,.2f}'.format(purchase.web_amount if purchase.web_amount_manual else purchase.amount_total)"/>
+                                    <t t-esc="purchase.web_amount if purchase.web_amount_manual else purchase.amount_total"
+                                       t-options='{"widget": "monetary", "display_currency": purchase.currency_id}'/>
                                 </dd>
                                 <t t-if="purchase.web_opening_datetime">
                                     <dt class="col-sm-4">Fecha y hora de Apertura</dt>
@@ -172,8 +172,8 @@
                                             <tr>
                                                 <td><t t-esc="award.partner_id.name"/></td>
                                                 <td>
-                                                    <t t-esc="award.currency_id.symbol"/>&#160;
-                                                    <t t-esc="'{:,.2f}'.format(award.amount)"/>
+                                                    <t t-esc="award.amount"
+                                                       t-options='{"widget": "monetary", "display_currency": award.currency_id}'/>
                                                 </td>
                                                 <td><t t-esc="award.notes or ''"/></td>
                                             </tr>
@@ -183,8 +183,8 @@
                                         <tr class="fw-bold">
                                             <td>Total adjudicado</td>
                                             <td>
-                                                <t t-esc="purchase.currency_id.symbol"/>&#160;
-                                                <t t-esc="'{:,.2f}'.format(purchase.web_total_awarded)"/>
+                                                <t t-esc="purchase.web_total_awarded"
+                                                   t-options='{"widget": "monetary", "display_currency": purchase.currency_id}'/>
                                             </td>
                                             <td></td>
                                         </tr>
