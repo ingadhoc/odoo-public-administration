@@ -90,19 +90,37 @@ class Remit(models.Model):
                         'You can Not cancel a remit that is not the last '
                         'one for all the expedients'))
 
-    @api.constrains('date', 'expedient_ids')
+    @api.constrains('date', 'expedient_ids', 'location_id')
     def check_dates(self):
-        for rec in self:
-            future_expedients = rec.expedient_ids.search([
-                ('last_move_date', '>', rec.date),
-                ('id', 'in', rec.expedient_ids.ids),
-            ])
-            if future_expedients:
-                raise ValidationError(_(
-                    'No puede mover expedientes que hayan sido movidos en un '
-                    'remito con fecha mayor a la de este remito!\n'
-                    '* Expedientes: %s' % (', '.join(
-                        future_expedients.mapped('number')))))
+        """ Validamos contra el remito anterior de cada expediente (no contra
+        el estado guardado del expediente) para que no se pueda agregar un
+        expediente a un remito creado antes de su último movimiento, ni mover
+        un expediente en tránsito o desde una ubicación en la que no está.
+        """
+        for rec in self.filtered(lambda x: x.state == 'in_transit'):
+            for expedient in rec.expedient_ids:
+                previous_remit = rec.sudo().search([
+                    ('expedient_ids', '=', expedient.id),
+                    ('state', '!=', 'cancel'),
+                    ('id', '!=', rec.id),
+                ], order='date desc, id desc', limit=1)
+                if previous_remit.date and previous_remit.date > rec.date:
+                    raise ValidationError(_(
+                        'No puede mover el expediente "%(expedient)s" en este remito porque fue '
+                        'movido en el remito "%(remit)s" con fecha mayor a la de este remito.',
+                        expedient=expedient.display_name, remit=previous_remit.display_name))
+                if previous_remit.state == 'in_transit':
+                    raise ValidationError(_(
+                        'No puede mover el expediente "%(expedient)s" porque está en tránsito '
+                        'en el remito "%(remit)s".',
+                        expedient=expedient.display_name, remit=previous_remit.display_name))
+                location = previous_remit.location_dest_id or expedient.sudo().first_location_id
+                if location != rec.location_id:
+                    raise ValidationError(_(
+                        'No puede mover el expediente "%(expedient)s" desde "%(origin)s" porque '
+                        'su ubicación actual es "%(location)s".',
+                        expedient=expedient.display_name, origin=rec.location_id.display_name,
+                        location=location.display_name))
 
     def check_user_location(self):
         for rec in self:
@@ -116,6 +134,7 @@ class Remit(models.Model):
     def action_cancel_in_transit(self):
         """ go from canceled state to draft state"""
         self.write({'state': 'in_transit'})
+        self.check_dates()
         return True
 
     def action_cancel(self):
