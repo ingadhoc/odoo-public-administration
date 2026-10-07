@@ -113,12 +113,12 @@ class PurchaseRequisition(models.Model):
                     'presupuestos'))
         return super().action_open()
 
-    @api.model
-    def create(self, vals):
-        vals['date'] = fields.Date.today()
-        vals['name'] = self.env['ir.sequence'].next_by_code(
-                'purchase.requisition.purchase.tender') or 'New'
-        return super().create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        # el name lo asigna el core; ver ir.sequence.next_by_code
+        for vals in vals_list:
+            vals['date'] = fields.Date.today()
+        return super().create(vals_list)
 
     def action_confirm(self):
         if self.amount_total <= 0:
