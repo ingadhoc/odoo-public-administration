@@ -72,14 +72,15 @@ class PublicBudgetSubsidyTicket(models.Model):
         if ticket.dni and ticket.partner_id:
             partner = ticket.partner_id
             partner.subsidy_recipient = True
-            if len(ticket.dni) == 8:
+            dni_identification_type = False
+            if len(ticket.dni) in (7, 8):
                 dni_identification_type = self.env['l10n_latam.identification.type'].search([('name', '=', 'DNI')], limit=1)
             if len(ticket.dni) == 11:
                 dni_identification_type = self.env['l10n_latam.identification.type'].search([('name', '=', 'CUIT')], limit=1)
             if dni_identification_type:
                 partner.l10n_latam_identification_type_id = dni_identification_type.id
             partner.vat = ticket.dni
-        elif not ticket.partner_id and len(ticket.dni) == 8:
+        elif not ticket.partner_id and len(ticket.dni) in (7, 8):
             partner = self.env['res.partner'].create({
                 'name': ticket.partner_name,
                 'mobile': ticket.partner_phone,
