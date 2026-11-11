@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_aeroo_purchase_requisition_comparative_report" model="ir.actions.report">
+        <field name="name">Comparativa de precios</field>
+        <field name="model">purchase.requisition</field>
+        <field name="report_name">sipreco_purchase_requisition_comparative_report</field>
+        <field name="report_type">aeroo</field>
+        <field name="in_format">oo-ods</field>
+        <field name="report_file">sipreco_purchase/reports/purchase_requisition_comparative_report.ods</field>
+        <field name="tml_source">file</field>
+        <field name="out_format" ref="report_aeroo.report_mimetypes_xls_odt"/>
+        <field name="styles_mode">specified</field>
+        <field name="stylesheet_id" ref="public_budget.sipreco_stylesheet"/>
+        <field name="binding_model_id" ref="purchase_requisition.model_purchase_requisition"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

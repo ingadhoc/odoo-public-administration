@@ -25,6 +25,27 @@ class PurchaseRequisitionLine(models.Model):
         for rec in self:
             rec.subtotal = rec.price_unit * rec.product_qty
 
+    def get_comparative_order_line(self, purchase):
+        """Return the line of ``purchase`` that quotes this requisition line.
+
+        Used by the price comparison report. Lines are matched by product and,
+        when the requisition repeats the product, also by description; equal
+        lines are paired in order.
+        """
+        self.ensure_one()
+        siblings = self.requisition_id.line_ids.filtered(
+            lambda line: line.product_id == self.product_id)
+        candidates = purchase.order_line.filtered(
+            lambda line: line.product_id == self.product_id)
+        if len(siblings) > 1:
+            description = (self.name or '').strip()
+            siblings = siblings.filtered(
+                lambda line: (line.name or '').strip() == description)
+            candidates = candidates.filtered(
+                lambda line: (line.name or '').strip() == description)
+        index = siblings.ids.index(self.id)
+        return candidates[index] if index < len(candidates) else candidates.browse()
+
     def _prepare_purchase_order_line(
             self, name, product_qty=0.0, price_unit=0.0, taxes_ids=False):
         res = super()._prepare_purchase_order_line(
