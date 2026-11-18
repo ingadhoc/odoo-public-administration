@@ -2,6 +2,8 @@
 # For copyright and license notices, see __manifest__.py file in module root
 # directory
 ##############################################################################
+from collections import Counter
+
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
 from odoo.tools import float_compare
@@ -182,57 +184,120 @@ class PurchaseRequisition(models.Model):
         """Match the lines of ``purchase`` with the requisition lines.
 
         Returns ``{requisition line id: purchase.order.line}``: the quoted line
-        first and then the alternatives the vendor added for that item. There
-        is no field linking both lines, so each requisition line takes, in
-        order, the first free line with the same product and:
+        first and then the alternatives the vendor added for that item.
 
-        1. the same description (the order line copied it from the requisition);
-        2. the same quantity (the order line kept the product name);
-        3. any quantity.
+        An order line linked to an item (``requisition_line_id``, set when the
+        order is created from the requisition or chosen by the user) belongs
+        to it. Order lines without a link (orders created before the link)
+        are matched against all the items in three steps:
 
-        The order lines left over are alternatives: each one goes to the item
-        whose quoted line is the closest above it in the order.
+        1. same product and description (the order line copied it from the
+           requisition), when no other requisition line has both;
+        2. same product, keeping the order of both documents: the lines are
+           aligned (longest common subsequence of products), so an extra line
+           of a product is skipped when pairing it would break the order of
+           the next items. Vendors may quote fewer units, so the quantity only
+           breaks ties between alignments with the same number of pairs;
+        3. same product, whatever the order (the order lines were reordered).
+
+        Each left over line goes to the item whose line is the closest above
+        it, or to the first item of the product when there is none above.
+        The lines of each item follow the order of the purchase: the first one
+        is the quoted line, unless the item was matched by description.
         """
         self.ensure_one()
         order_lines = purchase.order_line.filtered(lambda line: not line.display_type)
-        free = list(order_lines)
+        position = {line.id: index for index, line in enumerate(order_lines)}
+        item_ids = set(self.line_ids.ids)
+        groups = {}
+        for order_line in order_lines:
+            if order_line.requisition_line_id.id in item_ids:
+                groups.setdefault(order_line.requisition_line_id.id, []).append(order_line)
+        free = [o for o in order_lines if o.requisition_line_id.id not in item_ids]
         quoted = {}
 
-        def same_description(req_line, order_line):
+        def description_key(line):
+            return line.product_id, (line.name or '').strip()
+
+        # a repeated description does not tell the items apart: leave them to the alignment
+        repeated = {
+            key for key, count in Counter(description_key(r) for r in self.line_ids).items() if count > 1}
+        for req_line in self.line_ids:
             description = (req_line.name or '').strip()
-            return bool(description) and (order_line.name or '').strip() == description
+            if description_key(req_line) in repeated:
+                continue
+            order_line = description and next((
+                o for o in free
+                if o.product_id == req_line.product_id and (o.name or '').strip() == description), None)
+            if order_line:
+                quoted[req_line.id] = order_line
+                free.remove(order_line)
+        by_description = set(quoted)
 
-        def same_qty(req_line, order_line):
-            return not float_compare(
+        pending = [r for r in self.line_ids if r.id not in quoted]
+        pair_weight = len(pending) + 1
+
+        def weight(req_line, order_line):
+            # a pair always beats any number of quantity ties
+            if req_line.product_id != order_line.product_id:
+                return 0
+            return pair_weight + (not float_compare(
                 order_line.product_qty, req_line.product_qty,
-                precision_rounding=req_line.product_uom_id.rounding or 0.01)
+                precision_rounding=req_line.product_uom_id.rounding or 0.01))
 
-        for criterion in (same_description, same_qty, lambda r, o: True):
-            for req_line in self.line_ids:
-                if req_line.id in quoted:
-                    continue
-                order_line = next((
-                    o for o in free
-                    if o.product_id == req_line.product_id and criterion(req_line, o)), None)
-                if order_line:
-                    quoted[req_line.id] = order_line
-                    free.remove(order_line)
+        # score[i][j]: best alignment of pending[i:] with free[j:]
+        score = [[0] * (len(free) + 1) for _ in range(len(pending) + 1)]
+        for i in range(len(pending) - 1, -1, -1):
+            for j in range(len(free) - 1, -1, -1):
+                pair = weight(pending[i], free[j])
+                score[i][j] = max(
+                    score[i + 1][j], score[i][j + 1],
+                    pair and pair + score[i + 1][j + 1])
+        i = j = 0
+        aligned = []
+        while i < len(pending) and j < len(free):
+            pair = weight(pending[i], free[j])
+            if pair and score[i][j] == pair + score[i + 1][j + 1]:
+                aligned.append((pending[i], free[j]))
+                i += 1
+                j += 1
+            elif score[i + 1][j] >= score[i][j + 1]:
+                i += 1
+            else:
+                j += 1
+        for req_line, order_line in aligned:
+            quoted[req_line.id] = order_line
+            free.remove(order_line)
 
-        req_line_by_order_line = {o.id: r for r, o in quoted.items()}
-        alternatives = {}
+        for req_line in self.line_ids:
+            if req_line.id in quoted:
+                continue
+            order_line = next((o for o in free if o.product_id == req_line.product_id), None)
+            if order_line:
+                quoted[req_line.id] = order_line
+                free.remove(order_line)
+
+        for item, order_line in quoted.items():
+            groups.setdefault(item, []).append(order_line)
+        item_by_line = {o.id: item for item, lines in groups.items() for o in lines}
+        placed = sorted(
+            (o for lines in groups.values() for o in lines), key=lambda o: position[o.id])
         for order_line in free:
-            above = [
-                o for o in order_lines[:list(order_lines).index(order_line)]
-                if o.id in req_line_by_order_line and o.product_id == order_line.product_id]
-            if above:
-                alternatives.setdefault(req_line_by_order_line[above[-1].id], []).append(order_line)
+            same_product = [o for o in placed if o.product_id == order_line.product_id]
+            if not same_product:
+                continue
+            above = [o for o in same_product if position[o.id] < position[order_line.id]]
+            groups[item_by_line[(above[-1] if above else same_product[0]).id]].append(order_line)
 
         empty = purchase.order_line.browse()
-        return {
-            req_line.id: empty.concat(
-                quoted.get(req_line.id, empty), *alternatives.get(req_line.id, []))
-            for req_line in self.line_ids
-        }
+        result = {}
+        for req_line in self.line_ids:
+            lines = sorted(groups.get(req_line.id, []), key=lambda o: position[o.id])
+            if req_line.id in by_description:
+                lines.remove(quoted[req_line.id])
+                lines.insert(0, quoted[req_line.id])
+            result[req_line.id] = empty.concat(*lines)
+        return result
 
     def get_comparative_rows(self):
         """Rows of the price comparison report.

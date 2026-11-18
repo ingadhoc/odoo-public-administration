@@ -30,8 +30,17 @@ class PurchaseRequisitionLine(models.Model):
         res = super()._prepare_purchase_order_line(
             name, product_qty=product_qty, price_unit=0.0,
             taxes_ids=taxes_ids)
+        res['requisition_line_id'] = self.id
         if self.name:
             res.update({
                 'name': self.name,
             })
         return res
+
+    @api.depends('requisition_id.line_ids', 'product_id', 'name')
+    def _compute_display_name(self):
+        for line in self:
+            line_ids = line.requisition_id.line_ids.ids
+            description = (line.name or '').strip().split('\n')[0]
+            label = ' - '.join(filter(None, [line.product_id.display_name, description]))
+            line.display_name = '%s. %s' % (line_ids.index(line.id) + 1, label) if line.id in line_ids else label
