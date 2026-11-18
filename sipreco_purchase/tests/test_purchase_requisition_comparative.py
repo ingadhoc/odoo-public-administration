@@ -59,14 +59,30 @@ class TestPurchaseRequisitionComparative(TransactionCase):
         ])
         self.assertEqual(self._prices(order), [(1, 100.0), (2, 200.0), (3, 50.0)])
 
-    def test_matched_by_quantity(self):
-        """The order kept the product name: repeated products match by quantity."""
+    def test_partial_quote_matched_by_order(self):
+        """The order kept the product name and the vendor quoted fewer units.
+
+        The first item is quoted with the quantity of the second one: the
+        order of the lines decides, not the quantity.
+        """
         order = self._create_order([
+            (self.squeegee, 'Squeegee', 2, 100.0),
             (self.squeegee, 'Squeegee', 2, 200.0),
-            (self.squeegee, 'Squeegee', 4, 100.0),
             (self.bucket, 'Bucket', 1, 50.0),
         ])
         self.assertEqual(self._prices(order), [(1, 100.0), (2, 200.0), (3, 50.0)])
+
+    def test_partial_quote_with_alternative(self):
+        """The quoted line keeps its place although the alternative has the requested quantity."""
+        order = self._create_order([
+            (self.squeegee, 'Squeegee', 3, 100.0),
+            (self.squeegee, 'Squeegee', 4, 90.0),
+            (self.squeegee, 'Squeegee', 2, 200.0),
+            (self.bucket, 'Bucket', 1, 50.0),
+        ])
+        self.assertEqual(
+            self._prices(order),
+            [(1, 100.0), ('1 (opción 2)', 90.0), (2, 200.0), (3, 50.0)])
 
     def test_alternatives_add_rows(self):
         """An extra line goes under the item above it, as «N (opción 2)»."""
