@@ -422,7 +422,7 @@ class BudgetTransaction(models.Model):
                 -sum(to_pay_move_lines.mapped('amount_residual')))
             if invoice.currency_id.compare_amounts(amount, 0.0) <= 0:
                 continue
-            self.env['account.payment'].with_context(pay_now=True).create({
+            payment = self.env['account.payment'].with_context(pay_now=True).create({
                     'partner_type': 'supplier',
                     'payment_type': 'outbound',
                     'receiptbook_id': self.budget_id.receiptbook_id.id,
@@ -433,6 +433,8 @@ class BudgetTransaction(models.Model):
                     'to_pay_move_line_ids': [(6, False, to_pay_move_lines.ids)],
                     'amount': amount,
                 })
+            # The onchange that nets withholdings out of amount does not run on create
+            payment._onchange_withholdings()
         return True
 
     @api.depends(
