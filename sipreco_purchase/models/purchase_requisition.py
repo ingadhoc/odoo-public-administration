@@ -4,6 +4,7 @@
 ##############################################################################
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
+from odoo.tools import float_compare
 
 
 class PurchaseRequisition(models.Model):
@@ -176,3 +177,85 @@ class PurchaseRequisition(models.Model):
                 requisition.currency_id = requisition.company_id.currency_id.id
             else:
                 requisition.currency_id = requisition.vendor_id.property_purchase_currency_id.id
+
+    def _get_comparative_quotes(self, purchase):
+        """Match the lines of ``purchase`` with the requisition lines.
+
+        Returns ``{requisition line id: purchase.order.line}``: the quoted line
+        first and then the alternatives the vendor added for that item. There
+        is no field linking both lines, so each requisition line takes, in
+        order, the first free line with the same product and:
+
+        1. the same description (the order line copied it from the requisition);
+        2. the same quantity (the order line kept the product name);
+        3. any quantity.
+
+        The order lines left over are alternatives: each one goes to the item
+        whose quoted line is the closest above it in the order.
+        """
+        self.ensure_one()
+        order_lines = purchase.order_line.filtered(lambda line: not line.display_type)
+        free = list(order_lines)
+        quoted = {}
+
+        def same_description(req_line, order_line):
+            description = (req_line.name or '').strip()
+            return bool(description) and (order_line.name or '').strip() == description
+
+        def same_qty(req_line, order_line):
+            return not float_compare(
+                order_line.product_qty, req_line.product_qty,
+                precision_rounding=req_line.product_uom_id.rounding or 0.01)
+
+        for criterion in (same_description, same_qty, lambda r, o: True):
+            for req_line in self.line_ids:
+                if req_line.id in quoted:
+                    continue
+                order_line = next((
+                    o for o in free
+                    if o.product_id == req_line.product_id and criterion(req_line, o)), None)
+                if order_line:
+                    quoted[req_line.id] = order_line
+                    free.remove(order_line)
+
+        req_line_by_order_line = {o.id: r for r, o in quoted.items()}
+        alternatives = {}
+        for order_line in free:
+            above = [
+                o for o in order_lines[:list(order_lines).index(order_line)]
+                if o.id in req_line_by_order_line and o.product_id == order_line.product_id]
+            if above:
+                alternatives.setdefault(req_line_by_order_line[above[-1].id], []).append(order_line)
+
+        empty = purchase.order_line.browse()
+        return {
+            req_line.id: empty.concat(
+                quoted.get(req_line.id, empty), *alternatives.get(req_line.id, []))
+            for req_line in self.line_ids
+        }
+
+    def get_comparative_rows(self):
+        """Rows of the price comparison report.
+
+        One row per requisition line, followed by one row per alternative
+        («N (opción 2)», …) when some vendor quoted more than one line for the
+        item. ``quotes`` maps each purchase id to the order line of that row,
+        or to an empty recordset when the vendor has nothing for it.
+        """
+        self.ensure_one()
+        purchases = self.purchase_ids.filtered(lambda p: p.state != 'cancel')
+        quotes = {p.id: self._get_comparative_quotes(p) for p in purchases}
+        empty = self.env['purchase.order.line']
+        rows = []
+        for number, req_line in enumerate(self.line_ids, start=1):
+            options = max([len(quotes[p.id][req_line.id]) for p in purchases] + [1])
+            for option in range(options):
+                rows.append({
+                    'number': number if not option else '%s (opción %s)' % (number, option + 1),
+                    'line': req_line,
+                    'quotes': {
+                        p.id: quotes[p.id][req_line.id][option:option + 1] or empty
+                        for p in purchases
+                    },
+                })
+        return rows
