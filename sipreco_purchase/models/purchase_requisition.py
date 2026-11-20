@@ -4,6 +4,7 @@
 ##############################################################################
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
+from odoo.tools import float_compare
 
 
 class PurchaseRequisition(models.Model):
@@ -176,3 +177,131 @@ class PurchaseRequisition(models.Model):
                 requisition.currency_id = requisition.company_id.currency_id.id
             else:
                 requisition.currency_id = requisition.vendor_id.property_purchase_currency_id.id
+
+    def _get_comparative_quotes(self, purchase):
+        """Match the lines of ``purchase`` with the requisition lines.
+
+        Returns ``{requisition line id: purchase.order.line}``: the quoted line
+        first and then the alternatives the vendor added for that item. There
+        is no field linking both lines, so they are matched in three steps:
+
+        1. same product and description (the order line copied it from the
+           requisition);
+        2. same product, keeping the order of both documents: the lines are
+           aligned (longest common subsequence of products), so an extra line
+           of a product is skipped when pairing it would break the order of
+           the next items. Vendors may quote fewer units, so the quantity only
+           breaks ties between alignments with the same number of pairs;
+        3. same product, whatever the order (the order lines were reordered).
+
+        Each left over line goes to the item whose line is the closest above
+        it, or to the first item of the product when there is none above.
+        Unless the item was matched by description, the first line of its
+        group is the quoted one and the next ones are alternatives.
+        """
+        self.ensure_one()
+        order_lines = purchase.order_line.filtered(lambda line: not line.display_type)
+        position = {line.id: index for index, line in enumerate(order_lines)}
+        free = list(order_lines)
+        quoted = {}
+
+        for req_line in self.line_ids:
+            description = (req_line.name or '').strip()
+            order_line = description and next((
+                o for o in free
+                if o.product_id == req_line.product_id and (o.name or '').strip() == description), None)
+            if order_line:
+                quoted[req_line.id] = order_line
+                free.remove(order_line)
+        by_description = set(quoted)
+
+        pending = [r for r in self.line_ids if r.id not in quoted]
+        pair_weight = len(pending) + 1
+
+        def weight(req_line, order_line):
+            # a pair always beats any number of quantity ties
+            if req_line.product_id != order_line.product_id:
+                return 0
+            return pair_weight + (not float_compare(
+                order_line.product_qty, req_line.product_qty,
+                precision_rounding=req_line.product_uom_id.rounding or 0.01))
+
+        # score[i][j]: best alignment of pending[i:] with free[j:]
+        score = [[0] * (len(free) + 1) for _ in range(len(pending) + 1)]
+        for i in range(len(pending) - 1, -1, -1):
+            for j in range(len(free) - 1, -1, -1):
+                pair = weight(pending[i], free[j])
+                score[i][j] = max(
+                    score[i + 1][j], score[i][j + 1],
+                    pair and pair + score[i + 1][j + 1])
+        i = j = 0
+        aligned = []
+        while i < len(pending) and j < len(free):
+            pair = weight(pending[i], free[j])
+            if pair and score[i][j] == pair + score[i + 1][j + 1]:
+                aligned.append((pending[i], free[j]))
+                i += 1
+                j += 1
+            elif score[i + 1][j] >= score[i][j + 1]:
+                i += 1
+            else:
+                j += 1
+        for req_line, order_line in aligned:
+            quoted[req_line.id] = order_line
+            free.remove(order_line)
+
+        for req_line in self.line_ids:
+            if req_line.id in quoted:
+                continue
+            order_line = next((o for o in free if o.product_id == req_line.product_id), None)
+            if order_line:
+                quoted[req_line.id] = order_line
+                free.remove(order_line)
+
+        item_by_line = {o.id: r for r, o in quoted.items()}
+        groups = {r: [o] for r, o in quoted.items()}
+        for order_line in free:
+            same_product = sorted(
+                (o for o in quoted.values() if o.product_id == order_line.product_id),
+                key=lambda o: position[o.id])
+            if not same_product:
+                continue
+            above = [o for o in same_product if position[o.id] < position[order_line.id]]
+            groups[item_by_line[(above[-1] if above else same_product[0]).id]].append(order_line)
+
+        empty = purchase.order_line.browse()
+        result = {}
+        for req_line in self.line_ids:
+            lines = groups.get(req_line.id, [])
+            if req_line.id in by_description:
+                lines = lines[:1] + sorted(lines[1:], key=lambda o: position[o.id])
+            else:
+                lines = sorted(lines, key=lambda o: position[o.id])
+            result[req_line.id] = empty.concat(*lines)
+        return result
+
+    def get_comparative_rows(self):
+        """Rows of the price comparison report.
+
+        One row per requisition line, followed by one row per alternative
+        («N (opción 2)», …) when some vendor quoted more than one line for the
+        item. ``quotes`` maps each purchase id to the order line of that row,
+        or to an empty recordset when the vendor has nothing for it.
+        """
+        self.ensure_one()
+        purchases = self.purchase_ids.filtered(lambda p: p.state != 'cancel')
+        quotes = {p.id: self._get_comparative_quotes(p) for p in purchases}
+        empty = self.env['purchase.order.line']
+        rows = []
+        for number, req_line in enumerate(self.line_ids, start=1):
+            options = max([len(quotes[p.id][req_line.id]) for p in purchases] + [1])
+            for option in range(options):
+                rows.append({
+                    'number': number if not option else '%s (opción %s)' % (number, option + 1),
+                    'line': req_line,
+                    'quotes': {
+                        p.id: quotes[p.id][req_line.id][option:option + 1] or empty
+                        for p in purchases
+                    },
+                })
+        return rows
