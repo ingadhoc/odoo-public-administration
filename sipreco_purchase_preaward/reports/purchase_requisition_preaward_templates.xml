@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_purchase_requisition_preaward">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="purchases" t-value="doc.get_preaward_purchases()"/>
+                <t t-set="rows" t-value="doc.get_preaward_rows()"/>
+                <t t-set="items" t-value="doc.get_preaward_items()"/>
+                <t t-set="detail" t-value="doc.get_preaward_detail()"/>
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h5 class="text-center mb-4">
+                            PLANILLA DE PREADJUDICACIÓN DEL REQUIRENTE/UNIDAD DE COMPRA
+                        </h5>
+
+                        <table class="table table-sm table-bordered mb-2">
+                            <tr>
+                                <td><strong>Fecha:</strong> <span t-field="doc.date"/></td>
+                            </tr>
+                        </table>
+                        <table class="table table-sm table-bordered mb-2">
+                            <tr>
+                                <td>
+                                    <strong>Número/s de Trámite/s Administrativo/s:</strong>
+                                    <span t-field="doc.expedient_id"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="table table-sm table-bordered mb-2">
+                            <tr>
+                                <td>
+                                    <strong>Número de Licitación, Concurso o Compra ágil:</strong>
+                                    <span t-field="doc.web_number"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="table table-sm table-bordered mb-4">
+                            <tr>
+                                <td><strong>Objeto:</strong> <span t-field="doc.web_object"/></td>
+                            </tr>
+                        </table>
+
+                        <p class="mb-1">
+                            <strong>Planilla comparativa de bien o servicio ofertado por cada proveedor:</strong>
+                        </p>
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2">Ítem</th>
+                                    <th rowspan="2" class="text-end">Cantidad</th>
+                                    <th t-foreach="purchases" t-as="purchase" colspan="2" class="text-center">
+                                        Oferente: <span t-field="purchase.partner_id"/>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <t t-foreach="purchases" t-as="purchase">
+                                        <th class="text-end">Pr. unitario</th>
+                                        <th class="text-end">Total</th>
+                                    </t>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="rows" t-as="row">
+                                    <td>
+                                        <span t-esc="row['number']"/> -
+                                        <span t-esc="row['line'].name or row['line'].product_id.display_name"/>
+                                    </td>
+                                    <td class="text-end">
+                                        <span t-field="row['line'].product_qty"/>
+                                        <span t-field="row['line'].product_uom_id" groups="uom.group_uom"/>
+                                    </td>
+                                    <t t-foreach="purchases" t-as="purchase">
+                                        <t t-set="quote" t-value="row['quotes'][purchase.id]"/>
+                                        <t t-if="not quote">
+                                            <td colspan="2" class="text-center text-muted">NO COTIZA</td>
+                                        </t>
+                                        <t t-else="">
+                                            <td t-att-class="quote.preaward and 'text-end fw-bold' or 'text-end'">
+                                                <span t-field="quote.price_unit"
+                                                    t-options='{"widget": "monetary", "display_currency": quote.currency_id}'/>
+                                            </td>
+                                            <td t-att-class="quote.preaward and 'text-end fw-bold' or 'text-end'">
+                                                <span t-field="quote.price_subtotal"
+                                                    t-options='{"widget": "monetary", "display_currency": quote.currency_id}'/>
+                                                <span t-if="quote.preaward"> ✓</span>
+                                            </td>
+                                        </t>
+                                    </t>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="mb-1">
+                            <small>(En caso de existir mayor cantidad de oferentes realizar comparativa
+                            en planilla anexa firmada por responsable unidad solicitante. En caso de
+                            existir mayor cantidad de ítems, insertar filas a la tabla)</small>
+                        </p>
+                        <p class="text-muted mb-4">
+                            <small>✓ Ítem preadjudicado al oferente de esa columna.</small>
+                        </p>
+
+                        <p class="mb-1"><strong>Desestimación si la hubiera:</strong></p>
+                        <table class="table table-sm table-bordered mb-4">
+                            <tr>
+                                <td style="height: 60px;"><span t-field="doc.preaward_dismissal"/></td>
+                            </tr>
+                        </table>
+
+                        <p class="mb-1">
+                            <strong>Identificación del/los proveedor/es a adjudicar por ítem:</strong>
+                        </p>
+                        <table class="table table-sm table-bordered mb-4" style="page-break-inside: avoid;">
+                            <thead>
+                                <tr>
+                                    <th>Ítem</th>
+                                    <th>Proveedor</th>
+                                    <th>CUIT</th>
+                                    <th class="text-end">Cantidad</th>
+                                    <th class="text-end">Pr. unitario</th>
+                                    <th class="text-end">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-if="not items">
+                                    <td colspan="6" class="text-center text-muted" style="height: 40px;">
+                                        Ningún ítem preadjudicado.
+                                    </td>
+                                </tr>
+                                <tr t-foreach="items" t-as="item">
+                                    <td>
+                                        <span t-esc="item['number']"/> -
+                                        <span t-esc="item['line'].name or item['line'].product_id.display_name"/>
+                                    </td>
+                                    <td><span t-field="item['quote'].partner_id"/></td>
+                                    <td><span t-field="item['quote'].partner_id.vat"/></td>
+                                    <td class="text-end">
+                                        <span t-field="item['quote'].product_qty"/>
+                                        <span t-field="item['quote'].product_uom" groups="uom.group_uom"/>
+                                    </td>
+                                    <td class="text-end">
+                                        <span t-field="item['quote'].price_unit"
+                                            t-options='{"widget": "monetary", "display_currency": item["quote"].currency_id}'/>
+                                    </td>
+                                    <td class="text-end">
+                                        <span t-field="item['quote'].price_subtotal"
+                                            t-options='{"widget": "monetary", "display_currency": item["quote"].currency_id}'/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p class="mb-1">
+                            <strong>Monto a adjudicar totalizando por proveedor y total general:</strong>
+                        </p>
+                        <table class="table table-sm table-bordered mb-4" style="page-break-inside: avoid;">
+                            <tbody>
+                                <tr t-if="not detail">
+                                    <td class="text-center text-muted" style="height: 40px;">
+                                        Sin montos a adjudicar.
+                                    </td>
+                                </tr>
+                                <tr t-foreach="detail" t-as="group">
+                                    <td>
+                                        <span t-field="group['purchase'].partner_id"/>
+                                        <span class="text-muted">
+                                            (Cotización <span t-field="group['purchase'].name"/>)
+                                        </span>
+                                    </td>
+                                    <td class="text-end w-25">
+                                        <span t-esc="group['amount']"
+                                            t-options='{"widget": "monetary", "display_currency": group["purchase"].currency_id}'/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end"><strong>Total general</strong></td>
+                                    <td class="text-end">
+                                        <strong>
+                                            <span t-esc="sum([g['amount'] for g in detail])"
+                                                t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                        </strong>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p class="mb-1"><strong>Justificación de la recomendación:</strong></p>
+                        <table class="table table-sm table-bordered mb-4">
+                            <tr>
+                                <td style="height: 60px;"><span t-field="doc.preaward_justification"/></td>
+                            </tr>
+                        </table>
+
+                        <p class="mb-1"><strong>Firma y sello</strong></p>
+                        <table class="table table-sm table-bordered" style="page-break-inside: avoid;">
+                            <tr>
+                                <td style="height: 90px;" class="align-bottom">
+                                    <span t-field="doc.preaward_user_id"/>
+                                    <span t-if="doc.preaward_date"> - <span t-field="doc.preaward_date"/></span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

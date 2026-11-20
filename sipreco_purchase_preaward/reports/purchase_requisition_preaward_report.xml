@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <record id="paperformat_preaward" model="report.paperformat">
+        <field name="name">A4 apaisado preadjudicación</field>
+        <field name="default" eval="False"/>
+        <field name="format">A4</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">40</field>
+        <field name="margin_bottom">25</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="action_report_purchase_requisition_preaward" model="ir.actions.report">
+        <field name="name">Planilla de preadjudicación</field>
+        <field name="model">purchase.requisition</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sipreco_purchase_preaward.report_purchase_requisition_preaward</field>
+        <field name="report_file">sipreco_purchase_preaward.report_purchase_requisition_preaward</field>
+        <field name="paperformat_id" ref="paperformat_preaward"/>
+        <field name="binding_model_id" ref="purchase_requisition.model_purchase_requisition"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>
