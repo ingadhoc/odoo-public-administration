@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="purchase_order_line_preaward_list_view" model="ir.ui.view">
+        <field name="name">purchase.order.line.preaward.list</field>
+        <field name="model">purchase.order.line</field>
+        <field name="arch" type="xml">
+            <list string="Ofertas recibidas" create="0" delete="0" editable="bottom" expand="1"
+                decoration-muted="state in ['cancel', 'purchase', 'done']">
+                <field name="product_id" readonly="1"/>
+                <field name="partner_id" string="Proveedor" readonly="1"/>
+                <field name="order_id" string="Cotización" readonly="1"/>
+                <field name="name" readonly="1" optional="hide"/>
+                <field name="product_qty" readonly="1"/>
+                <field name="product_uom" groups="uom.group_uom" readonly="1"/>
+                <field name="price_unit" widget="monetary" readonly="1"/>
+                <field name="price_subtotal" string="Total" readonly="1"/>
+                <field name="currency_id" column_invisible="True"/>
+                <field name="state" readonly="1" optional="hide"/>
+                <field name="preaward" widget="boolean_toggle"
+                    readonly="state in ['cancel', 'purchase', 'done']"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="purchase_requisition_preaward_form_view" model="ir.ui.view">
+        <field name="name">purchase.requisition.preaward.form</field>
+        <field name="model">purchase.requisition</field>
+        <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Preadjudicación" name="preaward" invisible="not web_publishable">
+                    <div class="d-flex flex-wrap gap-2 mb-3">
+                        <button name="print_preaward_report" type="object"
+                            string="Planilla de preadjudicación" class="btn-primary"/>
+                        <button name="action_open_quotation_lines" type="object"
+                            string="Ofertas recibidas" class="btn-secondary"/>
+                        <button name="action_clear_unawarded_quantities" type="object"
+                            string="Poner en cero las no preadjudicadas" class="btn-secondary"
+                            confirm="Se pone en cero la cantidad de todas las líneas sin preadjudicar de las cotizaciones de esta solicitud. ¿Continuar?"/>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="preaward_user_id"/>
+                            <field name="preaward_date"/>
+                        </group>
+                    </group>
+                    <separator string="Desestimación"/>
+                    <field name="preaward_dismissal" placeholder="Ofertas desestimadas y su motivo..."/>
+                    <separator string="Justificación de la recomendación"/>
+                    <field name="preaward_justification" placeholder="Fundamento de la preadjudicación..."/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

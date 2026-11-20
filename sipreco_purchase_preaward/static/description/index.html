@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Preadjudicación de Solicitudes de Compra</title>
+</head>
+<body>
+
+<div style="max-width: 820px; margin: 0 auto; padding: 40px 32px 64px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 15px; line-height: 1.7; color: #1C2333;">
+
+  <!-- Header -->
+  <div style="border-bottom: 3px solid #7C6CD8; padding-bottom: 20px; margin-bottom: 32px;">
+    <div style="font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #7C6CD8; margin-bottom: 6px;">Consultoría Técnica · Adhoc · OBA 18.0</div>
+    <h1 style="font-size: 1.65rem; font-weight: 700; color: #1C2333; margin: 0 0 6px;">Preadjudicación de Solicitudes de Compra</h1>
+    <p style="font-size: 0.92rem; color: #6B7691; margin: 0;">Marcar qué ítems se recomienda adjudicar a cada oferente e imprimir la planilla que acompaña el expediente.</p>
+  </div>
+
+  <!-- Qué hace -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 0 0 1rem;">¿Qué hace?</div>
+
+  <p style="color: #444444; margin-bottom: 1.2rem;">
+    Cuando una Solicitud de Compra publicada en la web recibe sus ofertas, el requirente o la unidad
+    de compra tiene que comparar los oferentes ítem por ítem y recomendar a quién adjudicar cada uno.
+    Ese análisis se hacía afuera del sistema, copiando a mano los datos del trámite y de las ofertas.
+  </p>
+  <p style="color: #444444; margin-bottom: 1.2rem;">
+    El módulo agrega una marca <strong>"Preadjudicada"</strong> sobre la línea de cada cotización y
+    una solapa <strong>"Preadjudicación"</strong> en la Solicitud de Compra desde donde se compara,
+    se justifica y se imprime la planilla con los datos que ya están cargados en el sistema.
+  </p>
+
+  <!-- Flujo -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 2.5rem 0 1rem;">Cómo usarlo</div>
+
+  <div style="background: #F0EFF8; border: 1px solid #E4E2F0; border-radius: 6px; padding: 14px 18px; margin: 1rem 0; font-family: 'SF Mono', Consolas, monospace; font-size: 0.85rem; white-space: pre-wrap; line-height: 1.8; overflow-x: auto;">Cargar las ofertas como cotizaciones de la Solicitud de Compra
+  → Solapa "Preadjudicación" → "Ofertas recibidas"
+      → Marcar "Preadjudicada" en los ítems elegidos de cada oferente
+          → Completar Desestimación y Justificación de la recomendación
+              → "Planilla de preadjudicación" (imprime y deja la firma)
+                  → "Poner en cero las no preadjudicadas"
+                      → Confirmar o cancelar cada cotización a mano</div>
+
+  <!-- Qué sale en la planilla -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 2.5rem 0 1rem;">Qué sale en la planilla</div>
+
+  <table style="border-collapse: collapse; width: 100%; font-size: 0.91rem; margin-bottom: 1rem;">
+    <thead>
+      <tr>
+        <th style="background: #7C6CD8; color: #fff; text-align: left; padding: 8px 12px; font-size: 0.82rem;">Sección</th>
+        <th style="background: #7C6CD8; color: #fff; text-align: left; padding: 8px 12px; font-size: 0.82rem;">De dónde sale</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;"><strong>Encabezado</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;">Fecha y trámite administrativo de la SC; número de licitación, concurso o compra ágil y objeto, de los datos para la web.</td>
+      </tr>
+      <tr style="background: #F8F7FD;">
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;"><strong>Ofertas recibidas</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;">Una columna por oferente con precio unitario y total, y "NO COTIZA" donde el oferente no cotizó el ítem. Lo preadjudicado se marca con ✓.</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;"><strong>Desestimación</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;">Texto libre cargado en la solapa.</td>
+      </tr>
+      <tr style="background: #F8F7FD;">
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;"><strong>Preadjudicación por ítem</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;">Los ítems marcados, agrupados por proveedor, con el total de cada uno y el total general.</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;"><strong>Justificación y firma</strong></td>
+        <td style="padding: 8px 12px; border-bottom: 1px solid #E4E2F0;">Texto libre, más el usuario que imprimió la planilla por primera vez y la fecha y hora en que lo hizo.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Qué no hace -->
+  <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B7691; border-bottom: 2px solid #E4E2F0; padding-bottom: 6px; margin: 2.5rem 0 1rem;">Qué no hace</div>
+
+  <p style="color: #444444; margin-bottom: 0.8rem;">
+    No confirma ni cancela cotizaciones. La preadjudicación es una recomendación: poner en cero las
+    líneas que quedaron afuera deja las ofertas desestimadas a la vista y permite reimprimir la
+    planilla, pero quién confirma cada cotización y cuándo lo decide una persona.
+  </p>
+  <p style="color: #444444; margin-bottom: 0.8rem;">
+    La solapa aparece solo en las Solicitudes de Compra marcadas como publicables en web, que son
+    las que siguen este circuito.
+  </p>
+
+  <!-- Footer -->
+  <div style="margin-top: 2.5rem; padding-top: 20px; border-top: 1px solid #E4E2F0; font-size: 0.8rem; color: #6B7691; text-align: center;">
+    Desarrollado por Consultoría Técnica · <strong>Adhoc</strong>
+  </div>
+
+</div>
+</body>
+</html>
