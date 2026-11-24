@@ -354,7 +354,9 @@ class BudgetTransaction(models.Model):
             }
 
         domain = [('id', 'in', self.advance_payment_ids.ids)]
-        to_pay_domain = domain + [('sipreco_state', 'not in', ['canceled']),('state', 'not in', ['in_process','paid'])]
+        # same "sent to pay" states as invoices: from confirmation on, paid included
+        to_pay_domain = domain + [
+            ('sipreco_state', 'in', ['confirmed', 'signature_process', 'signed', 'in_process', 'paid'])]
         paid_domain = domain + [('state', 'in', ['in_process','paid'])]
 
         if to_date:
