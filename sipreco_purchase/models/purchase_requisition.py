@@ -2,6 +2,8 @@
 # For copyright and license notices, see __manifest__.py file in module root
 # directory
 ##############################################################################
+from collections import Counter
+
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
 from odoo.tools import float_compare
@@ -182,11 +184,15 @@ class PurchaseRequisition(models.Model):
         """Match the lines of ``purchase`` with the requisition lines.
 
         Returns ``{requisition line id: purchase.order.line}``: the quoted line
-        first and then the alternatives the vendor added for that item. There
-        is no field linking both lines, so they are matched in three steps:
+        first and then the alternatives the vendor added for that item.
+
+        An order line linked to an item (``requisition_line_id``, set when the
+        order is created from the requisition or chosen by the user) belongs
+        to it. Order lines without a link (orders created before the link)
+        are matched against all the items in three steps:
 
         1. same product and description (the order line copied it from the
-           requisition);
+           requisition), when no other requisition line has both;
         2. same product, keeping the order of both documents: the lines are
            aligned (longest common subsequence of products), so an extra line
            of a product is skipped when pairing it would break the order of
@@ -196,17 +202,30 @@ class PurchaseRequisition(models.Model):
 
         Each left over line goes to the item whose line is the closest above
         it, or to the first item of the product when there is none above.
-        Unless the item was matched by description, the first line of its
-        group is the quoted one and the next ones are alternatives.
+        The lines of each item follow the order of the purchase: the first one
+        is the quoted line, unless the item was matched by description.
         """
         self.ensure_one()
         order_lines = purchase.order_line.filtered(lambda line: not line.display_type)
         position = {line.id: index for index, line in enumerate(order_lines)}
-        free = list(order_lines)
+        item_ids = set(self.line_ids.ids)
+        groups = {}
+        for order_line in order_lines:
+            if order_line.requisition_line_id.id in item_ids:
+                groups.setdefault(order_line.requisition_line_id.id, []).append(order_line)
+        free = [o for o in order_lines if o.requisition_line_id.id not in item_ids]
         quoted = {}
 
+        def description_key(line):
+            return line.product_id, (line.name or '').strip()
+
+        # a repeated description does not tell the items apart: leave them to the alignment
+        repeated = {
+            key for key, count in Counter(description_key(r) for r in self.line_ids).items() if count > 1}
         for req_line in self.line_ids:
             description = (req_line.name or '').strip()
+            if description_key(req_line) in repeated:
+                continue
             order_line = description and next((
                 o for o in free
                 if o.product_id == req_line.product_id and (o.name or '').strip() == description), None)
@@ -258,12 +277,13 @@ class PurchaseRequisition(models.Model):
                 quoted[req_line.id] = order_line
                 free.remove(order_line)
 
-        item_by_line = {o.id: r for r, o in quoted.items()}
-        groups = {r: [o] for r, o in quoted.items()}
+        for item, order_line in quoted.items():
+            groups.setdefault(item, []).append(order_line)
+        item_by_line = {o.id: item for item, lines in groups.items() for o in lines}
+        placed = sorted(
+            (o for lines in groups.values() for o in lines), key=lambda o: position[o.id])
         for order_line in free:
-            same_product = sorted(
-                (o for o in quoted.values() if o.product_id == order_line.product_id),
-                key=lambda o: position[o.id])
+            same_product = [o for o in placed if o.product_id == order_line.product_id]
             if not same_product:
                 continue
             above = [o for o in same_product if position[o.id] < position[order_line.id]]
@@ -272,11 +292,10 @@ class PurchaseRequisition(models.Model):
         empty = purchase.order_line.browse()
         result = {}
         for req_line in self.line_ids:
-            lines = groups.get(req_line.id, [])
+            lines = sorted(groups.get(req_line.id, []), key=lambda o: position[o.id])
             if req_line.id in by_description:
-                lines = lines[:1] + sorted(lines[1:], key=lambda o: position[o.id])
-            else:
-                lines = sorted(lines, key=lambda o: position[o.id])
+                lines.remove(quoted[req_line.id])
+                lines.insert(0, quoted[req_line.id])
             result[req_line.id] = empty.concat(*lines)
         return result
 

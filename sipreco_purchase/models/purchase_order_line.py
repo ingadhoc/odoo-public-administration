@@ -10,6 +10,15 @@ class PurchaseOrderLine(models.Model):
 
     brand = fields.Char(
     )
+    requisition_line_id = fields.Many2one(
+        'purchase.requisition.line',
+        string='Requisition Item',
+        copy=False,
+        index='btree_not_null',
+        ondelete='set null',
+        help="Requisition line this line quotes. Lines added by hand with the same item are shown as alternatives "
+             "in the price comparison.",
+    )
 
     def _compute_price_unit_and_date_planned_and_name(self):
         lines_with_requisition = self.filtered(lambda l: l.order_id.requisition_id)

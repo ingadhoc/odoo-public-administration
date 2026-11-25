@@ -38,6 +38,8 @@
             </button>
             <xpath expr="//field[@name='order_line']/list//field[@name='name']" position="after">
                 <field name="brand"/>
+                <field name="requisition_line_id" optional="show" column_invisible="not parent.requisition_id"
+                       domain="[('requisition_id', '=', parent.requisition_id)]" options="{'no_create': True}"/>
             </xpath>
             <button id="draft_confirm" position="attributes">
                 <attribute name="groups">purchase.group_purchase_user</attribute>
