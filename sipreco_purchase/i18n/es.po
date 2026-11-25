@@ -414,6 +414,20 @@ msgid "Requirente"
 msgstr ""
 
 #. module: sipreco_purchase
+#: model:ir.model.fields,field_description:sipreco_purchase.field_purchase_order_line__requisition_line_id
+msgid "Requisition Item"
+msgstr "Ítem de la solicitud"
+
+#. module: sipreco_purchase
+#: model:ir.model.fields,help:sipreco_purchase.field_purchase_order_line__requisition_line_id
+msgid ""
+"Requisition line this line quotes. Lines added by hand with the same item are shown as alternatives "
+"in the price comparison."
+msgstr ""
+"Línea de la solicitud que cotiza esta línea. Las líneas agregadas a mano con el mismo ítem se muestran "
+"como alternativas en la comparativa de precios."
+
+#. module: sipreco_purchase
 #: model:ir.model.fields,field_description:sipreco_purchase.field_res_users__picking_type_ids
 msgid "Restricted Picking Types"
 msgstr "Restringir tipos de albarán"
